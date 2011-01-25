@@ -53,7 +53,7 @@
   <ItemGroup>
     <Reference Include="ChilkatDotNet2, Version=9.0.8.0, Culture=neutral, PublicKeyToken=eb5fc1fc52ef09bd, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\UnRar\ChilkatDotNet2.dll</HintPath>
+      <HintPath>..\ExtLibs\ChilkatDotNet2.dll</HintPath>
     </Reference>
     <Reference Include="EPubLibrary, Version=1.0.11.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
