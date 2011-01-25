@@ -1,0 +1,36 @@
+// Fb2EpubExt.idl : IDL source for Fb2EpubExt
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (Fb2Epub.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(3EFA062B-9215-41DE-96CE-4A7DC38B0EEB),
+	dual,
+	nonextensible,
+	helpstring("IFb2EpubShlExt Interface"),
+	pointer_default(unique)
+]
+interface IFb2EpubShlExt : IDispatch{
+};
+[
+	uuid(D74D7D29-DCA7-45A1-9678-80B43F2780E2),
+	version(1.0),
+	helpstring("Fb2Epub 1.0 Type Library")
+]
+library Fb2EpubExtLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(5FFF3DF0-E213-4CA6-A37E-0C3BA1FE35FC),
+		helpstring("Fb2Epub Class")
+	]
+	coclass Fb2EpubShlExt
+	{
+		[default] interface IFb2EpubShlExt;
+	};
+};

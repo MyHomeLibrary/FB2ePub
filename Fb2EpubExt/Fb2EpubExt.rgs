@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'Fb2EpubExt'
+		'Fb2EpubExt.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}

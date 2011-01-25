@@ -1,0 +1,20 @@
+HKLM
+{
+	NoRemove Software
+	{
+	NoRemove Classes
+	{
+	NoRemove CLSID
+	{
+		ForceRemove {5FFF3DF0-E213-4CA6-A37E-0C3BA1FE35FC} = s 'FB2Epub Class'
+		{
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	} 
+
+  }
+  }
+}

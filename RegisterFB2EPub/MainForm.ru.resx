@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="radioButtonChange.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 112</value>
+  </data>
+  <data name="radioButtonChange.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 17</value>
+  </data>
+  <data name="radioButtonChange.Text" xml:space="preserve">
+    <value>Изменить/Исправить</value>
+  </data>
+  <data name="radioButtonChange.ToolTip" xml:space="preserve">
+    <value>Изменить опции регистрации для контекстного меню правой клавиши мыши и/или отремонтировать неисправную/не работающую предыдущую регистрацию</value>
+  </data>
+  <data name="radioButtonRegister.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 17</value>
+  </data>
+  <data name="radioButtonRegister.Text" xml:space="preserve">
+    <value>Зарегистрировать</value>
+  </data>
+  <data name="radioButtonRegister.ToolTip" xml:space="preserve">
+    <value>Зарегистрировать расширения для контекстного меню правой кнопки мыши</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>209, 11</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>288, 220</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Пожалуйста выберете операцию которую вы хотели бы выполнить.
+"Зарегистрировать"  зарегистрирует расширение оболочки которое позволяет конвертировать .FB2 файлы используя правую кнопку мыши.
+"Отменить_регистрацию" уберет привязку расширения оболочки к правой кнопке мыши на вашей системе.
+"Изменить/Исправить" позволит вам вносить изменения в настройки уже зарегистрированного расширения оболочки или поправить слетевшую регистрацию.
+"Дополнительно" включит диалог для опытных пользователей, где можно будет произвести дополнительные тонкие настройки. Только для опытных пользователей.</value>
+  </data>
+  <data name="radioButtonUnregister.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 73</value>
+  </data>
+  <data name="radioButtonUnregister.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 17</value>
+  </data>
+  <data name="radioButtonUnregister.Text" xml:space="preserve">
+    <value>Отменить регистрацию</value>
+  </data>
+  <data name="radioButtonUnregister.ToolTip" xml:space="preserve">
+    <value>Удалить регистрацию по правой кнопке мыши</value>
+  </data>
+  <data name="radioButtonCustom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 151</value>
+  </data>
+  <data name="radioButtonCustom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 17</value>
+  </data>
+  <data name="radioButtonCustom.Text" xml:space="preserve">
+    <value>Дополнительно</value>
+  </data>
+  <data name="radioButtonCustom.ToolTip" xml:space="preserve">
+    <value>Режим для "продвинутых" пользователей, используйте только когда вы действительно знаете что делаете :)</value>
+  </data>
+  <data name="groupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 214</value>
+  </data>
+  <data name="groupBox6.Text" xml:space="preserve">
+    <value>Настройки регистрации расширения FB2</value>
+  </data>
+  <data name="tabPageInitial.Size" type="System.Drawing.Size, System.Drawing">
+    <value>505, 220</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="checkBoxAny.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 17</value>
+  </data>
+  <data name="checkBoxAny.Text" xml:space="preserve">
+    <value>Любой файл</value>
+  </data>
+  <data name="checkBoxAny.ToolTip" xml:space="preserve">
+    <value>Отметьте чтобы разрешить обработку любых расширений файлов</value>
+  </data>
+  <data name="buttonUnSelectAll.Text" xml:space="preserve">
+    <value>Очистить все</value>
+  </data>
+  <data name="buttonUnSelectAll.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonSelectAll.Text" xml:space="preserve">
+    <value>Выбрать все</value>
+  </data>
+  <data name="buttonSelectAll.ToolTip" xml:space="preserve">
+    <value>Выбрать все опции сразу</value>
+  </data>
+  <data name="checkBoxRar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 17</value>
+  </data>
+  <data name="checkBoxRar.Text" xml:space="preserve">
+    <value>расширение .rar </value>
+  </data>
+  <data name="checkBoxRar.ToolTip" xml:space="preserve">
+    <value>Отметьте чтобы показывалось контекстное меню для файлов с расширением .RAR.</value>
+  </data>
+  <data name="checkBoxZip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 17</value>
+  </data>
+  <data name="checkBoxZip.Text" xml:space="preserve">
+    <value>расширение .zip </value>
+  </data>
+  <data name="checkBoxZip.ToolTip" xml:space="preserve">
+    <value>Отметьте чтобы показывалось контекстное меню для файлов с расширением .ZIP.</value>
+  </data>
+  <data name="checkBoxFb2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 17</value>
+  </data>
+  <data name="checkBoxFb2.Text" xml:space="preserve">
+    <value>расширение .fb2</value>
+  </data>
+  <data name="checkBoxFb2.ToolTip" xml:space="preserve">
+    <value>Отметьте чтобы показывалось контекстное меню для файлов с расширением .FB2.</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 126</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Регистрация расширений файлов</value>
+  </data>
+  <data name="dllPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 22</value>
+  </data>
+  <data name="dllPath.ToolTip" xml:space="preserve">
+    <value>Путь к файлу расширения оболочки</value>
+  </data>
+  <data name="buttonBrowse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>378, 20</value>
+  </data>
+  <data name="buttonBrowse.Text" xml:space="preserve">
+    <value>Обзор...</value>
+  </data>
+  <data name="buttonBrowse.ToolTip" xml:space="preserve">
+    <value>Указать расположение DLL расширения оболочки для его регистрации</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 28</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>468, 58</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Расположение файла расширения оболочки</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 214</value>
+  </data>
+  <data name="tabPageAdvanced.Size" type="System.Drawing.Size, System.Drawing">
+    <value>505, 220</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>493, 195</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Нажав кнопку "Завершить" вы отмените регистрацию расширения оболочки Fb2ePub. Это означает что далее конвертация с Fb2 в ePub форматы при нажатии правой кнопки мыши больше не будет работать на вашем компьютере.
+Если это действительно то что вы хотите достичь - нажмите кнопку "Завершить".
+В противном случае, если вы попали сюда по ошибке или передумали - нажмите кнопку "Назад".</value>
+  </data>
+  <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 214</value>
+  </data>
+  <data name="groupBox5.Text" xml:space="preserve">
+    <value>Отмена регистрации расширения .FB2</value>
+  </data>
+  <data name="tabPageUnregisterFinish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>505, 220</value>
+  </data>
+  <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="labelRegPath.ToolTip" xml:space="preserve">
+    <value>Путь к регистрируемому DLL</value>
+  </data>
+  <data name="buttonRegBrowse.Text" xml:space="preserve">
+    <value>Обзор...</value>
+  </data>
+  <data name="buttonRegBrowse.ToolTip" xml:space="preserve">
+    <value>Указать файл для регистрации</value>
+  </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 116</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Расположение файла расширения оболочки</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Программа не смогла обнаружить расположение DLL файла расширения оболочки необходимого для регистрации.
+Пожалуйста используйте кнопку "Обзор" чтобы выбрать и указать программе расположение DLL расширения. После обнаружения этого файла вы сможете продолжить нажав на кнопку "Дальше".</value>
+  </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Расположение DLL расширения</value>
+  </data>
+  <data name="tabPageRegisterBrowse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>505, 220</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 40</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 135</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Выберете зарегистрировать если вы желаете чтобы меню конвертора показывалось когда вы нажимаете на правую кнопку мыши на файлах с расширением .FB2</value>
+  </data>
+  <data name="radioButtonNotRegisterFb2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 93</value>
+  </data>
+  <data name="radioButtonNotRegisterFb2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 17</value>
+  </data>
+  <data name="radioButtonNotRegisterFb2.Text" xml:space="preserve">
+    <value>Не регистрировать расширение .FB2</value>
+  </data>
+  <data name="radioButtonFb2Register.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 17</value>
+  </data>
+  <data name="radioButtonFb2Register.Text" xml:space="preserve">
+    <value>Зарегистрировать расширение .FB2</value>
+  </data>
+  <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 214</value>
+  </data>
+  <data name="groupBox7.Text" xml:space="preserve">
+    <value>Регистрация расширения файла .FB2</value>
+  </data>
+  <data name="tabPageRegisterFb2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>505, 220</value>
+  </data>
+  <data name="checkBoxFb2ZipOnly.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 17</value>
+  </data>
+  <data name="checkBoxFb2ZipOnly.Text" xml:space="preserve">
+    <value>Только .FB2.ZIP</value>
+  </data>
+  <data name="checkBoxFb2ZipOnly.ToolTip" xml:space="preserve">
+    <value>Обрабатывать только файлы с расширением .FB2.ZIP</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 40</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 135</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Выберете заригестрировать если вы желаете чтобы меню конвертора показывалось когда вы нажимаете на правую кнопку мыши на файлах с расширением .ZIP</value>
+  </data>
+  <data name="radioButtonNotRegisterZip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 93</value>
+  </data>
+  <data name="radioButtonNotRegisterZip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 17</value>
+  </data>
+  <data name="radioButtonNotRegisterZip.Text" xml:space="preserve">
+    <value>Не регистрировать расширение .ZIP</value>
+  </data>
+  <data name="radioButtonZipRegister.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 17</value>
+  </data>
+  <data name="radioButtonZipRegister.Text" xml:space="preserve">
+    <value>Зарегистрировать расширение .ZIP</value>
+  </data>
+  <data name="groupBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 214</value>
+  </data>
+  <data name="groupBox8.Text" xml:space="preserve">
+    <value>Регистрация расширения файла .ZIP</value>
+  </data>
+  <data name="tabPageRegisterZip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>505, 220</value>
+  </data>
+  <data name="checkBoxFb2RarOnly.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 17</value>
+  </data>
+  <data name="checkBoxFb2RarOnly.Text" xml:space="preserve">
+    <value>Только .FB2.RAR</value>
+  </data>
+  <data name="checkBoxFb2RarOnly.ToolTip" xml:space="preserve">
+    <value>Обрабатывать только файлы с расширением  .FB2.RAR</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 40</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 135</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Выберете зарегистрировать если вы желаете чтобы меню конвертора показывалось когда вы нажимаете на правую кнопку мыши на файлах с расширением .RAR</value>
+  </data>
+  <data name="radioButtonNotRegisterRar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 93</value>
+  </data>
+  <data name="radioButtonNotRegisterRar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 17</value>
+  </data>
+  <data name="radioButtonNotRegisterRar.Text" xml:space="preserve">
+    <value>Не регистрировать расширение .RAR</value>
+  </data>
+  <data name="radioButtonRarRegister.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 17</value>
+  </data>
+  <data name="radioButtonRarRegister.Text" xml:space="preserve">
+    <value>Зарегистрировать расширение  .RAR</value>
+  </data>
+  <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 214</value>
+  </data>
+  <data name="groupBox9.Text" xml:space="preserve">
+    <value>Регистрация расширения файла .RAR</value>
+  </data>
+  <data name="tabPageRegisterRar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>505, 220</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>272, 19</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 209</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Пожалийста проверьте все выбраные вами опции и настройки регистрации и если все верно - нажмите кнопку "Завершить".
+В противно случае, если вы хотите изменить что либо используйте кнопку "Назад" чтобы вернутся на предидущие страницы, которые вы хотели бы изменить.</value>
+  </data>
+  <data name="textBoxResults.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="textBoxResults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 209</value>
+  </data>
+  <data name="groupBox10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 214</value>
+  </data>
+  <data name="groupBox10.Text" xml:space="preserve">
+    <value>Окончание регистрации</value>
+  </data>
+  <data name="tabPageRegisterFinish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>505, 220</value>
+  </data>
+  <data name="tabWizard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>513, 246</value>
+  </data>
+  <data name="buttonPrev.Location" type="System.Drawing.Point, System.Drawing">
+    <value>90, 17</value>
+  </data>
+  <data name="buttonPrev.Text" xml:space="preserve">
+    <value>&lt;&lt; Назад</value>
+  </data>
+  <data name="buttonNext.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 17</value>
+  </data>
+  <data name="buttonNext.Text" xml:space="preserve">
+    <value>Дальше &gt;&gt;</value>
+  </data>
+  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 255</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>513, 57</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>519, 315</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>519, 315</value>
+  </data>
+  <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>535, 350</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>535, 350</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>FB2EPUB регистратор расширения оболочки системы </value>
+  </data>
+</root>

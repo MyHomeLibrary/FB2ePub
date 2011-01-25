@@ -1,0 +1,25 @@
+﻿This project uses following external components:
+
+1. fb2librarynet assembly for reading FB2 files ( http://code.google.com/p/fb2librarynet )
+
+2. ICSharpCode.SharpZipLib assembly for reading/writing ZIP files ( http://icsharpcode.net/OpenSource/SharpZipLib )
+
+3. ChilkatDotNet2 assembly for reading RAR files ( http://www.chilkatsoft.com/rar-features.asp - free RAR classes only) 
+
+4. translitrunet assembly for transliteration ( http://code.google.com/p/translitrunet/ )
+
+5. Using Log4Net for logging http://logging.apache.org/log4net/index.html
+
+6. Fb2Fix library v1.0.10.23846 https://www.assembla.com/wiki/show/fb2fix
+
+7. fontsettings - http://code.google.com/p/fontsettings
+
+8. xhtmlclasslibrary - http://code.google.com/p/xhtmlclasslibrary
+
+9. ISOLanguages(.dll) library, project located at http://code.google.com/p/isiolanguages
+
+10. epublibrary - https://code.google.com/p/epublibrary/
+
+
+
+The project is built using Microsoft Visual Studio 2008 and require .Net 3.5 to run.
