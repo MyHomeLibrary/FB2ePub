@@ -1,0 +1,70 @@
+﻿The EPUB file format uses standard CSS 2.1 without some elements to change the way book presented.
+See http://www.w3schools.com/Css/default.asp for CSS tutorial.
+
+FB2 standard include some elements are absent in XHTML standard used in EPUB files.
+To preserve "special" representation of such elements in resulting EPUB such element marked with "class" attribute that you can
+style with CSS.
+Here is the list of the "class" attribute values used and their meanings:
+
+"annotation" - FB2 annotation element
+
+"body_image" - FB2 image defined on top of main body
+
+"citation" - FB2 citation element
+
+"citation_author" - FB2 citation author element
+
+"empty-line" - FB2 empty line element
+
+"epigraph" - FB2 epigraph element
+
+"epigraph_author" - FB2 epigraph author element
+
+"ex_bad_link" - ex-bad link that get converterd to SPAN element in case had text content
+
+"fb2_info" - FB2 Document Info section transfered to EPUB as a page
+
+"int_image" - FB2 inline image element
+
+"note_anchor"  - anchor back to main body in FB2 "notes" body section
+
+"note_section" - section in "notes" FB2 body (usualy contains one note) 
+
+"poem" - FB2 poem element
+
+"poemdate" - date in the FB2 poem element
+
+"section"?  - where "?" is a number starting from 1 - FB2 file section, the number shows the level of inclusioon: 1 - top level section, 
+                 2 - section included in section level 1 etc.
+                 
+"section_image" - FB2 section image.
+
+"stanza" - FB2 stanza element
+
+"subtitle" - FB2 subtitle element
+
+"title"? - FB2 title element where ? - number starting from 1 defines level of inclusion, 1 - top level title (body) , 2 - title of it's subsection , etc
+
+"v" - FB2 "v" element (paragraph in stanza)
+
+
+
+Here are style classes speciffic to cover page only:
+
+"coverpage" - coverpage main section (page)
+"coverimage" - coverpage image
+
+
+
+
+Here are style classes specific to TitlePage only:
+
+"titlepage" - title page main section (page)
+
+
+
+
+Here are style classes speciffic to About page only:
+
+"about"   - about page main section (page)
+

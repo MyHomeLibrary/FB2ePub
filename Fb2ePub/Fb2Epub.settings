@@ -1,0 +1,92 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Fb2ePub" GeneratedClassName="Fb2Epub">
+  <Profiles />
+  <Settings>
+    <Setting Name="Transliterate" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="TransliterateFileName" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FB2Info" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="FixMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="AddSequences" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="TransliterateTOC" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FlatStructure" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConvertAlphaPNG" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EmbedStyles" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Fonts" Type="FontsSettings.FontSettings" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;Fonts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;Font generic_family="" style="normal" font-variant="" font-weight="400"&gt;
+    &lt;Destinations type="Embedded"&gt;
+      &lt;Path&gt;%ResourceFolder%\Fonts/LiberationSerif-Regular.ttf&lt;/Path&gt;
+    &lt;/Destinations&gt;
+    &lt;decorate&gt;true&lt;/decorate&gt;
+    &lt;CSSTargets&gt;body&lt;/CSSTargets&gt;
+    &lt;CSSTargets&gt;.epub&lt;/CSSTargets&gt;
+  &lt;/Font&gt;
+  &lt;Font generic_family="" style="italic" font-variant="" font-weight="400"&gt;
+    &lt;Destinations type="Embedded"&gt;
+      &lt;Path&gt;%ResourceFolder%\Fonts/LiberationSerif-Italic.ttf&lt;/Path&gt;
+    &lt;/Destinations&gt;
+    &lt;decorate&gt;true&lt;/decorate&gt;
+    &lt;CSSTargets&gt;body&lt;/CSSTargets&gt;
+    &lt;CSSTargets&gt;.epub&lt;/CSSTargets&gt;
+  &lt;/Font&gt;
+  &lt;Font generic_family="" style="normal" font-variant="" font-weight="700"&gt;
+    &lt;Destinations type="Embedded"&gt;
+      &lt;Path&gt;%ResourceFolder%\Fonts/LiberationSerif-Bold.ttf&lt;/Path&gt;
+    &lt;/Destinations&gt;
+    &lt;decorate&gt;true&lt;/decorate&gt;
+    &lt;CSSTargets&gt;body&lt;/CSSTargets&gt;
+    &lt;CSSTargets&gt;.epub&lt;/CSSTargets&gt;
+  &lt;/Font&gt;
+  &lt;Font generic_family="" style="italic" font-variant="" font-weight="700"&gt;
+    &lt;Destinations type="Embedded"&gt;
+      &lt;Path&gt;%ResourceFolder%\Fonts/LiberationSerif-BoldItalic.ttf&lt;/Path&gt;
+    &lt;/Destinations&gt;
+    &lt;decorate&gt;true&lt;/decorate&gt;
+    &lt;CSSTargets&gt;body&lt;/CSSTargets&gt;
+    &lt;CSSTargets&gt;.epub&lt;/CSSTargets&gt;
+  &lt;/Font&gt;
+  &lt;Font generic_family="" style="italic" font-variant="" font-weight=""&gt;
+    &lt;Destinations type="Embedded"&gt;
+      &lt;Path&gt;%ResourceFolder%\Fonts/LiberationSerif-Italic.ttf&lt;/Path&gt;
+    &lt;/Destinations&gt;
+    &lt;decorate&gt;true&lt;/decorate&gt;
+    &lt;CSSTargets&gt;code&lt;/CSSTargets&gt;
+  &lt;/Font&gt;
+&lt;/Fonts&gt;</Value>
+    </Setting>
+    <Setting Name="SequenceFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%bt% %sa.l%-%sn%</Value>
+    </Setting>
+    <Setting Name="NoSequenceFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%bt% (%sf.l%)</Value>
+    </Setting>
+    <Setting Name="NoSeriesFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%bt%</Value>
+    </Setting>
+    <Setting Name="AuthorFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%f.c%%m.c%%l.c%%n.c:b%</Value>
+    </Setting>
+    <Setting Name="FileAsFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%l.c%f.c</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

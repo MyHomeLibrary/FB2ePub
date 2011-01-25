@@ -1,0 +1,10 @@
+; Fb2EpubExt.def : Declares the module parameters.
+
+;LIBRARY      "Fb2EpubExt.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE
+	DllInstall		PRIVATE
