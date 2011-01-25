@@ -1,5 +1,6 @@
 ﻿1.0.38
 + Reorganized code to add to GoogleCode
++ Added project links to resulting "About" page
 
 
 1.0.37
