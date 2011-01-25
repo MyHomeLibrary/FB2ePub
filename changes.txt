@@ -1,1 +1,5 @@
-﻿1.0.11.0 - Added to GoogleCode
+﻿1.0.12.0
+* Changed the About page generation to allow change "About" page from caller application
+
+1.0.11.0 
+- Added to GoogleCode

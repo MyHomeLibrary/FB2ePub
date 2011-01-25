@@ -50,6 +50,8 @@ namespace EPubLibrary
         private readonly ContentFile content = new ContentFile();
         private readonly Rus2Lat rule = new Rus2Lat();
         private readonly List<string> allSequences = new List<string>();
+        private readonly List<string> about_texts = new List<string>();
+        private readonly List<string> about_links = new List<string>();
 
 
         private readonly Dictionary<string, string> fontFamiliesMap = new Dictionary<string, string>();
@@ -107,6 +109,28 @@ namespace EPubLibrary
         public AnnotationPageFile AnnotationPage { get; set; }
 
         public bool TranliterateToc { set; get; }
+
+        /// <summary>
+        /// Strings added to about page
+        /// </summary>
+        public List<string> AboutTexts
+        {
+            get
+            {
+                return about_texts;
+            }
+        }
+
+        /// <summary>
+        /// Links added to about page
+        /// </summary>
+        public List<string> AboutLinks
+        {
+            get
+            {
+                return about_links;
+            }
+        }
 
         public bool IsValid()
         {
@@ -398,7 +422,10 @@ namespace EPubLibrary
             AddTitle(stream);
             AddAnnotation(stream);
             AddBookContent(stream);
-            AddAbout(stream);
+            if (about_texts.Count >0 || about_links.Count > 0)
+            {
+                AddAbout(stream);                
+            }
         }
 
         private void AddAnnotation(ZipOutputStream stream)
@@ -523,11 +550,8 @@ namespace EPubLibrary
             stream.PutNextEntry(file);
 
 
-            AboutPageFile aboutPage = new AboutPageFile{ FlatStructure = FlatStructure, EmbedStyles = EmbedStyles};
-            //foreach (var cssFile in CSSFiles)
-            //{
-            //    aboutPage.StyleFiles.Add(cssFile);
-            //}
+            AboutPageFile aboutPage = new AboutPageFile{ FlatStructure = FlatStructure, EmbedStyles = EmbedStyles,AboutLinks = about_links, AboutTexts = about_texts};
+            aboutPage.Create();
             aboutPage.StyleFiles.Add(mainCSS);
 
             aboutPage.Write(stream);
