@@ -51,13 +51,21 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FontSettings, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ExtLibs\FontSettings.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Fb2ePub\ExtLibs\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>ExtLibs\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ISOLanguages, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ExtLibs\ISOLanguages.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Fb2ePub\ExtLibs\log4net.dll</HintPath>
+      <HintPath>ExtLibs\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -72,9 +80,13 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TranslitRu, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="TranslitRu, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Fb2ePub\ExtLibs\TranslitRu.dll</HintPath>
+      <HintPath>ExtLibs\TranslitRu.dll</HintPath>
+    </Reference>
+    <Reference Include="XHTMLClassLibrary, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ExtLibs\XHTMLClassLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -106,18 +118,8 @@
     <Compile Include="XHTML_Items\TitlePageFile.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FontSettings\FontsSettings.csproj">
-      <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
-      <Name>FontsSettings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ISOLanguages\ISOLanguages.csproj">
-      <Project>{58E261A5-B2EA-43F3-820D-902B5C061321}</Project>
-      <Name>ISOLanguages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XHTMLClassLibrary\XHTMLClassLibrary.csproj">
-      <Project>{FFCCD288-4F11-44A5-AB04-3CACF840935C}</Project>
-      <Name>XHTMLClassLibrary</Name>
-    </ProjectReference>
+    <Content Include="Build.txt" />
+    <Content Include="changes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
