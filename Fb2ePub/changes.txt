@@ -2,6 +2,8 @@
 + Added ability to draw "Capitalized" character (Huge "floating" character to start section that takes several lines)
 + Added new parameter -cap:[0/1] (default 1 -enabled) and .config setting "Capitalize" to control first character capitalization
 * Changed the default CSS style to support first character capitalization
+* Fixed old bug that prevented creation of multilevel headers <h1>,<h2>,<h3>,... based on depth(all <h2> were always created)
+* Switched to newer version of UnRar library (Chikalite 9.1.2.0) 
 
 1.0.38
 + Reorganized code to add to GoogleCode

@@ -182,8 +182,9 @@ namespace Fb2ePub
                             continue;
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        log.Error(ex);
                         continue;
                     }
                     if (fileParams.Count > 1 && !lookInSubFolders)

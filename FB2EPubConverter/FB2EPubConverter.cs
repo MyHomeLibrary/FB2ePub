@@ -1037,7 +1037,7 @@ namespace Fb2ePubConverter
             Logger.Log.DebugFormat("Adding section : {0}", docTitle);
             BookDocument sectionDocument = null;
             bool firstDocumentOfSplit = true;
-            foreach (var subitem in ConvertFromFb2SectionElement(section, 1,false))
+            foreach (var subitem in ConvertFromFb2SectionElement(section, GetRecursionLevel(navParent),false))
             {
                 sectionDocument = epubFile.AddDocument(docTitle);
                 sectionDocument.DocumentType = (navParent==null)?GuideTypeEnum.Text:navParent.DocumentType;
@@ -1056,6 +1056,15 @@ namespace Fb2ePubConverter
             {
                 AddSection(epubFile,subSection,sectionDocument);
             }
+        }
+
+        private int GetRecursionLevel(BookDocument navParent)
+        {
+            if (navParent == null)
+            {
+                return 1;
+            }
+            return navParent.NavigationLevel+1;
         }
 
 
