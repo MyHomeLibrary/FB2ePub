@@ -144,6 +144,11 @@ namespace Fb2ePubConverter
             }
         }
 
+        /// <summary>
+        /// Get set if a first character in section should start from capital huge "floating" character
+        /// </summary>
+        public bool Capitalized { get; set; }
+
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         public static extern int GetShortPathName(
             [MarshalAs(UnmanagedType.LPTStr)]
@@ -1587,6 +1592,7 @@ namespace Fb2ePubConverter
             // Parse all elements only if section has no sub section
             if (section.SubSections.Count == 0)
             {
+                bool startSection = true;
                 foreach (var item in section.Content)
                 {
                     IXHTMLItem newItem = null;
@@ -1597,7 +1603,8 @@ namespace Fb2ePubConverter
                     else if (item is ParagraphItem)
                     {
                         newItem = ConvertFromFb2ParagraphElement(item as ParagraphItem,
-                                                                   ParagraphConvTargetEnum.Paragraph);
+                                                                   ParagraphConvTargetEnum.Paragraph,startSection);
+                        startSection = false;
                     }
                     else if (item is PoemItem)
                     {
@@ -1786,6 +1793,7 @@ namespace Fb2ePubConverter
             return paragraphStyle;
         }
 
+
         /// <summary>
         /// Converts FB2 Paragraph to EPUB paragraph
         /// </summary>
@@ -1794,14 +1802,32 @@ namespace Fb2ePubConverter
         /// <returns></returns>
         private IBlockElement ConvertFromFb2ParagraphElement(ParagraphItem fb2ParagraphItem, ParagraphConvTargetEnum resultType)
         {
+            return ConvertFromFb2ParagraphElement(fb2ParagraphItem,resultType,false);
+        }
+
+        /// <summary>
+        /// Converts FB2 Paragraph to EPUB paragraph
+        /// </summary>
+        /// <param name="fb2ParagraphItem"></param>
+        /// <param name="resultType">type of the resulting block container in EPUB</param>
+        /// <param name="startSection"> if this is a first paragraph in section</param>
+        /// <returns></returns>
+        private IBlockElement ConvertFromFb2ParagraphElement(ParagraphItem fb2ParagraphItem, ParagraphConvTargetEnum resultType, bool startSection)
+        {
             IBlockElement paragraph = CreateBlock(resultType);
+            bool needToInsert = Capitalized && startSection;
 
             foreach (var item in fb2ParagraphItem.ParagraphData)
             {
                 if (item is SimpleText)
                 {
-                    foreach (var s in ConvertFromFb2SimpleTextElement(item))
+                    foreach (var s in ConvertFromFb2SimpleTextElement(item,needToInsert))
                     {
+                        if (needToInsert)
+                        {
+                            needToInsert = false;
+                            paragraph.Class.Value = "drop";
+                        }
                         paragraph.Add(s);                        
                     }
                 }
@@ -1877,6 +1903,18 @@ namespace Fb2ePubConverter
         /// <returns></returns>
         private List<IXHTMLItem> ConvertFromFb2SimpleTextElement(StyleType styleItem)
         {
+            return ConvertFromFb2SimpleTextElement(styleItem,false);
+        }
+
+        /// <summary>
+        /// Converts FB2 simple text 
+        /// ( simple text is normal text or text with one of the "styles")
+        /// </summary>
+        /// <param name="styleItem"></param>
+        /// <param name="needToInsert"></param>
+        /// <returns></returns>
+        private List<IXHTMLItem> ConvertFromFb2SimpleTextElement(StyleType styleItem, bool needToInsert)
+        {
 
             if (styleItem == null)
             {
@@ -1903,7 +1941,19 @@ namespace Fb2ePubConverter
                         }
                         else
                         {
-                            list.Add(new SimpleEPubText {Text = text.Text});
+                            if (needToInsert && text.Text.Length > 2)
+                            {
+                                var span1 = new Span();
+                                span1.Class.Value = "drop";
+                                span1.Add(new SimpleEPubText { Text = text.Text[0].ToString() });
+                                list.Add(span1);
+                                string substring = text.Text.Substring(1);
+                                list.Add(new SimpleEPubText { Text = substring });
+                            }
+                            else
+                            {
+                                list.Add(new SimpleEPubText { Text = text.Text });                                
+                            }
                         }
                         break;
                     case FB2Library.Elements.TextStyles.Code:

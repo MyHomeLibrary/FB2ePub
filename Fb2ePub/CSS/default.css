@@ -187,3 +187,14 @@ td {
    border: 1px solid black;
    padding: 0.3em;
 }
+span.drop
+{
+float:left;
+font-size:400%;
+line-height:80%;
+}              
+
+p.drop
+{
+	text-indent:0.1em;
+}

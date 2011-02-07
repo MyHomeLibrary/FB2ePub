@@ -223,5 +223,17 @@ namespace Fb2ePub {
                 this["FileAsFormat"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Capitalize {
+            get {
+                return ((bool)(this["Capitalize"]));
+            }
+            set {
+                this["Capitalize"] = value;
+            }
+        }
     }
 }
