@@ -88,5 +88,8 @@
     <Setting Name="FileAsFormat" Type="System.String" Scope="User">
       <Value Profile="(Default)">%l.c%f.c</Value>
     </Setting>
+    <Setting Name="Capitalize" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -176,6 +176,10 @@
         Enable/disable conversion of PNG files with palette that contain alpha channel into 32bit format. Many readers (especialy Adobe based)can't show 
         paletterized alpha chanel PNGs. The possible values are 0 (disable) and <dfn>-apng:1</dfn> - default
         </dd>                    
+        <dt><strong>-cap:<em>[0/1]</em></strong></dt>
+        <dd>
+        Enable (1) /disable (0)"capitalization" of section first character making it big and appear on several lines.<dfn>-cap:1</dfn> - default
+        </dd>                           
     </dl>
     <h2>
         Fonts:
@@ -334,6 +338,11 @@
         - Invokes "embeding styles mode" that, instead of adding CCS files to the ePub and referencing them, in xHTML injects the relevant style code 
           directly into the xHTML files. Values are: "False" - disabled (default) ,  "True" - enabled. The feature is for buggy readers that do not support reading styles from referenced files
         </dd>       
+        <dt>Capitalize</dt>
+        <dd> 
+        - Invokes "capitalization" of  section first character making it appera big and take several line. 
+        Values are: "False" - disabled  ,  "True" - enabled (default). 
+        </dd>              
         <dt>Fonts</dt>
         <dd>
         - Contains font definitions to be used by program, <br />

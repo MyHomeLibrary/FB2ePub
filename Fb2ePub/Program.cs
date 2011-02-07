@@ -317,6 +317,7 @@ namespace Fb2ePub
             converter.EmbedStyles = Fb2Epub.Default.EmbedStyles;
             converter.AuthorFormat = Fb2Epub.Default.AuthorFormat;
             converter.FileAsFormat = Fb2Epub.Default.FileAsFormat;
+            converter.Capitalized = Fb2Epub.Default.Capitalize;
             //Fb2Epub.Default.Save();
         }
 
@@ -597,6 +598,26 @@ namespace Fb2ePub
                             log.InfoFormat("Invalid -apng: parameter value {0}.", value);
                         }
                     }                                        
+                }
+                else if (command.StartsWith("cap:"))
+                {
+                    string commandValue = command.Substring(4);
+                    int value;
+                    if (int.TryParse(commandValue, out value))
+                    {
+                        if (value == 0)
+                        {
+                            converter.Capitalized = false;
+                        }
+                        else if (value == 1)
+                        {
+                            converter.Capitalized = true;
+                        }
+                        else
+                        {
+                            log.InfoFormat("Invalid -cap: parameter value {0}.", value);
+                        }
+                    }
                 }
                 else
                 {
