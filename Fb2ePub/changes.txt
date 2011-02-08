@@ -4,7 +4,9 @@
 * Changed the default CSS style to support first character capitalization
 * Fixed old bug that prevented creation of multilevel headers <h1>,<h2>,<h3>,... based on depth(all <h2> were always created)
 * Switched to newer version of UnRar library (Chikalite 9.1.2.0) 
-* Fixed deployment problem of UnRar library that required separaete DLLs on x86 and x64 systems
+* Changed setup to have 2 different versions for x64 and x86 since we actualy have 2 versions of Chikalite library,
+   this should fix the bug with unable to unrar on x64 systems
+* Added dependedncy of Chikalite library to MS VCRT DLLs
 
 1.0.38
 + Reorganized code to add to GoogleCode
