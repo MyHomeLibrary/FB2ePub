@@ -1434,13 +1434,6 @@
         }
         "LaunchCondition"
         {
-            "{836E08B8-0285-4809-BA42-01DB6754A45D}:_F9C54BB477BA4330B741BA3A28ED2442"
-            {
-            "Name" = "8:Archetecture Check"
-            "Condition" = "8:Msix64 = 0"
-            "Message" = "8:This installation is for x86 version only. Use correct installer from http://www.fb2epub.net"
-            "InstallUrl" = "8:"
-            }
         }
         "Locator"
         {
