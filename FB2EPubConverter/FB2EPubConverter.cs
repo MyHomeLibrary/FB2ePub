@@ -425,7 +425,7 @@ namespace Fb2ePubConverter
                                              {
                                                  ValidationType = ValidationType.None,
                                                  ProhibitDtd = true,
-                                                 CheckCharacters = false,
+                                                 CheckCharacters = false
                                                  
             };
             XDocument fb2Document;
@@ -1950,14 +1950,45 @@ namespace Fb2ePubConverter
                         }
                         else
                         {
-                            if (needToInsert && text.Text.Length > 2)
+                            if (needToInsert && text.Text.Length > 0)
                             {
                                 var span1 = new Span();
                                 span1.Class.Value = "drop";
-                                span1.Add(new SimpleEPubText { Text = text.Text[0].ToString() });
+                                int dropEnd = 0;
+                                // "pad" the white spaces so drop starts from visible character
+                                while (UnicodeHelpers.IsSpaceLike(text.Text[dropEnd]) && dropEnd < text.Text.Length)
+                                {
+                                    dropEnd++;
+                                }
+                                // calculate the initial drop part
+                                string dropPart = text.Text.Substring(0, dropEnd+1);
+                                // non-drop part starts from the next character
+                                int nondropPosition = dropEnd +1;
+                                // If first character is dash/hyphen like we need to add character to 
+                                // capital drop so it looks better with next character
+                                if (UnicodeHelpers.IsDashLike(dropPart[dropEnd]))
+                                {
+                                    // we need to add to capital drop all spaces if any
+                                    while (nondropPosition < text.Text.Length && UnicodeHelpers.IsSpaceLike(text.Text[nondropPosition]))
+                                    {
+                                        nondropPosition++;
+                                    }
+                                    // we need to advance to include one following nonspace character , unless
+                                    // we already at last character of the text
+                                    if (nondropPosition - dropEnd < text.Text.Length)
+                                    {
+                                        nondropPosition++;
+                                    }
+                                    // update drop part with the "string" we calculated
+                                    dropPart += text.Text.Substring(dropEnd+1,nondropPosition-dropEnd-1);
+                                }
+                                span1.Add(new SimpleEPubText {Text = dropPart });
                                 list.Add(span1);
-                                string substring = text.Text.Substring(1);
-                                list.Add(new SimpleEPubText { Text = substring });
+                                string substring = text.Text.Substring(nondropPosition);
+                                if (substring.Length > 0)
+                                {
+                                    list.Add(new SimpleEPubText { Text = substring });   
+                                }
                             }
                             else
                             {
@@ -2072,6 +2103,7 @@ namespace Fb2ePubConverter
 
             return list;
         }
+
 
         /// <summary>
         /// Converts FB2 inline image

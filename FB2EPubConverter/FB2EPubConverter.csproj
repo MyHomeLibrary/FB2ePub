@@ -115,6 +115,7 @@
     <Compile Include="ProcessAuthorFormat.cs" />
     <Compile Include="ProcessSeqFormatString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnicodeHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XMLFixerLibrary\XMLFixerLibrary.csproj">
