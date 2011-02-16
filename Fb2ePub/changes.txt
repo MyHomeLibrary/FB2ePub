@@ -1,4 +1,9 @@
-﻿1.0.39
+﻿1.0.40
+* Changed the way dropped capitals are calculated - now if section starts from any type of dash/hyphen looking character
+  we add the character that follows it to the drop, this way it looks better
+* Removed 2 character minimum limitation on dropped capitals
+
+1.0.39
 + Added ability to draw "Capitalized" character (Huge "floating" character to start section that takes several lines)
 + Added new parameter -cap:[0/1] (default 1 -enabled) and .config setting "Capitalize" to control first character capitalization
 * Changed the default CSS style to support first character capitalization
