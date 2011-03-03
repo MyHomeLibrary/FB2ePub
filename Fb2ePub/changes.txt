@@ -1,4 +1,12 @@
-﻿1.0.40
+﻿1.0.41
++ Added CSS style for "normal_image"
++ Switched to version 1.0.14 of FB2librarynet library that fixes several bug (detailed here)
++ Changed code to support more than one section image (as according to schema)
+* Fixed the bug where images after section image were replacing section image
+* Changed the non-section and non-inline images class to "normal_image" to be able to style them separately
+* Changed command propmpt execution file to contain title and open one window right away
+
+1.0.40
 * Changed the way dropped capitals are calculated - now if section starts from any type of dash/hyphen looking character
   we add the character that follows it to the drop, this way it looks better
 * Removed 2 character minimum limitation on dropped capitals

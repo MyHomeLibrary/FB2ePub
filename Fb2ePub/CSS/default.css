@@ -13,6 +13,12 @@ h1,h2,h3,h4,h5,h6
 
 .section_image
 {
+	display:block;	
+	text-align:center;
+}
+
+.normal_image
+{
 	page-break-inside: avoid;
 	display:block;	
 	text-align:center;

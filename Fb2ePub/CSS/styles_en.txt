@@ -28,6 +28,8 @@ Here is the list of the "class" attribute values used and their meanings:
 
 "int_image" - FB2 inline image element
 
+"normal_image" - FB2 image element that not section image and not inline image
+
 "note_anchor"  - anchor back to main body in FB2 "notes" body section
 
 "note_section" - section in "notes" FB2 body (usualy contains one note) 
