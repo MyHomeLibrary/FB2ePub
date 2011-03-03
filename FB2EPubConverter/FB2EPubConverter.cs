@@ -1514,41 +1514,45 @@ namespace Fb2ePubConverter
             }
 
             // Load section image
-            if ((section.SectionImage != null) && images.HasRealImages())
+            if ( images.HasRealImages())
             {
-                if (section.SectionImage.HRef != null)
+                foreach (var sectionImage in section.SectionImages)
                 {
-                    if (images.IsImageIdReal(section.SectionImage.HRef))
+                    if (sectionImage.HRef != null)
                     {
-                        Div container = new Div();
-                        Image sectionImagemage = new Image();
-                        if (section.SectionImage.AltText != null)
+                        if (images.IsImageIdReal(sectionImage.HRef))
                         {
-                            sectionImagemage.Alt.Value = section.SectionImage.AltText;
+                            Div container = new Div();
+                            Image sectionImagemage = new Image();
+                            if (sectionImage.AltText != null)
+                            {
+                                sectionImagemage.Alt.Value = sectionImage.AltText;
+                            }
+                            sectionImagemage.Source.Value = referencesManager.AddImageRefferenced(sectionImage, sectionImagemage);
+                            sectionImagemage.ID.Value = referencesManager.AddIdUsed(sectionImage.ID,
+                                                                                    sectionImagemage);
+                            if (sectionImage.Title != null)
+                            {
+                                sectionImagemage.Title.Value = sectionImage.Title;
+                            }
+                            container.Class.Value = "section_image";
+                            container.Add(sectionImagemage);
+                            long itemSize = container.EstimateSize();
+                            if (documentSize + itemSize >= MaxSize)
+                            {
+                                IBlockElement oldContent = content;
+                                resList.Add(content);
+                                content = new Div();
+                                content.Class.Value = oldContent.Class.Value;
+                                content.Language.Value = oldContent.Language.Value;
+                                documentSize = 0;
+                            }
+                            documentSize += itemSize;
+                            content.Add(container);
+                            images.ImageIdUsed(sectionImage.HRef);
                         }
-                        sectionImagemage.Source.Value = referencesManager.AddImageRefferenced(section.SectionImage, sectionImagemage);
-                        sectionImagemage.ID.Value = referencesManager.AddIdUsed(section.SectionImage.ID,
-                                                                                sectionImagemage);
-                        if (section.SectionImage.Title != null)
-                        {
-                            sectionImagemage.Title.Value = section.SectionImage.Title;
-                        }
-                        container.Class.Value = "section_image";
-                        container.Add(sectionImagemage);
-                        long itemSize = container.EstimateSize();
-                        if (documentSize + itemSize >= MaxSize)
-                        {
-                            IBlockElement oldContent = content;
-                            resList.Add(content);
-                            content = new Div();
-                            content.Class.Value = oldContent.Class.Value;
-                            content.Language.Value = oldContent.Language.Value;
-                            documentSize = 0;
-                        }
-                        documentSize += itemSize;
-                        content.Add(container);
-                        images.ImageIdUsed(section.SectionImage.HRef);
                     }
+                    
                 }
             }
 
@@ -1631,16 +1635,17 @@ namespace Fb2ePubConverter
                     {
                         newItem = ConvertFromFb2TableElement(item as TableItem);
                     }
-                    else if ((item is ImageItem) && (item != section.SectionImage) && images.HasRealImages())
+                    else if ((item is ImageItem) &&  images.HasRealImages())
                     {
                         ImageItem fb2Img = item as ImageItem;
-                        if (fb2Img.HRef != null)
+                        // if it's not section image and it's used
+                        if (( section.SectionImages.Find(x=>x ==fb2Img) == null) && (fb2Img.HRef != null) )
                         {
                             if (images.IsImageIdReal(fb2Img.HRef))
                             {
                                 Div enclosing = new Div(); // we use the enclosing so the user can style center it
                                 enclosing.Add(ConvertFromFb2ImageElement(fb2Img));
-                                enclosing.Class.Value = "section_image";
+                                enclosing.Class.Value = "normal_image";
                                 newItem = enclosing;
                             }
                         }
