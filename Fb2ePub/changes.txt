@@ -1,4 +1,7 @@
-﻿1.0.41
+﻿1.0.42
+* Fixed crash in case defective PNG file was in original .FB2
+
+1.0.41
 + Added CSS style for "normal_image"
 + Switched to version 1.0.14 of FB2librarynet library that fixes several bug (detailed here)
 + Changed code to support more than one section image (as according to schema)
