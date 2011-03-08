@@ -1,4 +1,5 @@
 ﻿1.0.42
++ Added hiddeen parameter to skip generation of "About" page
 * Fixed crash in case defective PNG file was in original .FB2
 
 1.0.41
