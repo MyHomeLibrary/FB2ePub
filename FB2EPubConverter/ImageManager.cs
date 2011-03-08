@@ -33,6 +33,22 @@ namespace FB2EPubConverter
             presentImagesList.Add(key,false);   
         }
 
+
+        /// <summary>
+        /// Removes image ID of the existing image
+        /// in case image invalid etc
+        /// </summary>
+        /// <param name="imageId"></param>
+        public void RemoveBinaryImageId(string imageId)
+        {
+            string key = imageId.TrimStart('#');
+            if (presentImagesList.ContainsKey(key))
+            {
+                presentImagesList.Remove(key);                
+            }
+        }
+
+
         /// <summary>
         /// Resets the image manager into initial state 
         /// </summary>
@@ -154,13 +170,21 @@ namespace FB2EPubConverter
                 }
                 if (IsImageIdUsed(image.ID)) // only if image regestered as used
                 {
-                    if (RemoveAlpha && (image.ImageType == EPUBImageTypeEnum.ImagePNG))
+                    try
                     {
-                        image.ImageData = GetPNGWithoutAlpha(image.ImageData);
+
+                        if (RemoveAlpha && (image.ImageType == EPUBImageTypeEnum.ImagePNG))
+                        {
+                            image.ImageData = GetPNGWithoutAlpha(image.ImageData);
+                        }
+                        epubImages.Add(string.Format("#{0}", image.ID), image);
                     }
-                    epubImages.Add(string.Format("#{0}", image.ID), image);
-                }
-                
+                    catch (Exception ex)
+                    {
+                        RemoveBinaryImageId(image.ID);
+                        Logger.log.ErrorFormat("Error reading PNG file {0}",ex);
+                    }
+                }               
             }
         }
 
