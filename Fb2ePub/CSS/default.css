@@ -33,15 +33,15 @@ h1,h2,h3,h4,h5,h6
 
 .epigraph
 {
-	font-style: italic;
 	page-break-inside:avoid;
-	margin: 0.5em 0px;
-	margin-bottom: 1em;	
-	font-size:0.9em;
+	margin-bottom: 2em;	
+	margin-top: 2em;
+	font-size:0.8em;
+	text-align:right;
 }
 .epigraph_author
 {
-	margin-left: 1em;
+    font-weight:bold;
 	font-size:0.85em;
 	margin: 0.6em 0px;
 	margin-left: 2em;	
