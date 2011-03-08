@@ -60,7 +60,14 @@ namespace EPubLibrary.CSS_Items
                     {
                         string key = parameter.Substring(0, valueStart).Trim();
                         string value = parameter.Substring(valueStart+1,parameter.Length - valueStart-1).Trim();
-                        Parameters.Add(key,value);
+                        if (!Parameters.ContainsKey(key))
+                        {
+                            Parameters.Add(key, value);                            
+                        }
+                        else
+                        {
+                            Logger.log.ErrorFormat("CSS Stylesheet for parameter {0} contains two or more values for parameter {1}",Name,key);
+                        }
                     }
                 }
             }

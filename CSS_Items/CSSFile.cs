@@ -82,7 +82,7 @@ namespace EPubLibrary.CSS_Items
                                 cssItem.Parse(elementString.ToString());
                                 AddTarget(cssItem);
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
                             }
                             elementString.Remove(0, elementString.Length);
