@@ -1,4 +1,7 @@
-﻿1.0.12.0
+﻿1.0.13.0
+* Fixed bug when font without style attribute and font with "normal" attribute were considered different , this caused sometimes for italic styles to be overwriten
+
+1.0.12.0
 * Changed the About page generation to allow change "About" page from caller application
 
 1.0.11.0 

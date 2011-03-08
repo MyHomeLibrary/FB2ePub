@@ -33,7 +33,7 @@ namespace EPubLibrary.CSS_Items
         {
             get { if (parameters.ContainsKey("font-weight"))
                     return parameters["font-weight"].ToString();
-                return string.Empty;
+                return "normal";
             }
             set { if (!string.IsNullOrEmpty(value)) parameters["font-weight"] = value; }                       
         }
