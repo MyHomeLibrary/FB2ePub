@@ -82,7 +82,7 @@ namespace FB2EPubConverter
                 case '\u3161':
                 case '\u4E00':
                 case '\uFF5E':
-                case '\u00AB':
+                case '\u00AB': //«
 
                     return true;
             }
