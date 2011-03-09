@@ -20,6 +20,8 @@ Here is the list of the "class" attribute values used and their meanings:
 
 "epigraph" - FB2 epigraph element
 
+"epigraph_main" - same as above but only for main (book) epigraphs
+
 "epigraph_author" - FB2 epigraph author element
 
 "ex_bad_link" - ex-bad link that get converterd to SPAN element in case had text content

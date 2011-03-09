@@ -919,7 +919,7 @@ namespace Fb2ePubConverter
                     MainDocument.NavigationParent = null;
                     MainDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
                 }
-                MainDocument.Content.Add(ConvertFromFb2EpigraphElement(ep, 1));
+                MainDocument.Content.Add(ConvertFromFb2EpigraphElement(ep, 1,true));
             }
 
             Logger.Log.Debug("Adding main sections");
@@ -1484,7 +1484,7 @@ namespace Fb2ePubConverter
             foreach (var epigraph in section.Epigraphs)
             {
 
-                IXHTMLItem epigraphItem = ConvertFromFb2EpigraphElement(epigraph, recursionLevel + 1);
+                IXHTMLItem epigraphItem = ConvertFromFb2EpigraphElement(epigraph, recursionLevel + 1,false);
                 long itemSize = epigraphItem.EstimateSize();
                 if (documentSize + itemSize >= MaxSize)
                 {
@@ -2236,7 +2236,7 @@ namespace Fb2ePubConverter
 
             foreach (var epigraph in poemItem.Epigraphs)
             {
-                poemContent.Add(ConvertFromFb2EpigraphElement(epigraph, level + 1));
+                poemContent.Add(ConvertFromFb2EpigraphElement(epigraph, level + 1,false));
             }
 
             foreach (var stanza in poemItem.Content)
@@ -2357,8 +2357,10 @@ namespace Fb2ePubConverter
         /// 
         /// </summary>
         /// <param name="epigraph"></param>
+        /// <param name="level">"recursion" level</param>
+        /// <param name="fromMain">If this is epigraph from Main section (book) or other level</param>
         /// <returns></returns>
-        private Div ConvertFromFb2EpigraphElement(EpigraphItem epigraph, int level)
+        private Div ConvertFromFb2EpigraphElement(EpigraphItem epigraph, int level,bool fromMain)
         {
             Div content = new Div();
 
@@ -2389,7 +2391,14 @@ namespace Fb2ePubConverter
                 content.Add(epAuthor);
             }
 
-            content.Class.Value = "epigraph";
+            if (fromMain)
+            {
+                content.Class.Value = "epigraph_main";
+            }
+            else
+            {
+                content.Class.Value = "epigraph";
+            }
 
             content.ID.Value = referencesManager.AddIdUsed(epigraph.ID, content);
 
