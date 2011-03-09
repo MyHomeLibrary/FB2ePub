@@ -82,13 +82,24 @@ namespace FB2EPubConverter
                 case '\u3161':
                 case '\u4E00':
                 case '\uFF5E':
-                case '\u00AB': //«
-
                     return true;
             }
 
             return false;
         }
 
+        public static bool IsNeedToBeJoinInDrop(char s)
+        {
+            if (IsDashLike(s))
+            {
+                return true;
+            }
+            switch (s)
+            {
+                case '\u00AB': //«
+                    return true;
+            }
+            return false;
+        }
     }
 }
