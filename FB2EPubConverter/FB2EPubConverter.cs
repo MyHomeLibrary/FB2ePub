@@ -1984,7 +1984,7 @@ namespace Fb2ePubConverter
                                 int nondropPosition = dropEnd +1;
                                 // If first character is dash/hyphen like we need to add character to 
                                 // capital drop so it looks better with next character
-                                if (UnicodeHelpers.IsDashLike(dropPart[dropEnd]))
+                                if (UnicodeHelpers.IsNeedToBeJoinInDrop(dropPart[dropEnd]))
                                 {
                                     // we need to add to capital drop all spaces if any
                                     while (nondropPosition < text.Text.Length && UnicodeHelpers.IsSpaceLike(text.Text[nondropPosition]))
