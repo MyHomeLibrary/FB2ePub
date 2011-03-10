@@ -16,8 +16,13 @@ namespace FB2EPubConverter.ElementConverters
         {
             Paragraph el = new Paragraph();
             el.Add(new SimpleEPubText { Text = "\u00A0" });
-            el.Class.Value = "empty-line";
+            SetClassType(el);
             return el;
+        }
+
+        public override string GetElementType()
+        {
+            return "empty-line";
         }
     }
 }

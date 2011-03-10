@@ -16,9 +16,8 @@ namespace FB2EPubConverter.ElementConverters
         /// </summary>
         /// <param name="epigraphItem"></param>
         /// <param name="level">"recursion" level</param>
-        /// <param name="fromMain">If this is epigraph from Main section (book) or other level</param>
         /// <returns>XHTML representation</returns>
-        public Div Convert(EpigraphItem epigraphItem,int level, bool fromMain)
+        public Div Convert(EpigraphItem epigraphItem,int level)
         {
             if (epigraphItem == null)
             {
@@ -56,19 +55,16 @@ namespace FB2EPubConverter.ElementConverters
                 content.Add(epigraphAuthorConverter.Convert(author as TextAuthorItem));
             }
 
-            if (fromMain)
-            {
-                content.Class.Value = "epigraph_main";
-            }
-            else
-            {
-                content.Class.Value = "epigraph";
-            }
+            SetClassType(content);
 
             content.ID.Value = Settings.ReferencesManager.AddIdUsed(epigraphItem.ID, content);
 
             return content;
         }
 
+        public override string GetElementType()
+        {
+            return "epigraph";
+        }
     }
 }

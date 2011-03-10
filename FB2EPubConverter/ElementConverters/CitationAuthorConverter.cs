@@ -29,5 +29,9 @@ namespace FB2EPubConverter.ElementConverters
             return cite;
         }
 
+        public override string GetElementType()
+        {
+            return "citation_author";
+        }
     }
 }

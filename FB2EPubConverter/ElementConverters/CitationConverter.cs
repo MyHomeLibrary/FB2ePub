@@ -66,10 +66,14 @@ namespace FB2EPubConverter.ElementConverters
             {
                 citation.Language.Value = citeItem.Lang;
             }
-            citation.Class.Value = "citation";
+            SetClassType(citation);
             return citation;
         }
 
 
+        public override string GetElementType()
+        {
+            return "citation";
+        }
     }
 }

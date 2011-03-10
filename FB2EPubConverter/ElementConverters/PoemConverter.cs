@@ -33,7 +33,7 @@ namespace FB2EPubConverter.ElementConverters
             foreach (var epigraph in poemItem.Epigraphs)
             {
                 EpigraphConverter epigraphConverter = new EpigraphConverter {Settings = Settings};
-                poemContent.Add(epigraphConverter.Convert(epigraph,level + 1, false));
+                poemContent.Add(epigraphConverter.Convert(epigraph,level + 1));
             }
 
             foreach (var stanza in poemItem.Content)
@@ -53,10 +53,8 @@ namespace FB2EPubConverter.ElementConverters
 
             if (poemItem.Date != null)
             {
-                Paragraph date = new Paragraph();
-                date.Add(new SimpleEPubText { Text = poemItem.Date.Text });
-                date.Class.Value = "poemdate";
-                poemContent.Add(date);
+                PoemDateConverter poemDateConverter = new PoemDateConverter {Settings = Settings};
+                poemContent.Add(poemDateConverter.Convert(poemItem.Date));
             }
 
             poemContent.ID.Value = Settings.ReferencesManager.AddIdUsed(poemItem.ID, poemContent);
@@ -65,9 +63,13 @@ namespace FB2EPubConverter.ElementConverters
             {
                 poemContent.Language.Value = poemItem.Lang;
             }
-            poemContent.Class.Value = "poem";
+            SetClassType(poemContent);
             return poemContent;
         }
 
+        public override string GetElementType()
+        {
+            return "poem";
+        }
     }
 }

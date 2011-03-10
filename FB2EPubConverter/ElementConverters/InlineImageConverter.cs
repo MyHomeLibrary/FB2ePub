@@ -33,5 +33,9 @@ namespace FB2EPubConverter.ElementConverters
             return img;
         }
 
+        public override string GetElementType()
+        {
+            return  "int_image";
+        }
     }
 }

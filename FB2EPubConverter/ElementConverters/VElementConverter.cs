@@ -23,12 +23,16 @@ namespace FB2EPubConverter.ElementConverters
             ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings,};
             IBlockElement item = paragraphConverter.Convert(paragraphItem,ParagraphConvTargetEnum.Paragraph);
 
-            item.Class.Value = "v";
+            SetClassType(item);
 
             item.ID.Value = Settings.ReferencesManager.AddIdUsed(paragraphItem.ID, item);
 
             return item;
         }
 
+        public override string GetElementType()
+        {
+            return "v";
+        }
     }
 }

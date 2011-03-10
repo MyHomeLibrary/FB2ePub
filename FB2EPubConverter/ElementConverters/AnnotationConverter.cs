@@ -61,9 +61,13 @@ namespace FB2EPubConverter.ElementConverters
 
             resAnnotation.ID.Value = Settings.ReferencesManager.AddIdUsed(annotationItem.ID, resAnnotation);
 
-            resAnnotation.Class.Value = "annotation";
+            SetClassType(resAnnotation);
             return resAnnotation;
         }
 
+        public override string GetElementType()
+        {
+            return "annotation";
+        }
     }
 }

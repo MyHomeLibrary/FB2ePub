@@ -47,9 +47,13 @@ namespace FB2EPubConverter.ElementConverters
                 stanzaSection.Language.Value = stanzaItem.Lang;
             }
 
-            stanzaSection.Class.Value = "stanza";
+            SetClassType(stanzaSection);
             return stanzaSection;
         }
 
+        public override string GetElementType()
+        {
+            return "stanza";
+        }
     }
 }

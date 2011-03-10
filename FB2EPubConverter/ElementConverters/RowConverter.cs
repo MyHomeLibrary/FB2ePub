@@ -139,6 +139,9 @@ namespace FB2EPubConverter.ElementConverters
         }
 
 
-
+        public override string GetElementType()
+        {
+            return string.Empty;
+        }
     }
 }

@@ -29,10 +29,16 @@ namespace FB2EPubConverter.ElementConverters
                 table.Add(rowConverter.Convert(row));
             }
 
+            SetClassType(table);
+
             table.ID.Value = Settings.ReferencesManager.AddIdUsed(tableItem.ID, table);
 
             return table;
         }
 
+        public override string GetElementType()
+        {
+            return string.Empty;
+        }
     }
 }
