@@ -107,7 +107,7 @@ namespace FB2EPubConverter.ElementConverters
             {
 
                 EpigraphConverter epigraphConverter = new EpigraphConverter {Settings = Settings};
-                IXHTMLItem epigraphItem = epigraphConverter.Convert(epigraph,RecursionLevel + 1, false);
+                IXHTMLItem epigraphItem = epigraphConverter.Convert(epigraph,RecursionLevel + 1);
                 long itemSize = epigraphItem.EstimateSize();
                 if (documentSize + itemSize >= Settings.MaxSize)
                 {
@@ -368,5 +368,9 @@ namespace FB2EPubConverter.ElementConverters
             return resList;
         }
 
+        public override string GetElementType()
+        {
+            return string.Empty;
+        }
     }
 }

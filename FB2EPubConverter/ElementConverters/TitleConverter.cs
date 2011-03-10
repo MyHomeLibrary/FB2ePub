@@ -10,6 +10,7 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class TitleConverter : BaseElementConverter
     {
+        private int level;
         /// <summary>
         /// Converts FB2 Title object to XHTML Title 
         /// </summary>
@@ -22,6 +23,7 @@ namespace FB2EPubConverter.ElementConverters
             {
                 throw new ArgumentNullException("titleItem");
             }
+            level = titleLevel;
             Div title = new Div();
             foreach (var fb2TextItem in titleItem.TitleData)
             {
@@ -41,8 +43,7 @@ namespace FB2EPubConverter.ElementConverters
                     Debug.WriteLine(string.Format("invalid type in Title - {0}", fb2TextItem.GetType()));
                 }
             }
-            string itemClass = string.Format("title{0}", titleLevel);
-            title.Class.Value = itemClass;
+            SetClassType(title);
             return title;
         }
 
@@ -71,5 +72,9 @@ namespace FB2EPubConverter.ElementConverters
         }
 
 
+        public override string GetElementType()
+        {
+            return string.Format("title{0}", level);
+        }
     }
 }

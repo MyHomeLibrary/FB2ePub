@@ -87,6 +87,7 @@ namespace FB2EPubConverter.ElementConverters
                 }
             }
 
+            //SetClassType(paragraph);
             paragraph.ID.Value = Settings.ReferencesManager.AddIdUsed(paragraphItem.ID, paragraph);
 
             return paragraph;
@@ -128,5 +129,9 @@ namespace FB2EPubConverter.ElementConverters
             return paragraph;
         }
 
+        public override string GetElementType()
+        {
+            return string.Empty;
+        }
     }
 }

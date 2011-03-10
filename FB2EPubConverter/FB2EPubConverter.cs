@@ -920,8 +920,8 @@ namespace Fb2ePubConverter
                     ReferencesManager = referencesManager
                 };
 
-                EpigraphConverter epigraphConverter = new EpigraphConverter{Settings = converterSettings};
-                MainDocument.Content.Add(epigraphConverter.Convert(ep,1,true));
+                MainEpigraphConverter epigraphConverter = new MainEpigraphConverter { Settings = converterSettings };
+                MainDocument.Content.Add(epigraphConverter.Convert(ep,1));
             }
 
             Logger.Log.Debug("Adding main sections");

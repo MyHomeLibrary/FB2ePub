@@ -47,15 +47,18 @@ namespace FB2EPubConverter.ElementConverters
             a.HRef.Value = string.Format("{0}_back", newId);
             if (a.HRef.Value.StartsWith("_back") == false)
             {
-                //a.ID.Value = newId; // no need since the Id usualy located on section level
                 a.Class.Value = "note_anchor";
                 Settings.ReferencesManager.AddBackReference(a.HRef.Value, a);
                 content.Add(a);
             }
-            content.Class.Value = "note_section";
+            SetClassType(content);
             return content;
 
         }
 
+        public override string GetElementType()
+        {
+            return "note_section";
+        }
     }
 }

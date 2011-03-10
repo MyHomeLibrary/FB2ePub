@@ -27,5 +27,9 @@ namespace FB2EPubConverter.ElementConverters
             return epigraphAuthor;
         }
 
+        public override string GetElementType()
+        {
+            return  "epigraph_author";
+        }
     }
 }
