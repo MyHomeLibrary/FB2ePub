@@ -11,45 +11,41 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class InternalLinkConverter : BaseElementConverter
     {
-        public InternalLinkItem Item { get; set; }
 
         /// <summary>
         /// Convert FB2 internal link 
         /// </summary>
-        /// <returns></returns>
-        public List<IXHTMLItem> Convert()
+        /// <param name="internalLinkItem">item to convert</param>
+        /// <returns>XHTML representation</returns>
+        public List<IXHTMLItem> Convert(InternalLinkItem internalLinkItem)
         {
-            if (Item == null)
+            if (internalLinkItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("internalLinkItem");
             }
             List<IXHTMLItem> list = new List<IXHTMLItem>();
-            if (!string.IsNullOrEmpty(Item.HRef))
+            if (!string.IsNullOrEmpty(internalLinkItem.HRef))
             {
                 Anchor anchor = new Anchor();
                 bool internalLink = false;
-                if (!ReferencesUtils.IsExternalLink(Item.HRef))
+                if (!ReferencesUtils.IsExternalLink(internalLinkItem.HRef))
                 {
-                    if (Item.HRef.StartsWith("#"))
+                    if (internalLinkItem.HRef.StartsWith("#"))
                     {
-                        Item.HRef = Item.HRef.Substring(1);
+                        internalLinkItem.HRef = internalLinkItem.HRef.Substring(1);
                     }
-                    Item.HRef = Settings.ReferencesManager.EnsureGoodID(Item.HRef);
+                    internalLinkItem.HRef = Settings.ReferencesManager.EnsureGoodID(internalLinkItem.HRef);
                     internalLink = true;
                 }
-                anchor.HRef.Value = Item.HRef;
+                anchor.HRef.Value = internalLinkItem.HRef;
                 if (internalLink)
                 {
-                    Settings.ReferencesManager.AddReference(Item.HRef, anchor);
+                    Settings.ReferencesManager.AddReference(internalLinkItem.HRef, anchor);
                 }
-                if (Item.LinkText != null)
+                if (internalLinkItem.LinkText != null)
                 {
-                    SimpleTextElementConverter tempConverter = new SimpleTextElementConverter
-                                                                   {
-                                                                       Item = Item.LinkText,
-                                                                       Settings = Settings
-                                                                   };
-                    foreach (var s in tempConverter.Convert())
+                    SimpleTextElementConverter tempConverter = new SimpleTextElementConverter {Settings = Settings};
+                    foreach (var s in tempConverter.Convert(internalLinkItem.LinkText))
                     {
                         s.Parent = anchor;
                         anchor.Content.Add(s);
@@ -58,9 +54,8 @@ namespace FB2EPubConverter.ElementConverters
                 list.Add(anchor);
                 return list;
             }
-            SimpleTextElementConverter converter = new SimpleTextElementConverter
-                                                       {Item = Item.LinkText, Settings = Settings};
-            return converter.Convert();
+            SimpleTextElementConverter converter = new SimpleTextElementConverter {Settings = Settings};
+            return converter.Convert(internalLinkItem.LinkText);
         }
 
 

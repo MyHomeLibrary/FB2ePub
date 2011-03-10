@@ -12,28 +12,23 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class RowConverter : BaseElementConverter
     {
-        public TableRowItem Item { get; set;}
 
-        public IXHTMLItem Convert()
+        public IXHTMLItem Convert(TableRowItem tableRowItem)
         {
-            if (Item == null)
+            if (tableRowItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("tableRowItem");
             }
             TableRow tableRow = new TableRow();
 
-            foreach (var element in Item.Cells)
+            foreach (var element in tableRowItem.Cells)
             {
                 if (element is TableHeadingItem)
                 {
                     TableHeadingItem th = element as TableHeadingItem;
                     HeaderCell cell = new HeaderCell();
-                    ParagraphConverter paragraphConverter = new ParagraphConverter
-                                                                {
-                                                                    Item = th,
-                                                                    Settings = Settings
-                                                                };
-                    IBlockElement cellData = paragraphConverter.Convert(ParagraphConvTargetEnum.Paragraph);
+                    ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
+                    IBlockElement cellData = paragraphConverter.Convert(th,ParagraphConvTargetEnum.Paragraph);
                     if (cellData.SubElements() != null)
                     {
                         foreach (var subElement in cellData.SubElements())
@@ -84,12 +79,8 @@ namespace FB2EPubConverter.ElementConverters
                 {
                     TableCellItem td = element as TableCellItem;
                     TableData cell = new TableData();
-                    ParagraphConverter paragraphConverter = new ParagraphConverter
-                                                                {
-                                                                    Item = td,
-                                                                    Settings = Settings
-                                                                };
-                    IBlockElement cellData = paragraphConverter.Convert(ParagraphConvTargetEnum.Paragraph);
+                    ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
+                    IBlockElement cellData = paragraphConverter.Convert(td,ParagraphConvTargetEnum.Paragraph);
                     if (cellData.SubElements() != null)
                     {
                         foreach (var subElement in cellData.SubElements())
@@ -143,7 +134,7 @@ namespace FB2EPubConverter.ElementConverters
                     continue;
                 }
             }
-            tableRow.Align.Value = Item.Align ?? "left";
+            tableRow.Align.Value = tableRowItem.Align ?? "left";
             return tableRow;
         }
 

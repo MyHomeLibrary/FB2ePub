@@ -10,68 +10,60 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class PoemConverter : BaseElementConverter
     {
-        public PoemItem Item { get; set; }
-
-        public  IXHTMLItem Convert(int level)
+        /// <summary>
+        /// Convert poem FB2 element
+        /// </summary>
+        /// <param name="poemItem">item to convert</param>
+        /// <param name="level">"deepness" level - affects representation</param>
+        /// <returns>XHTML representation</returns>
+        public  IXHTMLItem Convert(PoemItem poemItem,int level)
         {
-            if (Item == null)
+            if (poemItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("poemItem");
             }
             Div poemContent = new Div();
 
-            if (Item.Title != null)
+            if (poemItem.Title != null)
             {
-                TitleConverter titleConverter = new TitleConverter
-                                                    {
-                                                        Item = Item.Title,
-                                                        Settings = Settings
-                                                    };
-                poemContent.Add(titleConverter.Convert(level));
+                TitleConverter titleConverter = new TitleConverter {Settings = Settings};
+                poemContent.Add(titleConverter.Convert(poemItem.Title, level));
             }
 
-            foreach (var epigraph in Item.Epigraphs)
+            foreach (var epigraph in poemItem.Epigraphs)
             {
-                EpigraphConverter epigraphAuthorConverter = new EpigraphConverter
-                                                                {
-                                                                    Item = epigraph,
-                                                                    Settings = Settings
-                                                                };
-                poemContent.Add(epigraphAuthorConverter.Convert(level + 1, false));
+                EpigraphConverter epigraphConverter = new EpigraphConverter {Settings = Settings};
+                poemContent.Add(epigraphConverter.Convert(epigraph,level + 1, false));
             }
 
-            foreach (var stanza in Item.Content)
+            foreach (var stanza in poemItem.Content)
             {
                 if (stanza is StanzaItem)
                 {
-                    StanzaConverter stanzaConverter = new StanzaConverter
-                                                          {
-                                                              Item = stanza as StanzaItem,
-                                                              Settings = Settings
-                                                          };
-                    poemContent.Add(stanzaConverter.Convert(level + 1));
+                    StanzaConverter stanzaConverter = new StanzaConverter {Settings = Settings};
+                    poemContent.Add(stanzaConverter.Convert(stanza as StanzaItem,level + 1));
                 }
             }
 
-            foreach (var author in Item.Authors)
+            foreach (var author in poemItem.Authors)
             {
-                CitationAuthorConverter citationAuthorConverter = new CitationAuthorConverter {Item = author};
-                poemContent.Add(citationAuthorConverter.Convert());
+                CitationAuthorConverter citationAuthorConverter = new CitationAuthorConverter();
+                poemContent.Add(citationAuthorConverter.Convert(author));
             }
 
-            if (Item.Date != null)
+            if (poemItem.Date != null)
             {
                 Paragraph date = new Paragraph();
-                date.Add(new SimpleEPubText { Text = Item.Date.Text });
+                date.Add(new SimpleEPubText { Text = poemItem.Date.Text });
                 date.Class.Value = "poemdate";
                 poemContent.Add(date);
             }
 
-            poemContent.ID.Value = Settings.ReferencesManager.AddIdUsed(Item.ID, poemContent);
+            poemContent.ID.Value = Settings.ReferencesManager.AddIdUsed(poemItem.ID, poemContent);
 
-            if (Item.Lang != null)
+            if (poemItem.Lang != null)
             {
-                poemContent.Language.Value = Item.Lang;
+                poemContent.Language.Value = poemItem.Lang;
             }
             poemContent.Class.Value = "poem";
             return poemContent;

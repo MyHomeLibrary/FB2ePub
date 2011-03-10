@@ -11,49 +11,36 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class CitationConverter : BaseElementConverter
     {
-        public CiteItem Item { get; set; }
 
         /// <summary>
-        /// 
+        /// Convert FB2 citation element
         /// </summary>
-        /// <param name="level"></param>
-        /// <returns></returns>
-        public Div Convert(int level)
+        /// <param name="citeItem">item to convert</param>
+        /// <param name="level">"deepness" level, affects representation</param>
+        /// <returns>XHTML representation</returns>
+        public Div Convert(CiteItem citeItem,int level)
         {
-            if (Item == null)
+            if (citeItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("citeItem");
             }
             Div citation = new Div();
-            foreach (var item in Item.CiteData)
+            foreach (var item in citeItem.CiteData)
             {
                 if (item is SubTitleItem)
                 {
-                    SubtitleConverter subtitleConverter = new SubtitleConverter
-                                                              {
-                                                                  Item = item as SubTitleItem,
-                                                                  Settings = Settings
-                                                              };
-                    citation.Add(subtitleConverter.Convert(level));
+                    SubtitleConverter subtitleConverter = new SubtitleConverter {Settings = Settings};
+                    citation.Add(subtitleConverter.Convert(item as SubTitleItem));
                 }
                 else if (item is ParagraphItem)
                 {
-                    ParagraphConverter paragraphConverter = new ParagraphConverter
-                                                            {
-                                                                Item = item as ParagraphItem,
-                                                                Settings = Settings
-                                                            };
-
-                    citation.Add(paragraphConverter.Convert(ParagraphConvTargetEnum.Paragraph));
+                    ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
+                    citation.Add(paragraphConverter.Convert(item as ParagraphItem,ParagraphConvTargetEnum.Paragraph));
                 }
                 else if (item is PoemItem)
                 {
-                    PoemConverter poemConverter = new PoemConverter
-                                                      {
-                                                          Item = item as PoemItem,
-                                                          Settings = Settings
-                                                      };
-                    citation.Add(poemConverter.Convert(level + 1));
+                    PoemConverter poemConverter = new PoemConverter {Settings = Settings};
+                    citation.Add(poemConverter.Convert(item as PoemItem,level + 1));
                 }
                 else if (item is EmptyLineItem)
                 {
@@ -62,26 +49,22 @@ namespace FB2EPubConverter.ElementConverters
                 }
                 else if (item is TableItem)
                 {
-                    TableConverter tableConverter = new TableConverter
-                                                        {
-                                                            Item = item as TableItem,
-                                                            Settings = Settings
-                                                        };
-                    citation.Add(tableConverter.Convert());
+                    TableConverter tableConverter = new TableConverter {Settings = Settings};
+                    citation.Add(tableConverter.Convert(item as TableItem));
                 }
             }
 
-            foreach (var author in Item.TextAuthors)
+            foreach (var author in citeItem.TextAuthors)
             {
-                CitationAuthorConverter citationAuthorConverter = new CitationAuthorConverter {Item = author};
-                citation.Add(citationAuthorConverter.Convert());
+                CitationAuthorConverter citationAuthorConverter = new CitationAuthorConverter();
+                citation.Add(citationAuthorConverter.Convert(author));
             }
 
-            citation.ID.Value = Settings.ReferencesManager.AddIdUsed(Item.ID, citation);
+            citation.ID.Value = Settings.ReferencesManager.AddIdUsed(citeItem.ID, citation);
 
-            if (Item.Lang != null)
+            if (citeItem.Lang != null)
             {
-                citation.Language.Value = Item.Lang;
+                citation.Language.Value = citeItem.Lang;
             }
             citation.Class.Value = "citation";
             return citation;

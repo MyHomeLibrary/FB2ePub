@@ -10,24 +10,22 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class VElementConverter : BaseElementConverter
     {
-        public VPoemParagraph Item { get; set; }
-
-        public IXHTMLItem Convert()
+        /// <summary>
+        /// Converts "v" (poem) sub-element
+        /// </summary>
+        /// <returns>XHTML formated representation</returns>
+        public IXHTMLItem Convert(VPoemParagraph paragraphItem)
         {
-            if (Item == null)
+            if (paragraphItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("paragraphItem");
             }
-            ParagraphConverter paragraphConverter = new ParagraphConverter
-                                                        {
-                                                            Settings = Settings,
-                                                            Item = Item
-                                                        };
-            IBlockElement item = paragraphConverter.Convert(ParagraphConvTargetEnum.Paragraph);
+            ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings,};
+            IBlockElement item = paragraphConverter.Convert(paragraphItem,ParagraphConvTargetEnum.Paragraph);
 
             item.Class.Value = "v";
 
-            item.ID.Value = Settings.ReferencesManager.AddIdUsed(Item.ID, item);
+            item.ID.Value = Settings.ReferencesManager.AddIdUsed(paragraphItem.ID, item);
 
             return item;
         }

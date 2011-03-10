@@ -11,22 +11,21 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class LinkSectionConverter : BaseElementConverter
     {
-        public SectionItem Item { get; set; }
-
-        public IXHTMLItem Convert()
+        /// <summary>
+        /// Convert FB2 "notes" and "comments" and other "additional" sections
+        /// </summary>
+        /// <param name="linkSectionItem">item to convert</param>
+        /// <returns>XHTML representation</returns>
+        public IXHTMLItem Convert(SectionItem linkSectionItem)
         {
-            if (Item == null)
+            if (linkSectionItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("linkSectionItem");
             }
             IBlockElement content = new Paragraph();
             Anchor a = new Anchor();
-            TitleConverter titleConverter = new TitleConverter
-                                                {
-                                                    Settings = Settings,
-                                                    Item = Item.Title
-                                                };
-            foreach (var item in titleConverter.Convert(7).SubElements())
+            TitleConverter titleConverter = new TitleConverter{ Settings = Settings };
+            foreach (var item in titleConverter.Convert(linkSectionItem.Title, 7).SubElements())
             {
                 if (item is IInlineItem)
                 {
@@ -44,7 +43,7 @@ namespace FB2EPubConverter.ElementConverters
                     }
                 }
             }
-            string newId = Settings.ReferencesManager.EnsureGoodID(Item.ID);
+            string newId = Settings.ReferencesManager.EnsureGoodID(linkSectionItem.ID);
             a.HRef.Value = string.Format("{0}_back", newId);
             if (a.HRef.Value.StartsWith("_back") == false)
             {

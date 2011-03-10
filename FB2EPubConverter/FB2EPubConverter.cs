@@ -847,12 +847,8 @@ namespace Fb2ePubConverter
                                                                   MaxSize = MaxSize,
                                                                   ReferencesManager = referencesManager
                                                               };
-                    TitleConverter titleConverter = new TitleConverter
-                                                        {
-                                                            Item = fb2File.MainBody.Title,
-                                                            Settings = converterSettings
-                                                        };
-                    addTitlePage.Content.Add(titleConverter.Convert(2));
+                    TitleConverter titleConverter = new TitleConverter {Settings = converterSettings};
+                    addTitlePage.Content.Add(titleConverter.Convert(fb2File.MainBody.Title,2));
                 }
                 addTitlePage.NavigationParent = null;
                 addTitlePage.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
@@ -896,12 +892,8 @@ namespace Fb2ePubConverter
                             ReferencesManager = referencesManager
                         };
 
-                        ImageConverter imageConverter = new ImageConverter
-                                                            {
-                                                                Item = fb2File.MainBody.ImageName,
-                                                                Settings = converterSettings
-                                                            };
-                        enclosing.Add(imageConverter.Convert());
+                        ImageConverter imageConverter = new ImageConverter {Settings = converterSettings};
+                        enclosing.Add(imageConverter.Convert(fb2File.MainBody.ImageName));
                         enclosing.Class.Value = "body_image";
                         MainDocument.Content.Add(enclosing);
                     }
@@ -928,12 +920,8 @@ namespace Fb2ePubConverter
                     ReferencesManager = referencesManager
                 };
 
-                EpigraphConverter epigraphConverter = new EpigraphConverter
-                                                          {
-                                                              Item = ep,
-                                                              Settings = converterSettings
-                                                          };
-                MainDocument.Content.Add(epigraphConverter.Convert(1,true));
+                EpigraphConverter epigraphConverter = new EpigraphConverter{Settings = converterSettings};
+                MainDocument.Content.Add(epigraphConverter.Convert(ep,1,true));
             }
 
             Logger.Log.Debug("Adding main sections");
@@ -995,12 +983,8 @@ namespace Fb2ePubConverter
                     MaxSize = MaxSize,
                     ReferencesManager = referencesManager
                 };
-                TitleConverter titleConverter = new TitleConverter
-                                                    {
-                                                        Item = bodyItem.Title,
-                                                        Settings = converterSettings
-                                                    };
-                sectionDocument.Content.Add(titleConverter.Convert(1));
+                TitleConverter titleConverter = new TitleConverter {Settings = converterSettings};
+                sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,1));
             }
             sectionDocument.NavigationParent = null;
             sectionDocument.NotPartOfNavigation = notPartOfNavigation;
@@ -1034,10 +1018,9 @@ namespace Fb2ePubConverter
                                                     {
                                                         LinkSection = false,
                                                         RecursionLevel = GetRecursionLevel(navParent),
-                                                        Item = section,
                                                         Settings = converterSettings
                                                     };
-            foreach (var subitem in sectionConverter.Convert())
+            foreach (var subitem in sectionConverter.Convert(section))
             {
                 sectionDocument = epubFile.AddDocument(docTitle);
                 sectionDocument.DocumentType = (navParent==null)?GuideTypeEnum.Text:navParent.DocumentType;
@@ -1142,12 +1125,8 @@ namespace Fb2ePubConverter
                         MaxSize = MaxSize,
                         ReferencesManager = referencesManager
                     };
-                    AnnotationConverter annotationConverter = new AnnotationConverter
-                                                                  {
-                                                                      Item = fb2File.TitleInfo.Annotation,
-                                                                      Settings = converterSettings
-                                                                  };
-                    epubFile.AnnotationPage.BookAnnotation = annotationConverter.Convert(1);
+                    AnnotationConverter annotationConverter = new AnnotationConverter {Settings = converterSettings};
+                    epubFile.AnnotationPage.BookAnnotation = annotationConverter.Convert(fb2File.TitleInfo.Annotation,1);
                 }
 
 

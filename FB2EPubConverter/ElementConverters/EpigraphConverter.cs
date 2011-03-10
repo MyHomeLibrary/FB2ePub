@@ -10,65 +10,50 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class EpigraphConverter : BaseElementConverter
     {
-        public EpigraphItem Item { set; get; }
 
         /// <summary>
-        /// 
+        /// Converts FB2 epigraph element
         /// </summary>
+        /// <param name="epigraphItem"></param>
         /// <param name="level">"recursion" level</param>
         /// <param name="fromMain">If this is epigraph from Main section (book) or other level</param>
-        /// <returns></returns>
-        public Div Convert(int level, bool fromMain)
+        /// <returns>XHTML representation</returns>
+        public Div Convert(EpigraphItem epigraphItem,int level, bool fromMain)
         {
-            if (Item == null)
+            if (epigraphItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("epigraphItem");
             }
             Div content = new Div();
 
-            foreach (var element in Item.EpigraphData)
+            foreach (var element in epigraphItem.EpigraphData)
             {
                 if (element is ParagraphItem)
                 {
-                    ParagraphConverter paragraphConverter = new ParagraphConverter
-                                                                {
-                                                                    Item = element as ParagraphItem,
-                                                                    Settings = Settings
-                                                                };
-                    content.Add(paragraphConverter.Convert(ParagraphConvTargetEnum.Paragraph));
+                    ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
+                    content.Add(paragraphConverter.Convert(element as ParagraphItem,ParagraphConvTargetEnum.Paragraph));
                 }
                 if (element is PoemItem)
                 {
-                    PoemConverter poemConverter = new PoemConverter
-                                                      {
-                                                          Item = element as PoemItem,
-                                                          Settings = Settings
-                                                      };
-                    content.Add(poemConverter.Convert(level + 1));
+                    PoemConverter poemConverter = new PoemConverter {Settings = Settings};
+                    content.Add(poemConverter.Convert(element as PoemItem,level + 1));
                 }
                 if (element is CiteItem)
                 {
-                    CitationConverter citationAuthorConverter = new CitationConverter
-                                                                          {Item = element as CiteItem};
-                    content.Add(citationAuthorConverter.Convert(level + 1));
+                    CitationConverter citationAuthorConverter = new CitationConverter {Settings = Settings};
+                    content.Add(citationAuthorConverter.Convert(element as CiteItem,level + 1));
                 }
                 if (element is EmptyLineItem)
                 {
-                    EmptyLineConverter emptyLineConverter = new EmptyLineConverter();
+                    EmptyLineConverter emptyLineConverter = new EmptyLineConverter {Settings = Settings};
                     content.Add(emptyLineConverter.Convert());
                 }
             }
 
-            foreach (var author in Item.TextAuthors)
+            foreach (var author in epigraphItem.TextAuthors)
             {
-                EpigraphAuthorConverter epigraphAuthorConverter = new EpigraphAuthorConverter
-                                                                      {
-                                                                          Item = author as TextAuthorItem,
-                                                                          Settings = Settings
-                                                                      };
-                IBlockElement epAuthor = epigraphAuthorConverter.Convert();
-                epAuthor.Class.Value = "epigraph_author";
-                content.Add(epAuthor);
+                EpigraphAuthorConverter epigraphAuthorConverter = new EpigraphAuthorConverter {Settings = Settings};
+                content.Add(epigraphAuthorConverter.Convert(author as TextAuthorItem));
             }
 
             if (fromMain)
@@ -80,7 +65,7 @@ namespace FB2EPubConverter.ElementConverters
                 content.Class.Value = "epigraph";
             }
 
-            content.ID.Value = Settings.ReferencesManager.AddIdUsed(Item.ID, content);
+            content.ID.Value = Settings.ReferencesManager.AddIdUsed(epigraphItem.ID, content);
 
             return content;
         }

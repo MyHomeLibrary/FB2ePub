@@ -8,6 +8,10 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class EmptyLineConverter : BaseElementConverter
     {
+        /// <summary>
+        /// Converts empty line FB2 element 
+        /// </summary>
+        /// <returns>XHTML representation</returns>
         public IXHTMLItem Convert()
         {
             Paragraph el = new Paragraph();

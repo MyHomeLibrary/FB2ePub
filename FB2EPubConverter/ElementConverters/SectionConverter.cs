@@ -14,15 +14,19 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class SectionConverter : BaseElementConverter
     {
-        public SectionItem Item { get; set;}
         public int RecursionLevel { get; set;}
         public bool LinkSection { get; set; }
 
-        public List<IXHTMLItem> Convert()
+        /// <summary>
+        /// Converts FB2 section element
+        /// </summary>
+        /// <param name="sectionItem">item to convert</param>
+        /// <returns>XHTML representation</returns>
+        public List<IXHTMLItem> Convert(SectionItem sectionItem)
         {
-            if (Item == null)
+            if (sectionItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("sectionItem");
             }
             List<IXHTMLItem> resList = new List<IXHTMLItem>();
             Logger.Log.Debug("Convering section");
@@ -32,35 +36,27 @@ namespace FB2EPubConverter.ElementConverters
 
             content.Class.Value = string.Format("section{0}", RecursionLevel);
 
-            content.ID.Value = Settings.ReferencesManager.AddIdUsed(Item.ID, content);
+            content.ID.Value = Settings.ReferencesManager.AddIdUsed(sectionItem.ID, content);
 
-            if (Item.Lang != null)
+            if (sectionItem.Lang != null)
             {
-                content.Language.Value = Item.Lang;
+                content.Language.Value = sectionItem.Lang;
             }
 
 
             // Load Title
-            if (Item.Title != null)
+            if (sectionItem.Title != null)
             {
                 IXHTMLItem titleItem = null;
                 if (!LinkSection)
                 {
-                    TitleConverter titleConverter = new TitleConverter
-                                                        {
-                                                            Item = Item.Title,
-                                                            Settings = Settings
-                                                        };
-                    titleItem = titleConverter.Convert(RecursionLevel + 1);
+                    TitleConverter titleConverter = new TitleConverter {Settings = Settings};
+                    titleItem = titleConverter.Convert(sectionItem.Title, RecursionLevel + 1);
                 }
                 else
                 {
-                    LinkSectionConverter linkSectionConverter = new LinkSectionConverter
-                                                                    {
-                                                                        Item = Item,
-                                                                        Settings = Settings
-                                                                    };
-                    titleItem = linkSectionConverter.Convert();
+                    LinkSectionConverter linkSectionConverter = new LinkSectionConverter {Settings = Settings};
+                    titleItem = linkSectionConverter.Convert(sectionItem);
                 }
                 if (titleItem != null)
                 {
@@ -107,15 +103,11 @@ namespace FB2EPubConverter.ElementConverters
             }
 
             // Load epigraphs
-            foreach (var epigraph in Item.Epigraphs)
+            foreach (var epigraph in sectionItem.Epigraphs)
             {
 
-                EpigraphConverter epigraphConverter = new EpigraphConverter
-                                                          {
-                                                              Item = epigraph,
-                                                              Settings = Settings
-                                                          };
-                IXHTMLItem epigraphItem = epigraphConverter.Convert(RecursionLevel + 1, false);
+                EpigraphConverter epigraphConverter = new EpigraphConverter {Settings = Settings};
+                IXHTMLItem epigraphItem = epigraphConverter.Convert(epigraph,RecursionLevel + 1, false);
                 long itemSize = epigraphItem.EstimateSize();
                 if (documentSize + itemSize >= Settings.MaxSize)
                 {
@@ -160,7 +152,7 @@ namespace FB2EPubConverter.ElementConverters
             // Load section image
             if (Settings.Images.HasRealImages())
             {
-                foreach (var sectionImage in Item.SectionImages)
+                foreach (var sectionImage in sectionItem.SectionImages)
                 {
                     if (sectionImage.HRef != null)
                     {
@@ -201,14 +193,10 @@ namespace FB2EPubConverter.ElementConverters
             }
 
             // Load annotations
-            if (Item.Annotation != null)
+            if (sectionItem.Annotation != null)
             {
-                AnnotationConverter annotationConverter = new AnnotationConverter
-                                                              {
-                                                                  Item = Item.Annotation,
-                                                                  Settings = Settings
-                                                              };
-                IXHTMLItem annotationItem = annotationConverter.Convert(RecursionLevel + 1);
+                AnnotationConverter annotationConverter = new AnnotationConverter {Settings = Settings};
+                IXHTMLItem annotationItem = annotationConverter.Convert(sectionItem.Annotation,RecursionLevel + 1);
                 long itemSize = annotationItem.EstimateSize();
                 if (documentSize + itemSize >= Settings.MaxSize)
                 {
@@ -251,48 +239,32 @@ namespace FB2EPubConverter.ElementConverters
             }
 
             // Parse all elements only if section has no sub section
-            if (Item.SubSections.Count == 0)
+            if (sectionItem.SubSections.Count == 0)
             {
                 bool startSection = true;
-                foreach (var item in Item.Content)
+                foreach (var item in sectionItem.Content)
                 {
                     IXHTMLItem newItem = null;
                     if (item is SubTitleItem)
                     {
-                        SubtitleConverter subtitleConverter = new SubtitleConverter
-                                                                  {
-                                                                      Item = item as SubTitleItem,
-                                                                      Settings = Settings
-                                                                  };
-                        newItem = subtitleConverter.Convert(RecursionLevel + 1);
+                        SubtitleConverter subtitleConverter = new SubtitleConverter {Settings = Settings};
+                        newItem = subtitleConverter.Convert(item as SubTitleItem);
                     }
                     else if (item is ParagraphItem)
                     {
-                        ParagraphConverter paragraphConverter = new ParagraphConverter
-                                                                    {
-                                                                        Item = item as ParagraphItem,
-                                                                        Settings = Settings
-                                                                    };
-                        newItem = paragraphConverter.Convert(ParagraphConvTargetEnum.Paragraph, startSection);
+                        ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
+                        newItem = paragraphConverter.Convert(item as ParagraphItem,ParagraphConvTargetEnum.Paragraph, startSection);
                         startSection = false;
                     }
                     else if (item is PoemItem)
                     {
-                        PoemConverter poemConverter = new PoemConverter
-                                                          {
-                                                              Item = item as PoemItem,
-                                                              Settings = Settings
-                                                          };
-                        newItem = poemConverter.Convert(RecursionLevel + 1);
+                        PoemConverter poemConverter = new PoemConverter {Settings = Settings};
+                        newItem = poemConverter.Convert(item as PoemItem,RecursionLevel + 1);
                     }
                     else if (item is CiteItem)
                     {
-                        CitationConverter citationConverter = new CitationConverter
-                                                                  {
-                                                                      Item = item as CiteItem,
-                                                                      Settings = Settings
-                                                                  };
-                        newItem = citationConverter.Convert(RecursionLevel + 1);
+                        CitationConverter citationConverter = new CitationConverter {Settings = Settings};
+                        newItem = citationConverter.Convert(item as CiteItem,RecursionLevel + 1);
                     }
                     else if (item is EmptyLineItem)
                     {
@@ -301,28 +273,20 @@ namespace FB2EPubConverter.ElementConverters
                     }
                     else if (item is TableItem)
                     {
-                        TableConverter tableConverter = new TableConverter
-                                                            {
-                                                                Item = item as TableItem,
-                                                                Settings = Settings
-                                                            };
-                        newItem = tableConverter.Convert();
+                        TableConverter tableConverter = new TableConverter {Settings = Settings};
+                        newItem = tableConverter.Convert(item as TableItem);
                     }
                     else if ((item is ImageItem) && Settings.Images.HasRealImages())
                     {
                         ImageItem fb2Img = item as ImageItem;
                         // if it's not section image and it's used
-                        if ((Item.SectionImages.Find(x => x == fb2Img) == null) && (fb2Img.HRef != null))
+                        if ((sectionItem.SectionImages.Find(x => x == fb2Img) == null) && (fb2Img.HRef != null))
                         {
                             if (Settings.Images.IsImageIdReal(fb2Img.HRef))
                             {
                                 Div enclosing = new Div(); // we use the enclosing so the user can style center it
-                                ImageConverter imageConverter = new ImageConverter
-                                                                    {
-                                                                        Item = fb2Img,
-                                                                        Settings = Settings
-                                                                    };
-                                enclosing.Add(imageConverter.Convert());
+                                ImageConverter imageConverter = new ImageConverter {Settings = Settings};
+                                enclosing.Add(imageConverter.Convert(fb2Img));
                                 enclosing.Class.Value = "normal_image";
                                 newItem = enclosing;
                             }
