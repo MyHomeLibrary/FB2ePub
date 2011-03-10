@@ -10,37 +10,38 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class SimpleTextElementConverter : BaseElementConverter
     {
-        public StyleType Item { get; set; }
 
         /// <summary>
         /// Converts FB2 simple text 
         /// ( simple text is normal text or text with one of the "styles")
         /// </summary>
+        /// <param name="styletypeItem">item to convert</param>
         /// <returns></returns>
-        public List<IXHTMLItem> Convert()
+        public List<IXHTMLItem> Convert(StyleType styletypeItem)
         {
-            return Convert(false);
+            return Convert(styletypeItem,false);
         }
 
         /// <summary>
         /// Converts FB2 simple text 
         /// ( simple text is normal text or text with one of the "styles")
         /// </summary>
-        /// <param name="needToInsert"></param>
+        /// <param name="styletypeItem">item to convert</param>
+        /// <param name="needToInsert">set to true if we want to create a "capital drop" part</param>
         /// <returns></returns>
-        public List<IXHTMLItem> Convert(bool needToInsert)
+        public List<IXHTMLItem> Convert(StyleType styletypeItem,bool needToInsert)
         {
 
-            if (Item == null)
+            if (styletypeItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("styletypeItem");
             }
 
             List<IXHTMLItem> list = new List<IXHTMLItem>();
 
-            if (Item is SimpleText)
+            if (styletypeItem is SimpleText)
             {
-                SimpleText text = Item as SimpleText;
+                SimpleText text = styletypeItem as SimpleText;
                 switch (text.Style)
                 {
                     case FB2Library.Elements.TextStyles.Normal:
@@ -48,8 +49,7 @@ namespace FB2EPubConverter.ElementConverters
                         {
                             foreach (var child in text.Children)
                             {
-                                SimpleTextElementConverter converter = new SimpleTextElementConverter{ Item = child};
-                                foreach (var item in converter.Convert())
+                                foreach (var item in Convert(child))
                                 {
                                     list.Add(item);
                                 }
@@ -109,8 +109,7 @@ namespace FB2EPubConverter.ElementConverters
                         {
                             foreach (var child in text.Children)
                             {
-                                SimpleTextElementConverter converter = new SimpleTextElementConverter { Item = child };
-                                foreach (var item in converter.Convert())
+                                foreach (var item in Convert(child))
                                 {
                                     code.Add(item);
                                 }
@@ -129,8 +128,7 @@ namespace FB2EPubConverter.ElementConverters
                         {
                             foreach (var child in text.Children)
                             {
-                                SimpleTextElementConverter converter = new SimpleTextElementConverter { Item = child };
-                                foreach (var item in converter.Convert())
+                                foreach (var item in Convert(child))
                                 {
                                     emph.Add(item);
                                 }
@@ -148,8 +146,7 @@ namespace FB2EPubConverter.ElementConverters
                         {
                             foreach (var child in text.Children)
                             {
-                                SimpleTextElementConverter converter = new SimpleTextElementConverter { Item = child };
-                                foreach (var item in converter.Convert())
+                                foreach (var item in Convert(child))
                                 {
                                     str.Add(item);
                                 }
@@ -167,8 +164,7 @@ namespace FB2EPubConverter.ElementConverters
                         {
                             foreach (var child in text.Children)
                             {
-                                SimpleTextElementConverter converter = new SimpleTextElementConverter { Item = child };
-                                foreach (var item in converter.Convert())
+                                foreach (var item in Convert(child))
                                 {
                                     sub.Add(item);
                                 }
@@ -186,8 +182,7 @@ namespace FB2EPubConverter.ElementConverters
                         {
                             foreach (var child in text.Children)
                             {
-                                SimpleTextElementConverter converter = new SimpleTextElementConverter { Item = child };
-                                foreach (var item in converter.Convert())
+                                foreach (var item in Convert(child))
                                 {
                                     sup.Add(item);
                                 }
@@ -201,20 +196,18 @@ namespace FB2EPubConverter.ElementConverters
                         break;
                 }
             }
-            else if (Item is InternalLinkItem)
+            else if (styletypeItem is InternalLinkItem)
             {
-                InternalLinkConverter linkConverter = new InternalLinkConverter{Item = Item as InternalLinkItem,Settings = Settings};
-                foreach (var item in linkConverter.Convert())
+                InternalLinkConverter linkConverter = new InternalLinkConverter { Settings = Settings };
+                foreach (var item in linkConverter.Convert(styletypeItem as InternalLinkItem))
                 {
                     list.Add(item);
                 }
             }
-            else if (Item is InlineImageItem)
+            else if (styletypeItem is InlineImageItem)
             {
-                InlineImageConverter inlineImageConverter = new InlineImageConverter
-                                                                {Item = Item as InlineImageItem,
-                                                                Settings = Settings};
-                list.Add(inlineImageConverter.Convert());
+                InlineImageConverter inlineImageConverter = new InlineImageConverter {Settings = Settings};
+                list.Add(inlineImageConverter.Convert(styletypeItem as InlineImageItem));
             }
 
             return list;

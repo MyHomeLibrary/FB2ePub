@@ -10,27 +10,30 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class ImageConverter : BaseElementConverter
     {
-        public ImageItem Item { get; set; }
-
-        public IXHTMLItem Convert()
+        /// <summary>
+        /// Convert FB2 image item
+        /// </summary>
+        /// <param name="imageItem">item to convert</param>
+        /// <returns>XHTML representation</returns>
+        public IXHTMLItem Convert(ImageItem imageItem)
         {
-            if (Item == null)
+            if (imageItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("imageItem");
             }
             Image image = new Image();
-            if (Item.AltText != null)
+            if (imageItem.AltText != null)
             {
-                image.Alt.Value = Item.AltText;
+                image.Alt.Value = imageItem.AltText;
             }
-            image.Source.Value = Settings.ReferencesManager.AddImageRefferenced(Item, image);
+            image.Source.Value = Settings.ReferencesManager.AddImageRefferenced(imageItem, image);
 
-            image.ID.Value = Settings.ReferencesManager.AddIdUsed(Item.ID, image);
-            if (Item.Title != null)
+            image.ID.Value = Settings.ReferencesManager.AddIdUsed(imageItem.ID, image);
+            if (imageItem.Title != null)
             {
-                image.Title.Value = Item.Title;
+                image.Title.Value = imageItem.Title;
             }
-            Settings.Images.ImageIdUsed(Item.HRef);
+            Settings.Images.ImageIdUsed(imageItem.HRef);
             return image;
         }
 

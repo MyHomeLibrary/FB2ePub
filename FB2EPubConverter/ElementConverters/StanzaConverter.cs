@@ -10,50 +10,41 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class StanzaConverter : BaseElementConverter
     {
-        public StanzaItem Item { get; set; }
-
-
-        public IXHTMLItem Convert(int level)
+        /// <summary>
+        /// Converts FB2 Stanza element into XHTML representation
+        /// </summary>
+        /// <param name="stanzaItem">item to convert</param>
+        /// <param name="level">"deepness" level</param>
+        /// <returns>XHTML representation</returns>
+        public IXHTMLItem Convert(StanzaItem stanzaItem,int level)
         {
-            if (Item == null)
+            if (stanzaItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("stanzaItem");
             }
             Div stanzaSection = new Div();
 
-            if (Item.Title != null)
+            if (stanzaItem.Title != null)
             {
-                TitleConverter titleConverter = new TitleConverter
-                                                    {
-                                                        Item = Item.Title,
-                                                        Settings = Settings
-                                                    };
-                stanzaSection.Add(titleConverter.Convert(level));
+                TitleConverter titleConverter = new TitleConverter {Settings = Settings};
+                stanzaSection.Add(titleConverter.Convert(stanzaItem.Title, level));
             }
 
-            if (Item.SubTitle != null)
+            if (stanzaItem.SubTitle != null)
             {
-                SubtitleConverter subtitleConverter = new SubtitleConverter
-                {
-                    Item = Item.SubTitle,
-                    Settings = Settings
-                };
-                stanzaSection.Add(subtitleConverter.Convert(level + 1));
+                SubtitleConverter subtitleConverter = new SubtitleConverter {Settings = Settings};
+                stanzaSection.Add(subtitleConverter.Convert(stanzaItem.SubTitle));
             }
 
-            foreach (var line in Item.Lines)
+            foreach (var line in stanzaItem.Lines)
             {
-                VElementConverter vElementConverter = new VElementConverter
-                                                          {
-                                                              Item = line,
-                                                              Settings = Settings
-                                                          };
-                stanzaSection.Add(vElementConverter.Convert());
+                VElementConverter vElementConverter = new VElementConverter {Settings = Settings};
+                stanzaSection.Add(vElementConverter.Convert(line));
             }
 
-            if (Item.Lang != null)
+            if (stanzaItem.Lang != null)
             {
-                stanzaSection.Language.Value = Item.Lang;
+                stanzaSection.Language.Value = stanzaItem.Lang;
             }
 
             stanzaSection.Class.Value = "stanza";

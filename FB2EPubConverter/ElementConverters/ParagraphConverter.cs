@@ -21,40 +21,39 @@ namespace FB2EPubConverter.ElementConverters
 
     internal class ParagraphConverter : BaseElementConverter
     {
-        public ParagraphItem Item { get; set;}
-
         /// <summary>
         /// Converts FB2 Paragraph to EPUB paragraph
         /// </summary>
+        /// <param name="paragraphItem">item to convert</param>
         /// <param name="resultType">type of the resulting block container in EPUB</param>
         /// <returns></returns>
-        public IBlockElement Convert(ParagraphConvTargetEnum resultType)
+        public IBlockElement Convert(ParagraphItem paragraphItem,ParagraphConvTargetEnum resultType)
         {
-            return Convert(resultType, false);
+            return Convert(paragraphItem,resultType, false);
         }
 
         /// <summary>
         /// Converts FB2 Paragraph to EPUB paragraph
         /// </summary>
+        /// <param name="paragraphItem">item to convert</param>
         /// <param name="resultType">type of the resulting block container in EPUB</param>
         /// <param name="startSection"> if this is a first paragraph in section</param>
         /// <returns></returns>
-        public  IBlockElement Convert(ParagraphConvTargetEnum resultType, bool startSection)
+        public  IBlockElement Convert(ParagraphItem paragraphItem,ParagraphConvTargetEnum resultType, bool startSection)
         {
-            if (Item == null)
+            if (paragraphItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("paragraphItem");
             }
             IBlockElement paragraph = CreateBlock(resultType);
             bool needToInsert = Settings.CapitalDrop && startSection;
 
-            foreach (var item in Item.ParagraphData)
+            foreach (var item in paragraphItem.ParagraphData)
             {
                 if (item is SimpleText)
                 {
-                    SimpleTextElementConverter textConverter = new SimpleTextElementConverter
-                                                                   {Item = item, Settings = Settings};
-                    foreach (var s in textConverter.Convert(needToInsert))
+                    SimpleTextElementConverter textConverter = new SimpleTextElementConverter {Settings = Settings};
+                    foreach (var s in textConverter.Convert(item,needToInsert))
                     {
                         if (needToInsert)
                         {
@@ -72,23 +71,23 @@ namespace FB2EPubConverter.ElementConverters
                         InlineImageItem inlineItem = item as InlineImageItem;
                         if (Settings.Images.IsImageIdReal(inlineItem.HRef))
                         {
-                            InlineImageConverter inlineImageConverter = new InlineImageConverter {Item = inlineItem,Settings = Settings};
-                            paragraph.Add(inlineImageConverter.Convert());
+                            InlineImageConverter inlineImageConverter = new InlineImageConverter {Settings = Settings};
+                            paragraph.Add(inlineImageConverter.Convert(inlineItem));
                         }
                         Settings.Images.ImageIdUsed(inlineItem.HRef);
                     }
                 }
                 else if (item is InternalLinkItem)
                 {
-                    InternalLinkConverter internalLinkConverter = new InternalLinkConverter {Item = item as InternalLinkItem,Settings = Settings};
-                    foreach (var s in internalLinkConverter.Convert())
+                    InternalLinkConverter internalLinkConverter = new InternalLinkConverter {Settings = Settings};
+                    foreach (var s in internalLinkConverter.Convert(item as InternalLinkItem))
                     {
                         paragraph.Add(s);
                     }
                 }
             }
 
-            paragraph.ID.Value = Settings.ReferencesManager.AddIdUsed(Item.ID, paragraph);
+            paragraph.ID.Value = Settings.ReferencesManager.AddIdUsed(paragraphItem.ID, paragraph);
 
             return paragraph;
         }

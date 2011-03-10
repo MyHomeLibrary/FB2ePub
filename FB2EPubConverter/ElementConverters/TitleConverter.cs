@@ -10,31 +10,26 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class TitleConverter : BaseElementConverter
     {
-        public TitleItem Item { get; set; }
-
         /// <summary>
-        /// Converts FB2 Title to EPub Title page
+        /// Converts FB2 Title object to XHTML Title 
         /// </summary>
+        /// <param name="titleItem">title item to convert</param>
         /// <param name="titleLevel"></param>
         /// <returns></returns>
-        public Div Convert(int titleLevel)
+        public Div Convert(TitleItem titleItem,int titleLevel)
         {
-            if (Item == null)
+            if (titleItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("titleItem");
             }
             Div title = new Div();
-            foreach (var fb2TextItem in Item.TitleData)
+            foreach (var fb2TextItem in titleItem.TitleData)
             {
                 if (fb2TextItem is ParagraphItem)
                 {
                     ParagraphConvTargetEnum paragraphStyle = GetParagraphStyleByLevel(titleLevel);
-                    ParagraphConverter paragraphConverter = new ParagraphConverter
-                                                                {
-                                                                    Item = fb2TextItem as ParagraphItem,
-                                                                    Settings = Settings
-                                                                };
-                    title.Add(paragraphConverter.Convert(paragraphStyle));
+                    ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
+                    title.Add(paragraphConverter.Convert(fb2TextItem as ParagraphItem,paragraphStyle));
                 }
                 else if (fb2TextItem is EmptyLineItem)
                 {

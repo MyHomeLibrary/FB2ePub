@@ -9,21 +9,20 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class SubtitleConverter : BaseElementConverter
     {
-        public SubTitleItem Item { get; set;}
-
-        public Div Convert(int p)
+        /// <summary>
+        /// Converts FB2 subtitle element into XHTML representation
+        /// </summary>
+        /// <param name="subtitleItem">item to convert</param>
+        /// <returns>XHTML representation</returns>
+        public Div Convert(SubTitleItem subtitleItem)
         {
-            if (Item == null)
+            if (subtitleItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("subtitleItem");
             }
             Div subtitle = new Div();
-            ParagraphConverter paragraphConverter = new ParagraphConverter
-                                                        {
-                                                            Item = Item,
-                                                            Settings = Settings
-                                                        };
-            IBlockElement internalData = paragraphConverter.Convert(ParagraphConvTargetEnum.Paragraph);
+            ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
+            IBlockElement internalData = paragraphConverter.Convert(subtitleItem,ParagraphConvTargetEnum.Paragraph);
             internalData.Class.Value = "subtitle";
             subtitle.Add(internalData);
             subtitle.Class.Value = "subtitle";

@@ -9,21 +9,21 @@ namespace FB2EPubConverter.ElementConverters
 {
     internal class EpigraphAuthorConverter : BaseElementConverter
     {
-        public TextAuthorItem Item { get; set; }
-
-        public IBlockElement Convert()
+        /// <summary>
+        /// Convert epigrah author FB2 element
+        /// </summary>
+        /// <param name="textAuthorItem">item to convert</param>
+        /// <returns>XHTML representation</returns>
+        public IBlockElement Convert(TextAuthorItem textAuthorItem)
         {
-            if (Item == null)
+            if (textAuthorItem == null)
             {
-                throw new NullReferenceException("Item");
+                throw new ArgumentNullException("textAuthorItem");
             }
             Div epigraphAuthor = new Div();
-            ParagraphConverter paragraphConverter = new ParagraphConverter
-                                                        {
-                                                            Settings = Settings,
-                                                            Item = Item
-                                                        };
-            epigraphAuthor.Add(paragraphConverter.Convert(ParagraphConvTargetEnum.Paragraph));
+            ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
+            epigraphAuthor.Add(paragraphConverter.Convert(textAuthorItem, ParagraphConvTargetEnum.Paragraph));
+            epigraphAuthor.Class.Value = "epigraph_author";
             return epigraphAuthor;
         }
 
