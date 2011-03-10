@@ -7,6 +7,7 @@
 * Fixed crash in case defective PNG file was in original .FB2
 * Fixed a bug when CSS stylesheet for one element contained more than one occurance of same parameter (in this case previously entire element was ignored)
 * Some small changes to the look of the epigraph in default style
+* Conversion part of the code was heavily refactored, so expect new bugs and crashes :)
 
 
 1.0.41
