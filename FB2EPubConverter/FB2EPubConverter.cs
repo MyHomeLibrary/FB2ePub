@@ -19,6 +19,7 @@ using EPubLibrary.Content.Guide;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.XHTML_Items;
 using FB2EPubConverter;
+using FB2EPubConverter.ElementConverters;
 using FB2Library;
 using FB2Library.Elements;
 using FB2Library.Elements.Poem;
@@ -47,22 +48,6 @@ namespace Fb2ePubConverter
         
     }
 
-    internal static class XhtmlItemExtender
-    {
-        public static long EstimateSize(this IXHTMLItem item)
-        {
-            MemoryStream stream = new MemoryStream();
-            XNode node = item.Generate();
-            XDocument doc = new XDocument();
-            doc.Add(node);
-            using (var writer = XmlWriter.Create(stream))
-            {
-                //node.WriteTo(writer);
-                doc.WriteTo(writer);
-            }
-            return stream.Length;            
-        }
-    }
 
 
     public class Fb2EPubConverterEngine
@@ -71,16 +56,7 @@ namespace Fb2ePubConverter
 
         private int _sectionCounter = 0;
 
-        private enum ParagraphConvTargetEnum
-        {
-            Paragraph,
-            H1,
-            H2,
-            H3,
-            H4,
-            H5,
-            H6
-        }
+
 
 
         private readonly ImageManager images = new ImageManager();
@@ -864,7 +840,19 @@ namespace Fb2ePubConverter
                 addTitlePage.Content = new Div();
                 if (fb2File.MainBody.Title != null)
                 {
-                    addTitlePage.Content.Add(ConvertFromFb2TitleElement(fb2File.MainBody.Title, 2));
+                    ConverterSettings converterSettings = new ConverterSettings
+                                                              {
+                                                                  CapitalDrop = CapitalDrop,
+                                                                  Images = images,
+                                                                  MaxSize = MaxSize,
+                                                                  ReferencesManager = referencesManager
+                                                              };
+                    TitleConverter titleConverter = new TitleConverter
+                                                        {
+                                                            Item = fb2File.MainBody.Title,
+                                                            Settings = converterSettings
+                                                        };
+                    addTitlePage.Content.Add(titleConverter.Convert(2));
                 }
                 addTitlePage.NavigationParent = null;
                 addTitlePage.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
@@ -900,7 +888,20 @@ namespace Fb2ePubConverter
                     if (images.IsImageIdReal(fb2File.MainBody.ImageName.HRef))
                     {
                         Div enclosing = new Div(); // we use the enclosing so the user can style center it
-                        enclosing.Add(ConvertFromFb2ImageElement(fb2File.MainBody.ImageName));
+                        ConverterSettings converterSettings = new ConverterSettings
+                        {
+                            CapitalDrop = CapitalDrop,
+                            Images = images,
+                            MaxSize = MaxSize,
+                            ReferencesManager = referencesManager
+                        };
+
+                        ImageConverter imageConverter = new ImageConverter
+                                                            {
+                                                                Item = fb2File.MainBody.ImageName,
+                                                                Settings = converterSettings
+                                                            };
+                        enclosing.Add(imageConverter.Convert());
                         enclosing.Class.Value = "body_image";
                         MainDocument.Content.Add(enclosing);
                     }
@@ -919,7 +920,20 @@ namespace Fb2ePubConverter
                     MainDocument.NavigationParent = null;
                     MainDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
                 }
-                MainDocument.Content.Add(ConvertFromFb2EpigraphElement(ep, 1,true));
+                ConverterSettings converterSettings = new ConverterSettings
+                {
+                    CapitalDrop = CapitalDrop,
+                    Images = images,
+                    MaxSize = MaxSize,
+                    ReferencesManager = referencesManager
+                };
+
+                EpigraphConverter epigraphConverter = new EpigraphConverter
+                                                          {
+                                                              Item = ep,
+                                                              Settings = converterSettings
+                                                          };
+                MainDocument.Content.Add(epigraphConverter.Convert(1,true));
             }
 
             Logger.Log.Debug("Adding main sections");
@@ -974,7 +988,19 @@ namespace Fb2ePubConverter
             sectionDocument.Content = new Div();
             if (bodyItem.Title != null)
             {
-                sectionDocument.Content.Add(ConvertFromFb2TitleElement(bodyItem.Title, 1));
+                ConverterSettings converterSettings = new ConverterSettings
+                {
+                    CapitalDrop = CapitalDrop,
+                    Images = images,
+                    MaxSize = MaxSize,
+                    ReferencesManager = referencesManager
+                };
+                TitleConverter titleConverter = new TitleConverter
+                                                    {
+                                                        Item = bodyItem.Title,
+                                                        Settings = converterSettings
+                                                    };
+                sectionDocument.Content.Add(titleConverter.Convert(1));
             }
             sectionDocument.NavigationParent = null;
             sectionDocument.NotPartOfNavigation = notPartOfNavigation;
@@ -984,59 +1010,6 @@ namespace Fb2ePubConverter
             {
                 AddSection(epubFile, section, sectionDocument);
             }
-        }
-
-        private List<IXHTMLItem> ConvertFromFb2SecondaryBody(BodyItem bodyItem)
-        {
-            long documentSize = 0;
-            List<IXHTMLItem> list2Return = new List<IXHTMLItem>();
-            Div body = new Div();
-            foreach (var section in bodyItem.Sections)
-            {
-                foreach (var element in ConvertFromFb2SectionElement(section, 2, true))
-                {
-                    long itemSize = element.EstimateSize();
-                    if (documentSize + itemSize >= MaxSize)
-                    {
-                        list2Return.Add(body);
-                        body = new Div();
-                        documentSize = 0;
-                    }
-                    if (itemSize < MaxSize)
-                    {
-                        documentSize += itemSize;
-                        body.Add(element);
-                    }
-                    else
-                    {
-                        if (element is Div) // if the item that bigger than max size is Div block
-                        {
-                            foreach (var splitedItem in SplitDiv(element as Div, documentSize))
-                            {
-                                itemSize = splitedItem.EstimateSize();
-                                if (documentSize + itemSize >= MaxSize)
-                                {
-                                    IBlockElement oldContent = body;
-                                    list2Return.Add(body);
-                                    body = new Div();
-                                    body.Class.Value = oldContent.Class.Value;
-                                    body.Language.Value = oldContent.Language.Value;
-                                    documentSize = 0;
-                                }
-                                if (itemSize < MaxSize) // if we can "fit" element into a max size XHTML document
-                                {
-                                    documentSize += itemSize;
-                                    body.Add(splitedItem);
-                                }
-                            }
-                        }
-
-                    }
-                }
-            }
-            list2Return.Add(body);
-            //return body;
-            return list2Return;
         }
 
 
@@ -1050,7 +1023,21 @@ namespace Fb2ePubConverter
             Logger.Log.DebugFormat("Adding section : {0}", docTitle);
             BookDocument sectionDocument = null;
             bool firstDocumentOfSplit = true;
-            foreach (var subitem in ConvertFromFb2SectionElement(section, GetRecursionLevel(navParent),false))
+            ConverterSettings converterSettings = new ConverterSettings
+            {
+                CapitalDrop = CapitalDrop,
+                Images = images,
+                MaxSize = MaxSize,
+                ReferencesManager = referencesManager
+            };
+            SectionConverter sectionConverter = new SectionConverter
+                                                    {
+                                                        LinkSection = false,
+                                                        RecursionLevel = GetRecursionLevel(navParent),
+                                                        Item = section,
+                                                        Settings = converterSettings
+                                                    };
+            foreach (var subitem in sectionConverter.Convert())
             {
                 sectionDocument = epubFile.AddDocument(docTitle);
                 sectionDocument.DocumentType = (navParent==null)?GuideTypeEnum.Text:navParent.DocumentType;
@@ -1134,8 +1121,6 @@ namespace Fb2ePubConverter
                 if (fb2File.TitleInfo.BookTitle != null)
                 {
                     bookTitle.TitleName =
-                        //epubFile.Transliterator.Translate(AddSequencesAbb(epubFile, fb2File.TitleInfo),
-                        //                                  epubFile.TranslitMode);
                     epubFile.Transliterator.Translate(FormatBookTitle( fb2File.TitleInfo),
                                                           epubFile.TranslitMode);
                     bookTitle.Language = string.IsNullOrEmpty(fb2File.TitleInfo.BookTitle.Language)
@@ -1150,8 +1135,19 @@ namespace Fb2ePubConverter
                 {
                     epubFile.Title.Description = fb2File.TitleInfo.Annotation.ToString();
                     epubFile.AnnotationPage = new AnnotationPageFile();
-                    epubFile.AnnotationPage.BookAnnotation =
-                        ConvertFromFb2AnnotationElement(fb2File.TitleInfo.Annotation, 1);
+                    ConverterSettings converterSettings = new ConverterSettings
+                    {
+                        CapitalDrop = CapitalDrop,
+                        Images = images,
+                        MaxSize = MaxSize,
+                        ReferencesManager = referencesManager
+                    };
+                    AnnotationConverter annotationConverter = new AnnotationConverter
+                                                                  {
+                                                                      Item = fb2File.TitleInfo.Annotation,
+                                                                      Settings = converterSettings
+                                                                  };
+                    epubFile.AnnotationPage.BookAnnotation = annotationConverter.Convert(1);
                 }
 
 
@@ -1398,1214 +1394,6 @@ namespace Fb2ePubConverter
             return genre;
         }
 
-
-        /// <summary>
-        /// Convert from FB2 section element into EPUB data structures
-        /// </summary>
-        /// <param name="section">FB2 section</param>
-        /// <param name="recursionLevel">level of section inclusion 1 - top</param>
-        /// <param name="linkSection">true if this is a special link section like "notes"</param>
-        /// <returns></returns>
-        private List<IXHTMLItem> ConvertFromFb2SectionElement(SectionItem section, int recursionLevel, bool linkSection)
-        {
-            List<IXHTMLItem> resList = new List<IXHTMLItem>();
-            Logger.Log.Debug("Convering section");
-
-            IBlockElement content = new Div();
-            long documentSize = 0;
-
-            content.Class.Value = string.Format("section{0}", recursionLevel);
-
-            content.ID.Value = referencesManager.AddIdUsed(section.ID, content);
-
-            if (section.Lang != null)
-            {
-                content.Language.Value = section.Lang;
-            }
-
-
-            // Load Title
-            if (section.Title != null)
-            {
-                IXHTMLItem titleItem = null;
-                if (!linkSection)
-                {
-                    titleItem = ConvertFromFb2TitleElement(section.Title, recursionLevel+1);
-                }
-                else
-                {
-                    titleItem = ConvertFromFb2LinkSection(section);
-                }
-                if (titleItem != null)
-                {
-                    long itemSize = titleItem.EstimateSize();
-                    if (documentSize + itemSize >= MaxSize)
-                    {
-                        IBlockElement oldContent = content;
-                        resList.Add(content);
-                        content = new Div();
-                        content.Class.Value = oldContent.Class.Value;
-                        content.Language.Value = oldContent.Language.Value;
-                        documentSize = 0;
-                    }
-                    if (itemSize < MaxSize) // if we can "fit" element into a max size XHTML document
-                    {
-                        documentSize += itemSize;
-                        content.Add(titleItem);                        
-                    }
-                    else
-                    {
-                        if (titleItem is Div) // if the item that bigger than max size is Div block
-                        {
-                            foreach (var splitedItem in SplitDiv(titleItem as Div, documentSize))
-                            {
-                                itemSize = splitedItem.EstimateSize();
-                                if (documentSize + itemSize >= MaxSize)
-                                {
-                                    IBlockElement oldContent = content;
-                                    resList.Add(content);
-                                    content = new Div();
-                                    content.Class.Value = oldContent.Class.Value;
-                                    content.Language.Value = oldContent.Language.Value;
-                                    documentSize = 0;
-                                }
-                                if (itemSize < MaxSize) // if we can "fit" element into a max size XHTML document
-                                {
-                                    documentSize += itemSize;
-                                    content.Add(splitedItem);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Load epigraphs
-            foreach (var epigraph in section.Epigraphs)
-            {
-
-                IXHTMLItem epigraphItem = ConvertFromFb2EpigraphElement(epigraph, recursionLevel + 1,false);
-                long itemSize = epigraphItem.EstimateSize();
-                if (documentSize + itemSize >= MaxSize)
-                {
-                    IBlockElement oldContent = content;
-                    resList.Add(content);
-                    content = new Div();
-                    content.Class.Value = oldContent.Class.Value;
-                    content.Language.Value = oldContent.Language.Value;
-                    documentSize = 0;
-                }
-                if (itemSize < MaxSize) // if we can "fit" element into a max size XHTML document
-                {
-                    documentSize += itemSize;
-                    content.Add(epigraphItem);
-                }
-                else
-                {
-                    if (epigraphItem is Div) // if the item that bigger than max size is Div block
-                    {
-                        foreach (var splitedItem in SplitDiv(epigraphItem as Div, documentSize))
-                        {
-                            itemSize = splitedItem.EstimateSize();
-                            if (documentSize + itemSize >= MaxSize)
-                            {
-                                IBlockElement oldContent = content;
-                                resList.Add(content);
-                                content = new Div();
-                                content.Class.Value = oldContent.Class.Value;
-                                content.Language.Value = oldContent.Language.Value;
-                                documentSize = 0;
-                            }
-                            if (itemSize < MaxSize) // if we can "fit" element into a max size XHTML document
-                            {
-                                documentSize += itemSize;
-                                content.Add(splitedItem);
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Load section image
-            if ( images.HasRealImages())
-            {
-                foreach (var sectionImage in section.SectionImages)
-                {
-                    if (sectionImage.HRef != null)
-                    {
-                        if (images.IsImageIdReal(sectionImage.HRef))
-                        {
-                            Div container = new Div();
-                            Image sectionImagemage = new Image();
-                            if (sectionImage.AltText != null)
-                            {
-                                sectionImagemage.Alt.Value = sectionImage.AltText;
-                            }
-                            sectionImagemage.Source.Value = referencesManager.AddImageRefferenced(sectionImage, sectionImagemage);
-                            sectionImagemage.ID.Value = referencesManager.AddIdUsed(sectionImage.ID,
-                                                                                    sectionImagemage);
-                            if (sectionImage.Title != null)
-                            {
-                                sectionImagemage.Title.Value = sectionImage.Title;
-                            }
-                            container.Class.Value = "section_image";
-                            container.Add(sectionImagemage);
-                            long itemSize = container.EstimateSize();
-                            if (documentSize + itemSize >= MaxSize)
-                            {
-                                IBlockElement oldContent = content;
-                                resList.Add(content);
-                                content = new Div();
-                                content.Class.Value = oldContent.Class.Value;
-                                content.Language.Value = oldContent.Language.Value;
-                                documentSize = 0;
-                            }
-                            documentSize += itemSize;
-                            content.Add(container);
-                            images.ImageIdUsed(sectionImage.HRef);
-                        }
-                    }
-                    
-                }
-            }
-
-            // Load annotations
-            if (section.Annotation != null)
-            {
-                IXHTMLItem annotationItem = ConvertFromFb2AnnotationElement(section.Annotation,
-                                                                                   recursionLevel + 1);
-                long itemSize = annotationItem.EstimateSize();
-                if (documentSize + itemSize >= MaxSize)
-                {
-                    IBlockElement oldContent = content;
-                    resList.Add(content);
-                    content = new Div();
-                    content.Class.Value = oldContent.Class.Value;
-                    content.Language.Value = oldContent.Language.Value;
-                    documentSize = 0;
-                }
-                if (itemSize < MaxSize) // if we can "fit" element into a max size XHTML document
-                {
-                    documentSize += itemSize;
-                    content.Add(annotationItem);
-                }
-                else
-                {
-                    if (annotationItem is Div) // if the item that bigger than max size is Div block
-                    {
-                        foreach (var splitedItem in SplitDiv(annotationItem as Div, documentSize))
-                        {
-                            itemSize = splitedItem.EstimateSize();
-                            if (documentSize + itemSize >= MaxSize)
-                            {
-                                IBlockElement oldContent = content;
-                                resList.Add(content);
-                                content = new Div();
-                                content.Class.Value = oldContent.Class.Value;
-                                content.Language.Value = oldContent.Language.Value;
-                                documentSize = 0;
-                            }
-                            if (itemSize < MaxSize) // if we can "fit" element into a max size XHTML document
-                            {
-                                documentSize += itemSize;
-                                content.Add(splitedItem);
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Parse all elements only if section has no sub section
-            if (section.SubSections.Count == 0)
-            {
-                bool startSection = true;
-                foreach (var item in section.Content)
-                {
-                    IXHTMLItem newItem = null;
-                    if (item is SubTitleItem)
-                    {
-                        newItem = ConvertFromFb2SubtitleElement(item as SubTitleItem, recursionLevel + 1);
-                    }
-                    else if (item is ParagraphItem)
-                    {
-                        newItem = ConvertFromFb2ParagraphElement(item as ParagraphItem,
-                                                                   ParagraphConvTargetEnum.Paragraph,startSection);
-                        startSection = false;
-                    }
-                    else if (item is PoemItem)
-                    {
-                        newItem = ConvertFromFb2PoemElement(item as PoemItem, recursionLevel + 1);
-                    }
-                    else if (item is CiteItem)
-                    {
-                        newItem = ConvertFromFb2Citation(item as CiteItem, recursionLevel + 1);
-                    }
-                    else if (item is EmptyLineItem)
-                    {
-                        newItem = ConvertToEmptyLine();
-                    }
-                    else if (item is TableItem)
-                    {
-                        newItem = ConvertFromFb2TableElement(item as TableItem);
-                    }
-                    else if ((item is ImageItem) &&  images.HasRealImages())
-                    {
-                        ImageItem fb2Img = item as ImageItem;
-                        // if it's not section image and it's used
-                        if (( section.SectionImages.Find(x=>x ==fb2Img) == null) && (fb2Img.HRef != null) )
-                        {
-                            if (images.IsImageIdReal(fb2Img.HRef))
-                            {
-                                Div enclosing = new Div(); // we use the enclosing so the user can style center it
-                                enclosing.Add(ConvertFromFb2ImageElement(fb2Img));
-                                enclosing.Class.Value = "normal_image";
-                                newItem = enclosing;
-                            }
-                        }
-                    }
-                    if (newItem != null)
-                    {
-                        long itemSize = newItem.EstimateSize();
-                        if (documentSize + itemSize >= MaxSize)
-                        {
-                            IBlockElement oldContent = content;
-                            resList.Add(content);
-                            content = new Div();
-                            content.Class.Value = oldContent.Class.Value;
-                            content.Language.Value = oldContent.Language.Value;
-                            documentSize = 0;
-                        }
-                        if (itemSize < MaxSize) // if we can "fit" element into a max size XHTML document
-                        {
-                            documentSize += itemSize;
-                            content.Add(newItem);
-                        }
-                        else
-                        {
-                            if (newItem is Div) // if the item that bigger than max size is Div block
-                            {
-                                foreach (var splitedItem in SplitDiv(newItem as Div, documentSize)) 
-                                {
-                                    itemSize = splitedItem.EstimateSize();
-                                    if (documentSize + itemSize >= MaxSize)
-                                    {
-                                        IBlockElement oldContent = content;
-                                        resList.Add(content);
-                                        content = new Div();
-                                        content.Class.Value = oldContent.Class.Value;
-                                        content.Language.Value = oldContent.Language.Value;
-                                        documentSize = 0;
-                                    }
-                                    if (itemSize < MaxSize) // if we can "fit" element into a max size XHTML document
-                                    {
-                                        documentSize += itemSize;
-                                        content.Add(splitedItem);
-                                    }                                    
-                                }
-                            }   
-                        }
-                    }
-                }
-            }
-
-            resList.Add(content);
-            return resList;
-        }
-
-        private IXHTMLItem ConvertFromFb2ImageElement(ImageItem fb2Img)
-        {
-            Image image = new Image();
-            if (fb2Img.AltText != null)
-            {
-                image.Alt.Value = fb2Img.AltText;
-            }
-            image.Source.Value = referencesManager.AddImageRefferenced(fb2Img, image);
-
-            image.ID.Value = referencesManager.AddIdUsed(fb2Img.ID, image);
-            if (fb2Img.Title != null)
-            {
-                image.Title.Value = fb2Img.Title;
-            }
-            images.ImageIdUsed(fb2Img.HRef);
-            return image;
-        }
-
-        private List<IXHTMLItem> SplitDiv(Div div,long documentSize)
-        {
-            List<IXHTMLItem> resList = new List<IXHTMLItem>();
-            long newDocumentSize = documentSize;
-            Div container = new Div();
-            container.ID.Value = div.ID.Value;
-            foreach (var element in div.SubElements())
-            {
-                long elementSize = element.EstimateSize();
-                if (elementSize + newDocumentSize >= MaxSize)
-                {
-                    resList.Add(container);
-                    container = new Div();
-                    container.Class.Value = div.Class.Value;
-                    container.Language.Value = div.Language.Value;
-                    newDocumentSize = 0;
-                }
-                if (elementSize < MaxSize)
-                {
-                    container.Add(element);
-                    newDocumentSize += elementSize;                    
-                }
-            }
-            resList.Add(container);
-            return resList;
-        }
-
-
-        /// <summary>
-        /// Converts FB2 Title to EPub Title page
-        /// </summary>
-        /// <param name="titleItem"></param>
-        /// <param name="titleLevel"></param>
-        /// <returns></returns>
-        private Div ConvertFromFb2TitleElement(TitleItem titleItem, int titleLevel)
-        {
-            Div title = new Div();
-            foreach (var fb2TextItem in titleItem.TitleData)
-            {
-                if (fb2TextItem is ParagraphItem)
-                {
-                    ParagraphConvTargetEnum paragraphStyle = GetParagraphStyleByLevel(titleLevel);
-                    title.Add(ConvertFromFb2ParagraphElement((ParagraphItem)fb2TextItem, paragraphStyle));
-                }
-                else if (fb2TextItem is EmptyLineItem)
-                {
-                    title.Add(ConvertToEmptyLine());
-                }
-                else
-                {
-                    Debug.WriteLine(string.Format("invalid type in Title - {0}", fb2TextItem.GetType()));
-                }
-            }
-            string itemClass = string.Format("title{0}", titleLevel);
-            title.Class.Value = itemClass;
-            return title;
-        }
-
-        private static IXHTMLItem ConvertToEmptyLine()
-        {
-            Paragraph el = new Paragraph();
-            el.Add(new SimpleEPubText { Text = "\u00A0" });
-            el.Class.Value = "empty-line";
-            return el;
-        }
-
-        private static ParagraphConvTargetEnum GetParagraphStyleByLevel(int titleLevel)
-        {
-            ParagraphConvTargetEnum paragraphStyle = ParagraphConvTargetEnum.H6;
-            switch (titleLevel)
-            {
-                case 1:
-                    paragraphStyle = ParagraphConvTargetEnum.H1;
-                    break;
-                case 2:
-                    paragraphStyle = ParagraphConvTargetEnum.H2;
-                    break;
-                case 3:
-                    paragraphStyle = ParagraphConvTargetEnum.H3;
-                    break;
-                case 4:
-                    paragraphStyle = ParagraphConvTargetEnum.H4;
-                    break;
-                case 5:
-                    paragraphStyle = ParagraphConvTargetEnum.H5;
-                    break;
-            }
-            return paragraphStyle;
-        }
-
-
-        /// <summary>
-        /// Converts FB2 Paragraph to EPUB paragraph
-        /// </summary>
-        /// <param name="fb2ParagraphItem"></param>
-        /// <param name="resultType">type of the resulting block container in EPUB</param>
-        /// <returns></returns>
-        private IBlockElement ConvertFromFb2ParagraphElement(ParagraphItem fb2ParagraphItem, ParagraphConvTargetEnum resultType)
-        {
-            return ConvertFromFb2ParagraphElement(fb2ParagraphItem,resultType,false);
-        }
-
-        /// <summary>
-        /// Converts FB2 Paragraph to EPUB paragraph
-        /// </summary>
-        /// <param name="fb2ParagraphItem"></param>
-        /// <param name="resultType">type of the resulting block container in EPUB</param>
-        /// <param name="startSection"> if this is a first paragraph in section</param>
-        /// <returns></returns>
-        private IBlockElement ConvertFromFb2ParagraphElement(ParagraphItem fb2ParagraphItem, ParagraphConvTargetEnum resultType, bool startSection)
-        {
-            IBlockElement paragraph = CreateBlock(resultType);
-            bool needToInsert = CapitalDrop && startSection;
-
-            foreach (var item in fb2ParagraphItem.ParagraphData)
-            {
-                if (item is SimpleText)
-                {
-                    foreach (var s in ConvertFromFb2SimpleTextElement(item,needToInsert))
-                    {
-                        if (needToInsert)
-                        {
-                            needToInsert = false;
-                            paragraph.Class.Value = "drop";
-                        }
-                        paragraph.Add(s);                        
-                    }
-                }
-                else if (item is InlineImageItem)
-                {
-                    // if no image data - do not insert link
-                    if (images.HasRealImages())
-                    {
-                        InlineImageItem inlineItem = item as InlineImageItem;
-                        if (images.IsImageIdReal(inlineItem.HRef))
-                        {
-                            paragraph.Add(ConvertFromFb2InlineImageElement(inlineItem));
-                        }
-                        images.ImageIdUsed(inlineItem.HRef);
-                    }
-                }
-                else if (item is InternalLinkItem)
-                {
-                    foreach (var s in ConvertFromFb2InternalLinkElement((InternalLinkItem)item))
-                    {
-                        paragraph.Add(s);    
-                    }
-                }
-            }
-
-            paragraph.ID.Value = referencesManager.AddIdUsed(fb2ParagraphItem.ID, paragraph);
-
-            return paragraph;
-        }
-
-
-        /// <summary>
-        /// Creates block element based on paragraph type
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        private static IBlockElement CreateBlock(ParagraphConvTargetEnum type)
-        {
-            IBlockElement paragraph;
-            switch (type)
-            {
-                case ParagraphConvTargetEnum.H1:
-                    paragraph = new H1();
-                    break;
-                case ParagraphConvTargetEnum.H2:
-                    paragraph = new H2();
-                    break;
-                case ParagraphConvTargetEnum.H3:
-                    paragraph = new H3();
-                    break;
-                case ParagraphConvTargetEnum.H4:
-                    paragraph = new H4();
-                    break;
-                case ParagraphConvTargetEnum.H5:
-                    paragraph = new H5();
-                    break;
-                case ParagraphConvTargetEnum.H6:
-                    paragraph = new H6();
-                    break;
-                default: // Paragraph or anything else
-                    paragraph = new Paragraph();
-                    break;
-
-            }
-            return paragraph;
-        }
-
-        /// <summary>
-        /// Converts FB2 simple text 
-        /// ( simple text is normal text or text with one of the "styles")
-        /// </summary>
-        /// <param name="styleItem"></param>
-        /// <returns></returns>
-        private List<IXHTMLItem> ConvertFromFb2SimpleTextElement(StyleType styleItem)
-        {
-            return ConvertFromFb2SimpleTextElement(styleItem,false);
-        }
-
-        /// <summary>
-        /// Converts FB2 simple text 
-        /// ( simple text is normal text or text with one of the "styles")
-        /// </summary>
-        /// <param name="styleItem"></param>
-        /// <param name="needToInsert"></param>
-        /// <returns></returns>
-        private List<IXHTMLItem> ConvertFromFb2SimpleTextElement(StyleType styleItem, bool needToInsert)
-        {
-
-            if (styleItem == null)
-            {
-                throw new ArgumentNullException("styleItem");
-            }
-
-            List<IXHTMLItem> list = new List<IXHTMLItem>();
-
-            if (styleItem is SimpleText)
-            {
-                SimpleText text = styleItem as SimpleText;
-                switch (text.Style)
-                {
-                    case FB2Library.Elements.TextStyles.Normal:
-                        if (text.HasChildren)
-                        {
-                            foreach (var child in text.Children)
-                            {
-                                foreach (var item in ConvertFromFb2SimpleTextElement(child))
-                                {
-                                    list.Add(item);                                    
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (needToInsert && text.Text.Length > 0)
-                            {
-                                var span1 = new Span();
-                                span1.Class.Value = "drop";
-                                int dropEnd = 0;
-                                // "pad" the white spaces so drop starts from visible character
-                                while (UnicodeHelpers.IsSpaceLike(text.Text[dropEnd]) && dropEnd < text.Text.Length)
-                                {
-                                    dropEnd++;
-                                }
-                                // calculate the initial drop part
-                                string dropPart = text.Text.Substring(0, dropEnd+1);
-                                // non-drop part starts from the next character
-                                int nondropPosition = dropEnd +1;
-                                // If first character is dash/hyphen like we need to add character to 
-                                // capital drop so it looks better with next character
-                                if (UnicodeHelpers.IsNeedToBeJoinInDrop(dropPart[dropEnd]))
-                                {
-                                    // we need to add to capital drop all spaces if any
-                                    while (nondropPosition < text.Text.Length && UnicodeHelpers.IsSpaceLike(text.Text[nondropPosition]))
-                                    {
-                                        nondropPosition++;
-                                    }
-                                    // we need to advance to include one following nonspace character , unless
-                                    // we already at last character of the text
-                                    if (nondropPosition - dropEnd < text.Text.Length)
-                                    {
-                                        nondropPosition++;
-                                    }
-                                    // update drop part with the "string" we calculated
-                                    dropPart += text.Text.Substring(dropEnd+1,nondropPosition-dropEnd-1);
-                                }
-                                span1.Add(new SimpleEPubText {Text = dropPart });
-                                list.Add(span1);
-                                string substring = text.Text.Substring(nondropPosition);
-                                if (substring.Length > 0)
-                                {
-                                    list.Add(new SimpleEPubText { Text = substring });   
-                                }
-                            }
-                            else
-                            {
-                                list.Add(new SimpleEPubText { Text = text.Text });                                
-                            }
-                        }
-                        break;
-                    case FB2Library.Elements.TextStyles.Code:
-                        CodeText code = new CodeText();
-                        if (text.HasChildren)
-                        {
-                            foreach (var child in text.Children)
-                            {
-                                foreach (var item in ConvertFromFb2SimpleTextElement(child))
-                                {
-                                    code.Add(item);                                    
-                                }
-
-                            }
-                        }
-                        else
-                        {
-                            code.Add(new SimpleEPubText() {Text = text.Text});
-                        }
-                        list.Add(code);
-                        break;
-                    case FB2Library.Elements.TextStyles.Emphasis:
-                        EmphasisedText emph = new EmphasisedText();
-                        if (text.HasChildren)
-                        {
-                            foreach (var child in text.Children)
-                            {
-                                foreach (var item in ConvertFromFb2SimpleTextElement(child))
-                                {
-                                    emph.Add(item);                                    
-                                }
-                            }
-                        }
-                        else
-                        {
-                            emph.Add(new SimpleEPubText() {Text = text.Text});
-                        }
-                        list.Add(emph);
-                        break;
-                    case FB2Library.Elements.TextStyles.Strong:
-                        Strong str = new Strong();
-                        if (text.HasChildren)
-                        {
-                            foreach (var child in text.Children)
-                            {
-                                foreach (var item in ConvertFromFb2SimpleTextElement(child))
-                                {
-                                    str.Add(item);                                    
-                                }
-                            }
-                        }
-                        else
-                        {
-                            str.Add(new SimpleEPubText() {Text = text.Text});
-                        }
-                        list.Add(str);
-                        break;
-                    case FB2Library.Elements.TextStyles.Sub:
-                        Sub sub = new Sub();
-                        if (text.HasChildren)
-                        {
-                            foreach (var child in text.Children)
-                            {
-                                foreach (var item in ConvertFromFb2SimpleTextElement(child))
-                                {
-                                    sub.Add(item);        
-                                }
-                            }
-                        }
-                        else
-                        {
-                            sub.Add(new SimpleEPubText() {Text = text.Text});
-                        }
-                        list.Add(sub);
-                        break;
-                    case FB2Library.Elements.TextStyles.Sup:
-                        Sup sup = new Sup();
-                        if (text.HasChildren)
-                        {
-                            foreach (var child in text.Children)
-                            {
-                                foreach (var item in ConvertFromFb2SimpleTextElement(child))
-                                {
-                                    sup.Add(item);    
-                                }
-                            }
-                        }
-                        else
-                        {
-                            sup.Add(new SimpleEPubText() {Text = text.Text});
-                        }
-                        list.Add(sup);
-                        break;
-                }
-            }
-            else if (styleItem is InternalLinkItem)
-            {
-                foreach (var item in ConvertFromFb2InternalLinkElement(styleItem as InternalLinkItem))
-                {
-                    list.Add(item);    
-                }
-            }
-            else if (styleItem is InlineImageItem)
-            {
-                list.Add(ConvertFromFb2InlineImageElement(styleItem as InlineImageItem));
-            }
-
-            return list;
-        }
-
-
-        /// <summary>
-        /// Converts FB2 inline image
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        private IXHTMLItem ConvertFromFb2InlineImageElement(InlineImageItem item)
-        {
-            Image img = new Image();
-            if (item.AltText != null)
-            {
-                img.Alt.Value = item.AltText;
-            }
-
-            img.Source.Value = referencesManager.AddImageRefferenced(item,img);
-
-            img.Class.Value = "int_image";
-            return img;
-        }
-
-        /// <summary>
-        /// Convert FB2 internal link 
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        private List<IXHTMLItem> ConvertFromFb2InternalLinkElement(InternalLinkItem item)
-        {
-            List<IXHTMLItem> list = new List<IXHTMLItem>();
-            if (!string.IsNullOrEmpty(item.HRef) )
-            {
-                Anchor anchor = new Anchor();
-                bool internalLink = false;
-                if (!ReferencesUtils.IsExternalLink(item.HRef))
-                {
-                    if (item.HRef.StartsWith("#"))
-                    {
-                        item.HRef = item.HRef.Substring(1);
-                    }
-                    item.HRef = referencesManager.EnsureGoodID(item.HRef);
-                    internalLink = true;
-                }              
-                anchor.HRef.Value = item.HRef;
-                if (internalLink)
-                {
-                    referencesManager.AddReference(item.HRef, anchor);                    
-                }
-                if (item.LinkText != null)
-                {
-                    foreach (var s in ConvertFromFb2SimpleTextElement(item.LinkText))
-                    {
-                        s.Parent = anchor;
-                        anchor.Content.Add(s);    
-                    }
-                }
-                list.Add(anchor);
-                return list;
-            }
-            // deal with the case of invalid InternalLinkItem element without hReference
-            // in this case we convert link to paragraph
-            //Paragraph p = new Paragraph();
-            //p.Add(ConvertFromFb2SimpleTextElement(item.LinkText));
-            //return p;
-            return ConvertFromFb2SimpleTextElement(item.LinkText);
-        }
-
-
-
-        private IXHTMLItem ConvertFromFb2LinkSection(SectionItem section)
-        {
-            IBlockElement content = new Paragraph();
-            Anchor a = new Anchor();
-            foreach (var item in ConvertFromFb2TitleElement(section.Title, 7).SubElements())
-            {
-                if (item is IInlineItem)
-                {
-                    a.Add(item);
-                }
-                else if (item is SimpleEPubText)
-                {
-                    a.Add(item);
-                }
-                else
-                {
-                    foreach (var subElement in item.SubElements())
-                    {
-                        a.Add(subElement);
-                    }
-                }
-            }
-            string newId = referencesManager.EnsureGoodID(section.ID);
-            a.HRef.Value = string.Format("{0}_back", newId);
-            if (a.HRef.Value.StartsWith( "_back") == false)
-            {
-                //a.ID.Value = newId; // no need since the Id usualy located on section level
-                a.Class.Value = "note_anchor";
-                referencesManager.AddBackReference(a.HRef.Value, a);
-                content.Add(a);                
-            }
-            content.Class.Value = "note_section";
-            return content;
-
-        }
-
-        private IXHTMLItem ConvertFromFb2PoemElement(PoemItem poemItem, int level)
-        {
-            Div poemContent = new Div();
-
-            if (poemItem.Title != null)
-            {
-                poemContent.Add(ConvertFromFb2TitleElement(poemItem.Title, level));
-            }
-
-            foreach (var epigraph in poemItem.Epigraphs)
-            {
-                poemContent.Add(ConvertFromFb2EpigraphElement(epigraph, level + 1,false));
-            }
-
-            foreach (var stanza in poemItem.Content)
-            {
-                if (stanza is StanzaItem)
-                {
-                    poemContent.Add(ConvertFromFb2Stanza(stanza as StanzaItem, level + 1));
-                }
-            }
-
-            foreach (var author in poemItem.Authors)
-            {
-                poemContent.Add(ConvertFb2CitationAuthor(author));
-            }
-
-            if (poemItem.Date != null)
-            {
-                Paragraph date = new Paragraph();
-                date.Add(new SimpleEPubText { Text = poemItem.Date.Text });
-                date.Class.Value = "poemdate";
-                poemContent.Add(date);
-            }
-
-            poemContent.ID.Value = referencesManager.AddIdUsed(poemItem.ID, poemContent);
-
-            if (poemItem.Lang != null)
-            {
-                poemContent.Language.Value = poemItem.Lang;
-            }
-            poemContent.Class.Value = "poem";
-            return poemContent;
-        }
-
-        private IXHTMLItem ConvertFromFb2Stanza(StanzaItem stanza, int level)
-        {
-            Div stanzaSection = new Div();
-
-            if (stanza.Title != null)
-            {
-                stanzaSection.Add(ConvertFromFb2TitleElement(stanza.Title, level));
-            }
-
-            if (stanza.SubTitle != null)
-            {
-                stanzaSection.Add(ConvertFromFb2SubtitleElement(stanza.SubTitle, level + 1));
-            }
-
-            foreach (var line in stanza.Lines)
-            {
-                stanzaSection.Add(ConvertFromFb2VElement(line));
-            }
-
-            if (stanza.Lang != null)
-            {
-                stanzaSection.Language.Value = stanza.Lang;
-            }
-
-            stanzaSection.Class.Value = "stanza";
-            return stanzaSection;
-        }
-
-        private IXHTMLItem ConvertFromFb2VElement(VPoemParagraph paragraph)
-        {
-            if (paragraph == null)
-            {
-                throw new ArgumentNullException("paragraph");
-            }
-            IBlockElement item = ConvertFromFb2ParagraphElement(paragraph, ParagraphConvTargetEnum.Paragraph);
-
-            item.Class.Value = "v";
-
-            item.ID.Value = referencesManager.AddIdUsed(paragraph.ID, item);
-
-            return item;
-        }
-
-        private Div ConvertFromFb2AnnotationElement(AnnotationItem annotation, int level)
-        {
-            Div resAnnotation = new Div();
-
-            foreach (var element in annotation.Content)
-            {
-                if (element is ParagraphItem)
-                {
-                    resAnnotation.Add(ConvertFromFb2ParagraphElement(element as ParagraphItem, ParagraphConvTargetEnum.Paragraph));
-                }
-                else if (element is PoemItem)
-                {
-                    resAnnotation.Add(ConvertFromFb2PoemElement(element as PoemItem, level + 1));
-                }
-                else if (element is CiteItem)
-                {
-                    resAnnotation.Add(ConvertFromFb2Citation(element as CiteItem, level + 1));
-                }
-                else if (element is SubTitleItem)
-                {
-                    resAnnotation.Add(ConvertFromFb2SubtitleElement(element as SubTitleItem, level + 1));
-                }
-                else if (element is TableItem)
-                {
-                    resAnnotation.Add(ConvertFromFb2TableElement(element as TableItem));
-                }
-                else if (element is EmptyLineItem)
-                {
-                    resAnnotation.Add(ConvertToEmptyLine());
-                }
-            }
-
-            resAnnotation.ID.Value = referencesManager.AddIdUsed(annotation.ID, resAnnotation);
-
-            resAnnotation.Class.Value = "annotation";
-            return resAnnotation;
-        }
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="epigraph"></param>
-        /// <param name="level">"recursion" level</param>
-        /// <param name="fromMain">If this is epigraph from Main section (book) or other level</param>
-        /// <returns></returns>
-        private Div ConvertFromFb2EpigraphElement(EpigraphItem epigraph, int level,bool fromMain)
-        {
-            Div content = new Div();
-
-            foreach (var element in epigraph.EpigraphData)
-            {
-                if (element is ParagraphItem)
-                {
-                    content.Add(ConvertFromFb2ParagraphElement(element as ParagraphItem, ParagraphConvTargetEnum.Paragraph));
-                }
-                if (element is PoemItem)
-                {
-                    content.Add(ConvertFromFb2PoemElement(element as PoemItem, level + 1));
-                }
-                if (element is CiteItem)
-                {
-                    content.Add(ConvertFromFb2Citation(element as CiteItem, level + 1));
-                }
-                if (element is EmptyLineItem)
-                {
-                    content.Add(ConvertToEmptyLine());
-                }
-            }
-
-            foreach (var author in epigraph.TextAuthors)
-            {
-                IBlockElement epAuthor = ConvertFromFb2EpigraphAuthor(author as TextAuthorItem);
-                epAuthor.Class.Value = "epigraph_author";
-                content.Add(epAuthor);
-            }
-
-            if (fromMain)
-            {
-                content.Class.Value = "epigraph_main";
-            }
-            else
-            {
-                content.Class.Value = "epigraph";
-            }
-
-            content.ID.Value = referencesManager.AddIdUsed(epigraph.ID, content);
-
-            return content;
-        }
-
-        private IBlockElement ConvertFromFb2EpigraphAuthor(TextAuthorItem simpleText)
-        {
-            Div epigraphAuthor = new Div();
-            epigraphAuthor.Add(ConvertFromFb2ParagraphElement(simpleText, ParagraphConvTargetEnum.Paragraph));
-            return epigraphAuthor;
-        }
-
-        private IXHTMLItem ConvertFb2CitationAuthor(ParagraphItem author)
-        {
-            Citation cite = new Citation();
-
-            cite.Add(new SimpleEPubText{Text = author.ToString()});
-
-            cite.Class.Value = "citation_author";
-            return cite;
-        }
-
-        private Div ConvertFromFb2SubtitleElement(SubTitleItem subTitleItem, int p)
-        {
-            Div subtitle = new Div();
-            IBlockElement internalData = ConvertFromFb2ParagraphElement(subTitleItem, ParagraphConvTargetEnum.Paragraph);
-            internalData.Class.Value = "subtitle";
-            subtitle.Add(internalData);
-            subtitle.Class.Value = "subtitle";
-            return subtitle;
-        }
-
-        private Div ConvertFromFb2Citation(CiteItem citeItem, int level)
-        {
-            Div citation = new Div();
-            foreach (var item in citeItem.CiteData)
-            {
-                if (item is SubTitleItem)
-                {
-                    citation.Add(ConvertFromFb2SubtitleElement(item as SubTitleItem, level));
-                }
-                else if (item is ParagraphItem)
-                {
-                    citation.Add(ConvertFromFb2ParagraphElement(item as ParagraphItem, ParagraphConvTargetEnum.Paragraph));
-                }
-                else if (item is PoemItem)
-                {
-                    citation.Add(ConvertFromFb2PoemElement(item as PoemItem, level + 1));
-                }
-                else if (item is EmptyLineItem)
-                {
-                    citation.Add(ConvertToEmptyLine());
-                }
-                else if (item is TableItem)
-                {
-                    citation.Add(ConvertFromFb2TableElement(item as TableItem));
-                }
-            }
-
-            foreach (var author in citeItem.TextAuthors)
-            {
-                citation.Add(ConvertFb2CitationAuthor(author));
-            }
-
-            citation.ID.Value = referencesManager.AddIdUsed(citeItem.ID, citation);
-
-            if (citeItem.Lang != null)
-            {
-                citation.Language.Value = citeItem.Lang;
-            }
-            citation.Class.Value = "citation";
-            return citation;
-        }
-
-        private IXHTMLItem ConvertFromFb2TableElement(TableItem tableItem)
-        {
-            Table table = new Table();
-
-            foreach (var row in tableItem.Rows)
-            {
-                table.Add(ConvertFromFb2Row(row));
-            }
-
-            table.ID.Value = referencesManager.AddIdUsed(tableItem.ID, table);
-
-            return table;
-        }
-
-        private IXHTMLItem ConvertFromFb2Row(TableRowItem row)
-        {
-            TableRow tableRow = new TableRow();
-
-            foreach (var element in row.Cells)
-            {
-                if (element is TableHeadingItem)
-                {
-                    TableHeadingItem th = element as TableHeadingItem;
-                    HeaderCell cell = new HeaderCell();
-                    IBlockElement cellData = ConvertFromFb2ParagraphElement(th, ParagraphConvTargetEnum.Paragraph);
-                    if (cellData.SubElements() != null)
-                    {
-                        foreach (var subElement in cellData.SubElements())
-                        {
-                            cell.Add(subElement);
-                        }
-                    }
-                    else
-                    {
-                        cell.Add(cellData);
-                    }
-                    //cell.Add(new SimpleEPubText { Text = th.Text });
-                    if (th.ColSpan.HasValue)
-                    {
-                        cell.ColSpan.Value = th.ColSpan.ToString();
-                    }
-                    if (th.RowSpan.HasValue)
-                    {
-                        cell.RowSpan.Value = th.RowSpan.ToString();
-                    }
-                    switch (th.Align)
-                    {
-                        case TableAlignmentsEnum.Center:
-                            cell.Align.Value = "center";
-                            break;
-                        case TableAlignmentsEnum.Left:
-                            cell.Align.Value = "left";
-                            break;
-                        case TableAlignmentsEnum.Right:
-                            cell.Align.Value = "right";
-                            break;
-                    }
-                    switch (th.VAlign)
-                    {
-                        case TableVAlignmentsEnum.Top:
-                            cell.VerticalAlign.Value = "top";
-                            break;
-                        case TableVAlignmentsEnum.Middle:
-                            cell.VerticalAlign.Value = "middle";
-                            break;
-                        case TableVAlignmentsEnum.Bottom:
-                            cell.VerticalAlign.Value = "bottom";
-                            break;
-                    }
-                    tableRow.Add(cell);
-                }
-                else if (element is TableCellItem)
-                {
-                    TableCellItem td = element as TableCellItem;
-                    TableData cell = new TableData();
-                    IBlockElement cellData = ConvertFromFb2ParagraphElement(td, ParagraphConvTargetEnum.Paragraph);                 
-                    if (cellData.SubElements() != null)
-                    {
-                        foreach (var subElement in cellData.SubElements())
-                        {
-                            cell.Add(subElement);  
-                        }
-                    }
-                    else
-                    {
-                        cell.Add(cellData);
-                    }
-                    //cell.Add(new SimpleEPubText { Text = td.Text });
-                    if (td.ColSpan.HasValue)
-                    {
-                        cell.ColSpan.Value = td.ColSpan.ToString();
-                    }
-                    if (td.RowSpan.HasValue)
-                    {
-                        cell.RowSpan.Value = td.RowSpan.ToString();
-                    }
-                    switch (td.Align)
-                    {
-                        case TableAlignmentsEnum.Center:
-                            cell.Align.Value = "center";
-                            break;
-                        case TableAlignmentsEnum.Left:
-                            cell.Align.Value = "left";
-                            break;
-                        case TableAlignmentsEnum.Right:
-                            cell.Align.Value = "right";
-                            break;
-                    }
-                    switch (td.VAlign)
-                    {
-                        case TableVAlignmentsEnum.Top:
-                            cell.VerticalAlign.Value = "top";
-                            break;
-                        case TableVAlignmentsEnum.Middle:
-                            cell.VerticalAlign.Value = "middle";
-                            break;
-                        case TableVAlignmentsEnum.Bottom:
-                            cell.VerticalAlign.Value = "bottom";
-                            break;
-                    }
-                    tableRow.Add(cell);
-                }
-                else
-                {
-                    // invalid structure , we ignore
-                    Logger.Log.ErrorFormat("Invalid/unexpected table row sub element type : {0}", element.GetType().ToString());
-                    continue;
-                }
-            }
-            tableRow.Align.Value = row.Align ?? "left";
-            return tableRow;
-        }
 
 
         /// <summary>

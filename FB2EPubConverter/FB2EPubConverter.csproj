@@ -108,6 +108,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ElementConverters\AnnotationConverter.cs" />
+    <Compile Include="ElementConverters\BaseElementConverter.cs" />
+    <Compile Include="ElementConverters\CitationAuthorConverter.cs" />
+    <Compile Include="ElementConverters\CitationConverter.cs" />
+    <Compile Include="ElementConverters\ConverterSettings.cs" />
+    <Compile Include="ElementConverters\EmptyLineConverter.cs" />
+    <Compile Include="ElementConverters\EpigraphAuthorConverter.cs" />
+    <Compile Include="ElementConverters\EpigraphConverter.cs" />
+    <Compile Include="ElementConverters\ImageConverter.cs" />
+    <Compile Include="ElementConverters\InlineImageConverter.cs" />
+    <Compile Include="ElementConverters\InternalLinkConverter.cs" />
+    <Compile Include="ElementConverters\LinkSectionConverter.cs" />
+    <Compile Include="ElementConverters\ParagraphConverter.cs" />
+    <Compile Include="ElementConverters\PoemConverter.cs" />
+    <Compile Include="ElementConverters\RowConverter.cs" />
+    <Compile Include="ElementConverters\SimpleTextElementConverter.cs" />
+    <Compile Include="ElementConverters\StanzaConverter.cs" />
+    <Compile Include="ElementConverters\SubtitleConverter.cs" />
+    <Compile Include="ElementConverters\TableConverter.cs" />
+    <Compile Include="ElementConverters\TitleConverter.cs" />
+    <Compile Include="ElementConverters\VElementConverter.cs" />
+    <Compile Include="ElementConverters\XhtmlItemExtender.cs" />
     <Compile Include="FB2EPubConverter.cs" />
     <Compile Include="Fb2EpubInfoConverter.cs" />
     <Compile Include="HRefManager.cs" />
@@ -115,6 +137,7 @@
     <Compile Include="ProcessAuthorFormat.cs" />
     <Compile Include="ProcessSeqFormatString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ElementConverters\SectionConverter.cs" />
     <Compile Include="UnicodeHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
