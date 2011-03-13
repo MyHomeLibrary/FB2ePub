@@ -927,7 +927,7 @@ namespace Fb2ePubConverter
             Logger.Log.Debug("Adding main sections");
             foreach (var section in fb2File.MainBody.Sections)
             {
-                AddSection(epubFile, section, MainDocument);
+                AddSection(epubFile, section, MainDocument,false);
             }
 
             Logger.Log.Debug("Adding secondary bodies");
@@ -949,7 +949,8 @@ namespace Fb2ePubConverter
             GuideTypeEnum docType = GuideTypeEnum.Text;
             SectionTypeEnum sectionType = SectionTypeEnum.Text;
             bool notPartOfNavigation = false;
-            if (bodyItem.Name == "notes" || bodyItem.Name == "footnotes") // treat "standard" FBE created notes
+            bool fbeNotesSection = FBENotesSection(bodyItem.Name);
+            if (fbeNotesSection) // treat "standard" FBE created notes
             {
                 docType = GuideTypeEnum.Glossary;
                 sectionType = SectionTypeEnum.Links;
@@ -992,12 +993,29 @@ namespace Fb2ePubConverter
             Logger.Log.Debug("Adding sub-sections");
             foreach (var section in bodyItem.Sections)
             {
-                AddSection(epubFile, section, sectionDocument);
+                AddSection(epubFile, section, sectionDocument, fbeNotesSection);
             }
         }
 
+        /// <summary>
+        /// Check if the body is FBE generated notes section
+        /// </summary>
+        /// <param name="name">body name</param>
+        /// <returns>true if it is FBE generated notes/comments body</returns>
+        private static bool FBENotesSection(string name)
+        {
+            switch (name)
+            {
+                case "comments":
+                case "footnotes":
+                case "notes":
+                    return true;
+            }
+            return false;
+        }
 
-        private void AddSection(EPubFile epubFile, SectionItem section,BookDocument navParent)
+
+        private void AddSection(EPubFile epubFile, SectionItem section,BookDocument navParent,bool fbeNotesSection)
         {
             string docTitle = string.Empty;
             if (section.Title != null)
@@ -1009,7 +1027,7 @@ namespace Fb2ePubConverter
             bool firstDocumentOfSplit = true;
             ConverterSettings converterSettings = new ConverterSettings
             {
-                CapitalDrop = CapitalDrop,
+                CapitalDrop = fbeNotesSection?false:CapitalDrop,
                 Images = images,
                 MaxSize = MaxSize,
                 ReferencesManager = referencesManager
@@ -1037,7 +1055,7 @@ namespace Fb2ePubConverter
             Logger.Log.Debug("Adding sub-sections");
             foreach (var subSection in section.SubSections)
             {
-                AddSection(epubFile,subSection,sectionDocument);
+                AddSection(epubFile,subSection,sectionDocument,fbeNotesSection);
             }
         }
 
