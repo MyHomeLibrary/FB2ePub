@@ -10,6 +10,7 @@
 * Conversion part of the code was heavily refactored, so expect new bugs and crashes :)
 * Changed default CSS settings for subtitle to allow a bit more space before subtitles (on the top)
 * Subtitle element is no longer enclose in DIV - it was not needed
+* Drop capitalization is no longer performed on notes sections
 
 
 1.0.41
