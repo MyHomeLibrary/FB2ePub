@@ -57,7 +57,19 @@ void CProgressDialog::DoWork()
 		{
 			OutFileFolder = _AtlModule.GetPathWithoutFileName((LPTSTR)t->c_str());
 		}
-		size_t size = t->length() + lstrlen(OutFileFolder)+16 + _AtlModule.m_Fb2EpubApplication.length();
+		size_t outLength = lstrlen(OutFileFolder);
+		bool bAddSlash = false;
+		if ( outLength >= 2 )
+		{
+			clog << "OutFolder:" << W2A(OutFileFolder) << endl;
+			TCHAR lastChar = OutFileFolder[outLength-1];
+			clog << "Last char:" << lastChar << endl;
+			if ( lastChar != '\\' || lastChar != '/' )
+			{
+				bAddSlash = true;
+			}
+		}
+		size_t size = t->length() + outLength + 17 + _AtlModule.m_Fb2EpubApplication.length();
 		TCHAR* parameter = new TCHAR[size];
 		ZeroMemory(parameter,size*sizeof(TCHAR));
 		lstrcat(parameter,_T("\""));
@@ -67,8 +79,12 @@ void CProgressDialog::DoWork()
 		lstrcat(parameter,_T("\""));
 		lstrcat(parameter,t->c_str());
 		lstrcat(parameter,_T("\""));
-		lstrcat(parameter,_T(" /o:\""));
+		lstrcat(parameter,_T(" \"/o:"));
 		lstrcat(parameter,OutFileFolder);
+		if ( bAddSlash )
+		{
+			lstrcat(parameter,_T("\\"));
+		}
 		lstrcat(parameter,_T("\""));
 
 		PROCESS_INFORMATION procInfo;
@@ -80,7 +96,7 @@ void CProgressDialog::DoWork()
 		StartupInfo.dwFlags = STARTF_USESHOWWINDOW;
 		StartupInfo.wShowWindow = SW_HIDE;
 
-		clog << "Converting file " << W2A(t->c_str()) << " to " << W2A(OutFileFolder) << endl;
+		clog << "Converting file " << W2A(t->c_str()) << " to " << W2A(OutFileFolder) << "parameter: " << W2A(parameter) << endl;
 		if ( CreateProcess(_AtlModule.m_Fb2EpubApplication.c_str(),parameter,NULL,NULL,FALSE,0,NULL,NULL,&StartupInfo,&procInfo) )
 		{
 			WaitForSingleObject(procInfo.hProcess,INFINITE);

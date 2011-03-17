@@ -27,6 +27,7 @@ class ATL_NO_VTABLE CFB2EPUBShlExt :
 {
 public:
 	CFB2EPUBShlExt()
+		: m_hBitmap(NULL)
 	{
 	}
 
@@ -50,6 +51,11 @@ END_COM_MAP()
 
 	void FinalRelease()
 	{
+		if (m_hBitmap != NULL)
+		{
+			DeleteObject(m_hBitmap);
+			m_hBitmap = NULL;
+		}
 	}
 
 public:
@@ -64,6 +70,11 @@ public:
 
 protected:
 	string_list m_lsFiles;
+	HBITMAP m_hBitmap;
+
+	HRESULT  CreateFb2SubMenu(HMENU hmenu, UINT uMenuIndex,UINT uidFirstCmd);
+
+	HRESULT  CreateFb2SubItem(HMENU hmenu, UINT uMenuIndex,UINT uidFirstCmd);
 
 };
 

@@ -382,7 +382,14 @@ namespace Fb2ePub
                 }
                 else if (command.StartsWith("o:")) // output 
                 {
-                    converter.OutPutPath = command.Substring(2);
+                    if (command.EndsWith("\"") && command.Length > 4)
+                    {
+                        converter.OutPutPath = command.Substring(2, command.Length -3);
+                    }
+                    else
+                    {
+                        converter.OutPutPath = command.Substring(2);
+                    }
                     if (!converter.OutPutPath.EndsWith("\\") && !converter.OutPutPath.EndsWith("/"))
                     {
                         converter.OutPutPath += "\\";

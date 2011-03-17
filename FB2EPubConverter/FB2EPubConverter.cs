@@ -1059,7 +1059,7 @@ namespace Fb2ePubConverter
             }
         }
 
-        private int GetRecursionLevel(BookDocument navParent)
+        private static int GetRecursionLevel(BookDocument navParent)
         {
             if (navParent == null)
             {
