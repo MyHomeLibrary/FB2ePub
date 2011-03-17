@@ -34,9 +34,11 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxDestination = new System.Windows.Forms.ComboBox();
             this.buttonConvert = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -71,6 +73,13 @@
             resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
             // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.comboBoxDestination, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.buttonConvert, 0, 1);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
             // comboBoxDestination
             // 
             resources.ApplyResources(this.comboBoxDestination, "comboBoxDestination");
@@ -90,11 +99,9 @@
             // 
             // FormGUI
             // 
-            this.AcceptButton = this.buttonConvert;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.buttonConvert);
-            this.Controls.Add(this.comboBoxDestination);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -103,6 +110,7 @@
             this.Load += new System.EventHandler(this.FormGUI_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,11 +120,12 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ComboBox comboBoxDestination;
-        private System.Windows.Forms.Button buttonConvert;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.ComboBox comboBoxDestination;
+        private System.Windows.Forms.Button buttonConvert;
     }
 }
 
