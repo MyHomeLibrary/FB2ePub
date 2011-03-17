@@ -1,4 +1,10 @@
-﻿1.0.42
+﻿1.0.43
++ Added ePub icons to contect menu
+* Changed build environment to Visual Studio 2010
+* Changed shell extension to not create submenu if no paths set INI INI, in this case the item added to main menu
+* Fixed the shell extension bug when providing destination without slash in INI caused resulting file not to be created
+
+1.0.42
 + Added hiddeen parameter to skip generation of "About" page
 + Character '«' now also treated as dash, so it wil not be alone in case of dropped capital
 + Epigraph author is now always printed in bold in default style
