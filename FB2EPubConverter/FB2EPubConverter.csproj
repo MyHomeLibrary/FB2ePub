@@ -137,7 +137,7 @@
     <Compile Include="ElementConverters\VElementConverter.cs" />
     <Compile Include="ElementConverters\XhtmlItemExtender.cs" />
     <Compile Include="FB2EPubConverter.cs" />
-    <Compile Include="Fb2EpubInfoConverter.cs" />
+    <Compile Include="ElementConverters\Fb2EpubInfoConverter.cs" />
     <Compile Include="HRefManager.cs" />
     <Compile Include="ImageManager.cs" />
     <Compile Include="ProcessAuthorFormat.cs" />

@@ -43,7 +43,7 @@ namespace FB2EPubConverter.ElementConverters
                     }
                 }
             }
-            string newId = Settings.ReferencesManager.EnsureGoodID(linkSectionItem.ID);
+            string newId = Settings.ReferencesManager.EnsureGoodId(linkSectionItem.ID);
             a.HRef.Value = string.Format("{0}_back", newId);
             if (a.HRef.Value.StartsWith("_back") == false)
             {

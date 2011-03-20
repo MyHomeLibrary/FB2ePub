@@ -721,6 +721,7 @@ namespace Fb2ePubConverter
                     {
                         PassFb2InfoToEpub(epubFile, fb2File);
                     }
+                    UpdateInternalLinks(epubFile, fb2File);
                     PassImagesDataFromFb2ToEpub(epubFile, fb2File);
                     Logger.Log.DebugFormat("Transliteration of sile names set to : {0}",TransliterateFileName);
                     if (TransliterateFileName)
@@ -775,6 +776,13 @@ namespace Fb2ePubConverter
             }
         }
 
+        private void UpdateInternalLinks(EPubFile epubFile, FB2File fb2File)
+        {
+            referencesManager.RemoveInvalidAnchors();
+            referencesManager.RemoveInvalidImages(fb2File.Images);
+            referencesManager.RemapAnchors(epubFile);
+        }
+
         /// <summary>
         /// Passes FB2 info to the EPub file to be added at the end of the book
         /// </summary>
@@ -783,7 +791,14 @@ namespace Fb2ePubConverter
         private void PassFb2InfoToEpub(EPubFile epubFile, FB2File fb2File)
         {
             BookDocument infoDocument = epubFile.AddDocument("FB2 Info");
-            Fb2EpubInfoConverter infoConverter = new Fb2EpubInfoConverter();
+            ConverterSettings converterSettings = new ConverterSettings
+            {
+                CapitalDrop = false,
+                Images = images,
+                MaxSize = MaxSize,
+                ReferencesManager = referencesManager
+            };
+            Fb2EpubInfoConverter infoConverter = new Fb2EpubInfoConverter { Settings = converterSettings };
             infoDocument.Content = infoConverter.ConvertInfo(fb2File);
             infoDocument.FileName = "fb2info.xhtml";
             infoDocument.DocumentType = GuideTypeEnum.Notes;
@@ -832,85 +847,78 @@ namespace Fb2ePubConverter
             // create second title page
             if ((fb2File.MainBody.Title!=null) &&(!string.IsNullOrEmpty(fb2File.MainBody.Title.ToString())))
             {
-                string docTitle = string.Empty;
-                docTitle = fb2File.MainBody.Title.ToString();
+                string docTitle = fb2File.MainBody.Title.ToString();
                 Logger.Log.DebugFormat("Adding section : {0}", docTitle);
                 BookDocument addTitlePage = epubFile.AddDocument(docTitle);
                 addTitlePage.DocumentType = GuideTypeEnum.TitlePage;
                 addTitlePage.Content = new Div();
-                if (fb2File.MainBody.Title != null)
-                {
-                    ConverterSettings converterSettings = new ConverterSettings
-                                                              {
-                                                                  CapitalDrop = CapitalDrop,
-                                                                  Images = images,
-                                                                  MaxSize = MaxSize,
-                                                                  ReferencesManager = referencesManager
-                                                              };
-                    TitleConverter titleConverter = new TitleConverter {Settings = converterSettings};
-                    addTitlePage.Content.Add(titleConverter.Convert(fb2File.MainBody.Title,2));
-                }
+                ConverterSettings converterSettings = new ConverterSettings
+                                                          {
+                                                              CapitalDrop = CapitalDrop,
+                                                              Images = images,
+                                                              MaxSize = MaxSize,
+                                                              ReferencesManager = referencesManager
+                                                          };
+                TitleConverter titleConverter = new TitleConverter { Settings = converterSettings };
+                addTitlePage.Content.Add(titleConverter.Convert(fb2File.MainBody.Title, 2));
                 addTitlePage.NavigationParent = null;
                 addTitlePage.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
                 addTitlePage.NotPartOfNavigation = true;
             }
 
-            BookDocument MainDocument = null;
+            BookDocument mainDocument = null;
             if (!string.IsNullOrEmpty(fb2File.MainBody.Name))
             {
                 string docTitle = string.Empty;
                 docTitle = fb2File.MainBody.Name;
                 Logger.Log.DebugFormat("Adding section : {0}", docTitle);
-                MainDocument = epubFile.AddDocument(docTitle);
-                MainDocument.DocumentType = GuideTypeEnum.Text;
-                MainDocument.Content = new Div();
-                MainDocument.NavigationParent = null;
-                MainDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
+                mainDocument = epubFile.AddDocument(docTitle);
+                mainDocument.DocumentType = GuideTypeEnum.Text;
+                mainDocument.Content = new Div();
+                mainDocument.NavigationParent = null;
+                mainDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
             }
 
             if ((fb2File.MainBody.ImageName!= null) && !string.IsNullOrEmpty(fb2File.MainBody.ImageName.HRef))
             {
-                if (MainDocument == null)
+                if (mainDocument == null)
                 {
                     string newDocTitle = ((fb2File.MainBody.Title!=null)&&(!string.IsNullOrEmpty(fb2File.MainBody.Title.ToString())))?fb2File.MainBody.Title.ToString():"main";
-                    MainDocument = epubFile.AddDocument(newDocTitle);
-                    MainDocument.DocumentType = GuideTypeEnum.Text;
-                    MainDocument.Content = new Div();
-                    MainDocument.NavigationParent = null;
-                    MainDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
+                    mainDocument = epubFile.AddDocument(newDocTitle);
+                    mainDocument.DocumentType = GuideTypeEnum.Text;
+                    mainDocument.Content = new Div();
+                    mainDocument.NavigationParent = null;
+                    mainDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
                 }
-                if (fb2File.MainBody.ImageName.HRef != null)
+                if (images.IsImageIdReal(fb2File.MainBody.ImageName.HRef))
                 {
-                    if (images.IsImageIdReal(fb2File.MainBody.ImageName.HRef))
+                    Div enclosing = new Div(); // we use the enclosing so the user can style center it
+                    ConverterSettings converterSettings = new ConverterSettings
                     {
-                        Div enclosing = new Div(); // we use the enclosing so the user can style center it
-                        ConverterSettings converterSettings = new ConverterSettings
-                        {
-                            CapitalDrop = CapitalDrop,
-                            Images = images,
-                            MaxSize = MaxSize,
-                            ReferencesManager = referencesManager
-                        };
+                        CapitalDrop = CapitalDrop,
+                        Images = images,
+                        MaxSize = MaxSize,
+                        ReferencesManager = referencesManager
+                    };
 
-                        ImageConverter imageConverter = new ImageConverter {Settings = converterSettings};
-                        enclosing.Add(imageConverter.Convert(fb2File.MainBody.ImageName));
-                        enclosing.Class.Value = "body_image";
-                        MainDocument.Content.Add(enclosing);
-                    }
+                    ImageConverter imageConverter = new ImageConverter { Settings = converterSettings };
+                    enclosing.Add(imageConverter.Convert(fb2File.MainBody.ImageName));
+                    enclosing.Class.Value = "body_image";
+                    mainDocument.Content.Add(enclosing);
                 }
 
                 
             }
             foreach (var ep in fb2File.MainBody.Epigraphs)
             {
-                if (MainDocument == null)
+                if (mainDocument == null)
                 {
                     string newDocTitle = ((fb2File.MainBody.Title != null) && (!string.IsNullOrEmpty(fb2File.MainBody.Title.ToString()))) ? fb2File.MainBody.Title.ToString() : "main";
-                    MainDocument = epubFile.AddDocument(newDocTitle);
-                    MainDocument.DocumentType = GuideTypeEnum.Text;
-                    MainDocument.Content = new Div();
-                    MainDocument.NavigationParent = null;
-                    MainDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
+                    mainDocument = epubFile.AddDocument(newDocTitle);
+                    mainDocument.DocumentType = GuideTypeEnum.Text;
+                    mainDocument.Content = new Div();
+                    mainDocument.NavigationParent = null;
+                    mainDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
                 }
                 ConverterSettings converterSettings = new ConverterSettings
                 {
@@ -921,13 +929,13 @@ namespace Fb2ePubConverter
                 };
 
                 MainEpigraphConverter epigraphConverter = new MainEpigraphConverter { Settings = converterSettings };
-                MainDocument.Content.Add(epigraphConverter.Convert(ep,1));
+                mainDocument.Content.Add(epigraphConverter.Convert(ep,1));
             }
 
             Logger.Log.Debug("Adding main sections");
             foreach (var section in fb2File.MainBody.Sections)
             {
-                AddSection(epubFile, section, MainDocument,false);
+                AddSection(epubFile, section, mainDocument,false);
             }
 
             Logger.Log.Debug("Adding secondary bodies");
@@ -939,9 +947,6 @@ namespace Fb2ePubConverter
                 }
                 AddSecondaryBody(epubFile,bodyItem);
             }
-            referencesManager.RemoveInvalidAnchors();
-            referencesManager.RemoveInvalidImages(fb2File.Images);
-            referencesManager.RemapAnchors(epubFile);
         }
 
         private void AddSecondaryBody(EPubFile epubFile, BodyItem bodyItem)

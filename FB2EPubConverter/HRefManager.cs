@@ -117,7 +117,7 @@ namespace FB2EPubConverter
             {
                 return string.Empty;
             }
-            string newid = EnsureGoodID(id);
+            string newid = EnsureGoodId(id);
             if (ids.ContainsKey(newid))
             {
                 // we get here if in file same ID used twice
@@ -141,7 +141,7 @@ namespace FB2EPubConverter
             {
                 id = id.Substring(1);
             }
-            if (ids.ContainsKey(EnsureGoodID(id)))
+            if (ids.ContainsKey(EnsureGoodId(id)))
             {
                 return true;
             }
@@ -272,7 +272,7 @@ namespace FB2EPubConverter
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public string EnsureGoodID(string id)
+        public string EnsureGoodId(string id)
         {
             if (id == null)
             {
@@ -325,7 +325,7 @@ namespace FB2EPubConverter
                 return reference;
             }
             string subRef = reference.Substring(1);
-            return string.Format("#{0}", EnsureGoodID(subRef));
+            return string.Format("#{0}", EnsureGoodId(subRef));
         }
 
 

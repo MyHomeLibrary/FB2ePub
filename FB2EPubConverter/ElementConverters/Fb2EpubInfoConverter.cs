@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
-using EPubLibrary;
 using EPubLibrary.ReferenceUtils;
 using FB2Library;
 using FB2Library.HeaderItems;
@@ -11,12 +8,12 @@ using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 using XHTMLClassLibrary.BaseElements.ListElements;
 
-namespace FB2EPubConverter
+namespace FB2EPubConverter.ElementConverters
 {
     /// <summary>
     /// Used to convert FB2 information section into EPUB document content to generate FB2Info page(s)
     /// </summary>
-    internal class Fb2EpubInfoConverter
+    internal class Fb2EpubInfoConverter : BaseElementConverter
     {
         public IXHTMLItem ConvertInfo(FB2File fb2File)
         {
@@ -117,10 +114,11 @@ namespace FB2EPubConverter
                     H4 heading = new H4();
                     heading.Add(new SimpleEPubText() { Text = "Document history:" });
                     info.Add(heading);
-
-                    Paragraph p = new Paragraph();
-                    p.Add(new SimpleEPubText() { Text = fb2File.DocumentInfo.History.ToString() });
-                    info.Add(p);                                                            
+                    AnnotationConverter annotationConverter = new AnnotationConverter {Settings = Settings};
+                    info.Add(annotationConverter.Convert(fb2File.DocumentInfo.History,1));
+                    //Paragraph p = new Paragraph();
+                    //p.Add(new SimpleEPubText() { Text = fb2File.DocumentInfo.History.ToString() });
+                    //info.Add(p);                                                            
                 }
             }
 
@@ -169,6 +167,11 @@ namespace FB2EPubConverter
                 sb.AppendFormat(": {0}", author.UID.Text);
             }
             return sb.ToString();
+        }
+
+        public override string GetElementType()
+        {
+            return string.Empty;
         }
     }
 }
