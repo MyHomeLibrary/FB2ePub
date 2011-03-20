@@ -137,17 +137,106 @@ namespace EPubLibrary.XHTML_Items
                 if (newDoc != null)
                 {
                     list.Add(newDoc);
-                    if (EstimateSize(newDoc.Content) > MaxSize)
+                    if (EstimateSize(newDoc.Content) > MaxSize )
                     {
-                        List<BookDocument> subList = newDoc.Split();
-                        list.AddRange(subList);
+                        if ((newDoc.Content.SubElements() != null) && (newDoc.Content.SubElements().Count > 1)) // in case we have only one sub-element we can't split
+                        {
+                            List<BookDocument> subList = newDoc.Split();
+                            list.AddRange(subList);
+                            list.Remove(newDoc);                     
+                        }
+                        else
+                        {
+                            if (newDoc.Content.SubElements()[0] is Paragraph) // in case element we about to split is paragraph
+                            {
+                                List<BookDocument> subList = SplitParagraph(newDoc.Content.SubElements()[0] as Paragraph);
+                                list.AddRange(subList);                                                                                        
+                            }
+                            else if (newDoc.Content.SubElements()[0] is Div)
+                            {
+                                newDoc.Content = newDoc.Content.SubElements()[0];
+                                List<BookDocument> subList = newDoc.Split();
+                                list.AddRange(subList);                                                           
+                            }
+                        }
                     }
                 }
             }
             return list;
         }
 
-        private long EstimateSize(IXHTMLItem item)
+        private List<BookDocument> SplitParagraph(Paragraph paragraph)
+        {
+            List<BookDocument> list = new List<BookDocument>();
+            foreach (var subElement in paragraph.SubElements())
+            {
+                Paragraph newParagraph = new Paragraph();
+                newParagraph.Add(subElement);
+                long itemSize = EstimateSize(newParagraph);
+                if (itemSize > MaxSize)
+                {
+                    if (Content.SubElements() != null )
+                    {
+                        List<BookDocument> subList = null;
+                        if (subElement.GetType() == typeof(SimpleEPubText))
+                        {
+                            subList = SplitSimpleText(subElement as SimpleEPubText);
+                        }
+                        if (subList != null)
+                        {
+                            list.AddRange(subList);
+                        }
+                    }
+                }
+                else
+                {
+                    Content.Add(newParagraph);
+                }
+            }
+            return list;
+        }
+
+        private List<BookDocument> SplitSimpleText(SimpleEPubText simpleEPubText)
+        {
+            List<BookDocument> list = new List<BookDocument>();
+            BookDocument newDoc = new BookDocument();
+            newDoc.PageTitle = PageTitle;
+            newDoc.NotPartOfNavigation = true;
+            newDoc.StyleFiles.AddRange(StyleFiles);
+            newDoc.DocumentType = DocumentType;
+            newDoc.NavigationParent = NavigationParent;
+            newDoc.Content = new Div();
+            Paragraph newParagraph = new Paragraph();
+            newDoc.Content.Add(newParagraph);
+            SimpleEPubText newText = new SimpleEPubText{Text = ""};
+            newParagraph.Add(newText);
+            foreach (var word in simpleEPubText.Text.Split(' '))
+            {
+                newText.Text += ' ';
+                newText.Text+= word;
+                long itemSize = EstimateSize(newParagraph);
+                if (itemSize >= MaxSize)
+                {
+                    list.Add(newDoc);
+                    newDoc = new BookDocument();
+                    newDoc.PageTitle = PageTitle;
+                    newDoc.NotPartOfNavigation = true;
+                    newDoc.StyleFiles.AddRange(StyleFiles);
+                    newDoc.DocumentType = DocumentType;
+                    newDoc.NavigationParent = NavigationParent;
+                    newDoc.Content = new Div();
+                    newParagraph = new Paragraph();
+                    newDoc.Content.Add(newParagraph);
+                    newText = new SimpleEPubText { Text = "" };
+                    newParagraph.Add(newText);
+                }
+            }
+            list.Add(newDoc);
+
+            return list;
+        }
+
+        private static long EstimateSize(IXHTMLItem item)
         {
             MemoryStream stream = new MemoryStream();
             XNode node = item.Generate();

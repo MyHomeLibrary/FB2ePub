@@ -1,4 +1,8 @@
-﻿1.0.13.0
+﻿1.0.14.0
+* Converted to Visual Studio 2010 solution
+* Fixed problem with stack overflow in case of system unable to split document
+
+1.0.13.0
 * Fixed bug when font without style attribute and font with "normal" attribute were considered different , this caused sometimes for italic styles to be overwriten
 * Fixed a bug when CSS stylesheet for one element contained more than one occurance of same parameter (in this case previously entire element was ignored)
 

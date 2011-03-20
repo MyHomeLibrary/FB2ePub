@@ -84,6 +84,7 @@ namespace EPubLibrary.CSS_Items
                             }
                             catch (Exception ex)
                             {
+                                Logger.log.Error(ex);
                             }
                             elementString.Remove(0, elementString.Length);
                             startPosition = endPosition+1;
