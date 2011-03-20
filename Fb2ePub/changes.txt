@@ -3,6 +3,8 @@
 * Changed build environment to Visual Studio 2010
 * Changed shell extension to not create submenu if no paths set INI INI, in this case the item added to main menu
 * Fixed the shell extension bug when providing destination without slash in INI caused resulting file not to be created
+* History now loaded as an Annotation block (as it should be) not just as simple text
+* Fixed crash related to stack overflow when system was unable to split the file
 
 1.0.42
 + Added hiddeen parameter to skip generation of "About" page

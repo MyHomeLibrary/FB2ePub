@@ -34,7 +34,7 @@ namespace FB2EPubConverter.ElementConverters
                     {
                         internalLinkItem.HRef = internalLinkItem.HRef.Substring(1);
                     }
-                    internalLinkItem.HRef = Settings.ReferencesManager.EnsureGoodID(internalLinkItem.HRef);
+                    internalLinkItem.HRef = Settings.ReferencesManager.EnsureGoodId(internalLinkItem.HRef);
                     internalLink = true;
                 }
                 anchor.HRef.Value = internalLinkItem.HRef;

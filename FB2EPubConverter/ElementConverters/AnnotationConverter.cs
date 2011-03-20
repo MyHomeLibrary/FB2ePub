@@ -17,7 +17,7 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="annotationItem">item to convert</param>
         /// <param name="level">"deepness" of the annotation, affects representation</param>
         /// <returns>XHTML representation</returns>
-        public Div Convert(AnnotationItem annotationItem,int level)
+        public Div Convert(AnnotationType annotationItem, int level)
         {
             if (annotationItem == null)
             {
