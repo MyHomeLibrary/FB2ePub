@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using Fb2ePubConverter;
@@ -23,6 +24,11 @@ namespace Fb2ePubGui
         {
             InitializeComponent();
         }
+
+        [DllImport("kernel32")]
+        private static extern int GetPrivateProfileString(string section,
+          string key, string def, StringBuilder retVal,
+          int size, string filePath);
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -150,8 +156,29 @@ namespace Fb2ePubGui
         private void FormGuiLoad(object sender, EventArgs e)
         {
             comboBoxDestination.Items.Clear();
-            comboBoxDestination.Items.Add(string.Format("{0}\\My Books\\",Environment.GetFolderPath(Environment.SpecialFolder.Personal)));
+            LoadPaths();
             comboBoxDestination.SelectedIndex = 0;           
+        }
+
+        private void LoadPaths()
+        {
+            comboBoxDestination.Items.Clear();
+            string defaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+                                              "My Books\\");
+            if (!Directory.Exists(defaultPath))
+            {
+                try
+                {
+                    Directory.CreateDirectory(defaultPath);
+                }
+                catch(Exception)
+                {
+                    
+                }
+            }
+            comboBoxDestination.Items.Add(defaultPath);
+
+
         }
 
         private void buttonShowFolder_Click(object sender, EventArgs e)
