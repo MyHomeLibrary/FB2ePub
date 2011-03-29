@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using Fb2ePubConverter;
+using Fb2ePubGui.Properties;
 
 namespace Fb2ePubGui
 {
     public partial class FormGUI : Form
     {
-        private Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine();
+        private readonly Fb2EPubConverterEngine _converter = new Fb2EPubConverterEngine{ ResourcesPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)};
 
         public FormGUI()
         {
@@ -40,7 +43,7 @@ namespace Fb2ePubGui
             ofDialog.Filter = string.Format("FB2 file | *.fb2;*.fb2.zip;*.fb2.rar |Fb2 file and any archive | *.fb2;*.zip;*.rar;*.fb2.zip;*.fb2.rar |Any file | *.*");
             ofDialog.FilterIndex = 1;
             ofDialog.Multiselect = true;
-            ofDialog.Title = "Please select FB2 files to convert";
+            ofDialog.Title = Resources.FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert;
             ofDialog.RestoreDirectory = true;
             ofDialog.ShowReadOnly = false;
             ofDialog.SupportMultiDottedExtensions = true;
@@ -60,7 +63,7 @@ namespace Fb2ePubGui
                 // in case of folder detect all sub files matching mask
                 if ((File.GetAttributes(fileItem) & FileAttributes.Directory) == FileAttributes.Directory)
                 {
-                    string superPattern = "*.fb2,*.zip,*.rar";
+                    const string superPattern = "*.fb2,*.zip,*.rar";
                     foreach (var pattern in superPattern.Split(','))
                     {
                         foreach (var subfile in Directory.GetFiles(fileItem, pattern, SearchOption.AllDirectories))
@@ -75,40 +78,42 @@ namespace Fb2ePubGui
                 }
             }
 
-            converter.Transliterate = FB2EpubSettings.Default.Transliterate;
-            converter.TransliterateFileName = FB2EpubSettings.Default.TransliterateFileName;
-            converter.TransliterateToc = FB2EpubSettings.Default.TransliterateTOC;
-            converter.Fb2Info = FB2EpubSettings.Default.FB2Info;
-            converter.FixMode = (Fb2EPubConverterEngine.FixOptions)FB2EpubSettings.Default.FixMode;
-            converter.AddSeqToTitle = FB2EpubSettings.Default.AddSequences;
-            converter.Flat = FB2EpubSettings.Default.FlatStructure;
-            converter.ConvertAlphaPng = FB2EpubSettings.Default.ConvertAlphaPNG;
-            converter.EmbedStyles = FB2EpubSettings.Default.EmbedStyles;
-            converter.Fonts = FB2EpubSettings.Default.Fonts;
-            converter.OutPutPath = comboBoxDestination.Text;
+
+            _converter.Transliterate = Fb2epubSettings.Fb2Epub.Default.Transliterate;
+            _converter.TransliterateFileName = Fb2epubSettings.Fb2Epub.Default.TransliterateFileName;
+            _converter.TransliterateToc = Fb2epubSettings.Fb2Epub.Default.TransliterateTOC;
+            _converter.Fb2Info = Fb2epubSettings.Fb2Epub.Default.FB2Info;
+            _converter.FixMode = (Fb2EPubConverterEngine.FixOptions)Fb2epubSettings.Fb2Epub.Default.FixMode;
+            _converter.AddSeqToTitle = Fb2epubSettings.Fb2Epub.Default.AddSequences;
+            _converter.SequenceFormat = Fb2epubSettings.Fb2Epub.Default.SequenceFormat;
+            _converter.NoSequenceFormat = Fb2epubSettings.Fb2Epub.Default.NoSequenceFormat;
+            _converter.NoSeriesFormat = Fb2epubSettings.Fb2Epub.Default.NoSeriesFormat;
+            _converter.Flat = Fb2epubSettings.Fb2Epub.Default.FlatStructure;
+            _converter.ConvertAlphaPng = Fb2epubSettings.Fb2Epub.Default.ConvertAlphaPNG;
+            _converter.EmbedStyles = Fb2epubSettings.Fb2Epub.Default.EmbedStyles;
+            _converter.AuthorFormat = Fb2epubSettings.Fb2Epub.Default.AuthorFormat;
+            _converter.FileAsFormat = Fb2epubSettings.Fb2Epub.Default.FileAsFormat;
+            _converter.CapitalDrop = Fb2epubSettings.Fb2Epub.Default.Capitalize;
+            _converter.SkipAboutPage = Fb2epubSettings.Fb2Epub.Default.SkipAboutPage;
+            _converter.Fonts = Fb2epubSettings.Fb2Epub.Default.Fonts;
 
             // now really convert files
             foreach (var file in allFiles)
             {
                 string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
-                string fileLocation = string.Format("{0}\\", Path.GetDirectoryName(Path.GetFullPath(file)));
-                if (!string.IsNullOrEmpty(converter.OutPutPath))
+                if (fileNameWithoutExtension == null)
                 {
-                    fileLocation = converter.OutPutPath;
+                    continue;
                 }
-                // in case fb2.zip remove the "fb2" part
-                if (fileNameWithoutExtension.ToLower().EndsWith(".fb2"))
-                {
-                    fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileNameWithoutExtension);
-                }
-                string fileName = string.Format("{2}{0}.{1}", fileNameWithoutExtension, "epub", fileLocation);
+                fileNameWithoutExtension = Path.ChangeExtension(fileNameWithoutExtension, "epub");              
+                string fileName = Path.Combine(comboBoxDestination.Text,fileNameWithoutExtension);
                 try
                 {
-                    if (!converter.ConvertFile(file))
+                    if (!_converter.ConvertFile(file))
                     {
                         continue;
                     }
-                    converter.Save(fileName);
+                    _converter.Save(fileName);
                 }
                 catch (Exception)
                 {
@@ -141,11 +146,11 @@ namespace Fb2ePubGui
             }
         }
 
-        private void FormGUI_Load(object sender, EventArgs e)
+        private void FormGuiLoad(object sender, EventArgs e)
         {
             comboBoxDestination.Items.Clear();
             comboBoxDestination.Items.Add(string.Format("{0}\\My Books\\",Environment.GetFolderPath(Environment.SpecialFolder.Personal)));
-            comboBoxDestination.SelectedIndex = 0;
+            comboBoxDestination.SelectedIndex = 0;           
         }
     }
 }

@@ -59,5 +59,14 @@ namespace Fb2ePubGui.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select FB2 files to convert.
+        /// </summary>
+        internal static string FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert {
+            get {
+                return ResourceManager.GetString("FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert", resourceCulture);
+            }
+        }
     }
 }

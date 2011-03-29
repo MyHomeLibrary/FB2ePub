@@ -88,11 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fb2Epub.cs" />
-    <Compile Include="Fb2Epub.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Fb2Epub.settings</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -101,13 +96,13 @@
       <Project>{738F2015-0DC7-4C38-BBF0-90FD5C3C2518}</Project>
       <Name>FB2EPubConverter</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Fb2epubSettings\Fb2epubSettings.csproj">
+      <Project>{BB87C009-1337-43FF-ADF6-6E7861AA9343}</Project>
+      <Name>Fb2epubSettings</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Fb2Epub.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Fb2Epub.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Fonts\LiberationMono-Bold.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
