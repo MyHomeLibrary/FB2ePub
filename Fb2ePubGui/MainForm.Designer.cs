@@ -37,6 +37,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxDestination = new System.Windows.Forms.ComboBox();
             this.buttonConvert = new System.Windows.Forms.Button();
+            this.buttonShowFolder = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +79,7 @@
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.comboBoxDestination, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.buttonConvert, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.buttonShowFolder, 1, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // comboBoxDestination
@@ -90,12 +92,20 @@
             // buttonConvert
             // 
             this.buttonConvert.AllowDrop = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.buttonConvert, 2);
             resources.ApplyResources(this.buttonConvert, "buttonConvert");
             this.buttonConvert.Name = "buttonConvert";
             this.buttonConvert.UseVisualStyleBackColor = true;
             this.buttonConvert.Click += new System.EventHandler(this.buttonConvert_Click);
             this.buttonConvert.DragDrop += new System.Windows.Forms.DragEventHandler(this.buttonConvert_DragDrop);
             this.buttonConvert.DragEnter += new System.Windows.Forms.DragEventHandler(this.buttonConvert_DragEnter);
+            // 
+            // buttonShowFolder
+            // 
+            resources.ApplyResources(this.buttonShowFolder, "buttonShowFolder");
+            this.buttonShowFolder.Name = "buttonShowFolder";
+            this.buttonShowFolder.UseVisualStyleBackColor = true;
+            this.buttonShowFolder.Click += new System.EventHandler(this.buttonShowFolder_Click);
             // 
             // FormGUI
             // 
@@ -126,6 +136,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ComboBox comboBoxDestination;
         private System.Windows.Forms.Button buttonConvert;
+        private System.Windows.Forms.Button buttonShowFolder;
     }
 }
 

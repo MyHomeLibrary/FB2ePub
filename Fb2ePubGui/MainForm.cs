@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -151,6 +152,11 @@ namespace Fb2ePubGui
             comboBoxDestination.Items.Clear();
             comboBoxDestination.Items.Add(string.Format("{0}\\My Books\\",Environment.GetFolderPath(Environment.SpecialFolder.Personal)));
             comboBoxDestination.SelectedIndex = 0;           
+        }
+
+        private void buttonShowFolder_Click(object sender, EventArgs e)
+        {
+            Process.Start(comboBoxDestination.Text);
         }
     }
 }
