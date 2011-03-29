@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Fb2ePubGui")]
-[assembly: AssemblyDescription("Fb2ePub converter GUI")]
+[assembly: AssemblyTitle("Fb2epubSettings")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Lord KiRon")]
-[assembly: AssemblyProduct("Fb2ePubGui")]
-[assembly: AssemblyCopyright("Copyfree ©  2011")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("Fb2epubSettings")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("821f11de-99b2-436b-807d-baf0eb67c1f8")]
+[assembly: Guid("eae815b6-bec1-4269-a6db-ecc6f6eb3110")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.1.0")]
-[assembly: AssemblyFileVersion("1.0.1.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

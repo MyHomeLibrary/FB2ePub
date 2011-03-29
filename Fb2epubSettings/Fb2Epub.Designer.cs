@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Fb2ePub {
+namespace Fb2epubSettings {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0")]
-    internal sealed partial class Fb2Epub : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class Fb2Epub : global::System.Configuration.ApplicationSettingsBase {
         
         private static Fb2Epub defaultInstance = ((Fb2Epub)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Fb2Epub())));
         
