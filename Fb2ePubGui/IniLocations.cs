@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 
+
 namespace Fb2ePubGui
 {
     class IniLocations : IEnumerable<string>
@@ -48,7 +49,6 @@ namespace Fb2ePubGui
                         string path = IniReadValue(iniPath, section, "TargetPath");
                         if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
                         {
-                            //comboBoxDestination.Items.Add(path);
                             _listOfLocations.Add(path);
                         }
                     }
@@ -68,14 +68,14 @@ namespace Fb2ePubGui
         }
 
 
-        public string IniReadValue(string iniPath, string Section, string Key)
+        private static string IniReadValue(string iniPath, string section, string key)
         {
             StringBuilder temp = new StringBuilder(255);
-            int i = GetPrivateProfileString(Section, Key, "", temp, 255, iniPath);
+            int i = GetPrivateProfileString(section, key, "", temp, 255, iniPath);
             return temp.ToString();
         }
 
-        private string DetectIniLocation()
+        private static string DetectIniLocation()
         {
             string path2Exe = Assembly.GetEntryAssembly().Location;
             string folderPath = Path.GetDirectoryName(path2Exe);
