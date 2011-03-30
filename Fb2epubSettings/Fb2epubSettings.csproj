@@ -36,13 +36,20 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConverterSettings1.cs" />
+    <Compile Include="ConverterSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConverterSettingsForm.Designer.cs">
+      <DependentUpon>ConverterSettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fb2Epub.Designer.cs">
       <DependentUpon>Fb2Epub.settings</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -55,6 +62,11 @@
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Fb2Epub.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ConverterSettingsForm.resx">
+      <DependentUpon>ConverterSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
