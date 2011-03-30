@@ -6,12 +6,15 @@ using System.Reflection;
 using System.Windows.Forms;
 using Fb2ePubConverter;
 using Fb2ePubGui.Properties;
+using Fb2epubSettings;
 
 namespace Fb2ePubGui
 {
     public partial class FormGUI : Form
     {
         private readonly Fb2EPubConverterEngine _converter = new Fb2EPubConverterEngine{ ResourcesPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)};
+
+        delegate void OnButtonPressedCallback(object sender, EventArgs e);
 
         public FormGUI()
         {
@@ -21,11 +24,24 @@ namespace Fb2ePubGui
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (InvokeRequired)
+            {
+                OnButtonPressedCallback d = settingsToolStripMenuItem_Click;
+                Invoke(d, new object[] { sender, e });
+                return;
+            }
+            ConverterSettingsForm settings = new ConverterSettingsForm();
+            settings.ShowDialog(this);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (InvokeRequired)
+            {
+                OnButtonPressedCallback d = exitToolStripMenuItem_Click;
+                Invoke(d, new object[] { sender, e });
+                return;
+            }
             Close();
         }
 
