@@ -1,5 +1,6 @@
 ﻿1.0.43
 + Added ePub icons to contect menu
++ Added new parameter "/settings" to bring up converter setup window
 + Added first initial implementation of Fb2ePubGUI application (Drag'n'Drop) GUI for converter
 * Changed build environment to Visual Studio 2010
 * Changed shell extension to not create submenu if no paths set INI INI, in this case the item added to main menu
