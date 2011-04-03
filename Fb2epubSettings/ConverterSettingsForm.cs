@@ -13,6 +13,7 @@ namespace Fb2epubSettings
     {
         delegate void OnButtonPressedCallback(object sender, EventArgs e);
 
+
         public ConverterSettingsForm()
         {
             InitializeComponent();
@@ -61,6 +62,27 @@ namespace Fb2epubSettings
             checkBoxTransliterateTOC.Checked = Fb2Epub.Default.TransliterateTOC;
             checkBoxTransliterateFileName.Checked = Fb2Epub.Default.TransliterateFileName;
             checkBoxTransliterateAdditional.Checked = Fb2Epub.Default.Transliterate;
+            textBoxAuthorFormat.Text = Fb2Epub.Default.AuthorFormat;
+            textBoxFileAsFormat.Text = Fb2Epub.Default.FileAsFormat;
+            textBoxNoSequenceFormat.Text = Fb2Epub.Default.NoSequenceFormat;
+            textBoxSequenceFormat.Text = Fb2Epub.Default.SequenceFormat;
+            checkBoxAddSequences.Checked = Fb2Epub.Default.AddSequences;
+            checkBoxFb2Info.Checked = Fb2Epub.Default.FB2Info;
+            checkBoxConvertAlphaPNG.Checked = Fb2Epub.Default.ConvertAlphaPNG;
+            checkBoxFlatStructure.Checked = Fb2Epub.Default.FlatStructure;
+            checkBoxEmbedStyles.Checked = Fb2Epub.Default.EmbedStyles;
+            checkBoxCapitalize.Checked = Fb2Epub.Default.Capitalize;
+            checkBoxSkipAboutPage.Checked = Fb2Epub.Default.SkipAboutPage;
+            LoadFixMode();
+        }
+
+        private void LoadFixMode()
+        {
+            comboBoxFixMode.Items.Clear();
+            comboBoxFixMode.Items.Add("1");
+            comboBoxFixMode.Items.Add("2");
+            comboBoxFixMode.Items.Add("3");
+            comboBoxFixMode.SelectedItem = Fb2Epub.Default.FixMode.ToString();
         }
 
         private void checkBoxTransliterateTOC_CheckedChanged(object sender, EventArgs e)
@@ -76,6 +98,66 @@ namespace Fb2epubSettings
         private void checkBoxTransliterateAdditional_CheckedChanged(object sender, EventArgs e)
         {
             Fb2Epub.Default.Transliterate = checkBoxTransliterateAdditional.Checked;
+        }
+
+        private void textBoxSequenceFormat_TextChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.SequenceFormat = textBoxSequenceFormat.Text;
+        }
+
+        private void textBoxNoSequenceFormat_TextChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.NoSequenceFormat = textBoxNoSequenceFormat.Text;
+        }
+
+        private void textBoxAuthorFormat_TextChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.AuthorFormat = textBoxAuthorFormat.Text;
+        }
+
+        private void textBoxFileAsFormat_TextChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.FileAsFormat = textBoxFileAsFormat.Text;
+        }
+
+        private void checkBoxAddSequences_CheckedChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.AddSequences = checkBoxAddSequences.Checked;
+        }
+
+        private void checkBoxFb2Info_CheckedChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.FB2Info = checkBoxFb2Info.Checked;
+        }
+
+        private void checkBoxConvertAlphaPNG_CheckedChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.ConvertAlphaPNG = checkBoxConvertAlphaPNG.Checked;
+        }
+
+        private void checkBoxFlatStructure_CheckedChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.FlatStructure = checkBoxFlatStructure.Checked;
+        }
+
+        private void checkBoxEmbedStyles_CheckedChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.EmbedStyles = checkBoxEmbedStyles.Checked;
+        }
+
+        private void checkBoxCapitalize_CheckedChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.Capitalize = checkBoxCapitalize.Checked;
+        }
+
+        private void checkBoxSkipAboutPage_CheckedChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.SkipAboutPage = checkBoxSkipAboutPage.Checked;
+        }
+
+        private void comboBoxFixMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.FixMode = int.Parse((string)comboBoxFixMode.SelectedItem);
         }
     }
 }
