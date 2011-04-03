@@ -37,6 +37,7 @@ namespace Fb2ePub
         private static bool abortDeletion = false;
 
         const string Registrator2Run = "registerfb2epub.exe";
+        private static bool _settingsMode = false;
 
         static void Main(string[] args)
         {
@@ -88,6 +89,13 @@ namespace Fb2ePub
                         if ((options[0].ToLower() == "/u") || options[0].ToLower() == "-u")
                         {
                             UnregisterShellExtension();
+                            return;
+                        }
+                        if ((options[0].ToLower() == "/settings") || options[0].ToLower() == "-settings")
+                        {
+                            ConverterSettingsForm settings = new ConverterSettingsForm();
+                            settings.TopLevel = true;
+                            settings.ShowDialog();
                             return;
                         }
                     }
@@ -632,6 +640,10 @@ namespace Fb2ePub
                 else if (command.StartsWith("noabout"))
                 {
                     converter.SkipAboutPage = true;
+                }
+                else if (command.StartsWith("settings"))
+                {
+                    _settingsMode = true;
                 }
                 else
                 {
