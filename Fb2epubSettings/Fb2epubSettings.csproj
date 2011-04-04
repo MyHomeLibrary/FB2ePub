@@ -67,6 +67,9 @@
     <EmbeddedResource Include="ConverterSettingsForm.resx">
       <DependentUpon>ConverterSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ConverterSettingsForm.ru.resx">
+      <DependentUpon>ConverterSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
