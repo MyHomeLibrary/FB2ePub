@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tabPageTransliteration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="tabPageTransliteration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 203</value>
+  </data>
+  <data name="tabPageTransliteration.Text" xml:space="preserve">
+    <value>Транслитерация</value>
+  </data>
+  <data name="tabPageTransliteration.ToolTipText" xml:space="preserve">
+    <value>Настройки транслитерации (для ридеров не поддерживающих русские фонты)</value>
+  </data>
+  <data name="tabPageSequences.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="tabPageSequences.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 203</value>
+  </data>
+  <data name="tabPageSequences.Text" xml:space="preserve">
+    <value>Форматирование данных</value>
+  </data>
+  <data name="tabPageSequences.ToolTipText" xml:space="preserve">
+    <value>Настройки форматирования данных для отображения</value>
+  </data>
+  <data name="tabPageDifferent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="tabPageDifferent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 203</value>
+  </data>
+  <data name="tabPageDifferent.Text" xml:space="preserve">
+    <value>Основные настройки</value>
+  </data>
+  <data name="tabPageDifferent.ToolTipText" xml:space="preserve">
+    <value>Основные настройки конвертера</value>
+  </data>
+  <data name="tabPageFonts.Text" xml:space="preserve">
+    <value>Шрифты</value>
+  </data>
+  <data name="tabPageFonts.ToolTipText" xml:space="preserve">
+    <value>Настройки шрифтов</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>307, 197</value>
+  </data>
+  <data name="checkBoxTransliterateAdditional.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 17</value>
+  </data>
+  <data name="checkBoxTransliterateAdditional.Text" xml:space="preserve">
+    <value>Транслитерировать дополнительную информацию</value>
+  </data>
+  <data name="checkBoxTransliterateAdditional.ToolTip" xml:space="preserve">
+    <value>Транслитерировать дополнительную информацию (такую как описание книги)
+Включать для ридеров не поддергивающих русские фонты</value>
+  </data>
+  <data name="checkBoxTransliterateFileName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 17</value>
+  </data>
+  <data name="checkBoxTransliterateFileName.Text" xml:space="preserve">
+    <value>Транслитерировать имя файла</value>
+  </data>
+  <data name="checkBoxTransliterateFileName.ToolTip" xml:space="preserve">
+    <value>Транслитерировать имя файла (включать для ридеров не поддерживающих русские фонты и показывающих имена файлов, а так же сортирующие по ним)</value>
+  </data>
+  <data name="checkBoxTransliterateTOC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 17</value>
+  </data>
+  <data name="checkBoxTransliterateTOC.Text" xml:space="preserve">
+    <value>Транслитерировать оглавление</value>
+  </data>
+  <data name="checkBoxTransliterateTOC.ToolTip" xml:space="preserve">
+    <value>Транслитерировать оглавление (включать для ридеров не поддерживающих русские фонты)</value>
+  </data>
+  <data name="textBoxNoSeriesFormat.ToolTip" xml:space="preserve">
+    <value>Формат:
+%bt% - Название книги из заголовка FB2
+Так же возможно использовать следующие опции  для %bt% (после точки):
+c - С заглавной буквы, l - все буквы маленькие, u -все буквы большие</value>
+  </data>
+  <data name="labelNoSeries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 13</value>
+  </data>
+  <data name="labelNoSeries.Text" xml:space="preserve">
+    <value>Формат названия без серии :</value>
+  </data>
+  <data name="labelNoSeries.ToolTip" xml:space="preserve">
+    <value>Формат в котором название книги будет показано на странице описания в случае если книга не принадлежит к серии</value>
+  </data>
+  <data name="checkBoxAddSequences.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 17</value>
+  </data>
+  <data name="checkBoxAddSequences.Text" xml:space="preserve">
+    <value>Добавлять серии</value>
+  </data>
+  <data name="checkBoxAddSequences.ToolTip" xml:space="preserve">
+    <value>Включает/выключает добавление сокращенных имен серий к имени книги</value>
+  </data>
+  <data name="textBoxNoSequenceFormat.ToolTip" xml:space="preserve">
+    <value>Формат:
+%bt% - Название книги из заголовка FB2
+%sf% - Полное название серии из заголовка FB2
+%sa% - Сокращенное название серии из заголовка FB2
+Также можно использовать следующие модификаторы для параметров %bt%, $sf% and %sa% (указанные после точки):
+c - С заглавной буквы, l - все маленькими буквами, u - все бол=[ими буквами</value>
+  </data>
+  <data name="labelNoSeqFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 78</value>
+  </data>
+  <data name="labelNoSeqFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 13</value>
+  </data>
+  <data name="labelNoSeqFormat.Text" xml:space="preserve">
+    <value>Формат серии без номера :</value>
+  </data>
+  <data name="labelNoSeqFormat.ToolTip" xml:space="preserve">
+    <value>Формат в котором название серии будет добавлено к названию книги на странице описания в случае если книга не имеет номера в серии</value>
+  </data>
+  <data name="textBoxSequenceFormat.ToolTip" xml:space="preserve">
+    <value>
+
+Формат:
+%bt% - BookTitle (название) из заголовка FB2
+%sf% - Полное название серии из заголовка FB2
+%sa% - Сокращенное название серии из заголовка FB2
+%sn% - номер книги в серии
+Также возможно использовать следующие опции для параметров  %bt%, $sf% and %sa% , если указывать их через точку  ('.'):
+c - С большой буквы , l - все буквы маленькие, u - все буквы большие
+Дополнительно, для параметра %sn% можно использовать цифровой модификатор чтобы задать 0 перед цифрой</value>
+  </data>
+  <data name="labelSeqFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 52</value>
+  </data>
+  <data name="labelSeqFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 13</value>
+  </data>
+  <data name="labelSeqFormat.Text" xml:space="preserve">
+    <value>Формат серии с номером :</value>
+  </data>
+  <data name="labelSeqFormat.ToolTip" xml:space="preserve">
+    <value>Формат в котором название серии будет добавлено к названию книги на странице описания</value>
+  </data>
+  <data name="textBoxFileAsFormat.ToolTip" xml:space="preserve">
+    <value>Формат:
+%f% - Имя автора из заголовка FB2
+%m% - Отчество автора из заголовка FB2
+%l% - Фамилия автора из заголовка FB2
+%n% - Псевдоним автора из заголовка FB2
+Так же можно использовать дополнительные опции (после точки) для параметров %f%, %m%, %l% and %n%:
+c - С Заглавной буквы, l - все буквы маленькие, u - все буквы большие
+Дополнительно еще один параметр :b может быть добавлен для отображения имени в скобках</value>
+  </data>
+  <data name="labelFileAsFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 174</value>
+  </data>
+  <data name="labelFileAsFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
+  </data>
+  <data name="labelFileAsFormat.Text" xml:space="preserve">
+    <value>Формат "FileAs" :</value>
+  </data>
+  <data name="labelFileAsFormat.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelFileAsFormat.ToolTip" xml:space="preserve">
+    <value>Позволяет задать как имя автора будет выглядеть в "машинно читаемой" форме (FileAs).</value>
+  </data>
+  <data name="textBoxAuthorFormat.ToolTip" xml:space="preserve">
+    <value>Формат:
+%f% - Имя автора из заголовка FB2
+%m% - Отчество автора из заголовка FB2
+%l% - Фамилия автора из заголовка FB2
+%n% - Псевдоним автора из заголовка FB2
+Так же можно использовать дополнительные опции (после точки) для параметров %f%, %m%, %l% and %n%:
+c - С Заглавной буквы, l - все буквы маленькие, u - все буквы большие
+Дополнительно еще один параметр :b может быть добавлен для отображения имени в скобках</value>
+  </data>
+  <data name="labelAuthorFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 148</value>
+  </data>
+  <data name="labelAuthorFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 13</value>
+  </data>
+  <data name="labelAuthorFormat.Text" xml:space="preserve">
+    <value>Формат имени автора :</value>
+  </data>
+  <data name="labelAuthorFormat.ToolTip" xml:space="preserve">
+    <value>Формат имени автора, позволяет задать как имя автора будет выглядеть в описании</value>
+  </data>
+  <data name="comboBoxFixMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>172, 155</value>
+  </data>
+  <data name="labelFixMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 158</value>
+  </data>
+  <data name="labelFixMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 13</value>
+  </data>
+  <data name="labelFixMode.Text" xml:space="preserve">
+    <value>Режим коррекции FB2 :</value>
+  </data>
+  <data name="checkBoxSkipAboutPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 17</value>
+  </data>
+  <data name="checkBoxSkipAboutPage.Text" xml:space="preserve">
+    <value>Не включать страницу описания</value>
+  </data>
+  <data name="checkBoxSkipAboutPage.ToolTip" xml:space="preserve">
+    <value>Если включено, то страница описания (About) не будет генерироваться</value>
+  </data>
+  <data name="checkBoxCapitalize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
+  </data>
+  <data name="checkBoxCapitalize.Text" xml:space="preserve">
+    <value>Буквица</value>
+  </data>
+  <data name="checkBoxCapitalize.ToolTip" xml:space="preserve">
+    <value>Если включено, то первая буква каждой главы будет показана крупно (буквицей)</value>
+  </data>
+  <data name="checkBoxEmbedStyles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 17</value>
+  </data>
+  <data name="checkBoxEmbedStyles.Text" xml:space="preserve">
+    <value>Встроить стили</value>
+  </data>
+  <data name="checkBoxEmbedStyles.ToolTip" xml:space="preserve">
+    <value>Включает режим при котором CSS стили "встраиваются" в xHTML файлы
+Данная опция предназначена для некоторых проблематичных ридеров.</value>
+  </data>
+  <data name="checkBoxFlatStructure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 17</value>
+  </data>
+  <data name="checkBoxFlatStructure.Text" xml:space="preserve">
+    <value>"Плоская" структура</value>
+  </data>
+  <data name="checkBoxFlatStructure.ToolTip" xml:space="preserve">
+    <value>Включает режим при котором конечные ePub файлы имеют "плоскую" внутреннюю структуру
+то есть не имеют поддиректорий внутри файла
+Необходимо только на некоторых некорректно работающих ридерах</value>
+  </data>
+  <data name="checkBoxConvertAlphaPNG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 17</value>
+  </data>
+  <data name="checkBoxConvertAlphaPNG.Text" xml:space="preserve">
+    <value>Конвертировать PNG с прозрачностью</value>
+  </data>
+  <data name="checkBoxConvertAlphaPNG.ToolTip" xml:space="preserve">
+    <value>Включает конвертирование PNG файлов с прозрачностью в 32-х битные
+Увеличивает размер файла, но решает проблему для ридеров неспособных отображать PNG файлы с прозрачностью
+(вроде Sony, ADE и так далее)</value>
+  </data>
+  <data name="checkBoxFb2Info.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 17</value>
+  </data>
+  <data name="checkBoxFb2Info.Text" xml:space="preserve">
+    <value>Добавлять FB2 информацию</value>
+  </data>
+  <data name="checkBoxFb2Info.ToolTip" xml:space="preserve">
+    <value>Включает добавление в ePub дополнительной информации из заголовка FB2 (автор файла, использованные программы и т.д.)</value>
+  </data>
+  <data name="buttonSave.Text" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="buttonSave.ToolTip" xml:space="preserve">
+    <value>Сохранить изменения настроек</value>
+  </data>
+  <data name="buttonReset.Text" xml:space="preserve">
+    <value>Сброс</value>
+  </data>
+  <data name="buttonReset.ToolTip" xml:space="preserve">
+    <value>Отменить несохраненные изменения настроек</value>
+  </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="buttonCancel.ToolTip" xml:space="preserve">
+    <value>Закрыть без сохранения</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Настройки Конвертера</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value>Включает/выключает добавление сокращенных имен серий к имени книги</value>
+  </data>
+</root>
