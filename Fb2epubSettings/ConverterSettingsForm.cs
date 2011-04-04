@@ -66,6 +66,7 @@ namespace Fb2epubSettings
             textBoxFileAsFormat.Text = Fb2Epub.Default.FileAsFormat;
             textBoxNoSequenceFormat.Text = Fb2Epub.Default.NoSequenceFormat;
             textBoxSequenceFormat.Text = Fb2Epub.Default.SequenceFormat;
+            textBoxNoSeriesFormat.Text = Fb2Epub.Default.NoSeriesFormat;
             checkBoxAddSequences.Checked = Fb2Epub.Default.AddSequences;
             checkBoxFb2Info.Checked = Fb2Epub.Default.FB2Info;
             checkBoxConvertAlphaPNG.Checked = Fb2Epub.Default.ConvertAlphaPNG;
@@ -74,15 +75,26 @@ namespace Fb2epubSettings
             checkBoxCapitalize.Checked = Fb2Epub.Default.Capitalize;
             checkBoxSkipAboutPage.Checked = Fb2Epub.Default.SkipAboutPage;
             LoadFixMode();
+            UpdateSequencesGroup();
+        }
+
+        private void UpdateSequencesGroup()
+        {
+            labelSeqFormat.Enabled = checkBoxAddSequences.Checked;
+            labelNoSeqFormat.Enabled = checkBoxAddSequences.Checked;
+            labelNoSeries.Enabled = checkBoxAddSequences.Checked;
+            textBoxSequenceFormat.Enabled = checkBoxAddSequences.Checked;
+            textBoxNoSequenceFormat.Enabled = checkBoxAddSequences.Checked;
+            textBoxNoSeriesFormat.Enabled = checkBoxAddSequences.Checked;
         }
 
         private void LoadFixMode()
         {
             comboBoxFixMode.Items.Clear();
-            comboBoxFixMode.Items.Add("1");
-            comboBoxFixMode.Items.Add("2");
-            comboBoxFixMode.Items.Add("3");
-            comboBoxFixMode.SelectedItem = Fb2Epub.Default.FixMode.ToString();
+            comboBoxFixMode.Items.Add("None");
+            comboBoxFixMode.Items.Add("Internal");
+            comboBoxFixMode.Items.Add("Fb2Fix");
+            comboBoxFixMode.SelectedIndex = Fb2Epub.Default.FixMode;
         }
 
         private void checkBoxTransliterateTOC_CheckedChanged(object sender, EventArgs e)
@@ -123,6 +135,7 @@ namespace Fb2epubSettings
         private void checkBoxAddSequences_CheckedChanged(object sender, EventArgs e)
         {
             Fb2Epub.Default.AddSequences = checkBoxAddSequences.Checked;
+            UpdateSequencesGroup();
         }
 
         private void checkBoxFb2Info_CheckedChanged(object sender, EventArgs e)
@@ -157,7 +170,12 @@ namespace Fb2epubSettings
 
         private void comboBoxFixMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Fb2Epub.Default.FixMode = int.Parse((string)comboBoxFixMode.SelectedItem);
+            Fb2Epub.Default.FixMode = comboBoxFixMode.SelectedIndex;
+        }
+
+        private void textBoxNoSeriesFormat_TextChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.NoSeriesFormat = textBoxNoSeriesFormat.Text;
         }
     }
 }

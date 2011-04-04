@@ -117,4 +117,81 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="toolTipControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="toolTipControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="toolTipControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="toolTipControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="checkBoxEmbedStyles.ToolTip" xml:space="preserve">
+    <value>Invokes "embeding styles mode" that, instead of adding CCS files to the ePub and referencing them, in xHTML injects the relevant style code directly into the xHTML files (enable for some buggy readers)</value>
+  </data>
+  <metadata name="toolTipControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="toolTipControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="textBoxNoSequenceFormat.ToolTip" xml:space="preserve">
+    <value>Format:
+%bt% - BookTitle from FB2 header
+%sf% - Serie full name from FB2 header
+%sa% - Serie abbviarated name from FB2 header
+Also following modifiers specified after '.' (dot) are allowed for %bt%, $sf% and %sa%:
+c - Capitalize, l - lowercase, u -UPPERCASE</value>
+  </data>
+  <metadata name="toolTipControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="textBoxSequenceFormat.ToolTip" xml:space="preserve">
+    <value>Format:
+%bt% - BookTitle from FB2 header
+%sf% - Serie full name from FB2 header
+%sa% - Serie abbviarated name from FB2 header
+%sn% - book number in the series
+Also following modifiers specified after '.' (dot) are allowed for %bt%, $sf% and %sa%:
+c - Capitalize, l - lowercase, u -UPPERCASE
+additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix of the number</value>
+  </data>
+  <metadata name="toolTipControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="textBoxFileAsFormat.ToolTip" xml:space="preserve">
+    <value>Format:
+%f% - First name from FB2 header
+%m% - Middle name from FB2 header
+%l% - last name from FB2 header
+%n% - Nick name from FB2 header
+Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:
+c - Capitalize, l - lowercase, u -UPPERCASE
+additionally another subformat :b can be added to take name in brackets</value>
+  </data>
+  <metadata name="toolTipControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="textBoxAuthorFormat.ToolTip" xml:space="preserve">
+    <value>Format:
+%f% - First name from FB2 header
+%m% - Middle name from FB2 header
+%l% - last name from FB2 header
+%n% - Nick name from FB2 header
+Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:
+c - Capitalize, l - lowercase, u -UPPERCASE
+additionally another subformat :b can be added to take name in brackets</value>
+  </data>
+  <metadata name="toolTipControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="toolTipControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="toolTipControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>
