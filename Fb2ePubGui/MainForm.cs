@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 using Fb2ePubConverter;
 using Fb2ePubGui.Properties;
@@ -13,12 +15,23 @@ namespace Fb2ePubGui
     public partial class FormGUI : Form
     {
         private readonly Fb2EPubConverterEngine _converter = new Fb2EPubConverterEngine{ ResourcesPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)};
+        private readonly CultureInfo _russianCulture = new CultureInfo("ru");
+        private readonly CultureInfo _englishCulture = new CultureInfo("en");
+        private readonly CultureInfo _autoCulture = Thread.CurrentThread.CurrentUICulture;
 
         delegate void OnButtonPressedCallback(object sender, EventArgs e);
 
         public FormGUI()
         {
+            SetLanguage((LanguageSetting)Fb2EpubGUI.Default.Language);
             InitializeComponent();
+        }
+
+        private enum LanguageSetting
+        {
+            Auto = 0,
+            English = 1,
+            Russian = 2,
         }
 
 
@@ -162,7 +175,8 @@ namespace Fb2ePubGui
         {
             comboBoxDestination.Items.Clear();
             LoadPaths();
-            comboBoxDestination.SelectedIndex = 0;           
+            comboBoxDestination.SelectedIndex = 0;
+            SetLanguageUI((LanguageSetting)Fb2EpubGUI.Default.Language);
         }
 
         private void LoadPaths()
@@ -181,5 +195,77 @@ namespace Fb2ePubGui
             Process.Start(comboBoxDestination.Text);
         }
 
+        private void russianToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetLanguage(LanguageSetting.Russian);
+            Fb2EpubGUI.Default.Save();
+            Close();
+            Application.Restart();
+        }
+
+        private void autoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetLanguage(LanguageSetting.Auto);
+            Fb2EpubGUI.Default.Save();
+            Close();
+            Application.Restart();
+        }
+
+        private void englishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetLanguage(LanguageSetting.English);
+            Fb2EpubGUI.Default.Save();
+            Close();
+            Application.Restart();
+        }
+
+        private void SetLanguage(LanguageSetting languageSetting)
+        {
+            Fb2EpubGUI.Default.Language = (int)languageSetting;
+            switch (languageSetting)
+            {
+                case LanguageSetting.Auto:
+                    Thread.CurrentThread.CurrentUICulture = _autoCulture;
+                    break;
+                case LanguageSetting.English:
+                    Thread.CurrentThread.CurrentUICulture = _englishCulture;
+                    break;
+                case LanguageSetting.Russian:
+                    Thread.CurrentThread.CurrentUICulture = _russianCulture;
+                    break;
+            }
+            SetLanguageUI(languageSetting);
+        }
+
+        private void SetLanguageUI(LanguageSetting languageSetting)
+        {
+            if (autoToolStripMenuItem == null)
+            {
+                return;
+            }
+            autoToolStripMenuItem.Checked = false;
+            if (englishToolStripMenuItem == null)
+            {
+                return;
+            }
+            englishToolStripMenuItem.Checked = false;
+            if (russianToolStripMenuItem == null)
+            {
+                return;
+            }
+            russianToolStripMenuItem.Checked = false;
+            switch (languageSetting)
+            {
+                case LanguageSetting.Auto:
+                    autoToolStripMenuItem.Checked = true;
+                    break;
+                case LanguageSetting.English:
+                    englishToolStripMenuItem.Checked = true;
+                    break;
+                case LanguageSetting.Russian:
+                    russianToolStripMenuItem.Checked = true;
+                    break;
+            }
+        }
     }
 }

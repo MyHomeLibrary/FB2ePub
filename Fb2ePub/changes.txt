@@ -1,4 +1,9 @@
-﻿1.0.43
+﻿1.0.44
++ Added ability for FB2ePubGUI to switch languages from menu
+* Fixed condition that prevented x86 installer to run on x86 systems :)
+
+
+1.0.43
 + Added ePub icons to contect menu
 + Added new parameter "/settings" to bring up converter setup window
 + Added first initial implementation of Fb2ePubGUI application (Drag'n'Drop) GUI for converter

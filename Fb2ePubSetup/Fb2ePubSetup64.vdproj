@@ -1668,6 +1668,13 @@
         }
         "LaunchCondition"
         {
+            "{836E08B8-0285-4809-BA42-01DB6754A45D}:_38266A982B824DEDAA81DC2251CA081B"
+            {
+            "Name" = "8:Version check"
+            "Condition" = "8:Msix64"
+            "Message" = "8:This installation is for x64 version only. Use correct installer from http://www.fb2epub.net"
+            "InstallUrl" = "8:"
+            }
         }
         "Locator"
         {
@@ -1682,7 +1689,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Fb2ePub"
         "ProductCode" = "8:{6EF7E35F-BF1B-4C7F-8F2C-1559A52FEDFA}"
-        "PackageCode" = "8:{98C8E254-5682-45A0-8FE3-536A9C676DEE}"
+        "PackageCode" = "8:{6BC4295E-0E8E-4F4C-8917-C20F3BE7B4DA}"
         "UpgradeCode" = "8:{92997D07-961F-492E-90D5-E761F4095BE2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
