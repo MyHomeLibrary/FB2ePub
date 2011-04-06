@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGUI));
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +43,7 @@
             this.comboBoxDestination = new System.Windows.Forms.ComboBox();
             this.buttonConvert = new System.Windows.Forms.Button();
             this.buttonShowFolder = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.mainMenuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -53,6 +55,7 @@
             this.fileToolStripMenuItem,
             this.languageToolStripMenuItem});
             this.mainMenuStrip.Name = "mainMenuStrip";
+            this.toolTip1.SetToolTip(this.mainMenuStrip, resources.GetString("mainMenuStrip.ToolTip"));
             // 
             // fileToolStripMenuItem
             // 
@@ -105,6 +108,7 @@
             // 
             resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
+            this.toolTip1.SetToolTip(this.statusStrip1, resources.GetString("statusStrip1.ToolTip"));
             // 
             // tableLayoutPanel1
             // 
@@ -113,6 +117,7 @@
             this.tableLayoutPanel1.Controls.Add(this.buttonConvert, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.buttonShowFolder, 1, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.toolTip1.SetToolTip(this.tableLayoutPanel1, resources.GetString("tableLayoutPanel1.ToolTip"));
             // 
             // comboBoxDestination
             // 
@@ -120,6 +125,7 @@
             this.comboBoxDestination.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDestination.FormattingEnabled = true;
             this.comboBoxDestination.Name = "comboBoxDestination";
+            this.toolTip1.SetToolTip(this.comboBoxDestination, resources.GetString("comboBoxDestination.ToolTip"));
             // 
             // buttonConvert
             // 
@@ -127,6 +133,7 @@
             this.buttonConvert.AllowDrop = true;
             this.tableLayoutPanel1.SetColumnSpan(this.buttonConvert, 2);
             this.buttonConvert.Name = "buttonConvert";
+            this.toolTip1.SetToolTip(this.buttonConvert, resources.GetString("buttonConvert.ToolTip"));
             this.buttonConvert.UseVisualStyleBackColor = true;
             this.buttonConvert.Click += new System.EventHandler(this.buttonConvert_Click);
             this.buttonConvert.DragDrop += new System.Windows.Forms.DragEventHandler(this.buttonConvert_DragDrop);
@@ -136,6 +143,7 @@
             // 
             resources.ApplyResources(this.buttonShowFolder, "buttonShowFolder");
             this.buttonShowFolder.Name = "buttonShowFolder";
+            this.toolTip1.SetToolTip(this.buttonShowFolder, resources.GetString("buttonShowFolder.ToolTip"));
             this.buttonShowFolder.UseVisualStyleBackColor = true;
             this.buttonShowFolder.Click += new System.EventHandler(this.buttonShowFolder_Click);
             // 
@@ -148,6 +156,7 @@
             this.Controls.Add(this.mainMenuStrip);
             this.MainMenuStrip = this.mainMenuStrip;
             this.Name = "FormGUI";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.TopMost = true;
             this.Load += new System.EventHandler(this.FormGuiLoad);
             this.mainMenuStrip.ResumeLayout(false);
@@ -173,6 +182,7 @@
         private System.Windows.Forms.ToolStripMenuItem autoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem russianToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

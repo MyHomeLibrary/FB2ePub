@@ -121,11 +121,14 @@
   <data name="checkBoxAddSequences.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 17</value>
   </data>
-  <data name="checkBoxTransliterateAdditional.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 75</value>
+  <data name="checkBoxEmbedStyles.Text" xml:space="preserve">
+    <value>Embed Styles</value>
   </data>
   <data name="checkBoxAddSequences.ToolTip" xml:space="preserve">
     <value>Enable/disable addition of abbreviated secuence names to the book title name</value>
+  </data>
+  <data name="&gt;&gt;checkBoxTransliterateFileName.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -142,9 +145,6 @@
   </data>
   <data name="&gt;&gt;labelNoSeqFormat.Name" xml:space="preserve">
     <value>labelNoSeqFormat</value>
-  </data>
-  <data name="checkBoxEmbedStyles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 80</value>
   </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
@@ -189,11 +189,17 @@
   <data name="&gt;&gt;checkBoxTransliterateTOC.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="&gt;&gt;labelAuthorFormat.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="groupBoxSequences.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 7</value>
   </data>
   <data name="&gt;&gt;labelFixMode.Parent" xml:space="preserve">
     <value>tabPageDifferent</value>
+  </data>
+  <data name="&gt;&gt;labelNoSeries.Name" xml:space="preserve">
+    <value>labelNoSeries</value>
   </data>
   <data name="groupBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -243,8 +249,8 @@
   <data name="labelSeqFormat.Location" type="System.Drawing.Point, System.Drawing">
     <value>24, 52</value>
   </data>
-  <data name="checkBoxCapitalize.Text" xml:space="preserve">
-    <value>Capitalize Drop</value>
+  <data name="&gt;&gt;checkBoxFlatStructure.Name" xml:space="preserve">
+    <value>checkBoxFlatStructure</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -315,8 +321,8 @@
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="&gt;&gt;textBoxSequenceFormat.Name" xml:space="preserve">
-    <value>textBoxSequenceFormat</value>
+  <data name="checkBoxTransliterateAdditional.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 75</value>
   </data>
   <data name="labelSeqFormat.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -352,15 +358,8 @@ Also following modifiers specified after '.' (dot) are allowed for %bt%, $sf% an
 c - Capitalize, l - lowercase, u -UPPERCASE
 additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix of the number</value>
   </data>
-  <data name="textBoxFileAsFormat.ToolTip" xml:space="preserve">
-    <value>Format:
-%f% - First name from FB2 header
-%m% - Middle name from FB2 header
-%l% - last name from FB2 header
-%n% - Nick name from FB2 header
-Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:
-c - Capitalize, l - lowercase, u -UPPERCASE
-additionally another subformat :b can be added to take name in brackets</value>
+  <data name="&gt;&gt;textBoxSequenceFormat.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;groupBoxSequences.Parent" xml:space="preserve">
     <value>tabPageSequences</value>
@@ -371,8 +370,8 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="labelSeqFormat.Text" xml:space="preserve">
     <value>SequenceFormat :</value>
   </data>
-  <data name="&gt;&gt;checkBoxTransliterateFileName.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;checkBoxEmbedStyles.Parent" xml:space="preserve">
+    <value>tabPageDifferent</value>
   </data>
   <data name="&gt;&gt;tabControlSettings.Parent" xml:space="preserve">
     <value>$this</value>
@@ -521,8 +520,15 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>tabPageTransliteration</value>
   </data>
-  <data name="tabPageSequences.Text" xml:space="preserve">
-    <value>Sequences</value>
+  <data name="textBoxFileAsFormat.ToolTip" xml:space="preserve">
+    <value>Format:
+%f% - First name from FB2 header
+%m% - Middle name from FB2 header
+%l% - last name from FB2 header
+%n% - Nick name from FB2 header
+Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:
+c - Capitalize, l - lowercase, u -UPPERCASE
+additionally another subformat :b can be added to take name in brackets</value>
   </data>
   <data name="checkBoxFb2Info.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -618,6 +624,9 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;labelNoSeqFormat.Parent" xml:space="preserve">
     <value>groupBoxSequences</value>
   </data>
+  <data name="&gt;&gt;textBoxSequenceFormat.Name" xml:space="preserve">
+    <value>textBoxSequenceFormat</value>
+  </data>
   <data name="textBoxNoSeriesFormat.ToolTip" xml:space="preserve">
     <value>Format:
 %bt% - BookTitle from FB2 header
@@ -662,6 +671,9 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   </data>
   <data name="checkBoxSkipAboutPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 17</value>
+  </data>
+  <data name="checkBoxConvertAlphaPNG.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tabPageDifferent.Location" type="System.Drawing.Point, System.Drawing">
     <value>42, 4</value>
@@ -711,9 +723,6 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="checkBoxCapitalize.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 104</value>
   </data>
-  <data name="&gt;&gt;checkBoxEmbedStyles.Parent" xml:space="preserve">
-    <value>tabPageDifferent</value>
-  </data>
   <data name="&gt;&gt;tabPageSequences.Parent" xml:space="preserve">
     <value>tabControlSettings</value>
   </data>
@@ -745,9 +754,6 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   </data>
   <data name="&gt;&gt;checkBoxAddSequences.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="tabPageSequences.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 4</value>
   </data>
   <data name="tabPageDifferent.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -905,14 +911,11 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="&gt;&gt;textBoxAuthorFormat.Name" xml:space="preserve">
     <value>textBoxAuthorFormat</value>
   </data>
-  <data name="&gt;&gt;labelNoSeries.Name" xml:space="preserve">
-    <value>labelNoSeries</value>
+  <data name="tabPageSequences.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 4</value>
   </data>
-  <data name="&gt;&gt;labelAuthorFormat.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;checkBoxFlatStructure.Name" xml:space="preserve">
-    <value>checkBoxFlatStructure</value>
+  <data name="&gt;&gt;labelFileAsFormat.Name" xml:space="preserve">
+    <value>labelFileAsFormat</value>
   </data>
   <data name="&gt;&gt;tabPageTransliteration.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -964,9 +967,6 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   </data>
   <data name="&gt;&gt;labelNoSeries.Parent" xml:space="preserve">
     <value>groupBoxSequences</value>
-  </data>
-  <data name="checkBoxEmbedStyles.Text" xml:space="preserve">
-    <value>Embed Styles</value>
   </data>
   <data name="checkBoxTransliterateAdditional.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 17</value>
@@ -1028,11 +1028,8 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="&gt;&gt;textBoxNoSeriesFormat.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxSequenceFormat.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="checkBoxConvertAlphaPNG.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="tabPageFonts.Text" xml:space="preserve">
+    <value>Fonts</value>
   </data>
   <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1069,8 +1066,8 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="&gt;&gt;labelNoSeries.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tabPageFonts.Text" xml:space="preserve">
-    <value>Fonts</value>
+  <data name="checkBoxCapitalize.Text" xml:space="preserve">
+    <value>Capitalize Drop</value>
   </data>
   <data name="&gt;&gt;buttonSave.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1084,6 +1081,9 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="tabPageFonts.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="tabPageSequences.Text" xml:space="preserve">
+    <value>Sequences</value>
+  </data>
   <data name="&gt;&gt;checkBoxTransliterateTOC.Name" xml:space="preserve">
     <value>checkBoxTransliterateTOC</value>
   </data>
@@ -1093,8 +1093,8 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="&gt;&gt;textBoxSequenceFormat.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelFileAsFormat.Name" xml:space="preserve">
-    <value>labelFileAsFormat</value>
+  <data name="checkBoxEmbedStyles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 80</value>
   </data>
   <data name="tabControlSettings.ToolTip" xml:space="preserve">
     <value />
@@ -1117,9 +1117,6 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="&gt;&gt;textBoxFileAsFormat.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ru</value>
-  </metadata>
   <metadata name="toolTipControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
