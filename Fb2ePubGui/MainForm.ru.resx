@@ -118,6 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Файл</value>
+  </data>
+  <data name="languageToolStripMenuItem.Text" xml:space="preserve">
+    <value>Язык/Language</value>
+  </data>
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 22</value>
   </data>
@@ -130,20 +139,20 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>В&amp;ыход</value>
   </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Файл</value>
-  </data>
-  <data name="languageToolStripMenuItem.Text" xml:space="preserve">
-    <value>Язык/Language</value>
+  <data name="comboBoxDestination.ToolTip" xml:space="preserve">
+    <value>Фолдер куда записываются файлы после конверции</value>
   </data>
   <data name="buttonConvert.Text" xml:space="preserve">
     <value>Нажмите или тащите сюда</value>
   </data>
+  <data name="buttonConvert.ToolTip" xml:space="preserve">
+    <value>Перетащите файлы которые вы хотите конвертировать сюда или нажмите сюда чтобы получить диалог выбора файлов</value>
+  </data>
   <data name="buttonShowFolder.Text" xml:space="preserve">
     <value>Открыть&gt;&gt;</value>
+  </data>
+  <data name="buttonShowFolder.ToolTip" xml:space="preserve">
+    <value>Открывает окно фолдера куда "складываются" файлы после конверции</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
