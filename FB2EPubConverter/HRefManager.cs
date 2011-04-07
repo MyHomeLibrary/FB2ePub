@@ -124,7 +124,7 @@ namespace FB2EPubConverter
                 // The assumption here that since the text located in FB2 main body we should not have same ID used more than once
                 // otherwise we would not know how (and where to) go back
                 Logger.Log.InfoFormat("item with ID {0} already defined, ignoring to avoid inconsistences", newid);
-                return newid;
+                return string.Empty;
             }
             ids.Add(newid, item);
             return newid;
