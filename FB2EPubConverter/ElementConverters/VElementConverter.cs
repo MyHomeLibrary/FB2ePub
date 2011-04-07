@@ -25,7 +25,7 @@ namespace FB2EPubConverter.ElementConverters
 
             SetClassType(item);
 
-            item.ID.Value = Settings.ReferencesManager.AddIdUsed(paragraphItem.ID, item);
+            //item.ID.Value = Settings.ReferencesManager.AddIdUsed(paragraphItem.ID, item);
 
             return item;
         }
