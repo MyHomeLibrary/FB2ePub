@@ -1,4 +1,7 @@
-﻿1.0.44
+﻿1.0.45
+* Fixed problem when ID of "v" section of the poem was lost in conversion preverting internal linking to it
+
+1.0.44
 + Added ability for FB2ePubGUI to switch languages from menu
 * Fixed condition that prevented x86 installer to run on x86 systems :)
 
