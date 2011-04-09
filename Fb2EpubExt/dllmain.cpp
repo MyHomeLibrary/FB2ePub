@@ -5,6 +5,7 @@
 #include "Fb2EpubExt_i.h"
 #include "dllmain.h"
 #include <iostream>
+#include "Shlobj.h"
 
 
 
@@ -17,7 +18,7 @@ const LPTSTR  FB2EPUB_SECTION = _T("FB2EPUB");
 const LPTSTR  TARGETS_SECTION = _T("Targets");
 const LPTSTR  FILTERS_SECTION = _T("Filter");
 
-#define PATH_SIZE (1024+32)
+#define PATH_SIZE (1024*2+32)
 
 CFb2EpubExtModule _AtlModule;
 
@@ -57,18 +58,43 @@ void CFb2EpubExtModule::LoadINI()
 
 	TCHAR iniFile[PATH_SIZE];
 	::ZeroMemory(iniFile,sizeof(TCHAR)*PATH_SIZE);
-	lstrcpy(iniFile,GetPathWithoutFileName((LPTSTR)m_DLLPath.c_str()));
-	lstrcat(iniFile,c_tzINIFileName);
 
-	if ( PathFileExists(iniFile) ) // First check for INI in working directory
+	bool bDetected = false;
+	if ( SHGetSpecialFolderPath(NULL,iniFile,CSIDL_APPDATA,FALSE))
 	{
-		m_INIPath = iniFile;
-		clog << "Located INI file at: " << W2A(m_INIPath.c_str()) << endl;
-		bINIFound = TRUE;
+		lstrcat(iniFile,L"\\FB2ePub\\");
+		lstrcat(iniFile,c_tzINIFileName);
+		if ( PathFileExists(iniFile) )
+		{
+			m_INIPath = iniFile;
+			clog << "Located INI file in User Data folder at: " << W2A(m_INIPath.c_str()) << endl;
+			bDetected = true;
+		}
+		else
+		{
+			clog << "NOT Located INI file in User Data folder at: " << W2A(m_INIPath.c_str()) << endl;
+		}
+
 	}
-	else 
+	else
 	{
-		clog << "Unable to locate INI file " << endl;
+		clog << "Error getting special folder"  << endl;
+	}
+	if ( !bDetected)
+	{
+		lstrcpy(iniFile,GetPathWithoutFileName((LPTSTR)m_DLLPath.c_str()));
+		lstrcat(iniFile,c_tzINIFileName);
+
+		if ( PathFileExists(iniFile) ) // First check for INI in working directory
+		{
+			m_INIPath = iniFile;
+			clog << "Located INI file at: " << W2A(m_INIPath.c_str()) << endl;
+			bINIFound = TRUE;
+		}
+		else 
+		{
+			clog << "Unable to locate INI file " << endl;
+		}
 	}
 
 	DWORD dwRes = 0;

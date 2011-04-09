@@ -63,7 +63,6 @@ void CProgressDialog::DoWork()
 		{
 			clog << "OutFolder:" << W2A(OutFileFolder) << endl;
 			TCHAR lastChar = OutFileFolder[outLength-1];
-			clog << "Last char:" << lastChar << endl;
 			if ( lastChar != '\\' || lastChar != '/' )
 			{
 				bAddSlash = true;
