@@ -165,6 +165,12 @@
   <ItemGroup>
     <Content Include="Registry-file.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FolderSettingsHelper\FolderSettingsHelper.csproj">
+      <Project>{97C916FF-6271-44F8-9A20-6E0A0389524B}</Project>
+      <Name>FolderSettingsHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
