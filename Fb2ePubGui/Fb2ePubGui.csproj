@@ -115,6 +115,10 @@
       <Project>{BB87C009-1337-43FF-ADF6-6E7861AA9343}</Project>
       <Name>Fb2epubSettings</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FolderSettingsHelper\FolderSettingsHelper.csproj">
+      <Project>{97C916FF-6271-44F8-9A20-6E0A0389524B}</Project>
+      <Name>FolderSettingsHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

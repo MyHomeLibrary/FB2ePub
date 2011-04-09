@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
+using FolderSettingsHelper;
 
 // Configure log4net using the .config file
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
@@ -20,7 +21,7 @@ namespace Fb2ePubGui
         [STAThread]
         static void Main()
         {
-            string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Lord KiRon\\");
+            string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(), "Lord KiRon\\");
             GlobalContext.Properties["LogName"] = logPath;
             log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
 

@@ -8,6 +8,7 @@ using ProcessStartInfo=System.Diagnostics.ProcessStartInfo;
 using System.Diagnostics;
 using System.Windows.Forms;
 using Fb2epubSettings;
+using FolderSettingsHelper;
 
 
 // Configure log4net using the .config file
@@ -41,7 +42,7 @@ namespace Fb2ePub
 
         static void Main(string[] args)
         {
-            string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Lord KiRon\\");
+            string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(),"Lord KiRon\\");
             GlobalContext.Properties["LogName"] = logPath;
             log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
             // Log an info level message

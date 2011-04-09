@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using log4net;
+using FolderSettingsHelper;
 
 // Configure log4net using the .config file
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
@@ -20,7 +21,7 @@ namespace RegisterFB2EPub
         [STAThread]
         static void Main(string[] args)
         {
-            GlobalContext.Properties["LogName"] = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Lord KiRon\\");
+            GlobalContext.Properties["LogName"] = Path.Combine(FolderLocator.GetLocalAppDataFolder(), "Lord KiRon\\");
             Log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
             // Log an info level message
             Log.Info("FB2EPUB shell extension registration utility by Lord KiRon");
