@@ -189,6 +189,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8F0B479156934BA9990E923D32170E00"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_91AB536D59C8456D8DC070E1EDD04EB7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1026,6 +1032,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F0B479156934BA9990E923D32170E00"
+            {
+            "SourcePath" = "8:..\\Fb2EpubExt\\FB2EPUBExt.INI"
+            "TargetName" = "8:FB2EPUBExt.INI"
+            "Tag" = "8:"
+            "Folder" = "8:_CB4DA2FCAB58453785CB039E112630D1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_91AB536D59C8456D8DC070E1EDD04EB7"
             {
             "SourcePath" = "8:..\\Fb2ePub\\Fonts\\LiberationSans-Bold.ttf"
@@ -1398,7 +1424,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FB2EPubConverter, Version=1.0.27.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:FB2EPubConverter, Version=1.0.28.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_F438BD6F9821194D14FEB58879FBC48D"
@@ -1550,6 +1576,28 @@
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
                     "Property" = "8:_10188D6D24E14C07AE958F7073FA6AB2"
+                        "Folders"
+                        {
+                        }
+                    }
+                }
+            }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_9F6034AE344D4C3D8CD12CFBAB82BF29"
+            {
+            "Name" = "8:#1915"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:AppDataFolder"
+                "Folders"
+                {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_CB4DA2FCAB58453785CB039E112630D1"
+                    {
+                    "Name" = "8:FB2ePub"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_7E5D9D0DD30E497EA46B41C0395EBFB0"
                         "Folders"
                         {
                         }
@@ -2499,7 +2547,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7803B2ACDE654CDFBA8EA855D8F169BB"
             {
-            "SourcePath" = "8:..\\Fb2ePubGui\\obj\\Release\\Fb2ePubGui.exe"
+            "SourcePath" = "8:..\\Fb2ePubGui\\obj\\Debug\\Fb2ePubGui.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"
@@ -2555,7 +2603,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_867FC02021DA47E79D0FC87ED4E7EDFF"
             {
-            "SourcePath" = "8:..\\RegisterFB2EPub\\obj\\Release\\RegisterFB2EPub.exe"
+            "SourcePath" = "8:..\\RegisterFB2EPub\\obj\\Debug\\RegisterFB2EPub.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"
@@ -2583,7 +2631,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_AE27608A012A4FB3B34D367CDEBAE0F4"
             {
-            "SourcePath" = "8:..\\Fb2ePub\\obj\\Release\\Fb2ePub.exe"
+            "SourcePath" = "8:..\\Fb2ePub\\obj\\Debug\\Fb2ePub.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"

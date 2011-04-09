@@ -41,15 +41,7 @@ namespace Fb2ePub
 
         static void Main(string[] args)
         {
-            string logPath = Application.LocalUserAppDataPath;
-            if (string.IsNullOrEmpty(logPath))
-            {
-                logPath = Application.UserAppDataPath;
-                if (string.IsNullOrEmpty(logPath))
-                {
-                    logPath = "logs";
-                }
-            }
+            string logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Lord KiRon\\");
             GlobalContext.Properties["LogName"] = logPath;
             log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
             // Log an info level message

@@ -1,5 +1,6 @@
 ﻿1.0.45
 * Fixed problem when ID of "v" section of the poem was lost in conversion preverting internal linking to it
+* Changed default LOG folder to "LocalApplicationData" usualy C:\Users\<user name>\AppData\Local
 
 1.0.44
 + Added ability for FB2ePubGUI to switch languages from menu

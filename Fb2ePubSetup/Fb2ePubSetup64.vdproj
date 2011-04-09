@@ -93,6 +93,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_32246103880641B4BB702ABFA2F08DA9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4B64F0FADE4DE549A74EA07010678D82"
         "OwnerKey" = "8:_BC3CA77F3169672F1A0155D1E6C6B379"
         "MsmSig" = "8:_UNDEFINED"
@@ -148,12 +154,6 @@
         "Entry"
         {
         "MsmKey" = "8:_5B2D86580A5E42C5A93476B19DF1E0FC"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6170866FA80C4DE796D66D364A8AAECB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -856,6 +856,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_32246103880641B4BB702ABFA2F08DA9"
+            {
+            "SourcePath" = "8:..\\Fb2EpubExt\\FB2EPUBExt.INI"
+            "TargetName" = "8:FB2EPUBExt.INI"
+            "Tag" = "8:"
+            "Folder" = "8:_731018A6CB284569972BC6D350E304D9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4B64F0FADE4DE549A74EA07010678D82"
             {
             "AssemblyRegister" = "3:1"
@@ -944,26 +964,6 @@
             "TargetName" = "8:LiberationSans-Regular.ttf"
             "Tag" = "8:"
             "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6170866FA80C4DE796D66D364A8AAECB"
-            {
-            "SourcePath" = "8:..\\Fb2EpubExt\\FB2EPUBExt.INI"
-            "TargetName" = "8:FB2EPUBExt.INI"
-            "Tag" = "8:"
-            "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1430,7 +1430,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FB2EPubConverter, Version=1.0.27.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:FB2EPubConverter, Version=1.0.28.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_F438BD6F9821194D14FEB58879FBC48D"
@@ -1632,6 +1632,28 @@
                     }
                 }
             }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_C30E9DE87D334926BC54727D81F9147B"
+            {
+            "Name" = "8:#1915"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:AppDataFolder"
+                "Folders"
+                {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_731018A6CB284569972BC6D350E304D9"
+                    {
+                    "Name" = "8:FB2ePub"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_32D33CF1760D46B1B2E8F6F23FB42AB6"
+                        "Folders"
+                        {
+                        }
+                    }
+                }
+            }
             "{1525181F-901A-416C-8A58-119130FE478E}:_E9439ACDAD9C44EA83D573C59282CC11"
             {
             "Name" = "8:#1919"
@@ -1689,7 +1711,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Fb2ePub"
         "ProductCode" = "8:{6EF7E35F-BF1B-4C7F-8F2C-1559A52FEDFA}"
-        "PackageCode" = "8:{9FE6678F-A076-404B-9769-0CE55273C90E}"
+        "PackageCode" = "8:{C84EE0DB-D2BC-4562-8311-82779128C691}"
         "UpgradeCode" = "8:{92997D07-961F-492E-90D5-E761F4095BE2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
