@@ -157,10 +157,47 @@ BOOL CFb2EpubExtModule::FindConverterApp(LPTSTR outFile,unsigned int size)
 
 void CFb2EpubExtModule::StartLog(BOOL bOverwrite)
 {
-	LPCTSTR szAppPath = GetPathWithoutFileName((LPTSTR)m_DLLPath.c_str());
 	TCHAR szLogPath[PATH_SIZE];
 	::ZeroMemory(szLogPath,(PATH_SIZE)*sizeof(TCHAR));
-	lstrcpy(szLogPath,szAppPath);
+	bool bPathFound = false;
+	DWORD dwResultSize = GetEnvironmentVariable(L"LOCALAPPDATA",NULL,0);
+	if (  dwResultSize != 0 )
+	{
+		TCHAR* pBuffer = new TCHAR[dwResultSize+1];
+		GetEnvironmentVariable(L"LOCALAPPDATA",pBuffer,dwResultSize);
+		lstrcpy(szLogPath,pBuffer);
+		if ( pBuffer[dwResultSize] != '\\' && pBuffer[dwResultSize] != '/' )
+		{
+			lstrcat(szLogPath,L"\\");
+		}
+		delete pBuffer;
+		lstrcat(szLogPath,L"Lord KiRon\\");
+		CreateDirectory(szLogPath,NULL);
+		bPathFound = true;
+	}
+	if (!bPathFound)
+	{
+		CRegKey key;
+		if (key.Open(HKEY_CURRENT_USER,L"Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders",KEY_READ) == ERROR_SUCCESS)
+		{
+			ULONG uChars = PATH_SIZE;
+			if ( key.QueryStringValue(L"Local AppData",szLogPath,&uChars) == ERROR_SUCCESS)
+			{
+				if ( (uChars > 0) && (szLogPath[uChars-1] != '\\') && (szLogPath[uChars-1] != '/') )
+				{
+					lstrcat(szLogPath,L"\\");
+				}
+				lstrcat(szLogPath,L"Lord KiRon\\");
+				CreateDirectory(szLogPath,NULL);
+				bPathFound = true;
+			}
+		}
+	}
+	if (bPathFound)
+	{
+		LPCTSTR szAppPath = GetPathWithoutFileName((LPTSTR)m_DLLPath.c_str());
+		lstrcpy(szLogPath,szAppPath);
+	}
 	lstrcat(szLogPath,c_tzLOGFileName);
 	if ( !out.is_open() )
 	{
