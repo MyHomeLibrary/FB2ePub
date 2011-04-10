@@ -22,7 +22,7 @@ namespace FolderSettingsHelper
             {
                 if (key != null)
                 {
-                    string folder = (string)key.GetValue(null);
+                    string folder = (string)key.GetValue("Local AppData");
                     if (!string.IsNullOrEmpty(folder))
                     {
                         return folder;
