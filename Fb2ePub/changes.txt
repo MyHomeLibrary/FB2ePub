@@ -1,4 +1,5 @@
 ﻿1.0.45
++ Added new setting ("ShowInShell=" and "ShowInGUI") to FB2EPUBExt.INI file to control user available destination paths
 * Fixed problem when ID of "v" section of the poem was lost in conversion preverting internal linking to it
 * Changed default LOG folder to "LocalApplicationData" usualy C:\Users\<user name>\AppData\Local
 

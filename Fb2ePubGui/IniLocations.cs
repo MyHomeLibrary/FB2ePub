@@ -20,6 +20,12 @@ namespace Fb2ePubGui
           string key, string def, StringBuilder retVal,
           int size, string filePath);
 
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool WritePrivateProfileString(string lpAppName,
+           string lpKeyName, string lpString, string lpFileName);
+
+
         public IniLocations()
         {
             string defaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
@@ -46,10 +52,17 @@ namespace Fb2ePubGui
                     for (int i = 0; i < targetsCount; i++)
                     {
                         string section = string.Format("Target{0}", i + 1);
-                        string path = IniReadValue(iniPath, section, "TargetPath");
-                        if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
+                        string visability = IniReadValue(iniPath, section, "ShowInGUI");
+                        bool bAdd = true;
+                        bool.TryParse(visability, out bAdd);
+                        if (bAdd)
                         {
-                            _listOfLocations.Add(path);
+                            IniReadValue(iniPath, section, "TargetPath");
+                            string path = IniReadValue(iniPath, section, "TargetPath");
+                            if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
+                            {
+                                _listOfLocations.Add(path);
+                            }
                         }
                     }
                 }
