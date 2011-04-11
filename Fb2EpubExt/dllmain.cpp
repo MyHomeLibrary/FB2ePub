@@ -250,21 +250,25 @@ void CFb2EpubExtModule::ReadTargets()
 			wsprintf(section,_T("Target%d"),i);
 			::ZeroMemory(temp,sizeof(TCHAR)*PATH_SIZE);
 			target tempTarget;
-			DWORD dwRes = ::GetPrivateProfileString(section,_T("TargetPath"),NULL,temp,1024,m_INIPath.c_str());
-			if (dwRes != 0) 
+			bool bAdd = (::GetPrivateProfileInt(section,_T("ShowInShell"),1,m_INIPath.c_str()) == 1);
+			if ( bAdd )
 			{
-				tempTarget.path = temp;
-				::ZeroMemory(temp,sizeof(TCHAR)*PATH_SIZE);
-				DWORD dwRes = ::GetPrivateProfileString(section,_T("TargetName"),NULL,temp,1024,m_INIPath.c_str());
-				if ( dwRes == 0 )
+				DWORD dwRes = ::GetPrivateProfileString(section,_T("TargetPath"),NULL,temp,1024,m_INIPath.c_str());
+				if (dwRes != 0) 
 				{
-					tempTarget.name = tempTarget.path;
+					tempTarget.path = temp;
+					::ZeroMemory(temp,sizeof(TCHAR)*PATH_SIZE);
+					DWORD dwRes = ::GetPrivateProfileString(section,_T("TargetName"),NULL,temp,1024,m_INIPath.c_str());
+					if ( dwRes == 0 )
+					{
+						tempTarget.name = tempTarget.path;
+					}
+					else
+					{
+						tempTarget.name = temp;
+					}
+					m_targets.push_back(tempTarget);	
 				}
-				else
-				{
-					tempTarget.name = temp;
-				}
-				m_targets.push_back(tempTarget);	
 			}
 		}
 	}
