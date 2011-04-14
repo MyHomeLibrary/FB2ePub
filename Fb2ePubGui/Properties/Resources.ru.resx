@@ -120,4 +120,13 @@
   <data name="FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert" xml:space="preserve">
     <value>Пожалуйста выберете FB2 файлы подлежащие конвертированию</value>
   </data>
+  <data name="Status_Converting" xml:space="preserve">
+    <value>Конвертирую...</value>
+  </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Готов.</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
 </root>

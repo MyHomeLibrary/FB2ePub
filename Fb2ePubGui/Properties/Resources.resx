@@ -121,4 +121,10 @@
     <value>Please select FB2 files to convert</value>
     <comment>File selection dialog title	</comment>
   </data>
+  <data name="Status_Converting" xml:space="preserve">
+    <value>Converting...</value>
+  </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Ready.</value>
+  </data>
 </root>

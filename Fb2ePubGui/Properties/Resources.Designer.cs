@@ -68,5 +68,23 @@ namespace Fb2ePubGui.Properties {
                 return ResourceManager.GetString("FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Converting....
+        /// </summary>
+        internal static string Status_Converting {
+            get {
+                return ResourceManager.GetString("Status_Converting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready..
+        /// </summary>
+        internal static string Status_Ready {
+            get {
+                return ResourceManager.GetString("Status_Ready", resourceCulture);
+            }
+        }
     }
 }
