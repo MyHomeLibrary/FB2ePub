@@ -98,7 +98,7 @@ namespace Fb2ePubGui
 
         private void SetUIConverting(bool converting)
         {
-            toolStripStatus.Text = converting ? "Converting..." : "Ready.";
+            toolStripStatus.Text = converting ? Resources.Status_Converting : Resources.Status_Ready;
             UseWaitCursor = converting;
             Enabled = !converting;
         }
@@ -251,12 +251,15 @@ namespace Fb2ePubGui
             {
                 case LanguageSetting.Auto:
                     Thread.CurrentThread.CurrentUICulture = _autoCulture;
+                    Resources.Culture = _autoCulture;
                     break;
                 case LanguageSetting.English:
                     Thread.CurrentThread.CurrentUICulture = _englishCulture;
+                    Resources.Culture = _englishCulture;
                     break;
                 case LanguageSetting.Russian:
                     Thread.CurrentThread.CurrentUICulture = _russianCulture;
+                    Resources.Culture = _russianCulture;
                     break;
             }
             SetLanguageUI(languageSetting);
