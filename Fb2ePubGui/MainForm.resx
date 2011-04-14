@@ -234,6 +234,9 @@
   <data name="buttonShowFolder.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
+  <data name="buttonShowFolder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="&gt;&gt;aboutToolStripMenuItem.Name" xml:space="preserve">
     <value>aboutToolStripMenuItem</value>
   </data>
@@ -246,8 +249,8 @@
   <data name="toolStripStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 17</value>
   </data>
-  <data name="buttonShowFolder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="toolStripStatus.Text" xml:space="preserve">
+    <value>Ready</value>
   </data>
   <data name="&gt;&gt;settingsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -287,9 +290,6 @@
   </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="toolStripStatus.Text" xml:space="preserve">
-    <value>Ready</value>
   </data>
   <data name="mainMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>703, 24</value>
@@ -2451,7 +2451,7 @@
     <value>184, 22</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>FB2ePub Converter GUI</value>
+    <value>fb2 &gt; ePub</value>
   </data>
   <data name="buttonConvert.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

@@ -107,6 +107,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ManualResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="ManualResource.ru.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManualResource.ru.resx</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WizardPages .cs">
@@ -160,7 +165,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ManualResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManualResource.ru.resx" />
+    <EmbeddedResource Include="ManualResource.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ManualResource.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Registry-file.ico" />
