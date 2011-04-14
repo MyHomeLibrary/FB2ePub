@@ -40,6 +40,8 @@ namespace FB2EPubConverter
                 case '\u2800':
                 case '\u3000':
                 case '\uFEFF':
+                case '.': // .
+                case '\u2026': //… - Horizontal Ellipsis
                     return true;
             }
             return false;
@@ -97,6 +99,8 @@ namespace FB2EPubConverter
             switch (s)
             {
                 case '\u00AB': //«
+                case '.': // .
+                case '\u2026': //… - Horizontal Ellipsis
                     return true;
             }
             return false;
