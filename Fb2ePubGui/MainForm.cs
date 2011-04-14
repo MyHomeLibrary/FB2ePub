@@ -298,7 +298,8 @@ namespace Fb2ePubGui
 
         private void aboutToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-
+            AboutBox aboutBox = new AboutBox();
+            aboutBox.ShowDialog(this);
         }
     }
 }
