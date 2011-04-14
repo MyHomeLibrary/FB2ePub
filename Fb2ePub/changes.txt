@@ -15,7 +15,7 @@
 + Added first initial implementation of Fb2ePubGUI application (Drag'n'Drop) GUI for converter
 * Changed build environment to Visual Studio 2010
 * Changed shell extension to not create submenu if no paths set INI INI, in this case the item added to main menu
-* Fixed the shell extension bug when providing destination without slash in INI caused resulting file not to be created
+* Fixed the shell extension bug when providing destination without slas`h in INI caused resulting file not to be created
 * History now loaded as an Annotation block (as it should be) not just as simple text
 * Fixed crash related to stack overflow when system was unable to split the file
 
