@@ -19,6 +19,8 @@ namespace Fb2ePubGui
         private readonly CultureInfo _englishCulture = new CultureInfo("en");
         private readonly CultureInfo _autoCulture = Thread.CurrentThread.CurrentUICulture;
 
+        private delegate void ConversionDelegate(string[] files);
+
         delegate void OnButtonPressedCallback(object sender, EventArgs e);
 
         public FormGUI()
@@ -75,8 +77,30 @@ namespace Fb2ePubGui
             ofDialog.ValidateNames = true;
             if ( ofDialog.ShowDialog(this) == DialogResult.OK )
             {
-                ConvertFiles(ofDialog.FileNames);
+                PerformConversion(ofDialog.FileNames);
             }
+        }
+
+        private void PerformConversion(string[] files)
+        {
+            if (InvokeRequired)
+            {
+                ConversionDelegate d  = PerformConversion;
+                Invoke(d, new object[] { files });
+            }
+            else
+            {
+                SetUIConverting(true);
+                ConvertFiles(files);
+                SetUIConverting(false);
+            }
+        }
+
+        private void SetUIConverting(bool converting)
+        {
+            toolStripStatus.Text = converting ? "Converting..." : "Ready.";
+            UseWaitCursor = converting;
+            Enabled = !converting;
         }
 
         private void ConvertFiles(string[] files)
@@ -155,7 +179,7 @@ namespace Fb2ePubGui
               if(e.Data.GetDataPresent(DataFormats.FileDrop) )
               {
                     string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                    ConvertFiles(files);
+                    PerformConversion(files);
               }
         }
 
@@ -177,6 +201,7 @@ namespace Fb2ePubGui
             LoadPaths();
             comboBoxDestination.SelectedIndex = 0;
             SetLanguageUI((LanguageSetting)Fb2EpubGUI.Default.Language);
+            SetUIConverting(false);
         }
 
         private void LoadPaths()
@@ -266,6 +291,11 @@ namespace Fb2ePubGui
                     russianToolStripMenuItem.Checked = true;
                     break;
             }
+        }
+
+        private void aboutToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
