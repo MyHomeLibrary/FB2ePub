@@ -55,7 +55,9 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="IniLocations.cs" />
+    <Compile Include="IniLocations\IniAccessFunctions.cs" />
+    <Compile Include="IniLocations\IniLocations.cs" />
+    <Compile Include="IniLocations\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

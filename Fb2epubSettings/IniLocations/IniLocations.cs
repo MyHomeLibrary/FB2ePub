@@ -6,22 +6,11 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Fb2epubSettings
+namespace Fb2epubSettings.IniLocations
 {
-    public class IniLocations : IEnumerable<string>
+    public class IniLocations : IEnumerable<Location>
     {
-        private readonly List<string>  _listOfLocations = new List<string>();
-
-
-        [DllImport("kernel32")]
-        private static extern int GetPrivateProfileString(string section,
-          string key, string def, StringBuilder retVal,
-          int size, string filePath);
-
-        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool WritePrivateProfileString(string lpAppName,
-           string lpKeyName, string lpString, string lpFileName);
+        private readonly List<Location> _listOfLocations = new List<Location>();
 
 
         public IniLocations()
@@ -39,28 +28,21 @@ namespace Fb2epubSettings
 
                 }
             }
-            _listOfLocations.Add(defaultPath);
+            _listOfLocations.Add(new Location {Path = defaultPath,ShowInGui = true});
             string iniPath = DetectIniLocation();
             if (iniPath != string.Empty)
             {
-                string count = IniReadValue(iniPath, "TARGETS", "TargetsCount");
+                string count = IniAccessFunctions.IniReadValue(iniPath, "TARGETS", "TargetsCount");
                 int targetsCount;
                 if (int.TryParse(count, out targetsCount) && targetsCount > 0)
                 {
                     for (int i = 0; i < targetsCount; i++)
                     {
-                        string section = string.Format("Target{0}", i + 1);
-                        string visability = IniReadValue(iniPath, section, "ShowInGUI");
-                        bool bAdd = true;
-                        bool.TryParse(visability, out bAdd);
-                        if (bAdd)
+                        Location location = new Location();
+                        location.ReadLocation(iniPath,i);
+                        if (!string.IsNullOrEmpty(location.Path) && Directory.Exists(location.Path))
                         {
-                            IniReadValue(iniPath, section, "TargetPath");
-                            string path = IniReadValue(iniPath, section, "TargetPath");
-                            if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
-                            {
-                                _listOfLocations.Add(path);
-                            }
+                            _listOfLocations.Add(location);
                         }
                     }
                 }
@@ -68,7 +50,7 @@ namespace Fb2epubSettings
             
         }
 
-        public IEnumerator<string> GetEnumerator()
+        public IEnumerator<Location> GetEnumerator()
         {
             return  _listOfLocations.GetEnumerator();
         }
@@ -78,12 +60,14 @@ namespace Fb2epubSettings
             return GetEnumerator();
         }
 
-
-        private static string IniReadValue(string iniPath, string section, string key)
+        public List<Location> GetGuiLocations()
         {
-            StringBuilder temp = new StringBuilder(255);
-            int i = GetPrivateProfileString(section, key, "", temp, 255, iniPath);
-            return temp.ToString();
+            return _listOfLocations.FindAll(x =>(x.ShowInGui == true));
+        }
+
+        public List<Location> GetShellLocations()
+        {
+            return _listOfLocations.FindAll(x => (x.ShowInShell== true));
         }
 
         private static string DetectIniLocation()
@@ -102,6 +86,7 @@ namespace Fb2epubSettings
 
             return string.Empty;
         }
+
 
     }
 }
