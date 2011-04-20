@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Fb2epubSettings.IniLocations;
 
 namespace Fb2epubSettings
 {
@@ -194,7 +195,16 @@ namespace Fb2epubSettings
 
         private void buttonDeletePath_Click(object sender, EventArgs e)
         {
-
+            Location currentLocation = (Location)listBoxPaths.SelectedItem;
+            if (currentLocation != null)
+            {
+                listBoxPaths.Items.Remove(currentLocation);
+                if (listBoxPaths.Items.Count > 0)
+                {
+                    listBoxPaths.SelectedIndex = 0;
+                }
+            }
+            UpdatePathsTabGui();
         }
 
         private void buttonUpPath_Click(object sender, EventArgs e)
@@ -214,12 +224,20 @@ namespace Fb2epubSettings
 
         private void checkBoxVisibleInExt_CheckedChanged(object sender, EventArgs e)
         {
-
+            Location currentLocation = (Location)listBoxPaths.SelectedItem;
+            if (currentLocation != null)
+            {
+                currentLocation.ShowInShell= checkBoxVisibleInExt.Checked;
+            }
         }
 
         private void checkBoxVisibleInGUI_CheckedChanged(object sender, EventArgs e)
         {
-
+            Location currentLocation =  (Location) listBoxPaths.SelectedItem;
+            if (currentLocation != null)
+            {
+                currentLocation.ShowInGui = checkBoxVisibleInGUI.Checked;
+            }
         }
 
         private void buttonBrowsePath_Click(object sender, EventArgs e)
@@ -229,11 +247,29 @@ namespace Fb2epubSettings
 
         private void listBoxPaths_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            UpdatePathsTabGui();
         }
 
         private void UpdatePathsTabGui()
         {
+            buttonUpPath.Enabled = (listBoxPaths.SelectedIndex > 0);
+            buttonDownPath.Enabled = (listBoxPaths.SelectedIndex < listBoxPaths.Items.Count-1);
+            buttonDeletePath.Enabled = (listBoxPaths.Items.Count != 0);
+            Location currentLocation = (Location) listBoxPaths.SelectedItem;
+            checkBoxVisibleInExt.Enabled = (currentLocation != null);
+            checkBoxVisibleInGUI.Enabled = (currentLocation != null);
+            buttonBrowsePath.Enabled = (currentLocation != null);
+            if (currentLocation != null)
+            {
+                textBoxPath.Text = currentLocation.Path;
+                checkBoxVisibleInExt.Checked = currentLocation.ShowInShell;
+                checkBoxVisibleInGUI.Checked = currentLocation.ShowInGui;
+            }
+            else
+            {
+                textBoxPath.Text = string.Empty;
+            }
+
         }
     }
 }

@@ -25,5 +25,10 @@ namespace Fb2epubSettings.IniLocations
             return temp.ToString();
         }
 
+        public static void IniWriteValue(string iniPath, string section, string key,string value)
+        {
+            WritePrivateProfileString(section, key, value, iniPath);
+        }
+
     }
 }

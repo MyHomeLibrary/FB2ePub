@@ -209,6 +209,21 @@ namespace Fb2ePubGui
         {
             comboBoxDestination.Items.Clear();
             IniLocations locations = new IniLocations();
+            string defaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+                                              "My Books\\");
+            if (!Directory.Exists(defaultPath))
+            {
+                try
+                {
+                    Directory.CreateDirectory(defaultPath);
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            comboBoxDestination.Items.Add(defaultPath);
+
             foreach (var location in locations.GetGuiLocations())
             {
                 comboBoxDestination.Items.Add(location.Path);
