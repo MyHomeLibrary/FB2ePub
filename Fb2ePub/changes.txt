@@ -3,6 +3,7 @@
 * Fixed problem when ID of "v" section of the poem was lost in conversion preverting internal linking to it
 * Changed default LOG folder to "LocalApplicationData" usualy C:\Users\<user name>\AppData\Local
 * Fixed Capital Drop in case it encluded horizontal ellipsis before any character (in dialogs etc)
+* Fixed several bugs that prevented conversion of files in rare cases of badly formated FB2
 
 1.0.44
 + Added ability for FB2ePubGUI to switch languages from menu
