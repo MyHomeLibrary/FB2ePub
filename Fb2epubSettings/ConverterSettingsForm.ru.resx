@@ -122,7 +122,7 @@
     <value>61, 4</value>
   </data>
   <data name="tabPageTransliteration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 203</value>
+    <value>322, 203</value>
   </data>
   <data name="tabPageTransliteration.Text" xml:space="preserve">
     <value>Транслитерация</value>
@@ -134,7 +134,7 @@
     <value>61, 4</value>
   </data>
   <data name="tabPageSequences.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 203</value>
+    <value>322, 203</value>
   </data>
   <data name="tabPageSequences.Text" xml:space="preserve">
     <value>Форматирование данных</value>
@@ -146,7 +146,7 @@
     <value>61, 4</value>
   </data>
   <data name="tabPageDifferent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 203</value>
+    <value>322, 203</value>
   </data>
   <data name="tabPageDifferent.Text" xml:space="preserve">
     <value>Опции</value>
@@ -158,7 +158,7 @@
     <value>61, 4</value>
   </data>
   <data name="tabPageFonts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 203</value>
+    <value>322, 203</value>
   </data>
   <data name="tabPageFonts.Text" xml:space="preserve">
     <value>Шрифты</value>
@@ -166,8 +166,23 @@
   <data name="tabPageFonts.ToolTipText" xml:space="preserve">
     <value>Настройки шрифтов</value>
   </data>
+  <data name="tabPagePaths.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="tabPagePaths.Size" type="System.Drawing.Size, System.Drawing">
+    <value>322, 203</value>
+  </data>
+  <data name="tabPagePaths.Text" xml:space="preserve">
+    <value>Фолдеры</value>
+  </data>
+  <data name="tabPagePaths.ToolTipText" xml:space="preserve">
+    <value>Фолдеры вывода</value>
+  </data>
+  <data name="tabControlSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 211</value>
+  </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 197</value>
+    <value>316, 197</value>
   </data>
   <data name="checkBoxTransliterateAdditional.Size" type="System.Drawing.Size, System.Drawing">
     <value>283, 17</value>
@@ -381,17 +396,92 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   <data name="checkBoxFb2Info.ToolTip" xml:space="preserve">
     <value>Включает добавление в ePub дополнительной информации из заголовка FB2 (автор файла, использованные программы и т.д.)</value>
   </data>
+  <data name="buttonPathNew.Location" type="System.Drawing.Point, System.Drawing">
+    <value>242, 96</value>
+  </data>
+  <data name="buttonPathNew.Text" xml:space="preserve">
+    <value>Новый</value>
+  </data>
+  <data name="buttonPathNew.ToolTip" xml:space="preserve">
+    <value>Добавить новый путь</value>
+  </data>
+  <data name="checkBoxVisibleInGUI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 148</value>
+  </data>
+  <data name="checkBoxVisibleInGUI.ToolTip" xml:space="preserve">
+    <value>Поставьте галочку цчтобы путь был поклазан в списке фолдеров в графическом конвертере</value>
+  </data>
+  <data name="checkBoxVisibleInExt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 125</value>
+  </data>
+  <data name="checkBoxVisibleInExt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
+  </data>
+  <data name="checkBoxVisibleInExt.Text" xml:space="preserve">
+    <value>Расшир.</value>
+  </data>
+  <data name="checkBoxVisibleInExt.ToolTip" xml:space="preserve">
+    <value>Поставьте галочку чтобы путь был показан в списке расширений , по правой кнопке</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Путь</value>
+  </data>
+  <data name="buttonBrowsePath.Text" xml:space="preserve">
+    <value>Путь...</value>
+  </data>
+  <data name="buttonBrowsePath.ToolTip" xml:space="preserve">
+    <value>Обозреватель используемый чтобы указать путь к фолдеру</value>
+  </data>
+  <data name="buttonDownPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>242, 66</value>
+  </data>
+  <data name="buttonDownPath.Text" xml:space="preserve">
+    <value>Вниз</value>
+  </data>
+  <data name="buttonDownPath.ToolTip" xml:space="preserve">
+    <value>Передвинуть путь вниз</value>
+  </data>
+  <data name="buttonUpPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>242, 36</value>
+  </data>
+  <data name="buttonUpPath.Text" xml:space="preserve">
+    <value>Вверх</value>
+  </data>
+  <data name="buttonUpPath.ToolTip" xml:space="preserve">
+    <value>Передвинуть путь вверх</value>
+  </data>
+  <data name="buttonDeletePath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>241, 6</value>
+  </data>
+  <data name="buttonDeletePath.Text" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="buttonDeletePath.ToolTip" xml:space="preserve">
+    <value>Удалить выбраный путь из списка</value>
+  </data>
+  <data name="listBoxPaths.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 134</value>
+  </data>
+  <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>405, 13</value>
+  </data>
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Сохранить</value>
   </data>
   <data name="buttonSave.ToolTip" xml:space="preserve">
     <value>Сохранить изменения настроек</value>
   </data>
+  <data name="buttonReset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>405, 43</value>
+  </data>
   <data name="buttonReset.Text" xml:space="preserve">
     <value>Сброс</value>
   </data>
   <data name="buttonReset.ToolTip" xml:space="preserve">
     <value>Отменить несохраненные изменения настроек</value>
+  </data>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>405, 72</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
