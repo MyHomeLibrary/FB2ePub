@@ -188,9 +188,14 @@ namespace FB2EPubConverter.ElementConverters
             span1.Class.Value = "drop";
             int dropEnd = 0;
             // "pad" the white spaces so drop starts from visible character
-            while (UnicodeHelpers.IsSpaceLike(text.Text[dropEnd]) && dropEnd < text.Text.Length)
+            while (dropEnd < text.Text.Length && UnicodeHelpers.IsSpaceLike(text.Text[dropEnd]) )
             {
                 dropEnd++;
+            }
+            if (dropEnd >= text.Text.Length) // in case the text is too short for drop
+            {
+                parent.Add(new SimpleEPubText { Text = text.Text});
+                return;
             }
             // calculate the initial drop part
             string dropPart = text.Text.Substring(0, dropEnd + 1);
