@@ -4,6 +4,8 @@
 * Changed default LOG folder to "LocalApplicationData" usualy C:\Users\<user name>\AppData\Local
 * Fixed Capital Drop in case it encluded horizontal ellipsis before any character (in dialogs etc)
 * Fixed several bugs that prevented conversion of files in rare cases of badly formated FB2
+* Switched to version 1.0.16 of fb2librarynet library to fix several minor bugs
+* Switched to version 1.0.15 of epublibrary library to fix several minor bugs
 
 1.0.44
 + Added ability for FB2ePubGUI to switch languages from menu

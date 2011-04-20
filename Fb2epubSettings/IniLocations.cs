@@ -2,15 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 
-
-namespace Fb2ePubGui
+namespace Fb2epubSettings
 {
-    class IniLocations : IEnumerable<string>
+    public class IniLocations : IEnumerable<string>
     {
         private readonly List<string>  _listOfLocations = new List<string>();
 

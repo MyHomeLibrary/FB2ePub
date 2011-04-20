@@ -76,6 +76,12 @@ namespace Fb2epubSettings
             checkBoxSkipAboutPage.Checked = Fb2Epub.Default.SkipAboutPage;
             LoadFixMode();
             UpdateSequencesGroup();
+            LoadPathsGroup();
+        }
+
+        private void LoadPathsGroup()
+        {
+            UpdatePathsTabGui();
         }
 
         private void UpdateSequencesGroup()
@@ -176,6 +182,52 @@ namespace Fb2epubSettings
         private void textBoxNoSeriesFormat_TextChanged(object sender, EventArgs e)
         {
             Fb2Epub.Default.NoSeriesFormat = textBoxNoSeriesFormat.Text;
+        }
+
+        private void buttonDeletePath_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonUpPath_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonDownPath_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonPathNew_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBoxVisibleInExt_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBoxVisibleInGUI_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonBrowsePath_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBoxPaths_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpdatePathsTabGui()
+        {
+            listBoxPaths.Items.Clear();
+            textBoxPath.Text = string.Empty;
         }
     }
 }
