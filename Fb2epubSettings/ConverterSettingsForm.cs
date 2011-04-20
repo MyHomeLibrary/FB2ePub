@@ -81,6 +81,14 @@ namespace Fb2epubSettings
 
         private void LoadPathsGroup()
         {
+            listBoxPaths.Items.Clear();
+            textBoxPath.Text = string.Empty;
+            IniLocations.IniLocations locations = new IniLocations.IniLocations();
+            foreach (var iniLocation in locations)
+            {
+                listBoxPaths.Items.Add(iniLocation);
+            }
+            listBoxPaths.SelectedIndex = 0;
             UpdatePathsTabGui();
         }
 
@@ -226,8 +234,6 @@ namespace Fb2epubSettings
 
         private void UpdatePathsTabGui()
         {
-            listBoxPaths.Items.Clear();
-            textBoxPath.Text = string.Empty;
         }
     }
 }

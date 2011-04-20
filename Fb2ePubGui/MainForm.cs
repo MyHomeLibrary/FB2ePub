@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Fb2ePubConverter;
 using Fb2ePubGui.Properties;
 using Fb2epubSettings;
+using Fb2epubSettings.IniLocations;
 
 namespace Fb2ePubGui
 {
@@ -208,9 +209,9 @@ namespace Fb2ePubGui
         {
             comboBoxDestination.Items.Clear();
             IniLocations locations = new IniLocations();
-            foreach (var location in locations)
+            foreach (var location in locations.GetGuiLocations())
             {
-                comboBoxDestination.Items.Add(location);
+                comboBoxDestination.Items.Add(location.Path);
             }
         }
 
