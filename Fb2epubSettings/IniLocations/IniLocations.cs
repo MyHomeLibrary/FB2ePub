@@ -15,20 +15,6 @@ namespace Fb2epubSettings.IniLocations
 
         public IniLocations()
         {
-            string defaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                                              "My Books\\");
-            if (!Directory.Exists(defaultPath))
-            {
-                try
-                {
-                    Directory.CreateDirectory(defaultPath);
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-            _listOfLocations.Add(new Location {Path = defaultPath,ShowInGui = true});
             string iniPath = DetectIniLocation();
             if (iniPath != string.Empty)
             {
@@ -62,12 +48,12 @@ namespace Fb2epubSettings.IniLocations
 
         public List<Location> GetGuiLocations()
         {
-            return _listOfLocations.FindAll(x =>(x.ShowInGui == true));
+            return _listOfLocations.FindAll(x =>x.ShowInGui);
         }
 
         public List<Location> GetShellLocations()
         {
-            return _listOfLocations.FindAll(x => (x.ShowInShell== true));
+            return _listOfLocations.FindAll(x => x.ShowInShell);
         }
 
         private static string DetectIniLocation()

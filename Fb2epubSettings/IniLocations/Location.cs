@@ -35,6 +35,16 @@ namespace Fb2epubSettings.IniLocations
             
         }
 
+        public void WriteLocation(string iniPath,int locationNumber)
+        {
+            string section = string.Format("Target{0}", locationNumber + 1);
+            IniAccessFunctions.IniWriteValue(iniPath,section,"TargetPath",Path);
+            IniAccessFunctions.IniWriteValue(iniPath, section, "TargetName", Name);
+            IniAccessFunctions.IniWriteValue(iniPath, section, "ShowInGUI", ShowInGui?"1":"0");
+            IniAccessFunctions.IniWriteValue(iniPath, section, "ShowInShell", ShowInShell? "1" : "0");
+        }
+
+
         public override string ToString()
         {
             return Path;
