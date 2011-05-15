@@ -8,52 +8,66 @@ using System.Text;
 
 namespace Fb2epubSettings.IniLocations
 {
-    public class IniLocations : IEnumerable<Location>
+    public class IniLocations : List<Location>
     {
-        private readonly List<Location> _listOfLocations = new List<Location>();
+        //private readonly List<Location> _listOfLocations = new List<Location>();
+        private string _iniPath = string.Empty;
 
 
-        public IniLocations()
+        public bool Init()
         {
-            string iniPath = DetectIniLocation();
-            if (iniPath != string.Empty)
+            _iniPath = DetectIniLocation();
+            if (_iniPath != string.Empty)
             {
-                string count = IniAccessFunctions.IniReadValue(iniPath, "TARGETS", "TargetsCount");
+                return true;
+            }
+            return false;
+        }
+
+        public void Load()
+        {
+            if (!string.IsNullOrEmpty(_iniPath))
+            {
+                string count = IniAccessFunctions.IniReadValue(_iniPath, "TARGETS", "TargetsCount");
                 int targetsCount;
                 if (int.TryParse(count, out targetsCount) && targetsCount > 0)
                 {
                     for (int i = 0; i < targetsCount; i++)
                     {
                         Location location = new Location();
-                        location.ReadLocation(iniPath,i);
+                        location.ReadLocation(_iniPath, i);
                         if (!string.IsNullOrEmpty(location.Path) && Directory.Exists(location.Path))
                         {
-                            _listOfLocations.Add(location);
+                            Add(location);
                         }
                     }
                 }
             }
-            
         }
 
-        public IEnumerator<Location> GetEnumerator()
+        public void Save()
         {
-            return  _listOfLocations.GetEnumerator();
+            if (!string.IsNullOrEmpty(_iniPath))
+            {
+                IniAccessFunctions.IniWriteValue(_iniPath, "TARGETS", "TargetsCount", Count.ToString());
+                int i = 0;
+                foreach (var location in this)
+                {
+                    location.WriteLocation(_iniPath,i++);
+                }
+            }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+  
 
         public List<Location> GetGuiLocations()
         {
-            return _listOfLocations.FindAll(x =>x.ShowInGui);
+            return FindAll(x =>x.ShowInGui);
         }
 
         public List<Location> GetShellLocations()
         {
-            return _listOfLocations.FindAll(x => x.ShowInShell);
+            return FindAll(x => x.ShowInShell);
         }
 
         private static string DetectIniLocation()

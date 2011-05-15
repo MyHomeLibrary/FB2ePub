@@ -95,22 +95,25 @@
             this.tabControlSettings.Multiline = true;
             this.tabControlSettings.Name = "tabControlSettings";
             this.tabControlSettings.SelectedIndex = 0;
+            this.toolTipControl.SetToolTip(this.tabControlSettings, resources.GetString("tabControlSettings.ToolTip"));
             // 
             // tabPageTransliteration
             // 
-            this.tabPageTransliteration.Controls.Add(this.groupBox1);
             resources.ApplyResources(this.tabPageTransliteration, "tabPageTransliteration");
+            this.tabPageTransliteration.Controls.Add(this.groupBox1);
             this.tabPageTransliteration.Name = "tabPageTransliteration";
+            this.toolTipControl.SetToolTip(this.tabPageTransliteration, resources.GetString("tabPageTransliteration.ToolTip"));
             this.tabPageTransliteration.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.checkBoxTransliterateAdditional);
             this.groupBox1.Controls.Add(this.checkBoxTransliterateFileName);
             this.groupBox1.Controls.Add(this.checkBoxTransliterateTOC);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            this.toolTipControl.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
             // 
             // checkBoxTransliterateAdditional
             // 
@@ -138,17 +141,19 @@
             // 
             // tabPageSequences
             // 
+            resources.ApplyResources(this.tabPageSequences, "tabPageSequences");
             this.tabPageSequences.Controls.Add(this.groupBoxSequences);
             this.tabPageSequences.Controls.Add(this.textBoxFileAsFormat);
             this.tabPageSequences.Controls.Add(this.labelFileAsFormat);
             this.tabPageSequences.Controls.Add(this.textBoxAuthorFormat);
             this.tabPageSequences.Controls.Add(this.labelAuthorFormat);
-            resources.ApplyResources(this.tabPageSequences, "tabPageSequences");
             this.tabPageSequences.Name = "tabPageSequences";
+            this.toolTipControl.SetToolTip(this.tabPageSequences, resources.GetString("tabPageSequences.ToolTip"));
             this.tabPageSequences.UseVisualStyleBackColor = true;
             // 
             // groupBoxSequences
             // 
+            resources.ApplyResources(this.groupBoxSequences, "groupBoxSequences");
             this.groupBoxSequences.Controls.Add(this.textBoxNoSeriesFormat);
             this.groupBoxSequences.Controls.Add(this.labelNoSeries);
             this.groupBoxSequences.Controls.Add(this.checkBoxAddSequences);
@@ -156,9 +161,9 @@
             this.groupBoxSequences.Controls.Add(this.labelNoSeqFormat);
             this.groupBoxSequences.Controls.Add(this.textBoxSequenceFormat);
             this.groupBoxSequences.Controls.Add(this.labelSeqFormat);
-            resources.ApplyResources(this.groupBoxSequences, "groupBoxSequences");
             this.groupBoxSequences.Name = "groupBoxSequences";
             this.groupBoxSequences.TabStop = false;
+            this.toolTipControl.SetToolTip(this.groupBoxSequences, resources.GetString("groupBoxSequences.ToolTip"));
             // 
             // textBoxNoSeriesFormat
             // 
@@ -235,6 +240,7 @@
             // 
             // tabPageDifferent
             // 
+            resources.ApplyResources(this.tabPageDifferent, "tabPageDifferent");
             this.tabPageDifferent.Controls.Add(this.comboBoxFixMode);
             this.tabPageDifferent.Controls.Add(this.labelFixMode);
             this.tabPageDifferent.Controls.Add(this.checkBoxSkipAboutPage);
@@ -243,15 +249,15 @@
             this.tabPageDifferent.Controls.Add(this.checkBoxFlatStructure);
             this.tabPageDifferent.Controls.Add(this.checkBoxConvertAlphaPNG);
             this.tabPageDifferent.Controls.Add(this.checkBoxFb2Info);
-            resources.ApplyResources(this.tabPageDifferent, "tabPageDifferent");
             this.tabPageDifferent.Name = "tabPageDifferent";
+            this.toolTipControl.SetToolTip(this.tabPageDifferent, resources.GetString("tabPageDifferent.ToolTip"));
             this.tabPageDifferent.UseVisualStyleBackColor = true;
             // 
             // comboBoxFixMode
             // 
+            resources.ApplyResources(this.comboBoxFixMode, "comboBoxFixMode");
             this.comboBoxFixMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFixMode.FormattingEnabled = true;
-            resources.ApplyResources(this.comboBoxFixMode, "comboBoxFixMode");
             this.comboBoxFixMode.Name = "comboBoxFixMode";
             this.toolTipControl.SetToolTip(this.comboBoxFixMode, resources.GetString("comboBoxFixMode.ToolTip"));
             this.comboBoxFixMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxFixMode_SelectedIndexChanged);
@@ -314,10 +320,12 @@
             // 
             resources.ApplyResources(this.tabPageFonts, "tabPageFonts");
             this.tabPageFonts.Name = "tabPageFonts";
+            this.toolTipControl.SetToolTip(this.tabPageFonts, resources.GetString("tabPageFonts.ToolTip"));
             this.tabPageFonts.UseVisualStyleBackColor = true;
             // 
             // tabPagePaths
             // 
+            resources.ApplyResources(this.tabPagePaths, "tabPagePaths");
             this.tabPagePaths.Controls.Add(this.buttonPathNew);
             this.tabPagePaths.Controls.Add(this.checkBoxVisibleInGUI);
             this.tabPagePaths.Controls.Add(this.checkBoxVisibleInExt);
@@ -326,8 +334,8 @@
             this.tabPagePaths.Controls.Add(this.buttonUpPath);
             this.tabPagePaths.Controls.Add(this.buttonDeletePath);
             this.tabPagePaths.Controls.Add(this.listBoxPaths);
-            resources.ApplyResources(this.tabPagePaths, "tabPagePaths");
             this.tabPagePaths.Name = "tabPagePaths";
+            this.toolTipControl.SetToolTip(this.tabPagePaths, resources.GetString("tabPagePaths.ToolTip"));
             this.tabPagePaths.UseVisualStyleBackColor = true;
             // 
             // buttonPathNew
@@ -356,17 +364,19 @@
             // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.textBoxPath);
             this.groupBox2.Controls.Add(this.buttonBrowsePath);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            this.toolTipControl.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
             // 
             // textBoxPath
             // 
             resources.ApplyResources(this.textBoxPath, "textBoxPath");
             this.textBoxPath.Name = "textBoxPath";
             this.textBoxPath.ReadOnly = true;
+            this.toolTipControl.SetToolTip(this.textBoxPath, resources.GetString("textBoxPath.ToolTip"));
             // 
             // buttonBrowsePath
             // 
@@ -402,9 +412,10 @@
             // 
             // listBoxPaths
             // 
-            this.listBoxPaths.FormattingEnabled = true;
             resources.ApplyResources(this.listBoxPaths, "listBoxPaths");
+            this.listBoxPaths.FormattingEnabled = true;
             this.listBoxPaths.Name = "listBoxPaths";
+            this.toolTipControl.SetToolTip(this.listBoxPaths, resources.GetString("listBoxPaths.ToolTip"));
             this.listBoxPaths.SelectedIndexChanged += new System.EventHandler(this.listBoxPaths_SelectedIndexChanged);
             // 
             // buttonSave
@@ -449,6 +460,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConverterSettingsForm";
+            this.toolTipControl.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.ConverterSettingsForm_Load);
             this.tabControlSettings.ResumeLayout(false);
             this.tabPageTransliteration.ResumeLayout(false);

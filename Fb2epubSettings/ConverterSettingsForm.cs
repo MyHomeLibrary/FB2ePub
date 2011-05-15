@@ -14,6 +14,8 @@ namespace Fb2epubSettings
     {
         delegate void OnButtonPressedCallback(object sender, EventArgs e);
 
+        private readonly IniLocations.IniLocations _locations = new IniLocations.IniLocations();
+
 
         public ConverterSettingsForm()
         {
@@ -28,9 +30,15 @@ namespace Fb2epubSettings
                 Invoke(d, new object[] { sender, e });
                 return;
             }
+            savePathsList();
             Fb2Epub.Default.Save();
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void savePathsList()
+        {
+            _locations.Save();
         }
 
         private void buttonReset_Click(object sender, EventArgs e)
@@ -77,6 +85,7 @@ namespace Fb2epubSettings
             checkBoxSkipAboutPage.Checked = Fb2Epub.Default.SkipAboutPage;
             LoadFixMode();
             UpdateSequencesGroup();
+            _locations.Init();
             LoadPathsGroup();
         }
 
@@ -84,12 +93,15 @@ namespace Fb2epubSettings
         {
             listBoxPaths.Items.Clear();
             textBoxPath.Text = string.Empty;
-            IniLocations.IniLocations locations = new IniLocations.IniLocations();
-            foreach (var iniLocation in locations)
+            _locations.Load();
+            foreach (var iniLocation in _locations)
             {
                 listBoxPaths.Items.Add(iniLocation);
             }
-            listBoxPaths.SelectedIndex = 0;
+            if (listBoxPaths.Items.Count > 0)
+            {
+                listBoxPaths.SelectedIndex = 0;                
+            }
             UpdatePathsTabGui();
         }
 
@@ -198,6 +210,7 @@ namespace Fb2epubSettings
             Location currentLocation = (Location)listBoxPaths.SelectedItem;
             if (currentLocation != null)
             {
+                _locations.Remove(currentLocation);
                 listBoxPaths.Items.Remove(currentLocation);
                 if (listBoxPaths.Items.Count > 0)
                 {
