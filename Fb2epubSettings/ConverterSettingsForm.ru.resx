@@ -118,72 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tabPageTransliteration.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 4</value>
-  </data>
-  <data name="tabPageTransliteration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 203</value>
-  </data>
-  <data name="tabPageTransliteration.Text" xml:space="preserve">
-    <value>Транслитерация</value>
-  </data>
-  <data name="tabPageTransliteration.ToolTipText" xml:space="preserve">
-    <value>Настройки транслитерации (для ридеров не поддерживающих русские фонты)</value>
-  </data>
-  <data name="tabPageSequences.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 4</value>
-  </data>
-  <data name="tabPageSequences.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 203</value>
-  </data>
-  <data name="tabPageSequences.Text" xml:space="preserve">
-    <value>Форматирование данных</value>
-  </data>
-  <data name="tabPageSequences.ToolTipText" xml:space="preserve">
-    <value>Настройки форматирования данных для отображения</value>
-  </data>
-  <data name="tabPageDifferent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 4</value>
-  </data>
-  <data name="tabPageDifferent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 203</value>
-  </data>
-  <data name="tabPageDifferent.Text" xml:space="preserve">
-    <value>Опции</value>
-  </data>
-  <data name="tabPageDifferent.ToolTipText" xml:space="preserve">
-    <value>Основные настройки конвертера</value>
-  </data>
-  <data name="tabPageFonts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 4</value>
-  </data>
-  <data name="tabPageFonts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 203</value>
-  </data>
-  <data name="tabPageFonts.Text" xml:space="preserve">
-    <value>Шрифты</value>
-  </data>
-  <data name="tabPageFonts.ToolTipText" xml:space="preserve">
-    <value>Настройки шрифтов</value>
-  </data>
-  <data name="tabPagePaths.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 4</value>
-  </data>
-  <data name="tabPagePaths.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 203</value>
-  </data>
-  <data name="tabPagePaths.Text" xml:space="preserve">
-    <value>Фолдеры</value>
-  </data>
-  <data name="tabPagePaths.ToolTipText" xml:space="preserve">
-    <value>Фолдеры вывода</value>
-  </data>
-  <data name="tabControlSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 211</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 197</value>
-  </data>
   <data name="checkBoxTransliterateAdditional.Size" type="System.Drawing.Size, System.Drawing">
     <value>283, 17</value>
   </data>
@@ -211,6 +145,27 @@
   </data>
   <data name="checkBoxTransliterateTOC.ToolTip" xml:space="preserve">
     <value>Транслитерировать оглавление (включать для ридеров не поддерживающих русские фонты)</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>316, 197</value>
+  </data>
+  <data name="groupBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPageTransliteration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="tabPageTransliteration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>322, 203</value>
+  </data>
+  <data name="tabPageTransliteration.Text" xml:space="preserve">
+    <value>Транслитерация</value>
+  </data>
+  <data name="tabPageTransliteration.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPageTransliteration.ToolTipText" xml:space="preserve">
+    <value>Настройки транслитерации (для ридеров не поддерживающих русские фонты)</value>
   </data>
   <data name="textBoxNoSeriesFormat.ToolTip" xml:space="preserve">
     <value>Формат:
@@ -278,6 +233,9 @@ c - С большой буквы , l - все буквы маленькие, u -
   <data name="labelSeqFormat.ToolTip" xml:space="preserve">
     <value>Формат в котором название серии будет добавлено к названию книги на странице описания</value>
   </data>
+  <data name="groupBoxSequences.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="textBoxFileAsFormat.ToolTip" xml:space="preserve">
     <value>Формат:
 %f% - Имя автора из заголовка FB2
@@ -324,6 +282,21 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   </data>
   <data name="labelAuthorFormat.ToolTip" xml:space="preserve">
     <value>Формат имени автора, позволяет задать как имя автора будет выглядеть в описании</value>
+  </data>
+  <data name="tabPageSequences.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="tabPageSequences.Size" type="System.Drawing.Size, System.Drawing">
+    <value>322, 203</value>
+  </data>
+  <data name="tabPageSequences.Text" xml:space="preserve">
+    <value>Форматирование данных</value>
+  </data>
+  <data name="tabPageSequences.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPageSequences.ToolTipText" xml:space="preserve">
+    <value>Настройки форматирования данных для отображения</value>
   </data>
   <data name="comboBoxFixMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>172, 155</value>
@@ -396,6 +369,36 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   <data name="checkBoxFb2Info.ToolTip" xml:space="preserve">
     <value>Включает добавление в ePub дополнительной информации из заголовка FB2 (автор файла, использованные программы и т.д.)</value>
   </data>
+  <data name="tabPageDifferent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="tabPageDifferent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>322, 203</value>
+  </data>
+  <data name="tabPageDifferent.Text" xml:space="preserve">
+    <value>Опции</value>
+  </data>
+  <data name="tabPageDifferent.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPageDifferent.ToolTipText" xml:space="preserve">
+    <value>Основные настройки конвертера</value>
+  </data>
+  <data name="tabPageFonts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="tabPageFonts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>322, 203</value>
+  </data>
+  <data name="tabPageFonts.Text" xml:space="preserve">
+    <value>Шрифты</value>
+  </data>
+  <data name="tabPageFonts.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPageFonts.ToolTipText" xml:space="preserve">
+    <value>Настройки шрифтов</value>
+  </data>
   <data name="buttonPathNew.Location" type="System.Drawing.Point, System.Drawing">
     <value>242, 96</value>
   </data>
@@ -423,14 +426,20 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   <data name="checkBoxVisibleInExt.ToolTip" xml:space="preserve">
     <value>Поставьте галочку чтобы путь был показан в списке расширений , по правой кнопке</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Путь</value>
+  <data name="textBoxPath.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="buttonBrowsePath.Text" xml:space="preserve">
-    <value>Путь...</value>
+    <value>Изменить...</value>
   </data>
   <data name="buttonBrowsePath.ToolTip" xml:space="preserve">
     <value>Обозреватель используемый чтобы указать путь к фолдеру</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Путь</value>
+  </data>
+  <data name="groupBox2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="buttonDownPath.Location" type="System.Drawing.Point, System.Drawing">
     <value>242, 66</value>
@@ -462,6 +471,30 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   <data name="listBoxPaths.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 134</value>
   </data>
+  <data name="listBoxPaths.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPagePaths.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="tabPagePaths.Size" type="System.Drawing.Size, System.Drawing">
+    <value>322, 203</value>
+  </data>
+  <data name="tabPagePaths.Text" xml:space="preserve">
+    <value>Фолдеры</value>
+  </data>
+  <data name="tabPagePaths.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPagePaths.ToolTipText" xml:space="preserve">
+    <value>Фолдеры вывода</value>
+  </data>
+  <data name="tabControlSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 211</value>
+  </data>
+  <data name="tabControlSettings.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 13</value>
   </data>
@@ -491,5 +524,8 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки Конвертера</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>
