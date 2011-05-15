@@ -232,6 +232,16 @@ namespace Fb2epubSettings
 
         private void buttonPathNew_Click(object sender, EventArgs e)
         {
+            AddPath addPathForm = new AddPath();
+            DialogResult result = addPathForm.ShowDialog(this);
+            if ( result == DialogResult.OK)
+            {
+                Location newLocation = new Location();
+                newLocation.Name = addPathForm.PathName;
+                newLocation.Path = addPathForm.PathFolder;
+                _locations.Add(newLocation);
+                listBoxPaths.SelectedIndex =  listBoxPaths.Items.Add(newLocation);                
+            }
 
         }
 

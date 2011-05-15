@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddPathForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddPathForm.Designer.cs">
+      <DependentUpon>AddPathForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConverterSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +73,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AddPathForm.resx">
+      <DependentUpon>AddPathForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConverterSettingsForm.resx">
       <DependentUpon>ConverterSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
