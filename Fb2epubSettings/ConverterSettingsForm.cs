@@ -92,7 +92,6 @@ namespace Fb2epubSettings
         private void LoadPathsGroup()
         {
             listBoxPaths.Items.Clear();
-            textBoxPath.Text = string.Empty;
             _locations.Load();
             foreach (var iniLocation in _locations)
             {
@@ -102,7 +101,22 @@ namespace Fb2epubSettings
             {
                 listBoxPaths.SelectedIndex = 0;                
             }
+            radioButtonSDDisabled.Checked = (_locations.SingleDestination == -1);
             UpdatePathsTabGui();
+            UpdateSingleDestinationCombo();
+        }
+
+        private void UpdateSingleDestinationCombo()
+        {
+            comboBoxSDValue.Items.Clear();
+            for (int value = 0; value < _locations.Count; value++ )
+            {
+                comboBoxSDValue.Items.Add(value);
+            }
+            if (_locations.SingleDestination != -1)
+            {
+                comboBoxSDValue.SelectedItem = _locations.SingleDestination;
+            }
         }
 
         private void UpdateSequencesGroup()
@@ -218,6 +232,7 @@ namespace Fb2epubSettings
                 }
             }
             UpdatePathsTabGui();
+            UpdateSingleDestinationCombo();
         }
 
         private void buttonUpPath_Click(object sender, EventArgs e)
@@ -228,6 +243,10 @@ namespace Fb2epubSettings
             {
                 listBoxPaths.Items.Remove(currentLocation);
                 listBoxPaths.Items.Insert(currentIndex-1,currentLocation);
+                if( currentIndex == _locations.SingleDestination )
+                {
+                    _locations.SingleDestination--;
+                }
             }
             currentIndex = _locations.IndexOf(currentLocation);
             if (currentIndex != -1)
@@ -235,6 +254,7 @@ namespace Fb2epubSettings
                 _locations.Remove(currentLocation);
                 _locations.Insert(currentIndex - 1, currentLocation);
             }
+            UpdateSingleDestinationCombo();
         }
 
         private void buttonDownPath_Click(object sender, EventArgs e)
@@ -245,6 +265,10 @@ namespace Fb2epubSettings
             {
                 listBoxPaths.Items.Remove(currentLocation);
                 listBoxPaths.Items.Insert(currentIndex + 1, currentLocation);
+                if (currentIndex == _locations.SingleDestination)
+                {
+                    _locations.SingleDestination++;
+                }
             }
             currentIndex = _locations.IndexOf(currentLocation);
             if (currentIndex != -1)
@@ -252,6 +276,7 @@ namespace Fb2epubSettings
                 _locations.Remove(currentLocation);
                 _locations.Insert(currentIndex + 1, currentLocation);
             }
+            UpdateSingleDestinationCombo();
         }
 
         private void buttonPathNew_Click(object sender, EventArgs e)
@@ -266,7 +291,7 @@ namespace Fb2epubSettings
                 _locations.Add(newLocation);
                 listBoxPaths.SelectedIndex =  listBoxPaths.Items.Add(newLocation);                
             }
-
+            UpdateSingleDestinationCombo();
         }
 
         private void checkBoxVisibleInExt_CheckedChanged(object sender, EventArgs e)
@@ -287,11 +312,7 @@ namespace Fb2epubSettings
             }
         }
 
-        private void buttonBrowsePath_Click(object sender, EventArgs e)
-        {
-
-        }
-
+     
         private void listBoxPaths_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdatePathsTabGui();
@@ -302,19 +323,14 @@ namespace Fb2epubSettings
             buttonUpPath.Enabled = (listBoxPaths.SelectedIndex > 0);
             buttonDownPath.Enabled = (listBoxPaths.SelectedIndex < listBoxPaths.Items.Count-1);
             buttonDeletePath.Enabled = (listBoxPaths.Items.Count != 0);
+
             Location currentLocation = (Location) listBoxPaths.SelectedItem;
             checkBoxVisibleInExt.Enabled = (currentLocation != null);
             checkBoxVisibleInGUI.Enabled = (currentLocation != null);
-            buttonBrowsePath.Enabled = (currentLocation != null);
             if (currentLocation != null)
             {
-                textBoxPath.Text = currentLocation.Path;
                 checkBoxVisibleInExt.Checked = currentLocation.ShowInShell;
                 checkBoxVisibleInGUI.Checked = currentLocation.ShowInGui;
-            }
-            else
-            {
-                textBoxPath.Text = string.Empty;
             }
 
         }
@@ -322,8 +338,51 @@ namespace Fb2epubSettings
         private void listBoxPaths_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
-            e.Graphics.DrawString(string.Format("{0} [{1}]", ((Location)listBoxPaths.Items[e.Index]).Name, ((Location)listBoxPaths.Items[e.Index]).Path), e.Font, new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("{0})  {1} [{2}]", e.Index, ((Location) listBoxPaths.Items[e.Index]).Name,
+                            ((Location) listBoxPaths.Items[e.Index]).Path);
+            Brush textBrush = new SolidBrush(e.ForeColor);
+            if (e.Index == _locations.SingleDestination)
+            {
+                sb.Append("*");
+            }
+            else if (_locations.SingleDestination != -1)
+            {
+                textBrush = new SolidBrush(SystemColors.ControlLight);
+            }
+            e.Graphics.DrawString(sb.ToString(), e.Font,textBrush , e.Bounds, StringFormat.GenericDefault);
             e.DrawFocusRectangle();
         }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButtonSDDisabled_CheckedChanged(object sender, EventArgs e)
+        {
+            _locations.SingleDestination = -1;
+            UpdateSingleDestinationCombo();
+            listBoxPaths.Refresh();
+        }
+
+        private void radioButtonSDEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_locations.Count > 0)
+            {
+                _locations.SingleDestination = listBoxPaths.SelectedIndex;
+            }
+            UpdateSingleDestinationCombo();
+            listBoxPaths.Refresh();
+        }
+
+        private void comboBoxSDValue_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _locations.SingleDestination = (int) comboBoxSDValue.SelectedItem;
+            listBoxPaths.Refresh();
+        }
+
+
+     
     }
 }
