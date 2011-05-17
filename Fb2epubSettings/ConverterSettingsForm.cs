@@ -318,5 +318,12 @@ namespace Fb2epubSettings
             }
 
         }
+
+        private void listBoxPaths_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            e.Graphics.DrawString(string.Format("{0} [{1}]", ((Location)listBoxPaths.Items[e.Index]).Name, ((Location)listBoxPaths.Items[e.Index]).Path), e.Font, new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
+            e.DrawFocusRectangle();
+        }
     }
 }
