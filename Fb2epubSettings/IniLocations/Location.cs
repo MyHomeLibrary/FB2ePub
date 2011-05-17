@@ -15,6 +15,7 @@ namespace Fb2epubSettings.IniLocations
         public bool ShowInShell { get; set; }
         public string Name { get; set; }
 
+
         public void ReadLocation(string iniPath,int locationNumber)
         {
             string section = string.Format("Target{0}", locationNumber + 1);

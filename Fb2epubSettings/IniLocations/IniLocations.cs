@@ -12,7 +12,13 @@ namespace Fb2epubSettings.IniLocations
     {
         //private readonly List<Location> _listOfLocations = new List<Location>();
         private string _iniPath = string.Empty;
+        private int _singleDestination = -1;
 
+        public int SingleDestination
+        {
+            get { return _singleDestination; }
+            set { _singleDestination = value; }
+        }
 
         public bool Init()
         {
@@ -42,6 +48,13 @@ namespace Fb2epubSettings.IniLocations
                         }
                     }
                 }
+
+                string singleDestination = IniAccessFunctions.IniReadValue(_iniPath, "TARGETS", "SingleDestination");
+                int singleDestinationInt;
+                if (int.TryParse(singleDestination, out singleDestinationInt) )
+                {
+                    SingleDestination = singleDestinationInt;
+                }
             }
         }
 
@@ -55,6 +68,8 @@ namespace Fb2epubSettings.IniLocations
                 {
                     location.WriteLocation(_iniPath,i++);
                 }
+
+                IniAccessFunctions.IniWriteValue(_iniPath, "TARGETS", "SingleDestination",SingleDestination.ToString());
             }
         }
 

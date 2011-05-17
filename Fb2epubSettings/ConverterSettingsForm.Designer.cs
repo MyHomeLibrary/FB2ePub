@@ -60,12 +60,10 @@
             this.checkBoxFb2Info = new System.Windows.Forms.CheckBox();
             this.tabPageFonts = new System.Windows.Forms.TabPage();
             this.tabPagePaths = new System.Windows.Forms.TabPage();
+            this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonPathNew = new System.Windows.Forms.Button();
             this.checkBoxVisibleInGUI = new System.Windows.Forms.CheckBox();
             this.checkBoxVisibleInExt = new System.Windows.Forms.CheckBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBoxPath = new System.Windows.Forms.TextBox();
-            this.buttonBrowsePath = new System.Windows.Forms.Button();
             this.buttonDownPath = new System.Windows.Forms.Button();
             this.buttonUpPath = new System.Windows.Forms.Button();
             this.buttonDeletePath = new System.Windows.Forms.Button();
@@ -74,6 +72,10 @@
             this.buttonReset = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.toolTipControl = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radioButtonSDDisabled = new System.Windows.Forms.RadioButton();
+            this.radioButtonSDEnabled = new System.Windows.Forms.RadioButton();
+            this.comboBoxSDValue = new System.Windows.Forms.ComboBox();
             this.tabControlSettings.SuspendLayout();
             this.tabPageTransliteration.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -318,10 +320,11 @@
             // 
             // tabPagePaths
             // 
+            this.tabPagePaths.Controls.Add(this.groupBox2);
+            this.tabPagePaths.Controls.Add(this.buttonEdit);
             this.tabPagePaths.Controls.Add(this.buttonPathNew);
             this.tabPagePaths.Controls.Add(this.checkBoxVisibleInGUI);
             this.tabPagePaths.Controls.Add(this.checkBoxVisibleInExt);
-            this.tabPagePaths.Controls.Add(this.groupBox2);
             this.tabPagePaths.Controls.Add(this.buttonDownPath);
             this.tabPagePaths.Controls.Add(this.buttonUpPath);
             this.tabPagePaths.Controls.Add(this.buttonDeletePath);
@@ -329,6 +332,13 @@
             resources.ApplyResources(this.tabPagePaths, "tabPagePaths");
             this.tabPagePaths.Name = "tabPagePaths";
             this.tabPagePaths.UseVisualStyleBackColor = true;
+            // 
+            // buttonEdit
+            // 
+            resources.ApplyResources(this.buttonEdit, "buttonEdit");
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // buttonPathNew
             // 
@@ -353,28 +363,6 @@
             this.toolTipControl.SetToolTip(this.checkBoxVisibleInExt, resources.GetString("checkBoxVisibleInExt.ToolTip"));
             this.checkBoxVisibleInExt.UseVisualStyleBackColor = true;
             this.checkBoxVisibleInExt.CheckedChanged += new System.EventHandler(this.checkBoxVisibleInExt_CheckedChanged);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.textBoxPath);
-            this.groupBox2.Controls.Add(this.buttonBrowsePath);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
-            // 
-            // textBoxPath
-            // 
-            resources.ApplyResources(this.textBoxPath, "textBoxPath");
-            this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.ReadOnly = true;
-            // 
-            // buttonBrowsePath
-            // 
-            resources.ApplyResources(this.buttonBrowsePath, "buttonBrowsePath");
-            this.buttonBrowsePath.Name = "buttonBrowsePath";
-            this.toolTipControl.SetToolTip(this.buttonBrowsePath, resources.GetString("buttonBrowsePath.ToolTip"));
-            this.buttonBrowsePath.UseVisualStyleBackColor = true;
-            this.buttonBrowsePath.Click += new System.EventHandler(this.buttonBrowsePath_Click);
             // 
             // buttonDownPath
             // 
@@ -408,6 +396,7 @@
             this.listBoxPaths.Name = "listBoxPaths";
             this.listBoxPaths.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxPaths_DrawItem);
             this.listBoxPaths.SelectedIndexChanged += new System.EventHandler(this.listBoxPaths_SelectedIndexChanged);
+            this.listBoxPaths.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.buttonEdit_Click);
             // 
             // buttonSave
             // 
@@ -439,6 +428,39 @@
             this.toolTipControl.InitialDelay = 500;
             this.toolTipControl.IsBalloon = true;
             this.toolTipControl.ReshowDelay = 100;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.comboBoxSDValue);
+            this.groupBox2.Controls.Add(this.radioButtonSDEnabled);
+            this.groupBox2.Controls.Add(this.radioButtonSDDisabled);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.TabStop = false;
+            // 
+            // radioButtonSDDisabled
+            // 
+            resources.ApplyResources(this.radioButtonSDDisabled, "radioButtonSDDisabled");
+            this.radioButtonSDDisabled.Name = "radioButtonSDDisabled";
+            this.radioButtonSDDisabled.TabStop = true;
+            this.radioButtonSDDisabled.UseVisualStyleBackColor = true;
+            this.radioButtonSDDisabled.CheckedChanged += new System.EventHandler(this.radioButtonSDDisabled_CheckedChanged);
+            // 
+            // radioButtonSDEnabled
+            // 
+            resources.ApplyResources(this.radioButtonSDEnabled, "radioButtonSDEnabled");
+            this.radioButtonSDEnabled.Name = "radioButtonSDEnabled";
+            this.radioButtonSDEnabled.TabStop = true;
+            this.radioButtonSDEnabled.UseVisualStyleBackColor = true;
+            this.radioButtonSDEnabled.CheckedChanged += new System.EventHandler(this.radioButtonSDEnabled_CheckedChanged);
+            // 
+            // comboBoxSDValue
+            // 
+            this.comboBoxSDValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSDValue.FormattingEnabled = true;
+            resources.ApplyResources(this.comboBoxSDValue, "comboBoxSDValue");
+            this.comboBoxSDValue.Name = "comboBoxSDValue";
+            this.comboBoxSDValue.SelectedIndexChanged += new System.EventHandler(this.comboBoxSDValue_SelectedIndexChanged);
             // 
             // ConverterSettingsForm
             // 
@@ -510,12 +532,14 @@
         private System.Windows.Forms.Button buttonUpPath;
         private System.Windows.Forms.Button buttonDeletePath;
         private System.Windows.Forms.ListBox listBoxPaths;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBoxPath;
-        private System.Windows.Forms.Button buttonBrowsePath;
         private System.Windows.Forms.CheckBox checkBoxVisibleInGUI;
         private System.Windows.Forms.CheckBox checkBoxVisibleInExt;
         private System.Windows.Forms.Button buttonPathNew;
+        private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton radioButtonSDEnabled;
+        private System.Windows.Forms.RadioButton radioButtonSDDisabled;
+        private System.Windows.Forms.ComboBox comboBoxSDValue;
 
 
 
