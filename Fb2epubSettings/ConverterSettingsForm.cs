@@ -222,12 +222,36 @@ namespace Fb2epubSettings
 
         private void buttonUpPath_Click(object sender, EventArgs e)
         {
-
+            Location currentLocation = (Location)listBoxPaths.SelectedItem;
+            int currentIndex = listBoxPaths.Items.IndexOf(currentLocation);
+            if (currentIndex != -1)
+            {
+                listBoxPaths.Items.Remove(currentLocation);
+                listBoxPaths.Items.Insert(currentIndex-1,currentLocation);
+            }
+            currentIndex = _locations.IndexOf(currentLocation);
+            if (currentIndex != -1)
+            {
+                _locations.Remove(currentLocation);
+                _locations.Insert(currentIndex - 1, currentLocation);
+            }
         }
 
         private void buttonDownPath_Click(object sender, EventArgs e)
         {
-
+            Location currentLocation = (Location)listBoxPaths.SelectedItem;
+            int currentIndex = listBoxPaths.Items.IndexOf(currentLocation);
+            if (currentIndex != -1)
+            {
+                listBoxPaths.Items.Remove(currentLocation);
+                listBoxPaths.Items.Insert(currentIndex + 1, currentLocation);
+            }
+            currentIndex = _locations.IndexOf(currentLocation);
+            if (currentIndex != -1)
+            {
+                _locations.Remove(currentLocation);
+                _locations.Insert(currentIndex + 1, currentLocation);
+            }
         }
 
         private void buttonPathNew_Click(object sender, EventArgs e)
