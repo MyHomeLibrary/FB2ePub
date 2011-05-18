@@ -1,5 +1,8 @@
 ﻿1.0.45
 + Added new setting ("ShowInShell=" and "ShowInGUI") to FB2EPUBExt.INI file to control user available destination paths
++ Added new setting "SingleDestination=" to [TARGETS] section of FB2EPUBExt.INI. If set to -1 all works as before, 
+	if set to TargetNumber and this target enabled for shall extension then makes this target the only FB2Epub destination available in right-click menu
++ Added New "Folders" tab to the settings dialog, allows to control GUI and shell extension destination folders
 * Fixed problem when ID of "v" section of the poem was lost in conversion preverting internal linking to it
 * Changed default LOG folder to "LocalApplicationData" usualy C:\Users\<user name>\AppData\Local
 * Fixed Capital Drop in case it encluded horizontal ellipsis before any character (in dialogs etc)
