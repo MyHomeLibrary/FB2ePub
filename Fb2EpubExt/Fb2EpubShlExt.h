@@ -74,7 +74,7 @@ protected:
 
 	HRESULT  CreateFb2SubMenu(HMENU hmenu, UINT uMenuIndex,UINT uidFirstCmd);
 
-	HRESULT  CreateFb2SubItem(HMENU hmenu, UINT uMenuIndex,UINT uidFirstCmd);
+	HRESULT  CreateFb2SubItem(HMENU hmenu, UINT uMenuIndex,UINT uidFirstCmd,TCHAR* tchName);
 
 };
 

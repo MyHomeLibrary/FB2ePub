@@ -52,7 +52,6 @@ void CFb2EpubExtModule::Init()
 void CFb2EpubExtModule::LoadINI()
 {
 	USES_CONVERSION;
-	BOOL bINIFound = FALSE;
 
 	m_targets.clear();
 
@@ -62,7 +61,7 @@ void CFb2EpubExtModule::LoadINI()
 	bool bDetected = false;
 	if ( SHGetSpecialFolderPath(NULL,iniFile,CSIDL_APPDATA,FALSE))
 	{
-		lstrcat(iniFile,L"\\FB2ePub\\");
+		lstrcat(iniFile,L"\\Lord KiRon\\FB2ePubExt");
 		lstrcat(iniFile,c_tzINIFileName);
 		if ( PathFileExists(iniFile) )
 		{
@@ -89,7 +88,7 @@ void CFb2EpubExtModule::LoadINI()
 		{
 			m_INIPath = iniFile;
 			clog << "Located INI file at: " << W2A(m_INIPath.c_str()) << endl;
-			bINIFound = TRUE;
+			bDetected = true;
 		}
 		else 
 		{
@@ -100,14 +99,13 @@ void CFb2EpubExtModule::LoadINI()
 	DWORD dwRes = 0;
 	TCHAR path[PATH_SIZE+1];
 	::ZeroMemory(path,sizeof(TCHAR)*(PATH_SIZE+1));
-	if ( bINIFound ) 	// If INI file located - try to load from INI
+	if ( bDetected ) 	// If INI file located - try to load from INI
 	{
 		clog << "Attempting to read FB2EPUB.EXE location from INI" << endl;
 		// try to read setting from INI
 		dwRes = ::GetPrivateProfileString(FB2EPUB_SECTION,_T("Location"),NULL,path,1024,m_INIPath.c_str());
-		ReadTargets();
 	}
-	if ( !bINIFound || dwRes == 0 || !PathFileExists(path) ) // is setting not found or referenced file does not exist, try to locate
+	if ( !bDetected || dwRes == 0 || !PathFileExists(path) ) // is setting not found or referenced file does not exist, try to locate
 	{
 		clog << "Attempting to detect FB2EPUB.EXE location" << endl;
 		if ( !FindConverterApp(path,PATH_SIZE) )
@@ -121,6 +119,7 @@ void CFb2EpubExtModule::LoadINI()
 	clog << "Detected FB2EPUB.EXE location " << W2A(m_Fb2EpubApplication.c_str())<< endl;
 
 	ReadFilters();
+	ReadTargets();
 }
 
 
@@ -193,7 +192,7 @@ void CFb2EpubExtModule::StartLog(BOOL bOverwrite)
 			}
 		}
 	}
-	if (bPathFound)
+	if (!bPathFound)
 	{
 		LPCTSTR szAppPath = GetPathWithoutFileName((LPTSTR)m_DLLPath.c_str());
 		lstrcpy(szLogPath,szAppPath);
@@ -239,20 +238,23 @@ void CFb2EpubExtModule::ReadTargets()
 {
 	TCHAR temp[PATH_SIZE+1];
 	::ZeroMemory(temp,sizeof(TCHAR)*PATH_SIZE);
-	UINT count = ::GetPrivateProfileInt(TARGETS_SECTION,_T("TargetsCount"),-1,m_INIPath.c_str());	
-	if (count != (UINT)-1)
+	UINT count = ::GetPrivateProfileInt(TARGETS_SECTION,_T("TargetsCount"),0,m_INIPath.c_str());	
+	if (count > 0)
 	{
 		clog << count << " targets readed" << endl;
+		int iSingleDestination = ::GetPrivateProfileInt(TARGETS_SECTION,_T("SingleDestination"),-1,m_INIPath.c_str());	
+		clog << iSingleDestination << " set as SingleDestination" << endl;
+		m_bUseSingleDestination = false;
 		TCHAR section[1024];
-		for (UINT i=1; i <= count; i ++ )
+		if ( iSingleDestination != -1 )
 		{
-			::ZeroMemory(section,sizeof(TCHAR)*1024);
-			wsprintf(section,_T("Target%d"),i);
-			::ZeroMemory(temp,sizeof(TCHAR)*PATH_SIZE);
-			target tempTarget;
-			bool bAdd = (::GetPrivateProfileInt(section,_T("ShowInShell"),1,m_INIPath.c_str()) == 1);
-			if ( bAdd )
+				::ZeroMemory(section,sizeof(TCHAR)*1024);
+				wsprintf(section,_T("Target%d"),iSingleDestination);
+			bool bAdd = (::GetPrivateProfileInt(section,_T("ShowInShell"),0,m_INIPath.c_str()) == 1);
+			if (bAdd)
 			{
+				m_bUseSingleDestination = true;
+				target tempTarget;
 				DWORD dwRes = ::GetPrivateProfileString(section,_T("TargetPath"),NULL,temp,1024,m_INIPath.c_str());
 				if (dwRes != 0) 
 				{
@@ -268,6 +270,37 @@ void CFb2EpubExtModule::ReadTargets()
 						tempTarget.name = temp;
 					}
 					m_targets.push_back(tempTarget);	
+				}
+				return;
+			}
+		}
+		if (!m_bUseSingleDestination)
+		{
+			for (UINT i=1; i <= count; i ++ )
+			{
+				::ZeroMemory(section,sizeof(TCHAR)*1024);
+				wsprintf(section,_T("Target%d"),i);
+				::ZeroMemory(temp,sizeof(TCHAR)*PATH_SIZE);
+				target tempTarget;
+				bool bAdd = (::GetPrivateProfileInt(section,_T("ShowInShell"),1,m_INIPath.c_str()) == 1);
+				if ( bAdd )
+				{
+					DWORD dwRes = ::GetPrivateProfileString(section,_T("TargetPath"),NULL,temp,1024,m_INIPath.c_str());
+					if (dwRes != 0) 
+					{
+						tempTarget.path = temp;
+						::ZeroMemory(temp,sizeof(TCHAR)*PATH_SIZE);
+						DWORD dwRes = ::GetPrivateProfileString(section,_T("TargetName"),NULL,temp,1024,m_INIPath.c_str());
+						if ( dwRes == 0 )
+						{
+							tempTarget.name = tempTarget.path;
+						}
+						else
+						{
+							tempTarget.name = temp;
+						}
+						m_targets.push_back(tempTarget);	
+					}
 				}
 			}
 		}

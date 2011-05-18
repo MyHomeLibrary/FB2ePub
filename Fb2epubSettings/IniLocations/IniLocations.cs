@@ -92,6 +92,15 @@ namespace Fb2epubSettings.IniLocations
 
         private static string DetectIniLocation()
         {
+            string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            if (!string.IsNullOrEmpty(appDataFolder))
+            {
+                string defaultINIPath = Path.Combine(appDataFolder, @"Lord KiRon\Fb2ePubExt\FB2EPUBExt.INI");
+                if (File.Exists(defaultINIPath))
+                {
+                    return defaultINIPath;
+                }
+            }
             string path2Exe = Assembly.GetEntryAssembly().Location;
             string folderPath = Path.GetDirectoryName(path2Exe);
             if (folderPath == null)

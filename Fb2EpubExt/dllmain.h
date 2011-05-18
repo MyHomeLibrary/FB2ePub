@@ -20,6 +20,7 @@ public :
 	bool m_bAllowAllExtension;
 	bool m_bAllowAllZip;
 	bool m_bAllowAllRar;
+	bool m_bUseSingleDestination;
 
 
 	DECLARE_LIBID(LIBID_Fb2EpubExtLib)
