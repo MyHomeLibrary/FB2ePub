@@ -47,7 +47,11 @@ namespace Fb2ePubGui
                 return;
             }
             ConverterSettingsForm settings = new ConverterSettingsForm();
-            settings.ShowDialog(this);
+            if ( settings.ShowDialog(this) == DialogResult.OK )
+            {
+                LoadPaths();
+                comboBoxDestination.SelectedIndex = 0;               
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -209,6 +213,8 @@ namespace Fb2ePubGui
         {
             comboBoxDestination.Items.Clear();
             IniLocations locations = new IniLocations();
+            locations.Init();
+            locations.Load();
             string defaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
                                               "My Books\\");
             if (!Directory.Exists(defaultPath))

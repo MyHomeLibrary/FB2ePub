@@ -20,15 +20,15 @@ namespace Fb2epubSettings.IniLocations
         {
             string section = string.Format("Target{0}", locationNumber + 1);
             string visability = IniAccessFunctions.IniReadValue(iniPath, section, "ShowInGUI");
-            bool bAdd = true;
-            if (bool.TryParse(visability, out bAdd))
+            int bAdd = 0;
+            if (int.TryParse(visability, out bAdd))
             {
-                ShowInGui = bAdd;
+                ShowInGui = (bAdd!=0);
             }
             visability = IniAccessFunctions.IniReadValue(iniPath, section, "ShowInShell");
-            if (bool.TryParse(visability, out bAdd))
+            if (int.TryParse(visability, out bAdd))
             {
-                ShowInShell = bAdd;
+                ShowInShell = (bAdd!=0);
             }
             IniAccessFunctions.IniReadValue(iniPath, section, "TargetPath");
             Path = IniAccessFunctions.IniReadValue(iniPath, section, "TargetPath");

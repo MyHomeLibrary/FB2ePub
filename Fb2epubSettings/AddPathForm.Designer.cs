@@ -1,6 +1,6 @@
 ﻿namespace Fb2epubSettings
 {
-    partial class AddPath
+    partial class AddPathForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,94 +28,88 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddPathForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBoxAddName = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonSelect = new System.Windows.Forms.Button();
+            this.textBoxAddPath = new System.Windows.Forms.TextBox();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.textBoxAddPath = new System.Windows.Forms.TextBox();
-            this.buttonSelect = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.textBoxAddName);
-            this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(547, 53);
-            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Name";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.buttonSelect);
-            this.groupBox2.Controls.Add(this.textBoxAddPath);
-            this.groupBox2.Location = new System.Drawing.Point(13, 79);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(630, 59);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Path";
+            this.toolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
             // 
             // textBoxAddName
             // 
-            this.textBoxAddName.Location = new System.Drawing.Point(17, 19);
+            resources.ApplyResources(this.textBoxAddName, "textBoxAddName");
             this.textBoxAddName.Name = "textBoxAddName";
-            this.textBoxAddName.Size = new System.Drawing.Size(511, 20);
-            this.textBoxAddName.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.textBoxAddName, resources.GetString("textBoxAddName.ToolTip"));
+            // 
+            // groupBox2
+            // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Controls.Add(this.buttonSelect);
+            this.groupBox2.Controls.Add(this.textBoxAddPath);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
+            // 
+            // buttonSelect
+            // 
+            resources.ApplyResources(this.buttonSelect, "buttonSelect");
+            this.buttonSelect.Name = "buttonSelect";
+            this.toolTip1.SetToolTip(this.buttonSelect, resources.GetString("buttonSelect.ToolTip"));
+            this.buttonSelect.UseVisualStyleBackColor = true;
+            this.buttonSelect.Click += new System.EventHandler(this.buttonSelect_Click);
+            // 
+            // textBoxAddPath
+            // 
+            resources.ApplyResources(this.textBoxAddPath, "textBoxAddPath");
+            this.textBoxAddPath.Name = "textBoxAddPath";
+            this.textBoxAddPath.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.textBoxAddPath, resources.GetString("textBoxAddPath.ToolTip"));
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(567, 13);
+            resources.ApplyResources(this.buttonOK, "buttonOK");
+            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 2;
-            this.buttonOK.Text = "OK";
+            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(566, 43);
+            resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 3;
-            this.buttonCancel.Text = "Cancel";
+            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // textBoxAddPath
+            // AddPathForm
             // 
-            this.textBoxAddPath.Location = new System.Drawing.Point(7, 20);
-            this.textBoxAddPath.Name = "textBoxAddPath";
-            this.textBoxAddPath.ReadOnly = true;
-            this.textBoxAddPath.Size = new System.Drawing.Size(521, 20);
-            this.textBoxAddPath.TabIndex = 0;
-            // 
-            // buttonSelect
-            // 
-            this.buttonSelect.Location = new System.Drawing.Point(549, 20);
-            this.buttonSelect.Name = "buttonSelect";
-            this.buttonSelect.Size = new System.Drawing.Size(75, 23);
-            this.buttonSelect.TabIndex = 1;
-            this.buttonSelect.Text = "Select...";
-            this.buttonSelect.UseVisualStyleBackColor = true;
-            this.buttonSelect.Click += new System.EventHandler(this.buttonSelect_Click);
-            // 
-            // AddPath
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AcceptButton = this.buttonOK;
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(655, 148);
+            this.CancelButton = this.buttonCancel;
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "AddPath";
-            this.Text = "AddPathForm";
+            this.Name = "AddPathForm";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.AddPath_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -134,5 +128,6 @@
         private System.Windows.Forms.TextBox textBoxAddPath;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
