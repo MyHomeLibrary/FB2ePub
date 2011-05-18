@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Fb2epubSettings
 {
-    public partial class AddPath : Form
+    public partial class AddPathForm : Form
     {
-        public AddPath()
+        public AddPathForm()
         {
             InitializeComponent();
         }
@@ -37,7 +37,7 @@ namespace Fb2epubSettings
         private void buttonSelect_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            folderBrowserDialog.Description = "Please select a destination folder";
+            folderBrowserDialog.Description = Resources.Fb2epubSettings.AddPathForm_buttonSelect_Click_Please_select_a_destination_folder;
             folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
             folderBrowserDialog.ShowNewFolderButton = true;
             if ( folderBrowserDialog.ShowDialog(this) == DialogResult.OK )
@@ -50,7 +50,9 @@ namespace Fb2epubSettings
 
         private void AddPath_Load(object sender, EventArgs e)
         {
-            buttonOK.Enabled = false;
+            textBoxAddName.Text = PathName;
+            textBoxAddPath.Text = PathFolder;
+            buttonOK.Enabled = !string.IsNullOrEmpty(textBoxAddPath.Text);
         }
     }
 }

@@ -61,6 +61,11 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Resources\Fb2epubSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Fb2epubSettings.resx</DependentUpon>
+    </Compile>
     <Compile Include="IniLocations\IniAccessFunctions.cs" />
     <Compile Include="IniLocations\IniLocations.cs" />
     <Compile Include="IniLocations\Location.cs" />
@@ -76,12 +81,20 @@
     <EmbeddedResource Include="AddPathForm.resx">
       <DependentUpon>AddPathForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddPathForm.ru.resx">
+      <DependentUpon>AddPathForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConverterSettingsForm.resx">
       <DependentUpon>ConverterSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ConverterSettingsForm.ru.resx">
       <DependentUpon>ConverterSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fb2epubSettings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Fb2epubSettings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fb2epubSettings.ru.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

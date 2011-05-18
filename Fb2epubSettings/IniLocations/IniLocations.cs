@@ -20,6 +20,11 @@ namespace Fb2epubSettings.IniLocations
             set { _singleDestination = value; }
         }
 
+        public bool HasShellLocations()
+        {
+            return (Find(x => x.ShowInShell) != null);
+        }
+
         public bool Init()
         {
             _iniPath = DetectIniLocation();

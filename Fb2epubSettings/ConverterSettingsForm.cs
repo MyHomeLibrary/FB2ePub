@@ -102,6 +102,7 @@ namespace Fb2epubSettings
                 listBoxPaths.SelectedIndex = 0;                
             }
             radioButtonSDDisabled.Checked = (_locations.SingleDestination == -1);
+            radioButtonSDEnabled.Checked = (_locations.SingleDestination != -1);
             UpdatePathsTabGui();
             UpdateSingleDestinationCombo();
         }
@@ -109,9 +110,13 @@ namespace Fb2epubSettings
         private void UpdateSingleDestinationCombo()
         {
             comboBoxSDValue.Items.Clear();
+            comboBoxSDValue.Enabled = (_locations.SingleDestination != -1) && _locations.HasShellLocations();
             for (int value = 0; value < _locations.Count; value++ )
             {
-                comboBoxSDValue.Items.Add(value);
+                if (_locations[value].ShowInShell)
+                {
+                    comboBoxSDValue.Items.Add(value);
+                }
             }
             if (_locations.SingleDestination != -1)
             {
@@ -281,7 +286,7 @@ namespace Fb2epubSettings
 
         private void buttonPathNew_Click(object sender, EventArgs e)
         {
-            AddPath addPathForm = new AddPath();
+            AddPathForm addPathForm = new AddPathForm();
             DialogResult result = addPathForm.ShowDialog(this);
             if ( result == DialogResult.OK)
             {
@@ -300,6 +305,7 @@ namespace Fb2epubSettings
             if (currentLocation != null)
             {
                 currentLocation.ShowInShell= checkBoxVisibleInExt.Checked;
+                UpdateSingleDestinationCombo();
             }
         }
 
@@ -356,7 +362,16 @@ namespace Fb2epubSettings
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-
+            Location currentLocation =  (Location) listBoxPaths.SelectedItem;
+            AddPathForm editPathForm = new AddPathForm();
+            editPathForm.PathName = currentLocation.Name;
+            editPathForm.PathFolder = currentLocation.Path;
+            DialogResult result = editPathForm.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                currentLocation.Name = editPathForm.PathName;
+                currentLocation.Path = editPathForm.PathFolder;
+            }
         }
 
         private void radioButtonSDDisabled_CheckedChanged(object sender, EventArgs e)
@@ -368,7 +383,12 @@ namespace Fb2epubSettings
 
         private void radioButtonSDEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            if (_locations.Count > 0)
+            if (!_locations.HasShellLocations() && radioButtonSDEnabled.Checked)
+            {
+                MessageBox.Show(this, Resources.Fb2epubSettings.ConverterSettingsForm_radioButtonSDEnabled_CheckedChanged_Can_t_enable_Single_Destination_mode___no_path_defined_as_shell_path, Resources.Fb2epubSettings.ConverterSettingsForm_radioButtonSDEnabled_CheckedChanged_Setting_error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                radioButtonSDDisabled.Checked = true;
+            }
+            if (_locations.Count > 0 && _locations[listBoxPaths.SelectedIndex].ShowInShell)
             {
                 _locations.SingleDestination = listBoxPaths.SelectedIndex;
             }
