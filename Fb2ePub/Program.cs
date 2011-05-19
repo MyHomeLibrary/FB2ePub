@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Reflection;
 using Fb2ePubConverter;
 using System.IO;
@@ -49,7 +50,11 @@ namespace Fb2ePub
             log.Debug("Application [FB2EPUB] Start");
             Console.WriteLine("FB2 to EPUB command line converter by Lord KiRon");
             Console.WriteLine(string.Format("Logging to: {0}\\",GlobalContext.Properties["LogName"]));
-            Console.WriteLine();
+                        Console.WriteLine();
+            Configuration config =
+            ConfigurationManager.OpenExeConfiguration(
+            ConfigurationUserLevel.PerUserRoamingAndLocal);
+            log.InfoFormat("Local user config path: {0}", config.FilePath);
             if (args.Length > 0)
             {
                 List<string> options = new List<string>();
