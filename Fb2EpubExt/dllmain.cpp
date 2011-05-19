@@ -24,6 +24,34 @@ CFb2EpubExtModule _AtlModule;
 
 using namespace std;
 
+std::basic_string<TCHAR> format_arg_list(const TCHAR *fmt, va_list args)
+{
+    if (!fmt) return _T("");
+    int   result = -1, length = 256;
+    TCHAR *buffer = 0;
+    while (result == -1)
+    {
+        if (buffer) delete [] buffer;
+        buffer = new TCHAR [length + 1];
+        memset(buffer, 0, length + 1);
+		result = _vsntprintf_s(buffer,length*sizeof(TCHAR), length, fmt, args);
+        length *= 2;
+    }
+    std::basic_string<TCHAR> s= buffer;
+    delete [] buffer;
+    return s;
+}
+
+std::basic_string<TCHAR> format(const TCHAR *fmt, ...)
+{
+    va_list args;
+    va_start(args, fmt);
+    std::basic_string<TCHAR> s = format_arg_list(fmt, args);
+    va_end(args);
+    return s;
+}
+
+
 // DLL Entry Point
 extern "C" BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
 {
@@ -234,6 +262,7 @@ void CFb2EpubExtModule::SetDllPath(HMODULE hModule)
 	m_DLLPath = module;
 }
 
+
 void CFb2EpubExtModule::ReadTargets()
 {
 	TCHAR temp[PATH_SIZE+1];
@@ -250,7 +279,7 @@ void CFb2EpubExtModule::ReadTargets()
 		{
 				::ZeroMemory(section,sizeof(TCHAR)*1024);
 				wsprintf(section,_T("Target%d"),iSingleDestination);
-			bool bAdd = (::GetPrivateProfileInt(section,_T("ShowInShell"),0,m_INIPath.c_str()) == 1);
+			bool bAdd = (::GetPrivateProfileInt(section,_T("ShowInShell"),1,m_INIPath.c_str()) == 1);
 			if (bAdd)
 			{
 				m_bUseSingleDestination = true;
@@ -261,14 +290,16 @@ void CFb2EpubExtModule::ReadTargets()
 					tempTarget.path = temp;
 					::ZeroMemory(temp,sizeof(TCHAR)*PATH_SIZE);
 					DWORD dwRes = ::GetPrivateProfileString(section,_T("TargetName"),NULL,temp,1024,m_INIPath.c_str());
+					std::basic_string<TCHAR> tempString;
 					if ( dwRes == 0 )
 					{
-						tempTarget.name = tempTarget.path;
+						tempString = tempTarget.path;
 					}
 					else
 					{
-						tempTarget.name = temp;
+						tempString = temp;
 					}
+					tempTarget.name = format(L"FB2ePub [%s]",tempString.c_str());
 					m_targets.push_back(tempTarget);	
 				}
 				return;
