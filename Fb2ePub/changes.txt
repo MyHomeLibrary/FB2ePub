@@ -3,6 +3,7 @@
 * Fixed anchors not converted in poem and citation authors
 * Fixed a bug in shell extension where "Here" destination did not worked it there were other target destinations in INI
 * Fixed log line bug in case can't delete file
+* Fixed a bug where files that did not contained FB2 data were deleted in case *.* mask and delete parameters were used
 
 1.0.45
 + Added new setting ("ShowInShell=" and "ShowInGUI") to FB2EPUBExt.INI file to control user available destination paths
