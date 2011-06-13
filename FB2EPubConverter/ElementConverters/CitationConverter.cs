@@ -56,7 +56,7 @@ namespace FB2EPubConverter.ElementConverters
 
             foreach (var author in citeItem.TextAuthors)
             {
-                CitationAuthorConverter citationAuthorConverter = new CitationAuthorConverter();
+                CitationAuthorConverter citationAuthorConverter = new CitationAuthorConverter() { Settings = Settings };
                 citation.Add(citationAuthorConverter.Convert(author));
             }
 

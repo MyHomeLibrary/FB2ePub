@@ -260,6 +260,7 @@ namespace Fb2ePubConverter
         /// <returns></returns>
         private bool LoadFb2RarFile(string fileName)
         {
+            bool fb2FileFound = false;
             try
             {
                 Rar rarFile = new Rar();
@@ -287,6 +288,7 @@ namespace Fb2ePubConverter
                     }
                     if (Path.GetExtension(entry.Filename).ToUpper() == ".FB2")
                     {
+                        fb2FileFound = true;
                         try
                         {
                             string tempPath = Path.GetTempPath();
@@ -321,7 +323,7 @@ namespace Fb2ePubConverter
                 Logger.Log.ErrorFormat("Error loading RAR file : {0}",ex.ToString());
                 return false;
             }
-            return true;
+            return fb2FileFound;
         }
 
         /// <summary>
@@ -447,6 +449,7 @@ namespace Fb2ePubConverter
             try
             {
                 Exception returnEx = null;
+                bool fb2FileFound = false;
                 using (var s = new ZipInputStream(File.OpenRead(fileName)))
                 {
                     ZipEntry theEntry;
@@ -462,6 +465,7 @@ namespace Fb2ePubConverter
                             Logger.Log.InfoFormat("Processing {0} ...", theEntry.Name);
                             if (Path.GetExtension(theEntry.Name).ToUpper() == ".FB2")
                             {
+                                fb2FileFound = true;
                                 Fb2FixArguments options = new Fb2FixArguments();
                                 options.incversion = true;
                                 options.regenerateId = false;
@@ -568,7 +572,7 @@ namespace Fb2ePubConverter
                 {
                     throw returnEx;
                 }
-                return true;
+                return fb2FileFound;
             }
             catch (Exception ex)
             {
