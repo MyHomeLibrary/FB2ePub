@@ -5,14 +5,13 @@ using System.Text;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
-using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace FB2EPubConverter.ElementConverters
 {
-    internal class CitationAuthorConverter : BaseElementConverter
+    internal class PoemAuthorConverter : BaseElementConverter
     {
         /// <summary>
-        /// Converts FB2 citation author element
+        /// Converts FB2 poem  author element
         /// </summary>
         /// <param name="paragraphItem">item to convert</param>
         /// <returns>XHTML representation</returns>
@@ -22,18 +21,17 @@ namespace FB2EPubConverter.ElementConverters
             {
                 throw new ArgumentNullException("paragraphItem");
             }
-            Div cite = new Div();
 
             ParagraphConverter paragraphConverter = new ParagraphConverter { Settings = Settings };
-            cite.Add(paragraphConverter.Convert(paragraphItem, ParagraphConvTargetEnum.Paragraph));
+            IBlockElement item = paragraphConverter.Convert(paragraphItem, ParagraphConvTargetEnum.Paragraph);
 
-            SetClassType(cite);
-            return cite;
+            SetClassType(item);
+            return item;
         }
 
         public override string GetElementType()
         {
-            return "citation_author";
+            return "poem_author";
         }
     }
 }

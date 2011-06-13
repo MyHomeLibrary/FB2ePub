@@ -126,6 +126,7 @@
     <Compile Include="ElementConverters\LinkSectionConverter.cs" />
     <Compile Include="ElementConverters\MainEpigraphConverter.cs" />
     <Compile Include="ElementConverters\ParagraphConverter.cs" />
+    <Compile Include="ElementConverters\PoemAuthorConverter.cs" />
     <Compile Include="ElementConverters\PoemConverter.cs" />
     <Compile Include="ElementConverters\PoemDateConverter.cs" />
     <Compile Include="ElementConverters\RowConverter.cs" />

@@ -47,8 +47,8 @@ namespace FB2EPubConverter.ElementConverters
 
             foreach (var author in poemItem.Authors)
             {
-                CitationAuthorConverter citationAuthorConverter = new CitationAuthorConverter();
-                poemContent.Add(citationAuthorConverter.Convert(author));
+                PoemAuthorConverter poemAuthorConverter = new PoemAuthorConverter() { Settings = Settings };
+                poemContent.Add(poemAuthorConverter.Convert(author));
             }
 
             if (poemItem.Date != null)

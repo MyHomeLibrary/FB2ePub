@@ -141,10 +141,26 @@ div.citation
 	text-indent: 0px;
 }
 
+div.citation_author
+{
+	font-style: italic;
+	margin: 1em 0px 1em 2em;
+	text-indent: 0px;
+}
+
 div.poem {
 	margin: 0.5em 15% 0.5em 15%;
 	text-align: center;
 }
+
+p.poem_author
+{
+	font-style: italic;
+	margin: 1em 0px 1em 2em;
+	text-indent: 0px;
+	font-size:0.9em;
+}
+
 div.stanza {
 	page-break-inside: avoid;
 	margin: 0.5em 0px;
