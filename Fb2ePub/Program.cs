@@ -249,7 +249,7 @@ namespace Fb2ePub
                 }
                 catch (Exception ex)
                 {
-                    log.ErrorFormat("Unable to delete file {0}, exception: {1}.",ex.ToString());
+                    log.ErrorFormat("Unable to delete file {0}, exception: {1}.", inFileName,ex.ToString());
                 }
             }
         }
