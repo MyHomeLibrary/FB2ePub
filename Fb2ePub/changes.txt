@@ -1,4 +1,7 @@
-﻿1.0.45
+﻿1.0.46
+* Fixed a bug in shell extension where "Here" destination did not worked it there were other target destinations in INI
+
+1.0.45
 + Added new setting ("ShowInShell=" and "ShowInGUI") to FB2EPUBExt.INI file to control user available destination paths
 + Added new setting "SingleDestination=" to [TARGETS] section of FB2EPUBExt.INI. If set to -1 all works as before, 
 	if set to TargetNumber and this target enabled for shall extension then makes this target the only FB2Epub destination available in right-click menu
