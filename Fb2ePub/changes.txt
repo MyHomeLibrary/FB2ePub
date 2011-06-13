@@ -1,4 +1,6 @@
 ﻿1.0.46
++ Added ".poem_author" style element to have it different from citation author in epigraphs
+* Fixed anchors not converted in poem and citation authors
 * Fixed a bug in shell extension where "Here" destination did not worked it there were other target destinations in INI
 
 1.0.45

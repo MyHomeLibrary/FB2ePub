@@ -40,6 +40,8 @@ Here is the list of the "class" attribute values used and their meanings:
 
 "poemdate" - date in the FB2 poem element
 
+"poem_author" - FB2 poem author element
+
 "section"?  - where "?" is a number starting from 1 - FB2 file section, the number shows the level of inclusioon: 1 - top level section, 
                  2 - section included in section level 1 etc.
                  

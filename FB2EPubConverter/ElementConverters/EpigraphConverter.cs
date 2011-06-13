@@ -39,8 +39,8 @@ namespace FB2EPubConverter.ElementConverters
                 }
                 if (element is CiteItem)
                 {
-                    CitationConverter citationAuthorConverter = new CitationConverter {Settings = Settings};
-                    content.Add(citationAuthorConverter.Convert(element as CiteItem,level + 1));
+                    CitationConverter citationConverter = new CitationConverter {Settings = Settings};
+                    content.Add(citationConverter.Convert(element as CiteItem,level + 1));
                 }
                 if (element is EmptyLineItem)
                 {
