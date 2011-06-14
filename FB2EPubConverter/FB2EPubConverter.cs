@@ -949,23 +949,61 @@ namespace Fb2ePubConverter
                 {
                     continue;
                 }
-                AddSecondaryBody(epubFile,bodyItem);
+                bool fbeNotesSection = FBENotesSection(bodyItem.Name);
+                if (fbeNotesSection)
+                {
+                    AddFbeNotesBody(epubFile, bodyItem);
+                }
+                else
+                {
+                    AddSecondaryBody(epubFile, bodyItem);                    
+                }
             }
         }
 
+        /// <summary>
+        /// Add and convert FBE style generated notes sections
+        /// </summary>
+        /// <param name="epubFile"></param>
+        /// <param name="bodyItem"></param>
+        private void AddFbeNotesBody(EPubFile epubFile, BodyItem bodyItem)
+        {
+            string docTitle = bodyItem.Name;
+            Logger.Log.DebugFormat("Adding section : {0}", docTitle);
+            BookDocument sectionDocument = null;
+            sectionDocument = epubFile.AddDocument(docTitle);
+            sectionDocument.DocumentType = GuideTypeEnum.Glossary;
+            sectionDocument.Type = SectionTypeEnum.Links;
+            sectionDocument.Content = new Div();
+            if (bodyItem.Title != null)
+            {
+                ConverterSettings converterSettings = new ConverterSettings
+                {
+                    CapitalDrop = false,
+                    Images = images,
+                    MaxSize = MaxSize,
+                    ReferencesManager = referencesManager
+                };
+                TitleConverter titleConverter = new TitleConverter { Settings = converterSettings };
+                sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title, 1));
+            }
+            sectionDocument.NavigationParent = null;
+            sectionDocument.NotPartOfNavigation = true;
+            sectionDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
+            Logger.Log.Debug("Adding sub-sections");
+            foreach (var section in bodyItem.Sections)
+            {
+                AddSection(epubFile, section, sectionDocument, true);
+            }           
+        }
+
+        /// <summary>
+        /// Add and convert generic secondary body section
+        /// </summary>
+        /// <param name="epubFile"></param>
+        /// <param name="bodyItem"></param>
         private void AddSecondaryBody(EPubFile epubFile, BodyItem bodyItem)
         {
-            GuideTypeEnum docType = GuideTypeEnum.Text;
-            SectionTypeEnum sectionType = SectionTypeEnum.Text;
-            bool notPartOfNavigation = false;
-            bool fbeNotesSection = FBENotesSection(bodyItem.Name);
-            if (fbeNotesSection) // treat "standard" FBE created notes
-            {
-                docType = GuideTypeEnum.Glossary;
-                sectionType = SectionTypeEnum.Links;
-                notPartOfNavigation = true;
-
-            }
             string docTitle = string.Empty;
             if (string.IsNullOrEmpty(bodyItem.Name))
             {
@@ -981,8 +1019,8 @@ namespace Fb2ePubConverter
             Logger.Log.DebugFormat("Adding section : {0}", docTitle);
             BookDocument sectionDocument = null;
             sectionDocument = epubFile.AddDocument(docTitle);
-            sectionDocument.DocumentType = docType;
-            sectionDocument.Type = sectionType;
+            sectionDocument.DocumentType = GuideTypeEnum.Text;
+            sectionDocument.Type = SectionTypeEnum.Text;
             sectionDocument.Content = new Div();
             if (bodyItem.Title != null)
             {
@@ -997,12 +1035,12 @@ namespace Fb2ePubConverter
                 sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,1));
             }
             sectionDocument.NavigationParent = null;
-            sectionDocument.NotPartOfNavigation = notPartOfNavigation;
+            sectionDocument.NotPartOfNavigation = false;
             sectionDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
             Logger.Log.Debug("Adding sub-sections");
             foreach (var section in bodyItem.Sections)
             {
-                AddSection(epubFile, section, sectionDocument, fbeNotesSection);
+                AddSection(epubFile, section, sectionDocument, false);
             }
         }
 
@@ -1043,7 +1081,7 @@ namespace Fb2ePubConverter
             };
             SectionConverter sectionConverter = new SectionConverter
                                                     {
-                                                        LinkSection = false,
+                                                        LinkSection = /*fbeNotesSection,*/ false,
                                                         RecursionLevel = GetRecursionLevel(navParent),
                                                         Settings = converterSettings
                                                     };
