@@ -185,11 +185,11 @@ div.title4 {
 a.note_anchor
 {
 	font-size: larger;
-	vertical-align:middle;
-	text-align:center;
+	margin-top: 2em;
+	display: block;
 }
 
-p.note_section
+.note_section
 {
 	text-align: center;
 	display: block;
