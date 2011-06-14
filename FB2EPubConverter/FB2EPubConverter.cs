@@ -1081,7 +1081,7 @@ namespace Fb2ePubConverter
             };
             SectionConverter sectionConverter = new SectionConverter
                                                     {
-                                                        LinkSection = /*fbeNotesSection,*/ false,
+                                                        LinkSection = fbeNotesSection,
                                                         RecursionLevel = GetRecursionLevel(navParent),
                                                         Settings = converterSettings
                                                     };

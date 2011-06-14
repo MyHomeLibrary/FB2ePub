@@ -1,5 +1,7 @@
 ﻿1.0.46
 + Added ".poem_author" style element to have it different from citation author in epigraphs
++ Added 2 or more returns from notes section in case referenced from more than one place, before only first backlink worked
+* Changed the way notes section is generated, now it looks a bit different
 * Fixed anchors not converted in poem and citation authors
 * Fixed a bug in shell extension where "Here" destination did not worked it there were other target destinations in INI
 * Fixed log line bug in case can't delete file

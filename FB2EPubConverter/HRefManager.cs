@@ -339,10 +339,16 @@ namespace FB2EPubConverter
                     BaseXHTMLFile iDDocument = GetIDParentDocument(epubFile, ids[idString]);
                     if (iDDocument != null)
                     {
+                        int count = 0;
                         foreach (var anchor in link.Value)
                         {
                             BaseXHTMLFile idDocument = GetIDParentDocument(epubFile, anchor);
                             IXHTMLItem referencedItem = ids[anchor.HRef.Value];
+                            IXHTMLItem newParent = DetectParentContainer(referencedItem);
+                            if (newParent == null)
+                            {
+                                continue;
+                            }
                             Anchor newAnchor = new Anchor();
                             if (idDocument == iDDocument)
                             {
@@ -361,15 +367,10 @@ namespace FB2EPubConverter
                             if ((iDDocument is BookDocument) && ((iDDocument as BookDocument).Type == SectionTypeEnum.Links))  // if it's FBE notes section
                             {
                                 newAnchor.Class.Value = "note_anchor";
-                                if (referencedItem is IBlockElement)
-                                {
-                                    referencedItem.Add(newAnchor);
-                                }
-                                else if (referencedItem.Parent is IBlockElement)
-                                {
-                                    referencedItem.Parent.Add(newAnchor);                                    
-                                }
-                                newAnchor.Add(new SimpleEPubText{ Text = idString});
+                                newParent.Add(new EmptyLine());
+                                newParent.Add(newAnchor);
+                                count++;
+                                newAnchor.Add(new SimpleEPubText { Text = (link.Value.Count > 1) ? string.Format("(<< back {0})  ",count) : string.Format("(<< back)  ") });
                             }
                         }
                     }
@@ -381,6 +382,24 @@ namespace FB2EPubConverter
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Detect parent container of the element
+        /// </summary>
+        /// <param name="referencedItem"></param>
+        /// <returns></returns>
+        private static IXHTMLItem DetectParentContainer(IXHTMLItem referencedItem)
+        {
+            if (referencedItem is IBlockElement)
+            {
+                return referencedItem;
+            }
+            else if (referencedItem.Parent is IBlockElement)
+            {
+                return referencedItem.Parent;
+            }
+            return null;
         }
 
         private static IXHTMLItem ContainsAnchor(IXHTMLItem parent)

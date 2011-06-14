@@ -6,6 +6,7 @@ using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.Exceptions;
 
 namespace FB2EPubConverter.ElementConverters
 {
@@ -22,40 +23,28 @@ namespace FB2EPubConverter.ElementConverters
             {
                 throw new ArgumentNullException("linkSectionItem");
             }
-            IBlockElement content = new Paragraph();
+            IBlockElement content = new Div();
             Anchor a = new Anchor();
             TitleConverter titleConverter = new TitleConverter{ Settings = Settings };
-            foreach (var item in titleConverter.Convert(linkSectionItem.Title, 7).SubElements())
+            foreach (var item in titleConverter.Convert(linkSectionItem.Title, 2).SubElements())
             {
-                if (item is IInlineItem)
-                {
-                    a.Add(item);
-                }
-                else if (item is SimpleEPubText)
-                {
-                    a.Add(item);
-                }
-                else
-                {
-                    foreach (var subElement in item.SubElements())
-                    {
-                        a.Add(subElement);
-                    }
-                }
+                content.Add(item);                    
             }
             string newId = Settings.ReferencesManager.EnsureGoodId(linkSectionItem.ID);
+            a.Add(new SimpleEPubText { Text = newId });
             a.HRef.Value = string.Format("{0}_back", newId);
             if (a.HRef.Value.StartsWith("_back") == false)
             {
                 a.Class.Value = "note_anchor";
                 Settings.ReferencesManager.AddBackReference(a.HRef.Value, a);
-                content.Add(a);
+                //content.Add(a);
             }
             SetClassType(content);
             return content;
 
         }
 
+    
         public override string GetElementType()
         {
             return "note_section";
