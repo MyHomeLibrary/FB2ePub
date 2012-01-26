@@ -7,6 +7,7 @@
 * Fixed log line bug in case can't delete file
 * Fixed a bug where files that did not contained FB2 data were deleted in case *.* mask and delete parameters were used
 * Updated to v1.0.15 of EpubLib.dll to fix mimetype extra characters issue (validator failed while checking)
+* Fixed rare crash when fixing the misformed XML file using own algorithm
 
 1.0.45
 + Added new setting ("ShowInShell=" and "ShowInGUI") to FB2EPUBExt.INI file to control user available destination paths
