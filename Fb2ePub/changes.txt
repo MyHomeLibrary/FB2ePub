@@ -1,6 +1,7 @@
 ﻿1.0.46
 + Added ".poem_author" style element to have it different from citation author in epigraphs
 + Added 2 or more returns from notes section in case referenced from more than one place, before only first backlink worked
++ Added ability to read some badly formated FB2 files (xmlns="") , for this ubdated to FB2Library.dll v 1.0.17
 * Changed the way notes section is generated, now it looks a bit different
 * Fixed anchors not converted in poem and citation authors
 * Fixed a bug in shell extension where "Here" destination did not worked it there were other target destinations in INI
@@ -10,6 +11,8 @@
 * Fixed rare crash when fixing the misformed XML file using own algorithm
 * Fixed rare crash in some drop character processing
 * Fixed rare crash in misformated FB2 files related to internal links
+* Fixed crash if FB2 contained internal link with only # in a reference (href) field
+
 
 1.0.45
 + Added new setting ("ShowInShell=" and "ShowInGUI") to FB2EPUBExt.INI file to control user available destination paths
