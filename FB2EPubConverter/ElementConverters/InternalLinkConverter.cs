@@ -24,7 +24,7 @@ namespace FB2EPubConverter.ElementConverters
                 throw new ArgumentNullException("internalLinkItem");
             }
             List<IXHTMLItem> list = new List<IXHTMLItem>();
-            if (!string.IsNullOrEmpty(internalLinkItem.HRef))
+            if (!string.IsNullOrEmpty(internalLinkItem.HRef) && internalLinkItem.HRef != "#")
             {
                 Anchor anchor = new Anchor();
                 bool internalLink = false;
