@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("XMLFixerLibrary")]
-[assembly: AssemblyCopyright("Copyfree ©  2010")]
+[assembly: AssemblyCopyright("Copyfree ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

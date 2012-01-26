@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lord KiRon")]
 [assembly: AssemblyProduct("Fb2ePubGui")]
-[assembly: AssemblyCopyright("Copyfree ©  2011")]
+[assembly: AssemblyCopyright("Copyfree ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
