@@ -49,7 +49,6 @@ namespace XMLFixerLibrary
             inputStream.Read(buffer, 0, 5);
             Encoding encoding = DetectEncoding(buffer);
             StreamReader sr = new StreamReader(inputStream, encoding);
-            long iCount = 0;
             while((line = sr.ReadLine()) != null)
             {
                 if (writer == null)
