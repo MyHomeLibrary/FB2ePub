@@ -1,4 +1,7 @@
 ﻿1.0.14.0
+* Fixed (removed) extra \r\n in a mimetype tag to make it more compatible 
+
+1.0.14.0
 * Converted to Visual Studio 2010 solution
 * Fixed problem with stack overflow in case of system unable to split document
 

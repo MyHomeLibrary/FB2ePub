@@ -787,7 +787,7 @@ namespace EPubLibrary
             entry.IsUnicodeText = false;
             entry.ZipFileIndex = 0;
             s.PutNextEntry(entry);
-            const string mimetype = "application/epub+zip\r\n";
+            const string mimetype = "application/epub+zip";
             ASCIIEncoding encoding = new ASCIIEncoding();
             byte[] buffer = encoding.GetBytes(mimetype);
             s.Write(buffer, 0, buffer.Length);
