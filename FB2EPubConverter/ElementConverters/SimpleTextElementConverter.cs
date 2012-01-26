@@ -212,7 +212,7 @@ namespace FB2EPubConverter.ElementConverters
                 }
                 // we need to advance to include one following nonspace character , unless
                 // we already at last character of the text
-                if (nondropPosition - dropEnd < text.Text.Length)
+                if (nondropPosition < text.Text.Length)
                 {
                     nondropPosition++;
                 }
