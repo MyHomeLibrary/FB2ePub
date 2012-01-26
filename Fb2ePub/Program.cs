@@ -207,6 +207,10 @@ namespace Fb2ePub
                     else
                     {
                         string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
+                        if (fileNameWithoutExtension == null)
+                        {
+                            fileNameWithoutExtension = "$tmp$";
+                        }
                         string fileLocation = string.Format("{0}\\",Path.GetDirectoryName(Path.GetFullPath(file)));
                         if (!string.IsNullOrEmpty(converter.OutPutPath))
                         {
