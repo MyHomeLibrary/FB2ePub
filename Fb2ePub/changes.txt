@@ -6,6 +6,7 @@
 * Fixed a bug in shell extension where "Here" destination did not worked it there were other target destinations in INI
 * Fixed log line bug in case can't delete file
 * Fixed a bug where files that did not contained FB2 data were deleted in case *.* mask and delete parameters were used
+* Updated to v1.0.15 of EpubLib.dll to fix mimetype extra characters issue (validator failed while checking)
 
 1.0.45
 + Added new setting ("ShowInShell=" and "ShowInGUI") to FB2EPUBExt.INI file to control user available destination paths
