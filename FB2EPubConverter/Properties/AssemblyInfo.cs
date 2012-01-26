@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lord KiRon http://www.fb2epub.net")]
 [assembly: AssemblyProduct("FB2EPubConverter")]
-[assembly: AssemblyCopyright("Copyfree ©  2011")]
+[assembly: AssemblyCopyright("Copyfree ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
