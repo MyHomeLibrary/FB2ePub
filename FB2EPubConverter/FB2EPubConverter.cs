@@ -533,17 +533,25 @@ namespace Fb2ePubConverter
                                                     Logger.Log.Info(
                                                         "Repair attempt failed - attempting to repair using Fb2Fix...");
                                                     // try to read broken XML
-                                                    using (Stream output = Fb2Fix.Process(s2, options))
+                                                    try
                                                     {
-                                                        try
+                                                        using (Stream output = Fb2Fix.Process(s2, options))
                                                         {
-                                                            ReadFb2FileStream(output);
+                                                            try
+                                                            {
+                                                                ReadFb2FileStream(output);
+                                                            }
+                                                            catch (XmlException)
+                                                            {
+                                                                Logger.Log.ErrorFormat("Error in file - unable to fix");
+                                                                continue;
+                                                            }
                                                         }
-                                                        catch (XmlException)
-                                                        {
-                                                            Logger.Log.ErrorFormat("Error in file - unable to fix");
-                                                            continue;
-                                                        }
+                                                    }
+                                                    catch (Exception ex)
+                                                    {
+                                                        Logger.Log.ErrorFormat("Error in file - Fb2Fix crashes - unable to fix. \nError {0}",ex.Message);
+                                                        continue;
                                                     }
                                                 }
                                             }
