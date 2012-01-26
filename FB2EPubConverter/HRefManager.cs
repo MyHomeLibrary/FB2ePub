@@ -240,11 +240,14 @@ namespace FB2EPubConverter
                             {
                                 spanElement.Add(subElement);
                             }
-                            int index = element.Parent.SubElements().IndexOf(element);
-                            if (index != -1)
+                            if (element.Parent != null)
                             {
-                                spanElement.Parent = element.Parent;
-                                element.Parent.SubElements().Insert(index, spanElement);
+                                int index = element.Parent.SubElements().IndexOf(element);
+                                if (index != -1)
+                                {
+                                    spanElement.Parent = element.Parent;
+                                    element.Parent.SubElements().Insert(index, spanElement);
+                                }                                
                             }
                             if (!string.IsNullOrEmpty(element.ID.Value))
                             {
@@ -253,7 +256,10 @@ namespace FB2EPubConverter
                             }
                             spanElement.Class.Value = "ex_bad_link";
                         }
-                        element.Parent.Remove(element);
+                        if (element.Parent != null)
+                        {
+                            element.Parent.Remove(element);   
+                        }
                     }                                     
                 }
             }
