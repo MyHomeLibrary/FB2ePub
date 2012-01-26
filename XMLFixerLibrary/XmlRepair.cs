@@ -49,6 +49,7 @@ namespace XMLFixerLibrary
             inputStream.Read(buffer, 0, 5);
             Encoding encoding = DetectEncoding(buffer);
             StreamReader sr = new StreamReader(inputStream, encoding);
+            long iCount = 0;
             while((line = sr.ReadLine()) != null)
             {
                 if (writer == null)
@@ -105,10 +106,10 @@ namespace XMLFixerLibrary
                 }
                 else 
                 {
-                    int spacePos = line.IndexOf(' ', ampersendPosition + 1);
+                    int spacePos = resString.IndexOf(' ', ampersendPosition + 1);
                     if (spacePos >= 0)
                     {
-                        string subText = line.Substring(ampersendPosition + 1, spacePos - ampersendPosition-1);
+                        string subText = resString.Substring(ampersendPosition + 1, spacePos - ampersendPosition - 1);
                         if (!IsValidAmersendSeq(subText))
                         {
                             resString = resString.Remove(ampersendPosition, 1).Insert(ampersendPosition, "&amp;");
