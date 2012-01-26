@@ -9,6 +9,7 @@
 * Updated to v1.0.15 of EpubLib.dll to fix mimetype extra characters issue (validator failed while checking)
 * Fixed rare crash when fixing the misformed XML file using own algorithm
 * Fixed rare crash in some drop character processing
+* Fixed rare crash in misformated FB2 files related to internal links
 
 1.0.45
 + Added new setting ("ShowInShell=" and "ShowInGUI") to FB2EPUBExt.INI file to control user available destination paths
