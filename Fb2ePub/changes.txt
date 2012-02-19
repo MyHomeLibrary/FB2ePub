@@ -1,4 +1,7 @@
-﻿1.0.46
+﻿1.0.47
+* Fixed settings tabs not displayed properly on XP (due to XP bug with visual styles)
+
+1.0.46
 + Added ".poem_author" style element to have it different from citation author in epigraphs
 + Added 2 or more returns from notes section in case referenced from more than one place, before only first backlink worked
 + Added ability to read some badly formated FB2 files (xmlns="") , for this ubdated to FB2Library.dll v 1.0.17

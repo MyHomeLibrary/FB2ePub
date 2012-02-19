@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConverterSettingsForm));
-            this.tabControlSettings = new System.Windows.Forms.TabControl();
+            this.tabControlSettings = new NonStyledTabs();
             this.tabPageTransliteration = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBoxTransliterateAdditional = new System.Windows.Forms.CheckBox();
