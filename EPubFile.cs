@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using EPubLibrary.Container;
 using EPubLibrary.Content;
 using EPubLibrary.CSS_Items;
+using EPubLibrary.Template;
 using EPubLibrary.TOC;
 using EPubLibrary.XHTML_Items;
 using FontsSettings;
@@ -44,6 +45,7 @@ namespace EPubLibrary
         private string coverImage = null;
         private readonly List<Font> fontObjects = new List<Font>();
         private readonly CSSFile mainCSS = new CSSFile() { FileName = "main.css", ID = "mainCSS", FileExtPath = @"CSS\main.css" };
+        private readonly AdobeTemplate adobeTemplate = new AdobeTemplate();
         private readonly List<CSSFile> cssFiles = new List<CSSFile>();
         private readonly List<BookDocument> sections = new List<BookDocument>();
         private readonly TOCFile tableOfContentFile = new TOCFile();
@@ -62,6 +64,16 @@ namespace EPubLibrary
         public List<BookDocument> BookDocuments { get { return sections; } }
 
         public Rus2Lat Transliterator { get { return rule; } }
+
+        /// <summary>
+        /// Get/Set if adobe template XPGT file should be added to resulting file
+        /// </summary>
+        public bool UseAdobeTemplate { get; set; }
+
+        /// <summary>
+        /// Get/Set Path to Adobe template XPGT file
+        /// </summary>
+        public string AdobeTemplatePath{get;set;}
 
         /// <summary>
         /// Get/Set "flat" mode , when flat mode is set no subfolders created inside the ZIP
@@ -318,6 +330,7 @@ namespace EPubLibrary
             catch (Exception ex)
             {
                 Logger.log.ErrorFormat("Error generating file, exception thrown : {0}", ex.ToString());
+                File.Delete(outFileName);
             }
         }
 
@@ -417,6 +430,7 @@ namespace EPubLibrary
 
         private void AddFiles(ZipOutputStream stream)
         {
+            AddAdobeTemplate(stream);
             AddCSSFiles(stream);
             AddCover(stream);
             AddTitle(stream);
@@ -425,6 +439,34 @@ namespace EPubLibrary
             if (about_texts.Count >0 || about_links.Count > 0)
             {
                 AddAbout(stream);                
+            }
+        }
+
+        private void AddAdobeTemplate(ZipOutputStream stream)
+        {
+            if (!UseAdobeTemplate || string.IsNullOrEmpty(AdobeTemplatePath))
+            {
+                return;
+            }
+            if (!FlatStructure)
+            {
+                ZipEntry file = zipFactory.MakeDirectoryEntry(@"OEBPS\Template", false);
+                stream.PutNextEntry(file);
+            }
+            stream.SetLevel(9);
+            adobeTemplate.TemplateFileInputPath = AdobeTemplatePath;
+            try
+            {
+                adobeTemplate.Load();
+                string fileNameFormat = string.Format(FlatStructure ? "{0}" : @"Template\{0}", adobeTemplate.TemplateFileOutputName);
+                ZipEntry templateFile = zipFactory.MakeFileEntry(@"OEBPS\"+fileNameFormat, false);
+                stream.PutNextEntry(templateFile);
+                adobeTemplate.Write(stream);
+                content.AddXPGTTemplate(fileNameFormat, adobeTemplate.TemplateFileOutputName);
+            }
+            catch (Exception)
+            {             
+                Logger.log.ErrorFormat("Exception adding template, template will not be added");
             }
         }
 
@@ -441,11 +483,11 @@ namespace EPubLibrary
 
                 AnnotationPage.FlatStructure = FlatStructure;
                 AnnotationPage.EmbedStyles = EmbedStyles;
-                //foreach (var cssFile in CSSFiles)
-                //{
-                //    AnnotationPage.StyleFiles.Add(cssFile);
-                //}
                 AnnotationPage.StyleFiles.Add(mainCSS);
+                if (UseAdobeTemplate)
+                {
+                    AnnotationPage.StyleFiles.Add(adobeTemplate);
+                }
 
                 AnnotationPage.Write(stream);
 
@@ -471,37 +513,8 @@ namespace EPubLibrary
                 stream.PutNextEntry(file);               
             }
             AddMainCSS(stream);
-            //AddOtherCSSFiles(stream);
         }
 
-        //private void AddOtherCSSFiles(ZipOutputStream stream)
-        //{
-        //    foreach (var cssFile in cssFiles)
-        //    {
-        //        stream.SetLevel(9);
-        //        ZipEntry file = zipFactory.MakeFileEntry(string.Format(FlatStructure?"{0}":@"OEBPS\{0}", cssFile.EPubFilePath), false);
-        //        stream.PutNextEntry(file);
-
-        //        try
-        //        {
-        //            using (var reader = new BinaryReader(File.OpenRead(cssFile.FileExtPath)))
-        //            {
-        //                int iCount = 0;
-        //                Byte[] buffer = new Byte[2048];
-        //                while ((iCount = reader.Read(buffer, 0, 2048)) != 0)
-        //                {
-        //                    stream.Write(buffer, 0, iCount);
-        //                }
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Logger.log.ErrorFormat("CSS file {0} can't be added : {1}", cssFile.FileExtPath, ex.ToString());
-        //            continue;
-        //        }
-        //        content.AddCSS(cssFile.EPubFilePath, Path.GetFileNameWithoutExtension(cssFile.FileExtPath));               
-        //    }
-        //}
 
         private void AddMainCSS(ZipOutputStream stream)
         {
@@ -531,6 +544,10 @@ namespace EPubLibrary
                 //    TitlePage.StyleFiles.Add(cssFile);
                 //}
                 TitlePage.StyleFiles.Add(mainCSS);
+                if (UseAdobeTemplate)
+                {
+                    TitlePage.StyleFiles.Add(adobeTemplate);
+                }
 
                 TitlePage.Write(stream);
 
@@ -553,6 +570,10 @@ namespace EPubLibrary
             AboutPageFile aboutPage = new AboutPageFile{ FlatStructure = FlatStructure, EmbedStyles = EmbedStyles,AboutLinks = about_links, AboutTexts = about_texts};
             aboutPage.Create();
             aboutPage.StyleFiles.Add(mainCSS);
+            if (UseAdobeTemplate)
+            {
+                aboutPage.StyleFiles.Add(adobeTemplate);
+            }
 
             aboutPage.Write(stream);
 
@@ -680,6 +701,11 @@ namespace EPubLibrary
             //    cover.StyleFiles.Add(cssFile);
             //}
             cover.StyleFiles.Add(mainCSS);
+            if (UseAdobeTemplate)
+            {
+                cover.StyleFiles.Add(adobeTemplate);                
+            }
+
 
 
             cover.Write(stream);
@@ -803,11 +829,12 @@ namespace EPubLibrary
         public  BookDocument AddDocument(string ID)
         {
             BookDocument section = new BookDocument {PageTitle = ID};
-            //foreach (var cssFile in CSSFiles)
-            //{
-            //    section.StyleFiles.Add(cssFile);
-            //}
             section.StyleFiles.Add(mainCSS);
+            if (UseAdobeTemplate)
+            {
+                section.StyleFiles.Add(adobeTemplate);
+            }
+
             sections.Add(section);
             return section;
         }

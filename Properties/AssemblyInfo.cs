@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lord KiRon http://www.fb2epub.net")]
 [assembly: AssemblyProduct("EPubLibrary")]
-[assembly: AssemblyCopyright("Copyfree ©  2011")]
+[assembly: AssemblyCopyright("Copyfree ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.15.0")]
-[assembly: AssemblyFileVersion("1.0.15.0")]
+[assembly: AssemblyVersion("1.0.16.0")]
+[assembly: AssemblyFileVersion("1.0.16.0")]

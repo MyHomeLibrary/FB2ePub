@@ -20,7 +20,7 @@ namespace EPubLibrary.XHTML_Items
         protected XNamespace xhtmlNamespace = @"http://www.w3.org/1999/xhtml";
         protected string pageTitle;
 
-        private readonly List<CSSFile> styles = new List<CSSFile>();
+        private readonly List<StyleElement> styles = new List<StyleElement>();
 
         private XHTMLDocument mainDocument = new XHTMLDocument(XHTMRulesEnum.EPUBCompatible);
 
@@ -55,7 +55,7 @@ namespace EPubLibrary.XHTML_Items
         /// <summary>
         /// Get access to list of CSS files
         /// </summary>
-        public List<CSSFile> StyleFiles { get { return styles; } }
+        public List<StyleElement> StyleFiles { get { return styles; } }
 
 
         public BaseXHTMLFile()
@@ -101,7 +101,6 @@ namespace EPubLibrary.XHTML_Items
                         using (MemoryStream outStream = new MemoryStream())
                         {
                             file.Write(outStream);
-                            //styleElementEntry.Add(new SimpleEPubText { Text = outStream.ToString() });
                             styleElementEntry.Content.Text = encoding.GetString(outStream.ToArray());
                         }
                     }
@@ -114,10 +113,10 @@ namespace EPubLibrary.XHTML_Items
                     Link cssStyleShit = new Link();
                     styleElement = cssStyleShit;
                     cssStyleShit.Relation.Value = "stylesheet";
-                    cssStyleShit.Type.Value = CSSFile.MediaType;
+                    cssStyleShit.Type.Value = file.GetMediaType();
                     cssStyleShit.HRef.Value = FlatStructure
-                                                  ? string.Format("../{0}", file.EPubFilePath)
-                                                  : file.EPubFilePath;
+                                                  ? string.Format("../{0}", file.GetFilePathExt())
+                                                  : file.GetFilePathExt();
                 }
                 headElement.Add(styleElement);
             }

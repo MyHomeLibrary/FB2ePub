@@ -1,4 +1,7 @@
-﻿1.0.14.0
+﻿1.0.16.0
++ Added code to include external adobe XPGT templates into a resulting ePub 
+
+1.0.15.0
 * Fixed (removed) extra \r\n in a mimetype tag to make it more compatible 
 
 1.0.14.0

@@ -9,6 +9,7 @@ using EPubLibrary.Content.Guide;
 using EPubLibrary.Content.Manifest;
 using EPubLibrary.Content.Spine;
 using EPubLibrary.CSS_Items;
+using EPubLibrary.Template;
 
 namespace EPubLibrary.Content
 {
@@ -252,6 +253,12 @@ namespace EPubLibrary.Content
         public void AddCSS(string link, string id)
         {
             ManifestItem maincss = new ManifestItem{ HRef = link.Replace('\\','/'), ID = id, MediaType = CSSFile.MediaType };
+            manifest.Add(maincss);
+        }
+
+        public void AddXPGTTemplate(string link, string id)
+        {
+            ManifestItem maincss = new ManifestItem { HRef = link.Replace('\\', '/'), ID = id, MediaType = AdobeTemplate.MediaType };
             manifest.Add(maincss);
         }
 

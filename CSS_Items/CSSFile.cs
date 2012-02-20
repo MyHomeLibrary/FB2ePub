@@ -7,7 +7,7 @@ using System.Text;
 
 namespace EPubLibrary.CSS_Items
 {
-    public class CSSFile //: List<BaseCSSItem>
+    public class CSSFile : StyleElement
     {
         private readonly List<FontDefinition> fonts = new List<FontDefinition>();
         private string ePubFilePath;
@@ -150,7 +150,7 @@ namespace EPubLibrary.CSS_Items
         /// Writes CSS file to stream
         /// </summary>
         /// <param name="stream"></param>
-        public void Write(Stream stream)
+        public override void Write(Stream stream)
         {
             foreach (var item in fonts)
             {
@@ -163,5 +163,15 @@ namespace EPubLibrary.CSS_Items
             }
         }
 
+
+        public override string GetFilePathExt()
+        {
+            return EPubFilePath;
+        }
+
+        public override string GetMediaType()
+        {
+            return MediaType;
+        }
     }
 }
