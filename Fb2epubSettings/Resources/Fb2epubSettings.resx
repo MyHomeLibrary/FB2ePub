@@ -107,4 +107,7 @@
 	<data name="AddPathForm_buttonSelect_Click_Please_select_a_destination_folder">
 		<value xml:space="preserve">Please select a destination folder</value>
 	</data>
+	<data name="ConverterSettingsForm_buttonBrowseForXPGT_Click_Please_select_Adobe_XPGT_template_file">
+		<value xml:space="preserve">Please select Adobe XPGT template file</value>
+	</data>
 </root>
