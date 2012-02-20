@@ -1,5 +1,10 @@
 ﻿1.0.47
++ Added code to include external adobe XPGT templates into a resulting ePub (updated to v1.0.16 of epublibrary)
++ Added new parameter "-xpgt:[0:1]" to enable (1 - default) or disable (0) Adobe XPGT template file
++ Added new parameter "-xpgtPath:<path_to_PGT_file>" to provide alternative path to XPGT template file
 * Fixed settings tabs not displayed properly on XP (due to XP bug with visual styles)
+* If conversion critically failed for some reason, the converter no longer leaves defective (not finished) output file
+
 
 1.0.46
 + Added ".poem_author" style element to have it different from citation author in epigraphs

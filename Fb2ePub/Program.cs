@@ -331,6 +331,8 @@ namespace Fb2ePub
             converter.FileAsFormat = Fb2epubSettings.Fb2Epub.Default.FileAsFormat;
             converter.CapitalDrop = Fb2epubSettings.Fb2Epub.Default.Capitalize;
             converter.SkipAboutPage = Fb2epubSettings.Fb2Epub.Default.SkipAboutPage;
+            converter.EnableAdobeTemplate = Fb2epubSettings.Fb2Epub.Default.UseAdobeTemplate;
+            converter.AdobeTemplatePath = Fb2epubSettings.Fb2Epub.Default.AdobeTemplatePath;
             //Fb2Epub.Default.Save();
         }
 
@@ -646,6 +648,30 @@ namespace Fb2ePub
                 else if (command.StartsWith("settings"))
                 {
                     _settingsMode = true;
+                }
+                else if (command.StartsWith("xpgt:"))
+                {
+                    string commandValue = command.Substring(5);
+                    int value;
+                    if (int.TryParse(commandValue, out value))
+                    {
+                        if (value == 0)
+                        {
+                            converter.EnableAdobeTemplate = false;
+                        }
+                        else if (value == 1)
+                        {
+                            converter.EnableAdobeTemplate = true;
+                        }
+                        else
+                        {
+                            log.InfoFormat("Invalid -xpgt: parameter value {0}.", value);
+                        }
+                    }                   
+                }
+                else if (command.StartsWith("xpgtpath:"))
+                {
+                    converter.AdobeTemplatePath =  command.Substring(9);
                 }
                 else
                 {
