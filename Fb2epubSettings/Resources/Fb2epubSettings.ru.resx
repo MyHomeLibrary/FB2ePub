@@ -120,6 +120,9 @@
   <data name="AddPathForm_buttonSelect_Click_Please_select_a_destination_folder" xml:space="preserve">
     <value>Пожалуйста выберите путь</value>
   </data>
+  <data name="ConverterSettingsForm_buttonBrowseForXPGT_Click_Please_select_Adobe_XPGT_template_file" xml:space="preserve">
+    <value>Пожалуйста выберите файл шаблона XGPT</value>
+  </data>
   <data name="ConverterSettingsForm_radioButtonSDEnabled_CheckedChanged_Can_t_enable_Single_Destination_mode___no_path_defined_as_shell_path" xml:space="preserve">
     <value>Не могу включить режим единственного пути - ни один из путей не помечен как путь расширения</value>
   </data>

@@ -32,9 +32,16 @@ namespace Fb2epubSettings
                 return;
             }
             savePathsList();
+            saveXPGT();
             Fb2Epub.Default.Save();
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void saveXPGT()
+        {
+            Fb2Epub.Default.UseAdobeTemplate = checkBoxUseXPGT.Checked;
+            Fb2Epub.Default.AdobeTemplatePath = textBoxTemplatePath.Text;
         }
 
         private void savePathsList()
@@ -84,10 +91,18 @@ namespace Fb2epubSettings
             checkBoxEmbedStyles.Checked = Fb2Epub.Default.EmbedStyles;
             checkBoxCapitalize.Checked = Fb2Epub.Default.Capitalize;
             checkBoxSkipAboutPage.Checked = Fb2Epub.Default.SkipAboutPage;
+            checkBoxUseXPGT.Checked = Fb2Epub.Default.UseAdobeTemplate;
             LoadFixMode();
             UpdateSequencesGroup();
             _locations.Init();
             LoadPathsGroup();
+            UpdateXPGTGroupGUI();
+        }
+
+        private void UpdateXPGTGroupGUI()
+        {
+            groupBoxXPGTPath.Enabled = checkBoxUseXPGT.Checked;
+            buttonXPGTClear.Enabled = (!string.IsNullOrEmpty(textBoxTemplatePath.Text) && checkBoxUseXPGT.Checked);
         }
 
         private void LoadPathsGroup()
@@ -401,6 +416,68 @@ namespace Fb2epubSettings
         {
             _locations.SingleDestination = (int) comboBoxSDValue.SelectedItem;
             listBoxPaths.Refresh();
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                OnButtonPressedCallback d = buttonClear_Click;
+                Invoke(d, new object[] { sender, e });
+                return;
+            }
+            textBoxTemplatePath.Text = string.Empty;
+            UpdateXPGTGroupGUI();
+        }
+
+        private void buttonBrowseForXPGT_Click(object sender, EventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                OnButtonPressedCallback d = buttonBrowseForXPGT_Click;
+                Invoke(d, new object[] { sender, e });
+                return;
+            }
+            OpenFileDialog selectTemplateDlg = new OpenFileDialog();
+            selectTemplateDlg.Title = Resources.Fb2epubSettings.ConverterSettingsForm_buttonBrowseForXPGT_Click_Please_select_Adobe_XPGT_template_file;
+            selectTemplateDlg.AutoUpgradeEnabled = true;
+            selectTemplateDlg.CheckFileExists = true;
+            selectTemplateDlg.CheckPathExists = true;
+            selectTemplateDlg.DefaultExt = "*.xpgt";
+            selectTemplateDlg.FilterIndex = 1;
+            selectTemplateDlg.Multiselect = false;
+            selectTemplateDlg.Filter = string.Format("XPGT file | *.xpgt|Any file | *.*");
+            selectTemplateDlg.RestoreDirectory = true;
+            selectTemplateDlg.ShowReadOnly = false;
+            selectTemplateDlg.SupportMultiDottedExtensions = true;
+            selectTemplateDlg.ValidateNames = true;
+            DialogResult result = selectTemplateDlg.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                textBoxTemplatePath.Text = selectTemplateDlg.FileName;
+            }
+            UpdateXPGTGroupGUI();
+        }
+
+        private void checkBoxUseXPGT_CheckedChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.UseAdobeTemplate = checkBoxUseXPGT.Checked;
+            UpdateXPGTGroupGUI();
+        }
+
+        private void buttonEdit_Click(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void buttonBrowseForXGPT_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBoxUseXGPT_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
 
