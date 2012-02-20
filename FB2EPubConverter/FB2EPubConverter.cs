@@ -83,6 +83,16 @@ namespace Fb2ePubConverter
 
 
         /// <summary>
+        /// Enable/Disable embeding of Adobe XPGT Template into a resulting file
+        /// </summary>
+        public bool EnableAdobeTemplate { get; set; }
+
+        /// <summary>
+        /// Path to location of Adobe XPGT template
+        /// </summary>
+        public string AdobeTemplatePath { get; set; }
+
+        /// <summary>
         /// Get/Set if sequences abbreviations should be added to title
         /// </summary>
         public bool AddSeqToTitle { get; set; }
@@ -721,6 +731,15 @@ namespace Fb2ePubConverter
                     {
                         epubFile.TranslitMode = TranslitModeEnum.None;
                     }
+                    if (string.IsNullOrEmpty(AdobeTemplatePath))
+                    {
+                        epubFile.AdobeTemplatePath = @".\Template\template.xpgt";
+                    }
+                    else
+                    {
+                        epubFile.AdobeTemplatePath = AdobeTemplatePath;
+                    }
+                    epubFile.UseAdobeTemplate = EnableAdobeTemplate;
                     epubFile.TranliterateToc = TransliterateToc;
                     Logger.Log.DebugFormat("Transliteration mode : {0}", epubFile.TranslitMode);
                     images.RemoveAlpha = ConvertAlphaPng;

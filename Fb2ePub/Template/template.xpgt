@@ -1,0 +1,8 @@
+﻿<ade:template xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ade="http://ns.adobe.com/2006/ade" 
+  xmlns:fo="http://www.w3.org/1999/XSL/Format">
+ <fo:layout-master-set>
+ </fo:layout-master-set>
+ <ade:style>
+ </ade:style>
+</ade:template>
