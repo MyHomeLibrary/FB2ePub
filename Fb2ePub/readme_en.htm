@@ -10,15 +10,18 @@
     <h2>
         Description</h2>
     <p>
-        This program is command line converter from
+        This program 
+        suite consists of command line converter from
         <abbr>
             FB2</abbr>
-        (Fiction Book 2) format files into <acronym>EPUB</acronym> format files.<br />
+        (Fiction Book 2) format files into <acronym>EPUB</acronym> format files, GUI 
+        Utility converter and Windows shell extension .<br />
         The program uses embeded fonts with cyrillic <acronym>UNICODE</acronym> support
         to allow reading resulting files on readers without cyrillic support.
         <br />
     </p>
     <h3>
+        Command line utility
         Usage:
     </h3>
     <p>
@@ -179,7 +182,15 @@
         <dt><strong>-cap:<em>[0/1]</em></strong></dt>
         <dd>
         Enable (1) /disable (0)"capitalization" of section first character making it big and appear on several lines.<dfn>-cap:1</dfn> - default
-        </dd>                           
+        </dd>
+        <dt><strong>-xpgt:[0/1]<em></em></strong></dt>
+        <dd>
+        Enable (1) or disable (0, default) embeding of Adobe XPGT template into resulting ePub File. <dfn>-xpgt:0</dfn> - default
+        </dd>
+        <dt><strong>-xpgtPath:<em>[file_path]</em></strong></dt>
+        <dd>
+        Forces converter to use Adobe XPGT template file specified by this parameter instead of default XPGT template "template.xpgt" located in "Template" subfolder
+        </dd>
     </dl>
     <h2>
         Fonts:
@@ -342,7 +353,15 @@
         <dd> 
         - Invokes "capitalization" of  section first character making it appera big and take several line. 
         Values are: "False" - disabled  ,  "True" - enabled (default). 
-        </dd>              
+        </dd>
+        <dt>UseAdobeTemplate</dt>
+        <dd>
+        - Controls if Adobe XPGT templkate is to be added to the resulting ePub file. Values: "True" and "False" (default). Please see <a href="http://wiki.mobileread.com/wiki/XPGT">http://wiki.mobileread.com/wiki/XPGT</a> for details on XPGT templates.
+        </dd>
+        <dt>AdobeTemplatePath</dt>
+        <dd>
+        - Specifies non-default path to the XPGT template to use in case enabled (in case of empty - default "Template" folder "template.xpgt" file used.
+        </dd>
         <dt>Fonts</dt>
         <dd>
         - Contains font definitions to be used by program, <br />
