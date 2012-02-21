@@ -737,6 +737,10 @@ namespace Fb2ePub
             Console.WriteLine();
             Console.WriteLine("-emstyle:[0/1] - enable (1) or disable (0, default) embeding CCS styles into XHTML files instead referensing them");
             Console.WriteLine();
+            Console.WriteLine("-xpgt:[0/1] - enable (1) or disable (0, default) embeding of Adobe XPGT template into resulting ePub File");
+            Console.WriteLine();
+            Console.WriteLine("-xpgtPath:[file_path] - Forces converter to use Adobe XPGT template file specified by this parameter instead of default XPGT template \"template.xpgt\" located in \"Template\" subfolder");
+            Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();

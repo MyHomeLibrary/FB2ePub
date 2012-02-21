@@ -97,6 +97,7 @@
     <EmbeddedResource Include="Resources\Fb2epubSettings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Fb2epubSettings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Fb2epubSettings.ru.resx" />
   </ItemGroup>
