@@ -39,7 +39,6 @@ namespace Fb2ePub
         private static bool abortDeletion = false;
 
         const string Registrator2Run = "registerfb2epub.exe";
-        private static bool _settingsMode = false;
 
         static void Main(string[] args)
         {
@@ -644,10 +643,6 @@ namespace Fb2ePub
                 else if (command.StartsWith("noabout"))
                 {
                     converter.SkipAboutPage = true;
-                }
-                else if (command.StartsWith("settings"))
-                {
-                    _settingsMode = true;
                 }
                 else if (command.StartsWith("xpgt:"))
                 {

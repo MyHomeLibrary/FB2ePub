@@ -1,6 +1,6 @@
 ﻿1.0.47
 + Added code to include external adobe XPGT templates into a resulting ePub (updated to v1.0.16 of epublibrary)
-+ Added new parameter "-xpgt:[0:1]" to enable (1 - default) or disable (0) Adobe XPGT template file
++ Added new parameter "-xpgt:[0:1]" to enable (1 ) or disable (0)- default Adobe XPGT template file
 + Added new parameter "-xpgtPath:<path_to_XPGT_file>" to provide alternative path to XPGT template file
 + Added new tab in settings to setup XPGT template 
 + Added two configuration XML parameters "UseAdobeTemplate" (True - to add Adobe XPGT file to resulting ePub, default False) and "AdobeTemplatePath" - path to XPGT template file
