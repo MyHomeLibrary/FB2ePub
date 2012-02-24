@@ -8,6 +8,7 @@
 * Changed command line utility console output to show more than one page of help
 * Fixed settings tabs not displayed properly on XP (due to XP bug with visual styles)
 * If conversion critically failed for some reason, the converter no longer leaves defective (not finished) output file
+* fixed installer to copy Fb2Fix files that were missing
 
 
 1.0.46

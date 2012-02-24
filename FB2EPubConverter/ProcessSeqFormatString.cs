@@ -58,12 +58,12 @@ namespace FB2EPubConverter
             {
                 return bookTitle;
             }
-            String newBookTitle = ParseTemplate("bt", bookTitle),
+            string newBookTitle = ParseTemplate("bt", bookTitle),
               newSeqName = ParseTemplate("sf", seqName),
               newSeqAbbr = Abbreviate(ParseTemplate("sa", seqName)),
               newSeqNo = ParseTemplate("sn", seqNo);
 
-            String rc = Format.Replace("$bt$", newBookTitle);
+            string rc = Format.Replace("$bt$", newBookTitle);
             rc = rc.Replace("$sf$", newSeqName);
             rc = rc.Replace("$sa$", newSeqAbbr);
             rc = rc.Replace("$sn$", newSeqNo);
@@ -72,7 +72,7 @@ namespace FB2EPubConverter
 
         public static string Abbreviate(string name)
         {
-            String[] words = name.Split(' ');
+            string[] words = name.Split(' ');
             StringBuilder sb = new StringBuilder();
             foreach (var word in words)
                 if (!string.IsNullOrEmpty(word))
@@ -81,16 +81,16 @@ namespace FB2EPubConverter
             return sb.ToString().TrimEnd(' ');
         }
 
-        private string ParseTemplate(String expr, String source)
+        private string ParseTemplate(string expr, String source)
         {
             Regex rx = new Regex(@"%" + expr + @"(\.(?<mode>[clu]))?%", RegexOptions.IgnoreCase);
 
-            String rc = "";
+            string rc = "";
             if (rx.IsMatch(Format))
             {
                 Match mc = rx.Match(Format);
 
-                String mode = mc.Groups["mode"].ToString();
+                string mode = mc.Groups["mode"].ToString();
                 switch (mode)
                 {
                     case "c":
@@ -112,18 +112,18 @@ namespace FB2EPubConverter
         }
 
 
-        private string ParseTemplate(String expr, int? source)
+        private string ParseTemplate(string expr, int? source)
         {
             Regex rx = new Regex(@"%" + expr + @"(\.(?<mode>\d*))?%", RegexOptions.IgnoreCase);
 
-            String rc = source.ToString();
+            string rc = source.ToString();
             if (rx.IsMatch(Format))
             {
                 Match mc = rx.Match(Format);
-                String mode = mc.Groups["mode"].ToString();
+                string mode = mc.Groups["mode"].ToString();
 
-                if (!String.IsNullOrEmpty(mode))
-                    rc = String.Format("{0:D" + mode + "}", source);
+                if (!string.IsNullOrEmpty(mode))
+                    rc = string.Format("{0:D" + mode + "}", source);
             }
             Format = Regex.Replace(Format, @"%" + expr + @"(\.(?<mode>\d*))?%", "$" + expr + "$");
 
