@@ -287,7 +287,7 @@ namespace Fb2ePubConverter
                 }
 
                 int n = rarFile.NumEntries;
-                Logger.Log.DebugFormat("Detected {0} entries in RAR file");
+                Logger.Log.DebugFormat("Detected {0} entries in RAR file", n);
                 for (int i = 0; i <= n - 1; i++)
                 {
                     RarEntry entry = rarFile.GetEntryByIndex(i);
