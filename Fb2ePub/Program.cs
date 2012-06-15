@@ -34,7 +34,7 @@ namespace Fb2ePub
         
         private static ILog log;
         private static bool lookInSubFolders = false;
-        private static PathSearchOptions searchMask = PathSearchOptions.Fb2WithArchives;
+        private static PathSearchOptions _searchMask = PathSearchOptions.Fb2WithArchives;
         private static bool deleteSource = false;
         private static bool abortDeletion = false;
 
@@ -126,29 +126,19 @@ namespace Fb2ePub
                 //}
                 Console.WriteLine(string.Format("Loading {0}...", fileParams[0]));
                 List<string> filesInMask = new List<string>();
-                bool folder = Directory.Exists(fileParams[0]);
-                if (fileParams[0].Contains("*") || fileParams[0].Contains("?") || folder)
+                bool folderExists = Directory.Exists(fileParams[0]);
+                if (fileParams[0].Contains("*") || fileParams[0].Contains("?") || folderExists)
                 {
-                    if (folder && !fileParams[0].EndsWith("\\") && !fileParams[0].EndsWith("/")) //just to make sure we have a folder
+                    if (folderExists && !fileParams[0].EndsWith(Path.DirectorySeparatorChar.ToString()) && !fileParams[0].EndsWith(Path.AltDirectorySeparatorChar.ToString()) && !fileParams[0].EndsWith(".")) //just to make sure we have a folder
                     {
-                        fileParams[0] += "\\";
+                        fileParams[0] += Path.DirectorySeparatorChar;
                     }
                     string fileName = Path.GetFileName(fileParams[0]);
-                    if (string.IsNullOrEmpty(fileName))
+                    // if empty file name or . we list folder
+                    if (string.IsNullOrEmpty(fileName) || fileParams[0].EndsWith("."))
                     {
-                        fileName = "*.*";
-                        if (searchMask == PathSearchOptions.Fb2Only)
-                        {
-                            fileName = "*.fb2";
-                        }
-                        else if (searchMask == PathSearchOptions.Fb2WithArchives)
-                        {
-                            fileName = "*.fb2,*.fb2.zip,*.fb2.rar";
-                        }
-                        else if (searchMask == PathSearchOptions.WithAllArchives)
-                        {
-                            fileName = "*.fb2,*.zip,*.rar";
-                        }
+                        // based on search mask options
+                        fileName = GetFileMask(_searchMask);
                     }
                     foreach (var subMask in fileName.Split(','))
                     {
@@ -232,6 +222,28 @@ namespace Fb2ePub
                 ShowHelp();
             }
             log.Debug("Application [FB2EPUB] End");
+        }
+
+        /// <summary>
+        /// Return default file mask based on options
+        /// </summary>
+        /// <returns></returns>
+        private static string GetFileMask(PathSearchOptions searchMask)
+        {
+            string fileName = "*.*";
+            if (searchMask == PathSearchOptions.Fb2Only)
+            {
+                fileName = "*.fb2";
+            }
+            else if (searchMask == PathSearchOptions.Fb2WithArchives)
+            {
+                fileName = "*.fb2,*.fb2.zip,*.fb2.rar";
+            }
+            else if (searchMask == PathSearchOptions.WithAllArchives)
+            {
+                fileName = "*.fb2,*.zip,*.rar";
+            }
+            return fileName;
         }
 
         private static void Convert(Fb2EPubConverterEngine converter, string fileName,string inFileName)
@@ -444,19 +456,19 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            searchMask = PathSearchOptions.Fb2Only;
+                            _searchMask = PathSearchOptions.Fb2Only;
                         }
                         else if (value == 1)
                         {
-                            searchMask = PathSearchOptions.Fb2WithArchives;
+                            _searchMask = PathSearchOptions.Fb2WithArchives;
                         }
                         else if (value == 2)
                         {
-                            searchMask = PathSearchOptions.WithAllArchives;
+                            _searchMask = PathSearchOptions.WithAllArchives;
                         }
                         else if (value == 3)
                         {
-                            searchMask = PathSearchOptions.All;
+                            _searchMask = PathSearchOptions.All;
                         }
                         else
                         {
