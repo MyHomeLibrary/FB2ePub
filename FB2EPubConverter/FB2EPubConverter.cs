@@ -417,7 +417,7 @@ namespace Fb2ePubConverter
             XmlReaderSettings settings = new XmlReaderSettings
                                              {
                                                  ValidationType = ValidationType.None,
-                                                 ProhibitDtd = true,
+                                                 DtdProcessing = DtdProcessing.Prohibit,
                                                  CheckCharacters = false
                                                  
             };
