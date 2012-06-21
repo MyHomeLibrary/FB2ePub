@@ -105,25 +105,6 @@ namespace Fb2ePub
                 ProcessSettings(converter);
                 ProcessParameters(options, converter);
                 converter.Fonts = Fb2epubSettings.Fb2Epub.Default.Fonts;
-                //if (Fb2Epub.Default.Fonts == null)
-                //{
-                //    Fb2Epub.Default.Fonts = new FontSettings();
-                //    Font font1 = new Font();
-                //    font1.Destinations.Add(new Destination{Path = @"%ResourceFolder%\Fonts/LiberationSerif-Regular.ttf",Type = DestinationTypeEnum.Embedded});
-                //    font1.DecorateFamilyName = true;
-                //    font1.Style = FontStylesEnum.Normal;
-                //    font1.CSSTargets.Add("body");
-                //    Fb2Epub.Default.Fonts.Add(font1);
-
-                //    Font font2 = new Font();
-                //    font2.Destinations.Add(new Destination { Path = @"%ResourceFolder%\Fonts/LiberationSerif-Italic.ttf", Type = DestinationTypeEnum.Embedded });
-                //    font2.DecorateFamilyName = true;
-                //    font2.CSSTargets.Add("body");
-                //    font2.Style = FontStylesEnum.Italic;
-                //    Fb2Epub.Default.Fonts.Add(font2);
-                
-                //    Fb2Epub.Default.Save();                    
-                //}
                 Console.WriteLine(string.Format("Loading {0}...", fileParams[0]));
                 List<string> filesInMask = new List<string>();
                 bool folderExists = Directory.Exists(fileParams[0]);
@@ -344,6 +325,7 @@ namespace Fb2ePub
             converter.SkipAboutPage = Fb2epubSettings.Fb2Epub.Default.SkipAboutPage;
             converter.EnableAdobeTemplate = Fb2epubSettings.Fb2Epub.Default.UseAdobeTemplate;
             converter.AdobeTemplatePath = Fb2epubSettings.Fb2Epub.Default.AdobeTemplatePath;
+            converter.DecorateFontNames = Fb2epubSettings.Fb2Epub.Default.DecorateFontNames;
             //Fb2Epub.Default.Save();
         }
 

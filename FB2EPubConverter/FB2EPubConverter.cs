@@ -154,7 +154,13 @@ namespace Fb2ePubConverter
         /// <summary>
         /// Get/Set Fonts settings
         /// </summary>
-        public FontsSettings.FontSettings Fonts { get; set; }
+        public EPubFontSettings Fonts { get; set; }
+
+
+        /// <summary>
+        /// Get/Set if font names should be decorated to work around adobe memory cache bug
+        /// </summary>
+        public bool DecorateFontNames { get; set; }
 
         /// <summary>
         /// Get/Set output path used in case output file name does not includes path
@@ -855,21 +861,7 @@ namespace Fb2ePubConverter
                 Logger.Log.Warn("No fonts defined in configuration file.");
                 return;
             }
-            foreach (var font in Fonts)
-            {
-                foreach (var destination in font.Destinations)
-                {
-                    if (destination.Path == null)
-                    {
-                        destination.Path = string.Empty;
-                    }
-                    if (destination.Type == DestinationTypeEnum.Embedded && (destination.Path.Contains("%ResourceFolder%")))
-                    {
-                       destination.Path = destination.Path.Replace("%ResourceFolder%", ResourcesPath);                      
-                    }
-                }
-                epubFile.AddFontObject(font);
-            }
+            epubFile.SetEPubFonts(Fonts, ResourcesPath, DecorateFontNames);
         }
 
 

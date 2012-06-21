@@ -133,39 +133,6 @@ namespace Fb2epubSettings {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<Fonts xmlns:xsi=\"http://www.w3.org/2001" +
-            "/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <Font gene" +
-            "ric_family=\"\" style=\"normal\" font-variant=\"\" font-weight=\"400\">\r\n    <Destinatio" +
-            "ns type=\"Embedded\">\r\n      <Path>%ResourceFolder%\\Fonts/LiberationSerif-Regular." +
-            "ttf</Path>\r\n    </Destinations>\r\n    <decorate>true</decorate>\r\n    <CSSTargets>" +
-            "body</CSSTargets>\r\n    <CSSTargets>.epub</CSSTargets>\r\n  </Font>\r\n  <Font generi" +
-            "c_family=\"\" style=\"italic\" font-variant=\"\" font-weight=\"400\">\r\n    <Destinations" +
-            " type=\"Embedded\">\r\n      <Path>%ResourceFolder%\\Fonts/LiberationSerif-Italic.ttf" +
-            "</Path>\r\n    </Destinations>\r\n    <decorate>true</decorate>\r\n    <CSSTargets>bod" +
-            "y</CSSTargets>\r\n    <CSSTargets>.epub</CSSTargets>\r\n  </Font>\r\n  <Font generic_f" +
-            "amily=\"\" style=\"normal\" font-variant=\"\" font-weight=\"700\">\r\n    <Destinations ty" +
-            "pe=\"Embedded\">\r\n      <Path>%ResourceFolder%\\Fonts/LiberationSerif-Bold.ttf</Pat" +
-            "h>\r\n    </Destinations>\r\n    <decorate>true</decorate>\r\n    <CSSTargets>body</CS" +
-            "STargets>\r\n    <CSSTargets>.epub</CSSTargets>\r\n  </Font>\r\n  <Font generic_family" +
-            "=\"\" style=\"italic\" font-variant=\"\" font-weight=\"700\">\r\n    <Destinations type=\"E" +
-            "mbedded\">\r\n      <Path>%ResourceFolder%\\Fonts/LiberationSerif-BoldItalic.ttf</Pa" +
-            "th>\r\n    </Destinations>\r\n    <decorate>true</decorate>\r\n    <CSSTargets>body</C" +
-            "SSTargets>\r\n    <CSSTargets>.epub</CSSTargets>\r\n  </Font>\r\n  <Font generic_famil" +
-            "y=\"\" style=\"italic\" font-variant=\"\" font-weight=\"\">\r\n    <Destinations type=\"Emb" +
-            "edded\">\r\n      <Path>%ResourceFolder%\\Fonts/LiberationSerif-Italic.ttf</Path>\r\n " +
-            "   </Destinations>\r\n    <decorate>true</decorate>\r\n    <CSSTargets>code</CSSTarg" +
-            "ets>\r\n  </Font>\r\n</Fonts>")]
-        public global::FontsSettings.FontSettings Fonts {
-            get {
-                return ((global::FontsSettings.FontSettings)(this["Fonts"]));
-            }
-            set {
-                this["Fonts"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("%bt% %sa.l%-%sn%")]
         public string SequenceFormat {
             get {
@@ -269,6 +236,56 @@ namespace Fb2epubSettings {
             }
             set {
                 this["AdobeTemplatePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\r\n                  <FontSettings xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xm" +
+            "lns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n                    <FontF" +
+            "amily name=\"Fonts_97c90146-e42b-47a4-ac20-da6427fe9b9f\">\r\n                      " +
+            "<Font style=\"normal\" variant=\"normal\" width=\"400\" stretch=\"normal\">\r\n           " +
+            "             <Source type=\"Embedded\" format=\"\">\r\n                          <Loca" +
+            "tion>%ResourceFolder%\\Fonts/LiberationSerif-Regular.ttf</Location>\r\n            " +
+            "            </Source>\r\n                      </Font>\r\n                      <Fon" +
+            "t style=\"italic\" variant=\"normal\" width=\"400\" stretch=\"normal\">\r\n               " +
+            "         <Source type=\"Embedded\" format=\"\">\r\n                          <Location" +
+            ">%ResourceFolder%\\Fonts/LiberationSerif-Italic.ttf</Location>\r\n                 " +
+            "       </Source>\r\n                      </Font>\r\n                      <Font sty" +
+            "le=\"normal\" variant=\"normal\" width=\"700\" stretch=\"normal\">\r\n                    " +
+            "    <Source type=\"Embedded\" format=\"\">\r\n                          <Location>%Res" +
+            "ourceFolder%\\Fonts/LiberationSerif-Bold.ttf</Location>\r\n                        " +
+            "</Source>\r\n                      </Font>\r\n                      <Font style=\"ita" +
+            "lic\" variant=\"normal\" width=\"700\" stretch=\"normal\">\r\n                        <So" +
+            "urce type=\"Embedded\" format=\"\">\r\n                          <Location>%ResourceFo" +
+            "lder%\\Fonts/LiberationSerif-BoldItalic.ttf</Location>\r\n                        <" +
+            "/Source>\r\n                      </Font>\r\n                    </FontFamily>\r\n    " +
+            "                <CSSElement name=\"body\" class=\"\">\r\n                      <Font>F" +
+            "onts_97c90146-e42b-47a4-ac20-da6427fe9b9f</Font>\r\n                    </CSSEleme" +
+            "nt>\r\n                    <CSSElement name=\"code\" class=\"\">\r\n                    " +
+            "  <Font>Fonts_97c90146-e42b-47a4-ac20-da6427fe9b9f</Font>\r\n                    <" +
+            "/CSSElement>\r\n                    <CSSElement name=\"\" class=\"epub\">\r\n           " +
+            "           <Font>Fonts_97c90146-e42b-47a4-ac20-da6427fe9b9f</Font>\r\n            " +
+            "        </CSSElement>\r\n                  </FontSettings>\r\n                ")]
+        public global::FontsSettings.EPubFontSettings Fonts
+        {
+            get {
+                return ((global::FontsSettings.EPubFontSettings)(this["Fonts"]));
+            }
+            set {
+                this["Fonts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DecorateFontNames {
+            get {
+                return ((bool)(this["DecorateFontNames"]));
+            }
+            set {
+                this["DecorateFontNames"] = value;
             }
         }
     }

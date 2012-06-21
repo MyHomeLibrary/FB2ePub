@@ -4,8 +4,14 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fb2EpubSetup", "Fb2EpubSetup", "{FAC69113-CCEA-400B-B587-49F30C3ACB5D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fb2ePub", "Fb2ePub\Fb2ePub.csproj", "{58F68096-2525-432E-A658-901B24A3C7C5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2} = {3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FB2EPubConverter", "FB2EPubConverter\FB2EPubConverter.csproj", "{738F2015-0DC7-4C38-BBF0-90FD5C3C2518}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D} = {2868CFB2-562D-4C26-9471-F78F1D94CE0D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fb2EpubExt", "Fb2EpubExt\Fb2EpubExt.vcxproj", "{260632CD-33BF-4324-9119-C542E9A9B516}"
 EndProject
@@ -20,8 +26,18 @@ EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Fb2ePubSetup64", "Fb2ePubSetup\Fb2ePubSetup64.vdproj", "{6E993A49-2782-498E-95DA-358D5BFEBFF3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fb2epubSettings", "Fb2epubSettings\Fb2epubSettings.csproj", "{BB87C009-1337-43FF-ADF6-6E7861AA9343}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2} = {3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderSettingsHelper", "FolderSettingsHelper\FolderSettingsHelper.csproj", "{97C916FF-6271-44F8-9A20-6E0A0389524B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPubLibrary", "..\epublibrary\EPubLibrary.csproj", "{2868CFB2-562D-4C26-9471-F78F1D94CE0D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2} = {3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FontsSettings", "..\fontsettings\FontsSettings.csproj", "{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -136,7 +152,6 @@ Global
 		{AD23A99E-89FE-47C9-BD2C-25C416F327F3}.Release|x64.Build.0 = Release|Any CPU
 		{AD23A99E-89FE-47C9-BD2C-25C416F327F3}.Release|x86.ActiveCfg = Release|Any CPU
 		{FFC4C157-B416-49DB-BA20-7F2D8B8BB667}.Debug|Any CPU.ActiveCfg = Debug
-		{FFC4C157-B416-49DB-BA20-7F2D8B8BB667}.Debug|Any CPU.Build.0 = Debug
 		{FFC4C157-B416-49DB-BA20-7F2D8B8BB667}.Debug|Mixed Platforms.ActiveCfg = Debug
 		{FFC4C157-B416-49DB-BA20-7F2D8B8BB667}.Debug|Mixed Platforms.Build.0 = Debug
 		{FFC4C157-B416-49DB-BA20-7F2D8B8BB667}.Debug|Win32.ActiveCfg = Debug
@@ -202,6 +217,36 @@ Global
 		{97C916FF-6271-44F8-9A20-6E0A0389524B}.Release|Win32.ActiveCfg = Release|Any CPU
 		{97C916FF-6271-44F8-9A20-6E0A0389524B}.Release|x64.ActiveCfg = Release|Any CPU
 		{97C916FF-6271-44F8-9A20-6E0A0389524B}.Release|x86.ActiveCfg = Release|Any CPU
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Debug|Mixed Platforms.Build.0 = Debug|x64
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Debug|Win32.ActiveCfg = Debug|x64
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Debug|x64.ActiveCfg = Debug|x64
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Debug|x64.Build.0 = Debug|x64
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Debug|x86.ActiveCfg = Debug|x64
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Release|Mixed Platforms.ActiveCfg = Release|x64
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Release|Mixed Platforms.Build.0 = Release|x64
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Release|Win32.ActiveCfg = Release|x64
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Release|x64.ActiveCfg = Release|x64
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Release|x64.Build.0 = Release|x64
+		{2868CFB2-562D-4C26-9471-F78F1D94CE0D}.Release|x86.ActiveCfg = Release|x64
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Release|Win32.ActiveCfg = Release|Any CPU
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Release|x64.ActiveCfg = Release|Any CPU
+		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

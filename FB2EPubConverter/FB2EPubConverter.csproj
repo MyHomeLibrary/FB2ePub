@@ -60,10 +60,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ExtLibs\ChilkatDotNet2.dll</HintPath>
     </Reference>
-    <Reference Include="EPubLibrary, Version=1.0.11.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ExtLibs\EPubLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="Fb2FixLib, Version=1.0.12.14623, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ExtLibs\Fb2FixLib.dll</HintPath>
@@ -71,10 +67,6 @@
     <Reference Include="FB2Library, Version=1.0.13.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ExtLibs\FB2Library.dll</HintPath>
-    </Reference>
-    <Reference Include="FontSettings, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ExtLibs\FontSettings.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -150,6 +142,14 @@
     <Compile Include="UnicodeHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\epublibrary\EPubLibrary.csproj">
+      <Project>{2868CFB2-562D-4C26-9471-F78F1D94CE0D}</Project>
+      <Name>EPubLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\fontsettings\FontsSettings.csproj">
+      <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
+      <Name>FontsSettings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XMLFixerLibrary\XMLFixerLibrary.csproj">
       <Project>{AD23A99E-89FE-47C9-BD2C-25C416F327F3}</Project>
       <Name>XMLFixerLibrary</Name>
