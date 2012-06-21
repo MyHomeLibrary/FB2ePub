@@ -22,7 +22,26 @@ namespace EPubLibrary.CSS_Items
             result.Append("{");
             foreach (var parameter in Parameters)
             {
-                result.AppendFormat("\n {0}: {1};",parameter.Key,parameter.Value);
+                if (parameter.Value is List<string>)
+                {
+                    result.AppendFormat("\n {0}:",parameter.Key);
+                    int counter = 0;
+                    foreach (var param in parameter.Value as List<string>)
+                    {
+                        bool firstParam = (counter == 0);
+                        if (!firstParam)
+                        {
+                            result.Append("\n ,");
+                        }
+                        result.AppendFormat("{0}", param);
+                        counter++;
+                    }
+                    result.Append(";");
+                }
+                else
+                {
+                    result.AppendFormat("\n {0}: {1};", parameter.Key, parameter.Value);                    
+                }
             }
             result.AppendLine("}");
 

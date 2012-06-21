@@ -9,7 +9,7 @@ namespace EPubLibrary.CSS_Items
 {
     public class CSSFile : StyleElement
     {
-        private readonly List<FontDefinition> fonts = new List<FontDefinition>();
+        private readonly List<CssFontDefinition> fonts = new List<CssFontDefinition>();
         private string ePubFilePath;
 
         private readonly List<BaseCSSItem> targets =  new List<BaseCSSItem>();
@@ -100,7 +100,7 @@ namespace EPubLibrary.CSS_Items
         /// Add font object definition to CSS file
         /// </summary>
         /// <param name="font"></param>
-        public void AddFont(FontDefinition font)
+        public void AddFont(CssFontDefinition font)
         {
             if (!fonts.Contains(font))
             {
