@@ -29,50 +29,6 @@
     <Setting Name="EmbedStyles" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Fonts" Type="FontsSettings.FontSettings" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;Fonts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;Font generic_family="" style="normal" font-variant="" font-weight="400"&gt;
-    &lt;Destinations type="Embedded"&gt;
-      &lt;Path&gt;%ResourceFolder%\Fonts/LiberationSerif-Regular.ttf&lt;/Path&gt;
-    &lt;/Destinations&gt;
-    &lt;decorate&gt;true&lt;/decorate&gt;
-    &lt;CSSTargets&gt;body&lt;/CSSTargets&gt;
-    &lt;CSSTargets&gt;.epub&lt;/CSSTargets&gt;
-  &lt;/Font&gt;
-  &lt;Font generic_family="" style="italic" font-variant="" font-weight="400"&gt;
-    &lt;Destinations type="Embedded"&gt;
-      &lt;Path&gt;%ResourceFolder%\Fonts/LiberationSerif-Italic.ttf&lt;/Path&gt;
-    &lt;/Destinations&gt;
-    &lt;decorate&gt;true&lt;/decorate&gt;
-    &lt;CSSTargets&gt;body&lt;/CSSTargets&gt;
-    &lt;CSSTargets&gt;.epub&lt;/CSSTargets&gt;
-  &lt;/Font&gt;
-  &lt;Font generic_family="" style="normal" font-variant="" font-weight="700"&gt;
-    &lt;Destinations type="Embedded"&gt;
-      &lt;Path&gt;%ResourceFolder%\Fonts/LiberationSerif-Bold.ttf&lt;/Path&gt;
-    &lt;/Destinations&gt;
-    &lt;decorate&gt;true&lt;/decorate&gt;
-    &lt;CSSTargets&gt;body&lt;/CSSTargets&gt;
-    &lt;CSSTargets&gt;.epub&lt;/CSSTargets&gt;
-  &lt;/Font&gt;
-  &lt;Font generic_family="" style="italic" font-variant="" font-weight="700"&gt;
-    &lt;Destinations type="Embedded"&gt;
-      &lt;Path&gt;%ResourceFolder%\Fonts/LiberationSerif-BoldItalic.ttf&lt;/Path&gt;
-    &lt;/Destinations&gt;
-    &lt;decorate&gt;true&lt;/decorate&gt;
-    &lt;CSSTargets&gt;body&lt;/CSSTargets&gt;
-    &lt;CSSTargets&gt;.epub&lt;/CSSTargets&gt;
-  &lt;/Font&gt;
-  &lt;Font generic_family="" style="italic" font-variant="" font-weight=""&gt;
-    &lt;Destinations type="Embedded"&gt;
-      &lt;Path&gt;%ResourceFolder%\Fonts/LiberationSerif-Italic.ttf&lt;/Path&gt;
-    &lt;/Destinations&gt;
-    &lt;decorate&gt;true&lt;/decorate&gt;
-    &lt;CSSTargets&gt;code&lt;/CSSTargets&gt;
-  &lt;/Font&gt;
-&lt;/Fonts&gt;</Value>
-    </Setting>
     <Setting Name="SequenceFormat" Type="System.String" Scope="User">
       <Value Profile="(Default)">%bt% %sa.l%-%sn%</Value>
     </Setting>
@@ -99,6 +55,46 @@
     </Setting>
     <Setting Name="AdobeTemplatePath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Fonts" Type="FontsSettings.EPubFontSettings" Scope="User">
+      <Value Profile="(Default)">
+                  &lt;FontSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+                    &lt;FontFamily name="Fonts_97c90146-e42b-47a4-ac20-da6427fe9b9f"&gt;
+                      &lt;Font style="normal" variant="normal" width="400" stretch="normal"&gt;
+                        &lt;Source type="Embedded" format=""&gt;
+                          &lt;Location&gt;%ResourceFolder%\Fonts/LiberationSerif-Regular.ttf&lt;/Location&gt;
+                        &lt;/Source&gt;
+                      &lt;/Font&gt;
+                      &lt;Font style="italic" variant="normal" width="400" stretch="normal"&gt;
+                        &lt;Source type="Embedded" format=""&gt;
+                          &lt;Location&gt;%ResourceFolder%\Fonts/LiberationSerif-Italic.ttf&lt;/Location&gt;
+                        &lt;/Source&gt;
+                      &lt;/Font&gt;
+                      &lt;Font style="normal" variant="normal" width="700" stretch="normal"&gt;
+                        &lt;Source type="Embedded" format=""&gt;
+                          &lt;Location&gt;%ResourceFolder%\Fonts/LiberationSerif-Bold.ttf&lt;/Location&gt;
+                        &lt;/Source&gt;
+                      &lt;/Font&gt;
+                      &lt;Font style="italic" variant="normal" width="700" stretch="normal"&gt;
+                        &lt;Source type="Embedded" format=""&gt;
+                          &lt;Location&gt;%ResourceFolder%\Fonts/LiberationSerif-BoldItalic.ttf&lt;/Location&gt;
+                        &lt;/Source&gt;
+                      &lt;/Font&gt;
+                    &lt;/FontFamily&gt;
+                    &lt;CSSElement name="body" class=""&gt;
+                      &lt;Font&gt;Fonts_97c90146-e42b-47a4-ac20-da6427fe9b9f&lt;/Font&gt;
+                    &lt;/CSSElement&gt;
+                    &lt;CSSElement name="code" class=""&gt;
+                      &lt;Font&gt;Fonts_97c90146-e42b-47a4-ac20-da6427fe9b9f&lt;/Font&gt;
+                    &lt;/CSSElement&gt;
+                    &lt;CSSElement name="" class="epub"&gt;
+                      &lt;Font&gt;Fonts_97c90146-e42b-47a4-ac20-da6427fe9b9f&lt;/Font&gt;
+                    &lt;/CSSElement&gt;
+                  &lt;/FontSettings&gt;
+                </Value>
+    </Setting>
+    <Setting Name="DecorateFontNames" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

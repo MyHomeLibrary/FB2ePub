@@ -59,10 +59,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FontSettings, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ExtLibs\FontSettings.dll</HintPath>
-    </Reference>
     <Reference Include="ISOLanguages, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ExtLibs\ISOLanguages.dll</HintPath>
@@ -94,6 +90,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\fontsettings\FontsSettings.csproj">
+      <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
+      <Name>FontsSettings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FB2EPubConverter\FB2EPubConverter.csproj">
       <Project>{738F2015-0DC7-4C38-BBF0-90FD5C3C2518}</Project>
       <Name>FB2EPubConverter</Name>

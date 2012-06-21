@@ -97,5 +97,15 @@ namespace Fb2epubSettings.Resources {
                 return ResourceManager.GetString("ConverterSettingsForm_radioButtonSDEnabled_CheckedChanged_Setting_error", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Font family name can&apos;t be empty.
+        /// </summary>
+        internal static string EditFontFamilyForm_textBoxFontFamilyName_Validating_Font_family_name_can_t_be_empty {
+            get {
+                return ResourceManager.GetString("EditFontFamilyForm_textBoxFontFamilyName_Validating_Font_family_name_can_t_be_emp" +
+                        "ty", resourceCulture);
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using Fb2epubSettings.IniLocations;
+using FontsSettings;
 
 namespace Fb2epubSettings
 {
@@ -16,6 +17,8 @@ namespace Fb2epubSettings
         delegate void OnButtonPressedCallback(object sender, EventArgs e);
 
         private readonly IniLocations.IniLocations _locations = new IniLocations.IniLocations();
+        private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
+        
 
 
         public ConverterSettingsForm()
@@ -97,6 +100,30 @@ namespace Fb2epubSettings
             _locations.Init();
             LoadPathsGroup();
             UpdateXPGTGroupGUI();
+            LoadFontsList();
+            UpdateFontsList();
+            UpdateFontsButtons();
+        }
+
+        private void UpdateFontsButtons()
+        {
+            bool itemSelected = listViewFonts.SelectedItems.Count > 0;
+            buttonEditFont.Enabled = itemSelected;
+            buttonRemoveFont.Enabled = itemSelected;
+        }
+
+        private void UpdateFontsList()
+        {
+            listViewFonts.Items.Clear();
+            foreach (var cssFontFamily in _fontSettings.Fonts.Keys)
+            {
+                listViewFonts.Items.Add(cssFontFamily);
+            }
+        }
+
+        private void LoadFontsList()
+        {
+            _fontSettings.Load(Fb2Epub.Default.Fonts,string.Empty); 
         }
 
         private void UpdateXPGTGroupGUI()
@@ -470,14 +497,37 @@ namespace Fb2epubSettings
 
         }
 
-        private void buttonBrowseForXGPT_Click(object sender, EventArgs e)
+        private void tabPageFonts_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void checkBoxUseXGPT_CheckedChanged(object sender, EventArgs e)
+        private void buttonAddFont_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonEditFont_Click(object sender, EventArgs e)
+        {
+            EditFontFamily(listViewFonts.SelectedItems[0].Text);
+        }
+
+        private void EditFontFamily(string familyFontName)
+        {
+            EditFontFamilyForm editForm = new EditFontFamilyForm(_fontSettings,familyFontName);
+            editForm.ShowDialog();
+            UpdateFontsList();
+        }
+
+        private void buttonRemoveFont_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void listViewFonts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateFontsButtons();
         }
 
 
