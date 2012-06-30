@@ -58,6 +58,7 @@ namespace FontsSettings
         /// <summary>
         /// if not empty than resulting family name 'decorated' by this value
         /// </summary>
+        [XmlIgnore]
         public string DecorationId { get; set; }
 
         /// <summary>

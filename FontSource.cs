@@ -75,5 +75,27 @@ namespace FontsSettings
             Location = fontSource.Location;
             Format = fontSource.Format;
         }
+
+        [XmlIgnore]
+        public bool EmbeddedLocation
+        {
+            get
+            {
+                return Type == SourceTypes.Embedded;
+            }
+        }
+
+        [XmlIgnore]
+        public string Name
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Location))
+                {
+                    return "Undefined source";
+                }
+                return Location;
+            }
+        }
     }
 }
