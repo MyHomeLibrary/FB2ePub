@@ -15,9 +15,14 @@ namespace FontsSettings
         private readonly Dictionary<string, Dictionary<string, List<CSSFontFamily>>> _elements = new Dictionary<string, Dictionary<string, List<CSSFontFamily>>>();
         private readonly Dictionary<string,List<CSSFont>> _fontFiles = new Dictionary<string, List<CSSFont>>();
 
+        private EPubFontSettings _storageSettings = null;
+        private string _loadedDecoration = string.Empty;
+
         public const string MacroMask = "%ResourceFolder%";
 
         private string _resourcePath = string.Empty;
+
+       
 
         public CSSFontSettingsCollection() {}
 
@@ -146,6 +151,9 @@ namespace FontsSettings
                     }
                 }
             }
+
+            _storageSettings = settings;
+            _loadedDecoration = decoration;
         }
 
         public void StoreTo(EPubFontSettings settings)
@@ -153,6 +161,34 @@ namespace FontsSettings
             settings.FontFamilies.Clear();
             settings.CssElements.Clear();
             // TODO: implement
+            foreach (var cssFontFamily in _fonts.Keys)
+            {
+                CSSFontFamily newFamily = new CSSFontFamily();
+                newFamily.CopyFrom(_fonts[cssFontFamily]);
+                newFamily.DecorationId = _loadedDecoration;
+                settings.FontFamilies.Add(newFamily);
+            }
+
+            foreach (var elementName in _elements.Keys)
+            {
+                foreach (var elementClass in _elements[elementName].Keys)
+                {
+                    CSSStylableElement item = new CSSStylableElement();
+                    item.Name = elementName;
+                    item.Class = elementClass;
+                    foreach (var fontFamily in _elements[elementName][elementClass])
+                    {
+                        item.AssignedFontFamilies.Add(fontFamily.Name);
+                    }
+                    settings.CssElements.Add(item);
+                }
+            }
+            _storageSettings = settings;
+        }
+
+        public void Reload()
+        {
+            Load(_storageSettings,_loadedDecoration);
         }
     }
 }
