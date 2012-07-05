@@ -54,6 +54,7 @@
     <Compile Include="ConverterSettingsForm.Designer.cs">
       <DependentUpon>ConverterSettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CSSElementListItem.cs" />
     <Compile Include="EditFontFamilyForm.cs">
       <SubType>Form</SubType>
     </Compile>
