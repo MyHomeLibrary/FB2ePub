@@ -559,7 +559,15 @@ namespace Fb2epubSettings
 
         private void buttonRemoveFont_Click(object sender, EventArgs e)
         {
-
+            listViewFonts.BeginUpdate();
+            foreach (ListViewItem selectedItem in listViewFonts.SelectedItems)
+            {
+                _fontSettings.Fonts.Remove(selectedItem.Text);
+                listViewFonts.Items.Remove(selectedItem);
+            }
+            listViewFonts.EndUpdate();
+            UpdateFontsList();
+            UpdateFontsButtons();
         }
 
 
@@ -575,7 +583,22 @@ namespace Fb2epubSettings
 
         private void buttonRemoveCSS_Click(object sender, EventArgs e)
         {
-
+            CSSElementListItem current = _myDataSourceCSS.Current as CSSElementListItem;
+            if (current != null)
+            {
+                _myDataSourceCSS.RemoveCurrent();
+                if (_fontSettings.CssElements.ContainsKey(current.Name))
+                {
+                    if (_fontSettings.CssElements[current.Name].ContainsKey(current.Class))
+                    {
+                        _fontSettings.CssElements[current.Name].Remove(current.Class);
+                    }
+                    if (_fontSettings.CssElements[current.Name].Count == 0)
+                    {
+                        _fontSettings.CssElements.Remove(current.Name);
+                    }
+                }
+            }
         }
 
         private void buttonAddCSSFont_Click(object sender, EventArgs e)
@@ -585,7 +608,16 @@ namespace Fb2epubSettings
 
         private void buttonDeleteCSSFont_Click(object sender, EventArgs e)
         {
-
+            CSSFontFamily currentFont = _myDataSourceCSSFonts.Current as CSSFontFamily;
+            if (currentFont != null)
+            {
+                CSSElementListItem currentElement = _myDataSourceCSS.Current as CSSElementListItem;
+                if (currentElement != null)
+                {
+                    currentElement.Fonts.Remove(currentFont);
+                    _myDataSourceCSSFonts.ResetBindings(false);
+                }
+            }
         }
 
 
