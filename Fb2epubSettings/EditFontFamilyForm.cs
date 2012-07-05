@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using FontsSettings;
 
+
 namespace Fb2epubSettings
 {
     public partial class EditFontFamilyForm : Form
@@ -29,7 +30,6 @@ namespace Fb2epubSettings
 
             SetupBindings();
 
-            ResetSettings();
         }
 
         private void SetupBindings()
@@ -42,6 +42,7 @@ namespace Fb2epubSettings
             _myDataSourceFonts.DataSource = (_fontSettings.Fonts[_familyFontName].Fonts);
             listBoxFontNames.DataSource = _myDataSourceFonts;
             listBoxFontNames.DisplayMember = "Name";
+
 
             _myDataSourceSources.CurrentChanged += _myDataSourceSources_CurrentChanged;
             _myDataSourceSources.DataSource = _myDataSourceFonts;
@@ -64,6 +65,7 @@ namespace Fb2epubSettings
             ShowCurrentFontDetails(_myDataSourceFonts.Current as CSSFont);
             ShowCurrentSourceDetails(_myDataSourceSources.Current as FontSource);
 
+            textBoxFontFamilyName.Text = _familyFontName;
         }
 
         void _myDataSourceSources_CurrentChanged(object sender, EventArgs e)
@@ -78,6 +80,8 @@ namespace Fb2epubSettings
 
         private void ResetSettings()
         {
+            textBoxFontFamilyName.Text = _familyFontName;
+            _fontSettings.Reload();
         }
 
         private void SetSourceFormatItems()
@@ -154,10 +158,7 @@ namespace Fb2epubSettings
         void MyDataSourceFontsCurrentChanged(object sender, EventArgs e)
         {
             CSSFont currentFont = _myDataSourceFonts.Current as CSSFont;
-            if (currentFont != null)
-            {
-                ShowCurrentFontDetails(currentFont);
-            }
+            ShowCurrentFontDetails(currentFont);
 
             FontSource currentSource = _myDataSourceSources.Current as FontSource;
             if (currentSource != null)
@@ -168,20 +169,24 @@ namespace Fb2epubSettings
 
         private void ShowCurrentFontDetails(CSSFont currentFont)
         {
-            SetStyleCheck(currentFont.FontStyle);
-            SetVariantCheck(currentFont.FontVariant);
-            SetWidthBox(currentFont.FontWidth);
-            SetStretchBox(currentFont.FontStretch);
+            if (currentFont != null)
+            {
+                SetStyleCheck(currentFont.FontStyle);
+                SetVariantCheck(currentFont.FontVariant);
+                SetWidthBox(currentFont.FontWidth);
+                SetStretchBox(currentFont.FontStretch);
+            }
+            buttonDeleteFont.Enabled = (currentFont != null);
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            //if (_familyFontName != textBoxFontFamilyName.Text)
-            //{
-            //    var x = _fontSettings.Fonts[_familyFontName];
-            //    _fontSettings.Fonts.Remove(_familyFontName);
-            //    _fontSettings.Fonts[textBoxFontFamilyName.Text] = x;
-            //}
+            if (_familyFontName != textBoxFontFamilyName.Text)
+            {
+                var x = _fontSettings.Fonts[_familyFontName];
+                _fontSettings.Fonts.Remove(_familyFontName);
+                _fontSettings.Fonts[textBoxFontFamilyName.Text] = x;
+            }
             DialogResult = DialogResult.OK;
             Close();
         }

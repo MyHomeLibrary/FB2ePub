@@ -38,7 +38,7 @@
             this.buttonReset = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listBoxFontNames = new System.Windows.Forms.ListBox();
-            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonDeleteFont = new System.Windows.Forms.Button();
             this.buttonAddFont = new System.Windows.Forms.Button();
             this.groupBoxFontProperties = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -116,7 +116,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.listBoxFontNames);
-            this.groupBox2.Controls.Add(this.buttonDelete);
+            this.groupBox2.Controls.Add(this.buttonDeleteFont);
             this.groupBox2.Controls.Add(this.buttonAddFont);
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
@@ -128,12 +128,12 @@
             resources.ApplyResources(this.listBoxFontNames, "listBoxFontNames");
             this.listBoxFontNames.Name = "listBoxFontNames";
             // 
-            // buttonDelete
+            // buttonDeleteFont
             // 
-            resources.ApplyResources(this.buttonDelete, "buttonDelete");
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            resources.ApplyResources(this.buttonDeleteFont, "buttonDeleteFont");
+            this.buttonDeleteFont.Name = "buttonDeleteFont";
+            this.buttonDeleteFont.UseVisualStyleBackColor = true;
+            this.buttonDeleteFont.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonAddFont
             // 
@@ -363,7 +363,7 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonDeleteFont;
         private System.Windows.Forms.Button buttonAddFont;
         private System.Windows.Forms.GroupBox groupBoxFontProperties;
         private System.Windows.Forms.GroupBox groupBox5;

@@ -18,6 +18,9 @@ namespace Fb2epubSettings
 
         private readonly IniLocations.IniLocations _locations = new IniLocations.IniLocations();
         private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
+        private readonly BindingSource _myDataSourceCSS = new BindingSource();
+        private readonly BindingSource _myDataSourceCSSFonts = new BindingSource();
+        private readonly List<CSSElementListItem> _viewCSSElements = new List<CSSElementListItem>();
         
 
 
@@ -36,6 +39,7 @@ namespace Fb2epubSettings
             }
             savePathsList();
             saveXPGT();
+            _fontSettings.StoreTo(Fb2Epub.Default.Fonts);
             Fb2Epub.Default.Save();
             DialogResult = DialogResult.OK;
             Close();
@@ -103,6 +107,39 @@ namespace Fb2epubSettings
             LoadFontsList();
             UpdateFontsList();
             UpdateFontsButtons();
+            SetupCSSElements();
+            UpdateCCSElements();
+        }
+
+        private void SetupCSSElements()
+        {
+            _viewCSSElements.Clear();
+            foreach (var cssElementName in _fontSettings.CssElements.Keys)
+            {
+                foreach (var cssElementCode in _fontSettings.CssElements[cssElementName].Keys)
+                {
+                    CSSElementListItem item = new CSSElementListItem {Name = cssElementName, Class = cssElementCode};
+                    foreach (var font in _fontSettings.CssElements[cssElementName][cssElementCode])
+                    {
+                        item.Fonts.Add(font);
+                    }
+                    _viewCSSElements.Add(item);
+                }
+            }
+            _myDataSourceCSS.DataSource = _viewCSSElements;
+            listBoxCSSElements.DataSource = _myDataSourceCSS;
+            listBoxCSSElements.DisplayMember = "FullName";
+
+            _myDataSourceCSSFonts.DataSource = _myDataSourceCSS;
+            _myDataSourceCSSFonts.DataMember = "Fonts";
+
+            listBoxCSSFonts.DataSource = _myDataSourceCSSFonts;
+            listBoxCSSFonts.DisplayMember = "Name";
+        }
+
+        private void UpdateCCSElements()
+        {
+            
         }
 
         private void UpdateFontsButtons()
@@ -517,6 +554,7 @@ namespace Fb2epubSettings
             EditFontFamilyForm editForm = new EditFontFamilyForm(_fontSettings,familyFontName);
             editForm.ShowDialog();
             UpdateFontsList();
+            UpdateFontsButtons();
         }
 
         private void buttonRemoveFont_Click(object sender, EventArgs e)
@@ -528,6 +566,26 @@ namespace Fb2epubSettings
         private void listViewFonts_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateFontsButtons();
+        }
+
+        private void buttonAddCSS_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonRemoveCSS_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonAddCSSFont_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonDeleteCSSFont_Click(object sender, EventArgs e)
+        {
+
         }
 
 
