@@ -567,7 +567,6 @@
             this.listBoxPaths.Name = "listBoxPaths";
             this.listBoxPaths.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxPaths_DrawItem);
             this.listBoxPaths.SelectedIndexChanged += new System.EventHandler(this.listBoxPaths_SelectedIndexChanged);
-            this.listBoxPaths.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.buttonEdit_Click);
             // 
             // tabPageXPGT
             // 

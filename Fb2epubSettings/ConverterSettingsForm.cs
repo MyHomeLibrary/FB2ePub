@@ -443,14 +443,18 @@ namespace Fb2epubSettings
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             Location currentLocation =  (Location) listBoxPaths.SelectedItem;
-            AddPathForm editPathForm = new AddPathForm();
-            editPathForm.PathName = currentLocation.Name;
-            editPathForm.PathFolder = currentLocation.Path;
-            DialogResult result = editPathForm.ShowDialog(this);
-            if (result == DialogResult.OK)
+            if (currentLocation != null)
             {
-                currentLocation.Name = editPathForm.PathName;
-                currentLocation.Path = editPathForm.PathFolder;
+
+                AddPathForm editPathForm = new AddPathForm();
+                editPathForm.PathName = currentLocation.Name;
+                editPathForm.PathFolder = currentLocation.Path;
+                DialogResult result = editPathForm.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    currentLocation.Name = editPathForm.PathName;
+                    currentLocation.Path = editPathForm.PathFolder;
+                }
             }
         }
 
@@ -529,10 +533,6 @@ namespace Fb2epubSettings
             UpdateXPGTGroupGUI();
         }
 
-        private void buttonEdit_Click(object sender, MouseEventArgs e)
-        {
-
-        }
 
         private void tabPageFonts_Click(object sender, EventArgs e)
         {
@@ -541,7 +541,11 @@ namespace Fb2epubSettings
 
         private void buttonAddFont_Click(object sender, EventArgs e)
         {
-
+            CSSFontFamily newFamily = new CSSFontFamily();
+            _fontSettings.Fonts.Add(newFamily.Name, newFamily);
+            listViewFonts.Items.Add(newFamily.Name);
+            UpdateFontsList();
+            UpdateFontsButtons();
         }
 
         private void buttonEditFont_Click(object sender, EventArgs e)
@@ -578,7 +582,54 @@ namespace Fb2epubSettings
 
         private void buttonAddCSS_Click(object sender, EventArgs e)
         {
+            AddCSSForm newForm = new AddCSSForm();
+            DialogResult result = newForm.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                if (newForm.ElementClass == null)
+                {
+                    newForm.ElementClass = string.Empty;
+                }
+                if (newForm.ElementName == null)
+                {
+                    newForm.ElementName = string.Empty;
+                }
+                AddCSSElement(newForm.ElementName.ToLower(), newForm.ElementClass.ToLower());
+            }
+        }
 
+        private void AddCSSElement(string name, string className)
+        {
+            CSSElementListItem newViewElement = null;
+            if(!_fontSettings.CssElements.ContainsKey(name) )
+            {
+                _fontSettings.CssElements.Add(name,new Dictionary<string, List<CSSFontFamily>>());
+                _fontSettings.CssElements[name].Add(className,new List<CSSFontFamily>());
+                newViewElement = new CSSElementListItem {Class = className, Name = name};
+                _viewCSSElements.Add(newViewElement);
+            }
+            else
+            {
+                if (!_fontSettings.CssElements[name].ContainsKey(className))
+                {
+                    _fontSettings.CssElements[name].Add(className,new List<CSSFontFamily>());
+                    newViewElement = new CSSElementListItem { Class = className, Name = name };
+                    _viewCSSElements.Add(newViewElement);
+                }
+                else
+                {
+                    newViewElement = _viewCSSElements.Find(x=>((x.Name== name)&&(x.Class == className)));
+                }
+            }
+            if (newViewElement != null)
+            {
+                _myDataSourceCSS.MoveNext();
+                while (_myDataSourceCSS.Current != newViewElement)
+                {
+                    _myDataSourceCSS.MoveNext();
+                }
+            }
+            _myDataSourceCSS.ResetBindings(false);
         }
 
         private void buttonRemoveCSS_Click(object sender, EventArgs e)

@@ -113,8 +113,11 @@ namespace Fb2epubSettings
 
         private void ShowCurrentSourceDetails(FontSource fontSource)
         {
-            SetSourceTypeToBox(fontSource.Type);
-            SetSourceFormatToBox(fontSource.Format);
+            if (fontSource != null)
+            {
+                SetSourceTypeToBox(fontSource.Type);
+                SetSourceFormatToBox(fontSource.Format);                
+            }
         }
 
         private void SetStretchBoxItems()
