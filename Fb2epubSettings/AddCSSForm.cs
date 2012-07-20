@@ -22,6 +22,7 @@ namespace Fb2epubSettings
         {
             InitializeComponent();
             FillComboBoxces();
+            UpdateButtons();
         }
 
         private void FillComboBoxces()
@@ -174,6 +175,21 @@ namespace Fb2epubSettings
             ElementName = comboBoxName.Text;
             ElementClass = comboBoxClass.Text;
 
+        }
+
+        private void comboBoxName_TextChanged(object sender, EventArgs e)
+        {
+            UpdateButtons();
+        }
+
+        private void comboBoxClass_TextChanged(object sender, EventArgs e)
+        {
+            UpdateButtons();
+        }
+
+        private void UpdateButtons()
+        {
+            buttonSave.Enabled = (!string.IsNullOrEmpty(comboBoxName.Text) || !string.IsNullOrEmpty(comboBoxClass.Text));
         }
     }
 }

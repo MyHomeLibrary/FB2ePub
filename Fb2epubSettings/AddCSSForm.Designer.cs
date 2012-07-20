@@ -90,6 +90,7 @@
             this.comboBoxClass.Size = new System.Drawing.Size(215, 21);
             this.comboBoxClass.Sorted = true;
             this.comboBoxClass.TabIndex = 0;
+            this.comboBoxClass.TextChanged += new System.EventHandler(this.comboBoxClass_TextChanged);
             // 
             // groupBox2
             // 
@@ -109,6 +110,7 @@
             this.comboBoxName.Size = new System.Drawing.Size(215, 21);
             this.comboBoxName.Sorted = true;
             this.comboBoxName.TabIndex = 0;
+            this.comboBoxName.TextChanged += new System.EventHandler(this.comboBoxName_TextChanged);
             // 
             // AddCSSForm
             // 
