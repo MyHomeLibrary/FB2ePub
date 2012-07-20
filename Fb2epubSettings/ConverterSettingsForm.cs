@@ -654,7 +654,22 @@ namespace Fb2epubSettings
 
         private void buttonAddCSSFont_Click(object sender, EventArgs e)
         {
-
+            AddFontsForm addForm = new AddFontsForm(_fontSettings.Fonts);
+            DialogResult result = addForm.ShowDialog(this);
+            if (result == DialogResult.OK && addForm.SelectedFont != null)
+            {
+                CSSElementListItem currentElement = _myDataSourceCSS.Current as CSSElementListItem;
+                if (currentElement != null)
+                {
+                    CSSFontFamily font = _fontSettings.Fonts[addForm.SelectedFont];
+                    if (font != null)
+                    {
+                        currentElement.Fonts.Add(font);
+                        _myDataSourceCSSFonts.ResetBindings(false);
+                    }
+                }
+               
+            }
         }
 
         private void buttonDeleteCSSFont_Click(object sender, EventArgs e)

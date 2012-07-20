@@ -48,6 +48,12 @@
     <Compile Include="AddCSSForm.Designer.cs">
       <DependentUpon>AddCSSForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddFontsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddFontsForm.Designer.cs">
+      <DependentUpon>AddFontsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddPathForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
   <ItemGroup>
     <EmbeddedResource Include="AddCSSForm.resx">
       <DependentUpon>AddCSSForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddFontsForm.resx">
+      <DependentUpon>AddFontsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddPathForm.resx">
       <DependentUpon>AddPathForm.cs</DependentUpon>
