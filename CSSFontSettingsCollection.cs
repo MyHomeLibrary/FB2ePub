@@ -199,5 +199,40 @@ namespace FontsSettings
         {
             return _elements.AsParallel().Any(element => element.Value.AsParallel().Any(pair => pair.Value.AsParallel().Any(cssFontFamily => cssFontFamily.Name == text)));
         }
+
+        public string GetMediaType(string embededFileLocation)
+        {
+            foreach (var cssFontFamily in _fontFiles)
+            {
+                foreach (var cssFont in cssFontFamily.Value)
+                {
+                    foreach (var fontSource in cssFont.Sources)
+                    {
+                        if (fontSource.EmbeddedLocation && fontSource.Location.ToLower() == embededFileLocation.ToLower())
+                        {
+                            return ConverMediaTypeToString(fontSource.Format);
+                        }
+                    }
+                }
+            }
+            return "application/x-font-ttf";
+        }
+
+        private string ConverMediaTypeToString(FontFormat format)
+        {
+            switch (format)
+            {
+                case FontFormat.TrueType:
+                    return "application/x-font-ttf";
+                case FontFormat.OpenType:
+                    return "application/vnd.ms-opentype";
+                case FontFormat.EmbeddedOpenType:
+                case FontFormat.SVGFont:
+                case FontFormat.Unknown:
+                case FontFormat.WOFF:
+                default:
+                    return "application/x-font-ttf";
+            }
+        }
     }
 }
