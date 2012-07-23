@@ -568,8 +568,8 @@ namespace Fb2epubSettings
             if (used.Count > 0)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendFormat("Font {0}  is used by CSS elements. Please unassign them first before deleting", used[0]);
-                MessageBox.Show(this, sb.ToString(), "Font used", MessageBoxButtons.OK, MessageBoxIcon.Warning);                
+                sb.AppendFormat(Resources.Fb2epubSettings.ConverterSettingsForm_buttonRemoveFont_FontNameMessage, used[0].Text);
+                MessageBox.Show(this, sb.ToString(), Resources.Fb2epubSettings.ConverterSettingsForm_buttonRemoveFont_Click_Font_used, MessageBoxButtons.OK, MessageBoxIcon.Warning);                
             }
             List<ListViewItem> toDelete = new List<ListViewItem>();
             foreach (ListViewItem item in selected)
@@ -650,7 +650,8 @@ namespace Fb2epubSettings
                     newViewElement = _viewCSSElements.Find(x=>((x.Name== name)&&(x.Class == className)));
                 }
             }
-            if (newViewElement != null)
+            _myDataSourceCSS.ResetBindings(false);
+            if (newViewElement != null && _myDataSourceCSS.Count != 0 )
             {
                 _myDataSourceCSS.MoveNext();
                 while (_myDataSourceCSS.Current != newViewElement)
@@ -658,7 +659,6 @@ namespace Fb2epubSettings
                     _myDataSourceCSS.MoveNext();
                 }
             }
-            _myDataSourceCSS.ResetBindings(false);
         }
 
         private void buttonRemoveCSS_Click(object sender, EventArgs e)
