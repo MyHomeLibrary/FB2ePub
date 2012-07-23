@@ -70,6 +70,17 @@
             this.buttonXPGTClear = new System.Windows.Forms.Button();
             this.textBoxTemplatePath = new System.Windows.Forms.TextBox();
             this.checkBoxUseXPGT = new System.Windows.Forms.CheckBox();
+            this.buttonRemoveFont = new System.Windows.Forms.Button();
+            this.buttonEditFont = new System.Windows.Forms.Button();
+            this.buttonAddFont = new System.Windows.Forms.Button();
+            this.listViewFonts = new System.Windows.Forms.ListView();
+            this.columnHeaderFont = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listBoxCSSFonts = new System.Windows.Forms.ListBox();
+            this.buttonDeleteCSSFont = new System.Windows.Forms.Button();
+            this.buttonAddCSSFont = new System.Windows.Forms.Button();
+            this.listBoxCSSElements = new System.Windows.Forms.ListBox();
+            this.buttonRemoveCSS = new System.Windows.Forms.Button();
+            this.buttonAddCSS = new System.Windows.Forms.Button();
             this.tabControlSettings = new Fb2epubSettings.NonStyledTabs();
             this.tabPageTransliteration = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -77,11 +88,6 @@
             this.groupBoxSequences = new System.Windows.Forms.GroupBox();
             this.tabPageDifferent = new System.Windows.Forms.TabPage();
             this.tabPageFonts = new System.Windows.Forms.TabPage();
-            this.buttonRemoveFont = new System.Windows.Forms.Button();
-            this.buttonEditFont = new System.Windows.Forms.Button();
-            this.buttonAddFont = new System.Windows.Forms.Button();
-            this.listViewFonts = new System.Windows.Forms.ListView();
-            this.columnHeaderFont = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPagePaths = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listBoxPaths = new System.Windows.Forms.ListBox();
@@ -90,13 +96,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageCSSElements = new System.Windows.Forms.TabPage();
             this.groupBoxAssignedFonts = new System.Windows.Forms.GroupBox();
-            this.buttonDeleteCSSFont = new System.Windows.Forms.Button();
-            this.buttonAddCSSFont = new System.Windows.Forms.Button();
             this.groupBoxCSS = new System.Windows.Forms.GroupBox();
-            this.buttonRemoveCSS = new System.Windows.Forms.Button();
-            this.buttonAddCSS = new System.Windows.Forms.Button();
-            this.listBoxCSSElements = new System.Windows.Forms.ListBox();
-            this.listBoxCSSFonts = new System.Windows.Forms.ListBox();
             this.tabControlSettings.SuspendLayout();
             this.tabPageTransliteration.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -131,8 +131,8 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
             this.toolTipControl.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -244,9 +244,9 @@
             // 
             // comboBoxFixMode
             // 
+            resources.ApplyResources(this.comboBoxFixMode, "comboBoxFixMode");
             this.comboBoxFixMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFixMode.FormattingEnabled = true;
-            resources.ApplyResources(this.comboBoxFixMode, "comboBoxFixMode");
             this.comboBoxFixMode.Name = "comboBoxFixMode";
             this.toolTipControl.SetToolTip(this.comboBoxFixMode, resources.GetString("comboBoxFixMode.ToolTip"));
             this.comboBoxFixMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxFixMode_SelectedIndexChanged);
@@ -307,9 +307,9 @@
             // 
             // comboBoxSDValue
             // 
+            resources.ApplyResources(this.comboBoxSDValue, "comboBoxSDValue");
             this.comboBoxSDValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSDValue.FormattingEnabled = true;
-            resources.ApplyResources(this.comboBoxSDValue, "comboBoxSDValue");
             this.comboBoxSDValue.Name = "comboBoxSDValue";
             this.toolTipControl.SetToolTip(this.comboBoxSDValue, resources.GetString("comboBoxSDValue.ToolTip"));
             this.comboBoxSDValue.SelectedIndexChanged += new System.EventHandler(this.comboBoxSDValue_SelectedIndexChanged);
@@ -419,6 +419,93 @@
             this.checkBoxUseXPGT.UseVisualStyleBackColor = true;
             this.checkBoxUseXPGT.CheckedChanged += new System.EventHandler(this.checkBoxUseXPGT_CheckedChanged);
             // 
+            // buttonRemoveFont
+            // 
+            resources.ApplyResources(this.buttonRemoveFont, "buttonRemoveFont");
+            this.buttonRemoveFont.Name = "buttonRemoveFont";
+            this.toolTipControl.SetToolTip(this.buttonRemoveFont, resources.GetString("buttonRemoveFont.ToolTip"));
+            this.buttonRemoveFont.UseVisualStyleBackColor = true;
+            this.buttonRemoveFont.Click += new System.EventHandler(this.buttonRemoveFont_Click);
+            // 
+            // buttonEditFont
+            // 
+            resources.ApplyResources(this.buttonEditFont, "buttonEditFont");
+            this.buttonEditFont.Name = "buttonEditFont";
+            this.toolTipControl.SetToolTip(this.buttonEditFont, resources.GetString("buttonEditFont.ToolTip"));
+            this.buttonEditFont.UseVisualStyleBackColor = true;
+            this.buttonEditFont.Click += new System.EventHandler(this.buttonEditFont_Click);
+            // 
+            // buttonAddFont
+            // 
+            resources.ApplyResources(this.buttonAddFont, "buttonAddFont");
+            this.buttonAddFont.Name = "buttonAddFont";
+            this.toolTipControl.SetToolTip(this.buttonAddFont, resources.GetString("buttonAddFont.ToolTip"));
+            this.buttonAddFont.UseVisualStyleBackColor = true;
+            this.buttonAddFont.Click += new System.EventHandler(this.buttonAddFont_Click);
+            // 
+            // listViewFonts
+            // 
+            resources.ApplyResources(this.listViewFonts, "listViewFonts");
+            this.listViewFonts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderFont});
+            this.listViewFonts.FullRowSelect = true;
+            this.listViewFonts.MultiSelect = false;
+            this.listViewFonts.Name = "listViewFonts";
+            this.toolTipControl.SetToolTip(this.listViewFonts, resources.GetString("listViewFonts.ToolTip"));
+            this.listViewFonts.UseCompatibleStateImageBehavior = false;
+            this.listViewFonts.View = System.Windows.Forms.View.Details;
+            this.listViewFonts.SelectedIndexChanged += new System.EventHandler(this.listViewFonts_SelectedIndexChanged);
+            // 
+            // columnHeaderFont
+            // 
+            resources.ApplyResources(this.columnHeaderFont, "columnHeaderFont");
+            // 
+            // listBoxCSSFonts
+            // 
+            resources.ApplyResources(this.listBoxCSSFonts, "listBoxCSSFonts");
+            this.listBoxCSSFonts.FormattingEnabled = true;
+            this.listBoxCSSFonts.Name = "listBoxCSSFonts";
+            this.toolTipControl.SetToolTip(this.listBoxCSSFonts, resources.GetString("listBoxCSSFonts.ToolTip"));
+            // 
+            // buttonDeleteCSSFont
+            // 
+            resources.ApplyResources(this.buttonDeleteCSSFont, "buttonDeleteCSSFont");
+            this.buttonDeleteCSSFont.Name = "buttonDeleteCSSFont";
+            this.toolTipControl.SetToolTip(this.buttonDeleteCSSFont, resources.GetString("buttonDeleteCSSFont.ToolTip"));
+            this.buttonDeleteCSSFont.UseVisualStyleBackColor = true;
+            this.buttonDeleteCSSFont.Click += new System.EventHandler(this.buttonDeleteCSSFont_Click);
+            // 
+            // buttonAddCSSFont
+            // 
+            resources.ApplyResources(this.buttonAddCSSFont, "buttonAddCSSFont");
+            this.buttonAddCSSFont.Name = "buttonAddCSSFont";
+            this.toolTipControl.SetToolTip(this.buttonAddCSSFont, resources.GetString("buttonAddCSSFont.ToolTip"));
+            this.buttonAddCSSFont.UseVisualStyleBackColor = true;
+            this.buttonAddCSSFont.Click += new System.EventHandler(this.buttonAddCSSFont_Click);
+            // 
+            // listBoxCSSElements
+            // 
+            resources.ApplyResources(this.listBoxCSSElements, "listBoxCSSElements");
+            this.listBoxCSSElements.FormattingEnabled = true;
+            this.listBoxCSSElements.Name = "listBoxCSSElements";
+            this.toolTipControl.SetToolTip(this.listBoxCSSElements, resources.GetString("listBoxCSSElements.ToolTip"));
+            // 
+            // buttonRemoveCSS
+            // 
+            resources.ApplyResources(this.buttonRemoveCSS, "buttonRemoveCSS");
+            this.buttonRemoveCSS.Name = "buttonRemoveCSS";
+            this.toolTipControl.SetToolTip(this.buttonRemoveCSS, resources.GetString("buttonRemoveCSS.ToolTip"));
+            this.buttonRemoveCSS.UseVisualStyleBackColor = true;
+            this.buttonRemoveCSS.Click += new System.EventHandler(this.buttonRemoveCSS_Click);
+            // 
+            // buttonAddCSS
+            // 
+            resources.ApplyResources(this.buttonAddCSS, "buttonAddCSS");
+            this.buttonAddCSS.Name = "buttonAddCSS";
+            this.toolTipControl.SetToolTip(this.buttonAddCSS, resources.GetString("buttonAddCSS.ToolTip"));
+            this.buttonAddCSS.UseVisualStyleBackColor = true;
+            this.buttonAddCSS.Click += new System.EventHandler(this.buttonAddCSS_Click);
+            // 
             // tabControlSettings
             // 
             resources.ApplyResources(this.tabControlSettings, "tabControlSettings");
@@ -432,36 +519,41 @@
             this.tabControlSettings.Multiline = true;
             this.tabControlSettings.Name = "tabControlSettings";
             this.tabControlSettings.SelectedIndex = 0;
+            this.toolTipControl.SetToolTip(this.tabControlSettings, resources.GetString("tabControlSettings.ToolTip"));
             // 
             // tabPageTransliteration
             // 
-            this.tabPageTransliteration.Controls.Add(this.groupBox1);
             resources.ApplyResources(this.tabPageTransliteration, "tabPageTransliteration");
+            this.tabPageTransliteration.Controls.Add(this.groupBox1);
             this.tabPageTransliteration.Name = "tabPageTransliteration";
+            this.toolTipControl.SetToolTip(this.tabPageTransliteration, resources.GetString("tabPageTransliteration.ToolTip"));
             this.tabPageTransliteration.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.checkBoxTransliterateAdditional);
             this.groupBox1.Controls.Add(this.checkBoxTransliterateFileName);
             this.groupBox1.Controls.Add(this.checkBoxTransliterateTOC);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            this.toolTipControl.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
             // 
             // tabPageSequences
             // 
+            resources.ApplyResources(this.tabPageSequences, "tabPageSequences");
             this.tabPageSequences.Controls.Add(this.groupBoxSequences);
             this.tabPageSequences.Controls.Add(this.textBoxFileAsFormat);
             this.tabPageSequences.Controls.Add(this.labelFileAsFormat);
             this.tabPageSequences.Controls.Add(this.textBoxAuthorFormat);
             this.tabPageSequences.Controls.Add(this.labelAuthorFormat);
-            resources.ApplyResources(this.tabPageSequences, "tabPageSequences");
             this.tabPageSequences.Name = "tabPageSequences";
+            this.toolTipControl.SetToolTip(this.tabPageSequences, resources.GetString("tabPageSequences.ToolTip"));
             this.tabPageSequences.UseVisualStyleBackColor = true;
             // 
             // groupBoxSequences
             // 
+            resources.ApplyResources(this.groupBoxSequences, "groupBoxSequences");
             this.groupBoxSequences.Controls.Add(this.textBoxNoSeriesFormat);
             this.groupBoxSequences.Controls.Add(this.labelNoSeries);
             this.groupBoxSequences.Controls.Add(this.checkBoxAddSequences);
@@ -469,12 +561,13 @@
             this.groupBoxSequences.Controls.Add(this.labelNoSeqFormat);
             this.groupBoxSequences.Controls.Add(this.textBoxSequenceFormat);
             this.groupBoxSequences.Controls.Add(this.labelSeqFormat);
-            resources.ApplyResources(this.groupBoxSequences, "groupBoxSequences");
             this.groupBoxSequences.Name = "groupBoxSequences";
             this.groupBoxSequences.TabStop = false;
+            this.toolTipControl.SetToolTip(this.groupBoxSequences, resources.GetString("groupBoxSequences.ToolTip"));
             // 
             // tabPageDifferent
             // 
+            resources.ApplyResources(this.tabPageDifferent, "tabPageDifferent");
             this.tabPageDifferent.Controls.Add(this.comboBoxFixMode);
             this.tabPageDifferent.Controls.Add(this.labelFixMode);
             this.tabPageDifferent.Controls.Add(this.checkBoxSkipAboutPage);
@@ -483,60 +576,25 @@
             this.tabPageDifferent.Controls.Add(this.checkBoxFlatStructure);
             this.tabPageDifferent.Controls.Add(this.checkBoxConvertAlphaPNG);
             this.tabPageDifferent.Controls.Add(this.checkBoxFb2Info);
-            resources.ApplyResources(this.tabPageDifferent, "tabPageDifferent");
             this.tabPageDifferent.Name = "tabPageDifferent";
+            this.toolTipControl.SetToolTip(this.tabPageDifferent, resources.GetString("tabPageDifferent.ToolTip"));
             this.tabPageDifferent.UseVisualStyleBackColor = true;
             // 
             // tabPageFonts
             // 
+            resources.ApplyResources(this.tabPageFonts, "tabPageFonts");
             this.tabPageFonts.Controls.Add(this.buttonRemoveFont);
             this.tabPageFonts.Controls.Add(this.buttonEditFont);
             this.tabPageFonts.Controls.Add(this.buttonAddFont);
             this.tabPageFonts.Controls.Add(this.listViewFonts);
-            resources.ApplyResources(this.tabPageFonts, "tabPageFonts");
             this.tabPageFonts.Name = "tabPageFonts";
+            this.toolTipControl.SetToolTip(this.tabPageFonts, resources.GetString("tabPageFonts.ToolTip"));
             this.tabPageFonts.UseVisualStyleBackColor = true;
             this.tabPageFonts.Click += new System.EventHandler(this.tabPageFonts_Click);
             // 
-            // buttonRemoveFont
-            // 
-            resources.ApplyResources(this.buttonRemoveFont, "buttonRemoveFont");
-            this.buttonRemoveFont.Name = "buttonRemoveFont";
-            this.buttonRemoveFont.UseVisualStyleBackColor = true;
-            this.buttonRemoveFont.Click += new System.EventHandler(this.buttonRemoveFont_Click);
-            // 
-            // buttonEditFont
-            // 
-            resources.ApplyResources(this.buttonEditFont, "buttonEditFont");
-            this.buttonEditFont.Name = "buttonEditFont";
-            this.buttonEditFont.UseVisualStyleBackColor = true;
-            this.buttonEditFont.Click += new System.EventHandler(this.buttonEditFont_Click);
-            // 
-            // buttonAddFont
-            // 
-            resources.ApplyResources(this.buttonAddFont, "buttonAddFont");
-            this.buttonAddFont.Name = "buttonAddFont";
-            this.buttonAddFont.UseVisualStyleBackColor = true;
-            this.buttonAddFont.Click += new System.EventHandler(this.buttonAddFont_Click);
-            // 
-            // listViewFonts
-            // 
-            this.listViewFonts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderFont});
-            this.listViewFonts.FullRowSelect = true;
-            resources.ApplyResources(this.listViewFonts, "listViewFonts");
-            this.listViewFonts.MultiSelect = false;
-            this.listViewFonts.Name = "listViewFonts";
-            this.listViewFonts.UseCompatibleStateImageBehavior = false;
-            this.listViewFonts.View = System.Windows.Forms.View.Details;
-            this.listViewFonts.SelectedIndexChanged += new System.EventHandler(this.listViewFonts_SelectedIndexChanged);
-            // 
-            // columnHeaderFont
-            // 
-            resources.ApplyResources(this.columnHeaderFont, "columnHeaderFont");
-            // 
             // tabPagePaths
             // 
+            resources.ApplyResources(this.tabPagePaths, "tabPagePaths");
             this.tabPagePaths.Controls.Add(this.groupBox2);
             this.tabPagePaths.Controls.Add(this.buttonEdit);
             this.tabPagePaths.Controls.Add(this.buttonPathNew);
@@ -546,116 +604,84 @@
             this.tabPagePaths.Controls.Add(this.buttonUpPath);
             this.tabPagePaths.Controls.Add(this.buttonDeletePath);
             this.tabPagePaths.Controls.Add(this.listBoxPaths);
-            resources.ApplyResources(this.tabPagePaths, "tabPagePaths");
             this.tabPagePaths.Name = "tabPagePaths";
+            this.toolTipControl.SetToolTip(this.tabPagePaths, resources.GetString("tabPagePaths.ToolTip"));
             this.tabPagePaths.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.comboBoxSDValue);
             this.groupBox2.Controls.Add(this.radioButtonSDEnabled);
             this.groupBox2.Controls.Add(this.radioButtonSDDisabled);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            this.toolTipControl.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
             // 
             // listBoxPaths
             // 
+            resources.ApplyResources(this.listBoxPaths, "listBoxPaths");
             this.listBoxPaths.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBoxPaths.FormattingEnabled = true;
-            resources.ApplyResources(this.listBoxPaths, "listBoxPaths");
             this.listBoxPaths.Name = "listBoxPaths";
+            this.toolTipControl.SetToolTip(this.listBoxPaths, resources.GetString("listBoxPaths.ToolTip"));
             this.listBoxPaths.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxPaths_DrawItem);
             this.listBoxPaths.SelectedIndexChanged += new System.EventHandler(this.listBoxPaths_SelectedIndexChanged);
             // 
             // tabPageXPGT
             // 
+            resources.ApplyResources(this.tabPageXPGT, "tabPageXPGT");
             this.tabPageXPGT.Controls.Add(this.groupBoxXPGTPath);
             this.tabPageXPGT.Controls.Add(this.checkBoxUseXPGT);
-            resources.ApplyResources(this.tabPageXPGT, "tabPageXPGT");
             this.tabPageXPGT.Name = "tabPageXPGT";
+            this.toolTipControl.SetToolTip(this.tabPageXPGT, resources.GetString("tabPageXPGT.ToolTip"));
             this.tabPageXPGT.UseVisualStyleBackColor = true;
             // 
             // groupBoxXPGTPath
             // 
+            resources.ApplyResources(this.groupBoxXPGTPath, "groupBoxXPGTPath");
             this.groupBoxXPGTPath.Controls.Add(this.buttonBrowseForXPGT);
             this.groupBoxXPGTPath.Controls.Add(this.buttonXPGTClear);
             this.groupBoxXPGTPath.Controls.Add(this.textBoxTemplatePath);
             this.groupBoxXPGTPath.Controls.Add(this.label1);
-            resources.ApplyResources(this.groupBoxXPGTPath, "groupBoxXPGTPath");
             this.groupBoxXPGTPath.Name = "groupBoxXPGTPath";
             this.groupBoxXPGTPath.TabStop = false;
+            this.toolTipControl.SetToolTip(this.groupBoxXPGTPath, resources.GetString("groupBoxXPGTPath.ToolTip"));
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.toolTipControl.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // tabPageCSSElements
             // 
+            resources.ApplyResources(this.tabPageCSSElements, "tabPageCSSElements");
             this.tabPageCSSElements.Controls.Add(this.groupBoxAssignedFonts);
             this.tabPageCSSElements.Controls.Add(this.groupBoxCSS);
-            resources.ApplyResources(this.tabPageCSSElements, "tabPageCSSElements");
             this.tabPageCSSElements.Name = "tabPageCSSElements";
+            this.toolTipControl.SetToolTip(this.tabPageCSSElements, resources.GetString("tabPageCSSElements.ToolTip"));
             this.tabPageCSSElements.UseVisualStyleBackColor = true;
             // 
             // groupBoxAssignedFonts
             // 
+            resources.ApplyResources(this.groupBoxAssignedFonts, "groupBoxAssignedFonts");
             this.groupBoxAssignedFonts.Controls.Add(this.listBoxCSSFonts);
             this.groupBoxAssignedFonts.Controls.Add(this.buttonDeleteCSSFont);
             this.groupBoxAssignedFonts.Controls.Add(this.buttonAddCSSFont);
-            resources.ApplyResources(this.groupBoxAssignedFonts, "groupBoxAssignedFonts");
             this.groupBoxAssignedFonts.Name = "groupBoxAssignedFonts";
             this.groupBoxAssignedFonts.TabStop = false;
-            // 
-            // buttonDeleteCSSFont
-            // 
-            resources.ApplyResources(this.buttonDeleteCSSFont, "buttonDeleteCSSFont");
-            this.buttonDeleteCSSFont.Name = "buttonDeleteCSSFont";
-            this.buttonDeleteCSSFont.UseVisualStyleBackColor = true;
-            this.buttonDeleteCSSFont.Click += new System.EventHandler(this.buttonDeleteCSSFont_Click);
-            // 
-            // buttonAddCSSFont
-            // 
-            resources.ApplyResources(this.buttonAddCSSFont, "buttonAddCSSFont");
-            this.buttonAddCSSFont.Name = "buttonAddCSSFont";
-            this.buttonAddCSSFont.UseVisualStyleBackColor = true;
-            this.buttonAddCSSFont.Click += new System.EventHandler(this.buttonAddCSSFont_Click);
+            this.toolTipControl.SetToolTip(this.groupBoxAssignedFonts, resources.GetString("groupBoxAssignedFonts.ToolTip"));
             // 
             // groupBoxCSS
             // 
+            resources.ApplyResources(this.groupBoxCSS, "groupBoxCSS");
             this.groupBoxCSS.Controls.Add(this.listBoxCSSElements);
             this.groupBoxCSS.Controls.Add(this.buttonRemoveCSS);
             this.groupBoxCSS.Controls.Add(this.buttonAddCSS);
-            resources.ApplyResources(this.groupBoxCSS, "groupBoxCSS");
             this.groupBoxCSS.Name = "groupBoxCSS";
             this.groupBoxCSS.TabStop = false;
-            // 
-            // buttonRemoveCSS
-            // 
-            resources.ApplyResources(this.buttonRemoveCSS, "buttonRemoveCSS");
-            this.buttonRemoveCSS.Name = "buttonRemoveCSS";
-            this.buttonRemoveCSS.UseVisualStyleBackColor = true;
-            this.buttonRemoveCSS.Click += new System.EventHandler(this.buttonRemoveCSS_Click);
-            // 
-            // buttonAddCSS
-            // 
-            resources.ApplyResources(this.buttonAddCSS, "buttonAddCSS");
-            this.buttonAddCSS.Name = "buttonAddCSS";
-            this.buttonAddCSS.UseVisualStyleBackColor = true;
-            this.buttonAddCSS.Click += new System.EventHandler(this.buttonAddCSS_Click);
-            // 
-            // listBoxCSSElements
-            // 
-            this.listBoxCSSElements.FormattingEnabled = true;
-            resources.ApplyResources(this.listBoxCSSElements, "listBoxCSSElements");
-            this.listBoxCSSElements.Name = "listBoxCSSElements";
-            // 
-            // listBoxCSSFonts
-            // 
-            this.listBoxCSSFonts.FormattingEnabled = true;
-            resources.ApplyResources(this.listBoxCSSFonts, "listBoxCSSFonts");
-            this.listBoxCSSFonts.Name = "listBoxCSSFonts";
+            this.toolTipControl.SetToolTip(this.groupBoxCSS, resources.GetString("groupBoxCSS.ToolTip"));
             // 
             // ConverterSettingsForm
             // 
@@ -670,6 +696,7 @@
             this.MinimizeBox = false;
             this.Name = "ConverterSettingsForm";
             this.ShowInTaskbar = false;
+            this.toolTipControl.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.ConverterSettingsForm_Load);
             this.tabControlSettings.ResumeLayout(false);
             this.tabPageTransliteration.ResumeLayout(false);

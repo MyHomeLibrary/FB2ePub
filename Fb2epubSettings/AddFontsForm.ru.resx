@@ -117,25 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddPathForm_buttonSelect_Click_Please_select_a_destination_folder" xml:space="preserve">
-    <value>Пожалуйста выберите путь</value>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>Выбрать</value>
   </data>
-  <data name="ConverterSettingsForm_buttonBrowseForXPGT_Click_Please_select_Adobe_XPGT_template_file" xml:space="preserve">
-    <value>Пожалуйста выберите файл шаблона XGPT</value>
+  <data name="buttonOK.ToolTip" xml:space="preserve">
+    <value>Выбрать семью фонтов</value>
   </data>
-  <data name="ConverterSettingsForm_buttonRemoveFont_FontNameMessage" xml:space="preserve">
-    <value>Семья шрифтов {0} используется CSS элементом. Пожалуйста отмените использование перед тем как удалять.</value>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Отмена</value>
   </data>
-  <data name="ConverterSettingsForm_radioButtonSDEnabled_CheckedChanged_Can_t_enable_Single_Destination_mode___no_path_defined_as_shell_path" xml:space="preserve">
-    <value>Не могу включить режим единственного пути - ни один из путей не помечен как путь расширения</value>
+  <data name="buttonCancel.ToolTip" xml:space="preserve">
+    <value>Отменить выбор</value>
   </data>
-  <data name="ConverterSettingsForm_radioButtonSDEnabled_CheckedChanged_Setting_error" xml:space="preserve">
-    <value>Ошибка настроек</value>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Доступные фонты</value>
   </data>
-  <data name="EditFontFamilyForm_textBoxFontFamilyName_Validating_Font_family_name_can_t_be_empty" xml:space="preserve">
-    <value>Имя семейства шрифтов не может быть пустым</value>
+  <data name="groupBox1.ToolTip" xml:space="preserve">
+    <value>Список фонтов доступных на данный момент к выбору</value>
   </data>
-  <data name="String1ConverterSettingsForm_buttonRemoveFont_Click_Font_used" xml:space="preserve">
-    <value>Шрифт используется</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Выбор фонта для добавления</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value>Этот диалог выбирает семью фонтов, которой будет модифицирован CSS элемент</value>
   </data>
 </root>
