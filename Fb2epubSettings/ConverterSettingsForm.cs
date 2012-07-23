@@ -563,8 +563,24 @@ namespace Fb2epubSettings
 
         private void buttonRemoveFont_Click(object sender, EventArgs e)
         {
+            ListView.SelectedListViewItemCollection selected = listViewFonts.SelectedItems;
+            List<ListViewItem> used = GetUsed(selected);
+            if (used.Count > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendFormat("Font {0}  is used by CSS elements. Please unassign them first before deleting", used[0]);
+                MessageBox.Show(this, sb.ToString(), "Font used", MessageBoxButtons.OK, MessageBoxIcon.Warning);                
+            }
+            List<ListViewItem> toDelete = new List<ListViewItem>();
+            foreach (ListViewItem item in selected)
+            {
+                if ((item != null) && !used.Contains(item))
+                {
+                    toDelete.Add(item);
+                }
+            }
             listViewFonts.BeginUpdate();
-            foreach (ListViewItem selectedItem in listViewFonts.SelectedItems)
+            foreach (ListViewItem selectedItem in toDelete)
             {
                 _fontSettings.Fonts.Remove(selectedItem.Text);
                 listViewFonts.Items.Remove(selectedItem);
@@ -572,6 +588,19 @@ namespace Fb2epubSettings
             listViewFonts.EndUpdate();
             UpdateFontsList();
             UpdateFontsButtons();
+        }
+
+        private List<ListViewItem> GetUsed(ListView.SelectedListViewItemCollection selected)
+        {
+            List<ListViewItem> items = new List<ListViewItem>();
+            foreach (ListViewItem item in selected)
+            {
+                if (_fontSettings.IsFontUsed(item.Text))
+                {
+                    items.Add(item);
+                }
+            }
+            return items;
         }
 
 
