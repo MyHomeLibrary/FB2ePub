@@ -104,7 +104,13 @@
     <EmbeddedResource Include="AddCSSForm.resx">
       <DependentUpon>AddCSSForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddCSSForm.ru.resx">
+      <DependentUpon>AddCSSForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddFontsForm.resx">
+      <DependentUpon>AddFontsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddFontsForm.ru.resx">
       <DependentUpon>AddFontsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddPathForm.resx">
@@ -120,6 +126,9 @@
       <DependentUpon>ConverterSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditFontFamilyForm.resx">
+      <DependentUpon>EditFontFamilyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditFontFamilyForm.ru.resx">
       <DependentUpon>EditFontFamilyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Fb2epubSettings.resx">

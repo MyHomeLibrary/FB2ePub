@@ -63,6 +63,7 @@
             this.radioButtonStyleOblique = new System.Windows.Forms.RadioButton();
             this.radioButtonStyleItalic = new System.Windows.Forms.RadioButton();
             this.radioButtonStyleNormal = new System.Windows.Forms.RadioButton();
+            this.toolTipEditFonts = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -78,6 +79,7 @@
             // 
             resources.ApplyResources(this.buttonSave, "buttonSave");
             this.buttonSave.Name = "buttonSave";
+            this.toolTipEditFonts.SetToolTip(this.buttonSave, resources.GetString("buttonSave.ToolTip"));
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
@@ -86,6 +88,7 @@
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.Name = "buttonCancel";
+            this.toolTipEditFonts.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -95,11 +98,13 @@
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            this.toolTipEditFonts.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
             // 
             // textBoxFontFamilyName
             // 
             resources.ApplyResources(this.textBoxFontFamilyName, "textBoxFontFamilyName");
             this.textBoxFontFamilyName.Name = "textBoxFontFamilyName";
+            this.toolTipEditFonts.SetToolTip(this.textBoxFontFamilyName, resources.GetString("textBoxFontFamilyName.ToolTip"));
             this.textBoxFontFamilyName.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxFontFamilyName_Validating);
             // 
             // errorProvider1
@@ -110,6 +115,7 @@
             // 
             resources.ApplyResources(this.buttonReset, "buttonReset");
             this.buttonReset.Name = "buttonReset";
+            this.toolTipEditFonts.SetToolTip(this.buttonReset, resources.GetString("buttonReset.ToolTip"));
             this.buttonReset.UseVisualStyleBackColor = true;
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
@@ -121,17 +127,20 @@
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            this.toolTipEditFonts.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
             // 
             // listBoxFontNames
             // 
             this.listBoxFontNames.FormattingEnabled = true;
             resources.ApplyResources(this.listBoxFontNames, "listBoxFontNames");
             this.listBoxFontNames.Name = "listBoxFontNames";
+            this.toolTipEditFonts.SetToolTip(this.listBoxFontNames, resources.GetString("listBoxFontNames.ToolTip"));
             // 
             // buttonDeleteFont
             // 
             resources.ApplyResources(this.buttonDeleteFont, "buttonDeleteFont");
             this.buttonDeleteFont.Name = "buttonDeleteFont";
+            this.toolTipEditFonts.SetToolTip(this.buttonDeleteFont, resources.GetString("buttonDeleteFont.ToolTip"));
             this.buttonDeleteFont.UseVisualStyleBackColor = true;
             this.buttonDeleteFont.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
@@ -139,6 +148,7 @@
             // 
             resources.ApplyResources(this.buttonAddFont, "buttonAddFont");
             this.buttonAddFont.Name = "buttonAddFont";
+            this.toolTipEditFonts.SetToolTip(this.buttonAddFont, resources.GetString("buttonAddFont.ToolTip"));
             this.buttonAddFont.UseVisualStyleBackColor = true;
             this.buttonAddFont.Click += new System.EventHandler(this.buttonAddFont_Click);
             // 
@@ -152,6 +162,7 @@
             resources.ApplyResources(this.groupBoxFontProperties, "groupBoxFontProperties");
             this.groupBoxFontProperties.Name = "groupBoxFontProperties";
             this.groupBoxFontProperties.TabStop = false;
+            this.toolTipEditFonts.SetToolTip(this.groupBoxFontProperties, resources.GetString("groupBoxFontProperties.ToolTip"));
             // 
             // groupBox8
             // 
@@ -168,17 +179,20 @@
             resources.ApplyResources(this.groupBox8, "groupBox8");
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.TabStop = false;
+            this.toolTipEditFonts.SetToolTip(this.groupBox8, resources.GetString("groupBox8.ToolTip"));
             // 
             // listBoxSources
             // 
             this.listBoxSources.FormattingEnabled = true;
             resources.ApplyResources(this.listBoxSources, "listBoxSources");
             this.listBoxSources.Name = "listBoxSources";
+            this.toolTipEditFonts.SetToolTip(this.listBoxSources, resources.GetString("listBoxSources.ToolTip"));
             // 
             // buttonAddSource
             // 
             resources.ApplyResources(this.buttonAddSource, "buttonAddSource");
             this.buttonAddSource.Name = "buttonAddSource";
+            this.toolTipEditFonts.SetToolTip(this.buttonAddSource, resources.GetString("buttonAddSource.ToolTip"));
             this.buttonAddSource.UseVisualStyleBackColor = true;
             this.buttonAddSource.Click += new System.EventHandler(this.buttonAddSource_Click);
             // 
@@ -186,6 +200,7 @@
             // 
             resources.ApplyResources(this.buttonRemoveSource, "buttonRemoveSource");
             this.buttonRemoveSource.Name = "buttonRemoveSource";
+            this.toolTipEditFonts.SetToolTip(this.buttonRemoveSource, resources.GetString("buttonRemoveSource.ToolTip"));
             this.buttonRemoveSource.UseVisualStyleBackColor = true;
             this.buttonRemoveSource.Click += new System.EventHandler(this.buttonRemoveSource_Click);
             // 
@@ -195,6 +210,7 @@
             this.comboBoxFormat.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxFormat, "comboBoxFormat");
             this.comboBoxFormat.Name = "comboBoxFormat";
+            this.toolTipEditFonts.SetToolTip(this.comboBoxFormat, resources.GetString("comboBoxFormat.ToolTip"));
             this.comboBoxFormat.SelectedValueChanged += new System.EventHandler(this.comboBoxFormat_SelectedValueChanged);
             // 
             // labelFormat
@@ -208,6 +224,7 @@
             this.comboBoxSourceType.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxSourceType, "comboBoxSourceType");
             this.comboBoxSourceType.Name = "comboBoxSourceType";
+            this.toolTipEditFonts.SetToolTip(this.comboBoxSourceType, resources.GetString("comboBoxSourceType.ToolTip"));
             this.comboBoxSourceType.SelectedValueChanged += new System.EventHandler(this.comboBoxSourceType_SelectedValueChanged);
             // 
             // labelType
@@ -219,6 +236,7 @@
             // 
             resources.ApplyResources(this.buttonBrowseForLocation, "buttonBrowseForLocation");
             this.buttonBrowseForLocation.Name = "buttonBrowseForLocation";
+            this.toolTipEditFonts.SetToolTip(this.buttonBrowseForLocation, resources.GetString("buttonBrowseForLocation.ToolTip"));
             this.buttonBrowseForLocation.UseVisualStyleBackColor = true;
             this.buttonBrowseForLocation.Click += new System.EventHandler(this.buttonBrowseForLocation_Click);
             // 
@@ -226,6 +244,7 @@
             // 
             resources.ApplyResources(this.textBoxLocation, "textBoxLocation");
             this.textBoxLocation.Name = "textBoxLocation";
+            this.toolTipEditFonts.SetToolTip(this.textBoxLocation, resources.GetString("textBoxLocation.ToolTip"));
             this.textBoxLocation.TextChanged += new System.EventHandler(this.textBoxLocation_TextChanged);
             // 
             // labelLocation
@@ -239,6 +258,7 @@
             resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
+            this.toolTipEditFonts.SetToolTip(this.groupBox6, resources.GetString("groupBox6.ToolTip"));
             // 
             // comboBoxWidth
             // 
@@ -254,6 +274,7 @@
             resources.ApplyResources(this.groupBox7, "groupBox7");
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.TabStop = false;
+            this.toolTipEditFonts.SetToolTip(this.groupBox7, resources.GetString("groupBox7.ToolTip"));
             // 
             // comboBoxStretch
             // 
@@ -270,12 +291,14 @@
             resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
+            this.toolTipEditFonts.SetToolTip(this.groupBox5, resources.GetString("groupBox5.ToolTip"));
             // 
             // radioButtonVariantSmallCaps
             // 
             resources.ApplyResources(this.radioButtonVariantSmallCaps, "radioButtonVariantSmallCaps");
             this.radioButtonVariantSmallCaps.Name = "radioButtonVariantSmallCaps";
             this.radioButtonVariantSmallCaps.TabStop = true;
+            this.toolTipEditFonts.SetToolTip(this.radioButtonVariantSmallCaps, resources.GetString("radioButtonVariantSmallCaps.ToolTip"));
             this.radioButtonVariantSmallCaps.UseVisualStyleBackColor = true;
             this.radioButtonVariantSmallCaps.CheckedChanged += new System.EventHandler(this.radioButtonVariantSmallCaps_CheckedChanged);
             // 
@@ -284,6 +307,7 @@
             resources.ApplyResources(this.radioButtonVariantNormal, "radioButtonVariantNormal");
             this.radioButtonVariantNormal.Name = "radioButtonVariantNormal";
             this.radioButtonVariantNormal.TabStop = true;
+            this.toolTipEditFonts.SetToolTip(this.radioButtonVariantNormal, resources.GetString("radioButtonVariantNormal.ToolTip"));
             this.radioButtonVariantNormal.UseVisualStyleBackColor = true;
             this.radioButtonVariantNormal.CheckedChanged += new System.EventHandler(this.radioButtonVariantNormal_CheckedChanged);
             // 
@@ -295,12 +319,14 @@
             resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
+            this.toolTipEditFonts.SetToolTip(this.groupBox4, resources.GetString("groupBox4.ToolTip"));
             // 
             // radioButtonStyleOblique
             // 
             resources.ApplyResources(this.radioButtonStyleOblique, "radioButtonStyleOblique");
             this.radioButtonStyleOblique.Name = "radioButtonStyleOblique";
             this.radioButtonStyleOblique.TabStop = true;
+            this.toolTipEditFonts.SetToolTip(this.radioButtonStyleOblique, resources.GetString("radioButtonStyleOblique.ToolTip"));
             this.radioButtonStyleOblique.UseVisualStyleBackColor = true;
             this.radioButtonStyleOblique.CheckedChanged += new System.EventHandler(this.radioButtonStyleOblique_CheckedChanged);
             // 
@@ -309,6 +335,7 @@
             resources.ApplyResources(this.radioButtonStyleItalic, "radioButtonStyleItalic");
             this.radioButtonStyleItalic.Name = "radioButtonStyleItalic";
             this.radioButtonStyleItalic.TabStop = true;
+            this.toolTipEditFonts.SetToolTip(this.radioButtonStyleItalic, resources.GetString("radioButtonStyleItalic.ToolTip"));
             this.radioButtonStyleItalic.UseVisualStyleBackColor = true;
             this.radioButtonStyleItalic.CheckedChanged += new System.EventHandler(this.radioButtonStyleItalic_CheckedChanged);
             // 
@@ -317,6 +344,7 @@
             resources.ApplyResources(this.radioButtonStyleNormal, "radioButtonStyleNormal");
             this.radioButtonStyleNormal.Name = "radioButtonStyleNormal";
             this.radioButtonStyleNormal.TabStop = true;
+            this.toolTipEditFonts.SetToolTip(this.radioButtonStyleNormal, resources.GetString("radioButtonStyleNormal.ToolTip"));
             this.radioButtonStyleNormal.UseVisualStyleBackColor = true;
             this.radioButtonStyleNormal.CheckedChanged += new System.EventHandler(this.radioButtonStyleNormal_CheckedChanged);
             // 
@@ -336,6 +364,7 @@
             this.Name = "EditFontFamilyForm";
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.toolTipEditFonts.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.TopMost = true;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -389,5 +418,6 @@
         private System.Windows.Forms.Button buttonRemoveSource;
         private System.Windows.Forms.ListBox listBoxFontNames;
         private System.Windows.Forms.ListBox listBoxSources;
+        private System.Windows.Forms.ToolTip toolTipEditFonts;
     }
 }

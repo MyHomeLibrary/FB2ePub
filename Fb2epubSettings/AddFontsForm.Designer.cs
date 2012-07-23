@@ -28,65 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddFontsForm));
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBoxFonts = new System.Windows.Forms.ListBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(434, 13);
+            resources.ApplyResources(this.buttonOK, "buttonOK");
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 0;
-            this.buttonOK.Text = "Select";
+            this.toolTip1.SetToolTip(this.buttonOK, resources.GetString("buttonOK.ToolTip"));
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(434, 43);
+            resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 1;
-            this.buttonCancel.Text = "Cancel";
+            this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.listBoxFonts);
-            this.groupBox1.Location = new System.Drawing.Point(13, 13);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(415, 197);
-            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Available fonts:";
             // 
             // listBoxFonts
             // 
             this.listBoxFonts.FormattingEnabled = true;
-            this.listBoxFonts.Location = new System.Drawing.Point(7, 20);
+            resources.ApplyResources(this.listBoxFonts, "listBoxFonts");
             this.listBoxFonts.Name = "listBoxFonts";
-            this.listBoxFonts.Size = new System.Drawing.Size(402, 160);
-            this.listBoxFonts.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.listBoxFonts, resources.GetString("listBoxFonts.ToolTip"));
             this.listBoxFonts.SelectedValueChanged += new System.EventHandler(this.listBoxFonts_SelectedValueChanged);
             // 
             // AddFontsForm
             // 
             this.AcceptButton = this.buttonOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(521, 222);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Name = "AddFontsForm";
-            this.Text = "Select font to add";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -98,5 +92,6 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListBox listBoxFonts;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
