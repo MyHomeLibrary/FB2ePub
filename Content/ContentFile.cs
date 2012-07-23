@@ -263,9 +263,9 @@ namespace EPubLibrary.Content
         }
 
 
-        public void AddFontFile(string link, string id)
+        public void AddFontFile(string link, string id,string mediaType)
         {
-            manifest.Add(new ManifestItem() { HRef = link.Replace('\\', '/'), ID = id, MediaType = "application/x-font-ttf" });
+            manifest.Add(new ManifestItem() { HRef = link.Replace('\\', '/'), ID = id, MediaType = mediaType/*"application/x-font-ttf"*/ });
         }
 
 

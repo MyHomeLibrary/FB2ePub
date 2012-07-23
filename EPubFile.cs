@@ -335,7 +335,7 @@ namespace EPubLibrary
                         continue;
                     }
                     _content.AddFontFile(string.Format(FlatStructure ? "{0}" : @"fonts/{0}", Path.GetFileName(embededFileLocation)),
-                                        Path.GetFileNameWithoutExtension(embededFileLocation));
+                                        Path.GetFileNameWithoutExtension(embededFileLocation), _fontSettings.GetMediaType(embededFileLocation));
                 }
             }
         }
