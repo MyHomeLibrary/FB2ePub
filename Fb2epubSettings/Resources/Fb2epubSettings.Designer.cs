@@ -80,6 +80,24 @@ namespace Fb2epubSettings.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Font used.
+        /// </summary>
+        internal static string ConverterSettingsForm_buttonRemoveFont_Click_Font_used {
+            get {
+                return ResourceManager.GetString("ConverterSettingsForm_buttonRemoveFont_Click_Font_used", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Font {0}  is used by CSS elements. Please unassign them first before deleting.
+        /// </summary>
+        internal static string ConverterSettingsForm_buttonRemoveFont_FontNameMessage {
+            get {
+                return ResourceManager.GetString("ConverterSettingsForm_buttonRemoveFont_FontNameMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t enable Single Destination mode - no path defined as shell path.
         /// </summary>
         internal static string ConverterSettingsForm_radioButtonSDEnabled_CheckedChanged_Can_t_enable_Single_Destination_mode___no_path_defined_as_shell_path {
