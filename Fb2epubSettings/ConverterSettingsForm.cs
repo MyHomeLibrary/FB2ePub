@@ -546,6 +546,7 @@ namespace Fb2epubSettings
             listViewFonts.Items.Add(newFamily.Name);
             UpdateFontsList();
             UpdateFontsButtons();
+            EditFontFamily(newFamily.Name);
         }
 
         private void buttonEditFont_Click(object sender, EventArgs e)
@@ -694,6 +695,7 @@ namespace Fb2epubSettings
                     if (font != null)
                     {
                         currentElement.Fonts.Add(font);
+                        _fontSettings.CssElements[currentElement.Name][currentElement.Class].Add(font);
                         _myDataSourceCSSFonts.ResetBindings(false);
                     }
                 }

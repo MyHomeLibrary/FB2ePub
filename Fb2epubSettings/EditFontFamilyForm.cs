@@ -187,6 +187,7 @@ namespace Fb2epubSettings
             if (_familyFontName != textBoxFontFamilyName.Text)
             {
                 var x = _fontSettings.Fonts[_familyFontName];
+                x.Name = textBoxFontFamilyName.Text;
                 _fontSettings.Fonts.Remove(_familyFontName);
                 _fontSettings.Fonts[textBoxFontFamilyName.Text] = x;
             }
@@ -392,7 +393,7 @@ namespace Fb2epubSettings
         private void buttonBrowseForLocation_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog{AutoUpgradeEnabled = true,CheckFileExists = true,CheckPathExists = true};
-            dialog.Filter = "All font files|*.ttf *.otf|TTF files (*.ttf)|*.ttf|All files (*.*)|*.*";
+            dialog.Filter = "All font files|*.ttf; *.otf; *.ttc|TTF files (*.ttf)|*.ttf|All files (*.*)|*.*";
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
