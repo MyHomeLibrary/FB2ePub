@@ -160,7 +160,6 @@ namespace FontsSettings
         {
             settings.FontFamilies.Clear();
             settings.CssElements.Clear();
-            // TODO: implement
             foreach (var cssFontFamily in _fonts.Keys)
             {
                 CSSFontFamily newFamily = new CSSFontFamily();
