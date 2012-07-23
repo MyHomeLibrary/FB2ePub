@@ -1,8 +1,11 @@
 ﻿1.0.48
 + Added Microsoft public license file
++ Added code to control fonts and CSS fonts assignments from settings
++ Added support for "application/vnd.ms-opentype" media type (*.otf - OpenType fonts)
 * Moved to .Net framework v4.0
 * Fixed loading paths ending with '.' in command line utility
 * Redesigned font settings structure
+* Fonts data storage format inside the configuration file changed
 
 1.0.47
 + Added code to include external adobe XPGT templates into a resulting ePub (updated to v1.0.16 of epublibrary)
