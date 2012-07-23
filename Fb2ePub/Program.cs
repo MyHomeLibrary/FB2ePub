@@ -108,7 +108,7 @@ namespace Fb2ePub
                 Console.WriteLine(string.Format("Loading {0}...", fileParams[0]));
                 List<string> filesInMask = new List<string>();
                 bool folderExists = Directory.Exists(fileParams[0]);
-                if (fileParams[0].Contains("*") || fileParams[0].Contains("?") || folderExists)
+                if (fileParams[0].Contains("*") || fileParams[0].Contains("?") || folderExists || fileParams[0].EndsWith("."))
                 {
                     if (folderExists && !fileParams[0].EndsWith(Path.DirectorySeparatorChar.ToString()) && !fileParams[0].EndsWith(Path.AltDirectorySeparatorChar.ToString()) && !fileParams[0].EndsWith(".")) //just to make sure we have a folder
                     {
@@ -120,6 +120,10 @@ namespace Fb2ePub
                     {
                         // based on search mask options
                         fileName = GetFileMask(_searchMask);
+                        if (fileParams[0].EndsWith("."))
+                        {
+                            fileParams[0] = fileParams[0].Remove(fileParams[0].Length - 1);
+                        }
                     }
                     foreach (var subMask in fileName.Split(','))
                     {

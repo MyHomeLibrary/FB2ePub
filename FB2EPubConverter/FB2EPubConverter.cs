@@ -277,6 +277,7 @@ namespace Fb2ePubConverter
         private bool LoadFb2RarFile(string fileName)
         {
             bool fb2FileFound = false;
+            bool Fb2FileLoaded = false;
             try
             {
                 Rar rarFile = new Rar();
@@ -318,6 +319,10 @@ namespace Fb2ePubConverter
                                 Logger.Log.ErrorFormat("Unable to load {0}", entry.Filename);
                                 continue;
                             }
+                            else
+                            {
+                                Fb2FileLoaded = true;
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -339,7 +344,7 @@ namespace Fb2ePubConverter
                 Logger.Log.ErrorFormat("Error loading RAR file : {0}",ex.ToString());
                 return false;
             }
-            return fb2FileFound;
+            return fb2FileFound && Fb2FileLoaded;
         }
 
         /// <summary>
@@ -466,6 +471,7 @@ namespace Fb2ePubConverter
             {
                 Exception returnEx = null;
                 bool fb2FileFound = false;
+                bool fb2FileLoaded = false;
                 using (var s = new ZipInputStream(File.OpenRead(fileName)))
                 {
                     ZipEntry theEntry;
@@ -501,6 +507,7 @@ namespace Fb2ePubConverter
                                         using (Stream output = Fb2Fix.Process(s1, options))
                                         {
                                             ReadFb2FileStream(output);
+                                            fb2FileLoaded = true;
                                         }
                                     }
                                 }
@@ -509,6 +516,7 @@ namespace Fb2ePubConverter
                                     try
                                     {
                                         ReadFb2FileStream(s);
+                                        fb2FileLoaded = true;
                                     }
                                     catch (XmlException) // broken/mailformed Xml detected
                                     {
@@ -530,6 +538,7 @@ namespace Fb2ePubConverter
                                             try
                                             {
                                                 ReadBrokenXmlFb2FileStream(s1);
+                                                fb2FileLoaded = true;
                                             }
                                             catch (XmlException)
                                             {
@@ -556,6 +565,7 @@ namespace Fb2ePubConverter
                                                             try
                                                             {
                                                                 ReadFb2FileStream(output);
+                                                                fb2FileLoaded = true;
                                                             }
                                                             catch (XmlException)
                                                             {
@@ -596,7 +606,7 @@ namespace Fb2ePubConverter
                 {
                     throw returnEx;
                 }
-                return fb2FileFound;
+                return fb2FileFound && fb2FileLoaded;
             }
             catch (Exception ex)
             {
