@@ -190,5 +190,15 @@ namespace FontsSettings
         {
             Load(_storageSettings,_loadedDecoration);
         }
+
+        /// <summary>
+        /// Checks if font (family, by name) used in one of the CSS elements
+        /// </summary>
+        /// <param name="text">font family name</param>
+        /// <returns>if font used by any CSS element</returns>
+        public bool IsFontUsed(string text)
+        {
+            return _elements.AsParallel().Any(element => element.Value.AsParallel().Any(pair => pair.Value.AsParallel().Any(cssFontFamily => cssFontFamily.Name == text)));
+        }
     }
 }
