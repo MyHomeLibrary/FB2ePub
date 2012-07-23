@@ -1,9 +1,8 @@
 ﻿1.0.17.0
 + License file added
-+ Added code to control fonts and CSS fonts assignments from settings
 * Small refactoring of code
 * Changed to .Net 4.0
-* Fonts data storage format inside the configuration file changed
+
 
 
 1.0.16.0
