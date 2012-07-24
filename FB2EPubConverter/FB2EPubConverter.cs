@@ -79,6 +79,17 @@ namespace Fb2ePubConverter
             Fb2FixAlways,
         }
 
+        public enum IgnoreTitleOptions
+        {
+            IgnoreNothing = 0,
+            IgnoreMainTitle,
+            IgnoreSourceTitle,
+            IgnorePublishTitle,
+            IgnoreMainAndSource,
+            IgnoreMainAndPublish,
+            IgnoreSourceAndPublish,
+        }
+
         private readonly List<FB2File> fb2Files = new List<FB2File>();
 
 
@@ -86,6 +97,13 @@ namespace Fb2ePubConverter
         /// Enable/Disable embeding of Adobe XPGT Template into a resulting file
         /// </summary>
         public bool EnableAdobeTemplate { get; set; }
+
+
+        /// <summary>
+        /// Controls which titles should be ignored when generating ePub
+        /// by default - nothing
+        /// </summary>
+        public IgnoreTitleOptions IgnoreTitle { get; set; }
 
         /// <summary>
         /// Path to location of Adobe XPGT template
@@ -1204,7 +1222,10 @@ namespace Fb2ePubConverter
                                              ? fb2File.TitleInfo.Language
                                              : fb2File.TitleInfo.BookTitle.Language;
                 }
-                epubFile.Title.BookTitles.Add(bookTitle);
+                if ((IgnoreTitle != IgnoreTitleOptions.IgnoreMainTitle) && (IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndPublish) && IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndSource)
+                {
+                    epubFile.Title.BookTitles.Add(bookTitle);
+                }
 
                 epubFile.Title.Languages.Add(fb2File.TitleInfo.Language);
 
@@ -1298,7 +1319,10 @@ namespace Fb2ePubConverter
                 bookTitle = new Title();
                 bookTitle.TitleName= epubFile.Transliterator.Translate(fb2File.SourceTitleInfo.BookTitle.Text,epubFile.TranslitMode);
                 bookTitle.Language = string.IsNullOrEmpty(fb2File.SourceTitleInfo.BookTitle.Language)&&(fb2File.TitleInfo != null) ? fb2File.TitleInfo.Language : fb2File.SourceTitleInfo.BookTitle.Language;
-                epubFile.Title.BookTitles.Add(bookTitle);
+                if ((IgnoreTitle != IgnoreTitleOptions.IgnoreSourceTitle) && (IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndSource) && IgnoreTitle != IgnoreTitleOptions.IgnoreSourceAndPublish)
+                {
+                    epubFile.Title.BookTitles.Add(bookTitle);
+                }
 
                 epubFile.Title.Languages.Add(fb2File.SourceTitleInfo.Language);
             }
@@ -1342,7 +1366,10 @@ namespace Fb2ePubConverter
                 bookTitle = new Title();
                 bookTitle.TitleName = epubFile.Transliterator.Translate(fb2File.PublishInfo.BookName.Text,epubFile.TranslitMode);
                 bookTitle.Language = !string.IsNullOrEmpty(fb2File.PublishInfo.BookName.Language) ? fb2File.PublishInfo.BookName.Language : fb2File.TitleInfo.Language;
-                epubFile.Title.BookTitles.Add(bookTitle);
+                if ((IgnoreTitle != IgnoreTitleOptions.IgnorePublishTitle) && (IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndPublish) && IgnoreTitle != IgnoreTitleOptions.IgnoreSourceAndPublish)
+                {
+                    epubFile.Title.BookTitles.Add(bookTitle);
+                }
             }
 
 

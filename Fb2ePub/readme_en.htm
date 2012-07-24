@@ -183,7 +183,7 @@
         <dd>
         Enable (1) /disable (0)"capitalization" of section first character making it big and appear on several lines.<dfn>-cap:1</dfn> - default
         </dd>
-        <dt><strong>-xpgt:[0/1]<em></em></strong></dt>
+        <dt><strong>-xpgt:<em>[0/1]</em></strong></dt>
         <dd>
         Enable (1) or disable (0, default) embeding of Adobe XPGT template into resulting ePub File. <dfn>-xpgt:0</dfn> - default
         </dd>
@@ -191,6 +191,21 @@
         <dd>
         Forces converter to use Adobe XPGT template file specified by this parameter instead of default XPGT template "template.xpgt" located in "Template" subfolder
         </dd>
+        <dt><strong>-settings</strong></dt>
+        <dd>
+        Calling with this parameter (should be the only parameter) will bring up settings configuration window UI to ease setting up the defaults
+        </dd>
+       <dt><strong>-ignoretitle:<em>[0/1/2/3/4/5/6]</em></strong></dt>
+       <dd>Controls if one or more FB2 titles should be ignored, <dfn>-ignoretitle:0</dfn> - default
+       Possible options are
+       <li>0 - nothing ignored</li>
+       <li>1 - Main FB2 title ignored </li>
+       <li>2 - Source info title ignored</li>
+       <li>3 - Publish info title ignored</li>
+       <li>4 - Main and Source info titles are ignored</li>
+       <li>5 - Main and Publish info titles are ignored</li>
+       <li>6 - Source and Publish info titles are ignored</li>
+       </dd>
     </dl>
     <h2>
         Fonts:
@@ -361,26 +376,6 @@
         <dt>AdobeTemplatePath</dt>
         <dd>
         - Specifies non-default path to the XPGT template to use in case enabled (in case of empty - default "Template" folder "template.xpgt" file used.
-        </dd>
-        <dt>Fonts</dt>
-        <dd>
-        - Contains font definitions to be used by program, <br />
-        can contain several <b>&lt;Font&gt;</b> elements, <br />
-        each such element can have several <b>&lt;Destinations&gt;</b> that define if the font to be <br />
-        <b>"Local"</b> (use "local" syntax), <br />
-        <b>"External"</b> (use url syntax) <br />
-        or <b>"Embedded"</b> (embeded into EPUB file, file taken from path), <br />
-        in all cases the path to take font from taken from <b>&lt;Path&gt;</b> setting and have a path to the font file. <br />
-        The <b><em>%ResourceFolder%</em></b> variable that can be used in <b>&lt;Path&gt;</b> string points to the program's own FONTS folder.<br />
-        The <b>&lt;CSSTargets&gt;</b> element list all the <acronym>XHTML</acronym> targets the font will be applied to (for example <b>body</b>). <br />
-        The <b>&lt;decorate&gt;</b> parameter if set to true "decorates" font family name with additional unique string working around Adobe SDK bug of "cached" fonts, can be "true" or "false". The font attributes are regular <acronym>CSS</acronym> font attributes and can accept same values.<br />
-        Additionaly &lt;Font&gt; setting jhave following attributes:
-        <ul>
-        <li><b>style</b> - font style to override, can be either "normal" or "italic"</li>
-        <li><b>generic_family</b> - font generic family, can be empty (""), "serif", "sans-serif", "cursive", "fantasy", "monospace"</li>
-        <li><b>font-variant</b> - font variant, can be empty ("") = normal, "normal", "small-caps"</li>
-        <li><b>font-weight</b> - font boldnes, can be any standard HTML boldness , default "" = normal</li>
-        </ul>
         </dd>
     </dl>
     <h2>

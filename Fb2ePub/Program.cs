@@ -330,6 +330,8 @@ namespace Fb2ePub
             converter.EnableAdobeTemplate = Fb2epubSettings.Fb2Epub.Default.UseAdobeTemplate;
             converter.AdobeTemplatePath = Fb2epubSettings.Fb2Epub.Default.AdobeTemplatePath;
             converter.DecorateFontNames = Fb2epubSettings.Fb2Epub.Default.DecorateFontNames;
+            converter.IgnoreTitle =
+                (Fb2EPubConverterEngine.IgnoreTitleOptions) Fb2epubSettings.Fb2Epub.Default.IgnoreTitle;
             //Fb2Epub.Default.Save();
         }
 
@@ -665,6 +667,46 @@ namespace Fb2ePub
                 else if (command.StartsWith("xpgtpath:"))
                 {
                     converter.AdobeTemplatePath =  command.Substring(9);
+                }
+                else if (command.StartsWith("ignoretitle:"))
+                {
+                    string commandValue = command.Substring(12);
+                    int value;
+                    if (int.TryParse(commandValue, out value))
+                    {
+                        if (value == 0)
+                        {
+                            converter.IgnoreTitle = Fb2EPubConverterEngine.IgnoreTitleOptions.IgnoreNothing;
+                        }
+                        else if (value == 1)
+                        {
+                            converter.IgnoreTitle = Fb2EPubConverterEngine.IgnoreTitleOptions.IgnoreMainTitle;
+                        }
+                        else if (value == 2)
+                        {
+                            converter.IgnoreTitle = Fb2EPubConverterEngine.IgnoreTitleOptions.IgnoreSourceTitle;
+                        }
+                        else if (value == 3)
+                        {
+                            converter.IgnoreTitle = Fb2EPubConverterEngine.IgnoreTitleOptions.IgnorePublishTitle;
+                        }
+                        else if (value == 4)
+                        {
+                            converter.IgnoreTitle = Fb2EPubConverterEngine.IgnoreTitleOptions.IgnoreMainAndSource;
+                        }
+                        else if (value == 5)
+                        {
+                            converter.IgnoreTitle = Fb2EPubConverterEngine.IgnoreTitleOptions.IgnoreMainAndPublish;
+                        }
+                        else if (value == 6)
+                        {
+                            converter.IgnoreTitle = Fb2EPubConverterEngine.IgnoreTitleOptions.IgnoreSourceAndPublish;
+                        }
+                        else
+                        {
+                            log.InfoFormat("Invalid -ignoretitle: parameter value {0}.", value);
+                        }
+                    }                                       
                 }
                 else
                 {

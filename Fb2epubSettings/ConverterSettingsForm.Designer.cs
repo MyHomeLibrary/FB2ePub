@@ -81,6 +81,10 @@
             this.listBoxCSSElements = new System.Windows.Forms.ListBox();
             this.buttonRemoveCSS = new System.Windows.Forms.Button();
             this.buttonAddCSS = new System.Windows.Forms.Button();
+            this.groupBoxAssignedFonts = new System.Windows.Forms.GroupBox();
+            this.groupBoxCSS = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxIgnoreTitle = new System.Windows.Forms.ComboBox();
             this.tabControlSettings = new Fb2epubSettings.NonStyledTabs();
             this.tabPageTransliteration = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -95,8 +99,8 @@
             this.groupBoxXPGTPath = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageCSSElements = new System.Windows.Forms.TabPage();
-            this.groupBoxAssignedFonts = new System.Windows.Forms.GroupBox();
-            this.groupBoxCSS = new System.Windows.Forms.GroupBox();
+            this.groupBoxAssignedFonts.SuspendLayout();
+            this.groupBoxCSS.SuspendLayout();
             this.tabControlSettings.SuspendLayout();
             this.tabPageTransliteration.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -109,8 +113,6 @@
             this.tabPageXPGT.SuspendLayout();
             this.groupBoxXPGTPath.SuspendLayout();
             this.tabPageCSSElements.SuspendLayout();
-            this.groupBoxAssignedFonts.SuspendLayout();
-            this.groupBoxCSS.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonSave
@@ -506,6 +508,49 @@
             this.buttonAddCSS.UseVisualStyleBackColor = true;
             this.buttonAddCSS.Click += new System.EventHandler(this.buttonAddCSS_Click);
             // 
+            // groupBoxAssignedFonts
+            // 
+            resources.ApplyResources(this.groupBoxAssignedFonts, "groupBoxAssignedFonts");
+            this.groupBoxAssignedFonts.Controls.Add(this.listBoxCSSFonts);
+            this.groupBoxAssignedFonts.Controls.Add(this.buttonDeleteCSSFont);
+            this.groupBoxAssignedFonts.Controls.Add(this.buttonAddCSSFont);
+            this.groupBoxAssignedFonts.Name = "groupBoxAssignedFonts";
+            this.groupBoxAssignedFonts.TabStop = false;
+            this.toolTipControl.SetToolTip(this.groupBoxAssignedFonts, resources.GetString("groupBoxAssignedFonts.ToolTip"));
+            // 
+            // groupBoxCSS
+            // 
+            resources.ApplyResources(this.groupBoxCSS, "groupBoxCSS");
+            this.groupBoxCSS.Controls.Add(this.listBoxCSSElements);
+            this.groupBoxCSS.Controls.Add(this.buttonRemoveCSS);
+            this.groupBoxCSS.Controls.Add(this.buttonAddCSS);
+            this.groupBoxCSS.Name = "groupBoxCSS";
+            this.groupBoxCSS.TabStop = false;
+            this.toolTipControl.SetToolTip(this.groupBoxCSS, resources.GetString("groupBoxCSS.ToolTip"));
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            this.toolTipControl.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
+            // 
+            // comboBoxIgnoreTitle
+            // 
+            resources.ApplyResources(this.comboBoxIgnoreTitle, "comboBoxIgnoreTitle");
+            this.comboBoxIgnoreTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxIgnoreTitle.FormattingEnabled = true;
+            this.comboBoxIgnoreTitle.Items.AddRange(new object[] {
+            resources.GetString("comboBoxIgnoreTitle.Items"),
+            resources.GetString("comboBoxIgnoreTitle.Items1"),
+            resources.GetString("comboBoxIgnoreTitle.Items2"),
+            resources.GetString("comboBoxIgnoreTitle.Items3"),
+            resources.GetString("comboBoxIgnoreTitle.Items4"),
+            resources.GetString("comboBoxIgnoreTitle.Items5"),
+            resources.GetString("comboBoxIgnoreTitle.Items6")});
+            this.comboBoxIgnoreTitle.Name = "comboBoxIgnoreTitle";
+            this.toolTipControl.SetToolTip(this.comboBoxIgnoreTitle, resources.GetString("comboBoxIgnoreTitle.ToolTip"));
+            this.comboBoxIgnoreTitle.SelectedIndexChanged += new System.EventHandler(this.comboBoxIgnoreTitle_SelectedIndexChanged);
+            // 
             // tabControlSettings
             // 
             resources.ApplyResources(this.tabControlSettings, "tabControlSettings");
@@ -568,6 +613,8 @@
             // tabPageDifferent
             // 
             resources.ApplyResources(this.tabPageDifferent, "tabPageDifferent");
+            this.tabPageDifferent.Controls.Add(this.comboBoxIgnoreTitle);
+            this.tabPageDifferent.Controls.Add(this.label2);
             this.tabPageDifferent.Controls.Add(this.comboBoxFixMode);
             this.tabPageDifferent.Controls.Add(this.labelFixMode);
             this.tabPageDifferent.Controls.Add(this.checkBoxSkipAboutPage);
@@ -663,26 +710,6 @@
             this.toolTipControl.SetToolTip(this.tabPageCSSElements, resources.GetString("tabPageCSSElements.ToolTip"));
             this.tabPageCSSElements.UseVisualStyleBackColor = true;
             // 
-            // groupBoxAssignedFonts
-            // 
-            resources.ApplyResources(this.groupBoxAssignedFonts, "groupBoxAssignedFonts");
-            this.groupBoxAssignedFonts.Controls.Add(this.listBoxCSSFonts);
-            this.groupBoxAssignedFonts.Controls.Add(this.buttonDeleteCSSFont);
-            this.groupBoxAssignedFonts.Controls.Add(this.buttonAddCSSFont);
-            this.groupBoxAssignedFonts.Name = "groupBoxAssignedFonts";
-            this.groupBoxAssignedFonts.TabStop = false;
-            this.toolTipControl.SetToolTip(this.groupBoxAssignedFonts, resources.GetString("groupBoxAssignedFonts.ToolTip"));
-            // 
-            // groupBoxCSS
-            // 
-            resources.ApplyResources(this.groupBoxCSS, "groupBoxCSS");
-            this.groupBoxCSS.Controls.Add(this.listBoxCSSElements);
-            this.groupBoxCSS.Controls.Add(this.buttonRemoveCSS);
-            this.groupBoxCSS.Controls.Add(this.buttonAddCSS);
-            this.groupBoxCSS.Name = "groupBoxCSS";
-            this.groupBoxCSS.TabStop = false;
-            this.toolTipControl.SetToolTip(this.groupBoxCSS, resources.GetString("groupBoxCSS.ToolTip"));
-            // 
             // ConverterSettingsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -698,6 +725,8 @@
             this.ShowInTaskbar = false;
             this.toolTipControl.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.ConverterSettingsForm_Load);
+            this.groupBoxAssignedFonts.ResumeLayout(false);
+            this.groupBoxCSS.ResumeLayout(false);
             this.tabControlSettings.ResumeLayout(false);
             this.tabPageTransliteration.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -718,8 +747,6 @@
             this.groupBoxXPGTPath.ResumeLayout(false);
             this.groupBoxXPGTPath.PerformLayout();
             this.tabPageCSSElements.ResumeLayout(false);
-            this.groupBoxAssignedFonts.ResumeLayout(false);
-            this.groupBoxCSS.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -793,6 +820,8 @@
         private System.Windows.Forms.Button buttonAddCSSFont;
         private System.Windows.Forms.ListBox listBoxCSSFonts;
         private System.Windows.Forms.ListBox listBoxCSSElements;
+        private System.Windows.Forms.ComboBox comboBoxIgnoreTitle;
+        private System.Windows.Forms.Label label2;
 
 
 
