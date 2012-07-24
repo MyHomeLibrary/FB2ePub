@@ -267,8 +267,7 @@ namespace Fb2epubSettings {
             "/CSSElement>\r\n                    <CSSElement name=\"\" class=\"epub\">\r\n           " +
             "           <Font>Fonts_97c90146-e42b-47a4-ac20-da6427fe9b9f</Font>\r\n            " +
             "        </CSSElement>\r\n                  </FontSettings>\r\n                ")]
-        public global::FontsSettings.EPubFontSettings Fonts
-        {
+        public global::FontsSettings.EPubFontSettings Fonts {
             get {
                 return ((global::FontsSettings.EPubFontSettings)(this["Fonts"]));
             }
@@ -286,6 +285,18 @@ namespace Fb2epubSettings {
             }
             set {
                 this["DecorateFontNames"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int IgnoreTitle {
+            get {
+                return ((int)(this["IgnoreTitle"]));
+            }
+            set {
+                this["IgnoreTitle"] = value;
             }
         }
     }

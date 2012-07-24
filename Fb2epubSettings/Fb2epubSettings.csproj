@@ -97,8 +97,6 @@
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Fb2Epub.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Properties\DataSources\FontsSettings.CSSFont.datasource" />
-    <None Include="Properties\DataSources\FontsSettings.FontSource.datasource" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AddCSSForm.resx">

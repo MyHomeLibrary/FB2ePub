@@ -151,6 +151,7 @@ namespace Fb2ePubGui
             _converter.SkipAboutPage = Fb2Epub.Default.SkipAboutPage;
             _converter.Fonts = Fb2Epub.Default.Fonts;
             _converter.DecorateFontNames = Fb2Epub.Default.DecorateFontNames;
+            _converter.IgnoreTitle = (Fb2EPubConverterEngine.IgnoreTitleOptions) Fb2Epub.Default.IgnoreTitle;
 
             // now really convert files
             foreach (var file in allFiles)

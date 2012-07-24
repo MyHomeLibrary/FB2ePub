@@ -146,17 +146,23 @@
   <data name="checkBoxVisibleInExt.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 148</value>
   </data>
+  <data name="&gt;&gt;radioButtonSDDisabled.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="buttonRemoveFont.ToolTip" xml:space="preserve">
     <value>Remove selected font family</value>
   </data>
   <data name="&gt;&gt;buttonReset.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="comboBoxIgnoreTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 21</value>
+  </data>
   <data name="&gt;&gt;textBoxAuthorFormat.Parent" xml:space="preserve">
     <value>tabPageSequences</value>
   </data>
-  <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>397, 13</value>
+  <data name="labelFixMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 9</value>
   </data>
   <data name="comboBoxFixMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>230, 7</value>
@@ -178,6 +184,9 @@
   </data>
   <data name="&gt;&gt;tabPageFonts.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="comboBoxIgnoreTitle.Items4" xml:space="preserve">
+    <value>Main&amp;Source,</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="checkBoxCapitalize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -216,6 +225,9 @@
   <data name="tabPageTransliteration.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;comboBoxIgnoreTitle.Parent" xml:space="preserve">
+    <value>tabPageDifferent</value>
+  </data>
   <data name="listBoxCSSElements.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 19</value>
   </data>
@@ -234,6 +246,9 @@
   <data name="checkBoxVisibleInGUI.ToolTip" xml:space="preserve">
     <value>Check to show path as converter GUI destination</value>
   </data>
+  <data name="&gt;&gt;textBoxNoSequenceFormat.Parent" xml:space="preserve">
+    <value>groupBoxSequences</value>
+  </data>
   <data name="&gt;&gt;groupBoxAssignedFonts.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -241,7 +256,7 @@
     <value>45, 17</value>
   </data>
   <data name="&gt;&gt;checkBoxCapitalize.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="textBoxFileAsFormat.Location" type="System.Drawing.Point, System.Drawing">
     <value>199, 171</value>
@@ -267,9 +282,6 @@
   <data name="buttonAddCSSFont.Text" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="&gt;&gt;checkBoxTransliterateAdditional.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
   <data name="&gt;&gt;radioButtonSDEnabled.Name" xml:space="preserve">
     <value>radioButtonSDEnabled</value>
   </data>
@@ -280,7 +292,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkBoxFlatStructure.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="checkBoxEmbedStyles.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 17</value>
@@ -290,6 +302,9 @@
   </data>
   <data name="checkBoxCapitalize.ToolTip" xml:space="preserve">
     <value>If enabled the first character of each chapter is displayed as capital drop</value>
+  </data>
+  <data name="comboBoxIgnoreTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>229, 36</value>
   </data>
   <data name="&gt;&gt;checkBoxTransliterateAdditional.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -339,8 +354,11 @@
   <data name="&gt;&gt;checkBoxAddSequences.Parent" xml:space="preserve">
     <value>groupBoxSequences</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;buttonReset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Ignore Title :</value>
   </data>
   <data name="radioButtonSDDisabled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -354,11 +372,20 @@
   <data name="&gt;&gt;buttonAddFont.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="checkBoxTransliterateFileName.ToolTip" xml:space="preserve">
+    <value>Transliterate file name (enable for readers that display file names in directory but do not have support for cyrillic fonts)</value>
+  </data>
   <data name="radioButtonSDEnabled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;checkBoxTransliterateTOC.Parent" xml:space="preserve">
     <value>groupBox1</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 36</value>
+  </data>
+  <data name="label2.ToolTip" xml:space="preserve">
+    <value>Controls which FB2 section Title to be ignored</value>
   </data>
   <data name="listViewFonts.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 175</value>
@@ -374,6 +401,9 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   </data>
   <data name="buttonRemoveCSS.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
+  </data>
+  <data name="&gt;&gt;tabPageXPGT.Name" xml:space="preserve">
+    <value>tabPageXPGT</value>
   </data>
   <data name="checkBoxTransliterateTOC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -477,8 +507,11 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="textBoxNoSequenceFormat.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;checkBoxFlatStructure.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;comboBoxFixMode.Name" xml:space="preserve">
+    <value>comboBoxFixMode</value>
+  </data>
+  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="groupBoxXPGTPath.Text" xml:space="preserve">
     <value>XPGT Template Path</value>
@@ -571,6 +604,9 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
   <data name="&gt;&gt;labelAuthorFormat.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="comboBoxIgnoreTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
   <data name="buttonRemoveFont.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -632,7 +668,7 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkBoxSkipAboutPage.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="checkBoxTransliterateFileName.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 17</value>
@@ -643,8 +679,8 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
   <data name="buttonBrowseForXPGT.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="&gt;&gt;buttonAddCSSFont.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelNoSeqFormat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tabPageSequences.Text" xml:space="preserve">
     <value>Sequences</value>
@@ -652,8 +688,8 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>484, 262</value>
   </data>
-  <data name="checkBoxFb2Info.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;textBoxFileAsFormat.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="tabPageXPGT.Location" type="System.Drawing.Point, System.Drawing">
     <value>42, 4</value>
@@ -697,8 +733,8 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
   <data name="listBoxPaths.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;buttonReset.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;checkBoxTransliterateAdditional.Parent" xml:space="preserve">
+    <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;groupBoxAssignedFonts.Parent" xml:space="preserve">
     <value>tabPageCSSElements</value>
@@ -757,9 +793,6 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
   <data name="&gt;&gt;textBoxAuthorFormat.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="groupBoxXPGTPath.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="radioButtonSDDisabled.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -774,6 +807,9 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
   </data>
   <data name="buttonXPGTClear.Text" xml:space="preserve">
     <value>Clear/Default</value>
+  </data>
+  <data name="groupBoxAssignedFonts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 110</value>
   </data>
   <data name="&gt;&gt;buttonUpPath.Name" xml:space="preserve">
     <value>buttonUpPath</value>
@@ -814,6 +850,9 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
   <data name="&gt;&gt;labelFixMode.Parent" xml:space="preserve">
     <value>tabPageDifferent</value>
   </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
   <data name="&gt;&gt;checkBoxSkipAboutPage.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -823,8 +862,8 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
   <data name="checkBoxCapitalize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="tabPageXPGT.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="&gt;&gt;checkBoxAddSequences.Name" xml:space="preserve">
+    <value>checkBoxAddSequences</value>
   </data>
   <data name="buttonUpPath.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -856,9 +895,6 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
   <data name="checkBoxFlatStructure.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;checkBoxConvertAlphaPNG.Name" xml:space="preserve">
-    <value>checkBoxConvertAlphaPNG</value>
-  </data>
   <data name="&gt;&gt;comboBoxFixMode.Parent" xml:space="preserve">
     <value>tabPageDifferent</value>
   </data>
@@ -877,23 +913,14 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
   <data name="labelNoSeries.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="buttonAddCSS.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="checkBoxTransliterateFileName.ToolTip" xml:space="preserve">
-    <value>Transliterate file name (enable for readers that display file names in directory but do not have support for cyrillic fonts)</value>
+  <data name="&gt;&gt;buttonDownPath.Name" xml:space="preserve">
+    <value>buttonDownPath</value>
   </data>
   <data name="&gt;&gt;textBoxNoSeriesFormat.Parent" xml:space="preserve">
     <value>groupBoxSequences</value>
   </data>
-  <data name="&gt;&gt;buttonUpPath.Parent" xml:space="preserve">
-    <value>tabPagePaths</value>
-  </data>
   <data name="buttonAddCSSFont.Location" type="System.Drawing.Point, System.Drawing">
     <value>236, 20</value>
-  </data>
-  <data name="labelNoSeqFormat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;buttonRemoveCSS.Parent" xml:space="preserve">
     <value>groupBoxCSS</value>
@@ -907,8 +934,8 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
   <data name="tabPageCSSElements.Size" type="System.Drawing.Size, System.Drawing">
     <value>332, 203</value>
   </data>
-  <data name="&gt;&gt;radioButtonSDDisabled.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;buttonAddCSSFont.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonSave.Name" xml:space="preserve">
     <value>buttonSave</value>
@@ -928,11 +955,17 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
   <data name="label1.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;checkBoxFlatStructure.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="buttonPathNew.ToolTip" xml:space="preserve">
     <value>Add new path</value>
   </data>
   <data name="&gt;&gt;buttonEdit.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>tabPageDifferent</value>
   </data>
   <data name="tabPagePaths.Location" type="System.Drawing.Point, System.Drawing">
     <value>42, 4</value>
@@ -971,8 +1004,8 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="buttonUpPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;buttonAddCSS.Parent" xml:space="preserve">
-    <value>groupBoxCSS</value>
+  <data name="checkBoxEmbedStyles.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="buttonEditFont.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1002,7 +1035,7 @@ additionally another subformat :b can be added to take name in brackets</value>
     <value>7</value>
   </data>
   <data name="&gt;&gt;labelFixMode.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="buttonXPGTClear.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 23</value>
@@ -1049,8 +1082,8 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="labelNoSeqFormat.Text" xml:space="preserve">
     <value>NoSequenceFormat :</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Single Destination</value>
+  <data name="buttonEdit.ToolTip" xml:space="preserve">
+    <value>Edit currently selected path definition</value>
   </data>
   <data name="checkBoxVisibleInGUI.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1091,9 +1124,6 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;buttonRemoveCSS.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="buttonDownPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="groupBoxSequences.Text" xml:space="preserve">
     <value>Sequences</value>
   </data>
@@ -1102,6 +1132,9 @@ additionally another subformat :b can be added to take name in brackets</value>
   </data>
   <data name="buttonPathNew.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
+  </data>
+  <data name="textBoxNoSequenceFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
   </data>
   <data name="&gt;&gt;buttonDownPath.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -1182,7 +1215,7 @@ additionally another subformat :b can be added to take name in brackets</value>
     <value>55, 13</value>
   </data>
   <data name="&gt;&gt;comboBoxFixMode.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="tabControlSettings.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1235,6 +1268,9 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="buttonAddCSSFont.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;buttonReset.Name" xml:space="preserve">
     <value>buttonReset</value>
   </data>
@@ -1255,6 +1291,9 @@ additionally another subformat :b can be added to take name in brackets</value>
   </data>
   <data name="&gt;&gt;tabPageCSSElements.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="&gt;&gt;checkBoxVisibleInGUI.Parent" xml:space="preserve">
+    <value>tabPagePaths</value>
   </data>
   <data name="checkBoxFb2Info.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1282,6 +1321,9 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="listBoxCSSFonts.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 20</value>
   </data>
+  <data name="buttonSave.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="labelNoSeries.ToolTip" xml:space="preserve">
     <value>Format book title description info string , This allows to define what will be displayed on book description page if book is not part of series</value>
   </data>
@@ -1307,7 +1349,7 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
     <value>True</value>
   </data>
   <data name="&gt;&gt;checkBoxFb2Info.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="checkBoxVisibleInExt.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1327,6 +1369,9 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="&gt;&gt;groupBoxSequences.Name" xml:space="preserve">
     <value>groupBoxSequences</value>
   </data>
+  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
   <data name="&gt;&gt;buttonUpPath.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1342,8 +1387,8 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="textBoxTemplatePath.Location" type="System.Drawing.Point, System.Drawing">
     <value>46, 12</value>
   </data>
-  <data name="textBoxNoSequenceFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="groupBoxXPGTPath.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;labelNoSeries.Parent" xml:space="preserve">
     <value>groupBoxSequences</value>
@@ -1353,6 +1398,9 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   </data>
   <data name="buttonSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
+  </data>
+  <data name="comboBoxIgnoreTitle.Items3" xml:space="preserve">
+    <value>PublishTitle,</value>
   </data>
   <data name="buttonReset.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1390,14 +1438,11 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="checkBoxConvertAlphaPNG.Text" xml:space="preserve">
     <value>Convert Alpha PNG</value>
   </data>
-  <data name="&gt;&gt;textBoxNoSequenceFormat.Parent" xml:space="preserve">
-    <value>groupBoxSequences</value>
+  <data name="&gt;&gt;checkBoxConvertAlphaPNG.Name" xml:space="preserve">
+    <value>checkBoxConvertAlphaPNG</value>
   </data>
   <data name="groupBoxSequences.Size" type="System.Drawing.Size, System.Drawing">
     <value>322, 132</value>
-  </data>
-  <data name="buttonSave.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
   </data>
   <data name="listBoxPaths.ToolTip" xml:space="preserve">
     <value />
@@ -1426,6 +1471,9 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="&gt;&gt;checkBoxTransliterateTOC.Name" xml:space="preserve">
     <value>checkBoxTransliterateTOC</value>
   </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tabPageFonts.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1443,6 +1491,9 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   </data>
   <data name="textBoxSequenceFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
+  </data>
+  <data name="&gt;&gt;comboBoxIgnoreTitle.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>500, 300</value>
@@ -1465,11 +1516,14 @@ c - Capitalize, l - lowercase, u -UPPERCASE</value>
   <data name="labelFileAsFormat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="tabPageTransliteration.Text" xml:space="preserve">
+    <value>Transliteration</value>
+  </data>
   <data name="buttonBrowseForXPGT.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 39</value>
   </data>
-  <data name="&gt;&gt;buttonDownPath.Name" xml:space="preserve">
-    <value>buttonDownPath</value>
+  <data name="tabPageXPGT.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="buttonAddCSS.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1487,8 +1541,8 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;checkBoxEmbedStyles.Parent" xml:space="preserve">
     <value>tabPageDifferent</value>
   </data>
-  <data name="labelNoSeries.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="comboBoxIgnoreTitle.Items2" xml:space="preserve">
+    <value>SourceTitle,</value>
   </data>
   <data name="&gt;&gt;checkBoxSkipAboutPage.Parent" xml:space="preserve">
     <value>tabPageDifferent</value>
@@ -1502,14 +1556,17 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
   <data name="&gt;&gt;groupBoxXPGTPath.Parent" xml:space="preserve">
     <value>tabPageXPGT</value>
   </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Single Destination</value>
+  </data>
   <data name="groupBoxXPGTPath.Size" type="System.Drawing.Size, System.Drawing">
     <value>319, 75</value>
-  </data>
-  <data name="labelFixMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 9</value>
   </data>
   <data name="checkBoxConvertAlphaPNG.ToolTip" xml:space="preserve">
     <value>Enable to convert all PNG files with Alpha channel to 32bit (some readers like Sony/ADE can not display PNG files with Alpha channel set)</value>
@@ -1547,9 +1604,6 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;buttonAddCSS.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonReset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="labelSeqFormat.Text" xml:space="preserve">
     <value>SequenceFormat :</value>
   </data>
@@ -1565,8 +1619,8 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;checkBoxAddSequences.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="buttonReset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="buttonSave.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;checkBoxVisibleInExt.Name" xml:space="preserve">
     <value>checkBoxVisibleInExt</value>
@@ -1574,8 +1628,8 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="checkBoxEmbedStyles.Text" xml:space="preserve">
     <value>Embed Styles</value>
   </data>
-  <data name="tabPageTransliteration.Text" xml:space="preserve">
-    <value>Transliteration</value>
+  <data name="checkBoxFb2Info.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;toolTipControl.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1591,6 +1645,9 @@ additionally another subformat :b can be added to take name in brackets</value>
   </data>
   <data name="buttonDeletePath.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
+  </data>
+  <data name="comboBoxIgnoreTitle.Items1" xml:space="preserve">
+    <value>MainTitle</value>
   </data>
   <data name="checkBoxUseXPGT.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 7</value>
@@ -1649,6 +1706,9 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="tabPageTransliteration.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="buttonReset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelAuthorFormat.Text" xml:space="preserve">
     <value>AuthorFormat :</value>
   </data>
@@ -1700,6 +1760,9 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;tabPageFonts.Name" xml:space="preserve">
     <value>tabPageFonts</value>
   </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="labelFixMode.ToolTip" xml:space="preserve">
     <value>Mode used to attempt to fix broken and non-valie FB2s</value>
   </data>
@@ -1712,14 +1775,17 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="textBoxNoSequenceFormat.Location" type="System.Drawing.Point, System.Drawing">
     <value>199, 75</value>
   </data>
-  <data name="&gt;&gt;tabPageSequences.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;checkBoxUseXPGT.Parent" xml:space="preserve">
+    <value>tabPageXPGT</value>
   </data>
   <data name="comboBoxSDValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 21</value>
   </data>
   <data name="buttonReset.ToolTip" xml:space="preserve">
     <value>Drop changes and reset to initial state</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="buttonAddFont.Location" type="System.Drawing.Point, System.Drawing">
     <value>253, 7</value>
@@ -1730,14 +1796,14 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;buttonXPGTClear.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="buttonEdit.ToolTip" xml:space="preserve">
-    <value>Edit currently selected path definition</value>
-  </data>
   <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonSDDisabled.Parent" xml:space="preserve">
     <value>groupBox2</value>
+  </data>
+  <data name="comboBoxIgnoreTitle.Items" xml:space="preserve">
+    <value>Nothing</value>
   </data>
   <data name="&gt;&gt;groupBoxXPGTPath.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1820,8 +1886,8 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="tabPageFonts.Size" type="System.Drawing.Size, System.Drawing">
     <value>332, 203</value>
   </data>
-  <data name="&gt;&gt;checkBoxAddSequences.Name" xml:space="preserve">
-    <value>checkBoxAddSequences</value>
+  <data name="&gt;&gt;comboBoxIgnoreTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkBoxAddSequences.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1831,6 +1897,9 @@ additionally another subformat :b can be added to take name in brackets</value>
   </data>
   <data name="&gt;&gt;textBoxNoSeriesFormat.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="tabPageSequences.Size" type="System.Drawing.Size, System.Drawing">
     <value>332, 203</value>
@@ -1901,8 +1970,8 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;buttonAddFont.Parent" xml:space="preserve">
     <value>tabPageFonts</value>
   </data>
-  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;comboBoxIgnoreTitle.Name" xml:space="preserve">
+    <value>comboBoxIgnoreTitle</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -8118,11 +8187,20 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;buttonSave.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="comboBoxIgnoreTitle.Items6" xml:space="preserve">
+    <value>Source&amp;Publish</value>
+  </data>
   <data name="&gt;&gt;textBoxNoSequenceFormat.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="&gt;&gt;checkBoxConvertAlphaPNG.Parent" xml:space="preserve">
     <value>tabPageDifferent</value>
+  </data>
+  <data name="&gt;&gt;buttonAddCSS.Parent" xml:space="preserve">
+    <value>groupBoxCSS</value>
+  </data>
+  <data name="&gt;&gt;buttonReset.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="checkBoxEmbedStyles.ToolTip" xml:space="preserve">
     <value>Invokes "embeding styles mode" that, instead of adding CCS files to the ePub and referencing them, in xHTML injects the relevant style code directly into the xHTML files (enable for some buggy readers)</value>
@@ -8133,14 +8211,11 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="tabPageXPGT.Size" type="System.Drawing.Size, System.Drawing">
     <value>332, 203</value>
   </data>
-  <data name="&gt;&gt;comboBoxFixMode.Name" xml:space="preserve">
-    <value>comboBoxFixMode</value>
+  <data name="&gt;&gt;buttonUpPath.Parent" xml:space="preserve">
+    <value>tabPagePaths</value>
   </data>
   <data name="&gt;&gt;buttonEdit.Name" xml:space="preserve">
     <value>buttonEdit</value>
-  </data>
-  <data name="checkBoxEmbedStyles.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
   </data>
   <data name="groupBox1.ToolTip" xml:space="preserve">
     <value />
@@ -8154,29 +8229,40 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="comboBoxSDValue.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>397, 13</value>
+  </data>
   <data name="tabPageDifferent.ToolTipText" xml:space="preserve">
     <value>Main options</value>
   </data>
   <data name="tabPageTransliteration.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
+  <data name="comboBoxIgnoreTitle.ToolTip" xml:space="preserve">
+    <value>"Nothing" - nothing to ignore. Default
+"MainTitle" - ignore FB2 main Title section
+"SourceTitle" - ignore Source info title section
+"PublishTitle" - ignore Publish  info title section
+"Main&amp;Source" - ignore Main and Source info title section
+"Main&amp;Publish" - ignore Main and Publish info title section
+"Source&amp;Publish" - ignore Source and Publish info title section</value>
+  </data>
   <data name="checkBoxVisibleInGUI.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 171</value>
   </data>
   <data name="&gt;&gt;checkBoxConvertAlphaPNG.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
-  <data name="groupBoxAssignedFonts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 110</value>
+  <data name="comboBoxFixMode.ToolTip" xml:space="preserve">
+    <value> "None" - do not try to fix
+"Internal" - try to fix using conservative method (only basic errors fixed)
+"Fb2Fix" - try to fix as much as possible using Fb2Fix</value>
   </data>
   <data name="&gt;&gt;textBoxTemplatePath.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="labelSeqFormat.ToolTip" xml:space="preserve">
     <value>Format book title description info string, This allows to define what will be displayed on book description page</value>
-  </data>
-  <data name="&gt;&gt;tabPageCSSElements.Name" xml:space="preserve">
-    <value>tabPageCSSElements</value>
   </data>
   <data name="&gt;&gt;groupBoxCSS.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -8190,16 +8276,11 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="buttonRemoveCSS.ToolTip" xml:space="preserve">
     <value>Remove CSS element, element will no longer be styled with fonts</value>
   </data>
-  <data name="comboBoxFixMode.ToolTip" xml:space="preserve">
-    <value> "None" - do not try to fix
-"Internal" - try to fix using conservative method (only basic errors fixed)
-"Fb2Fix" - try to fix as much as possible using Fb2Fix</value>
-  </data>
   <data name="buttonDownPath.Location" type="System.Drawing.Point, System.Drawing">
     <value>252, 66</value>
   </data>
   <data name="&gt;&gt;checkBoxEmbedStyles.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="tabPageXPGT.Text" xml:space="preserve">
     <value>XPGT</value>
@@ -8207,8 +8288,8 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="radioButtonSDDisabled.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 17</value>
   </data>
-  <data name="&gt;&gt;checkBoxUseXPGT.Parent" xml:space="preserve">
-    <value>tabPageXPGT</value>
+  <data name="&gt;&gt;tabPageSequences.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxAuthorFormat.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -8237,17 +8318,17 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="listBoxCSSElements.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="comboBoxIgnoreTitle.Items5" xml:space="preserve">
+    <value>Main&amp;Publish,</value>
   </data>
   <data name="checkBoxTransliterateTOC.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="buttonSave.Text" xml:space="preserve">
-    <value>Save</value>
+  <data name="buttonAddCSS.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;textBoxFileAsFormat.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="labelNoSeries.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;listBoxCSSElements.Name" xml:space="preserve">
     <value>listBoxCSSElements</value>
@@ -8267,8 +8348,8 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="checkBoxSkipAboutPage.Text" xml:space="preserve">
     <value>Skip About page</value>
   </data>
-  <data name="&gt;&gt;tabPageXPGT.Name" xml:space="preserve">
-    <value>tabPageXPGT</value>
+  <data name="&gt;&gt;tabPageCSSElements.Name" xml:space="preserve">
+    <value>tabPageCSSElements</value>
   </data>
   <data name="checkBoxConvertAlphaPNG.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 17</value>
@@ -8300,8 +8381,8 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="buttonBrowseForXPGT.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;checkBoxVisibleInGUI.Parent" xml:space="preserve">
-    <value>tabPagePaths</value>
+  <data name="buttonDownPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="labelSeqFormat.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

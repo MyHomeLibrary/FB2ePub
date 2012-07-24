@@ -100,6 +100,7 @@ namespace Fb2epubSettings
             checkBoxSkipAboutPage.Checked = Fb2Epub.Default.SkipAboutPage;
             checkBoxUseXPGT.Checked = Fb2Epub.Default.UseAdobeTemplate;
             LoadFixMode();
+            LoadIgnoreTitleMode();
             UpdateSequencesGroup();
             _locations.Init();
             LoadPathsGroup();
@@ -109,6 +110,11 @@ namespace Fb2epubSettings
             UpdateFontsButtons();
             SetupCSSElements();
             UpdateCCSElements();
+        }
+
+        private void LoadIgnoreTitleMode()
+        {
+            comboBoxIgnoreTitle.SelectedIndex = Fb2Epub.Default.IgnoreTitle;
         }
 
         private void SetupCSSElements()
@@ -715,6 +721,11 @@ namespace Fb2epubSettings
                     _myDataSourceCSSFonts.ResetBindings(false);
                 }
             }
+        }
+
+        private void comboBoxIgnoreTitle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Fb2Epub.Default.IgnoreTitle= comboBoxIgnoreTitle.SelectedIndex;
         }
 
 
