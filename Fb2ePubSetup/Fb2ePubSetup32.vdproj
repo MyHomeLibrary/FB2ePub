@@ -710,7 +710,7 @@
                 "Message" = "8:[VSDNETMSG]"
                 "FrameworkVersion" = "8:.NETFramework,Version=v4.0"
                 "AllowLaterVersions" = "11:FALSE"
-                "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=76617"
+                "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=181011"
                 }
             }
         }
@@ -1875,7 +1875,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Fb2ePub"
         "ProductCode" = "8:{59F2F08A-F802-46B1-B53B-205082A1E231}"
-        "PackageCode" = "8:{8169AFC0-5AF1-4503-B070-87D77B97CA29}"
+        "PackageCode" = "8:{01D1574E-26DC-4149-8C68-C040A333FCFB}"
         "UpgradeCode" = "8:{92997D07-961F-492E-90D5-E761F4095BE2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
