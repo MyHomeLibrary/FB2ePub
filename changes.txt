@@ -1,4 +1,4 @@
-﻿1.0.17.0
+﻿1.0.18.0
 + License file added
 * Small refactoring of code
 * Changed to .Net 4.0
