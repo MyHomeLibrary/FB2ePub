@@ -8,6 +8,7 @@
 * Redesigned font settings structure
 * Fonts data storage format inside the configuration file changed
 * Fixed deletion of source file (if enabled) in case fix of FB2 failed
+* Changed project build structure to contain all my libraries to ease the debug
 
 1.0.47
 + Added code to include external adobe XPGT templates into a resulting ePub (updated to v1.0.16 of epublibrary)
