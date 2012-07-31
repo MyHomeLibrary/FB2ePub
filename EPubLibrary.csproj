@@ -75,10 +75,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ExtLibs\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="ISOLanguages, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>ExtLibs\ISOLanguages.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ExtLibs\log4net.dll</HintPath>
@@ -96,10 +92,6 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TranslitRu, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>ExtLibs\TranslitRu.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Container\ContainerFile.cs" />
@@ -159,6 +151,14 @@
     <ProjectReference Include="..\fontsettings\FontsSettings.csproj">
       <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
       <Name>FontsSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\isiolanguages\ISOLanguages.csproj">
+      <Project>{58E261A5-B2EA-43F3-820D-902B5C061321}</Project>
+      <Name>ISOLanguages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\translitrunet\TranslitRu.csproj">
+      <Project>{CDFF6D0A-EB28-4817-8635-D6B0A9FDE833}</Project>
+      <Name>TranslitRu</Name>
     </ProjectReference>
     <ProjectReference Include="..\xhtmlclasslibrary\XHTMLClassLibrary.csproj">
       <Project>{FFCCD288-4F11-44A5-AB04-3CACF840935C}</Project>
