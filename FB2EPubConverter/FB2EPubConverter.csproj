@@ -64,10 +64,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ExtLibs\Fb2FixLib.dll</HintPath>
     </Reference>
-    <Reference Include="FB2Library, Version=1.0.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ExtLibs\FB2Library.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ExtLibs\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -93,16 +89,8 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TranslitRu, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ExtLibs\TranslitRu.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="XHTMLClassLibrary, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ExtLibs\XHTMLClassLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -146,9 +134,21 @@
       <Project>{2868CFB2-562D-4C26-9471-F78F1D94CE0D}</Project>
       <Name>EPubLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\fb2librarynet\FB2Library.csproj">
+      <Project>{4DEC5888-E71A-4D00-93B7-7F11C92D0A3F}</Project>
+      <Name>FB2Library</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\fontsettings\FontsSettings.csproj">
       <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
       <Name>FontsSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\translitrunet\TranslitRu.csproj">
+      <Project>{CDFF6D0A-EB28-4817-8635-D6B0A9FDE833}</Project>
+      <Name>TranslitRu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xhtmlclasslibrary\XHTMLClassLibrary.csproj">
+      <Project>{FFCCD288-4F11-44A5-AB04-3CACF840935C}</Project>
+      <Name>XHTMLClassLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\XMLFixerLibrary\XMLFixerLibrary.csproj">
       <Project>{AD23A99E-89FE-47C9-BD2C-25C416F327F3}</Project>
