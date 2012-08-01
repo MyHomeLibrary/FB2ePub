@@ -5,17 +5,18 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Fb2ePubConverter;
 using Fb2ePubGui.Properties;
 using Fb2epubSettings;
 using Fb2epubSettings.IniLocations;
 
+
 namespace Fb2ePubGui
 {
     public partial class FormGUI : Form
     {
-        private readonly Fb2EPubConverterEngine _converter = new Fb2EPubConverterEngine{ ResourcesPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)};
         private readonly CultureInfo _russianCulture = new CultureInfo("ru");
         private readonly CultureInfo _englishCulture = new CultureInfo("en");
         private readonly CultureInfo _autoCulture = Thread.CurrentThread.CurrentUICulture;
@@ -105,7 +106,11 @@ namespace Fb2ePubGui
         {
             toolStripStatus.Text = converting ? Resources.Status_Converting : Resources.Status_Ready;
             UseWaitCursor = converting;
-            Enabled = !converting;
+            Cursor = converting ? Cursors.WaitCursor : Cursors.Default;
+            buttonConvert.Enabled = !converting;
+            buttonShowFolder.Enabled = !converting;
+            comboBoxDestination.Enabled = !converting;
+            //Enabled = !converting;
         }
 
         private void ConvertFiles(string[] files)
@@ -132,51 +137,59 @@ namespace Fb2ePubGui
                 }
             }
 
-
-            _converter.Transliterate = Fb2Epub.Default.Transliterate;
-            _converter.TransliterateFileName = Fb2Epub.Default.TransliterateFileName;
-            _converter.TransliterateToc = Fb2Epub.Default.TransliterateTOC;
-            _converter.Fb2Info = Fb2Epub.Default.FB2Info;
-            _converter.FixMode = (Fb2EPubConverterEngine.FixOptions)Fb2Epub.Default.FixMode;
-            _converter.AddSeqToTitle = Fb2Epub.Default.AddSequences;
-            _converter.SequenceFormat = Fb2Epub.Default.SequenceFormat;
-            _converter.NoSequenceFormat = Fb2Epub.Default.NoSequenceFormat;
-            _converter.NoSeriesFormat = Fb2Epub.Default.NoSeriesFormat;
-            _converter.Flat = Fb2Epub.Default.FlatStructure;
-            _converter.ConvertAlphaPng = Fb2Epub.Default.ConvertAlphaPNG;
-            _converter.EmbedStyles = Fb2Epub.Default.EmbedStyles;
-            _converter.AuthorFormat = Fb2Epub.Default.AuthorFormat;
-            _converter.FileAsFormat = Fb2Epub.Default.FileAsFormat;
-            _converter.CapitalDrop = Fb2Epub.Default.Capitalize;
-            _converter.SkipAboutPage = Fb2Epub.Default.SkipAboutPage;
-            _converter.Fonts = Fb2Epub.Default.Fonts;
-            _converter.DecorateFontNames = Fb2Epub.Default.DecorateFontNames;
-            _converter.IgnoreTitle = (Fb2EPubConverterEngine.IgnoreTitleOptions) Fb2Epub.Default.IgnoreTitle;
+            string destination = comboBoxDestination.Text;
 
             // now really convert files
-            foreach (var file in allFiles)
-            {
-                string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
-                if (fileNameWithoutExtension == null)
-                {
-                    continue;
-                }
-                fileNameWithoutExtension = Path.ChangeExtension(fileNameWithoutExtension, "epub");              
-                string fileName = Path.Combine(comboBoxDestination.Text,fileNameWithoutExtension);
-                try
-                {
-                    if (!_converter.ConvertFile(file))
-                    {
-                        continue;
-                    }
-                    _converter.Save(fileName);
-                }
-                catch (Exception)
-                {
-                    continue;
-                }
+            //foreach (var file in allFiles)
+            Parallel.ForEach(allFiles, (file) =>
+                                           {
+                                               string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
+                                               if (fileNameWithoutExtension == null)
+                                               {
+                                                   return;
+                                                   //continue;
+                                               }
+                                               fileNameWithoutExtension = Path.ChangeExtension(
+                                                   fileNameWithoutExtension, "epub");
+                                               string fileName = Path.Combine(destination,
+                                                                              fileNameWithoutExtension);
+                                               Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine{ ResourcesPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)};
+                                               converter.Transliterate = Fb2Epub.Default.Transliterate;
+                                               converter.TransliterateFileName = Fb2Epub.Default.TransliterateFileName;
+                                               converter.TransliterateToc = Fb2Epub.Default.TransliterateTOC;
+                                               converter.Fb2Info = Fb2Epub.Default.FB2Info;
+                                               converter.FixMode = (Fb2EPubConverterEngine.FixOptions)Fb2Epub.Default.FixMode;
+                                               converter.AddSeqToTitle = Fb2Epub.Default.AddSequences;
+                                               converter.SequenceFormat = Fb2Epub.Default.SequenceFormat;
+                                               converter.NoSequenceFormat = Fb2Epub.Default.NoSequenceFormat;
+                                               converter.NoSeriesFormat = Fb2Epub.Default.NoSeriesFormat;
+                                               converter.Flat = Fb2Epub.Default.FlatStructure;
+                                               converter.ConvertAlphaPng = Fb2Epub.Default.ConvertAlphaPNG;
+                                               converter.EmbedStyles = Fb2Epub.Default.EmbedStyles;
+                                               converter.AuthorFormat = Fb2Epub.Default.AuthorFormat;
+                                               converter.FileAsFormat = Fb2Epub.Default.FileAsFormat;
+                                               converter.CapitalDrop = Fb2Epub.Default.Capitalize;
+                                               converter.SkipAboutPage = Fb2Epub.Default.SkipAboutPage;
+                                               converter.Fonts = Fb2Epub.Default.Fonts;
+                                               converter.DecorateFontNames = Fb2Epub.Default.DecorateFontNames;
+                                               converter.IgnoreTitle = (Fb2EPubConverterEngine.IgnoreTitleOptions)Fb2Epub.Default.IgnoreTitle;
 
-            }
+                                               try
+                                               {
+                                                   if (!converter.ConvertFile(file))
+                                                   {
+                                                       return;
+                                                       //continue;
+                                                   }
+                                                   converter.Save(fileName);
+                                               }
+                                               catch (Exception)
+                                               {
+                                                   return;
+                                                   //continue;
+                                               }
+
+                                           });
         }
 
 

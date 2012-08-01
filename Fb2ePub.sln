@@ -47,6 +47,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslitRu", "..\translitru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISOLanguages", "..\isiolanguages\ISOLanguages.csproj", "{58E261A5-B2EA-43F3-820D-902B5C061321}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{074062C0-E1AD-472D-9D88-73DAC2F69322}"
+	ProjectSection(SolutionItems) = preProject
+		CommonAssemblyInfo.cs.cs = CommonAssemblyInfo.cs.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

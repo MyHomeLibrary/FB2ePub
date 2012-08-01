@@ -1,4 +1,11 @@
-﻿1.0.48
+﻿1.0.49
+* Fixed crash if user clicked "Reset" in settings
+* Changed both command libne utility and GUI to use same version source file (this fixes issue when GUI added it's own version to converted ePub file)
+* Fixed wait cursor in the GUI while converting
+* Changed GUI utility to use multicore CPUs (now if processing several files each file processed on it's own core)
+* Changed command line utility to use multicore CPUs (now if processing several files each file processed on it's own core)
+
+1.0.48
 + Added Microsoft public license file
 + Added code to control fonts and CSS fonts assignments from settings
 + Added support for "application/vnd.ms-opentype" media type (*.otf - OpenType fonts)

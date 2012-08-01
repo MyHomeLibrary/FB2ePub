@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
+using System.Threading.Tasks;
 using Fb2ePubConverter;
 using System.IO;
 using log4net;
@@ -101,10 +102,6 @@ namespace Fb2ePub
                     if (log.IsInfoEnabled) log.Info("Application [FB2EPUB] End");
                     return;
                 }
-                Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine() { ResourcesPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) };
-                ProcessSettings(converter);
-                ProcessParameters(options, converter);
-                converter.Fonts = Fb2epubSettings.Fb2Epub.Default.Fonts;
                 Console.WriteLine(string.Format("Loading {0}...", fileParams[0]));
                 List<string> filesInMask = new List<string>();
                 bool folderExists = Directory.Exists(fileParams[0]);
@@ -152,54 +149,69 @@ namespace Fb2ePub
                     filesInMask.Add(fileParams[0]);
                 }
 
-                foreach (var file in filesInMask)
-                {
-                    abortDeletion = false;
-                    try
-                    {
-                        if (!converter.ConvertFile(file))
-                        {
-                            abortDeletion = true;
-                            continue;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        log.Error(ex);
-                        continue;
-                    }
-                    if (fileParams.Count > 1 && !lookInSubFolders)
-                    {
-                        string fileName = fileParams[1].ToLower();
-                        if (Path.GetExtension(fileName) != ".epub")
-                        {
-                            fileName = string.Format("{0}.epub", fileName);
-                        }
-                        Console.WriteLine(string.Format("Saving {0}...", fileName));
-                        Convert(converter,fileName,file);
-                    }
-                    else
-                    {
-                        string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
-                        if (fileNameWithoutExtension == null)
-                        {
-                            fileNameWithoutExtension = "$tmp$";
-                        }
-                        string fileLocation = string.Format("{0}\\",Path.GetDirectoryName(Path.GetFullPath(file)));
-                        if (!string.IsNullOrEmpty(converter.OutPutPath))
-                        {
-                            fileLocation = converter.OutPutPath;
-                        }
-                        // in case fb2.zip remove the "fb2" part
-                        if (fileNameWithoutExtension.ToLower().EndsWith(".fb2"))
-                        {
-                            fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileNameWithoutExtension);
-                        }
-                        string fileName = string.Format("{2}{0}.{1}", fileNameWithoutExtension, "epub", fileLocation);
-                        Console.WriteLine(string.Format("Saving {0}...", fileName));
-                        Convert(converter, fileName, file);
-                    }
-                }
+                Parallel.ForEach(filesInMask, (file) =>
+                                              //foreach (var file in filesInMask)
+                                                  {
+                                                      Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine() { ResourcesPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) };
+                                                      ProcessSettings(converter);
+                                                      ProcessParameters(options, converter);
+                                                      converter.Fonts = Fb2epubSettings.Fb2Epub.Default.Fonts;
+
+                                                      abortDeletion = false;
+                                                      try
+                                                      {
+                                                          if (!converter.ConvertFile(file))
+                                                          {
+                                                              abortDeletion = true;
+                                                              //continue;
+                                                              return;
+                                                          }
+                                                      }
+                                                      catch (Exception ex)
+                                                      {
+                                                          log.Error(ex);
+                                                          //continue;
+                                                          return;
+                                                      }
+                                                      if (fileParams.Count > 1 && !lookInSubFolders)
+                                                      {
+                                                          string fileName = fileParams[1].ToLower();
+                                                          if (Path.GetExtension(fileName) != ".epub")
+                                                          {
+                                                              fileName = string.Format("{0}.epub", fileName);
+                                                          }
+                                                          Console.WriteLine(string.Format("Saving {0}...", fileName));
+                                                          Convert(converter, fileName, file);
+                                                      }
+                                                      else
+                                                      {
+                                                          string fileNameWithoutExtension =
+                                                              Path.GetFileNameWithoutExtension(file);
+                                                          if (fileNameWithoutExtension == null)
+                                                          {
+                                                              fileNameWithoutExtension = "$tmp$";
+                                                          }
+                                                          string fileLocation = string.Format("{0}\\",
+                                                                                              Path.GetDirectoryName(
+                                                                                                  Path.GetFullPath(file)));
+                                                          if (!string.IsNullOrEmpty(converter.OutPutPath))
+                                                          {
+                                                              fileLocation = converter.OutPutPath;
+                                                          }
+                                                          // in case fb2.zip remove the "fb2" part
+                                                          if (fileNameWithoutExtension.ToLower().EndsWith(".fb2"))
+                                                          {
+                                                              fileNameWithoutExtension =
+                                                                  Path.GetFileNameWithoutExtension(
+                                                                      fileNameWithoutExtension);
+                                                          }
+                                                          string fileName = string.Format("{2}{0}.{1}",
+                                                                                          fileNameWithoutExtension,
+                                                                                          "epub", fileLocation);
+                                                          Console.WriteLine(string.Format("Saving {0}...", fileName));
+                                                          Convert(converter, fileName, file);
+                                                      }
+                                                  });
                 Console.WriteLine("Done.");
             }
             else
