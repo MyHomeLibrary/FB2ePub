@@ -37,6 +37,7 @@ using EPubLibrary.ReferenceUtils;
 using ZipEntry=ICSharpCode.SharpZipLib.Zip.ZipEntry;
 using FB2Fix;
 
+
 namespace Fb2ePubConverter
 {
 
@@ -71,66 +72,13 @@ namespace Fb2ePubConverter
             FileTypeUnknown,
         }
 
-        public enum FixOptions
-        {
-            DoNotFix,
-            MinimalFix,
-            UseFb2Fix,
-            Fb2FixAlways,
-        }
 
-        public enum IgnoreTitleOptions
-        {
-            IgnoreNothing = 0,
-            IgnoreMainTitle,
-            IgnoreSourceTitle,
-            IgnorePublishTitle,
-            IgnoreMainAndSource,
-            IgnoreMainAndPublish,
-            IgnoreSourceAndPublish,
-        }
 
         private readonly List<FB2File> fb2Files = new List<FB2File>();
 
 
-        /// <summary>
-        /// Enable/Disable embeding of Adobe XPGT Template into a resulting file
-        /// </summary>
-        public bool EnableAdobeTemplate { get; set; }
 
 
-        /// <summary>
-        /// Controls which titles should be ignored when generating ePub
-        /// by default - nothing
-        /// </summary>
-        public IgnoreTitleOptions IgnoreTitle { get; set; }
-
-        /// <summary>
-        /// Path to location of Adobe XPGT template
-        /// </summary>
-        public string AdobeTemplatePath { get; set; }
-
-        /// <summary>
-        /// Get/Set if sequences abbreviations should be added to title
-        /// </summary>
-        public bool AddSeqToTitle { get; set; }
-
-
-        /// <summary>
-        /// Get/Set embeding styles into xHTML files instead of referencing style files
-        /// </summary>
-        public bool EmbedStyles { get; set; }
-
-        /// <summary>
-        /// Set/Get if alpha channel palette bitmaps need to be converted
-        /// </summary>
-        public bool ConvertAlphaPng { get; set; }
-
-        /// <summary>
-        /// Get/Set "flat" mode , when flat mode is set no subfolders created inside the ZIP
-        /// used to work aroun bugs in some readers
-        /// </summary>
-        public bool Flat { get; set; }
 
         /// <summary>
         /// Get/Set max document size in bytes
@@ -148,15 +96,6 @@ namespace Fb2ePubConverter
             }
         }
 
-        /// <summary>
-        /// Get set if a first character in section should start from capital huge "floating" character
-        /// </summary>
-        public bool CapitalDrop { get; set; }
-
-        /// <summary>
-        /// Get/Set if About page generation will be skipped
-        /// </summary>
-        public bool SkipAboutPage { get; set; }
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         public static extern int GetShortPathName(
@@ -167,7 +106,6 @@ namespace Fb2ePubConverter
             int shortPathLength
             );
 
-        public FixOptions FixMode { get; set; }
 
         /// <summary>
         /// Get/Set Fonts settings
@@ -175,37 +113,11 @@ namespace Fb2ePubConverter
         public EPubFontSettings Fonts { get; set; }
 
 
-        /// <summary>
-        /// Get/Set if font names should be decorated to work around adobe memory cache bug
-        /// </summary>
-        public bool DecorateFontNames { get; set; }
-
-        /// <summary>
-        /// Get/Set output path used in case output file name does not includes path
-        /// </summary>
-        public string OutPutPath { get; set; }
 
 
-        /// <summary>
-        /// Get/Set if program should generate FB2 info page
-        /// </summary>
-        public bool Fb2Info { get; set; }
+        public ConverterSettings Settings;
 
-        /// <summary>
-        /// Get/Set if data outside the text body needs to be transliterated 
-        /// (used in case device does not support cyrillic fonts)
-        /// </summary>
-        public bool Transliterate { get; set; }
 
-        /// <summary>
-        /// Get/Set transliteration of the output file name(s)
-        /// </summary>
-        public bool TransliterateFileName { get; set; }
-
-        /// <summary>
-        /// Get set transliteration of TOC
-        /// </summary>
-        public bool TransliterateToc { get; set; }
 
         /// <summary>
         /// Get/Set path to conversion resources location (css, fonts etc)
@@ -213,31 +125,12 @@ namespace Fb2ePubConverter
         public string ResourcesPath { get; set; }
 
 
-        /// <summary>
-        /// Get/Set book title sequence format
-        /// </summary>
-        public string SequenceFormat { get; set; }
 
         /// <summary>
-        /// Get/Set book title with no sequence format
+        /// Get/Set output path used in case output file name does not includes path
         /// </summary>
-        public string NoSequenceFormat { get; set; }
+        public string OutPutPath { get; set; }
 
-        /// <summary>
-        /// Get/Set book title with no series format
-        /// </summary>
-        public string NoSeriesFormat { get; set; }
-
-        /// <summary>
-        /// Get/Set Author format string
-        /// </summary>
-        public string AuthorFormat { get; set; }
-
-
-        /// <summary>
-        /// Get/Set FileAs format string
-        /// </summary>
-        public string FileAsFormat { get; set; }
         
         /// <summary>
         /// Convert input file or archive to ePub(s)
@@ -246,7 +139,7 @@ namespace Fb2ePubConverter
         /// <returns></returns>
         public bool ConvertFile(string fileName)
         {
-            referencesManager.FlatStructure = Flat;
+            referencesManager.FlatStructure = Settings.Flat;
             Logger.Log.InfoFormat("Starting to convert {0}", fileName);
             fb2Files.Clear();
             if (!File.Exists(fileName))
@@ -385,7 +278,7 @@ namespace Fb2ePubConverter
                 options.encoding = Encoding.UTF8;
 
 
-                if (FixMode == FixOptions.Fb2FixAlways)
+                if (Settings.FixMode == FixOptions.Fb2FixAlways)
                 {
                     using (Stream output = Fb2Fix.Process(s, options))
                     {
@@ -402,7 +295,7 @@ namespace Fb2ePubConverter
                         }
                         catch (XmlException)
                         {
-                            if (FixMode == FixOptions.DoNotFix)
+                            if (Settings.FixMode == FixOptions.DoNotFix)
                             {
                                 Logger.Log.ErrorFormat("Error in file, not fixing ");
                                 return false;
@@ -416,7 +309,7 @@ namespace Fb2ePubConverter
                     }
                     catch (XmlException)
                     {
-                        if (FixMode == FixOptions.MinimalFix)
+                        if (Settings.FixMode == FixOptions.MinimalFix)
                         {
                             Logger.Log.ErrorFormat("Error in file, not fixing ");
                             return false;
@@ -514,7 +407,7 @@ namespace Fb2ePubConverter
                                 options.mapGenres = true;
                                 options.encoding = Encoding.UTF8;
 
-                                if (FixMode == FixOptions.Fb2FixAlways)
+                                if (Settings.FixMode == FixOptions.Fb2FixAlways)
                                 {
                                     using (var s1 = new ZipInputStream(File.OpenRead(fileName)))
                                     {
@@ -538,7 +431,7 @@ namespace Fb2ePubConverter
                                     }
                                     catch (XmlException) // broken/mailformed Xml detected
                                     {
-                                        if (FixMode == FixOptions.DoNotFix)
+                                        if (Settings.FixMode == FixOptions.DoNotFix)
                                         {
                                             Logger.Log.ErrorFormat("Error in file, not fixing ");
                                             continue;
@@ -560,7 +453,7 @@ namespace Fb2ePubConverter
                                             }
                                             catch (XmlException)
                                             {
-                                                if (FixMode == FixOptions.MinimalFix)
+                                                if (Settings.FixMode == FixOptions.MinimalFix)
                                                 {
                                                     Logger.Log.ErrorFormat("Error in file, not fixing ");
                                                     continue;
@@ -742,7 +635,7 @@ namespace Fb2ePubConverter
                 Logger.Log.DebugFormat("Saving totaly {0} file(s)",fb2Files.Count);
                 foreach (var fb2File in fb2Files)
                 {
-                    epubFile = new EPubFile{ FlatStructure = Flat, EmbedStyles = EmbedStyles};
+                    epubFile = new EPubFile { FlatStructure = Settings.Flat, EmbedStyles = Settings.EmbedStyles };
                     Reset();
                     if (string.IsNullOrEmpty(ResourcesPath))
                     {
@@ -753,7 +646,7 @@ namespace Fb2ePubConverter
                         epubFile.Transliterator.RuleFile = string.Format(@"{0}\Translit\translit.xml",ResourcesPath);
                     }
                     Logger.Log.DebugFormat("Using transliteration rule file : {0}", epubFile.Transliterator.RuleFile);
-                    if (Transliterate)
+                    if (Settings.Transliterate)
                     {
                         epubFile.TranslitMode = TranslitModeEnum.ExternalRuleFile;
                         if (!File.Exists(epubFile.Transliterator.RuleFile))
@@ -765,31 +658,31 @@ namespace Fb2ePubConverter
                     {
                         epubFile.TranslitMode = TranslitModeEnum.None;
                     }
-                    if (string.IsNullOrEmpty(AdobeTemplatePath))
+                    if (string.IsNullOrEmpty(Settings.AdobeTemplatePath))
                     {
                         epubFile.AdobeTemplatePath = @".\Template\template.xpgt";
                     }
                     else
                     {
-                        epubFile.AdobeTemplatePath = AdobeTemplatePath;
+                        epubFile.AdobeTemplatePath = Settings.AdobeTemplatePath;
                     }
-                    epubFile.UseAdobeTemplate = EnableAdobeTemplate;
-                    epubFile.TranliterateToc = TransliterateToc;
+                    epubFile.UseAdobeTemplate = Settings.EnableAdobeTemplate;
+                    epubFile.TranliterateToc = Settings.TransliterateToc;
                     Logger.Log.DebugFormat("Transliteration mode : {0}", epubFile.TranslitMode);
-                    images.RemoveAlpha = ConvertAlphaPng;
+                    images.RemoveAlpha = Settings.ConvertAlphaPng;
                     images.LoadFromBinarySection(fb2File.Images);
                     PassHeaderDataFromFb2ToEpub(epubFile, fb2File);
                     SetupCSS(epubFile);
                     SetupFonts(epubFile);
                     PassTextFromFb2ToEpub(epubFile, fb2File);
-                    if (Fb2Info)
+                    if (Settings.Fb2Info)
                     {
                         PassFb2InfoToEpub(epubFile, fb2File);
                     }
                     UpdateInternalLinks(epubFile, fb2File);
                     PassImagesDataFromFb2ToEpub(epubFile, fb2File);
-                    Logger.Log.DebugFormat("Transliteration of sile names set to : {0}",TransliterateFileName);
-                    if (TransliterateFileName)
+                    Logger.Log.DebugFormat("Transliteration of sile names set to : {0}",Settings.TransliterateFileName);
+                    if (Settings.TransliterateFileName)
                     {
                         outFileName = epubFile.Transliterator.Translate(outFileName, epubFile.TranslitMode);
                         Logger.Log.DebugFormat("New transliterated file name : {0}",outFileName);
@@ -819,7 +712,7 @@ namespace Fb2ePubConverter
                     {
                         version = asm.GetName().Version.ToString();
                     }
-                    if (!SkipAboutPage)
+                    if (!Settings.SkipAboutPage)
                     {
                         epubFile.AboutTexts.Add(
                             string.Format("This book was generated by Lord KiRon's FB2EPUB converter version {0}.",
@@ -856,7 +749,7 @@ namespace Fb2ePubConverter
         private void PassFb2InfoToEpub(EPubFile epubFile, FB2File fb2File)
         {
             BookDocument infoDocument = epubFile.AddDocument("FB2 Info");
-            ConverterSettings converterSettings = new ConverterSettings
+            ConverterOptions converterSettings = new ConverterOptions
             {
                 CapitalDrop = false,
                 Images = images,
@@ -889,7 +782,7 @@ namespace Fb2ePubConverter
                 Logger.Log.Warn("No fonts defined in configuration file.");
                 return;
             }
-            epubFile.SetEPubFonts(Fonts, ResourcesPath, DecorateFontNames);
+            epubFile.SetEPubFonts(Fonts, ResourcesPath, Settings.DecorateFontNames);
         }
 
 
@@ -903,9 +796,9 @@ namespace Fb2ePubConverter
                 BookDocument addTitlePage = epubFile.AddDocument(docTitle);
                 addTitlePage.DocumentType = GuideTypeEnum.TitlePage;
                 addTitlePage.Content = new Div();
-                ConverterSettings converterSettings = new ConverterSettings
+                ConverterOptions converterSettings = new ConverterOptions
                                                           {
-                                                              CapitalDrop = CapitalDrop,
+                                                              CapitalDrop = Settings.CapitalDrop,
                                                               Images = images,
                                                               MaxSize = MaxSize,
                                                               ReferencesManager = referencesManager
@@ -944,9 +837,9 @@ namespace Fb2ePubConverter
                 if (images.IsImageIdReal(fb2File.MainBody.ImageName.HRef))
                 {
                     Div enclosing = new Div(); // we use the enclosing so the user can style center it
-                    ConverterSettings converterSettings = new ConverterSettings
+                    ConverterOptions converterSettings = new ConverterOptions
                     {
-                        CapitalDrop = CapitalDrop,
+                        CapitalDrop = Settings.CapitalDrop,
                         Images = images,
                         MaxSize = MaxSize,
                         ReferencesManager = referencesManager
@@ -971,9 +864,9 @@ namespace Fb2ePubConverter
                     mainDocument.NavigationParent = null;
                     mainDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
                 }
-                ConverterSettings converterSettings = new ConverterSettings
+                ConverterOptions converterSettings = new ConverterOptions
                 {
-                    CapitalDrop = CapitalDrop,
+                    CapitalDrop = Settings.CapitalDrop,
                     Images = images,
                     MaxSize = MaxSize,
                     ReferencesManager = referencesManager
@@ -1024,7 +917,7 @@ namespace Fb2ePubConverter
             sectionDocument.Content = new Div();
             if (bodyItem.Title != null)
             {
-                ConverterSettings converterSettings = new ConverterSettings
+                ConverterOptions converterSettings = new ConverterOptions
                 {
                     CapitalDrop = false,
                     Images = images,
@@ -1071,9 +964,9 @@ namespace Fb2ePubConverter
             sectionDocument.Content = new Div();
             if (bodyItem.Title != null)
             {
-                ConverterSettings converterSettings = new ConverterSettings
+                ConverterOptions converterSettings = new ConverterOptions
                 {
-                    CapitalDrop = CapitalDrop,
+                    CapitalDrop = Settings.CapitalDrop,
                     Images = images,
                     MaxSize = MaxSize,
                     ReferencesManager = referencesManager
@@ -1119,9 +1012,9 @@ namespace Fb2ePubConverter
             Logger.Log.DebugFormat("Adding section : {0}", docTitle);
             BookDocument sectionDocument = null;
             bool firstDocumentOfSplit = true;
-            ConverterSettings converterSettings = new ConverterSettings
+            ConverterOptions converterSettings = new ConverterOptions
             {
-                CapitalDrop = fbeNotesSection?false:CapitalDrop,
+                CapitalDrop = fbeNotesSection ? false : Settings.CapitalDrop,
                 Images = images,
                 MaxSize = MaxSize,
                 ReferencesManager = referencesManager
@@ -1222,7 +1115,8 @@ namespace Fb2ePubConverter
                                              ? fb2File.TitleInfo.Language
                                              : fb2File.TitleInfo.BookTitle.Language;
                 }
-                if ((IgnoreTitle != IgnoreTitleOptions.IgnoreMainTitle) && (IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndPublish) && IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndSource)
+                if ((Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreMainTitle) && (Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndPublish) && 
+                    Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndSource)
                 {
                     epubFile.Title.BookTitles.Add(bookTitle);
                 }
@@ -1233,9 +1127,9 @@ namespace Fb2ePubConverter
                 {
                     epubFile.Title.Description = fb2File.TitleInfo.Annotation.ToString();
                     epubFile.AnnotationPage = new AnnotationPageFile();
-                    ConverterSettings converterSettings = new ConverterSettings
+                    ConverterOptions converterSettings = new ConverterOptions
                     {
-                        CapitalDrop = CapitalDrop,
+                        CapitalDrop = Settings.CapitalDrop,
                         Images = images,
                         MaxSize = MaxSize,
                         ReferencesManager = referencesManager
@@ -1319,7 +1213,8 @@ namespace Fb2ePubConverter
                 bookTitle = new Title();
                 bookTitle.TitleName= epubFile.Transliterator.Translate(fb2File.SourceTitleInfo.BookTitle.Text,epubFile.TranslitMode);
                 bookTitle.Language = string.IsNullOrEmpty(fb2File.SourceTitleInfo.BookTitle.Language)&&(fb2File.TitleInfo != null) ? fb2File.TitleInfo.Language : fb2File.SourceTitleInfo.BookTitle.Language;
-                if ((IgnoreTitle != IgnoreTitleOptions.IgnoreSourceTitle) && (IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndSource) && IgnoreTitle != IgnoreTitleOptions.IgnoreSourceAndPublish)
+                if ((Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreSourceTitle) && (Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndSource) 
+                    && Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreSourceAndPublish)
                 {
                     epubFile.Title.BookTitles.Add(bookTitle);
                 }
@@ -1366,7 +1261,8 @@ namespace Fb2ePubConverter
                 bookTitle = new Title();
                 bookTitle.TitleName = epubFile.Transliterator.Translate(fb2File.PublishInfo.BookName.Text,epubFile.TranslitMode);
                 bookTitle.Language = !string.IsNullOrEmpty(fb2File.PublishInfo.BookName.Language) ? fb2File.PublishInfo.BookName.Language : fb2File.TitleInfo.Language;
-                if ((IgnoreTitle != IgnoreTitleOptions.IgnorePublishTitle) && (IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndPublish) && IgnoreTitle != IgnoreTitleOptions.IgnoreSourceAndPublish)
+                if ((Settings.IgnoreTitle != IgnoreTitleOptions.IgnorePublishTitle) && (Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndPublish) && 
+                    Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreSourceAndPublish)
                 {
                     epubFile.Title.BookTitles.Add(bookTitle);
                 }
@@ -1424,7 +1320,7 @@ namespace Fb2ePubConverter
         private string GenerateFileAsString(AuthorType author)
         {
             ProcessAuthorFormat processor = new ProcessAuthorFormat();
-            processor.Format = FileAsFormat;
+            processor.Format = Settings.FileAsFormat;
             return processor.GenerateAuthorString(author);
 
         }
@@ -1432,7 +1328,7 @@ namespace Fb2ePubConverter
         private string GenerateAuthorString(AuthorType author)
         {
             ProcessAuthorFormat processor = new ProcessAuthorFormat();
-            processor.Format = AuthorFormat;
+            processor.Format = Settings.AuthorFormat;
             return processor.GenerateAuthorString(author);
         }
 
@@ -1441,12 +1337,12 @@ namespace Fb2ePubConverter
         private string FormatBookTitle(ItemTitleInfo titleInfo)
         {
             ProcessSeqFormatString formatTitle = new ProcessSeqFormatString();
-            formatTitle.BookTitleFormatSeqNum = SequenceFormat;
-            formatTitle.BookTitleFormatNoSeqNum = NoSequenceFormat;
-            formatTitle.BookTitleFormatNoSeries = NoSeriesFormat;
+            formatTitle.BookTitleFormatSeqNum = Settings.SequenceFormat;
+            formatTitle.BookTitleFormatNoSeqNum = Settings.NoSequenceFormat;
+            formatTitle.BookTitleFormatNoSeries = Settings.NoSeriesFormat;
 
             String rc;
-            if ((titleInfo.Sequences.Count > 0) && AddSeqToTitle)
+            if ((titleInfo.Sequences.Count > 0) && Settings.AddSeqToTitle)
             {
                 rc = formatTitle.GenerateBookTitle(titleInfo.BookTitle.Text, titleInfo.Sequences[0].Name,
                                                    titleInfo.Sequences[0].Number);

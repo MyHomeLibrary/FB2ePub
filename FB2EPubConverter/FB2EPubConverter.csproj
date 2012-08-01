@@ -94,11 +94,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConverterSettings.cs" />
     <Compile Include="ElementConverters\AnnotationConverter.cs" />
     <Compile Include="ElementConverters\BaseElementConverter.cs" />
     <Compile Include="ElementConverters\CitationAuthorConverter.cs" />
     <Compile Include="ElementConverters\CitationConverter.cs" />
-    <Compile Include="ElementConverters\ConverterSettings.cs" />
+    <Compile Include="ElementConverters\ConverterOptions.cs" />
     <Compile Include="ElementConverters\EmptyLineConverter.cs" />
     <Compile Include="ElementConverters\EpigraphAuthorConverter.cs" />
     <Compile Include="ElementConverters\EpigraphConverter.cs" />
