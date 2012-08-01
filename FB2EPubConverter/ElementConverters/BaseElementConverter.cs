@@ -10,7 +10,7 @@ namespace FB2EPubConverter.ElementConverters
 
     internal abstract class  BaseElementConverter
     {
-        public ConverterSettings Settings { get; set; }
+        public ConverterOptions Settings { get; set; }
 
         abstract public  string GetElementType();
 

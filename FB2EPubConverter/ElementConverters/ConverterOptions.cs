@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FB2EPubConverter.ElementConverters
 {
-    internal class ConverterSettings
+    internal class ConverterOptions
     {
         public HRefManager ReferencesManager { get; set; }
         public ImageManager Images { get; set; }
