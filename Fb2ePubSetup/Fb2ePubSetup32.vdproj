@@ -124,12 +124,6 @@
         "Entry"
         {
         "MsmKey" = "8:_56EE64E4F6515A51E0DBE7E6F5BC00B0"
-        "OwnerKey" = "8:_7803B2ACDE654CDFBA8EA855D8F169BB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_56EE64E4F6515A51E0DBE7E6F5BC00B0"
         "OwnerKey" = "8:_7C4B6D50F5DDA2AFE8BD39B7E1E18D80"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -137,6 +131,12 @@
         {
         "MsmKey" = "8:_56EE64E4F6515A51E0DBE7E6F5BC00B0"
         "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_56EE64E4F6515A51E0DBE7E6F5BC00B0"
+        "OwnerKey" = "8:_7803B2ACDE654CDFBA8EA855D8F169BB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -490,12 +490,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_56EE64E4F6515A51E0DBE7E6F5BC00B0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_DB302C8FD51A594FD1A3C2843E2C9DE5"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -550,19 +544,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_56EE64E4F6515A51E0DBE7E6F5BC00B0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_362342C28A971AF1A378325E85C07ED6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D8AB8954D1730EEE6B124065D9E65583"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EA6E6A87ED414F07CA6CEC1D46EE8958"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -575,6 +563,18 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_7803B2ACDE654CDFBA8EA855D8F169BB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D8AB8954D1730EEE6B124065D9E65583"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EA6E6A87ED414F07CA6CEC1D46EE8958"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1874,15 +1874,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Fb2ePub"
-        "ProductCode" = "8:{59F2F08A-F802-46B1-B53B-205082A1E231}"
-        "PackageCode" = "8:{01D1574E-26DC-4149-8C68-C040A333FCFB}"
+        "ProductCode" = "8:{027D9FD6-7EA9-463F-B8ED-4FB9769D594C}"
+        "PackageCode" = "8:{9A30AC5F-395D-498B-9FE7-C8E1F4AA668B}"
         "UpgradeCode" = "8:{92997D07-961F-492E-90D5-E761F4095BE2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.48"
+        "InstallAllUsers" = "11:TRUE"
+        "ProductVersion" = "8:1.0.49"
         "Manufacturer" = "8:Lord KiRon"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.fb2epub.net"
