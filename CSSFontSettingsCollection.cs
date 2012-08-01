@@ -131,7 +131,8 @@ namespace FontsSettings
                 }
             }
 
-            
+            // now fill the list with pointers to the font families instead of names
+            _elements.Clear();
             foreach (var element in settings.CssElements)
             {
                 CSSStylableElement newElement = new CSSStylableElement();
