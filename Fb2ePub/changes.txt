@@ -1,4 +1,7 @@
-﻿1.0.49
+﻿1.0.50
+* Fixed the bug when removing the font assignment to the CSS element did not removed association until the CSS element itself was removed
+
+1.0.49
 * Fixed crash if user clicked "Reset" in settings
 * Changed both command libne utility and GUI to use same version source file (this fixes issue when GUI added it's own version to converted ePub file)
 * Fixed wait cursor in the GUI while converting

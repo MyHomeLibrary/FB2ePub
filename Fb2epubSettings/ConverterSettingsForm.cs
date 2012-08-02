@@ -717,6 +717,7 @@ namespace Fb2epubSettings
                 CSSElementListItem currentElement = _myDataSourceCSS.Current as CSSElementListItem;
                 if (currentElement != null)
                 {
+                    _fontSettings.CssElements[currentElement.Name][currentElement.Class].Remove(currentFont);
                     currentElement.Fonts.Remove(currentFont);
                     _myDataSourceCSSFonts.ResetBindings(false);
                 }
