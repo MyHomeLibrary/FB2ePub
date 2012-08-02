@@ -155,67 +155,6 @@ namespace EPubLibrary
             return true;
         }
 
-  /*      public  void AddFontObject(CSSFont fontObject)
-        {
-            string name = string.Empty;
-            if ((Title.Identifiers.Count > 0) && !string.IsNullOrEmpty(Title.Identifiers[0].ID))
-            {
-                name = Title.Identifiers[0].IdentifierName;
-            }           
-
-            CssFontDefinition cssFont = new CssFontDefinition();
-
-            cssFont.Family = _fontsCollection.Add(fontObject, name);
-
-            if (fontObject.FontStyle != FontStylesEnum.Normal)
-            {
-                cssFont.FontStyle = fontObject.FontStyle.ToString();                
-            }
-            StringBuilder builder = new StringBuilder();
-            foreach (var destination in fontObject.Sources)
-            {
-                if (builder.Length != 0)
-                {
-                    builder.Append(", ");
-                }
-                switch (destination.Type)
-                {
-                    case SourceTypes.External:
-                        builder.AppendFormat(@" url({0}) ", destination.Location);
-                        break;
-                    case SourceTypes.Local:
-                        builder.AppendFormat(" local(\"{0}\") ", destination.Location);
-                        break;
-                    case SourceTypes.Embedded:
-                        if (!EmbedStyles)
-                        {
-                            builder.AppendFormat(FlatStructure ? @" url({0}) " : @" url(../fonts/{0}) ", Path.GetFileName(destination.Location));                            
-                        }
-                        else
-                        {
-                            builder.AppendFormat(FlatStructure ? @" url(../{0}) " : @" url(fonts/{0}) ", Path.GetFileName(destination.Location));                            
-                        }
-                        break;
-                    default:
-                        Logger.log.ErrorFormat("Unknown font destination type : {0}", destination.Type);
-                        break;
-                }
-            }
-            
-            cssFont.FontSrc = builder.ToString();
-            cssFont.FontWidth = ConvertFromFontWidth(fontObject.FontWidth);
-            _mainCss.AddFont(cssFont);
-
-            //foreach (var target in fontObject.CSSTargets)
-            //{
-            //    BaseCSSItem cssItem = new BaseCSSItem();
-            //    cssItem.Name = target;
-            //    cssItem.Parameters.Add("font-family", string.Format("\"{0}\"", cssFont.Family));
-            //    _mainCss.AddTarget(cssItem);
-            //}
-
-        }*/
-
 
         /// <summary>
         /// Writes (generates) file to disk
