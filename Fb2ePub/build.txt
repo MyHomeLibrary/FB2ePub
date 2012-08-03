@@ -8,7 +8,7 @@
 
 4. translitrunet assembly for transliteration ( http://code.google.com/p/translitrunet/ )
 
-5. Using Log4Net for logging http://logging.apache.org/log4net/index.html
+5. Using Log4Net for logging http://logging.apache.org/log4net/index.html (v1.2.11 , client profile)
 
 6. Fb2Fix library v1.0.10.23846 https://www.assembla.com/wiki/show/fb2fix
 
