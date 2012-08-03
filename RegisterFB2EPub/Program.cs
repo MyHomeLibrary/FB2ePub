@@ -19,7 +19,7 @@ namespace RegisterFB2EPub
         private const string FileName64 = "Fb2EpubExt_x64.dll";
 
         [STAThread]
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             GlobalContext.Properties["LogName"] = Path.Combine(FolderLocator.GetLocalAppDataFolder(), "Lord KiRon\\");
             Log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
@@ -48,12 +48,12 @@ namespace RegisterFB2EPub
                         if (string.IsNullOrEmpty(filePath))
                         {
                             Log.ErrorFormat("Unable to locate {0}", fileName);
-                            return;
+                            return 1;
                         }
                         registrator.Path = filePath;
                         Log.InfoFormat("Registering {0}",filePath);
                         registrator.Register(ExtRegistrator.RegistrationExtensionEnum.BaseSet);
-                        return;
+                        return 1;
                     }
                     if ((options[0].ToLower() == "/rall") || (options[0].ToLower() == "-rall"))
                     {
@@ -61,18 +61,18 @@ namespace RegisterFB2EPub
                         if (string.IsNullOrEmpty(filePath))
                         {
                             Log.ErrorFormat("Unable to locate {0}", fileName);
-                            return;
+                            return 1;
                         }
                         registrator.Path = filePath;
                         Log.InfoFormat("Registering {0}", filePath);
                         registrator.Register(ExtRegistrator.RegistrationExtensionEnum.All);
-                        return;
+                        return 0;
                     }
                     if ((options[0].ToLower() == "/u") || options[0].ToLower() == "-u")
                     {
                         Log.Info("Unregistering");
                         registrator.Unregister();
-                        return;
+                        return 0;
                     }
                 }
                 else
@@ -84,7 +84,9 @@ namespace RegisterFB2EPub
             catch (Exception ex)
             {
                 Log.Error(ex);
+                return 2;
             }
+            return 0;
         }
 
         private static string GetDllFileName()
