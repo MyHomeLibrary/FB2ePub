@@ -2,5 +2,5 @@
 1. xhtmlclasslibrary - http://code.google.com/p/xhtmlclasslibrary
 2. ICSharpCode.SharpZipLib assembly for reading/writing ZIP files ( http://icsharpcode.net/OpenSource/SharpZipLib )
 3. translitrunet assembly for transliteration ( http://code.google.com/p/translitrunet/ )
-4. Using Log4Net for logging http://logging.apache.org/log4net/index.html
+4. Using Log4Net for logging http://logging.apache.org/log4net/index.html (1.2.11 client profile)
 5. fontsettings - http://code.google.com/p/fontsettings

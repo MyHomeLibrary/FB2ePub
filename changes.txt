@@ -1,4 +1,8 @@
-﻿1.0.18.0
+﻿1.0.19.0
+* Updated log4net to v1.2.11 client profile
+* Changed to .Net 4.0 client profile
+
+1.0.18.0
 + License file added
 * Small refactoring of code
 * Changed to .Net 4.0
