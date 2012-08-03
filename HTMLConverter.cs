@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
-using System.Web;
+
 
 namespace TranslitRu
 {
@@ -13,7 +14,7 @@ namespace TranslitRu
             StringBuilder result = new StringBuilder();
 
             // first take care of special HTML characters like '&' or '<'
-            string str = HttpUtility.HtmlEncode(inputCharacter.ToString());
+            string str = WebUtility.HtmlEncode(inputCharacter.ToString());
             if (str.Length > 1)
             {
                 return str;
