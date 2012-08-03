@@ -653,10 +653,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4 (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.0"
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
                     }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.4.5"
                     {
@@ -2451,7 +2451,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_0969B61FE89F42BA9C74110F5A156636"
             {
-            "SourcePath" = "8:..\\Fb2ePubGui\\obj\\Debug\\Fb2ePubGui.exe"
+            "SourcePath" = "8:..\\Fb2ePubGui\\obj\\Release\\Fb2ePubGui.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"
@@ -2675,7 +2675,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_867FC02021DA47E79D0FC87ED4E7EDFF"
             {
-            "SourcePath" = "8:..\\RegisterFB2EPub\\obj\\Debug\\RegisterFB2EPub.exe"
+            "SourcePath" = "8:..\\RegisterFB2EPub\\obj\\Release\\RegisterFB2EPub.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"
@@ -2703,7 +2703,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_AE27608A012A4FB3B34D367CDEBAE0F4"
             {
-            "SourcePath" = "8:..\\Fb2ePub\\obj\\Debug\\Fb2ePub.exe"
+            "SourcePath" = "8:..\\Fb2ePub\\obj\\Release\\Fb2ePub.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"
