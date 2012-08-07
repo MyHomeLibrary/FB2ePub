@@ -2,5 +2,5 @@
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("1.0.50.0")]
+[assembly: AssemblyVersion("1.0.51.0")]
 
