@@ -1,4 +1,7 @@
-﻿1.0.50
+﻿1.0.51
+* Fixed false warning when building setup project regarding .Net version 
+
+1.0.50
 * Fixed the bug when removing the font assignment to the CSS element did not removed association until the CSS element itself was removed
 * Changed transliterate library to not use ASP.NET related commands to be able to compile as Client profile
 * Updated to the newer version of Log4.net (1.2.11) that uses client profile
