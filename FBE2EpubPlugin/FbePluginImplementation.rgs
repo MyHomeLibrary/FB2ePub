@@ -1,0 +1,15 @@
+HKCR
+{
+	NoRemove CLSID
+	{
+		ForceRemove {469E5867-292A-4A8D-B094-5F3597C4B353} = s 'FbePluginImplementation Class'
+		{
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			TypeLib = s '{5E0033D0-FC76-4FC2-85EA-5247F4972382}'
+			Version = s '1.0'
+		}
+	}
+}
