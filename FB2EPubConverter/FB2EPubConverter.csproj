@@ -55,6 +55,13 @@
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ChilkatDotNet2, Version=9.1.2.0, Culture=neutral, PublicKeyToken=eb5fc1fc52ef09bd, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
@@ -94,7 +101,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs.cs">
+      <Link>Properties\CommonAssemblyInfo.cs.cs</Link>
+    </Compile>
     <Compile Include="ConverterSettings.cs" />
+    <Compile Include="ConvertProcessor.cs" />
+    <Compile Include="ConvertProcessorSettings.cs" />
     <Compile Include="ElementConverters\AnnotationConverter.cs" />
     <Compile Include="ElementConverters\BaseElementConverter.cs" />
     <Compile Include="ElementConverters\CitationAuthorConverter.cs" />
@@ -150,6 +162,10 @@
     <ProjectReference Include="..\..\xhtmlclasslibrary\XHTMLClassLibrary.csproj">
       <Project>{FFCCD288-4F11-44A5-AB04-3CACF840935C}</Project>
       <Name>XHTMLClassLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fb2epubSettings\Fb2epubSettings.csproj">
+      <Project>{BB87C009-1337-43FF-ADF6-6E7861AA9343}</Project>
+      <Name>Fb2epubSettings</Name>
     </ProjectReference>
     <ProjectReference Include="..\XMLFixerLibrary\XMLFixerLibrary.csproj">
       <Project>{AD23A99E-89FE-47C9-BD2C-25C416F327F3}</Project>

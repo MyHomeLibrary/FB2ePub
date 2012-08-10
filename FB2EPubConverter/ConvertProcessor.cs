@@ -1,0 +1,225 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Fb2ePubConverter;
+
+namespace FB2EPubConverter
+{
+    public class ConvertProcessor
+    {
+        private readonly ConvertProcessorSettings _processorSettings = new ConvertProcessorSettings();
+
+        public ConvertProcessorSettings ProcessorSettings { get { return _processorSettings; } }
+
+        /// <summary>
+        /// Performs conversion of list of files 
+        /// </summary>
+        /// <param name="filesInMask">list of files to convert</param>
+        /// <param name="outputFileName">output file name in case provided and single file is to be converted </param>
+        public void PerformConvertOperation(List<string> filesInMask, string outputFileName)
+        {
+            Parallel.ForEach(filesInMask, (file) =>
+            {
+                Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine()
+                {
+                    Settings = _processorSettings.Settings
+                };
+
+                try
+                {
+                    if (!converter.ConvertFile(file))
+                    {
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log.Error(ex);
+                    return;
+                }
+                string fileName = BuildNewFileName(file,outputFileName);
+                Console.WriteLine(string.Format("Saving {0}...", fileName));
+                SaveAndCleanUp(converter, fileName, file);
+            });
+
+        }
+
+        /// <summary>
+        /// Builds a new file name for the output file (with .epub extension)
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="outputFileName"></param>
+        /// <returns></returns>
+        private string BuildNewFileName(string file, string outputFileName)
+        {
+            string fileName = string.Empty;
+            if (!string.IsNullOrEmpty(outputFileName) && !_processorSettings.LookInSubFolders)
+            {
+                fileName = outputFileName.ToLower();
+                if (Path.GetExtension(fileName) != ".epub")
+                {
+                    fileName = string.Format("{0}.epub", fileName);
+                }
+            }
+            else
+            {
+                string fileNameWithoutExtension =
+                    Path.GetFileNameWithoutExtension(file);
+                if (fileNameWithoutExtension == null)
+                {
+                    fileNameWithoutExtension = "$tmp$";
+                }
+                string fileLocation = string.Format("{0}\\",
+                                                    Path.GetDirectoryName(
+                                                        Path.GetFullPath(file)));
+                if (!string.IsNullOrEmpty(_processorSettings.Settings.OutPutPath))
+                {
+                    fileLocation = _processorSettings.Settings.OutPutPath;
+                }
+                // in case fb2.zip remove the "fb2" part
+                fileNameWithoutExtension = Path.ChangeExtension(
+                                                                 fileNameWithoutExtension, "epub");
+                fileName = Path.Combine(fileLocation,
+                                               fileNameWithoutExtension);
+            }
+            return fileName;
+        }
+
+        private void SaveAndCleanUp(Fb2EPubConverterEngine converter, string fileName, string inFileName)
+        {
+            try
+            {
+                converter.Save(fileName);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            if (_processorSettings.DeleteSource)
+            {
+                try
+                {
+                    File.Delete(inFileName);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log.ErrorFormat("Unable to delete file {0}, exception: {1}.", inFileName, ex);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Loads the settings from Fb2epub settings configuration storage object
+        /// </summary>
+        /// <param name="fb2EpubSettings"></param>
+        public void LoadSettings(Fb2epubSettings.Fb2Epub fb2EpubSettings)
+        {
+            ConverterSettings settings = _processorSettings.Settings;
+            settings.Transliterate = fb2EpubSettings.Transliterate;
+            settings.TransliterateFileName = fb2EpubSettings.TransliterateFileName;
+            settings.TransliterateToc = fb2EpubSettings.TransliterateTOC;
+            settings.Fb2Info = fb2EpubSettings.FB2Info;
+            settings.FixMode = (FixOptions)fb2EpubSettings.FixMode;
+            settings.AddSeqToTitle = fb2EpubSettings.AddSequences;
+            settings.SequenceFormat = fb2EpubSettings.SequenceFormat;
+            settings.NoSequenceFormat = fb2EpubSettings.NoSequenceFormat;
+            settings.NoSeriesFormat = fb2EpubSettings.NoSeriesFormat;
+            settings.Flat = fb2EpubSettings.FlatStructure;
+            settings.ConvertAlphaPng = fb2EpubSettings.ConvertAlphaPNG;
+            settings.EmbedStyles = fb2EpubSettings.EmbedStyles;
+            settings.AuthorFormat = fb2EpubSettings.AuthorFormat;
+            settings.FileAsFormat = fb2EpubSettings.FileAsFormat;
+            settings.CapitalDrop = fb2EpubSettings.Capitalize;
+            settings.SkipAboutPage = fb2EpubSettings.SkipAboutPage;
+            settings.EnableAdobeTemplate = fb2EpubSettings.UseAdobeTemplate;
+            settings.AdobeTemplatePath = fb2EpubSettings.AdobeTemplatePath;
+            settings.DecorateFontNames = fb2EpubSettings.DecorateFontNames;
+            settings.IgnoreTitle = (IgnoreTitleOptions)fb2EpubSettings.IgnoreTitle;
+            settings.Fonts = fb2EpubSettings.Fonts;
+            
+        }
+
+        /// <summary>
+        /// Detects all files we need to process 
+        /// </summary>
+        /// <param name="fileParams">list of parameters containing command line pointing to files to process</param>
+        /// <param name="filesInMask">outputs actual list of files that need to be processed</param>
+        /// <param name="lookInSubFolders"></param>
+        public void DetectFilesToProcess(List<string> fileParams, ref List<string> filesInMask)
+        {
+            filesInMask.Clear();
+            bool folderExists = Directory.Exists(fileParams[0]);
+            if (fileParams[0].Contains("*") || fileParams[0].Contains("?") || folderExists || fileParams[0].EndsWith("."))
+            {
+                if (folderExists && !fileParams[0].EndsWith(Path.DirectorySeparatorChar.ToString()) && !fileParams[0].EndsWith(Path.AltDirectorySeparatorChar.ToString()) && !fileParams[0].EndsWith(".")) //just to make sure we have a folder
+                {
+                    fileParams[0] += Path.DirectorySeparatorChar;
+                }
+                string fileName = Path.GetFileName(fileParams[0]);
+                // if empty file name or . we list folder
+                if (string.IsNullOrEmpty(fileName) || fileParams[0].EndsWith("."))
+                {
+                    // based on search mask options
+                    fileName = GetFileMask(_processorSettings.SearchMask);
+                    if (fileParams[0].EndsWith("."))
+                    {
+                        fileParams[0] = fileParams[0].Remove(fileParams[0].Length - 1);
+                    }
+                }
+                foreach (var subMask in fileName.Split(','))
+                {
+                    if (fileParams[0].Contains(Path.DirectorySeparatorChar.ToString()) ||
+                        fileParams[0].Contains(Path.AltDirectorySeparatorChar.ToString()))
+                    // if does not have dir. separators then it's current folder
+                    {
+                        filesInMask.AddRange(Directory.GetFiles(Path.GetDirectoryName(fileParams[0]),
+                                                                subMask,
+                                                                _processorSettings.LookInSubFolders
+                                                                    ? SearchOption.AllDirectories
+                                                                    : SearchOption.TopDirectoryOnly));
+                    }
+                    else
+                    {
+                        filesInMask.AddRange(Directory.GetFiles(Directory.GetCurrentDirectory(),
+                                                                subMask,
+                                                                _processorSettings.LookInSubFolders
+                                                                    ? SearchOption.AllDirectories
+                                                                    : SearchOption.TopDirectoryOnly));
+                    }
+                }
+            }
+            else
+            {
+                filesInMask.Add(fileParams[0]);
+            }
+
+        }
+
+        /// <summary>
+        /// Return default file mask based on options
+        /// </summary>
+        /// <returns></returns>
+        private static string GetFileMask(PathSearchOptions searchMask)
+        {
+            string fileName = "*.*";
+            if (searchMask == PathSearchOptions.Fb2Only)
+            {
+                fileName = "*.fb2";
+            }
+            else if (searchMask == PathSearchOptions.Fb2WithArchives)
+            {
+                fileName = "*.fb2,*.fb2.zip,*.fb2.rar";
+            }
+            else if (searchMask == PathSearchOptions.WithAllArchives)
+            {
+                fileName = "*.fb2,*.zip,*.rar";
+            }
+            return fileName;
+        }
+
+    }
+}
