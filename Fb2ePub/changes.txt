@@ -1,4 +1,5 @@
 ﻿1.0.51
++ Added detection of the image type in case media tag in FB2 was wrong
 * Fixed false warning when building setup project regarding .Net version 
 
 1.0.50

@@ -53,6 +53,12 @@ namespace Fb2ePubConverter
 
     public class Fb2EPubConverterEngine
     {
+        
+
+        #region Static help functions
+
+        #endregion
+
         private long _maxSize = 245 * 1024;
 
         private int _sectionCounter = 0;
@@ -107,29 +113,14 @@ namespace Fb2ePubConverter
             );
 
 
-        /// <summary>
-        /// Get/Set Fonts settings
-        /// </summary>
-        public EPubFontSettings Fonts { get; set; }
-
-
 
 
         public ConverterSettings Settings;
 
 
 
-        /// <summary>
-        /// Get/Set path to conversion resources location (css, fonts etc)
-        /// </summary>
-        public string ResourcesPath { get; set; }
 
 
-
-        /// <summary>
-        /// Get/Set output path used in case output file name does not includes path
-        /// </summary>
-        public string OutPutPath { get; set; }
 
         
         /// <summary>
@@ -637,13 +628,13 @@ namespace Fb2ePubConverter
                 {
                     epubFile = new EPubFile { FlatStructure = Settings.Flat, EmbedStyles = Settings.EmbedStyles };
                     Reset();
-                    if (string.IsNullOrEmpty(ResourcesPath))
+                    if (string.IsNullOrEmpty(Settings.ResourcesPath))
                     {
                         epubFile.Transliterator.RuleFile = @".\Translit\translit.xml";
                     }
                     else
                     {
-                        epubFile.Transliterator.RuleFile = string.Format(@"{0}\Translit\translit.xml",ResourcesPath);
+                        epubFile.Transliterator.RuleFile = string.Format(@"{0}\Translit\translit.xml", Settings.ResourcesPath);
                     }
                     Logger.Log.DebugFormat("Using transliteration rule file : {0}", epubFile.Transliterator.RuleFile);
                     if (Settings.Transliterate)
@@ -691,8 +682,8 @@ namespace Fb2ePubConverter
                     string outFolder = Path.GetDirectoryName(outFileName);
                     if (string.IsNullOrEmpty(outFolder))
                     {
-                        Logger.Log.DebugFormat("Using output folder : {0}",OutPutPath);
-                        outFolder = OutPutPath;
+                        Logger.Log.DebugFormat("Using output folder : {0}", Settings.OutPutPath);
+                        outFolder = Settings.OutPutPath;
                         if (!string.IsNullOrEmpty(outFolder))
                         {
                             outFile = string.Format(@"{0}\{1}.epub", outFolder, Path.GetFileNameWithoutExtension(outFileName));    
@@ -768,21 +759,21 @@ namespace Fb2ePubConverter
         private void SetupCSS(EPubFile epubFile)
         {
             string pathPreffix = @".\";
-            if (!string.IsNullOrEmpty(ResourcesPath))
+            if (!string.IsNullOrEmpty(Settings.ResourcesPath))
             {
-                pathPreffix = ResourcesPath;
+                pathPreffix = Settings.ResourcesPath;
             }
             epubFile.CSSFiles.Add(new CSSFile { FileExtPath = string.Format(@"{0}\{1}", pathPreffix, @"CSS\default.css"), FileName = "default.css" });
         }
 
         private void SetupFonts(EPubFile epubFile)
         {
-            if (Fonts == null)
+            if (Settings.Fonts == null)
             {
                 Logger.Log.Warn("No fonts defined in configuration file.");
                 return;
             }
-            epubFile.SetEPubFonts(Fonts, ResourcesPath, Settings.DecorateFontNames);
+            epubFile.SetEPubFonts(Settings.Fonts, Settings.ResourcesPath, Settings.DecorateFontNames);
         }
 
 

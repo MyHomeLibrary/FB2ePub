@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Fb2ePubConverter;
 using System.IO;
 using FB2EPubConverter;
 using log4net;
 using ProcessStartInfo=System.Diagnostics.ProcessStartInfo;
 using System.Diagnostics;
-using System.Windows.Forms;
 using Fb2epubSettings;
 using FolderSettingsHelper;
+
 
 
 // Configure log4net using the .config file
@@ -23,41 +24,21 @@ using FolderSettingsHelper;
 
 namespace Fb2ePub
 {
-    class Program
+    class Program : IConverterExposed 
     {     
-        enum PathSearchOptions
-        {
-            Fb2Only,
-            Fb2WithArchives,
-            WithAllArchives,
-            All,
-        }
         // Create a logger for use in this class
         
         private static ILog log;
-        private static bool lookInSubFolders = false;
-        private static PathSearchOptions _searchMask = PathSearchOptions.Fb2WithArchives;
-        private static bool deleteSource = false;
-        private static bool abortDeletion = false;
-        private static string _outPath;
+        //private static bool lookInSubFolders = false;
+
+        //private static bool deleteSource = false;
+        //private static bool abortDeletion = false;
 
         const string Registrator2Run = "registerfb2epub.exe";
 
         static void Main(string[] args)
         {
-            string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(),"Lord KiRon\\");
-            GlobalContext.Properties["LogName"] = logPath;
-            log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
-            // Log an info level message
-            log.Debug("Application [FB2EPUB] Start");
-            Console.WriteLine("FB2 to EPUB command line converter by Lord KiRon");
-            Console.WriteLine(string.Format("Logging to: {0}\\",GlobalContext.Properties["LogName"]));
-                        Console.WriteLine();
-            Configuration config =
-            ConfigurationManager.OpenExeConfiguration(
-            ConfigurationUserLevel.PerUserRoamingAndLocal);
-            ConverterSettings settings = new ConverterSettings();
-            log.InfoFormat("Local user config path: {0}", config.FilePath);
+            SetupLogAndData();
             if (args.Length > 0)
             {
                 List<string> options = new List<string>();
@@ -77,26 +58,9 @@ namespace Fb2ePub
                 {
                     if ( options.Count == 1)
                     {
-                        if ((options[0].ToLower() == "/r") || (options[0].ToLower() == "-r"))
+                        // Process single option command (registration etc.) , exit if it's a valid command
+                        if( ProcessSingleOptionCommand(options[0]) )
                         {
-                            RegisterShellExtension(false);
-                            return;
-                        }
-                        if ((options[0].ToLower() == "/rall") || (options[0].ToLower() == "-rall"))
-                        {
-                            RegisterShellExtension(true);
-                            return;
-                        }
-                        if ((options[0].ToLower() == "/u") || options[0].ToLower() == "-u")
-                        {
-                            UnregisterShellExtension();
-                            return;
-                        }
-                        if ((options[0].ToLower() == "/settings") || options[0].ToLower() == "-settings")
-                        {
-                            ConverterSettingsForm settingsForm = new ConverterSettingsForm();
-                            settingsForm.TopLevel = true;
-                            settingsForm.ShowDialog();
                             return;
                         }
                     }
@@ -105,118 +69,15 @@ namespace Fb2ePub
                     if (log.IsInfoEnabled) log.Info("Application [FB2EPUB] End");
                     return;
                 }
-                ProcessSettings(settings);
-                ProcessParameters(options, settings);
+                //ConverterSettings settings = new ConverterSettings();
+                ConvertProcessor processor = new ConvertProcessor();
+                ProcessSettings(processor);
+                ProcessParameters(options, processor.ProcessorSettings);
                 Console.WriteLine(string.Format("Loading {0}...", fileParams[0]));
                 List<string> filesInMask = new List<string>();
-                bool folderExists = Directory.Exists(fileParams[0]);
-                if (fileParams[0].Contains("*") || fileParams[0].Contains("?") || folderExists || fileParams[0].EndsWith("."))
-                {
-                    if (folderExists && !fileParams[0].EndsWith(Path.DirectorySeparatorChar.ToString()) && !fileParams[0].EndsWith(Path.AltDirectorySeparatorChar.ToString()) && !fileParams[0].EndsWith(".")) //just to make sure we have a folder
-                    {
-                        fileParams[0] += Path.DirectorySeparatorChar;
-                    }
-                    string fileName = Path.GetFileName(fileParams[0]);
-                    // if empty file name or . we list folder
-                    if (string.IsNullOrEmpty(fileName) || fileParams[0].EndsWith("."))
-                    {
-                        // based on search mask options
-                        fileName = GetFileMask(_searchMask);
-                        if (fileParams[0].EndsWith("."))
-                        {
-                            fileParams[0] = fileParams[0].Remove(fileParams[0].Length - 1);
-                        }
-                    }
-                    foreach (var subMask in fileName.Split(','))
-                    {
-                        if (fileParams[0].Contains(Path.DirectorySeparatorChar.ToString()) ||
-                            fileParams[0].Contains(Path.AltDirectorySeparatorChar.ToString()))
-                            // if does not have dir. separators then it's current folder
-                        {
-                            filesInMask.AddRange(Directory.GetFiles(Path.GetDirectoryName(fileParams[0]),
-                                                                    subMask,
-                                                                    lookInSubFolders
-                                                                        ? SearchOption.AllDirectories
-                                                                        : SearchOption.TopDirectoryOnly));
-                        }
-                        else
-                        {
-                            filesInMask.AddRange(Directory.GetFiles(Directory.GetCurrentDirectory(),
-                                                                    subMask,
-                                                                    lookInSubFolders
-                                                                        ? SearchOption.AllDirectories
-                                                                        : SearchOption.TopDirectoryOnly));
-                        }
-                    }
-                }
-                else 
-                {
-                    filesInMask.Add(fileParams[0]);
-                }
-
-                string resourcesPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-                Parallel.ForEach(filesInMask, (file) =>
-                                              //foreach (var file in filesInMask)
-                                                  {
-                                                      Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine() { ResourcesPath =  resourcesPath,OutPutPath = _outPath,
-                                                      Settings = settings};
-                                                      converter.Fonts = Fb2epubSettings.Fb2Epub.Default.Fonts;
-
-                                                      abortDeletion = false;
-                                                      try
-                                                      {
-                                                          if (!converter.ConvertFile(file))
-                                                          {
-                                                              abortDeletion = true;
-                                                              //continue;
-                                                              return;
-                                                          }
-                                                      }
-                                                      catch (Exception ex)
-                                                      {
-                                                          log.Error(ex);
-                                                          //continue;
-                                                          return;
-                                                      }
-                                                      if (fileParams.Count > 1 && !lookInSubFolders)
-                                                      {
-                                                          string fileName = fileParams[1].ToLower();
-                                                          if (Path.GetExtension(fileName) != ".epub")
-                                                          {
-                                                              fileName = string.Format("{0}.epub", fileName);
-                                                          }
-                                                          Console.WriteLine(string.Format("Saving {0}...", fileName));
-                                                          Convert(converter, fileName, file);
-                                                      }
-                                                      else
-                                                      {
-                                                          string fileNameWithoutExtension =
-                                                              Path.GetFileNameWithoutExtension(file);
-                                                          if (fileNameWithoutExtension == null)
-                                                          {
-                                                              fileNameWithoutExtension = "$tmp$";
-                                                          }
-                                                          string fileLocation = string.Format("{0}\\",
-                                                                                              Path.GetDirectoryName(
-                                                                                                  Path.GetFullPath(file)));
-                                                          if (!string.IsNullOrEmpty(converter.OutPutPath))
-                                                          {
-                                                              fileLocation = converter.OutPutPath;
-                                                          }
-                                                          // in case fb2.zip remove the "fb2" part
-                                                          if (fileNameWithoutExtension.ToLower().EndsWith(".fb2"))
-                                                          {
-                                                              fileNameWithoutExtension =
-                                                                  Path.GetFileNameWithoutExtension(
-                                                                      fileNameWithoutExtension);
-                                                          }
-                                                          string fileName = string.Format("{2}{0}.{1}",
-                                                                                          fileNameWithoutExtension,
-                                                                                          "epub", fileLocation);
-                                                          Console.WriteLine(string.Format("Saving {0}...", fileName));
-                                                          Convert(converter, fileName, file);
-                                                      }
-                                                  });
+                processor.DetectFilesToProcess(fileParams, ref filesInMask);
+                string outputFileName = (fileParams.Count > 1)?fileParams[1]:null;
+                processor.PerformConvertOperation(filesInMask,  outputFileName);
                 Console.WriteLine("Done.");
             }
             else
@@ -226,50 +87,57 @@ namespace Fb2ePub
             log.Debug("Application [FB2EPUB] End");
         }
 
+
         /// <summary>
-        /// Return default file mask based on options
+        /// Processes single option command like settings ort registration that does not require actual converting
         /// </summary>
-        /// <returns></returns>
-        private static string GetFileMask(PathSearchOptions searchMask)
+        /// <param name="singleOptionCommand">the option command to process</param>
+        /// <returns>true if proper known command was processed, false if unrecognized command</returns>
+        private static bool ProcessSingleOptionCommand(string singleOptionCommand)
         {
-            string fileName = "*.*";
-            if (searchMask == PathSearchOptions.Fb2Only)
+            if ((singleOptionCommand.ToLower() == "/r") || (singleOptionCommand.ToLower() == "-r"))
             {
-                fileName = "*.fb2";
+                RegisterShellExtension(false);
+                return true;
             }
-            else if (searchMask == PathSearchOptions.Fb2WithArchives)
+            if ((singleOptionCommand.ToLower() == "/rall") || (singleOptionCommand.ToLower() == "-rall"))
             {
-                fileName = "*.fb2,*.fb2.zip,*.fb2.rar";
+                RegisterShellExtension(true);
+                return true;
             }
-            else if (searchMask == PathSearchOptions.WithAllArchives)
+            if ((singleOptionCommand.ToLower() == "/u") || singleOptionCommand.ToLower() == "-u")
             {
-                fileName = "*.fb2,*.zip,*.rar";
+                UnregisterShellExtension();
+                return true;
             }
-            return fileName;
+            if ((singleOptionCommand.ToLower() == "/settings") || singleOptionCommand.ToLower() == "-settings")
+            {
+                ConverterSettingsForm settingsForm = new ConverterSettingsForm();
+                settingsForm.TopLevel = true;
+                settingsForm.ShowDialog();
+                return true;
+            }
+            return false;
+        }   
+
+
+        private static void SetupLogAndData()
+        {
+            string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(), "Lord KiRon\\");
+            GlobalContext.Properties["LogName"] = logPath;
+            log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
+            // Log an info level message
+            log.Debug("Application [FB2EPUB] Start");
+            Console.WriteLine("FB2 to EPUB command line converter by Lord KiRon");
+            Console.WriteLine(string.Format("Logging to: {0}\\", GlobalContext.Properties["LogName"]));
+            Console.WriteLine();
+            Configuration config =
+            ConfigurationManager.OpenExeConfiguration(
+            ConfigurationUserLevel.PerUserRoamingAndLocal);
+            log.InfoFormat("Local user config path: {0}", config.FilePath);
         }
 
-        private static void Convert(Fb2EPubConverterEngine converter, string fileName,string inFileName)
-        {
-            try
-            {
-                converter.Save(fileName);
-            }
-            catch (Exception)
-            {
-                return;
-            }
-            if (deleteSource && !abortDeletion)
-            {
-                try
-                {
-                    File.Delete(inFileName);
-                }
-                catch (Exception ex)
-                {
-                    log.ErrorFormat("Unable to delete file {0}, exception: {1}.", inFileName,ex.ToString());
-                }
-            }
-        }
+
 
         private static void UnregisterShellExtension()
         {
@@ -326,32 +194,13 @@ namespace Fb2ePub
             return ExitCode;
         }
 
-        private static void ProcessSettings(ConverterSettings settings)
+        private static void ProcessSettings(ConvertProcessor processor)
         {
-            settings.Transliterate = Fb2epubSettings.Fb2Epub.Default.Transliterate;
-            settings.TransliterateFileName = Fb2epubSettings.Fb2Epub.Default.TransliterateFileName;
-            settings.TransliterateToc = Fb2epubSettings.Fb2Epub.Default.TransliterateTOC;
-            settings.Fb2Info = Fb2epubSettings.Fb2Epub.Default.FB2Info;
-            settings.FixMode = (FixOptions)Fb2epubSettings.Fb2Epub.Default.FixMode;
-            settings.AddSeqToTitle = Fb2epubSettings.Fb2Epub.Default.AddSequences;
-            settings.SequenceFormat = Fb2epubSettings.Fb2Epub.Default.SequenceFormat;
-            settings.NoSequenceFormat = Fb2epubSettings.Fb2Epub.Default.NoSequenceFormat;
-            settings.NoSeriesFormat = Fb2epubSettings.Fb2Epub.Default.NoSeriesFormat;
-            settings.Flat = Fb2epubSettings.Fb2Epub.Default.FlatStructure;
-            settings.ConvertAlphaPng = Fb2epubSettings.Fb2Epub.Default.ConvertAlphaPNG;
-            settings.EmbedStyles = Fb2epubSettings.Fb2Epub.Default.EmbedStyles;
-            settings.AuthorFormat = Fb2epubSettings.Fb2Epub.Default.AuthorFormat;
-            settings.FileAsFormat = Fb2epubSettings.Fb2Epub.Default.FileAsFormat;
-            settings.CapitalDrop = Fb2epubSettings.Fb2Epub.Default.Capitalize;
-            settings.SkipAboutPage = Fb2epubSettings.Fb2Epub.Default.SkipAboutPage;
-            settings.EnableAdobeTemplate = Fb2epubSettings.Fb2Epub.Default.UseAdobeTemplate;
-            settings.AdobeTemplatePath = Fb2epubSettings.Fb2Epub.Default.AdobeTemplatePath;
-            settings.DecorateFontNames = Fb2epubSettings.Fb2Epub.Default.DecorateFontNames;
-            settings.IgnoreTitle = (IgnoreTitleOptions) Fb2epubSettings.Fb2Epub.Default.IgnoreTitle;
-            //Fb2Epub.Default.Save();
+            processor.LoadSettings(Fb2epubSettings.Fb2Epub.Default);
+            processor.ProcessorSettings.Settings.ResourcesPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
         }
 
-        private static void ProcessParameters(List<string> options, ConverterSettings settings)
+        private static void ProcessParameters(List<string> options, ConvertProcessorSettings settings)
         {
             foreach (var param in options)
             {
@@ -364,39 +213,39 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Transliterate = false;
-                            settings.TransliterateFileName = false;
-                            settings.TransliterateToc = false;
+                            settings.Settings.Transliterate = false;
+                            settings.Settings.TransliterateFileName = false;
+                            settings.Settings.TransliterateToc = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Transliterate = true;
-                            settings.TransliterateToc = true;
-                            settings.TransliterateFileName = false;
+                            settings.Settings.Transliterate = true;
+                            settings.Settings.TransliterateToc = true;
+                            settings.Settings.TransliterateFileName = false;
                         }
                         else if (value == 2)
                         {
-                            settings.Transliterate = false;
-                            settings.TransliterateToc = false;
-                            settings.TransliterateFileName = true;
+                            settings.Settings.Transliterate = false;
+                            settings.Settings.TransliterateToc = false;
+                            settings.Settings.TransliterateFileName = true;
                         }
                         else if (value == 3)
                         {
-                            settings.Transliterate = true;
-                            settings.TransliterateToc = true;
-                            settings.TransliterateFileName = true;
+                            settings.Settings.Transliterate = true;
+                            settings.Settings.TransliterateToc = true;
+                            settings.Settings.TransliterateFileName = true;
                         }
                         else if (value == 4)
                         {
-                            settings.Transliterate = true;
-                            settings.TransliterateToc = false;
-                            settings.TransliterateFileName = false;
+                            settings.Settings.Transliterate = true;
+                            settings.Settings.TransliterateToc = false;
+                            settings.Settings.TransliterateFileName = false;
                         }
                         else if (value == 5)
                         {
-                            settings.Transliterate = true;
-                            settings.TransliterateToc = false;
-                            settings.TransliterateFileName = true;
+                            settings.Settings.Transliterate = true;
+                            settings.Settings.TransliterateToc = false;
+                            settings.Settings.TransliterateFileName = true;
                         }
                         else
                         {
@@ -412,17 +261,12 @@ namespace Fb2ePub
                 {
                     if (command.EndsWith("\"") && command.Length > 4)
                     {
-                        _outPath = command.Substring(2, command.Length - 3);
+                        settings.Settings.OutPutPath = command.Substring(2, command.Length - 3);
                     }
                     else
                     {
-                        _outPath = command.Substring(2);
+                        settings.Settings.OutPutPath = command.Substring(2);
                     }
-                    if (!_outPath.EndsWith("\\") && !_outPath.EndsWith("/"))
-                    {
-                        _outPath += "\\";
-                    }
-                    
                 }
                 else if (command.StartsWith("f2i:")) // generate additional info
                 {
@@ -432,11 +276,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Fb2Info = false;
+                            settings.Settings.Fb2Info = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Fb2Info = true;
+                            settings.Settings.Fb2Info = true;
                         }
                         else
                         {
@@ -450,7 +294,7 @@ namespace Fb2ePub
                 }
                 else if (command == "s") // subfolders
                 {
-                    lookInSubFolders = true;
+                    settings.LookInSubFolders = true;
                 }
                 else if (command.StartsWith("m:")) // mask when searching
                 {
@@ -460,19 +304,19 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            _searchMask = PathSearchOptions.Fb2Only;
+                            settings.SearchMask = PathSearchOptions.Fb2Only;
                         }
                         else if (value == 1)
                         {
-                            _searchMask = PathSearchOptions.Fb2WithArchives;
+                            settings.SearchMask = PathSearchOptions.Fb2WithArchives;
                         }
                         else if (value == 2)
                         {
-                            _searchMask = PathSearchOptions.WithAllArchives;
+                            settings.SearchMask = PathSearchOptions.WithAllArchives;
                         }
                         else if (value == 3)
                         {
-                            _searchMask = PathSearchOptions.All;
+                            settings.SearchMask = PathSearchOptions.All;
                         }
                         else
                         {
@@ -486,7 +330,7 @@ namespace Fb2ePub
                 }
                 else if (command == "deletesource")
                 {
-                    deleteSource = true;
+                    settings.DeleteSource = true;
                 }
                 else if (command.StartsWith("fix:"))
                 {
@@ -496,19 +340,19 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.FixMode = FixOptions.DoNotFix;
+                            settings.Settings.FixMode = FixOptions.DoNotFix;
                         }
                         else if (value == 1)
                         {
-                            settings.FixMode = FixOptions.MinimalFix;
+                            settings.Settings.FixMode = FixOptions.MinimalFix;
                         }
                         else if (value == 2)
                         {
-                            settings.FixMode = FixOptions.UseFb2Fix;
+                            settings.Settings.FixMode = FixOptions.UseFb2Fix;
                         }
                         else if (value == 3)
                         {
-                            settings.FixMode = FixOptions.Fb2FixAlways;
+                            settings.Settings.FixMode = FixOptions.Fb2FixAlways;
                         }
                         else
                         {
@@ -524,11 +368,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.AddSeqToTitle = false;
+                            settings.Settings.AddSeqToTitle = false;
                         }
                         else if (value == 1)
                         {
-                            settings.AddSeqToTitle = true;
+                            settings.Settings.AddSeqToTitle = true;
                         }
                         else
                         {
@@ -540,7 +384,7 @@ namespace Fb2ePub
                 {
                     string commandValue = command.Substring(10);
                     if (!string.IsNullOrEmpty(commandValue))
-                        settings.SequenceFormat = commandValue;
+                        settings.Settings.SequenceFormat = commandValue;
                     else
                         log.InfoFormat("Invalid -seqformat: parameter value is empty.");
                 }
@@ -548,7 +392,7 @@ namespace Fb2ePub
                 {
                     string commandValue = command.Substring(10);
                     if (!string.IsNullOrEmpty(commandValue))
-                        settings.NoSequenceFormat = commandValue;
+                        settings.Settings.NoSequenceFormat = commandValue;
                     else
                         log.InfoFormat("Invalid -nseqformat: parameter value is empty.");
                 }
@@ -556,7 +400,7 @@ namespace Fb2ePub
                 {
                     string commandValue = command.Substring(10);
                     if (!string.IsNullOrEmpty(commandValue))
-                        settings.NoSeriesFormat= commandValue;
+                        settings.Settings.NoSeriesFormat= commandValue;
                     else
                         log.InfoFormat("Invalid -nnseqformat: parameter value is empty.");
                 }
@@ -564,7 +408,7 @@ namespace Fb2ePub
                 {
                     string commandValue = command.Substring(10);
                     if (!string.IsNullOrEmpty(commandValue))
-                        settings.AuthorFormat = commandValue;
+                        settings.Settings.AuthorFormat = commandValue;
                     else
                         log.InfoFormat("Invalid -aformat: parameter value is empty.");
                 }
@@ -572,7 +416,7 @@ namespace Fb2ePub
                 {
                     string commandValue = command.Substring(10);
                     if (!string.IsNullOrEmpty(commandValue))
-                        settings.FileAsFormat = commandValue;
+                        settings.Settings.FileAsFormat = commandValue;
                     else
                         log.InfoFormat("Invalid -svformat: parameter value is empty.");
                 }
@@ -584,11 +428,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Flat = false;
+                            settings.Settings.Flat = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Flat = true;
+                            settings.Settings.Flat = true;
                         }
                         else
                         {
@@ -604,11 +448,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.EmbedStyles = false;
+                            settings.Settings.EmbedStyles = false;
                         }
                         else if (value == 1)
                         {
-                            settings.EmbedStyles = true;
+                            settings.Settings.EmbedStyles = true;
                         }
                         else
                         {
@@ -624,11 +468,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.ConvertAlphaPng = false;
+                            settings.Settings.ConvertAlphaPng = false;
                         }
                         else if (value == 1)
                         {
-                            settings.ConvertAlphaPng = true;
+                            settings.Settings.ConvertAlphaPng = true;
                         }
                         else
                         {
@@ -644,11 +488,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.CapitalDrop = false;
+                            settings.Settings.CapitalDrop = false;
                         }
                         else if (value == 1)
                         {
-                            settings.CapitalDrop = true;
+                            settings.Settings.CapitalDrop = true;
                         }
                         else
                         {
@@ -658,7 +502,7 @@ namespace Fb2ePub
                 }
                 else if (command.StartsWith("noabout"))
                 {
-                    settings.SkipAboutPage = true;
+                    settings.Settings.SkipAboutPage = true;
                 }
                 else if (command.StartsWith("xpgt:"))
                 {
@@ -668,11 +512,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.EnableAdobeTemplate = false;
+                            settings.Settings.EnableAdobeTemplate = false;
                         }
                         else if (value == 1)
                         {
-                            settings.EnableAdobeTemplate = true;
+                            settings.Settings.EnableAdobeTemplate = true;
                         }
                         else
                         {
@@ -682,7 +526,7 @@ namespace Fb2ePub
                 }
                 else if (command.StartsWith("xpgtpath:"))
                 {
-                    settings.AdobeTemplatePath =  command.Substring(9);
+                    settings.Settings.AdobeTemplatePath =  command.Substring(9);
                 }
                 else if (command.StartsWith("ignoretitle:"))
                 {
@@ -692,31 +536,31 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.IgnoreTitle = IgnoreTitleOptions.IgnoreNothing;
+                            settings.Settings.IgnoreTitle = IgnoreTitleOptions.IgnoreNothing;
                         }
                         else if (value == 1)
                         {
-                            settings.IgnoreTitle = IgnoreTitleOptions.IgnoreMainTitle;
+                            settings.Settings.IgnoreTitle = IgnoreTitleOptions.IgnoreMainTitle;
                         }
                         else if (value == 2)
                         {
-                            settings.IgnoreTitle = IgnoreTitleOptions.IgnoreSourceTitle;
+                            settings.Settings.IgnoreTitle = IgnoreTitleOptions.IgnoreSourceTitle;
                         }
                         else if (value == 3)
                         {
-                            settings.IgnoreTitle = IgnoreTitleOptions.IgnorePublishTitle;
+                            settings.Settings.IgnoreTitle = IgnoreTitleOptions.IgnorePublishTitle;
                         }
                         else if (value == 4)
                         {
-                            settings.IgnoreTitle = IgnoreTitleOptions.IgnoreMainAndSource;
+                            settings.Settings.IgnoreTitle = IgnoreTitleOptions.IgnoreMainAndSource;
                         }
                         else if (value == 5)
                         {
-                            settings.IgnoreTitle = IgnoreTitleOptions.IgnoreMainAndPublish;
+                            settings.Settings.IgnoreTitle = IgnoreTitleOptions.IgnoreMainAndPublish;
                         }
                         else if (value == 6)
                         {
-                            settings.IgnoreTitle = IgnoreTitleOptions.IgnoreSourceAndPublish;
+                            settings.Settings.IgnoreTitle = IgnoreTitleOptions.IgnoreSourceAndPublish;
                         }
                         else
                         {
@@ -796,6 +640,64 @@ namespace Fb2ePub
             conWriter.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
+
+        /// <summary>
+        /// COM exported implementation for converter
+        /// </summary>
+        /// <param name="files">list of files to convert</param>
+        /// <param name="outputFolder">output folder</param>
+        /// <returns>true if no fatal error</returns>
+        public bool Convert(List<string> files, string outputFolder)
+        {
+            try
+            {
+                SetupLogAndData();
+                //ConverterSettings settings = new ConverterSettings();
+                ConvertProcessor processor = new ConvertProcessor();
+                ProcessSettings(processor);
+                processor.ProcessorSettings.Settings.OutPutPath = outputFolder;
+                processor.PerformConvertOperation(files, null);
+            }
+            catch (Exception ex)
+            {
+                log.Fatal(ex.Message);
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// COM exported implementation for converter
+        /// </summary>
+        /// <param name="inputPath">input folder to scan for input files</param>
+        /// <param name="outputFolder">output folder</param>
+        /// <returns>true if no fatal error</returns>
+        public bool Convert(string inputPath, string outputFolder)
+        {
+            try
+            {
+                SetupLogAndData();
+                ConvertProcessor processor = new ConvertProcessor();
+                ProcessSettings(processor);
+                processor.ProcessorSettings.Settings.OutPutPath = outputFolder;
+                List<string> fileParams = new List<string>();
+                fileParams.Add(inputPath);
+                processor.ProcessorSettings.LookInSubFolders= true;
+                List<string> filesInMask = new List<string>();
+                processor.DetectFilesToProcess(fileParams, ref filesInMask);
+                processor.PerformConvertOperation(filesInMask,  null);
+            }
+            catch (Exception ex)
+            {
+                log.Fatal(ex.Message);
+                return false;
+            }
+
+            return true;
+            
+        }
+
+
 
     }
 

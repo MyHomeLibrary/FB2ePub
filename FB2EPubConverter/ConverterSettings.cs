@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Fb2ePubConverter;
+using FontsSettings;
 
 namespace FB2EPubConverter
 {
@@ -31,6 +32,8 @@ namespace FB2EPubConverter
 
     public class ConverterSettings
     {
+        private string _outputPath = string.Empty;
+
         /// <summary>
         /// Get/Set if data outside the text body needs to be transliterated 
         /// (used in case device does not support cyrillic fonts)
@@ -134,6 +137,36 @@ namespace FB2EPubConverter
         /// Get/Set if font names should be decorated to work around adobe memory cache bug
         /// </summary>
         public bool DecorateFontNames { get; set; }
+
+        /// <summary>
+        /// Get/Set Fonts settings
+        /// </summary>
+        public EPubFontSettings Fonts { get; set; }
+
+
+        /// <summary>
+        /// Get/Set path to conversion resources location (css, fonts etc)
+        /// </summary>
+        public string ResourcesPath { get; set; }
+
+        /// <summary>
+        /// Get/Set output path used in case output file name does not includes path
+        /// </summary>
+        public string OutPutPath
+        {
+            get { return _outputPath; }
+            set 
+            { 
+                _outputPath = value;
+                if (!_outputPath.EndsWith("\\") && !_outputPath.EndsWith("/"))
+                {
+                    _outputPath += "\\";
+                }
+
+            }
+        }
+
+
 
     }
 }
