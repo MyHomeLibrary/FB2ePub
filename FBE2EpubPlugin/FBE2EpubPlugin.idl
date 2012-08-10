@@ -1,0 +1,67 @@
+// FBE2EpubPlugin.idl : IDL source for FBE2EpubPlugin
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (FBE2EpubPlugin.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
+	dual,	
+	pointer_default(unique)
+]
+interface IComponentRegistrar : IDispatch
+{
+	[id(1)]	HRESULT Attach([in] BSTR bstrPath);
+	[id(2)]	HRESULT RegisterAll();
+	[id(3)]	HRESULT UnregisterAll();
+	[id(4)]	HRESULT GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
+	[id(5)]	HRESULT RegisterComponent([in] BSTR bstrCLSID);
+	[id(6)] HRESULT UnregisterComponent([in] BSTR bstrCLSID);
+};
+
+[
+	object,
+	uuid(1afaab7f-6f66-4ef6-b199-16fa49cc5b52),
+	helpstring("IFBEExportPlugin interface"),
+	pointer_default(unique),
+]
+interface IFBEExportPlugin : IUnknown
+{
+	[id(1), helpstring("method Export")] HRESULT Export([in] long hWnd,[in] BSTR filename,[in] IDispatch *document);
+};
+
+[
+	object,
+	uuid(B09520C4-D1E8-4491-AEDC-49B7D9AE61A0),
+	pointer_default(unique)
+]
+interface IFbePluginImplementation : IUnknown{
+};
+[
+	uuid(5E0033D0-FC76-4FC2-85EA-5247F4972382),
+	version(1.0),
+	custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a,"{1A76FCFC-D2DE-4985-91F0-912026D7C67C}")
+]
+library FBE2EpubPluginLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(1A76FCFC-D2DE-4985-91F0-912026D7C67C)		
+	]
+	coclass CompReg
+	{
+		[default] interface IComponentRegistrar;
+	};
+	[
+		uuid(469E5867-292A-4A8D-B094-5F3597C4B353)		
+	]
+	coclass FbePluginImplementation
+	{
+		[default] interface IFbePluginImplementation;
+	};
+};
+
