@@ -83,6 +83,12 @@
     <None Include="FbePluginImplementation.rgs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="icon1.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Fb2ePub\epub-logo-color-book.ICO">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="FBE2EpubPlugin.idl">
