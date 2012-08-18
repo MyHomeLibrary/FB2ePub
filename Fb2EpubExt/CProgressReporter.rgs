@@ -1,0 +1,15 @@
+HKCR
+{
+	NoRemove CLSID
+	{
+		ForceRemove {F61EE366-A514-4B3C-B5FC-CA5E6DF97D84} = s 'CProgressReporter Class'
+		{
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			TypeLib = s '{D74D7D29-DCA7-45A1-9678-80B43F2780E2}'
+			Version = s '1.0'
+		}
+	}
+}

@@ -10,7 +10,6 @@ using FB2EPubConverter;
 using log4net;
 using ProcessStartInfo=System.Diagnostics.ProcessStartInfo;
 using System.Diagnostics;
-using Fb2epubSettings;
 using FolderSettingsHelper;
 
 
@@ -24,7 +23,7 @@ using FolderSettingsHelper;
 
 namespace Fb2ePub
 {
-    class Program : IConverterExposed 
+    class Program 
     {     
         // Create a logger for use in this class
         
@@ -112,9 +111,7 @@ namespace Fb2ePub
             }
             if ((singleOptionCommand.ToLower() == "/settings") || singleOptionCommand.ToLower() == "-settings")
             {
-                ConverterSettingsForm settingsForm = new ConverterSettingsForm();
-                settingsForm.TopLevel = true;
-                settingsForm.ShowDialog();
+                ConvertProcessor.ShowSettinsDialog(null);
                 return true;
             }
             return false;
@@ -196,7 +193,7 @@ namespace Fb2ePub
 
         private static void ProcessSettings(ConvertProcessor processor)
         {
-            processor.LoadSettings(Fb2epubSettings.Fb2Epub.Default);
+            processor.LoadSettings();
             processor.ProcessorSettings.Settings.ResourcesPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
         }
 
@@ -640,64 +637,6 @@ namespace Fb2ePub
             conWriter.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
-
-        /// <summary>
-        /// COM exported implementation for converter
-        /// </summary>
-        /// <param name="files">list of files to convert</param>
-        /// <param name="outputFolder">output folder</param>
-        /// <returns>true if no fatal error</returns>
-        public bool Convert(List<string> files, string outputFolder)
-        {
-            try
-            {
-                SetupLogAndData();
-                //ConverterSettings settings = new ConverterSettings();
-                ConvertProcessor processor = new ConvertProcessor();
-                ProcessSettings(processor);
-                processor.ProcessorSettings.Settings.OutPutPath = outputFolder;
-                processor.PerformConvertOperation(files, null);
-            }
-            catch (Exception ex)
-            {
-                log.Fatal(ex.Message);
-                return false;
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// COM exported implementation for converter
-        /// </summary>
-        /// <param name="inputPath">input folder to scan for input files</param>
-        /// <param name="outputFolder">output folder</param>
-        /// <returns>true if no fatal error</returns>
-        public bool Convert(string inputPath, string outputFolder)
-        {
-            try
-            {
-                SetupLogAndData();
-                ConvertProcessor processor = new ConvertProcessor();
-                ProcessSettings(processor);
-                processor.ProcessorSettings.Settings.OutPutPath = outputFolder;
-                List<string> fileParams = new List<string>();
-                fileParams.Add(inputPath);
-                processor.ProcessorSettings.LookInSubFolders= true;
-                List<string> filesInMask = new List<string>();
-                processor.DetectFilesToProcess(fileParams, ref filesInMask);
-                processor.PerformConvertOperation(filesInMask,  null);
-            }
-            catch (Exception ex)
-            {
-                log.Fatal(ex.Message);
-                return false;
-            }
-
-            return true;
-            
-        }
-
-
 
     }
 

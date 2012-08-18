@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FB2EPubConverter.Interfaces;
 
 namespace FB2EPubConverter
 {
@@ -38,6 +39,11 @@ namespace FB2EPubConverter
         /// Returns search mask
         /// </summary>
         public PathSearchOptions SearchMask { get { return _searchMask; } set { _searchMask = value; } }
+
+        /// <summary>
+        /// Get/Set reference to progress callback interface
+        /// </summary>
+        public IProgressUpdateInterface ProgressCallbacks { get; set; }
 
     }
 }

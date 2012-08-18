@@ -21,6 +21,15 @@
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_FB2EPUBEXT          REGISTRY                "Fb2EpubExt.rgs"
+IDR_FB2EPUBSHLEXT       REGISTRY                "Fb2EpubShlExt.rgs"
+IDR_CPROGRESSREPORTER   REGISTRY                "CProgressReporter.rgs"
+
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -90,14 +99,6 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// REGISTRY
-//
-
-IDR_FB2EPUBEXT          REGISTRY                "Fb2EpubExt.rgs"
-IDR_FB2EPUBSHLEXT       REGISTRY                "Fb2EpubShlExt.rgs"
-
-/////////////////////////////////////////////////////////////////////////////
-//
 // Dialog
 //
 
@@ -108,7 +109,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     CONTROL         "",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,25,17,243,14
     LTEXT           "Converting:",IDC_STATIC,25,49,39,8
-    LTEXT           "",IDC_FILE_NAME,79,51,188,8,SS_PATHELLIPSIS,WS_EX_TRANSPARENT
+    LTEXT           "",IDC_FILE_NAME,79,49,188,8,SS_WORDELLIPSIS,WS_EX_TRANSPARENT
 END
 
 

@@ -158,7 +158,7 @@ namespace FB2EPubConverter
             set 
             { 
                 _outputPath = value;
-                if (!_outputPath.EndsWith("\\") && !_outputPath.EndsWith("/"))
+                if (!_outputPath.EndsWith("\\") && !_outputPath.EndsWith("/") && !string.IsNullOrEmpty(_outputPath))
                 {
                     _outputPath += "\\";
                 }

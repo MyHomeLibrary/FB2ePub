@@ -18,6 +18,13 @@ import "ocidl.idl";
 interface IFb2EpubShlExt : IDispatch{
 };
 [
+	object,
+	uuid(F5B7E955-D15D-4EE5-BE14-FE1570BEE774),
+	pointer_default(unique)
+]
+interface ICProgressReporter : IUnknown{
+};
+[
 	uuid(D74D7D29-DCA7-45A1-9678-80B43F2780E2),
 	version(1.0),
 	helpstring("Fb2Epub 1.0 Type Library")
@@ -32,5 +39,12 @@ library Fb2EpubExtLib
 	coclass Fb2EpubShlExt
 	{
 		[default] interface IFb2EpubShlExt;
+	};
+	[
+		uuid(F61EE366-A514-4B3C-B5FC-CA5E6DF97D84)		
+	]
+	coclass CProgressReporter
+	{
+		[default] interface ICProgressReporter;
 	};
 };

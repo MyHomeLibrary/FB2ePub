@@ -111,10 +111,6 @@
     <Content Include="epub-logo-color-book.ICO" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\fontsettings\FontsSettings.csproj">
-      <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
-      <Name>FontsSettings</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\isiolanguages\ISOLanguages.csproj">
       <Project>{58E261A5-B2EA-43F3-820D-902B5C061321}</Project>
       <Name>ISOLanguages</Name>
@@ -122,10 +118,6 @@
     <ProjectReference Include="..\FB2EPubConverter\FB2EPubConverter.csproj">
       <Project>{738F2015-0DC7-4C38-BBF0-90FD5C3C2518}</Project>
       <Name>FB2EPubConverter</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fb2epubSettings\Fb2epubSettings.csproj">
-      <Project>{BB87C009-1337-43FF-ADF6-6E7861AA9343}</Project>
-      <Name>Fb2epubSettings</Name>
     </ProjectReference>
     <ProjectReference Include="..\FolderSettingsHelper\FolderSettingsHelper.csproj">
       <Project>{97C916FF-6271-44F8-9A20-6E0A0389524B}</Project>

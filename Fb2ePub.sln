@@ -14,6 +14,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FB2EPubConverter", "FB2EPub
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fb2EpubExt", "Fb2EpubExt\Fb2EpubExt.vcxproj", "{260632CD-33BF-4324-9119-C542E9A9B516}"
+	ProjectSection(ProjectDependencies) = postProject
+		{738F2015-0DC7-4C38-BBF0-90FD5C3C2518} = {738F2015-0DC7-4C38-BBF0-90FD5C3C2518}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegisterFB2EPub", "RegisterFB2EPub\RegisterFB2EPub.csproj", "{48473EBF-89D0-46BE-B7AE-D46E3B52415F}"
 EndProject

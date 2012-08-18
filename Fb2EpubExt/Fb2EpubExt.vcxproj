@@ -22,8 +22,8 @@
     <ProjectGuid>{260632CD-33BF-4324-9119-C542E9A9B516}</ProjectGuid>
     <RootNamespace>SimpleExt</RootNamespace>
     <Keyword>AtlProj</Keyword>
-	<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>   
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>	
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -256,6 +256,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CProgressReporter.cpp" />
     <ClCompile Include="dllmain.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
@@ -296,6 +297,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BITMAP1.BMP" />
+    <None Include="CProgressReporter.rgs" />
     <None Include="Fb2EpubExt.def" />
     <None Include="Fb2EpubExt.rgs" />
     <None Include="Fb2EpubShlExt.rgs" />
@@ -305,6 +307,7 @@
     <Midl Include="Fb2EpubExt.idl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CProgressReporter.h" />
     <ClInclude Include="dllmain.h" />
     <ClInclude Include="Fb2EpubShlExt.h" />
     <ClInclude Include="ProgressDialog.h" />

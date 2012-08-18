@@ -93,9 +93,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Fb2epubSettings.resx</DependentUpon>
     </Compile>
-    <Compile Include="IniLocations\IniAccessFunctions.cs" />
-    <Compile Include="IniLocations\IniLocations.cs" />
-    <Compile Include="IniLocations\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +144,10 @@
     <ProjectReference Include="..\..\fontsettings\FontsSettings.csproj">
       <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
       <Name>FontsSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FolderSettingsHelper\FolderSettingsHelper.csproj">
+      <Project>{97C916FF-6271-44F8-9A20-6E0A0389524B}</Project>
+      <Name>FolderSettingsHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

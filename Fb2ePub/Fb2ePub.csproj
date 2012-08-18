@@ -109,16 +109,11 @@
       <Link>Properties\CommonAssemblyInfo.cs.cs</Link>
     </Compile>
     <Compile Include="ConsoleWriter.cs" />
-    <Compile Include="ConverterExposed.cs" />
     <Compile Include="Fb2Epub.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\fontsettings\FontsSettings.csproj">
-      <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
-      <Name>FontsSettings</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\isiolanguages\ISOLanguages.csproj">
       <Project>{58E261A5-B2EA-43F3-820D-902B5C061321}</Project>
       <Name>ISOLanguages</Name>
@@ -126,10 +121,6 @@
     <ProjectReference Include="..\FB2EPubConverter\FB2EPubConverter.csproj">
       <Project>{738F2015-0DC7-4C38-BBF0-90FD5C3C2518}</Project>
       <Name>FB2EPubConverter</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fb2epubSettings\Fb2epubSettings.csproj">
-      <Project>{BB87C009-1337-43FF-ADF6-6E7861AA9343}</Project>
-      <Name>Fb2epubSettings</Name>
     </ProjectReference>
     <ProjectReference Include="..\FolderSettingsHelper\FolderSettingsHelper.csproj">
       <Project>{97C916FF-6271-44F8-9A20-6E0A0389524B}</Project>
@@ -140,67 +131,13 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Fonts\LiberationMono-Bold.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Fonts\LiberationMono-BoldItalic.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Fonts\LiberationMono-Italic.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Fonts\LiberationMono-Regular.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Fonts\LiberationSans-Bold.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Fonts\LiberationSans-BoldItalic.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Fonts\LiberationSans-Italic.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Fonts\LiberationSans-Regular.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Fonts\LiberationSerif-Bold.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Fonts\LiberationSerif-BoldItalic.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Fonts\LiberationSerif-Italic.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Fonts\LiberationSerif-Regular.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="license.docx" />
     <None Include="prompt.cmd" />
-    <None Include="Translit\translit.xsd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />
-    <Content Include="changes.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CSS\default.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CSS\styles_en.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="epub-logo-color-book.ICO" />
-    <Content Include="Fonts\License.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="readme_en.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Translit\translit.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
