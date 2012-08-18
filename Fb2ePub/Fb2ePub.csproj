@@ -121,6 +121,7 @@
     <ProjectReference Include="..\FB2EPubConverter\FB2EPubConverter.csproj">
       <Project>{738F2015-0DC7-4C38-BBF0-90FD5C3C2518}</Project>
       <Name>FB2EPubConverter</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\FolderSettingsHelper\FolderSettingsHelper.csproj">
       <Project>{97C916FF-6271-44F8-9A20-6E0A0389524B}</Project>

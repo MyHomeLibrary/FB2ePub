@@ -2,7 +2,10 @@
 
 #include "stdafx.h"
 #include "FbePluginImplementation.h"
+#pragma warning( push )
+#pragma warning(disable,4279)
 #import "..\ExtLibs\msxml4.dll" 
+#pragma warning( pop )
 using namespace MSXML2;
 #include "atlstr.h"
 using namespace System;
