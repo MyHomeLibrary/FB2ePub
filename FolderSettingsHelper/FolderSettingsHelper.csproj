@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FoolderLocator.cs" />
+    <Compile Include="IniLocations\IniAccessFunctions.cs" />
+    <Compile Include="IniLocations\IniLocations.cs" />
+    <Compile Include="IniLocations\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

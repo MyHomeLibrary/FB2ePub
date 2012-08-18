@@ -697,7 +697,7 @@ namespace Fb2ePubConverter
                     }
                     //outFile.Replace('?','1' );
                     Logger.Log.DebugFormat("Final output file name : {0}",outFile);
-                    Assembly asm = Assembly.GetEntryAssembly();
+                    Assembly asm = Assembly.GetAssembly(GetType());
                     string version = "???";
                     if (asm != null)
                     {
@@ -758,7 +758,8 @@ namespace Fb2ePubConverter
 
         private void SetupCSS(EPubFile epubFile)
         {
-            string pathPreffix = @".\";
+            Assembly asm = Assembly.GetAssembly(GetType());
+            string pathPreffix = Path.GetDirectoryName(asm.Location);
             if (!string.IsNullOrEmpty(Settings.ResourcesPath))
             {
                 pathPreffix = Settings.ResourcesPath;

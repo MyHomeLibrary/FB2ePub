@@ -1,18 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml;
 using Fb2ePubConverter;
+using FB2EPubConverter.Interfaces;
+using System.Runtime.InteropServices;
+using Fb2epubSettings;
 
 namespace FB2EPubConverter
 {
-    public class ConvertProcessor
+    [Guid("0FF011AD-18A5-4CF2-8AB1-011AA9AA2BDF"),ComVisible(true)]
+    public class ConvertProcessor : IEPubConverterInterface
     {
         private readonly ConvertProcessorSettings _processorSettings = new ConvertProcessorSettings();
 
         public ConvertProcessorSettings ProcessorSettings { get { return _processorSettings; } }
+
+
+        public void PerformConvertOperation(string[] filesInMask, string outputFileName)
+        {
+            List<string> files = new List<string>();
+            foreach (var mask in filesInMask)
+            {
+                files.Add(mask);
+            }
+            PerformConvertOperation(files, outputFileName);
+        }
 
         /// <summary>
         /// Performs conversion of list of files 
@@ -21,8 +40,23 @@ namespace FB2EPubConverter
         /// <param name="outputFileName">output file name in case provided and single file is to be converted </param>
         public void PerformConvertOperation(List<string> filesInMask, string outputFileName)
         {
-            Parallel.ForEach(filesInMask, (file) =>
+            int filesCount = filesInMask.Count;
+            int successfullyConverted = 0;
+
+            if (_processorSettings.ProgressCallbacks != null)
             {
+                _processorSettings.ProgressCallbacks.ConvertStarted(filesCount);
+            }
+
+
+            Parallel.ForEach(filesInMask, (file) =>
+                                              {
+                int Id;
+                lock (_processorSettings)
+                {
+                  Id   = successfullyConverted++;                    
+                }
+           
                 Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine()
                 {
                     Settings = _processorSettings.Settings
@@ -30,8 +64,17 @@ namespace FB2EPubConverter
 
                 try
                 {
+                    if (_processorSettings.ProgressCallbacks != null)
+                    {
+                        _processorSettings.ProgressCallbacks.ProcessingStarted(file,Id, filesCount);
+                    }
+
                     if (!converter.ConvertFile(file))
                     {
+                        if (_processorSettings.ProgressCallbacks != null)
+                        {
+                            _processorSettings.ProgressCallbacks.SkippedDueError(file);
+                        }
                         return;
                     }
                 }
@@ -42,8 +85,21 @@ namespace FB2EPubConverter
                 }
                 string fileName = BuildNewFileName(file,outputFileName);
                 Console.WriteLine(string.Format("Saving {0}...", fileName));
+                if (_processorSettings.ProgressCallbacks != null)
+                {
+                    _processorSettings.ProgressCallbacks.ProcessingSaving(fileName,Id, filesCount);
+                }
                 SaveAndCleanUp(converter, fileName, file);
+                if (_processorSettings.ProgressCallbacks != null)
+                {
+                    _processorSettings.ProgressCallbacks.Processed(fileName, Id, filesCount);
+                }
             });
+
+            if (_processorSettings.ProgressCallbacks != null)
+            {
+                _processorSettings.ProgressCallbacks.ConvertFinished(successfullyConverted);
+            }
 
         }
 
@@ -221,5 +277,51 @@ namespace FB2EPubConverter
             return fileName;
         }
 
+        #region Implementation of IEPubConverterInterface
+
+        public void ConvertPath(string inputPath, string outputFolder, IProgressUpdateInterface progress)
+        {
+            LoadSettings(Fb2Epub.Default);
+            ProcessorSettings.ProgressCallbacks = progress;
+            ProcessorSettings.Settings.OutPutPath = outputFolder;
+            List<string> fileParams = new List<string>();
+            fileParams.Add(inputPath);
+            ProcessorSettings.LookInSubFolders = true;
+            ProcessorSettings.Settings.ResourcesPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            List<string> filesInMask = new List<string>();
+            DetectFilesToProcess(fileParams, ref filesInMask);
+            PerformConvertOperation(filesInMask, null);
+        }
+
+        public void ConvertList(string[] files, string outputFolder, IProgressUpdateInterface progress)
+        {
+            LoadSettings(Fb2Epub.Default);
+            ProcessorSettings.Settings.OutPutPath = outputFolder;
+            ProcessorSettings.ProgressCallbacks = progress;
+            ProcessorSettings.Settings.ResourcesPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            PerformConvertOperation(files, null);
+
+        }
+
+        public void ConvertXml(XmlDocument doc, string outFileName, IProgressUpdateInterface progress)
+        {
+
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        public static bool ShowSettinsDialog(IWin32Window parent)
+        {
+            ConverterSettingsForm settingsForm = new ConverterSettingsForm();
+            settingsForm.TopLevel = true;
+            return (settingsForm.ShowDialog(parent) == DialogResult.OK);
+
+        }
+
+        public void LoadSettings()
+        {
+            LoadSettings(Fb2Epub.Default);
+        }
     }
 }

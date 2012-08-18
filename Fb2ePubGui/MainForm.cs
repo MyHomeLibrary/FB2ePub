@@ -10,8 +10,7 @@ using System.Windows.Forms;
 using Fb2ePubConverter;
 using FB2EPubConverter;
 using Fb2ePubGui.Properties;
-using Fb2epubSettings;
-using Fb2epubSettings.IniLocations;
+using FolderSettingsHelper.IniLocations;
 
 
 namespace Fb2ePubGui
@@ -48,8 +47,8 @@ namespace Fb2ePubGui
                 Invoke(d, new object[] { sender, e });
                 return;
             }
-            ConverterSettingsForm settings = new ConverterSettingsForm();
-            if ( settings.ShowDialog(this) == DialogResult.OK )
+           
+            if ( ConvertProcessor.ShowSettinsDialog(this) )
             {
                 LoadPaths();
                 comboBoxDestination.SelectedIndex = 0;               
@@ -117,7 +116,7 @@ namespace Fb2ePubGui
         private void ConvertFiles(string[] files)
         {
             ConvertProcessor processor = new ConvertProcessor();
-            processor.LoadSettings(Fb2Epub.Default);
+            processor.LoadSettings();
             processor.ProcessorSettings.Settings.OutPutPath = comboBoxDestination.Text;
             processor.ProcessorSettings.Settings.ResourcesPath =
                 Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
@@ -297,27 +296,6 @@ namespace Fb2ePubGui
             aboutBox.ShowDialog(this);
         }
 
-        /// <summary>
-        /// Return default file mask based on options
-        /// </summary>
-        /// <returns></returns>
-        private static string GetFileMask(PathSearchOptions searchMask)
-        {
-            string fileName = "*.*";
-            if (searchMask == PathSearchOptions.Fb2Only)
-            {
-                fileName = "*.fb2";
-            }
-            else if (searchMask == PathSearchOptions.Fb2WithArchives)
-            {
-                fileName = "*.fb2,*.fb2.zip,*.fb2.rar";
-            }
-            else if (searchMask == PathSearchOptions.WithAllArchives)
-            {
-                fileName = "*.fb2,*.zip,*.rar";
-            }
-            return fileName;
-        }
 
     }
 }

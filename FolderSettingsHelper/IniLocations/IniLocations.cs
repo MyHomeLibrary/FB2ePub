@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
 
-namespace Fb2epubSettings.IniLocations
+namespace FolderSettingsHelper.IniLocations
 {
     public class IniLocations : List<Location>
     {

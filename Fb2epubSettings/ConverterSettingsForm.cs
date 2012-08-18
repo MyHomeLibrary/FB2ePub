@@ -7,7 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using Fb2epubSettings.IniLocations;
+using FolderSettingsHelper.IniLocations;
 using FontsSettings;
 
 namespace Fb2epubSettings
@@ -16,7 +16,7 @@ namespace Fb2epubSettings
     {
         delegate void OnButtonPressedCallback(object sender, EventArgs e);
 
-        private readonly IniLocations.IniLocations _locations = new IniLocations.IniLocations();
+        private readonly IniLocations _locations = new IniLocations();
         private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
         private readonly BindingSource _myDataSourceCSS = new BindingSource();
         private readonly BindingSource _myDataSourceCSSFonts = new BindingSource();

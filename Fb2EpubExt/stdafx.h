@@ -24,3 +24,4 @@ using namespace ATL;
 
 #include <string>
 #include <list>
+#import "C:\Project\GoogleCode\fb2epub\FB2EPubConverter.tlb" raw_interfaces_only, raw_native_types, no_namespace, named_guids, auto_search
