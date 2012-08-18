@@ -22,36 +22,24 @@
         "Entry"
         {
         "MsmKey" = "8:_05537CB6CFBCA16DDB1476B24553CECC"
-        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_05537CB6CFBCA16DDB1476B24553CECC"
-        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_06D4980509DD5A04A60EAC5C30B41970"
         "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_06D4980509DD5A04A60EAC5C30B41970"
-        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "MsmKey" = "8:_0946376AA3AA4E8EBE708525C0832A2E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_09FF58557F47464A967F023266249945"
+        "MsmKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -63,14 +51,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_106F220BDAB872F44E5EED4CE2120326"
-        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "MsmKey" = "8:_0FD047232F18414EB54261C2B4559808"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0FEEC0EBD1C64ECA8A4185E229D4AC2F"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_106F220BDAB872F44E5EED4CE2120326"
-        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
+        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -81,19 +75,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_13F5F13A94734C2588F29D0292CF0C5C"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_106F220BDAB872F44E5EED4CE2120326"
+        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_214D8E6D622745899D1A5C40379E9201"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_243EA5D2808C475BAA3CDE5539521C70"
+        "MsmKey" = "8:_287B2D85FBE84A36B45BD1345CA82187"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -106,6 +94,18 @@
         "Entry"
         {
         "MsmKey" = "8:_2CA2D33124D54B66BA3BFE183337EDE4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2D518EB19A9A4D199F64C4561D32AF64"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2E15D0D7584A4A3EA5F1C6802670B05E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -124,7 +124,7 @@
         "Entry"
         {
         "MsmKey" = "8:_362342C28A971AF1A378325E85C07ED6"
-        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
+        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -136,7 +136,25 @@
         "Entry"
         {
         "MsmKey" = "8:_362342C28A971AF1A378325E85C07ED6"
-        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
+        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_367D5C31D012409290FD2E92CDA5089B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_387ACF9AEC1C4F8E8C9CA4385905588C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3D3AEDC0B8B58C03DEAF23B6630C0E7F"
+        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -147,7 +165,31 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_481F2395C96F5F23D0B4FDA89A853A55"
+        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_481F2395C96F5F23D0B4FDA89A853A55"
+        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_481F2395C96F5F23D0B4FDA89A853A55"
+        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4F28330A35BF4D42B0EE14306111F1E1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_54D008F3D7E74C00B41A61E3204CBAB8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -159,13 +201,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5B2D86580A5E42C5A93476B19DF1E0FC"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_757758145B3B47BA8171E2F525E48C8F"
+        "MsmKey" = "8:_7933CB02696544DBA4C3C5F57C37DE39"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -178,7 +214,7 @@
         "Entry"
         {
         "MsmKey" = "8:_7C4B6D50F5DDA2AFE8BD39B7E1E18D80"
-        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
+        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -190,13 +226,7 @@
         "Entry"
         {
         "MsmKey" = "8:_7C4B6D50F5DDA2AFE8BD39B7E1E18D80"
-        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_80F8A27883EA4B1898887F7C5FB6CE2F"
-        "OwnerKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -208,30 +238,18 @@
         "Entry"
         {
         "MsmKey" = "8:_8405936719281E8DC8F430B7170FEDF2"
-        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_8405936719281E8DC8F430B7170FEDF2"
-        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
+        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_867FC02021DA47E79D0FC87ED4E7EDFF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8778A182247543038B0C2D67C8A38BF4"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_91AB536D59C8456D8DC070E1EDD04EB7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -249,50 +267,26 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C0FD1A18492B48788AC61ED6DF896E1D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C291B126AA4649EFA5FAA89A0CBA484C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C4A079B648194EFAB071FB32D011AA29"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D93077FCE321BF380E851B174361D0DB"
-        "OwnerKey" = "8:_106F220BDAB872F44E5EED4CE2120326"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D93077FCE321BF380E851B174361D0DB"
-        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D93077FCE321BF380E851B174361D0DB"
-        "OwnerKey" = "8:_06D4980509DD5A04A60EAC5C30B41970"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D93077FCE321BF380E851B174361D0DB"
-        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D93077FCE321BF380E851B174361D0DB"
-        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
+        "MsmKey" = "8:_DB302C8FD51A594FD1A3C2843E2C9DE5"
+        "OwnerKey" = "8:_481F2395C96F5F23D0B4FDA89A853A55"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_DB302C8FD51A594FD1A3C2843E2C9DE5"
-        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -304,61 +298,85 @@
         "Entry"
         {
         "MsmKey" = "8:_DB302C8FD51A594FD1A3C2843E2C9DE5"
-        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E25430B0BD314FE3AA98AFE167CEE280"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E5659323DCDB4A87BCB71B4E8D079373"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E84A41C544CFE334503D8EEF51BC38C0"
-        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E84A41C544CFE334503D8EEF51BC38C0"
         "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E84A41C544CFE334503D8EEF51BC38C0"
-        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EE6B40414DFA44558F1B76ACC3276654"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EF4324C5FFECB4119A99AA684CB3AF88"
-        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EF4324C5FFECB4119A99AA684CB3AF88"
+        "MsmKey" = "8:_DD2843CA811B804C6C3561FF2D85C140"
         "OwnerKey" = "8:_106F220BDAB872F44E5EED4CE2120326"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_EF4324C5FFECB4119A99AA684CB3AF88"
+        "MsmKey" = "8:_DD2843CA811B804C6C3561FF2D85C140"
+        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DD2843CA811B804C6C3561FF2D85C140"
+        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DD2843CA811B804C6C3561FF2D85C140"
         "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DD2843CA811B804C6C3561FF2D85C140"
+        "OwnerKey" = "8:_481F2395C96F5F23D0B4FDA89A853A55"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DE51F946A8704D7E93EBB53D7B38D9B9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E168C627AB214590941FA3723DC153A9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E84A41C544CFE334503D8EEF51BC38C0"
+        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E84A41C544CFE334503D8EEF51BC38C0"
+        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E84A41C544CFE334503D8EEF51BC38C0"
+        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EDA2F866A68B41168878703740D7230B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EF4324C5FFECB4119A99AA684CB3AF88"
+        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EF4324C5FFECB4119A99AA684CB3AF88"
+        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -370,13 +388,13 @@
         "Entry"
         {
         "MsmKey" = "8:_EF4324C5FFECB4119A99AA684CB3AF88"
-        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
+        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F2AD97CD6B3F413C8FA2D8A9F26CE14A"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_EF4324C5FFECB4119A99AA684CB3AF88"
+        "OwnerKey" = "8:_106F220BDAB872F44E5EED4CE2120326"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -400,7 +418,7 @@
         "Entry"
         {
         "MsmKey" = "8:_F4F14FC7119550EFFC02B7B1780A6A2E"
-        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
+        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -412,19 +430,7 @@
         "Entry"
         {
         "MsmKey" = "8:_F4F14FC7119550EFFC02B7B1780A6A2E"
-        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F5FC8DBFC0DA4B84824F2B2B04CC34FF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F65B45A792E741B49216C7FD6CA04745"
-        "OwnerKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -436,13 +442,19 @@
         "Entry"
         {
         "MsmKey" = "8:_F7905D1E498E8BBCB465645968DC3EB9"
-        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F7905D1E498E8BBCB465645968DC3EB9"
-        "OwnerKey" = "8:_AE27608A012A4FB3B34D367CDEBAE0F4"
+        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F91364E1031F4B90A95A1B849F9922D5"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -453,14 +465,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_FC1767FACB29F2EBA1032966E13262A0"
-        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "MsmKey" = "8:_FA621C382956478E9E59A27A03CE377B"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_FC1767FACB29F2EBA1032966E13262A0"
-        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
+        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -471,7 +483,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_FF15E6A224C740F18C351B341F79A248"
+        "MsmKey" = "8:_FC1767FACB29F2EBA1032966E13262A0"
+        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FDE80A3467164B56AA14094351D34899"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -490,91 +508,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EF4324C5FFECB4119A99AA684CB3AF88"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FC1767FACB29F2EBA1032966E13262A0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F4F14FC7119550EFFC02B7B1780A6A2E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_362342C28A971AF1A378325E85C07ED6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_05537CB6CFBCA16DDB1476B24553CECC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7C4B6D50F5DDA2AFE8BD39B7E1E18D80"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D93077FCE321BF380E851B174361D0DB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_106F220BDAB872F44E5EED4CE2120326"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8405936719281E8DC8F430B7170FEDF2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E84A41C544CFE334503D8EEF51BC38C0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F7905D1E498E8BBCB465645968DC3EB9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_06D4980509DD5A04A60EAC5C30B41970"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DB302C8FD51A594FD1A3C2843E2C9DE5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "OwnerKey" = "8:_FFA3B4005BAB4605B95A226B36B4C402"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -586,7 +520,91 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FFA3B4005BAB4605B95A226B36B4C402"
+        "OwnerKey" = "8:_0969B61FE89F42BA9C74110F5A156636"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F43A0DBCCB148B53E77539A52A068EF0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F7905D1E498E8BBCB465645968DC3EB9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E84A41C544CFE334503D8EEF51BC38C0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_8405936719281E8DC8F430B7170FEDF2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_481F2395C96F5F23D0B4FDA89A853A55"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DB302C8FD51A594FD1A3C2843E2C9DE5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_106F220BDAB872F44E5EED4CE2120326"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7C4B6D50F5DDA2AFE8BD39B7E1E18D80"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_05537CB6CFBCA16DDB1476B24553CECC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_362342C28A971AF1A378325E85C07ED6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F4F14FC7119550EFFC02B7B1780A6A2E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DD2843CA811B804C6C3561FF2D85C140"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FC1767FACB29F2EBA1032966E13262A0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EF4324C5FFECB4119A99AA684CB3AF88"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -729,6 +747,11 @@
             "AssemblyAsmDisplayName" = "8:ISOLanguages, Version=1.0.1.0, Culture=neutral, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
+                    "_05537CB6CFBCA16DDB1476B24553CECC"
+                    {
+                    "Name" = "8:ISOLanguages.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:ISOLanguages.dll"
             "TargetName" = "8:"
@@ -748,35 +771,9 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_06D4980509DD5A04A60EAC5C30B41970"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0946376AA3AA4E8EBE708525C0832A2E"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Fb2epubSettings, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:Fb2epubSettings.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_09FF58557F47464A967F023266249945"
-            {
-            "SourcePath" = "8:..\\Fb2ePub\\Translit\\translit.xml"
+            "SourcePath" = "8:..\\FB2EPubConverter\\Translit\\translit.xml"
             "TargetName" = "8:translit.xml"
             "Tag" = "8:"
             "Folder" = "8:_88DA79251D1742F89CB4426CB9827EEE"
@@ -814,6 +811,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0FD047232F18414EB54261C2B4559808"
+            {
+            "SourcePath" = "8:..\\FB2EPubConverter\\Fonts\\LiberationSans-Bold.ttf"
+            "TargetName" = "8:LiberationSans-Bold.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0FEEC0EBD1C64ECA8A4185E229D4AC2F"
+            {
+            "SourcePath" = "8:..\\FB2EPubConverter\\Fonts\\LiberationSerif-BoldItalic.ttf"
+            "TargetName" = "8:LiberationSerif-BoldItalic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_106F220BDAB872F44E5EED4CE2120326"
             {
             "AssemblyRegister" = "3:1"
@@ -821,6 +858,11 @@
             "AssemblyAsmDisplayName" = "8:EPubLibrary, Version=1.0.19.0, Culture=neutral, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
+                    "_106F220BDAB872F44E5EED4CE2120326"
+                    {
+                    "Name" = "8:EPubLibrary.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:EPubLibrary.dll"
             "TargetName" = "8:"
@@ -840,52 +882,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_13F5F13A94734C2588F29D0292CF0C5C"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_287B2D85FBE84A36B45BD1345CA82187"
             {
-            "SourcePath" = "8:..\\Fb2ePub\\Fonts\\LiberationMono-Regular.ttf"
-            "TargetName" = "8:LiberationMono-Regular.ttf"
+            "SourcePath" = "8:..\\FB2EPubConverter\\Fonts\\LiberationSans-BoldItalic.ttf"
+            "TargetName" = "8:LiberationSans-BoldItalic.ttf"
             "Tag" = "8:"
             "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_214D8E6D622745899D1A5C40379E9201"
-            {
-            "SourcePath" = "8:..\\Fb2ePub\\Fonts\\License.txt"
-            "TargetName" = "8:License.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_243EA5D2808C475BAA3CDE5539521C70"
-            {
-            "SourcePath" = "8:..\\Fb2ePub\\CSS\\default.css"
-            "TargetName" = "8:default.css"
-            "Tag" = "8:"
-            "Folder" = "8:_8D72155C468542719D24B09F98D62AA1"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -940,6 +942,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2D518EB19A9A4D199F64C4561D32AF64"
+            {
+            "SourcePath" = "8:..\\FB2EPubConverter\\CSS\\styles_en.txt"
+            "TargetName" = "8:styles_en.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_8D72155C468542719D24B09F98D62AA1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2E15D0D7584A4A3EA5F1C6802670B05E"
+            {
+            "SourcePath" = "8:..\\FB2EPubConverter\\Fonts\\LiberationMono-Regular.ttf"
+            "TargetName" = "8:LiberationMono-Regular.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_32246103880641B4BB702ABFA2F08DA9"
             {
             "SourcePath" = "8:..\\Fb2EpubExt\\FB2EPUBExt.INI"
@@ -967,6 +1009,11 @@
             "AssemblyAsmDisplayName" = "8:TranslitRu, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_362342C28A971AF1A378325E85C07ED6"
+                    {
+                    "Name" = "8:TranslitRu.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:TranslitRu.dll"
             "TargetName" = "8:"
@@ -982,6 +1029,66 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_367D5C31D012409290FD2E92CDA5089B"
+            {
+            "SourcePath" = "8:..\\FB2EPubConverter\\Fonts\\LiberationMono-BoldItalic.ttf"
+            "TargetName" = "8:LiberationMono-BoldItalic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_387ACF9AEC1C4F8E8C9CA4385905588C"
+            {
+            "SourcePath" = "8:..\\FB2EPubConverter\\Fonts\\LiberationSans-Italic.ttf"
+            "TargetName" = "8:LiberationSans-Italic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3D3AEDC0B8B58C03DEAF23B6630C0E7F"
+            {
+            "SourcePath" = "8:FB2EPubConverter.tlb"
+            "TargetName" = "8:FB2EPubConverter.tlb"
+            "Tag" = "8:"
+            "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:2"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
@@ -1006,12 +1113,63 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_481F2395C96F5F23D0B4FDA89A853A55"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Fb2epubSettings, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_481F2395C96F5F23D0B4FDA89A853A55"
+                    {
+                    "Name" = "8:Fb2epubSettings.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Fb2epubSettings.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4F28330A35BF4D42B0EE14306111F1E1"
             {
             "SourcePath" = "8:..\\FB2EPubConverter\\fb2.dtd"
             "TargetName" = "8:fb2.dtd"
             "Tag" = "8:"
             "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_54D008F3D7E74C00B41A61E3204CBAB8"
+            {
+            "SourcePath" = "8:..\\FB2EPubConverter\\Fonts\\LiberationSerif-Italic.ttf"
+            "TargetName" = "8:LiberationSerif-Italic.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1046,30 +1204,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5B2D86580A5E42C5A93476B19DF1E0FC"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7933CB02696544DBA4C3C5F57C37DE39"
             {
-            "SourcePath" = "8:..\\Fb2ePub\\Fonts\\LiberationSans-Regular.ttf"
-            "TargetName" = "8:LiberationSans-Regular.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_757758145B3B47BA8171E2F525E48C8F"
-            {
-            "SourcePath" = "8:..\\Fb2ePub\\Fonts\\LiberationSerif-Bold.ttf"
-            "TargetName" = "8:LiberationSerif-Bold.ttf"
+            "SourcePath" = "8:..\\FB2EPubConverter\\Fonts\\LiberationMono-Italic.ttf"
+            "TargetName" = "8:LiberationMono-Italic.ttf"
             "Tag" = "8:"
             "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
             "Condition" = "8:"
@@ -1093,6 +1231,11 @@
             "AssemblyAsmDisplayName" = "8:XHTMLClassLibrary, Version=1.0.6.0, Culture=neutral, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
+                    "_7C4B6D50F5DDA2AFE8BD39B7E1E18D80"
+                    {
+                    "Name" = "8:XHTMLClassLibrary.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:XHTMLClassLibrary.dll"
             "TargetName" = "8:"
@@ -1112,26 +1255,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_80F8A27883EA4B1898887F7C5FB6CE2F"
-            {
-            "SourcePath" = "8:..\\Fb2ePub\\Fonts\\LiberationSans-BoldItalic.ttf"
-            "TargetName" = "8:LiberationSans-BoldItalic.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8405936719281E8DC8F430B7170FEDF2"
             {
             "AssemblyRegister" = "3:1"
@@ -1139,6 +1262,11 @@
             "AssemblyAsmDisplayName" = "8:Fb2FixLib, Version=1.0.12.14623, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_8405936719281E8DC8F430B7170FEDF2"
+                    {
+                    "Name" = "8:Fb2FixLib.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Fb2FixLib.dll"
             "TargetName" = "8:"
@@ -1158,52 +1286,32 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8778A182247543038B0C2D67C8A38BF4"
-            {
-            "SourcePath" = "8:..\\Fb2ePub\\Fonts\\LiberationSerif-BoldItalic.ttf"
-            "TargetName" = "8:LiberationSerif-BoldItalic.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_91AB536D59C8456D8DC070E1EDD04EB7"
-            {
-            "SourcePath" = "8:..\\Fb2ePub\\Fonts\\LiberationSans-Bold.ttf"
-            "TargetName" = "8:LiberationSans-Bold.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B690DD8EC92D4FCD967ED97158A3E915"
             {
             "SourcePath" = "8:..\\Fb2ePubGui\\epub-logo-color-book.ICO"
             "TargetName" = "8:epub-logo-color-book.ICO"
             "Tag" = "8:"
             "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C0FD1A18492B48788AC61ED6DF896E1D"
+            {
+            "SourcePath" = "8:..\\FB2EPubConverter\\Fonts\\LiberationSerif-Regular.ttf"
+            "TargetName" = "8:LiberationSerif-Regular.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1238,52 +1346,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C4A079B648194EFAB071FB32D011AA29"
-            {
-            "SourcePath" = "8:..\\Fb2ePub\\Translit\\translit.xsd"
-            "TargetName" = "8:translit.xsd"
-            "Tag" = "8:"
-            "Folder" = "8:_88DA79251D1742F89CB4426CB9827EEE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D93077FCE321BF380E851B174361D0DB"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FontSettings, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:FontSettings.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DB302C8FD51A594FD1A3C2843E2C9DE5"
             {
             "AssemblyRegister" = "3:1"
@@ -1291,6 +1353,11 @@
             "AssemblyAsmDisplayName" = "8:FolderSettingsHelper, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_DB302C8FD51A594FD1A3C2843E2C9DE5"
+                    {
+                    "Name" = "8:FolderSettingsHelper.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:FolderSettingsHelper.dll"
             "TargetName" = "8:"
@@ -1310,12 +1377,43 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E25430B0BD314FE3AA98AFE167CEE280"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DD2843CA811B804C6C3561FF2D85C140"
             {
-            "SourcePath" = "8:..\\Fb2ePub\\Fonts\\LiberationMono-Bold.ttf"
-            "TargetName" = "8:LiberationMono-Bold.ttf"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:FontSettings, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_DD2843CA811B804C6C3561FF2D85C140"
+                    {
+                    "Name" = "8:FontSettings.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:FontSettings.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
+            "Folder" = "8:_490537BAF14844E3BE385EE121CD4696"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DE51F946A8704D7E93EBB53D7B38D9B9"
+            {
+            "SourcePath" = "8:..\\FB2EPubConverter\\Translit\\translit.xsd"
+            "TargetName" = "8:translit.xsd"
+            "Tag" = "8:"
+            "Folder" = "8:_88DA79251D1742F89CB4426CB9827EEE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1330,10 +1428,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E5659323DCDB4A87BCB71B4E8D079373"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E168C627AB214590941FA3723DC153A9"
             {
-            "SourcePath" = "8:..\\Fb2ePub\\Fonts\\LiberationSans-Italic.ttf"
-            "TargetName" = "8:LiberationSans-Italic.ttf"
+            "SourcePath" = "8:..\\FB2EPubConverter\\Fonts\\LiberationSerif-Bold.ttf"
+            "TargetName" = "8:LiberationSerif-Bold.ttf"
             "Tag" = "8:"
             "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
             "Condition" = "8:"
@@ -1354,9 +1452,14 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FB2Library, Version=1.0.19.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:FB2Library, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_E84A41C544CFE334503D8EEF51BC38C0"
+                    {
+                    "Name" = "8:FB2Library.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:FB2Library.dll"
             "TargetName" = "8:"
@@ -1376,12 +1479,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EE6B40414DFA44558F1B76ACC3276654"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EDA2F866A68B41168878703740D7230B"
             {
-            "SourcePath" = "8:..\\Fb2ePub\\Fonts\\LiberationMono-BoldItalic.ttf"
-            "TargetName" = "8:LiberationMono-BoldItalic.ttf"
+            "SourcePath" = "8:..\\FB2EPubConverter\\CSS\\default.css"
+            "TargetName" = "8:default.css"
             "Tag" = "8:"
-            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
+            "Folder" = "8:_8D72155C468542719D24B09F98D62AA1"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1403,6 +1506,11 @@
             "AssemblyAsmDisplayName" = "8:log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_EF4324C5FFECB4119A99AA684CB3AF88"
+                    {
+                    "Name" = "8:log4net.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:log4net.dll"
             "TargetName" = "8:"
@@ -1422,33 +1530,18 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F2AD97CD6B3F413C8FA2D8A9F26CE14A"
-            {
-            "SourcePath" = "8:..\\Fb2ePub\\Fonts\\LiberationMono-Italic.ttf"
-            "TargetName" = "8:LiberationMono-Italic.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F43A0DBCCB148B53E77539A52A068EF0"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FB2EPubConverter, Version=1.0.34.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:FB2EPubConverter, Version=1.0.51.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_F43A0DBCCB148B53E77539A52A068EF0"
+                    {
+                    "Name" = "8:FB2EPubConverter.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:FB2EPubConverter.dll"
             "TargetName" = "8:"
@@ -1475,6 +1568,11 @@
             "AssemblyAsmDisplayName" = "8:ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_F4F14FC7119550EFFC02B7B1780A6A2E"
+                    {
+                    "Name" = "8:ICSharpCode.SharpZipLib.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:ICSharpCode.SharpZipLib.dll"
             "TargetName" = "8:"
@@ -1494,46 +1592,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F5FC8DBFC0DA4B84824F2B2B04CC34FF"
-            {
-            "SourcePath" = "8:..\\Fb2ePub\\Fonts\\LiberationSerif-Italic.ttf"
-            "TargetName" = "8:LiberationSerif-Italic.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F65B45A792E741B49216C7FD6CA04745"
-            {
-            "SourcePath" = "8:..\\Fb2ePub\\Fonts\\LiberationSerif-Regular.ttf"
-            "TargetName" = "8:LiberationSerif-Regular.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F7905D1E498E8BBCB465645968DC3EB9"
             {
             "AssemblyRegister" = "3:1"
@@ -1541,6 +1599,11 @@
             "AssemblyAsmDisplayName" = "8:XMLFixerLibrary, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_F7905D1E498E8BBCB465645968DC3EB9"
+                    {
+                    "Name" = "8:XMLFixerLibrary.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:XMLFixerLibrary.dll"
             "TargetName" = "8:"
@@ -1560,6 +1623,46 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F91364E1031F4B90A95A1B849F9922D5"
+            {
+            "SourcePath" = "8:..\\FB2EPubConverter\\Fonts\\License.txt"
+            "TargetName" = "8:License.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FA621C382956478E9E59A27A03CE377B"
+            {
+            "SourcePath" = "8:..\\FB2EPubConverter\\Fonts\\LiberationMono-Bold.ttf"
+            "TargetName" = "8:LiberationMono-Bold.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FC1767FACB29F2EBA1032966E13262A0"
             {
             "AssemblyRegister" = "3:1"
@@ -1567,6 +1670,11 @@
             "AssemblyAsmDisplayName" = "8:ChilkatDotNet2, Version=9.1.2.0, Culture=neutral, PublicKeyToken=eb5fc1fc52ef09bd, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
+                    "_FC1767FACB29F2EBA1032966E13262A0"
+                    {
+                    "Name" = "8:ChilkatDotNet2.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:ChilkatDotNet2.dll"
             "TargetName" = "8:"
@@ -1586,12 +1694,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FF15E6A224C740F18C351B341F79A248"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FDE80A3467164B56AA14094351D34899"
             {
-            "SourcePath" = "8:..\\Fb2ePub\\CSS\\styles_en.txt"
-            "TargetName" = "8:styles_en.txt"
+            "SourcePath" = "8:..\\FB2EPubConverter\\Fonts\\LiberationSans-Regular.ttf"
+            "TargetName" = "8:LiberationSans-Regular.ttf"
             "Tag" = "8:"
-            "Folder" = "8:_8D72155C468542719D24B09F98D62AA1"
+            "Folder" = "8:_1BFEBCFEBA4545CF9D811A09E2758087"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
