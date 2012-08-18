@@ -164,9 +164,11 @@
     <ResourceCompile Include="FBE2EpubPlugin.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Fb2ePub\epub-logo-color-book.ICO" />
     <None Include="FBE2EpubPlugin.def" />
     <None Include="FBE2EpubPlugin.rgs" />
     <None Include="FbePluginImplementation.rgs" />
+    <None Include="icon1.ico" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
