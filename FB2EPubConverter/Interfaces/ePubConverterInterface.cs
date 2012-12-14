@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using System.Xml;
+using System.Xml.Linq;
 
 namespace FB2EPubConverter.Interfaces
 {
@@ -9,6 +9,6 @@ namespace FB2EPubConverter.Interfaces
     {
         void ConvertPath(string inputPath, string outputFolder, IProgressUpdateInterface progress);
         void ConvertList(string[] files, string outputFolder, IProgressUpdateInterface progress);
-        void ConvertXml(XmlDocument doc, string outFileName, IProgressUpdateInterface progress);
+        void ConvertXml(XDocument doc, string outFileName, IProgressUpdateInterface progress);
     }
 }

@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "FbePluginImplementation.h"
 #pragma warning( push )
-#pragma warning(disable,4279)
+#pragma warning(disable:4279)
 #import "..\ExtLibs\msxml4.dll" 
 #pragma warning( pop )
 using namespace MSXML2;
@@ -37,10 +37,10 @@ HRESULT CFbePluginImplementation::Export(long hWnd,BSTR filename,IDispatch *doc)
 	strName.ReleaseBuffer();
 	MessageBox((HWND)hWnd,strName,L"Test message",MB_OK);
 
-	Xml::XmlDocument^ xmlDoc = gcnew Xml::XmlDocument;
+	Xml::Linq::XDocument^ xmlDoc = gcnew Xml::Linq::XDocument;
 	BSTR bstrXml = source->xml;
 	String^ xmlString = gcnew String(bstrXml);
-	xmlDoc->LoadXml(xmlString);
+	xmlDoc->Parse(xmlString);
 	
 	return S_OK;
 }

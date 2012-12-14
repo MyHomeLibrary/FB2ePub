@@ -1394,5 +1394,19 @@ namespace Fb2ePubConverter
         }
 
 
+        public void ConvertXml(XDocument fb2Document)
+        {
+            fb2Files.Clear();
+            FB2File file = new FB2File();
+            try
+            {
+                file.Load(fb2Document, false);
+                fb2Files.Add(file);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.ErrorFormat("Error loading XML document : {0}", ex);
+            }
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace RegisterFB2EPub
                             Log.ErrorFormat("Unable to locate {0}", fileName);
                             return 1;
                         }
-                        registrator.Path = filePath;
+                        registrator.RegistrationPath = filePath;
                         Log.InfoFormat("Registering {0}",filePath);
                         registrator.Register(ExtRegistrator.RegistrationExtensionEnum.BaseSet);
                         return 1;
@@ -63,7 +63,7 @@ namespace RegisterFB2EPub
                             Log.ErrorFormat("Unable to locate {0}", fileName);
                             return 1;
                         }
-                        registrator.Path = filePath;
+                        registrator.RegistrationPath = filePath;
                         Log.InfoFormat("Registering {0}", filePath);
                         registrator.Register(ExtRegistrator.RegistrationExtensionEnum.All);
                         return 0;
