@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -27,11 +28,12 @@ namespace RegisterFB2EPub
         private const string DllGuid = "{4A62D35B-DFF9-4901-A0EF-397236523B33}";
         private const string ExtensionName = "Fb2EpubShlExt";
         private const string ExtensionClassName = "FB2Epub Class";
+        private const string FbeExportPluginGuid = "{469E5867-292A-4A8D-B094-5F3597C4B353}";
 
         /// <summary>
         /// Path to extension DLL file to register
         /// </summary>
-        public string Path { get; set; }
+        public string RegistrationPath { get; set; }
 
         /// <summary>
         /// Checks the current registration 
@@ -224,6 +226,24 @@ namespace RegisterFB2EPub
         public void Unregister()
         {
             Unregister(RegistrationExtensionEnum.All);
+            UnregisterFbeExtension();
+
+        }
+
+        private void UnregisterFbeExtension()
+        {
+            try
+            {
+                using (RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
+                {
+                    key.DeleteSubKeyTree(string.Format(@"Software\Haali\FBE\Plugins\{0}", FbeExportPluginGuid),false);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Log.Error(ex);
+            }
         }
 
         public void Unregister(RegistrationExtensionEnum regType)
@@ -510,6 +530,8 @@ namespace RegisterFB2EPub
 
                 RegisterComServer();
 
+                RegisterFbeExtension();
+
                 if ((regType & RegistrationExtensionEnum.Any) == RegistrationExtensionEnum.Any)
                 {
                     RegisterFileExtension("*", "");
@@ -578,12 +600,41 @@ namespace RegisterFB2EPub
             }
         }
 
+        private void RegisterFbeExtension()
+        {
+            try
+            {
+                string iconFile = Path.GetDirectoryName(RegistrationPath);
+                iconFile= Path.Combine(iconFile, "FBE2EpubPlugin.dll");
+                using (RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
+                {
+                    if (key != null)
+                    {
+                        RegistryKey topKey = key.CreateSubKey(string.Format(@"Software\Haali\FBE\Plugins\{0}", FbeExportPluginGuid), RegistryKeyPermissionCheck.ReadWriteSubTree);
+                        if (topKey != null)
+                        {
+                            topKey.SetValue(string.Empty, "Export Fb2 to ePub");
+                            topKey.SetValue("Menu", "To ePub");
+                            topKey.SetValue("Type", "Export");
+                            topKey.SetValue("Icon", iconFile);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Log.Error(ex);
+            }
+
+        }
+
         /// <summary>
         /// Registers DLL as COM server
         /// </summary>
         private void RegisterComServer()
         {
-            if (string.IsNullOrEmpty(Path))
+            if (string.IsNullOrEmpty(RegistrationPath))
             {
                 throw new NullReferenceException("Path can not be empty");
             }
@@ -621,7 +672,7 @@ namespace RegisterFB2EPub
                         {
                             throw new Exception("Unable to create apartment key brench");
                         }
-                        apartmentKey.SetValue(null,Path);
+                        apartmentKey.SetValue(null,RegistrationPath);
                         apartmentKey.SetValue("ThreadingModel", "Apartment");
                     }
                 }

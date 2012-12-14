@@ -187,7 +187,7 @@ namespace RegisterFB2EPub
                 case PageStates.AdvancedPage:
                     if (_setState != ExtRegistrator.RegistrationExtensionEnum.None )
                     {
-                        _registrator.Path = _location;
+                        _registrator.RegistrationPath = _location;
                         _registrator.Register(_setState);
                         UpdateIni();
                     }
@@ -239,7 +239,7 @@ namespace RegisterFB2EPub
                     SetActiveState(PageStates.RegisterSelectionRarPage);
                     break;
                 case PageStates.RegisterFinishPage:
-                    _registrator.Path = _location;
+                    _registrator.RegistrationPath = _location;
                     _registrator.Register(_setState);
                     UpdateIni();
                     Close();

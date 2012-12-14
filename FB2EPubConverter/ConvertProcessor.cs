@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 using Fb2ePubConverter;
 using FB2EPubConverter.Interfaces;
 using System.Runtime.InteropServices;
@@ -303,10 +304,53 @@ namespace FB2EPubConverter
 
         }
 
-        public void ConvertXml(XmlDocument doc, string outFileName, IProgressUpdateInterface progress)
+        public void ConvertXml(XDocument doc, string outFileName, IProgressUpdateInterface progress)
         {
+            LoadSettings(Fb2Epub.Default);
+            _processorSettings.DeleteSource = false;
+            int successfullyConverted = 0;
 
-            throw new NotImplementedException();
+            if (_processorSettings.ProgressCallbacks != null)
+            {
+                _processorSettings.ProgressCallbacks.ConvertStarted(1);
+            }
+
+
+            Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine()
+            {
+                Settings = _processorSettings.Settings
+            };
+
+            try
+            {
+                if (_processorSettings.ProgressCallbacks != null)
+                {
+                    _processorSettings.ProgressCallbacks.ProcessingStarted(outFileName, 1, 1);
+                }
+                converter.ConvertXml(doc);
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex);
+                return;
+            }
+            if (_processorSettings.ProgressCallbacks != null)
+            {
+                _processorSettings.ProgressCallbacks.ProcessingSaving(outFileName, 1, 1);
+            }
+            SaveAndCleanUp(converter, outFileName, "");
+            if (_processorSettings.ProgressCallbacks != null)
+            {
+                _processorSettings.ProgressCallbacks.Processed(outFileName, 1, 1);
+            }
+
+
+            if (_processorSettings.ProgressCallbacks != null)
+            {
+                _processorSettings.ProgressCallbacks.ConvertFinished(successfullyConverted);
+            }
+
         }
 
         #endregion
