@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fb2EpubSetup", "Fb2EpubSetup", "{FAC69113-CCEA-400B-B587-49F30C3ACB5D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fb2ePub", "Fb2ePub\Fb2ePub.csproj", "{58F68096-2525-432E-A658-901B24A3C7C5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2} = {3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}
@@ -49,6 +47,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{074062C0-E1AD-472D-9D88-73DAC2F69322}"
 	ProjectSection(SolutionItems) = preProject
 		CommonAssemblyInfo.cs.cs = CommonAssemblyInfo.cs.cs
+		Fb2ePub\epub-logo-color-book.ICO = Fb2ePub\epub-logo-color-book.ICO
+		Fb2ePub\license.docx = Fb2ePub\license.docx
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fb2ePubGUI2", "Fb2ePubGUI2\Fb2ePubGUI2.csproj", "{4A9C9165-F68E-4BEE-BFB0-757568EB769D}"
