@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProductVersion>1.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>7341370f-f602-4a7b-b16c-f035748d8a20</ProjectGuid>
+    <AssemblyName>FB2ePubSetup64</AssemblyName>
+    <Name>FB2ePubSetup</Name>
+    <RootNamespace>FB2ePubSetup64</RootNamespace>
+    <CompilerOutput />
+    <CompilerBaseFileName>
+    </CompilerBaseFileName>
+    <CompilerSignTool />
+    <DirectivesSymbol />
+    <DirectivesOption />
+    <DirectivesParseOption />
+    <DirectivesInclude />
+    <DirectivesInlineStart />
+    <DirectivesInlineEnd />
+    <LaunchToolBeforeBuild />
+    <LaunchToolAfterBuild />
+    <RunInstaller>No</RunInstaller>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>
+    </OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>
+    </OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="FB2ePubSetup.iss">
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\VisualInstaller\InnoSetupProject.targets" />
+</Project>
