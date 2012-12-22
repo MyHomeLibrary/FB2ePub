@@ -49,8 +49,6 @@ const
 	vcredist2012_url_x64 = 'http://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU1/vcredist_x64.exe';
 
 procedure vcredist2012();
-var
-	version: cardinal;
 begin
 
 	if (VCRedistNeedsInstall()) then
