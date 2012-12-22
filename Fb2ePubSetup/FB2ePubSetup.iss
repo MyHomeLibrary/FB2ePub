@@ -50,9 +50,10 @@ Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
 Source: "{#BaseFolder}FB2EPubConverter\CSS\*"; DestDir: "{app}\CSS"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#BaseFolder}FB2EPubConverter\Fonts\*"; DestDir: "{app}\Fonts"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#BaseFolder}FB2EPubConverter\Translit\*"; DestDir: "{app}\Translit"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#BaseFolder}Fb2ePub\prompt.cmd"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BaseFolder}FB2EPubConverter\fb2.dtd"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BaseFolder}FB2EPubConverter\genrestransfer.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BaseFolder}FB2EPubConverter\changes.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BaseFolder}Fb2ePub\prompt.cmd"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BaseFolder}Fb2ePub\readme_en.htm"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BaseFolder}Fb2ePub\epub-logo-color-book.ICO"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BaseFolder}Fb2ePub\license.docx"; DestDir: "{app}"; Flags: ignoreversion
