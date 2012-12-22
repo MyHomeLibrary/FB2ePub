@@ -71,7 +71,7 @@ Source: "{#BuildFolder64}ChilkatDotNet2.dll"; DestDir: "{app}"; Check: Is64BitIn
 Source: "{#BuildFolder64}EPubLibrary.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
 Source: "{#BuildFolder64}FB2EPubConverter.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
 Source: "{#BuildFolder64}FB2EPubConverter.dll.config"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}Fb2EpubExt_x64.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
+Source: "{#BuildFolder64}Fb2EpubExt_x64.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: regserver 32bit
 Source: "{#BuildFolder64}Fb2epubSettings.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
 Source: "{#BuildFolder64}Fb2FixLib.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
 Source: "{#BuildFolder64}FB2Library.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
@@ -101,7 +101,7 @@ Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Check: not Is64BitIn
 Source: "{#BuildFolder86}Fb2epubSettings.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
 Source: "{#BuildFolder86}Fb2FixLib.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
 Source: "{#BuildFolder86}FB2Library.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
-Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
+Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: regserver 
 Source: "{#BuildFolder86}FolderSettingsHelper.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
 Source: "{#BuildFolder86}FontSettings.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
 Source: "{#BuildFolder86}ICSharpCode.SharpZipLib.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: 
@@ -113,10 +113,10 @@ Source: "{#BuildFolder86}XMLFixerLibrary.dll"; DestDir: "{app}"; Check: not Is64
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
-Name: "{group}\FB2ePub Command Prompt"; Filename: "{app}\prompt.cmd"; 
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; Flags: excludefromshowinnewinstall
+Name: "{group}\FB2ePub Command Prompt"; Filename: "{app}\prompt.cmd"; Flags: excludefromshowinnewinstall
 Name: "{group}\FB2ePub GUI"; Filename: "{app}\Fb2ePubGui.exe"; 
-Name: "{group}\Register FB2ePub"; Filename: "{app}\RegisterFB2EPub.exe"; 
+Name: "{group}\Register FB2ePub"; Filename: "{app}\RegisterFB2EPub.exe"; Flags: excludefromshowinnewinstall
 
 [CustomMessages]
 en.register_ext=Register shell extensions
@@ -133,13 +133,15 @@ ru.register_ext=Зарегистрировать расширения оболочки Windows
 #include "scripts\products\vcredist2012.iss"
 
 [Run]
-Filename: "{dotnet4064}\RegAsm"; Parameters: /codebase {app}\FB2EPubConverter.dll /n; Flags: runascurrentuser waituntilterminated; WorkingDir: {app};
-Filename: "{app}\RegisterFB2EPub.exe"; Description: {cm:register_ext} ; Flags: postinstall runascurrentuser waituntilterminated; Parameters: /r; StatusMsg: "Registering file extensions"
+; Just to be sure it runs we call both for 32 and 64 bit
+Filename: "{dotnet40}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
+Filename: "{app}\RegisterFB2EPub.exe"; Description: {cm:register_ext} ; Flags: postinstall runascurrentuser waituntilterminated runhidden; Parameters: /r; StatusMsg: "Registering file extensions"
 
 
 [UninstallRun]
 Filename: "{app}\RegisterFB2EPub.exe"; Flags: runascurrentuser waituntilterminated; Parameters: /u; 
-Filename: "{dotnet4064}\RegAsm"; Parameters: /u {app}\FB2EPubConverter.dll /n; Flags: runascurrentuser; WorkingDir: {app};
+; Just to be sure it runs we call both for 32 and 64 bit
+Filename: "{dotnet40}\RegAsm.exe"; Parameters: "/u ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser runhidden; WorkingDir: {app};
 
 
 [Code]
