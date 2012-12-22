@@ -58,6 +58,7 @@ Source: "{#BaseFolder}Fb2ePub\prompt.cmd"; DestDir: "{app}"; Flags: ignoreversio
 Source: "{#BaseFolder}Fb2ePub\readme_en.htm"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BaseFolder}Fb2ePub\epub-logo-color-book.ICO"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BaseFolder}Fb2ePub\license.docx"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver 32bit
 
 ; x64
 Source: "{#BuildFolder64}Fb2ePub.exe"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
@@ -71,11 +72,10 @@ Source: "{#BuildFolder64}ChilkatDotNet2.dll"; DestDir: "{app}"; Check: Is64BitIn
 Source: "{#BuildFolder64}EPubLibrary.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
 Source: "{#BuildFolder64}FB2EPubConverter.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
 Source: "{#BuildFolder64}FB2EPubConverter.dll.config"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}Fb2EpubExt_x64.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: regserver 32bit
+Source: "{#BuildFolder64}Fb2EpubExt_x64.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: regserver 
 Source: "{#BuildFolder64}Fb2epubSettings.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
 Source: "{#BuildFolder64}Fb2FixLib.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
 Source: "{#BuildFolder64}FB2Library.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}FBE2EpubPlugin.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
 Source: "{#BuildFolder64}FolderSettingsHelper.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
 Source: "{#BuildFolder64}FontSettings.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
 Source: "{#BuildFolder64}ICSharpCode.SharpZipLib.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
@@ -101,7 +101,6 @@ Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Check: not Is64BitIn
 Source: "{#BuildFolder86}Fb2epubSettings.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
 Source: "{#BuildFolder86}Fb2FixLib.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
 Source: "{#BuildFolder86}FB2Library.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
-Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: regserver 
 Source: "{#BuildFolder86}FolderSettingsHelper.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
 Source: "{#BuildFolder86}FontSettings.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
 Source: "{#BuildFolder86}ICSharpCode.SharpZipLib.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: 
@@ -133,15 +132,26 @@ ru.register_ext=Зарегистрировать расширения оболочки Windows
 #include "scripts\products\vcredist2012.iss"
 
 [Run]
-; Just to be sure it runs we call both for 32 and 64 bit
 Filename: "{dotnet40}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
 Filename: "{app}\RegisterFB2EPub.exe"; Description: {cm:register_ext} ; Flags: postinstall runascurrentuser waituntilterminated runhidden; Parameters: /r; StatusMsg: "Registering file extensions"
 
 
 [UninstallRun]
 Filename: "{app}\RegisterFB2EPub.exe"; Flags: runascurrentuser waituntilterminated; Parameters: /u; 
-; Just to be sure it runs we call both for 32 and 64 bit
 Filename: "{dotnet40}\RegAsm.exe"; Parameters: "/u ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser runhidden; WorkingDir: {app};
+
+[Registry]
+Root: HKLM32; Subkey: "Software\Haali\FBE\Plugins"; Flags: uninsdeletekeyifempty ;
+Root: HKLM32; Subkey: "Software\Haali\FBE\Plugins\{{469E5867-292A-4A8D-B094-5F3597C4B353}"; Flags: uninsdeletekey; ValueName:""; ValueData: "Export FB2 to ePub"; ValueType: string ;
+Root: HKLM32; Subkey: "Software\Haali\FBE\Plugins\{{469E5867-292A-4A8D-B094-5F3597C4B353}"; Flags: uninsdeletekey; ValueName: "Icon"; ValueData: "{app}\FBE2EpubPlugin.dll"; ValueType: string;
+Root: HKLM32; Subkey: "Software\Haali\FBE\Plugins\{{469E5867-292A-4A8D-B094-5F3597C4B353}"; Flags: uninsdeletekey; ValueName: "Menu"; ValueData: "To ePub"; ValueType: string;
+Root: HKLM32; Subkey: "Software\Haali\FBE\Plugins\{{469E5867-292A-4A8D-B094-5F3597C4B353}"; Flags: uninsdeletekey; ValueName: "Type"; ValueData: "Export"; ValueType: string;
+
+Root: HKCU; Subkey: "Software\FBETeam\FictionBook Editor\Plugins"; Flags: uninsdeletekeyifempty ;
+Root: HKCU; Subkey: "Software\FBETeam\FictionBook Editor\Plugins\{{469E5867-292A-4A8D-B094-5F3597C4B353}"; Flags: uninsdeletekey; ValueName:""; ValueData: "Export FB2 to ePub"; ValueType: string ;
+Root: HKCU; Subkey: "Software\FBETeam\FictionBook Editor\Plugins\{{469E5867-292A-4A8D-B094-5F3597C4B353}"; Flags: uninsdeletekey; ValueName: "Icon"; ValueData: "{app}\FBE2EpubPlugin.dll"; ValueType: string;
+Root: HKCU; Subkey: "Software\FBETeam\FictionBook Editor\Plugins\{{469E5867-292A-4A8D-B094-5F3597C4B353}"; Flags: uninsdeletekey; ValueName: "Menu"; ValueData: "To ePub"; ValueType: string;
+Root: HKCU; Subkey: "Software\FBETeam\FictionBook Editor\Plugins\{{469E5867-292A-4A8D-B094-5F3597C4B353}"; Flags: uninsdeletekey; ValueName: "Type"; ValueData: "Export"; ValueType: string;
 
 
 [Code]
