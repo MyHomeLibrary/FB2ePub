@@ -95,7 +95,7 @@ Source: "{#BuildFolder86}RegisterFB2EPub.exe.config"; DestDir: "{app}"; Check: n
 Source: "{#BuildFolder86}ru\*"; DestDir: "{app}\ru"; Check: not Is64BitInstallMode; Flags: createallsubdirs recursesubdirs
 Source: "{#BuildFolder86}ChilkatDotNet2.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
 Source: "{#BuildFolder86}EPubLibrary.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
-Source: "{#BuildFolder86}FB2EPubConverter.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
+Source: "{#BuildFolder86}FB2EPubConverter.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode;  Flags: 
 Source: "{#BuildFolder86}FB2EPubConverter.dll.config"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: ignoreversion
 Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
 Source: "{#BuildFolder86}Fb2epubSettings.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
@@ -133,10 +133,13 @@ ru.register_ext=Зарегистрировать расширения оболочки Windows
 #include "scripts\products\vcredist2012.iss"
 
 [Run]
-Filename: "{app}\RegisterFB2EPub.exe"; Description: {cm:register_ext} ; Flags: postinstall runascurrentuser waituntilterminated; Parameters: "/r"; StatusMsg: "Registering file extensions"
+Filename: "{dotnet4064}\RegAsm"; Parameters: /codebase {app}\FB2EPubConverter.dll /n; Flags: runascurrentuser waituntilterminated; WorkingDir: {app};
+Filename: "{app}\RegisterFB2EPub.exe"; Description: {cm:register_ext} ; Flags: postinstall runascurrentuser waituntilterminated; Parameters: /r; StatusMsg: "Registering file extensions"
+
 
 [UninstallRun]
-Filename: "{app}\RegisterFB2EPub.exe"; Flags: runascurrentuser waituntilterminated; Parameters: "/u"; 
+Filename: "{app}\RegisterFB2EPub.exe"; Flags: runascurrentuser waituntilterminated; Parameters: /u; 
+Filename: "{dotnet4064}\RegAsm"; Parameters: /u {app}\FB2EPubConverter.dll /n; Flags: runascurrentuser; WorkingDir: {app};
 
 
 [Code]
