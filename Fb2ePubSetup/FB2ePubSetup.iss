@@ -37,6 +37,9 @@ AppContact={#Contact}
 UninstallDisplayIcon={#BaseFolder}Fb2ePub\epub-logo-color-book.ICO
 ArchitecturesInstallIn64BitMode=x64
 MinVersion=0,5.01sp3
+WizardSmallImageFile={#BaseFolder}Fb2ePubSetup\banner_small.bmp
+WizardImageFile={#BaseFolder}Fb2ePubSetup\banner.bmp
+WizardImageStretch=False
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl"
