@@ -40,6 +40,7 @@ MinVersion=0,5.01sp3
 WizardSmallImageFile={#BaseFolder}Fb2ePubSetup\banner_small.bmp
 WizardImageFile={#BaseFolder}Fb2ePubSetup\banner.bmp
 WizardImageStretch=False
+LicenseFile={#BaseFolder}license.txt
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl"
