@@ -118,6 +118,9 @@ Name: "{group}\FB2ePub Command Prompt"; Filename: "{app}\prompt.cmd";
 Name: "{group}\FB2ePub GUI"; Filename: "{app}\Fb2ePubGui.exe"; 
 Name: "{group}\Register FB2ePub"; Filename: "{app}\RegisterFB2EPub.exe"; 
 
+[CustomMessages]
+en.register_ext=Register shell extensions
+ru.register_ext=Зарегистрировать расширения оболочки Windows
 
 
 #include "scripts\products.iss"
@@ -129,6 +132,11 @@ Name: "{group}\Register FB2ePub"; Filename: "{app}\RegisterFB2EPub.exe";
 #include "scripts\products\dotnetfx45.iss"
 #include "scripts\products\vcredist2012.iss"
 
+[Run]
+Filename: "{app}\RegisterFB2EPub.exe"; Description: {cm:register_ext} ; Flags: postinstall runascurrentuser waituntilterminated; Parameters: "/r"; StatusMsg: "Registering file extensions"
+
+[UninstallRun]
+Filename: "{app}\RegisterFB2EPub.exe"; Flags: runascurrentuser waituntilterminated; Parameters: "/u"; 
 
 
 [Code]
