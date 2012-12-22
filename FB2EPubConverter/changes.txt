@@ -1,0 +1,499 @@
+﻿1.5.0
+(Major revoke)
++ Moved to Visual Studio 2012 Update 1
++ Moved to .Net 4.5
++ Moved to InnoSetup (warning: need to uninstall prev. version manualy , upgrade does not work)
++ Setup now is unified for both x64 and Win32 versions
++ Added support to act as export for FBE (you can "Save as" to ePub now)
+
+
+
+1.0.51
++ Added detection of the image type in case media tag in FB2 was wrong
+* Fixed false warning when building setup project regarding .Net version 
+
+1.0.50
+* Fixed the bug when removing the font assignment to the CSS element did not removed association until the CSS element itself was removed
+* Changed transliterate library to not use ASP.NET related commands to be able to compile as Client profile
+* Updated to the newer version of Log4.net (1.2.11) that uses client profile
+* Changed .Net 4.0 Profile to .Net 4.0 client profile to make users less to download on install
+
+1.0.49
+* Fixed crash if user clicked "Reset" in settings
+* Changed both command libne utility and GUI to use same version source file (this fixes issue when GUI added it's own version to converted ePub file)
+* Fixed wait cursor in the GUI while converting
+* Changed GUI utility to use multicore CPUs (now if processing several files each file processed on it's own core)
+* Changed command line utility to use multicore CPUs (now if processing several files each file processed on it's own core)
+* Changed installer to install for all users by default
+
+1.0.48
++ Added Microsoft public license file
++ Added code to control fonts and CSS fonts assignments from settings
++ Added support for "application/vnd.ms-opentype" media type (*.otf - OpenType fonts)
++ added new .config setting "IgnoreTitle" and new command line parameter "-ignoretitle:" to control which title source to be ignored (nothing by default)
+* Moved to .Net framework v4.0 (all libraries too)
+* Fixed loading paths ending with '.' in command line utility
+* Redesigned font settings structure
+* Fonts data storage format inside the configuration file changed
+* Fixed deletion of source file (if enabled) in case fix of FB2 failed
+* Changed project build structure to contain all my libraries to ease the debug
+
+1.0.47
++ Added code to include external adobe XPGT templates into a resulting ePub (updated to v1.0.16 of epublibrary)
++ Added new parameter "-xpgt:[0:1]" to enable (1 ) or disable (0)- default Adobe XPGT template file
++ Added new parameter "-xpgtPath:<path_to_XPGT_file>" to provide alternative path to XPGT template	file
++ Added new tab in settings to setup XPGT template 
++ Added two configuration XML parameters "UseAdobeTemplate" (True - to add Adobe XPGT file to resulting ePub, default False) and "AdobeTemplatePath" - path to XPGT template file
++ Added "settings" icon to the settings dialog windows
+* Changed command line utility console output to show more than one page of help
+* Fixed settings tabs not displayed properly on XP (due to XP bug with visual styles)
+* If conversion critically failed for some reason, the converter no longer leaves defective (not finished) output file
+* fixed installer to copy Fb2Fix files that were missing
+
+
+1.0.46
++ Added ".poem_author" style element to have it different from citation author in epigraphs
++ Added 2 or more returns from notes section in case referenced from more than one place, before only first backlink worked
++ Added ability to read some badly formated FB2 files (xmlns="") , for this ubdated to FB2Library.dll v 1.0.17
+* Changed the way notes section is generated, now it looks a bit different
+* Fixed anchors not converted in poem and citation authors
+* Fixed a bug in shell extension where "Here" destination did not worked it there were other target destinations in INI
+* Fixed log line bug in case can't delete file
+* Fixed a bug where files that did not contained FB2 data were deleted in case *.* mask and delete parameters were used
+* Updated to v1.0.15 of EpubLib.dll to fix mimetype extra characters issue (validator failed while checking)
+* Fixed rare crash when fixing the misformed XML file using own algorithm
+* Fixed rare crash in some drop character processing
+* Fixed rare crash in misformated FB2 files related to internal links
+* Fixed crash if FB2 contained internal link with only # in a reference (href) field
+
+
+1.0.45
++ Added new setting ("ShowInShell=" and "ShowInGUI") to FB2EPUBExt.INI file to control user available destination paths
++ Added new setting "SingleDestination=" to [TARGETS] section of FB2EPUBExt.INI. If set to -1 all works as before, 
+	if set to TargetNumber and this target enabled for shall extension then makes this target the only FB2Epub destination available in right-click menu
++ Added New "Folders" tab to the settings dialog, allows to control GUI and shell extension destination folders
+* Fixed problem when ID of "v" section of the poem was lost in conversion preverting internal linking to it
+* Changed default LOG folder to "LocalApplicationData" usualy C:\Users\<user name>\AppData\Local
+* Fixed Capital Drop in case it encluded horizontal ellipsis before any character (in dialogs etc)
+* Fixed several bugs that prevented conversion of files in rare cases of badly formated FB2
+* Switched to version 1.0.16 of fb2librarynet library to fix several minor bugs
+* Switched to version 1.0.15 of epublibrary library to fix several minor bugs
+* Fixed problem with system not loading all the FB2 settings from .config file, introduced 2 version ago
+
+1.0.44
++ Added ability for FB2ePubGUI to switch languages from menu
+* Fixed condition that prevented x86 installer to run on x86 systems :)
+
+
+1.0.43
++ Added ePub icons to contect menu
++ Added new parameter "/settings" to bring up converter setup window
++ Added first initial implementation of Fb2ePubGUI application (Drag'n'Drop) GUI for converter
+* Changed build environment to Visual Studio 2010
+* Changed shell extension to not create submenu if no paths set INI INI, in this case the item added to main menu
+* Fixed the shell extension bug when providing destination without slas`h in INI caused resulting file not to be created
+* History now loaded as an Annotation block (as it should be) not just as simple text
+* Fixed crash related to stack overflow when system was unable to split the file
+
+1.0.42
++ Added hiddeen parameter to skip generation of "About" page
++ Character '«' now also treated as dash, so it wil not be alone in case of dropped capital
++ Epigraph author is now always printed in bold in default style
++ Added different class "epigraph_main" for a book's main epigraphs (not inside sections)
+* Fixed bug when font without style attribute and font with "normal" attribute were considered different , this caused sometimes for italic styles to be overwriten
+* Fixed crash in case defective PNG file was in original .FB2
+* Fixed a bug when CSS stylesheet for one element contained more than one occurance of same parameter (in this case previously entire element was ignored)
+* Some small changes to the look of the epigraph in default style
+* Conversion part of the code was heavily refactored, so expect new bugs and crashes :)
+* Changed default CSS settings for subtitle to allow a bit more space before subtitles (on the top)
+* Subtitle element is no longer enclose in DIV - it was not needed
+* Drop capitalization is no longer performed on notes sections
+
+
+1.0.41
++ Added CSS style for "normal_image"
++ Switched to version 1.0.14 of FB2librarynet library that fixes several bug (detailed here)
++ Changed code to support more than one section image (as according to schema)
+* Fixed the bug where images after section image were replacing section image
+* Changed the non-section and non-inline images class to "normal_image" to be able to style them separately
+* Changed command propmpt execution file to contain title and open one window right away
+
+1.0.40
+* Changed the way dropped capitals are calculated - now if section starts from any type of dash/hyphen looking character
+  we add the character that follows it to the drop, this way it looks better
+* Removed 2 character minimum limitation on dropped capitals
+
+1.0.39
++ Added ability to draw "Capitalized" character (Huge "floating" character to start section that takes several lines)
++ Added new parameter -cap:[0/1] (default 1 -enabled) and .config setting "Capitalize" to control first character capitalization
+* Changed the default CSS style to support first character capitalization
+* Fixed old bug that prevented creation of multilevel headers <h1>,<h2>,<h3>,... based on depth(all <h2> were always created)
+* Switched to newer version of UnRar library (Chikalite 9.1.2.0) 
+* Changed setup to have 2 different versions for x64 and x86 since we actualy have 2 versions of Chikalite library,
+   this should fix the bug with unable to unrar on x64 systems
+* Added dependedncy of Chikalite library to MS VCRT DLLs
+
+1.0.38
++ Reorganized code to add to GoogleCode
++ Added project links to resulting "About" page
+
+
+1.0.37
++ Added new format name option and setting ( "nseqformat:" and "NoSequenceFormat") used to format info title description when book has no seq number or 0
+  Same format options as for SequenceFormat.
++ Added new format name option and setting ( "nnseqformat:" and "NoSeriesFormat") used to format info title description when book has no series.
+  Same format options as for SequenceFormat.
++ Added new formating strings for Author name  , the string controlled by "-aformat:" parameter or "AuthorFormat" setting in configuration
+  file. The following format options are allowed:
+  %f% - first name
+  %m% - middle name
+  %l% - last name
+  %n% - nick name
+  Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:
+  c - Capitalize, l - lowercase, u -UPPERCASE 
+  additionally another subformat :b can be added to take name in brackets
+  Default: "%f.c%%m.c%%l.c%%n.c:b%" (please note no spaces required, inserted automatically)
++ Added new formating strings for "FileAs author" , the string controlled by "-svformat:" parameter or "FileAsFormat" setting in configuration
+  file. The following format options are allowed:
+  %f% - first name
+  %m% - middle name
+  %l% - last name
+  %n% - nick name
+  Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:
+  c - Capitalize, l - lowercase, u -UPPERCASE 
+  additionally another subformat :b can be added to take name in brackets
+  Default: "%l.c%f.c" (please note no spaces required, inserted automatically)
+* Fixed a bug that caused main.css style file not to be created if epub did not included any fonts
+
+1.0.36
++ Setup project added
++ Fonts settings moved to separate assembly for future reuse
++ Added new parameter /seqformat:<format> and new .config setting "SequenceFormat" for formating book title description info (thanks wserg) , This allows to define what will be displayed on book
+  description page. The following format options are allowed:
+  %bt% - BookTitle from FB2 header
+  %sf% - Serie full name from FB2 header
+  %sa% - Serie abbviarated name from FB2 header
+  %sn% - book number in the series
+  Also following modifiers specified after '.' (dot) are allowed for %bt%, $sf% and %sa%:
+  c - Capitalize, l - lowercase, u -UPPERCASE 
+  additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix of the number
+  The default format is same as in prev versions: "%bt% %sa.l%-%sn%"
+* Fixed problem when when /s parameter used and two file names specified, no 2nd parameter ignored
+* Fixed iTunes cover display broken couple of versions ago
+* Fixed wrong two diggits series number abbreviation in book title description (thanks to wserg)
+
+
+1.0.35
+* Fixed crash, introduced in prev. version, in some cases where autthors middle name was empty , last name not empty, first name empty
+* Fixed "main" TOC entry created if Fb2 contained main epigraph or images
+* Title page is no longer part of the navigation TOC
+
+1.0.34
++ Added bold fonts to the default .config file - files are now a bit bigger but look better (bold shown properly)
++ Added new parameter (-emstyles:[0/1]) and new config file setting (EmbedStyles)to embed styles and font data inside xHTML files instead of creating CSS files 
+  and referencing them. This feature for the readers that do not support reading styles from referenced CCS style files 
++ Added new parameter (-apng:[0/1]) and new config setting (ConvertAlphaPNG)to control conversion of PNG images with Alpha channel, the setting enabled by default 
+  because ADE and other Adobe SDK derived software can't display PNG with alpha colors in the pallete
++ Added new parameter -flat:[0/1] , using this parameter forces creation of "flat" ePub files, meaning without directory substructure (no "images", "css",
+  "fonts" subfolders - old the files in main folder). This feature added to support some buggy readers
++ Added publishing date to metadata
++ Added "file as" attribute in content for creator and contributor
++ Added ability to registration utility to control the INI, allowing to control file types processed in more details
+* Changed .config file to provide support for display of the embeded fonts on Kobo reader
+* Changed content.opf generation to generate good opf scheme name
+* Changed "file as" creators to be comma separated
+* Changed the way authors' names are generated in metadata to avoid extra spaces
+* Changed to use transliteration library v1.0.1 to support new HTML transliteration mode
+* Changed the table generation so if element contained within cell is simple one it no longer embeded in redundant paragraph
+* Changed to latest version of ICSharpCode.SharpZipLib.dll (0.86)
+* Changed the code so system no creates one single CSS file instead of two, combining data from both of them
+* Fixed some low chance potential crash issue
+* Fixed configuration utility issue when already registered state caused registration to be selected on start
+* Fixed registration app spelling
+* Fixed adding same subject twice in case it entered both in FB2 Title and Source info
+
+
+1.0.33
++ The reslulting ePub now has "second Title page" , the main one lists book name, seriaes and authors, while new one lists main section Title 
+ (if present in document) with all it's anchors, styles etc
++ Added grid for the tables in default style
++ Added full support for loading and converting table cells content (not just simple text)
+* fb2Librarynet ver 1.0.13 used to load full tables
+* Changed subtitle element from H2 to paragraph, the default style also updated accordingly - this should allow bettwe manual control over the 
+  subtitle look using styles
+* Fixed problem of book title not shown on title page in case main body title was empty 
+* Updated help message to reflect -t:4 and -t:5 options
+* Updated to version 1.0.12 of Fb2Fix 
+
+1.0.32
+* Switched to version 1.0.12 of fb2librarynet that fixes crash on books without cover image introduced in prev. version
+
+1.0.31
++ Switched to v1.0.11 of fb2librarynet, some changes made ther by "malishp"
++ Added GetHash ovverride to FontDefinition object to avoid warning messages
++ Added new transliteration command-line parameters: /t:4 (transliterate metadata but not TOC) and /t:5 (transliterate metadata and file name but not TOC)
++ Added new .config file setting TransliterateTOC - True (default) causes TOC to be transliterated if transliteration of metadata enabled
+* Changed epigraph authors to be entered not as simple text but as paragraph
+* Fixed adding not needed '-' character in sequence name in case sequence number was not set at all (not just 0)
+* Moved to new version of Fb2Fix - several bugs fixed there including droping of sub-sequences and now it can fix more files
+* "()" no longer added to book title if book contains only empty sequences
+* Fixed a bug when Author's name on the title page was also transliterated if transliteration enabled
+* Changed XML namespace declarations in OEBPS\Content.opf to be more compatible with some exotic converters
+* Changed empty line from regular space to NBSP since some readers ignore the regular space character
+
+
+1.0.30
++ Added capability to write sequence names on title page
++ Added ability to add sequence names abbreviations to the file title
++ Added .config file setting (AddSequences) to control if seq. abbreviations should be added
++ Added new parameter "seqadd:" to control adding sequence abbreviations from command line, 0 - do not add , 1 - add (default)
+* Fixed not reading file sequences and sub-sequences (new version of Fb2Librarynet 1.0.10. used)
+* Fixed wrong default in config file that caused Fb2Fix to be applied always.
+* Removed line needlessly creating (saving) default setting on load
+
+
+1.0.29
++ Added cover meta data element to the opf file so iTunes can display cover
+* Fixed wrong text allignment values for "stanza" and "v" in default.css
+
+1.0.28
++ Added "body_image" CSS class style in case user want to change representation of the body main section image
++ Added "div.coverpage" and "img.coverimage" CSS style classes to CSS settings to user control cover page looks
++ Added "div.titlepage" CSS style classes to CSS settings to user control title page looks
+* Changed cover, title and about pages to use styles defined in main.css not hardcoded styles, so user can change
+* Font properties in main.css is no longer written as empty if the property not defined
+* Fixed main mody section image was dropped from resulting file
+* Finally fixed the problem with main.css file growing when processing several files at once
+* Fixed not reading other font attrinutes from .config if style=""
+* The font style property is no longer added to main.css if style="" in .config file
+* Fixed adding "note_anchor" class style to backlinks from FB2 notes sections
+* Fixed annotation page not being marked as of "annotation" style class
+* Changed default.css for annotation to be displayed in "smaller" font size
+
+1.0.27
++ Added generation of font family name if font family name is empty in .config file
+* Fixed mess with adding huge font names to main.css if font name was not set in .config file
+* Fixed adding several fonts to same css element (usual cas - body) in case they defined
+
+
+
+1.0.26
++ Added support for repairing of bad Fb2 files using Fb2Fix library v1.0.10.36017 (thanks to Andriy Ryepin and stuff of the Fb2Fix project : https://www.assembla.com/wiki/show/fb2fix )
++ Added new parametr "-fix:" relted to fixing broken Fb2 files
+* Fixed boldnes not being passed to CSS file from font setting in config file.
+
+
+1.0.25
+* Updated Fb2Library to version 1.0.8 to load files with images defined as "image\jpg"
+* Changed justification of stanza and v elements in default CSS to justify left - looks better
+* Reduced margins for poem element in default CSS to fit more poem lines in one line
+* Fixed error when superscript text was converted to emphosized text
+* Changed russian text in about based on users suggestion ;)
+
+1.0.24
+* Fixed problem with main document epigraphs dropped out of resulting ePub
+
+1.0.23
++ Added code to use app data path for log if local not found and use "logs" subfolder in case none of them found
++ Added writing converter version at last (About) page of the converted book
++ Changed FB2 info at the end not to write "unknown-uid" in case uid is unknown :)
+* Fixed some text dropped if atributed text used inside code elements
+
+1.0.22
+* Fixed case where some images were dropped if image file name contained different case characters
+* Changed level of sub section titles to one less (h2 instead of h1) because they looked too big on some reader like Sony
+
+1.0.21
++ Added annotation page after a title page containing FB2 book annotation
++ Added some triks to read some broken FB2 files
+* Fixed crash in case FB2 file contained invalid date of publishing
+* Fixed case where sometimes backlink was added to entire paragraph
+
+1.0.20
++ Changed all the log to be written to application local folder (which is usualy in %HOMEPATH%\Local Settings\Application Data\<App_Name>\<version_name> , where App_Name = FB2EPub and 
+  version_name is a latest version number) - UAC compatibility thing.
++ Changed the way backlinking done, now it always works on any type of section
++ Added code to split huge (>300k) Div blocks to sub blocks
++ Added ability to convert files with multiply "body" elements containing text, only body named "notes" or "footnotes" treated as FBE created notes
+* Fixed the problem when files that have XML structure error get deleted when deletesource parameter set
+* Program can now recover from invalid XML structure due to '&' characters used instead of &amp;
+* Changed the program not to abort conversion if one of the IDs used not found (in case element was dropped due size)
+* Fixed crash when invalid FB2 file have cover object but no reference to cover
+* Fixed strange case when FB2 file contained images with same names but different case of characters
+* In default.css reduced default title sizes a bit - were too big
+* Fixed section images not always centered (actually container for CSS style was not always generated so style was not applyed)
+
+
+1.0.19
++ Added support for reading FB2 files with GIF images inside (Gifs were dropped before)
+* Fixed bug when conversion failed if one of attributes contained character 'q' in it's name  
+* Fixed inline only images binary data not copied to resulting ePub
+* Fixed bug introduced in prev. version with dropping images
+* Fixed exit on files with book titles containing internal anchor link
+* Fixed anchor link if it was located in book title
+* Fixed problem when (if document was split) the split point was added to TOC as a navigation item
+* Changed the code and default CSS style so the section images are centered but not streatched to the width (caused problems with some small decoration images)
+* updated to newer version (9.0.8) of "Chilkat RAR for C#" library
+* Updated to newer version (1.0.6) of FB2Library to support reading FB2 files with GIF images inside
+
+1.0.18
++ Added support for linking from several location to same ID (backlinking however still "jumps" to first out of all links)
++ Image files references to files missing are now removed to get valid ePub
+* Fixed hang in case one of the undevidable element's size is bigger than 300k (limit defined for ePub readers. Howver in such case unfit item will be dropped.
+* Fixed internal crossrefferensing broken in one of prev. versions
+* Fixed some issues with ePub generation  of multilevel inclusions of text elements one in another 
+* Moved to FB2Library v1.0.5 that fixes reading multilevel including text elements from FB2
+* Fixed invalid link in Fb2 information page links in case the text entered there is not a URL (ePub validity issue)
+* Changed default style to add 20% margin to poems on both sides so they look more "centered"
+
+
+1.0.17
++ Added icons to the program
++ Added installation and upgrade steps to program's readme.html.
+* Moved to FB2Library v1.0.4 to fix styled text nested in [code] tag problem
+* Fixed bug with not showing normal text having style subtypes nested
+* Fixed bug with deleting source file even if conversion failed
+* Added workaround in case we have internal link with an empty reference - in this case it treated as a simple text
+* Fixed exit in case input file not found (less error output)
+
+1.0.16
++ Added new default font section to the .config file to point to font used for [code] text, it was not russified otherwise
++ Added code to work on entire folder even if folder path does not ends with backslash
++ When converting with subfolders converted files now stored in original folder unless output parameter invoked
++ Added new parameter -m:[0/1/2/3] to search for either *.fb2 or *.* or some other extensions files when working on folders (see readme for details)
++ Added new parameter /DELETESOURCE (all capital) to delete source file upon successful conversion
+* Changed the code to support reffering to the same embedded font file several times from .config file without actually adding it to ePub twice
+* Moved to fixed FB2Library v1.0.3 to fix loading of tables
+* Fixed a bug in table generation resulting in empty tables
+
+
+
+1.0.15
++ Added new parameter /s to convert in subfolders if using mask (results still will be put in default output location)
+* Fixed extension registrator class to detect when we registered to AND file extension
+* Rewriten registration utility to provide wizard like user interface
+* Added russian translation to registration wizard 
+* Fixed problem when "inline" links point to external (internet) resources
+* Fixed recognition of mailto: prefix as external linking
+* Increased (x10) maximum log file size to avoid creating a lot of log backups
+
+
+1.0.14
++ Added special handling in case input FB2 file contains invalid XML characters
+* Fixed not being able to convert files with poems that had authors
+* Fixed (worked around) case when UnRar refused to unrar files with spaces in file name
+
+1.0.13
++ Added ability to run shell extension on 64bit OS
++ Created CMD file to perform build
++ Added automatic detection of OS type (32/64 bit) and selection of apropriete DLL by registration utility
++ Added more logging to extension in case of errors
++ Added support for extension to react on any .ZIP/.RAR files as well as ANY type of files, not just .FB2.ZIP and FB2.RAR (need to be allowed in INI)
++ Added parameter /rAll to allow registration of shell extension for ANY file
+* Fixed "Unregister all" button in RegisterFB2EPub utility shifted left on some systems
+
+
+
+1.0.12
++ Added mechanizsm to register extension DLL in case of UAC
++ Added some error output when unable to (un)register shell extension DLL
++ Changed shell extension to compile with static libraries to avoid deployment problems
+* Fixed ocasional crash in shell extension 
+* Fixed small memory leak in shell extension
+
+1.0.11
++ Some small speed optimization in case source file contains a lot of external links.
+* Changed shell extension to process file names with spaces
+* Fixed incorrect TOC generation (3rd level TOC items were dropped) in several cases
+* Fixed program failing to generate a file when TOC item with emplty name had subitems
+* Fixed initial configuration file to include fonts data
+* Updated help file
+* Fixed crash caused by invalid files with empty referenced section names
+* Fixed some rare case when same ID was used twice if contained invalid (for ID) characters causing EPub not passing validation
+* Filtered out TOC from control characters that caused ADE to display TOC wrongly
+
+1.0.10
++ Added generation of FB2 Info page at the end of the converted book
++ Added parameter -f2i:0/1 to disable/enable generation of Fb2 Info page
++ Added ability to control fonts used based on .config file (this was actually added in prev. version, just not published). See readme for usage.
+- "EmbedFonts" setting and -e parameter has been removed since they are no longer needed ("Fonts" section of the .config file used instead)
+* Some major internal code structure changes
+* Anchors with empty or not used references converted to SPAN elements if they have content (and class set to "ex_bad_link"), otherwise - removed
+* Speed and memory usage improvements (memory usage cut about by half)
+* Changed readme_en.txt to readme_en.htm
+* Changed to log exceptions fully , not just messages
+
+1.0.9
++ Added support for processing wildcard input filenames (*.zip etc)
++ Added ability to process more that one FB2 file per ZIP
++ Added creation of output folder in case not exists
++ Added more logging
++ Added aditional destinations besides ("Here") for FB2EPUB shell extension (configured by FB2EPUBExt.INI file)
++ Added checking for invalid id attributes and converting them to valid 
+* Significantly speed up processing of huge (in terms of text) FB2 files
+* Changed code not to add image references in case no image present in binary form
+* Anchors pointing to non existing IDs are removed.
+
+1.0.8
++ Added support for logging errors (not really used yet)
+* Fixed crash on files that have no titles at all
+* Fixed generation of invalid EPUBs if all sections had empty titles
+* Fixed not reading/converting epigraph authors (updated to v 1.0.2 of fb2library)
+* Changed CSS style a bit for section images to work around Adobe bug of overlaping images (fix with style it even should not support :))
+* Changed handling of FB2 empty line element to correctly display it
+* Changed generation of font family names to include document ID to workaround Adobe fonts "cache" bug
+* Fixed case where input FB2 did not had a ID 
+
+1.0.7
++ Added "one click" shell extension to perform conversion using right mouse click
++ Added options to register (/r) and unregister (/u) shell extension
++ Added option to transliterate output file name (/t:2 and /t:3)
++ Added option (-e:) to disable/enable embeding of the fonts 
++ Added storing of the settings in file
+* Fixed crash if no input file name supplied, only options
+* Changed that converter takes path for CSS and FONT files relatively to the executing EXE assembly and not from current folder
+
+1.0.6
++ Added support for PNG grphic files
+* changed default CSS style for paragraph to work around Adobe bug.
+* uses ver 1.0.1 of fb2librarynet assembly
+
+1.0.5
++ Added more error messages when invalid options parameters supplied
++ Added -o: (/o:) output path parameter 
+* Changed help message to reflect new parameters
+* Fixed some crashes in case of input FB2 file does not have Annotation and some other fields filled etc
+
+1.0.4
++ Added build.txt 
++ Added readme_en.txt
++ Added styles_en.txt with explanations on CSS class elements used.
++ added option (-t:1) to transliterate the book, author and chapters names to fix the display on readers without cyrillic support
+* Changed to use fb2librarynet as separate external assembly ( http://code.google.com/p/fb2librarynet )
+* Updated code to match some interface changes in fb2librarynet assembly
+
+1.0.3
++ Added display of input and output file names when loading/saving
++ Added support for detection of ZIP files without ZIP extension
++ Added support for RAR-ed files
++ Added support for processing archives containing more than one FB2 file (in such case outputed files named with _0, _1 and so on)
+* Fixed crash when input file is of unsupported file type
+* Fixed crash when invalid (not existing) file name supplied
+* Fixed crash if output file exists and busy/not writable
+* Fixed wrong handling of supplied output filename
+* Some changes to default CSS the way I like it :) mainly no spaces between paragraphs.
+* Changed the notes link to be heading so it can be cusomized better with styles
+* Changed notes generation updates code to be more generic for any anchor in any structure
+
+1.0.2
++ Files now splited to XHTML files by section
++ Added some definitions to default CCS file so now epigraphs and citations no longer look as normal text.
++ added book FB2 description to EPUB description
++ Added spliting XHTML files by size , big text is no longer a problem
++ Added linking from the notes page back to the anchor page 
+* Title, Cover , About etc are no longer part of the navigation tree.
+
+
+-------------------------------------------------------------------------------------------
++ - Feature added
+* - Bug fixed/Feature changed
