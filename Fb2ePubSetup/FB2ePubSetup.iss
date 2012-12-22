@@ -2,13 +2,17 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "FB2ePub"
-#define MyAppVersion "1.5"
 #define MyAppPublisher "Lord KiRon"
 #define MyAppURL "http://www.fb2epub.net"
 #define Contact "lordkiron@fb2epub.net"
 #define BaseFolder "C:\Project\GoogleCode\fb2epub\"
 #define BuildFolder64 BaseFolder + "Output\x64\Release\"
 #define BuildFolder86 BaseFolder + "Output\x86\Release\"
+#define File4Version BuildFolder64 + "Fb2ePub.exe"
+#define AppVersionNo GetFileVersion(File4Version)
+
+
+
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -16,8 +20,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{86973C45-84A3-458B-A98E-CF360FD87909}
 AppName={#MyAppName}
-AppVersion={#MyAppVersion}
-;AppVerName={#MyAppName} {#MyAppVersion}
+AppVersion={#AppVersionNo}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
@@ -36,8 +39,8 @@ ArchitecturesInstallIn64BitMode=x64
 MinVersion=0,5.01sp3
 
 [Languages]
-Name: "english"; MessagesFile: "compiler:Default.isl"
-Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
+Name: "en"; MessagesFile: "compiler:Default.isl"
+Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Files]
 ; common
@@ -111,7 +114,27 @@ Name: "{group}\FB2ePub GUI"; Filename: "{app}\Fb2ePubGui.exe";
 Name: "{group}\Register FB2ePub"; Filename: "{app}\RegisterFB2EPub.exe"; 
 
 
-[Types]
-Name: "common"; Description: "Stuff common to both CPU configurations"
-Name: "x86"; Description: "x86 CPU install"
-Name: "x64"; Description: "x64 CPU install"
+
+#include "scripts\products.iss"
+#include "scripts\products\winversion.iss"
+#include "scripts\products\stringversion.iss"
+#include "scripts\products\fileversion.iss"
+#include "scripts\products\dotnetfxversion.iss"
+#include "scripts\products\msi45.iss"
+#include "scripts\products\dotnetfx45.iss"
+#include "scripts\products\vcredist2012.iss"
+
+
+
+[Code]
+function InitializeSetup(): boolean;
+begin
+	//init windows version
+	initwinversion();
+
+	msi45('4.5');
+  dotnetfx45();
+  vcredist2012();
+
+	Result := true;
+end;
