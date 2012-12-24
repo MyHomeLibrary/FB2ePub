@@ -62,7 +62,6 @@ namespace FB2EPubConverter
                 {
                     Settings = _processorSettings.Settings
                 };
-
                 try
                 {
                     if (_processorSettings.ProgressCallbacks != null)
@@ -81,6 +80,10 @@ namespace FB2EPubConverter
                 }
                 catch (Exception ex)
                 {
+                    if (_processorSettings.ProgressCallbacks != null)
+                    {
+                        _processorSettings.ProgressCallbacks.SkippedDueError(file);
+                    }
                     Logger.Log.Error(ex);
                     return;
                 }

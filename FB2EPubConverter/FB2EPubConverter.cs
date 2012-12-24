@@ -585,11 +585,18 @@ namespace Fb2ePubConverter
 
         private static bool IsRarFile(string fileName)
         {
-            Rar file = new Rar();
-            if( file.Open(fileName)) 
+            try
             {
-                file.Close();
-                return true;
+                Rar file = new Rar();
+                if (file.Open(fileName))
+                {
+                    file.Close();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Debug(ex.Message);
             }
             return false;
         }
