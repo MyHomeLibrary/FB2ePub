@@ -133,12 +133,16 @@ ru.register_ext=Зарегистрировать расширения оболочки Windows
 
 [Run]
 Filename: "{dotnet40}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
+; for 32bit it will be 2nd time, but for 64 will register 32bit key
+Filename: "{dotnet4032}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
 Filename: "{app}\RegisterFB2EPub.exe"; Description: {cm:register_ext} ; Flags: postinstall runascurrentuser waituntilterminated runhidden; Parameters: /r; StatusMsg: "Registering file extensions"
 
 
 [UninstallRun]
 Filename: "{app}\RegisterFB2EPub.exe"; Flags: runascurrentuser waituntilterminated; Parameters: /u; 
 Filename: "{dotnet40}\RegAsm.exe"; Parameters: "/u ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser runhidden; WorkingDir: {app};
+; for 32bit it will be 2nd time, but for 64 will unregister 32bit key
+Filename: "{dotnet4032}\RegAsm.exe"; Parameters: "/u ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser runhidden; WorkingDir: {app};
 
 [Registry]
 Root: HKLM32; Subkey: "Software\Haali\FBE\Plugins"; Flags: uninsdeletekeyifempty ;
