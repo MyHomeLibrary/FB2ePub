@@ -4,7 +4,7 @@
 
 2. ICSharpCode.SharpZipLib assembly for reading/writing ZIP files ( http://icsharpcode.net/OpenSource/SharpZipLib )
 
-3. ChilkatDotNet2 assembly for reading RAR files ( http://www.chilkatsoft.com/rar-features.asp - free RAR classes only) 
+3. NuRar assembly for reading RAR files ( http://nunrar.codeplex.com ) 
 
 4. translitrunet assembly for transliteration ( http://code.google.com/p/translitrunet/ )
 
@@ -22,4 +22,4 @@
 
 
 
-The project is built using Microsoft Visual Studio 2012 Update 1 and require .Net 4.5 to run ( http://go.microsoft.com/fwlink/?LinkId=181011 )
+The project is built using Microsoft Visual Studio 2012 Update 1 and require .Net 4.5 to run 

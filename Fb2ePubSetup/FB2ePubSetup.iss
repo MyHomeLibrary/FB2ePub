@@ -6,9 +6,10 @@
 #define MyAppURL "http://www.fb2epub.net"
 #define Contact "lordkiron@fb2epub.net"
 #define BaseFolder "C:\Project\GoogleCode\fb2epub\"
+#define BuildFolder BaseFolder + "Output\Release\"
 #define BuildFolder64 BaseFolder + "Output\x64\Release\"
 #define BuildFolder86 BaseFolder + "Output\x86\Release\"
-#define File4Version BuildFolder64 + "Fb2ePub.exe"
+#define File4Version BuildFolder + "Fb2ePub.exe"
 #define AppVersionNo GetFileVersion(File4Version)
 
 
@@ -48,68 +49,47 @@ Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Files]
 ; common
-Source: "{#BaseFolder}FB2EPubConverter\CSS\*"; DestDir: "{app}\CSS"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#BaseFolder}FB2EPubConverter\Fonts\*"; DestDir: "{app}\Fonts"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#BaseFolder}FB2EPubConverter\Translit\*"; DestDir: "{app}\Translit"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#BaseFolder}FB2EPubConverter\fb2.dtd"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BaseFolder}FB2EPubConverter\genrestransfer.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BaseFolder}FB2EPubConverter\changes.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BaseFolder}Fb2ePub\prompt.cmd"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BaseFolder}Fb2ePub\readme_en.htm"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BaseFolder}Fb2ePub\epub-logo-color-book.ICO"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BaseFolder}Fb2ePub\license.docx"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildFolder}CSS\*"; DestDir: "{app}\CSS"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#BuildFolder}Fonts\*"; DestDir: "{app}\Fonts"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#BuildFolder}Translit\*"; DestDir: "{app}\Translit"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#BuildFolder}ru\*"; DestDir: "{app}\ru";   Flags: recursesubdirs createallsubdirs
+Source: "{#BuildFolder}fb2.dtd"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildFolder}genrestransfer.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildFolder}changes.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildFolder}Fb2ePub.exe"; DestDir: "{app}"; Flags: 
+Source: "{#BuildFolder}Fb2ePub.exe.config"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}Fb2ePubGui.exe"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}Fb2ePubGui.exe.config"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}RegisterFB2EPub.exe"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}RegisterFB2EPub.exe.config"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}EPubLibrary.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}FB2EPubConverter.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}FB2EPubConverter.dll.config"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}Fb2epubSettings.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}Fb2FixLib.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}FB2Library.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}FolderSettingsHelper.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}FontSettings.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}ICSharpCode.SharpZipLib.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}ISOLanguages.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}log4net.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}NUnrar.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}TranslitRu.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}XHTMLClassLibrary.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}XMLFixerLibrary.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}prompt.cmd"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildFolder}readme_en.htm"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildFolder}epub-logo-color-book.ICO"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildFolder}license.docx"; DestDir: "{app}"; Flags: ignoreversion
+
+
 Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver 32bit
 
 ; x64
-Source: "{#BuildFolder64}Fb2ePub.exe"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}Fb2ePub.exe.config"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}Fb2ePubGui.exe"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}Fb2ePubGui.exe.config"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}RegisterFB2EPub.exe"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}RegisterFB2EPub.exe.config"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}ru\*"; DestDir: "{app}\ru"; Check: Is64BitInstallMode;  Flags: recursesubdirs createallsubdirs
-Source: "{#BuildFolder64}ChilkatDotNet2.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}EPubLibrary.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}FB2EPubConverter.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}FB2EPubConverter.dll.config"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}Fb2EpubExt_x64.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: regserver 
-Source: "{#BuildFolder64}Fb2epubSettings.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}Fb2FixLib.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}FB2Library.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}FolderSettingsHelper.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}FontSettings.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}ICSharpCode.SharpZipLib.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}ISOLanguages.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}log4net.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}TranslitRu.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}XHTMLClassLibrary.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder64}XMLFixerLibrary.dll"; DestDir: "{app}"; Check: Is64BitInstallMode; Flags: 
+Source: "{#BuildFolder64}Fb2EpubExt_x64.dll"; DestDir: "{app}";  Check: Is64BitInstallMode; Flags: regserver 
 
 ;x86
-Source: "{#BuildFolder86}Fb2ePub.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags:
-Source: "{#BuildFolder86}Fb2ePub.exe.config"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: ignoreversion
-Source: "{#BuildFolder86}Fb2ePubGui.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder86}Fb2ePubGui.exe.config"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: ignoreversion
-Source: "{#BuildFolder86}RegisterFB2EPub.exe"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags:
-Source: "{#BuildFolder86}RegisterFB2EPub.exe.config"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: ignoreversion
-Source: "{#BuildFolder86}ru\*"; DestDir: "{app}\ru"; Check: not Is64BitInstallMode; Flags: createallsubdirs recursesubdirs
-Source: "{#BuildFolder86}ChilkatDotNet2.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
-Source: "{#BuildFolder86}EPubLibrary.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
-Source: "{#BuildFolder86}FB2EPubConverter.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode;  Flags: 
-Source: "{#BuildFolder86}FB2EPubConverter.dll.config"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: ignoreversion
 Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
-Source: "{#BuildFolder86}Fb2epubSettings.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
-Source: "{#BuildFolder86}Fb2FixLib.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
-Source: "{#BuildFolder86}FB2Library.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
-Source: "{#BuildFolder86}FolderSettingsHelper.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
-Source: "{#BuildFolder86}FontSettings.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
-Source: "{#BuildFolder86}ICSharpCode.SharpZipLib.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder86}ISOLanguages.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder86}log4net.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder86}TranslitRu.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder86}XHTMLClassLibrary.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: 
-Source: "{#BuildFolder86}XMLFixerLibrary.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: 
-; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; Flags: excludefromshowinnewinstall
@@ -132,16 +112,16 @@ ru.register_ext=Зарегистрировать расширения оболочки Windows
 #include "scripts\products\vcredist2012.iss"
 
 [Run]
-Filename: "{dotnet40}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
-; for 32bit it will be 2nd time, but for 64 will register 32bit key
+Filename: "{dotnet4064}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};    Check: Is64BitInstallMode;  
+; for 64bit we need both
 Filename: "{dotnet4032}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
 Filename: "{app}\RegisterFB2EPub.exe"; Description: {cm:register_ext} ; Flags: postinstall runascurrentuser waituntilterminated runhidden; Parameters: /r; StatusMsg: "Registering file extensions"
 
 
 [UninstallRun]
 Filename: "{app}\RegisterFB2EPub.exe"; Flags: runascurrentuser waituntilterminated; Parameters: /u; 
-Filename: "{dotnet40}\RegAsm.exe"; Parameters: "/u ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser runhidden; WorkingDir: {app};
-; for 32bit it will be 2nd time, but for 64 will unregister 32bit key
+Filename: "{dotnet4064}\RegAsm.exe"; Parameters: "/u ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser runhidden; WorkingDir: {app};     Check: Is64BitInstallMode;  
+; for 64bit we need both
 Filename: "{dotnet4032}\RegAsm.exe"; Parameters: "/u ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser runhidden; WorkingDir: {app};
 
 [Registry]

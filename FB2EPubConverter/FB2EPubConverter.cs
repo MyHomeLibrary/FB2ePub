@@ -13,7 +13,6 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
-using Chilkat;
 using EPubLibrary;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.CSS_Items;
@@ -36,6 +35,7 @@ using XMLFixerLibrary;
 using EPubLibrary.ReferenceUtils;
 using ZipEntry=ICSharpCode.SharpZipLib.Zip.ZipEntry;
 using FB2Fix;
+using NUnrar.Archive;
 
 
 namespace Fb2ePubConverter
@@ -182,43 +182,28 @@ namespace Fb2ePubConverter
             bool Fb2FileLoaded = false;
             try
             {
-                Rar rarFile = new Rar();
-                if (fileName.Contains(' ')) // This to work around unrar bug with filenames containing spaces
-                {
-                    StringBuilder shortPath = new StringBuilder(255);
-                    GetShortPathName(fileName, shortPath, shortPath.Capacity);
-                    fileName = shortPath.ToString();
-                }
-                if (!rarFile.Open(fileName))
-                {
-                    Logger.Log.ErrorFormat("Unable to open {0} file",fileName);
-                    return false;
-                }
+                RarArchive rarFile = RarArchive.Open(fileName);
 
-                int n = rarFile.NumEntries;
+                int n = rarFile.Entries.Count;
                 Logger.Log.DebugFormat("Detected {0} entries in RAR file", n);
-                for (int i = 0; i <= n - 1; i++)
+                foreach(var entry in rarFile.Entries)
                 {
-                    RarEntry entry = rarFile.GetEntryByIndex(i);
                     if (entry.IsDirectory) 
                     {
                         Logger.Log.DebugFormat("{0} is not file but folder", fileName);
                         continue;
                     }
-                    if (Path.GetExtension(entry.Filename).ToUpper() == ".FB2")
+                    if (Path.GetExtension(entry.FilePath).ToUpper() == ".FB2")
                     {
                         fb2FileFound = true;
                         try
                         {
                             string tempPath = Path.GetTempPath();
-                            if (!entry.Unrar(tempPath))
+                            entry.WriteToDirectory(tempPath);
+                            Logger.Log.InfoFormat("Processing {0} ...",entry.FilePath);
+                            if (!LoadFb2File(string.Format(@"{0}\{1}",tempPath,entry.FilePath)))
                             {
-                                throw new Exception(entry.LastErrorText);
-                            }
-                            Logger.Log.InfoFormat("Processing {0} ...",entry.Filename);
-                            if (!LoadFb2File(string.Format(@"{0}\{1}",tempPath,entry.Filename)))
-                            {
-                                Logger.Log.ErrorFormat("Unable to load {0}", entry.Filename);
+                                Logger.Log.ErrorFormat("Unable to load {0}", entry.FilePath);
                                 continue;
                             }
                             else
@@ -228,18 +213,17 @@ namespace Fb2ePubConverter
                         }
                         catch (Exception ex)
                         {
-                            Logger.Log.ErrorFormat("Unable to unrar file entry {0} : {1}", entry.Filename, ex.ToString());
+                            Logger.Log.ErrorFormat("Unable to unrar file entry {0} : {1}", entry.FilePath, ex.ToString());
                             continue;
                         }
                     }
                     else
                     {
-                        Logger.Log.InfoFormat("{0} is not FB2 file", entry.Filename);
+                        Logger.Log.InfoFormat("{0} is not FB2 file", entry.FilePath);
                         continue;                        
                     }
                     
                 }
-                rarFile.Close();
             }
             catch (Exception ex)
             {
@@ -587,12 +571,7 @@ namespace Fb2ePubConverter
         {
             try
             {
-                Rar file = new Rar();
-                if (file.Open(fileName))
-                {
-                    file.Close();
-                    return true;
-                }
+                return RarArchive.IsRarFile(fileName);
             }
             catch (Exception ex)
             {
