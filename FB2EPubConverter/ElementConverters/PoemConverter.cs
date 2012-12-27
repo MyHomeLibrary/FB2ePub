@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FB2Library.Elements;
 using FB2Library.Elements.Poem;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
+
 
 namespace FB2EPubConverter.ElementConverters
 {
@@ -36,14 +38,20 @@ namespace FB2EPubConverter.ElementConverters
                 poemContent.Add(epigraphConverter.Convert(epigraph,level + 1));
             }
 
-            foreach (var stanza in poemItem.Content)
+            foreach (var poemElement in poemItem.Content)
             {
-                if (stanza is StanzaItem)
+                if (poemElement is StanzaItem)
                 {
                     StanzaConverter stanzaConverter = new StanzaConverter {Settings = Settings};
-                    poemContent.Add(stanzaConverter.Convert(stanza as StanzaItem,level + 1));
+                    poemContent.Add(stanzaConverter.Convert(poemElement as StanzaItem, level + 1));
+                }
+                else if (poemElement is SubTitleItem)
+                {
+                    PoemSubtitleConverter subtitleConverter = new PoemSubtitleConverter { Settings = Settings };
+                    poemContent.Add(subtitleConverter.Convert(poemElement as SubTitleItem));
                 }
             }
+
 
             foreach (var author in poemItem.Authors)
             {

@@ -1,5 +1,7 @@
 ﻿1.1.1
++ Added new CSS element "poem_subtitle" for poem's subtitles, also styled it to left allign
 * Fixed converter dropping the "strikethrough" tag text
+* Fixed converting of poem subtitles
 
 1.1.0
 (Major revoke)
