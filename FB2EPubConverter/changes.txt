@@ -1,4 +1,7 @@
-﻿1.1.0
+﻿1.1.1
+* Fixed converter dropping the "strikethrough" tag text
+
+1.1.0
 (Major revoke)
 + Moved to Visual Studio 2012 Update 1
 + Moved to .Net 4.5
