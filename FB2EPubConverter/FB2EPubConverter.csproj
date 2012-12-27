@@ -147,6 +147,7 @@
     <Compile Include="ElementConverters\PoemAuthorConverter.cs" />
     <Compile Include="ElementConverters\PoemConverter.cs" />
     <Compile Include="ElementConverters\PoemDateConverter.cs" />
+    <Compile Include="ElementConverters\PoemSubtitleConverter.cs" />
     <Compile Include="ElementConverters\RowConverter.cs" />
     <Compile Include="ElementConverters\SimpleTextElementConverter.cs" />
     <Compile Include="ElementConverters\StanzaConverter.cs" />

@@ -161,6 +161,12 @@ p.poem_author
 	font-size:0.9em;
 }
 
+p.poem_subtitle
+{
+	margin: 0.5em 0px;
+	text-align: left;
+}
+
 div.stanza {
 	page-break-inside: avoid;
 	margin: 0.5em 0px;
