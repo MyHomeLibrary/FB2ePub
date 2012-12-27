@@ -307,6 +307,17 @@ namespace FB2EPubConverter
 
         }
 
+        public void ConvertSingleFile(string inputPath, string outputName, IProgressUpdateInterface progress)
+        {
+            LoadSettings(Fb2Epub.Default);
+            ProcessorSettings.ProgressCallbacks = progress;
+            ProcessorSettings.Settings.ResourcesPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            List<string> filesInMask = new List<string>();
+            filesInMask.Add(inputPath);
+            PerformConvertOperation(filesInMask, outputName);
+
+        }
+
         public void ConvertXml(XDocument doc, string outFileName, IProgressUpdateInterface progress)
         {
             LoadSettings(Fb2Epub.Default);

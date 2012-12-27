@@ -10,7 +10,7 @@ using namespace MSXML2;
 #include "atlstr.h"
 using namespace System;
 using namespace System::IO;
-#import "C:\Project\GoogleCode\fb2epub\FB2EPubConverter.tlb" raw_interfaces_only, raw_native_types, no_namespace, named_guids, auto_search
+#import "..\FB2EPubConverter.tlb" raw_interfaces_only, raw_native_types, no_namespace, named_guids, auto_search
 
 
 
@@ -85,7 +85,7 @@ HRESULT CFbePluginImplementation::Export(long hWnd,BSTR filename,IDispatch *doc)
 	}
 
 	CComBSTR bstrOutName(strName);
-	hr = converter->ConvertPath(bstrTempFileName.bstrVal,bstrOutName,NULL);
+	hr = converter->ConvertSingleFile(bstrTempFileName.bstrVal,bstrOutName,NULL);
 	if ( FAILED(hr) )
 	{
 		MessageBox((HWND)hWnd,L"Error cconverting",L"Test message",MB_OK);
