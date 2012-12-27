@@ -158,6 +158,24 @@ namespace FB2EPubConverter.ElementConverters
                         }
                         list.Add(sup);
                         break;
+                    case FB2Library.Elements.TextStyles.Strikethrough:
+                        Strike strike = new Strike();
+                        if (text.HasChildren)
+                        {
+                            foreach (var child in text.Children)
+                            {
+                                foreach (var item in Convert(child))
+                                {
+                                    strike.Add(item);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            strike.Add(new SimpleEPubText() { Text = text.Text });
+                        }
+                        list.Add(strike);
+                        break;
                 }
             }
             else if (styletypeItem is InternalLinkItem)
