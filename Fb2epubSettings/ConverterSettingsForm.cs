@@ -226,6 +226,7 @@ namespace Fb2epubSettings
             comboBoxFixMode.Items.Add("None");
             comboBoxFixMode.Items.Add("Internal");
             comboBoxFixMode.Items.Add("Fb2Fix");
+            comboBoxFixMode.Items.Add("FixAlways");
             comboBoxFixMode.SelectedIndex = Fb2Epub.Default.FixMode;
         }
 

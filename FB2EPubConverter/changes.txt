@@ -6,6 +6,7 @@
 + Setup now is unified for both x64 and Win32 versions
 + Added support to act as export for FBE (you can "Save as" to ePub now)
 * Changed UnRar library used, both because Chiklite no longer suport theirs and becouse I needed something that compiled as AnyCPU to resolve installation issues
+* Fixed missing "FixAlways" item from the settings dialog
 
 
 

@@ -53,23 +53,9 @@ namespace Fb2ePubConverter
 
     public class Fb2EPubConverterEngine
     {
-        
-
-        #region Static help functions
-
-        #endregion
-
-        private long _maxSize = 245 * 1024;
-
-        private int _sectionCounter = 0;
-
-
-
-
-        private readonly ImageManager images = new ImageManager();
-
-        private readonly HRefManager referencesManager = new HRefManager();
-
+        /// <summary>
+        /// Represent acceptable input file types
+        /// </summary>
         private enum FileTypesEnum
         {
             FileTypeZIP,
@@ -78,12 +64,13 @@ namespace Fb2ePubConverter
             FileTypeUnknown,
         }
 
-
-
+        private readonly ImageManager images = new ImageManager();
+        private readonly HRefManager referencesManager = new HRefManager();
         private readonly List<FB2File> fb2Files = new List<FB2File>();
 
 
-
+        private long _maxSize = 245 * 1024;
+        private int _sectionCounter = 0;
 
 
         /// <summary>
@@ -103,18 +90,11 @@ namespace Fb2ePubConverter
         }
 
 
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
-        public static extern int GetShortPathName(
-            [MarshalAs(UnmanagedType.LPTStr)]
-        string path,
-            [MarshalAs(UnmanagedType.LPTStr)]
-        StringBuilder shortPath,
-            int shortPathLength
-            );
 
 
-
-
+        /// <summary>
+        /// Settings for the converter
+        /// </summary>
         public ConverterSettings Settings;
 
 
@@ -200,10 +180,11 @@ namespace Fb2ePubConverter
                         {
                             string tempPath = Path.GetTempPath();
                             entry.WriteToDirectory(tempPath);
-                            Logger.Log.InfoFormat("Processing {0} ...",entry.FilePath);
-                            if (!LoadFb2File(string.Format(@"{0}\{1}",tempPath,entry.FilePath)))
+                            string fileNameOnly = Path.GetFileName(entry.FilePath);
+                            Logger.Log.InfoFormat("Processing {0} ...", fileNameOnly);
+                            if (!LoadFb2File(string.Format(@"{0}\{1}", tempPath, fileNameOnly)))
                             {
-                                Logger.Log.ErrorFormat("Unable to load {0}", entry.FilePath);
+                                Logger.Log.ErrorFormat("Unable to load {0}", fileNameOnly);
                                 continue;
                             }
                             else
@@ -244,21 +225,9 @@ namespace Fb2ePubConverter
             {
                 Stream s = File.OpenRead(fileName);
 
-                Fb2FixArguments options = new Fb2FixArguments();
-                options.incversion = true;
-                options.regenerateId = false;
-                options.indentBody = false;
-                options.indentHeader = true;
-                options.mapGenres = true;
-                options.encoding = Encoding.UTF8;
-
-
                 if (Settings.FixMode == FixOptions.Fb2FixAlways)
                 {
-                    using (Stream output = Fb2Fix.Process(s, options))
-                    {
-                        ReadFb2FileStream(output);
-                    }
+                    LoadFB2StreamWithFix(s, ReadFb2FileStream);
                 }
                 else
                 {
@@ -292,10 +261,7 @@ namespace Fb2ePubConverter
                         Logger.Log.Info("Repair attempt failed - attempting to repair using Fb2Fix...");
                         // try to read broken XML
                         s.Seek(0, SeekOrigin.Begin);
-                        using (Stream output = Fb2Fix.Process(s, options))
-                        {
-                            ReadFb2FileStream(output);
-                        }
+                        LoadFB2StreamWithFix(s, ReadFb2FileStream);
                     }
                 }
             }
@@ -306,6 +272,23 @@ namespace Fb2ePubConverter
             }
 
             return true;
+        }
+
+        private void LoadFB2StreamWithFix(Stream s, Action<Stream> streamLoader)
+        {
+            Fb2FixArguments options = new Fb2FixArguments();
+            options.incversion = true;
+            options.regenerateId = false;
+            options.indentBody = false;
+            options.indentHeader = true;
+            options.mapGenres = true;
+            options.encoding = Encoding.UTF8;
+
+            using (Stream output = Fb2Fix.Process(s, options))
+            {
+                streamLoader(output);
+            }
+            
         }
 
         private void ReadFb2FileStream(Stream s)
@@ -374,27 +357,15 @@ namespace Fb2ePubConverter
                             if (Path.GetExtension(theEntry.Name).ToUpper() == ".FB2")
                             {
                                 fb2FileFound = true;
-                                Fb2FixArguments options = new Fb2FixArguments();
-                                options.incversion = true;
-                                options.regenerateId = false;
-                                options.indentBody = false;
-                                options.indentHeader = true;
-                                options.mapGenres = true;
-                                options.encoding = Encoding.UTF8;
 
                                 if (Settings.FixMode == FixOptions.Fb2FixAlways)
                                 {
                                     using (var s1 = new ZipInputStream(File.OpenRead(fileName)))
                                     {
                                         // reach the same position in ZIP
-                                        while (theEntry.ToString() != s1.GetNextEntry().ToString())
-                                        {
-                                        }
-                                        using (Stream output = Fb2Fix.Process(s1, options))
-                                        {
-                                            ReadFb2FileStream(output);
-                                            fb2FileLoaded = true;
-                                        }
+                                        while (theEntry.ToString() != s1.GetNextEntry().ToString());
+                                        LoadFB2StreamWithFix(s1, ReadFb2FileStream);
+                                        fb2FileLoaded = true;
                                     }
                                 }
                                 else
@@ -446,18 +417,15 @@ namespace Fb2ePubConverter
                                                     // try to read broken XML
                                                     try
                                                     {
-                                                        using (Stream output = Fb2Fix.Process(s2, options))
+                                                        try
                                                         {
-                                                            try
-                                                            {
-                                                                ReadFb2FileStream(output);
-                                                                fb2FileLoaded = true;
-                                                            }
-                                                            catch (XmlException)
-                                                            {
-                                                                Logger.Log.ErrorFormat("Error in file - unable to fix");
-                                                                continue;
-                                                            }
+                                                            LoadFB2StreamWithFix(s2, ReadFb2FileStream);
+                                                            fb2FileLoaded = true;
+                                                        }
+                                                        catch (XmlException)
+                                                        {
+                                                            Logger.Log.ErrorFormat("Error in file - unable to fix");
+                                                            continue;
                                                         }
                                                     }
                                                     catch (Exception ex)

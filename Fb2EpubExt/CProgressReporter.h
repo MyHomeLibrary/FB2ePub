@@ -6,7 +6,6 @@
 
 
 #include "SimpleExt_i.h"
-#import "..\FB2EPubConverter.tlb" no_namespace named_guids
 #include "ProgressDialog.h"
 #include <iostream>
 
