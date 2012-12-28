@@ -16,8 +16,8 @@ en.vcredist2012_size_ia64=2.2 MB
 ru.vcredist2012_size_ia64=2,2 MB
 
 ;http://www.microsoft.com/globaldev/reference/lcid-all.mspx
-en.vcredist2012_lcid=''
-ru.vcredist2012_lcid='/lcid 1049 '
+en.vcredist2012_lcid=
+ru.vcredist2012_lcid=/lcid 1049
 
 
 [Code]

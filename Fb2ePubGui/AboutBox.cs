@@ -11,6 +11,13 @@ namespace Fb2ePubGui
             InitializeComponent();
             this.Text = String.Format("About {0}", AssemblyTitle);
             linkLabelAbout.Links.Add(0, linkLabelAbout.Text.Length, @"http://www.fb2epub.net");
+            Assembly asm = Assembly.GetAssembly(GetType());
+            string version = "???";
+            if (asm != null)
+            {
+                version = asm.GetName().Version.ToString();
+            }
+            textBoxNameAndVersion.Text = string.Format("FB2ePub GUI converter v{0}", version);
         }
 
         #region Assembly Attribute Accessors

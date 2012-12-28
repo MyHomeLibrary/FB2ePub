@@ -58,6 +58,7 @@ var
 	path: string;
 	i: Integer;
 begin
+  Log('Adding product');
 	installMemo := installMemo + '%1' + Title + #13;
 
 	path := ExpandConstant('{src}{\}') + CustomMessage('DependenciesDir') + '\' + FileName;
@@ -73,7 +74,9 @@ begin
 	i := GetArrayLength(products);
 	SetArrayLength(products, i + 1);
 	products[i].File := path;
+  Log('Title: '+ Title + #13);
 	products[i].Title := Title;
+  Log('Parameters: '+ Parameters + #13);
 	products[i].Parameters := Parameters;
 	products[i].InstallClean := InstallClean;
 	products[i].MustRebootAfter := MustRebootAfter;
@@ -82,8 +85,10 @@ end;
 function SmartExec(prod : TProduct; var ResultCode : Integer) : boolean;
 begin
 	if (LowerCase(Copy(prod.File,Length(prod.File)-2,3)) = 'exe') then begin
+    Log('Executing (exec) :' + prod.File + ' ' + prod.Parameters + #13);
 		Result := Exec(prod.File, prod.Parameters, '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
 	end else begin
+    Log('Executing (shellexec):' + prod.File + ' ' + prod.Parameters + #13);
 		Result := ShellExec('', prod.File, prod.Parameters, '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
 	end;
 end;
