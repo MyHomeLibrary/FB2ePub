@@ -153,6 +153,25 @@ div.poem {
 	text-align: center;
 }
 
+div.poem_title
+{
+	page-break-after: avoid;
+	page-break-inside: avoid;
+	font-weight: bold;
+	margin: 1em 0px 0.5em 1.5625em;
+	font-size: 1.1em;
+    text-align: left;
+}
+
+div.poem_epigraph
+{
+	page-break-inside:avoid;
+	margin: auto;
+	margin-bottom: 3em;	
+	margin-top: 2em;
+	font-size:0.8em;
+}
+
 p.poem_author
 {
 	font-style: italic;
