@@ -10,8 +10,8 @@ dotnetfx45_title=.NET Framework 4.5
 dotnetfx45_size=3 MB - 197 MB
 
 ;http://www.microsoft.com/globaldev/reference/lcid-all.mspx
-en.dotnetfx45_lcid=''
-ru.dotnetfx45_lcid='/lcid 1049 '
+en.dotnetfx45_lcid=
+ru.dotnetfx45_lcid=/lcid 1049
 
 
 [Code]

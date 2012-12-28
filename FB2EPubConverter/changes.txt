@@ -1,4 +1,8 @@
-﻿1.1.1
+﻿1.1.2
++ Added text  and image to about dialog to FB2ePub GUI utility
+* Fixed installer so now .net and VCresdist are called wirh minimal user prompt (passive mode)
+
+1.1.1
 + Added new CSS element "poem_subtitle" for poem's subtitles, also styled it to left allign
 + Added new CSS element "poem_title" for poem's title
 + Added new CSS element "poem_epigraph" for poem's epigraphs, to destinguish from regular text epigraphs, so they can be styled differently

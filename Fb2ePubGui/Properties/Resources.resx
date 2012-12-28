@@ -112,19 +112,23 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert" xml:space="preserve">
-    <value>Please select FB2 files to convert</value>
-    <comment>File selection dialog title	</comment>
-  </data>
   <data name="Status_Converting" xml:space="preserve">
     <value>Converting...</value>
   </data>
   <data name="Status_Ready" xml:space="preserve">
     <value>Ready.</value>
+  </data>
+  <data name="FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert" xml:space="preserve">
+    <value>Please select FB2 files to convert</value>
+    <comment>File selection dialog title	</comment>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="epub-logo-color-book" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\epub-logo-color-book.ICO;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

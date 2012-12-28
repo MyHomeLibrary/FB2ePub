@@ -61,6 +61,16 @@ namespace Fb2ePubGui.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap epub_logo_color_book {
+            get {
+                object obj = ResourceManager.GetObject("epub-logo-color-book", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select FB2 files to convert.
         /// </summary>
         internal static string FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert {
