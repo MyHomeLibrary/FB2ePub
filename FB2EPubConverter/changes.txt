@@ -6,6 +6,7 @@
 * Fixed converting of poem subtitles
 * If parfagraph at the start of the section starts with image, we assume it's a "drop" image and do not create a drop character afterwards
 * Fixed case of incorrect display when paragraph starts from link and Drop is enabled
+* Fixed case when fonts were not applied by readers in case decoration option was enabled and document had a Id containing '{' or '}' characters
 
 
 1.1.0
