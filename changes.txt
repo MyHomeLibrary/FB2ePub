@@ -1,4 +1,7 @@
-﻿1.0.3.0 
+﻿1.0.5.0 
+* Fixed case of generating font family names when decoration contained '{' or '}' that caused readers not to apply fonts
+
+1.0.3.0 
 + License file added
 * Changed to .Net 4.0
 * Redesigned font settings structure
