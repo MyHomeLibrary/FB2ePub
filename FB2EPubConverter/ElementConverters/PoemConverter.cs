@@ -28,13 +28,13 @@ namespace FB2EPubConverter.ElementConverters
 
             if (poemItem.Title != null)
             {
-                TitleConverter titleConverter = new TitleConverter {Settings = Settings};
+                PoemTitleConverter titleConverter = new PoemTitleConverter { Settings = Settings };
                 poemContent.Add(titleConverter.Convert(poemItem.Title, level));
             }
 
             foreach (var epigraph in poemItem.Epigraphs)
             {
-                EpigraphConverter epigraphConverter = new EpigraphConverter {Settings = Settings};
+                PoemEpigraphConverter epigraphConverter = new PoemEpigraphConverter { Settings = Settings };
                 poemContent.Add(epigraphConverter.Convert(epigraph,level + 1));
             }
 

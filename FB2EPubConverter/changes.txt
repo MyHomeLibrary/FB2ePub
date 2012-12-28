@@ -1,5 +1,7 @@
 ﻿1.1.1
 + Added new CSS element "poem_subtitle" for poem's subtitles, also styled it to left allign
++ Added new CSS element "poem_title" for poem's title
++ Added new CSS element "poem_epigraph" for poem's epigraphs, to destinguish from regular text epigraphs, so they can be styled differently
 * Fixed converter dropping the "strikethrough" tag text
 * Fixed converting of poem subtitles
 
