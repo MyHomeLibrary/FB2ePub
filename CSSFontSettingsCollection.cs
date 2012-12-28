@@ -171,9 +171,9 @@ namespace FontsSettings
             }
             decoration = decoration.Replace("{", string.Empty);
             decoration = decoration.Replace("}", string.Empty);
-            if (string.IsNullOrEmpty(decoration))
+            if (string.IsNullOrEmpty(decoration)) // just in case there is nothing left
             {
-                decoration = string.Format("{0}",new Guid().ToString());
+                decoration = string.Format("{0}", Guid.NewGuid().ToString());
             }
         }
 
