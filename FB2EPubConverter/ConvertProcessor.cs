@@ -139,13 +139,26 @@ namespace FB2EPubConverter
                 {
                     fileLocation = _processorSettings.Settings.OutPutPath;
                 }
-                // in case fb2.zip remove the "fb2" part
-                fileNameWithoutExtension = Path.ChangeExtension(
-                                                                 fileNameWithoutExtension, "epub");
+                // in case .fb2.zip remove the "fb2" part
+                string fileNameWithExtension = GenerateProperExtension(fileNameWithoutExtension);
                 fileName = Path.Combine(fileLocation,
-                                               fileNameWithoutExtension);
+                                               fileNameWithExtension);
             }
             return fileName;
+        }
+
+        private string GenerateProperExtension(string fileNameWithoutExtension)
+        {
+            int position = fileNameWithoutExtension.LastIndexOf('.');
+            if (position > 0)
+            {
+                string ext = fileNameWithoutExtension.Substring(position);
+                if (ext.ToUpper().CompareTo(".FB2") == 0)
+                {
+                    fileNameWithoutExtension = fileNameWithoutExtension.Remove(position);
+                }
+            }
+            return string.Format("{0}.ePub",fileNameWithoutExtension);           
         }
 
         private void SaveAndCleanUp(Fb2EPubConverterEngine converter, string fileName, string inFileName)

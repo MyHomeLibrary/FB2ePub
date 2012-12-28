@@ -7,6 +7,7 @@
 * If parfagraph at the start of the section starts with image, we assume it's a "drop" image and do not create a drop character afterwards
 * Fixed case of incorrect display when paragraph starts from link and Drop is enabled
 * Fixed case when fonts were not applied by readers in case decoration option was enabled and document had a Id containing '{' or '}' characters
+* Fixed case when file name containing severa '.'-s was cut to the first '.' when automatically generating ePub file name 
 
 
 1.1.0
