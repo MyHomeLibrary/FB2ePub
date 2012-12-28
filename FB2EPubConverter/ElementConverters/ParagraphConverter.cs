@@ -46,18 +46,18 @@ namespace FB2EPubConverter.ElementConverters
                 throw new ArgumentNullException("paragraphItem");
             }
             IBlockElement paragraph = CreateBlock(resultType);
-            bool needToInsert = Settings.CapitalDrop && startSection;
+            bool needToInsertDrop = Settings.CapitalDrop && startSection;
 
             foreach (var item in paragraphItem.ParagraphData)
             {
                 if (item is SimpleText)
                 {
                     SimpleTextElementConverter textConverter = new SimpleTextElementConverter {Settings = Settings};
-                    foreach (var s in textConverter.Convert(item,needToInsert))
+                    foreach (var s in textConverter.Convert(item,needToInsertDrop))
                     {
-                        if (needToInsert)
+                        if (needToInsertDrop)
                         {
-                            needToInsert = false;
+                            needToInsertDrop = false;
                             paragraph.Class.Value = "drop";
                         }
                         paragraph.Add(s);
@@ -75,13 +75,22 @@ namespace FB2EPubConverter.ElementConverters
                             paragraph.Add(inlineImageConverter.Convert(inlineItem));
                         }
                         Settings.Images.ImageIdUsed(inlineItem.HRef);
+                        if (needToInsertDrop) // in case this is "drop" image - no need to create a drop
+                        {
+                            needToInsertDrop = false;
+                        }
                     }
                 }
                 else if (item is InternalLinkItem)
                 {
                     InternalLinkConverter internalLinkConverter = new InternalLinkConverter {Settings = Settings};
-                    foreach (var s in internalLinkConverter.Convert(item as InternalLinkItem))
+                    foreach (var s in internalLinkConverter.Convert(item as InternalLinkItem, needToInsertDrop))
                     {
+                        if (needToInsertDrop)
+                        {
+                            needToInsertDrop = false;
+                            paragraph.Class.Value = "drop";
+                        }
                         paragraph.Add(s);
                     }
                 }
