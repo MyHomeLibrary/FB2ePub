@@ -104,6 +104,7 @@ namespace FontsSettings
             // Copy all font families 
             _fonts.Clear();
             _fontFiles.Clear();
+            MakeDecorationValid(ref decoration);
             foreach (var cssFontFamily in settings.FontFamilies)
             {
                 CSSFontFamily newFamily = new CSSFontFamily();
@@ -155,6 +156,25 @@ namespace FontsSettings
 
             _storageSettings = settings;
             _loadedDecoration = decoration;
+        }
+
+        /// <summary>
+        /// Some decorations are not valid, for example in CSS they can't contain '{' or '}"
+        /// here we filter them out
+        /// </summary>
+        /// <param name="decoration"></param>
+        private void MakeDecorationValid(ref string decoration)
+        {
+            if ( string.IsNullOrEmpty(decoration) )
+            {
+                return;
+            }
+            decoration = decoration.Replace("{", string.Empty);
+            decoration = decoration.Replace("}", string.Empty);
+            if (string.IsNullOrEmpty(decoration))
+            {
+                decoration = string.Format("{0}",new Guid().ToString());
+            }
         }
 
         public void StoreTo(EPubFontSettings settings)
