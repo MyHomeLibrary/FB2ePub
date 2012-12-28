@@ -17,7 +17,7 @@ namespace FB2EPubConverter.ElementConverters
         /// </summary>
         /// <param name="internalLinkItem">item to convert</param>
         /// <returns>XHTML representation</returns>
-        public List<IXHTMLItem> Convert(InternalLinkItem internalLinkItem)
+        public List<IXHTMLItem> Convert(InternalLinkItem internalLinkItem, bool needToInsertDrop)
         {
             if (internalLinkItem == null)
             {
@@ -45,7 +45,7 @@ namespace FB2EPubConverter.ElementConverters
                 if (internalLinkItem.LinkText != null)
                 {
                     SimpleTextElementConverter tempConverter = new SimpleTextElementConverter {Settings = Settings};
-                    foreach (var s in tempConverter.Convert(internalLinkItem.LinkText))
+                    foreach (var s in tempConverter.Convert(internalLinkItem.LinkText,needToInsertDrop))
                     {
                         s.Parent = anchor;
                         anchor.Content.Add(s);
@@ -55,7 +55,7 @@ namespace FB2EPubConverter.ElementConverters
                 return list;
             }
             SimpleTextElementConverter converter = new SimpleTextElementConverter {Settings = Settings};
-            return converter.Convert(internalLinkItem.LinkText);
+            return converter.Convert(internalLinkItem.LinkText,needToInsertDrop);
         }
 
 

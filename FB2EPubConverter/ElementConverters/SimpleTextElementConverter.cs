@@ -27,9 +27,9 @@ namespace FB2EPubConverter.ElementConverters
         /// ( simple text is normal text or text with one of the "styles")
         /// </summary>
         /// <param name="styletypeItem">item to convert</param>
-        /// <param name="needToInsert">set to true if we want to create a "capital drop" part</param>
+        /// <param name="needToInsertDrop">set to true if we want to create a "capital drop" part</param>
         /// <returns></returns>
-        public List<IXHTMLItem> Convert(StyleType styletypeItem,bool needToInsert)
+        public List<IXHTMLItem> Convert(StyleType styletypeItem,bool needToInsertDrop)
         {
 
             if (styletypeItem == null)
@@ -57,7 +57,7 @@ namespace FB2EPubConverter.ElementConverters
                         }
                         else
                         {
-                            if (needToInsert && text.Text.Length > 0)
+                            if (needToInsertDrop && text.Text.Length > 0)
                             {
                                 AddAsDrop(list,text);
                             }
@@ -181,7 +181,7 @@ namespace FB2EPubConverter.ElementConverters
             else if (styletypeItem is InternalLinkItem)
             {
                 InternalLinkConverter linkConverter = new InternalLinkConverter { Settings = Settings };
-                foreach (var item in linkConverter.Convert(styletypeItem as InternalLinkItem))
+                foreach (var item in linkConverter.Convert(styletypeItem as InternalLinkItem, needToInsertDrop))
                 {
                     list.Add(item);
                 }
