@@ -112,12 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 22</value>
   </data>
@@ -151,17 +151,11 @@
   <data name="helpToolStripMenuItem.Text" xml:space="preserve">
     <value>Справка</value>
   </data>
-  <data name="mainMenuStrip.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="toolStripStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 17</value>
   </data>
   <data name="toolStripStatus.Text" xml:space="preserve">
     <value>Готов</value>
-  </data>
-  <data name="statusStrip1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="comboBoxDestination.ToolTip" xml:space="preserve">
     <value>Фолдер куда записываются файлы после конверции</value>
@@ -177,9 +171,6 @@
   </data>
   <data name="buttonShowFolder.ToolTip" xml:space="preserve">
     <value>Открывает окно фолдера куда "складываются" файлы после конверции</value>
-  </data>
-  <data name="tableLayoutPanel1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2264,8 +2255,5 @@
         AFGiRIkAECVKlAgAUaJEiQAQJUqUCABRokSJABAlSpQIAFGiRIkAECVKlAgAUaJEiQAQJUqUCABRokSJ
         ABAlSpRjkP8PWMJnKJr8jgAAAAAASUVORK5CYII=
 </value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

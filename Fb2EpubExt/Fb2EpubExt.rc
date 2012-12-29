@@ -64,8 +64,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,7,0
- PRODUCTVERSION 1,0,7,0
+ FILEVERSION 1,0,8,0
+ PRODUCTVERSION 1,1,2,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -82,12 +82,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Lord KiRon"
             VALUE "FileDescription", "FB2Epub shell extension"
-            VALUE "FileVersion", "1.0.7.0"
+            VALUE "FileVersion", "1.0.8.0"
             VALUE "InternalName", "Fb2EpubExt.dll"
             VALUE "LegalCopyright", "CopyFree 2010"
             VALUE "OriginalFilename", "Fb2EpubExt.dll"
             VALUE "ProductName", "FB2EPUB"
-            VALUE "ProductVersion", "1.0.7.0"
+            VALUE "ProductVersion", "1.1.2.0"
         END
     END
     BLOCK "VarFileInfo"
