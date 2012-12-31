@@ -3,6 +3,7 @@
 * Fixed installer so now .net and VCresdist are called wirh minimal user prompt (passive mode)
 * Moved registration of shell extension from RegisterFb2ePub.exe to installer, as result removed RegisterFb2ePub.exe completely
 * Removed self registration code from shell extension DLL
+* Reverted back to .Net 4.0 Client to continue XP support
 
 1.1.1
 + Added new CSS element "poem_subtitle" for poem's subtitles, also styled it to left allign

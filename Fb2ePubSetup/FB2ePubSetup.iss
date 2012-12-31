@@ -105,7 +105,7 @@ Name: "{group}\FB2ePub GUI"; Filename: "{app}\Fb2ePubGui.exe";
 #include "scripts\products\fileversion.iss"
 #include "scripts\products\dotnetfxversion.iss"
 #include "scripts\products\msi45.iss"
-#include "scripts\products\dotnetfx45.iss"
+#include "scripts\products\dotnetfx40client.iss"
 #include "scripts\products\vcredist2012.iss"
 #include "scripts\products\fb2epub_ext.iss"
 
@@ -161,7 +161,7 @@ begin
 	initwinversion();
 
 	msi45('4.5');
-  dotnetfx45();
+  dotnetfx40client();
   vcredist2012();
 
 	Result := true;
