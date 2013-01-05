@@ -61,8 +61,6 @@ Source: "{#BuildFolder}Fb2ePub.exe"; DestDir: "{app}"; Flags:
 Source: "{#BuildFolder}Fb2ePub.exe.config"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}Fb2ePubGui.exe"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}Fb2ePubGui.exe.config"; DestDir: "{app}";  Flags: 
-;Source: "{#BuildFolder}RegisterFB2EPub.exe"; DestDir: "{app}";  Flags: 
-;Source: "{#BuildFolder}RegisterFB2EPub.exe.config"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}EPubLibrary.dll"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}FB2EPubConverter.dll"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}FB2EPubConverter.dll.config"; DestDir: "{app}";  Flags: 
@@ -79,6 +77,7 @@ Source: "{#BuildFolder}TranslitRu.dll"; DestDir: "{app}";  Flags:
 Source: "{#BuildFolder}XHTMLClassLibrary.dll"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}XMLFixerLibrary.dll"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}prompt.cmd"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildFolder}settings.cmd"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}readme_en.htm"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}epub-logo-color-book.ICO"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}license.docx"; DestDir: "{app}"; Flags: ignoreversion
@@ -95,6 +94,7 @@ Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Check: not Is64BitIn
 [Icons]
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; Flags: excludefromshowinnewinstall
 Name: "{group}\FB2ePub Command Prompt"; Filename: "{app}\prompt.cmd"; Flags: excludefromshowinnewinstall
+Name: "{group}\FB2ePub command-line settings"; Filename: "{app}\settings.cmd"; WorkingDir: "{app}"; Flags: excludefromshowinnewinstall
 Name: "{group}\FB2ePub GUI"; Filename: "{app}\Fb2ePubGui.exe"; 
 
 
@@ -167,42 +167,9 @@ begin
 	Result := true;
 end;
 
-//const DB_PAGE_CAPTION='Select Application Database Folder';
-//  DB_PAGE_DESCRIPTION='Where should application database files be installed or where     your database files already are?';
-//  DB_PAGE_SUBCAPTION='In case of new installation select the folder in which Setup should install application database files, then click Next. Or select folder where previous version of application stored database files, then click Next';
-//
-//var databasePage : TInputDirWizardPage;//this is predefined form declaration
-//    CheckListBox : TNewCheckListBox;  //this is new element i'm about to add to page
-//
-//procedure createDatabaseWizardPage; //creating page
-//begin
-//databasePage :=CreateInputDirPage(wpSelectDir,
-//DB_PAGE_CAPTION,
-//DB_PAGE_DESCRIPTION,
-//DB_PAGE_SUBCAPTION,
-//False, '');
-//databasePage.Add('');
-//
-//databasePage.buttons[0].Top:=databasePage.buttons[0].Top+ScaleY(70);//moving predefined 
-//databasePage.edits[0].Top:=databasePage.edits[0].Top+ScaleY(70);    //elements down.
-//databasePage.edits[0].Text:=ExpandConstant('{commonappdata}\my app');//default value
-//
-//CheckListBox := TNewCheckListBox.Create(databasePage);//creating and modifying new checklistbox
-//CheckListBox.Top := 40 + ScaleY(8);
-//CheckListBox.Width := databasePage.SurfaceWidth;
-//CheckListBox.Height := ScaleY(50);
-//CheckListBox.BorderStyle := bsNone;
-//CheckListBox.ParentColor := True;
-//CheckListBox.MinItemHeight := WizardForm.TasksList.MinItemHeight;
-//CheckListBox.ShowLines := False;
-//CheckListBox.WantTabs := True;
-//CheckListBox.Parent := databasePage.Surface;//setting control's parent element
-//CheckListBox.AddRadioButton('New Installation', '', 0, True, True, nil);
-//CheckListBox.AddRadioButton('Update existing copy', '', 0, False, True, nil);
-//end;
 
 
 procedure InitializeWizard;
 begin
-//createDatabaseWizardPage(); 
+
 end;

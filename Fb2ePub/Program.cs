@@ -35,6 +35,7 @@ namespace Fb2ePub
 
         const string Registrator2Run = "registerfb2epub.exe";
 
+        [STAThread]
         static void Main(string[] args)
         {
             SetupLogAndData();

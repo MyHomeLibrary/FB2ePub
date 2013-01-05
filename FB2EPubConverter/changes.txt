@@ -1,4 +1,9 @@
-﻿1.1.2
+﻿1.1.3
++ Added settings.cmd file and shourtcut to configure command line converter settings
++ Added "succeeded" message at the end of FBE export
+* Fixed crash when browse for font button was used from command line utility settings
+
+1.1.2
 + Added text  and image to about dialog to FB2ePub GUI utility
 * Fixed installer so now .net and VCresdist are called wirh minimal user prompt (passive mode)
 * Moved registration of shell extension from RegisterFb2ePub.exe to installer, as result removed RegisterFb2ePub.exe completely
