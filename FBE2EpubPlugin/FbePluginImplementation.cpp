@@ -21,7 +21,6 @@ using namespace System::IO;
 
 HRESULT CFbePluginImplementation::Export(long hWnd,BSTR filename,IDispatch *doc)
 {
-	//MessageBox((HWND)hWnd,L"This is the Test",L"Test message",MB_OK);
 	HRESULT hr(S_OK);
 	int maxSize = MAX_PATH*10;
 	MSXML2::IXMLDOMDocument2Ptr	    source(doc);
@@ -47,12 +46,12 @@ HRESULT CFbePluginImplementation::Export(long hWnd,BSTR filename,IDispatch *doc)
 	DWORD dwResult = GetTempPath(MAX_PATH,(LPWSTR)&Buffer);
 	if ( dwResult == 0 )
 	{
-		MessageBox((HWND)hWnd,L"Error getting temporary path",L"Test message",MB_OK);
+		MessageBox((HWND)hWnd,L"Error getting temporary path",L"Error",MB_OK);
 		return E_FAIL;
 	}
 	if ( dwResult > MAX_PATH -14 )
 	{
-		MessageBox((HWND)hWnd,L"Error temporary path variable is too long",L"Test message",MB_OK);
+		MessageBox((HWND)hWnd,L"Error temporary path variable is too long",L"Error",MB_OK);
 		return E_FAIL;
 	}
 	WCHAR FileNameBuffer[MAX_PATH+1];
@@ -60,7 +59,7 @@ HRESULT CFbePluginImplementation::Export(long hWnd,BSTR filename,IDispatch *doc)
 	dwResult	=	GetTempFileName(Buffer,L"FB2",0,(LPWSTR)&FileNameBuffer);
 	if ( dwResult == 0 )
 	{
-		MessageBox((HWND)hWnd,L"Error creating temporary file name",L"Test message",MB_OK);
+		MessageBox((HWND)hWnd,L"Error creating temporary file name",L"Error",MB_OK);
 		return E_FAIL;
 	}
 	
@@ -71,7 +70,7 @@ HRESULT CFbePluginImplementation::Export(long hWnd,BSTR filename,IDispatch *doc)
   	hr = source->save(bstrTempFileName);
 	if ( FAILED(hr) )
 	{
-		MessageBox((HWND)hWnd,L"Error saving temporary file",L"Test message",MB_OK);
+		MessageBox((HWND)hWnd,L"Error saving temporary file",L"Error",MB_OK);
 		return hr;
 	}
 
@@ -79,7 +78,7 @@ HRESULT CFbePluginImplementation::Export(long hWnd,BSTR filename,IDispatch *doc)
 	hr = converter.CreateInstance(CLSID_ConvertProcessor);
 	if ( FAILED(hr) )
 	{
-		MessageBox((HWND)hWnd,L"Error creating converter object",L"Test message",MB_OK);
+		MessageBox((HWND)hWnd,L"Error creating converter object",L"Error",MB_OK);
 		DeleteFile(FileNameBuffer);
 		return hr;
 	}
@@ -88,10 +87,11 @@ HRESULT CFbePluginImplementation::Export(long hWnd,BSTR filename,IDispatch *doc)
 	hr = converter->ConvertSingleFile(bstrTempFileName.bstrVal,bstrOutName,NULL);
 	if ( FAILED(hr) )
 	{
-		MessageBox((HWND)hWnd,L"Error cconverting",L"Test message",MB_OK);
+		MessageBox((HWND)hWnd,L"Error cconverting",L"Error",MB_OK);
 		DeleteFile(FileNameBuffer);
 		return hr;
 	}
 	DeleteFile(FileNameBuffer);
+	MessageBox((HWND)hWnd,L"File was exported successfully",L"Conversion result",MB_OK);
 	return hr;
 }

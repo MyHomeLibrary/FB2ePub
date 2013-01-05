@@ -62,7 +62,7 @@ begin
 	if (VCRedistNeedsInstall()) then
 		AddProduct('vcredist2012' + GetArchitectureString() + '.exe',
 			CustomMessage('vcredist2012_lcid') + '/passive /norestart',
-			CustomMessage('vcredist2012_title'),
+			CustomMessage('vcredist2012_title')  + GetArchitectureString(),
 			CustomMessage('vcredist2012_size' + GetArchitectureString()),
 			GetString(vcredist2012_url, vcredist2012_url_x64, vcredist2012_url_x64),
 			false, false);
