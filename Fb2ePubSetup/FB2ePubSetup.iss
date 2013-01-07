@@ -89,7 +89,7 @@ Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver
 Source: "{#BuildFolder64}Fb2EpubExt_x64.dll"; DestDir: "{app}";  Check: Is64BitInstallMode; Flags: regserver 
 
 ;x86
-Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; 
+Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: regserver
 
 [Icons]
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; Flags: excludefromshowinnewinstall
@@ -136,7 +136,7 @@ Root: HKCU; Subkey: "Software\FBETeam\FictionBook Editor\Plugins\{{469E5867-292A
 
 ;File assosiations
 ; Generic enable it to be an extension
-Root: HKLM; Subkey: "Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved"; ValueType: string; ValueName: "{#CLSID_Fb2EpubShlExt}"; ValueData: "Fb2EpubShlExt extension"; Flags: uninsdeletevalue; Tasks: registreFB2Extension; 
+Root: HKLM; Subkey: "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved"; ValueType: string; ValueName: "{#CLSID_Fb2EpubShlExt}"; ValueData: "Fb2EpubShlExt extension"; Flags: uninsdeletevalue; Tasks: registreFB2Extension; 
 ; FB2
 Root: HKCR; Subkey: {#FB2_Extension_Path}\ShellEx\ContextMenuHandlers\{#Fb2EpubShlExtName}; ValueType: string; ValueName: ""; ValueData: {#CLSID_Fb2EpubShlExt}; Flags: uninsdeletekey; Tasks: registreFB2Extension; 
 ;ZIP
