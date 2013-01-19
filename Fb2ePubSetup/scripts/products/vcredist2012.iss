@@ -35,12 +35,12 @@ begin
   Result := (Installed = 1);
 end;
 
-function VCRedistNeedsInstall: Boolean;
+function VCRedistNeedsInstall86: Boolean;
 begin
     // here the Result must be True when you need to install your VCRedist
   // or False when you don't need to, so now it's upon you how you build
   // this statement, the following won't install your VC redist only when
-  Result := not (VCVersionInstalled(VC_2012_REDIST_X86_UP1) or  VCVersionInstalled(VC_2012_REDIST_X64_UP1));
+  Result := not (VCVersionInstalled(VC_2012_REDIST_X86_UP1) );
 end;
 
 function VCRedistNeedsInstall64: Boolean;
@@ -48,7 +48,7 @@ begin
     // here the Result must be True when you need to install your VCRedist
   // or False when you don't need to, so now it's upon you how you build
   // this statement, the following won't install your VC redist only when
-  Result := not (VCVersionInstalled(VC_2012_REDIST_X86_UP1) and IsX64());
+  Result := not (VCVersionInstalled(VC_2012_REDIST_X64_UP1) and IsX64());
 end;
 
 
@@ -59,19 +59,19 @@ const
 procedure vcredist2012();
 begin
 
-	if (VCRedistNeedsInstall()) then
+	if (VCRedistNeedsInstall86()) then
 		AddProduct('vcredist2012' + GetArchitectureString() + '.exe',
 			CustomMessage('vcredist2012_lcid') + '/passive /norestart',
-			CustomMessage('vcredist2012_title')  + GetArchitectureString(),
-			CustomMessage('vcredist2012_size' + GetArchitectureString()),
-			GetString(vcredist2012_url, vcredist2012_url_x64, vcredist2012_url_x64),
+			CustomMessage('vcredist2012_title')  + ' (x86)',
+			CustomMessage('vcredist2012_size_x64'),
+			GetString(vcredist2012_url, vcredist2012_url, vcredist2012_url),
 			false, false);
 	if (VCRedistNeedsInstall64()) then
 		AddProduct('vcredist2012' + '.exe',
 			CustomMessage('vcredist2012_lcid') + '/passive /norestart',
-			CustomMessage('vcredist2012_title'),
+			CustomMessage('vcredist2012_title')+ ' (x64)',
 			CustomMessage('vcredist2012_size'),
-			GetString(vcredist2012_url, vcredist2012_url, vcredist2012_url),
+			GetString(vcredist2012_url_x64, vcredist2012_url_x64, vcredist2012_url_x64),
 			false, false);
 
 end;
