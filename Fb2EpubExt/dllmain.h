@@ -15,7 +15,6 @@ class CFb2EpubExtModule : public CAtlDllModuleT< CFb2EpubExtModule >
 {
 public :
 	std::basic_string<TCHAR> m_INIPath;
-	std::basic_string<TCHAR> m_Fb2EpubApplication;
 	target_list m_targets;
 	bool m_bAllowAllExtension;
 	bool m_bAllowAllZip;

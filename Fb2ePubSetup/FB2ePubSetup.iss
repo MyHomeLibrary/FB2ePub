@@ -89,7 +89,7 @@ Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver
 Source: "{#BuildFolder64}Fb2EpubExt_x64.dll"; DestDir: "{app}";  Check: Is64BitInstallMode; Flags: regserver 
 
 ;x86
-Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; Flags: regserver
+Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Flags: regserver 32bit
 
 [Icons]
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; Flags: excludefromshowinnewinstall
@@ -146,6 +146,18 @@ Root: HKCR; Subkey: {#RAR_Extension_Path}\ShellEx\ContextMenuHandlers\{#Fb2EpubS
 ; Any (.*)
 Root: HKCR; Subkey: {#Any_Extension_Path}\ShellEx\ContextMenuHandlers\{#Fb2EpubShlExtName}; ValueType: string; ValueName: ""; ValueData: {#CLSID_Fb2EpubShlExt}; Flags: uninsdeletekey; Tasks: registreAnyExtension; 
 
+
+;File assosiations  for 32 bit in 64 machine
+; Generic enable it to be an extension
+Root: HKLM32; Subkey: "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved"; ValueType: string; ValueName: "{#CLSID_Fb2EpubShlExt}"; ValueData: "Fb2EpubShlExt extension"; Flags: uninsdeletevalue; Tasks: registreFB2Extension; Check: Is64BitInstallMode; 
+; FB2
+Root: HKCR32; Subkey: {#FB2_Extension_Path}\ShellEx\ContextMenuHandlers\{#Fb2EpubShlExtName}; ValueType: string; ValueName: ""; ValueData: {#CLSID_Fb2EpubShlExt}; Flags: uninsdeletekey; Tasks: registreFB2Extension; Check: Is64BitInstallMode; 
+;ZIP
+Root: HKCR32; Subkey: {#ZIP_Extension_Path}\ShellEx\ContextMenuHandlers\{#Fb2EpubShlExtName}; ValueType: string; ValueName: ""; ValueData: {#CLSID_Fb2EpubShlExt}; Flags: uninsdeletekey; Tasks: registreZIPExtension; Check: Is64BitInstallMode; 
+;RAR
+Root: HKCR32; Subkey: {#RAR_Extension_Path}\ShellEx\ContextMenuHandlers\{#Fb2EpubShlExtName}; ValueType: string; ValueName: ""; ValueData: {#CLSID_Fb2EpubShlExt}; Flags: uninsdeletekey; Tasks: registreRARExtension; Check: Is64BitInstallMode; 
+; Any (.*)
+Root: HKCR32; Subkey: {#Any_Extension_Path}\ShellEx\ContextMenuHandlers\{#Fb2EpubShlExtName}; ValueType: string; ValueName: ""; ValueData: {#CLSID_Fb2EpubShlExt}; Flags: uninsdeletekey; Tasks: registreAnyExtension; Check: Is64BitInstallMode; 
 
 
 [Tasks]
