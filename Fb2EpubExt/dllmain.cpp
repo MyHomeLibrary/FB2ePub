@@ -124,28 +124,6 @@ void CFb2EpubExtModule::LoadINI()
 		}
 	}
 
-	DWORD dwRes = 0;
-	TCHAR path[PATH_SIZE+1];
-	::ZeroMemory(path,sizeof(TCHAR)*(PATH_SIZE+1));
-	if ( bDetected ) 	// If INI file located - try to load from INI
-	{
-		clog << "Attempting to read FB2EPUB.EXE location from INI" << endl;
-		// try to read setting from INI
-		dwRes = ::GetPrivateProfileString(FB2EPUB_SECTION,_T("Location"),NULL,path,1024,m_INIPath.c_str());
-	}
-	if ( !bDetected || dwRes == 0 || !PathFileExists(path) ) // is setting not found or referenced file does not exist, try to locate
-	{
-		clog << "Attempting to detect FB2EPUB.EXE location" << endl;
-		if ( !FindConverterApp(path,PATH_SIZE) )
-		{
-			clog << "Unable to locate FB2EPUB converter. Aborting..."  << endl;
-			return;
-		}
-	}
-	
-	m_Fb2EpubApplication = path;
-	clog << "Detected FB2EPUB.EXE location " << W2A(m_Fb2EpubApplication.c_str())<< endl;
-
 	ReadFilters();
 	ReadTargets();
 }
