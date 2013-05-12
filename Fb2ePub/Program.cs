@@ -11,6 +11,7 @@ using log4net;
 using ProcessStartInfo=System.Diagnostics.ProcessStartInfo;
 using System.Diagnostics;
 using FolderSettingsHelper;
+using Fb2epubSettings;
 
 
 
@@ -28,12 +29,7 @@ namespace Fb2ePub
         // Create a logger for use in this class
         
         private static ILog log;
-        //private static bool lookInSubFolders = false;
 
-        //private static bool deleteSource = false;
-        //private static bool abortDeletion = false;
-
-        const string Registrator2Run = "registerfb2epub.exe";
 
         [STAThread]
         static void Main(string[] args)
@@ -71,6 +67,7 @@ namespace Fb2ePub
                 }
                 //ConverterSettings settings = new ConverterSettings();
                 ConvertProcessor processor = new ConvertProcessor();
+                PreProcessParameters(options, processor.ProcessorSettings);
                 ProcessSettings(processor);
                 ProcessParameters(options, processor.ProcessorSettings);
                 Console.WriteLine(string.Format("Loading {0}...", fileParams[0]));
@@ -87,6 +84,24 @@ namespace Fb2ePub
             log.Debug("Application [FB2EPUB] End");
         }
 
+        /// <summary>
+        /// called before loading settings to process parameters that affect loading
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="convertProcessorSettings"></param>
+        private static void PreProcessParameters(List<string> options, ConvertProcessorSettings convertProcessorSettings)
+        {
+            foreach (var param in options)
+            {
+                string command = param.ToLower().Substring(1);
+                if (command.StartsWith("cfg:")) //transliterate
+                {
+                    string commandValue = command.Substring(4);
+                    convertProcessorSettings.SettingsFileToUse = commandValue;
+                }
+            }            
+        }
+
 
         /// <summary>
         /// Processes single option command like settings ort registration that does not require actual converting
@@ -95,27 +110,7 @@ namespace Fb2ePub
         /// <returns>true if proper known command was processed, false if unrecognized command</returns>
         private static bool ProcessSingleOptionCommand(string singleOptionCommand)
         {
-            if ((singleOptionCommand.ToLower() == "/r") || (singleOptionCommand.ToLower() == "-r"))
-            {
-                RegisterShellExtension(false);
-                return true;
-            }
-            if ((singleOptionCommand.ToLower() == "/rall") || (singleOptionCommand.ToLower() == "-rall"))
-            {
-                RegisterShellExtension(true);
-                return true;
-            }
-            if ((singleOptionCommand.ToLower() == "/u") || singleOptionCommand.ToLower() == "-u")
-            {
-                UnregisterShellExtension();
-                return true;
-            }
-            if ((singleOptionCommand.ToLower() == "/settings") || singleOptionCommand.ToLower() == "-settings")
-            {
-                ConvertProcessor.ShowSettinsDialog(null);
-                return true;
-            }
-            return false;
+            return true;
         }   
 
 
@@ -129,48 +124,11 @@ namespace Fb2ePub
             Console.WriteLine("FB2 to EPUB command line converter by Lord KiRon");
             Console.WriteLine(string.Format("Logging to: {0}\\", GlobalContext.Properties["LogName"]));
             Console.WriteLine();
-            Configuration config =
-            ConfigurationManager.OpenExeConfiguration(
-            ConfigurationUserLevel.PerUserRoamingAndLocal);
-            log.InfoFormat("Local user config path: {0}", config.FilePath);
         }
 
 
 
-        private static void UnregisterShellExtension()
-        {
-            if(!File.Exists(Registrator2Run) )
-            {
-                log.ErrorFormat("Unable to locate {0}, please ensure that  this file located in the running folder",Registrator2Run);
-                return;   
-            }
-            if ( RunCommand(Registrator2Run, "/u") != 0 )
-            {
-                log.Error("Unregistration failed");
-                return;
-            }
-            log.Info("Unregistration succeeded");
-        }
 
-        private static void RegisterShellExtension(bool all)
-        {
-            if (!File.Exists(Registrator2Run))
-            {
-                log.ErrorFormat("Unable to locate {0}, please ensure that  this file located in the running folder", Registrator2Run);
-                return;
-            }
-            string param = "/r";
-            if (all)
-            {
-                param = "/rall";
-            }
-            if (RunCommand(Registrator2Run, param) != 0)
-            {
-                log.Error("Registration failed");
-                return;
-            }
-            log.Info("Registration succeeded");
-        }
 
         private static int RunCommand(string command,string argument)
         {
