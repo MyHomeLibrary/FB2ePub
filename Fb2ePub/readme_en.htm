@@ -16,8 +16,8 @@
             FB2</abbr>
         (Fiction Book 2) format files into <acronym>EPUB</acronym> format files, GUI 
         Utility converter and Windows shell extension .<br />
-        The program uses embeded fonts with cyrillic <acronym>UNICODE</acronym> support
-        to allow reading resulting files on readers without cyrillic support.
+        The program uses embedded fonts with Cyrillic <acronym>UNICODE</acronym> support
+        to allow reading resulting files on readers without Cyrillic support.
         <br />
     </p>
     <h3>
@@ -52,8 +52,8 @@
         <dt><strong>-t:<em>[0/1/2/3/4/5]</em></strong></dt>
         <dd>
             where <dfn>-t:0</dfn> (default) means no transliteration, while <dfn>-t:1</dfn>
-            applyes transliteration to book title, authors names, chapters etc to improve the
-            display on readers without cyrillic support (Sony non-russified readers etc). <dfn>-t:2</dfn>
+            applies transliteration to book title, authors names, chapters etc to improve the
+            display on readers without Cyrillic support (Sony non-russified readers etc). <dfn>-t:2</dfn>
             apply transliteration to output file name , <dfn>-t:3</dfn> transliterate both output
             file name and book content, <dfn>-t:4</dfn> (Kindle mode) transliterates book metadata without TOC, 
             <dfn>-t:5 transliterates book metadata and filename but not TOC</dfn></dd>
@@ -67,7 +67,7 @@
         <dd>
             registration options used to register/unregister right click shell extension</dd>
             <dd><strong>-r</strong> registers for basic RAR/ZIP/FB2 file types, <strong>-rAll</strong> registers for all file extensions</dd>
-            <dd>when registration option used all other commands and arameters are ignored</dd>
+            <dd>when registration option used all other commands and parameters are ignored</dd>
         <dt><strong>-f2i:<em>[0/1]</em></strong></dt>
         <dd>
         Enable (<dfn>-f2i:1</dfn>) or disable (<dfn>-f2i:0</dfn>) generation of additional FB2 information page
@@ -80,15 +80,15 @@
         <dd>
             - Format book title description info (thanks wserg) , This allows to define what will be displayed on book description page. The following format options are allowed:<br />
             <dfn>%bt%</dfn> - BookTitle from FB2 header<br />
-            <dfn>%sf%</dfn> - Serie full name from FB2 header<br />
-            <dfn>%sa%</dfn> - Serie abbviarated name from FB2 header<br />
+            <dfn>%sf%</dfn> - Series full name from FB2 header<br />
+            <dfn>%sa%</dfn> - Series abbviarated name from FB2 header<br />
             <dfn>%sn%</dfn> - book number in the series<br />
            Also following modifiers specified after '.' (dot) are allowed for %bt%, %sf% and %sa%:<br />
             <dfn>c</dfn> - Capitalize, <dfn>l</dfn> - lowercase, <dfn>u</dfn> -UPPERCASE <br />
-            additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix of the number<br />
+            additionally for parameter %sn% numeric modifier can be used to specify 0-preffix of the number<br />
             The default format is same as in prev versions: <strong>"%bt% %sa.l%-%sn%"</strong><br />
             <strong>Examples:</strong><br />
-            Serie: Star Wars<br />
+            Series: Star Wars<br />
             %sf.u% - STAR WARS<br />
             Number: 1<br />
             %sn.3% - 001 <br />
@@ -98,8 +98,8 @@
         <dd>
             - Format book title description info (thanks wserg) , This allows to define what will be displayed on book description page if book is not part of the sequence (no seq. number). The following format options are allowed:<br />
             <dfn>%bt%</dfn> - BookTitle from FB2 header<br />
-            <dfn>%sf%</dfn> - Serie full name from FB2 header<br />
-            <dfn>%sa%</dfn> - Serie abbviarated name from FB2 header<br />
+            <dfn>%sf%</dfn> - Series full name from FB2 header<br />
+            <dfn>%sa%</dfn> - Series abbviarated name from FB2 header<br />
            Also following modifiers specified after '.' (dot) are allowed for %bt%, %sf% and %sa%:<br />
             <dfn>c</dfn> - Capitalize, <dfn>l</dfn> - lowercase, <dfn>u</dfn> -UPPERCASE <br />
             The default format is : <strong>"%bt% (%sf.l%)"</strong><br />
@@ -176,8 +176,8 @@
         </dd>             
         <dt><strong>-apng:<em>[0/1]</em></strong></dt>
         <dd>
-        Enable/disable conversion of PNG files with palette that contain alpha channel into 32bit format. Many readers (especialy Adobe based)can't show 
-        paletterized alpha chanel PNGs. The possible values are 0 (disable) and <dfn>-apng:1</dfn> - default
+        Enable/disable conversion of PNG files with palette that contain alpha channel into 32bit format. Many readers (especially Adobe based)can't show 
+        paletterized alpha channel PNGs. The possible values are 0 (disable) and <dfn>-apng:1</dfn> - default
         </dd>                    
         <dt><strong>-cap:<em>[0/1]</em></strong></dt>
         <dd>
@@ -185,7 +185,7 @@
         </dd>
         <dt><strong>-xpgt:<em>[0/1]</em></strong></dt>
         <dd>
-        Enable (1) or disable (0, default) embeding of Adobe XPGT template into resulting ePub File. <dfn>-xpgt:0</dfn> - default
+        Enable (1) or disable (0, default) embedding of Adobe XPGT template into resulting ePub File. <dfn>-xpgt:0</dfn> - default
         </dd>
         <dt><strong>-xpgtPath:<em>[file_path]</em></strong></dt>
         <dd>
@@ -206,6 +206,8 @@
        <li>5 - Main and Publish info titles are ignored</li>
        <li>6 - Source and Publish info titles are ignored</li>
        </dd>
+        <dt><strong>-cfg:<em>&lt;path&gt;</em></strong></dt>
+        <dd>Allows to specify different settings file path to use for conversion</dd>
     </dl>
     <h2>
         Fonts:
@@ -235,28 +237,28 @@
         Transliteration:
     </h2>
     <p>
-        The transliteratin conversion mapping of the items that displayed without using
-        embeded fonts (book title, authors, chapter navigation points, etc) can be customized.
+        The transliterating conversion mapping of the items that displayed without using
+        embedded fonts (book title, authors, chapter navigation points, etc) can be customized.
         To customize transliteration open the <em>translit.xml</em> file and change (or
         add) mapping.<br />
-        Each &lt;map&gt; element has two required attributes: "in" - russin character on
-        input, and "out" - string to substitude in character with. You can modify either
+        Each &lt;map&gt; element has two required attributes: "in" - Russian character on
+        input, and "out" - string to substitute in character with. You can modify either
         one of them or both. The supplied <em>translit.xsd</em> file provides tool to validate
         resulting file in case needed,
         <br />
     </p>
     <h2>
-        Configuration defaults ( <em>Fb2ePub.exe.config</em> ):
+        Configuration defaults ( <em>defsettings.xml</em> ):
     </h2>
     <p>
-        Some default setting used by application are stored in <em>Fb2ePub.exe.config</em>
+        Some default setting used by converter are stored in <em>defsettings.xml</em>
         file.
     </p>
     <h3>
         Currently user can change following settings:
     </h3>
     <dl>
-        <dt>Transliterate</dt>
+        <dt>TransliterateBook</dt>
         <dd>
             - enable/disable transliteration of metadata 
             by default, values: "False" (Default), "True"
@@ -271,17 +273,17 @@
             - enable/disable transliteration of output file name by default, values: "False"
             (Default), "True"
         </dd>
-        <dt>FB2Info</dt>
+        <dt>AddFB2Info</dt>
         <dd> 
         - Enable/disable generation of additional FB2 info page at the end of the resulting EPUB.
           Values are: "True" (default) and "False"
         </dd>
-        <dt>AddSequences</dt>
+        <dt>AddSequenceNameToTitle</dt>
         <dd> 
-        - Enable/disable addition of abbreviated secuence names to the book title name
+        - Enable/disable addition of abbreviated sequence names to the book title name
           Values are: "True" (default) and "False"
         </dd>
-        <dt>SequenceFormat</dt>
+        <dt>FormatWithSequenceName</dt>
         <dd> 
          - Format book title description info (thanks wserg) , This allows to define what will be displayed on book description page. The following format options are allowed:<br />
             %bt% - BookTitle from FB2 header<br />
@@ -290,7 +292,7 @@
             %sn% - book number in the series<br />
            Also following modifiers specified after '.' (dot) are allowed for %bt%, $sf% and %sa%:<br />
             c - Capitalize, l - lowercase, u -UPPERCASE <br />
-            additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix of the number<br />
+            additionally for parameter %sn% numeric modifier can be used to specify 0-prefix of the number<br />
             The default format is same as in prev versions: "%bt% %sa.l%-%sn%"<br />
             Examples:<br />
             Serie: Star Wars<br />
@@ -298,20 +300,20 @@
             Number: 1<br />
             %sn.3% - 001 <br />
         </dd>
-        <dt>NoSequenceFormat</dt>
+        <dt>FormatWithOutSequenceName</dt>
         <dd> 
          - Format book title description info (thanks wserg) , This allows to define what will be displayed on book description page if book is part of series but does not have series number. The following format options are allowed:<br />
             %bt% - BookTitle from FB2 header<br />
-            %sf% - Serie full name from FB2 header<br />
-            %sa% - Serie abbviarated name from FB2 header<br />
+            %sf% - Series full name from FB2 header<br />
+            %sa% - Series abbviarated name from FB2 header<br />
            Also following modifiers specified after '.' (dot) are allowed for %bt%, $sf% and %sa%:<br />
             c - Capitalize, l - lowercase, u -UPPERCASE <br />
             The default format is: "%bt% (%sf.l%)"<br />
             Examples:<br />
-            Serie: Star Wars<br />
+            Series: Star Wars<br />
             %sf.u% - STAR WARS<br />
         </dd>
-        <dt>NoSeriesFormat</dt>
+        <dt>FormatWithOutSeriesName</dt>
         <dd> 
          - Format book title description info (thanks wserg) , This allows to define what will be displayed on book description page if book is not part of series. The following format options are allowed:<br />
             %bt% - BookTitle from FB2 header<br />
@@ -319,7 +321,7 @@
             c - Capitalize, l - lowercase, u -UPPERCASE <br />
             The default format is: "%bt%"<br />
         </dd>
-        <dt>AuthorFormat</dt>
+        <dt>AuthorNameFormat</dt>
         <dd>
             - Format author name , This allows to define what will be displayed on book description page. The following format options are allowed:<br />
             <dfn>%f%</dfn> - First name from FB2 header<br />
@@ -328,7 +330,7 @@
             <dfn>%n%</dfn> - Nick name from FB2 header<br />
            Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:<br />
             <dfn>c</dfn> - Capitalize, <dfn>l</dfn> - lowercase, <dfn>u</dfn> -UPPERCASE <br />
-            additionally another subformat <dfn>:b</dfn> can be added to take name in brackets<br />
+            additionally another sub format <dfn>:b</dfn> can be added to take name in brackets<br />
             The default format is : <strong>"%f.c%%m.c%%l.c%%n.c:b%"</strong><br />
         </dd>
         <dt>FileAsFormat</dt>
@@ -340,19 +342,19 @@
             <dfn>%n%</dfn> - Nick name from FB2 header<br />
            Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:<br />
             <dfn>c</dfn> - Capitalize, <dfn>l</dfn> - lowercase, <dfn>u</dfn> -UPPERCASE <br />
-            additionally another subformat <dfn>:b</dfn> can be added to take name in brackets<br />
+            additionally another sub format <dfn>:b</dfn> can be added to take name in brackets<br />
             The default format is : <strong>"%l.c%f.c"</strong><br />
         </dd>
         
-        <dt>FixMode</dt>
+        <dt>Fb2FixMode</dt>
         <dd> 
-        - Controls invoking of Fb2Fix to fix imput files 
+        - Controls invoking of Fb2Fix to fix input files 
           Values are: "0" - never try to fix ,  "1" - try to fix using internal algorithms only , "2" (default) - if internal algorithms fail try to apply FB2Fix, "3" - allways apply FB2Fix
         </dd>
         <dt>ConvertAlphaPNG</dt>
         <dd> 
-        - Controls conversion of palettarized PNG files with alpha chanel to 32 bit files. Many readers (especialy Adobe based)can't show 
-        paletterized alpha chanel PNGs. Values are: "False" - do not convert ,  "True" - always convert (default)
+        - Controls conversion of palatalized PNG files with alpha channel to 32 bit files. Many readers (especially Adobe based)can't show 
+        palatalized alpha channel PNGs. Values are: "False" - do not convert ,  "True" - always convert (default)
         </dd>     
         <dt>FlatStructure</dt>
         <dd> 
@@ -361,22 +363,47 @@
         </dd>       
         <dt>EmbedStyles</dt>
         <dd> 
-        - Invokes "embeding styles mode" that, instead of adding CCS files to the ePub and referencing them, in xHTML injects the relevant style code 
+        - Invokes "embedding styles mode" that, instead of adding CCS files to the ePub and referencing them, in xHTML injects the relevant style code 
           directly into the xHTML files. Values are: "False" - disabled (default) ,  "True" - enabled. The feature is for buggy readers that do not support reading styles from referenced files
         </dd>       
-        <dt>Capitalize</dt>
+        <dt>GenerateDropCharacters</dt>
         <dd> 
-        - Invokes "capitalization" of  section first character making it appera big and take several line. 
+        - Invokes "capitalization" of  section first (drop) character making it appear big and take several lines. 
         Values are: "False" - disabled  ,  "True" - enabled (default). 
         </dd>
-        <dt>UseAdobeTemplate</dt>
+        <dt>EnableAdobeTemplateUsage</dt>
         <dd>
-        - Controls if Adobe XPGT templkate is to be added to the resulting ePub file. Values: "True" and "False" (default). Please see <a href="http://wiki.mobileread.com/wiki/XPGT">http://wiki.mobileread.com/wiki/XPGT</a> for details on XPGT templates.
+        - Controls if Adobe XPGT template is to be added to the resulting ePub file. Values: "True" and "False" (default). Please see <a href="http://wiki.mobileread.com/wiki/XPGT">http://wiki.mobileread.com/wiki/XPGT</a> for details on XPGT templates.
         </dd>
         <dt>AdobeTemplatePath</dt>
         <dd>
         - Specifies non-default path to the XPGT template to use in case enabled (in case of empty - default "Template" folder "template.xpgt" file used.
         </dd>
+        <dt>IgnoreTitleOption</dt>
+        <dd>- Controls if one or more FB2 titles should be ignored when generating ePub. Values: &quot;IgnoreNothing&quot;(default) ,  &quot;IgnoreMainTitle&quot; ,  &quot;IgnoreSourceTitle&quot;,  &quot;IgnorePublishTitle&quot;,  &quot;IgnoreMainAndSource&quot;,  &quot;IgnoreMainAndPublish&quot; ,  &quot;IgnoreSourceAndPublish&quot;  . </dd>
+        <dt>DecorateFontNames</dt>
+        <dd>-Controls if font names should be "decorated" using random characters to work around font cacke bug present on some Adobe based readers. Values: &quot;true&quot;(default) ,  &quot;false&quot; </dd>
+        <dt>Fonts</dt>
+        <dd>Fonts settings section , see format bellow</dd>
+    </dl>
+    <h3>Fonts settings</h3>
+    <dl>Fonts section can be empty, this means no fonts are to be embedded and device internal fonts will be used always</dl>
+    <dl>
+        <h4>Format of the Fonts Section:</h4>
+        FontFamilies - list of the fonts families to embed
+        CSSElements - list of the CSS/XHTML elements to assign fonts families to
+        <h5>Format of the FontFamilies section</h5>
+        <p>Each FontFamilies section can contain up to several FontFamily elements. that in turn consist of Font sections listing specific fonts with their properties and sources (locations)</p>
+        <p>Each font can have following styles(attributes):</p>
+        <li>style</li>
+        <li>variant</li>
+        <li>width</li>
+        <li>stretch</li>
+        <li>format</li>
+        <p>Each Font can also contain several  Source elements defining font location with attributes:</p>
+        <li>type</li>
+        <li>format</li>
+        <p>and Location defining path to the font file</p>
     </dl>
     <h2>
         Installation</h2>
@@ -384,8 +411,8 @@
     <p>2. Make sure that you have <a href=http://www.microsoft.com/en-us/download/details.aspx?id=17851>.Net 4.0</a> installed</p>    
     <p>3. If you wish to register right mouse click shell extension please either execute <strong>FB2EPUB /R</strong> from that folder or run <strong>RegisterFB2EPub.EXE</strong>. Please note that you have to be administrator or have admenistrative access on your computer to register right click shell extension.</p>        
     <h2>
-        Upgrading from previouse version</h2>
-    <p>1. Unregister previously registered shell extension using either <strong>FB2EPUB /U</strong> from that folder or runing <strong>RegisterFB2EPub.EXE</strong> and selecting unregistration option (Please note that you have to be administrator or have admenistrative access on your computer to unregister right click shell extension.)</p>        
+        Upgrading from previous version</h2>
+    <p>1. Unregister previously registered shell extension using either <strong>FB2EPUB /U</strong> from that folder or running <strong>RegisterFB2EPub.EXE</strong> and selecting unregistration option (Please note that you have to be administrator or have admenistrative access on your computer to unregister right click shell extension.)</p>        
     <p>2. Reboot your computer</p>        
     <p>3. Unpack new version either into a new folder (in this case you can delete old one) or overwriting into an old folder</p>
     <p>4. If you wish to register right mouse click shell extension please either execute <strong>FB2EPUB /R</strong> from that folder or run <strong>RegisterFB2EPub.EXE</strong>. Please note that you have to be administrator or have admenistrative access on your computer to register right click shell extension. </p>

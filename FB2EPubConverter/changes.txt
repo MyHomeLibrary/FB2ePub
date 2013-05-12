@@ -1,42 +1,45 @@
 ﻿1.1.4
++ Added new option for command line utility "/cfg:<path>" to perform conversions using external configuration file
 * Fixed installer problem on x86 systems downloading VCRedist x86 twice
 * The shell extension no longer looks for a converter path, as it's a COM object now
 * Returned registration of shell extension for 32 bit programs on 64 bit machine that was broken in prev. version
+* Moved conversion options configuration to different file defsetting.xml that will be located in user profile, if not exist will be copied there from program folder or created from defaults. This file will be used by all converters either command line , GUI or COM.
+* When creating configuration from defaults it will not have font settings included
 
 
 1.1.3
-+ Added settings.cmd file and shourtcut to configure command line converter settings
++ Added settings.cmd file and shortcut to configure command line converter settings
 + Added "succeeded" message at the end of FBE export
 * Fixed crash when browse for font button was used from command line utility settings
 
 1.1.2
 + Added text  and image to about dialog to FB2ePub GUI utility
-* Fixed installer so now .net and VCresdist are called wirh minimal user prompt (passive mode)
+* Fixed installer so now .net and VCresdist are called with minimal user prompt (passive mode)
 * Moved registration of shell extension from RegisterFb2ePub.exe to installer, as result removed RegisterFb2ePub.exe completely
 * Removed self registration code from shell extension DLL
 * Reverted back to .Net 4.0 Client to continue XP support
 * Fixed 64bit install to install 32 version of VCRT as well in order to support FBE extension
 
 1.1.1
-+ Added new CSS element "poem_subtitle" for poem's subtitles, also styled it to left allign
++ Added new CSS element "poem_subtitle" for poem's subtitles, also styled it to left align
 + Added new CSS element "poem_title" for poem's title
-+ Added new CSS element "poem_epigraph" for poem's epigraphs, to destinguish from regular text epigraphs, so they can be styled differently
++ Added new CSS element "poem_epigraph" for poem's epigraphs, to distinguish from regular text epigraphs, so they can be styled differently
 * Fixed converter dropping the "strikethrough" tag text
 * Fixed converting of poem subtitles
-* If parfagraph at the start of the section starts with image, we assume it's a "drop" image and do not create a drop character afterwards
+* If paragraph at the start of the section starts with image, we assume it's a "drop" image and do not create a drop character afterwards
 * Fixed case of incorrect display when paragraph starts from link and Drop is enabled
 * Fixed case when fonts were not applied by readers in case decoration option was enabled and document had a Id containing '{' or '}' characters
-* Fixed case when file name containing severa '.'-s was cut to the first '.' when automatically generating ePub file name 
+* Fixed case when file name containing several '.'-s was cut to the first '.' when automatically generating ePub file name 
 
 
 1.1.0
 (Major revoke)
 + Moved to Visual Studio 2012 Update 1
 + Moved to .Net 4.5
-+ Moved to InnoSetup (warning: need to uninstall prev. version manualy , upgrade does not work)
++ Moved to InnoSetup (warning: need to uninstall prev. version manually , upgrade does not work)
 + Setup now is unified for both x64 and Win32 versions
 + Added support to act as export for FBE (you can "Save as" to ePub now)
-* Changed UnRar library used, both because Chiklite no longer suport theirs and becouse I needed something that compiled as AnyCPU to resolve installation issues
+* Changed UnRar library used, both because Chiklite no longer support theirs and because I needed something that compiled as AnyCPU to resolve installation issues
 * Fixed missing "FixAlways" item from the settings dialog
 
 
@@ -54,7 +57,7 @@
 
 1.0.49
 * Fixed crash if user clicked "Reset" in settings
-* Changed both command libne utility and GUI to use same version source file (this fixes issue when GUI added it's own version to converted ePub file)
+* Changed both command line utility and GUI to use same version source file (this fixes issue when GUI added it's own version to converted ePub file)
 * Fixed wait cursor in the GUI while converting
 * Changed GUI utility to use multicore CPUs (now if processing several files each file processed on it's own core)
 * Changed command line utility to use multicore CPUs (now if processing several files each file processed on it's own core)

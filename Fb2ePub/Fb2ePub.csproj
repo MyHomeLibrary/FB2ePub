@@ -148,6 +148,10 @@
       <Name>FB2EPubConverter</Name>
       <Private>True</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Fb2epubSettings\Fb2epubSettings.csproj">
+      <Project>{bb87c009-1337-43ff-adf6-6e7861aa9343}</Project>
+      <Name>Fb2epubSettings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FolderSettingsHelper\FolderSettingsHelper.csproj">
       <Project>{97C916FF-6271-44F8-9A20-6E0A0389524B}</Project>
       <Name>FolderSettingsHelper</Name>

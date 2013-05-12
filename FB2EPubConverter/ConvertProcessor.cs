@@ -13,13 +13,23 @@ using Fb2ePubConverter;
 using FB2EPubConverter.Interfaces;
 using System.Runtime.InteropServices;
 using Fb2epubSettings;
+using System.Configuration;
+using Microsoft.Win32;
 
 namespace FB2EPubConverter
 {
     [Guid("0FF011AD-18A5-4CF2-8AB1-011AA9AA2BDF"),ComVisible(true)]
     public class ConvertProcessor : IEPubConverterInterface
     {
+        internal static class Logger
+        {
+            // Create a logger for use in this class
+            public static readonly log4net.ILog Log = log4net.LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
+
+        }
+
         private readonly ConvertProcessorSettings _processorSettings = new ConvertProcessorSettings();
+        //private string _settingsFileName = @"c:\settings.xml";
 
         public ConvertProcessorSettings ProcessorSettings { get { return _processorSettings; } }
 
@@ -49,60 +59,68 @@ namespace FB2EPubConverter
                 _processorSettings.ProgressCallbacks.ConvertStarted(filesCount);
             }
 
-
-            Parallel.ForEach(filesInMask, (file) =>
-                                              {
-                int Id;
-                lock (_processorSettings)
-                {
-                  Id   = successfullyConverted++;                    
-                }
-           
-                Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine()
-                {
-                    Settings = _processorSettings.Settings
-                };
-                try
-                {
-                    if (_processorSettings.ProgressCallbacks != null)
-                    {
-                        _processorSettings.ProgressCallbacks.ProcessingStarted(file,Id, filesCount);
-                    }
-
-                    if (!converter.ConvertFile(file))
-                    {
-                        if (_processorSettings.ProgressCallbacks != null)
-                        {
-                            _processorSettings.ProgressCallbacks.SkippedDueError(file);
-                        }
-                        return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    if (_processorSettings.ProgressCallbacks != null)
-                    {
-                        _processorSettings.ProgressCallbacks.SkippedDueError(file);
-                    }
-                    Logger.Log.Error(ex);
-                    return;
-                }
-                string fileName = BuildNewFileName(file,outputFileName);
-                Console.WriteLine(string.Format("Saving {0}...", fileName));
-                if (_processorSettings.ProgressCallbacks != null)
-                {
-                    _processorSettings.ProgressCallbacks.ProcessingSaving(fileName,Id, filesCount);
-                }
-                SaveAndCleanUp(converter, fileName, file);
-                if (_processorSettings.ProgressCallbacks != null)
-                {
-                    _processorSettings.ProgressCallbacks.Processed(fileName, Id, filesCount);
-                }
-            });
-
-            if (_processorSettings.ProgressCallbacks != null)
+            try
             {
-                _processorSettings.ProgressCallbacks.ConvertFinished(successfullyConverted);
+                Parallel.ForEach(filesInMask, (file) =>
+                                                  {
+                                                      int Id;
+                                                      lock (_processorSettings)
+                                                      {
+                                                          Id = successfullyConverted++;
+                                                      }
+
+                                                      Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine()
+                                                      {
+                                                          Settings = _processorSettings.Settings
+                                                      };
+                                                      try
+                                                      {
+                                                          if (_processorSettings.ProgressCallbacks != null)
+                                                          {
+                                                              _processorSettings.ProgressCallbacks.ProcessingStarted(file, Id, filesCount);
+                                                          }
+
+                                                          if (!converter.ConvertFile(file))
+                                                          {
+                                                              if (_processorSettings.ProgressCallbacks != null)
+                                                              {
+                                                                  _processorSettings.ProgressCallbacks.SkippedDueError(file);
+                                                              }
+                                                              return;
+                                                          }
+                                                      }
+                                                      catch (Exception ex)
+                                                      {
+                                                          if (_processorSettings.ProgressCallbacks != null)
+                                                          {
+                                                              _processorSettings.ProgressCallbacks.SkippedDueError(file);
+                                                          }
+                                                          Logger.Log.Error(ex);
+                                                          return;
+                                                      }
+                                                      string fileName = BuildNewFileName(file, outputFileName);
+                                                      Console.WriteLine(string.Format("Saving {0}...", fileName));
+                                                      if (_processorSettings.ProgressCallbacks != null)
+                                                      {
+                                                          _processorSettings.ProgressCallbacks.ProcessingSaving(fileName, Id, filesCount);
+                                                      }
+                                                      SaveAndCleanUp(converter, fileName, file);
+                                                      if (_processorSettings.ProgressCallbacks != null)
+                                                      {
+                                                          _processorSettings.ProgressCallbacks.Processed(fileName, Id, filesCount);
+                                                      }
+                                                  });
+            }
+            catch(Exception ex)
+            {
+                Logger.Log.Error(ex.Message);
+            }
+            finally
+            {
+                if (_processorSettings.ProgressCallbacks != null)
+                {
+                    _processorSettings.ProgressCallbacks.ConvertFinished(successfullyConverted);
+                }
             }
 
         }
@@ -189,26 +207,28 @@ namespace FB2EPubConverter
         /// Loads the settings from Fb2epub settings configuration storage object
         /// </summary>
         /// <param name="fb2EpubSettings"></param>
-        public void LoadSettings(Fb2epubSettings.Fb2Epub fb2EpubSettings)
+        public void LoadSettings(ConverterSettings fb2EpubSettings)
         {
+            LoadSettings();
+
             ConverterSettings settings = _processorSettings.Settings;
             settings.Transliterate = fb2EpubSettings.Transliterate;
             settings.TransliterateFileName = fb2EpubSettings.TransliterateFileName;
-            settings.TransliterateToc = fb2EpubSettings.TransliterateTOC;
-            settings.Fb2Info = fb2EpubSettings.FB2Info;
+            settings.TransliterateToc = fb2EpubSettings.TransliterateToc;
+            settings.Fb2Info = fb2EpubSettings.Fb2Info;
             settings.FixMode = (FixOptions)fb2EpubSettings.FixMode;
-            settings.AddSeqToTitle = fb2EpubSettings.AddSequences;
+            settings.AddSeqToTitle = fb2EpubSettings.AddSeqToTitle;
             settings.SequenceFormat = fb2EpubSettings.SequenceFormat;
             settings.NoSequenceFormat = fb2EpubSettings.NoSequenceFormat;
             settings.NoSeriesFormat = fb2EpubSettings.NoSeriesFormat;
-            settings.Flat = fb2EpubSettings.FlatStructure;
-            settings.ConvertAlphaPng = fb2EpubSettings.ConvertAlphaPNG;
+            settings.Flat = fb2EpubSettings.Flat;
+            settings.ConvertAlphaPng = fb2EpubSettings.ConvertAlphaPng;
             settings.EmbedStyles = fb2EpubSettings.EmbedStyles;
             settings.AuthorFormat = fb2EpubSettings.AuthorFormat;
             settings.FileAsFormat = fb2EpubSettings.FileAsFormat;
-            settings.CapitalDrop = fb2EpubSettings.Capitalize;
+            settings.CapitalDrop = fb2EpubSettings.CapitalDrop;
             settings.SkipAboutPage = fb2EpubSettings.SkipAboutPage;
-            settings.EnableAdobeTemplate = fb2EpubSettings.UseAdobeTemplate;
+            settings.EnableAdobeTemplate = fb2EpubSettings.EnableAdobeTemplate;
             settings.AdobeTemplatePath = fb2EpubSettings.AdobeTemplatePath;
             settings.DecorateFontNames = fb2EpubSettings.DecorateFontNames;
             settings.IgnoreTitle = (IgnoreTitleOptions)fb2EpubSettings.IgnoreTitle;
@@ -298,7 +318,7 @@ namespace FB2EPubConverter
 
         public void ConvertPath(string inputPath, string outputFolder, IProgressUpdateInterface progress)
         {
-            LoadSettings(Fb2Epub.Default);
+            LoadSettings();
             ProcessorSettings.ProgressCallbacks = progress;
             ProcessorSettings.Settings.OutPutPath = outputFolder;
             List<string> fileParams = new List<string>();
@@ -312,7 +332,7 @@ namespace FB2EPubConverter
 
         public void ConvertList(string[] files, string outputFolder, IProgressUpdateInterface progress)
         {
-            LoadSettings(Fb2Epub.Default);
+            LoadSettings();
             ProcessorSettings.Settings.OutPutPath = outputFolder;
             ProcessorSettings.ProgressCallbacks = progress;
             ProcessorSettings.Settings.ResourcesPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -322,7 +342,7 @@ namespace FB2EPubConverter
 
         public void ConvertSingleFile(string inputPath, string outputName, IProgressUpdateInterface progress)
         {
-            LoadSettings(Fb2Epub.Default);
+            LoadSettings();
             ProcessorSettings.ProgressCallbacks = progress;
             ProcessorSettings.Settings.ResourcesPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             List<string> filesInMask = new List<string>();
@@ -333,7 +353,7 @@ namespace FB2EPubConverter
 
         public void ConvertXml(XDocument doc, string outFileName, IProgressUpdateInterface progress)
         {
-            LoadSettings(Fb2Epub.Default);
+            LoadSettings();
             _processorSettings.DeleteSource = false;
             int successfullyConverted = 0;
 
@@ -392,7 +412,34 @@ namespace FB2EPubConverter
 
         public void LoadSettings()
         {
-            LoadSettings(Fb2Epub.Default);
+            ConverterSettingsFile file = new ConverterSettingsFile();
+            if (string.IsNullOrEmpty(_processorSettings.SettingsFileToUse) || !File.Exists(ProcessorSettings.SettingsFileToUse))
+            {
+                string filePath = null;
+                if ( !string.IsNullOrEmpty(_processorSettings.SettingsFileToUse) )
+                {
+                    Logger.Log.ErrorFormat("LoadSettings - the specified settings file \"{0}\" not found, going to use standard settings file",_processorSettings.SettingsFileToUse);
+                }
+                DefaultSettingsLocatorHelper.EnsureDefaultSettingsFilePresent(out filePath, file.Settings);
+                ProcessorSettings.SettingsFileToUse = filePath;
+            }
+            try
+            {
+                Logger.Log.InfoFormat("Loading settings from {0}", _processorSettings.SettingsFileToUse);
+                file.Load(ProcessorSettings.SettingsFileToUse);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.ErrorFormat("LoadSettings - unable to load file {0} , exception: {1}", _processorSettings.SettingsFileToUse, ex.ToString());
+            }
+            try
+            {
+                _processorSettings.Settings.CopyFrom(file.Settings);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.ErrorFormat("LoadSettings - unable to copy settings , exception: {0}",  ex.ToString());
+            }
         }
     }
 }

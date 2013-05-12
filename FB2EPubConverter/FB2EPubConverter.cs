@@ -36,6 +36,7 @@ using EPubLibrary.ReferenceUtils;
 using ZipEntry=ICSharpCode.SharpZipLib.Zip.ZipEntry;
 using FB2Fix;
 using NUnrar.Archive;
+using Fb2epubSettings;
 
 
 namespace Fb2ePubConverter

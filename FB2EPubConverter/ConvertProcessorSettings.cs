@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FB2EPubConverter.Interfaces;
+using Fb2epubSettings;
 
 namespace FB2EPubConverter
 {
@@ -44,6 +45,11 @@ namespace FB2EPubConverter
         /// Get/Set reference to progress callback interface
         /// </summary>
         public IProgressUpdateInterface ProgressCallbacks { get; set; }
+
+        /// <summary>
+        /// Returns the name of the settings file to use, null if we need to use default file
+        /// </summary>
+        public string SettingsFileToUse { get; set; }
 
     }
 }
