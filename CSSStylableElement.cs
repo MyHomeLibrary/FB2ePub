@@ -9,7 +9,7 @@ namespace FontsSettings
     /// <summary>
     /// Represent any element (HTTP or .class) that can be styled
     /// </summary>
-    [Serializable]
+    /// 
     public class CSSStylableElement
     {
         private string _name = string.Empty;
