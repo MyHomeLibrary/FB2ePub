@@ -110,7 +110,12 @@ namespace Fb2ePub
         /// <returns>true if proper known command was processed, false if unrecognized command</returns>
         private static bool ProcessSingleOptionCommand(string singleOptionCommand)
         {
-            return true;
+            if ((singleOptionCommand.ToLower() == "/settings") || singleOptionCommand.ToLower() == "-settings")
+            {
+                ConvertProcessor.ShowSettinsDialog(null);
+                return true;
+            }
+            return false;
         }   
 
 
