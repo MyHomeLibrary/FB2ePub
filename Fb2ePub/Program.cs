@@ -121,7 +121,7 @@ namespace Fb2ePub
 
         private static void SetupLogAndData()
         {
-            string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(), "Lord KiRon\\");
+            string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(), @"Lord_KiRon\");
             GlobalContext.Properties["LogName"] = logPath;
             log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
             // Log an info level message
