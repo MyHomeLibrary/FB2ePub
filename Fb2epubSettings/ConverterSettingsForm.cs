@@ -576,7 +576,7 @@ namespace Fb2epubSettings
             selectTemplateDlg.DefaultExt = "*.xpgt";
             selectTemplateDlg.FilterIndex = 1;
             selectTemplateDlg.Multiselect = false;
-            selectTemplateDlg.Filter = string.Format("XPGT file | *.xpgt|Any file | *.*");
+            selectTemplateDlg.Filter = "XPGT file | *.xpgt|Any file | *.*";
             selectTemplateDlg.RestoreDirectory = true;
             selectTemplateDlg.ShowReadOnly = false;
             selectTemplateDlg.SupportMultiDottedExtensions = true;
@@ -783,6 +783,13 @@ namespace Fb2epubSettings
         private void comboBoxIgnoreTitle_SelectedIndexChanged(object sender, EventArgs e)
         {
             _settings.IgnoreTitle= (IgnoreTitleOptions)comboBoxIgnoreTitle.SelectedIndex;
+        }
+
+        private void buttonImportExport_Click(object sender, EventArgs e)
+        {
+            ImportExportForm form = new ImportExportForm(_settings);
+            DialogResult result =  form.ShowDialog();
+            ConverterSettingsForm_Load(this, null);
         }
 
 

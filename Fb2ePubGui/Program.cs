@@ -21,7 +21,7 @@ namespace Fb2ePubGui
         [STAThread]
         static void Main()
         {
-            string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(), "Lord KiRon\\");
+            string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(), @"Lord_KiRon\");
             GlobalContext.Properties["LogName"] = logPath;
             log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
 
