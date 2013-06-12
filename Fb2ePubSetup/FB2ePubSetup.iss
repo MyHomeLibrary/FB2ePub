@@ -3,6 +3,7 @@
 
 #define MyAppName "FB2ePub"
 #define MyAppPublisher "Lord KiRon"
+#define MyAppSubfolder "Lord_KiRon\FB2ePub"
 #define MyAppURL "http://www.fb2epub.net"
 #define Contact "lordkiron@fb2epub.net"
 #define BaseFolder "C:\Project\GoogleCode\fb2epub\"
@@ -51,9 +52,9 @@ Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Files]
 ; common
-Source: "{#BuildFolder}CSS\*"; DestDir: "{app}\CSS"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#BuildFolder}Fonts\*"; DestDir: "{app}\Fonts"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#BuildFolder}Translit\*"; DestDir: "{app}\Translit"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#BuildFolder}CSS\*"; DestDir: "{commonappdata}\{#MyAppSubfolder}\CSS"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#BuildFolder}Fonts\*"; DestDir: "{commonappdata}\{#MyAppSubfolder}\Fonts"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#BuildFolder}Translit\*"; DestDir: "{commonappdata}\{#MyAppSubfolder}\Translit"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#BuildFolder}ru\*"; DestDir: "{app}\ru";   Flags: recursesubdirs createallsubdirs
 Source: "{#BuildFolder}fb2.dtd"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}genrestransfer.xml"; DestDir: "{app}"; Flags: ignoreversion
@@ -79,10 +80,13 @@ Source: "{#BuildFolder}XHTMLClassLibrary.dll"; DestDir: "{app}";  Flags:
 Source: "{#BuildFolder}XMLFixerLibrary.dll"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}prompt.cmd"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}settings.cmd"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildFolder}readme_en.htm"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildFolder}readme_en.htm"; DestDir: "{app}"; Flags: ignoreversion  
 Source: "{#BuildFolder}epub-logo-color-book.ICO"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}license.docx"; DestDir: "{app}"; Flags: ignoreversion
 
+; configuration
+Source: "{#BuildFolder}defsettings.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildFolder}defsettings.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver 32bit
 
