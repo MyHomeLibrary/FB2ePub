@@ -135,6 +135,12 @@
   <data name="EditFontFamilyForm_textBoxFontFamilyName_Validating_Font_family_name_can_t_be_empty" xml:space="preserve">
     <value>Имя семейства шрифтов не может быть пустым</value>
   </data>
+  <data name="SelectFileNameSaveTo" xml:space="preserve">
+    <value>Выберите имя файла куда сохранить настройки</value>
+  </data>
+  <data name="SelectFileToLoadFrom" xml:space="preserve">
+    <value>Укажите имя файла для загрузки настроек</value>
+  </data>
   <data name="String1ConverterSettingsForm_buttonRemoveFont_Click_Font_used" xml:space="preserve">
     <value>Шрифт используется</value>
   </data>

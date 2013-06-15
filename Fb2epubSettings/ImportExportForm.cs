@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -12,6 +13,7 @@ namespace Fb2epubSettings
     public partial class ImportExportForm : Form
     {
         private ConverterSettings _settings = null;
+        public static readonly log4net.ILog Log = log4net.LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
 
         public ImportExportForm(ConverterSettings settings)
         {
@@ -30,7 +32,7 @@ namespace Fb2epubSettings
             fileOpenDialog.Multiselect = false;
             fileOpenDialog.ShowReadOnly = false;
             fileOpenDialog.SupportMultiDottedExtensions = true;
-            fileOpenDialog.Title = "Select configuration file to load settings from";
+            fileOpenDialog.Title = Resources.Fb2epubSettings.SelectFileToLoadFrom;
             fileOpenDialog.AddExtension = true;
             fileOpenDialog.AutoUpgradeEnabled = true;
             fileOpenDialog.CheckFileExists = true;
@@ -48,8 +50,10 @@ namespace Fb2epubSettings
                     result = DialogResult.OK;
                     Close();
                 }
-                catch (Exception)
-                {
+                catch (Exception ex)
+                {               
+                    MessageBox.Show(string.Format("Error loading file {0} : {1}", fileOpenDialog.FileName,ex.Message),"Load file error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    Log.Error( ex);
                 }
             }
         }
@@ -65,7 +69,7 @@ namespace Fb2epubSettings
             fileSaveDialog.Filter = "XML file | *.xml|Any file | *.*";
             fileSaveDialog.OverwritePrompt = true;
             fileSaveDialog.SupportMultiDottedExtensions = true;
-            fileSaveDialog.Title = "Select file name to save configuration to";
+            fileSaveDialog.Title = Resources.Fb2epubSettings.SelectFileNameSaveTo;
             fileSaveDialog.ValidateNames = true;
             DialogResult result = fileSaveDialog.ShowDialog();
             if (result == DialogResult.OK)
@@ -78,8 +82,10 @@ namespace Fb2epubSettings
                     result = DialogResult.OK;
                     Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    MessageBox.Show(string.Format("Error saving file {0} : {1}", fileSaveDialog.FileName, ex.Message), "Load file error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Log.Error(ex);
                 }
             }
         }

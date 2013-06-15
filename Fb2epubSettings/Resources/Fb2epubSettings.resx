@@ -138,4 +138,10 @@
   <data name="ConverterSettingsForm_buttonRemoveFont_FontNameMessage" xml:space="preserve">
     <value>Font {0}  is used by CSS elements. Please unassign them first before deleting</value>
   </data>
+  <data name="SelectFileNameSaveTo" xml:space="preserve">
+    <value>Select file name to save configuration to</value>
+  </data>
+  <data name="SelectFileToLoadFrom" xml:space="preserve">
+    <value>Select configuration file to load settings from</value>
+  </data>
 </root>

@@ -177,6 +177,9 @@
     <EmbeddedResource Include="ImportExportForm.resx">
       <DependentUpon>ImportExportForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ImportExportForm.ru.resx">
+      <DependentUpon>ImportExportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Fb2epubSettings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Fb2epubSettings.Designer.cs</LastGenOutput>

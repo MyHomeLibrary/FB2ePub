@@ -48,8 +48,8 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
             this.toolTip1.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -57,15 +57,16 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.listBoxFonts);
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.listBoxFonts);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
             // 
             // listBoxFonts
             // 
-            this.listBoxFonts.FormattingEnabled = true;
             resources.ApplyResources(this.listBoxFonts, "listBoxFonts");
+            this.listBoxFonts.FormattingEnabled = true;
             this.listBoxFonts.Name = "listBoxFonts";
             this.toolTip1.SetToolTip(this.listBoxFonts, resources.GetString("listBoxFonts.ToolTip"));
             this.listBoxFonts.SelectedValueChanged += new System.EventHandler(this.listBoxFonts_SelectedValueChanged);
