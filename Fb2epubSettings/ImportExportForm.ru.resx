@@ -117,28 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="buttonOK.Text" xml:space="preserve">
-    <value>Выбрать</value>
-  </data>
-  <data name="buttonOK.ToolTip" xml:space="preserve">
-    <value>Выбрать семью фонтов</value>
-  </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
-  <data name="buttonCancel.ToolTip" xml:space="preserve">
-    <value>Отменить выбор</value>
+  <data name="buttonLoad.Text" xml:space="preserve">
+    <value>Загрузить файл настроек...</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Доступные фонты</value>
+  <data name="buttonSave.Text" xml:space="preserve">
+    <value>Сохранить настройки в...</value>
   </data>
-  <data name="groupBox1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="buttonReset.Text" xml:space="preserve">
+    <value>Сброс настроек</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Выбор фонта для добавления</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value>Этот диалог выбирает семью фонтов, которой будет модифицирован CSS элемент</value>
+    <value>Импорт/Экспорт настроек</value>
   </data>
 </root>

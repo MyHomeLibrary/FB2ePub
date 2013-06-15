@@ -137,7 +137,7 @@
     <value>Отменить несохраненные изменения настроек</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>405, 72</value>
+    <value>405, 101</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
@@ -585,8 +585,17 @@ c - С Заглавной буквы, l - все буквы маленькие, 
 "Main&amp;Publish" - игнорировать Main и Publish info title секцию
 "Source&amp;Publish" - игнорировать Source и Publish info title секцию</value>
   </data>
+  <data name="buttonImportExport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>405, 72</value>
+  </data>
+  <data name="buttonImportExport.Text" xml:space="preserve">
+    <value>Файлы...</value>
+  </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>316, 197</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Настройки транслитерации</value>
   </data>
   <data name="tabPageTransliteration.Location" type="System.Drawing.Point, System.Drawing">
     <value>61, 4</value>
@@ -599,6 +608,9 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   </data>
   <data name="tabPageTransliteration.ToolTipText" xml:space="preserve">
     <value>Настройки транслитерации (для ридеров не поддерживающих русские фонты)</value>
+  </data>
+  <data name="groupBoxSequences.Text" xml:space="preserve">
+    <value>Серии</value>
   </data>
   <data name="tabPageSequences.Location" type="System.Drawing.Point, System.Drawing">
     <value>61, 4</value>

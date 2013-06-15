@@ -253,6 +253,9 @@
   <data name="buttonReset.ToolTip" xml:space="preserve">
     <value>Сбросить все изменения и вернутся к предыдущим настройкам</value>
   </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Название семейства шрифтов</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Редактирование семейства шрифтов</value>
   </data>
