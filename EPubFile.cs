@@ -182,11 +182,6 @@ namespace EPubLibrary
             }
             try
             {
-                //foreach (var cssFile in CSSFiles)
-                //{
-                //    cssFile.EPubFilePath = string.Format(FlatStructure ? "{0}" : @"css\{0}",
-                //                            Path.GetFileName(cssFile.FileExtPath));
-                //}
                 _mainCss.EPubFilePath = string.Format(FlatStructure ? "{0}" : @"css\{0}",
                                                      Path.GetFileName(_mainCss.FileExtPath));
                 using (var fileStream = File.Create(outFileName))

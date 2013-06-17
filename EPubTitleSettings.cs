@@ -233,7 +233,7 @@ namespace EPubLibrary
 
         /// <summary>
         /// Check if Title settings is valid meaning 
-        /// minimal requirments a filled
+        /// minimal requirements a filled
         /// </summary>
         /// <returns></returns>
         public bool IsValid()
