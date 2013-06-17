@@ -8,6 +8,7 @@
 * Changed to use innosetup 5.5.3
 * Doubled size of the single LOG file to reduce number of log files created
 * Fixed some issues with localization
+* Fixed a bug when book ID contained a characters not fit for CSS font family name and decoration enabled - resulted in CSS fonts (including Cyrillic) not being applied
 
 
 1.1.3
