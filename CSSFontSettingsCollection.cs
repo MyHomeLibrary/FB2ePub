@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace FontsSettings
 {
@@ -159,8 +160,9 @@ namespace FontsSettings
         }
 
         /// <summary>
-        /// Some decorations are not valid, for example in CSS they can't contain '{' or '}"
+        /// Some decorations are not valid, according to CSS standard
         /// here we filter them out
+        /// http://mathiasbynens.be/notes/unquoted-font-family
         /// </summary>
         /// <param name="decoration"></param>
         private void MakeDecorationValid(ref string decoration)
@@ -169,11 +171,17 @@ namespace FontsSettings
             {
                 return;
             }
-            decoration = decoration.Replace("{", string.Empty);
-            decoration = decoration.Replace("}", string.Empty);
-            if (string.IsNullOrEmpty(decoration)) // just in case there is nothing left
+            //In CSS, identifiers (including element names, classes, and IDs in selectors) can contain only the characters [a-zA-Z0-9] and ISO 10646 characters U+00A0 and higher, plus the hyphen (-) and the underscore (_).
+            string pattern1 = "[^-_a-zA-Z0-9\u00A0-\u10FFFF]";
+            string replacement = "a";
+            Regex processor = new Regex(pattern1);
+            decoration = processor.Replace(decoration, replacement);
+            // [Identifiers] cannot start with a digit, two hyphens, or a hyphen followed by a digit. Identifiers can also contain escaped characters and any ISO 10646 character as a numeric code
+            string pattern2 = @"^(-?\d|--)";
+           processor = new Regex(pattern2);
+            if (processor.IsMatch(decoration))
             {
-                decoration = string.Format("{0}", Guid.NewGuid().ToString());
+                decoration = string.Format("a{0}",decoration);
             }
         }
 
