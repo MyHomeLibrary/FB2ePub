@@ -504,14 +504,14 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   <data name="buttonAddFont.ToolTip" xml:space="preserve">
     <value>Добавить новое семейство шрифтов</value>
   </data>
-  <data name="columnHeaderFont.Text" xml:space="preserve">
-    <value>Шрифт</value>
-  </data>
   <data name="listViewFonts.Size" type="System.Drawing.Size, System.Drawing">
     <value>227, 175</value>
   </data>
   <data name="listViewFonts.ToolTip" xml:space="preserve">
     <value>Список семейств шрифтов</value>
+  </data>
+  <data name="columnHeaderFont.Text" xml:space="preserve">
+    <value>Шрифт</value>
   </data>
   <data name="listBoxCSSFonts.ToolTip" xml:space="preserve">
     <value>Шрифты назначеные выбранномы элементу</value>
@@ -591,11 +591,11 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   <data name="buttonImportExport.Text" xml:space="preserve">
     <value>Файлы...</value>
   </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 197</value>
+  <data name="buttonImportExport.ToolTip" xml:space="preserve">
+    <value>Открывает диалог позволяющий импортировать и экспортировать настройки с/в файл</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Настройки транслитерации</value>
+  <data name="tabControlSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 211</value>
   </data>
   <data name="tabPageTransliteration.Location" type="System.Drawing.Point, System.Drawing">
     <value>61, 4</value>
@@ -609,8 +609,11 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   <data name="tabPageTransliteration.ToolTipText" xml:space="preserve">
     <value>Настройки транслитерации (для ридеров не поддерживающих русские фонты)</value>
   </data>
-  <data name="groupBoxSequences.Text" xml:space="preserve">
-    <value>Серии</value>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>316, 197</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Настройки транслитерации</value>
   </data>
   <data name="tabPageSequences.Location" type="System.Drawing.Point, System.Drawing">
     <value>61, 4</value>
@@ -623,6 +626,9 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   </data>
   <data name="tabPageSequences.ToolTipText" xml:space="preserve">
     <value>Настройки форматирования данных для отображения</value>
+  </data>
+  <data name="groupBoxSequences.Text" xml:space="preserve">
+    <value>Серии</value>
   </data>
   <data name="tabPageDifferent.Location" type="System.Drawing.Point, System.Drawing">
     <value>61, 4</value>
@@ -648,15 +654,6 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   <data name="tabPageFonts.ToolTipText" xml:space="preserve">
     <value>Настройки шрифтов</value>
   </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 49</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Единственный путь</value>
-  </data>
-  <data name="listBoxPaths.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 134</value>
-  </data>
   <data name="tabPagePaths.Location" type="System.Drawing.Point, System.Drawing">
     <value>61, 4</value>
   </data>
@@ -669,14 +666,14 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   <data name="tabPagePaths.ToolTipText" xml:space="preserve">
     <value>Папки вывода расширения</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 49</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Путь:</value>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Единственный путь</value>
   </data>
-  <data name="groupBoxXPGTPath.Text" xml:space="preserve">
-    <value>Путь к шаблону XPGT </value>
+  <data name="listBoxPaths.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 134</value>
   </data>
   <data name="tabPageXPGT.Location" type="System.Drawing.Point, System.Drawing">
     <value>61, 4</value>
@@ -684,14 +681,20 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   <data name="tabPageXPGT.Size" type="System.Drawing.Size, System.Drawing">
     <value>322, 203</value>
   </data>
+  <data name="groupBoxXPGTPath.Text" xml:space="preserve">
+    <value>Путь к шаблону XPGT </value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Путь:</value>
+  </data>
   <data name="tabPageCSSElements.Location" type="System.Drawing.Point, System.Drawing">
     <value>61, 4</value>
   </data>
   <data name="tabPageCSSElements.Size" type="System.Drawing.Size, System.Drawing">
     <value>322, 203</value>
-  </data>
-  <data name="tabControlSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 211</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
