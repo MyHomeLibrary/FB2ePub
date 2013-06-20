@@ -67,6 +67,14 @@ namespace FontsSettings
         /// <param name="cssFontFamily"></param>
         public void CopyFrom(CSSFontFamily cssFontFamily)
         {
+            if (cssFontFamily == null)
+            {
+                throw new ArgumentNullException("cssFontFamily");
+            }
+            if (cssFontFamily == this)
+            {
+                return;
+            }
             _name = cssFontFamily.Name;
             _fonts.Clear();
             foreach (var cssFont in cssFontFamily.Fonts)

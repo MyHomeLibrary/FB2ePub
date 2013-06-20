@@ -38,6 +38,14 @@ namespace FontsSettings
 
         internal void CopyFrom(CSSStylableElement element)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException("element");
+            }
+            if (element == this)
+            {
+                return;
+            }
             _name= element._name;
             _class= element._class;
             _assignedFonts.Clear();

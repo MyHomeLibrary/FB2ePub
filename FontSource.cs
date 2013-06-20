@@ -71,6 +71,14 @@ namespace FontsSettings
 
         internal void CopyFrom(FontSource fontSource)
         {
+            if (fontSource == null)
+            {
+                throw new ArgumentNullException("fontSource");
+            }
+            if (fontSource == this)
+            {
+                return;
+            }
             Type = fontSource.Type;
             Location = fontSource.Location;
             Format = fontSource.Format;

@@ -350,6 +350,14 @@ namespace FontsSettings
 
         public void CopyFrom(CSSFont cssFont)
         {
+            if (cssFont == null)
+            {
+                throw new ArgumentNullException("cssFont");
+            }
+            if (cssFont == this)
+            {
+                return;
+            }
             _width = cssFont._width;
             FontStyle = cssFont.FontStyle;
             FontVariant = cssFont.FontVariant;
