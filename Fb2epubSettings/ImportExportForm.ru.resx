@@ -120,14 +120,26 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Отмена</value>
   </data>
+  <data name="buttonCancel.ToolTip" xml:space="preserve">
+    <value>Отменяет работу с диалогом и закрывает это окно</value>
+  </data>
   <data name="buttonLoad.Text" xml:space="preserve">
     <value>Загрузить файл настроек...</value>
+  </data>
+  <data name="buttonLoad.ToolTip" xml:space="preserve">
+    <value>Открывает диалог позволяющий выбрать файл настроек и загрузить их</value>
   </data>
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Сохранить настройки в...</value>
   </data>
+  <data name="buttonSave.ToolTip" xml:space="preserve">
+    <value>Открывает диалог позволяющий выбрать путь и имя файла, куда сохранить настройки</value>
+  </data>
   <data name="buttonReset.Text" xml:space="preserve">
     <value>Сброс настроек</value>
+  </data>
+  <data name="buttonReset.ToolTip" xml:space="preserve">
+    <value>Загружает набор самых базовых, дефолтных настроек</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Импорт/Экспорт настроек</value>
