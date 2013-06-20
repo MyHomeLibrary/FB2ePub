@@ -108,6 +108,9 @@
     <Compile Include="AddPathForm.Designer.cs">
       <DependentUpon>AddPathForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppleSettings\ePub_v2\AppleConverterePub2Settings.cs" />
+    <Compile Include="AppleSettings\AppleConverterSettings.cs" />
+    <Compile Include="AppleSettings\ePub_v2\AppleEPub2PlatformSettings.cs" />
     <Compile Include="ConverterSettings.cs" />
     <Compile Include="ConverterSettingsFile.cs" />
     <Compile Include="ConverterSettingsForm.cs">

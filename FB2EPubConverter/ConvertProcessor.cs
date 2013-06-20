@@ -232,6 +232,7 @@ namespace FB2EPubConverter
             settings.AdobeTemplatePath = fb2EpubSettings.AdobeTemplatePath;
             settings.DecorateFontNames = fb2EpubSettings.DecorateFontNames;
             settings.IgnoreTitle = (IgnoreTitleOptions)fb2EpubSettings.IgnoreTitle;
+            //settings.UseCustomFontsForApple = fb2EpubSettings.UseCustomFontsForApple;
             settings.Fonts = fb2EpubSettings.Fonts;
             
         }
@@ -253,7 +254,7 @@ namespace FB2EPubConverter
                     fileParams[0] += Path.DirectorySeparatorChar;
                 }
                 string fileName = Path.GetFileName(fileParams[0]);
-                // if empty file name or . we list folder
+                // if empty file name or '.' we list folder
                 if (string.IsNullOrEmpty(fileName) || fileParams[0].EndsWith("."))
                 {
                     // based on search mask options

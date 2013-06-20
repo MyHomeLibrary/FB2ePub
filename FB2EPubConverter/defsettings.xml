@@ -58,4 +58,16 @@
     </CSSElements>
   </Fonts>
   <ResourcesPath />
+    <AppleConverterEPub2Settings>
+    <V2Settings>
+      <Platforms>
+        <Platform PlatformType="Any">
+          <UseCusomFontsOnAppleDevices>true</UseCusomFontsOnAppleDevices>
+          <OpenToSpreadOnAppleDevices>false</OpenToSpreadOnAppleDevices>
+          <FixedLayoutOnAppleDevices>false</FixedLayoutOnAppleDevices>
+          <OrientationLockOnAppleDevices>Disabled</OrientationLockOnAppleDevices>
+        </Platform>
+      </Platforms>
+    </V2Settings>
+  </AppleConverterEPub2Settings>
 </ConverterSettings>
