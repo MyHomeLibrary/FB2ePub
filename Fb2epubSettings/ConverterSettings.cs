@@ -1,4 +1,5 @@
-﻿using FontsSettings;
+﻿using Fb2epubSettings.AppleSettings;
+using FontsSettings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,7 @@ namespace Fb2epubSettings
         private bool _decorateFontNames = false;
         private readonly EPubFontSettings _fonts = new EPubFontSettings();
         private string _resourcesPath = string.Empty;
+        private readonly AppleConverterSettings _appleEPubSettings = new AppleConverterSettings();
         #endregion
 
         public ConverterSettings()
@@ -89,6 +91,7 @@ namespace Fb2epubSettings
             _adobeTemplatePath = string.Empty;
             _decorateFontNames = true;
             _resourcesPath = string.Empty;
+            _appleEPubSettings.SetupDefaults();
 
             _fonts.FontFamilies.Clear();
             //CSSFontFamily family = new CSSFontFamily() { Name = @"LiberationSerif" };
@@ -371,6 +374,16 @@ namespace Fb2epubSettings
             set { _resourcesPath = value; }
         }
 
+        /// <summary>
+        /// Return reference to set of apple/iBook related settings
+        /// </summary>
+        [XmlElement(ElementName = "AppleConverterEPub2Settings")]
+        public AppleConverterSettings AppleConverterEPubSettings
+        {
+            get { return _appleEPubSettings; }
+            set { _appleEPubSettings.CopyFrom(value); }
+        }
+
         #endregion
 
         #region nonserializable_public_Properties
@@ -402,6 +415,11 @@ namespace Fb2epubSettings
             {
                 throw new ArgumentNullException("temp");
             }
+            if (temp == this)
+            {
+                return;
+            }
+
             _outputPath = temp._outputPath;
             _transliterate = temp._transliterate;
             _transliterateFileName = temp._transliterateFileName;
@@ -424,7 +442,8 @@ namespace Fb2epubSettings
             _adobeTemplatePath = temp._adobeTemplatePath;
             _decorateFontNames = temp._decorateFontNames;
             _fonts.CopyFrom(temp._fonts);
-            _resourcesPath = temp._resourcesPath;            
+            _resourcesPath = temp._resourcesPath;
+            _appleEPubSettings.CopyFrom(temp._appleEPubSettings);
         }
     }
 }

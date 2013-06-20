@@ -1,5 +1,7 @@
 ﻿1.1.4
 + Added new option for command line utility "/cfg:<path>" to perform conversions using external configuration file
++ Added option to generate Apple file that allows Apple devices to use custom (embedded) fonts
++ Addeded code to store and load apple related settings
 * Fixed installer problem on x86 systems downloading VCRedist x86 twice
 * The shell extension no longer looks for a converter path, as it's a COM object now
 * Returned registration of shell extension for 32 bit programs on 64 bit machine that was broken in prev. version
