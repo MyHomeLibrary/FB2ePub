@@ -203,39 +203,6 @@ namespace FB2EPubConverter
         }
 
 
-        /// <summary>
-        /// Loads the settings from Fb2epub settings configuration storage object
-        /// </summary>
-        /// <param name="fb2EpubSettings"></param>
-        public void LoadSettings(ConverterSettings fb2EpubSettings)
-        {
-            LoadSettings();
-
-            ConverterSettings settings = _processorSettings.Settings;
-            settings.Transliterate = fb2EpubSettings.Transliterate;
-            settings.TransliterateFileName = fb2EpubSettings.TransliterateFileName;
-            settings.TransliterateToc = fb2EpubSettings.TransliterateToc;
-            settings.Fb2Info = fb2EpubSettings.Fb2Info;
-            settings.FixMode = (FixOptions)fb2EpubSettings.FixMode;
-            settings.AddSeqToTitle = fb2EpubSettings.AddSeqToTitle;
-            settings.SequenceFormat = fb2EpubSettings.SequenceFormat;
-            settings.NoSequenceFormat = fb2EpubSettings.NoSequenceFormat;
-            settings.NoSeriesFormat = fb2EpubSettings.NoSeriesFormat;
-            settings.Flat = fb2EpubSettings.Flat;
-            settings.ConvertAlphaPng = fb2EpubSettings.ConvertAlphaPng;
-            settings.EmbedStyles = fb2EpubSettings.EmbedStyles;
-            settings.AuthorFormat = fb2EpubSettings.AuthorFormat;
-            settings.FileAsFormat = fb2EpubSettings.FileAsFormat;
-            settings.CapitalDrop = fb2EpubSettings.CapitalDrop;
-            settings.SkipAboutPage = fb2EpubSettings.SkipAboutPage;
-            settings.EnableAdobeTemplate = fb2EpubSettings.EnableAdobeTemplate;
-            settings.AdobeTemplatePath = fb2EpubSettings.AdobeTemplatePath;
-            settings.DecorateFontNames = fb2EpubSettings.DecorateFontNames;
-            settings.IgnoreTitle = (IgnoreTitleOptions)fb2EpubSettings.IgnoreTitle;
-            //settings.UseCustomFontsForApple = fb2EpubSettings.UseCustomFontsForApple;
-            settings.Fonts = fb2EpubSettings.Fonts;
-            
-        }
 
         /// <summary>
         /// Detects all files we need to process 
@@ -403,7 +370,7 @@ namespace FB2EPubConverter
 
         #endregion
 
-        public static bool ShowSettinsDialog(IWin32Window parent)
+        public static bool ShowSettingsDialog(IWin32Window parent)
         {
             ConverterSettingsForm settingsForm = new ConverterSettingsForm();
             settingsForm.TopLevel = true;
@@ -411,6 +378,9 @@ namespace FB2EPubConverter
 
         }
 
+        /// <summary>
+        /// Load settings from one of the default settings locations or file specified
+        /// </summary>
         public void LoadSettings()
         {
             ConverterSettingsFile file = new ConverterSettingsFile();

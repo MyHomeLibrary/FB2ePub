@@ -112,7 +112,7 @@ namespace Fb2ePub
         {
             if ((singleOptionCommand.ToLower() == "/settings") || singleOptionCommand.ToLower() == "-settings")
             {
-                ConvertProcessor.ShowSettinsDialog(null);
+                ConvertProcessor.ShowSettingsDialog(null);
                 return true;
             }
             return false;

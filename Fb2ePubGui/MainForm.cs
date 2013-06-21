@@ -48,7 +48,7 @@ namespace Fb2ePubGui
                 return;
             }
            
-            if ( ConvertProcessor.ShowSettinsDialog(this) )
+            if ( ConvertProcessor.ShowSettingsDialog(this) )
             {
                 LoadPaths();
                 comboBoxDestination.SelectedIndex = 0;               
