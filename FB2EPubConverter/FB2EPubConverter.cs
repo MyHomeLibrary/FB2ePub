@@ -37,6 +37,7 @@ using ZipEntry=ICSharpCode.SharpZipLib.Zip.ZipEntry;
 using FB2Fix;
 using NUnrar.Archive;
 using Fb2epubSettings;
+using EPubLibrary.AppleEPubV2Extensions;
 
 
 namespace Fb2ePubConverter
@@ -620,6 +621,7 @@ namespace Fb2ePubConverter
                     PassHeaderDataFromFb2ToEpub(epubFile, fb2File);
                     SetupCSS(epubFile);
                     SetupFonts(epubFile);
+                    SetupAppleSettings(epubFile);
                     PassTextFromFb2ToEpub(epubFile, fb2File);
                     if (Settings.Fb2Info)
                     {
@@ -678,6 +680,52 @@ namespace Fb2ePubConverter
                 Logger.Log.ErrorFormat("Error saving file {0} : {1} - {2}", outFileName,ex.StackTrace, ex);
                 throw;
             }
+        }
+
+        private void SetupAppleSettings(EPubFile epubFile)
+        {
+            if (epubFile == null)
+            {
+                throw new ArgumentNullException("epubFile");
+            }
+            // setup epub2 options
+            epubFile.AppleOptions.Reset();
+            foreach (var platform in Settings.AppleConverterEPubSettings.V2Settings.Platforms)
+            {
+                AppleTargetPlatform targetPlatform = new AppleTargetPlatform();
+                switch (platform.Name)
+                {
+                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleTargetPlatform.All:
+                        targetPlatform.Type = PlatformType.All;
+                        break;
+                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleTargetPlatform.iPad:
+                        targetPlatform.Type = PlatformType.iPad;
+                        break;
+                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleTargetPlatform.iPhone:
+                        targetPlatform.Type = PlatformType.iPhone;
+                        break;
+                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleTargetPlatform.NotSet: // we not going to add if type not set
+                        Logger.Log.Error("SetupAppleSettings() - passed apple platform of type NotSet");
+                        continue;
+                }
+                targetPlatform.FixedLayout = platform.FixedLayout;
+                targetPlatform.OpenToSpread = platform.OpenToSpread;
+                targetPlatform.CustomFontsAllowed = platform.UseCustomFonts;
+                switch(platform.OrientationLock)
+                {
+                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleOrientationLock.None:
+                        targetPlatform.OrientationLockType = OrientationLock.Off;               
+                        break;
+                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleOrientationLock.LandscapeOnly:
+                        targetPlatform.OrientationLockType = OrientationLock.LandscapeOnly;
+                        break;
+                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleOrientationLock.PortraitOnly:
+                        targetPlatform.OrientationLockType = OrientationLock.PortraitOnly;
+                        break;
+                }
+                epubFile.AppleOptions.AddPlatform(targetPlatform);
+            }
+            
         }
 
         private void UpdateInternalLinks(EPubFile epubFile, FB2File fb2File)
