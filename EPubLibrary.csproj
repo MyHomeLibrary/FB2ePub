@@ -123,6 +123,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppleEPubV2Extensions\AppleDisplayOptionsFile.cs" />
+    <Compile Include="AppleEPubV2Extensions\AppleTargetPlatform.cs" />
     <Compile Include="Container\ContainerFile.cs" />
     <Compile Include="Content\ContentFile.cs" />
     <Compile Include="Content\Guide\GuideSection.cs" />

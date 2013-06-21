@@ -17,6 +17,7 @@ using ICSharpCode.SharpZipLib.Zip;
 using TranslitRu;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
+using EPubLibrary.AppleEPubV2Extensions;
 
 namespace EPubLibrary
 {
@@ -54,13 +55,7 @@ namespace EPubLibrary
         private readonly List<string> _aboutTexts = new List<string>();
         private readonly List<string> _aboutLinks = new List<string>();
         private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
-
-        /// <summary>
-        /// Collection of fonts for this file
-        /// </summary>
-        //private readonly  FontsCollection _fontsCollection = new FontsCollection();
-
-
+        private readonly AppleDisplayOptionsFile _appleOptionsFile = new AppleDisplayOptionsFile();
         private readonly Dictionary<string,EPUBImage> _images = new Dictionary<string ,EPUBImage>();
 
         public List<BookDocument> BookDocuments { get { return _sections; } }
@@ -79,10 +74,14 @@ namespace EPubLibrary
 
         /// <summary>
         /// Get/Set "flat" mode , when flat mode is set no subfolders created inside the ZIP
-        /// used to work aroun bugs in some readers
+        /// used to work around bugs in some readers
         /// </summary>
         public bool FlatStructure { get; set; }
 
+
+        /// <summary>
+        /// Transliteration mode
+        /// </summary>
         public TranslitModeEnum TranslitMode = TranslitModeEnum.ExternalRuleFile;
 
         // All sequences in the book
@@ -144,6 +143,14 @@ namespace EPubLibrary
             {
                 return _aboutLinks;
             }
+        }
+
+        /// <summary>
+        /// Returns reference to apple options file
+        /// </summary>
+        public AppleDisplayOptionsFile AppleOptions
+        {
+            get { return _appleOptionsFile; }
         }
 
         public bool IsValid()
@@ -209,6 +216,16 @@ namespace EPubLibrary
         {
             AddMetaDataFolder(stream);
             AddMetaDataFile(stream);
+            AddAppleOptionsFile(stream); // generate apple options file with custom fonts option allowed
+        }
+
+        private void AddAppleOptionsFile(ZipOutputStream stream)
+        {
+            stream.SetLevel(9);
+            ZipEntry metaDataFile = _zipFactory.MakeFileEntry(@"META-INF\com.apple.ibooks.display-options.xml", false);
+            stream.PutNextEntry(metaDataFile);
+            _appleOptionsFile.Write(stream);
+            stream.CloseEntry();
         }
 
         private void AddMetaDataFile(ZipOutputStream stream)
@@ -696,6 +713,7 @@ namespace EPubLibrary
             _sections.Add(section);
             return section;
         }
+
 
         public void SetEPubFonts(EPubFontSettings fonts, string resourcesPath, bool decorateFontNames)
         {
