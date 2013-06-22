@@ -145,6 +145,15 @@
   <data name="buttonCancel.ToolTip" xml:space="preserve">
     <value>Закрыть без сохранения</value>
   </data>
+  <data name="buttonImportExport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>405, 72</value>
+  </data>
+  <data name="buttonImportExport.Text" xml:space="preserve">
+    <value>Файлы...</value>
+  </data>
+  <data name="buttonImportExport.ToolTip" xml:space="preserve">
+    <value>Открывает диалог позволяющий импортировать и экспортировать настройки с/в файл</value>
+  </data>
   <data name="checkBoxTransliterateAdditional.Size" type="System.Drawing.Size, System.Drawing">
     <value>283, 17</value>
   </data>
@@ -285,6 +294,30 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   </data>
   <data name="labelAuthorFormat.ToolTip" xml:space="preserve">
     <value>Формат имени автора, позволяет задать как имя автора будет выглядеть в описании</value>
+  </data>
+  <data name="comboBoxIgnoreTitle.Items2" xml:space="preserve">
+    <value>SourceTitle</value>
+  </data>
+  <data name="comboBoxIgnoreTitle.Items3" xml:space="preserve">
+    <value>PublishTitle</value>
+  </data>
+  <data name="comboBoxIgnoreTitle.Items4" xml:space="preserve">
+    <value>Main&amp;Source</value>
+  </data>
+  <data name="comboBoxIgnoreTitle.Items5" xml:space="preserve">
+    <value>Main&amp;Publish</value>
+  </data>
+  <data name="comboBoxIgnoreTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>172, 179</value>
+  </data>
+  <data name="comboBoxIgnoreTitle.ToolTip" xml:space="preserve">
+    <value>"Nothing" -Ничего не игнорировать. Включено по определению
+"MainTitle" - игнорировать FB2 main Title секцию
+"SourceTitle" - игнорировать Source info title секцию
+"PublishTitle" - игнорировать Publish  info title секцию
+"Main&amp;Source" - игнорировать Main и Source info title секцию
+"Main&amp;Publish" - игнорировать Main и Publish info title секцию
+"Source&amp;Publish" - игнорировать Source и Publish info title секцию</value>
   </data>
   <data name="comboBoxFixMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>172, 149</value>
@@ -444,11 +477,17 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   <data name="buttonDeletePath.ToolTip" xml:space="preserve">
     <value>Удалить выбраный путь из списка</value>
   </data>
+  <data name="buttonBrowseForXPGT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>234, 43</value>
+  </data>
   <data name="buttonBrowseForXPGT.Text" xml:space="preserve">
     <value>Выбрать...</value>
   </data>
   <data name="buttonBrowseForXPGT.ToolTip" xml:space="preserve">
     <value>Выбрать какой XGPT шаблон использовать</value>
+  </data>
+  <data name="buttonXPGTClear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>46, 43</value>
   </data>
   <data name="buttonXPGTClear.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -458,6 +497,12 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   </data>
   <data name="buttonXPGTClear.ToolTip" xml:space="preserve">
     <value>Использовать путь к файлу шаблона XPGT "по определению"</value>
+  </data>
+  <data name="textBoxTemplatePath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>43, 16</value>
+  </data>
+  <data name="textBoxTemplatePath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 20</value>
   </data>
   <data name="checkBoxUseXPGT.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 17</value>
@@ -561,47 +606,14 @@ c - С Заглавной буквы, l - все буквы маленькие, 
   <data name="label2.Text" xml:space="preserve">
     <value>Игнорировать заголовок :</value>
   </data>
-  <data name="comboBoxIgnoreTitle.Items2" xml:space="preserve">
-    <value>SourceTitle</value>
-  </data>
-  <data name="comboBoxIgnoreTitle.Items3" xml:space="preserve">
-    <value>PublishTitle</value>
-  </data>
-  <data name="comboBoxIgnoreTitle.Items4" xml:space="preserve">
-    <value>Main&amp;Source</value>
-  </data>
-  <data name="comboBoxIgnoreTitle.Items5" xml:space="preserve">
-    <value>Main&amp;Publish</value>
-  </data>
-  <data name="comboBoxIgnoreTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 179</value>
-  </data>
-  <data name="comboBoxIgnoreTitle.ToolTip" xml:space="preserve">
-    <value>"Nothing" -Ничего не игнорировать. Включено по определению
-"MainTitle" - игнорировать FB2 main Title секцию
-"SourceTitle" - игнорировать Source info title секцию
-"PublishTitle" - игнорировать Publish  info title секцию
-"Main&amp;Source" - игнорировать Main и Source info title секцию
-"Main&amp;Publish" - игнорировать Main и Publish info title секцию
-"Source&amp;Publish" - игнорировать Source и Publish info title секцию</value>
-  </data>
-  <data name="buttonImportExport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>405, 72</value>
-  </data>
-  <data name="buttonImportExport.Text" xml:space="preserve">
-    <value>Файлы...</value>
-  </data>
-  <data name="buttonImportExport.ToolTip" xml:space="preserve">
-    <value>Открывает диалог позволяющий импортировать и экспортировать настройки с/в файл</value>
-  </data>
   <data name="tabControlSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 211</value>
+    <value>387, 241</value>
   </data>
   <data name="tabPageTransliteration.Location" type="System.Drawing.Point, System.Drawing">
     <value>61, 4</value>
   </data>
   <data name="tabPageTransliteration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 203</value>
+    <value>322, 233</value>
   </data>
   <data name="tabPageTransliteration.Text" xml:space="preserve">
     <value>Транслитерация</value>
@@ -610,7 +622,7 @@ c - С Заглавной буквы, l - все буквы маленькие, 
     <value>Настройки транслитерации (для ридеров не поддерживающих русские фонты)</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 197</value>
+    <value>316, 227</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Настройки транслитерации</value>
@@ -619,7 +631,7 @@ c - С Заглавной буквы, l - все буквы маленькие, 
     <value>61, 4</value>
   </data>
   <data name="tabPageSequences.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 203</value>
+    <value>322, 233</value>
   </data>
   <data name="tabPageSequences.Text" xml:space="preserve">
     <value>Форматирование данных</value>
@@ -634,7 +646,7 @@ c - С Заглавной буквы, l - все буквы маленькие, 
     <value>61, 4</value>
   </data>
   <data name="tabPageDifferent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 203</value>
+    <value>322, 233</value>
   </data>
   <data name="tabPageDifferent.Text" xml:space="preserve">
     <value>Опции</value>
@@ -646,7 +658,7 @@ c - С Заглавной буквы, l - все буквы маленькие, 
     <value>61, 4</value>
   </data>
   <data name="tabPageFonts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 203</value>
+    <value>322, 233</value>
   </data>
   <data name="tabPageFonts.Text" xml:space="preserve">
     <value>Шрифты</value>
@@ -658,7 +670,7 @@ c - С Заглавной буквы, l - все буквы маленькие, 
     <value>61, 4</value>
   </data>
   <data name="tabPagePaths.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 203</value>
+    <value>322, 233</value>
   </data>
   <data name="tabPagePaths.Text" xml:space="preserve">
     <value>Папки</value>
@@ -679,10 +691,13 @@ c - С Заглавной буквы, l - все буквы маленькие, 
     <value>61, 4</value>
   </data>
   <data name="tabPageXPGT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 203</value>
+    <value>322, 233</value>
   </data>
   <data name="groupBoxXPGTPath.Text" xml:space="preserve">
     <value>Путь к шаблону XPGT </value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 24</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
@@ -694,7 +709,103 @@ c - С Заглавной буквы, l - все буквы маленькие, 
     <value>61, 4</value>
   </data>
   <data name="tabPageCSSElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 203</value>
+    <value>322, 233</value>
+  </data>
+  <data name="tabPageApple.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="tabPageApple.Size" type="System.Drawing.Size, System.Drawing">
+    <value>322, 233</value>
+  </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="comboBoxOrientationLock.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 60</value>
+  </data>
+  <data name="comboBoxOrientationLock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 21</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Запр. ориентации:</value>
+  </data>
+  <data name="label3.ToolTip" xml:space="preserve">
+    <value>Контролирует запрет на определенные типы ориентации страницы</value>
+  </data>
+  <data name="checkBoxFixedLayout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 61</value>
+  </data>
+  <data name="checkBoxFixedLayout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 17</value>
+  </data>
+  <data name="checkBoxFixedLayout.Text" xml:space="preserve">
+    <value>Фикс. раскладка</value>
+  </data>
+  <data name="checkBoxFixedLayout.ToolTip" xml:space="preserve">
+    <value>Контролирует режим "фиксированной раскладки" - когда позиция каждого элемента задана при помощи стилей. Не рекомендуется включать. Используется только для картиночных книг и подобного если позиции заданы четко и вручную.</value>
+  </data>
+  <data name="checkBoxSpreadToOpen.Location" type="System.Drawing.Point, System.Drawing">
+    <value>153, 20</value>
+  </data>
+  <data name="checkBoxSpreadToOpen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 17</value>
+  </data>
+  <data name="checkBoxSpreadToOpen.Text" xml:space="preserve">
+    <value>Раскрывать при открытии</value>
+  </data>
+  <data name="checkBoxSpreadToOpen.ToolTip" xml:space="preserve">
+    <value>Контролирует будет ли при открытии на девайсе книга открыта в режиме "двух страниц"</value>
+  </data>
+  <data name="checkBoxUseCustomFonts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 17</value>
+  </data>
+  <data name="checkBoxUseCustomFonts.Text" xml:space="preserve">
+    <value>Встроенные шрифты</value>
+  </data>
+  <data name="checkBoxUseCustomFonts.ToolTip" xml:space="preserve">
+    <value>Контролирует будут ли использоваться встроенные в файл шрифты</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Тип платформы/девайса</value>
+  </data>
+  <data name="buttonMoveLeft.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 64</value>
+  </data>
+  <data name="buttonMoveLeft.ToolTip" xml:space="preserve">
+    <value>Отменяет настройки для выбранного типа платформы/девайса</value>
+  </data>
+  <data name="buttonMoveRight.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 34</value>
+  </data>
+  <data name="buttonMoveRight.ToolTip" xml:space="preserve">
+    <value>Нажмите чтобы произвести настройки для этого типа платформы/девайса</value>
+  </data>
+  <data name="labelUsedPlatforms.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 13</value>
+  </data>
+  <data name="labelUsedPlatforms.Text" xml:space="preserve">
+    <value>Используются :</value>
+  </data>
+  <data name="labelAvailablePlatforms.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="labelAvailablePlatforms.Text" xml:space="preserve">
+    <value>Доступные :</value>
+  </data>
+  <data name="listBoxUsedPlatforms.Location" type="System.Drawing.Point, System.Drawing">
+    <value>202, 34</value>
+  </data>
+  <data name="listBoxUsedPlatforms.ToolTip" xml:space="preserve">
+    <value>Список настроенных платформ/типов девайсов</value>
+  </data>
+  <data name="listBoxAvailablePlatforms.ToolTip" xml:space="preserve">
+    <value>Список неиспользуемых платформ/типов девайсов которые можно настроить</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>484, 312</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -6867,6 +6978,16 @@ c - С Заглавной буквы, l - все буквы маленькие, 
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
+  </data>
+  <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>500, 350</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>500, 350</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки Конвертера</value>
