@@ -117,40 +117,101 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ConverterSettingsForm_radioButtonSDEnabled_CheckedChanged_Can_t_enable_Single_Destination_mode___no_path_defined_as_shell_path" xml:space="preserve">
-    <value>Can't enable Single Destination mode - no path defined as shell path</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="comboBoxOrientationLock.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 60</value>
   </data>
-  <data name="ConverterSettingsForm_radioButtonSDEnabled_CheckedChanged_Setting_error" xml:space="preserve">
-    <value>Setting error</value>
+  <data name="comboBoxOrientationLock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 21</value>
   </data>
-  <data name="AddPathForm_buttonSelect_Click_Please_select_a_destination_folder" xml:space="preserve">
-    <value>Please select a destination folder</value>
+  <data name="comboBoxOrientationLock.ToolTip" xml:space="preserve">
+    <value>Выберите опцию запрещения ориентации, если хотите предотвратить отображение книги в определенной ориентации</value>
   </data>
-  <data name="ConverterSettingsForm_buttonBrowseForXPGT_Click_Please_select_Adobe_XPGT_template_file" xml:space="preserve">
-    <value>Please select Adobe XPGT template file</value>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
   </data>
-  <data name="EditFontFamilyForm_textBoxFontFamilyName_Validating_Font_family_name_can_t_be_empty" xml:space="preserve">
-    <value>Font family name can't be empty</value>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Блок. ориентации:</value>
   </data>
-  <data name="ConverterSettingsForm_buttonRemoveFont_Click_Font_used" xml:space="preserve">
-    <value>Font used</value>
+  <data name="checkBoxFixedLayout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 62</value>
   </data>
-  <data name="ConverterSettingsForm_buttonRemoveFont_FontNameMessage" xml:space="preserve">
-    <value>Font {0}  is used by CSS elements. Please unassign them first before deleting</value>
+  <data name="checkBoxFixedLayout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 17</value>
   </data>
-  <data name="SelectFileNameSaveTo" xml:space="preserve">
-    <value>Select file name to save configuration to</value>
+  <data name="checkBoxFixedLayout.Text" xml:space="preserve">
+    <value>Фикс. макет</value>
   </data>
-  <data name="SelectFileToLoadFrom" xml:space="preserve">
-    <value>Select configuration file to load settings from</value>
+  <data name="checkBoxFixedLayout.ToolTip" xml:space="preserve">
+    <value>Выберите эту опцию если хотите получить фиксированный макет книги. Не рекомендуется использовать - только для книг с большим количеством картинок вместо текста и в ручную настроенными стилями позиционирования этих картинок на странице</value>
   </data>
-  <data name="Applev2BookOrientationLockLandscapeOnly" xml:space="preserve">
-    <value>LandscapeOnly</value>
+  <data name="checkBoxSpreadToOpen.Location" type="System.Drawing.Point, System.Drawing">
+    <value>165, 19</value>
   </data>
-  <data name="Applev2BookOrientationLockOff" xml:space="preserve">
-    <value>Off</value>
+  <data name="checkBoxSpreadToOpen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 17</value>
   </data>
-  <data name="Applev2BookOrientationLockPortraitOnly" xml:space="preserve">
-    <value>PortraitOnly</value>
+  <data name="checkBoxSpreadToOpen.Text" xml:space="preserve">
+    <value>Раскрыть при открытии</value>
+  </data>
+  <data name="checkBoxSpreadToOpen.ToolTip" xml:space="preserve">
+    <value>Отметьте если хотите чтобы книга при открытии сразу открывалась на две страницы</value>
+  </data>
+  <data name="checkBoxUseCustomFonts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 17</value>
+  </data>
+  <data name="checkBoxUseCustomFonts.Text" xml:space="preserve">
+    <value>Встроенные фонты</value>
+  </data>
+  <data name="checkBoxUseCustomFonts.ToolTip" xml:space="preserve">
+    <value>Отметьте чтобы разрешить использование встроенных в ePub файл шрифтов на девайсах Apple</value>
+  </data>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>326, 100</value>
+  </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="buttonMoveLeft.Location" type="System.Drawing.Point, System.Drawing">
+    <value>129, 64</value>
+  </data>
+  <data name="buttonMoveLeft.ToolTip" xml:space="preserve">
+    <value>Удалить платформу из списка сконфигурированых</value>
+  </data>
+  <data name="buttonMoveRight.Location" type="System.Drawing.Point, System.Drawing">
+    <value>129, 34</value>
+  </data>
+  <data name="buttonMoveRight.ToolTip" xml:space="preserve">
+    <value>Использовать и конфигурировать выбранную платформу</value>
+  </data>
+  <data name="labelUsedPlatforms.Location" type="System.Drawing.Point, System.Drawing">
+    <value>211, 16</value>
+  </data>
+  <data name="labelUsedPlatforms.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 13</value>
+  </data>
+  <data name="labelUsedPlatforms.Text" xml:space="preserve">
+    <value>Используются :</value>
+  </data>
+  <data name="labelAvailablePlatforms.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="labelAvailablePlatforms.Text" xml:space="preserve">
+    <value>Доступные :</value>
+  </data>
+  <data name="listBoxAvailablePlatforms.ToolTip" xml:space="preserve">
+    <value>Список платформ (девайсов) Вы можете сконфигурировать</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>326, 101</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Платформы</value>
+  </data>
+  <data name="listBoxUsedPlatforms.Location" type="System.Drawing.Point, System.Drawing">
+    <value>211, 34</value>
+  </data>
+  <data name="listBoxUsedPlatforms.ToolTip" xml:space="preserve">
+    <value>Список платформ (девайсов) сконфигурированных на данный момент</value>
   </data>
 </root>

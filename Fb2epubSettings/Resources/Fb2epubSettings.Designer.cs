@@ -70,6 +70,33 @@ namespace Fb2epubSettings.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LandscapeOnly.
+        /// </summary>
+        internal static string Applev2BookOrientationLockLandscapeOnly {
+            get {
+                return ResourceManager.GetString("Applev2BookOrientationLockLandscapeOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Off.
+        /// </summary>
+        internal static string Applev2BookOrientationLockOff {
+            get {
+                return ResourceManager.GetString("Applev2BookOrientationLockOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PortraitOnly.
+        /// </summary>
+        internal static string Applev2BookOrientationLockPortraitOnly {
+            get {
+                return ResourceManager.GetString("Applev2BookOrientationLockPortraitOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select Adobe XPGT template file.
         /// </summary>
         internal static string ConverterSettingsForm_buttonBrowseForXPGT_Click_Please_select_Adobe_XPGT_template_file {
