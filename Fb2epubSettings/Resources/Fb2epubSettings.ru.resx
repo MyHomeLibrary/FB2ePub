@@ -120,6 +120,15 @@
   <data name="AddPathForm_buttonSelect_Click_Please_select_a_destination_folder" xml:space="preserve">
     <value>Пожалуйста выберите путь</value>
   </data>
+  <data name="Applev2BookOrientationLockLandscapeOnly" xml:space="preserve">
+    <value>Только верт.</value>
+  </data>
+  <data name="Applev2BookOrientationLockOff" xml:space="preserve">
+    <value>Выкл.</value>
+  </data>
+  <data name="Applev2BookOrientationLockPortraitOnly" xml:space="preserve">
+    <value>Только горизонт.</value>
+  </data>
   <data name="ConverterSettingsForm_buttonBrowseForXPGT_Click_Please_select_Adobe_XPGT_template_file" xml:space="preserve">
     <value>Пожалуйста выберите файл шаблона XGPT</value>
   </data>

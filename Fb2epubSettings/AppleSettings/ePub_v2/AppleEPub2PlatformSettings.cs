@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -22,6 +23,7 @@ namespace Fb2epubSettings.AppleSettings.ePub_v2
         All = 3,
     };
 
+
     /// <summary>
     /// Defines orientation lock
     /// preventing the device to display book in specific orientation
@@ -34,6 +36,8 @@ namespace Fb2epubSettings.AppleSettings.ePub_v2
         LandscapeOnly = 1,
         [XmlEnum(Name = "PortraitOnly")]
         PortraitOnly = 2,
+
+        LastValue = PortraitOnly,
     };
 
     /// <summary>
@@ -117,6 +121,11 @@ namespace Fb2epubSettings.AppleSettings.ePub_v2
             _targetPlatform = otherSettings._targetPlatform;
             _orientationLock = otherSettings._orientationLock;
             _fixedLayout = otherSettings._fixedLayout;
+        }
+
+        public override string ToString()
+        {
+            return _targetPlatform.ToString();
         }
 
     }

@@ -111,6 +111,15 @@
     <Compile Include="AppleSettings\ePub_v2\AppleConverterePub2Settings.cs" />
     <Compile Include="AppleSettings\AppleConverterSettings.cs" />
     <Compile Include="AppleSettings\ePub_v2\AppleEPub2PlatformSettings.cs" />
+    <Compile Include="AppleV2Settings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AppleV2Settings.Designer.cs">
+      <DependentUpon>AppleV2Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseSettingsTabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ConverterSettings.cs" />
     <Compile Include="ConverterSettingsFile.cs" />
     <Compile Include="ConverterSettingsForm.cs">
@@ -164,6 +173,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddPathForm.ru.resx">
       <DependentUpon>AddPathForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppleV2Settings.resx">
+      <DependentUpon>AppleV2Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppleV2Settings.ru.resx">
+      <DependentUpon>AppleV2Settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ConverterSettingsForm.resx">
       <DependentUpon>ConverterSettingsForm.cs</DependentUpon>

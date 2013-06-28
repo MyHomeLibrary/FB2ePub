@@ -11,6 +11,7 @@ using FolderSettingsHelper.IniLocations;
 using FontsSettings;
 using System.IO;
 using System.Reflection;
+using Fb2epubSettings.AppleSettings.ePub_v2;
 
 namespace Fb2epubSettings
 {
@@ -54,6 +55,7 @@ namespace Fb2epubSettings
             savePathsList();
             saveXPGT();
             _fontSettings.StoreTo(_settings.Fonts);
+            appleV2SettingsControl.SaveToSettings(_settings);
             ConverterSettingsFile settingsFile = new ConverterSettingsFile();
             settingsFile.Settings.CopyFrom(_settings);
             try
@@ -165,7 +167,22 @@ namespace Fb2epubSettings
             UpdateFontsButtons();
             SetupCSSElements();
             UpdateCCSElements();
+            LoadAppleSettingsTab();
+            appleV2SettingsControl.LoadSettings(_settings);
         }
+
+        private void LoadAppleSettingsTab()
+        {
+            // remove Apple controls first
+            // (for future use/ conditional add)
+            this.tabControlSettings.Controls.Remove(tabPageAppleV2);
+
+            
+            // add needed controls conditionally
+            this.tabControlSettings.Controls.Add(tabPageAppleV2);
+
+        }
+
 
         private void LoadIgnoreTitleMode()
         {
@@ -791,6 +808,7 @@ namespace Fb2epubSettings
             DialogResult result =  form.ShowDialog();
             ConverterSettingsForm_Load(this, null);
         }
+
 
  
 
