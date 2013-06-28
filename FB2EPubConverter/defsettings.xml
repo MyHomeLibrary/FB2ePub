@@ -13,7 +13,7 @@
   <ConvertAlphaChannelPNGImages>true</ConvertAlphaChannelPNGImages>
   <EmbedStylesIntoXHTML>false</EmbedStylesIntoXHTML>
   <AuthorNameFormat>%f.c%%m.c%%l.c%%n.c:b%</AuthorNameFormat>
-  <FileAsFormat>%l.c%f.c</FileAsFormat>
+  <FileAsFormat>%l.c%%f.c%</FileAsFormat>
   <GenerateDropCharacters>true</GenerateDropCharacters>
   <SkipAboutPageGeneration>false</SkipAboutPageGeneration>
   <EnableAdobeTemplateUsage>false</EnableAdobeTemplateUsage>
