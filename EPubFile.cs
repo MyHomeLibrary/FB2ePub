@@ -60,6 +60,15 @@ namespace EPubLibrary
 
         public List<BookDocument> BookDocuments { get { return _sections; } }
 
+
+        /// <summary>
+        /// Controls if Lord Kiron's license need to be added to file
+        /// </summary>
+        public bool InjectLKRLicense { get; set; }
+
+        /// <summary>
+        /// Return transliteration rule object
+        /// </summary>
         public Rus2Lat Transliterator { get { return _rule; } }
 
         /// <summary>
@@ -250,11 +259,31 @@ namespace EPubLibrary
         private void AddBookData(ZipOutputStream stream)
         {
             AddBookFolder(stream);
+            if (InjectLKRLicense)
+            {
+                AddLicenseFile(stream);
+            }
             AddImages(stream);
             AddFontFiles(stream);
             AddFiles(stream);
             AddTOCFile(stream);
             AddContentFile(stream);
+        }
+
+        private void AddLicenseFile(ZipOutputStream stream)
+        {
+            const string fileName = "license.xhtml";
+            // for test let's just create one file
+            stream.SetLevel(9);
+            ZipEntry file = _zipFactory.MakeFileEntry(string.Format(@"OEBPS\license\{0}", fileName), false);
+            stream.PutNextEntry(file);
+
+
+            LicenseFile licensePage = new LicenseFile { FlatStructure = FlatStructure, EmbedStyles = EmbedStyles };
+            licensePage.Create();
+            licensePage.Write(stream);
+            _content.AddTOC(FlatStructure ? fileName : string.Format("license\\{0}", fileName) , "license");
+           
         }
 
         private void AddFontFiles(ZipOutputStream stream)
@@ -414,10 +443,6 @@ namespace EPubLibrary
                 stream.PutNextEntry(file);
 
 
-                //foreach (var cssFile in CSSFiles)
-                //{
-                //    TitlePage.StyleFiles.Add(cssFile);
-                //}
                 TitlePage.StyleFiles.Add(_mainCss);
                 if (UseAdobeTemplate)
                 {

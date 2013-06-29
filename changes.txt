@@ -1,5 +1,6 @@
 ﻿1.0.21.0
 + Added option to generate Apple file that allows Apple devices to use custom (embedded) fonts
++ Added option to embed invisible license file 
 * Fixed the issue with improper filling the identifier in .ncx file (id and content got mixed up)
 * Fixed a namespace issue that prevented proper book sort on some systems
 

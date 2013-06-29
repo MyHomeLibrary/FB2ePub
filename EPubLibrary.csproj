@@ -152,6 +152,7 @@
     <Compile Include="Content\Spine\SpineItem.cs" />
     <Compile Include="XHTML_Items\BookDocument.cs" />
     <Compile Include="XHTML_Items\CoverPageFile.cs" />
+    <Compile Include="XHTML_Items\LicenseFile.cs" />
     <Compile Include="XHTML_Items\TitlePageFile.cs" />
   </ItemGroup>
   <ItemGroup>
