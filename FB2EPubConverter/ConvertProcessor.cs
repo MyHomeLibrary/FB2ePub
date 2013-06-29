@@ -176,7 +176,7 @@ namespace FB2EPubConverter
                     fileNameWithoutExtension = fileNameWithoutExtension.Remove(position);
                 }
             }
-            return string.Format("{0}.ePub",fileNameWithoutExtension);           
+            return string.Format("{0}.epub",fileNameWithoutExtension);           
         }
 
         private void SaveAndCleanUp(Fb2EPubConverterEngine converter, string fileName, string inFileName)
