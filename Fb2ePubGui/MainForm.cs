@@ -142,7 +142,7 @@ namespace Fb2ePubGui
                         }
                     }
                 }
-                else // regular fil - just add
+                else // regular fill - just add
                 {
                     allFiles.Add(fileItem);
                 }
