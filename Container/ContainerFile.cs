@@ -34,7 +34,7 @@ namespace EPubLibrary.Container
             containerElement.Add(new XAttribute("version", "1.0"));
             XElement rootFilesElement = new XElement(localNameSpace + "rootfiles");
             XElement rootFileElement = new XElement(localNameSpace + "rootfile");
-            rootFileElement.Add(new XAttribute("full-path", FlatStructure ? "Content.opf" : @"OEBPS/Content.opf"));
+            rootFileElement.Add(new XAttribute("full-path",  @"OEBPS/Content.opf"));
             rootFileElement.Add(new XAttribute("media-type", @"application/oebps-package+xml"));
             rootFilesElement.Add(rootFileElement);
             containerElement.Add(rootFilesElement);

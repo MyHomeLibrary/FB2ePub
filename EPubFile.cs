@@ -275,7 +275,7 @@ namespace EPubLibrary
             const string fileName = "license.xhtml";
             // for test let's just create one file
             stream.SetLevel(9);
-            ZipEntry file = _zipFactory.MakeFileEntry(FlatStructure? string.Format(@"OEBPS\{0}",fileName):string.Format(@"OEBPS\license\{0}", fileName), false);
+            ZipEntry file = _zipFactory.MakeFileEntry(FlatStructure ? string.Format(@"OEBPS\{0}", fileName) : string.Format(@"OEBPS\license\{0}", fileName), false);
             stream.PutNextEntry(file);
 
 
@@ -294,7 +294,7 @@ namespace EPubLibrary
                 stream.SetLevel(9);
                 foreach (var embededFileLocation in _fontSettings.EmbededFilesLocations)
                 {
-                    string filePath = string.Format(FlatStructure ? @"{0}" : @"OEBPS\fonts\{0}", Path.GetFileName(embededFileLocation));
+                    string filePath = string.Format(FlatStructure ? @"OEBPS\{0}" : @"OEBPS\fonts\{0}", Path.GetFileName(embededFileLocation));
                     ZipEntry entry = _zipFactory.MakeFileEntry(filePath, false);
                     stream.PutNextEntry(entry);
                     try
@@ -396,7 +396,7 @@ namespace EPubLibrary
                 AnnotationPage.Write(stream);
 
                 const string fileID = "annotation";
-                _content.AddXHTMLTextItem(FlatStructure?string.Format("OEBPS\\{0}",AnnotationPage.FileName):AnnotationPage.FileName, fileID, AnnotationPage.DocumentType);
+                _content.AddXHTMLTextItem(AnnotationPage.FileName, fileID, AnnotationPage.DocumentType);
 
             }
         }
@@ -423,7 +423,7 @@ namespace EPubLibrary
         private void AddMainCSS(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            ZipEntry file = _zipFactory.MakeFileEntry(string.Format(FlatStructure?"{0}":@"OEBPS\{0}", _mainCss.EPubFilePath), false);
+            ZipEntry file = _zipFactory.MakeFileEntry(string.Format(@"OEBPS\{0}", _mainCss.EPubFilePath), false);
             stream.PutNextEntry(file);
             _mainCss.Write(stream);
 
@@ -452,7 +452,7 @@ namespace EPubLibrary
                 TitlePage.Write(stream);
 
                 const string fileID = "title";
-                _content.AddXHTMLTextItem(FlatStructure ? string.Format("OEBPS\\{0}", TitlePage.FileName) : TitlePage.FileName, fileID, TitlePage.DocumentType);
+                _content.AddXHTMLTextItem(TitlePage.FileName, fileID, TitlePage.DocumentType);
 
             }
 
@@ -479,7 +479,7 @@ namespace EPubLibrary
 
             const string fileID = "about";
 
-            _content.AddXHTMLTextItem(FlatStructure ? string.Format("OEBPS\\{0}", fileName) : fileName, fileID, aboutPage.DocumentType);
+            _content.AddXHTMLTextItem(fileName, fileID, aboutPage.DocumentType);
         }
 
         /// <summary>
@@ -538,7 +538,7 @@ namespace EPubLibrary
             // to be valid we need at least one NAVPoint
             if ( _tableOfContentFile.IsNavMapEmpty() && (_sections.Count > 0) )
             {
-                _tableOfContentFile.AddNavPoint(FlatStructure?string.Format("OEBPS\\{0}",_sections[0].FileName):_sections[0].FileName, _rule.Translate(_title.BookTitles[0].TitleName, TranliterateToc ? TranslitMode : TranslitModeEnum.None));                        
+                _tableOfContentFile.AddNavPoint(_sections[0].FileName, _rule.Translate(_title.BookTitles[0].TitleName, TranliterateToc ? TranslitMode : TranslitModeEnum.None));                        
             }
         }
 
@@ -558,16 +558,16 @@ namespace EPubLibrary
         private void AddBookContentSection(BookDocument subsection, int count,int subcount)
         {
             string fileId = string.Format("bookcontent{0}_{1}", count,subcount); // generate unique ID
-            _content.AddXHTMLTextItem(FlatStructure ? string.Format("OEBPS\\{0}", subsection.FileName) : subsection.FileName, fileId, subsection.DocumentType);
-            if (!subsection.NotPartOfNavigation /*&& !string.IsNullOrEmpty(subsection.PageTitle)*/)
+            _content.AddXHTMLTextItem(subsection.FileName, fileId, subsection.DocumentType);
+            if (!subsection.NotPartOfNavigation)
             {
                 if (subsection.NavigationLevel <= 1)
                 {
-                    _tableOfContentFile.AddNavPoint(FlatStructure?string.Format("OEBPS\\{0}",subsection.FileName): subsection.FileName, _rule.Translate(subsection.PageTitle, TranliterateToc? TranslitMode : TranslitModeEnum.None));
+                    _tableOfContentFile.AddNavPoint(subsection.FileName, _rule.Translate(subsection.PageTitle, TranliterateToc? TranslitMode : TranslitModeEnum.None));
                 }
                 else
                 {
-                    _tableOfContentFile.AddSubNavPoint(FlatStructure ? string.Format("OEBPS\\{0}", subsection.NavigationParent.FileName) : subsection.NavigationParent.FileName, FlatStructure ? string.Format("OEBPS\\{0}", subsection.FileName) : subsection.FileName, _rule.Translate(subsection.PageTitle, TranliterateToc ? TranslitMode : TranslitModeEnum.None));
+                    _tableOfContentFile.AddSubNavPoint(subsection.NavigationParent.FileName, subsection.FileName, _rule.Translate(subsection.PageTitle, TranliterateToc ? TranslitMode : TranslitModeEnum.None));
                 }
             }
         }
@@ -596,10 +596,6 @@ namespace EPubLibrary
             CoverPageFile cover = new CoverPageFile() {  CoverFileName = GetCoverImageName(eImage) };
             cover.FlatStructure = FlatStructure;
             cover.EmbedStyles = EmbedStyles;
-            //foreach (var cssFile in CSSFiles)
-            //{
-            //    cover.StyleFiles.Add(cssFile);
-            //}
             cover.StyleFiles.Add(_mainCss);
             if (UseAdobeTemplate)
             {
@@ -618,7 +614,7 @@ namespace EPubLibrary
 
             const string fileID = "cover";
 
-            _content.AddXHTMLTextItem(FlatStructure ? string.Format("OEBPS\\{0}", fileName) : fileName, fileID, cover.DocumentType);
+            _content.AddXHTMLTextItem(fileName, fileID, cover.DocumentType);
         }
 
         private string GetCoverImageName(EPUBImage eImage)
@@ -638,7 +634,7 @@ namespace EPubLibrary
         private void AddTOCFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            ZipEntry tocFile = _zipFactory.MakeFileEntry(FlatStructure ? "toc.ncx" : @"OEBPS\toc.ncx", false);
+            ZipEntry tocFile = _zipFactory.MakeFileEntry(@"OEBPS\toc.ncx", false);
             stream.PutNextEntry(tocFile);
             _tableOfContentFile.ID = _title.Identifiers[0].ID;
             _tableOfContentFile.Title = _rule.Translate(_title.BookTitles[0].TitleName,TranslitMode);
@@ -651,7 +647,7 @@ namespace EPubLibrary
         private void AddContentFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            ZipEntry contentFile = _zipFactory.MakeFileEntry(FlatStructure ? "Content.opf" : @"OEBPS\Content.opf", false);
+            ZipEntry contentFile = _zipFactory.MakeFileEntry(@"OEBPS\Content.opf", false);
             stream.PutNextEntry(contentFile);
             _content.Title = _title;
             _content.Write(stream);
@@ -680,7 +676,7 @@ namespace EPubLibrary
                 ZipEntry entry = _zipFactory.MakeFileEntry(filePath, false);
                 stream.PutNextEntry(entry);
                 stream.Write(epubImage.Value.ImageData, 0, epubImage.Value.ImageData.Length);
-                _content.AddImage(string.Format(FlatStructure ? "OEBPS\\{0}" : @"images/{0}", filename), epubImage.Value.ID, epubImage.Value.ImageType);
+                _content.AddImage(string.Format(FlatStructure ? "{0}" : @"images/{0}", filename), epubImage.Value.ID, epubImage.Value.ImageType);
             }
 
         }

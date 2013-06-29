@@ -3,6 +3,7 @@
 + Added option to embed invisible license file 
 * Fixed the issue with improper filling the identifier in .ncx file (id and content got mixed up)
 * Fixed a namespace issue that prevented proper book sort on some systems
+* Fixed a FlatStructure option generating invalid files
 
 1.0.20.0
 * Updated to use Visual Studio 2012 Update 1

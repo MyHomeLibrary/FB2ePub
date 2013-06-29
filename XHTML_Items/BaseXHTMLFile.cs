@@ -114,9 +114,7 @@ namespace EPubLibrary.XHTML_Items
                     styleElement = cssStyleShit;
                     cssStyleShit.Relation.Value = "stylesheet";
                     cssStyleShit.Type.Value = file.GetMediaType();
-                    cssStyleShit.HRef.Value = FlatStructure
-                                                  ? string.Format("../{0}", file.GetFilePathExt())
-                                                  : file.GetFilePathExt();
+                    cssStyleShit.HRef.Value = file.GetFilePathExt();
                 }
                 headElement.Add(styleElement);
             }
