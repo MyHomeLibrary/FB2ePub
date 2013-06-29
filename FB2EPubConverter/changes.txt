@@ -5,6 +5,7 @@
 + Added GUI to control Apple related settings
 + Added copyright notice text to "about" page
 + Added option to embed invisible license file (on by default when using converter)
++ Added some additional error handling for "settings" dialog in case no FB2EPUBExt.INI present in any of the paths
 * Fixed installer problem on x86 systems downloading VCRedist x86 twice
 * The shell extension no longer looks for a converter path, as it's a COM object now
 * Returned registration of shell extension for 32 bit programs on 64 bit machine that was broken in prev. version

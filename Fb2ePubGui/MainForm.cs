@@ -185,7 +185,11 @@ namespace Fb2ePubGui
         {
             comboBoxDestination.Items.Clear();
             IniLocations locations = new IniLocations();
-            locations.Init();
+            if (!locations.Init())
+            {
+                string error = "No FB2EPUBExt.INI file found in any of the paths";
+                Program.log.Error(error);
+            }
             locations.Load();
             string defaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
                                               "My Books\\");

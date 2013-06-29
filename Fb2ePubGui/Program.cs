@@ -14,7 +14,7 @@ namespace Fb2ePubGui
 {
     static class Program
     {
-        private static ILog log;
+        public static ILog log;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
