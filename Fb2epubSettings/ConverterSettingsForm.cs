@@ -33,6 +33,8 @@ namespace Fb2epubSettings
         private readonly List<CSSElementListItem> _viewCSSElements = new List<CSSElementListItem>();
         private readonly ConverterSettings _settings = new ConverterSettings();
 
+        private bool _locationsLoaded = false;
+
 
         /// <summary>
         /// File name and path of the settings file to load
@@ -159,7 +161,14 @@ namespace Fb2epubSettings
             LoadFixMode();
             LoadIgnoreTitleMode();
             UpdateSequencesGroup();
-            _locations.Init();
+            _locationsLoaded = _locations.Init();
+            if (!_locationsLoaded)
+            {
+                string error = "No FB2EPUBExt.INI file found in any of the paths";
+                toolTipControl.SetToolTip(tabPagePaths, error);
+                toolTipControl.SetToolTip(listBoxPaths, error);
+                Logger.Log.Error(error);
+            }
             LoadPathsGroup();
             UpdateXPGTGroupGUI();
             LoadFontsList();
@@ -259,8 +268,12 @@ namespace Fb2epubSettings
             {
                 listBoxPaths.SelectedIndex = 0;                
             }
+            radioButtonSDEnabled.Enabled =  _locationsLoaded;
+            radioButtonSDDisabled.Enabled = _locationsLoaded;
             radioButtonSDDisabled.Checked = (_locations.SingleDestination == -1);
-            radioButtonSDEnabled.Checked = (_locations.SingleDestination != -1);
+            radioButtonSDEnabled.Checked = (_locations.SingleDestination != -1) ;
+            buttonPathNew.Enabled = _locationsLoaded;
+            buttonEdit.Enabled = _locationsLoaded;
             UpdatePathsTabGui();
             UpdateSingleDestinationCombo();
         }
@@ -268,7 +281,7 @@ namespace Fb2epubSettings
         private void UpdateSingleDestinationCombo()
         {
             comboBoxSDValue.Items.Clear();
-            comboBoxSDValue.Enabled = (_locations.SingleDestination != -1) && _locations.HasShellLocations();
+            comboBoxSDValue.Enabled = (_locations.SingleDestination != -1) && _locations.HasShellLocations() && _locationsLoaded;
             for (int value = 0; value < _locations.Count; value++ )
             {
                 if (_locations[value].ShowInShell)
@@ -485,13 +498,13 @@ namespace Fb2epubSettings
 
         private void UpdatePathsTabGui()
         {
-            buttonUpPath.Enabled = (listBoxPaths.SelectedIndex > 0);
-            buttonDownPath.Enabled = (listBoxPaths.SelectedIndex < listBoxPaths.Items.Count-1);
-            buttonDeletePath.Enabled = (listBoxPaths.Items.Count != 0);
+            buttonUpPath.Enabled = (listBoxPaths.SelectedIndex > 0) && _locationsLoaded;
+            buttonDownPath.Enabled = (listBoxPaths.SelectedIndex < listBoxPaths.Items.Count - 1) && _locationsLoaded;
+            buttonDeletePath.Enabled = (listBoxPaths.Items.Count != 0) && _locationsLoaded;
 
             Location currentLocation = (Location) listBoxPaths.SelectedItem;
-            checkBoxVisibleInExt.Enabled = (currentLocation != null);
-            checkBoxVisibleInGUI.Enabled = (currentLocation != null);
+            checkBoxVisibleInExt.Enabled = (currentLocation != null) && _locationsLoaded;
+            checkBoxVisibleInGUI.Enabled = (currentLocation != null) && _locationsLoaded;
             if (currentLocation != null)
             {
                 checkBoxVisibleInExt.Checked = currentLocation.ShowInShell;
