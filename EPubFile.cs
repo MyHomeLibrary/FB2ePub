@@ -275,7 +275,7 @@ namespace EPubLibrary
             const string fileName = "license.xhtml";
             // for test let's just create one file
             stream.SetLevel(9);
-            ZipEntry file = _zipFactory.MakeFileEntry(string.Format(@"OEBPS\license\{0}", fileName), false);
+            ZipEntry file = _zipFactory.MakeFileEntry(FlatStructure? string.Format(@"OEBPS\{0}",fileName):string.Format(@"OEBPS\license\{0}", fileName), false);
             stream.PutNextEntry(file);
 
 
