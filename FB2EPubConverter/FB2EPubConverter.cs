@@ -673,6 +673,7 @@ namespace Fb2ePubConverter
                         epubFile.AboutLinks.Add(@"http://www.fb2epub.net");
                         epubFile.AboutLinks.Add(@"https://code.google.com/p/fb2epub/");
                     }
+                    epubFile.InjectLKRLicense = true;
                     epubFile.Generate(outFile);                        
                 }
             }
