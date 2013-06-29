@@ -83,10 +83,12 @@ Source: "{#BuildFolder}settings.cmd"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}readme_en.htm"; DestDir: "{app}"; Flags: ignoreversion  
 Source: "{#BuildFolder}epub-logo-color-book.ICO"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}license.docx"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{app}"; Flags: ignoreversion
 
 ; configuration
 Source: "{#BuildFolder}defsettings.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}defsettings.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver 32bit
 

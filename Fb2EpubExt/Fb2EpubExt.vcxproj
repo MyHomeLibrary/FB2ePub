@@ -225,6 +225,10 @@ copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
       <TargetMachine>MachineX86</TargetMachine>
       <TurnOffAssemblyGeneration>true</TurnOffAssemblyGeneration>
     </Link>
+    <PostBuildEvent>
+      <Command>copy FB2EPUBExt.INI $(TargetDir). /y
+copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -266,6 +270,10 @@ copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
       <TargetMachine>MachineX64</TargetMachine>
       <TurnOffAssemblyGeneration>true</TurnOffAssemblyGeneration>
     </Link>
+    <PostBuildEvent>
+      <Command>copy FB2EPUBExt.INI $(TargetDir). /y
+copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CProgressReporter.cpp" />
