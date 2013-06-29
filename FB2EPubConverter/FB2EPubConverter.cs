@@ -1174,13 +1174,13 @@ namespace Fb2ePubConverter
             Identifier bookId = new Identifier();
             if (!string.IsNullOrEmpty(fb2File.DocumentInfo.ID))
             {
-                bookId.IdentifierName = fb2File.DocumentInfo.ID;
+                bookId.ID = fb2File.DocumentInfo.ID;
             }
             else
             {
-                bookId.IdentifierName = Guid.NewGuid().ToString();
+                bookId.ID = Guid.NewGuid().ToString();
             }
-            bookId.ID = "FB2BookID";
+            bookId.IdentifierName = "FB2BookID";
             bookId.Scheme = "URI";
             epubFile.Title.Identifiers.Add(bookId);
 
@@ -1268,8 +1268,8 @@ namespace Fb2ePubConverter
             {
                 bookId = new Identifier
                              {
-                                 IdentifierName = fb2File.PublishInfo.ISBN.Text,
-                                 ID = "BookISBN",
+                                 IdentifierName = "BookISBN",
+                                 ID = fb2File.PublishInfo.ISBN.Text,
                                  Scheme = "ISBN"
                              };
                 epubFile.Title.Identifiers.Add(bookId);
