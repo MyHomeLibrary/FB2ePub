@@ -42,7 +42,7 @@ namespace EPubLibrary.Content
             XElement packagedata = new XElement(opfNameSpace + "package");
             packagedata.Add(new XAttribute("version", "2.0"));
             // we use ID of the first identifier
-            packagedata.Add(new XAttribute("unique-identifier", Title.Identifiers[0].ID));
+            packagedata.Add(new XAttribute("unique-identifier", Title.Identifiers[0].IdentifierName));
             //packagedata.Add(new XAttribute(XNamespace.Xmlns + "opf", opfNameSpace));
             document.Add(packagedata);
         }
@@ -77,7 +77,7 @@ namespace EPubLibrary.Content
             metadata.Add(new XAttribute(XNamespace.Xmlns + "dc", dc));
             metadata.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi));
             metadata.Add(new XAttribute(XNamespace.Xmlns + "dcterms", dcterms));
-            //metadata.Add(new XAttribute("opf", opfNameSpace));
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", opfNameSpace));
 
             foreach (var titleItem in Title.BookTitles)
             {
@@ -99,14 +99,9 @@ namespace EPubLibrary.Content
 
             foreach (var identifierItem in Title.Identifiers)
             {
-                string id = id = string.Format("{0}", identifierItem.IdentifierName);
-                if (identifierItem.Scheme.ToUpper() == "URI")
-                {
-                    id = string.Format("urn:uuid:{0}", identifierItem.IdentifierName);
-
-                }
+                string id = id = string.Format("{0}", identifierItem.ID);
                 XElement identifier = new XElement(dc + "identifier", id);
-                identifier.Add(new XAttribute("id", identifierItem.ID));
+                identifier.Add(new XAttribute("id", identifierItem.IdentifierName));
                 identifier.Add(new XAttribute(opfNameSpace + "scheme", identifierItem.Scheme));
                 metadata.Add(identifier);
             }

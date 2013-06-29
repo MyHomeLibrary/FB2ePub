@@ -103,12 +103,36 @@ namespace EPubLibrary
     }
 
     /// <summary>
-    /// Clas to store one identifier
+    /// Class to store one identifier
     /// </summary>
     public class Identifier
     {
+        private string _id = string.Empty;
+
+        /// <summary>
+        /// Name of the identifier 
+        /// </summary>
         public string IdentifierName { get; set;}
-        public string ID { get; set; }
+
+        /// <summary>
+        /// ID value of the identifier
+        /// </summary>
+        public string ID
+        {
+            get 
+            {
+                if (Scheme.ToUpper() == "URI")
+                {
+                    return string.Format("urn:uuid:{0}", _id);
+                }
+                return _id; 
+            }
+            set { _id = value; }
+        }
+
+        /// <summary>
+        /// Scheme used by identifier
+        /// </summary>
         public string Scheme { get; set; }
     }
 
@@ -118,7 +142,7 @@ namespace EPubLibrary
     public class EPubTitleSettings
     {
         /// <summary>
-        /// list of subjects for the book (usualy genres)
+        /// list of subjects for the book (usually genres)
         /// </summary>
         private readonly List<Subject> subjects = new List<Subject>();
 
