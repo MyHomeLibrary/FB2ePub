@@ -23,7 +23,7 @@
     <RootNamespace>SimpleExt</RootNamespace>
     <Keyword>AtlProj</Keyword>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-	<TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -131,6 +131,10 @@
       <TargetMachine>MachineX86</TargetMachine>
       <TurnOffAssemblyGeneration>true</TurnOffAssemblyGeneration>
     </Link>
+    <PostBuildEvent>
+      <Command>copy FB2EPUBExt.INI $(TargetDir). /y
+copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -175,6 +179,10 @@
       <RegisterOutput>false</RegisterOutput>
       <TurnOffAssemblyGeneration>true</TurnOffAssemblyGeneration>
     </Link>
+    <PostBuildEvent>
+      <Command>copy FB2EPUBExt.INI $(TargetDir). /y
+copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
@@ -305,7 +313,9 @@
     <None Include="Fb2EpubExt.def" />
     <None Include="Fb2EpubExt.rgs" />
     <None Include="Fb2EpubShlExt.rgs" />
-    <None Include="FB2EPUBExt.INI" />
+    <None Include="FB2EPUBExt.INI">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="Fb2EpubExt.idl" />
