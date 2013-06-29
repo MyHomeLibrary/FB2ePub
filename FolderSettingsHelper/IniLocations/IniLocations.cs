@@ -89,10 +89,10 @@ namespace FolderSettingsHelper.IniLocations
 
         private static string DetectIniLocation()
         {
-            string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             if (!string.IsNullOrEmpty(appDataFolder))
             {
-                string defaultINIPath = Path.Combine(appDataFolder, @"Lord KiRon\Fb2ePubExt\FB2EPUBExt.INI");
+                string defaultINIPath = Path.Combine(appDataFolder, @"Lord_KiRon\FB2ePub\FB2EPUBExt.INI");
                 if (File.Exists(defaultINIPath))
                 {
                     return defaultINIPath;

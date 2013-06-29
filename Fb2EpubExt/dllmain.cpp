@@ -87,9 +87,9 @@ void CFb2EpubExtModule::LoadINI()
 	::ZeroMemory(iniFile,sizeof(TCHAR)*PATH_SIZE);
 
 	bool bDetected = false;
-	if ( SHGetSpecialFolderPath(NULL,iniFile,CSIDL_APPDATA,FALSE))
+	if ( SHGetSpecialFolderPath(NULL,iniFile,CSIDL_COMMON_APPDATA ,FALSE))
 	{
-		lstrcat(iniFile,L"\\Lord KiRon\\FB2ePubExt");
+		lstrcat(iniFile,L"\\Lord_KiRon\\FB2ePub");
 		lstrcat(iniFile,c_tzINIFileName);
 		if ( PathFileExists(iniFile) )
 		{
@@ -176,7 +176,7 @@ void CFb2EpubExtModule::StartLog(BOOL bOverwrite)
 			lstrcat(szLogPath,L"\\");
 		}
 		delete pBuffer;
-		lstrcat(szLogPath,L"Lord KiRon\\");
+		lstrcat(szLogPath,L"Lord_KiRon\\");
 		CreateDirectory(szLogPath,NULL);
 		bPathFound = true;
 	}
@@ -192,7 +192,7 @@ void CFb2EpubExtModule::StartLog(BOOL bOverwrite)
 				{
 					lstrcat(szLogPath,L"\\");
 				}
-				lstrcat(szLogPath,L"Lord KiRon\\");
+				lstrcat(szLogPath,L"Lord_KiRon\\");
 				CreateDirectory(szLogPath,NULL);
 				bPathFound = true;
 			}
