@@ -520,7 +520,7 @@ namespace Fb2ePubConverter
                     Logger.Log.Debug("The file is RAR file");
                     return FileTypesEnum.FileTypeRAR;
                 default:
-                    Logger.Log.Debug("Can't use extension - attemting to detect");
+                    Logger.Log.Debug("Can't use extension - attempting to detect");
                     if (IsZipFile(fileName))
                     {
                         Logger.Log.Debug("The file is ZIP file");

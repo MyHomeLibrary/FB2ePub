@@ -248,7 +248,7 @@ void CFb2EpubExtModule::ReadTargets()
 	UINT count = ::GetPrivateProfileInt(TARGETS_SECTION,_T("TargetsCount"),0,m_INIPath.c_str());	
 	if (count > 0)
 	{
-		clog << count << " targets readed" << endl;
+		clog << count << " targets read" << endl;
 		int iSingleDestination = ::GetPrivateProfileInt(TARGETS_SECTION,_T("SingleDestination"),-1,m_INIPath.c_str());	
 		clog << iSingleDestination << " set as SingleDestination" << endl;
 		m_bUseSingleDestination = false;

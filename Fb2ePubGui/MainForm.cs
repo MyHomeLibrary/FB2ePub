@@ -118,8 +118,7 @@ namespace Fb2ePubGui
             ConvertProcessor processor = new ConvertProcessor();
             processor.LoadSettings();
             processor.ProcessorSettings.Settings.OutPutPath = comboBoxDestination.Text;
-            processor.ProcessorSettings.Settings.ResourcesPath =
-                Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            processor.ProcessorSettings.Settings.ResourcesPath = ConvertProcessor.GetResourcesPath();
             List<string> allFiles = SelectValidFiles(files);
             processor.PerformConvertOperation(allFiles, null);
         }

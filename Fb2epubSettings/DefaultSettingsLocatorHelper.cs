@@ -51,7 +51,7 @@ namespace Fb2epubSettings
         {
             string newLocation = GetProperSettingsLocation();
             string folder = Path.GetDirectoryName(newLocation);
-            if (!Directory.Exists(folder))
+            if (folder != null && !Directory.Exists(folder))
             {
                 Directory.CreateDirectory(folder);
             }
@@ -94,13 +94,17 @@ namespace Fb2epubSettings
             }
 
             detectionFolder = Assembly.GetEntryAssembly().Location;
-            detectionFolder =   Path.GetDirectoryName(detectionFolder);
-            fileLocation = Path.Combine(detectionFolder, "defsettings.xml");
-            if (File.Exists(fileLocation))
+            detectionFolder = Path.GetDirectoryName(detectionFolder);
+            if (detectionFolder != null)
             {
-                locationDetected = SettingsLocation.ProgramFolder;
-                return true;
+                fileLocation = Path.Combine(detectionFolder, "defsettings.xml");
+                if (File.Exists(fileLocation))
+                {
+                    locationDetected = SettingsLocation.ProgramFolder;
+                    return true;
+                }
             }
+
 
             return false;
         }

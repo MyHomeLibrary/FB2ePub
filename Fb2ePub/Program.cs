@@ -135,30 +135,12 @@ namespace Fb2ePub
 
 
 
-        private static int RunCommand(string command,string argument)
-        {
-            int ExitCode = -1;
-            ProcessStartInfo ProcessInfo;
-            Process Process;
-
-            ProcessInfo = new ProcessStartInfo(command,argument);
-            ProcessInfo.CreateNoWindow = false;
-            ProcessInfo.UseShellExecute = true;
-            Process = Process.Start(ProcessInfo);
-            if (Process != null)
-            {
-                Process.WaitForExit();
-                ExitCode = Process.ExitCode;
-                Process.Close();
-            }
-
-            return ExitCode;
-        }
 
         private static void ProcessSettings(ConvertProcessor processor)
         {
             processor.LoadSettings();
-            processor.ProcessorSettings.Settings.ResourcesPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            processor.ProcessorSettings.Settings.ResourcesPath = ConvertProcessor.GetResourcesPath();
+            //Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
         }
 
         private static void ProcessParameters(List<string> options, ConvertProcessorSettings settings)
