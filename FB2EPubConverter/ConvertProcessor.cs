@@ -171,7 +171,7 @@ namespace FB2EPubConverter
             if (position > 0)
             {
                 string ext = fileNameWithoutExtension.Substring(position);
-                if (ext.ToUpper().CompareTo(".FB2") == 0)
+                if (String.Compare(ext.ToUpper(), ".FB2", StringComparison.Ordinal) == 0)
                 {
                     fileNameWithoutExtension = fileNameWithoutExtension.Remove(position);
                 }
@@ -292,18 +292,32 @@ namespace FB2EPubConverter
             List<string> fileParams = new List<string>();
             fileParams.Add(inputPath);
             ProcessorSettings.LookInSubFolders = true;
-            ProcessorSettings.Settings.ResourcesPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            ProcessorSettings.Settings.ResourcesPath = GetResourcesPath();
             List<string> filesInMask = new List<string>();
             DetectFilesToProcess(fileParams, ref filesInMask);
             PerformConvertOperation(filesInMask, null);
         }
 
+        public static string GetResourcesPath()
+        {
+            string detectionFolder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Lord_KiRon\FB2ePub";
+            if (Directory.Exists(detectionFolder))
+            {
+                return detectionFolder;
+            }
+            return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        }
+
         public void ConvertList(string[] files, string outputFolder, IProgressUpdateInterface progress)
         {
+            foreach (var file in files)
+            {
+                MessageBox.Show(file);
+            }
             LoadSettings();
             ProcessorSettings.Settings.OutPutPath = outputFolder;
             ProcessorSettings.ProgressCallbacks = progress;
-            ProcessorSettings.Settings.ResourcesPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            ProcessorSettings.Settings.ResourcesPath = GetResourcesPath();
             PerformConvertOperation(files, null);
 
         }
@@ -312,7 +326,7 @@ namespace FB2EPubConverter
         {
             LoadSettings();
             ProcessorSettings.ProgressCallbacks = progress;
-            ProcessorSettings.Settings.ResourcesPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            ProcessorSettings.Settings.ResourcesPath = GetResourcesPath(); 
             List<string> filesInMask = new List<string>();
             filesInMask.Add(inputPath);
             PerformConvertOperation(filesInMask, outputName);
