@@ -10,7 +10,8 @@
 #ifndef APSTUDIO_INVOKED
 #include "targetver.h"
 #endif
-#include "winres.h"
+#include "winres.h"
+
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 

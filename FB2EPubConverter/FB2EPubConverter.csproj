@@ -193,6 +193,10 @@
       <Project>{BB87C009-1337-43FF-ADF6-6E7861AA9343}</Project>
       <Name>Fb2epubSettings</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FolderSettingsHelper\FolderSettingsHelper.csproj">
+      <Project>{97c916ff-6271-44f8-9a20-6e0a0389524b}</Project>
+      <Name>FolderSettingsHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XMLFixerLibrary\XMLFixerLibrary.csproj">
       <Project>{AD23A99E-89FE-47C9-BD2C-25C416F327F3}</Project>
       <Name>XMLFixerLibrary</Name>
