@@ -14,7 +14,9 @@ using FB2EPubConverter.Interfaces;
 using System.Runtime.InteropServices;
 using Fb2epubSettings;
 using System.Configuration;
-using Microsoft.Win32;
+using log4net.Config;
+using FolderSettingsHelper;
+
 
 namespace FB2EPubConverter
 {
@@ -23,13 +25,29 @@ namespace FB2EPubConverter
     {
         internal static class Logger
         {
+            static Logger()
+            {
+                // in case we run from DLL
+                if (Assembly.GetEntryAssembly() == null)
+                {
+                    // detect assembly path, the config file should be right near it
+                    string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    if (!string.IsNullOrEmpty(path))
+                    {
+                        // set the path to location were we wish to log to
+                        log4net.GlobalContext.Properties["LogName"] = Path.Combine(FolderLocator.GetLocalAppDataFolder(), @"Lord_KiRon\");
+                        // load .config file containing loggers
+                        XmlConfigurator.Configure(new FileInfo(path + @"\FB2EPubConverter.dll.config"));
+                    }
+                }
+            }
+
             // Create a logger for use in this class
             public static readonly log4net.ILog Log = log4net.LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
 
         }
 
         private readonly ConvertProcessorSettings _processorSettings = new ConvertProcessorSettings();
-        //private string _settingsFileName = @"c:\settings.xml";
 
         public ConvertProcessorSettings ProcessorSettings { get { return _processorSettings; } }
 
@@ -52,6 +70,7 @@ namespace FB2EPubConverter
         public void PerformConvertOperation(List<string> filesInMask, string outputFileName)
         {
             int filesCount = filesInMask.Count;
+            Logger.Log.Error("Test entry");
             int successfullyConverted = 0;
 
             if (_processorSettings.ProgressCallbacks != null)
