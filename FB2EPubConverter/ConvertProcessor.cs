@@ -310,10 +310,6 @@ namespace FB2EPubConverter
 
         public void ConvertList(string[] files, string outputFolder, IProgressUpdateInterface progress)
         {
-            foreach (var file in files)
-            {
-                MessageBox.Show(file);
-            }
             LoadSettings();
             ProcessorSettings.Settings.OutPutPath = outputFolder;
             ProcessorSettings.ProgressCallbacks = progress;
