@@ -70,7 +70,6 @@ namespace FB2EPubConverter
         public void PerformConvertOperation(List<string> filesInMask, string outputFileName)
         {
             int filesCount = filesInMask.Count;
-            Logger.Log.Error("Test entry");
             int successfullyConverted = 0;
 
             if (_processorSettings.ProgressCallbacks != null)
