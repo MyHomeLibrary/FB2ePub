@@ -52,7 +52,7 @@ Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Dirs]
 ; create subfolder in "ProgramData" and set permissions to write for everyone in order to resolve UAC permissions
-Name: "{app}\{#MyAppSubfolder}"; Permissions: everyone-modify
+Name: "{app}\{#MyAppSubfolder}"; Permissions: everyone-modify users-modify powerusers-full admins-full;
 
 [Files]
 ; common
@@ -91,8 +91,8 @@ Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{app}"; Flags: ignoreversion
 
 ; configuration
 Source: "{#BuildFolder}defsettings.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildFolder}defsettings.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs; Permissions: everyone-modify
-Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs; Permissions: everyone-modify
+Source: "{#BuildFolder}defsettings.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs; Permissions: everyone-modify users-modify powerusers-full admins-full;
+Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs; Permissions: everyone-modify users-modify powerusers-full admins-full;
 
 Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver 32bit
 
