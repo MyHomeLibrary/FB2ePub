@@ -92,9 +92,9 @@ Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{app}"; Flags: ignoreversion
 ; configuration
 Source: "{#BuildFolder}DefaultSettings\defsettings_fonts.xml"; DestDir: "{app}\DefaultSettings\"; Flags: ignoreversion
 Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{app}\DefaultSettings\"; Flags: ignoreversion
-Source: "{#BuildFolder}DefaultSettings\defsettings_fonts.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs; Permissions: everyone-modify users-modify powerusers-full admins-full; Tasks: installWithEmbeddedFonts; DestName: "defsettings.xml";
-Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs; Permissions: everyone-modify users-modify powerusers-full admins-full; Tasks: installWithoutEmbeddedFonts; DestName: "defsettings.xml";
-Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs; Permissions: everyone-modify users-modify powerusers-full admins-full;
+Source: "{#BuildFolder}DefaultSettings\defsettings_fonts.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion; Permissions: everyone-modify users-modify powerusers-full admins-full; Tasks: installWithEmbeddedFonts; DestName: "defsettings.xml";
+Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion; Permissions: everyone-modify users-modify powerusers-full admins-full; Tasks: installWithoutEmbeddedFonts; DestName: "defsettings.xml";
+Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion; Permissions: everyone-modify users-modify powerusers-full admins-full;
 
 Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver 32bit
 
