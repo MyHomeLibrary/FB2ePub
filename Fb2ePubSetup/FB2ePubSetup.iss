@@ -127,11 +127,21 @@ Filename: "{dotnet4064}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConve
 ; for 64bit we need both
 Filename: "{dotnet4032}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
 
+;ngen stuff
+Filename: "{dotnet4032}\ngen.exe"; Parameters: "install ""{app}\Fb2ePubGui.exe"""; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
+Filename: "{dotnet4032}\ngen.exe"; Parameters: "install ""{app}\Fb2ePub.exe"""; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
+
+
 
 [UninstallRun]
 Filename: "{dotnet4064}\RegAsm.exe"; Parameters: "/u ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser runhidden; WorkingDir: {app};     Check: Is64BitInstallMode;  
 ; for 64bit we need both
 Filename: "{dotnet4032}\RegAsm.exe"; Parameters: "/u ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser runhidden; WorkingDir: {app};
+
+;ngen stuff
+Filename: "{dotnet4032}\ngen.exe"; Parameters: "uninstall ""{app}\Fb2ePubGui.exe"""; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
+Filename: "{dotnet4032}\ngen.exe"; Parameters: "uninstall ""{app}\Fb2ePub.exe"""; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
+
 
 [Registry]
 ;FBE related plugins
