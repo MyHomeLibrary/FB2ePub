@@ -212,9 +212,12 @@
     <Content Include="CSS\styles_en.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="defsettings.xml">
+    <Content Include="DefaultSettings\defsettings_fonts.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
+    <Content Include="DefaultSettings\defsettings_nofonts.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Fonts\License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -279,7 +282,7 @@
   <PropertyGroup>
     <PostBuildEvent>call "$(DevEnvDir)..\..\VC\vcvarsall.bat"
 tlbexp $(TargetPath)  /verbose  /out:$(SolutionDir)$(TargetName).tlb
-</PostBuildEvent>
+copy $(ProjectDir)DefaultSettings\defsettings_fonts.xml $(TargetDir)defsettings.xml</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
