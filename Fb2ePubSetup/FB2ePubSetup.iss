@@ -50,6 +50,10 @@ SetupLogging=yes
 Name: "en"; MessagesFile: "compiler:Default.isl"
 Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
 
+[Dirs]
+; create subfolder in "ProgramData" and set permissions to write for everyone in order to resolve UAC permissions
+Name: "{app}\{#MyAppSubfolder}"; Permissions: everyone-modify
+
 [Files]
 ; common
 Source: "{#BuildFolder}CSS\*"; DestDir: "{commonappdata}\{#MyAppSubfolder}\CSS"; Flags: ignoreversion recursesubdirs createallsubdirs
