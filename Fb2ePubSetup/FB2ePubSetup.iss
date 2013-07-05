@@ -52,7 +52,7 @@ Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Dirs]
 ; create subfolder in "ProgramData" and set permissions to write for everyone in order to resolve UAC permissions
-Name: "{app}\{#MyAppSubfolder}"; Permissions: everyone-modify users-modify powerusers-full admins-full;
+Name: "{commonappdata}\{#MyAppSubfolder}"; Permissions: everyone-modify users-modify powerusers-full admins-full;
 
 [Files]
 ; common
