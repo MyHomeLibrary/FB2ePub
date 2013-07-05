@@ -23,6 +23,18 @@ ru.assosiateRAR = Привязать правую кнопку манипулятора к расширению файла "rar"
 en.assosiateAny = Associate context menu with any file extension
 ru.assosiateAny = Привязать правую кнопку манипулятора к любому расширению файла
 
+en.fileExtGroup = File extensions
+ru.fileExtGroup = Расширения файлов
+
+en.ConfigSelection = Embed cyrillic fonts
+ru.ConfigSelection = Встраивать русские шрифты
+
+en.EmbedFonts = Embed cyrillic fonts (for devices without russian lang. support)
+ru.EmbedFonts = Встраивать рус. шрифты (для ридеров без поддержки русского)
+
+en.NoEmbedFonts = No fonts embedding (for devices with russian lang. support)
+ru.NoEmbedFonts = Не встраивать шрифты (для ридеров отображающих русский текст)
+
 [Code]
 // returns the assosiation for the extension if present 
 // or extension iteslf to know where to register 

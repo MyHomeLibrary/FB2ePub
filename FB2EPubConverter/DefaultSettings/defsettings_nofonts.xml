@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<ConverterSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <TransliterateBook>false</TransliterateBook>
+  <TransliterateFileName>false</TransliterateFileName>
+  <TransliterateTOC>false</TransliterateTOC>
+  <AddFB2Info>true</AddFB2Info>
+  <Fb2FixMode>UseFb2Fix</Fb2FixMode>
+  <AddSequenceNameToTitle>true</AddSequenceNameToTitle>
+  <FormatWithSequenceName>%bt% %sa.l%-%sn%</FormatWithSequenceName>
+  <FormatWithOutSequenceName>%bt% (%sf.l%)</FormatWithOutSequenceName>
+  <FormatWithOutSeriesName>%bt%</FormatWithOutSeriesName>
+  <CreateFlatInternalFolderStructure>false</CreateFlatInternalFolderStructure>
+  <ConvertAlphaChannelPNGImages>true</ConvertAlphaChannelPNGImages>
+  <EmbedStylesIntoXHTML>false</EmbedStylesIntoXHTML>
+  <AuthorNameFormat>%f.c%%m.c%%l.c%%n.c:b%</AuthorNameFormat>
+  <FileAsFormat>%l.c%%f.c%</FileAsFormat>
+  <GenerateDropCharacters>true</GenerateDropCharacters>
+  <SkipAboutPageGeneration>false</SkipAboutPageGeneration>
+  <EnableAdobeTemplateUsage>false</EnableAdobeTemplateUsage>
+  <IgnoreTitleOption>IgnoreNothing</IgnoreTitleOption>
+  <AdobeTemplatePath />
+  <DecorateFontNames>true</DecorateFontNames>
+  <Fonts>
+    <FontFamilies>
+    </FontFamilies>
+    <CSSElements>
+    </CSSElements>
+  </Fonts>
+  <ResourcesPath />
+    <AppleConverterEPub2Settings>
+    <V2Settings>
+      <Platforms>
+        <Platform PlatformType="Any">
+          <UseCusomFontsOnAppleDevices>true</UseCusomFontsOnAppleDevices>
+          <OpenToSpreadOnAppleDevices>false</OpenToSpreadOnAppleDevices>
+          <FixedLayoutOnAppleDevices>false</FixedLayoutOnAppleDevices>
+          <OrientationLockOnAppleDevices>Disabled</OrientationLockOnAppleDevices>
+        </Platform>
+      </Platforms>
+    </V2Settings>
+  </AppleConverterEPub2Settings>
+</ConverterSettings>

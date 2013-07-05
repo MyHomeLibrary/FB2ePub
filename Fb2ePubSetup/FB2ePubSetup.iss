@@ -90,8 +90,10 @@ Source: "{#BuildFolder}license.docx"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{app}"; Flags: ignoreversion
 
 ; configuration
-Source: "{#BuildFolder}defsettings.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildFolder}defsettings.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs; Permissions: everyone-modify users-modify powerusers-full admins-full;
+Source: "{#BuildFolder}DefaultSettings\defsettings_fonts.xml"; DestDir: "{app}\DefaultSettings\"; Flags: ignoreversion
+Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{app}\DefaultSettings\"; Flags: ignoreversion
+Source: "{#BuildFolder}DefaultSettings\defsettings_fonts.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs; Permissions: everyone-modify users-modify powerusers-full admins-full; Tasks: installWithEmbeddedFonts; DestName: "defsettings.xml";
+Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs; Permissions: everyone-modify users-modify powerusers-full admins-full; Tasks: installWithoutEmbeddedFonts; DestName: "defsettings.xml";
 Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs; Permissions: everyone-modify users-modify powerusers-full admins-full;
 
 Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver 32bit
@@ -172,10 +174,13 @@ Root: HKCR32; Subkey: {#Any_Extension_Path}\ShellEx\ContextMenuHandlers\{#Fb2Epu
 
 
 [Tasks]
-Name: registreFB2Extension; Description: {cm:assosiateFB2}; GroupDescription: "File extensions";
-Name: registreZIPExtension; Description: {cm:assosiateZIP}; GroupDescription: "File extensions";
-Name: registreRARExtension; Description: {cm:assosiateRAR}; GroupDescription: "File extensions";
-Name: registreAnyExtension; Description: {cm:assosiateAny}; GroupDescription: "File extensions"; Flags: unchecked;
+Name: installWithEmbeddedFonts; Description: {cm:EmbedFonts}; Flags: exclusive ; GroupDescription: {cm:ConfigSelection};
+Name: installWithoutEmbeddedFonts; Description: {cm:NoEmbedFonts}; Flags: exclusive unchecked; GroupDescription: {cm:ConfigSelection};
+Name: registreFB2Extension; Description: {cm:assosiateFB2}; GroupDescription: {cm:fileExtGroup};         
+Name: registreZIPExtension; Description: {cm:assosiateZIP}; GroupDescription: {cm:fileExtGroup};
+Name: registreRARExtension; Description: {cm:assosiateRAR}; GroupDescription: {cm:fileExtGroup};
+Name: registreAnyExtension; Description: {cm:assosiateAny}; GroupDescription: {cm:fileExtGroup}; Flags: unchecked;
+
 
 [Code]
 function InitializeSetup(): boolean;
