@@ -235,7 +235,8 @@ img.coverimage
 div.titlepage
 {
 	text-align: center;
-	page-break-after: always;	
+	page-break-after: always;
+	page-break-inside: avoid;		
 }
 table {
    border: 1px solid black;
