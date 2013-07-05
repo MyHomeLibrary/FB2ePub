@@ -91,7 +91,7 @@ Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{app}"; Flags: ignoreversion
 
 ; configuration
 Source: "{#BuildFolder}defsettings.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildFolder}defsettings.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs Permissions: everyone-modify
+Source: "{#BuildFolder}defsettings.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs; Permissions: everyone-modify
 Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion recursesubdirs createallsubdirs; Permissions: everyone-modify
 
 Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver 32bit
