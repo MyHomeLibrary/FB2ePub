@@ -19,10 +19,10 @@ ru.vcredist2012_lcid=/lcid 1049
 
 [Code]
 const
-;11.0.51106 (Update1)
+//11.0.51106 (Update1)
   VC_2012_REDIST_X86_UP1 = '{8e70e4e1-06d7-470b-9f74-a51bef21088e}';
   VC_2012_REDIST_X64_UP1 = '{6e8f74e0-43bd-4dce-8477-6ff6828acc07}';
-;11.0.60610 (Update3)
+//11.0.60610 (Update3)
   VC_2012_REDIST_X86_UP3 = '{95716cce-fc71-413f-8ad5-56c2892d4b3a}';
   VC_2012_REDIST_X64_UP3 = '{a1909659-0a08-4554-8af1-2175904903a1}';
  
