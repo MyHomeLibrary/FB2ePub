@@ -128,8 +128,8 @@ Filename: "{dotnet4064}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConve
 Filename: "{dotnet4032}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
 
 ;ngen stuff
-Filename: "{dotnet4032}\ngen.exe"; Parameters: "install ""{app}\Fb2ePubGui.exe"""; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
-Filename: "{dotnet4032}\ngen.exe"; Parameters: "install ""{app}\Fb2ePub.exe"""; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
+Filename: "{dotnet40}\ngen.exe"; Parameters: "install ""{app}\Fb2ePubGui.exe"""; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
+Filename: "{dotnet40}\ngen.exe"; Parameters: "install ""{app}\Fb2ePub.exe"""; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
 
 
 
