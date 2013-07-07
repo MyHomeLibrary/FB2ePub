@@ -40,6 +40,7 @@ namespace Fb2epubSettings
             fileLocation    =   GetProperSettingsLocation();
             ConverterSettingsFile settingsFile = new ConverterSettingsFile();
             settingsFile.Settings.CopyFrom(defaultSettings);
+            Directory.CreateDirectory(Path.GetDirectoryName(fileLocation));
             settingsFile.Save(fileLocation);
         }
 
