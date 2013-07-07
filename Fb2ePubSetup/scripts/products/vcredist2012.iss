@@ -48,7 +48,7 @@ begin
     // here the Result must be True when you need to install your VCRedist
   // or False when you don't need to, so now it's upon you how you build
   // this statement, the following won't install your VC redist only when
-  Result := not (VCVersionInstalled(VC_2012_REDIST_X64_UP1) and IsX64());
+  Result := (not VCVersionInstalled(VC_2012_REDIST_X64_UP1)) and IsX64();
 end;
 
 
