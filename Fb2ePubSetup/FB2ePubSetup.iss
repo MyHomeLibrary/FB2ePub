@@ -90,10 +90,16 @@ Source: "{#BuildFolder}license.docx"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{app}"; Flags: ignoreversion
 
 ; configuration
+;copy to application folder for reference
 Source: "{#BuildFolder}DefaultSettings\defsettings_fonts.xml"; DestDir: "{app}\DefaultSettings\"; Flags: ignoreversion
 Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{app}\DefaultSettings\"; Flags: ignoreversion
+;copy to common aplication based on user selection for default
 Source: "{#BuildFolder}DefaultSettings\defsettings_fonts.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion; Permissions: everyone-modify users-modify powerusers-full admins-full; Tasks: installWithEmbeddedFonts; DestName: "defsettings.xml";
 Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion; Permissions: everyone-modify users-modify powerusers-full admins-full; Tasks: installWithoutEmbeddedFonts; DestName: "defsettings.xml";
+;copy to application folder for fail safe defaults (based on user selection)
+Source: "{#BuildFolder}DefaultSettings\defsettings_fonts.xml"; DestDir: "{app}"; Flags: ignoreversion; Tasks: installWithEmbeddedFonts; DestName: "defsettings.xml";
+Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{app}"; Flags: ignoreversion; Tasks: installWithoutEmbeddedFonts; DestName: "defsettings.xml";
+;copy shell extension configuration
 Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion; Permissions: everyone-modify users-modify powerusers-full admins-full;
 
 Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver 32bit
