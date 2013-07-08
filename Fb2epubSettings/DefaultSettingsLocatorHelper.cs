@@ -112,7 +112,7 @@ namespace Fb2epubSettings
 
         private static string AttachFileSubpath(string rootPath)
         {
-            return Path.Combine(rootPath, "Lord_KiRon", "defsettings.xml");
+            return Path.Combine(rootPath, @"Lord_KiRon\Fb2ePub", "defsettings.xml");
         }
     }
 }
