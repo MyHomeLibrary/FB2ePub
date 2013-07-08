@@ -45,6 +45,9 @@ begin
 Result := extension;
 if ( RegQueryStringValue(HKCR,extension,'',readValue)) then
 begin
+if ( readValue <> '') then
+begin
 Result := readValue;
+end
 end;
 end;
