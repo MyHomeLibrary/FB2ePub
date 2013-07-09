@@ -29,6 +29,8 @@ namespace Fb2ePubGui
         {
             SetLanguage((LanguageSetting)Fb2EpubGUI.Default.Language);
             InitializeComponent();
+            this.TopMost = Settings.Default.Topmost;
+            topmostToolStripMenuItem.Checked = this.TopMost;
         }
 
         private enum LanguageSetting
@@ -297,6 +299,14 @@ namespace Fb2ePubGui
         {
             AboutBox aboutBox = new AboutBox();
             aboutBox.ShowDialog(this);
+        }
+
+        private void topmostToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.TopMost = !this.TopMost;
+            topmostToolStripMenuItem.Checked = this.TopMost;
+            Settings.Default.Topmost = this.TopMost;
+            Settings.Default.Save();
         }
 
 
