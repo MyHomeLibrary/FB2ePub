@@ -97,6 +97,25 @@ namespace Fb2epubSettings.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure?.
+        /// </summary>
+        internal static string AppleV2Settings_checkBoxFixedLayout_CheckedChanged_Are_you_sure_ {
+            get {
+                return ResourceManager.GetString("AppleV2Settings_checkBoxFixedLayout_CheckedChanged_Are_you_sure_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fixed layout is not fit for automatic convertors. Are you sure you want to keep it ON?.
+        /// </summary>
+        internal static string AppleV2Settings_checkBoxFixedLayout_CheckedChanged_Fixed_layout_is_not_fit_for_automatic_convertors {
+            get {
+                return ResourceManager.GetString("AppleV2Settings_checkBoxFixedLayout_CheckedChanged_Fixed_layout_is_not_fit_for_au" +
+                        "tomatic_convertors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select Adobe XPGT template file.
         /// </summary>
         internal static string ConverterSettingsForm_buttonBrowseForXPGT_Click_Please_select_Adobe_XPGT_template_file {

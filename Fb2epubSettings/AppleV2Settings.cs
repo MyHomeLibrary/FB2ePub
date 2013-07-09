@@ -382,6 +382,17 @@ namespace Fb2epubSettings
             if (_selectedListBox == SelectedBox.Used)
             {
                 AppleTargetPlatform currentPlatform = GetCurrentPlatform();
+                if (checkBoxFixedLayout.Checked)
+                {
+                    DialogResult result = MessageBox.Show(Resources.Fb2epubSettings.AppleV2Settings_checkBoxFixedLayout_CheckedChanged_Fixed_layout_is_not_fit_for_automatic_convertors,
+                        Resources.Fb2epubSettings.AppleV2Settings_checkBoxFixedLayout_CheckedChanged_Are_you_sure_,
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                    if (result == DialogResult.No)
+                    {
+                        checkBoxFixedLayout.Checked = false;
+                        return;
+                    }
+                }
                 _allPlatformObjects[currentPlatform].FixedLayout= checkBoxFixedLayout.Checked;
             }
         }
