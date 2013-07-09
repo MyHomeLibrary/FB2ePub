@@ -235,6 +235,9 @@ img.coverimage
 {
 	max-width:100%;	
 	height:100%;
+	padding: 0;
+	margin: 0;
+	oeb-column-number: 1;
 }
 
 div.titlepage
