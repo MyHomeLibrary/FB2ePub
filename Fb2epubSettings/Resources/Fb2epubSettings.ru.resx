@@ -129,6 +129,12 @@
   <data name="Applev2BookOrientationLockPortraitOnly" xml:space="preserve">
     <value>Только горизонт.</value>
   </data>
+  <data name="AppleV2Settings_checkBoxFixedLayout_CheckedChanged_Are_you_sure_" xml:space="preserve">
+    <value>Вы уверены?</value>
+  </data>
+  <data name="AppleV2Settings_checkBoxFixedLayout_CheckedChanged_Fixed_layout_is_not_fit_for_automatic_convertors" xml:space="preserve">
+    <value>Опция фиксированого макета не подходит для автоматических конвертеров. Вы уверены что Вы хотите ее ВКЛЮЧИТЬ?</value>
+  </data>
   <data name="ConverterSettingsForm_buttonBrowseForXPGT_Click_Please_select_Adobe_XPGT_template_file" xml:space="preserve">
     <value>Пожалуйста выберите файл шаблона XGPT</value>
   </data>

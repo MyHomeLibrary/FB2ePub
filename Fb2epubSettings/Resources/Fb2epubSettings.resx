@@ -153,4 +153,10 @@
   <data name="Applev2BookOrientationLockPortraitOnly" xml:space="preserve">
     <value>PortraitOnly</value>
   </data>
+  <data name="AppleV2Settings_checkBoxFixedLayout_CheckedChanged_Fixed_layout_is_not_fit_for_automatic_convertors" xml:space="preserve">
+    <value>Fixed layout is not fit for automatic convertors. Are you sure you want to keep it ON?</value>
+  </data>
+  <data name="AppleV2Settings_checkBoxFixedLayout_CheckedChanged_Are_you_sure_" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
 </root>
