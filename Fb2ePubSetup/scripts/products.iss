@@ -4,7 +4,7 @@
 DependenciesDir=MyProgramDependencies
 
 en.depdownload_msg=The following applications are required before setup can continue:%n%n%1%nDownload and install now?
-ru.depdownload_msg=Преред тек как продолжить необходима установка следующих программ:%n%n%1%nЗагрузить и усатановить сейчас?
+ru.depdownload_msg=Для продолжения установки аппликации установите следующие программы::%n%n%1%nЗагрузить и установить сейчас?
 
 en.depdownload_memo_title=Download dependencies
 ru.depdownload_memo_title=Загрузка компонент
@@ -13,7 +13,7 @@ en.depinstall_memo_title=Install dependencies
 ru.depinstall_memo_title=Установить компоненты
 
 en.depinstall_title=Installing dependencies
-ru.depinstall_title=Устанавливаем комопоненты
+ru.depinstall_title=Устанавливаем компоненты
 
 en.depinstall_description=Please wait while Setup installs dependencies on your computer.
 ru.depinstall_description=Пожалуйста подождите пока Загрузчик устанавливает требуемые компоненты на Ваш компьютер
