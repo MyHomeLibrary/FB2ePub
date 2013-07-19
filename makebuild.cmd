@@ -32,7 +32,7 @@ SET VCVARS="C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat
 rem this actually defines packed file name , do not forget to change it when building
 SET VERSION_MAJOR=1
 SET VERSION_MINOR=1
-SET VERSION_BUILD=4
+SET VERSION_BUILD=5
 
 rem here the output archived setup will be placed
 SET ARCHIVE_PATH=%PROJ_ROOT%Output\

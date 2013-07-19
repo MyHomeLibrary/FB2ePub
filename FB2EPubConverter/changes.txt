@@ -1,4 +1,7 @@
-﻿1.1.4
+﻿1.1.5
+* Changed to generate truly Flat ePubs 
+
+1.1.4
 + Added installer code to support configurations with and without embedding fonts
 + Added new option for command line utility "/cfg:<path>" to perform conversions using external configuration file
 + Added option to generate Apple file that allows Apple devices to use custom (embedded) fonts
