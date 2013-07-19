@@ -44,7 +44,7 @@ namespace EPubLibrary
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
         private readonly EPubTitleSettings _title = new EPubTitleSettings();
         private string _coverImage = null;
-        private readonly CSSFile _mainCss = new CSSFile() { FileName = "main.css", ID = "mainCSS", FileExtPath = @"CSS\main.css" };
+        private readonly CSSFile _mainCss = new CSSFile() { FileName = "main.css", ID = "mainCSS", FileExtPath = @"main.css" };
         private readonly AdobeTemplate _adobeTemplate = new AdobeTemplate();
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
         private readonly List<BookDocument> _sections = new List<BookDocument>();
@@ -198,8 +198,7 @@ namespace EPubLibrary
             }
             try
             {
-                _mainCss.EPubFilePath = string.Format(FlatStructure ? "{0}" : @"css\{0}",
-                                                     Path.GetFileName(_mainCss.FileExtPath));
+                _mainCss.EPubFilePath = @"css\" + Path.GetFileName(_mainCss.FileExtPath);
                 using (var fileStream = File.Create(outFileName))
                 {
                     using (var s = new ZipOutputStream(fileStream))
@@ -275,7 +274,7 @@ namespace EPubLibrary
             const string fileName = "license.xhtml";
             // for test let's just create one file
             stream.SetLevel(9);
-            ZipEntry file = _zipFactory.MakeFileEntry(FlatStructure ? string.Format(@"OEBPS\{0}", fileName) : string.Format(@"OEBPS\license\{0}", fileName), false);
+            ZipEntry file = _zipFactory.MakeFileEntry(MakeFilePath(string.Format(@"license\{0}", fileName)), false);
             stream.PutNextEntry(file);
 
 
@@ -294,7 +293,7 @@ namespace EPubLibrary
                 stream.SetLevel(9);
                 foreach (var embededFileLocation in _fontSettings.EmbededFilesLocations)
                 {
-                    string filePath = string.Format(FlatStructure ? @"OEBPS\{0}" : @"OEBPS\fonts\{0}", Path.GetFileName(embededFileLocation));
+                    string filePath = MakeFilePath(string.Format(@"fonts\{0}", Path.GetFileName(embededFileLocation)));
                     ZipEntry entry = _zipFactory.MakeFileEntry(filePath, false);
                     stream.PutNextEntry(entry);
                     try
@@ -322,12 +321,17 @@ namespace EPubLibrary
 
         private void AddFontsFolder(ZipOutputStream stream)
         {
+            CreateZipFolder(stream, "fonts");
+        }
+
+        private void CreateZipFolder(ZipOutputStream stream, string folder)
+        {
             if (FlatStructure)
             {
                 return;
             }
             stream.SetLevel(9);
-            ZipEntry entry = _zipFactory.MakeDirectoryEntry(@"OEBPS\fonts", false);
+            ZipEntry entry = _zipFactory.MakeDirectoryEntry(string.Format(@"OEBPS\{0}",folder), false);
             stream.PutNextEntry(entry);
             stream.CloseEntry();
         }
@@ -352,18 +356,14 @@ namespace EPubLibrary
             {
                 return;
             }
-            if (!FlatStructure)
-            {
-                ZipEntry file = _zipFactory.MakeDirectoryEntry(@"OEBPS\Template", false);
-                stream.PutNextEntry(file);
-            }
+            CreateZipFolder(stream, "Template");
             stream.SetLevel(9);
             _adobeTemplate.TemplateFileInputPath = AdobeTemplatePath;
             try
             {
                 _adobeTemplate.Load();
-                string fileNameFormat = string.Format(FlatStructure ? "{0}" : @"Template\{0}", _adobeTemplate.TemplateFileOutputName);
-                ZipEntry templateFile = _zipFactory.MakeFileEntry(@"OEBPS\"+fileNameFormat, false);
+                string fileNameFormat = MakeFilePath(string.Format(@"Template\{0}", _adobeTemplate.TemplateFileOutputName)); 
+                ZipEntry templateFile = _zipFactory.MakeFileEntry(fileNameFormat, false);
                 stream.PutNextEntry(templateFile);
                 _adobeTemplate.Write(stream);
                 _content.AddXPGTTemplate(fileNameFormat, _adobeTemplate.TemplateFileOutputName);
@@ -381,7 +381,7 @@ namespace EPubLibrary
 
                 // for test let's just create one file
                 stream.SetLevel(9);
-                ZipEntry file = _zipFactory.MakeFileEntry(string.Format(@"OEBPS\{0}", AnnotationPage.FileName), false);
+                ZipEntry file = _zipFactory.MakeFileEntry(MakeFilePath(AnnotationPage.FileName), false);
                 stream.PutNextEntry(file);
 
 
@@ -411,11 +411,7 @@ namespace EPubLibrary
             {
                 return;
             }
-            if (!FlatStructure)
-            {
-                ZipEntry file = _zipFactory.MakeDirectoryEntry(@"OEBPS\css", false);
-                stream.PutNextEntry(file);               
-            }
+            CreateZipFolder(stream, "css");
             AddMainCSS(stream);
         }
 
@@ -423,11 +419,11 @@ namespace EPubLibrary
         private void AddMainCSS(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            ZipEntry file = _zipFactory.MakeFileEntry(string.Format(@"OEBPS\{0}", _mainCss.EPubFilePath), false);
+            ZipEntry file = _zipFactory.MakeFileEntry(MakeFilePath(_mainCss.EPubFilePath), false);
             stream.PutNextEntry(file);
             _mainCss.Write(stream);
 
-            _content.AddCSS(_mainCss.EPubFilePath, _mainCss.ID);
+            _content.AddCSS(FlatStructure ? Path.GetFileName(_mainCss.EPubFilePath) : _mainCss.EPubFilePath, _mainCss.ID);
         }
 
         private void AddTitle(ZipOutputStream stream)
@@ -439,7 +435,7 @@ namespace EPubLibrary
 
                 // for test let's just create one file
                 stream.SetLevel(9);
-                ZipEntry file = _zipFactory.MakeFileEntry(string.Format(@"OEBPS\{0}", TitlePage.FileName), false);
+                ZipEntry file = _zipFactory.MakeFileEntry(MakeFilePath(TitlePage.FileName), false);
                 stream.PutNextEntry(file);
 
 
@@ -463,7 +459,7 @@ namespace EPubLibrary
             const string fileName = "about.xhtml";
             // for test let's just create one file
             stream.SetLevel(9);
-            ZipEntry file = _zipFactory.MakeFileEntry(string.Format(@"OEBPS\{0}", fileName),false);
+            ZipEntry file = _zipFactory.MakeFileEntry(MakeFilePath(fileName),false);
             stream.PutNextEntry(file);
 
 
@@ -512,7 +508,7 @@ namespace EPubLibrary
                         subsection.FlatStructure = FlatStructure;
                         subsection.EmbedStyles = EmbedStyles;
                         subsection.FileName = string.Format("{0}_{1}.xhtml", Path.GetFileNameWithoutExtension(section.FileName), subCount);
-                        ZipEntry file = _zipFactory.MakeFileEntry(string.Format(@"OEBPS\{0}", subsection.FileName), false);
+                        ZipEntry file = _zipFactory.MakeFileEntry(MakeFilePath(subsection.FileName), false);
                         stream.PutNextEntry(file);
                         document = subsection.Generate();
                         WriteDocumentToStream(document,stream);
@@ -523,7 +519,7 @@ namespace EPubLibrary
                 }
                 else
                 {
-                    ZipEntry file = _zipFactory.MakeFileEntry(string.Format(@"OEBPS\{0}", section.FileName), false);
+                    ZipEntry file = _zipFactory.MakeFileEntry(MakeFilePath(section.FileName), false);
                     stream.PutNextEntry(file);
                     WriteDocumentToStream(document, stream);
                     AddBookContentSection(section, count,0);
@@ -590,12 +586,15 @@ namespace EPubLibrary
             string  fileName = "cover.xhtml";
             // for test let's just create one file
             stream.SetLevel(9);
-            ZipEntry file = _zipFactory.MakeFileEntry(string.Format(@"OEBPS\{0}", fileName),false);
+            ZipEntry file = _zipFactory.MakeFileEntry(MakeFilePath(fileName),false);
             stream.PutNextEntry(file);
 
-            CoverPageFile cover = new CoverPageFile() {  CoverFileName = GetCoverImageName(eImage) };
-            cover.FlatStructure = FlatStructure;
-            cover.EmbedStyles = EmbedStyles;
+            CoverPageFile cover = new CoverPageFile
+            {
+                CoverFileName = GetCoverImageName(eImage),
+                FlatStructure = FlatStructure,
+                EmbedStyles = EmbedStyles
+            };
             cover.StyleFiles.Add(_mainCss);
             if (UseAdobeTemplate)
             {
@@ -634,7 +633,7 @@ namespace EPubLibrary
         private void AddTOCFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            ZipEntry tocFile = _zipFactory.MakeFileEntry(@"OEBPS\toc.ncx", false);
+            ZipEntry tocFile = _zipFactory.MakeFileEntry(MakeFilePath("toc.ncx"), false);
             stream.PutNextEntry(tocFile);
             _tableOfContentFile.ID = _title.Identifiers[0].ID;
             _tableOfContentFile.Title = _rule.Translate(_title.BookTitles[0].TitleName,TranslitMode);
@@ -647,10 +646,19 @@ namespace EPubLibrary
         private void AddContentFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            ZipEntry contentFile = _zipFactory.MakeFileEntry(@"OEBPS\Content.opf", false);
+            ZipEntry contentFile = _zipFactory.MakeFileEntry(MakeFilePath("Content.opf"), false);
             stream.PutNextEntry(contentFile);
             _content.Title = _title;
             _content.Write(stream);
+        }
+
+        private string MakeFilePath(string fileName)
+        {
+            if (FlatStructure)
+            {
+                return Path.GetFileName(fileName);
+            }
+            return string.Format(@"OEBPS\{0}", fileName);
         }
 
 
@@ -672,7 +680,7 @@ namespace EPubLibrary
             foreach (var epubImage in _images)
             {
                 string filename = epubImage.Value.ID;
-                string filePath = string.Format(FlatStructure ? @"OEBPS\{0}" : @"OEBPS\images\{0}", filename);
+                string filePath = MakeFilePath(string.Format(@"images\{0}", filename));
                 ZipEntry entry = _zipFactory.MakeFileEntry(filePath, false);
                 stream.PutNextEntry(entry);
                 stream.Write(epubImage.Value.ImageData, 0, epubImage.Value.ImageData.Length);
@@ -683,18 +691,15 @@ namespace EPubLibrary
 
         private void AddImagesFolder(ZipOutputStream stream)
         {
-            if (FlatStructure)
-            {
-                return;
-            }
-            stream.SetLevel(9);
-            ZipEntry entry = _zipFactory.MakeDirectoryEntry(@"OEBPS\images", false);
-            stream.PutNextEntry(entry);
-            stream.CloseEntry();
+            CreateZipFolder(stream, "images");
         }
 
         private void AddBookFolder(ZipOutputStream stream)
         {
+            if (FlatStructure)
+            {
+                return;
+            }
             stream.SetLevel(9);
             ZipEntry entry = _zipFactory.MakeDirectoryEntry("OEBPS", false);
             stream.PutNextEntry(entry);

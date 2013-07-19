@@ -28,7 +28,7 @@ namespace EPubLibrary.ReferenceUtils
         /// <summary>
         /// Checks if anchor reference is internal or external
         /// </summary>
-        /// <param name="link">link/refference to check</param>
+        /// <param name="link">link/reference to check</param>
         /// <returns>returns true if internal, false otherwise</returns>
         public static bool IsInternalLink(string link)
         {
@@ -40,7 +40,7 @@ namespace EPubLibrary.ReferenceUtils
         }
 
         /// <summary>
-        /// Returns ID substing from the link reference string
+        /// Returns ID substring from the link reference string
         /// </summary>
         /// <param name="link"></param>
         /// <returns></returns>

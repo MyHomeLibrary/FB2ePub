@@ -1,4 +1,7 @@
-﻿1.0.21.0
+﻿1.0.22.0
+* Changed to generate truly Flat ePubs 
+
+1.0.21.0
 + Added option to generate Apple file that allows Apple devices to use custom (embedded) fonts
 + Added option to embed invisible license file 
 * Fixed the issue with improper filling the identifier in .ncx file (id and content got mixed up)
@@ -31,7 +34,7 @@
 
 1.0.13.0
 * Fixed bug when font without style attribute and font with "normal" attribute were considered different , this caused sometimes for italic styles to be overwriten
-* Fixed a bug when CSS stylesheet for one element contained more than one occurance of same parameter (in this case previously entire element was ignored)
+* Fixed a bug when CSS stylesheet for one element contained more than one occurrence of same parameter (in this case previously entire element was ignored)
 
 1.0.12.0
 * Changed the About page generation to allow change "About" page from caller application
