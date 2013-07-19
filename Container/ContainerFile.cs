@@ -12,7 +12,13 @@ namespace EPubLibrary.Container
     {
         private readonly XNamespace localNameSpace = "urn:oasis:names:tc:opendocument:xmlns:container";
 
-        public bool FlatStructure { get; set; }
+        private string _contentFileName = string.Empty;
+
+
+        public ContainerFile(string contentFileName)
+        {
+            _contentFileName = contentFileName;
+        }
 
         public void Write(Stream s)
         {
@@ -35,20 +41,11 @@ namespace EPubLibrary.Container
             containerElement.Add(new XAttribute("version", "1.0"));
             XElement rootFilesElement = new XElement(localNameSpace + "rootfiles");
             XElement rootFileElement = new XElement(localNameSpace + "rootfile");
-            rootFileElement.Add(new XAttribute("full-path", GetContentFilePath()));
+            rootFileElement.Add(new XAttribute("full-path", _contentFileName));
             rootFileElement.Add(new XAttribute("media-type", @"application/oebps-package+xml"));
             rootFilesElement.Add(rootFileElement);
             containerElement.Add(rootFilesElement);
             document.Add(containerElement);
-        }
-
-        private string GetContentFilePath()
-        {
-            if (FlatStructure)
-            {
-                return "Content.opf";
-            }
-            return @"OEBPS/Content.opf";
         }
 
     }

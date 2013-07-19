@@ -10,7 +10,6 @@ namespace EPubLibrary.CSS_Items
     public class CSSFile : StyleElement
     {
         private readonly List<CssFontDefinition> fonts = new List<CssFontDefinition>();
-        private string ePubFilePath;
 
         private readonly List<BaseCSSItem> targets =  new List<BaseCSSItem>();
 
@@ -18,6 +17,11 @@ namespace EPubLibrary.CSS_Items
         /// Get/Set file name of the CSS file
         /// </summary>
         public string FileName { get; set; }
+
+        /// <summary>
+        /// Folder path where the file to reside
+        /// </summary>
+        public string LocationSubFolder { get; set; }
 
         /// <summary>
         /// Get/Set ID of the current element to be used in manifest etc
@@ -35,19 +39,19 @@ namespace EPubLibrary.CSS_Items
         public string FileExtPath { get; set; }
 
         /// <summary>
-        /// Get/Set relative location of the file inside ePub
+        /// Get relative path of the file inside ePub
         /// </summary>
-        public string EPubFilePath
+        public string InternalPath
         {
             get
             {
-                return ePubFilePath;
+                if (string.IsNullOrEmpty(LocationSubFolder))
+                {
+                    return Path.GetFileName(FileExtPath);
+                }
+                return string.Format("css/{0}", Path.GetFileName(FileExtPath));
             }
 
-            set
-            {
-                ePubFilePath = value.Replace('\\','/');
-            }
         }
 
         /// <summary>
@@ -164,14 +168,14 @@ namespace EPubLibrary.CSS_Items
         }
 
 
-        public override string GetFilePathExt()
-        {
-            return EPubFilePath;
-        }
-
         public override string GetMediaType()
         {
             return MediaType;
+        }
+
+        public override string GetFilePathExt()
+        {
+            return InternalPath;
         }
     }
 }
