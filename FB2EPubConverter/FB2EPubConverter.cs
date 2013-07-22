@@ -769,7 +769,7 @@ namespace Fb2ePubConverter
             {
                 pathPreffix = Settings.ResourcesPath;
             }
-            epubFile.CSSFiles.Add(new CSSFile { FileExtPath = string.Format(@"{0}\{1}", pathPreffix, @"CSS\default.css"), FileName = "default.css" });
+            epubFile.CSSFiles.Add(new CSSFile { FilePathOnDisk = string.Format(@"{0}\{1}", pathPreffix, @"CSS\default.css"), FileName = "default.css" });
         }
 
         private void SetupFonts(EPubFile epubFile)
