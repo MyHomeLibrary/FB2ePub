@@ -149,7 +149,7 @@ namespace FB2EPubConverter
             {
                 EPUBImage image = new EPUBImage();
                 image.ID = item.Value.Id;
-                Logger.log.DebugFormat("Image ID : {0}", image.ID);
+                Logger.Log.DebugFormat("Image ID : {0}", image.ID);
                 image.ImageData = item.Value.BinaryData;
                 if (item.Value.ContentType == ContentTypeEnum.ContentTypeJpeg)
                 {
@@ -165,7 +165,7 @@ namespace FB2EPubConverter
                 }
                 else
                 {
-                    Logger.log.ErrorFormat("Unknown image type {0}", item.Value.ContentType);
+                    Logger.Log.ErrorFormat("Unknown image type {0}", item.Value.ContentType);
                     continue;
                 }
                 if (IsImageIdUsed(image.ID)) // only if image regestered as used
@@ -182,7 +182,7 @@ namespace FB2EPubConverter
                     catch (Exception ex)
                     {
                         RemoveBinaryImageId(image.ID);
-                        Logger.log.ErrorFormat("Error reading PNG file {0}",ex);
+                        Logger.Log.ErrorFormat("Error reading PNG file {0}",ex);
                     }
                 }               
             }

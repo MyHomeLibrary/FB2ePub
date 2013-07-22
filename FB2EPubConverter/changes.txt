@@ -1,5 +1,7 @@
 ﻿1.1.5
 * Changed to generate truly Flat ePubs 
+* Refactoring of the code to perform automatic internal relative paths resolving when constructing ePubs , instead of hard coded
+
 
 1.1.4
 + Added installer code to support configurations with and without embedding fonts
