@@ -1,5 +1,6 @@
 ﻿1.0.22.0
 * Changed to generate truly Flat ePubs 
+* Refactoring of the code to perform automatic internal relative paths resolving when constructing ePubs , instead of hard coded
 
 1.0.21.0
 + Added option to generate Apple file that allows Apple devices to use custom (embedded) fonts

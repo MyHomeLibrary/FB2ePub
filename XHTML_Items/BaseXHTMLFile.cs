@@ -1,28 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.CSS_Items;
+using EPubLibrary.PathUtils;
 using XHTMLClassLibrary;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.Structure_Header;
 
 namespace EPubLibrary.XHTML_Items
 {
-    public class BaseXHTMLFile 
+    public class BaseXHTMLFile : IEPubPath
     {
-        protected Head headElement = null;
-        protected Body bodyElement = null;
-        protected XNamespace xhtmlNamespace = @"http://www.w3.org/1999/xhtml";
+        protected Head HeadElement = null;
+        protected Body BodyElement = null;
+        protected XNamespace XhtmlNamespace = @"http://www.w3.org/1999/xhtml";
         protected string pageTitle;
 
-        private readonly List<StyleElement> styles = new List<StyleElement>();
+        protected EPubInternalPath FileEPubInternalPath= null;
 
-        private XHTMLDocument mainDocument = new XHTMLDocument(XHTMRulesEnum.EPUBCompatible);
+        private readonly List<StyleElement> _styles = new List<StyleElement>();
+
+        private readonly XHTMLDocument _mainDocument = new XHTMLDocument(XHTMRulesEnum.EPUBCompatible);
 
         public GuideTypeEnum DocumentType { get; set; }
 
@@ -30,18 +32,33 @@ namespace EPubLibrary.XHTML_Items
 
         public bool FlatStructure { get; set; }
 
+        public string Id { get; set; }
+
+        public EPubInternalPath PathInEPUB
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(FileName))
+                {
+                    throw new NullReferenceException("FileName property has to be set");
+                }
+                return new EPubInternalPath(FileEPubInternalPath, FileName);
+            }
+            
+        }
+
         /// <summary>
         /// Get/Set file name to be used when saving into EPUB
         /// </summary>
         public string FileName { get; set; }
 
         /// <summary>
-        /// Get/Set embeding styles into xHTML files instead of referencing style files
+        /// Get/Set embedding styles into xHTML files instead of referencing style files
         /// </summary>
         public bool EmbedStyles { get; set; }
 
         /// <summary>
-        /// Document title (meaningless in EPUB , usualy used by browsers)
+        /// Document title (meaningless in EPUB , usually used by browsers)
         /// </summary>
         public string PageTitle
         {
@@ -55,15 +72,15 @@ namespace EPubLibrary.XHTML_Items
         /// <summary>
         /// Get access to list of CSS files
         /// </summary>
-        public List<StyleElement> StyleFiles { get { return styles; } }
+        public List<StyleElement> StyleFiles { get { return _styles; } }
 
 
         public BaseXHTMLFile()
         {
-            headElement = new Head();
+            HeadElement = new Head();
 
-            bodyElement = new Body();
-            bodyElement.Class.Value = "epub";
+            BodyElement = new Body();
+            BodyElement.Class.Value = "epub";
 
             
         }
@@ -88,7 +105,7 @@ namespace EPubLibrary.XHTML_Items
         public virtual XDocument Generate()
         {
             UTF8Encoding encoding = new UTF8Encoding();
-            foreach (var file in StyleFiles)
+            foreach (var file in _styles)
             {
                 IXHTMLItem styleElement;
                 if (EmbedStyles)
@@ -114,16 +131,16 @@ namespace EPubLibrary.XHTML_Items
                     styleElement = cssStyleShit;
                     cssStyleShit.Relation.Value = "stylesheet";
                     cssStyleShit.Type.Value = file.GetMediaType();
-                    cssStyleShit.HRef.Value = file.GetFilePathExt();
+                    cssStyleShit.HRef.Value = file.PathInEPUB.GetRelativePath(FileEPubInternalPath, FlatStructure);
                 }
-                headElement.Add(styleElement);
+                HeadElement.Add(styleElement);
             }
 
-            mainDocument.RootHTML.Add(headElement);
+            _mainDocument.RootHTML.Add(HeadElement);
 
-            mainDocument.RootHTML.Add(bodyElement);
+            _mainDocument.RootHTML.Add(BodyElement);
 
-            if (!mainDocument.RootHTML.IsValid())
+            if (!_mainDocument.RootHTML.IsValid())
             {
                throw new Exception("Document content is not valid");
             }
@@ -131,17 +148,17 @@ namespace EPubLibrary.XHTML_Items
 
             var titleElm = new XHTMLClassLibrary.BaseElements.Structure_Header.Title();
             titleElm.Content.Text = pageTitle;
-            headElement.Add(titleElm);
+            HeadElement.Add(titleElm);
             
 
-            return mainDocument.Generate();
+            return _mainDocument.Generate();
         }
 
         /// <summary>
         /// Checks if XHTML element is part of current document
         /// </summary>
-        /// <param name="value">elemenrt to check</param>
-        /// <returns>true idf part of this document, false otherwise</returns>
+        /// <param name="value">element to check</param>
+        /// <returns>true if part of this document, false otherwise</returns>
         public virtual  bool PartOfDocument(IXHTMLItem value)
         {
             return false;

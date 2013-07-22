@@ -5,32 +5,36 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using EPubLibrary.PathUtils;
 using EPubLibrary.TOC.NavMap;
+using EPubLibrary.XHTML_Items;
 
 namespace EPubLibrary.TOC
 {
     internal class TOCFile
     {
-        private readonly NavMapElement navMap = new NavMapElement();
-        private string title;
+        public static readonly EPubInternalPath TOCFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/toc.ncx");
+
+        private readonly NavMapElement _navMap = new NavMapElement();
+        private string _title;
 
 
         public bool IsNavMapEmpty()
         {
-            return (navMap.Count == 0);
+            return (_navMap.Count == 0);
         }
 
         public string Title
         {
             get
             {
-                if(title == null)
+                if(_title == null)
                 {
                     return string.Empty;
                 }
-                return title;
+                return _title;
             }
-            set { title = value;}
+            set { _title = value;}
         }
 
         public string ID { get; set; }
@@ -52,29 +56,27 @@ namespace EPubLibrary.TOC
             
         }
 
-        public void AddNavPoint(string content, string name)
+        public void AddNavPoint(BookDocument content, string name)
         {
-            NavPoint bookPoint = new NavPoint { Content = content.Replace('\\', '/'), Name = name };
-            navMap.Add(bookPoint);
+            NavPoint bookPoint = new NavPoint { Content = content.PathInEPUB.GetRelativePath(TOCFilePath, content.FlatStructure), Name = name };
+            _navMap.Add(bookPoint);
         }
 
-        public void AddSubNavPoint(string content, string subcontent, string name)
+        public void AddSubNavPoint(BookDocument content, BookDocument subcontent, string name)
         {
-            content = content.Replace('\\', '/');
-            subcontent = subcontent.Replace('\\', '/');
-            var point = navMap.Find(x => (x.Content == content));
+            var point = _navMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(TOCFilePath, content.FlatStructure)));
             if (point != null)
             {
-                point.SubPoints.Add(new NavPoint{Content = subcontent,Name = name});
+                point.SubPoints.Add(new NavPoint { Content = subcontent.PathInEPUB.GetRelativePath(TOCFilePath, subcontent.FlatStructure), Name = name });
             }
             else
             {
-                foreach (var element in navMap)
+                foreach (var element in _navMap)
                 {
-                    point = element.AllContent().Find(x => (x.Content == content));
+                    point = element.AllContent().Find(x => (x.Content == content.PathInEPUB.GetRelativePath(TOCFilePath, content.FlatStructure)));
                     if (point != null)
                     {
-                        point.SubPoints.Add(new NavPoint { Content = subcontent, Name = name });
+                        point.SubPoints.Add(new NavPoint { Content = subcontent.PathInEPUB.GetRelativePath(TOCFilePath, subcontent.FlatStructure), Name = name });
                         return;
                     }
                 }
@@ -84,9 +86,9 @@ namespace EPubLibrary.TOC
         }
 
 
-        public void AddSubLink(string content, string subcontent, string name)
+        public void AddSubLink(BookDocument content, BookDocument subcontent, string name)
         {
-            var point = navMap.Find(x => (x.Content == content));
+            var point = _navMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(TOCFilePath,content.FlatStructure)));
             if (point != null)
             {
                 point.SubPoints.Add(new NavPoint { Content = string.Format("{0}#{1}", content, subcontent), Name = name });
@@ -120,7 +122,7 @@ namespace EPubLibrary.TOC
 
             XElement metaDepth = new XElement(ncxNamespace + "meta");
             metaDepth.Add(new XAttribute("name", "dtb:depth"));
-            metaDepth.Add(new XAttribute("content", navMap.GetDepth()));
+            metaDepth.Add(new XAttribute("content", _navMap.GetDepth()));
             headElement.Add(metaDepth);
 
             XElement metaTotalPageCount = new XElement(ncxNamespace + "meta");
@@ -141,7 +143,7 @@ namespace EPubLibrary.TOC
             docTitleElement.Add(textElement);
             ncxElement.Add(docTitleElement);
 
-            ncxElement.Add(navMap.GenerateXMLMap());
+            ncxElement.Add(_navMap.GenerateXMLMap());
 
             document.Add(new XDocumentType("ncx", @"-//NISO//DTD ncx 2005-1//EN", @"http://www.daisy.org/z3986/2005/ncx-2005-1.dtd", null));
             document.Add(ncxElement);
@@ -150,17 +152,17 @@ namespace EPubLibrary.TOC
 
         internal void Consolidate()
         {
-            foreach (var point in navMap)
+            foreach (var point in _navMap)
             {
                 point.RemoveDeadEnds();
             }
 
-            var points = navMap.FindAll(x => (string.IsNullOrEmpty(x.Name)));
+            var points = _navMap.FindAll(x => (string.IsNullOrEmpty(x.Name)));
             foreach (var navPoint in points)
             {
                 if (navPoint.SubPoints.Count == 0)
                 {
-                    navMap.Remove(navPoint);
+                    _navMap.Remove(navPoint);
                 }
             }
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using EPubLibrary.PathUtils;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -33,6 +34,7 @@ namespace EPubLibrary.XHTML_Items
             // real limit is 300k but just to be sure
             MaxSize = 300 * 1024;
             Type = SectionTypeEnum.Text;
+            FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
         }
 
 
@@ -87,11 +89,11 @@ namespace EPubLibrary.XHTML_Items
         {
             if (Content != null)
             {
-                bodyElement.Add(Content);                    
+                BodyElement.Add(Content);                    
             }
             else // just to make sure it's valid element
             {
-                bodyElement.Add(new EmptyLine());
+                BodyElement.Add(new EmptyLine());
             }
 
             return base.Generate();

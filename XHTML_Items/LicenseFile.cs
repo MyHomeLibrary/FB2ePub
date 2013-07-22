@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using EPubLibrary.Content.Guide;
+using EPubLibrary.PathUtils;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -10,6 +12,14 @@ namespace EPubLibrary.XHTML_Items
 {
     class LicenseFile : BaseXHTMLFile
     {
+        internal LicenseFile()
+        {
+            FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/license/");
+            Id = "license";
+            FileName = "license.xhtml";
+            DocumentType = GuideTypeEnum.Ignore;
+        }
+
         internal void Create()
         {
             pageTitle = "License";
@@ -40,7 +50,7 @@ namespace EPubLibrary.XHTML_Items
             page.Add(p1);
 
 
-            bodyElement.Add(page);
+            BodyElement.Add(page);
         }
     }
 }

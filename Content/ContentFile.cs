@@ -9,19 +9,33 @@ using EPubLibrary.Content.Guide;
 using EPubLibrary.Content.Manifest;
 using EPubLibrary.Content.Spine;
 using EPubLibrary.CSS_Items;
+using EPubLibrary.PathUtils;
 using EPubLibrary.Template;
+using EPubLibrary.TOC;
+using EPubLibrary.XHTML_Items;
 
 namespace EPubLibrary.Content
 {
     internal class ContentFile
     {
-        XNamespace opfNameSpace = @"http://www.idpf.org/2007/opf";
+        public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
 
-        private readonly GuideSection guide = new GuideSection();
+        private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
 
-        private readonly ManifestSection manifest = new ManifestSection();
+        private readonly GuideSection _guide = new GuideSection();
 
-        private readonly SpineSection spine = new SpineSection();
+        private readonly ManifestSection _manifest = new ManifestSection();
+
+        private readonly SpineSection _spine = new SpineSection();
+
+        private bool _flatStructure = false;
+
+
+        public bool FlatStructure
+        {
+            get { return _flatStructure; }
+            set { _flatStructure = value; }
+        }
 
 
         private void CreateContentDocument(XDocument document)
@@ -39,45 +53,44 @@ namespace EPubLibrary.Content
 
         private void AddPackageData(XDocument document)
         {
-            XElement packagedata = new XElement(opfNameSpace + "package");
+            XElement packagedata = new XElement(_opfNameSpace + "package");
             packagedata.Add(new XAttribute("version", "2.0"));
             // we use ID of the first identifier
             packagedata.Add(new XAttribute("unique-identifier", Title.Identifiers[0].IdentifierName));
-            //packagedata.Add(new XAttribute(XNamespace.Xmlns + "opf", opfNameSpace));
             document.Add(packagedata);
         }
 
         private void AddManifestToContentDocument(XElement document)
         {
-            XElement manifestElement = manifest.GenerateManifestElement();
+            XElement manifestElement = _manifest.GenerateManifestElement();
             document.Add(manifestElement);
         }
 
 
         private void AddGuideToContentDocument(XElement xElement)
         {
-            if (guide.HasData())
+            if (_guide.HasData())
             {
-                xElement.Add(guide.GenerateGuide());
+                xElement.Add(_guide.GenerateGuide());
             }
         }
 
         private void AddSpineToContentDocument(XElement xElement)
         {
-            XElement spineElement = spine.GenerateSpineElement();
+            XElement spineElement = _spine.GenerateSpineElement();
             xElement.Add(spineElement);
         }
 
         private void AddMetaDataToContentDocument(XElement document)
         {
-            XElement metadata = new XElement(opfNameSpace + "metadata", new XAttribute("xmlns", "http://www.idpf.org/2007/opf"));
+            XElement metadata = new XElement(_opfNameSpace + "metadata", new XAttribute("xmlns", "http://www.idpf.org/2007/opf"));
             XNamespace dc = @"http://purl.org/dc/elements/1.1/";
             XNamespace xsi = @"http://www.w3.org/2001/XMLSchema-instance";
             XNamespace dcterms = @"http://purl.org/dc/terms/";
             metadata.Add(new XAttribute(XNamespace.Xmlns + "dc", dc));
             metadata.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi));
             metadata.Add(new XAttribute(XNamespace.Xmlns + "dcterms", dcterms));
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", opfNameSpace));
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", _opfNameSpace));
 
             foreach (var titleItem in Title.BookTitles)
             {
@@ -99,17 +112,17 @@ namespace EPubLibrary.Content
 
             foreach (var identifierItem in Title.Identifiers)
             {
-                string id = id = string.Format("{0}", identifierItem.ID);
+                string id = string.Format("{0}", identifierItem.ID);
                 XElement identifier = new XElement(dc + "identifier", id);
                 identifier.Add(new XAttribute("id", identifierItem.IdentifierName));
-                identifier.Add(new XAttribute(opfNameSpace + "scheme", identifierItem.Scheme));
+                identifier.Add(new XAttribute(_opfNameSpace + "scheme", identifierItem.Scheme));
                 metadata.Add(identifier);
             }
 
             if ( Title.DatePublished.HasValue)
             {
                 XElement xDate = new XElement(dc + "date",Title.DatePublished.Value.Year);
-                xDate.Add(new XAttribute(opfNameSpace + "event", "original-publication"));
+                xDate.Add(new XAttribute(_opfNameSpace + "event", "original-publication"));
                 metadata.Add(xDate);
             }
 
@@ -118,10 +131,10 @@ namespace EPubLibrary.Content
                 if (!string.IsNullOrEmpty(creatorItem.PersonName))
                 {
                     var creator = new XElement(dc + "creator", creatorItem.PersonName);
-                    creator.Add(new XAttribute(opfNameSpace + "role", EPubRoles.ConvertEnumToAttribute(creatorItem.Role)));
+                    creator.Add(new XAttribute(_opfNameSpace + "role", EPubRoles.ConvertEnumToAttribute(creatorItem.Role)));
                     if (!string.IsNullOrEmpty(creatorItem.FileAs))
                     {
-                        creator.Add(new XAttribute(opfNameSpace + "file-as",creatorItem.FileAs));
+                        creator.Add(new XAttribute(_opfNameSpace + "file-as",creatorItem.FileAs));
                     }
                     if (!string.IsNullOrEmpty(creatorItem.Language))
                     {
@@ -137,10 +150,10 @@ namespace EPubLibrary.Content
                 if (!string.IsNullOrEmpty(contributorItem.PersonName))
                 {
                     var contributor = new XElement(dc + "contributor", contributorItem.PersonName);
-                    contributor.Add(new XAttribute(opfNameSpace + "role", EPubRoles.ConvertEnumToAttribute(contributorItem.Role)));
+                    contributor.Add(new XAttribute(_opfNameSpace + "role", EPubRoles.ConvertEnumToAttribute(contributorItem.Role)));
                     if (!string.IsNullOrEmpty(contributorItem.FileAs))
                     {
-                        contributor.Add(new XAttribute(opfNameSpace + "file-as", contributorItem.FileAs));
+                        contributor.Add(new XAttribute(_opfNameSpace + "file-as", contributorItem.FileAs));
                     }
                     if (!string.IsNullOrEmpty(contributorItem.Language))
                     {
@@ -190,7 +203,7 @@ namespace EPubLibrary.Content
             if (!string.IsNullOrEmpty(CoverId))
             {
                 // <meta name="cover" content="cover.jpg"/>
-                var cover = new XElement(opfNameSpace + "meta");
+                var cover = new XElement(_opfNameSpace + "meta");
                 cover.Add(new XAttribute("name","cover"));
                 cover.Add(new XAttribute("content", CoverId));
                 metadata.Add(cover);
@@ -223,44 +236,47 @@ namespace EPubLibrary.Content
             
         }
 
-        public void AddXHTMLTextItem(string link, string id, GuideTypeEnum type)
+        public void AddXHTMLTextItem(BaseXHTMLFile baseXhtmlFile)
         {
-            ManifestItem bookItem = new ManifestItem { HRef = link.Replace('\\', '/'), ID = id, MediaType = @"application/xhtml+xml" };
-            manifest.Add(bookItem);
+            ManifestItem bookItem = new ManifestItem { HRef = baseXhtmlFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = baseXhtmlFile.Id, MediaType = @"application/xhtml+xml" };
+            _manifest.Add(bookItem);
 
-            SpineItem bookSpine = new SpineItem{ Name = id };
-            spine.Add(bookSpine);
+            if (baseXhtmlFile.DocumentType != GuideTypeEnum.Ignore) // we do not add objects that to be ignored 
+            {
+                SpineItem bookSpine = new SpineItem {Name = baseXhtmlFile.Id};
+                _spine.Add(bookSpine);
+            }
 
-            guide.AddGuideItem(link, id, type);                
+            _guide.AddGuideItem(bookItem.HRef, baseXhtmlFile.Id, baseXhtmlFile.DocumentType);                
         }
 
-        public void AddTOC(string link, string id)
+        public void AddTOC()
         {
-            ManifestItem TOCItem = new ManifestItem { HRef = link.Replace('\\', '/'), ID = id, MediaType = @"application/x-dtbncx+xml" };
-            manifest.Add(TOCItem);                     
+            ManifestItem TOCItem = new ManifestItem { HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), ID = "ncx", MediaType = @"application/x-dtbncx+xml" };
+            _manifest.Add(TOCItem);                     
         }
 
-        public void AddImage(string link,string id,EPUBImageTypeEnum imageType)
+        public void AddImage(ImageOnStorage image)
         {
-            manifest.Add(new ManifestItem { HRef = link.Replace('\\', '/'), ID = id, MediaType = EPUBImage.ConvertImageTypeToMediaType(imageType) });
+            _manifest.Add(new ManifestItem { HRef = image.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = image.ID, MediaType = EPUBImage.ConvertImageTypeToMediaType(image.ImageType) });
         }
 
-        public void AddCSS(string link, string id)
+        public void AddCSS(CSSFile cssFile)
         {
-            ManifestItem maincss = new ManifestItem{ HRef = link.Replace('\\','/'), ID = id, MediaType = CSSFile.MediaType };
-            manifest.Add(maincss);
+            ManifestItem maincss = new ManifestItem { HRef = cssFile.PathInEPUB.GetRelativePath(ContentFilePath,_flatStructure), ID = cssFile.ID, MediaType = CSSFile.MediaType };
+            _manifest.Add(maincss);
         }
 
-        public void AddXPGTTemplate(string link, string id)
+        public void AddXPGTTemplate(AdobeTemplate template)
         {
-            ManifestItem maincss = new ManifestItem { HRef = link.Replace('\\', '/'), ID = id, MediaType = AdobeTemplate.MediaType };
-            manifest.Add(maincss);
+            ManifestItem maincss = new ManifestItem { HRef = template.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = template.ID, MediaType = template.GetMediaType() };
+            _manifest.Add(maincss);
         }
 
 
-        public void AddFontFile(string link, string id,string mediaType)
+        public void AddFontFile(FontOnStorage fontFile)
         {
-            manifest.Add(new ManifestItem() { HRef = link.Replace('\\', '/'), ID = id, MediaType = mediaType/*"application/x-font-ttf"*/ });
+            _manifest.Add(new ManifestItem() { HRef = fontFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = fontFile.ID, MediaType =fontFile.MediaType });
         }
 
 

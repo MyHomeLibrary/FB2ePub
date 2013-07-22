@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 
 namespace EPubLibrary.CSS_Items
@@ -85,7 +84,7 @@ namespace EPubLibrary.CSS_Items
                         }
                         else
                         {
-                            Logger.log.ErrorFormat("CSS Stylesheet for parameter {0} contains two or more values for parameter {1}",Name,key);
+                            Logger.Log.ErrorFormat("CSS Stylesheet for parameter {0} contains two or more values for parameter {1}",Name,key);
                         }
                     }
                 }

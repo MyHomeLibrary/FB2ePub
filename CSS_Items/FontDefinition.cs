@@ -170,7 +170,7 @@ namespace EPubLibrary.CSS_Items
                         }
                         break;
                     default:
-                        Logger.log.ErrorFormat("Unknown font source type : {0}", fontSource.Type);
+                        Logger.Log.ErrorFormat("Unknown font source type : {0}", fontSource.Type);
                         break;
             }
             return builder.ToString();

@@ -25,6 +25,7 @@ namespace EPubLibrary.Content.Guide
         Notes,
         Preface,
         Text,
+        Ignore,
     }
 
     internal class GuideElement

@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
 using EPubLibrary.Content.Guide;
+using EPubLibrary.PathUtils;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -17,6 +18,9 @@ namespace EPubLibrary.XHTML_Items
         {
             DocumentType = GuideTypeEnum.CopyrightPage;
             pageTitle = "About";
+            Id = "about";
+            FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
+            FileName = "about.xhtml";
         }
 
         /// <summary>
@@ -60,7 +64,7 @@ namespace EPubLibrary.XHTML_Items
                 page.Add(p1);
             }
 
-            bodyElement.Add(page);
+            BodyElement.Add(page);
         }
     }
 }

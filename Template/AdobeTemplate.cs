@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using EPubLibrary.CSS_Items;
+using EPubLibrary.PathUtils;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace EPubLibrary.Template
@@ -22,24 +24,22 @@ namespace EPubLibrary.Template
 
         }
 
-        /// <summary>
-        /// Get default CSS media type
-        /// </summary>
-        public static string MediaType { get { return @"application/adobe-page-template+xml"; } }
+        private readonly EPubInternalPath _pathInEPub = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/template/");
 
-        private  XDocument fileDocument = null;
+
+        private  XDocument _fileDocument = null;
+
+
+        public string FileName { get { return "template.xpgt"; } }
 
         /// <summary>
         /// Full path and file name to the template file
         /// </summary>
         public string TemplateFileInputPath { get; set; }
 
-        /// <summary>
-        /// Returns internal name of the file (without path)
-        /// </summary>
-        public string TemplateFileOutputName
+        public string ID
         {
-            get { return string.IsNullOrEmpty(TemplateFileInputPath) ? "template.xpgt" : Path.GetFileName(TemplateFileInputPath); }
+            get { return Path.GetFileNameWithoutExtension(TemplateFileInputPath); }
         }
 
         public void Load()
@@ -59,19 +59,19 @@ namespace EPubLibrary.Template
                 };
                 using (XmlReader reader = XmlReader.Create(TemplateFileInputPath, settings))
                 {
-                    fileDocument = XDocument.Load(reader, LoadOptions.PreserveWhitespace);
+                    _fileDocument = XDocument.Load(reader, LoadOptions.PreserveWhitespace);
                     reader.Close();
                 }
 
             }
             catch (XmlException ex) // we handle this on top
             {
-                Logger.Log.ErrorFormat("The template file {0} contains invalid XML, error: {1}", TemplateFileInputPath, ex.ToString());
+                Logger.Log.ErrorFormat("The template file {0} contains invalid XML, error: {1}", TemplateFileInputPath, ex);
                 throw;
             }
             catch (Exception ex)
             {
-                Logger.Log.ErrorFormat("Error loading file : {0}", ex.ToString());
+                Logger.Log.ErrorFormat("Error loading file : {0}", ex);
                 throw;
             }
 
@@ -79,7 +79,7 @@ namespace EPubLibrary.Template
 
         public void Write(ZipOutputStream stream)
         {
-            if (fileDocument == null)
+            if (_fileDocument == null)
             {
                 throw new NullReferenceException("Document pointer is null - file need to be properly loaded first");
             }
@@ -89,7 +89,7 @@ namespace EPubLibrary.Template
             settings.Indent = true;
             using (var writer = XmlWriter.Create(stream, settings))
             {
-                fileDocument.WriteTo(writer);
+                _fileDocument.WriteTo(writer);
             }
             
         }
@@ -99,14 +99,22 @@ namespace EPubLibrary.Template
             throw new NotImplementedException();
         }
 
-        public override string GetFilePathExt()
+        public override EPubInternalPath PathInEPUB
         {
-            return TemplateFileOutputName;
+            get
+            {
+                if (string.IsNullOrEmpty(FileName))
+                {
+                    throw new NullReferenceException("FileName property has to be set");
+                }
+                return new EPubInternalPath(_pathInEPub, FileName);
+            }
         }
+
 
         public override string GetMediaType()
         {
-            return MediaType;
+            return @"application/adobe-page-template+xml";;
         }
     }
 }

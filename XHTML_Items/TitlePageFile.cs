@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using EPubLibrary.PathUtils;
 using XHTMLClassLibrary;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
@@ -13,21 +14,23 @@ namespace EPubLibrary.XHTML_Items
 {
     public class TitlePageFile : BaseXHTMLFile
     {
-        private readonly List<string> authors = new List<string>();
-        private readonly List<string> series = new List<string>();
+        private readonly List<string> _authors = new List<string>();
+        private readonly List<string> _series = new List<string>();
 
         public TitlePageFile()
         {
             pageTitle = "Title";
             DocumentType = GuideTypeEnum.TitlePage;
             FileName = "title.xhtml";
+            FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
+            Id = "title";
         }
 
         public string BookTitle { get; set; }
 
-        public List<string> Authors { get { return authors; } }
+        public List<string> Authors { get { return _authors; } }
 
-        public List<string> Series { get { return series; } }
+        public List<string> Series { get { return _series; } }
 
 
         override public XDocument Generate()
@@ -51,13 +54,13 @@ namespace EPubLibrary.XHTML_Items
             }
             else
             {
-                titlePage.Add(new SimpleEPubText() { Text = "Unnamed" });
+                titlePage.Add(new SimpleEPubText { Text = "Unnamed" });
             }
             
             titlePage.Add(new EmptyLine());
 
             StringBuilder sbSeries = new StringBuilder();
-            foreach (var serie in series)
+            foreach (var serie in _series)
             {
                 if (!string.IsNullOrEmpty(sbSeries.ToString()))
                 {
@@ -75,16 +78,16 @@ namespace EPubLibrary.XHTML_Items
                 titlePage.Add(seriesHeading);                
             }
 
-            foreach (var author in authors)
+            foreach (var author in _authors)
             {
                 H3 authorsHeading = new H3();
-                SimpleEPubText authorLine = new SimpleEPubText() { Text = author};
+                SimpleEPubText authorLine = new SimpleEPubText { Text = author};
                 authorsHeading.Add(authorLine);
                 titlePage.Add(authorsHeading);
             }
 
 
-            bodyElement.Add(titlePage);
+            BodyElement.Add(titlePage);
             
             //return document;
             return base.Generate();

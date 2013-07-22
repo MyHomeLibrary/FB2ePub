@@ -4,24 +4,25 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using EPubLibrary.PathUtils;
 
 namespace EPubLibrary.CSS_Items
 {
     public class CSSFile : StyleElement
     {
-        private readonly List<CssFontDefinition> fonts = new List<CssFontDefinition>();
+        private readonly List<CssFontDefinition> _fonts = new List<CssFontDefinition>();
 
-        private readonly List<BaseCSSItem> targets =  new List<BaseCSSItem>();
+        private readonly List<BaseCSSItem> _targets =  new List<BaseCSSItem>();
 
         /// <summary>
-        /// Get/Set file name of the CSS file
+        /// path to the file inside ePub
+        /// </summary>
+        private readonly EPubInternalPath _pathInEPub = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder +"/css");
+
+        /// <summary>
+        /// Name of the file in ePub
         /// </summary>
         public string FileName { get; set; }
-
-        /// <summary>
-        /// Folder path where the file to reside
-        /// </summary>
-        public string LocationSubFolder { get; set; }
 
         /// <summary>
         /// Get/Set ID of the current element to be used in manifest etc
@@ -33,26 +34,23 @@ namespace EPubLibrary.CSS_Items
         /// </summary>
         public static string MediaType { get { return @"text/css"; } }
 
-        /// <summary>
-        /// Get/Set full path to the file location on disk
-        /// </summary>
-        public string FileExtPath { get; set; }
-
-        /// <summary>
-        /// Get relative path of the file inside ePub
-        /// </summary>
-        public string InternalPath
+        public override EPubInternalPath PathInEPUB
         {
             get
             {
-                if (string.IsNullOrEmpty(LocationSubFolder))
+                if (string.IsNullOrEmpty(FileName))
                 {
-                    return Path.GetFileName(FileExtPath);
+                    throw new NullReferenceException("FileName property has to be set");
                 }
-                return string.Format("css/{0}", Path.GetFileName(FileExtPath));
+                return new EPubInternalPath(_pathInEPub,FileName);
             }
-
         }
+
+        /// <summary>
+        /// Get/Set full path to the file location on disk
+        /// </summary>
+        public string FilePathOnDisk { get; set; }
+
 
         /// <summary>
         /// Loads items from another CSS file
@@ -63,8 +61,8 @@ namespace EPubLibrary.CSS_Items
         {
             if (!add)
             {
-                targets.Clear();
-                fonts.Clear();
+                _targets.Clear();
+                _fonts.Clear();
             }
             using (var textReader = File.OpenText(fileName))
             {
@@ -88,7 +86,7 @@ namespace EPubLibrary.CSS_Items
                             }
                             catch (Exception ex)
                             {
-                                Logger.log.Error(ex);
+                                Logger.Log.Error(ex);
                             }
                             elementString.Remove(0, elementString.Length);
                             startPosition = endPosition+1;
@@ -106,9 +104,9 @@ namespace EPubLibrary.CSS_Items
         /// <param name="font"></param>
         public void AddFont(CssFontDefinition font)
         {
-            if (!fonts.Contains(font))
+            if (!_fonts.Contains(font))
             {
-                fonts.Add(font);                
+                _fonts.Add(font);                
             }
         }
 
@@ -119,10 +117,10 @@ namespace EPubLibrary.CSS_Items
         public void AddTarget(BaseCSSItem item)
         {
             // If it's a new item just add it
-            int sameItemPos = targets.FindIndex(x => x.Name.ToLower() == item.Name.ToLower());
+            int sameItemPos = _targets.FindIndex(x => x.Name.ToLower() == item.Name.ToLower());
             if ( sameItemPos == -1)
             {
-                targets.Add(item);
+                _targets.Add(item);
             }
             else
             {
@@ -130,14 +128,14 @@ namespace EPubLibrary.CSS_Items
                 foreach (var parameter in item.Parameters)
                 {
                     // but copy only in case that it's new parameters, ignore same 
-                    if (!targets[sameItemPos].Parameters.ContainsKey(parameter.Key))
+                    if (!_targets[sameItemPos].Parameters.ContainsKey(parameter.Key))
                     {
-                        targets[sameItemPos].Parameters.Add(parameter.Key,parameter.Value);
+                        _targets[sameItemPos].Parameters.Add(parameter.Key,parameter.Value);
                     }
-                    else if (targets[sameItemPos].Parameters[parameter.Key].ToString().ToLower() != parameter.Value.ToString().ToLower())
+                    else if (_targets[sameItemPos].Parameters[parameter.Key].ToString().ToLower() != parameter.Value.ToString().ToLower())
                     {
-                        string old = (string)targets[sameItemPos].Parameters[parameter.Key];
-                        targets[sameItemPos].Parameters[parameter.Key] = string.Format("{0}, {1}", old, parameter.Value);
+                        string old = (string)_targets[sameItemPos].Parameters[parameter.Key];
+                        _targets[sameItemPos].Parameters[parameter.Key] = string.Format("{0}, {1}", old, parameter.Value);
                         
                     //    Logger.log.ErrorFormat("CSS values conflict for parameter \"{0}\" ",parameter.Key);
                     }
@@ -147,7 +145,7 @@ namespace EPubLibrary.CSS_Items
 
         public bool Empty() 
         {
-            return ((fonts.Count == 0) && (targets.Count == 0));
+            return ((_fonts.Count == 0) && (_targets.Count == 0));
         }
 
         /// <summary>
@@ -156,12 +154,12 @@ namespace EPubLibrary.CSS_Items
         /// <param name="stream"></param>
         public override void Write(Stream stream)
         {
-            foreach (var item in fonts)
+            foreach (var item in _fonts)
             {
                 item.Write(stream);
             }
 
-            foreach (var item in targets)
+            foreach (var item in _targets)
             {
                 item.Write(stream);
             }
@@ -173,9 +171,5 @@ namespace EPubLibrary.CSS_Items
             return MediaType;
         }
 
-        public override string GetFilePathExt()
-        {
-            return InternalPath;
-        }
     }
 }

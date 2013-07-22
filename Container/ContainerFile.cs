@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using EPubLibrary.Content;
+using EPubLibrary.PathUtils;
 
 namespace EPubLibrary.Container
 {
@@ -12,13 +14,14 @@ namespace EPubLibrary.Container
     {
         private readonly XNamespace localNameSpace = "urn:oasis:names:tc:opendocument:xmlns:container";
 
-        private string _contentFileName = string.Empty;
-
-
-        public ContainerFile(string contentFileName)
+        public static readonly EPubInternalPath DefaultContainerPath = new EPubInternalPath("META-INF/container.xml")
         {
-            _contentFileName = contentFileName;
-        }
+            SupportFlatStructure = false
+        };
+
+        public bool FlatStructure { get; set; }
+
+
 
         public void Write(Stream s)
         {
@@ -41,7 +44,7 @@ namespace EPubLibrary.Container
             containerElement.Add(new XAttribute("version", "1.0"));
             XElement rootFilesElement = new XElement(localNameSpace + "rootfiles");
             XElement rootFileElement = new XElement(localNameSpace + "rootfile");
-            rootFileElement.Add(new XAttribute("full-path", _contentFileName));
+            rootFileElement.Add(new XAttribute("full-path", FlatStructure ? "content.opf" : EPubInternalPath.DefaultOebpsFolder + "/content.opf"));
             rootFileElement.Add(new XAttribute("media-type", @"application/oebps-package+xml"));
             rootFilesElement.Add(rootFileElement);
             containerElement.Add(rootFilesElement);
