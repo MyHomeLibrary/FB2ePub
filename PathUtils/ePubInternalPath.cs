@@ -109,7 +109,10 @@ namespace EPubLibrary.PathUtils
             type = _path[elementOrder].Type;
         }
 
-
+        /// <summary>
+        /// Returns path to the object inside this always assuming it's not a flat structure
+        /// </summary>
+        /// <returns>internal path</returns>
         private string GetFilePathInZip()
         {
             // we assume the structure is valid and file name can be only at last element
@@ -135,7 +138,7 @@ namespace EPubLibrary.PathUtils
         /// <summary>
         /// Returns path to object inside a ZIP (ePub)
         /// </summary>
-        /// <returns></returns>
+        /// <returns>internal path</returns>
         public string GetFilePathInZip(bool flatStructure)
         {
             if (flatStructure && _supportFlatStructure)
@@ -201,12 +204,15 @@ namespace EPubLibrary.PathUtils
         /// <returns></returns>
         public EPubInternalPath GetPathWithoutFileName()
         {
-            string path = GetFilePathInZip();
-            if (GetPathType() == PathType.File)
+            EPubInternalPath newPathObject = (EPubInternalPath)MemberwiseClone();
+            newPathObject._path.Clear();
+            foreach (PathElement element in _path) // copy all without Filename
             {
-                path = path.Substring(0, path.LastIndexOf('/'));
+                if (element.Type != PathType.File)
+                {
+                    newPathObject._path.Add((PathElement)element.Clone());
+                }
             }
-            EPubInternalPath newPathObject = new EPubInternalPath(path);
             return newPathObject;
         }
 
@@ -216,17 +222,31 @@ namespace EPubLibrary.PathUtils
         /// <returns></returns>
         public string GetPathWithoutFileNameAsString()
         {
-            string path = GetFilePathInZip();
-            if (GetPathType() == PathType.File)
+            // we assume the structure is valid and file name can be only at last element
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < _path.Count; i++)
             {
-                path = path.Substring(0, path.LastIndexOf('/'));
+                switch (_path[i].Type)
+                {
+                    case PathType.Root:
+                        result.Append('/');
+                        break;
+                    case PathType.Folder:
+                        result.AppendFormat("{0}/", _path[i].Name);
+                        break;
+                }
             }
-            return path;
+            return result.ToString();           
         }
 
         public object Clone()
         {
-            EPubInternalPath newPath = new EPubInternalPath(GetFilePathInZip());
+            EPubInternalPath newPath = (EPubInternalPath)MemberwiseClone();
+            newPath._path.Clear();
+            foreach (PathElement element in _path)
+            {
+                newPath._path.Add((PathElement)element.Clone());
+            }
             return newPath;
         }
 
@@ -234,6 +254,11 @@ namespace EPubLibrary.PathUtils
         {
             EPubInternalPath newPath = new EPubInternalPath(path);
             return GetRelativePath(newPath, flatStructure);
+        }
+
+        public override string ToString()
+        {
+            return GetFilePathInZip();
         }
     }
 }

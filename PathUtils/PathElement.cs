@@ -11,8 +11,8 @@ namespace EPubLibrary.PathUtils
 
     public class PathElement : ICloneable
     {
-        private PathType _pathType = PathType.File;
-        private string _name = string.Empty;
+        private readonly PathType _pathType = PathType.File;
+        private readonly string _name = string.Empty;
 
         public PathElement(string name, PathType type)
         {
