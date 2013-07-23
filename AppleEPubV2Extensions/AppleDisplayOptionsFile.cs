@@ -5,12 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using EPubLibrary.PathUtils;
 
 namespace EPubLibrary.AppleEPubV2Extensions
 {
-    public class AppleDisplayOptionsFile
+    public class AppleDisplayOptionsFile : IEPubPath
     {
         private readonly Dictionary<PlatformType, AppleTargetPlatform> _platforms = new Dictionary<PlatformType, AppleTargetPlatform>();
+
+        public static readonly EPubInternalPath DefaultAppleFilePath = new EPubInternalPath("META-INF/com.apple.ibooks.display-options.xml")
+        {
+            SupportFlatStructure = false
+        };
 
 
         public void Write(Stream s)
@@ -83,6 +89,15 @@ namespace EPubLibrary.AppleEPubV2Extensions
                 _platforms.Remove(targetPlatform.Type);
             }
             _platforms.Add(targetPlatform.Type, targetPlatform);
+        }
+
+        public EPubInternalPath PathInEPUB
+        {
+            get
+            {
+                return DefaultAppleFilePath;
+            }
+           
         }
     }
 }

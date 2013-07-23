@@ -11,7 +11,7 @@ using EPubLibrary.XHTML_Items;
 
 namespace EPubLibrary.TOC
 {
-    internal class TOCFile
+    internal class TOCFile : IEPubPath
     {
         public static readonly EPubInternalPath TOCFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/toc.ncx");
 
@@ -165,6 +165,11 @@ namespace EPubLibrary.TOC
                     _navMap.Remove(navPoint);
                 }
             }
+        }
+
+        public EPubInternalPath PathInEPUB
+        {
+            get { return TOCFilePath; }
         }
     }
 }

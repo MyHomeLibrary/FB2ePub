@@ -16,7 +16,7 @@ using EPubLibrary.XHTML_Items;
 
 namespace EPubLibrary.Content
 {
-    internal class ContentFile
+    internal class ContentFile : IEPubPath
     {
         public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
 
@@ -280,5 +280,10 @@ namespace EPubLibrary.Content
         }
 
 
+
+        public EPubInternalPath PathInEPUB
+        {
+            get { return ContentFilePath; }
+        }
     }
 }

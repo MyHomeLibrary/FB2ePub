@@ -46,11 +46,6 @@ namespace EPubLibrary.XHTML_Items
                 string itemClass = string.Format("title{0}", 1);
                 p.Class.Value = itemClass;
                 titlePage.Add(p);
-
-                //foreach (var item in BookTitle.SubElements())
-                //{
-                //    titlePage.Add(item);
-                //}
             }
             else
             {
