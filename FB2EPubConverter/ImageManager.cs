@@ -168,7 +168,7 @@ namespace FB2EPubConverter
                     Logger.Log.ErrorFormat("Unknown image type {0}", item.Value.ContentType);
                     continue;
                 }
-                if (IsImageIdUsed(image.ID)) // only if image regestered as used
+                if (IsImageIdUsed(image.ID)) // only if image registered as used
                 {
                     try
                     {
