@@ -327,7 +327,7 @@ namespace EPubLibrary
         private void AddAppleOptionsFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            PutFileInZip(stream, _appleOptionsFile);
+            CreateFileEntryInZip(stream, _appleOptionsFile);
             _appleOptionsFile.Write(stream);
             stream.CloseEntry();
         }
@@ -340,7 +340,7 @@ namespace EPubLibrary
         {
             stream.SetLevel(9);
             ContainerFile container = new ContainerFile {FlatStructure = _flatStructure,ContentFilePath = _content};
-            PutFileInZip(stream, container);
+            CreateFileEntryInZip(stream, container);
             container.Write(stream);
             stream.CloseEntry();
         }
@@ -375,9 +375,8 @@ namespace EPubLibrary
                 FlatStructure = FlatStructure, 
                 EmbedStyles = EmbedStyles, 
             };
-            PutFileInZip(stream, licensePage);
-            licensePage.Create();
-            licensePage.Write(stream);
+            CreateFileEntryInZip(stream, licensePage);
+            PutPageToFile(stream,licensePage);
             _content.AddXHTMLTextItem(licensePage);          
         }
 
@@ -393,7 +392,7 @@ namespace EPubLibrary
                 foreach (var embededFileLocation in _fontSettings.EmbededFilesLocations)
                 {
                     FontOnStorage fontFile = new FontOnStorage(embededFileLocation, _fontSettings.GetMediaType(embededFileLocation));
-                    PutFileInZip(stream,fontFile);
+                    CreateFileEntryInZip(stream,fontFile);
                     try
                     {
                         using (var reader = new BinaryReader(File.OpenRead(embededFileLocation)))
@@ -451,7 +450,7 @@ namespace EPubLibrary
             try
             {
                 _adobeTemplate.Load();
-                PutFileInZip(stream,_adobeTemplate);
+                CreateFileEntryInZip(stream,_adobeTemplate);
                 _adobeTemplate.Write(stream);
                 _content.AddXPGTTemplate(_adobeTemplate);
             }
@@ -470,7 +469,7 @@ namespace EPubLibrary
             if (AnnotationPage != null)
             {
                 stream.SetLevel(9);
-                PutFileInZip(stream, AnnotationPage);
+                CreateFileEntryInZip(stream, AnnotationPage);
                 PutPageToFile(stream, AnnotationPage);
                 _content.AddXHTMLTextItem(AnnotationPage);
             }
@@ -501,7 +500,7 @@ namespace EPubLibrary
         private void AddMainCSS(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            PutFileInZip(stream, _mainCss);
+            CreateFileEntryInZip(stream, _mainCss);
             _mainCss.Write(stream);
             _content.AddCSS(_mainCss);
         }
@@ -511,7 +510,7 @@ namespace EPubLibrary
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="pathObject"></param>
-        private void PutFileInZip(ZipOutputStream stream,IEPubPath pathObject)
+        private void CreateFileEntryInZip(ZipOutputStream stream,IEPubPath pathObject)
         {
             ZipEntry file = _zipFactory.MakeFileEntry(pathObject.PathInEPUB.GetFilePathInZip(_flatStructure), false);
             stream.PutNextEntry(file);
@@ -526,14 +525,14 @@ namespace EPubLibrary
             if (TitlePage != null)
             {
                 stream.SetLevel(9);
-                PutFileInZip(stream, TitlePage);
+                CreateFileEntryInZip(stream, TitlePage);
                 PutPageToFile(stream,TitlePage);
                 _content.AddXHTMLTextItem(TitlePage);
             }
 
         }
 
-        private void PutPageToFile(ZipOutputStream stream, BaseXHTMLFile xhtmlFile)
+        private void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
         {
             xhtmlFile.FlatStructure = FlatStructure;
             xhtmlFile.EmbedStyles = EmbedStyles;
@@ -561,16 +560,8 @@ namespace EPubLibrary
                 AboutTexts = _aboutTexts
             };
 
-            PutFileInZip(stream,aboutPage);
-
-            aboutPage.Create();
-            aboutPage.StyleFiles.Add(_mainCss);
-            if (UseAdobeTemplate)
-            {
-                aboutPage.StyleFiles.Add(_adobeTemplate);
-            }
-
-            aboutPage.Write(stream);
+            CreateFileEntryInZip(stream,aboutPage);
+            PutPageToFile(stream,aboutPage);
 
             _content.AddXHTMLTextItem(aboutPage);
         }
@@ -605,9 +596,8 @@ namespace EPubLibrary
                         subsection.FlatStructure = FlatStructure;
                         subsection.EmbedStyles = EmbedStyles;
                         subsection.FileName = string.Format("{0}_{1}.xhtml", Path.GetFileNameWithoutExtension(section.FileName), subCount);
-                        PutFileInZip(stream,subsection);
-                        document = subsection.Generate();
-                        WriteDocumentToStream(document,stream);
+                        CreateFileEntryInZip(stream,subsection);
+                        subsection.Write(stream);
                         AddBookContentSection(subsection,count,subCount);
                         subCount++;
                     }
@@ -615,8 +605,8 @@ namespace EPubLibrary
                 }
                 else
                 {
-                    PutFileInZip(stream,section);
-                    WriteDocumentToStream(document, stream);
+                    CreateFileEntryInZip(stream,section);
+                    section.Write(stream);
                     AddBookContentSection(section, count,0);
                     count++;                    
                 }
@@ -633,18 +623,6 @@ namespace EPubLibrary
             }
         }
 
-        private void WriteDocumentToStream(XDocument document, ZipOutputStream stream)
-        {
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.CloseOutput = false;
-            settings.Encoding = Encoding.UTF8;
-            settings.Indent = true;
-
-            using (var writer = XmlWriter.Create(stream, settings))
-            {
-                document.WriteTo(writer);
-            }            
-        }
 
         private void AddBookContentSection(BookDocument subsection, int count,int subcount)
         {
@@ -686,7 +664,7 @@ namespace EPubLibrary
                 CoverFileName = GetCoverImageName(eImage),
             };
 
-            PutFileInZip(stream,cover);
+            CreateFileEntryInZip(stream,cover);
             PutPageToFile(stream,cover);
 
             if (!string.IsNullOrEmpty(eImage.ID))
@@ -713,7 +691,7 @@ namespace EPubLibrary
         private void AddTOCFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            PutFileInZip(stream, _tableOfContentFile);
+            CreateFileEntryInZip(stream, _tableOfContentFile);
             _tableOfContentFile.ID = _title.Identifiers[0].ID;
             _tableOfContentFile.Title = _rule.Translate(_title.BookTitles[0].TitleName,TranslitMode);
             _tableOfContentFile.Write(stream);
@@ -725,7 +703,7 @@ namespace EPubLibrary
         private void AddContentFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            PutFileInZip(stream,_content);
+            CreateFileEntryInZip(stream,_content);
             _content.Title = _title;
             _content.Write(stream);
         }
@@ -746,7 +724,7 @@ namespace EPubLibrary
             foreach (var epubImage in _images)
             {
                 ImageOnStorage imageFile = new ImageOnStorage(epubImage.Value) {FileName = epubImage.Value.ID};
-                PutFileInZip(stream,imageFile);
+                CreateFileEntryInZip(stream,imageFile);
                 stream.Write(epubImage.Value.ImageData, 0, epubImage.Value.ImageData.Length);
                 _content.AddImage(imageFile);
             }

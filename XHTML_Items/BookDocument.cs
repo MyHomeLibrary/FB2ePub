@@ -20,12 +20,14 @@ namespace EPubLibrary.XHTML_Items
 
     public class BookDocument : BaseXHTMLFile
     {
-        private readonly Dictionary<Anchor,ICommonAttributes> references = new Dictionary<Anchor, ICommonAttributes>();
+        public readonly static EPubInternalPath DefaultTextFilesFolder= new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
+        private readonly Dictionary<Anchor,ICommonAttributes> _references = new Dictionary<Anchor, ICommonAttributes>();
+        private IXHTMLItem _content;
         
 
         public Dictionary<Anchor,ICommonAttributes> Refrences
         {
-            get { return references; }    
+            get { return _references; }    
         }
 
 
@@ -34,13 +36,13 @@ namespace EPubLibrary.XHTML_Items
             // real limit is 300k but just to be sure
             MaxSize = 300 * 1024;
             Type = SectionTypeEnum.Text;
-            FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
+            FileEPubInternalPath = DefaultTextFilesFolder;
         }
 
 
         public bool NeedSplit()
         {
-            return (EstimateSize(Content)>MaxSize);
+            return (EstimateSize(_content)>MaxSize);
         }
 
         /// <summary>
@@ -76,28 +78,31 @@ namespace EPubLibrary.XHTML_Items
         /// </summary>
         public BookDocument NavigationParent { get; set; }
 
-        /// <summary>
-        /// Get/Set document title (which is also content menu entry)
-        /// </summary>
-        public new string PageTitle { get { return pageTitle; } set { pageTitle = value; } }
 
-
-        public IXHTMLItem Content { get; set; }
-
-
-        public override XDocument Generate()
+        public IXHTMLItem Content
         {
-            if (Content != null)
+            get { return _content; }
+            set
             {
-                BodyElement.Add(Content);                    
+                _content = value;
+                Durty = true;
+            }
+        }
+
+
+        public override void GenerateBody()
+        {
+            base.GenerateBody();
+            if (_content != null)
+            {
+                BodyElement.Add(_content);
             }
             else // just to make sure it's valid element
             {
                 BodyElement.Add(new EmptyLine());
             }
-
-            return base.Generate();
         }
+
 
 
         public List<BookDocument> Split()
@@ -106,11 +111,11 @@ namespace EPubLibrary.XHTML_Items
             BookDocument newDoc = null;
             List<IXHTMLItem> listToRemove = new List<IXHTMLItem>();
             long totlaSize = 0;
-            IXHTMLItem oldContent = Content;
+            IXHTMLItem oldContent = _content;
             IXHTMLItem newContent = new Div();
-            if (Content != null)
+            if (_content != null)
             {
-                foreach (var subElement in Content.SubElements())
+                foreach (var subElement in _content.SubElements())
                 {
                     long itemSize = EstimateSize(subElement);
                     if (totlaSize + itemSize > MaxSize)
@@ -252,9 +257,9 @@ namespace EPubLibrary.XHTML_Items
         /// <summary>
         /// Checks if XHTML element is part of current document
         /// </summary>
-        /// <param name="value">elemenrt to check</param>
-        /// <returns>true idf part of this document, false otherwise</returns>
-        public new bool PartOfDocument(IXHTMLItem value)
+        /// <param name="value">element to check</param>
+        /// <returns>true if part of this document, false otherwise</returns>
+        public override bool PartOfDocument(IXHTMLItem value)
         {
             if (Content == null)
             {

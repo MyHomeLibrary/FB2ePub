@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using EPubLibrary.PathUtils;
+using EPubLibrary.XHTML_Items;
 
 namespace EPubLibrary.ReferenceUtils
 {
@@ -46,7 +48,7 @@ namespace EPubLibrary.ReferenceUtils
         /// <returns></returns>
         public static string GetIdFromLink(string link)
         {
-            int position = link.IndexOf("#");
+            int position = link.IndexOf("#", StringComparison.Ordinal);
             if ( position == -1 || (position + 1 == link.Length) )
             {
                 return link;
@@ -54,5 +56,11 @@ namespace EPubLibrary.ReferenceUtils
             return link.Substring(position+1);
         }
 
+
+        public static string FormatImagePath(string validName, bool flatStructure)
+        {
+            EPubInternalPath imagePath = new EPubInternalPath(ImageOnStorage.DefaultImagesStoragePath,validName);
+            return imagePath.GetRelativePath(BookDocument.DefaultTextFilesFolder, flatStructure);
+        }
     }
 }

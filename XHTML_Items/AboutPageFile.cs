@@ -34,8 +34,9 @@ namespace EPubLibrary.XHTML_Items
         public List<string> AboutLinks{get; set;}
 
 
-        internal void Create()
+        public override void GenerateBody()
         {
+            base.GenerateBody();
             Div page = new Div();
             page.Class.Value = "about";
             H1 heading = new H1();
@@ -66,5 +67,6 @@ namespace EPubLibrary.XHTML_Items
 
             BodyElement.Add(page);
         }
+
     }
 }

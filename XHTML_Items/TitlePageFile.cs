@@ -32,10 +32,9 @@ namespace EPubLibrary.XHTML_Items
 
         public List<string> Series { get { return _series; } }
 
-
-        override public XDocument Generate()
+        public override void GenerateBody()
         {
-
+            base.GenerateBody();
             Div titlePage = new Div();
             titlePage.Class.Value = "titlepage";
             if (!string.IsNullOrEmpty(BookTitle))
@@ -51,7 +50,7 @@ namespace EPubLibrary.XHTML_Items
             {
                 titlePage.Add(new SimpleEPubText { Text = "Unnamed" });
             }
-            
+
             titlePage.Add(new EmptyLine());
 
             StringBuilder sbSeries = new StringBuilder();
@@ -70,24 +69,20 @@ namespace EPubLibrary.XHTML_Items
                 containingText.Add(seriesItem);
                 H3 seriesHeading = new H3();
                 seriesHeading.Add(containingText);
-                titlePage.Add(seriesHeading);                
+                titlePage.Add(seriesHeading);
             }
 
             foreach (var author in _authors)
             {
                 H3 authorsHeading = new H3();
-                SimpleEPubText authorLine = new SimpleEPubText { Text = author};
+                SimpleEPubText authorLine = new SimpleEPubText { Text = author };
                 authorsHeading.Add(authorLine);
                 titlePage.Add(authorsHeading);
             }
 
 
             BodyElement.Add(titlePage);
-            
-            //return document;
-            return base.Generate();
         }
-
 
     }
 }

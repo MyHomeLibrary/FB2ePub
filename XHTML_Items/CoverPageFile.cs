@@ -23,24 +23,23 @@ namespace EPubLibrary.XHTML_Items
             FileName = "cover.xhtml";
         }
 
-        override public XDocument Generate()
+        public override void GenerateBody()
         {
+            base.GenerateBody();
             Div coverPage = new Div();
             coverPage.Class.Value = "coverpage";
-//            coverPage.Style.Value = "text-align: center; page-break-after: always;";
+            //            coverPage.Style.Value = "text-align: center; page-break-after: always;";
 
             Image coverImage = new Image();
             coverImage.Class.Value = "coverimage";
-            coverImage.Source.Value = CoverFileName.PathInEPUB.GetRelativePath(FileEPubInternalPath,FlatStructure);
+            coverImage.Source.Value = CoverFileName.PathInEPUB.GetRelativePath(FileEPubInternalPath, FlatStructure);
             coverImage.Alt.Value = "Cover";
             //coverImage.Style.Value = "max-width: 100%;";
             coverPage.Add(coverImage);
 
             BodyElement.Add(coverPage);
 
-
-            //return document;
-            return base.Generate();
         }
+
     }
 }

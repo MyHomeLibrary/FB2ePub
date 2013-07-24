@@ -26,8 +26,9 @@ namespace EPubLibrary.XHTML_Items
         public Div BookAnnotation { get; set; }
 
 
-        override public XDocument Generate()
+        public override void GenerateBody()
         {
+            base.GenerateBody();
             Div annotationPage = new Div();
             annotationPage.Class.Value = "annotation";
             if (BookAnnotation != null)
@@ -45,10 +46,8 @@ namespace EPubLibrary.XHTML_Items
             annotationPage.Add(new EmptyLine());
 
             BodyElement.Add(annotationPage);
-
-            //return document;
-            return base.Generate();
         }
+
 
         /// <summary>
         /// Checks if XHTML element is part of current document

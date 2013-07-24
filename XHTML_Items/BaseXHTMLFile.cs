@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -13,22 +14,29 @@ using XHTMLClassLibrary.BaseElements.Structure_Header;
 
 namespace EPubLibrary.XHTML_Items
 {
-    public class BaseXHTMLFile : IEPubPath
+    public class BaseXHTMLFile : IEPubPath , IBaseXHTMLFile
     {
         protected Head HeadElement = null;
         protected Body BodyElement = null;
         protected XNamespace XhtmlNamespace = @"http://www.w3.org/1999/xhtml";
         protected string pageTitle;
+        protected bool Durty = true;
+        
 
         protected EPubInternalPath FileEPubInternalPath= null;
 
         private readonly List<StyleElement> _styles = new List<StyleElement>();
+        private XDocument _generatedCodeXDocument;
+        private bool _embeddStyles;
 
-        private readonly XHTMLDocument _mainDocument = new XHTMLDocument(XHTMRulesEnum.EPUBCompatible);
+        public virtual void GenerateHead()
+        {
+            HeadElement = new Head();
+        }
 
         public GuideTypeEnum DocumentType { get; set; }
 
-        public bool NotPartOfNavigation { get; set; }
+        public bool NotPartOfNavigation{get; set;}
 
         public bool FlatStructure { get; set; }
 
@@ -55,7 +63,15 @@ namespace EPubLibrary.XHTML_Items
         /// <summary>
         /// Get/Set embedding styles into xHTML files instead of referencing style files
         /// </summary>
-        public bool EmbedStyles { get; set; }
+        public bool EmbedStyles
+        {
+            get { return _embeddStyles; }
+            set
+            {
+                _embeddStyles = value;
+                Durty = true;
+            }
+        }
 
         /// <summary>
         /// Document title (meaningless in EPUB , usually used by browsers)
@@ -66,6 +82,7 @@ namespace EPubLibrary.XHTML_Items
             set
             {
                 pageTitle = value;
+                Durty = true;
             }
         }
 
@@ -75,16 +92,6 @@ namespace EPubLibrary.XHTML_Items
         public List<StyleElement> StyleFiles { get { return _styles; } }
 
 
-        public BaseXHTMLFile()
-        {
-            HeadElement = new Head();
-
-            BodyElement = new Body();
-            BodyElement.Class.Value = "epub";
-
-            
-        }
-
         public void Write(Stream stream)
         {
             XmlWriterSettings settings = new XmlWriterSettings();
@@ -92,7 +99,12 @@ namespace EPubLibrary.XHTML_Items
             settings.Encoding = Encoding.UTF8;
             settings.Indent = true;
 
-            XDocument document = Generate();
+
+            XDocument document = _generatedCodeXDocument;
+            if (document == null || Durty)
+            {
+                document = Generate();
+            }
 
 
             using (var writer = XmlWriter.Create(stream, settings))
@@ -104,6 +116,9 @@ namespace EPubLibrary.XHTML_Items
 
         public virtual XDocument Generate()
         {
+            XHTMLDocument mainDocument = new XHTMLDocument(XHTMRulesEnum.EPUBCompatible);
+            GenerateHead();
+            GenerateBody();
             UTF8Encoding encoding = new UTF8Encoding();
             foreach (var file in _styles)
             {
@@ -136,11 +151,11 @@ namespace EPubLibrary.XHTML_Items
                 HeadElement.Add(styleElement);
             }
 
-            _mainDocument.RootHTML.Add(HeadElement);
+            mainDocument.RootHTML.Add(HeadElement);
 
-            _mainDocument.RootHTML.Add(BodyElement);
+            mainDocument.RootHTML.Add(BodyElement);
 
-            if (!_mainDocument.RootHTML.IsValid())
+            if (!mainDocument.RootHTML.IsValid())
             {
                throw new Exception("Document content is not valid");
             }
@@ -151,7 +166,16 @@ namespace EPubLibrary.XHTML_Items
             HeadElement.Add(titleElm);
             
 
-            return _mainDocument.Generate();
+            _generatedCodeXDocument =  mainDocument.Generate();
+            Durty = false;
+            return _generatedCodeXDocument;
+        }
+
+
+        public virtual void GenerateBody()
+        {
+            BodyElement = new Body();
+            BodyElement.Class.Value = "epub";           
         }
 
         /// <summary>

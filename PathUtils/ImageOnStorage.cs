@@ -7,9 +7,10 @@ namespace EPubLibrary.PathUtils
 {
     class ImageOnStorage : IEPubPath
     {
-        private readonly EPubInternalPath _pathInEPub = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/images");
-        private string _id = string.Empty;
-        private EPUBImageTypeEnum _imageType = EPUBImageTypeEnum.ImageJPG;
+        public static readonly EPubInternalPath DefaultImagesStoragePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/images/");
+        private readonly EPubInternalPath _pathInEPub = DefaultImagesStoragePath;
+        private readonly string _id = string.Empty;
+        private readonly EPUBImageTypeEnum _imageType = EPUBImageTypeEnum.ImageJPG;
 
         public string FileName { get; set; }
 
