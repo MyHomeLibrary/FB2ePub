@@ -20,30 +20,24 @@ namespace FB2EPubConverter
         /// <summary>
         /// List of IDs 
         /// </summary>
-        private readonly Dictionary<string, IXHTMLItem> ids = new Dictionary<string, IXHTMLItem>();
+        private readonly Dictionary<string, IXHTMLItem> _ids = new Dictionary<string, IXHTMLItem>();
 
 
         /// <summary>
         /// List of references
         /// </summary>
-        private readonly Dictionary<string, List<Anchor>> references = new Dictionary<string, List<Anchor>>();
+        private readonly Dictionary<string, List<Anchor>> _references = new Dictionary<string, List<Anchor>>();
 
 
         /// <summary>
         /// List of references
         /// </summary>
-        private readonly Dictionary<string, List<Image>> images = new Dictionary<string, List<Image>>();
+        private readonly Dictionary<string, List<Image>> _images = new Dictionary<string, List<Image>>();
 
         /// <summary>
-        /// List of remaped attributes 
+        /// List of remapped attributes 
         /// </summary>
-        private readonly Dictionary<string, string> attributesRemap = new Dictionary<string, string>();
-
-        /// <summary>
-        /// Get/Set "flat structure mode"
-        /// decides if images located in "images" folder or in same folder where the documents are (flat)
-        /// </summary>
-        public bool FlatStructure { get; set; }
+        private readonly Dictionary<string, string> _attributesRemap = new Dictionary<string, string>();
 
         /// <summary>
         /// Resets the manager to empty state,
@@ -51,10 +45,10 @@ namespace FB2EPubConverter
         /// </summary>
         public void Reset()
         {
-            ids.Clear();
-            references.Clear();
-            attributesRemap.Clear();
-            images.Clear();
+            _ids.Clear();
+            _references.Clear();
+            _attributesRemap.Clear();
+            _images.Clear();
         }
 
         public string AddImageRefferenced(InlineImageItem item, Image img)
@@ -64,13 +58,14 @@ namespace FB2EPubConverter
                 return string.Empty;
             }
             string validName = MakeValidImageName(item.HRef);
-            if (!images.ContainsKey(validName))
+            if (!_images.ContainsKey(validName))
             {
                 List<Image> entryList = new List<Image>();
-                images.Add(validName, entryList);
+                _images.Add(validName, entryList);
             }
-            images[validName].Add(img);
-            return string.Format(FlatStructure?"{0}":@"images/{0}", validName);
+            _images[validName].Add(img);
+            //return string.Format("{0}", validName);
+            return ReferencesUtils.FormatImagePath(validName,FlatStructure);
         }
 
         public string AddImageRefferenced(ImageItem item, Image img)
@@ -81,13 +76,14 @@ namespace FB2EPubConverter
             }
             string validName = MakeValidImageName(item.HRef);
             
-            if (!images.ContainsKey(validName))
+            if (!_images.ContainsKey(validName))
             {
                 List<Image> entryList = new List<Image>();
-                images.Add(validName, entryList);
+                _images.Add(validName, entryList);
             }
-            images[validName].Add(img);
-            return string.Format(FlatStructure ? "{0}" : @"images/{0}", validName);
+            _images[validName].Add(img);
+            //return string.Format("{0}", validName);
+            return ReferencesUtils.FormatImagePath(validName, FlatStructure);
         }
 
 
@@ -118,7 +114,7 @@ namespace FB2EPubConverter
                 return string.Empty;
             }
             string newid = EnsureGoodId(id);
-            if (ids.ContainsKey(newid))
+            if (_ids.ContainsKey(newid))
             {
                 // we get here if in file same ID used twice
                 // The assumption here that since the text located in FB2 main body we should not have same ID used more than once
@@ -126,7 +122,7 @@ namespace FB2EPubConverter
                 Logger.Log.InfoFormat("item with ID {0} already defined, ignoring to avoid inconsistences", newid);
                 return string.Empty;
             }
-            ids.Add(newid, item);
+            _ids.Add(newid, item);
             return newid;
         }
 
@@ -134,14 +130,14 @@ namespace FB2EPubConverter
         /// Checks if ID already used
         /// </summary>
         /// <param name="id">ID to check</param>
-        /// <returns>true if usef, false otherwise</returns>
+        /// <returns>true if used, false otherwise</returns>
         private bool IsIdUsed(string id)
         {
             if ( id.StartsWith("#") && (id.Length > 1))
             {
                 id = id.Substring(1);
             }
-            if (ids.ContainsKey(EnsureGoodId(id)))
+            if (_ids.ContainsKey(EnsureGoodId(id)))
             {
                 return true;
             }
@@ -150,7 +146,7 @@ namespace FB2EPubConverter
 
 
         /// <summary>
-        /// Adds referance 
+        /// Adds reference 
         /// Used to add hyperlinks (anchors) from one part of the document to another
         /// </summary>
         /// <param name="reference">reference name (name of the link we going to "jump to" - href)</param>
@@ -162,18 +158,18 @@ namespace FB2EPubConverter
                 reference = EnsureGoodReference(reference); // make sure that reference name is valid according to HTML rules
 
                 List<Anchor> list = null;
-                if (!references.ContainsKey(reference)) // if this a first time we see "jump" to this ID
+                if (!_references.ContainsKey(reference)) // if this a first time we see "jump" to this ID
                 {
                     list = new List<Anchor>(); //allocate new list of referenced objects
-                    references.Add(reference, list); // add list to dictionary
+                    _references.Add(reference, list); // add list to dictionary
                 }
                 else // if we already have at least one reference to this ID
                 {
-                    list = references[reference]; // find this ID in references dictionarry
+                    list = _references[reference]; // find this ID in references dictionary
                 }
                 if (string.IsNullOrEmpty(anchor.ID.Value)) // if anchor does not have ID already (FB2 link element does not have ID so this is just in case), we need this for backlinking
                 {
-                    string backLink = string.Format("{0}_back", reference); // generate backlink
+                    string backLink = string.Format("{0}_back", reference); // generate back link
                     if (backLink.StartsWith("#"))
                     // most references starts with # as part of the href linking, so we need to strip this character to get valid ID 
                     {
@@ -198,14 +194,14 @@ namespace FB2EPubConverter
                 reference = EnsureGoodReference(reference); // make sure that reference name is valid according to HTML rules
 
                 List<Anchor> list = null;
-                if (!references.ContainsKey(reference)) // if this a first time we see "jump" to this ID
+                if (!_references.ContainsKey(reference)) // if this a first time we see "jump" to this ID
                 {
                     list = new List<Anchor>(); //allocate new list of referenced objects
-                    references.Add(reference, list); // add list to dictionary
+                    _references.Add(reference, list); // add list to dictionary
                 }
                 else // if we already have at least one reference to this ID
                 {
-                    list = references[reference]; // find this ID in references dictionarry
+                    list = _references[reference]; // find this ID in references dictionarry
                 }
                 list.Add(anchor);
             }
@@ -220,14 +216,14 @@ namespace FB2EPubConverter
         public void RemoveInvalidAnchors()
         {
             List<string> listToRemove = new List<string>();
-            foreach (var reference in references)
+            foreach (var reference in _references)
             {
                 // If reference does not points on one of valid IDs and it's not external reference
                 if (!IsIdUsed(reference.Key) && !ReferencesUtils.IsExternalLink(reference.Key))
                 {
                     listToRemove.Add(reference.Key);
                     // remove all references to this ID
-                    foreach (var element in references[reference.Key])
+                    foreach (var element in _references[reference.Key])
                     {
                         // The Anchor element can't have empty reference so
                         // we remove it and in case it has some meaningful content
@@ -252,7 +248,7 @@ namespace FB2EPubConverter
                             if (!string.IsNullOrEmpty(element.ID.Value))
                             {
                                 spanElement.ID.Value = element.ID.Value; // Copy ID anyway - may be someone "jumps" here
-                                ids[element.ID.Value] = spanElement;     // and update the "pointer" to element                           
+                                _ids[element.ID.Value] = spanElement;     // and update the "pointer" to element                           
                             }
                             spanElement.Class.Value = "ex_bad_link";
                         }
@@ -267,14 +263,14 @@ namespace FB2EPubConverter
             // from the lists
             foreach (var toRemove in listToRemove)
             {
-                references.Remove(toRemove);
+                _references.Remove(toRemove);
             }
         }
 
 
         /// <summary>
         /// Ensures that all IDs are valid
-        /// This still require remaping the references to updated IDs
+        /// This still require remapping the references to updated IDs
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -288,9 +284,9 @@ namespace FB2EPubConverter
             {
                 return id;
             }
-            if (attributesRemap.Keys.Any(x => x == id))
+            if (_attributesRemap.Keys.Any(x => x == id))
             {
-                return attributesRemap[id];
+                return _attributesRemap[id];
             }
             bool remaped = false;
             StringBuilder res = new StringBuilder();
@@ -315,11 +311,11 @@ namespace FB2EPubConverter
             }
             if (remaped)
             {
-                while (attributesRemap.Keys.Any(x => x == id))
+                while (_attributesRemap.Keys.Any(x => x == id))
                 {
                     res.Append(new Random().Next(0, 9).ToString());
                 }
-                attributesRemap.Add(id, res.ToString());
+                _attributesRemap.Add(id, res.ToString());
             }
             return res.ToString();
         }
@@ -337,19 +333,19 @@ namespace FB2EPubConverter
 
         public void RemapAnchors(EPubFile epubFile)
         {
-            foreach (var link in references)
+            foreach (var link in _references)
             {
                 if (!ReferencesUtils.IsExternalLink(link.Key))
                 {
                     string idString = ReferencesUtils.GetIdFromLink(link.Key);
-                    BaseXHTMLFile iDDocument = GetIDParentDocument(epubFile, ids[idString]);
+                    BaseXHTMLFile iDDocument = GetIDParentDocument(epubFile, _ids[idString]);
                     if (iDDocument != null)
                     {
                         int count = 0;
                         foreach (var anchor in link.Value)
                         {
                             BaseXHTMLFile idDocument = GetIDParentDocument(epubFile, anchor);
-                            IXHTMLItem referencedItem = ids[anchor.HRef.Value];
+                            IXHTMLItem referencedItem = _ids[anchor.HRef.Value];
                             IXHTMLItem newParent = DetectParentContainer(referencedItem);
                             if (newParent == null)
                             {
@@ -382,8 +378,8 @@ namespace FB2EPubConverter
                     }
                     else
                     {
-                        //throw new Exception("Internal consistancy error - Used ID has to be in one of the book documents objects");
-                        Logger.Log.Error("Internal consistancy error - Used ID has to be in one of the book documents objects");
+                        //throw new Exception("Internal consistency error - Used ID has to be in one of the book documents objects");
+                        Logger.Log.Error("Internal consistency error - Used ID has to be in one of the book documents objects");
                         continue;
                     }
                 }
@@ -408,25 +404,6 @@ namespace FB2EPubConverter
             return null;
         }
 
-        private static IXHTMLItem ContainsAnchor(IXHTMLItem parent)
-        {
-            if (parent is Anchor)
-            {
-                return parent;
-            }
-            if (parent is IBlockElement)
-            {
-                foreach (var element in parent.SubElements())
-                {
-                    IXHTMLItem subItem = ContainsAnchor(element);
-                    if (subItem != null)
-                    {
-                        return subItem;
-                    }
-                }
-            }
-            return null;
-        }
 
 
         private BaseXHTMLFile GetIDParentDocument(EPubFile file, IXHTMLItem value)
@@ -448,11 +425,11 @@ namespace FB2EPubConverter
 
         public void RemoveInvalidImages(Dictionary<string, BinaryItem> dictionary)
         {
-            foreach (var imageId in images.Keys)
+            foreach (var imageId in _images.Keys)
             {
                 if (!dictionary.ContainsKey(imageId))
                 {
-                    foreach (var element in images[imageId])
+                    foreach (var element in _images[imageId])
                     {
                         if (element.Parent != null)
                         {
@@ -462,5 +439,8 @@ namespace FB2EPubConverter
                 }
             }
         }
+
+
+        public bool FlatStructure { get; set; }
     }
 }
