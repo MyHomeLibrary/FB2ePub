@@ -629,7 +629,7 @@ namespace Fb2ePubConverter
                     }
                     UpdateInternalLinks(epubFile, fb2File);
                     PassImagesDataFromFb2ToEpub(epubFile, fb2File);
-                    Logger.Log.DebugFormat("Transliteration of sile names set to : {0}",Settings.TransliterateFileName);
+                    Logger.Log.DebugFormat("Transliteration of file names set to : {0}",Settings.TransliterateFileName);
                     if (Settings.TransliterateFileName)
                     {
                         outFileName = epubFile.Transliterator.Translate(outFileName, epubFile.TranslitMode);
@@ -1311,7 +1311,31 @@ namespace Fb2ePubConverter
                         
             epubFile.Title.DateFileCreation = DateTime.Now;
 
+            PassCalibreMetadata(fb2File, epubFile);
+        }
 
+        private void PassCalibreMetadata(FB2File fb2File, EPubFile epubFile)
+        {
+            epubFile.AddCalibreMetadata = Settings.AddCalibreMetadata;
+            
+            if (!Settings.AddCalibreMetadata)
+            {
+                return;
+            }
+            if (fb2File.TitleInfo != null && fb2File.TitleInfo.BookTitle != null &&
+                !string.IsNullOrEmpty(fb2File.TitleInfo.BookTitle.Text))
+            {
+                epubFile.CalibreMetadata.TitleForSort = fb2File.TitleInfo.BookTitle.Text;
+            }
+            if (fb2File.TitleInfo != null && fb2File.TitleInfo.Sequences.Count > 0 &&
+                !string.IsNullOrEmpty(fb2File.TitleInfo.Sequences[0].Name))
+            {
+                epubFile.CalibreMetadata.SeriesName = fb2File.TitleInfo.Sequences[0].Name;
+                if (fb2File.TitleInfo.Sequences[0].Number.HasValue)
+                {
+                    epubFile.CalibreMetadata.SeriesIndex = fb2File.TitleInfo.Sequences[0].Number.Value;
+                }
+            }
         }
 
         private string GenerateFileAsString(AuthorType author)

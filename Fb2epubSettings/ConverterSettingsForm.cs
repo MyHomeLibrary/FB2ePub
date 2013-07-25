@@ -156,6 +156,7 @@ namespace Fb2epubSettings
             checkBoxFlatStructure.Checked = _settings.Flat;
             checkBoxEmbedStyles.Checked = _settings.EmbedStyles;
             checkBoxCapitalize.Checked = _settings.CapitalDrop;
+            checkBoxCalibreMetadata.Checked = _settings.AddCalibreMetadata;
             checkBoxSkipAboutPage.Checked = _settings.SkipAboutPage;
             checkBoxUseXPGT.Checked = _settings.EnableAdobeTemplate;
             LoadFixMode();
@@ -820,6 +821,11 @@ namespace Fb2epubSettings
             ImportExportForm form = new ImportExportForm(_settings);
             DialogResult result =  form.ShowDialog();
             ConverterSettingsForm_Load(this, null);
+        }
+
+        private void checkBoxCalibreMetadata_CheckedChanged(object sender, EventArgs e)
+        {
+            _settings.AddCalibreMetadata = checkBoxCalibreMetadata.Checked;
         }
 
 

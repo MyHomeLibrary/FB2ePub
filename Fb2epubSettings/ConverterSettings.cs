@@ -58,6 +58,7 @@ namespace Fb2epubSettings
         private readonly EPubFontSettings _fonts = new EPubFontSettings();
         private string _resourcesPath = string.Empty;
         private readonly AppleConverterSettings _appleEPubSettings = new AppleConverterSettings();
+        private bool _addCalibreMetadata = true;
         #endregion
 
         public ConverterSettings()
@@ -83,7 +84,7 @@ namespace Fb2epubSettings
             _convertAlphaPng = true;
             _embedStyles = false;
             _authorFormat = @"%f.c%%m.c%%l.c%%n.c:b%";
-            _fileAsFormat = @"%l.c%f.c";
+            _fileAsFormat = @"%l.c%%f.c%";
             _capitalDrop = true;
             _skipAboutPage = false;
             _enableAdobeTemplate = false;
@@ -91,6 +92,7 @@ namespace Fb2epubSettings
             _adobeTemplatePath = string.Empty;
             _decorateFontNames = true;
             _resourcesPath = string.Empty;
+            _addCalibreMetadata = true;
             _appleEPubSettings.SetupDefaults();
 
             _fonts.FontFamilies.Clear();
@@ -158,6 +160,16 @@ namespace Fb2epubSettings
         {
             get { return _transliterate; }
             set { _transliterate = value; }
+        }
+
+        /// <summary>
+        /// Get/Set if Calibre metadata should be added
+        /// </summary>
+        [XmlElement(ElementName = "AddCalibreMetadata")]
+        public bool AddCalibreMetadata
+        {
+            get { return _addCalibreMetadata; }
+            set { _addCalibreMetadata = value; }
         }
 
         /// <summary>
@@ -443,6 +455,7 @@ namespace Fb2epubSettings
             _decorateFontNames = temp._decorateFontNames;
             _fonts.CopyFrom(temp._fonts);
             _resourcesPath = temp._resourcesPath;
+            _addCalibreMetadata = temp._addCalibreMetadata;
             _appleEPubSettings.CopyFrom(temp._appleEPubSettings);
         }
     }

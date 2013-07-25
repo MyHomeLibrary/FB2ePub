@@ -49,6 +49,7 @@
             this.labelFileAsFormat = new System.Windows.Forms.Label();
             this.textBoxAuthorFormat = new System.Windows.Forms.TextBox();
             this.labelAuthorFormat = new System.Windows.Forms.Label();
+            this.checkBoxCalibreMetadata = new System.Windows.Forms.CheckBox();
             this.comboBoxIgnoreTitle = new System.Windows.Forms.ComboBox();
             this.comboBoxFixMode = new System.Windows.Forms.ComboBox();
             this.labelFixMode = new System.Windows.Forms.Label();
@@ -255,6 +256,14 @@
             resources.ApplyResources(this.labelAuthorFormat, "labelAuthorFormat");
             this.labelAuthorFormat.Name = "labelAuthorFormat";
             this.toolTipControl.SetToolTip(this.labelAuthorFormat, resources.GetString("labelAuthorFormat.ToolTip"));
+            // 
+            // checkBoxCalibreMetadata
+            // 
+            resources.ApplyResources(this.checkBoxCalibreMetadata, "checkBoxCalibreMetadata");
+            this.checkBoxCalibreMetadata.Name = "checkBoxCalibreMetadata";
+            this.toolTipControl.SetToolTip(this.checkBoxCalibreMetadata, resources.GetString("checkBoxCalibreMetadata.ToolTip"));
+            this.checkBoxCalibreMetadata.UseVisualStyleBackColor = true;
+            this.checkBoxCalibreMetadata.CheckedChanged += new System.EventHandler(this.checkBoxCalibreMetadata_CheckedChanged);
             // 
             // comboBoxIgnoreTitle
             // 
@@ -626,6 +635,7 @@
             // tabPageDifferent
             // 
             resources.ApplyResources(this.tabPageDifferent, "tabPageDifferent");
+            this.tabPageDifferent.Controls.Add(this.checkBoxCalibreMetadata);
             this.tabPageDifferent.Controls.Add(this.comboBoxIgnoreTitle);
             this.tabPageDifferent.Controls.Add(this.label2);
             this.tabPageDifferent.Controls.Add(this.comboBoxFixMode);
@@ -854,6 +864,7 @@
         private System.Windows.Forms.Button buttonImportExport;
         private System.Windows.Forms.TabPage tabPageAppleV2;
         private AppleV2Settings appleV2SettingsControl;
+        private System.Windows.Forms.CheckBox checkBoxCalibreMetadata;
 
 
 
