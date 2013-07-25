@@ -159,6 +159,7 @@ namespace Fb2epubSettings
             checkBoxCalibreMetadata.Checked = _settings.AddCalibreMetadata;
             checkBoxSkipAboutPage.Checked = _settings.SkipAboutPage;
             checkBoxUseXPGT.Checked = _settings.EnableAdobeTemplate;
+            textBoxTemplatePath.Text = _settings.AdobeTemplatePath;
             LoadFixMode();
             LoadIgnoreTitleMode();
             UpdateSequencesGroup();
