@@ -65,7 +65,6 @@ namespace Fb2ePub
                     if (log.IsInfoEnabled) log.Info("Application [FB2EPUB] End");
                     return;
                 }
-                //ConverterSettings settings = new ConverterSettings();
                 ConvertProcessor processor = new ConvertProcessor();
                 PreProcessParameters(options, processor.ProcessorSettings);
                 ProcessSettings(processor);
@@ -140,7 +139,6 @@ namespace Fb2ePub
         {
             processor.LoadSettings();
             processor.ProcessorSettings.Settings.ResourcesPath = ConvertProcessor.GetResourcesPath();
-            //Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
         }
 
         private static void ProcessParameters(List<string> options, ConvertProcessorSettings settings)
@@ -510,6 +508,26 @@ namespace Fb2ePub
                             log.InfoFormat("Invalid -ignoretitle: parameter value {0}.", value);
                         }
                     }                                       
+                }
+                else if (command.StartsWith("calibremeta:"))
+                {
+                    string commandValue = command.Substring(12);
+                    int value;
+                    if (int.TryParse(commandValue, out value))
+                    {
+                        if (value == 0)
+                        {
+                            settings.Settings.AddCalibreMetadata = false;
+                        }
+                        else if (value == 1)
+                        {
+                            settings.Settings.AddCalibreMetadata = true;
+                        }
+                        else
+                        {
+                            log.InfoFormat("Invalid -calibremeta: parameter value {0}.", value);
+                        }
+                    }
                 }
                 else
                 {

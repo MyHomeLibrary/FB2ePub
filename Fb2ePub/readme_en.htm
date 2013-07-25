@@ -208,6 +208,8 @@
        </dd>
         <dt><strong>-cfg:<em>&lt;path&gt;</em></strong></dt>
         <dd>Allows to specify different settings file path to use for conversion</dd>
+        <dt><strong>-calibremeta:<em>[0/1]</em></strong></dt>
+        <dd>Enable/Disable Calibre metadata injection into output file, used by some programs to sort, display series etc. Default: 1(Enabled)</dd>
     </dl>
     <h2>
         Fonts:
@@ -275,22 +277,22 @@
         </dd>
         <dt>AddFB2Info</dt>
         <dd> 
-        - Enable/disable generation of additional FB2 info page at the end of the resulting EPUB.
-          Values are: "True" (default) and "False"
+            - Enable/disable generation of additional FB2 info page at the end of the resulting EPUB.
+            Values are: "True" (default) and "False"
         </dd>
         <dt>AddSequenceNameToTitle</dt>
         <dd> 
-        - Enable/disable addition of abbreviated sequence names to the book title name
-          Values are: "True" (default) and "False"
+            - Enable/disable addition of abbreviated sequence names to the book title name
+            Values are: "True" (default) and "False"
         </dd>
         <dt>FormatWithSequenceName</dt>
         <dd> 
-         - Format book title description info (thanks wserg) , This allows to define what will be displayed on book description page. The following format options are allowed:<br />
+            - Format book title description info (thanks wserg) , This allows to define what will be displayed on book description page. The following format options are allowed:<br />
             %bt% - BookTitle from FB2 header<br />
             %sf% - Serie full name from FB2 header<br />
             %sa% - Serie abbviarated name from FB2 header<br />
             %sn% - book number in the series<br />
-           Also following modifiers specified after '.' (dot) are allowed for %bt%, $sf% and %sa%:<br />
+            Also following modifiers specified after '.' (dot) are allowed for %bt%, $sf% and %sa%:<br />
             c - Capitalize, l - lowercase, u -UPPERCASE <br />
             additionally for parameter %sn% numeric modifier can be used to specify 0-prefix of the number<br />
             The default format is same as in prev versions: "%bt% %sa.l%-%sn%"<br />
@@ -302,11 +304,11 @@
         </dd>
         <dt>FormatWithOutSequenceName</dt>
         <dd> 
-         - Format book title description info (thanks wserg) , This allows to define what will be displayed on book description page if book is part of series but does not have series number. The following format options are allowed:<br />
+            - Format book title description info (thanks wserg) , This allows to define what will be displayed on book description page if book is part of series but does not have series number. The following format options are allowed:<br />
             %bt% - BookTitle from FB2 header<br />
             %sf% - Series full name from FB2 header<br />
             %sa% - Series abbviarated name from FB2 header<br />
-           Also following modifiers specified after '.' (dot) are allowed for %bt%, $sf% and %sa%:<br />
+            Also following modifiers specified after '.' (dot) are allowed for %bt%, $sf% and %sa%:<br />
             c - Capitalize, l - lowercase, u -UPPERCASE <br />
             The default format is: "%bt% (%sf.l%)"<br />
             Examples:<br />
@@ -315,9 +317,9 @@
         </dd>
         <dt>FormatWithOutSeriesName</dt>
         <dd> 
-         - Format book title description info (thanks wserg) , This allows to define what will be displayed on book description page if book is not part of series. The following format options are allowed:<br />
+            - Format book title description info (thanks wserg) , This allows to define what will be displayed on book description page if book is not part of series. The following format options are allowed:<br />
             %bt% - BookTitle from FB2 header<br />
-           Also following modifiers specified after '.' (dot) are allowed for %bt%, $sf% and %sa%:<br />
+            Also following modifiers specified after '.' (dot) are allowed for %bt%, $sf% and %sa%:<br />
             c - Capitalize, l - lowercase, u -UPPERCASE <br />
             The default format is: "%bt%"<br />
         </dd>
@@ -328,7 +330,7 @@
             <dfn>%m%</dfn> - Middle name from FB2 header<br />
             <dfn>%l%</dfn> - last name from FB2 header<br />
             <dfn>%n%</dfn> - Nick name from FB2 header<br />
-           Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:<br />
+            Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:<br />
             <dfn>c</dfn> - Capitalize, <dfn>l</dfn> - lowercase, <dfn>u</dfn> -UPPERCASE <br />
             additionally another sub format <dfn>:b</dfn> can be added to take name in brackets<br />
             The default format is : <strong>"%f.c%%m.c%%l.c%%n.c:b%"</strong><br />
@@ -340,7 +342,7 @@
             <dfn>%m%</dfn> - Middle name from FB2 header<br />
             <dfn>%l%</dfn> - last name from FB2 header<br />
             <dfn>%n%</dfn> - Nick name from FB2 header<br />
-           Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:<br />
+            Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:<br />
             <dfn>c</dfn> - Capitalize, <dfn>l</dfn> - lowercase, <dfn>u</dfn> -UPPERCASE <br />
             additionally another sub format <dfn>:b</dfn> can be added to take name in brackets<br />
             The default format is : <strong>"%l.c%f.c"</strong><br />
@@ -348,39 +350,41 @@
         
         <dt>Fb2FixMode</dt>
         <dd> 
-        - Controls invoking of Fb2Fix to fix input files 
-          Values are: "0" - never try to fix ,  "1" - try to fix using internal algorithms only , "2" (default) - if internal algorithms fail try to apply FB2Fix, "3" - allways apply FB2Fix
+            - Controls invoking of Fb2Fix to fix input files 
+            Values are: "0" - never try to fix ,  "1" - try to fix using internal algorithms only , "2" (default) - if internal algorithms fail try to apply FB2Fix, "3" - allways apply FB2Fix
         </dd>
         <dt>ConvertAlphaPNG</dt>
         <dd> 
-        - Controls conversion of palatalized PNG files with alpha channel to 32 bit files. Many readers (especially Adobe based)can't show 
-        palatalized alpha channel PNGs. Values are: "False" - do not convert ,  "True" - always convert (default)
+            - Controls conversion of palatalized PNG files with alpha channel to 32 bit files. Many readers (especially Adobe based)can't show 
+            palatalized alpha channel PNGs. Values are: "False" - do not convert ,  "True" - always convert (default)
         </dd>     
         <dt>FlatStructure</dt>
         <dd> 
-        - Invokes "flat structure mode" that prohibits creation of subfolders inside ePub archive, workaround for some buggy.
-          Values are: "False" - disabled (default) ,  "True" - enabled
+            - Invokes "flat structure mode" that prohibits creation of subfolders inside ePub archive, workaround for some buggy.
+            Values are: "False" - disabled (default) ,  "True" - enabled
         </dd>       
         <dt>EmbedStyles</dt>
         <dd> 
-        - Invokes "embedding styles mode" that, instead of adding CCS files to the ePub and referencing them, in xHTML injects the relevant style code 
-          directly into the xHTML files. Values are: "False" - disabled (default) ,  "True" - enabled. The feature is for buggy readers that do not support reading styles from referenced files
+            - Invokes "embedding styles mode" that, instead of adding CCS files to the ePub and referencing them, in xHTML injects the relevant style code 
+            directly into the xHTML files. Values are: "False" - disabled (default) ,  "True" - enabled. The feature is for buggy readers that do not support reading styles from referenced files
         </dd>       
         <dt>GenerateDropCharacters</dt>
         <dd> 
-        - Invokes "capitalization" of  section first (drop) character making it appear big and take several lines. 
-        Values are: "False" - disabled  ,  "True" - enabled (default). 
+            - Invokes "capitalization" of  section first (drop) character making it appear big and take several lines. 
+            Values are: "False" - disabled  ,  "True" - enabled (default). 
         </dd>
         <dt>EnableAdobeTemplateUsage</dt>
         <dd>
-        - Controls if Adobe XPGT template is to be added to the resulting ePub file. Values: "True" and "False" (default). Please see <a href="http://wiki.mobileread.com/wiki/XPGT">http://wiki.mobileread.com/wiki/XPGT</a> for details on XPGT templates.
+            - Controls if Adobe XPGT template is to be added to the resulting ePub file. Values: "True" and "False" (default). Please see <a href="http://wiki.mobileread.com/wiki/XPGT">http://wiki.mobileread.com/wiki/XPGT</a> for details on XPGT templates.
         </dd>
         <dt>AdobeTemplatePath</dt>
         <dd>
-        - Specifies non-default path to the XPGT template to use in case enabled (in case of empty - default "Template" folder "template.xpgt" file used.
+            - Specifies non-default path to the XPGT template to use in case enabled (in case of empty - default&quot;"Template&quot; folder &quot;template.xpgt&quot; file used.
         </dd>
         <dt>IgnoreTitleOption</dt>
         <dd>- Controls if one or more FB2 titles should be ignored when generating ePub. Values: &quot;IgnoreNothing&quot;(default) ,  &quot;IgnoreMainTitle&quot; ,  &quot;IgnoreSourceTitle&quot;,  &quot;IgnorePublishTitle&quot;,  &quot;IgnoreMainAndSource&quot;,  &quot;IgnoreMainAndPublish&quot; ,  &quot;IgnoreSourceAndPublish&quot;  . </dd>
+        <dt></dt>
+        <dd>Enable/Disable Calibre metadata injection into output file, used by some programs to sort, display series etc. Default: &quot;true&quot;(Enabled)</dd>
         <dt>DecorateFontNames</dt>
         <dd>-Controls if font names should be "decorated" using random characters to work around font cacke bug present on some Adobe based readers. Values: &quot;true&quot;(default) ,  &quot;false&quot; </dd>
         <dt>Fonts</dt>
