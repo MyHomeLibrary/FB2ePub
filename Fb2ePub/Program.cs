@@ -69,7 +69,7 @@ namespace Fb2ePub
                 PreProcessParameters(options, processor.ProcessorSettings);
                 ProcessSettings(processor);
                 ProcessParameters(options, processor.ProcessorSettings);
-                Console.WriteLine(string.Format("Loading {0}...", fileParams[0]));
+                Console.WriteLine("Loading {0}...", fileParams[0]);
                 List<string> filesInMask = new List<string>();
                 processor.DetectFilesToProcess(fileParams, ref filesInMask);
                 string outputFileName = (fileParams.Count > 1)?fileParams[1]:null;
@@ -126,7 +126,7 @@ namespace Fb2ePub
             // Log an info level message
             log.Debug("Application [FB2EPUB] Start");
             Console.WriteLine("FB2 to EPUB command line converter by Lord KiRon");
-            Console.WriteLine(string.Format("Logging to: {0}\\", GlobalContext.Properties["LogName"]));
+            Console.WriteLine("Logging to: {0}\\", GlobalContext.Properties["LogName"]);
             Console.WriteLine();
         }
 
@@ -529,9 +529,29 @@ namespace Fb2ePub
                         }
                     }
                 }
+                else if (command.StartsWith("fixcodeformat:"))
+                {
+                    string commandValue = command.Substring(14);
+                    int value;
+                    if (int.TryParse(commandValue, out value))
+                    {
+                        if (value == 0)
+                        {
+                            settings.Settings.FixCodeElement = false;
+                        }
+                        else if (value == 1)
+                        {
+                            settings.Settings.FixCodeElement = true;
+                        }
+                        else
+                        {
+                            log.InfoFormat("Invalid -fixcodeformat: parameter value {0}.", value);
+                        }
+                    }
+                }
                 else
                 {
-                    Console.WriteLine(string.Format("Invalid option {0}.", param));
+                    Console.WriteLine("Invalid option {0}.", param);
                 }
             }
         }

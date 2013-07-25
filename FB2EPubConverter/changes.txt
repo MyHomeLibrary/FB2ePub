@@ -4,6 +4,8 @@
 + Added new command line parameter "calibremeta:[0/1]" to enable/disable Calibre metadata generation
 + Added new configuration setting "AddCalibreMetadata" to settings file to enable/disable Calibre metadata generation
 + Added Fb2ePub Converter as book producer
++ Added code for fixing wrong display of [code] elements on some readers 
++ Added new setting "FixCodeElements" in configuration file and new parameter "fixcodeformat:[0/1]" to control if [code] sections should be fixed
 * Changed to generate truly Flat ePubs 
 * Refactoring of the code to perform automatic internal relative paths resolving when constructing ePubs , instead of hard coded
 * Replaced <strike> element with <del> element for better XHTML compatibility

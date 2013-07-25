@@ -59,6 +59,7 @@ namespace Fb2epubSettings
         private string _resourcesPath = string.Empty;
         private readonly AppleConverterSettings _appleEPubSettings = new AppleConverterSettings();
         private bool _addCalibreMetadata = true;
+        private bool _fixCodeElement = true;
         #endregion
 
         public ConverterSettings()
@@ -93,6 +94,7 @@ namespace Fb2epubSettings
             _decorateFontNames = true;
             _resourcesPath = string.Empty;
             _addCalibreMetadata = true;
+            _fixCodeElement = true;
             _appleEPubSettings.SetupDefaults();
 
             _fonts.FontFamilies.Clear();
@@ -151,6 +153,17 @@ namespace Fb2epubSettings
         }
 
         #region serializable_public_Properties
+
+        /// <summary>
+        /// Get/set if converter should fix [code] elements by enclosing with [pre] elements to resolve the unbreakable spaces issue
+        /// </summary>
+        [XmlElement(ElementName = "FixCodeElements")]
+        public bool FixCodeElement
+        {
+            get { return _fixCodeElement; }
+            set { _fixCodeElement = value; }
+        }
+
         /// <summary>
         /// Get/Set if data outside the text body needs to be transliterated 
         /// (used in case device does not support Cyrillic fonts)
@@ -456,6 +469,7 @@ namespace Fb2epubSettings
             _fonts.CopyFrom(temp._fonts);
             _resourcesPath = temp._resourcesPath;
             _addCalibreMetadata = temp._addCalibreMetadata;
+            _fixCodeElement = temp._fixCodeElement;
             _appleEPubSettings.CopyFrom(temp._appleEPubSettings);
         }
     }

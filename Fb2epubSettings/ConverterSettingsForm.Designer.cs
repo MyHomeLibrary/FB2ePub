@@ -87,6 +87,7 @@
             this.groupBoxAssignedFonts = new System.Windows.Forms.GroupBox();
             this.groupBoxCSS = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.checkBoxFixCodeElement = new System.Windows.Forms.CheckBox();
             this.tabControlSettings = new Fb2epubSettings.NonStyledTabs();
             this.tabPageTransliteration = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -572,6 +573,14 @@
             this.label2.Name = "label2";
             this.toolTipControl.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
+            // checkBoxFixCodeElement
+            // 
+            resources.ApplyResources(this.checkBoxFixCodeElement, "checkBoxFixCodeElement");
+            this.checkBoxFixCodeElement.Name = "checkBoxFixCodeElement";
+            this.toolTipControl.SetToolTip(this.checkBoxFixCodeElement, resources.GetString("checkBoxFixCodeElement.ToolTip"));
+            this.checkBoxFixCodeElement.UseVisualStyleBackColor = true;
+            this.checkBoxFixCodeElement.CheckedChanged += new System.EventHandler(this.checkBoxFixCodeElement_CheckedChanged);
+            // 
             // tabControlSettings
             // 
             resources.ApplyResources(this.tabControlSettings, "tabControlSettings");
@@ -635,6 +644,7 @@
             // tabPageDifferent
             // 
             resources.ApplyResources(this.tabPageDifferent, "tabPageDifferent");
+            this.tabPageDifferent.Controls.Add(this.checkBoxFixCodeElement);
             this.tabPageDifferent.Controls.Add(this.checkBoxCalibreMetadata);
             this.tabPageDifferent.Controls.Add(this.comboBoxIgnoreTitle);
             this.tabPageDifferent.Controls.Add(this.label2);
@@ -865,6 +875,7 @@
         private System.Windows.Forms.TabPage tabPageAppleV2;
         private AppleV2Settings appleV2SettingsControl;
         private System.Windows.Forms.CheckBox checkBoxCalibreMetadata;
+        private System.Windows.Forms.CheckBox checkBoxFixCodeElement;
 
 
 
