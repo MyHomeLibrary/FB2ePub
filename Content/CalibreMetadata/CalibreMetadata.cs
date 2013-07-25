@@ -14,22 +14,38 @@ namespace EPubLibrary.Content.CalibreMetadata
     public class CalibreMetadataObject
     {
         private static readonly XNamespace CalibreNamespace = @"http://calibre.kovidgoyal.net/2009/metadata";
-        private static readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
-        private static readonly XName MetaName = _opfNameSpace + "meta";
+        private static readonly XNamespace OpfNameSpace = @"http://www.idpf.org/2007/opf";
+        private static readonly XName MetaName = OpfNameSpace + "meta";
 
-
+        /// <summary>
+        /// Get/Set Series name (only one 1st Series used)
+        /// </summary>
         public string SeriesName { get; set; }
 
+        /// <summary>
+        /// Get/Set Series index if > 0
+        /// </summary>
         public int SeriesIndex { get; set; }
 
+        /// <summary>
+        /// Get/Set Title name to be used for sorting by Calibre
+        /// </summary>
         public string TitleForSort { get; set; }
 
 
+        /// <summary>
+        /// Injects Calibre's namespace into XHTML element
+        /// </summary>
+        /// <param name="metadata"></param>
         internal void InjectNamespace(XElement metadata)
         {
             metadata.Add(new XAttribute(XNamespace.Xmlns + "calibre", CalibreNamespace));
         }
 
+        /// <summary>
+        /// Injects Calibre's metadata into XHTML element (for metadata part)
+        /// </summary>
+        /// <param name="metadata"></param>
         internal void InjectData(XElement metadata)
         {
             if (!string.IsNullOrEmpty(SeriesName))

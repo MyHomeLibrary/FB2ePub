@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -19,7 +20,17 @@ namespace EPubLibrary.Content
 {
     internal class ContentFile : IEPubPath
     {
-        public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
+        static ContentFile()
+        {
+            Assembly asm = Assembly.GetAssembly(typeof (ContentFile));
+            if (asm != null)
+            {
+                AssemblyVersion = string.Format(@"Fb2epub v{0} [http://www.fb2epub.net]", asm.GetName().Version);
+            }
+        }
+                public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
+
+        public static readonly string AssemblyVersion = @"Fb2epub [http://www.fb2epub.net]";
 
         private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
 
@@ -169,6 +180,9 @@ namespace EPubLibrary.Content
                     metadata.Add(contributor);
                 }
             }
+            var maker = new XElement(dc + "contributor",AssemblyVersion);
+            maker.Add(new XAttribute(_opfNameSpace + "role", EPubRoles.ConvertEnumToAttribute(RolesEnum.BookProducer)));
+            metadata.Add(maker);
 
             if (!string.IsNullOrEmpty(Title.Publisher.PublisherName))
             {

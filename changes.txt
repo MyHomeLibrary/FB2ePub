@@ -1,5 +1,6 @@
 ﻿1.0.22.0
 + Added support for generation of Calibre metadata - used for some sorts, series etc.
++ Added Fb2ePub Converter as book producer
 * Changed to generate truly Flat ePubs 
 * Refactoring of the code to perform automatic internal relative paths resolving when constructing ePubs , instead of hard coded
 
