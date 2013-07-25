@@ -1,6 +1,8 @@
 ﻿1.1.5
++ Added styling for <de> element for compatibility with some older readers/browsers
 * Changed to generate truly Flat ePubs 
 * Refactoring of the code to perform automatic internal relative paths resolving when constructing ePubs , instead of hard coded
+* Replaced <strike> element with <del> element for better XHTML compatibility
 
 
 1.1.4
