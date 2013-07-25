@@ -10,11 +10,13 @@ Here is the list of the "class" attribute values used and their meanings:
 
 "body_image" - FB2 image defined on top of main body
 
+"pre.code_fix" ("code_fix")  - set only on "pre" elements used to workaround [code] element problem (wrap them)
+
 "citation" - FB2 citation element
 
 "citation_author" - FB2 citation author element
 
-"drop" - related to capitalization of section's firts character, span.drop - controls the first character itself, while p.drop - the trailing text
+"drop" - related to capitalization of section's first character, span.drop - controls the first character itself, while p.drop - the trailing text
 
 "empty-line" - FB2 empty line element
 
@@ -24,9 +26,9 @@ Here is the list of the "class" attribute values used and their meanings:
 
 "epigraph_author" - FB2 epigraph author element
 
-"ex_bad_link" - ex-bad link that get converterd to SPAN element in case had text content
+"ex_bad_link" - ex-bad link that get converted to SPAN element in case had text content
 
-"fb2_info" - FB2 Document Info section transfered to EPUB as a page
+"fb2_info" - FB2 Document Info section transferred to EPUB as a page
 
 "int_image" - FB2 inline image element
 
@@ -34,7 +36,7 @@ Here is the list of the "class" attribute values used and their meanings:
 
 "note_anchor"  - anchor back to main body in FB2 "notes" body section
 
-"note_section" - section in "notes" FB2 body (usualy contains one note) 
+"note_section" - section in "notes" FB2 body (usually contains one note) 
 
 "poem" - FB2 poem element
 
@@ -59,11 +61,12 @@ Here is the list of the "class" attribute values used and their meanings:
 
 "title"? - FB2 title element where ? - number starting from 1 defines level of inclusion, 1 - top level title (body) , 2 - title of it's subsection , etc
 
+
 "v" - FB2 "v" element (paragraph in stanza)
 
 
 
-Here are style classes speciffic to cover page only:
+Here are style classes specific to cover page only:
 
 "coverpage" - coverpage main section (page)
 "coverimage" - coverpage image
@@ -74,11 +77,13 @@ Here are style classes speciffic to cover page only:
 Here are style classes specific to TitlePage only:
 
 "titlepage" - title page main section (page)
+"title_series" - (applied only to h3 on title page) used to style series on Title page
+"title_authors" - (applied only to h3 on title page) used to style authors on Title page
 
 
 
 
-Here are style classes speciffic to About page only:
+Here are style classes specific to About page only:
 
 "about"   - about page main section (page)
 
