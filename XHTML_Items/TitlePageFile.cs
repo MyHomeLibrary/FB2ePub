@@ -68,6 +68,7 @@ namespace EPubLibrary.XHTML_Items
                 EmphasisedText containingText = new EmphasisedText();
                 containingText.Add(seriesItem);
                 H3 seriesHeading = new H3();
+                seriesHeading.Class.Value = "title_series";
                 seriesHeading.Add(containingText);
                 titlePage.Add(seriesHeading);
             }
@@ -77,6 +78,7 @@ namespace EPubLibrary.XHTML_Items
                 H3 authorsHeading = new H3();
                 SimpleEPubText authorLine = new SimpleEPubText { Text = author };
                 authorsHeading.Add(authorLine);
+                authorsHeading.Class.Value = "title_authors";
                 titlePage.Add(authorsHeading);
             }
 
