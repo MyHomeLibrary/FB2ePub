@@ -119,8 +119,7 @@ namespace EPubLibrary.Content
 
             foreach (var identifierItem in Title.Identifiers)
             {
-                string id = string.Format("{0}", identifierItem.ID);
-                XElement identifier = new XElement(dc + "identifier", id);
+                XElement identifier = new XElement(dc + "identifier", identifierItem.ID);
                 identifier.Add(new XAttribute("id", identifierItem.IdentifierName));
                 identifier.Add(new XAttribute(_opfNameSpace + "scheme", identifierItem.Scheme));
                 metadata.Add(identifier);
