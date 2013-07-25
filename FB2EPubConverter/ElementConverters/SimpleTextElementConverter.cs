@@ -159,7 +159,7 @@ namespace FB2EPubConverter.ElementConverters
                         list.Add(sup);
                         break;
                     case FB2Library.Elements.TextStyles.Strikethrough:
-                        Strike strike = new Strike();
+                        DeletedText strike = new DeletedText();
                         if (text.HasChildren)
                         {
                             foreach (var child in text.Children)

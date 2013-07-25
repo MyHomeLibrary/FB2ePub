@@ -267,3 +267,7 @@ p.drop
 {
 	text-indent:0.1em;
 }
+del
+{
+     text-decoration: line-through;
+}
