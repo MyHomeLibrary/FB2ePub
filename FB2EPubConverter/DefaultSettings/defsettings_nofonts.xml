@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <ConverterSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <FixCodeElements>true</FixCodeElements>
   <TransliterateBook>false</TransliterateBook>
   <AddCalibreMetadata>true</AddCalibreMetadata>
   <TransliterateFileName>false</TransliterateFileName>

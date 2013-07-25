@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
+using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace FB2EPubConverter.ElementConverters
@@ -84,7 +85,17 @@ namespace FB2EPubConverter.ElementConverters
                         {
                             code.Add(new SimpleEPubText() { Text = text.Text });
                         }
-                        list.Add(code);
+                        if (Settings.FixCodeSpaces)
+                        {
+                            PreFormated pf = new PreFormated();
+                            pf.Class.Value = "code_fix";
+                            pf.Add(code);
+                            list.Add(pf);
+                        }
+                        else
+                        {
+                            list.Add(code);
+                        }
                         break;
                     case FB2Library.Elements.TextStyles.Emphasis:
                         EmphasisedText emph = new EmphasisedText();

@@ -158,6 +158,7 @@ namespace Fb2epubSettings
             checkBoxCapitalize.Checked = _settings.CapitalDrop;
             checkBoxCalibreMetadata.Checked = _settings.AddCalibreMetadata;
             checkBoxSkipAboutPage.Checked = _settings.SkipAboutPage;
+            checkBoxFixCodeElement.Checked = _settings.FixCodeElement;
             checkBoxUseXPGT.Checked = _settings.EnableAdobeTemplate;
             textBoxTemplatePath.Text = _settings.AdobeTemplatePath;
             LoadFixMode();
@@ -827,6 +828,11 @@ namespace Fb2epubSettings
         private void checkBoxCalibreMetadata_CheckedChanged(object sender, EventArgs e)
         {
             _settings.AddCalibreMetadata = checkBoxCalibreMetadata.Checked;
+        }
+
+        private void checkBoxFixCodeElement_CheckedChanged(object sender, EventArgs e)
+        {
+            _settings.FixCodeElement = checkBoxFixCodeElement.Checked;
         }
 
 
