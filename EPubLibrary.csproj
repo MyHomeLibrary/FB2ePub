@@ -126,6 +126,7 @@
     <Compile Include="AppleEPubV2Extensions\AppleDisplayOptionsFile.cs" />
     <Compile Include="AppleEPubV2Extensions\AppleTargetPlatform.cs" />
     <Compile Include="Container\ContainerFile.cs" />
+    <Compile Include="Content\CalibreMetadata\CalibreMetadata.cs" />
     <Compile Include="Content\ContentFile.cs" />
     <Compile Include="Content\Guide\GuideSection.cs" />
     <Compile Include="Content\Guide\GuideElement.cs" />

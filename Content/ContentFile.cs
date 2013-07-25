@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using EPubLibrary.Content.CalibreMetadata;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.Content.Manifest;
 using EPubLibrary.Content.Spine;
@@ -29,6 +30,8 @@ namespace EPubLibrary.Content
         private readonly SpineSection _spine = new SpineSection();
 
         private bool _flatStructure = false;
+
+        public CalibreMetadataObject CalibreData { get; set; }
 
 
         public bool FlatStructure
@@ -91,6 +94,10 @@ namespace EPubLibrary.Content
             metadata.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi));
             metadata.Add(new XAttribute(XNamespace.Xmlns + "dcterms", dcterms));
             metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", _opfNameSpace));
+            if (CalibreData!= null)
+            {
+                CalibreData.InjectNamespace(metadata);
+            }
 
             foreach (var titleItem in Title.BookTitles)
             {
@@ -207,6 +214,11 @@ namespace EPubLibrary.Content
                 cover.Add(new XAttribute("name","cover"));
                 cover.Add(new XAttribute("content", CoverId));
                 metadata.Add(cover);
+            }
+
+            if (CalibreData != null)
+            {
+                CalibreData.InjectData(metadata);
             }
 
             document.Add(metadata);

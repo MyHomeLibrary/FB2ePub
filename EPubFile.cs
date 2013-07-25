@@ -7,6 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary.Container;
 using EPubLibrary.Content;
+using EPubLibrary.Content.CalibreMetadata;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
 using EPubLibrary.Template;
@@ -67,6 +68,7 @@ namespace EPubLibrary
         private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
         private readonly AppleDisplayOptionsFile _appleOptionsFile = new AppleDisplayOptionsFile();
         private readonly Dictionary<string,EPUBImage> _images = new Dictionary<string ,EPUBImage>();
+        private readonly CalibreMetadataObject _calibreMetadata =  new CalibreMetadataObject();
         #endregion
 
         #region private_properties
@@ -75,6 +77,16 @@ namespace EPubLibrary
         #endregion
 
         #region public_properties
+
+        public CalibreMetadataObject CalibreMetadata { get { return _calibreMetadata; }}
+
+        /// <summary>
+        /// Controls id Calibre metadata is to be added to content metadata
+        /// </summary>
+        public bool AddCalibreMetadata
+        {
+            get; set;
+        } 
         /// <summary>
         /// Return reference to the list of the contained "book documents" - book content objects
         /// </summary>
@@ -705,6 +717,10 @@ namespace EPubLibrary
             stream.SetLevel(9);
             CreateFileEntryInZip(stream,_content);
             _content.Title = _title;
+            if (AddCalibreMetadata)
+            {
+                _content.CalibreData = _calibreMetadata;
+            }
             _content.Write(stream);
         }
 
