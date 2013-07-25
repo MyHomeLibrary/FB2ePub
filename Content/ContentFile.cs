@@ -20,14 +20,7 @@ namespace EPubLibrary.Content
 {
     internal class ContentFile : IEPubPath
     {
-        static ContentFile()
-        {
-            Assembly asm = Assembly.GetEntryAssembly();
-            AssemblyVersion = string.Format(@"Fb2epub v{0} [http://www.fb2epub.net]", asm.GetName().Version);
-        }
-                public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
-
-        public static readonly string AssemblyVersion = @"Fb2epub [http://www.fb2epub.net]";
+        public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
 
         private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
 
@@ -39,9 +32,16 @@ namespace EPubLibrary.Content
 
         private bool _flatStructure = false;
 
+
+        /// <summary>
+        /// Get/Set CalibreData object containing calibre's metadata to add to file
+        /// </summary>
         public CalibreMetadataObject CalibreData { get; set; }
 
 
+        /// <summary>
+        /// Get /Set if flat structure used
+        /// </summary>
         public bool FlatStructure
         {
             get { return _flatStructure; }
@@ -177,9 +177,13 @@ namespace EPubLibrary.Content
                     metadata.Add(contributor);
                 }
             }
-            var maker = new XElement(dc + "contributor",AssemblyVersion);
-            maker.Add(new XAttribute(_opfNameSpace + "role", EPubRoles.ConvertEnumToAttribute(RolesEnum.BookProducer)));
-            metadata.Add(maker);
+            if (CreatorSoftwareString != null)
+            {
+                var maker = new XElement(dc + "contributor", CreatorSoftwareString);
+                maker.Add(new XAttribute(_opfNameSpace + "role",
+                    EPubRoles.ConvertEnumToAttribute(RolesEnum.BookProducer)));
+                metadata.Add(maker);
+            }
 
             if (!string.IsNullOrEmpty(Title.Publisher.PublisherName))
             {
@@ -236,6 +240,9 @@ namespace EPubLibrary.Content
 
 
 
+        /// <summary>
+        /// Get/Set book title
+        /// </summary>
         public EPubTitleSettings Title { get; set; }
 
         /// <summary>
@@ -243,6 +250,10 @@ namespace EPubLibrary.Content
         /// </summary>
         public string CoverId{ get; set; }
 
+        /// <summary>
+        /// Writes content to stream
+        /// </summary>
+        /// <param name="s"></param>
         public void Write (Stream s)
         {
             XDocument contentDocument = new XDocument();
@@ -302,10 +313,17 @@ namespace EPubLibrary.Content
         }
 
 
-
+        /// <summary>
+        /// Returns path in ePub 
+        /// </summary>
         public EPubInternalPath PathInEPUB
         {
             get { return ContentFilePath; }
         }
+
+        /// <summary>
+        /// Get/Set string by software creator to identify creator software
+        /// </summary>
+        public string CreatorSoftwareString { get; set; }
     }
 }

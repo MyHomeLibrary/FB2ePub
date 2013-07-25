@@ -78,6 +78,17 @@ namespace EPubLibrary
 
         #region public_properties
 
+
+        /// <summary>
+        /// Used to set creator software string
+        /// </summary>
+        public string CreatorSoftwareString {
+            set { _content.CreatorSoftwareString = value; }
+        }
+
+        /// <summary>
+        /// Return Calibre's metadata object
+        /// </summary>
         public CalibreMetadataObject CalibreMetadata { get { return _calibreMetadata; }}
 
         /// <summary>
