@@ -22,11 +22,8 @@ namespace EPubLibrary.Content
     {
         static ContentFile()
         {
-            Assembly asm = Assembly.GetAssembly(typeof (ContentFile));
-            if (asm != null)
-            {
-                AssemblyVersion = string.Format(@"Fb2epub v{0} [http://www.fb2epub.net]", asm.GetName().Version);
-            }
+            Assembly asm = Assembly.GetEntryAssembly();
+            AssemblyVersion = string.Format(@"Fb2epub v{0} [http://www.fb2epub.net]", asm.GetName().Version);
         }
                 public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
 
