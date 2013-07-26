@@ -15,6 +15,7 @@
 * Replaced <strike> element with <del> element for better XHTML compatibility
 * Fixed the bug with XGPT path not loaded in settings GUI
 * Fixed shell extension converter sometimes does not convert all files when many files selected (COM interface marshaling between threads problem)
+* Changed the left margin in default CSS to match right margin (8pt)
 
 
 1.1.4
