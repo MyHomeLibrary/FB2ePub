@@ -3,7 +3,8 @@
 
 #define MyAppName "FB2ePub"
 #define MyAppPublisher "Lord KiRon"
-#define MyAppSubfolder "Lord_KiRon\FB2ePub"
+#define MyAppRootFolder "Lord_KiRon"
+#define MyAppSubfolder MyAppRootFolder + "\FB2ePub"
 #define MyAppURL "http://www.fb2epub.net"
 #define Contact "lordkiron@fb2epub.net"
 #define BaseFolder "C:\Project\GoogleCode\fb2epub\"
@@ -53,6 +54,13 @@ Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
 [Dirs]
 ; create subfolder in "ProgramData" and set permissions to write for everyone in order to resolve UAC permissions
 Name: "{commonappdata}\{#MyAppSubfolder}"; Permissions: everyone-modify users-modify powerusers-full admins-full;
+
+
+[UninstallDelete]
+Name: "{localappdata}\Lord_KiRon"; Type: filesandordirs;
+Name: "{userappdata}\Lord_KiRon\Fb2ePub"; Type: filesandordirs;
+
+
 
 [Files]
 ; common
