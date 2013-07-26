@@ -16,6 +16,7 @@
 * Fixed the bug with XGPT path not loaded in settings GUI
 * Fixed shell extension converter sometimes does not convert all files when many files selected (COM interface marshaling between threads problem)
 * Changed the left margin in default CSS to match right margin (8pt)
+* Changed the installed to install VC++ libraries only if both English and localized versions not present 
 
 
 1.1.4
