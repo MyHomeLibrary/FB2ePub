@@ -120,19 +120,38 @@ namespace Fb2ePub
 
         private static void SetupLogAndData()
         {
-            string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(), @"Lord_KiRon\");
-            GlobalContext.Properties["LogName"] = logPath;
+            Console.WriteLine("FB2 to EPUB command line converter by Lord KiRon");
+            string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(), @"Lord_KiRon\fb2epub.log");
+            SetNewLogPath(logPath);
             log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
             // Log an info level message
             log.Debug("Application [FB2EPUB] Start");
-            Console.WriteLine("FB2 to EPUB command line converter by Lord KiRon");
-            Console.WriteLine("Logging to: {0}\\", GlobalContext.Properties["LogName"]);
-            Console.WriteLine();
         }
 
-
-
-
+        private static void SetNewLogPath(string pathName)
+        {
+            string logPath;
+            if (!Directory.Exists(pathName))
+            {
+                if (Path.HasExtension(pathName))
+                {
+                    logPath = pathName;
+                }
+                else
+                {
+                    Directory.CreateDirectory(pathName);
+                    logPath = Path.Combine(pathName, "fb2epub.log");
+                }
+            }
+            else // in case folder passed
+            {
+                logPath = Path.Combine(pathName, "fb2epub.log");
+            }
+            GlobalContext.Properties["LogFileName"] = logPath;
+            log4net.Config.XmlConfigurator.Configure();
+            Console.WriteLine("Logging to: {0}\\", pathName);
+            Console.WriteLine();
+        }
 
 
         private static void ProcessSettings(ConvertProcessor processor)
@@ -549,6 +568,11 @@ namespace Fb2ePub
                         }
                     }
                 }
+                else if (command.StartsWith("log:"))
+                {
+                    string commandValue = command.Substring(4);
+                    SetNewLogPath(commandValue);  
+                }
                 else
                 {
                     Console.WriteLine("Invalid option {0}.", param);
@@ -592,6 +616,8 @@ namespace Fb2ePub
             conWriter.WriteLine("-f2i:[0/1] - enable (1) or disable (0) generation of FB2 information page in target EPUB");
             conWriter.WriteLine();
             conWriter.WriteLine("-s - searches for files to convert in subfolders");
+            conWriter.WriteLine();
+            conWriter.WriteLine("-log:<log_file_path> - redirects logging output to the file specified");
             conWriter.WriteLine();
             conWriter.WriteLine("-m:[0/1/2/3] - when searching in folders search either *.fb (0) or  *.fb2;*.fb2.zip;*.fb2.rar (1 - default) or *.zip;*.rar;*.fb2 (2) or *.* (3) files");
             conWriter.WriteLine();
