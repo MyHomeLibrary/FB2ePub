@@ -11,6 +11,7 @@ using Fb2ePubConverter;
 using FB2EPubConverter;
 using Fb2ePubGui.Properties;
 using FolderSettingsHelper.IniLocations;
+using log4net;
 
 
 namespace Fb2ePubGui
@@ -307,6 +308,12 @@ namespace Fb2ePubGui
             topmostToolStripMenuItem.Checked = this.TopMost;
             Settings.Default.Topmost = this.TopMost;
             Settings.Default.Save();
+        }
+
+        private void toolStripMenuItemShowLog_Click(object sender, EventArgs e)
+        {
+            LogWindow log = new LogWindow(string.Format(@"{0}{1}", GlobalContext.Properties["LogName"], "fb2epubGUI.log"));
+            log.Show();
         }
 
 
