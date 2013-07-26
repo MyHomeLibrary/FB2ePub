@@ -72,10 +72,8 @@ namespace FB2EPubConverter
             int filesCount = filesInMask.Count;
             int successfullyConverted = 0;
 
-            if (_processorSettings.ProgressCallbacks != null)
-            {
-                _processorSettings.ProgressCallbacks.ConvertStarted(filesCount);
-            }
+            ProgressUpdateWrapper progressReporter = new ProgressUpdateWrapper(_processorSettings.ProgressCallbacks);
+            progressReporter.ConvertStarted(filesCount);
 
             try
             {
@@ -93,41 +91,25 @@ namespace FB2EPubConverter
                                                       };
                                                       try
                                                       {
-                                                          if (_processorSettings.ProgressCallbacks != null)
-                                                          {
-                                                              _processorSettings.ProgressCallbacks.ProcessingStarted(file, Id, filesCount);
-                                                          }
-
+                                                          progressReporter.ProcessingStarted(file, Id, filesCount);
                                                           if (!converter.ConvertFile(file))
                                                           {
                                                               Logger.Log.Error(string.Format("Conversion of a file {0} failed", file));
-                                                              if (_processorSettings.ProgressCallbacks != null)
-                                                              {
-                                                                  _processorSettings.ProgressCallbacks.SkippedDueError(file);
-                                                              }
+                                                              progressReporter.SkippedDueError(file);
                                                               return;
                                                           }
                                                       }
                                                       catch (Exception ex)
                                                       {
                                                           Logger.Log.Error("Conversion error", ex);
-                                                          if (_processorSettings.ProgressCallbacks != null)
-                                                          {
-                                                              _processorSettings.ProgressCallbacks.SkippedDueError(file);
-                                                          }
+                                                          progressReporter.SkippedDueError(file);
                                                           return;
                                                       }
                                                       string fileName = BuildNewFileName(file, outputFileName);
                                                       Logger.Log.InfoFormat("Saving {0}...", fileName);
-                                                      if (_processorSettings.ProgressCallbacks != null)
-                                                      {
-                                                          _processorSettings.ProgressCallbacks.ProcessingSaving(fileName, Id, filesCount);
-                                                      }
+                                                      progressReporter.ProcessingSaving(fileName, Id, filesCount);
                                                       SaveAndCleanUp(converter, fileName, file);
-                                                      if (_processorSettings.ProgressCallbacks != null)
-                                                      {
-                                                          _processorSettings.ProgressCallbacks.Processed(fileName, Id, filesCount);
-                                                      }
+                                                      progressReporter.Processed(fileName, Id, filesCount);
                                                   });
             }
             catch(Exception ex)
@@ -136,10 +118,7 @@ namespace FB2EPubConverter
             }
             finally
             {
-                if (_processorSettings.ProgressCallbacks != null)
-                {
-                    _processorSettings.ProgressCallbacks.ConvertFinished(successfullyConverted);
-                }
+                progressReporter.ConvertFinished(successfullyConverted);
             }
 
         }
@@ -354,10 +333,8 @@ namespace FB2EPubConverter
             _processorSettings.DeleteSource = false;
             int successfullyConverted = 0;
 
-            if (_processorSettings.ProgressCallbacks != null)
-            {
-                _processorSettings.ProgressCallbacks.ConvertStarted(1);
-            }
+            ProgressUpdateWrapper progressReporter = new ProgressUpdateWrapper(_processorSettings.ProgressCallbacks);
+            progressReporter.ConvertStarted(1);
 
 
             Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine()
@@ -367,34 +344,18 @@ namespace FB2EPubConverter
 
             try
             {
-                if (_processorSettings.ProgressCallbacks != null)
-                {
-                    _processorSettings.ProgressCallbacks.ProcessingStarted(outFileName, 1, 1);
-                }
+                progressReporter.ProcessingStarted(outFileName, 1, 1);
                 converter.ConvertXml(doc);
-
             }
             catch (Exception ex)
             {
                 Logger.Log.Error(ex);
                 return;
             }
-            if (_processorSettings.ProgressCallbacks != null)
-            {
-                _processorSettings.ProgressCallbacks.ProcessingSaving(outFileName, 1, 1);
-            }
+            progressReporter.ProcessingSaving(outFileName, 1, 1);
             SaveAndCleanUp(converter, outFileName, "");
-            if (_processorSettings.ProgressCallbacks != null)
-            {
-                _processorSettings.ProgressCallbacks.Processed(outFileName, 1, 1);
-            }
-
-
-            if (_processorSettings.ProgressCallbacks != null)
-            {
-                _processorSettings.ProgressCallbacks.ConvertFinished(successfullyConverted);
-            }
-
+            progressReporter.Processed(outFileName, 1, 1);
+            progressReporter.ConvertFinished(successfullyConverted);
         }
 
         #endregion
