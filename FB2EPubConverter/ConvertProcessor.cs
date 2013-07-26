@@ -100,6 +100,7 @@ namespace FB2EPubConverter
 
                                                           if (!converter.ConvertFile(file))
                                                           {
+                                                              Logger.Log.Error(string.Format("Conversion of a file {0} failed", file));
                                                               if (_processorSettings.ProgressCallbacks != null)
                                                               {
                                                                   _processorSettings.ProgressCallbacks.SkippedDueError(file);
@@ -109,15 +110,15 @@ namespace FB2EPubConverter
                                                       }
                                                       catch (Exception ex)
                                                       {
+                                                          Logger.Log.Error("Conversion error", ex);
                                                           if (_processorSettings.ProgressCallbacks != null)
                                                           {
                                                               _processorSettings.ProgressCallbacks.SkippedDueError(file);
                                                           }
-                                                          Logger.Log.Error(ex);
                                                           return;
                                                       }
                                                       string fileName = BuildNewFileName(file, outputFileName);
-                                                      Console.WriteLine(string.Format("Saving {0}...", fileName));
+                                                      Logger.Log.InfoFormat("Saving {0}...", fileName);
                                                       if (_processorSettings.ProgressCallbacks != null)
                                                       {
                                                           _processorSettings.ProgressCallbacks.ProcessingSaving(fileName, Id, filesCount);
@@ -131,7 +132,7 @@ namespace FB2EPubConverter
             }
             catch(Exception ex)
             {
-                Logger.Log.Error(ex.Message);
+                Logger.Log.Error("Error converting file, exception: ",ex);
             }
             finally
             {
