@@ -11,6 +11,7 @@
 * Refactoring of the code to perform automatic internal relative paths resolving when constructing ePubs , instead of hard coded
 * Replaced <strike> element with <del> element for better XHTML compatibility
 * Fixed the bug with XGPT path not loaded in settings GUI
+* Fixed shell extension converter sometimes does not convert all files when many files selected (COM interface marshaling between threads problem)
 
 
 1.1.4
