@@ -112,6 +112,9 @@ Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{app}
 ;copy to common aplication based on user selection for default
 Source: "{#BuildFolder}DefaultSettings\defsettings_fonts.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion; Permissions: everyone-modify users-modify powerusers-full admins-full; Tasks: installWithEmbeddedFonts; DestName: "defsettings.xml";
 Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion; Permissions: everyone-modify users-modify powerusers-full admins-full; Tasks: installWithoutEmbeddedFonts; DestName: "defsettings.xml";
+;copy to user settings based on user selection for default
+Source: "{#BuildFolder}DefaultSettings\defsettings_fonts.xml"; DestDir: "{userappdata}\Lord_KiRon\Fb2ePub"; Flags: ignoreversion; Permissions: everyone-modify users-modify powerusers-full admins-full; Tasks: installWithEmbeddedFonts; DestName: "defsettings.xml";
+Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{userappdata}\Lord_KiRon\Fb2ePub"; Flags: ignoreversion; Permissions: everyone-modify users-modify powerusers-full admins-full; Tasks: installWithoutEmbeddedFonts; DestName: "defsettings.xml";
 ;copy to application folder for fail safe defaults (based on user selection)
 Source: "{#BuildFolder}DefaultSettings\defsettings_fonts.xml"; DestDir: "{app}"; Flags: ignoreversion; Tasks: installWithEmbeddedFonts; DestName: "defsettings.xml";
 Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{app}"; Flags: ignoreversion; Tasks: installWithoutEmbeddedFonts; DestName: "defsettings.xml";
