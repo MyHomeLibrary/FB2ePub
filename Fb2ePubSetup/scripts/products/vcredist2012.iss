@@ -3,6 +3,7 @@
 // requires Internet Explorer 5.01 or later
 // http://www.microsoft.com/en-us/download/details.aspx?id=30679
 
+
 [CustomMessages]
 vcredist2012_title=Visual C++ Redistributable for Visual Studio 2012 Update 3
 
@@ -36,6 +37,8 @@ ru.vcredist2012_u3_url_x64 =http://download.microsoft.com/download/E/C/C/ECCD0A4
 [Code]
 const 
   UNINSTALL_PATH = 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\';
+  VC_2012_REDIST_X86_UP3_GUID='{95716cce-fc71-413f-8ad5-56c2892d4b3a}';
+  VC_2012_REDIST_X64_UP3_GUID='{a1909659-0a08-4554-8af1-2175904903a1}';
 
 function VCVersionInstalled(const ProductID: string): Boolean;
 var
@@ -46,19 +49,27 @@ begin
 end;
 
 function VCRedistNeedsInstall86: Boolean;
+var localInstalled: Boolean;
+var englishInstalled: Boolean;
 begin
     // here the Result must be True when you need to install your VCRedist
   // or False when you don't need to, so now it's upon you how you build
   // this statement, the following won't install your VC redist only when
-  Result := not (VCVersionInstalled(CustomMessage('VC_2012_REDIST_X86_UP3')) );
+  localInstalled := VCVersionInstalled(CustomMessage('VC_2012_REDIST_X86_UP3'));
+  englishInstalled := VCVersionInstalled(VC_2012_REDIST_X86_UP3_GUID);
+  Result :=  not ( localInstalled or englishInstalled);
 end;
 
 function VCRedistNeedsInstall64: Boolean;
+var localInstalled: Boolean;
+var englishInstalled: Boolean;
 begin
     // here the Result must be True when you need to install your VCRedist
   // or False when you don't need to, so now it's upon you how you build
   // this statement, the following won't install your VC redist only when
-  Result := (not VCVersionInstalled(CustomMessage('VC_2012_REDIST_X64_UP3'))) and IsX64();
+  localInstalled := VCVersionInstalled(CustomMessage('VC_2012_REDIST_X64_UP3'));
+  englishInstalled := VCVersionInstalled(VC_2012_REDIST_X64_UP3_GUID);
+  Result :=  ( (not ( localInstalled or englishInstalled)) and IsX64());
 end;
 
 
