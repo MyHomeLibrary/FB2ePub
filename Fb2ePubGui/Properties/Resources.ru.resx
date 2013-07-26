@@ -112,21 +112,27 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutBox_AboutBox_Default_settings_file_not_f" xml:space="preserve">
+    <value>Файл стандартных настроек не обнаружен</value>
+  </data>
+  <data name="Default_Settings_File" xml:space="preserve">
+    <value>Файл стандартных настроек: {0}, ({1})</value>
+  </data>
   <data name="FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert" xml:space="preserve">
     <value>Пожалуйста выберете FB2 файлы подлежащие конвертированию</value>
+  </data>
+  <data name="Log_Folder" xml:space="preserve">
+    <value>Путь к Журналу: {0}</value>
   </data>
   <data name="Status_Converting" xml:space="preserve">
     <value>Конвертирую...</value>
   </data>
   <data name="Status_Ready" xml:space="preserve">
     <value>Готов.</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value />
   </data>
 </root>

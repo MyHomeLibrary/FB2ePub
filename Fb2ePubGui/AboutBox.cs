@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows.Forms;
+using Fb2ePubGui.Properties;
+using Fb2epubSettings;
+using log4net;
 
 namespace Fb2ePubGui
 {
@@ -18,6 +21,18 @@ namespace Fb2ePubGui
                 version = asm.GetName().Version.ToString();
             }
             textBoxNameAndVersion.Text = string.Format("FB2ePub GUI converter v{0}", version);
+            textBoxLogPath.Text = string.Format(Resources.Log_Folder, GlobalContext.Properties["LogName"]);
+            string settingsLocation;
+            DefaultSettingsLocatorHelper.SettingsLocation detected;
+            DefaultSettingsLocatorHelper.LocateDefaultSettings(out settingsLocation,out detected);
+            if (detected != DefaultSettingsLocatorHelper.SettingsLocation.NotDetected)
+            {
+                textBoxSettingsPath.Text = string.Format(Resources.Default_Settings_File, settingsLocation, detected);
+            }
+            else
+            {
+                textBoxSettingsPath.Text = Resources.AboutBox_AboutBox_Default_settings_file_not_found;
+            }
         }
 
         #region Assembly Attribute Accessors
