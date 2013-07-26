@@ -201,13 +201,11 @@ namespace FB2EPubConverter
         }
 
 
-
         /// <summary>
         /// Detects all files we need to process 
         /// </summary>
         /// <param name="fileParams">list of parameters containing command line pointing to files to process</param>
         /// <param name="filesInMask">outputs actual list of files that need to be processed</param>
-        /// <param name="lookInSubFolders"></param>
         public void DetectFilesToProcess(List<string> fileParams, ref List<string> filesInMask)
         {
             filesInMask.Clear();

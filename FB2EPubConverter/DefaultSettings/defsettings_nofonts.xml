@@ -20,7 +20,7 @@
   <SkipAboutPageGeneration>false</SkipAboutPageGeneration>
   <EnableAdobeTemplateUsage>false</EnableAdobeTemplateUsage>
   <IgnoreTitleOption>IgnoreNothing</IgnoreTitleOption>
-  <AdobeTemplatePath />
+  <AdobeTemplatePath>C:\Project\GoogleCode\fb2epub\Fb2ePub\Template\template.xpgt</AdobeTemplatePath>
   <DecorateFontNames>true</DecorateFontNames>
   <Fonts>
     <FontFamilies>
