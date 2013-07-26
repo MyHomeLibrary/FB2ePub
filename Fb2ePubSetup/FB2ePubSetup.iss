@@ -56,10 +56,17 @@ Name: "{commonappdata}\{#MyAppSubfolder}"; Permissions: everyone-modify users-mo
 
 [Files]
 ; common
+; copy to ProgramData folder
 Source: "{#BuildFolder}CSS\*"; DestDir: "{commonappdata}\{#MyAppSubfolder}\CSS"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#BuildFolder}Fonts\*"; DestDir: "{commonappdata}\{#MyAppSubfolder}\Fonts"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#BuildFolder}Translit\*"; DestDir: "{commonappdata}\{#MyAppSubfolder}\Translit"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#BuildFolder}Template\*"; DestDir: "{commonappdata}\{#MyAppSubfolder}\Template"; Flags: ignoreversion recursesubdirs createallsubdirs
+; just "in case" make a copy in application folder
+Source: "{#BuildFolder}CSS\*"; DestDir: "{commonappdata}\{#MyAppSubfolder}\CSS"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#BuildFolder}Fonts\*"; DestDir: "{commonappdata}\{#MyAppSubfolder}\Fonts"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#BuildFolder}Translit\*"; DestDir: "{commonappdata}\{#MyAppSubfolder}\Translit"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#BuildFolder}Template\*"; DestDir: "{commonappdata}\{#MyAppSubfolder}\Template"; Flags: ignoreversion recursesubdirs createallsubdirs
+
 Source: "{#BuildFolder}ru\*"; DestDir: "{app}\ru";   Flags: recursesubdirs createallsubdirs
 Source: "{#BuildFolder}fb2.dtd"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}genrestransfer.xml"; DestDir: "{app}"; Flags: ignoreversion
