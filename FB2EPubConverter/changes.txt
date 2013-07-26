@@ -9,6 +9,7 @@
 + Added 2 new style classes for Title page "title_series" for series on title page and "title_authors" for authors on title page
 + Added display log function to GUI utility
 + Added display of settings file and log folder to the GUI utility About dialog
++ Added a new "/LOG<file_path>" parameter to command line utility in order to redirect logging, can accept either file path or folder
 * Changed to generate truly Flat ePubs 
 * Refactoring of the code to perform automatic internal relative paths resolving when constructing ePubs , instead of hard coded
 * Replaced <strike> element with <del> element for better XHTML compatibility
