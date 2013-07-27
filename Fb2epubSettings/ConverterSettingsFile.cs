@@ -1,4 +1,5 @@
-﻿using Fb2epubSettings.AppleSettings;
+﻿using System.Collections;
+using Fb2epubSettings.AppleSettings;
 using Fb2epubSettings.AppleSettings.ePub_v2;
 using FontsSettings;
 using System;
@@ -17,6 +18,8 @@ namespace Fb2epubSettings
     public class ConverterSettingsFile
     {
         protected readonly ConverterSettings _settings = new ConverterSettings();
+        //private Hashtable _serializers = new Hashtable();
+        private XmlSerializer _serializer = null;
 
 
         public ConverterSettings Settings { get { return _settings; } }
@@ -27,14 +30,13 @@ namespace Fb2epubSettings
         /// <param name="fileName">name of the file to load</param>
         public void Load(string fileName)
         {
+            if (_serializer == null)
+            {
+                _serializer = new XmlSerializer(_settings.GetType(), GetSerializerTypes());
+            }
             using (FileStream fs = File.OpenRead(fileName))
             {
-                XmlSerializer serializer = new XmlSerializer(_settings.GetType(), new Type[] { typeof(EPubFontSettings), 
-                                                                                                typeof(CSSFontFamily), 
-                                                                                                typeof(CSSStylableElement),
-                                                                                                typeof(AppleConverterePub2Settings),
-                                                                                                typeof(AppleEPub2PlatformSettings)});
-                ConverterSettings temp   =   serializer.Deserialize(fs) as ConverterSettings;
+                ConverterSettings temp = _serializer.Deserialize(fs) as ConverterSettings;
                 if (temp != null)
                 {
                     _settings.CopyFrom(temp);
@@ -42,21 +44,30 @@ namespace Fb2epubSettings
             }
         }
 
+
         /// <summary>
         /// Saves converter settings to file
         /// </summary>
         /// <param name="fileName">name of the file to save to</param>
         public void Save(string fileName)
         {
-            XmlSerializer serializer = new XmlSerializer(_settings.GetType(), new Type[] { typeof(EPubFontSettings), 
-                                                                                            typeof(CSSFontFamily), 
-                                                                                            typeof(CSSStylableElement),
-                                                                                            typeof(AppleConverterePub2Settings),
-                                                                                            typeof(AppleEPub2PlatformSettings)});
+            if (_serializer == null)
+            {
+                _serializer = new XmlSerializer(_settings.GetType(), GetSerializerTypes());
+            }
             using (FileStream fs = File.Create(fileName))
             {
-                serializer.Serialize(fs, _settings);
+                _serializer.Serialize(fs, _settings);
             }
+        }
+
+        private Type[] GetSerializerTypes()
+        {
+            return new[] {typeof (EPubFontSettings),
+                    typeof (CSSFontFamily),
+                    typeof (CSSStylableElement),
+                    typeof (AppleConverterePub2Settings),
+                    typeof (AppleEPub2PlatformSettings)};
         }
     }
 }
