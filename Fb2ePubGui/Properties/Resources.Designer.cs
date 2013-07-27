@@ -123,5 +123,14 @@ namespace Fb2ePubGui.Properties {
                 return ResourceManager.GetString("Status_Ready", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using Resources from: {0}.
+        /// </summary>
+        internal static string Using_Resources_From {
+            get {
+                return ResourceManager.GetString("Using_Resources_From", resourceCulture);
+            }
+        }
     }
 }

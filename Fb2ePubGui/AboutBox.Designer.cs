@@ -34,8 +34,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBoxNameAndVersion = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBoxSettingsPath = new System.Windows.Forms.TextBox();
             this.textBoxLogPath = new System.Windows.Forms.TextBox();
+            this.textBoxSettingsPath = new System.Windows.Forms.TextBox();
+            this.textBoxResourcePath = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -86,7 +87,16 @@
             this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel2, 3);
             this.tableLayoutPanel2.Controls.Add(this.textBoxLogPath, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.textBoxSettingsPath, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxResourcePath, 0, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // textBoxLogPath
+            // 
+            resources.ApplyResources(this.textBoxLogPath, "textBoxLogPath");
+            this.textBoxLogPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tableLayoutPanel2.SetColumnSpan(this.textBoxLogPath, 3);
+            this.textBoxLogPath.Name = "textBoxLogPath";
+            this.textBoxLogPath.ReadOnly = true;
             // 
             // textBoxSettingsPath
             // 
@@ -96,13 +106,12 @@
             this.textBoxSettingsPath.Name = "textBoxSettingsPath";
             this.textBoxSettingsPath.ReadOnly = true;
             // 
-            // textBoxLogPath
+            // textBoxResourcePath
             // 
-            resources.ApplyResources(this.textBoxLogPath, "textBoxLogPath");
-            this.textBoxLogPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tableLayoutPanel2.SetColumnSpan(this.textBoxLogPath, 3);
-            this.textBoxLogPath.Name = "textBoxLogPath";
-            this.textBoxLogPath.ReadOnly = true;
+            resources.ApplyResources(this.textBoxResourcePath, "textBoxResourcePath");
+            this.tableLayoutPanel2.SetColumnSpan(this.textBoxResourcePath, 3);
+            this.textBoxResourcePath.Name = "textBoxResourcePath";
+            this.textBoxResourcePath.ReadOnly = true;
             // 
             // AboutBox
             // 
@@ -136,5 +145,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox textBoxLogPath;
         private System.Windows.Forms.TextBox textBoxSettingsPath;
+        private System.Windows.Forms.TextBox textBoxResourcePath;
     }
 }

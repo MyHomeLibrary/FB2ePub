@@ -296,12 +296,7 @@ namespace FB2EPubConverter
 
         public static string GetResourcesPath()
         {
-            string detectionFolder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Lord_KiRon\FB2ePub";
-            if (Directory.Exists(detectionFolder))
-            {
-                return detectionFolder;
-            }
-            return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            return DefaultSettingsLocatorHelper.GetResourcesPath();
         }
 
         public void ConvertList(string[] files, string outputFolder, IProgressUpdateInterface progress)

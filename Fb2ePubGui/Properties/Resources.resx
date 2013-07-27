@@ -140,4 +140,7 @@
   <data name="Log_Folder" xml:space="preserve">
     <value>LOG folder: {0}</value>
   </data>
+  <data name="Using_Resources_From" xml:space="preserve">
+    <value>Using Resources from: {0}</value>
+  </data>
 </root>

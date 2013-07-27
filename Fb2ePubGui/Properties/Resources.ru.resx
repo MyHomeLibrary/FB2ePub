@@ -135,4 +135,7 @@
   <data name="Status_Ready" xml:space="preserve">
     <value>Готов.</value>
   </data>
+  <data name="Using_Resources_From" xml:space="preserve">
+    <value>Используются ресурсы из: {0}</value>
+  </data>
 </root>
