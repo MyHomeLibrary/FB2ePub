@@ -93,7 +93,6 @@
             // textBoxLogPath
             // 
             resources.ApplyResources(this.textBoxLogPath, "textBoxLogPath");
-            this.textBoxLogPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tableLayoutPanel2.SetColumnSpan(this.textBoxLogPath, 3);
             this.textBoxLogPath.Name = "textBoxLogPath";
             this.textBoxLogPath.ReadOnly = true;
@@ -101,7 +100,6 @@
             // textBoxSettingsPath
             // 
             resources.ApplyResources(this.textBoxSettingsPath, "textBoxSettingsPath");
-            this.textBoxSettingsPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tableLayoutPanel2.SetColumnSpan(this.textBoxSettingsPath, 3);
             this.textBoxSettingsPath.Name = "textBoxSettingsPath";
             this.textBoxSettingsPath.ReadOnly = true;

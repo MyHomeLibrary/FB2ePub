@@ -42,21 +42,6 @@ namespace Fb2ePubGui
         }
 
 
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (InvokeRequired)
-            {
-                OnButtonPressedCallback d = settingsToolStripMenuItem_Click;
-                Invoke(d, new object[] { sender, e });
-                return;
-            }
-           
-            if ( ConvertProcessor.ShowSettingsDialog(this) )
-            {
-                LoadPaths();
-                comboBoxDestination.SelectedIndex = 0;               
-            }
-        }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -315,6 +300,23 @@ namespace Fb2ePubGui
             LogWindow log = new LogWindow(string.Format(@"{0}{1}", GlobalContext.Properties["LogName"], "fb2epubGUI.log"));
             log.Show();
         }
+
+        private void toolStripMenuItemConvSettings_Click(object sender, EventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                OnButtonPressedCallback d = toolStripMenuItemConvSettings_Click;
+                Invoke(d, new object[] { sender, e });
+                return;
+            }
+
+            if (ConvertProcessor.ShowSettingsDialog(this))
+            {
+                LoadPaths();
+                comboBoxDestination.SelectedIndex = 0;
+            }
+        }
+
 
 
     }
