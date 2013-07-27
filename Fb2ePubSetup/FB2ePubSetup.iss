@@ -134,6 +134,7 @@ Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; 
 Name: "{group}\FB2ePub Command Prompt"; Filename: "{app}\prompt.cmd"; Flags: excludefromshowinnewinstall
 Name: "{group}\FB2ePub command-line settings"; Filename: "{app}\settings.cmd"; WorkingDir: "{app}"; Flags: excludefromshowinnewinstall
 Name: "{group}\FB2ePub GUI"; Filename: "{app}\Fb2ePubGui.exe"; 
+Name: "{group}\ReadMe"; Filename: "{app}\readme_en.htm"; 
 
 
 
