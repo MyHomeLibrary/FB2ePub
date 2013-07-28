@@ -548,26 +548,6 @@ namespace Fb2ePub
                         }
                     }
                 }
-                else if (command.StartsWith("fixcodeformat:"))
-                {
-                    string commandValue = command.Substring(14);
-                    int value;
-                    if (int.TryParse(commandValue, out value))
-                    {
-                        if (value == 0)
-                        {
-                            settings.Settings.FixCodeElement = false;
-                        }
-                        else if (value == 1)
-                        {
-                            settings.Settings.FixCodeElement = true;
-                        }
-                        else
-                        {
-                            log.InfoFormat("Invalid -fixcodeformat: parameter value {0}.", value);
-                        }
-                    }
-                }
                 else if (command.StartsWith("log:"))
                 {
                     string commandValue = command.Substring(4);

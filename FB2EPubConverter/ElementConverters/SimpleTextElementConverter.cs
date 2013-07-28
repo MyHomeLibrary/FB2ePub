@@ -85,17 +85,7 @@ namespace FB2EPubConverter.ElementConverters
                         {
                             code.Add(new SimpleEPubText() { Text = text.Text });
                         }
-                        if (Settings.FixCodeSpaces)
-                        {
-                            PreFormated pf = new PreFormated();
-                            pf.Class.Value = "code_fix";
-                            pf.Add(code);
-                            list.Add(pf);
-                        }
-                        else
-                        {
-                            list.Add(code);
-                        }
+                        list.Add(code);
                         break;
                     case FB2Library.Elements.TextStyles.Emphasis:
                         EmphasisedText emph = new EmphasisedText();

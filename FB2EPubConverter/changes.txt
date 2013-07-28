@@ -4,8 +4,6 @@
 + Added new command line parameter "calibremeta:[0/1]" to enable/disable Calibre metadata generation
 + Added new configuration setting "AddCalibreMetadata" to settings file to enable/disable Calibre metadata generation
 + Added Fb2ePub Converter as book producer
-+ Added code for fixing wrong display of [code] elements on some readers 
-+ Added new setting "FixCodeElements" in configuration file and new parameter "fixcodeformat:[0/1]" to control if [code] sections should be fixed
 + Added 2 new style classes for Title page "title_series" for series on title page and "title_authors" for authors on title page
 + Added display log function to GUI utility
 + Added display of settings file and log folder to the GUI utility About dialog
