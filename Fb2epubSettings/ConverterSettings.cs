@@ -155,16 +155,6 @@ namespace Fb2epubSettings
         #region serializable_public_Properties
 
         /// <summary>
-        /// Get/set if converter should fix [code] elements by enclosing with [pre] elements to resolve the unbreakable spaces issue
-        /// </summary>
-        [XmlElement(ElementName = "FixCodeElements")]
-        public bool FixCodeElement
-        {
-            get { return _fixCodeElement; }
-            set { _fixCodeElement = value; }
-        }
-
-        /// <summary>
         /// Get/Set if data outside the text body needs to be transliterated 
         /// (used in case device does not support Cyrillic fonts)
         /// </summary>

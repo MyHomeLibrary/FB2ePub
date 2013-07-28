@@ -752,7 +752,6 @@ namespace Fb2ePubConverter
                 Images = images,
                 MaxSize = MaxSize,
                 ReferencesManager = referencesManager,
-                FixCodeSpaces = Settings.FixCodeElement
             };
             Fb2EpubInfoConverter infoConverter = new Fb2EpubInfoConverter { Settings = converterSettings };
             infoDocument.Content = infoConverter.ConvertInfo(fb2File);
@@ -801,7 +800,6 @@ namespace Fb2ePubConverter
                                                               Images = images,
                                                               MaxSize = MaxSize,
                                                               ReferencesManager = referencesManager,
-                                                              FixCodeSpaces = Settings.FixCodeElement
                                                           };
                 TitleConverter titleConverter = new TitleConverter { Settings = converterSettings };
                 addTitlePage.Content.Add(titleConverter.Convert(fb2File.MainBody.Title, 2));
@@ -843,7 +841,6 @@ namespace Fb2ePubConverter
                         Images = images,
                         MaxSize = MaxSize,
                         ReferencesManager = referencesManager,
-                        FixCodeSpaces = Settings.FixCodeElement
                     };
 
                     ImageConverter imageConverter = new ImageConverter { Settings = converterSettings };
@@ -871,7 +868,6 @@ namespace Fb2ePubConverter
                     Images = images,
                     MaxSize = MaxSize,
                     ReferencesManager = referencesManager,
-                    FixCodeSpaces = Settings.FixCodeElement
                 };
 
                 MainEpigraphConverter epigraphConverter = new MainEpigraphConverter { Settings = converterSettings };
@@ -925,7 +921,6 @@ namespace Fb2ePubConverter
                     Images = images,
                     MaxSize = MaxSize,
                     ReferencesManager = referencesManager,
-                    FixCodeSpaces = Settings.FixCodeElement
                 };
                 TitleConverter titleConverter = new TitleConverter { Settings = converterSettings };
                 sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title, 1));
@@ -973,7 +968,6 @@ namespace Fb2ePubConverter
                     Images = images,
                     MaxSize = MaxSize,
                     ReferencesManager = referencesManager,
-                    FixCodeSpaces = Settings.FixCodeElement
                 };
                 TitleConverter titleConverter = new TitleConverter {Settings = converterSettings};
                 sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,1));
@@ -1022,7 +1016,6 @@ namespace Fb2ePubConverter
                 Images = images,
                 MaxSize = MaxSize,
                 ReferencesManager = referencesManager,
-                FixCodeSpaces = Settings.FixCodeElement
             };
             SectionConverter sectionConverter = new SectionConverter
                                                     {
@@ -1138,7 +1131,6 @@ namespace Fb2ePubConverter
                         Images = images,
                         MaxSize = MaxSize,
                         ReferencesManager = referencesManager,
-                        FixCodeSpaces = Settings.FixCodeElement
                     };
                     AnnotationConverter annotationConverter = new AnnotationConverter {Settings = converterSettings};
                     epubFile.AnnotationPage.BookAnnotation = annotationConverter.Convert(fb2File.TitleInfo.Annotation,1);

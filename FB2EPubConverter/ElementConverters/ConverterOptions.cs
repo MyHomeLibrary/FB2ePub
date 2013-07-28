@@ -11,7 +11,5 @@ namespace FB2EPubConverter.ElementConverters
         public ImageManager Images { get; set; }
         public bool CapitalDrop { get; set; }
         public long MaxSize;
-        public bool FixCodeSpaces;
-
     }
 }
