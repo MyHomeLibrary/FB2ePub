@@ -4,6 +4,7 @@
 + Added 2 new style classes for Title page "title_series" for series on title page and "title_authors" for authors on title page
 * Changed to generate truly Flat ePubs 
 * Refactoring of the code to perform automatic internal relative paths resolving when constructing ePubs , instead of hard coded
+* Changed manifest creation to omit of namespace as some readers (librusec) "did not liked it"
 
 1.0.21.0
 + Added option to generate Apple file that allows Apple devices to use custom (embedded) fonts

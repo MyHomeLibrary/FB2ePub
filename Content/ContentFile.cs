@@ -23,6 +23,8 @@ namespace EPubLibrary.Content
         public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
 
         private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
+        private readonly XNamespace _FakeOpf = @"http://www.idpf.org/2007/xxx";
+
 
         private readonly GuideSection _guide = new GuideSection();
 
@@ -68,6 +70,7 @@ namespace EPubLibrary.Content
             packagedata.Add(new XAttribute("version", "2.0"));
             // we use ID of the first identifier
             packagedata.Add(new XAttribute("unique-identifier", Title.Identifiers[0].IdentifierName));
+            packagedata.Add(new XAttribute("xmlns", _opfNameSpace.NamespaceName));
             document.Add(packagedata);
         }
 
@@ -94,14 +97,14 @@ namespace EPubLibrary.Content
 
         private void AddMetaDataToContentDocument(XElement document)
         {
-            XElement metadata = new XElement(_opfNameSpace + "metadata", new XAttribute("xmlns", "http://www.idpf.org/2007/opf"));
+            XElement metadata = new XElement(_opfNameSpace + "metadata");
             XNamespace dc = @"http://purl.org/dc/elements/1.1/";
             XNamespace xsi = @"http://www.w3.org/2001/XMLSchema-instance";
             XNamespace dcterms = @"http://purl.org/dc/terms/";
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "dc", dc));
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi));
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "dcterms", dcterms));
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", _opfNameSpace));
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "dc", dc.NamespaceName));
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi.NamespaceName));
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "dcterms", dcterms.NamespaceName));
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", _FakeOpf.NamespaceName));
             if (CalibreData!= null)
             {
                 CalibreData.InjectNamespace(metadata);
@@ -129,14 +132,14 @@ namespace EPubLibrary.Content
             {
                 XElement identifier = new XElement(dc + "identifier", identifierItem.ID);
                 identifier.Add(new XAttribute("id", identifierItem.IdentifierName));
-                identifier.Add(new XAttribute(_opfNameSpace + "scheme", identifierItem.Scheme));
+                identifier.Add(new XAttribute(_FakeOpf + "scheme", identifierItem.Scheme));
                 metadata.Add(identifier);
             }
 
             if ( Title.DatePublished.HasValue)
             {
                 XElement xDate = new XElement(dc + "date",Title.DatePublished.Value.Year);
-                xDate.Add(new XAttribute(_opfNameSpace + "event", "original-publication"));
+                xDate.Add(new XAttribute(_FakeOpf + "event", "original-publication"));
                 metadata.Add(xDate);
             }
 
@@ -145,10 +148,10 @@ namespace EPubLibrary.Content
                 if (!string.IsNullOrEmpty(creatorItem.PersonName))
                 {
                     var creator = new XElement(dc + "creator", creatorItem.PersonName);
-                    creator.Add(new XAttribute(_opfNameSpace + "role", EPubRoles.ConvertEnumToAttribute(creatorItem.Role)));
+                    creator.Add(new XAttribute(_FakeOpf + "role", EPubRoles.ConvertEnumToAttribute(creatorItem.Role)));
                     if (!string.IsNullOrEmpty(creatorItem.FileAs))
                     {
-                        creator.Add(new XAttribute(_opfNameSpace + "file-as",creatorItem.FileAs));
+                        creator.Add(new XAttribute(_FakeOpf + "file-as",creatorItem.FileAs));
                     }
                     if (!string.IsNullOrEmpty(creatorItem.Language))
                     {
@@ -164,10 +167,10 @@ namespace EPubLibrary.Content
                 if (!string.IsNullOrEmpty(contributorItem.PersonName))
                 {
                     var contributor = new XElement(dc + "contributor", contributorItem.PersonName);
-                    contributor.Add(new XAttribute(_opfNameSpace + "role", EPubRoles.ConvertEnumToAttribute(contributorItem.Role)));
+                    contributor.Add(new XAttribute(_FakeOpf + "role", EPubRoles.ConvertEnumToAttribute(contributorItem.Role)));
                     if (!string.IsNullOrEmpty(contributorItem.FileAs))
                     {
-                        contributor.Add(new XAttribute(_opfNameSpace + "file-as", contributorItem.FileAs));
+                        contributor.Add(new XAttribute(_FakeOpf + "file-as", contributorItem.FileAs));
                     }
                     if (!string.IsNullOrEmpty(contributorItem.Language))
                     {
@@ -180,7 +183,7 @@ namespace EPubLibrary.Content
             if (CreatorSoftwareString != null)
             {
                 var maker = new XElement(dc + "contributor", CreatorSoftwareString);
-                maker.Add(new XAttribute(_opfNameSpace + "role",
+                maker.Add(new XAttribute(_FakeOpf + "role",
                     EPubRoles.ConvertEnumToAttribute(RolesEnum.BookProducer)));
                 metadata.Add(maker);
             }
@@ -258,15 +261,40 @@ namespace EPubLibrary.Content
         {
             XDocument contentDocument = new XDocument();
             CreateContentDocument(contentDocument);
+            string str = FixDocument(contentDocument);
+            UTF8Encoding encoding = new UTF8Encoding();
+            s.Write(encoding.GetBytes(str), 0, encoding.GetByteCount(str));            
+
+        }
+
+
+        /// <summary>
+        /// Fixes namespace issue
+        /// we need this since .Net add namespace (opf) before "root" (metadata) element name 
+        /// if we set Xmlns and opf to same id
+        /// and some readers do not like it
+        /// so we fake the opf namespace with "template" and then replace it here 
+        /// </summary>
+        /// <param name="contentDocument"></param>
+        /// <returns></returns>
+        private string FixDocument(XDocument contentDocument)
+        {
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.CloseOutput = false;
             settings.Encoding = Encoding.UTF8;
             settings.Indent = true;
-            using (var writer = XmlWriter.Create(s, settings))
+            MemoryStream ms = new MemoryStream();
+            using (var writer = XmlWriter.Create(ms, settings))
             {
                 contentDocument.WriteTo(writer);
             }
-            
+            ms.Seek(0, SeekOrigin.Begin);
+            byte[] buffer = new byte[ms.Length];
+            ms.Read(buffer, 0, buffer.Length);
+            UTF8Encoding encoding = new UTF8Encoding();
+            string str = encoding.GetString(buffer);
+            str = str.Replace(_FakeOpf.NamespaceName, _opfNameSpace.NamespaceName);
+            return str;
         }
 
         public void AddXHTMLTextItem(BaseXHTMLFile baseXhtmlFile)
