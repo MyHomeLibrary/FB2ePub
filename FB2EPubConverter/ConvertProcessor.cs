@@ -72,8 +72,10 @@ namespace FB2EPubConverter
             int filesCount = filesInMask.Count;
             int successfullyConverted = 0;
 
+            Logger.Log.InfoFormat("Using resources from: {0}",_processorSettings.Settings.ResourcesPath);
             ProgressUpdateWrapper progressReporter = new ProgressUpdateWrapper(_processorSettings.ProgressCallbacks);
             progressReporter.ConvertStarted(filesCount);
+            Logger.Log.InfoFormat("Conversion process started at {0}",DateTime.Now.ToString("f"));
 
             try
             {
@@ -119,6 +121,7 @@ namespace FB2EPubConverter
             finally
             {
                 progressReporter.ConvertFinished(successfullyConverted);
+                Logger.Log.Info("Conversion process finished");
             }
 
         }

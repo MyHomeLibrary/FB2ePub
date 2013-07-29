@@ -1,7 +1,9 @@
 ﻿1.1.6
 + Added "Open" to File menu in GUI utility - another way to open files for convert selection dialog
++ Added resources and conversion process start/end markings to the log
 * Changed the version treatment so time "seed" generated each time assembly compiled - to prevent problems when installing with same verson different build
 * Fixed the issue when elements of type Ignore (e.g. license.xhtml) were added to guide
+* Increased Fb2epub.exe log size x10 since it can be used in huge conversions of a lot of files
 
 
 1.1.5
