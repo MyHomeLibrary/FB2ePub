@@ -11,7 +11,7 @@
 #define BuildFolder BaseFolder + "Output\Release\"
 #define BuildFolder64 BaseFolder + "Output\x64\Release\"
 #define BuildFolder86 BaseFolder + "Output\x86\Release\"
-#define File4Version BuildFolder + "Fb2ePub.exe"
+#define File4Version BuildFolder + "FB2EPubConverter.dll"
 #define AppVersionNo GetFileVersion(File4Version)
 
 

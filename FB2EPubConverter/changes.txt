@@ -1,4 +1,8 @@
-﻿1.1.5
+﻿1.1.6
+* Changed the version treatment so time "seed" generated each time assembly compiled - to prevent problems when installing with same verson different build
+
+
+1.1.5
 + Added styling for <de> element for compatibility with some older readers/browsers
 + Added support for generation of Calibre metadata - used for some sorts, series etc.
 + Added new command line parameter "calibremeta:[0/1]" to enable/disable Calibre metadata generation
