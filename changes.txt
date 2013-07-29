@@ -1,4 +1,8 @@
-﻿1.0.22.0
+﻿1.0.23.0
+* Fixed the issue when elements of type Ignore (e.g. license.xhtml) were added to guide
+
+
+1.0.22.0
 + Added support for generation of Calibre metadata - used for some sorts, series etc.
 + Added Fb2ePub Converter as book producer
 + Added 2 new style classes for Title page "title_series" for series on title page and "title_authors" for authors on title page

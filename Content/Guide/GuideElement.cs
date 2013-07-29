@@ -102,6 +102,10 @@ namespace EPubLibrary.Content.Guide
             {
                 return false;
             }
+            if (Type == GuideTypeEnum.Ignore)
+            {
+                return false;
+            }
             return true;
         }
     }
