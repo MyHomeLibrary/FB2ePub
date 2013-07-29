@@ -56,6 +56,11 @@ namespace Fb2ePubGui
 
         private void buttonConvert_Click(object sender, EventArgs e)
         {
+            OpenSelectDialog();
+        }
+
+        private void OpenSelectDialog()
+        {
             OpenFileDialog ofDialog = new OpenFileDialog();
             ofDialog.AutoUpgradeEnabled = true;
             ofDialog.CheckFileExists = true;
@@ -69,7 +74,7 @@ namespace Fb2ePubGui
             ofDialog.ShowReadOnly = false;
             ofDialog.SupportMultiDottedExtensions = true;
             ofDialog.ValidateNames = true;
-            if ( ofDialog.ShowDialog(this) == DialogResult.OK )
+            if (ofDialog.ShowDialog(this) == DialogResult.OK)
             {
                 PerformConversion(ofDialog.FileNames);
             }
@@ -315,6 +320,11 @@ namespace Fb2ePubGui
                 LoadPaths();
                 comboBoxDestination.SelectedIndex = 0;
             }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenSelectDialog();
         }
 
 

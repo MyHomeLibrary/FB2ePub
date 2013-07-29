@@ -121,11 +121,11 @@
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>255, 190</value>
   </data>
-  <data name="mainMenuStrip.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;mainMenuStrip.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>703, 374</value>
   </data>
   <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;About</value>
@@ -140,14 +140,15 @@
   <data name="buttonShowFolder.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="mainMenuStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;statusStrip1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
+  <data name="&gt;&gt;comboBoxDestination.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
   </data>
   <data name="englishToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;English/Английский</value>
@@ -188,6 +189,9 @@
   <data name="&gt;&gt;buttonConvert.Name" xml:space="preserve">
     <value>buttonConvert</value>
   </data>
+  <data name="openToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Open...</value>
+  </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -204,13 +208,16 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="topmostToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>122, 22</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;languageToolStripMenuItem.Name" xml:space="preserve">
     <value>languageToolStripMenuItem</value>
   </data>
   <data name="toolStripMenuItemShowLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>126, 22</value>
   </data>
   <data name="buttonConvert.Size" type="System.Drawing.Size, System.Drawing">
     <value>697, 295</value>
@@ -230,8 +237,8 @@
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;buttonShowFolder.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="openToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
   </data>
   <data name="languageToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Language/Язык</value>
@@ -239,11 +246,14 @@
   <data name="mainMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>703, 24</value>
   </data>
-  <data name="&gt;&gt;buttonConvert.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;openToolStripMenuItem.Name" xml:space="preserve">
+    <value>openToolStripMenuItem</value>
   </data>
-  <data name="autoToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Auto</value>
+  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
+    <value>toolStripSeparator2</value>
+  </data>
+  <data name="toolStripMenuItemSettings.Text" xml:space="preserve">
+    <value>&amp;Settings</value>
   </data>
   <data name="statusStrip1.ToolTip" xml:space="preserve">
     <value />
@@ -260,7 +270,6 @@
   <data name="buttonShowFolder.Location" type="System.Drawing.Point, System.Drawing">
     <value>625, 3</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -270,14 +279,11 @@
   <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
     <value>toolTip1</value>
   </data>
-  <data name="toolStripMenuItemSettings.Text" xml:space="preserve">
-    <value>&amp;Settings</value>
-  </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
-  <data name="&gt;&gt;russianToolStripMenuItem.Name" xml:space="preserve">
-    <value>russianToolStripMenuItem</value>
+  <data name="toolStripMenuItemSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
   </data>
   <data name="mainMenuStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -285,11 +291,14 @@
   <data name="&gt;&gt;toolStripStatus.Name" xml:space="preserve">
     <value>toolStripStatus</value>
   </data>
+  <data name="buttonConvert.Text" xml:space="preserve">
+    <value>Click or Drag here</value>
+  </data>
   <data name="buttonShowFolder.Text" xml:space="preserve">
     <value>Open&gt;&gt;</value>
   </data>
-  <data name="&gt;&gt;englishToolStripMenuItem.Name" xml:space="preserve">
-    <value>englishToolStripMenuItem</value>
+  <data name="&gt;&gt;toolStripMenuItemConvSettings.Name" xml:space="preserve">
+    <value>toolStripMenuItemConvSettings</value>
   </data>
   <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -299,6 +308,9 @@
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autoToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Auto</value>
   </data>
   <data name="&gt;&gt;languageToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -318,8 +330,11 @@
   <data name="buttonShowFolder.ToolTip" xml:space="preserve">
     <value>Opens destination folder</value>
   </data>
+  <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
+    <value>123, 6</value>
   </data>
   <data name="comboBoxDestination.ToolTip" xml:space="preserve">
     <value>Destination (output) folder selection</value>
@@ -330,14 +345,14 @@
   <data name="&gt;&gt;mainMenuStrip.Name" xml:space="preserve">
     <value>mainMenuStrip</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
-    <value>toolStripSeparator1</value>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
     <value>helpToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItemShowLog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="russianToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Russian/Русский</value>
   </data>
   <data name="tableLayoutPanel1.ToolTip" xml:space="preserve">
     <value />
@@ -351,9 +366,6 @@
   <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>703, 22</value>
   </data>
-  <data name="toolStripMenuItemSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
-  </data>
   <data name="&gt;&gt;windowToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -363,11 +375,11 @@
   <data name="buttonShowFolder.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;englishToolStripMenuItem.Name" xml:space="preserve">
+    <value>englishToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;russianToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="topmostToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Topmost</value>
   </data>
   <data name="comboBoxDestination.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -381,11 +393,8 @@
   <data name="toolStripStatus.Text" xml:space="preserve">
     <value>Ready</value>
   </data>
-  <data name="&gt;&gt;comboBoxDestination.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;statusStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="mainMenuStrip.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="toolStripMenuItemConvSettings.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 22</value>
@@ -2483,8 +2492,11 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="mainMenuStrip.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="buttonConvert.ToolTip" xml:space="preserve">
+    <value>Drug the files you want to convert here, or click here to bring up file selection dialog</value>
+  </data>
+  <data name="&gt;&gt;russianToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripMenuItemConvSettings.Text" xml:space="preserve">
     <value>&amp;Converter Settings</value>
@@ -2507,8 +2519,8 @@
   <data name="&gt;&gt;fileToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItemConvSettings.Name" xml:space="preserve">
-    <value>toolStripMenuItemConvSettings</value>
+  <data name="&gt;&gt;toolStripMenuItemShowLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -2525,11 +2537,17 @@
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="comboBoxDestination" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="buttonConvert" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="buttonShowFolder" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
+  </data>
   <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
     <value>fileToolStripMenuItem</value>
   </data>
   <data name="buttonConvert.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
+  </data>
+  <data name="statusStrip1.Text" xml:space="preserve">
+    <value>statusStrip1</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
@@ -2543,11 +2561,11 @@
   <data name="&gt;&gt;windowToolStripMenuItem.Name" xml:space="preserve">
     <value>windowToolStripMenuItem</value>
   </data>
-  <data name="buttonConvert.Text" xml:space="preserve">
-    <value>Click or Drag here</value>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
   </data>
-  <data name="russianToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Russian/Русский</value>
+  <data name="&gt;&gt;statusStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2555,22 +2573,25 @@
   <data name="&gt;&gt;toolStripMenuItemConvSettings.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="statusStrip1.Text" xml:space="preserve">
-    <value>statusStrip1</value>
+  <data name="&gt;&gt;buttonConvert.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>703, 374</value>
+  <data name="&gt;&gt;russianToolStripMenuItem.Name" xml:space="preserve">
+    <value>russianToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>126, 22</value>
   </data>
   <data name="&gt;&gt;topmostToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="topmostToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Topmost</value>
+  <data name="&gt;&gt;openToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;buttonShowFolder.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="&gt;&gt;comboBoxDestination.ZOrder" xml:space="preserve">
@@ -2582,8 +2603,8 @@
   <data name="&gt;&gt;toolStripStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="buttonConvert.ToolTip" xml:space="preserve">
-    <value>Drug the files you want to convert here, or click here to bring up file selection dialog</value>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

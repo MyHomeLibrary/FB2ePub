@@ -1,4 +1,5 @@
 ﻿1.1.6
++ Added "Open" to File menu in GUI utility - another way to open files for convert selection dialog
 * Changed the version treatment so time "seed" generated each time assembly compiled - to prevent problems when installing with same verson different build
 * Fixed the issue when elements of type Ignore (e.g. license.xhtml) were added to guide
 
