@@ -93,7 +93,7 @@ namespace FB2EPubConverter
                                                       };
                                                       try
                                                       {
-                                                          progressReporter.ProcessingStarted(file, Id, filesCount);
+                                                          progressReporter.ProcessingStarted(file);
                                                           if (!converter.ConvertFile(file))
                                                           {
                                                               Logger.Log.Error(string.Format("Conversion of a file {0} failed", file));
@@ -109,9 +109,9 @@ namespace FB2EPubConverter
                                                       }
                                                       string fileName = BuildNewFileName(file, outputFileName);
                                                       Logger.Log.InfoFormat("Saving {0}...", fileName);
-                                                      progressReporter.ProcessingSaving(fileName, Id, filesCount);
+                                                      progressReporter.ProcessingSaving(fileName);
                                                       SaveAndCleanUp(converter, fileName, file);
-                                                      progressReporter.Processed(fileName, Id, filesCount);
+                                                      progressReporter.Processed(fileName);
                                                   });
             }
             catch(Exception ex)
@@ -340,7 +340,7 @@ namespace FB2EPubConverter
 
             try
             {
-                progressReporter.ProcessingStarted(outFileName, 1, 1);
+                progressReporter.ProcessingStarted(outFileName);
                 converter.ConvertXml(doc);
             }
             catch (Exception ex)
@@ -348,9 +348,9 @@ namespace FB2EPubConverter
                 Logger.Log.Error(ex);
                 return;
             }
-            progressReporter.ProcessingSaving(outFileName, 1, 1);
+            progressReporter.ProcessingSaving(outFileName);
             SaveAndCleanUp(converter, outFileName, "");
-            progressReporter.Processed(outFileName, 1, 1);
+            progressReporter.Processed(outFileName);
             progressReporter.ConvertFinished(successfullyConverted);
         }
 

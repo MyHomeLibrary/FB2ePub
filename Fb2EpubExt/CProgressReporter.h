@@ -94,7 +94,7 @@ public:
 		return S_OK;
 	}
 
-	STDMETHOD_(HRESULT, Processed)(BSTR bstrFileName,long count, long total)
+	STDMETHOD_(HRESULT, Processed)(BSTR bstrFileName)
 	{
 		m_Dialog.AdvancePhase(bstrFileName);
 	/*	wchar_t text[512];
@@ -104,7 +104,7 @@ public:
 		//MessageBox(NULL,text,L"Status Message",MB_OK);
 		return S_OK;
 	}
-	STDMETHOD_(HRESULT, ProcessingStarted)(BSTR bstrFileName,long count, long total)
+	STDMETHOD_(HRESULT, ProcessingStarted)(BSTR bstrFileName)
 	{
 		m_Dialog.AdvancePhase(bstrFileName);
 		//wchar_t text[512];
@@ -114,7 +114,7 @@ public:
 		//MessageBox(NULL,text,L"Status Message",MB_OK);
 		return S_OK;
 	}
-	STDMETHOD_(HRESULT, ProcessingSaving)(BSTR bstrFileName,long count, long total)
+	STDMETHOD_(HRESULT, ProcessingSaving)(BSTR bstrFileName)
 	{
 		m_Dialog.AdvancePhase(bstrFileName);
 	/*	wchar_t text[512];

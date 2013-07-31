@@ -48,12 +48,15 @@
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topmostToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBarConversion = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxDestination = new System.Windows.Forms.ComboBox();
             this.buttonConvert = new System.Windows.Forms.Button();
             this.buttonShowFolder = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.backgroundWorkerProcess = new System.ComponentModel.BackgroundWorker();
             this.mainMenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -181,9 +184,23 @@
             // 
             resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripProgressBarConversion,
             this.toolStripStatus});
             this.statusStrip1.Name = "statusStrip1";
             this.toolTip1.SetToolTip(this.statusStrip1, resources.GetString("statusStrip1.ToolTip"));
+            this.statusStrip1.Resize += new System.EventHandler(this.statusStrip1_Resize);
+            // 
+            // toolStripStatusLabel1
+            // 
+            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            // 
+            // toolStripProgressBarConversion
+            // 
+            resources.ApplyResources(this.toolStripProgressBarConversion, "toolStripProgressBarConversion");
+            this.toolStripProgressBarConversion.AutoToolTip = true;
+            this.toolStripProgressBarConversion.Name = "toolStripProgressBarConversion";
             // 
             // toolStripStatus
             // 
@@ -226,6 +243,12 @@
             this.toolTip1.SetToolTip(this.buttonShowFolder, resources.GetString("buttonShowFolder.ToolTip"));
             this.buttonShowFolder.UseVisualStyleBackColor = true;
             this.buttonShowFolder.Click += new System.EventHandler(this.buttonShowFolder_Click);
+            // 
+            // backgroundWorkerProcess
+            // 
+            this.backgroundWorkerProcess.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerProcess_DoWork);
+            this.backgroundWorkerProcess.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerProcess_ProgressChanged);
+            this.backgroundWorkerProcess.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerProcess_RunWorkerCompleted);
             // 
             // FormGUI
             // 
@@ -275,6 +298,9 @@
         private System.Windows.Forms.ToolStripMenuItem russianToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBarConversion;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerProcess;
     }
 }
 

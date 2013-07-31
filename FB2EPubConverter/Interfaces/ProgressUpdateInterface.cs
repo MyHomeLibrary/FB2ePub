@@ -8,9 +8,9 @@ namespace FB2EPubConverter.Interfaces
     {
         void ConvertStarted(System.Int32 total);
         void ConvertFinished(System.Int32 total);
-        void ProcessingStarted(string fileName, System.Int32 count, System.Int32 total);
-        void ProcessingSaving(string fileName, System.Int32 count, System.Int32 total);
-        void Processed(string fileName, System.Int32 count, System.Int32 total);
+        void ProcessingStarted(string fileName);
+        void ProcessingSaving(string fileName);
+        void Processed(string fileName);
         void SkippedDueError(string fileName);
     }
 }
