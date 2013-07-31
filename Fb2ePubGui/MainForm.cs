@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,10 +23,26 @@ namespace Fb2ePubGui
         private readonly CultureInfo _russianCulture = new CultureInfo("ru");
         private readonly CultureInfo _englishCulture = new CultureInfo("en");
         private readonly CultureInfo _autoCulture = Thread.CurrentThread.CurrentUICulture;
+        private readonly ConcurrentQueue<MessagePacket> _messageQueue = new ConcurrentQueue<MessagePacket>();
+        private readonly Semaphore _updateController = new Semaphore(0,1000);
+        private readonly ManualResetEvent _exitMonitor = new ManualResetEvent(false);
+
+        private Thread _monitorThread = null;
 
         private delegate void ConversionDelegate(string[] files);
 
         delegate void OnButtonPressedCallback(object sender, EventArgs e);
+
+        private delegate void SetStatusTextDelegate(string text);
+
+        private delegate void SetUIConvertingDelegate(bool converting);
+
+        private delegate void SetProgressStartDelegate(int total);
+
+        private delegate void SetProgressFinishedDelegate();
+
+        private delegate void SetFileProcessedDelegate();
+
 
         public FormGUI()
         {
@@ -32,6 +50,8 @@ namespace Fb2ePubGui
             InitializeComponent();
             this.TopMost = Settings.Default.Topmost;
             topmostToolStripMenuItem.Checked = this.TopMost;
+            backgroundWorkerProcess.WorkerSupportsCancellation = true;
+            backgroundWorkerProcess.WorkerReportsProgress = true;
         }
 
         private enum LanguageSetting
@@ -90,21 +110,193 @@ namespace Fb2ePubGui
             else
             {
                 SetUIConverting(true);
-                ConvertFiles(files);
-                SetUIConverting(false);
+                ConvertFiles(files);                
             }
         }
 
         private void SetUIConverting(bool converting)
         {
-            toolStripStatus.Text = converting ? Resources.Status_Converting : Resources.Status_Ready;
+            ProcessThreadCommand(converting);
+            if (InvokeRequired)
+            {
+                SetUIConvertingDelegate d = SetUIConverting;
+                Invoke(d, new object[] { converting });
+                return;
+            }
+            SetStatusText(converting ? Resources.Status_Converting : Resources.Status_Ready);
             UseWaitCursor = converting;
             Cursor = converting ? Cursors.WaitCursor : Cursors.Default;
             buttonConvert.Enabled = !converting;
             buttonShowFolder.Enabled = !converting;
             comboBoxDestination.Enabled = !converting;
-            //Enabled = !converting;
+            mainMenuStrip.Enabled = !converting;
+            if (!converting)
+            {
+                toolStripProgressBarConversion.Value = 0;
+            }
+            toolStripProgressBarConversion.Visible = converting;
+            statusStrip1.Update();
         }
+
+        private void ProcessThreadCommand(bool converting)
+        {
+            if (converting)
+            {
+                if (_monitorThread == null) // if thread not created yet
+                {
+                    _exitMonitor.Reset(); // reset exit manual event so thread will not exit right away
+                    _monitorThread = new Thread(UIUpdateQueueMonitor); // create a thread
+                    _monitorThread.Start(this); // start a thread passing this as parameter
+                }
+            }
+            else
+            {
+                _monitorThread = null; // "release" thread pointer
+            }
+        }
+
+
+        public void SubmitMessage(MessagePacket message)
+        {
+            _messageQueue.Enqueue(message);
+            _updateController.Release();
+        }
+
+        private void SetStatusText(string text)
+        {
+            if (InvokeRequired)
+            {
+                SetStatusTextDelegate d = SetStatusText;
+                Invoke(d,new object[]{text});
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(text))
+                {
+                    Debugger.Break();
+                }
+                toolStripStatus.Text = text;
+                statusStrip1.Update();
+            }
+        }
+
+        static void UIUpdateQueueMonitor(object frameFormGui)
+        {
+            FormGUI formGui = frameFormGui as FormGUI;
+            if (formGui == null)
+            {
+                throw new ArgumentException("Invalid parameter passed, need to be pointer to FormGUI window","frameFormGui");
+            }
+            WaitHandle[] handles = new WaitHandle[2];
+            handles[0] = formGui._exitMonitor;
+            handles[1] = formGui._updateController;
+            int handleReleased = -1;
+            do
+            {
+                handleReleased = WaitHandle.WaitAny(handles);
+                if (handleReleased == 1)
+                {
+                    MessagePacket message;
+                    if(formGui._messageQueue.TryDequeue(out message))
+                    {
+                        formGui.ProcessUpdateMessage(message);
+                    }
+                }
+                else // if 0
+                {
+                    while (!formGui._messageQueue.IsEmpty)
+                    {
+                        MessagePacket message;
+                        if (formGui._messageQueue.TryDequeue(out message))
+                        {
+                            formGui.ProcessUpdateMessage(message);
+                        }                        
+                    }
+                }
+            } while (handleReleased != 0);
+        }
+
+        private void ProcessUpdateMessage(MessagePacket message)
+        {
+            switch (message.Type)
+            {
+                case MessageType.Started:
+                    if (message.Total.HasValue)
+                    {
+                        SetStatusText(string.Format(Resources.Started_To_ConvertFiles,message.Total));
+                        SetProgressStart(message.Total.Value);
+                    }
+                    break;
+                case MessageType.Finished:
+                    if (message.Total.HasValue)
+                    {
+                        SetStatusText(string.Format(Resources.Finished_To_Convert_Files, message.Total));
+                        SetProgressFinished();
+                    }
+                    break;
+                case MessageType.FileProcessingStarted:
+                    if (!string.IsNullOrEmpty(message.FileName))
+                    {
+                        SetStatusText(string.Format(Resources.Converting_File, message.FileName));
+                    }
+                    break;
+                case MessageType.FileSaving:
+                    if (!string.IsNullOrEmpty(message.FileName))
+                    {
+                        SetStatusText(string.Format(Resources.Saving_File, message.FileName));
+                    }
+                    break;
+                case MessageType.FileProcessed:
+                    if (!string.IsNullOrEmpty(message.FileName))
+                    {
+                        SetStatusText(string.Format(Resources.File_Processed, message.FileName));
+                        SetFileProcessed();
+                    }
+                    break;
+                case MessageType.FileSkipped:
+                    if (!string.IsNullOrEmpty(message.FileName))
+                    {
+                        SetStatusText(string.Format(Resources.File_Skipped_toError, message.FileName));
+                    }
+                    break;
+            }
+        }
+
+        private void SetFileProcessed()
+        {
+            if (statusStrip1.InvokeRequired)
+            {
+                SetFileProcessedDelegate d = SetFileProcessed;
+                statusStrip1.Invoke(d);
+                return;
+            }
+            toolStripProgressBarConversion.PerformStep();
+        }
+
+        private void SetProgressFinished()
+        {
+            if (statusStrip1.InvokeRequired)
+            {
+                SetProgressFinishedDelegate d = SetProgressFinished;
+                statusStrip1.Invoke(d);
+                return;
+            }
+            toolStripProgressBarConversion.Value = toolStripProgressBarConversion.Maximum;
+        }
+
+        private void SetProgressStart(int total)
+        {
+            if (statusStrip1.InvokeRequired)
+            {
+                SetProgressStartDelegate d = SetProgressStart;
+                statusStrip1.Invoke(d, new object[] {total});
+                return;
+            }
+            toolStripProgressBarConversion.Minimum = 0;
+            toolStripProgressBarConversion.Maximum = total;
+            toolStripProgressBarConversion.Step = 1;
+        }
+
 
         private void ConvertFiles(string[] files)
         {
@@ -112,8 +304,9 @@ namespace Fb2ePubGui
             processor.LoadSettings();
             processor.ProcessorSettings.Settings.OutPutPath = comboBoxDestination.Text;
             processor.ProcessorSettings.Settings.ResourcesPath = ConvertProcessor.GetResourcesPath();
+            processor.ProcessorSettings.ProgressCallbacks = new ProgressUpdater(this);
             List<string> allFiles = SelectValidFiles(files);
-            processor.PerformConvertOperation(allFiles, null);
+            backgroundWorkerProcess.RunWorkerAsync(new object[] { processor, allFiles,this });
         }
 
         private List<string> SelectValidFiles(string[] files)
@@ -166,6 +359,7 @@ namespace Fb2ePubGui
 
         private void FormGuiLoad(object sender, EventArgs e)
         {
+            ResizeStatusStrip();
             comboBoxDestination.Items.Clear();
             LoadPaths();
             comboBoxDestination.SelectedIndex = 0;
@@ -325,6 +519,37 @@ namespace Fb2ePubGui
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenSelectDialog();
+        }
+
+        private void backgroundWorkerProcess_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            object[] parameters = (object[]) e.Argument;
+            ConvertProcessor processor = (ConvertProcessor)parameters[0];
+            processor.PerformConvertOperation((List<string>)parameters[1],null);
+            ((ProgressUpdater)processor.ProcessorSettings.ProgressCallbacks).EnableCalls(false);
+            _exitMonitor.Set(); // signal thread to exit
+            _monitorThread.Join(); // wait to thread to finish, be sure to do this BEFORE any UI Invoke() as it might create deadlock otherwise
+        }
+
+        private void backgroundWorkerProcess_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void backgroundWorkerProcess_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            SetUIConverting(false);
+        }
+
+        private void statusStrip1_Resize(object sender, EventArgs e)
+        {
+            ResizeStatusStrip();
+        }
+
+        private void ResizeStatusStrip()
+        {
+            toolStripStatus.Width = statusStrip1.Width - toolStripStatusLabel1.Width -
+                                    toolStripProgressBarConversion.Width - (Width - ClientSize.Width);
         }
 
 

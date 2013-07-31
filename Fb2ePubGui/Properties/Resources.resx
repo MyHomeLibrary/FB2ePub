@@ -143,4 +143,22 @@
   <data name="Using_Resources_From" xml:space="preserve">
     <value>Using Resources from: {0}</value>
   </data>
+  <data name="Converting_File" xml:space="preserve">
+    <value>Converting file: {0}.</value>
+  </data>
+  <data name="File_Processed" xml:space="preserve">
+    <value>File: {0} processed.</value>
+  </data>
+  <data name="File_Skipped_toError" xml:space="preserve">
+    <value>File: {0} skipped due error.</value>
+  </data>
+  <data name="Finished_To_Convert_Files" xml:space="preserve">
+    <value>Finished to convert {0} files.</value>
+  </data>
+  <data name="Saving_File" xml:space="preserve">
+    <value>Saving file: {0}.</value>
+  </data>
+  <data name="Started_To_ConvertFiles" xml:space="preserve">
+    <value>Started to convert {0} files.</value>
+  </data>
 </root>

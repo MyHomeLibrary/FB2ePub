@@ -53,33 +53,33 @@ namespace FB2EPubConverter
             }
         }
 
-        public void ProcessingStarted(string fileName, int count, int total)
+        public void ProcessingStarted(string fileName)
         {
             if (_wrappedInterfacePtr != IntPtr.Zero)
             {
                 IProgressUpdateInterface wrappedInterface =
                     (IProgressUpdateInterface)Marshal.GetUniqueObjectForIUnknown(_wrappedInterfacePtr);
-                wrappedInterface.ProcessingStarted(fileName, count, total);
+                wrappedInterface.ProcessingStarted(fileName);
             }
         }
 
-        public void ProcessingSaving(string fileName, int count, int total)
+        public void ProcessingSaving(string fileName)
         {
             if (_wrappedInterfacePtr != IntPtr.Zero)
             {
                 IProgressUpdateInterface wrappedInterface =
                     (IProgressUpdateInterface)Marshal.GetUniqueObjectForIUnknown(_wrappedInterfacePtr);
-                wrappedInterface.ProcessingSaving(fileName, count, total);
+                wrappedInterface.ProcessingSaving(fileName);
             }
         }
 
-        public void Processed(string fileName, int count, int total)
+        public void Processed(string fileName)
         {
             if (_wrappedInterfacePtr != IntPtr.Zero)
             {
                 IProgressUpdateInterface wrappedInterface =
                     (IProgressUpdateInterface)Marshal.GetUniqueObjectForIUnknown(_wrappedInterfacePtr);
-                wrappedInterface.Processed(fileName, count, total);
+                wrappedInterface.Processed(fileName);
             }
         }
 

@@ -70,6 +70,15 @@ namespace Fb2ePubGui.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Converting file: {0}..
+        /// </summary>
+        internal static string Converting_File {
+            get {
+                return ResourceManager.GetString("Converting_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default settings file: {0},  ({1}).
         /// </summary>
         internal static string Default_Settings_File {
@@ -89,6 +98,33 @@ namespace Fb2ePubGui.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File: {0} processed..
+        /// </summary>
+        internal static string File_Processed {
+            get {
+                return ResourceManager.GetString("File_Processed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File: {0} skipped due error..
+        /// </summary>
+        internal static string File_Skipped_toError {
+            get {
+                return ResourceManager.GetString("File_Skipped_toError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finished to convert {0} files..
+        /// </summary>
+        internal static string Finished_To_Convert_Files {
+            get {
+                return ResourceManager.GetString("Finished_To_Convert_Files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select FB2 files to convert.
         /// </summary>
         internal static string FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert {
@@ -103,6 +139,24 @@ namespace Fb2ePubGui.Properties {
         internal static string Log_Folder {
             get {
                 return ResourceManager.GetString("Log_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving file: {0}..
+        /// </summary>
+        internal static string Saving_File {
+            get {
+                return ResourceManager.GetString("Saving_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Started to convert {0} files..
+        /// </summary>
+        internal static string Started_To_ConvertFiles {
+            get {
+                return ResourceManager.GetString("Started_To_ConvertFiles", resourceCulture);
             }
         }
         

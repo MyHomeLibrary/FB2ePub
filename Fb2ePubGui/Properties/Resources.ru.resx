@@ -120,14 +120,32 @@
   <data name="AboutBox_AboutBox_Default_settings_file_not_f" xml:space="preserve">
     <value>Файл стандартных настроек не обнаружен</value>
   </data>
+  <data name="Converting_File" xml:space="preserve">
+    <value>Конвертируем файл {0}.</value>
+  </data>
   <data name="Default_Settings_File" xml:space="preserve">
     <value>Файл стандартных настроек: {0}, ({1})</value>
+  </data>
+  <data name="File_Processed" xml:space="preserve">
+    <value>Обработка файла {0} окончена</value>
+  </data>
+  <data name="File_Skipped_toError" xml:space="preserve">
+    <value>Файл: {0} пропущен из-за ошибки.</value>
+  </data>
+  <data name="Finished_To_Convert_Files" xml:space="preserve">
+    <value>Закончил конвертировать {0} файлов.</value>
   </data>
   <data name="FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert" xml:space="preserve">
     <value>Пожалуйста выберете FB2 файлы подлежащие конвертированию</value>
   </data>
   <data name="Log_Folder" xml:space="preserve">
     <value>Путь к Журналу: {0}</value>
+  </data>
+  <data name="Saving_File" xml:space="preserve">
+    <value>Сохраняем файл: {0}.</value>
+  </data>
+  <data name="Started_To_ConvertFiles" xml:space="preserve">
+    <value>Начал конвертировать {0} файлов.</value>
   </data>
   <data name="Status_Converting" xml:space="preserve">
     <value>Конвертирую...</value>
