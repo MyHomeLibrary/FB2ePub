@@ -125,6 +125,24 @@ namespace Fb2ePubGui.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aborting conversion.
+        /// </summary>
+        internal static string FormGUI_AbortConversion_Aborting_conversion {
+            get {
+                return ResourceManager.GetString("FormGUI_AbortConversion_Aborting_conversion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you wish to abort conversion?.
+        /// </summary>
+        internal static string FormGUI_AbortConversion_Are_you_sure_you_wish_to_abort_conversion_ {
+            get {
+                return ResourceManager.GetString("FormGUI_AbortConversion_Are_you_sure_you_wish_to_abort_conversion_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select FB2 files to convert.
         /// </summary>
         internal static string FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert {

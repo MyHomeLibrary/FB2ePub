@@ -11,7 +11,6 @@ namespace Fb2ePubGui
     class ProgressUpdater : IProgressUpdateInterface
     {
         private readonly FormGUI _mainForm;
-        private bool _callsEnabled = true;
 
 
         public ProgressUpdater(FormGUI mainForm)
@@ -22,10 +21,6 @@ namespace Fb2ePubGui
 
         public void ConvertStarted(int total)
         {
-            if (!_callsEnabled)
-            {
-                return;
-            }
             _mainForm.SetStatusText(string.Format(Resources.Started_To_ConvertFiles,total));
             _mainForm.SetProgressStart(total);
 
@@ -33,55 +28,31 @@ namespace Fb2ePubGui
 
         public void ConvertFinished(int total)
         {
-            if (!_callsEnabled)
-            {
-                return;
-            }
             _mainForm.SetStatusText(string.Format(Resources.Finished_To_Convert_Files, total));
             _mainForm.SetProgressFinished();
         }
 
         public void ProcessingStarted(string fileName)
         {
-            if (!_callsEnabled)
-            {
-                return;
-            }
             _mainForm.SetStatusText(string.Format(Resources.Converting_File, fileName));
         }
 
         public void ProcessingSaving(string fileName)
         {
-            if (!_callsEnabled)
-            {
-                return;
-            }
             _mainForm.SetStatusText(string.Format(Resources.Saving_File, fileName));
         }
 
         public void Processed(string fileName)
         {
-            if (!_callsEnabled)
-            {
-                return;
-            }
             _mainForm.SetStatusText(string.Format(Resources.File_Processed, fileName));
             _mainForm.SetFileProcessed();
         }
 
         public void SkippedDueError(string fileName)
         {
-            if (!_callsEnabled)
-            {
-                return;
-            }
             _mainForm.SetStatusText(string.Format(Resources.File_Skipped_toError, fileName));
             _mainForm.SetFileProcessed();
         }
 
-        internal void EnableCalls(bool enabled)
-        {
-            _callsEnabled = enabled;
-        }
     }
 }
