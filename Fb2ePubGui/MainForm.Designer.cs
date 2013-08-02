@@ -47,19 +47,20 @@
             this.toolStripMenuItemConvSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topmostToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBarConversion = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxDestination = new System.Windows.Forms.ComboBox();
             this.buttonConvert = new System.Windows.Forms.Button();
             this.buttonShowFolder = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBarConversion = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripDropDownButtonAbort = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.backgroundWorkerProcess = new System.ComponentModel.BackgroundWorker();
             this.mainMenuStrip.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -180,33 +181,6 @@
             this.topmostToolStripMenuItem.Name = "topmostToolStripMenuItem";
             this.topmostToolStripMenuItem.Click += new System.EventHandler(this.topmostToolStripMenuItem_Click);
             // 
-            // statusStrip1
-            // 
-            resources.ApplyResources(this.statusStrip1, "statusStrip1");
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripProgressBarConversion,
-            this.toolStripStatus});
-            this.statusStrip1.Name = "statusStrip1";
-            this.toolTip1.SetToolTip(this.statusStrip1, resources.GetString("statusStrip1.ToolTip"));
-            this.statusStrip1.Resize += new System.EventHandler(this.statusStrip1_Resize);
-            // 
-            // toolStripStatusLabel1
-            // 
-            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            // 
-            // toolStripProgressBarConversion
-            // 
-            resources.ApplyResources(this.toolStripProgressBarConversion, "toolStripProgressBarConversion");
-            this.toolStripProgressBarConversion.AutoToolTip = true;
-            this.toolStripProgressBarConversion.Name = "toolStripProgressBarConversion";
-            // 
-            // toolStripStatus
-            // 
-            resources.ApplyResources(this.toolStripStatus, "toolStripStatus");
-            this.toolStripStatus.Name = "toolStripStatus";
-            // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
@@ -244,6 +218,42 @@
             this.buttonShowFolder.UseVisualStyleBackColor = true;
             this.buttonShowFolder.Click += new System.EventHandler(this.buttonShowFolder_Click);
             // 
+            // statusStrip1
+            // 
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripProgressBarConversion,
+            this.toolStripDropDownButtonAbort,
+            this.toolStripStatus});
+            this.statusStrip1.Name = "statusStrip1";
+            this.toolTip1.SetToolTip(this.statusStrip1, resources.GetString("statusStrip1.ToolTip"));
+            this.statusStrip1.Resize += new System.EventHandler(this.statusStrip1_Resize);
+            // 
+            // toolStripStatusLabel1
+            // 
+            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            // 
+            // toolStripProgressBarConversion
+            // 
+            resources.ApplyResources(this.toolStripProgressBarConversion, "toolStripProgressBarConversion");
+            this.toolStripProgressBarConversion.AutoToolTip = true;
+            this.toolStripProgressBarConversion.Name = "toolStripProgressBarConversion";
+            // 
+            // toolStripDropDownButtonAbort
+            // 
+            resources.ApplyResources(this.toolStripDropDownButtonAbort, "toolStripDropDownButtonAbort");
+            this.toolStripDropDownButtonAbort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButtonAbort.Name = "toolStripDropDownButtonAbort";
+            this.toolStripDropDownButtonAbort.ShowDropDownArrow = false;
+            this.toolStripDropDownButtonAbort.Click += new System.EventHandler(this.toolStripDropDownButtonAbort_Click);
+            // 
+            // toolStripStatus
+            // 
+            resources.ApplyResources(this.toolStripStatus, "toolStripStatus");
+            this.toolStripStatus.Name = "toolStripStatus";
+            // 
             // backgroundWorkerProcess
             // 
             this.backgroundWorkerProcess.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerProcess_DoWork);
@@ -264,9 +274,9 @@
             this.Load += new System.EventHandler(this.FormGuiLoad);
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,7 +285,6 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip mainMenuStrip;
-        private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -285,7 +294,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatus;
         private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem topmostToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemShowLog;
@@ -298,9 +306,12 @@
         private System.Windows.Forms.ToolStripMenuItem russianToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBarConversion;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.ComponentModel.BackgroundWorker backgroundWorkerProcess;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBarConversion;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatus;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonAbort;
     }
 }
 

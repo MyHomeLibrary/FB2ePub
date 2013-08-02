@@ -20,6 +20,9 @@ namespace Fb2ePubGui
 {
     public partial class FormGUI : Form
     {
+        private readonly ConvertProcessor _processor = new ConvertProcessor();
+
+
         private readonly CultureInfo _russianCulture = new CultureInfo("ru");
         private readonly CultureInfo _englishCulture = new CultureInfo("en");
         private readonly CultureInfo _autoCulture = Thread.CurrentThread.CurrentUICulture;
@@ -129,6 +132,8 @@ namespace Fb2ePubGui
                 toolStripProgressBarConversion.Value = 0;
             }
             toolStripProgressBarConversion.Visible = converting;
+            toolStripDropDownButtonAbort.Visible = converting;
+            toolStripDropDownButtonAbort.Enabled = converting;
             statusStrip1.Update();
         }
 
@@ -191,13 +196,12 @@ namespace Fb2ePubGui
 
         private void ConvertFiles(string[] files)
         {
-            ConvertProcessor processor = new ConvertProcessor();
-            processor.LoadSettings();
-            processor.ProcessorSettings.Settings.OutPutPath = comboBoxDestination.Text;
-            processor.ProcessorSettings.Settings.ResourcesPath = ConvertProcessor.GetResourcesPath();
-            processor.ProcessorSettings.ProgressCallbacks = new ProgressUpdater(this);
+            _processor.LoadSettings();
+            _processor.ProcessorSettings.Settings.OutPutPath = comboBoxDestination.Text;
+            _processor.ProcessorSettings.Settings.ResourcesPath = ConvertProcessor.GetResourcesPath();
+            _processor.ProcessorSettings.ProgressCallbacks = new ProgressUpdater(this);
             List<string> allFiles = SelectValidFiles(files);
-            backgroundWorkerProcess.RunWorkerAsync(new object[] { processor, allFiles,this });
+            backgroundWorkerProcess.RunWorkerAsync(new object[] { _processor, allFiles,this });
         }
 
         private List<string> SelectValidFiles(string[] files)
@@ -417,7 +421,6 @@ namespace Fb2ePubGui
             object[] parameters = (object[]) e.Argument;
             ConvertProcessor processor = (ConvertProcessor)parameters[0];
             processor.PerformConvertOperation((List<string>)parameters[1],null);
-            ((ProgressUpdater)processor.ProcessorSettings.ProgressCallbacks).EnableCalls(false);
         }
 
         private void backgroundWorkerProcess_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -438,10 +441,36 @@ namespace Fb2ePubGui
         private void ResizeStatusStrip()
         {
             toolStripStatus.Width = statusStrip1.Width - toolStripStatusLabel1.Width -
-                                    toolStripProgressBarConversion.Width - (Width - ClientSize.Width);
+                                    toolStripProgressBarConversion.Width - toolStripDropDownButtonAbort.Width - (Width - ClientSize.Width);
         }
 
+        private void toolStripDropDownButtonAbort_Click(object sender, EventArgs e)
+        {
+            AbortConversion();
+        }
 
+        private bool AbortConversion()
+        {
+            DialogResult result = MessageBox.Show(this, Resources.FormGUI_AbortConversion_Are_you_sure_you_wish_to_abort_conversion_,Resources.FormGUI_AbortConversion_Aborting_conversion,MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                _processor.AbortConversion();
+                return true;
+            }
+            return false;
+        }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            if (backgroundWorkerProcess.IsBusy)
+            {
+                if (!AbortConversion())
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
     }
 }

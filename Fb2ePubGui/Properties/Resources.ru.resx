@@ -135,6 +135,12 @@
   <data name="Finished_To_Convert_Files" xml:space="preserve">
     <value>Закончил конвертировать {0} файлов.</value>
   </data>
+  <data name="FormGUI_AbortConversion_Aborting_conversion" xml:space="preserve">
+    <value>Прерывание работы конвертера</value>
+  </data>
+  <data name="FormGUI_AbortConversion_Are_you_sure_you_wish_to_abort_conversion_" xml:space="preserve">
+    <value>Вы уверены что хотите прервать работу конвертера?</value>
+  </data>
   <data name="FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert" xml:space="preserve">
     <value>Пожалуйста выберете FB2 файлы подлежащие конвертированию</value>
   </data>

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -48,6 +49,7 @@ namespace FB2EPubConverter
         }
 
         private readonly ConvertProcessorSettings _processorSettings = new ConvertProcessorSettings();
+        private  CancellationTokenSource _cts = new CancellationTokenSource();
 
         public ConvertProcessorSettings ProcessorSettings { get { return _processorSettings; } }
 
@@ -77,42 +79,51 @@ namespace FB2EPubConverter
             progressReporter.ConvertStarted(filesCount);
             Logger.Log.InfoFormat("Conversion process started at {0}",DateTime.Now.ToString("f"));
 
+            ParallelOptions po = new ParallelOptions();
+            po.CancellationToken = _cts.Token;
+            po.MaxDegreeOfParallelism = Environment.ProcessorCount;
             try
             {
-                Parallel.ForEach(filesInMask, (file) =>
-                                                  {
-                                                      int Id;
-                                                      lock (_processorSettings)
-                                                      {
-                                                          Id = successfullyConverted++;
-                                                      }
+                Parallel.ForEach(filesInMask, po, (file) =>
+                {
+                    po.CancellationToken.ThrowIfCancellationRequested();
+                    int Id;
+                    lock (_processorSettings)
+                    {
+                        Id = successfullyConverted++;
+                    }
 
-                                                      Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine()
-                                                      {
-                                                          Settings = _processorSettings.Settings
-                                                      };
-                                                      try
-                                                      {
-                                                          progressReporter.ProcessingStarted(file);
-                                                          if (!converter.ConvertFile(file))
-                                                          {
-                                                              Logger.Log.Error(string.Format("Conversion of a file {0} failed", file));
-                                                              progressReporter.SkippedDueError(file);
-                                                              return;
-                                                          }
-                                                      }
-                                                      catch (Exception ex)
-                                                      {
-                                                          Logger.Log.Error("Conversion error", ex);
-                                                          progressReporter.SkippedDueError(file);
-                                                          return;
-                                                      }
-                                                      string fileName = BuildNewFileName(file, outputFileName);
-                                                      Logger.Log.InfoFormat("Saving {0}...", fileName);
-                                                      progressReporter.ProcessingSaving(fileName);
-                                                      SaveAndCleanUp(converter, fileName, file);
-                                                      progressReporter.Processed(fileName);
-                                                  });
+                    Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine()
+                    {
+                        Settings = _processorSettings.Settings
+                    };
+                    try
+                    {
+                        progressReporter.ProcessingStarted(file);
+                        if (!converter.ConvertFile(file))
+                        {
+                            Logger.Log.Error(string.Format("Conversion of a file {0} failed", file));
+                            progressReporter.SkippedDueError(file);
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log.Error("Conversion error", ex);
+                        progressReporter.SkippedDueError(file);
+                        return;
+                    }
+                    string fileName = BuildNewFileName(file, outputFileName);
+                    Logger.Log.InfoFormat("Saving {0}...", fileName);
+                    progressReporter.ProcessingSaving(fileName);
+                    SaveAndCleanUp(converter, fileName, file);
+                    progressReporter.Processed(fileName);
+                });
+            }
+            catch (OperationCanceledException e)
+            {
+                Logger.Log.Info("Operation was canceled");
+                _cts = new CancellationTokenSource();
             }
             catch(Exception ex)
             {
@@ -321,6 +332,11 @@ namespace FB2EPubConverter
             filesInMask.Add(inputPath);
             PerformConvertOperation(filesInMask, outputName);
 
+        }
+
+        public void AbortConversion()
+        {
+            _cts.Cancel();
         }
 
         public void ConvertXml(XDocument doc, string outFileName, IProgressUpdateInterface progress)

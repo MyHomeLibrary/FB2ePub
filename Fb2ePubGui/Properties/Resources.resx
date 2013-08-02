@@ -161,4 +161,10 @@
   <data name="Started_To_ConvertFiles" xml:space="preserve">
     <value>Started to convert {0} files.</value>
   </data>
+  <data name="FormGUI_AbortConversion_Are_you_sure_you_wish_to_abort_conversion_" xml:space="preserve">
+    <value>Are you sure you wish to abort conversion?</value>
+  </data>
+  <data name="FormGUI_AbortConversion_Aborting_conversion" xml:space="preserve">
+    <value>Aborting conversion</value>
+  </data>
 </root>

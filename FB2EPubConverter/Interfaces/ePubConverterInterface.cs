@@ -11,5 +11,6 @@ namespace FB2EPubConverter.Interfaces
         void ConvertList(string[] files, string outputFolder, IProgressUpdateInterface progress);
         void ConvertXml(XDocument doc, string outFileName, IProgressUpdateInterface progress);
         void ConvertSingleFile(string inputPath, string outputName, IProgressUpdateInterface progress);
+        void AbortConversion();
     }
 }
