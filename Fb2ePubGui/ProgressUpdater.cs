@@ -4,29 +4,11 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using FB2EPubConverter.Interfaces;
+using Fb2ePubGui.Properties;
 
 namespace Fb2ePubGui
 {
-    public enum MessageType
-    {
-        Unknown = 0,
-        Started,
-        Finished,
-        FileProcessingStarted,
-        FileSaving,
-        FileProcessed,
-        FileSkipped,
-    }
-
-    public class MessagePacket
-    {
-        public string FileName { get; set; }
-        public  int? Total { get; set; }
-        public MessageType Type { get; set; }
-    }
-
-    [Synchronization]
-    class ProgressUpdater :  ContextBoundObject, IProgressUpdateInterface
+    class ProgressUpdater : IProgressUpdateInterface
     {
         private readonly FormGUI _mainForm;
         private bool _callsEnabled = true;
@@ -44,12 +26,9 @@ namespace Fb2ePubGui
             {
                 return;
             }
-            _mainForm.SubmitMessage(new MessagePacket
-            {
-                Type =  MessageType.Started,
-                Total = total
-            
-            });
+            _mainForm.SetStatusText(string.Format(Resources.Started_To_ConvertFiles,total));
+            _mainForm.SetProgressStart(total);
+
         }
 
         public void ConvertFinished(int total)
@@ -58,11 +37,8 @@ namespace Fb2ePubGui
             {
                 return;
             }
-            _mainForm.SubmitMessage(new MessagePacket
-            {
-                Type = MessageType.Finished, 
-                Total = total                
-            });
+            _mainForm.SetStatusText(string.Format(Resources.Finished_To_Convert_Files, total));
+            _mainForm.SetProgressFinished();
         }
 
         public void ProcessingStarted(string fileName)
@@ -71,11 +47,7 @@ namespace Fb2ePubGui
             {
                 return;
             }
-            _mainForm.SubmitMessage(new MessagePacket
-            {
-                FileName = fileName,
-                Type = MessageType.FileProcessingStarted,
-            });
+            _mainForm.SetStatusText(string.Format(Resources.Converting_File, fileName));
         }
 
         public void ProcessingSaving(string fileName)
@@ -84,11 +56,7 @@ namespace Fb2ePubGui
             {
                 return;
             }
-            _mainForm.SubmitMessage(new MessagePacket
-            {
-                FileName = fileName,
-                Type = MessageType.FileSaving,
-            });
+            _mainForm.SetStatusText(string.Format(Resources.Saving_File, fileName));
         }
 
         public void Processed(string fileName)
@@ -97,11 +65,8 @@ namespace Fb2ePubGui
             {
                 return;
             }
-            _mainForm.SubmitMessage(new MessagePacket
-            {
-                FileName = fileName,
-                Type = MessageType.FileProcessed,
-            });
+            _mainForm.SetStatusText(string.Format(Resources.File_Processed, fileName));
+            _mainForm.SetFileProcessed();
         }
 
         public void SkippedDueError(string fileName)
@@ -110,11 +75,8 @@ namespace Fb2ePubGui
             {
                 return;
             }
-            _mainForm.SubmitMessage(new MessagePacket
-            {
-                FileName = fileName,
-                Type = MessageType.FileSkipped,
-            });
+            _mainForm.SetStatusText(string.Format(Resources.File_Skipped_toError, fileName));
+            _mainForm.SetFileProcessed();
         }
 
         internal void EnableCalls(bool enabled)

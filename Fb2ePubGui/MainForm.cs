@@ -23,11 +23,6 @@ namespace Fb2ePubGui
         private readonly CultureInfo _russianCulture = new CultureInfo("ru");
         private readonly CultureInfo _englishCulture = new CultureInfo("en");
         private readonly CultureInfo _autoCulture = Thread.CurrentThread.CurrentUICulture;
-        private readonly ConcurrentQueue<MessagePacket> _messageQueue = new ConcurrentQueue<MessagePacket>();
-        private readonly Semaphore _updateController = new Semaphore(0,1000);
-        private readonly ManualResetEvent _exitMonitor = new ManualResetEvent(false);
-
-        private Thread _monitorThread = null;
 
         private delegate void ConversionDelegate(string[] files);
 
@@ -116,7 +111,6 @@ namespace Fb2ePubGui
 
         private void SetUIConverting(bool converting)
         {
-            ProcessThreadCommand(converting);
             if (InvokeRequired)
             {
                 SetUIConvertingDelegate d = SetUIConverting;
@@ -138,31 +132,9 @@ namespace Fb2ePubGui
             statusStrip1.Update();
         }
 
-        private void ProcessThreadCommand(bool converting)
-        {
-            if (converting)
-            {
-                if (_monitorThread == null) // if thread not created yet
-                {
-                    _exitMonitor.Reset(); // reset exit manual event so thread will not exit right away
-                    _monitorThread = new Thread(UIUpdateQueueMonitor); // create a thread
-                    _monitorThread.Start(this); // start a thread passing this as parameter
-                }
-            }
-            else
-            {
-                _monitorThread = null; // "release" thread pointer
-            }
-        }
 
 
-        public void SubmitMessage(MessagePacket message)
-        {
-            _messageQueue.Enqueue(message);
-            _updateController.Release();
-        }
-
-        private void SetStatusText(string text)
+        internal void SetStatusText(string text)
         {
             if (InvokeRequired)
             {
@@ -180,89 +152,8 @@ namespace Fb2ePubGui
             }
         }
 
-        static void UIUpdateQueueMonitor(object frameFormGui)
-        {
-            FormGUI formGui = frameFormGui as FormGUI;
-            if (formGui == null)
-            {
-                throw new ArgumentException("Invalid parameter passed, need to be pointer to FormGUI window","frameFormGui");
-            }
-            WaitHandle[] handles = new WaitHandle[2];
-            handles[0] = formGui._exitMonitor;
-            handles[1] = formGui._updateController;
-            int handleReleased = -1;
-            do
-            {
-                handleReleased = WaitHandle.WaitAny(handles);
-                if (handleReleased == 1)
-                {
-                    MessagePacket message;
-                    if(formGui._messageQueue.TryDequeue(out message))
-                    {
-                        formGui.ProcessUpdateMessage(message);
-                    }
-                }
-                else // if 0
-                {
-                    while (!formGui._messageQueue.IsEmpty)
-                    {
-                        MessagePacket message;
-                        if (formGui._messageQueue.TryDequeue(out message))
-                        {
-                            formGui.ProcessUpdateMessage(message);
-                        }                        
-                    }
-                }
-            } while (handleReleased != 0);
-        }
 
-        private void ProcessUpdateMessage(MessagePacket message)
-        {
-            switch (message.Type)
-            {
-                case MessageType.Started:
-                    if (message.Total.HasValue)
-                    {
-                        SetStatusText(string.Format(Resources.Started_To_ConvertFiles,message.Total));
-                        SetProgressStart(message.Total.Value);
-                    }
-                    break;
-                case MessageType.Finished:
-                    if (message.Total.HasValue)
-                    {
-                        SetStatusText(string.Format(Resources.Finished_To_Convert_Files, message.Total));
-                        SetProgressFinished();
-                    }
-                    break;
-                case MessageType.FileProcessingStarted:
-                    if (!string.IsNullOrEmpty(message.FileName))
-                    {
-                        SetStatusText(string.Format(Resources.Converting_File, message.FileName));
-                    }
-                    break;
-                case MessageType.FileSaving:
-                    if (!string.IsNullOrEmpty(message.FileName))
-                    {
-                        SetStatusText(string.Format(Resources.Saving_File, message.FileName));
-                    }
-                    break;
-                case MessageType.FileProcessed:
-                    if (!string.IsNullOrEmpty(message.FileName))
-                    {
-                        SetStatusText(string.Format(Resources.File_Processed, message.FileName));
-                        SetFileProcessed();
-                    }
-                    break;
-                case MessageType.FileSkipped:
-                    if (!string.IsNullOrEmpty(message.FileName))
-                    {
-                        SetStatusText(string.Format(Resources.File_Skipped_toError, message.FileName));
-                    }
-                    break;
-            }
-        }
-
-        private void SetFileProcessed()
+        internal void SetFileProcessed()
         {
             if (statusStrip1.InvokeRequired)
             {
@@ -273,7 +164,7 @@ namespace Fb2ePubGui
             toolStripProgressBarConversion.PerformStep();
         }
 
-        private void SetProgressFinished()
+        internal void SetProgressFinished()
         {
             if (statusStrip1.InvokeRequired)
             {
@@ -284,7 +175,7 @@ namespace Fb2ePubGui
             toolStripProgressBarConversion.Value = toolStripProgressBarConversion.Maximum;
         }
 
-        private void SetProgressStart(int total)
+        internal void SetProgressStart(int total)
         {
             if (statusStrip1.InvokeRequired)
             {
@@ -527,8 +418,6 @@ namespace Fb2ePubGui
             ConvertProcessor processor = (ConvertProcessor)parameters[0];
             processor.PerformConvertOperation((List<string>)parameters[1],null);
             ((ProgressUpdater)processor.ProcessorSettings.ProgressCallbacks).EnableCalls(false);
-            _exitMonitor.Set(); // signal thread to exit
-            _monitorThread.Join(); // wait to thread to finish, be sure to do this BEFORE any UI Invoke() as it might create deadlock otherwise
         }
 
         private void backgroundWorkerProcess_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
