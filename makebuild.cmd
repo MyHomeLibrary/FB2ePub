@@ -43,7 +43,7 @@ rem path to ZIP archiver used
 SET ZIPER="C:\Program Files\WinRAR\WinRAR.exe"
 
 rem parameters passed to archiver
-SET ZIPER_PARAMS=a -y -afzip -m5 -ep
+SET ZIPER_PARAMS=a -y -afzip -m5 -ep -av -rr
 
 
 
@@ -100,11 +100,21 @@ copy %PROJ_ROOT%FB2EPubConverter\changes.txt %PROJ_ROOT%Fb2ePubSetup\Output\. /Y
 if errorlevel==1 goto failed
 
 rem archive installation files into a ZIP for distribution
-call:PrintParam "Creating ZIP archive"
+call:PrintParam "Creating installation ZIP archive"
 %ZIPER% %ZIPER_PARAMS% %ARCHIVE_NAME% %PROJ_ROOT%Fb2ePubSetup\Output\*.*
 if not errorlevel==0 goto winrar_failed
 
+rem archive of program files needed for standalone distribution
+call:PrintParam "Creating standalone ZIP archive"
+call makestandalone.cmd 
+if not errorlevel==0 goto standalone_failed
+
 goto success
+
+
+:standalone_failed
+call:PrintParam "Creation of standalone archive failed"
+gotofailed
 
 :winrar_failed
 if errorlevel==1 goto success
