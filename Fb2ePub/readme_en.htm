@@ -10,22 +10,32 @@
     <h2>
         Description</h2>
     <p>
-        This program 
-        suite consists of command line converter from
-        <abbr>
-            FB2</abbr>
-        (Fiction Book 2) format files into <acronym>EPUB</acronym> format files, GUI 
-        Utility converter and Windows shell extension .<br />
-        The program uses embedded fonts with Cyrillic <acronym>UNICODE</acronym> support
-        to allow reading resulting files on readers without Cyrillic support.
+        This program suite is intended for conversion of from <abbr>FB2</abbr> (Fiction Book 2) format files into <acronym>EPUB</acronym> format files</p>
+    <p>It consists of the 
+        <ul>
+            <li><a href="#command_line_util">Command line converter utility</a></li>
+            <li><a href="#gui_converter">GUI Utility converter</a></li>
+        <li><a href="#shell_converter">Windows shell extension</a></li>
+        <li><a href="#fbe_converter">Fiction Book Editor (FBE) export plugin</a></li>
+        <li><a href ="#com_converter">COM interface to the converter for external programs</a></li>         
+        </ul></p>
+    <p>The program also optionally embed fonts with Cyrillic <acronym>UNICODE</acronym> support
+        to allow reading resulting files on readers without Cyrillic support. But it can embed any font for any purpose
         <br />
     </p>
-    <h3>
+    <br/>
+    <h2 id="command_line_util">
         Command line utility
-        Usage:
-    </h3>
+    </h2>
+    <h3>Description</h3>
+    <p>This utility perform FB2 to ePub files conversion using command line "DOS" syntax</p>
+    <br/>
+
+    <h3>Usage</h3>
+    <p>The command line for the utility has following structure:</p>
+    <br/>
     <p>
-        <strong>fb2epub <em>&lt;input_fb2_file_name&gt; [-options]<br />
+        <strong>fb2epub <em>&lt;input_fb2_file_path&gt; [-options]<br />
         </em></strong>
         <br />
         &nbsp;&nbsp;&nbsp; or optional<br />
@@ -33,9 +43,7 @@
         <strong>fb2epub <em>&lt;input_fb2_file_name&gt; &lt;output_epub_file_name&gt; [-options]<br />
         </em></strong>
         <br />
-        &nbsp;&nbsp;&nbsp; or optional<br />
-        <br />
-        <strong>fb2epub <em>[-registration_options]</em></strong><br />
+        &nbsp;&nbsp;&nbsp; <br />
         <br />
         The input file can be either .FB2 file or RAR archive or ZIP archive containing
         <abbr>
@@ -43,7 +51,7 @@
         files inside. In case archive containing more than one
         <abbr>
             FB2</abbr>
-        file all files in archive are converted. Also it is possible to specify path or/and mask to convert<br />
+        file all files in archive are converted. Also it is possible to specify path or/and mask to convert to convert entire folders<br />
     </p>
     <h4>
         The currently valid options are:
@@ -62,19 +70,14 @@
             Set output path in case no output file name supplied.</dd>
         <dt><strong>-fix:<em>[0/1/2/3]</em></strong></dt>
         <dd>where <dfn>-fix:0</dfn> means "do not attempt to fix", <dfn>-fix:1</dfn> means "try to apply minimal internal corrections only", 
-        <dfn>-fix:2</dfn> (default) means "use Fb2Fix to fix the files" - fixes most problems, <dfn>-fix:3</dfn> instruct the system to use Fb2Fix on every file even if it does not contain errors</dd>
-        <dt><strong>-r(all)/-u</strong></dt>
-        <dd>
-            registration options used to register/unregister right click shell extension</dd>
-            <dd><strong>-r</strong> registers for basic RAR/ZIP/FB2 file types, <strong>-rAll</strong> registers for all file extensions</dd>
-            <dd>when registration option used all other commands and parameters are ignored</dd>
+            <dfn>-fix:2</dfn> (default) means "use Fb2Fix to fix the files" - fixes most problems, <dfn>-fix:3</dfn> instruct the system to use Fb2Fix on every file even if it does not contain errors</dd>
         <dt><strong>-f2i:<em>[0/1]</em></strong></dt>
         <dd>
-        Enable (<dfn>-f2i:1</dfn>) or disable (<dfn>-f2i:0</dfn>) generation of additional FB2 information page
+            Enable (<dfn>-f2i:1</dfn>) or disable (<dfn>-f2i:0</dfn>) generation of additional FB2 information page
         </dd>
         <dt><strong>-seqadd:<em>[0/1]</em></strong></dt>
         <dd>
-        Enable (<dfn>-secadd:1</dfn>) (default) or disable (<dfn>-secadd:0</dfn>) adding sequences abbreviations to book title name
+            Enable (<dfn>-secadd:1</dfn>) (default) or disable (<dfn>-secadd:0</dfn>) adding sequences abbreviations to book title name
         </dd>
         <dt><strong>-seqformat:<em>[format_string]</em></strong></dt>
         <dd>
@@ -83,9 +86,9 @@
             <dfn>%sf%</dfn> - Series full name from FB2 header<br />
             <dfn>%sa%</dfn> - Series abbviarated name from FB2 header<br />
             <dfn>%sn%</dfn> - book number in the series<br />
-           Also following modifiers specified after '.' (dot) are allowed for %bt%, %sf% and %sa%:<br />
+            Also following modifiers specified after '.' (dot) are allowed for %bt%, %sf% and %sa%:<br />
             <dfn>c</dfn> - Capitalize, <dfn>l</dfn> - lowercase, <dfn>u</dfn> -UPPERCASE <br />
-            additionally for parameter %sn% numeric modifier can be used to specify 0-preffix of the number<br />
+            additionally for parameter %sn% numeric modifier can be used to specify 0-prefix of the number<br />
             The default format is same as in prev versions: <strong>"%bt% %sa.l%-%sn%"</strong><br />
             <strong>Examples:</strong><br />
             Series: Star Wars<br />
@@ -100,7 +103,7 @@
             <dfn>%bt%</dfn> - BookTitle from FB2 header<br />
             <dfn>%sf%</dfn> - Series full name from FB2 header<br />
             <dfn>%sa%</dfn> - Series abbviarated name from FB2 header<br />
-           Also following modifiers specified after '.' (dot) are allowed for %bt%, %sf% and %sa%:<br />
+            Also following modifiers specified after '.' (dot) are allowed for %bt%, %sf% and %sa%:<br />
             <dfn>c</dfn> - Capitalize, <dfn>l</dfn> - lowercase, <dfn>u</dfn> -UPPERCASE <br />
             The default format is : <strong>"%bt% (%sf.l%)"</strong><br />
             <strong>Examples:</strong><br />
@@ -112,7 +115,7 @@
         <dd>
             - Format book title description info (thanks wserg) , This allows to define what will be displayed on book description page if book has no series name defined. The following format options are allowed:<br />
             <dfn>%bt%</dfn> - BookTitle from FB2 header<br />
-           Also following modifiers specified after '.' (dot) are allowed for %bt%, %sf% and %sa%:<br />
+            Also following modifiers specified after '.' (dot) are allowed for %bt%, %sf% and %sa%:<br />
             <dfn>c</dfn> - Capitalize, <dfn>l</dfn> - lowercase, <dfn>u</dfn> -UPPERCASE <br />
             The default format is : <strong>"%bt%"</strong><br />
             do not forget to double quote the format string if it contain spaces
@@ -124,7 +127,7 @@
             <dfn>%m%</dfn> - Middle name from FB2 header<br />
             <dfn>%l%</dfn> - last name from FB2 header<br />
             <dfn>%n%</dfn> - Nick name from FB2 header<br />
-           Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:<br />
+            Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:<br />
             <dfn>c</dfn> - Capitalize, <dfn>l</dfn> - lowercase, <dfn>u</dfn> -UPPERCASE <br />
             additionally another subformat <dfn>:b</dfn> can be added to take name in brackets<br />
             The default format is : <strong>"%f.c%%m.c%%l.c%%n.c:b%"</strong><br />
@@ -136,7 +139,7 @@
             <dfn>%m%</dfn> - Middle name from FB2 header<br />
             <dfn>%l%</dfn> - last name from FB2 header<br />
             <dfn>%n%</dfn> - Nick name from FB2 header<br />
-           Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:<br />
+            Also following modifiers specified after '.' (dot) are allowed for %f%, %m%, %l% and %n%:<br />
             <dfn>c</dfn> - Capitalize, <dfn>l</dfn> - lowercase, <dfn>u</dfn> -UPPERCASE <br />
             additionally another subformat <dfn>:b</dfn> can be added to take name in brackets<br />
             The default format is : <strong>"%l.c%f.c"</strong><br />
@@ -144,68 +147,68 @@
        
         <dt><strong>-s</strong></dt>
         <dd>
-        Enable search for files in subfolders in case path or mask specified
+            Enable search for files in subfolders in case path or mask specified
         </dd>       
         <dt><strong>-m:<em>[0/1/2/3]</em></strong></dt>
         <dd>
-        Search for *.fb2 files only(<dfn>-m:0</dfn>) or all .fb2 files and *.fb2.zip/*.fb2.rar files(<dfn>-m:1</dfn> - default) or 
+            Search for *.fb2 files only(<dfn>-m:0</dfn>) or all .fb2 files and *.fb2.zip/*.fb2.rar files(<dfn>-m:1</dfn> - default) or 
         </dd>
         <dd>      
-        for all *.fb2;*.zip;*.rar files (<dfn>-m:2</dfn>) or just all files *.* (<dfn>-m:3</dfn>)when looking for files in folder(s). 
+            for all *.fb2;*.zip;*.rar files (<dfn>-m:2</dfn>) or just all files *.* (<dfn>-m:3</dfn>)when looking for files in folder(s). 
         </dd>
         <dd>             
-        Providing search mask in input string override this parameter.
+            Providing search mask in input string override this parameter.
         </dd>
         <dd>
-        Specifying file mask in input parameter overrides this option.
+            Specifying file mask in input parameter overrides this option.
         </dd>
         <dt><strong>-DELETESOURCE</strong></dt>
         <dd>
-        Deletes the source FictionBook file upon successful conversion
+            Deletes the source FictionBook file upon successful conversion
         </dd>             
         <dt><strong>-flat:<em>[0/1]</em></strong></dt>
         <dd>
-        Invokes (1) "flat structure mode" that prohibits creation of subfolders inside ePub archive, workaround for some buggy readers.
-        <dfn>-flat:0</dfn> - default
+            Invokes (1) "flat structure mode" that prohibits creation of subfolders inside ePub archive, workaround for some buggy readers.
+            <dfn>-flat:0</dfn> - default
         </dd>             
         <dt><strong>-emstyles:<em>[0/1]</em></strong></dt>
         <dd>
-        - Invokes "embeding styles mode" that, instead of adding CCS files to the ePub and referencing them, in xHTML injects the relevant style code 
-          directly into the xHTML files. Values are: 0 - disabled (default) ,  1 - enabled. The feature is for buggy readers that do not support reading styles from referenced files
-        <dfn>-flat:0</dfn> - default
+            - Invokes "embeding styles mode" that, instead of adding CCS files to the ePub and referencing them, in xHTML injects the relevant style code 
+            directly into the xHTML files. Values are: 0 - disabled (default) ,  1 - enabled. The feature is for buggy readers that do not support reading styles from referenced files
+            <dfn>-flat:0</dfn> - default
         </dd>             
         <dt><strong>-apng:<em>[0/1]</em></strong></dt>
         <dd>
-        Enable/disable conversion of PNG files with palette that contain alpha channel into 32bit format. Many readers (especially Adobe based)can't show 
-        paletterized alpha channel PNGs. The possible values are 0 (disable) and <dfn>-apng:1</dfn> - default
+            Enable/disable conversion of PNG files with palette that contain alpha channel into 32bit format. Many readers (especially Adobe based)can't show 
+            paletterized alpha channel PNGs. The possible values are 0 (disable) and <dfn>-apng:1</dfn> - default
         </dd>                    
         <dt><strong>-cap:<em>[0/1]</em></strong></dt>
         <dd>
-        Enable (1) /disable (0)"capitalization" of section first character making it big and appear on several lines.<dfn>-cap:1</dfn> - default
+            Enable (1) /disable (0)"capitalization" of section first character making it big and appear on several lines.<dfn>-cap:1</dfn> - default
         </dd>
         <dt><strong>-xpgt:<em>[0/1]</em></strong></dt>
         <dd>
-        Enable (1) or disable (0, default) embedding of Adobe XPGT template into resulting ePub File. <dfn>-xpgt:0</dfn> - default
+            Enable (1) or disable (0, default) embedding of Adobe XPGT template into resulting ePub File. <dfn>-xpgt:0</dfn> - default
         </dd>
         <dt><strong>-xpgtPath:<em>[file_path]</em></strong></dt>
         <dd>
-        Forces converter to use Adobe XPGT template file specified by this parameter instead of default XPGT template "template.xpgt" located in "Template" subfolder
+            Forces converter to use Adobe XPGT template file specified by this parameter instead of default XPGT template "template.xpgt" located in "Template" subfolder
         </dd>
         <dt><strong>-settings</strong></dt>
         <dd>
-        Calling with this parameter (should be the only parameter) will bring up settings configuration window UI to ease setting up the defaults
+            Calling with this parameter (should be the only parameter) will bring up settings configuration window UI to ease setting up the defaults
         </dd>
-       <dt><strong>-ignoretitle:<em>[0/1/2/3/4/5/6]</em></strong></dt>
-       <dd>Controls if one or more FB2 titles should be ignored, <dfn>-ignoretitle:0</dfn> - default
-       Possible options are
-       <li>0 - nothing ignored</li>
-       <li>1 - Main FB2 title ignored </li>
-       <li>2 - Source info title ignored</li>
-       <li>3 - Publish info title ignored</li>
-       <li>4 - Main and Source info titles are ignored</li>
-       <li>5 - Main and Publish info titles are ignored</li>
-       <li>6 - Source and Publish info titles are ignored</li>
-       </dd>
+        <dt><strong>-ignoretitle:<em>[0/1/2/3/4/5/6]</em></strong></dt>
+        <dd>Controls if one or more FB2 titles should be ignored, <dfn>-ignoretitle:0</dfn> - default
+            Possible options are
+            <li>0 - nothing ignored</li>
+            <li>1 - Main FB2 title ignored </li>
+            <li>2 - Source info title ignored</li>
+            <li>3 - Publish info title ignored</li>
+            <li>4 - Main and Source info titles are ignored</li>
+            <li>5 - Main and Publish info titles are ignored</li>
+            <li>6 - Source and Publish info titles are ignored</li>
+        </dd>
         <dt><strong>-cfg:<em>&lt;path&gt;</em></strong></dt>
         <dd>Allows to specify different settings file path to use for conversion</dd>
         <dt><strong>-calibremeta:<em>[0/1]</em></strong></dt>
@@ -213,6 +216,52 @@
         <dt><strong>-log:<em>file_path</em></strong></dt>
         <dd>Redirect logger to a new file or path (can be either, in case of path uses "fb2epub.log" file name)</dd>
     </dl>
+    <br/>
+    <h2 id="gui_converter">GUI Utility</h2>
+    <h3>Description</h3>
+    <p>This utility provides Windows style User Interface for the Fb2 to ePub file conversion.
+        Files can be either "dragged" into it by mouse or selected by browsing to file.
+        The resulting ePub file(s) will be placed into the user selected output folder</p>
+    <p>The utility can be used with English language UI and also has Russian language localization</p>
+    <br/>
+    <h2 id="shell_converter">Windows shell extension</h2>
+    <h3>Description</h3>
+    <p>The converter provides and register a Windows Shell Extension mechanism that allow to perform conversion of FB2 files or archives containing FB2 files in Windows Explorer</p>
+    <h3>Usage</h3>
+    <p>The conversion into ePub performed by mouse right-clicking on the source file in Windows Explorer and selecting conversion from the context menu.
+        Conversion output can be generated in same folder ("Here" option) or (if configured by <a>FB2EPUBExt.INI</a>) into some preconfigured path.
+    </p>
+    <br/>
+    <h2 id="fbe_converter">Fiction Book Editor (FBE) export plugin</h2>
+    <h3>Description</h3>
+    <p>This plugin (in case FBE installed on the computer) allows exporting edited FB2 files directly into ePub file format</p>
+    <h3>Usage</h3>
+    <p>From "File" menu select "Export" , then "toEPUB"</p>
+    <br/>
+    
+    <h2 id="com_converter">COM interface to the converter for external programs</h2>
+    <h3>Description</h3>
+    <p>We provide COM interface in order to allow external programs to be able to use (call) converter functionality</p>
+    <h3>Usage</h3>
+    <p>The <i><b>IEPubConverterInterface</b></i> interface (GUID <b>9B6D89BC-0C32-46E0-B06C-360DA401FE9A</b>) declare following functions</p>
+    <ul>
+        <li>HRESULT ConvertPath(BSTR inputPath, BSTR outputFolder, IProgressUpdateInterface progress) - convert files in path into output folder</li>
+        <li>HRESULT ConvertList(SAFEARRAY* files, BSTR outputFolder, IProgressUpdateInterface progress) - convert list of files to output folder</li>
+        <li>HRESULT ConvertXml(IUnknown * doc, BSTR outFileName, IProgressUpdateInterface progress) convert IXHTMLDocument into file name</li>
+        <li>HRESULT ConvertSingleFile(BSTR inputPath, BSTR outputName, IProgressUpdateInterface progress) - convert single file provided to the output name</li>
+        <li>HRESULT AbortConversion() - aborts conversion in progress</li>       
+    </ul>
+    <p>The <i><b>IProgressUpdateInterface</b></i> pointer used there (interface GUID <b>255293F1-ECB5-4218-8797-1068B915BEC5</b>) can be NULL, otherwise it should be an object implementing this interface and containing following functions:</p>
+    <ul>
+        <li>HRESULT ConvertStarted (/*[in]*/ long total )</li>
+        <li>HRESULT ConvertFinished (/*[in]*/ long total )</li>
+        <li>HRESULT ProcessingStarted (/*[in]*/ BSTR fileName )</li>
+        <li>HRESULT ProcessingSaving (/*[in]*/ BSTR fileName )</li>
+        <li>HRESULT Processed (/*[in]*/ BSTR fileName )</li>
+        <li>HRESULT SkippedDueError (/*[in]*/ BSTR fileName )</li>
+    </ul>
+    <p>The converter object itself can be created using GUID <b>0FF011AD-18A5-4CF2-8AB1-011AA9AA2BDF</b>.</p>
+    <br/>
     <h2>
         Fonts:
     </h2>

@@ -48,6 +48,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CommonAssemblyInfo.cs.cs = CommonAssemblyInfo.cs.cs
 		Fb2ePub\epub-logo-color-book.ICO = Fb2ePub\epub-logo-color-book.ICO
 		Fb2ePub\license.docx = Fb2ePub\license.docx
+		Fb2ePub\readme_en.htm = Fb2ePub\readme_en.htm
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FBE2EpubPlugin", "FBE2EpubPlugin\FBE2EpubPlugin.vcxproj", "{747EB3E8-4318-4A6F-BDB9-90F7DB4122D3}"
