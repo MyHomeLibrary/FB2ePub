@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace FB2EPubConverter.Interfaces
@@ -12,5 +13,6 @@ namespace FB2EPubConverter.Interfaces
         void ConvertXml(XDocument doc, string outFileName, IProgressUpdateInterface progress);
         void ConvertSingleFile(string inputPath, string outputName, IProgressUpdateInterface progress);
         void AbortConversion();
+        bool ShowSettingsDialog(IWin32Window parent);
     }
 }

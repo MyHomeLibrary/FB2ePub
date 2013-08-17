@@ -339,6 +339,11 @@ namespace FB2EPubConverter
             _cts.Cancel();
         }
 
+        bool IEPubConverterInterface.ShowSettingsDialog(IWin32Window parent)
+        {
+            return ShowSettingsDialog(parent);
+        }
+
         public void ConvertXml(XDocument doc, string outFileName, IProgressUpdateInterface progress)
         {
             LoadSettings();
