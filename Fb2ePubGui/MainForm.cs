@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
@@ -471,6 +472,30 @@ namespace Fb2ePubGui
                     e.Cancel = true;
                 }
             }
+        }
+
+        private void checkForUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateChecker updater = new UpdateChecker(this);
+            UpdateCheckResult checkResult = updater.CheckForUpdate(true);
+            switch (checkResult)
+            {
+                case UpdateCheckResult.CheckError:
+                    // nothing to do as updater displayed error
+                    break;
+                case UpdateCheckResult.CurrentVersion:
+                    MessageBox.Show(this, Resources.FormGUI_checkForUpdateToolStripMenuItem_Click_The_version_is_most_current, Resources.FormGUI_checkForUpdateToolStripMenuItem_Click_Version_check,MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    break;
+                case UpdateCheckResult.UpdatePresent:
+                    ShowUpdateMessage(updater.CurrentVersion,updater.UpdateVersion,updater.UpdatePath);
+                    break;
+            }
+        }
+
+        private void ShowUpdateMessage(Version versionNow, Version versionServer, string updateURL)
+        {
+            NewUpdateMessage message = new NewUpdateMessage{VersionNow =  versionNow,VersionServer = versionServer,UpdateURl = updateURL};
+            message.ShowDialog(this);
         }
     }
 }

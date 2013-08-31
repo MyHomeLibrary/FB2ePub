@@ -159,6 +159,9 @@
   <data name="Status_Ready" xml:space="preserve">
     <value>Готов.</value>
   </data>
+  <data name="UpdateURL" xml:space="preserve">
+    <value>http://www.fb2epub.net/rus/index.html#latest</value>
+  </data>
   <data name="Using_Resources_From" xml:space="preserve">
     <value>Используются ресурсы из: {0}</value>
   </data>

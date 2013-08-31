@@ -119,6 +119,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewUpdateMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewUpdateMessage.Designer.cs">
+      <DependentUpon>NewUpdateMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProgressUpdater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,6 +137,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="UpdateChecker.cs" />
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -143,6 +150,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.ru.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewUpdateMessage.resx">
+      <DependentUpon>NewUpdateMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewUpdateMessage.ru.resx">
+      <DependentUpon>NewUpdateMessage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

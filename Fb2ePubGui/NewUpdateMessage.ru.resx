@@ -117,69 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Status_Converting" xml:space="preserve">
-    <value>Converting...</value>
-  </data>
-  <data name="Status_Ready" xml:space="preserve">
-    <value>Ready.</value>
-  </data>
-  <data name="FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert" xml:space="preserve">
-    <value>Please select FB2 files to convert</value>
-    <comment>File selection dialog title	</comment>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="epub-logo-color-book" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\epub-logo-color-book.ICO;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AboutBox_AboutBox_Default_settings_file_not_found" xml:space="preserve">
-    <value>Default settings file not found</value>
-  </data>
-  <data name="Default_Settings_File" xml:space="preserve">
-    <value>Default settings file: {0},  ({1})</value>
-  </data>
-  <data name="Log_Folder" xml:space="preserve">
-    <value>LOG folder: {0}</value>
-  </data>
-  <data name="Using_Resources_From" xml:space="preserve">
-    <value>Using Resources from: {0}</value>
-  </data>
-  <data name="Converting_File" xml:space="preserve">
-    <value>Converting file: {0}.</value>
-  </data>
-  <data name="File_Processed" xml:space="preserve">
-    <value>File: {0} processed.</value>
-  </data>
-  <data name="File_Skipped_toError" xml:space="preserve">
-    <value>File: {0} skipped due error.</value>
-  </data>
-  <data name="Finished_To_Convert_Files" xml:space="preserve">
-    <value>Finished to convert {0} files.</value>
-  </data>
-  <data name="Saving_File" xml:space="preserve">
-    <value>Saving file: {0}.</value>
-  </data>
-  <data name="Started_To_ConvertFiles" xml:space="preserve">
-    <value>Started to convert {0} files.</value>
-  </data>
-  <data name="FormGUI_AbortConversion_Are_you_sure_you_wish_to_abort_conversion_" xml:space="preserve">
-    <value>Are you sure you wish to abort conversion?</value>
-  </data>
-  <data name="FormGUI_AbortConversion_Aborting_conversion" xml:space="preserve">
-    <value>Aborting conversion</value>
-  </data>
-  <data name="FormGUI_checkForUpdateToolStripMenuItem_Click_Error_downloading_version_file" xml:space="preserve">
-    <value>Error downloading version file</value>
-  </data>
-  <data name="FormGUI_checkForUpdateToolStripMenuItem_Click_The_version_is_most_current" xml:space="preserve">
-    <value>The version is most current</value>
-  </data>
-  <data name="FormGUI_checkForUpdateToolStripMenuItem_Click_Version_check" xml:space="preserve">
-    <value>Version check</value>
-  </data>
-  <data name="UpdateChecker_CheckForUpdate_Error_loading_downloaded_version_file" xml:space="preserve">
-    <value>Error loading downloaded version file</value>
-  </data>
-  <data name="UpdateURL" xml:space="preserve">
-    <value>http://www.fb2epub.net/eng/index.html#latest</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Обнаружено обновление версии</value>
   </data>
 </root>

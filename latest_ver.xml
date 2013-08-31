@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<version>
+<major>1</major>
+<minor>1</minor>
+<build>6</build>
+<revision>12</revision>
+<paths>
+<update_path>
+<path>http://www.fb2epub.net/eng/index.html#latest</path>
+<lang>eng</lang>
+</update_path>
+<update_path>
+<path>http://www.fb2epub.net/rus/index.html#latest</path>
+<lang>rus</lang>
+</update_path>
+</paths>
+</version>

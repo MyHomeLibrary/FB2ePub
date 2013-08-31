@@ -204,6 +204,9 @@
   <data name="&gt;&gt;languageToolStripMenuItem.Name" xml:space="preserve">
     <value>languageToolStripMenuItem</value>
   </data>
+  <data name="checkForUpdateToolStripMenuItem.Text" xml:space="preserve">
+    <value>Check for &amp;Update</value>
+  </data>
   <data name="&gt;&gt;buttonShowFolder.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
@@ -2330,9 +2333,6 @@
   <data name="&gt;&gt;toolStripDropDownButtonAbort.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 352</value>
-  </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -2387,8 +2387,8 @@
   <data name="autoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 22</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormGUI</value>
+  <data name="checkForUpdateToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Check for update on internet</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
     <value>toolStripSeparator2</value>
@@ -2423,8 +2423,11 @@
   <data name="&gt;&gt;statusStrip1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="&gt;&gt;checkForUpdateToolStripMenuItem.Name" xml:space="preserve">
+    <value>checkForUpdateToolStripMenuItem</value>
+  </data>
   <data name="toolStripMenuItemShowLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 22</value>
+    <value>166, 22</value>
   </data>
   <data name="comboBoxDestination.Size" type="System.Drawing.Size, System.Drawing">
     <value>616, 21</value>
@@ -2432,8 +2435,8 @@
   <data name="languageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 20</value>
   </data>
-  <data name="&gt;&gt;backgroundWorkerProcess.Type" xml:space="preserve">
-    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 352</value>
   </data>
   <data name="&gt;&gt;comboBoxDestination.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -2493,7 +2496,7 @@
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 22</value>
+    <value>166, 22</value>
   </data>
   <data name="toolStripDropDownButtonAbort.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2532,7 +2535,7 @@
     <value>Click or Drag here</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 6</value>
+    <value>163, 6</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 22</value>
@@ -2585,6 +2588,9 @@
   <data name="&gt;&gt;buttonConvert.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;checkForUpdateToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -2633,6 +2639,9 @@
   <data name="toolStripStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
+  <data name="checkForUpdateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 22</value>
+  </data>
   <data name="mainMenuStrip.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -2648,11 +2657,17 @@
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
+  <data name="&gt;&gt;backgroundWorkerProcess.Type" xml:space="preserve">
+    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="toolStripDropDownButtonAbort.Text" xml:space="preserve">
     <value>(Abort)</value>
   </data>
   <data name="&gt;&gt;topmostToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FormGUI</value>
   </data>
   <data name="toolStripMenuItemShowLog.Text" xml:space="preserve">
     <value>&amp;Show Log</value>
