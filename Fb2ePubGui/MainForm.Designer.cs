@@ -42,6 +42,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemShowLog = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.checkForUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemConvSettings = new System.Windows.Forms.ToolStripMenuItem();
@@ -135,6 +136,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemShowLog,
             this.toolStripSeparator1,
+            this.checkForUpdateToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             // 
@@ -148,6 +150,12 @@
             // 
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             this.toolStripSeparator1.Name = "toolStripSeparator1";
+            // 
+            // checkForUpdateToolStripMenuItem
+            // 
+            resources.ApplyResources(this.checkForUpdateToolStripMenuItem, "checkForUpdateToolStripMenuItem");
+            this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
+            this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdateToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -312,6 +320,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatus;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonAbort;
+        private System.Windows.Forms.ToolStripMenuItem checkForUpdateToolStripMenuItem;
     }
 }
 

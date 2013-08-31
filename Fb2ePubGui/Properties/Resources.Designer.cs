@@ -152,6 +152,33 @@ namespace Fb2ePubGui.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error downloading version file.
+        /// </summary>
+        internal static string FormGUI_checkForUpdateToolStripMenuItem_Click_Error_downloading_version_file {
+            get {
+                return ResourceManager.GetString("FormGUI_checkForUpdateToolStripMenuItem_Click_Error_downloading_version_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The version is most current.
+        /// </summary>
+        internal static string FormGUI_checkForUpdateToolStripMenuItem_Click_The_version_is_most_current {
+            get {
+                return ResourceManager.GetString("FormGUI_checkForUpdateToolStripMenuItem_Click_The_version_is_most_current", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version check.
+        /// </summary>
+        internal static string FormGUI_checkForUpdateToolStripMenuItem_Click_Version_check {
+            get {
+                return ResourceManager.GetString("FormGUI_checkForUpdateToolStripMenuItem_Click_Version_check", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LOG folder: {0}.
         /// </summary>
         internal static string Log_Folder {
@@ -193,6 +220,24 @@ namespace Fb2ePubGui.Properties {
         internal static string Status_Ready {
             get {
                 return ResourceManager.GetString("Status_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error loading downloaded version file.
+        /// </summary>
+        internal static string UpdateChecker_CheckForUpdate_Error_loading_downloaded_version_file {
+            get {
+                return ResourceManager.GetString("UpdateChecker_CheckForUpdate_Error_loading_downloaded_version_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://www.fb2epub.net/eng/index.html#latest.
+        /// </summary>
+        internal static string UpdateURL {
+            get {
+                return ResourceManager.GetString("UpdateURL", resourceCulture);
             }
         }
         
