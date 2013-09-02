@@ -144,6 +144,15 @@
   <data name="FormGUI_buttonConvert_Click_Please_select_FB2_files_to_convert" xml:space="preserve">
     <value>Пожалуйста выберете FB2 файлы подлежащие конвертированию</value>
   </data>
+  <data name="FormGUI_checkForUpdateToolStripMenuItem_Click_Error_downloading_version_file" xml:space="preserve">
+    <value>Ошибка загрузки файла версии</value>
+  </data>
+  <data name="FormGUI_checkForUpdateToolStripMenuItem_Click_The_version_is_most_current" xml:space="preserve">
+    <value>Эта версия последняя</value>
+  </data>
+  <data name="FormGUI_checkForUpdateToolStripMenuItem_Click_Version_check" xml:space="preserve">
+    <value>Проверка версии</value>
+  </data>
   <data name="Log_Folder" xml:space="preserve">
     <value>Путь к Журналу: {0}</value>
   </data>
@@ -158,6 +167,9 @@
   </data>
   <data name="Status_Ready" xml:space="preserve">
     <value>Готов.</value>
+  </data>
+  <data name="UpdateChecker_CheckForUpdate_Error_loading_" xml:space="preserve">
+    <value>Ошибка загрузки в память файла версии</value>
   </data>
   <data name="UpdateURL" xml:space="preserve">
     <value>http://www.fb2epub.net/rus/index.html#latest</value>

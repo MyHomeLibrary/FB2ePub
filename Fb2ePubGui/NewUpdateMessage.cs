@@ -9,12 +9,24 @@ using System.Windows.Forms;
 
 namespace Fb2ePubGui
 {
+    /// <summary>
+    /// This class used to display "New version update found" dialog
+    /// </summary>
     public partial class NewUpdateMessage : Form
     {
+        /// <summary>
+        /// Current assembly/product version
+        /// </summary>
         public Version VersionNow { get; set; }
 
+        /// <summary>
+        /// Version found on server
+        /// </summary>
         public Version VersionServer { get; set; }
 
+        /// <summary>
+        /// ULT to the page with version update
+        /// </summary>
         public string UpdateURl { get; set; }
 
         public NewUpdateMessage()
