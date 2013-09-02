@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<overlay id="fb2-unknownContentType"
+xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script src="fb2-unknownContentType.js" />
+
+<dialog id"overlay-test"
+xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+onload="bd_onLoad(event);">
+</dialog>
+
+</overlay>

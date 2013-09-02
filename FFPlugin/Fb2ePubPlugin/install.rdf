@@ -19,7 +19,7 @@
     </em:targetApplication>
    
     <!-- Front End MetaData -->
-    <em:name>Fb2EPub Cnverter</em:name>
+    <em:name>Fb2EPub Converter</em:name>
     <em:description>An extension used to convert FB2 format files into ePub format</em:description>
     <em:creator>Lord KiRon</em:creator>
     <em:homepageURL>http://www.fb2epub.net/</em:homepageURL>
