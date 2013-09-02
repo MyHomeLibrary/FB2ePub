@@ -46,6 +46,7 @@
             // 
             resources.ApplyResources(this.buttonClose, "buttonClose");
             this.buttonClose.Name = "buttonClose";
+            this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
@@ -53,26 +54,31 @@
             // 
             resources.ApplyResources(this.labelCurrent, "labelCurrent");
             this.labelCurrent.Name = "labelCurrent";
+            this.toolTip1.SetToolTip(this.labelCurrent, resources.GetString("labelCurrent.ToolTip"));
             // 
             // labelServer
             // 
             resources.ApplyResources(this.labelServer, "labelServer");
             this.labelServer.Name = "labelServer";
+            this.toolTip1.SetToolTip(this.labelServer, resources.GetString("labelServer.ToolTip"));
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
+            this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
             // labelLink
             // 
             resources.ApplyResources(this.labelLink, "labelLink");
             this.labelLink.Name = "labelLink";
+            this.toolTip1.SetToolTip(this.labelLink, resources.GetString("labelLink.ToolTip"));
             // 
             // textBoxCurrentVersion
             // 
@@ -110,6 +116,7 @@
             this.Controls.Add(this.labelCurrent);
             this.Controls.Add(this.buttonClose);
             this.Name = "NewUpdateMessage";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -117,6 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 13</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Установленная версия:</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 13</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Версия на сервере:</value>
+  </data>
+  <data name="labelLink.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 13</value>
+  </data>
+  <data name="labelLink.Text" xml:space="preserve">
+    <value>Путь к обновлению:</value>
+  </data>
+  <data name="linkLabelPath.ToolTip" xml:space="preserve">
+    <value>Нажмите тут чтобы открыть страницу с обновлением</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Обнаружено обновление версии</value>
   </data>

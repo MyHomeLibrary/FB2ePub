@@ -487,6 +487,7 @@ namespace Fb2ePubGui
                     MessageBox.Show(this, Resources.FormGUI_checkForUpdateToolStripMenuItem_Click_The_version_is_most_current, Resources.FormGUI_checkForUpdateToolStripMenuItem_Click_Version_check,MessageBoxButtons.OK,MessageBoxIcon.Information);
                     break;
                 case UpdateCheckResult.UpdatePresent:
+                    // if new version found - display the "new version found" dialog
                     ShowUpdateMessage(updater.CurrentVersion,updater.UpdateVersion,updater.UpdatePath);
                     break;
             }
