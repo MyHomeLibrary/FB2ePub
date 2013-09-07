@@ -190,6 +190,15 @@
   <data name="toolStripMenuItemConvSettings.Text" xml:space="preserve">
     <value>Н&amp;астроки Конвертера</value>
   </data>
+  <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 22</value>
+  </data>
+  <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Настройки</value>
+  </data>
+  <data name="settingsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Настройки утилиты FB2ePub GUI</value>
+  </data>
   <data name="topmostToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 22</value>
   </data>

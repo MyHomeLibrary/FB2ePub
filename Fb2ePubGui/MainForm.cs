@@ -498,5 +498,11 @@ namespace Fb2ePubGui
             NewUpdateMessage message = new NewUpdateMessage{VersionNow =  versionNow,VersionServer = versionServer,UpdateURl = updateURL};
             message.ShowDialog(this);
         }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FB2epubGUISettings settings = new FB2epubGUISettings();
+            settings.ShowDialog(this);
+        }
     }
 }
