@@ -144,6 +144,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="UpdateChecker.cs" />
+    <Compile Include="UpdteSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UpdteSettings.Designer.cs">
+      <DependentUpon>UpdteSettings.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -180,6 +186,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
+    <EmbeddedResource Include="UpdteSettings.resx">
+      <DependentUpon>UpdteSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
