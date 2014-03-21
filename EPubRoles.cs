@@ -19,8 +19,8 @@ namespace EPubLibrary
         Artist,     // Use for a person (e.g., a painter) who conceives, and perhaps also implements, 
         //an original graphic design or work of art, if specific codes (e.g., [egr], [etr]) are not desired. For book illustrators, prefer Illustrator [ill]. 
 
-        AssociatedName, // Use as a general relator for a name associated with or found in an item or collection, or which 
-        //cannot be determined to be that of a Former owner [fmo] or other designated relator indicative of provenance. 
+        AssociatedName, // Use as a general relater for a name associated with or found in an item or collection, or which 
+        //cannot be determined to be that of a Former owner [fmo] or other designated relater indicative of provenance. 
 
         Author,         // Use for a person or corporate body chiefly responsible for the intellectual or artistic content of a work. 
         //This term may also be used when more than one person or body bears such responsibility. 
@@ -57,7 +57,7 @@ namespace EPubLibrary
 
         Narrator,                          // Use for the speaker who relates the particulars of an act, occurrence, or course of events. 
 
-        Other,                             // Use for relator codes from other lists which have no equivalent in the MARC list or for terms which have not been assigned a code. 
+        Other,                             // Use for relater codes from other lists which have no equivalent in the MARC list or for terms which have not been assigned a code. 
 
         Photographer,                      //  Use for the person or organization responsible for taking photographs, whether they are used in their original form or as reproductions. 
 
