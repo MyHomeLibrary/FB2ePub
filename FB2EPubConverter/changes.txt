@@ -7,10 +7,11 @@
 + Added "minizip" a build that can be run without installation
 + Added setup window call to external interface
 + Added code to GUI utility to check for update
-* Changed the version treatment so time "seed" generated each time assembly compiled - to prevent problems when installing with same verson different build
+* Changed the version treatment so time "seed" generated each time assembly compiled - to prevent problems when installing with same version different build
 * Fixed the issue when elements of type Ignore (e.g. license.xhtml) were added to guide
 * Increased Fb2epub.exe log size x10 since it can be used in huge conversions of a lot of files
 * Changed progress reporting interface: dropped file counter report as in parallel processing it's meaningless
+* Fixed extra space added to "File as" and other such strings
 
 
 1.1.5

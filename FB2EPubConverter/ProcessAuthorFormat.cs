@@ -59,7 +59,7 @@ namespace FB2EPubConverter
                         break;
                 }
                 string sub = mc.Groups["sub"].ToString();
-                if (sub.CompareTo("p") == 0)
+                if (String.Compare(sub, "p", StringComparison.InvariantCulture) == 0)
                 {
                     brackets = true;
                 }
@@ -70,7 +70,7 @@ namespace FB2EPubConverter
             }
             else
             {
-                Format = Regex.Replace(Format, @"%" + expr + @"(\.(?<mode>[clu]))?(\:(?<sub>[b]))?%", "$" + expr + "$ ");    
+                Format = Regex.Replace(Format, @"%" + expr + @"(\.(?<mode>[clu]))?(\:(?<sub>[b]))?%", "$" + expr + "$");    
             }
             
             return rc;
