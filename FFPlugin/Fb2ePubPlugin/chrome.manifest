@@ -1,2 +1,3 @@
 content     fb2epub    chrome/content/
+content fb2epub chrome/content/ contentaccessible=yes
 overlay chrome://mozapps/content/downloads/unknownContentType.xul chrome://fb2epub/content/fb2epub_download_dialog.xul

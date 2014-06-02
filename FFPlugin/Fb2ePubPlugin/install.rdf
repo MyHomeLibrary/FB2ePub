@@ -23,5 +23,7 @@
     <em:description>An extension used to convert FB2 format files into ePub format</em:description>
     <em:creator>Lord KiRon</em:creator>
     <em:homepageURL>http://www.fb2epub.net/</em:homepageURL>
+	
+	<em:iconURL>chrome://fb2epub/icon.png</em:iconURL>
   </Description>      
 </RDF>
