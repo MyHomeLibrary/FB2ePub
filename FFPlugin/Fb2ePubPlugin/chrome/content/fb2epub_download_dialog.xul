@@ -6,12 +6,5 @@ xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 
 <script type="application/x-javascript" src="chrome://fb2epub/content/fb2-unknownContentType.js"/>
  
- <radiogroup id="mode" >
-		<vbox insertbefore="save" id="fb2epubcontainer" flex="1">
-			<hbox flex="1">
-        <radio id="fb2epub-dmradio" label="Fb2ePub (convert to ePub)"  oncommandupdate="onCheckHidden();"/>
-			</hbox>
-		</vbox>
-  </radiogroup>
 
 </overlay>
