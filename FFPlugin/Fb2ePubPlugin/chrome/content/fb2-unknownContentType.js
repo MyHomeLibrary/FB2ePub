@@ -59,7 +59,6 @@ checkRememberButton: function(check)
 	  dump("\ncheckRememberButton: - rememberChoice button not found");
 	  return;
 	}
-	dump("\nSetting: " +check);
 	rememberbutton.setAttribute("checked", check);
 },
 
@@ -77,28 +76,27 @@ toggleChoice: function(event)
   var selectedItem = saveGroup.selectedItem;
   if ( selectedItem.id == "fb2epub-radio" ) // if selected item's id is id of our (fb2epub) menu entry
   {
-	if ( _fb2ItemSelected == false ) // if this is first time in a row user clicked on fb2epub button (to avoid multiple clicks)
+	if ( this._fb2ItemSelected == false ) // if this is first time in a row user clicked on fb2epub button (to avoid multiple clicks)
 	{
 		// record current enabled/disabled state of remember button
-		_rememberButtonDisabledPrevState = this.getRememberButtonDisabledState();
-		_rememberButtonCheckedPrevState = this.getRememberButtonCheckedState();
+		this._rememberButtonDisabledPrevState = this.getRememberButtonDisabledState();
+		this._rememberButtonCheckedPrevState = this.getRememberButtonCheckedState();
 		// disable the remember button
 		this.disableRememberButton(true);
 		// uncheck the button by default
 		this.checkRememberButton(false);
 		// mark that fb2epub item was selected as last select operation
-		_fb2ItemSelected = true;
+		this._fb2ItemSelected = true;
 	}
   }
   else // if not our menu entry
   {
-	if ( _fb2ItemSelected == true) // if prev. selection was fb2epub menu entry
+	if ( this._fb2ItemSelected == true) // if prev. selection was fb2epub menu entry
 	{
-		this.disableRememberButton(_rememberButtonDisabledPrevState); // restore the enabled/disabled state that was before fb2epub menu entry was clicked first time
-		dump("\n" + _rememberButtonCheckedPrevState);
-		this.checkRememberButton(_rememberButtonCheckedPrevState); // restore the checked state that was before fb2epub menu entry was clicked first time
+		this.disableRememberButton(this._rememberButtonDisabledPrevState); // restore the enabled/disabled state that was before fb2epub menu entry was clicked first time
+		this.checkRememberButton(this._rememberButtonCheckedPrevState); // restore the checked state that was before fb2epub menu entry was clicked first time
 		// clear fb2epub menu entry selection flag
-	    _fb2ItemSelected = false;
+	    this._fb2ItemSelected = false;
 	}
   }
 },
@@ -145,8 +143,7 @@ getRememberButtonCheckedState: function()
 	  return false; // not checked by default, just in case
 	}
 	var state = rememberbutton.getAttribute("checked");	
-	dump("\n" + state);
-	if ( state == true) // if checked then return true
+	if ( state == "true") // if checked then return true
 	{
 	  return true;
 	}
@@ -175,13 +172,14 @@ getRememberButtonDisabledState: function()
 
 init: function()
 {
+	dump("\n\nStarting:\n");
 	if ( this.isfb2extension(dialog.mLauncher.source))
 	{
-		_fb2MenuItem =  null;
-		_fb2ItemSelected =  false;
+		this._fb2MenuItem =  null;
+		this._fb2ItemSelected =  false;
 		// record initial button state
-		_rememberButtonDisabledPrevState = this.getRememberButtonDisabledState();
-		_rememberButtonCheckedPrevState = this.getRememberButtonCheckedState();
+		this._rememberButtonDisabledPrevState = this.getRememberButtonDisabledState();
+		this._rememberButtonCheckedPrevState = this.getRememberButtonCheckedState();
 		var saveGroup = document.getElementById('mode');
 		if ( saveGroup == null )
 		{
@@ -197,7 +195,7 @@ init: function()
 			}
 			else
 			{
-				_original_onaccept_action = d.getAttribute('ondialogaccept'); // save original action performed on accept
+				this._original_onaccept_action = d.getAttribute('ondialogaccept'); // save original action performed on accept
 			    //d.setAttribute('ondialogaccept',"return fb2SaveContent.onConvAccept();");
 			}
 		}
