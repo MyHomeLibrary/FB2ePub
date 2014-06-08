@@ -4,7 +4,6 @@ window.addEventListener("load", function load(event){
 },false);
 
 var fb2SaveContent = {
-	_original_onaccept_action: null, // used to store original "onaccept" action
 	_fb2MenuItem: null, // menu item we insert
 	_fb2ItemSelected: false,
 	_rememberButtonDisabledPrevState: false,
@@ -170,6 +169,22 @@ getRememberButtonDisabledState: function()
 	return false;
 },
 
+downloadAndConvert: function()
+{
+	
+},
+
+dialogAccepted: function() {
+	if ( this._fb2ItemSelected ) // if user selected convert to FB2
+	{
+		// call function to download file and when completed - convert it
+		this.downloadAndConvert();
+		return false;
+	}
+	return true;
+},
+
+
 init: function()
 {
 	dump("\n\nStarting:\n");
@@ -195,8 +210,8 @@ init: function()
 			}
 			else
 			{
-				this._original_onaccept_action = d.getAttribute('ondialogaccept'); // save original action performed on accept
-			    //d.setAttribute('ondialogaccept',"return fb2SaveContent.onConvAccept();");
+				// redirect ondialogaccept event, if it's "our" we do what we want, if not - we call original implementation
+				d.setAttribute('ondialogaccept','if(fb2SaveContent.dialogAccepted()) { ' + document.documentElement.getAttribute('ondialogaccept') +'}');
 			}
 		}
 	}
@@ -204,12 +219,6 @@ init: function()
 	{
 		//dump("\nNot FB2 file downloading");
 	}
-},
-
-onConvAccept: function()
-{
-	dump("\nAccept pressed");
-	return _original_onaccept_action;
 },
 
 onload: function()
