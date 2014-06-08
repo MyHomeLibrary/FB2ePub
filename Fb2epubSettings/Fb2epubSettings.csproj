@@ -182,6 +182,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConverterSettingsForm.resx">
       <DependentUpon>ConverterSettingsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ConverterSettingsForm.ru.resx">
       <DependentUpon>ConverterSettingsForm.cs</DependentUpon>

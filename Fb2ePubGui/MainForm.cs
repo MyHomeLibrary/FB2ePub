@@ -51,6 +51,10 @@ namespace Fb2ePubGui
             topmostToolStripMenuItem.Checked = this.TopMost;
             backgroundWorkerProcess.WorkerSupportsCancellation = true;
             backgroundWorkerProcess.WorkerReportsProgress = true;
+            if (Settings.Default.PerformAutoupdate)
+            {
+                CheckForUpdate(false);
+            }
         }
 
         private enum LanguageSetting
@@ -476,6 +480,15 @@ namespace Fb2ePubGui
 
         private void checkForUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CheckForUpdate(true);
+        }
+
+        /// <summary>
+        /// Checks for version and shows message
+        /// </summary>
+        /// <param name="showIfCurrent">show message or not if current version</param>
+        private void CheckForUpdate(bool showIfCurrent)
+        {
             UpdateChecker updater = new UpdateChecker(this);
             UpdateCheckResult checkResult = updater.CheckForUpdate(true);
             switch (checkResult)
@@ -484,11 +497,17 @@ namespace Fb2ePubGui
                     // nothing to do as updater displayed error
                     break;
                 case UpdateCheckResult.CurrentVersion:
-                    MessageBox.Show(this, Resources.FormGUI_checkForUpdateToolStripMenuItem_Click_The_version_is_most_current, Resources.FormGUI_checkForUpdateToolStripMenuItem_Click_Version_check,MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    if (showIfCurrent)
+                    {
+                        MessageBox.Show(this,
+                            Resources.FormGUI_checkForUpdateToolStripMenuItem_Click_The_version_is_most_current,
+                            Resources.FormGUI_checkForUpdateToolStripMenuItem_Click_Version_check, MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
                     break;
                 case UpdateCheckResult.UpdatePresent:
                     // if new version found - display the "new version found" dialog
-                    ShowUpdateMessage(updater.CurrentVersion,updater.UpdateVersion,updater.UpdatePath);
+                    ShowUpdateMessage(updater.CurrentVersion, updater.UpdateVersion, updater.UpdatePath);
                     break;
             }
         }
