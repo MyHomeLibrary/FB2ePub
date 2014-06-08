@@ -36,7 +36,7 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.updteSettings1 = new Fb2ePubGui.UpdteSettings();
+            this.updateSettings = new Fb2ePubGui.UpdateSettings();
             this.groupBox1.SuspendLayout();
             this.tabControlSettings.SuspendLayout();
             this.tabPageUpdate.SuspendLayout();
@@ -60,7 +60,7 @@
             // 
             // tabPageUpdate
             // 
-            this.tabPageUpdate.Controls.Add(this.updteSettings1);
+            this.tabPageUpdate.Controls.Add(this.updateSettings);
             resources.ApplyResources(this.tabPageUpdate, "tabPageUpdate");
             this.tabPageUpdate.Name = "tabPageUpdate";
             this.toolTip1.SetToolTip(this.tabPageUpdate, resources.GetString("tabPageUpdate.ToolTip"));
@@ -84,8 +84,8 @@
             // 
             // updteSettings1
             // 
-            resources.ApplyResources(this.updteSettings1, "updteSettings1");
-            this.updteSettings1.Name = "updteSettings1";
+            resources.ApplyResources(this.updateSettings, "updteSettings1");
+            this.updateSettings.Name = "updteSettings1";
             // 
             // FB2epubGUISettings
             // 
@@ -113,6 +113,6 @@
         private System.Windows.Forms.TabControl tabControlSettings;
         private System.Windows.Forms.TabPage tabPageUpdate;
         private System.Windows.Forms.ToolTip toolTip1;
-        private UpdteSettings updteSettings1;
+        private UpdateSettings updateSettings;
     }
 }
