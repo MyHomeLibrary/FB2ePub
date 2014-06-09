@@ -11,29 +11,43 @@ var fb2SaveContent = {
 
 	
 // Check if the passed source name is one of FB2 extensions
-isfb2extension: function(sourceURI)
+isfb2extension: function(fileName)
 {
- var myURL = sourceURI.QueryInterface(Components.interfaces.nsIURL);
+ // var myURL = sourceURI.QueryInterface(Components.interfaces.nsIURL);
 
- var extension = myURL.fileExtension.toLowerCase();
+ // var extension = myURL.fileExtension.toLowerCase();
+ var extension = fileName.split('.').pop().toLowerCase();
+ if ( extension == null || extension == "") // if no extension
+ {
+ 	return false;
+ }
  if ( extension == "fb2") // if FB2 extension then FB2
  {
     return true;
  }
- 
  // now let's check if it double extension for archives
  if ( extension == "zip" || extension == "rar")
  {
 	 // get name without extension
-	 var partWithoutExtension = myURL.fileBaseName;
-	 var extension2ndLvl = partWithoutExtension.split('.').pop();
-	 if ( extension2ndLvl != null && extension2ndLvl != "")
-	 {
+	 var partWithoutExtension = "";
+	 
+	var start = fileName.lastIndexOf("."); // index of last extension
+	if (start == -1) 
+	{
+		dump("\nisfb2extension: Error - can't find extension");
+		return false;
+	}
+	// remove the extension
+	partWithoutExtension = fileName.substring(0,start);
+	// detect 2nd level extension
+	var extension2ndLvl = partWithoutExtension.split('.').pop();
+	if ( extension2ndLvl != null && extension2ndLvl != "")
+	{
 		if( extension2ndLvl.toLowerCase() == "fb2") // if 2nd level extension is FB2
 		{
 			return true;
 		}
-	 }
+	}
  }
  return false;
 },
@@ -233,15 +247,23 @@ downloadAndConvert: function()
 	fp.init(window, "Enter a File Name to save", nsIFilePicker.modeSave);
 	fp.appendFilter("ePub file","*.ePub");
 	fp.defaultExtension = "ePub";
-	var myURL = dialog.mLauncher.source.QueryInterface(Components.interfaces.nsIURL);
-	var extension = myURL.fileExtension.toLowerCase();
-	var basename = myURL.fileBaseName + ".ePub";
+	//var myURL = dialog.mLauncher.source.QueryInterface(Components.interfaces.nsIURL);
+	var fileToDownload = document.getElementById("location").value;
+	if ( fileToDownload == null || fileToDownload == "")
+	{
+		dump("\ndownloadAndConvert: Can't get file to download");
+	}
+	// get the extension
+	var extension = fileToDownload.split('.').pop().toLowerCase();
+	var start = fileToDownload.lastIndexOf("."); // index of last extension
+	basename = fileToDownload.substring(0,start)  + ".ePub";	 // just remove last extension and add eub
 	if (extension != "fb2") //if some kind of archive
 	{
-		var start = myURL.fileBaseName.lastIndexOf("."); // index of last .FB2 extension
+		var withoutFirstExtension = fileToDownload.substring(0,start);
+		start = withoutFirstExtension.lastIndexOf(".");
 		if (start != -1) // if no more extension , then 'basename' is ok, otherwise - need to remove
 		{
-			basename = myURL.fileBaseName.substring(0,start)  + ".ePub";
+			basename = withoutFirstExtension.substring(0,start)  + ".ePub";
 		}
 	}
 	dump("\n"+ basename);
@@ -277,7 +299,9 @@ dialogAccepted: function() {
 init: function()
 {
 	dump("\n\nStarting: \n" );
-	if ( this.isfb2extension(dialog.mLauncher.source))
+	
+	var fileToDownload = document.getElementById("location");
+	if ( this.isfb2extension(fileToDownload.value))
 	{
 		this._fb2MenuItem =  null;
 		this._fb2ItemSelected =  false;
