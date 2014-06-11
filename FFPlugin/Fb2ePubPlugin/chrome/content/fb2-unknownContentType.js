@@ -211,6 +211,7 @@ download: function (filename, uri)
 		return null;
 	}
     persist.persistFlags = nsIWBP.PERSIST_FLAGS_REPLACE_EXISTING_FILES;
+
 	var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
 	if ( wm == null )
 	{
