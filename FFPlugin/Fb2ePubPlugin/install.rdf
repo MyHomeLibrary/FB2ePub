@@ -7,6 +7,7 @@
     <em:id>fb2epub_plugin@fb2epub.net</em:id>
     <em:version>1.0</em:version>
     <em:type>2</em:type>
+	<em:unpack>true</em:unpack>
    
     <!-- Target Application this extension can install into, 
          with minimum and maximum supported versions. --> 
@@ -24,6 +25,8 @@
     <em:creator>Lord KiRon</em:creator>
     <em:homepageURL>http://www.fb2epub.net/</em:homepageURL>
 	
-	<em:iconURL>chrome://fb2epub/icon.png</em:iconURL>
+	<em:iconURL>chrome://fb2epub/skin/fb2epub/images/icon48.png</em:iconURL>
+	<em:iconURL64>chrome://fb2epub/skin/fb2epub/images/icon48.png64</em:iconURL64>
+	<em:targetPlatform>WINNT</em:targetPlatform>
   </Description>      
 </RDF>
