@@ -1,8 +1,6 @@
 "use strict";
 
-this.EXPORTED_SYMBOLS = [
-	"DownloadsExt",
-];
+this.EXPORTED_SYMBOLS = [];
 
 ////////////////////////////////////////////////////////////////////////////////
 //// Globals
@@ -29,7 +27,9 @@ function isString(aValue) {
          (typeof aValue == "object" && "charAt" in aValue);
 }
 
-
+/*
+ * overrides type of savers creation to "inject" our own saver
+*/
 this.DownloadSaver.fromSerializable = function (aSerializable) {
   let serializable = isString(aSerializable) ? { type: aSerializable }
                                              : aSerializable;
