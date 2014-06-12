@@ -155,8 +155,8 @@ insertMenu: function (saveGroup)
 	else
 	{
 		this._fb2MenuItem.id = "fb2epub-radio";
-		saveGroup.addEventListener(
-      "select", function(event) {fb2SaveContent.toggleChoice(event);},true);
+		saveGroup.addEventListener("select", function(event) {fb2SaveContent.toggleChoice(event);},true);
+		saveGroup.selectedItem = this._fb2MenuItem;
 	}
   }
 },
