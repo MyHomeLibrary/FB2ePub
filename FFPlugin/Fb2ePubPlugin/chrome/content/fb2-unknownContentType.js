@@ -1,14 +1,13 @@
-//const {DownloadsExt} = Components.utils.import("chrome://fb2epub/content/DownloadsExt.jsm", {});
-//const {DownloadCore} = Components.utils.import("chrome://fb2epub/content/DownloadCoreExt.jsm", {});
 const {Services} = Components.utils.import("resource://gre/modules/Services.jsm", {});
 const {Task} = Components.utils.import("resource://gre/modules/Task.jsm", {});
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
-//const {Fb2ePubSaver} = Components.utils.import("chrome://fb2epub/content/fb-2download_fb2Saver.jsm", {});
 
 
-XPCOMUtils.defineLazyModuleGetter(this, "Fb2DownloadCopySaverToEPub","chrome://fb2epub/content/fb-2download_fb2Saver.jsm");
-XPCOMUtils.defineLazyModuleGetter(this, "DownloadsExt","chrome://fb2epub/content/DownloadsExt.jsm");
+//Components.utils.import("resource://gre/modules/DownloadCore.jsm");
+Components.utils.import("resource://gre/modules/Downloads.jsm");
+Components.utils.import("chrome://fb2epub/content/DownloadsExt.jsm");
+
 
 
 window.addEventListener("load", function load(event){
@@ -96,7 +95,7 @@ toggleChoice: function(event)
 {
   // get pointer to radio menu
   var saveGroup = document.getElementById('mode');
-  if ( saveGroup == null ) // if rqadio menu not found
+  if ( saveGroup == null ) // if radio menu not found
   {
     dump("\ntoggleChoice: SaveGroup not found in document");
     return;
@@ -270,7 +269,7 @@ test: function(destination,source)
 {
 Task.spawn(function () {
 
-  let list = yield DownloadsExt.getList(DownloadsExt.ALL);
+  let list = yield Downloads.getList(Downloads.ALL);
 
   let view = {
     onDownloadAdded: download => dump("\nAdded: " + download.target.path),
@@ -279,12 +278,11 @@ Task.spawn(function () {
   };
 
   yield list.addView(view);
-    var serialized = Fb2DownloadCopySaverToEPub.toSerializable;
   try {
-    let download = yield DownloadExt.createDownload({
+    let download = yield Downloads.createDownload({
       source: source,
       target:  destination,
-	  saver: "copy",
+	  saver: "Fb2DownloadCopySaverToEPub",
     });
     list.add(download);
     try {
@@ -292,6 +290,7 @@ Task.spawn(function () {
     } finally {
       //yield list.remove(download);
       yield download.finalize(true);
+	  dump("\nDone");
     }
   } finally {
     yield list.removeView(view);
@@ -317,7 +316,7 @@ downloadAndConvert: function()
 	// get the extension
 	var extension = fileToDownload.split('.').pop().toLowerCase();
 	var start = fileToDownload.lastIndexOf("."); // index of last extension
-	basename = fileToDownload.substring(0,start)  + ".ePub";	 // just remove last extension and add eub
+	var basename = fileToDownload.substring(0,start)  + ".ePub";	 // just remove last extension and add eub
 	if (extension != "fb2") //if some kind of archive
 	{
 		var withoutFirstExtension = fileToDownload.substring(0,start);
@@ -346,7 +345,7 @@ downloadAndConvert: function()
 		// var wrecent = wm.getMostRecentWindow("navigator:browser");
 		// wrecent.saveURL(dialog.mLauncher.source, fp.file.leafName);
 	}
-	this.test(path1,dialog.mLauncher.source);
+	this.test(fp.file.path,dialog.mLauncher.source);
 	//Components.utils.import("resource://gre/modules/Downloads.jsm");
 	//let list = yield Downloads.getList(Downloads.ALL);
 	// if ( list == null )
@@ -412,5 +411,3 @@ onload: function()
 
 
 };
-
-Components.utils.unload("chrome://fb2epub/content/fb-2download_fb2Saver.jsm");

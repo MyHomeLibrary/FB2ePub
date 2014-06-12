@@ -26,7 +26,7 @@
     <em:homepageURL>http://www.fb2epub.net/</em:homepageURL>
 	
 	<em:iconURL>chrome://fb2epub/skin/fb2epub/images/icon48.png</em:iconURL>
-	<em:iconURL64>chrome://fb2epub/skin/fb2epub/images/icon48.png64</em:iconURL64>
+	<em:iconURL64>chrome://fb2epub/skin/fb2epub/images/icon64.png</em:iconURL64>
 	<em:targetPlatform>WINNT</em:targetPlatform>
   </Description>      
 </RDF>
