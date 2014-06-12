@@ -1,3 +1,16 @@
+//const {DownloadsExt} = Components.utils.import("chrome://fb2epub/content/DownloadsExt.jsm", {});
+//const {DownloadCore} = Components.utils.import("chrome://fb2epub/content/DownloadCoreExt.jsm", {});
+const {Services} = Components.utils.import("resource://gre/modules/Services.jsm", {});
+const {Task} = Components.utils.import("resource://gre/modules/Task.jsm", {});
+Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+
+//const {Fb2ePubSaver} = Components.utils.import("chrome://fb2epub/content/fb-2download_fb2Saver.jsm", {});
+
+
+XPCOMUtils.defineLazyModuleGetter(this, "Fb2DownloadCopySaverToEPub","chrome://fb2epub/content/fb-2download_fb2Saver.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "DownloadsExt","chrome://fb2epub/content/DownloadsExt.jsm");
+
+
 window.addEventListener("load", function load(event){
     window.removeEventListener("load", load, false); //remove listener, no longer needed
     fb2SaveContent.init();  
@@ -240,6 +253,53 @@ download: function (filename, uri)
   }
 },
 
+// Generate temporary file name of required length
+// length - length of temporal string
+makeTempFileName: function(length)
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < length; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text +".tmp";
+},
+
+test: function(destination,source)
+{
+Task.spawn(function () {
+
+  let list = yield DownloadsExt.getList(DownloadsExt.ALL);
+
+  let view = {
+    onDownloadAdded: download => dump("\nAdded: " + download.target.path),
+    onDownloadChanged: download => dump("\nChanged: " + download.target.path),
+    onDownloadRemoved: download => dump("\nRemoved: "+ download.target.path),
+  };
+
+  yield list.addView(view);
+    var serialized = Fb2DownloadCopySaverToEPub.toSerializable;
+  try {
+    let download = yield DownloadExt.createDownload({
+      source: source,
+      target:  destination,
+	  saver: "copy",
+    });
+    list.add(download);
+    try {
+      yield download.start();
+    } finally {
+      //yield list.remove(download);
+      yield download.finalize(true);
+    }
+  } finally {
+    yield list.removeView(view);
+  }
+
+}).then(null, Components.utils.reportError);
+},
+
 downloadAndConvert: function()
 {
 	// get file picker dialog interface
@@ -272,18 +332,27 @@ downloadAndConvert: function()
 	var result = fp.show();
 	if (result == nsIFilePicker.returnOK || result == nsIFilePicker.returnReplace)
 	{
-		var savedFile = this.download(fp.file.path,dialog.mLauncher.source);
-		if ( savedFile == null )
-		{
-			dump("\ndownloadAndConvert: Unable to download file: " + fp.file.path);
-		}
+		Components.utils.import("resource://gre/modules/osfile.jsm")
+		var path1 = OS.Path.join(OS.Constants.Path.tmpDir, this.makeTempFileName(8));
+		dump("\nTemp path: " +path1);
+		// var savedFile = this.download(path1,dialog.mLauncher.source);
+		// if ( savedFile == null )
+		// {
+			// dump("\ndownloadAndConvert: Unable to download file: " + fp.file.path);
+		// }
 	
 		// dump("\n"+fp.file.leafName);
 		// var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
 		// var wrecent = wm.getMostRecentWindow("navigator:browser");
 		// wrecent.saveURL(dialog.mLauncher.source, fp.file.leafName);
 	}
-
+	this.test(path1,dialog.mLauncher.source);
+	//Components.utils.import("resource://gre/modules/Downloads.jsm");
+	//let list = yield Downloads.getList(Downloads.ALL);
+	// if ( list == null )
+	// {
+		// dump("\nNo list");
+	// }
 },
 
 dialogAccepted: function() {
@@ -344,3 +413,4 @@ onload: function()
 
 };
 
+Components.utils.unload("chrome://fb2epub/content/fb-2download_fb2Saver.jsm");
