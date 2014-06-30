@@ -1,9 +1,9 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM comp.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM fb2epub-xpcom.idl
  */
 
-#ifndef __gen_comp_h__
-#define __gen_comp_h__
+#ifndef __gen_fb2epub-xpcom_h__
+#define __gen_fb2epub-xpcom_h__
 
 
 #ifndef __gen_nsISupports_h__
@@ -15,20 +15,20 @@
 #define NS_NO_VTABLE
 #endif
 
-/* starting interface:    ISpecialThing */
-#define ISPECIALTHING_IID_STR "263ed1ba-5cc1-11db-9673-00e08161165f"
+/* starting interface:    IFb2EpubConverter */
+#define IFB2EPUBCONVERTER_IID_STR "3820526b-d2e7-44c4-9313-2f8cededde8e"
 
-#define ISPECIALTHING_IID \
-  {0x263ed1ba, 0x5cc1, 0x11db, \
-    { 0x96, 0x73, 0x00, 0xe0, 0x81, 0x61, 0x16, 0x5f }}
+#define IFB2EPUBCONVERTER_IID \
+  {0x3820526b, 0xd2e7, 0x44c4, \
+    { 0x93, 0x13, 0x2f, 0x8c, 0xed, 0xed, 0xde, 0x8e }}
 
-class NS_NO_VTABLE ISpecialThing : public nsISupports {
+class NS_NO_VTABLE IFb2EpubConverter : public nsISupports {
  public: 
 
-  NS_DEFINE_STATIC_IID_ACCESSOR(ISPECIALTHING_IID)
+  NS_DECLARE_STATIC_IID_ACCESSOR(IFB2EPUBCONVERTER_IID)
 
   /* long add (in long a, in long b); */
-  NS_IMETHOD Add(PRInt32 a, PRInt32 b, PRInt32 *_retval) = 0;
+  NS_IMETHOD Add(int32_t a, int32_t b, int32_t *_retval) = 0;
 
   /* attribute AString name; */
   NS_IMETHOD GetName(nsAString & aName) = 0;
@@ -36,21 +36,23 @@ class NS_NO_VTABLE ISpecialThing : public nsISupports {
 
 };
 
+  NS_DEFINE_STATIC_IID_ACCESSOR(IFb2EpubConverter, IFB2EPUBCONVERTER_IID)
+
 /* Use this macro when declaring classes that implement this interface. */
-#define NS_DECL_ISPECIALTHING \
-  NS_IMETHOD Add(PRInt32 a, PRInt32 b, PRInt32 *_retval); \
+#define NS_DECL_IFB2EPUBCONVERTER \
+  NS_IMETHOD Add(int32_t a, int32_t b, int32_t *_retval); \
   NS_IMETHOD GetName(nsAString & aName); \
   NS_IMETHOD SetName(const nsAString & aName); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
-#define NS_FORWARD_ISPECIALTHING(_to) \
-  NS_IMETHOD Add(PRInt32 a, PRInt32 b, PRInt32 *_retval) { return _to Add(a, b, _retval); } \
+#define NS_FORWARD_IFB2EPUBCONVERTER(_to) \
+  NS_IMETHOD Add(int32_t a, int32_t b, int32_t *_retval) { return _to Add(a, b, _retval); } \
   NS_IMETHOD GetName(nsAString & aName) { return _to GetName(aName); } \
   NS_IMETHOD SetName(const nsAString & aName) { return _to SetName(aName); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
-#define NS_FORWARD_SAFE_ISPECIALTHING(_to) \
-  NS_IMETHOD Add(PRInt32 a, PRInt32 b, PRInt32 *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->Add(a, b, _retval); } \
+#define NS_FORWARD_SAFE_IFB2EPUBCONVERTER(_to) \
+  NS_IMETHOD Add(int32_t a, int32_t b, int32_t *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->Add(a, b, _retval); } \
   NS_IMETHOD GetName(nsAString & aName) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetName(aName); } \
   NS_IMETHOD SetName(const nsAString & aName) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetName(aName); } 
 
@@ -58,11 +60,11 @@ class NS_NO_VTABLE ISpecialThing : public nsISupports {
 /* Use the code below as a template for the implementation class for this interface. */
 
 /* Header file */
-class _MYCLASS_ : public ISpecialThing
+class _MYCLASS_ : public IFb2EpubConverter
 {
 public:
   NS_DECL_ISUPPORTS
-  NS_DECL_ISPECIALTHING
+  NS_DECL_IFB2EPUBCONVERTER
 
   _MYCLASS_();
 
@@ -74,7 +76,7 @@ protected:
 };
 
 /* Implementation file */
-NS_IMPL_ISUPPORTS1(_MYCLASS_, ISpecialThing)
+NS_IMPL_ISUPPORTS1(_MYCLASS_, IFb2EpubConverter)
 
 _MYCLASS_::_MYCLASS_()
 {
@@ -87,7 +89,7 @@ _MYCLASS_::~_MYCLASS_()
 }
 
 /* long add (in long a, in long b); */
-NS_IMETHODIMP _MYCLASS_::Add(PRInt32 a, PRInt32 b, PRInt32 *_retval)
+NS_IMETHODIMP _MYCLASS_::Add(int32_t a, int32_t b, int32_t *_retval)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -106,4 +108,4 @@ NS_IMETHODIMP _MYCLASS_::SetName(const nsAString & aName)
 #endif
 
 
-#endif /* __gen_comp_h__ */
+#endif /* __gen_fb2epub-xpcom_h__ */
