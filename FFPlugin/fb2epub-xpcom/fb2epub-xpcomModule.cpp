@@ -26,3 +26,4 @@ static const mozilla::Module kFb2EPubModule = {
 };
  
 NSMODULE_DEFN(nsFb2EPubModule) = &kFb2EPubModule;
+NS_IMPL_MOZILLA192_NSGETMODULE(&kFb2EPubModule);

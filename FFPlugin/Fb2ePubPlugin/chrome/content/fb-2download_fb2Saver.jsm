@@ -28,6 +28,7 @@ XPCOMUtils.defineLazyModuleGetter(this, "NetUtil","resource://gre/modules/NetUti
 const BackgroundFileSaverStreamListener = Components.Constructor("@mozilla.org/network/background-file-saver;1?mode=streamlistener","nsIBackgroundFileSaver");
 
 
+
 this.Fb2DownloadCopySaverToEPub = Object.create(DownloadCopySaver);
 
 this.Fb2DownloadCopySaverToEPub.prototype.fromSerializable = function (aSerializable) {
@@ -110,6 +111,10 @@ this.Fb2DownloadCopySaverToEPub.prototype.fromSerializable = function (aSerializ
                 this._redirects = aSaver.redirects;
                 deferSaveComplete.resolve();
 				dump("\nSaved!");
+						if (!("@fb2epub.net/fb2epub/fb2epub;1" in Components.classes))
+						{
+							dump("\nBad component!");
+						}	
               } else {
                 // Infer the origin of the error from the failure code, because
                 // BackgroundFileSaver does not provide more specific data.
