@@ -1,3 +1,4 @@
+"use strict";
 const {Services} = Components.utils.import("resource://gre/modules/Services.jsm", {});
 const {Task} = Components.utils.import("resource://gre/modules/Task.jsm", {});
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
