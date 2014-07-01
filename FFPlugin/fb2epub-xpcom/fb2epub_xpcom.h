@@ -1,9 +1,9 @@
 /*
- * DO NOT EDIT.  THIS FILE IS GENERATED FROM fb2epub-xpcom.idl
+ * DO NOT EDIT.  THIS FILE IS GENERATED FROM fb2epub_xpcom.idl
  */
 
-#ifndef __gen_fb2epub-xpcom_h__
-#define __gen_fb2epub-xpcom_h__
+#ifndef __gen_fb2epub_xpcom_h__
+#define __gen_fb2epub_xpcom_h__
 
 
 #ifndef __gen_nsISupports_h__
@@ -27,12 +27,8 @@ class NS_NO_VTABLE IFb2EpubConverter : public nsISupports {
 
   NS_DECLARE_STATIC_IID_ACCESSOR(IFB2EPUBCONVERTER_IID)
 
-  /* long add (in long a, in long b); */
-  NS_IMETHOD Add(int32_t a, int32_t b, int32_t *_retval) = 0;
-
-  /* attribute AString name; */
-  NS_IMETHOD GetName(nsAString & aName) = 0;
-  NS_IMETHOD SetName(const nsAString & aName) = 0;
+  /* long Convert (in AString inputPath, in AString putputPath); */
+  NS_IMETHOD Convert(const nsAString & inputPath, const nsAString & putputPath, int32_t *_retval) = 0;
 
 };
 
@@ -40,21 +36,15 @@ class NS_NO_VTABLE IFb2EpubConverter : public nsISupports {
 
 /* Use this macro when declaring classes that implement this interface. */
 #define NS_DECL_IFB2EPUBCONVERTER \
-  NS_IMETHOD Add(int32_t a, int32_t b, int32_t *_retval); \
-  NS_IMETHOD GetName(nsAString & aName); \
-  NS_IMETHOD SetName(const nsAString & aName); 
+  NS_IMETHOD Convert(const nsAString & inputPath, const nsAString & putputPath, int32_t *_retval); 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object. */
 #define NS_FORWARD_IFB2EPUBCONVERTER(_to) \
-  NS_IMETHOD Add(int32_t a, int32_t b, int32_t *_retval) { return _to Add(a, b, _retval); } \
-  NS_IMETHOD GetName(nsAString & aName) { return _to GetName(aName); } \
-  NS_IMETHOD SetName(const nsAString & aName) { return _to SetName(aName); } 
+  NS_IMETHOD Convert(const nsAString & inputPath, const nsAString & putputPath, int32_t *_retval) { return _to Convert(inputPath, putputPath, _retval); } 
 
 /* Use this macro to declare functions that forward the behavior of this interface to another object in a safe way. */
 #define NS_FORWARD_SAFE_IFB2EPUBCONVERTER(_to) \
-  NS_IMETHOD Add(int32_t a, int32_t b, int32_t *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->Add(a, b, _retval); } \
-  NS_IMETHOD GetName(nsAString & aName) { return !_to ? NS_ERROR_NULL_POINTER : _to->GetName(aName); } \
-  NS_IMETHOD SetName(const nsAString & aName) { return !_to ? NS_ERROR_NULL_POINTER : _to->SetName(aName); } 
+  NS_IMETHOD Convert(const nsAString & inputPath, const nsAString & putputPath, int32_t *_retval) { return !_to ? NS_ERROR_NULL_POINTER : _to->Convert(inputPath, putputPath, _retval); } 
 
 #if 0
 /* Use the code below as a template for the implementation class for this interface. */
@@ -88,18 +78,8 @@ _MYCLASS_::~_MYCLASS_()
   /* destructor code */
 }
 
-/* long add (in long a, in long b); */
-NS_IMETHODIMP _MYCLASS_::Add(int32_t a, int32_t b, int32_t *_retval)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* attribute AString name; */
-NS_IMETHODIMP _MYCLASS_::GetName(nsAString & aName)
-{
-    return NS_ERROR_NOT_IMPLEMENTED;
-}
-NS_IMETHODIMP _MYCLASS_::SetName(const nsAString & aName)
+/* long Convert (in AString inputPath, in AString putputPath); */
+NS_IMETHODIMP _MYCLASS_::Convert(const nsAString & inputPath, const nsAString & putputPath, int32_t *_retval)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -108,4 +88,4 @@ NS_IMETHODIMP _MYCLASS_::SetName(const nsAString & aName)
 #endif
 
 
-#endif /* __gen_fb2epub-xpcom_h__ */
+#endif /* __gen_fb2epub_xpcom_h__ */

@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;XP_WIN;XP_WIN32;_CHAR16T;XPCOM_GLUE_AVOID_NSPR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;XP_WIN;XP_WIN32;XPCOM_GLUE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -171,10 +171,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="fb2epub-xpcom-impl.cpp" />
     <ClCompile Include="fb2epub-xpcom.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="fb2epub-xpcom.idl">
+    <CustomBuild Include="fb2epub_xpcom.idl">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)xpidl-build.bat  %(Filename) %(Extension)
 </Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)xpidl-build.bat  %(Filename) %(Extension)
@@ -190,7 +191,8 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="fb2epub-xpcom.h" />
+    <ClInclude Include="fb2epub-xpcom-impl.h" />
+    <ClInclude Include="fb2epub_xpcom.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
