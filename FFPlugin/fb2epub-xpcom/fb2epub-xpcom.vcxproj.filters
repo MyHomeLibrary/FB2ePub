@@ -21,6 +21,9 @@
     <ClCompile Include="fb2epub-xpcom-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fb2epub-xpcomModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fb2epub-xpcom-impl.h">
