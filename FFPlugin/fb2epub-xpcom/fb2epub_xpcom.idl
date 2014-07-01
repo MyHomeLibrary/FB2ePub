@@ -3,7 +3,6 @@
 [scriptable, uuid(3820526B-D2E7-44C4-9313-2F8CEDEDDE8E)]
 interface IFb2EpubConverter : nsISupports
 {
-  long add(in long a, in long b);
-  attribute AString name;
+  long Convert(in AString inputPath, in AString putputPath);
 };
 

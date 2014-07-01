@@ -18,15 +18,21 @@
     <ClCompile Include="fb2epub-xpcom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="fb2epub-xpcom.idl">
+    <ClCompile Include="fb2epub-xpcom-impl.cpp">
       <Filter>Source Files</Filter>
-    </CustomBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="fb2epub-xpcom.h">
+    <ClInclude Include="fb2epub-xpcom-impl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fb2epub_xpcom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="fb2epub_xpcom.idl">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>
