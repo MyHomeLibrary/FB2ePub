@@ -82,7 +82,7 @@
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(xulrunner-sdk)\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(xulrunner-sdk)\include;$(xulrunner-sdk)\include\nspr;$(IncludePath)</IncludePath>
     <LibraryPath>$(xulrunner-sdk)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -134,14 +134,15 @@
     <ClCompile>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;XP_WIN;XP_WIN32;_CHAR16T;XPCOM_GLUE_AVOID_NSPR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;XP_WIN;XP_WIN32;_CHAR16T;MOZILLA_STRICT_API;MOZ_NO_MOZALLOC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>xpcom-config.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>xpcomglue_s.lib;mozalloc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>xpcomglue_s_nomozalloc.lib;xul.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -175,6 +176,7 @@
   <ItemGroup>
     <ClCompile Include="fb2epub-xpcom-impl.cpp" />
     <ClCompile Include="fb2epub-xpcom.cpp" />
+    <ClCompile Include="fb2epub-xpcomModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fb2epub_xpcom.idl">
