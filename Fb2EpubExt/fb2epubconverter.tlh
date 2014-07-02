@@ -1,0 +1,188 @@
+﻿// Created by Microsoft (R) C/C++ Compiler Version 11.00.61030.0 (231622d2).
+//
+// c:\projects\googlecode\fb2epub\fb2epubext\x64\debug\fb2epubconverter.tlh
+//
+// C++ source equivalent of Win32 type library ..\FB2EPubConverter.tlb
+// compiler-generated file created 07/02/14 at 14:09:27 - DO NOT EDIT!
+
+#pragma once
+#pragma pack(push, 8)
+
+#include <comdef.h>
+
+//
+// Forward references and typedefs
+//
+
+struct __declspec(uuid("27113588-a62a-4e39-90a9-d8bc3e6c9ce7"))
+/* LIBID */ __FB2EPubConverter;
+struct __declspec(uuid("9b6d89bc-0c32-46e0-b06c-360da401fe9a"))
+/* interface */ IEPubConverterInterface;
+struct /* coclass */ ConvertProcessor;
+enum PathSearchOptions;
+struct /* coclass */ ConvertProcessorSettings;
+enum ParagraphConvTargetEnum;
+struct /* coclass */ Fb2EPubConverterEngine;
+struct __declspec(uuid("255293f1-ecb5-4218-8797-1068b915bec5"))
+/* dual interface */ IProgressUpdateInterface;
+struct /* coclass */ UnicodeHelpers;
+struct __declspec(uuid("22b31ddc-fca9-36d1-9851-38bfaf7f3e16"))
+/* dual interface */ _ConvertProcessor;
+struct __declspec(uuid("c02a7a19-78ee-3da1-b3f0-272c9c7957c2"))
+/* dual interface */ _ConvertProcessorSettings;
+struct __declspec(uuid("c4f58120-3b77-3552-9315-a6f1c4aef75c"))
+/* dual interface */ _Fb2EPubConverterEngine;
+struct __declspec(uuid("5bc860c8-8c66-3b7f-8be7-24be78a1e34b"))
+/* dual interface */ _UnicodeHelpers;
+
+//
+// Smart pointer typedef declarations
+//
+
+_COM_SMARTPTR_TYPEDEF(IProgressUpdateInterface, __uuidof(IProgressUpdateInterface));
+_COM_SMARTPTR_TYPEDEF(IEPubConverterInterface, __uuidof(IEPubConverterInterface));
+_COM_SMARTPTR_TYPEDEF(_ConvertProcessor, __uuidof(_ConvertProcessor));
+_COM_SMARTPTR_TYPEDEF(_ConvertProcessorSettings, __uuidof(_ConvertProcessorSettings));
+_COM_SMARTPTR_TYPEDEF(_Fb2EPubConverterEngine, __uuidof(_Fb2EPubConverterEngine));
+_COM_SMARTPTR_TYPEDEF(_UnicodeHelpers, __uuidof(_UnicodeHelpers));
+
+//
+// Type library items
+//
+
+struct __declspec(uuid("0ff011ad-18a5-4cf2-8ab1-011aa9aa2bdf"))
+ConvertProcessor;
+    // [ default ] interface _ConvertProcessor
+    // interface _Object
+    // interface IEPubConverterInterface
+
+enum __declspec(uuid("7d3dc364-17a3-3710-ba39-90521fdd2b61"))
+PathSearchOptions
+{
+    PathSearchOptions_Fb2Only = 0,
+    PathSearchOptions_Fb2WithArchives = 1,
+    PathSearchOptions_WithAllArchives = 2,
+    PathSearchOptions_All = 3
+};
+
+struct __declspec(uuid("2c4f754f-9ec8-39d7-8232-611cf39b8726"))
+ConvertProcessorSettings;
+    // [ default ] interface _ConvertProcessorSettings
+    // interface _Object
+
+enum __declspec(uuid("b88deca3-fa63-3c4f-b32f-ee341957e209"))
+ParagraphConvTargetEnum
+{
+    ParagraphConvTargetEnum_Paragraph = 0,
+    ParagraphConvTargetEnum_H1 = 1,
+    ParagraphConvTargetEnum_H2 = 2,
+    ParagraphConvTargetEnum_H3 = 3,
+    ParagraphConvTargetEnum_H4 = 4,
+    ParagraphConvTargetEnum_H5 = 5,
+    ParagraphConvTargetEnum_H6 = 6
+};
+
+struct __declspec(uuid("845f893c-8495-32de-92e7-b41b5e0b9483"))
+Fb2EPubConverterEngine;
+    // [ default ] interface _Fb2EPubConverterEngine
+    // interface _Object
+
+struct __declspec(uuid("255293f1-ecb5-4218-8797-1068b915bec5"))
+IProgressUpdateInterface : IDispatch
+{
+    //
+    // Raw methods provided by interface
+    //
+
+      virtual HRESULT __stdcall ConvertStarted (
+        /*[in]*/ long total ) = 0;
+      virtual HRESULT __stdcall ConvertFinished (
+        /*[in]*/ long total ) = 0;
+      virtual HRESULT __stdcall ProcessingStarted (
+        /*[in]*/ BSTR fileName ) = 0;
+      virtual HRESULT __stdcall ProcessingSaving (
+        /*[in]*/ BSTR fileName ) = 0;
+      virtual HRESULT __stdcall Processed (
+        /*[in]*/ BSTR fileName ) = 0;
+      virtual HRESULT __stdcall SkippedDueError (
+        /*[in]*/ BSTR fileName ) = 0;
+};
+
+struct __declspec(uuid("9b6d89bc-0c32-46e0-b06c-360da401fe9a"))
+IEPubConverterInterface : IUnknown
+{
+    //
+    // Raw methods provided by interface
+    //
+
+      virtual HRESULT __stdcall ConvertPath (
+        /*[in]*/ BSTR inputPath,
+        /*[in]*/ BSTR outputFolder,
+        /*[in]*/ struct IProgressUpdateInterface * progress ) = 0;
+      virtual HRESULT __stdcall ConvertList (
+        /*[in]*/ SAFEARRAY * files,
+        /*[in]*/ BSTR outputFolder,
+        /*[in]*/ struct IProgressUpdateInterface * progress ) = 0;
+      virtual HRESULT __stdcall ConvertXml (
+        /*[in]*/ IUnknown * doc,
+        /*[in]*/ BSTR outFileName,
+        /*[in]*/ struct IProgressUpdateInterface * progress ) = 0;
+      virtual HRESULT __stdcall ConvertSingleFile (
+        /*[in]*/ BSTR inputPath,
+        /*[in]*/ BSTR outputName,
+        /*[in]*/ struct IProgressUpdateInterface * progress ) = 0;
+      virtual HRESULT __stdcall AbortConversion ( ) = 0;
+      virtual HRESULT __stdcall ShowSettingsDialog (
+        /*[in]*/ long parent,
+        /*[out,retval]*/ VARIANT_BOOL * pRetVal ) = 0;
+};
+
+struct __declspec(uuid("688add6d-0760-3472-9688-6469813178d5"))
+UnicodeHelpers;
+    // [ default ] interface _UnicodeHelpers
+    // interface _Object
+
+struct __declspec(uuid("22b31ddc-fca9-36d1-9851-38bfaf7f3e16"))
+_ConvertProcessor : IDispatch
+{};
+
+struct __declspec(uuid("c02a7a19-78ee-3da1-b3f0-272c9c7957c2"))
+_ConvertProcessorSettings : IDispatch
+{};
+
+struct __declspec(uuid("c4f58120-3b77-3552-9315-a6f1c4aef75c"))
+_Fb2EPubConverterEngine : IDispatch
+{};
+
+struct __declspec(uuid("5bc860c8-8c66-3b7f-8be7-24be78a1e34b"))
+_UnicodeHelpers : IDispatch
+{};
+
+//
+// Named GUID constants initializations
+//
+
+extern "C" const GUID __declspec(selectany) LIBID_FB2EPubConverter =
+    {0x27113588,0xa62a,0x4e39,{0x90,0xa9,0xd8,0xbc,0x3e,0x6c,0x9c,0xe7}};
+extern "C" const GUID __declspec(selectany) CLSID_ConvertProcessor =
+    {0x0ff011ad,0x18a5,0x4cf2,{0x8a,0xb1,0x01,0x1a,0xa9,0xaa,0x2b,0xdf}};
+extern "C" const GUID __declspec(selectany) CLSID_ConvertProcessorSettings =
+    {0x2c4f754f,0x9ec8,0x39d7,{0x82,0x32,0x61,0x1c,0xf3,0x9b,0x87,0x26}};
+extern "C" const GUID __declspec(selectany) CLSID_Fb2EPubConverterEngine =
+    {0x845f893c,0x8495,0x32de,{0x92,0xe7,0xb4,0x1b,0x5e,0x0b,0x94,0x83}};
+extern "C" const GUID __declspec(selectany) IID_IProgressUpdateInterface =
+    {0x255293f1,0xecb5,0x4218,{0x87,0x97,0x10,0x68,0xb9,0x15,0xbe,0xc5}};
+extern "C" const GUID __declspec(selectany) IID_IEPubConverterInterface =
+    {0x9b6d89bc,0x0c32,0x46e0,{0xb0,0x6c,0x36,0x0d,0xa4,0x01,0xfe,0x9a}};
+extern "C" const GUID __declspec(selectany) CLSID_UnicodeHelpers =
+    {0x688add6d,0x0760,0x3472,{0x96,0x88,0x64,0x69,0x81,0x31,0x78,0xd5}};
+extern "C" const GUID __declspec(selectany) IID__ConvertProcessor =
+    {0x22b31ddc,0xfca9,0x36d1,{0x98,0x51,0x38,0xbf,0xaf,0x7f,0x3e,0x16}};
+extern "C" const GUID __declspec(selectany) IID__ConvertProcessorSettings =
+    {0xc02a7a19,0x78ee,0x3da1,{0xb3,0xf0,0x27,0x2c,0x9c,0x79,0x57,0xc2}};
+extern "C" const GUID __declspec(selectany) IID__Fb2EPubConverterEngine =
+    {0xc4f58120,0x3b77,0x3552,{0x93,0x15,0xa6,0xf1,0xc4,0xae,0xf7,0x5c}};
+extern "C" const GUID __declspec(selectany) IID__UnicodeHelpers =
+    {0x5bc860c8,0x8c66,0x3b7f,{0x8b,0xe7,0x24,0xbe,0x78,0xa1,0xe3,0x4b}};
+
+#pragma pack(pop)
