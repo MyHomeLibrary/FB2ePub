@@ -31,30 +31,41 @@ int	CFb2EpubConverterCaller::MessageBoxNS(HWND hWnd,const nsAString& nsaText,con
 /* long Convert (in AString inputPath, in AString putputPath); */
 NS_IMETHODIMP CFb2EpubConverterCaller::Convert(const nsAString & inputPath, const nsAString & outputPath, int32_t *_retval)
 {
+	HRESULT hr(S_OK);
 	CoInitialize(NULL);
 	IEPubConverterInterfacePtr pConverter = NULL;
-	HRESULT hr = pConverter.CreateInstance(CLSID_ConvertProcessor);
-	if ( FAILED(hr))
+	do
 	{
-		MessageBox(NULL,L"Unable to create converter instance.\nConverter probably not registered",L"Error",MB_OK|MB_ICONERROR);
+		hr = pConverter.CreateInstance(CLSID_ConvertProcessor);
+		if ( FAILED(hr))
+		{
+			MessageBox(NULL,L"Unable to create converter instance.\nConverter probably not registered",L"Error",MB_OK|MB_ICONERROR);
+		}
+		// convert input string to BSTR
+		char16_t* chText = ToNewUnicode(inputPath);
+		BSTR bstrInput = ::SysAllocString(chText);
+		NS_Free(chText);
+		// convert output string to BSTR
+		chText = ToNewUnicode(outputPath);
+		BSTR bstrOutput = ::SysAllocString(chText);
+		NS_Free(chText);
+		hr = pConverter->ConvertSingleFile(bstrInput,bstrOutput,NULL);
+		::SysFreeString(bstrInput);
+		::SysFreeString(bstrOutput);
+		if ( FAILED(hr))
+		{
+			MessageBox(NULL,L"Unable to convert file",L"Error",MB_OK|MB_ICONERROR);
+			break;
+		}
 	}
-	// convert input string to BSTR
-	char16_t* chText = ToNewUnicode(inputPath);
-	BSTR bstrInput = ::SysAllocString(chText);
-	NS_Free(chText);
-	// convert output string to BSTR
-	chText = ToNewUnicode(outputPath);
-	BSTR bstrOutput = ::SysAllocString(chText);
-	NS_Free(chText);
-	hr = pConverter->ConvertSingleFile(bstrInput,bstrOutput,NULL);
-	::SysFreeString(bstrInput);
-	::SysFreeString(bstrOutput);
-	if ( FAILED(hr))
-	{
-		MessageBox(NULL,L"Unable to convert file",L"Error",MB_OK|MB_ICONERROR);
-	}
-    //return NS_ERROR_NOT_IMPLEMENTED;
-	//MessageBoxNS(NULL,inputPath,outputPath,MB_OK);
+	while(false);
 	CoUninitialize();
+
+	if ( FAILED(hr) )
+	{
+		return NS_ERROR_FAILURE;
+	}
+	//return NS_ERROR_NOT_IMPLEMENTED;
+	//MessageBoxNS(NULL,outputPath,inputPath,MB_OK);
 	return NS_OK;
 }
