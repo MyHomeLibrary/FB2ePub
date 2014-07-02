@@ -133,7 +133,6 @@
     </Link>
     <PostBuildEvent>
       <Command>copy FB2EPUBExt.INI $(TargetDir). /y
-copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y
 copy $(ProjectDir)$(IntermediateOutputPath)fb2epubconverter.tlh $(ProjectDir). /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -182,7 +181,6 @@ copy $(ProjectDir)$(IntermediateOutputPath)fb2epubconverter.tlh $(ProjectDir). /
     </Link>
     <PostBuildEvent>
       <Command>copy FB2EPUBExt.INI $(TargetDir). /y
-copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y
 copy $(ProjectDir)$(IntermediateOutputPath)fb2epubconverter.tlh $(ProjectDir). /y
 </Command>
     </PostBuildEvent>
@@ -230,7 +228,6 @@ copy $(ProjectDir)$(IntermediateOutputPath)fb2epubconverter.tlh $(ProjectDir). /
     </Link>
     <PostBuildEvent>
       <Command>copy FB2EPUBExt.INI $(TargetDir). /y
-copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y
 copy $(ProjectDir)$(IntermediateOutputPath)fb2epubconverter.tlh $(ProjectDir). /y
 </Command>
     </PostBuildEvent>
@@ -277,7 +274,6 @@ copy $(ProjectDir)$(IntermediateOutputPath)fb2epubconverter.tlh $(ProjectDir). /
     </Link>
     <PostBuildEvent>
       <Command>copy FB2EPUBExt.INI $(TargetDir). /y
-copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y
 copy $(ProjectDir)$(IntermediateOutputPath)fb2epubconverter.tlh $(ProjectDir). /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
