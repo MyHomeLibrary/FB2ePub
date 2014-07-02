@@ -151,7 +151,7 @@ namespace FB2EPubConverter
                 fileName = outputFileName.ToLower();
                 if (Path.GetExtension(fileName) != ".epub")
                 {
-                    fileName = string.Format("{0}.epub", fileName);
+                    fileName = string.Format("{0}.epub", outputFileName);
                 }
             }
             else
