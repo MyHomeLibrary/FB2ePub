@@ -133,7 +133,8 @@
     </Link>
     <PostBuildEvent>
       <Command>copy FB2EPUBExt.INI $(TargetDir). /y
-copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
+copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y
+copy $(ProjectDir)$(IntermediateOutputPath)fb2epubconverter.tlh $(ProjectDir). /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -181,7 +182,9 @@ copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
     </Link>
     <PostBuildEvent>
       <Command>copy FB2EPUBExt.INI $(TargetDir). /y
-copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
+copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y
+copy $(ProjectDir)$(IntermediateOutputPath)fb2epubconverter.tlh $(ProjectDir). /y
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -227,7 +230,9 @@ copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
     </Link>
     <PostBuildEvent>
       <Command>copy FB2EPUBExt.INI $(TargetDir). /y
-copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
+copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y
+copy $(ProjectDir)$(IntermediateOutputPath)fb2epubconverter.tlh $(ProjectDir). /y
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -272,7 +277,8 @@ copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
     </Link>
     <PostBuildEvent>
       <Command>copy FB2EPUBExt.INI $(TargetDir). /y
-copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
+copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y
+copy $(ProjectDir)$(IntermediateOutputPath)fb2epubconverter.tlh $(ProjectDir). /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -318,6 +324,7 @@ copy FB2EPUBExt.INI $(SolutionDir)Output\$(Configuration)\. /y</Command>
   <ItemGroup>
     <None Include="BITMAP1.BMP" />
     <None Include="CProgressReporter.rgs" />
+    <None Include="fb2epubconverter.tlh" />
     <None Include="Fb2EpubExt.def" />
     <None Include="Fb2EpubExt.rgs" />
     <None Include="Fb2EpubShlExt.rgs" />
