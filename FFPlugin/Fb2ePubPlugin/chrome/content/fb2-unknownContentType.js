@@ -200,73 +200,63 @@ getRememberButtonDisabledState: function()
 	return false;
 },
 
-// Download a file from internet, to file named "filename" (should include path) from URI path "uri"
-download: function (filename, uri)
-{
-  try {
-    var nsILocalFile = Components.classes["@mozilla.org/file/local;1"]
-                      .getService(Components.interfaces.nsILocalFile);
-    // var nsIURI = Components.classes["@mozilla.org/network/standard-url;1"]
-                 // .getService(Components.interfaces.nsIURI);
-    nsILocalFile.initWithPath(filename);
-    // nsIURI.spec = url;
-    var nsIWBP = Components.interfaces.nsIWebBrowserPersist;
-	if ( nsIWBP == null )
-	{
-		dump("\ndownload: - Unable to create nsIWebBrowserPersist interface");
-		return null;
-	}
-    var persist = Components.classes["@mozilla.org/embedding/browser/nsWebBrowserPersist;1"]
-                 .createInstance(nsIWBP);
-	if ( persist == null )
-	{
-		dump("\ndownload: - Unable to create nsIWebBrowserPersist interface object instance");
-		return null;
-	}
-    persist.persistFlags = nsIWBP.PERSIST_FLAGS_REPLACE_EXISTING_FILES;
+// // Download a file from internet, to file named "filename" (should include path) from URI path "uri"
+// download: function (filename, uri)
+// {
+  // try {
+    // var nsILocalFile = Components.classes["@mozilla.org/file/local;1"]
+                      // .getService(Components.interfaces.nsILocalFile);
+    // // var nsIURI = Components.classes["@mozilla.org/network/standard-url;1"]
+                 // // .getService(Components.interfaces.nsIURI);
+    // nsILocalFile.initWithPath(filename);
+    // // nsIURI.spec = url;
+    // var nsIWBP = Components.interfaces.nsIWebBrowserPersist;
+	// if ( nsIWBP == null )
+	// {
+		// dump("\ndownload: - Unable to create nsIWebBrowserPersist interface");
+		// return null;
+	// }
+    // var persist = Components.classes["@mozilla.org/embedding/browser/nsWebBrowserPersist;1"]
+                 // .createInstance(nsIWBP);
+	// if ( persist == null )
+	// {
+		// dump("\ndownload: - Unable to create nsIWebBrowserPersist interface object instance");
+		// return null;
+	// }
+    // persist.persistFlags = nsIWBP.PERSIST_FLAGS_REPLACE_EXISTING_FILES;
 
-	var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-	if ( wm == null )
-	{
-		dump("\ndownload: - Unable to get nsIWindowMediator");
-		return null;
-	}
-	var wrecent = wm.getMostRecentWindow("navigator:browser");
-	if ( wrecent == null )
-	{
-		dump("\ndownload: - Unable to get latest window");
-		return null;
-	}
-	Components.utils.import("resource://gre/modules/PrivateBrowsingUtils.jsm");	
-	var privacy = PrivateBrowsingUtils.privacyContextFromWindow(wrecent);
-	if ( privacy == null )
-	{
-		dump("\ndownload: - Unable to get privacy from recent window");
-		return null;
-	}
-    persist.saveURI(uri, null, null, null, null, nsILocalFile,privacy);
-    return nsILocalFile;
-  }
-  catch(ex) {
-	dump("\n"+ex);
-    return null;
-  }
-},
+	// var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+	// if ( wm == null )
+	// {
+		// dump("\ndownload: - Unable to get nsIWindowMediator");
+		// return null;
+	// }
+	// var wrecent = wm.getMostRecentWindow("navigator:browser");
+	// if ( wrecent == null )
+	// {
+		// dump("\ndownload: - Unable to get latest window");
+		// return null;
+	// }
+	// Components.utils.import("resource://gre/modules/PrivateBrowsingUtils.jsm");	
+	// var privacy = PrivateBrowsingUtils.privacyContextFromWindow(wrecent);
+	// if ( privacy == null )
+	// {
+		// dump("\ndownload: - Unable to get privacy from recent window");
+		// return null;
+	// }
+    // persist.saveURI(uri, null, null, null, null, nsILocalFile,privacy);
+    // return nsILocalFile;
+  // }
+  // catch(ex) {
+	// dump("\n"+ex);
+    // return null;
+  // }
+// },
 
 // Generate temporary file name of required length
 // length - length of temporal string
-makeTempFileName: function(length)
-{
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    for( var i=0; i < length; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text +".tmp";
-},
-
-test: function(destination,source)
+download: function(destination,source)
 {
 Task.spawn(function () {
 
@@ -332,27 +322,9 @@ downloadAndConvert: function()
 	var result = fp.show();
 	if (result == nsIFilePicker.returnOK || result == nsIFilePicker.returnReplace)
 	{
-		Components.utils.import("resource://gre/modules/osfile.jsm")
-		var path1 = OS.Path.join(OS.Constants.Path.tmpDir, this.makeTempFileName(8));
-		dump("\nTemp path: " +path1);
-		// var savedFile = this.download(path1,dialog.mLauncher.source);
-		// if ( savedFile == null )
-		// {
-			// dump("\ndownloadAndConvert: Unable to download file: " + fp.file.path);
-		// }
-	
-		// dump("\n"+fp.file.leafName);
-		// var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-		// var wrecent = wm.getMostRecentWindow("navigator:browser");
-		// wrecent.saveURL(dialog.mLauncher.source, fp.file.leafName);
+		this.download(fp.file.path,dialog.mLauncher.source);
 	}
-	this.test(fp.file.path,dialog.mLauncher.source);
-	//Components.utils.import("resource://gre/modules/Downloads.jsm");
-	//let list = yield Downloads.getList(Downloads.ALL);
-	// if ( list == null )
-	// {
-		// dump("\nNo list");
-	// }
+	dump("\n" + result);
 },
 
 dialogAccepted: function() {
