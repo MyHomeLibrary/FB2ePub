@@ -151,6 +151,10 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(TargetPath) $(ProjectDir)..\Fb2ePubPlugin\components\. /y
+copy   $(ProjectDir)fb2epub_xpcom.xpt $(ProjectDir)..\Fb2ePubPlugin\components\. /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

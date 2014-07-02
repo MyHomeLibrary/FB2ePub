@@ -110,11 +110,18 @@ this.Fb2DownloadCopySaverToEPub.prototype.fromSerializable = function (aSerializ
                 this._signatureInfo = aSaver.signatureInfo;
                 this._redirects = aSaver.redirects;
                 deferSaveComplete.resolve();
-				dump("\nSaved!");
-						if (!("@fb2epub.net/fb2epub/fb2epub;1" in Components.classes))
-						{
-							dump("\nBad component!");
-						}	
+				var fb2epubConverterComponent = Cc["@fb2epub.net/fb2epub/fb2epub;1"];
+				if (fb2epubConverterComponent == null)
+				{
+					dump("\nUnable to load component, it's probably not registered!");
+				}	
+				var converterObject = fb2epubConverterComponent.createInstance(Ci.IFb2EpubConverter);
+				if (converterObject == null)
+				{
+					dump("\nUnable to create component!");
+				}	
+				var res = converterObject.Convert("Test1","Test2");
+				dump("\nSaved!");			
               } else {
                 // Infer the origin of the error from the failure code, because
                 // BackgroundFileSaver does not provide more specific data.
