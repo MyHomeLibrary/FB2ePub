@@ -1,9 +1,9 @@
-﻿// Created by Microsoft (R) C/C++ Compiler Version 11.00.61030.0 (231622d2).
+﻿// Created by Microsoft (R) C/C++ Compiler Version 11.00.61030.0 (01bacf6b).
 //
-// c:\projects\googlecode\fb2epub\fb2epubext\x64\debug\fb2epubconverter.tlh
+// c:\projects\googlecode\fb2epub\fb2epubext\win32\debug\fb2epubconverter.tlh
 //
 // C++ source equivalent of Win32 type library ..\FB2EPubConverter.tlb
-// compiler-generated file created 07/02/14 at 14:09:27 - DO NOT EDIT!
+// compiler-generated file created 07/02/14 at 14:00:38 - DO NOT EDIT!
 
 #pragma once
 #pragma pack(push, 8)
