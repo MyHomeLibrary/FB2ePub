@@ -9,7 +9,7 @@ Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 Components.utils.import("resource://gre/modules/Downloads.jsm");
 Components.utils.import("chrome://fb2epub/content/DownloadsExt.jsm");
 
-
+const defaultNS = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 
 
 window.addEventListener("load", function load(event){
@@ -142,25 +142,33 @@ insertMenu: function (saveGroup)
   }
   else
   {
-  // get pointer to save item in the group
+	// get pointer to save item in the group
     var saveIndex = saveGroup.getIndexOfItem(saveItem);
-	var fb2ePubMenuItem = document.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul",'radio');
-	fb2ePubMenuItem.setAttribute( 'label', translator.getString("fb2epub_menu_item_id") ); // uses locale 
+	// create a HBox container
+	var fb2ePubHBox = document.createElementNS(defaultNS,'hbox');
+	fb2ePubHBox.setAttribute( 'id', 'fb2epubcontainer' ); 
+	fb2ePubHBox.setAttribute( 'flex', '1' ); 
+	// Create a FB2EPub radio button
+	this._fb2MenuItem = document.createElementNS(defaultNS,'radio');
+	this._fb2MenuItem.setAttribute( 'label', translator.getString("fb2epub_menu_item_id") ); // uses locale 
+	this._fb2MenuItem.setAttribute( 'flex', '1' ); 
+	this._fb2MenuItem.setAttribute( 'id', 'fb2epub-radio' ); 
+	fb2ePubHBox.appendChild(this._fb2MenuItem); // add to container
+	var addedElement;
 	if (saveIndex  == saveGroup.itemCount ) // if 'save' - last item we append
 	{
-		this._fb2MenuItem = saveGroup.appendChild(fb2ePubMenuItem);
+		addedElement = saveGroup.appendChild(fb2ePubHBox);
 	}
 	else // else insert before it
 	{
-	  this._fb2MenuItem = saveGroup.insertBefore(fb2ePubMenuItem,saveItem.nextSibling);
+	  addedElement = saveGroup.insertBefore(fb2ePubHBox,saveItem);
 	}
-	if ( this._fb2MenuItem == null )
+	if ( addedElement == null )
 	{
 		dump("\ninsertMenu: adding menu entry failed");
 	}
 	else
 	{
-		this._fb2MenuItem.id = "fb2epub-radio";
 		saveGroup.addEventListener("select", function(event) {fb2SaveContent.toggleChoice(event);},true);
 		saveGroup.selectedItem = this._fb2MenuItem;
 	}
