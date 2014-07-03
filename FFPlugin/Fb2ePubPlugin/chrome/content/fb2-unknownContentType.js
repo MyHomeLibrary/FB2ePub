@@ -128,6 +128,42 @@ toggleChoice: function(event)
   }
 },
 
+createMenuList: function (parent)
+{ 
+	var menulist = document.createElementNS(defaultNS,'menulist');
+	if ( menulist == null)
+	{
+		dump("\ncreateMenuList: Unable to create menulist\n");
+	}
+	menulist.setAttribute( 'flex', '1' ); 
+	menulist.setAttribute( 'id', 'fb2epub-menulist' ); 
+	
+	// Create a menu popup
+	var menuPopup = document.createElementNS(defaultNS,'menupopup');
+	if ( menuPopup == null)
+	{
+		dump("\ncreateMenuList: Unable to create menu popup\n");
+	}
+	menuPopup.setAttribute( 'id', 'fb2epub-menupopup' ); 
+	
+	// create "browse for folder" menu item
+	var browseItem = document.createElementNS(defaultNS,'menuitem');
+	browseItem.setAttribute( 'id', 'fb2epub-menubrowseItem' ); 
+    var translator = document.getElementById('download_dialog');
+    if ( translator == null)
+    {
+      dump("\ncreateMenuList: 'download_dialog' not found\n");  
+    }
+	
+	browseItem.setAttribute( 'label', translator.getString("fb2epub_browse4folder.label")); 
+	menuPopup.appendChild(browseItem); //add popup to menulist
+	
+	
+	menulist.appendChild(menuPopup); //add popup to menulist
+	
+	parent.appendChild(menulist); // add to container
+},
+
 insertMenu: function (saveGroup)
 { 
   var translator = document.getElementById('download_dialog');
@@ -144,16 +180,30 @@ insertMenu: function (saveGroup)
   {
 	// get pointer to save item in the group
     var saveIndex = saveGroup.getIndexOfItem(saveItem);
+	
 	// create a HBox container
 	var fb2ePubHBox = document.createElementNS(defaultNS,'hbox');
+	if ( fb2ePubHBox == null)
+	{
+		dump("\ninsertMenu: Unable to create hbox container\n");
+	}
 	fb2ePubHBox.setAttribute( 'id', 'fb2epubcontainer' ); 
 	fb2ePubHBox.setAttribute( 'flex', '1' ); 
+	
 	// Create a FB2EPub radio button
 	this._fb2MenuItem = document.createElementNS(defaultNS,'radio');
-	this._fb2MenuItem.setAttribute( 'label', translator.getString("fb2epub_menu_item_id") ); // uses locale 
+	if ( this._fb2MenuItem == null)
+	{
+		dump("\ninsertMenu: Unable to create radio button\n");
+	}
+	this._fb2MenuItem.setAttribute( 'label', translator.getString("fb2epub_menu_item_id.label") ); // uses locale 
 	this._fb2MenuItem.setAttribute( 'flex', '1' ); 
 	this._fb2MenuItem.setAttribute( 'id', 'fb2epub-radio' ); 
 	fb2ePubHBox.appendChild(this._fb2MenuItem); // add to container
+	
+	// Create and populate  menu list
+	this.createMenuList(fb2ePubHBox);
+
 	var addedElement;
 	if (saveIndex  == saveGroup.itemCount ) // if 'save' - last item we append
 	{
