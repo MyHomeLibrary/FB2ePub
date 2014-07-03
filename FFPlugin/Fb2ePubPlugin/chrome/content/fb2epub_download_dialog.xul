@@ -4,6 +4,13 @@
 <overlay id="fb2-unknownContentType"
 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 
+<!-- Need to put into a window in order to work, otherwise boundleset will not be found -->
+<window>
+<stringbundleset id="stringbundleset">
+    <stringbundle id="download_dialog" src="chrome://fb2epub/locale/download_dialog.properties" />
+</stringbundleset>
+</window>
+  
 <script type="application/x-javascript" src="chrome://fb2epub/content/fb2-unknownContentType.js"/>
  
 

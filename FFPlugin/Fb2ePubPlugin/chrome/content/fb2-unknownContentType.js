@@ -11,6 +11,7 @@ Components.utils.import("chrome://fb2epub/content/DownloadsExt.jsm");
 
 
 
+
 window.addEventListener("load", function load(event){
     window.removeEventListener("load", load, false); //remove listener, no longer needed
     fb2SaveContent.init();  
@@ -26,9 +27,6 @@ var fb2SaveContent = {
 // Check if the passed source name is one of FB2 extensions
 isfb2extension: function(fileName)
 {
- // var myURL = sourceURI.QueryInterface(Components.interfaces.nsIURL);
-
- // var extension = myURL.fileExtension.toLowerCase();
  var extension = fileName.split('.').pop().toLowerCase();
  if ( extension == null || extension == "") // if no extension
  {
@@ -131,18 +129,23 @@ toggleChoice: function(event)
 },
 
 insertMenu: function (saveGroup)
-{
+{ 
+  var translator = document.getElementById('download_dialog');
+  if ( translator == null)
+  {
+    dump("\ninsertMenu: 'download_dialog' not found\n");  
+  }
   var saveItem = document.getElementById('save');
   if ( saveItem == null)
   {
-    dump("\ninsertMenu: Item with ID save not found");
+    dump("\ninsertMenu: Item with ID save not found\n");
   }
   else
   {
   // get pointer to save item in the group
     var saveIndex = saveGroup.getIndexOfItem(saveItem);
 	var fb2ePubMenuItem = document.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul",'radio');
-	fb2ePubMenuItem.setAttribute( 'label', "Fb2ePub (convert to ePub)" );
+	fb2ePubMenuItem.setAttribute( 'label', translator.getString("fb2epub_menu_item_id") ); // uses locale 
 	if (saveIndex  == saveGroup.itemCount ) // if 'save' - last item we append
 	{
 		this._fb2MenuItem = saveGroup.appendChild(fb2ePubMenuItem);
