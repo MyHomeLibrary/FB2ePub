@@ -22,6 +22,7 @@ var fb2SaveContent = {
 	_fb2ItemSelected: false,
 	_rememberButtonDisabledPrevState: false,
 	_rememberButtonCheckedPrevState: false,
+	_selectedDestinationId: 'fb2epub-menubrowseItem',
 
 	
 // Check if the passed source name is one of FB2 extensions
@@ -87,6 +88,18 @@ checkRememberButton: function(check)
 	}
 	// set checked attribute
 	rememberbutton.setAttribute("checked", check);
+},
+
+toggleDestinationChoice: function(event)
+{
+	var topMenu = document.getElementById('fb2epub-menulist');
+	if ( topMenu == null )
+	{
+		dump("\ntoggleDestinationChoice - error getting top menu!");
+		return;
+	}
+	var selectedItem = topMenu.selectedItem;
+	this._selectedDestinationId = selectedItem.id;
 },
 
 // react on user clicking on one of the radio buttons
@@ -174,7 +187,6 @@ createMenuList: function (parent)
 	{
 		let path= converterPathsObject.GetPath(i);
 		let name = converterPathsObject.GetPathName(i);
-		dump("\n " + i + " " + path + " " + name);		
 		let menuItem = document.createElementNS(defaultNS,'menuitem');
 		menuItem.setAttribute( 'id', i ); 
 		var itemLabel;
@@ -198,7 +210,7 @@ createMenuList: function (parent)
 		// disable selection box
 		menulist.setAttribute("disabled", true);
 	}
-	
+	menulist.addEventListener("select", function(event) {fb2SaveContent.toggleDestinationChoice(event);},true);
 	parent.appendChild(menulist); // add to container
 },
 
@@ -353,6 +365,10 @@ getFileNameToSaveFromUser: function(originalName)
 	return null;
 },
 
+isNumber: function(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+},
+
 // React on user pressed "Accept" in SaveAs dialogue
 downloadAndConvert: function()
 {
@@ -374,9 +390,42 @@ downloadAndConvert: function()
 			basename = withoutFirstExtension.substring(0,start)  + ".ePub";
 		}
 	}
-	var destPath = this.getFileNameToSaveFromUser(basename);
+	var destPath = null;
+	if ( this._selectedDestinationId == 'fb2epub-menubrowseItem' )
+	{
+		destPath = this.getFileNameToSaveFromUser(basename);
+	}
+	else if (this.isNumber(this._selectedDestinationId))
+	{
+		var fb2epubConverterComponent = Components.classes["@fb2epub.net/fb2epub/fb2epubpaths;1"];
+		if (fb2epubConverterComponent == null)
+		{
+			dump("\ndownloadAndConvert: Unable to load component, it's probably not registered!");
+			return;
+		}	
+		var converterPathsObject = fb2epubConverterComponent.createInstance(Components.interfaces.IFb2EpubConverterPaths);
+		if (converterPathsObject == null)
+		{
+			dump("\ndownloadAndConvert: Unable to create component!");
+			return;
+		}	
+		var pathsCount =	converterPathsObject.GetPathsCount();
+		if (this._selectedDestinationId >= pathsCount)
+		{
+			dump("\ndownloadAndConvert: Selected value " + this._selectedDestinationId + " is higher then total paths count: " + pathsCount + " !");
+			return;
+		}
+		let path= converterPathsObject.GetPath(this._selectedDestinationId);
+		destPath = path + basename;
+	}
+	else 
+	{
+		dump("\ndownloadAndConvert: Unknown item " + + "selected, calling user selection dialogue");
+		destPath = this.getFileNameToSaveFromUser(basename);
+	}
 	if ( destPath != null)
 	{
+		dump("\n" + destPath);
 		this.download(destPath,dialog.mLauncher.source);
 	}
 },
