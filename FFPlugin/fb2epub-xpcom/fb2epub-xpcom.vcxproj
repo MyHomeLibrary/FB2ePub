@@ -181,6 +181,7 @@ copy   $(ProjectDir)fb2epub_xpcom.xpt $(ProjectDir)..\Fb2ePubPlugin\components\.
     <ClCompile Include="fb2epub-xpcom-impl.cpp" />
     <ClCompile Include="fb2epub-xpcom.cpp" />
     <ClCompile Include="fb2epub-xpcomModule.cpp" />
+    <ClCompile Include="fb2epub_paths-imp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fb2epub_xpcom.idl">
@@ -200,6 +201,7 @@ copy   $(ProjectDir)fb2epub_xpcom.xpt $(ProjectDir)..\Fb2ePubPlugin\components\.
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fb2epub-xpcom-impl.h" />
+    <ClInclude Include="fb2epub_paths-imp.h" />
     <ClInclude Include="fb2epub_xpcom.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

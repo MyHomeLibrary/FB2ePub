@@ -158,6 +158,37 @@ createMenuList: function (parent)
 	browseItem.setAttribute( 'label', translator.getString("fb2epub_browse4folder.label")); 
 	menuPopup.appendChild(browseItem); //add popup to menulist
 	
+	var fb2epubConverterComponent = Components.classes["@fb2epub.net/fb2epub/fb2epub;1"];
+	if (fb2epubConverterComponent == null)
+	{
+		dump("\ncreateMenuList: Unable to load component, it's probably not registered!");
+	}	
+	var converterPathsObject = fb2epubConverterComponent.createInstance(Components.interfaces.IFb2EpubConverterPaths);
+	if (converterPathsObject == null)
+	{
+		dump("\nUnable to create component!");
+	}	
+	var pathsCount =	converterPathsObject.GetPathsCount();
+	dump("\n " + pathsCount);
+	for (var i = 0; i < pathsCount; i++) 
+	{
+		let path= converterPathsObject.GetPath(i);
+		let name = converterPathsObject.GetPathName(i);
+		dump("\n " + i + " " + path + " " + name);		
+		let menuItem = document.createElementNS(defaultNS,'menuitem');
+		menuItem.setAttribute( 'id', i ); 
+		var itemLabel;
+		if ( name == null || name == "")
+		{
+			itemLabel = path;
+		}
+		else
+		{
+			itemLabel = name + " ( " + path + " ) ";
+		}
+		menuItem.setAttribute( 'label',itemLabel ); 
+		menuPopup.appendChild(menuItem); //add popup to menulist
+	}
 	
 	menulist.appendChild(menuPopup); //add popup to menulist
 	

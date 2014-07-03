@@ -1,6 +1,6 @@
 #include "fb2epub-xpcom-impl.h"
 #include "nsStringAPI.h"
-#include "..\..\Fb2EpubExt\fb2epubconverter.tlh"
+#import "..\..\FB2EPubConverter.tlb" raw_interfaces_only, raw_native_types, no_namespace, named_guids, auto_search
 
 
 NS_IMPL_ISUPPORTS1(CFb2EpubConverterCaller, IFb2EpubConverter)
