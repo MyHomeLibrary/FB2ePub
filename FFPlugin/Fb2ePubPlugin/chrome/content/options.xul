@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+
+<vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+ <setting type="bool" pref="extensions.fb2epub.bool" title="Boolean" desc="Stored as a boolean preference" />
+ </vbox>
