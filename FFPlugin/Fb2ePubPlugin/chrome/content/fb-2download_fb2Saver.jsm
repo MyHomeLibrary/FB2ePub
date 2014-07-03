@@ -133,7 +133,6 @@ this.Fb2DownloadCopySaverToEPub.prototype.makeTempFileName = function(length)
 				{
 					dump("\nUnable to create component!");
 				}	
-				//var res = converterObject.Convert(targetPath,"Test");
 				var res = converterObject.Convert(targetPath,download.target.path);
 				dump("\nSaved!");			
               } else {
