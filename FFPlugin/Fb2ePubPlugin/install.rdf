@@ -40,5 +40,10 @@
 	<em:iconURL>chrome://fb2epub/skin/fb2epub/images/icon48.png</em:iconURL>
 	<em:iconURL64>chrome://fb2epub/skin/fb2epub/images/icon64.png</em:iconURL64>
 	<em:targetPlatform>WINNT</em:targetPlatform>
+	
+	<em:optionsURL>chrome://fb2epub/content/options.xul</em:optionsURL>
+	<em:optionsType>2</em:optionsType>
+	
+	<em:aboutURL>chrome://fb2epub/content/about.xul</em:aboutURL>
   </Description>      
 </RDF>
