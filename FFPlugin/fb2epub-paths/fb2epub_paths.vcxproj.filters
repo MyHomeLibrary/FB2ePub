@@ -15,26 +15,26 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="fb2epub-xpcom-impl.cpp">
+    <ClCompile Include="fb2epub_paths-imp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fb2epub-xpcomModule.cpp">
+    <ClCompile Include="fb2epub_pathsModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fb2epub-com.cpp">
+    <ClCompile Include="fb2epub_paths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="fb2epub-xpcom-impl.h">
+    <ClInclude Include="fb2epub_paths-imp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="fb2epub_xpcom.h">
+    <ClInclude Include="fb2epub_paths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="fb2epub_xpcom.idl">
+    <CustomBuild Include="fb2epub_paths.idl">
       <Filter>Source Files</Filter>
     </CustomBuild>
   </ItemGroup>

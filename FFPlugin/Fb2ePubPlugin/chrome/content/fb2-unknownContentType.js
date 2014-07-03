@@ -158,7 +158,7 @@ createMenuList: function (parent)
 	browseItem.setAttribute( 'label', translator.getString("fb2epub_browse4folder.label")); 
 	menuPopup.appendChild(browseItem); //add popup to menulist
 	
-	var fb2epubConverterComponent = Components.classes["@fb2epub.net/fb2epub/fb2epub;1"];
+	var fb2epubConverterComponent = Components.classes["@fb2epub.net/fb2epub/fb2epubpaths;1"];
 	if (fb2epubConverterComponent == null)
 	{
 		dump("\ncreateMenuList: Unable to load component, it's probably not registered!");

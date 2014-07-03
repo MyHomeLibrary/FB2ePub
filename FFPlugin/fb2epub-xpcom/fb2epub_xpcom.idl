@@ -6,11 +6,3 @@ interface IFb2EpubConverter : nsISupports
   long Convert(in AString inputPath, in AString putputPath);
 };
 
-[scriptable, uuid(FF6E2A9F-08CC-4F2D-A38E-B6C74BAB11C9)]
-interface IFb2EpubConverterPaths : nsISupports
-{
-  long GetPathsCount();
-  AString GetPath(in long iPath);
-  AString GetPathName(in long iPath);
-};
-

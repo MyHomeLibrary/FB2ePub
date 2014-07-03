@@ -40,6 +40,7 @@ NS_IMETHODIMP CFb2EpubConverterCaller::Convert(const nsAString & inputPath, cons
 		if ( FAILED(hr))
 		{
 			MessageBox(NULL,L"Unable to create converter instance.\nConverter probably not registered",L"Error",MB_OK|MB_ICONERROR);
+			break;
 		}
 		// convert input string to BSTR
 		char16_t* chText = ToNewUnicode(inputPath);
@@ -65,7 +66,5 @@ NS_IMETHODIMP CFb2EpubConverterCaller::Convert(const nsAString & inputPath, cons
 	{
 		return NS_ERROR_FAILURE;
 	}
-	//return NS_ERROR_NOT_IMPLEMENTED;
-	//MessageBoxNS(NULL,outputPath,inputPath,MB_OK);
 	return NS_OK;
 }
