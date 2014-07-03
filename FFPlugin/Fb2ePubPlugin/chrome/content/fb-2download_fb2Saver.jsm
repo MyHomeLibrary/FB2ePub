@@ -44,6 +44,8 @@ this.Fb2DownloadCopySaverToEPub.prototype.fromSerializable = function (aSerializ
   return saver;
 };
 
+// Generate temporary file name of required length
+// length - length of temporal string
 this.Fb2DownloadCopySaverToEPub.prototype.makeTempFileName = function(length)
 {
     var text = "";
@@ -135,7 +137,15 @@ this.Fb2DownloadCopySaverToEPub.prototype.makeTempFileName = function(length)
 					dump("\nUnable to create component!");
 				}	
 				var res = converterObject.Convert(targetPath,download.target.path);
-				dump("\nSaved!");			
+				try {
+					// clean up temporary file
+				  OS.File.remove(targetPath);
+				} catch (e2) {
+				  if (!(e2 instanceof OS.File.Error &&
+						(e2.becauseNoSuchFile || e2.becauseAccessDenied))) {
+					Cu.reportError(e2);
+				  }
+				}
               } else {
                 // Infer the origin of the error from the failure code, because
                 // BackgroundFileSaver does not provide more specific data.
