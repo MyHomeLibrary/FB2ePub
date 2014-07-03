@@ -17,13 +17,13 @@ CFb2EpubConverterPaths::CFb2EpubConverterPaths()
 ,m_lTargetsCount(0)
 {
   /* member initializers and constructor code */
-	//Init();
+	Init();
 }
 
 CFb2EpubConverterPaths::~CFb2EpubConverterPaths()
 {
   /* destructor code */
-	//ReleaseTargets();
+	ReleaseTargets();
 }
 
 void CFb2EpubConverterPaths::Init()
