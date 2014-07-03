@@ -7,4 +7,4 @@ interfaces components/fb2epub_paths.xpt
 binary-component components/fb2epub-xpcom.dll
 binary-component components/fb2epub_paths.dll
 locale fb2epub en-US chrome/locale/en-US/
-locale fb2epub ru chrome/locale/ru/
+locale fb2epub ru-RU chrome/locale/ru-RU/
