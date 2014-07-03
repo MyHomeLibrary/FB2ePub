@@ -141,13 +141,15 @@ insertMenu: function (saveGroup)
   {
   // get pointer to save item in the group
     var saveIndex = saveGroup.getIndexOfItem(saveItem);
+	var fb2ePubMenuItem = document.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul",'radio');
+	fb2ePubMenuItem.setAttribute( 'label', "Fb2ePub (convert to ePub)" );
 	if (saveIndex  == saveGroup.itemCount ) // if 'save' - last item we append
 	{
-	  this._fb2MenuItem = saveGroup.appendItem("Fb2ePub (convert to ePub)");
+		this._fb2MenuItem = saveGroup.appendChild(fb2ePubMenuItem);
 	}
 	else // else insert before it
 	{
-	  this._fb2MenuItem = saveGroup.insertItemAt(saveIndex+1,"Fb2ePub (convert to ePub)");
+	  this._fb2MenuItem = saveGroup.insertBefore(fb2ePubMenuItem,saveItem.nextSibling);
 	}
 	if ( this._fb2MenuItem == null )
 	{
