@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fb2epub_xpcom.h"
+#include "fb2epub_paths.h"
 #include <Windows.h>
 
 #ifdef _CHAR16T

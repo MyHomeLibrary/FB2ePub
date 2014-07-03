@@ -9,12 +9,12 @@ const Ci = Components.interfaces;
 const Cu = Components.utils;
 const Cr = Components.results;
 
-Components.utils.import("resource://gre/modules/Downloads.jsm");
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 //XPCOMUtils.defineLazyModuleGetter(this, "DownloadSaver","resource://gre/modules/DownloadCore.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "DownloadCopySaver","resource://gre/modules/DownloadCore.jsm");
 
 XPCOMUtils.defineLazyModuleGetter(this, "Task","resource://gre/modules/Task.jsm");  
+XPCOMUtils.defineLazyModuleGetter(this, "DownloadError","resource://gre/modules/Downloads.jsm");  
 XPCOMUtils.defineLazyModuleGetter(this, "OS","resource://gre/modules/osfile.jsm")
 XPCOMUtils.defineLazyModuleGetter(this, "Promise","resource://gre/modules/Promise.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "Services","resource://gre/modules/Services.jsm");
