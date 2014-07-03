@@ -1,10 +1,12 @@
 #pragma once
 
 #include "fb2epub_xpcom.h"
+#include <Windows.h>
 
 #ifdef _CHAR16T
 #undef _CHAR16T
 #endif 
+
 
 
 #define Fb2EpubPathsCaller_CLASSNAME "Fb2EpubPathsCaller"
@@ -24,4 +26,18 @@ private:
 
 protected:
   /* additional members */
+	void Init();
+	LPTSTR DetectINILocation();
+	void ReadTargets(LPTSTR strINILocation);
+	void ReleaseTargets();
+
+	typedef struct 
+	{
+		LPTSTR path;
+		LPTSTR name;
+	}target;
+
+
+	target* m_pTargetsArray;
+	long	m_lTargetsCount;
 };
