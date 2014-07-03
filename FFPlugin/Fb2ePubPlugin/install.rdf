@@ -20,8 +20,20 @@
     </em:targetApplication>
    
     <!-- Front End MetaData -->
-    <em:name>Fb2EPub Converter</em:name>
-    <em:description>An extension used to convert FB2 format files into ePub format</em:description>
+	<em:localized>
+		<Description>
+			<em:locale>en-US</em:locale>
+			<em:name>Fb2EPub Converter</em:name>
+			<em:description>An extension used to convert FB2 format files into ePub format</em:description>
+		</Description>
+	</em:localized>
+	<em:localized>
+		<Description>
+			<em:locale>ru</em:locale>
+			<em:name>Fb2EPub Конвертер</em:name>
+			<em:description>Расширение, для конвертирования книг в формате FB2 в формат ePub</em:description>
+		</Description>
+	</em:localized>
     <em:creator>Lord KiRon</em:creator>
     <em:homepageURL>http://www.fb2epub.net/</em:homepageURL>
 	
