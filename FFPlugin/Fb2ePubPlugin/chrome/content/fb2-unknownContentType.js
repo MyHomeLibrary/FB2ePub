@@ -169,7 +169,6 @@ createMenuList: function (parent)
 		dump("\nUnable to create component!");
 	}	
 	var pathsCount =	converterPathsObject.GetPathsCount();
-	dump("\n " + pathsCount);
 	for (var i = 0; i < pathsCount; i++) 
 	{
 		let path= converterPathsObject.GetPath(i);
@@ -191,6 +190,13 @@ createMenuList: function (parent)
 	}
 	
 	menulist.appendChild(menuPopup); //add popup to menulist
+
+	// in case only "browse" destination (no destinations in INI)
+	if ( pathsCount == 0 )
+	{
+		// disable selection box
+		menulist.setAttribute("disabled", true);
+	}
 	
 	parent.appendChild(menulist); // add to container
 },
