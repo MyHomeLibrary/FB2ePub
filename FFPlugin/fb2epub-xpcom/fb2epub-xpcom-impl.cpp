@@ -32,6 +32,7 @@ int	CFb2EpubConverterCaller::MessageBoxNS(HWND hWnd,const nsAString& nsaText,con
 NS_IMETHODIMP CFb2EpubConverterCaller::Convert(const nsAString & inputPath, const nsAString & outputPath, int32_t *_retval)
 {
 	HRESULT hr(S_OK);
+	*_retval = NS_OK;
 	CoInitialize(NULL);
 	IEPubConverterInterfacePtr pConverter = NULL;
 	do
@@ -64,7 +65,7 @@ NS_IMETHODIMP CFb2EpubConverterCaller::Convert(const nsAString & inputPath, cons
 
 	if ( FAILED(hr) )
 	{
-		return NS_ERROR_FAILURE;
+		*_retval = NS_ERROR_FAILURE;
 	}
 	return NS_OK;
 }
