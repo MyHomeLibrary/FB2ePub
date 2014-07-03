@@ -49,7 +49,7 @@
     <LibraryPath>$(xulrunner-sdk)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(xulrunner-sdk)\include;$(xulrunner-sdk)\include\nspr;$(IncludePath)</IncludePath>
