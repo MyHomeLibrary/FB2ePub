@@ -1,0 +1,12 @@
+<!ENTITY checkforFB2ZIP.Title "*.FB2.ZIP enabled">
+<!ENTITY checkforFB2ZIP.Desc "Invoke converter when downloading files with *.FB2.ZIP extension">
+<!ENTITY checkforFB2RAR.Title "*.RAR.RAR enabled">
+<!ENTITY checkforFB2RAR.Desc "Invoke converter when downloading files with *.FB2.RAR extension">
+<!ENTITY checkforANYZIP.Title "*.ZIP enabled">
+<!ENTITY checkforANYZIP.Desc "Invoke converter when downloading any ZIP files">
+<!ENTITY checkforANYRAR.Title "*.RAR enabled">
+<!ENTITY checkforANYRAR.Desc "Invoke converter when downloading any RAR files">
+<!ENTITY checkAdditional.Title "Custom file types (extensions) enabled">
+<!ENTITY checkAdditional.Desc "Invoke converter when downloading any files of custom types">
+<!ENTITY additionalExtensions.Title "Custom file types">
+<!ENTITY additionalExtensions.Desc "List of custom file types (extensions) to activate the converter on (separate by `;` character)">

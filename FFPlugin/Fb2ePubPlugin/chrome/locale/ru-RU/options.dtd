@@ -1,0 +1,12 @@
+<!ENTITY checkforFB2ZIP.Title "*.FB2.ZIP разрешены">
+<!ENTITY checkforFB2ZIP.Desc "Использовать конвертер когда загружаем файлы с расширением *.FB2.ZIP">
+<!ENTITY checkforFB2RAR.Title "*.RAR.RAR разрешены">
+<!ENTITY checkforFB2RAR.Desc "Использовать конвертер когда загружаем файлы с расширением *.FB2.RAR">
+<!ENTITY checkforANYZIP.Title "*.ZIP разрешены">
+<!ENTITY checkforANYZIP.Desc "Использовать конвертер когда загружаем любые ZIP файлы">
+<!ENTITY checkforANYRAR.Title "*.RAR разрешены">
+<!ENTITY checkforANYRAR.Desc "Использовать конвертер когда загружаем любые RAR файлы">
+<!ENTITY checkAdditional.Title "Пользовательские типы файлов (расширения) разрешены">
+<!ENTITY checkAdditional.Desc "Использовать конвертер когда загружаем типы файлов указанные пользователем">
+<!ENTITY additionalExtensions.Title "Пользовательские типы файлов">
+<!ENTITY additionalExtensions.Desc "Пользовательский список типов файлов (расширений) для которых будет разрешено использование конвертера (расширения разделяются между собой при помощи `;`) ">
