@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
 
+<!DOCTYPE window SYSTEM "chrome://fb2epub/locale/options.dtd">
+
 <vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
- <setting type="bool" pref="extensions.fb2epub.bool" title="Boolean" desc="Stored as a boolean preference" />
+ <setting type="bool" pref="extensions.fb2epub.checkforFB2ZIP" title="&checkforFB2ZIP.Title;" desc="&checkforFB2ZIP.Desc;" />
+ <setting type="bool" pref="extensions.fb2epub.checkforFB2RAR" title="&checkforFB2RAR.Title;" desc="&checkforFB2RAR.Desc;" />
+ <setting type="bool" pref="extensions.fb2epub.checkforANYZIP" title="&checkforANYZIP.Title;" desc="&checkforANYZIP.Desc;" />
+ <setting type="bool" pref="extensions.fb2epub.checkforANYRAR" title="&checkforANYRAR.Title;" desc="&checkforANYRAR.Desc;" />
+ <setting type="bool" pref="extensions.fb2epub.checkAdditional" title="&checkAdditional.Title;" desc="&checkAdditional.Desc;" />
+ <setting type="string" pref="extensions.fb2epub.additionalExtensions" title="&additionalExtensions.Title;" desc="&additionalExtensions.Desc;" />
  </vbox>
