@@ -37,8 +37,68 @@ isfb2extension: function(fileName)
  {
     return true;
  }
+ // access to service that read preferences
+ var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+ // access my extension preferences branch
+ prefs = prefs.getBranch("extensions.fb2epub.");
+ // read if we support ANY .ZIP file
+ var value = prefs.getBoolPref("checkforANYZIP");			 
+ if ( value == true && extension == "zip" )
+ {
+	return true;
+ }
+ // read if we support ANY .RAR file
+ value = prefs.getBoolPref("checkforANYRAR");
+ if ( value == true && extension == "rar" )
+ {
+	return true;
+ }
+ // read if we need to check additional extensions at all
+ value = prefs.getBoolPref("checkAdditional");
+ if ( value == true )
+ {
+	value = prefs.getCharPref("additionalExtensions").toLowerCase(); // making lower case so easier to search
+	dump("\n\n" + value);
+	var extensionsPassed = value.split(';');
+	dump("\n" + extensionsPassed);
+	for (var elm in extensionsPassed )
+	{
+		dump("\n" + elm);
+		if ( extensionsPassed[elm] == extension)
+		{
+			return true;
+		}
+	}
+ }
  // now let's check if it double extension for archives
- if ( extension == "zip" || extension == "rar")
+ // for .FB2.ZIP
+ value = prefs.getBoolPref("checkforFB2ZIP");
+ if ( (extension == "zip") && (value == true) )
+ {
+	 // get name without extension
+	 var partWithoutExtension = "";
+	 
+	var start = fileName.lastIndexOf("."); // index of last extension
+	if (start == -1) 
+	{
+		dump("\nisfb2extension: Error - can't find extension");
+		return false;
+	}
+	// remove the extension
+	partWithoutExtension = fileName.substring(0,start);
+	// detect 2nd level extension
+	var extension2ndLvl = partWithoutExtension.split('.').pop();
+	if ( extension2ndLvl != null && extension2ndLvl != "")
+	{
+		if( extension2ndLvl.toLowerCase() == "fb2") // if 2nd level extension is FB2
+		{
+			return true;
+		}
+	}
+ }
+ // for .FB2.RAR
+ value = prefs.getBoolPref("checkforFB2RAR");
+ if ( ( value == true) && (extension == "rar") )
  {
 	 // get name without extension
 	 var partWithoutExtension = "";
@@ -443,8 +503,6 @@ dialogAccepted: function() {
 
 init: function()
 {
-	dump("\n\nStarting: \n" );
-	
 	var fileToDownload = document.getElementById("location");
 	if ( this.isfb2extension(fileToDownload.value))
 	{
