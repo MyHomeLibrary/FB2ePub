@@ -5,11 +5,11 @@
 
 
 [CustomMessages]
-en.vcredist2012_title= Microsoft Visual C++ 2010 SP1 Redistributable Package (x86) 
-ru.vcredist2012_title= –аспростран€емый пакет пакета обновлени€ 1 дл€ Microsoft Visual C++ 2010 (x86)
+en.vcredist2010_title= Microsoft Visual C++ 2010 SP1 Redistributable Package (x86) 
+ru.vcredist2010_title= –аспростран€емый пакет пакета обновлени€ 1 дл€ Microsoft Visual C++ 2010 (x86)
 
-en.vcredist2012_size=6.3 MB
-ru.vcredist2012_size=4,8 MB
+en.vcredist2010_size=4.8 MB
+ru.vcredist2010_size=4,8 MB
 
 
 ;http://www.microsoft.com/globaldev/reference/lcid-all.mspx
@@ -51,7 +51,7 @@ begin
 		AddProduct('vcredist2010.exe',
 			CustomMessage('vcredist2010_lcid') + '/passive /norestart',
 			CustomMessage('vcredist2010_title'),
-			CustomMessage('vcredist2012_size'),
+			CustomMessage('vcredist2010_size'),
 			GetString(CustomMessage('vcredist2010_url'), CustomMessage('vcredist2010_url'), CustomMessage('vcredist2010_url')),
 			false, false);
 end;
