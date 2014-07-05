@@ -147,6 +147,7 @@ Name: "{group}\ReadMe"; Filename: "{app}\readme_en.htm";
 #include "scripts\products\dotnetfx40client.iss"
 #include "scripts\products\vcredist2012.iss"
 #include "scripts\products\fb2epub_ext.iss"
+#include "scripts\products\vcredist2010.iss"
 
 [Run]
 Filename: "{dotnet4064}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};    Check: Is64BitInstallMode;  
@@ -227,6 +228,7 @@ begin
 	msi45('4.5');
   dotnetfx40client();
   vcredist2012();
+  vcredist2010();
 
 	Result := true;
 end;

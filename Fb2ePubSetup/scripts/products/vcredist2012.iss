@@ -5,15 +5,14 @@
 
 
 [CustomMessages]
-vcredist2012_title=Visual C++ Redistributable for Visual Studio 2012 Update 4
+en.vcredist2012_title=Visual C++ Redistributable for Visual Studio 2012 Update 4 
+ru.vcredist2012_title=Распространяемый пакет Visual C++ для Visual Studio 2012 Обновление 4 
 
 en.vcredist2012_size=6.3 MB
 ru.vcredist2012_size=6,3 MB
-ru_mol.vcredist2012_size=6,3 MB
 
 en.vcredist2012_size_x64=6.9 MB
 ru.vcredist2012_size_x64=6,9 MB
-ru_mol.vcredist2012_size_x64=6,9 MB
 
 ;http://www.microsoft.com/globaldev/reference/lcid-all.mspx
 en.vcredist2012_lcid=
@@ -41,15 +40,15 @@ ru.vcredist2012_u4_url_x64 =http://download.microsoft.com/download/E/C/C/ECCD0A4
 
 [Code]
 const 
-  UNINSTALL_PATH = 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\';
+  VC_2012_UNINSTALL_PATH = 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\';
   VC_2012_REDIST_X86_UP4_GUID='{33d1fd90-4274-48a1-9bc1-97e33d9c2d6f}';
   VC_2012_REDIST_X64_UP4_GUID='{ca67548a-5ebe-413a-b50c-4b9ceb6d66c6}';
 
-function VCVersionInstalled(const ProductID: string): Boolean;
+function VC2012VersionInstalled(const ProductID: string): Boolean;
 var
 Installed: cardinal;
 begin
-  RegQueryDWordValue(HKEY_LOCAL_MACHINE_32,UNINSTALL_PATH + ProductID ,'Installed',Installed);
+  RegQueryDWordValue(HKEY_LOCAL_MACHINE_32,VC_2012_UNINSTALL_PATH + ProductID ,'Installed',Installed);
   Result := (Installed = 1);
 end;
 
@@ -60,8 +59,8 @@ begin
     // here the Result must be True when you need to install your VCRedist
   // or False when you don't need to, so now it's upon you how you build
   // this statement, the following won't install your VC redist only when
-  localInstalled := VCVersionInstalled(CustomMessage('VC_2012_REDIST_X86_UP4'));
-  englishInstalled := VCVersionInstalled(VC_2012_REDIST_X86_UP4_GUID);
+  localInstalled := VC2012VersionInstalled(CustomMessage('VC_2012_REDIST_X86_UP4'));
+  englishInstalled := VC2012VersionInstalled(VC_2012_REDIST_X86_UP4_GUID);
   Result :=  not ( localInstalled or englishInstalled);
 end;
 
@@ -72,8 +71,8 @@ begin
     // here the Result must be True when you need to install your VCRedist
   // or False when you don't need to, so now it's upon you how you build
   // this statement, the following won't install your VC redist only when
-  localInstalled := VCVersionInstalled(CustomMessage('VC_2012_REDIST_X64_UP4'));
-  englishInstalled := VCVersionInstalled(VC_2012_REDIST_X64_UP4_GUID);
+  localInstalled := VC2012VersionInstalled(CustomMessage('VC_2012_REDIST_X64_UP4'));
+  englishInstalled := VC2012VersionInstalled(VC_2012_REDIST_X64_UP4_GUID);
   Result :=  ( (not ( localInstalled or englishInstalled)) and IsX64());
 end;
 
@@ -88,7 +87,7 @@ begin
 		AddProduct('vcredist2012' + GetArchitectureString() + '.exe',
 			CustomMessage('vcredist2012_lcid') + '/passive /norestart',
 			CustomMessage('vcredist2012_title')  + ' (x86)',
-			CustomMessage('vcredist2012_size_x64'),
+			CustomMessage('vcredist2012_size'),
 			GetString(CustomMessage('vcredist2012_u4_url'), CustomMessage('vcredist2012_u4_url'), CustomMessage('vcredist2012_u4_url')),
 			false, false);
 end;
@@ -97,7 +96,7 @@ begin
 		AddProduct('vcredist2012' + '.exe',
 			CustomMessage('vcredist2012_lcid') + '/passive /norestart',
 			CustomMessage('vcredist2012_title')+ ' (x64)',
-			CustomMessage('vcredist2012_size'),
+			CustomMessage('vcredist2012_size_x64'),
 			GetString(CustomMessage('vcredist2012_u4_url_x64'), CustomMessage('vcredist2012_u4_url_x64'), CustomMessage('vcredist2012_u4_url_x64')),
 			false, false);
 end ;
