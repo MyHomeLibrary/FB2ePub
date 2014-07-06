@@ -47,7 +47,7 @@ SET ZIPER_PARAMS=a -y -afzip -m5 -ep -av -rr
 
 
 
-REM end of variables sectio
+REM end of variables section
 REM -----------------------------------------------------
 
 
@@ -73,20 +73,28 @@ call:PrintParam %out1%
 
 rem deleting old outputs
 call:PrintParam "Deleting old outputs from %ARCHIVE_PATH%Release"
+if not exist %ARCHIVE_PATH%Release goto skip_delete_release
 del %ARCHIVE_PATH%Release /S /Q /S >> %LOG%   
 if errorlevel==1 goto failed
+:skip_delete_release
 
 call:PrintParam "Deleting old outputs from %ARCHIVE_PATH%x86"
+if not exist %ARCHIVE_PATH%x86 goto skip_delete_x86
 del %ARCHIVE_PATH%x86 /S /Q /S >> %LOG%   
 if errorlevel==1 goto failed
+:skip_delete_x86
 
 call:PrintParam "Deleting old outputs from %ARCHIVE_PATH%x64"
+if not exist %ARCHIVE_PATH%x64 goto skip_delete_x64
 del %ARCHIVE_PATH%x64 /S /Q /S >> %LOG%   
 if errorlevel==1 goto failed
+:skip_delete_x64
 
-call:PrintParam "Deleting old XPI outputs from %ARCHIVE_PATH%"
-del %ARCHIVE_PATH%*.xpi /S /Q  >> %LOG%   
+call:PrintParam "Deleting old XPI outputs from %ARCHIVE_PATH%Plugins\"
+if not exist %ARCHIVE_PATH%Plugins goto skip_delete_plugins
+del %ARCHIVE_PATH%Plugins\*.xpi /S /Q  >> %LOG%   
 if errorlevel==1 goto failed
+:skip_delete_plugins
 
 
 call %VCVARS% x86_amd64
