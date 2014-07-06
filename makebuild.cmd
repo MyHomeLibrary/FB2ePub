@@ -106,6 +106,12 @@ call:PrintParam "Now building x64"
 msbuild %PROJ_ROOT%Fb2ePub.sln /t:rebuild /m /property:Configuration=Release;Platform=x64 >> %LOG%
 if errorlevel==1 goto failed
 
+rem create firefox extension
+call:PrintParam "Creating Firefox extension"
+call %PROJ_ROOT%FFPlugin\build_ff_extension.cmd
+if errorlevel==1 goto failed
+
+
 rem call InnoSetup compiler
 call:PrintParam "Compiling the setup"
 call %INNO_PATH%Compil32.exe /cc %PROJ_ROOT%Fb2ePubSetup\FB2ePubSetup.iss >> %LOG%
