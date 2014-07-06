@@ -1,4 +1,4 @@
-function stringtoversion(var temp: String): Integer;
+﻿function stringtoversion(var temp: String): Integer;
 var
 	part: String;
 	pos1: Integer;

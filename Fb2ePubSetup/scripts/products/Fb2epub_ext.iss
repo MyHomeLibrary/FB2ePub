@@ -1,4 +1,4 @@
-//extensions
+п»ї//extensions
 // contains functionality used to register Fb2Epub  windows shell extensions
 //
 
@@ -12,28 +12,28 @@
 
 [CustomMessages]
 en.assosiateFB2 = Associate context menu with "fb2" extension
-ru.assosiateFB2 = Привязать правую кнопку манипулятора к расширению файла "fb2" 
+ru.assosiateFB2 = РџСЂРёРІСЏР·Р°С‚СЊ РїСЂР°РІСѓСЋ РєРЅРѕРїРєСѓ РјР°РЅРёРїСѓР»СЏС‚РѕСЂР° Рє СЂР°СЃС€РёСЂРµРЅРёСЋ С„Р°Р№Р»Р° "fb2" 
 
 en.assosiateZIP = Associate context menu with "zip" extension
-ru.assosiateZIP = Привязать правую кнопку манипулятора к расширению файла "zip"
+ru.assosiateZIP = РџСЂРёРІСЏР·Р°С‚СЊ РїСЂР°РІСѓСЋ РєРЅРѕРїРєСѓ РјР°РЅРёРїСѓР»СЏС‚РѕСЂР° Рє СЂР°СЃС€РёСЂРµРЅРёСЋ С„Р°Р№Р»Р° "zip"
 
 en.assosiateRAR = Associate context menu with "rar" extension
-ru.assosiateRAR = Привязать правую кнопку манипулятора к расширению файла "rar"
+ru.assosiateRAR = РџСЂРёРІСЏР·Р°С‚СЊ РїСЂР°РІСѓСЋ РєРЅРѕРїРєСѓ РјР°РЅРёРїСѓР»СЏС‚РѕСЂР° Рє СЂР°СЃС€РёСЂРµРЅРёСЋ С„Р°Р№Р»Р° "rar"
 
 en.assosiateAny = Associate context menu with any file extension
-ru.assosiateAny = Привязать правую кнопку манипулятора к любому расширению файла
+ru.assosiateAny = РџСЂРёРІСЏР·Р°С‚СЊ РїСЂР°РІСѓСЋ РєРЅРѕРїРєСѓ РјР°РЅРёРїСѓР»СЏС‚РѕСЂР° Рє Р»СЋР±РѕРјСѓ СЂР°СЃС€РёСЂРµРЅРёСЋ С„Р°Р№Р»Р°
 
 en.fileExtGroup = File extensions
-ru.fileExtGroup = Расширения файлов
+ru.fileExtGroup = Р Р°СЃС€РёСЂРµРЅРёСЏ С„Р°Р№Р»РѕРІ
 
 en.ConfigSelection = Embed cyrillic fonts
-ru.ConfigSelection = Встраивать русские шрифты
+ru.ConfigSelection = Р’СЃС‚СЂР°РёРІР°С‚СЊ СЂСѓСЃСЃРєРёРµ С€СЂРёС„С‚С‹
 
 en.EmbedFonts = Embed cyrillic fonts (for devices without russian lang. support)
-ru.EmbedFonts = Встраивать рус. шрифты (для ридеров без поддержки русского)
+ru.EmbedFonts = Р’СЃС‚СЂР°РёРІР°С‚СЊ СЂСѓСЃ. С€СЂРёС„С‚С‹ (РґР»СЏ СЂРёРґРµСЂРѕРІ Р±РµР· РїРѕРґРґРµСЂР¶РєРё СЂСѓСЃСЃРєРѕРіРѕ)
 
 en.NoEmbedFonts = No fonts embedding (for devices with russian lang. support)
-ru.NoEmbedFonts = Не встраивать шрифты (для ридеров отображающих русский текст)
+ru.NoEmbedFonts = РќРµ РІСЃС‚СЂР°РёРІР°С‚СЊ С€СЂРёС„С‚С‹ (РґР»СЏ СЂРёРґРµСЂРѕРІ РѕС‚РѕР±СЂР°Р¶Р°СЋС‰РёС… СЂСѓСЃСЃРєРёР№ С‚РµРєСЃС‚)
 
 [Code]
 // returns the assosiation for the extension if present 

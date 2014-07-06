@@ -1,4 +1,4 @@
-[CustomMessages]
+﻿[CustomMessages]
 msi45_title=Windows Installer 4.5
 
 en.msi45win60_size=1.7 MB

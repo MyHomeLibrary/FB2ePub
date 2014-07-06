@@ -1,4 +1,4 @@
-// requires Windows 7, Windows 7 Service Pack 1, Windows Server 2003 Service Pack 2, Windows Server 2008, Windows Server 2008 R2, Windows Server 2008 R2 SP1, Windows Vista Service Pack 1, Windows XP Service Pack 3
+п»ї// requires Windows 7, Windows 7 Service Pack 1, Windows Server 2003 Service Pack 2, Windows Server 2008, Windows Server 2008 R2, Windows Server 2008 R2 SP1, Windows Vista Service Pack 1, Windows XP Service Pack 3
 // requires Windows Installer 3.1 or later
 // requires Internet Explorer 5.01 or later
 // http://www.microsoft.com/en-us/download/details.aspx?id=30679
@@ -6,7 +6,7 @@
 
 [CustomMessages]
 en.vcredist2012_title=Visual C++ Redistributable for Visual Studio 2012 Update 4 
-ru.vcredist2012_title=Распространяемый пакет Visual C++ для Visual Studio 2012 Обновление 4 
+ru.vcredist2012_title=Р Р°СЃРїСЂРѕСЃС‚СЂР°РЅСЏРµРјС‹Р№ РїР°РєРµС‚ Visual C++ РґР»СЏ Visual Studio 2012 РћР±РЅРѕРІР»РµРЅРёРµ 4 
 
 en.vcredist2012_size=6.3 MB
 ru.vcredist2012_size=6,3 MB

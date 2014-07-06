@@ -1,31 +1,31 @@
-#include "isxdl\isxdl.iss"
+п»ї#include "isxdl\isxdl.iss"
 
 [CustomMessages]
 DependenciesDir=MyProgramDependencies
 
 en.depdownload_msg=The following applications are required before setup can continue:%n%n%1%nDownload and install now?
-ru.depdownload_msg=Для продолжения установки аппликации установите следующие программы::%n%n%1%nЗагрузить и установить сейчас?
+ru.depdownload_msg=Р”Р»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ СѓСЃС‚Р°РЅРѕРІРєРё Р°РїРїР»РёРєР°С†РёРё СѓСЃС‚Р°РЅРѕРІРёС‚Рµ СЃР»РµРґСѓСЋС‰РёРµ РїСЂРѕРіСЂР°РјРјС‹::%n%n%1%nР—Р°РіСЂСѓР·РёС‚СЊ Рё СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЃРµР№С‡Р°СЃ?
 
 en.depdownload_memo_title=Download dependencies
-ru.depdownload_memo_title=Загрузка компонент
+ru.depdownload_memo_title=Р—Р°РіСЂСѓР·РєР° РєРѕРјРїРѕРЅРµРЅС‚
 
 en.depinstall_memo_title=Install dependencies
-ru.depinstall_memo_title=Установить компоненты
+ru.depinstall_memo_title=РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РєРѕРјРїРѕРЅРµРЅС‚С‹
 
 en.depinstall_title=Installing dependencies
-ru.depinstall_title=Устанавливаем компоненты
+ru.depinstall_title=РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєРѕРјРїРѕРЅРµРЅС‚С‹
 
 en.depinstall_description=Please wait while Setup installs dependencies on your computer.
-ru.depinstall_description=Пожалуйста подождите пока Загрузчик устанавливает требуемые компоненты на Ваш компьютер
+ru.depinstall_description=РџРѕР¶Р°Р»СѓР№СЃС‚Р° РїРѕРґРѕР¶РґРёС‚Рµ РїРѕРєР° Р—Р°РіСЂСѓР·С‡РёРє СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ С‚СЂРµР±СѓРµРјС‹Рµ РєРѕРјРїРѕРЅРµРЅС‚С‹ РЅР° Р’Р°С€ РєРѕРјРїСЊСЋС‚РµСЂ
 
 en.depinstall_status=Installing %1...
-ru.depinstall_status=Устанавливается %1...
+ru.depinstall_status=РЈСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ %1...
 
 en.depinstall_missing=%1 must be installed before setup can continue. Please install %1 and run Setup again.
-ru.depinstall_missing=%1 Должен быть установлен перед тем как Установщик сможет продолжить. Пожалуйста установите %1 и запустите установщик снова.
+ru.depinstall_missing=%1 Р”РѕР»Р¶РµРЅ Р±С‹С‚СЊ СѓСЃС‚Р°РЅРѕРІР»РµРЅ РїРµСЂРµРґ С‚РµРј РєР°Рє РЈСЃС‚Р°РЅРѕРІС‰РёРє СЃРјРѕР¶РµС‚ РїСЂРѕРґРѕР»Р¶РёС‚СЊ. РџРѕР¶Р°Р»СѓР№СЃС‚Р° СѓСЃС‚Р°РЅРѕРІРёС‚Рµ %1 Рё Р·Р°РїСѓСЃС‚РёС‚Рµ СѓСЃС‚Р°РЅРѕРІС‰РёРє СЃРЅРѕРІР°.
 
 en.depinstall_error=An error occured while installing the dependencies. Please restart the computer and run the setup again or install the following dependencies manually:%n
-ru.depinstall_error=Произошла ошибка при установке одной из компонент. Пожалийста перезапустите компьютер и затем запустите Установщик снова или установите следующие компоненты вручную:%n
+ru.depinstall_error=РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё СѓСЃС‚Р°РЅРѕРІРєРµ РѕРґРЅРѕР№ РёР· РєРѕРјРїРѕРЅРµРЅС‚. РџРѕР¶Р°Р»РёР№СЃС‚Р° РїРµСЂРµР·Р°РїСѓСЃС‚РёС‚Рµ РєРѕРјРїСЊСЋС‚РµСЂ Рё Р·Р°С‚РµРј Р·Р°РїСѓСЃС‚РёС‚Рµ РЈСЃС‚Р°РЅРѕРІС‰РёРє СЃРЅРѕРІР° РёР»Рё СѓСЃС‚Р°РЅРѕРІРёС‚Рµ СЃР»РµРґСѓСЋС‰РёРµ РєРѕРјРїРѕРЅРµРЅС‚С‹ РІСЂСѓС‡РЅСѓСЋ:%n
 
 en.isxdl_langfile=
 ru.isxdl_langfile=russian.ini
