@@ -71,6 +71,24 @@ rem create/reset log file and add header entry
 SET out1="Building at %DATE% , %TIME%."
 call:PrintParam %out1%
 
+rem deleting old outputs
+call:PrintParam "Deleting old outputs from %ARCHIVE_PATH%Release"
+del %ARCHIVE_PATH%Release /S /Q /S >> %LOG%   
+if errorlevel==1 goto failed
+
+call:PrintParam "Deleting old outputs from %ARCHIVE_PATH%x86"
+del %ARCHIVE_PATH%x86 /S /Q /S >> %LOG%   
+if errorlevel==1 goto failed
+
+call:PrintParam "Deleting old outputs from %ARCHIVE_PATH%x64"
+del %ARCHIVE_PATH%x64 /S /Q /S >> %LOG%   
+if errorlevel==1 goto failed
+
+call:PrintParam "Deleting old XPI outputs from %ARCHIVE_PATH%"
+del %ARCHIVE_PATH%*.xpi /S /Q  >> %LOG%   
+if errorlevel==1 goto failed
+
+
 call %VCVARS% x86_amd64
 
 rem

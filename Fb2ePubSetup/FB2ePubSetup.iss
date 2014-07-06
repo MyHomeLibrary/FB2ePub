@@ -103,7 +103,7 @@ Source: "{#BuildFolder}settings.cmd"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}readme_en.htm"; DestDir: "{app}"; Flags: ignoreversion  
 Source: "{#BuildFolder}epub-logo-color-book.ICO"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder}license.docx"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildFolder86}FB2EPUBExt.INI"; DestDir: "{app}"; Flags: ignoreversion
 
 ; configuration
 ;copy to application folder for reference
@@ -119,7 +119,7 @@ Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{user
 Source: "{#BuildFolder}DefaultSettings\defsettings_fonts.xml"; DestDir: "{app}"; Flags: ignoreversion; Tasks: installWithEmbeddedFonts; DestName: "defsettings.xml";
 Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{app}"; Flags: ignoreversion; Tasks: installWithoutEmbeddedFonts; DestName: "defsettings.xml";
 ;copy shell extension configuration
-Source: "{#BuildFolder}FB2EPUBExt.INI"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion; Permissions: everyone-modify users-modify powerusers-full admins-full;
+Source: "{#BuildFolder86}FB2EPUBExt.INI"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion; Permissions: everyone-modify users-modify powerusers-full admins-full;
 
 Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver 32bit
 
