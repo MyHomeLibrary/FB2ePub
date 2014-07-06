@@ -1,4 +1,4 @@
-[Code]
+﻿[Code]
 type
 	NetFXType = (NetFx10, NetFx11, NetFx20, NetFx30, NetFx35, NetFx40Client, NetFx40Full, NetFx45);
 

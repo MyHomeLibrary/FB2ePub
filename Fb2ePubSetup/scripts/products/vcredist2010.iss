@@ -1,4 +1,4 @@
-// requires Windows 7, Windows 7 Service Pack 1, Windows Server 2003 Service Pack 2, Windows Server 2008, Windows Server 2008 R2, Windows Server 2008 R2 SP1, Windows Vista Service Pack 1, Windows XP Service Pack 3
+п»ї// requires Windows 7, Windows 7 Service Pack 1, Windows Server 2003 Service Pack 2, Windows Server 2008, Windows Server 2008 R2, Windows Server 2008 R2 SP1, Windows Vista Service Pack 1, Windows XP Service Pack 3
 // requires Windows Installer 3.1 or later
 // requires Internet Explorer 5.01 or later
 // http://www.microsoft.com/en-us/download/details.aspx?id=30679
@@ -6,7 +6,7 @@
 
 [CustomMessages]
 en.vcredist2010_title= Microsoft Visual C++ 2010 SP1 Redistributable Package (x86) 
-ru.vcredist2010_title= Распространяемый пакет пакета обновления 1 для Microsoft Visual C++ 2010 (x86)
+ru.vcredist2010_title= Р Р°СЃРїСЂРѕСЃС‚СЂР°РЅСЏРµРјС‹Р№ РїР°РєРµС‚ РїР°РєРµС‚Р° РѕР±РЅРѕРІР»РµРЅРёР№ 1 РґР»СЏ Microsoft Visual C++ 2010 (x86)
 
 en.vcredist2010_size=4.8 MB
 ru.vcredist2010_size=4,8 MB
