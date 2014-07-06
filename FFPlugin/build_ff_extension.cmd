@@ -28,7 +28,7 @@ rem we build extension with VS 2010
 SET VCVARS="C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
 
 rem here the output archived setup will be placed
-SET ARCHIVE_PATH=%PROJ_ROOT%Output\
+SET ARCHIVE_PATH=%PROJ_ROOT%Output\Plugins\
 
 SET ARCHIVE_NAME=%ARCHIVE_PATH%fb2epub_plugin@fb2epub.net.xpi
 
@@ -66,6 +66,11 @@ rem
 call:PrintParam "Running x86 build first"
 msbuild %PROJ_ROOT%FFPlugin\xpcom_components.sln /t:rebuild /m /property:Configuration=Release;Platform="Win32" >> %LOG%
 if errorlevel==1 goto failed
+
+rem creating a plugins output folder
+call:PrintParam "creating a plugins output folder %ARCHIVE_PATH%"
+mkdir %ARCHIVE_PATH%
+if not errorlevel==0 goto winrar_failed
 
 rem archive installation files into a ZIP for distribution
 call:PrintParam "Creating XPI extension archive ( %ARCHIVE_NAME% )"
