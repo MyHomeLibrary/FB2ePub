@@ -9,10 +9,12 @@
 #define Contact "lordkiron@fb2epub.net"
 #define BaseFolder "C:\Project\GoogleCode\fb2epub\"
 #define BuildFolder BaseFolder + "Output\Release\"
+#define BuildFolderPlugins BaseFolder + "Output\Plugins\"
 #define BuildFolder64 BaseFolder + "Output\x64\Release\"
 #define BuildFolder86 BaseFolder + "Output\x86\Release\"
 #define File4Version BuildFolder + "FB2EPubConverter.dll"
 #define AppVersionNo GetFileVersion(File4Version)
+#define ZIPerFolder   BaseFolder + "Fb2ePubSetup\7unzip\"
 
 
 
@@ -59,6 +61,7 @@ Name: "{commonappdata}\{#MyAppSubfolder}"; Permissions: everyone-modify users-mo
 [UninstallDelete]
 Name: "{localappdata}\Lord_KiRon"; Type: filesandordirs;
 Name: "{userappdata}\Lord_KiRon\Fb2ePub"; Type: filesandordirs;
+Name: "{app}\FireFoxPlugin\fb2epub_plugin@fb2epub.net"; Type: filesandordirs; Tasks: installFFPlugin;
 
 
 
@@ -105,6 +108,9 @@ Source: "{#BuildFolder}epub-logo-color-book.ICO"; DestDir: "{app}"; Flags: ignor
 Source: "{#BuildFolder}license.docx"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildFolder86}FB2EPUBExt.INI"; DestDir: "{app}"; Flags: ignoreversion
 
+; copy firefox extension into a location, where user can manually instal it from
+Source: "{#BuildFolderPlugins}fb2epub_plugin@fb2epub.net.xpi"; DestDir: "{app}\FireFoxPlugin\"; Flags: ignoreversion
+
 ; configuration
 ;copy to application folder for reference
 Source: "{#BuildFolder}DefaultSettings\defsettings_fonts.xml"; DestDir: "{app}\DefaultSettings\"; Flags: ignoreversion
@@ -129,6 +135,10 @@ Source: "{#BuildFolder64}Fb2EpubExt_x64.dll"; DestDir: "{app}";  Check: Is64BitI
 ;x86
 Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Flags: regserver 32bit
 
+;7-ZIP , used to extract data from ZIP files durring installation, temporary , so far needed only if Firefox plugin installation selected
+Source: "{#ZIPerFolder}7za.exe"; DestDir: "{app}"; Flags: deleteafterinstall; Tasks: installFFPlugin;
+
+
 [Icons]
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; Flags: excludefromshowinnewinstall
 Name: "{group}\FB2ePub Command Prompt"; Filename: "{app}\prompt.cmd"; Flags: excludefromshowinnewinstall
@@ -148,6 +158,7 @@ Name: "{group}\ReadMe"; Filename: "{app}\readme_en.htm";
 #include "scripts\products\vcredist2012.iss"
 #include "scripts\products\fb2epub_ext.iss"
 #include "scripts\products\vcredist2010.iss"
+#include "scripts\products\firefox.iss"
 
 [Run]
 Filename: "{dotnet4064}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConverter.dll"" /n"; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};    Check: Is64BitInstallMode;  
@@ -157,6 +168,9 @@ Filename: "{dotnet4032}\RegAsm.exe"; Parameters: "/codebase ""{app}\FB2EPubConve
 ;ngen stuff
 Filename: "{dotnet40}\ngen.exe"; Parameters: "install ""{app}\Fb2ePubGui.exe"""; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
 Filename: "{dotnet40}\ngen.exe"; Parameters: "install ""{app}\Fb2ePub.exe"""; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
+
+;Extract xpi if Firefox installation selected, need to extract as binary components won't run from XPI
+Filename: "{app}\7za.exe"; Parameters: "x ""{app}\FireFoxPlugin\fb2epub_plugin@fb2epub.net.xpi"" -o""{app}\FireFoxPlugin\fb2epub_plugin@fb2epub.net\"""; Tasks: installFFPlugin; Flags: runascurrentuser waituntilterminated runhidden; WorkingDir: {app};
 
 
 
@@ -209,6 +223,10 @@ Root: HKCR32; Subkey: {#RAR_Extension_Path}\ShellEx\ContextMenuHandlers\{#Fb2Epu
 ; Any (.*)
 Root: HKCR32; Subkey: {#Any_Extension_Path}\ShellEx\ContextMenuHandlers\{#Fb2EpubShlExtName}; ValueType: string; ValueName: ""; ValueData: {#CLSID_Fb2EpubShlExt}; Flags: uninsdeletekey; Tasks: registreAnyExtension; Check: Is64BitInstallMode; 
 
+;Register Firefox extension
+Root: HKCU32; Subkey: "Software\Mozilla\Firefox\Extensions"; ValueType: string; ValueName: "fb2epub_plugin@fb2epub.net"; ValueData: "{app}\FireFoxPlugin\fb2epub_plugin@fb2epub.net\"; Flags: uninsdeletekey; Tasks: installFFPlugin; 
+
+
 
 [Tasks]
 Name: installWithEmbeddedFonts; Description: {cm:EmbedFonts}; Flags: exclusive ; GroupDescription: {cm:ConfigSelection};
@@ -217,6 +235,9 @@ Name: registreFB2Extension; Description: {cm:assosiateFB2}; GroupDescription: {c
 Name: registreZIPExtension; Description: {cm:assosiateZIP}; GroupDescription: {cm:fileExtGroup};
 Name: registreRARExtension; Description: {cm:assosiateRAR}; GroupDescription: {cm:fileExtGroup};
 Name: registreAnyExtension; Description: {cm:assosiateAny}; GroupDescription: {cm:fileExtGroup}; Flags: unchecked;
+Name: installFFPlugin; Description: {cm:installFFPlugin};    Check:  IsFirefoxInstalled;
+
+
 
 
 [Code]
