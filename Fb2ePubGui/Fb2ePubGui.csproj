@@ -191,6 +191,9 @@
     <EmbeddedResource Include="UpdateSettings.resx">
       <DependentUpon>UpdateSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UpdateSettings.ru.resx">
+      <DependentUpon>UpdateSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

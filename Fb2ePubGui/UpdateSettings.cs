@@ -15,6 +15,10 @@ namespace Fb2ePubGui
         public UpdateSettings()
         {
             InitializeComponent();
+            comboBoxUpdateFreq.Items.Add(AutoUpdateFreqCheckTimeSlice.EveryRun);
+            comboBoxUpdateFreq.Items.Add(AutoUpdateFreqCheckTimeSlice.OnceADay);
+            comboBoxUpdateFreq.Items.Add(AutoUpdateFreqCheckTimeSlice.OnceAWeek);
+            comboBoxUpdateFreq.Items.Add(AutoUpdateFreqCheckTimeSlice.OnceAMonths);
         }
 
         /// <summary>
@@ -26,6 +30,10 @@ namespace Fb2ePubGui
             set { checkBoxAutomaticUpdate.Checked = value; }
         }
 
-
+        public AutoUpdateFreqCheckTimeSlice AutoUpdateFrequency
+        {
+            get { return (AutoUpdateFreqCheckTimeSlice)comboBoxUpdateFreq.SelectedItem; }
+            set { comboBoxUpdateFreq.SelectedItem = value; }
+        }
     }
 }

@@ -395,7 +395,7 @@ namespace Fb2ePubGui
         private void toolStripMenuItemShowLog_Click(object sender, EventArgs e)
         {
             LogWindow log = new LogWindow(string.Format(@"{0}{1}", GlobalContext.Properties["LogName"], "fb2epubGUI.log"));
-            log.Show();
+            log.Show(this);
         }
 
         private void toolStripMenuItemConvSettings_Click(object sender, EventArgs e)
