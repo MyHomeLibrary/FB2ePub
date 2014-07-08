@@ -284,6 +284,7 @@
             this.Name = "FormGUI";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.FormGuiLoad);
+            this.Shown += new System.EventHandler(this.FormGUI_Shown);
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
