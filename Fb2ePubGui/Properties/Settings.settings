@@ -14,5 +14,11 @@
     <Setting Name="LastUpdateTime" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">1989-01-01</Value>
     </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AutoUpdateFreqCheck" Type="Fb2ePubGui.AutoUpdateFreqCheckTimeSlice" Scope="User">
+      <Value Profile="(Default)">OnceADay</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

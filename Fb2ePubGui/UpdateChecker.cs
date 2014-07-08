@@ -22,6 +22,17 @@ namespace Fb2ePubGui
     }
 
     /// <summary>
+    /// Used to define how often to check for automatic update
+    /// </summary>
+    public enum AutoUpdateFreqCheckTimeSlice
+    {
+        EveryRun, // check each time program loads
+        OnceADay, // every day (date change)
+        OnceAWeek, // every week
+        OnceAMonths, // every months
+    };
+
+    /// <summary>
     /// This class used to check for updated version presence on the server
     /// </summary>
     internal class UpdateChecker
@@ -120,6 +131,10 @@ namespace Fb2ePubGui
             }
             try
             {
+                // update last time we checked for version
+                // only update here if internet was available and file downloaded
+                Settings.Default.LastUpdateTime = DateTime.Now;
+                Settings.Default.Save();
                 // try to read and parse downloaded version file
                 XDocument versionDocument = XDocument.Load(fileName);
                 if (versionDocument.Root == null)
@@ -256,6 +271,45 @@ namespace Fb2ePubGui
             {
                 throw new Exception(string.Format("Invalid version file format - \"{1}\" element contains invalid value of {0}", xNodeElement.Value,elementName));
             }
+        }
+
+        /// <summary>
+        /// Used to decide , based one settings , if update needed
+        /// </summary>
+        /// <returns>if we need to perfor autoupdate</returns>
+        public static bool IsNeedToUpdate()
+        {
+            if (!Settings.Default.PerformAutoupdate) // if autoupdate disabled
+            {
+                return false;
+            }
+            bool needToAutoUpdate = false; // default value
+            switch (Settings.Default.AutoUpdateFreqCheck) // check how often we need to update
+            {
+                case AutoUpdateFreqCheckTimeSlice.EveryRun: // if every run then we do need to perform autoupdate
+                    needToAutoUpdate = true;
+                    break;
+                case AutoUpdateFreqCheckTimeSlice.OnceADay: // if once a day
+                    if (Settings.Default.LastUpdateTime.Date != DateTime.Now.Date) // just check that date is different
+                    {
+                        needToAutoUpdate = true;
+                    }
+                    break;
+                case AutoUpdateFreqCheckTimeSlice.OnceAWeek: // if once a week 
+                    TimeSpan dif = DateTime.Now - Settings.Default.LastUpdateTime;
+                    if (dif.Days >= 7) // 7 days ( aweek) passed
+                    {
+                        needToAutoUpdate = true;
+                    }
+                    break;
+                case AutoUpdateFreqCheckTimeSlice.OnceAMonths: // if once a month
+                    if (Settings.Default.LastUpdateTime.Month != DateTime.Now.Month) // if different month number then enough
+                    {
+                        needToAutoUpdate = true;
+                    }
+                    break;
+            }
+            return needToAutoUpdate;
         }
     }
 }

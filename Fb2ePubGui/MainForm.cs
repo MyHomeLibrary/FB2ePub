@@ -528,13 +528,27 @@ namespace Fb2ePubGui
             settings.ShowDialog(this);
         }
 
+        /// <summary>
+        /// Called first time frame shown (only once)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormGUI_Shown(object sender, EventArgs e)
         {
-            if (Settings.Default.PerformAutoupdate)
+            if (NeedToCheckForUpdate())
             {
                 CheckForUpdateDelegate d = CheckForUpdate;
                 Invoke(d, new object[] { false });
             }
+        }
+
+        /// <summary>
+        /// Return if we need to check for update or not
+        /// </summary>
+        /// <returns></returns>
+        private bool NeedToCheckForUpdate()
+        {
+            return UpdateChecker.IsNeedToUpdate();
         }
     }
 }
