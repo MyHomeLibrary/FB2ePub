@@ -145,32 +145,36 @@ namespace FB2EPubConverter
         /// <returns></returns>
         private string BuildNewFileName(string file, string outputFileName)
         {
-            string fileName = string.Empty;
-            if (!string.IsNullOrEmpty(outputFileName) && !_processorSettings.LookInSubFolders)
+            string fileName = outputFileName;
+            if (!string.IsNullOrEmpty(outputFileName) && !_processorSettings.LookInSubFolders) // if output file name specified
             {
-                fileName = outputFileName.ToLower();
-                if (Path.GetExtension(fileName) != ".epub")
+                if (Path.GetExtension(fileName).ToLower() != ".epub") // if output file name already has "ePub" extension - do nothing, if not - add it
                 {
                     fileName = string.Format("{0}.epub", outputFileName);
                 }
             }
-            else
+            else // if no output file name specified , means "outputFileName" empty and as result "fileName" empty at this point
             {
                 string fileNameWithoutExtension =
-                    Path.GetFileNameWithoutExtension(file);
-                if (fileNameWithoutExtension == null)
+                    Path.GetFileNameWithoutExtension(file); // get input file name without extension 
+                if (fileNameWithoutExtension == null) // if file starts with "." 
                 {
-                    fileNameWithoutExtension = "$tmp$";
+                    fileNameWithoutExtension = "$tmp$"; //create temporary name for it
                 }
-                string fileLocation = string.Format("{0}\\",
+
+                string fileLocation = fileLocation = _processorSettings.Settings.OutPutPath;
+
+                // if output file path in settings not set we need to build it
+                // creating from the input file path   
+                if (string.IsNullOrEmpty(_processorSettings.Settings.OutPutPath))
+                {
+                    fileLocation = string.Format("{0}\\",
                                                     Path.GetDirectoryName(
-                                                        Path.GetFullPath(file)));
-                if (!string.IsNullOrEmpty(_processorSettings.Settings.OutPutPath))
-                {
-                    fileLocation = _processorSettings.Settings.OutPutPath;
+                                                        Path.GetFullPath(file))); // 
                 }
-                // in case .fb2.zip remove the "fb2" part
+                // in case .fb2.zip etc. remove the "fb2" part (as .zip was removed earlier) 
                 string fileNameWithExtension = GenerateProperExtension(fileNameWithoutExtension);
+                // build new file location from path and name
                 fileName = Path.Combine(fileLocation,
                                                fileNameWithExtension);
             }
