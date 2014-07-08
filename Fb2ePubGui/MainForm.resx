@@ -218,7 +218,7 @@
     <value>&amp;Settings</value>
   </data>
   <data name="topmostToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>122, 22</value>
   </data>
   <data name="topmostToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Topmost</value>

@@ -42,6 +42,8 @@ namespace Fb2ePubGui
 
         private delegate void SetFileProcessedDelegate();
 
+        private delegate void CheckForUpdateDelegate(bool showIfCurrent);
+
 
         public FormGUI()
         {
@@ -51,10 +53,6 @@ namespace Fb2ePubGui
             topmostToolStripMenuItem.Checked = this.TopMost;
             backgroundWorkerProcess.WorkerSupportsCancellation = true;
             backgroundWorkerProcess.WorkerReportsProgress = true;
-            if (Settings.Default.PerformAutoupdate)
-            {
-                CheckForUpdate(false);
-            }
         }
 
         private enum LanguageSetting
@@ -480,6 +478,12 @@ namespace Fb2ePubGui
 
         private void checkForUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (this.InvokeRequired)
+            {
+                CheckForUpdateDelegate d = CheckForUpdate;
+                Invoke(d, new object[] { true });
+                return;
+            }
             CheckForUpdate(true);
         }
 
@@ -522,6 +526,15 @@ namespace Fb2ePubGui
         {
             FB2epubGUISettings settings = new FB2epubGUISettings();
             settings.ShowDialog(this);
+        }
+
+        private void FormGUI_Shown(object sender, EventArgs e)
+        {
+            if (Settings.Default.PerformAutoupdate)
+            {
+                CheckForUpdateDelegate d = CheckForUpdate;
+                Invoke(d, new object[] { false });
+            }
         }
     }
 }
