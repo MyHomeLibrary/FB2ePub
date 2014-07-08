@@ -16,11 +16,13 @@ namespace Fb2ePubGui
         {
             InitializeComponent();
             updateSettings.AutoUpdateEnabled = Settings.Default.PerformAutoupdate;
+            updateSettings.AutoUpdateFrequency = Settings.Default.AutoUpdateFreqCheck;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
             Settings.Default.PerformAutoupdate = updateSettings.AutoUpdateEnabled;
+            Settings.Default.AutoUpdateFreqCheck = updateSettings.AutoUpdateFrequency;
             Close();
         }
 
