@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -24,6 +26,7 @@ namespace Fb2ePubGui
     /// <summary>
     /// Used to define how often to check for automatic update
     /// </summary>
+    [TypeConverter(typeof(AutoUpdateFreqCheckTypeConverter))]
     public enum AutoUpdateFreqCheckTimeSlice
     {
         EveryRun, // check each time program loads
@@ -31,6 +34,79 @@ namespace Fb2ePubGui
         OnceAWeek, // every week
         OnceAMonths, // every months
     };
+
+    /// <summary>
+    /// Convert to/from string, used to display enum in combo box and localized
+    /// </summary>
+    internal class AutoUpdateFreqCheckTypeConverter : TypeConverter
+    {
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            if (sourceType == typeof (string))
+            {
+                return true;
+            }
+            return base.CanConvertFrom(context, sourceType);
+        }
+
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        {
+            if (destinationType == typeof (string))
+            {
+                return true;
+            }
+            return base.CanConvertTo(context, destinationType);
+        }
+
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            if (value is string)
+            {
+                switch (value as string)
+                {
+                    case "Every start":
+                    case "EveryRun":
+                        return AutoUpdateFreqCheckTimeSlice.EveryRun;
+                    case "Once a day":
+                    case "OnceADay":
+                        return AutoUpdateFreqCheckTimeSlice.OnceADay;
+                    case "Once a week":
+                    case "OnceAWeek":
+                        return AutoUpdateFreqCheckTimeSlice.OnceAWeek;
+                    case "Once a months":
+                    case "OnceAMonths":
+                        return AutoUpdateFreqCheckTimeSlice.OnceAMonths;
+                }
+                throw new ArgumentException(string.Format("The value '{0}' is not one of the AutoUpdateFreqCheckTimeSlice enumeration values", value as string));
+            }
+            return base.ConvertFrom(context, culture, value);
+        }
+
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        {
+            if (destinationType == typeof(AutoUpdateFreqCheckTimeSlice))
+            {
+                AutoUpdateFreqCheckTimeSlice enumValue = (AutoUpdateFreqCheckTimeSlice) value;
+                switch (enumValue)
+                {
+                    case AutoUpdateFreqCheckTimeSlice.EveryRun:
+                        return "Every start";
+                    case AutoUpdateFreqCheckTimeSlice.OnceADay:
+                        return "Once a day";
+                    case AutoUpdateFreqCheckTimeSlice.OnceAWeek:
+                        return "Once a week";
+                    case AutoUpdateFreqCheckTimeSlice.OnceAMonths:
+                        return "Once a months";
+                }
+            }
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
+
+        public override bool IsValid(ITypeDescriptorContext context, object value)
+        {
+            return base.IsValid(context, value);
+        }
+    }
 
     /// <summary>
     /// This class used to check for updated version presence on the server

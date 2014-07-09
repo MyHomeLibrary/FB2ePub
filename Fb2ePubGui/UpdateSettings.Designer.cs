@@ -52,6 +52,7 @@
             // 
             // comboBoxUpdateFreq
             // 
+            this.comboBoxUpdateFreq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxUpdateFreq.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxUpdateFreq, "comboBoxUpdateFreq");
             this.comboBoxUpdateFreq.Name = "comboBoxUpdateFreq";
