@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using Fb2ePubConverter;
 using FB2EPubConverter;
 using Fb2ePubGui.Properties;
+using Fb2ePubGui.UpdateSettingsControl;
 using FolderSettingsHelper.IniLocations;
 using log4net;
 

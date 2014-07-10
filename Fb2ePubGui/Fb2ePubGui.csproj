@@ -144,11 +144,17 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="UpdateChecker.cs" />
-    <Compile Include="UpdateSettings.cs">
+    <Compile Include="UpdateSettingsControl\AutoUpdateFreqCheckTimeSlice.cs" />
+    <Compile Include="UpdateSettingsControl\AutoUpdateFreqCheckTimeSliceTranslations.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AutoUpdateFreqCheckTimeSliceTranslations.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateSettingsControl\UpdateChecker.cs" />
+    <Compile Include="UpdateSettingsControl\UpdateSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UpdateSettings.Designer.cs">
+    <Compile Include="UpdateSettingsControl\UpdateSettings.Designer.cs">
       <DependentUpon>UpdateSettings.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AboutBox.resx">
@@ -188,11 +194,17 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
-    <EmbeddedResource Include="UpdateSettings.resx">
+    <EmbeddedResource Include="UpdateSettingsControl\AutoUpdateFreqCheckTimeSliceTranslations.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AutoUpdateFreqCheckTimeSliceTranslations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateSettingsControl\AutoUpdateFreqCheckTimeSliceTranslations.ru.resx" />
+    <EmbeddedResource Include="UpdateSettingsControl\UpdateSettings.resx">
       <DependentUpon>UpdateSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateSettings.ru.resx">
+    <EmbeddedResource Include="UpdateSettingsControl\UpdateSettings.ru.resx">
       <DependentUpon>UpdateSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
@@ -220,6 +232,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

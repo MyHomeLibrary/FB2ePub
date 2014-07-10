@@ -86,9 +86,9 @@ namespace Fb2ePubGui.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("OnceADay")]
-        public global::Fb2ePubGui.AutoUpdateFreqCheckTimeSlice AutoUpdateFreqCheck {
+        public global::Fb2ePubGui.UpdateSettingsControl.AutoUpdateFreqCheckTimeSlice AutoUpdateFreqCheck {
             get {
-                return ((global::Fb2ePubGui.AutoUpdateFreqCheckTimeSlice)(this["AutoUpdateFreqCheck"]));
+                return ((global::Fb2ePubGui.UpdateSettingsControl.AutoUpdateFreqCheckTimeSlice)(this["AutoUpdateFreqCheck"]));
             }
             set {
                 this["AutoUpdateFreqCheck"] = value;
