@@ -138,13 +138,13 @@ if errorlevel==1 goto failed
 
 rem archive installation files into a ZIP for distribution
 call:PrintParam "Creating installation ZIP archive"
-%ZIPER% %ZIPER_PARAMS% %ARCHIVE_NAME% %PROJ_ROOT%Fb2ePubSetup\Output\*.* >> %LOG%   
-if not errorlevel==0 goto winrar_failed
+msbuild build.tasks /t:CreateInstallationArchive /p:Archiver=\"%ZIPER%\" /p:ArchiverParams="%ZIPER_PARAMS%"  /p:ArchiveLocation=\"%ARCHIVE_PATH%\\"  /p:ArchiveSource=\"%PROJ_ROOT%Fb2ePubSetup\Output\*.*\" >> %LOG%   
+if errorlevel==1 goto winrar_failed
 
 rem archive of program files needed for standalone distribution
 call:PrintParam "Creating standalone ZIP archive"
-call makestandalone.cmd 
-if not errorlevel==0 goto standalone_failed
+msbuild build.tasks /t:CreateStandAloneArchive /p:Archiver=\"%ZIPER%\" /p:ArchiverParams="%ZIPER_PARAMS%"  /p:ArchiveLocation=\"%ARCHIVE_PATH%\\"  /p:ProjectRoot=\"%PROJ_ROOT%" >> %LOG%   
+if errorlevel==1 goto standalone_failed
 
 
 goto success
@@ -152,10 +152,9 @@ goto success
 
 :standalone_failed
 call:PrintParam "Creation of standalone archive failed"
-gotofailed
+goto failed
 
 :winrar_failed
-if errorlevel==1 goto success
 call:PrintParam "WinRar error"
 goto failed
 
