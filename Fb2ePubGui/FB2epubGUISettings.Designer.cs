@@ -1,4 +1,6 @@
-﻿namespace Fb2ePubGui
+﻿using Fb2ePubGui.UpdateSettingsControl;
+
+namespace Fb2ePubGui
 {
     partial class FB2epubGUISettings
     {
@@ -36,7 +38,7 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.updateSettings = new Fb2ePubGui.UpdateSettings();
+            this.updateSettings = new UpdateSettings();
             this.groupBox1.SuspendLayout();
             this.tabControlSettings.SuspendLayout();
             this.tabPageUpdate.SuspendLayout();
