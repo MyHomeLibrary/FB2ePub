@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 <Import Project="$(FrameworkDir)\$(FrameworkVersion)\Microsoft.Common.Tasks"/>
-<Target Name="UpdateVersionInXML">
-	<GetAssemblyIdentity AssemblyFiles="Output\Release\Fb2ePub.exe">
+
+<Target Name="GetConverterVersion">
+<GetAssemblyIdentity AssemblyFiles="Output\Release\Fb2ePub.exe">
 		<Output TaskParameter="Assemblies" ItemName="FB2ePubAssemblyInfo"/>
 	</GetAssemblyIdentity>
 	<PropertyGroup>	
@@ -13,9 +14,40 @@
         <OutVersionBuild>$([System.Text.RegularExpressions.Regex]::Match($(In), $(Pattern)).Groups[3].Value)</OutVersionBuild>
         <OutVersionRevision>$([System.Text.RegularExpressions.Regex]::Match($(In), $(Pattern)).Groups[4].Value)</OutVersionRevision>
     </PropertyGroup>	
+</Target>
+
+<Target Name="UpdateVersionInXML" DependsOnTargets="GetConverterVersion">
 	<XmlPoke  XmlInputPath="latest_ver.xml" Query="version/major" Value="$(OutVersionMajor)" /> 
 	<XmlPoke  XmlInputPath="latest_ver.xml" Query="version/minor" Value="$(OutVersionMinor)" /> 
 	<XmlPoke  XmlInputPath="latest_ver.xml" Query="version/build" Value="$(OutVersionBuild)" /> 
 	<XmlPoke  XmlInputPath="latest_ver.xml" Query="version/revision" Value="$(OutVersionRevision)" /> 
+</Target>
+
+<Target Name="CreateInstallationArchive" DependsOnTargets="GetConverterVersion">
+	<PropertyGroup>
+		<ArchiveFileName>$(ArchiveLocation)Fb2ePubSetup_$(OutVersionMajor)_$(OutVersionMinor)_$(OutVersionBuild).zip</ArchiveFileName>
+	</PropertyGroup>
+	<Message Text="Archiver=$(Archiver)" />
+	<Message Text="ArchiverParams=$(ArchiverParams)" />
+	<Message Text="ArchiveFileName=$(ArchiveFileName)" />
+	<Message Text="ArchiveSource=$(ArchiveSource)" />
+	<Message Text="Creating archive $(ArchiveFileName)" />
+	<Exec Command="$(Archiver) $(ArchiverParams) $(ArchiveFileName) $(ArchiveSource)">
+		<Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
+	</Exec>
+</Target>
+
+<Target Name="CreateStandAloneArchive" DependsOnTargets="GetConverterVersion">
+	<PropertyGroup>
+		<ArchiveFileName>$(ArchiveLocation)Fb2ePubMINI_$(OutVersionMajor)_$(OutVersionMinor)_$(OutVersionBuild).zip</ArchiveFileName>
+	</PropertyGroup>
+	<Message Text="Archiver=$(Archiver)" />
+	<Message Text="ArchiverParams=$(ArchiverParams)" />
+	<Message Text="ArchiveFileName=$(ArchiveFileName)" />
+	<Message Text="ProjectRoot=$(ProjectRoot)" />
+	<Message Text="Creating archive $(ArchiveFileName)" />
+	<Exec Command="$(Archiver) $(ArchiverParams) $(ArchiveFileName) -ep1 @$(ProjectRoot)\standalone.lst">
+		<Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
+	</Exec>
 </Target>
 </Project>
