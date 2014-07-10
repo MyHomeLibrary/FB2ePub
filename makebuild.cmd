@@ -128,18 +128,24 @@ if errorlevel==2 goto inno_fail
 
 rem now copy changes.txt to the setup folder
 call:PrintParam "Copy changes to the setup folder"
-copy %PROJ_ROOT%FB2EPubConverter\changes.txt %PROJ_ROOT%Fb2ePubSetup\Output\. /Y
+copy %PROJ_ROOT%FB2EPubConverter\changes.txt %PROJ_ROOT%Fb2ePubSetup\Output\. /Y >> %LOG%   
+if errorlevel==1 goto failed
+
+rem updating version in XML that will be used to compare current version  with version on update server
+call:PrintParam "Updating latest_ver.XML with version numbers"
+msbuild build.tasks /t:UpdateVersionInXML >> %LOG%   
 if errorlevel==1 goto failed
 
 rem archive installation files into a ZIP for distribution
 call:PrintParam "Creating installation ZIP archive"
-%ZIPER% %ZIPER_PARAMS% %ARCHIVE_NAME% %PROJ_ROOT%Fb2ePubSetup\Output\*.*
+%ZIPER% %ZIPER_PARAMS% %ARCHIVE_NAME% %PROJ_ROOT%Fb2ePubSetup\Output\*.* >> %LOG%   
 if not errorlevel==0 goto winrar_failed
 
 rem archive of program files needed for standalone distribution
 call:PrintParam "Creating standalone ZIP archive"
 call makestandalone.cmd 
 if not errorlevel==0 goto standalone_failed
+
 
 goto success
 
