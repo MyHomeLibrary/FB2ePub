@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Import Project="$(FrameworkDir)\$(FrameworkVersion)\Microsoft.Common.Tasks"/>
+<Target Name="UpdateVersionInXML">
+	<GetAssemblyIdentity AssemblyFiles="Output\Release\Fb2ePub.exe">
+		<Output TaskParameter="Assemblies" ItemName="FB2ePubAssemblyInfo"/>
+	</GetAssemblyIdentity>
+	<PropertyGroup>	
+        <Pattern>(\d+)\.?(\d+)\.?(\d+)\.?(\d+)</Pattern>
+        <In>%(FB2ePubAssemblyInfo.Version)</In>
+        <OutVersionMajor>$([System.Text.RegularExpressions.Regex]::Match($(In), $(Pattern)).Groups[1].Value)</OutVersionMajor>
+        <OutVersionMinor>$([System.Text.RegularExpressions.Regex]::Match($(In), $(Pattern)).Groups[2].Value)</OutVersionMinor>
+        <OutVersionBuild>$([System.Text.RegularExpressions.Regex]::Match($(In), $(Pattern)).Groups[3].Value)</OutVersionBuild>
+        <OutVersionRevision>$([System.Text.RegularExpressions.Regex]::Match($(In), $(Pattern)).Groups[4].Value)</OutVersionRevision>
+    </PropertyGroup>	
+	<XmlPoke  XmlInputPath="latest_ver.xml" Query="version/major" Value="$(OutVersionMajor)" /> 
+	<XmlPoke  XmlInputPath="latest_ver.xml" Query="version/minor" Value="$(OutVersionMinor)" /> 
+	<XmlPoke  XmlInputPath="latest_ver.xml" Query="version/build" Value="$(OutVersionBuild)" /> 
+	<XmlPoke  XmlInputPath="latest_ver.xml" Query="version/revision" Value="$(OutVersionRevision)" /> 
+</Target>
+</Project>
