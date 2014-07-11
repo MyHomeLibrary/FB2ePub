@@ -29,15 +29,8 @@ SET LOGFILE_NAME=build
 rem path to VC variable set file
 SET VCVARS="C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat"
 
-rem this actually defines packed file name , do not forget to change it when building
-SET VERSION_MAJOR=1
-SET VERSION_MINOR=1
-SET VERSION_BUILD=6
-
 rem here the output archived setup will be placed
 SET ARCHIVE_PATH=%PROJ_ROOT%Output\
-
-SET ARCHIVE_NAME=%ARCHIVE_PATH%Fb2ePubSetup_%VERSION_MAJOR%_%VERSION_MINOR%_%VERSION_BUILD%.zip
 
 rem path to ZIP archiver used
 SET ZIPER="C:\Program Files\WinRAR\WinRAR.exe"
@@ -71,33 +64,11 @@ rem create/reset log file and add header entry
 SET out1="Building at %DATE% , %TIME%."
 call:PrintParam %out1%
 
-rem deleting old outputs
-call:PrintParam "Deleting old outputs from %ARCHIVE_PATH%Release"
-if not exist %ARCHIVE_PATH%Release goto skip_delete_release
-del %ARCHIVE_PATH%Release /S /Q /S >> %LOG%   
-if errorlevel==1 goto failed
-:skip_delete_release
-
-call:PrintParam "Deleting old outputs from %ARCHIVE_PATH%x86"
-if not exist %ARCHIVE_PATH%x86 goto skip_delete_x86
-del %ARCHIVE_PATH%x86 /S /Q /S >> %LOG%   
-if errorlevel==1 goto failed
-:skip_delete_x86
-
-call:PrintParam "Deleting old outputs from %ARCHIVE_PATH%x64"
-if not exist %ARCHIVE_PATH%x64 goto skip_delete_x64
-del %ARCHIVE_PATH%x64 /S /Q /S >> %LOG%   
-if errorlevel==1 goto failed
-:skip_delete_x64
-
-call:PrintParam "Deleting old XPI outputs from %ARCHIVE_PATH%Plugins\"
-if not exist %ARCHIVE_PATH%Plugins goto skip_delete_plugins
-del %ARCHIVE_PATH%Plugins\*.xpi /S /Q  >> %LOG%   
-if errorlevel==1 goto failed
-:skip_delete_plugins
-
-
 call %VCVARS% x86_amd64
+
+rem cleanup old outputs
+call:PrintParam "Cleaning up old outputs"
+msbuild build.tasks /t:Cleanup /p:OutputPath="%ARCHIVE_PATH%\" >> %LOG%
 
 rem
 call:PrintParam "Running AnyCPU build first"

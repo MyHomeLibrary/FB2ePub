@@ -2,6 +2,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 <Import Project="$(FrameworkDir)\$(FrameworkVersion)\Microsoft.Common.Tasks"/>
 
+<!-- Read version number from converter and set it to properties -->
 <Target Name="GetConverterVersion">
 <GetAssemblyIdentity AssemblyFiles="Output\Release\Fb2ePub.exe">
 		<Output TaskParameter="Assemblies" ItemName="FB2ePubAssemblyInfo"/>
@@ -16,6 +17,7 @@
     </PropertyGroup>	
 </Target>
 
+<!-- Write version number to latest_ver.xml used for version check by internet  -->
 <Target Name="UpdateVersionInXML" DependsOnTargets="GetConverterVersion">
 	<XmlPoke  XmlInputPath="latest_ver.xml" Query="version/major" Value="$(OutVersionMajor)" /> 
 	<XmlPoke  XmlInputPath="latest_ver.xml" Query="version/minor" Value="$(OutVersionMinor)" /> 
@@ -23,6 +25,7 @@
 	<XmlPoke  XmlInputPath="latest_ver.xml" Query="version/revision" Value="$(OutVersionRevision)" /> 
 </Target>
 
+<!-- Archive installation into a single archive file -->
 <Target Name="CreateInstallationArchive" DependsOnTargets="GetConverterVersion">
 	<PropertyGroup>
 		<ArchiveFileName>$(ArchiveLocation)Fb2ePubSetup_$(OutVersionMajor)_$(OutVersionMinor)_$(OutVersionBuild).zip</ArchiveFileName>
@@ -37,6 +40,7 @@
 	</Exec>
 </Target>
 
+<!-- Creates minimal (without installation) program archive for distribution without setup -->
 <Target Name="CreateStandAloneArchive" DependsOnTargets="GetConverterVersion">
 	<PropertyGroup>
 		<ArchiveFileName>$(ArchiveLocation)Fb2ePubMINI_$(OutVersionMajor)_$(OutVersionMinor)_$(OutVersionBuild).zip</ArchiveFileName>
@@ -49,5 +53,26 @@
 	<Exec Command="$(Archiver) $(ArchiverParams) $(ArchiveFileName) -ep1 @$(ProjectRoot)\standalone.lst">
 		<Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
 	</Exec>
+</Target>
+
+<!-- Performs cleanup of output folder -->
+<Target Name="Cleanup">
+	<PropertyGroup>
+		<ReleaseFolder>$(OutputPath)Release</ReleaseFolder>
+		<x86Folder>$(OutputPath)x86</x86Folder>
+		<x64Folder>$(OutputPath)x64</x64Folder>
+		<PluginsFolder>$(OutputPath)Plugins</PluginsFolder>
+	</PropertyGroup>
+	<Message Text="Deleting old outputs from $(ReleaseFolder)" />
+	<RemoveDir Directories="$(ReleaseFolder)" />
+	<Message Text="Deleting old outputs from $(x86Folder)" />
+	<RemoveDir Directories="$(x86Folder)" />
+	<Message Text="Deleting old outputs from $(x64Folder)" />
+	<RemoveDir Directories="$(x64Folder)" />
+	<Message Text="Deleting old XPI outputs from $(PluginsFolder)" />
+	<ItemGroup>
+		<FilesToDelete Include="$(PluginsFolder)\*.xpi"/>
+	</ItemGroup>
+	<Delete Files="@(FilesToDelete)" />
 </Target>
 </Project>
