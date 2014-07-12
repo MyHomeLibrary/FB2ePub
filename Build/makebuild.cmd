@@ -68,7 +68,7 @@ call %VCVARS% x86_amd64
 
 rem cleanup old outputs
 call:PrintParam "Cleaning up old outputs"
-msbuild build.tasks /t:Cleanup /p:OutputPath="%ARCHIVE_PATH%\" >> %LOG%
+msbuild %PROJ_ROOT%Build\build.tasks /t:Cleanup /p:OutputPath="%ARCHIVE_PATH%\" >> %LOG%
 
 rem
 call:PrintParam "Running AnyCPU build first"
@@ -104,17 +104,17 @@ if errorlevel==1 goto failed
 
 rem updating version in XML that will be used to compare current version  with version on update server
 call:PrintParam "Updating latest_ver.XML with version numbers"
-msbuild build.tasks /t:UpdateVersionInXML >> %LOG%   
+msbuild %PROJ_ROOT%Build\build.tasks /t:UpdateVersionInXML >> %LOG%   
 if errorlevel==1 goto failed
 
 rem archive installation files into a ZIP for distribution
 call:PrintParam "Creating installation ZIP archive"
-msbuild build.tasks /t:CreateInstallationArchive /p:Archiver=\"%ZIPER%\" /p:ArchiverParams="%ZIPER_PARAMS%"  /p:ArchiveLocation=\"%ARCHIVE_PATH%\\"  /p:ArchiveSource=\"%PROJ_ROOT%Fb2ePubSetup\Output\*.*\" >> %LOG%   
+msbuild %PROJ_ROOT%Build\build.tasks /t:CreateInstallationArchive /p:Archiver=\"%ZIPER%\" /p:ArchiverParams="%ZIPER_PARAMS%"  /p:ArchiveLocation=\"%ARCHIVE_PATH%\\"  /p:ArchiveSource=\"%PROJ_ROOT%Fb2ePubSetup\Output\*.*\" >> %LOG%   
 if errorlevel==1 goto winrar_failed
 
 rem archive of program files needed for standalone distribution
 call:PrintParam "Creating standalone ZIP archive"
-msbuild build.tasks /t:CreateStandAloneArchive /p:Archiver=\"%ZIPER%\" /p:ArchiverParams="%ZIPER_PARAMS%"  /p:ArchiveLocation=\"%ARCHIVE_PATH%\\"  /p:ProjectRoot=\"%PROJ_ROOT%" >> %LOG%   
+msbuild %PROJ_ROOT%Build\build.tasks /t:CreateStandAloneArchive /p:Archiver=\"%ZIPER%\" /p:ArchiverParams="%ZIPER_PARAMS%"  /p:ArchiveLocation=\"%ARCHIVE_PATH%\\"  >> %LOG%   
 if errorlevel==1 goto standalone_failed
 
 
