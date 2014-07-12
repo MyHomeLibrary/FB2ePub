@@ -86,8 +86,8 @@ Source: "{#BuildFolder}Fb2ePub.exe"; DestDir: "{app}"; Flags:
 Source: "{#BuildFolder}Fb2ePub.exe.config"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}Fb2ePubGui.exe"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}Fb2ePubGui.exe.config"; DestDir: "{app}";  Flags: 
-Source: "{#BuildFolder}EPubLibrary.dll"; DestDir: "{app}";  Flags: 
-Source: "{#BuildFolder}FB2EPubConverter.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}EPubLibrary.dll"; DestDir: "{app}";  Flags:  
+Source: "{#BuildFolder}FB2EPubConverter.dll"; DestDir: "{app}";  Flags: uninsrestartdelete
 Source: "{#BuildFolder}FB2EPubConverter.dll.config"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}Fb2epubSettings.dll"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}Fb2FixLib.dll"; DestDir: "{app}";  Flags: 
@@ -130,10 +130,10 @@ Source: "{#BuildFolder86}FB2EPUBExt.INI"; DestDir: "{commonappdata}\{#MyAppSubfo
 Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver 32bit
 
 ; x64
-Source: "{#BuildFolder64}Fb2EpubExt_x64.dll"; DestDir: "{app}";  Check: Is64BitInstallMode; Flags: regserver 
+Source: "{#BuildFolder64}Fb2EpubExt_x64.dll"; DestDir: "{app}";  Check: Is64BitInstallMode; Flags: regserver uninsrestartdelete
 
 ;x86
-Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Flags: regserver 32bit
+Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Flags: regserver 32bit uninsrestartdelete
 
 ;7-ZIP , used to extract data from ZIP files durring installation, temporary , so far needed only if Firefox plugin installation selected
 Source: "{#ZIPerFolder}7za.exe"; DestDir: "{app}"; Flags: deleteafterinstall; Tasks: installFFPlugin;
