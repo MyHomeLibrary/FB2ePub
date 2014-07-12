@@ -123,9 +123,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CommonAssemblyInfo.cs.cs">
-      <Link>Properties\CommonAssemblyInfo.cs.cs</Link>
-    </Compile>
+    <Compile Include="Properties\CommonAssemblyInfo.cs.cs" />
     <Compile Include="ConvertProcessor.cs" />
     <Compile Include="ConvertProcessorSettings.cs" />
     <Compile Include="ElementConverters\AnnotationConverter.cs" />

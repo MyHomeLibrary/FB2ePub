@@ -130,9 +130,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CommonAssemblyInfo.cs.cs">
-      <Link>Properties\CommonAssemblyInfo.cs.cs</Link>
-    </Compile>
+    <Compile Include="Properties\CommonAssemblyInfo.cs" />
     <Compile Include="ConsoleWriter.cs" />
     <Compile Include="Fb2Epub.cs" />
     <Compile Include="Program.cs" />

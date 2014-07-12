@@ -45,7 +45,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{074062C0-E1AD-472D-9D88-73DAC2F69322}"
 	ProjectSection(SolutionItems) = preProject
 		FB2EPubConverter\changes.txt = FB2EPubConverter\changes.txt
-		CommonAssemblyInfo.cs.cs = CommonAssemblyInfo.cs.cs
+		CommonIncludes\CommonAssemblyInfo.cs = CommonIncludes\CommonAssemblyInfo.cs
 		Fb2ePub\epub-logo-color-book.ICO = Fb2ePub\epub-logo-color-book.ICO
 		Fb2ePub\license.docx = Fb2ePub\license.docx
 		Fb2ePub\readme_en.htm = Fb2ePub\readme_en.htm
