@@ -8,12 +8,109 @@ Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 //Components.utils.import("resource://gre/modules/DownloadCore.jsm");
 Components.utils.import("resource://gre/modules/Downloads.jsm");
 Components.utils.import("chrome://fb2epub/content/DownloadsExt.jsm");
+Components.utils.import("resource://gre/modules/ctypes.jsm");
+Components.utils.import("resource://gre/modules/AddonManager.jsm");
 
 const defaultNS = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 
 
+var myLib = {
+    lib: null,
+	error:false,
+
+    init: function() {
+        //Open the library you want to call
+        AddonManager.getAddonByID("fb2epub_plugin@fb2epub.net", function(addon)
+{
+    var uri = addon.getResourceURI("components/js-ctype_connector.dll");
+    if (uri instanceof Components.interfaces.nsIFileURL)
+    {
+        myLib.lib	=	ctypes.open(uri.file.path);
+    }
+	else
+	{
+		myLib.error = true; //  mark we need to exit wait in case of error
+		dump("\nAddonManager.getAddonByID : Unable to locate DLL " + "js-ctype_connector.dll" + "\n");
+	}
+	});
+	// wait until we open the library
+	var thread = Components.classes["@mozilla.org/thread-manager;1"].getService().currentThread;
+	while (this.lib == null && !this.error )
+	 {
+		thread.processNextEvent(true);
+	 }
+	
+	// Declarations part
+	//////////////////////////
+	this.impGetPathsCount = this.lib.declare("CNTR_GetPathsCount",
+                        ctypes.winapi_abi,
+                        ctypes.bool,
+                        ctypes.uint32_t.ptr);	 
+
+	this.impGetPath = this.lib.declare("CNTR_GetPath",
+                        ctypes.winapi_abi,
+                        ctypes.bool,
+                        ctypes.uint32_t,
+						ctypes.jschar.ptr,
+						ctypes.uint32_t.ptr);
+	
+	//////////////////////////
+		
+    },
+	
+	
+	
+	GetPathsCount: function()
+	{
+		var tempOut =ctypes.uint32_t(0);
+		if (this.impGetPathsCount(tempOut.address()) == false )
+		{
+			return 0;
+		}		
+		return tempOut.value;
+	},
+	
+	GetPath: function(pathNumber)
+	{
+		var Failed	=	false;
+		var dataLength = 260;
+		var NewString = ctypes.ArrayType(ctypes.jschar);
+		var myArray = new NewString(dataLength);
+		//var myArray = ctypes.jschar.array()(dataLength);
+		var DataLengthOut =ctypes.uint32_t(dataLength);
+		if (this.impGetPath(pathNumber,myArray,DataLengthOut.address()) == false )
+		{
+			var result = { failed: true, path: ""};
+			dump("\nFailed!");
+			return result;
+			
+		}
+		if ( DataLengthOut.value <= dataLength )
+		{
+			var result = { failed: false, path: myArray.readString()};
+			dump("\n" + result.path + "\n");
+			return result;
+		}
+		myArray = ctypes.jschar.array()(DataLengthOut.value);
+		if (this.impGetPath(pathNumber,myArray,DataLengthOut.address()) == false )
+		{
+			var result = { failed: true, path: ""};
+			dump("\nFailed!");
+			return result;
+		}
+		var result = { failed: false, path: myArray.readString()};
+		dump("\n" + result.path + "\n");
+		return result;		
+	},
+
+    //need to close the library once we're finished with it
+    close: function() {
+        this.lib.close();
+    }
+};
 window.addEventListener("load", function load(event){
     window.removeEventListener("load", load, false); //remove listener, no longer needed
+	myLib.init();
     fb2SaveContent.init();  
 },false);
 
@@ -23,7 +120,7 @@ var fb2SaveContent = {
 	_rememberButtonDisabledPrevState: false,
 	_rememberButtonCheckedPrevState: false,
 	_selectedDestinationId: 'fb2epub-menubrowseItem',
-
+	
 	
 // Check if the passed source name is one of FB2 extensions
 isfb2extension: function(fileName)
@@ -232,27 +329,18 @@ createMenuList: function (parent)
 	browseItem.setAttribute( 'label', translator.getString("fb2epub_browse4folder.label")); 
 	menuPopup.appendChild(browseItem); //add popup to menulist
 	
-	var fb2epubConverterComponent = Components.classes["@fb2epub.net/fb2epub/fb2epubpaths;1"];
-	if (fb2epubConverterComponent == null)
-	{
-		dump("\ncreateMenuList: Unable to load component, it's probably not registered!");
-	}	
-	var converterPathsObject = fb2epubConverterComponent.createInstance(Components.interfaces.IFb2EpubConverterPaths);
-	if (converterPathsObject == null)
-	{
-		dump("\nUnable to create component!");
-	}	
-	var pathsCount =	converterPathsObject.GetPathsCount();
+	
+	var pathsCount =	myLib.GetPathsCount(pathsCount);
 	for (var i = 0; i < pathsCount; i++) 
 	{
-		let path= converterPathsObject.GetPath(i);
+		let resultObj= myLib.GetPath(i).path;
 		let name = converterPathsObject.GetPathName(i);
 		let menuItem = document.createElementNS(defaultNS,'menuitem');
 		menuItem.setAttribute( 'id', i ); 
 		var itemLabel;
 		if ( name == null || name == "")
 		{
-			itemLabel = path;
+			itemLabel = resultObj.path;
 		}
 		else
 		{
@@ -545,3 +633,4 @@ onload: function()
 
 
 };
+
