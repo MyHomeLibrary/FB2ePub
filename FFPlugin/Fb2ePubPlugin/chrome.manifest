@@ -2,9 +2,6 @@ content     fb2epub    chrome/content/
 content fb2epub chrome/content/ contentaccessible=yes
 skin fb2epub classic/1.0 chrome/skin/
 overlay chrome://mozapps/content/downloads/unknownContentType.xul chrome://fb2epub/content/fb2epub_download_dialog.xul
-interfaces components/fb2epub_xpcom.xpt
-interfaces components/fb2epub_paths.xpt
-binary-component components/fb2epub-xpcom.dll
-binary-component components/fb2epub_paths.dll
 locale fb2epub en-US chrome/locale/en-US/
 locale fb2epub ru-RU chrome/locale/ru-RU/
+resource fb2epub_dll components/js-ctype_connector.dll
