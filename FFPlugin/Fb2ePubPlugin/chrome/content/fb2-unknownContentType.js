@@ -53,7 +53,14 @@ var myLib = {
                         ctypes.uint32_t,
 						ctypes.jschar.ptr,
 						ctypes.uint32_t.ptr);
-	
+
+	this.impGetPathName = this.lib.declare("CNTR_GetPathName",
+                        ctypes.winapi_abi,
+                        ctypes.bool,
+                        ctypes.uint32_t,
+						ctypes.jschar.ptr,
+						ctypes.uint32_t.ptr);
+						
 	//////////////////////////
 		
     },
@@ -76,33 +83,60 @@ var myLib = {
 		var dataLength = 260;
 		var NewString = ctypes.ArrayType(ctypes.jschar);
 		var myArray = new NewString(dataLength);
-		//var myArray = ctypes.jschar.array()(dataLength);
 		var DataLengthOut =ctypes.uint32_t(dataLength);
 		if (this.impGetPath(pathNumber,myArray,DataLengthOut.address()) == false )
 		{
 			var result = { failed: true, path: ""};
-			dump("\nFailed!");
+			dump("\nGetPath: Failed!");
 			return result;
 			
 		}
 		if ( DataLengthOut.value <= dataLength )
 		{
 			var result = { failed: false, path: myArray.readString()};
-			dump("\n" + result.path + "\n");
 			return result;
 		}
 		myArray = ctypes.jschar.array()(DataLengthOut.value);
 		if (this.impGetPath(pathNumber,myArray,DataLengthOut.address()) == false )
 		{
 			var result = { failed: true, path: ""};
-			dump("\nFailed!");
+			dump("\nGetPath: Failed!");
 			return result;
 		}
 		var result = { failed: false, path: myArray.readString()};
-		dump("\n" + result.path + "\n");
 		return result;		
 	},
 
+	GetPathName: function(pathNumber)
+	{
+		var Failed	=	false;
+		var dataLength = 260;
+		var NewString = ctypes.ArrayType(ctypes.jschar);
+		var myArray = new NewString(dataLength);
+		var DataLengthOut =ctypes.uint32_t(dataLength);
+		if (this.impGetPathName(pathNumber,myArray,DataLengthOut.address()) == false )
+		{
+			var result = { failed: true, name: ""};
+			dump("\nGetPathName Failed!");
+			return result;
+			
+		}
+		if ( DataLengthOut.value <= dataLength )
+		{
+			var result = { failed: false, name: myArray.readString()};
+			return result;
+		}
+		myArray = ctypes.jschar.array()(DataLengthOut.value);
+		if (this.impGetPathName(pathNumber,myArray,DataLengthOut.address()) == false )
+		{
+			var result = { failed: true, name: ""};
+			dump("\nGetPathName Failed!");
+			return result;
+		}
+		var result = { failed: false, name: myArray.readString()};
+		return result;		
+	},
+	
     //need to close the library once we're finished with it
     close: function() {
         this.lib.close();
@@ -155,12 +189,9 @@ isfb2extension: function(fileName)
  if ( value == true )
  {
 	value = prefs.getCharPref("additionalExtensions").toLowerCase(); // making lower case so easier to search
-	dump("\n\n" + value);
 	var extensionsPassed = value.split(';');
-	dump("\n" + extensionsPassed);
 	for (var elm in extensionsPassed )
 	{
-		dump("\n" + elm);
 		if ( extensionsPassed[elm] == extension)
 		{
 			return true;
@@ -333,14 +364,14 @@ createMenuList: function (parent)
 	var pathsCount =	myLib.GetPathsCount(pathsCount);
 	for (var i = 0; i < pathsCount; i++) 
 	{
-		let resultObj= myLib.GetPath(i).path;
-		let name = converterPathsObject.GetPathName(i);
+		let path = myLib.GetPath(i).path;
+		let name = myLib.GetPathName(i).name;
 		let menuItem = document.createElementNS(defaultNS,'menuitem');
 		menuItem.setAttribute( 'id', i ); 
 		var itemLabel;
 		if ( name == null || name == "")
 		{
-			itemLabel = resultObj.path;
+			itemLabel = path;
 		}
 		else
 		{

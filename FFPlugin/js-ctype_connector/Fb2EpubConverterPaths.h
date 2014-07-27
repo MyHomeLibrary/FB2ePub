@@ -9,8 +9,6 @@ public:
 	bool GetPath(UINT32 uiPath,LPWSTR strPath, UINT32& uiPathLength);
 	bool GetPathName(UINT32 uiPath,LPWSTR strPathName, UINT32& uiPathLength);
 	
-	static void FreeString(LPWSTR strPath);
-
 protected:
   /* additional members */
 	void Init();

@@ -4,4 +4,3 @@ skin fb2epub classic/1.0 chrome/skin/
 overlay chrome://mozapps/content/downloads/unknownContentType.xul chrome://fb2epub/content/fb2epub_download_dialog.xul
 locale fb2epub en-US chrome/locale/en-US/
 locale fb2epub ru-RU chrome/locale/ru-RU/
-resource fb2epub_dll components/js-ctype_connector.dll

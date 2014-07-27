@@ -45,9 +45,4 @@ bool JSCTYPE_CONNECTOR_API CNTR_GetPathName(UINT32 uiPath,LPWSTR strPathName, UI
 	return  PathsConverterObj.GetPathName(uiPath,strPathName,uiPathLength);
 }
 
-void JSCTYPE_CONNECTOR_API CNTR_FreeString(LPWSTR strPath)
-{
-	CFb2EpubConverterPaths::FreeString(strPath); 
-}
-
 }

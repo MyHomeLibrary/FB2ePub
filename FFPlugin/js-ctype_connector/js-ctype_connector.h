@@ -16,7 +16,6 @@ EXTERN_C
 bool JSCTYPE_CONNECTOR_API CNTR_GetPathsCount(UINT32& uiPathCount);
 bool JSCTYPE_CONNECTOR_API CNTR_GetPath(UINT32 uiPath,LPWSTR strPath, UINT32& uiPathLength);
 bool JSCTYPE_CONNECTOR_API CNTR_GetPathName(UINT32 uiPath,LPWSTR strPathName, UINT32& uiPathLength);
-void JSCTYPE_CONNECTOR_API CNTR_FreeString(LPWSTR strPath);
 }
 
 //// This class is exported from the js-ctype_connector.dll
