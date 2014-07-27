@@ -142,11 +142,20 @@ var myLib = {
         this.lib.close();
     }
 };
+
+// attach event listener to "load" event , fired when window loaded
 window.addEventListener("load", function load(event){
     window.removeEventListener("load", load, false); //remove listener, no longer needed
 	myLib.init();
     fb2SaveContent.init();  
 },false);
+
+// attach event listener to "unload" event , fired when window unloaded
+window.addEventListener("unload", function unload(event){
+    window.removeEventListener("unload", unload, false); //remove listener, no longer needed
+	myLib.close();
+},false);
+
 
 var fb2SaveContent = {
 	_fb2MenuItem: null, // menu item we insert
@@ -452,6 +461,7 @@ insertMenu: function (saveGroup)
 		saveGroup.selectedItem = this._fb2MenuItem;
 	}
   }
+  window.sizeToContent();
 },
 
 // Return if rememberChoise button checked or not
@@ -576,25 +586,13 @@ downloadAndConvert: function()
 	}
 	else if (this.isNumber(this._selectedDestinationId))
 	{
-		var fb2epubConverterComponent = Components.classes["@fb2epub.net/fb2epub/fb2epubpaths;1"];
-		if (fb2epubConverterComponent == null)
-		{
-			dump("\ndownloadAndConvert: Unable to load component, it's probably not registered!");
-			return;
-		}	
-		var converterPathsObject = fb2epubConverterComponent.createInstance(Components.interfaces.IFb2EpubConverterPaths);
-		if (converterPathsObject == null)
-		{
-			dump("\ndownloadAndConvert: Unable to create component!");
-			return;
-		}	
-		var pathsCount =	converterPathsObject.GetPathsCount();
+		var pathsCount =	myLib.GetPathsCount(pathsCount);
 		if (this._selectedDestinationId >= pathsCount)
 		{
 			dump("\ndownloadAndConvert: Selected value " + this._selectedDestinationId + " is higher then total paths count: " + pathsCount + " !");
 			return;
 		}
-		let path= converterPathsObject.GetPath(this._selectedDestinationId);
+		let path= myLib.GetPath(this._selectedDestinationId).path;
 		destPath = path + basename;
 	}
 	else 
