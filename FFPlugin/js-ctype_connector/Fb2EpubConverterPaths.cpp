@@ -15,7 +15,7 @@ CFb2EpubConverterPaths::CFb2EpubConverterPaths(void)
 : m_pTargetsArray(NULL)
 ,m_uiTargetsCount(0)
 {
-  /* member initializers and constructor code */
+  /* member initialization and constructor code */
 	Init();
 }
 
@@ -44,12 +44,12 @@ void CFb2EpubConverterPaths::ReleaseTargets()
 	{
 		for(UINT32 i = 0; i < m_uiTargetsCount; i++)
 		{
-			if ( m_pTargetsArray[i].path != NULL )
+			if ( m_pTargetsArray[i].path != NULL && StrCmpCW(m_pTargetsArray[i].path,L"") != 0)
 			{
 				free(m_pTargetsArray[i].path);
 				m_pTargetsArray[i].path	= NULL;
 			}
-			if ( m_pTargetsArray[i].name != NULL)
+			if ( m_pTargetsArray[i].name != NULL && StrCmpCW(m_pTargetsArray[i].name,L"") != 0)
 			{
 				free(m_pTargetsArray[i].name);
 				m_pTargetsArray[i].name = NULL;
@@ -164,14 +164,13 @@ bool CFb2EpubConverterPaths::GetPathName(UINT32 uiPath,LPWSTR strPathName, UINT3
 	{
 		return false;
 	}
-	uiPathLength	=	_tcslen(m_pTargetsArray[uiPath].name);
-	_tcscpy_s(strPathName,uiPathLength,m_pTargetsArray[uiPath].name);
+	UINT32 uiTempLen	=	_tcslen(m_pTargetsArray[uiPath].name);
+	if ( uiTempLen <= uiPathLength )
+	{
+		::CopyMemory(strPathName,m_pTargetsArray[uiPath].name,uiTempLen*sizeof(WCHAR));
+	}
+	uiPathLength	=	uiTempLen;
 	return true;
 }
 
 
-
-void CFb2EpubConverterPaths::FreeString(LPWSTR strPath)
-{
-	free(strPath);		
-}
