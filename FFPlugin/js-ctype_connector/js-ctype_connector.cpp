@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "js-ctype_connector.h"
 #include "Fb2EpubConverterPaths.h"
+#include "Fb2ePubConverter.h"
 
 
 
@@ -43,6 +44,12 @@ bool JSCTYPE_CONNECTOR_API CNTR_GetPathName(UINT32 uiPath,LPWSTR strPathName, UI
 {
 	CFb2EpubConverterPaths PathsConverterObj;
 	return  PathsConverterObj.GetPathName(uiPath,strPathName,uiPathLength);
+}
+
+bool JSCTYPE_CONNECTOR_API CNTR_Convert(LPCWSTR inputPath,LPCWSTR outputPath)
+{
+	CFb2ePubConverter Converter;
+	return Converter.Convert(inputPath,outputPath);
 }
 
 }

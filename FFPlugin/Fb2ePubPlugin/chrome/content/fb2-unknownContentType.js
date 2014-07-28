@@ -5,7 +5,6 @@ Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
 
 
-//Components.utils.import("resource://gre/modules/DownloadCore.jsm");
 Components.utils.import("resource://gre/modules/Downloads.jsm");
 Components.utils.import("chrome://fb2epub/content/DownloadsExt.jsm");
 Components.utils.import("chrome://fb2epub/content/converter_path_exports.jsm");
@@ -473,7 +472,6 @@ downloadAndConvert: function()
 	}
 	if ( destPath != null)
 	{
-		dump("\n" + destPath);
 		this.download(destPath,dialog.mLauncher.source);
 	}
 },

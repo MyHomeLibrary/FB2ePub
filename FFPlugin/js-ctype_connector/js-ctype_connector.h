@@ -13,18 +13,13 @@
 EXTERN_C
 {
 
-bool JSCTYPE_CONNECTOR_API CNTR_GetPathsCount(UINT32& uiPathCount);
-bool JSCTYPE_CONNECTOR_API CNTR_GetPath(UINT32 uiPath,LPWSTR strPath, UINT32& uiPathLength);
-bool JSCTYPE_CONNECTOR_API CNTR_GetPathName(UINT32 uiPath,LPWSTR strPathName, UINT32& uiPathLength);
+	// Path related functions
+	bool JSCTYPE_CONNECTOR_API CNTR_GetPathsCount(UINT32& uiPathCount);
+	bool JSCTYPE_CONNECTOR_API CNTR_GetPath(UINT32 uiPath,LPWSTR strPath, UINT32& uiPathLength);
+	bool JSCTYPE_CONNECTOR_API CNTR_GetPathName(UINT32 uiPath,LPWSTR strPathName, UINT32& uiPathLength);
+
+	// Converter unctions
+	bool JSCTYPE_CONNECTOR_API CNTR_Convert(LPCWSTR inputPath,LPCWSTR outputPath);
+
 }
 
-//// This class is exported from the js-ctype_connector.dll
-//class JSCTYPE_CONNECTOR_API Cjsctype_connector {
-//public:
-//	Cjsctype_connector(void);
-//	// TODO: add your methods here.
-//};
-//
-//extern JSCTYPE_CONNECTOR_API int njsctype_connector;
-//
-//JSCTYPE_CONNECTOR_API int fnjsctype_connector(void);
