@@ -56,7 +56,7 @@
 </Target>
 
 <!-- Performs cleanup of output folder -->
-<Target Name="Cleanup">
+<Target Name="CleanupMain">
 	<PropertyGroup>
 		<ReleaseFolder>$(OutputPath)Release</ReleaseFolder>
 		<x86Folder>$(OutputPath)x86</x86Folder>
@@ -75,4 +75,45 @@
 	</ItemGroup>
 	<Delete Files="@(FilesToDelete)" />
 </Target>
+
+<!-- Performs cleanup of output folder -->
+<Target Name="CleanupFFPlugin">
+	<PropertyGroup>
+		<PluginsOutFolder>$(PROJ_ROOT)FFPlugin\Fb2ePubPlugin\components</PluginsOutFolder>
+	</PropertyGroup>
+	<Message Text="Deleting old XPI outputs from $(PluginsOutFolder)" />
+	<ItemGroup>
+		<FilesToDelete Include="$(PluginsOutFolder)\*.*"/>
+	</ItemGroup>
+	<Delete Files="@(FilesToDelete)" />
+</Target>
+
+<!-- Creates Firefox XPI archive -->
+<Target Name="CreateFFXPIArchive">
+	<PropertyGroup>
+		<PluginDataLocation>$(PROJ_ROOT)FFPlugin\Fb2ePubPlugin\*.*</PluginDataLocation>
+		<ArchiveFileName>$(PROJ_ROOT)Output\Plugins\fb2epub_plugin@fb2epub.net.xpi</ArchiveFileName>
+	</PropertyGroup>
+	<Message Text="Archiver=$(Archiver)" />
+	<Message Text="ArchiverParams=$(ArchiverParams)" />
+	<Message Text="ArchiveFileName=$(ArchiveFileName)" />
+	<Message Text="Creating archive $(ArchiveFileName)" />
+	<Exec Command="$(Archiver) $(ArchiverParams) $(ArchiveFileName) $(PluginDataLocation)"  WorkingDirectory="$(PROJ_ROOT)">
+		<Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
+	</Exec>
+</Target>
+
+<Target Name="CompileSetup">
+	<PropertyGroup>
+		<InnoCompiler>$(INNO_PATH)Compil32.exe</InnoCompiler>
+		<SetupProject>$(PROJ_ROOT)Fb2ePubSetup\FB2ePubSetup.iss</SetupProject>
+	</PropertyGroup>
+	<Message Text="InnoCompiler=$(InnoCompiler)" />
+	<Message Text="SetupProject=$(SetupProject)" />
+	<Exec Command="$(InnoCompiler) /cc $(SetupProject)"  WorkingDirectory="$(PROJ_ROOT)">
+		<Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
+	</Exec>
+</Target>
+
+
 </Project>
