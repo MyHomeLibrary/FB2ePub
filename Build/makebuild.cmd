@@ -68,7 +68,7 @@ call %VCVARS% x86_amd64
 
 rem cleanup old outputs
 call:PrintParam "Cleaning up old outputs"
-msbuild %PROJ_ROOT%Build\build.tasks /t:Cleanup /p:OutputPath="%ARCHIVE_PATH%\" >> %LOG%
+msbuild %PROJ_ROOT%Build\build.tasks /t:CleanupMain /p:OutputPath="%ARCHIVE_PATH%\" >> %LOG%
 
 rem
 call:PrintParam "Running AnyCPU build first"
@@ -87,14 +87,24 @@ if errorlevel==1 goto failed
 
 rem create firefox extension
 call:PrintParam "Creating Firefox extension"
-call %PROJ_ROOT%FFPlugin\build_ff_extension.cmd
+msbuild %PROJ_ROOT%FFPlugin\js-ctype_connector\js-ctype_connector.sln /t:rebuild /m /property:Configuration=Release;Platform="Win32" >> %LOG%
 if errorlevel==1 goto failed
 
 
+rem creating a plugins output folder
+call:PrintParam "creating a plugins output folder %ARCHIVE_PATH%"
+mkdir %PROJ_ROOT%Output\Plugins\
+if not errorlevel==0 goto failed
+
+rem archive installation files into a ZIP for distribution
+call:PrintParam "Creating XPI extension archive"
+msbuild %PROJ_ROOT%Build\build.tasks /t:CreateFFXPIArchive /p:Archiver=\"%ZIPER%\" /p:ArchiverParams="%ZIPER_PARAMS%"  >> %LOG%   
+if not errorlevel==0 goto winrar_failed
+
 rem call InnoSetup compiler
 call:PrintParam "Compiling the setup"
-call %INNO_PATH%Compil32.exe /cc %PROJ_ROOT%Fb2ePubSetup\FB2ePubSetup.iss >> %LOG%
-if errorlevel==1 goto inon_params_fail
+msbuild %PROJ_ROOT%Build\build.tasks /t:CompileSetup >> %LOG%   
+if errorlevel==1 goto inno_params_fail
 if errorlevel==2 goto inno_fail
 
 rem now copy changes.txt to the setup folder
@@ -129,7 +139,7 @@ goto failed
 call:PrintParam "WinRar error"
 goto failed
 
-:inon_params_fail
+:inno_params_fail
 call:PrintParam "invalid parameters passed"
 goto failed
 
