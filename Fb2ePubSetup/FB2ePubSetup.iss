@@ -249,8 +249,7 @@ begin
 	msi45('4.5');
   dotnetfx40client();
   vcredist2012();
-  vcredist2010();
-
+  
 	Result := true;
 end;
 
