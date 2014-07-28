@@ -1,4 +1,8 @@
-﻿1.1.6
+﻿1.1.7
++ Added ability to detect FB2 files by content, not by extension, when passed to converter (needed for FF plugin)
+* The FF plugin rewriten to use js-ctypes instead of XPCOM as XPCOM required to recompile plugin each time SDK version changed,this also removes VS2010 compilation requirments
+
+1.1.6
 + -= Added Firefox extension to use converter for "saveAs" FB2 dialogs =-
 + Added "Open" to File menu in GUI utility - another way to open files for convert selection dialog
 + Added resources and conversion process start/end markings to the log

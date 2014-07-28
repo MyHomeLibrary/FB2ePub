@@ -531,10 +531,51 @@ namespace Fb2ePubConverter
                         Logger.Log.Debug("The file is RAR file");
                         return FileTypesEnum.FileTypeRAR;
                     }
+                    if (IsFB2File(fileName))
+                    {
+                        Logger.Log.Debug("The file is FB2 file");
+                        return FileTypesEnum.FileTypeFB2;                       
+                    }
                     break;
             }
             Logger.Log.Debug("The file is unknown file type");
             return FileTypesEnum.FileTypeUnknown;
+        }
+
+        private static bool IsFB2File(string fileName)
+        {
+            using (Stream s = File.OpenRead(fileName))
+            {
+                XmlReaderSettings settings = new XmlReaderSettings
+                                                 {
+                                                     ValidationType = ValidationType.None,
+                                                     DtdProcessing = DtdProcessing.Prohibit,
+                                                     CheckCharacters = false
+                                                 
+                };
+                try
+                {
+                        using (XmlReader reader = XmlReader.Create(s, settings))
+                        {
+                            XNamespace fb2Namespace = "http://www.gribuser.ru/xml/fictionbook/2.0";
+                            XDocument fb2Document= XDocument.Load(reader, LoadOptions.PreserveWhitespace);
+                            if (fb2Document.Root != null &&
+                                fb2Document.Root.Name.LocalName == "FictionBook" &&
+                                fb2Document.Root.Name.Namespace == fb2Namespace) 
+                            {
+                                reader.Close();
+                                return true;
+                            }
+                            reader.Close();
+                        }
+
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+            return false;
         }
 
         private static bool IsRarFile(string fileName)
