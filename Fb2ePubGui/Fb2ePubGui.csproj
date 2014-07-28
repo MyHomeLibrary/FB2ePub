@@ -99,13 +99,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonIncludes\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="CommonAssemblyInfo.cs" />
     <Compile Include="FB2epubGUISettings.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -95,6 +95,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonIncludes\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="InvalidSequence.cs" />
     <Compile Include="XmlRepair.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
