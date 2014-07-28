@@ -462,7 +462,7 @@ downloadAndConvert: function()
 			dump("\ndownloadAndConvert: Selected value " + this._selectedDestinationId + " is higher then total paths count: " + pathsCount + " !");
 			return;
 		}
-		let path= ConverterPaths.GetPath(this._selectedDestinationId).path;
+		let path= ConverterPaths.GetPath(Number(this._selectedDestinationId)).path;
 		destPath = path + basename;
 	}
 	else 
