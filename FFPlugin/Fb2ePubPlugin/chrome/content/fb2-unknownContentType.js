@@ -463,7 +463,7 @@ downloadAndConvert: function()
 			return;
 		}
 		let path= ConverterPaths.GetPath(Number(this._selectedDestinationId)).path;
-		destPath = path + basename;
+		destPath = path + "\\" + basename;
 	}
 	else 
 	{
