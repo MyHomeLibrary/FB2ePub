@@ -90,6 +90,7 @@ copy $(TargetDir)$(TargetName).pdb $(ProjectDir)..\Fb2ePubPlugin\components\. /y
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Fb2ePubConverter.h" />
     <ClInclude Include="Fb2EpubConverterPaths.h" />
     <ClInclude Include="js-ctype_connector.h" />
     <ClInclude Include="resource.h" />
@@ -105,6 +106,7 @@ copy $(TargetDir)$(TargetName).pdb $(ProjectDir)..\Fb2ePubPlugin\components\. /y
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Fb2ePubConverter.cpp" />
     <ClCompile Include="Fb2EpubConverterPaths.cpp" />
     <ClCompile Include="js-ctype_connector.cpp" />
     <ClCompile Include="stdafx.cpp">

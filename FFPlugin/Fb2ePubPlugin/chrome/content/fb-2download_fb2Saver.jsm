@@ -9,8 +9,8 @@ const Ci = Components.interfaces;
 const Cu = Components.utils;
 const Cr = Components.results;
 
+Components.utils.import("chrome://fb2epub/content/converter_exports.jsm");
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
-//XPCOMUtils.defineLazyModuleGetter(this, "DownloadSaver","resource://gre/modules/DownloadCore.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "DownloadCopySaver","resource://gre/modules/DownloadCore.jsm");
 
 XPCOMUtils.defineLazyModuleGetter(this, "Task","resource://gre/modules/Task.jsm");  
@@ -72,7 +72,7 @@ this.Fb2DownloadCopySaverToEPub.prototype.makeTempFileName = function(length)
 	let targetPath = OS.Path.join(OS.Constants.Path.tmpDir, this.makeTempFileName(8));
     let partFilePath = download.target.partFilePath;
     let keepPartialData = download.tryToKeepPartialData;
-
+	
     return Task.spawn(function task_DCS_execute() {
       // Add the download to history the first time it is started in this
       // session.  If the download is restarted in a different session, a new
@@ -126,20 +126,12 @@ this.Fb2DownloadCopySaverToEPub.prototype.makeTempFileName = function(length)
                 this._signatureInfo = aSaver.signatureInfo;
                 this._redirects = aSaver.redirects;
                 deferSaveComplete.resolve();
-				var fb2epubConverterComponent = Cc["@fb2epub.net/fb2epub/fb2epub;1"];
-				if (fb2epubConverterComponent == null)
-				{
-					dump("\nUnable to load component, it's probably not registered!");
-				}	
-				var converterObject = fb2epubConverterComponent.createInstance(Ci.IFb2EpubConverter);
-				if (converterObject == null)
-				{
-					dump("\nUnable to create component!");
-				}	
-				var res = converterObject.Convert(targetPath,download.target.path);
+  			    Fb2ePubConverter.init();
+				var res = Fb2ePubConverter.Convert(targetPath,download.target.path);
+				Fb2ePubConverter.close();
 				try {
 					// clean up temporary file
-				  OS.File.remove(targetPath);
+				  //OS.File.remove(targetPath);
 				} catch (e2) {
 				  if (!(e2 instanceof OS.File.Error &&
 						(e2.becauseNoSuchFile || e2.becauseAccessDenied))) {
