@@ -433,7 +433,6 @@
             this.radioButtonSDEnabled.TabStop = true;
             this.toolTipControl.SetToolTip(this.radioButtonSDEnabled, resources.GetString("radioButtonSDEnabled.ToolTip"));
             this.radioButtonSDEnabled.UseVisualStyleBackColor = true;
-            this.radioButtonSDEnabled.CheckedChanged += new System.EventHandler(this.radioButtonSDEnabled_CheckedChanged);
             this.radioButtonSDEnabled.Click += new System.EventHandler(this.radioButtonSDEnabled_Click);
             // 
             // radioButtonSDDisabled
@@ -443,7 +442,6 @@
             this.radioButtonSDDisabled.TabStop = true;
             this.toolTipControl.SetToolTip(this.radioButtonSDDisabled, resources.GetString("radioButtonSDDisabled.ToolTip"));
             this.radioButtonSDDisabled.UseVisualStyleBackColor = true;
-            this.radioButtonSDDisabled.CheckedChanged += new System.EventHandler(this.radioButtonSDDisabled_CheckedChanged);
             this.radioButtonSDDisabled.Click += new System.EventHandler(this.radioButtonSDDisabled_Click);
             // 
             // buttonEdit
@@ -468,7 +466,6 @@
             this.checkBoxVisibleInGUI.Name = "checkBoxVisibleInGUI";
             this.toolTipControl.SetToolTip(this.checkBoxVisibleInGUI, resources.GetString("checkBoxVisibleInGUI.ToolTip"));
             this.checkBoxVisibleInGUI.UseVisualStyleBackColor = true;
-            this.checkBoxVisibleInGUI.CheckedChanged += new System.EventHandler(this.checkBoxVisibleInGUI_CheckedChanged);
             this.checkBoxVisibleInGUI.Click += new System.EventHandler(this.checkBoxVisibleInGUI_Click);
             // 
             // checkBoxVisibleInExt
@@ -477,7 +474,6 @@
             this.checkBoxVisibleInExt.Name = "checkBoxVisibleInExt";
             this.toolTipControl.SetToolTip(this.checkBoxVisibleInExt, resources.GetString("checkBoxVisibleInExt.ToolTip"));
             this.checkBoxVisibleInExt.UseVisualStyleBackColor = true;
-            this.checkBoxVisibleInExt.CheckedChanged += new System.EventHandler(this.checkBoxVisibleInExt_CheckedChanged);
             this.checkBoxVisibleInExt.Click += new System.EventHandler(this.checkBoxVisibleInExt_Click);
             // 
             // buttonDownPath

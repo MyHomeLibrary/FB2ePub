@@ -255,8 +255,8 @@ void CFb2EpubExtModule::ReadTargets()
 		TCHAR section[1024];
 		if ( iSingleDestination != -1 )
 		{
-				::ZeroMemory(section,sizeof(TCHAR)*1024);
-				wsprintf(section,_T("Target%d"),iSingleDestination);
+			::ZeroMemory(section,sizeof(TCHAR)*1024);
+			wsprintf(section,_T("Target%d"),iSingleDestination);
 			bool bAdd = (::GetPrivateProfileInt(section,_T("ShowInShell"),1,m_INIPath.c_str()) == 1);
 			if (bAdd)
 			{
