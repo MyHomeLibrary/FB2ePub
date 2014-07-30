@@ -33,8 +33,8 @@ std::basic_string<TCHAR> format_arg_list(const TCHAR *fmt, va_list args)
     {
         if (buffer) delete [] buffer;
         buffer = new TCHAR [length + 1];
-        memset(buffer, 0, length + 1);
-		result = _vsntprintf_s(buffer,length*sizeof(TCHAR), length, fmt, args);
+        memset(buffer, 0, (length + 1)*sizeof(TCHAR));
+		result = _vsntprintf_s(buffer,length, length, fmt, args);
         length *= 2;
     }
     std::basic_string<TCHAR> s= buffer;
