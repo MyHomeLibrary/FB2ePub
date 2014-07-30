@@ -95,10 +95,9 @@
 		<ArchiveFileName>$(PROJ_ROOT)Output\Plugins\fb2epub_plugin@fb2epub.net.xpi</ArchiveFileName>
 	</PropertyGroup>
 	<Message Text="Archiver=$(Archiver)" />
-	<Message Text="ArchiverParams=$(ArchiverParams)" />
 	<Message Text="ArchiveFileName=$(ArchiveFileName)" />
 	<Message Text="Creating archive $(ArchiveFileName)" />
-	<Exec Command="$(Archiver) $(ArchiverParams) $(ArchiveFileName) $(PluginDataLocation)"  WorkingDirectory="$(PROJ_ROOT)">
+	<Exec Command="$(Archiver) a -y -afzip -m0 -ep -av -rr -r -ep1 $(ArchiveFileName) $(PluginDataLocation)"  WorkingDirectory="$(PROJ_ROOT)">
 		<Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
 	</Exec>
 </Target>
