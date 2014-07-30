@@ -249,6 +249,12 @@
   <data name="&gt;&gt;buttonImportExport.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="tabControlSettings.Alignment" type="System.Windows.Forms.TabAlignment, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="tabControlSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
   <data name="checkBoxTransliterateAdditional.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -347,6 +353,63 @@
   </data>
   <data name="&gt;&gt;checkBoxTransliterateTOC.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="groupBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>326, 217</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Transliteration settings</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>tabPageTransliteration</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPageTransliteration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 4</value>
+  </data>
+  <data name="tabPageTransliteration.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageTransliteration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 223</value>
+  </data>
+  <data name="tabPageTransliteration.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPageTransliteration.Text" xml:space="preserve">
+    <value>Transliteration</value>
+  </data>
+  <data name="tabPageTransliteration.ToolTipText" xml:space="preserve">
+    <value>Transliteration related settings</value>
+  </data>
+  <data name="&gt;&gt;tabPageTransliteration.Name" xml:space="preserve">
+    <value>tabPageTransliteration</value>
+  </data>
+  <data name="&gt;&gt;tabPageTransliteration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageTransliteration.Parent" xml:space="preserve">
+    <value>tabControlSettings</value>
+  </data>
+  <data name="&gt;&gt;tabPageTransliteration.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="textBoxNoSeriesFormat.Location" type="System.Drawing.Point, System.Drawing">
     <value>199, 102</value>
@@ -567,6 +630,30 @@ additionaly for parameter %sn% numeric modifier can be used to specify 0-preffix
   <data name="&gt;&gt;labelSeqFormat.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="groupBoxSequences.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 7</value>
+  </data>
+  <data name="groupBoxSequences.Size" type="System.Drawing.Size, System.Drawing">
+    <value>322, 132</value>
+  </data>
+  <data name="groupBoxSequences.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="groupBoxSequences.Text" xml:space="preserve">
+    <value>Sequences</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSequences.Name" xml:space="preserve">
+    <value>groupBoxSequences</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSequences.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSequences.Parent" xml:space="preserve">
+    <value>tabPageSequences</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSequences.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="textBoxFileAsFormat.Location" type="System.Drawing.Point, System.Drawing">
     <value>199, 171</value>
   </data>
@@ -695,6 +782,36 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;labelAuthorFormat.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="tabPageSequences.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 4</value>
+  </data>
+  <data name="tabPageSequences.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageSequences.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 223</value>
+  </data>
+  <data name="tabPageSequences.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPageSequences.Text" xml:space="preserve">
+    <value>Sequences</value>
+  </data>
+  <data name="tabPageSequences.ToolTipText" xml:space="preserve">
+    <value>Sequence display related settings</value>
+  </data>
+  <data name="&gt;&gt;tabPageSequences.Name" xml:space="preserve">
+    <value>tabPageSequences</value>
+  </data>
+  <data name="&gt;&gt;tabPageSequences.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageSequences.Parent" xml:space="preserve">
+    <value>tabControlSettings</value>
+  </data>
+  <data name="&gt;&gt;tabPageSequences.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="checkBoxCalibreMetadata.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -778,6 +895,39 @@ additionally another subformat :b can be added to take name in brackets</value>
   </data>
   <data name="&gt;&gt;comboBoxIgnoreTitle.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 36</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Ignore Title :</value>
+  </data>
+  <data name="label2.ToolTip" xml:space="preserve">
+    <value>Controls which FB2 section Title to be ignored</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>tabPageDifferent</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="comboBoxFixMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>230, 7</value>
@@ -1039,6 +1189,186 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;checkBoxFb2Info.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="tabPageDifferent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 4</value>
+  </data>
+  <data name="tabPageDifferent.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageDifferent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 223</value>
+  </data>
+  <data name="tabPageDifferent.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabPageDifferent.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="tabPageDifferent.ToolTipText" xml:space="preserve">
+    <value>Main options</value>
+  </data>
+  <data name="&gt;&gt;tabPageDifferent.Name" xml:space="preserve">
+    <value>tabPageDifferent</value>
+  </data>
+  <data name="&gt;&gt;tabPageDifferent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageDifferent.Parent" xml:space="preserve">
+    <value>tabControlSettings</value>
+  </data>
+  <data name="&gt;&gt;tabPageDifferent.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="buttonRemoveFont.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonRemoveFont.Location" type="System.Drawing.Point, System.Drawing">
+    <value>253, 67</value>
+  </data>
+  <data name="buttonRemoveFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonRemoveFont.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="buttonRemoveFont.Text" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="buttonRemoveFont.ToolTip" xml:space="preserve">
+    <value>Remove selected font family</value>
+  </data>
+  <data name="&gt;&gt;buttonRemoveFont.Name" xml:space="preserve">
+    <value>buttonRemoveFont</value>
+  </data>
+  <data name="&gt;&gt;buttonRemoveFont.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonRemoveFont.Parent" xml:space="preserve">
+    <value>tabPageFonts</value>
+  </data>
+  <data name="&gt;&gt;buttonRemoveFont.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="buttonEditFont.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonEditFont.Location" type="System.Drawing.Point, System.Drawing">
+    <value>253, 37</value>
+  </data>
+  <data name="buttonEditFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonEditFont.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="buttonEditFont.Text" xml:space="preserve">
+    <value>Edit...</value>
+  </data>
+  <data name="buttonEditFont.ToolTip" xml:space="preserve">
+    <value>Edit selected font family</value>
+  </data>
+  <data name="&gt;&gt;buttonEditFont.Name" xml:space="preserve">
+    <value>buttonEditFont</value>
+  </data>
+  <data name="&gt;&gt;buttonEditFont.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonEditFont.Parent" xml:space="preserve">
+    <value>tabPageFonts</value>
+  </data>
+  <data name="&gt;&gt;buttonEditFont.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="buttonAddFont.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonAddFont.Location" type="System.Drawing.Point, System.Drawing">
+    <value>253, 7</value>
+  </data>
+  <data name="buttonAddFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonAddFont.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="buttonAddFont.Text" xml:space="preserve">
+    <value>Add...</value>
+  </data>
+  <data name="buttonAddFont.ToolTip" xml:space="preserve">
+    <value>Add new font family</value>
+  </data>
+  <data name="&gt;&gt;buttonAddFont.Name" xml:space="preserve">
+    <value>buttonAddFont</value>
+  </data>
+  <data name="&gt;&gt;buttonAddFont.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonAddFont.Parent" xml:space="preserve">
+    <value>tabPageFonts</value>
+  </data>
+  <data name="&gt;&gt;buttonAddFont.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="columnHeaderFont.Text" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="columnHeaderFont.Width" type="System.Int32, mscorlib">
+    <value>600</value>
+  </data>
+  <data name="listViewFonts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 7</value>
+  </data>
+  <data name="listViewFonts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 175</value>
+  </data>
+  <data name="listViewFonts.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="listViewFonts.ToolTip" xml:space="preserve">
+    <value>List of font families</value>
+  </data>
+  <data name="&gt;&gt;listViewFonts.Name" xml:space="preserve">
+    <value>listViewFonts</value>
+  </data>
+  <data name="&gt;&gt;listViewFonts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listViewFonts.Parent" xml:space="preserve">
+    <value>tabPageFonts</value>
+  </data>
+  <data name="&gt;&gt;listViewFonts.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tabPageFonts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 4</value>
+  </data>
+  <data name="tabPageFonts.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageFonts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 223</value>
+  </data>
+  <data name="tabPageFonts.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tabPageFonts.Text" xml:space="preserve">
+    <value>Fonts</value>
+  </data>
+  <data name="tabPageFonts.ToolTipText" xml:space="preserve">
+    <value>Font related settings</value>
+  </data>
+  <data name="&gt;&gt;tabPageFonts.Name" xml:space="preserve">
+    <value>tabPageFonts</value>
+  </data>
+  <data name="&gt;&gt;tabPageFonts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageFonts.Parent" xml:space="preserve">
+    <value>tabControlSettings</value>
+  </data>
+  <data name="&gt;&gt;tabPageFonts.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="comboBoxSDValue.Location" type="System.Drawing.Point, System.Drawing">
     <value>149, 15</value>
   </data>
@@ -1128,6 +1458,30 @@ additionally another subformat :b can be added to take name in brackets</value>
   </data>
   <data name="&gt;&gt;radioButtonSDDisabled.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>86, 148</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>240, 49</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Single Destination</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>tabPagePaths</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="buttonEdit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1345,6 +1699,60 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;buttonDeletePath.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="listBoxPaths.HorizontalScrollbar" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="listBoxPaths.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 7</value>
+  </data>
+  <data name="listBoxPaths.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 134</value>
+  </data>
+  <data name="listBoxPaths.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;listBoxPaths.Name" xml:space="preserve">
+    <value>listBoxPaths</value>
+  </data>
+  <data name="&gt;&gt;listBoxPaths.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listBoxPaths.Parent" xml:space="preserve">
+    <value>tabPagePaths</value>
+  </data>
+  <data name="&gt;&gt;listBoxPaths.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="tabPagePaths.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 4</value>
+  </data>
+  <data name="tabPagePaths.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPagePaths.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 223</value>
+  </data>
+  <data name="tabPagePaths.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tabPagePaths.Text" xml:space="preserve">
+    <value>Paths</value>
+  </data>
+  <data name="tabPagePaths.ToolTipText" xml:space="preserve">
+    <value>Destination paths</value>
+  </data>
+  <data name="&gt;&gt;tabPagePaths.Name" xml:space="preserve">
+    <value>tabPagePaths</value>
+  </data>
+  <data name="&gt;&gt;tabPagePaths.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPagePaths.Parent" xml:space="preserve">
+    <value>tabControlSettings</value>
+  </data>
+  <data name="&gt;&gt;tabPagePaths.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="buttonBrowseForXPGT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1429,6 +1837,60 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;textBoxTemplatePath.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 20</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 13</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Path:</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>groupBoxXPGTPath</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="groupBoxXPGTPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 30</value>
+  </data>
+  <data name="groupBoxXPGTPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>319, 75</value>
+  </data>
+  <data name="groupBoxXPGTPath.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="groupBoxXPGTPath.Text" xml:space="preserve">
+    <value>XPGT Template Path</value>
+  </data>
+  <data name="&gt;&gt;groupBoxXPGTPath.Name" xml:space="preserve">
+    <value>groupBoxXPGTPath</value>
+  </data>
+  <data name="&gt;&gt;groupBoxXPGTPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxXPGTPath.Parent" xml:space="preserve">
+    <value>tabPageXPGT</value>
+  </data>
+  <data name="&gt;&gt;groupBoxXPGTPath.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="checkBoxUseXPGT.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1462,125 +1924,32 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;checkBoxUseXPGT.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="buttonRemoveFont.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="tabPageXPGT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 4</value>
   </data>
-  <data name="buttonRemoveFont.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 67</value>
+  <data name="tabPageXPGT.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
-  <data name="buttonRemoveFont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="tabPageXPGT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 223</value>
   </data>
-  <data name="buttonRemoveFont.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="tabPageXPGT.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="buttonRemoveFont.Text" xml:space="preserve">
-    <value>Remove</value>
+  <data name="tabPageXPGT.Text" xml:space="preserve">
+    <value>XPGT</value>
   </data>
-  <data name="buttonRemoveFont.ToolTip" xml:space="preserve">
-    <value>Remove selected font family</value>
+  <data name="&gt;&gt;tabPageXPGT.Name" xml:space="preserve">
+    <value>tabPageXPGT</value>
   </data>
-  <data name="&gt;&gt;buttonRemoveFont.Name" xml:space="preserve">
-    <value>buttonRemoveFont</value>
+  <data name="&gt;&gt;tabPageXPGT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonRemoveFont.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tabPageXPGT.Parent" xml:space="preserve">
+    <value>tabControlSettings</value>
   </data>
-  <data name="&gt;&gt;buttonRemoveFont.Parent" xml:space="preserve">
-    <value>tabPageFonts</value>
-  </data>
-  <data name="&gt;&gt;buttonRemoveFont.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="buttonEditFont.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonEditFont.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 37</value>
-  </data>
-  <data name="buttonEditFont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="buttonEditFont.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="buttonEditFont.Text" xml:space="preserve">
-    <value>Edit...</value>
-  </data>
-  <data name="buttonEditFont.ToolTip" xml:space="preserve">
-    <value>Edit selected font family</value>
-  </data>
-  <data name="&gt;&gt;buttonEditFont.Name" xml:space="preserve">
-    <value>buttonEditFont</value>
-  </data>
-  <data name="&gt;&gt;buttonEditFont.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonEditFont.Parent" xml:space="preserve">
-    <value>tabPageFonts</value>
-  </data>
-  <data name="&gt;&gt;buttonEditFont.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="buttonAddFont.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonAddFont.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 7</value>
-  </data>
-  <data name="buttonAddFont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="buttonAddFont.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="buttonAddFont.Text" xml:space="preserve">
-    <value>Add...</value>
-  </data>
-  <data name="buttonAddFont.ToolTip" xml:space="preserve">
-    <value>Add new font family</value>
-  </data>
-  <data name="&gt;&gt;buttonAddFont.Name" xml:space="preserve">
-    <value>buttonAddFont</value>
-  </data>
-  <data name="&gt;&gt;buttonAddFont.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonAddFont.Parent" xml:space="preserve">
-    <value>tabPageFonts</value>
-  </data>
-  <data name="&gt;&gt;buttonAddFont.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="columnHeaderFont.Text" xml:space="preserve">
-    <value>Font</value>
-  </data>
-  <data name="columnHeaderFont.Width" type="System.Int32, mscorlib">
-    <value>600</value>
-  </data>
-  <data name="listViewFonts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 7</value>
-  </data>
-  <data name="listViewFonts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 175</value>
-  </data>
-  <data name="listViewFonts.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="listViewFonts.ToolTip" xml:space="preserve">
-    <value>List of font families</value>
-  </data>
-  <data name="&gt;&gt;listViewFonts.Name" xml:space="preserve">
-    <value>listViewFonts</value>
-  </data>
-  <data name="&gt;&gt;listViewFonts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;listViewFonts.Parent" xml:space="preserve">
-    <value>tabPageFonts</value>
-  </data>
-  <data name="&gt;&gt;listViewFonts.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;tabPageXPGT.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="listBoxCSSFonts.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 20</value>
@@ -1666,6 +2035,33 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;buttonAddCSSFont.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="groupBoxAssignedFonts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 110</value>
+  </data>
+  <data name="groupBoxAssignedFonts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>319, 87</value>
+  </data>
+  <data name="groupBoxAssignedFonts.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="groupBoxAssignedFonts.Text" xml:space="preserve">
+    <value>Assigned fonts</value>
+  </data>
+  <data name="groupBoxAssignedFonts.ToolTip" xml:space="preserve">
+    <value>Список фонтов назначеных для выбранного элемента</value>
+  </data>
+  <data name="&gt;&gt;groupBoxAssignedFonts.Name" xml:space="preserve">
+    <value>groupBoxAssignedFonts</value>
+  </data>
+  <data name="&gt;&gt;groupBoxAssignedFonts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxAssignedFonts.Parent" xml:space="preserve">
+    <value>tabPageCSSElements</value>
+  </data>
+  <data name="&gt;&gt;groupBoxAssignedFonts.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="listBoxCSSElements.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 19</value>
   </data>
@@ -1750,33 +2146,6 @@ additionally another subformat :b can be added to take name in brackets</value>
   <data name="&gt;&gt;buttonAddCSS.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="groupBoxAssignedFonts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 110</value>
-  </data>
-  <data name="groupBoxAssignedFonts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 87</value>
-  </data>
-  <data name="groupBoxAssignedFonts.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="groupBoxAssignedFonts.Text" xml:space="preserve">
-    <value>Assigned fonts</value>
-  </data>
-  <data name="groupBoxAssignedFonts.ToolTip" xml:space="preserve">
-    <value>Список фонтов назначеных для выбранного элемента</value>
-  </data>
-  <data name="&gt;&gt;groupBoxAssignedFonts.Name" xml:space="preserve">
-    <value>groupBoxAssignedFonts</value>
-  </data>
-  <data name="&gt;&gt;groupBoxAssignedFonts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxAssignedFonts.Parent" xml:space="preserve">
-    <value>tabPageCSSElements</value>
-  </data>
-  <data name="&gt;&gt;groupBoxAssignedFonts.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="groupBoxCSS.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 7</value>
   </data>
@@ -1803,375 +2172,6 @@ additionally another subformat :b can be added to take name in brackets</value>
   </data>
   <data name="&gt;&gt;groupBoxCSS.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 36</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Ignore Title :</value>
-  </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value>Controls which FB2 section Title to be ignored</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>tabPageDifferent</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tabControlSettings.Alignment" type="System.Windows.Forms.TabAlignment, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="tabControlSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="groupBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 217</value>
-  </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Transliteration settings</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>tabPageTransliteration</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabPageTransliteration.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 4</value>
-  </data>
-  <data name="tabPageTransliteration.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageTransliteration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>332, 223</value>
-  </data>
-  <data name="tabPageTransliteration.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tabPageTransliteration.Text" xml:space="preserve">
-    <value>Transliteration</value>
-  </data>
-  <data name="tabPageTransliteration.ToolTipText" xml:space="preserve">
-    <value>Transliteration related settings</value>
-  </data>
-  <data name="&gt;&gt;tabPageTransliteration.Name" xml:space="preserve">
-    <value>tabPageTransliteration</value>
-  </data>
-  <data name="&gt;&gt;tabPageTransliteration.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageTransliteration.Parent" xml:space="preserve">
-    <value>tabControlSettings</value>
-  </data>
-  <data name="&gt;&gt;tabPageTransliteration.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="groupBoxSequences.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 7</value>
-  </data>
-  <data name="groupBoxSequences.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 132</value>
-  </data>
-  <data name="groupBoxSequences.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="groupBoxSequences.Text" xml:space="preserve">
-    <value>Sequences</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSequences.Name" xml:space="preserve">
-    <value>groupBoxSequences</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSequences.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSequences.Parent" xml:space="preserve">
-    <value>tabPageSequences</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSequences.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabPageSequences.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 4</value>
-  </data>
-  <data name="tabPageSequences.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageSequences.Size" type="System.Drawing.Size, System.Drawing">
-    <value>332, 223</value>
-  </data>
-  <data name="tabPageSequences.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tabPageSequences.Text" xml:space="preserve">
-    <value>Sequences</value>
-  </data>
-  <data name="tabPageSequences.ToolTipText" xml:space="preserve">
-    <value>Sequence display related settings</value>
-  </data>
-  <data name="&gt;&gt;tabPageSequences.Name" xml:space="preserve">
-    <value>tabPageSequences</value>
-  </data>
-  <data name="&gt;&gt;tabPageSequences.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageSequences.Parent" xml:space="preserve">
-    <value>tabControlSettings</value>
-  </data>
-  <data name="&gt;&gt;tabPageSequences.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabPageDifferent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 4</value>
-  </data>
-  <data name="tabPageDifferent.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageDifferent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>332, 223</value>
-  </data>
-  <data name="tabPageDifferent.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tabPageDifferent.Text" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="tabPageDifferent.ToolTipText" xml:space="preserve">
-    <value>Main options</value>
-  </data>
-  <data name="&gt;&gt;tabPageDifferent.Name" xml:space="preserve">
-    <value>tabPageDifferent</value>
-  </data>
-  <data name="&gt;&gt;tabPageDifferent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageDifferent.Parent" xml:space="preserve">
-    <value>tabControlSettings</value>
-  </data>
-  <data name="&gt;&gt;tabPageDifferent.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tabPageFonts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 4</value>
-  </data>
-  <data name="tabPageFonts.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageFonts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>332, 223</value>
-  </data>
-  <data name="tabPageFonts.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="tabPageFonts.Text" xml:space="preserve">
-    <value>Fonts</value>
-  </data>
-  <data name="tabPageFonts.ToolTipText" xml:space="preserve">
-    <value>Font related settings</value>
-  </data>
-  <data name="&gt;&gt;tabPageFonts.Name" xml:space="preserve">
-    <value>tabPageFonts</value>
-  </data>
-  <data name="&gt;&gt;tabPageFonts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageFonts.Parent" xml:space="preserve">
-    <value>tabControlSettings</value>
-  </data>
-  <data name="&gt;&gt;tabPageFonts.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>86, 148</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 49</value>
-  </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Single Destination</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>tabPagePaths</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="listBoxPaths.HorizontalScrollbar" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="listBoxPaths.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 7</value>
-  </data>
-  <data name="listBoxPaths.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 134</value>
-  </data>
-  <data name="listBoxPaths.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;listBoxPaths.Name" xml:space="preserve">
-    <value>listBoxPaths</value>
-  </data>
-  <data name="&gt;&gt;listBoxPaths.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;listBoxPaths.Parent" xml:space="preserve">
-    <value>tabPagePaths</value>
-  </data>
-  <data name="&gt;&gt;listBoxPaths.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="tabPagePaths.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 4</value>
-  </data>
-  <data name="tabPagePaths.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPagePaths.Size" type="System.Drawing.Size, System.Drawing">
-    <value>332, 223</value>
-  </data>
-  <data name="tabPagePaths.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="tabPagePaths.Text" xml:space="preserve">
-    <value>Paths</value>
-  </data>
-  <data name="tabPagePaths.ToolTipText" xml:space="preserve">
-    <value>Destination paths</value>
-  </data>
-  <data name="&gt;&gt;tabPagePaths.Name" xml:space="preserve">
-    <value>tabPagePaths</value>
-  </data>
-  <data name="&gt;&gt;tabPagePaths.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPagePaths.Parent" xml:space="preserve">
-    <value>tabControlSettings</value>
-  </data>
-  <data name="&gt;&gt;tabPagePaths.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 20</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 13</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Path:</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>groupBoxXPGTPath</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="groupBoxXPGTPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 30</value>
-  </data>
-  <data name="groupBoxXPGTPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>319, 75</value>
-  </data>
-  <data name="groupBoxXPGTPath.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="groupBoxXPGTPath.Text" xml:space="preserve">
-    <value>XPGT Template Path</value>
-  </data>
-  <data name="&gt;&gt;groupBoxXPGTPath.Name" xml:space="preserve">
-    <value>groupBoxXPGTPath</value>
-  </data>
-  <data name="&gt;&gt;groupBoxXPGTPath.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxXPGTPath.Parent" xml:space="preserve">
-    <value>tabPageXPGT</value>
-  </data>
-  <data name="&gt;&gt;groupBoxXPGTPath.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tabPageXPGT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 4</value>
-  </data>
-  <data name="tabPageXPGT.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageXPGT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>332, 223</value>
-  </data>
-  <data name="tabPageXPGT.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="tabPageXPGT.Text" xml:space="preserve">
-    <value>XPGT</value>
-  </data>
-  <data name="&gt;&gt;tabPageXPGT.Name" xml:space="preserve">
-    <value>tabPageXPGT</value>
-  </data>
-  <data name="&gt;&gt;tabPageXPGT.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageXPGT.Parent" xml:space="preserve">
-    <value>tabControlSettings</value>
-  </data>
-  <data name="&gt;&gt;tabPageXPGT.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="tabPageCSSElements.Location" type="System.Drawing.Point, System.Drawing">
     <value>42, 4</value>
@@ -2216,7 +2216,7 @@ additionally another subformat :b can be added to take name in brackets</value>
     <value>appleV2SettingsControl</value>
   </data>
   <data name="&gt;&gt;appleV2SettingsControl.Type" xml:space="preserve">
-    <value>Fb2epubSettings.AppleV2Settings, Fb2epubSettings, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Fb2epubSettings.AppleV2Settings, Fb2epubSettings, Version=1.1.7.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;appleV2SettingsControl.Parent" xml:space="preserve">
     <value>tabPageAppleV2</value>
@@ -2270,7 +2270,7 @@ additionally another subformat :b can be added to take name in brackets</value>
     <value>tabControlSettings</value>
   </data>
   <data name="&gt;&gt;tabControlSettings.Type" xml:space="preserve">
-    <value>Fb2epubSettings.NonStyledTabs, Fb2epubSettings, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Fb2epubSettings.NonStyledTabs, Fb2epubSettings, Version=1.1.7.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tabControlSettings.Parent" xml:space="preserve">
     <value>$this</value>
@@ -8458,6 +8458,9 @@ additionally another subformat :b can be added to take name in brackets</value>
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>500, 320</value>

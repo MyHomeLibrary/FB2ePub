@@ -4,6 +4,8 @@
 * The FF plugin rewriten to use js-ctypes instead of XPCOM as XPCOM required to recompile plugin each time SDK version changed,this also removes VS2010 compilation requirments
 * Fixed right click processing of additional folders
 * Fixed memory heap corruption in Windows shell extension in case single destination used
+* Fixed selecting single destination from settings (now it loaded properly next time you open)
+* Fixed "Reset" from settings (no destinations do not "multiply" when "Reset" pressed)
 
 1.1.6
 + -= Added Firefox extension to use converter for "saveAs" FB2 dialogs =-

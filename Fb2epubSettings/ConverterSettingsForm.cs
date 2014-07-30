@@ -91,15 +91,6 @@ namespace Fb2epubSettings
                 Invoke(d, new object[] { sender, e });
                 return;
             }
-            ConverterSettingsFile settingsFile = new ConverterSettingsFile();
-            try
-            {
-                settingsFile.Load(SettingsFileName);
-                _settings.CopyFrom(settingsFile.Settings);
-            }
-            catch(Exception)
-            {
-            }
             ConverterSettingsForm_Load(this,null);
         }
 
@@ -475,21 +466,10 @@ namespace Fb2epubSettings
 
         private void checkBoxVisibleInExt_CheckedChanged(object sender, EventArgs e)
         {
-            Location currentLocation = (Location)listBoxPaths.SelectedItem;
-            if (currentLocation != null)
-            {
-                currentLocation.ShowInShell= checkBoxVisibleInExt.Checked;
-                UpdateSingleDestinationCombo();
-            }
         }
 
         private void checkBoxVisibleInGUI_CheckedChanged(object sender, EventArgs e)
         {
-            Location currentLocation =  (Location) listBoxPaths.SelectedItem;
-            if (currentLocation != null)
-            {
-                currentLocation.ShowInGui = checkBoxVisibleInGUI.Checked;
-            }
         }
 
      
@@ -554,24 +534,10 @@ namespace Fb2epubSettings
 
         private void radioButtonSDDisabled_CheckedChanged(object sender, EventArgs e)
         {
-            _locations.SingleDestination = -1;
-            UpdateSingleDestinationCombo();
-            listBoxPaths.Refresh();
         }
 
         private void radioButtonSDEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            if (!_locations.HasShellLocations() && radioButtonSDEnabled.Checked)
-            {
-                MessageBox.Show(this, Resources.Fb2epubSettings.ConverterSettingsForm_radioButtonSDEnabled_CheckedChanged_Can_t_enable_Single_Destination_mode___no_path_defined_as_shell_path, Resources.Fb2epubSettings.ConverterSettingsForm_radioButtonSDEnabled_CheckedChanged_Setting_error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                radioButtonSDDisabled.Checked = true;
-            }
-            if (_locations.Count > 0 && _locations[listBoxPaths.SelectedIndex].ShowInShell)
-            {
-                _locations.SingleDestination = listBoxPaths.SelectedIndex;
-            }
-            UpdateSingleDestinationCombo();
-            listBoxPaths.Refresh();
         }
 
         private void comboBoxSDValue_SelectedIndexChanged(object sender, EventArgs e)
@@ -827,6 +793,47 @@ namespace Fb2epubSettings
         private void checkBoxCalibreMetadata_CheckedChanged(object sender, EventArgs e)
         {
             _settings.AddCalibreMetadata = checkBoxCalibreMetadata.Checked;
+        }
+
+        private void checkBoxVisibleInExt_Click(object sender, EventArgs e)
+        {
+            Location currentLocation = (Location)listBoxPaths.SelectedItem;
+            if (currentLocation != null)
+            {
+                currentLocation.ShowInShell = checkBoxVisibleInExt.Checked;
+                UpdateSingleDestinationCombo();
+            }
+        }
+
+        private void checkBoxVisibleInGUI_Click(object sender, EventArgs e)
+        {
+            Location currentLocation = (Location)listBoxPaths.SelectedItem;
+            if (currentLocation != null)
+            {
+                currentLocation.ShowInGui = checkBoxVisibleInGUI.Checked;
+            }
+        }
+
+        private void radioButtonSDEnabled_Click(object sender, EventArgs e)
+        {
+            if (!_locations.HasShellLocations() && radioButtonSDEnabled.Checked)
+            {
+                MessageBox.Show(this, Resources.Fb2epubSettings.ConverterSettingsForm_radioButtonSDEnabled_CheckedChanged_Can_t_enable_Single_Destination_mode___no_path_defined_as_shell_path, Resources.Fb2epubSettings.ConverterSettingsForm_radioButtonSDEnabled_CheckedChanged_Setting_error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                radioButtonSDDisabled.Checked = true;
+            }
+            if (_locations.Count > 0 && _locations[listBoxPaths.SelectedIndex].ShowInShell)
+            {
+                _locations.SingleDestination = listBoxPaths.SelectedIndex;
+            }
+            UpdateSingleDestinationCombo();
+            listBoxPaths.Refresh();
+        }
+
+        private void radioButtonSDDisabled_Click(object sender, EventArgs e)
+        {
+            _locations.SingleDestination = -1;
+            UpdateSingleDestinationCombo();
+            listBoxPaths.Refresh();
         }
 
 

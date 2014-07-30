@@ -34,6 +34,7 @@ namespace FolderSettingsHelper.IniLocations
 
         public void Load()
         {
+            Clear();
             if (!string.IsNullOrEmpty(_iniPath))
             {
                 string count = IniAccessFunctions.IniReadValue(_iniPath, "TARGETS", "TargetsCount");
