@@ -51,5 +51,11 @@ namespace FB2EPubConverter
         /// </summary>
         public string SettingsFileToUse { get; set; }
 
+        /// <summary>
+        /// Set if we converting single file and single file output expected
+        /// in such case we return error if not converted
+        /// </summary>
+        public bool SingleFile { get; set; }
+
     }
 }

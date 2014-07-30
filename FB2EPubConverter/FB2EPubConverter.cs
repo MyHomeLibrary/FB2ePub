@@ -618,12 +618,11 @@ namespace Fb2ePubConverter
             Logger.Log.DebugFormat("Saving {0}",outFileName);
             try
             {
-                EPubFile epubFile;
                 int count = 0;
                 Logger.Log.DebugFormat("Saving totaly {0} file(s)",fb2Files.Count);
                 foreach (var fb2File in fb2Files)
                 {
-                    epubFile = new EPubFile { FlatStructure = Settings.Flat, EmbedStyles = Settings.EmbedStyles };
+                    var epubFile = new EPubFile { FlatStructure = Settings.Flat, EmbedStyles = Settings.EmbedStyles };
                     Reset();
                     if (string.IsNullOrEmpty(Settings.ResourcesPath))
                     {

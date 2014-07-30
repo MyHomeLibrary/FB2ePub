@@ -134,7 +134,10 @@ var ConverterPaths = {
 	
     //need to close the library once we're finished with it
     close: function() {
-        this.lib.close();
-		this.lib= null;
+		if ( this.lib != null )
+		{
+			this.lib.close();
+			this.lib= null;
+		}
     }
 };
