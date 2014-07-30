@@ -428,15 +428,17 @@ isNumber: function(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 },
 
+
 // React on user pressed "Accept" in SaveAs dialogue
 downloadAndConvert: function()
 {
+	// obtain 'location" item, that holds the full file name
 	var fileToDownload = document.getElementById("location").value;
 	if ( fileToDownload == null || fileToDownload == "")
 	{
 		dump("\ndownloadAndConvert: Can't get file to download");
 	}
-	// get the extension
+	// get the extension from full file name
 	var extension = fileToDownload.split('.').pop().toLowerCase();
 	var start = fileToDownload.lastIndexOf("."); // index of last extension
 	var basename = fileToDownload.substring(0,start)  + ".ePub";	 // just remove last extension and add eub
@@ -450,30 +452,53 @@ downloadAndConvert: function()
 		}
 	}
 	var destPath = null;
+	// check if "browse for destination" was selected
 	if ( this._selectedDestinationId == 'fb2epub-menubrowseItem' )
 	{
+		// if it was bring up destination selection dialog
 		destPath = this.getFileNameToSaveFromUser(basename);
 	}
-	else if (this.isNumber(this._selectedDestinationId))
+	else if (this.isNumber(this._selectedDestinationId)) // if one of the predefined destinations was selected
 	{
+		// check that number stored is valid 
 		var pathsCount =	ConverterPaths.GetPathsCount(pathsCount);
 		if (this._selectedDestinationId >= pathsCount)
 		{
 			dump("\ndownloadAndConvert: Selected value " + this._selectedDestinationId + " is higher then total paths count: " + pathsCount + " !");
 			return;
 		}
+		// get save path from setting based on predefined path selection
 		let path= ConverterPaths.GetPath(Number(this._selectedDestinationId)).path;
-		destPath = path + "\\" + basename;
+		// build full destination path from the destination path selected and destination file name
+		destPath	=	this.connectPath(path,basename);
 	}
-	else 
+	else // this is actually error case , as should be one of above, but just in case if we got here try to fix the situation by bringing up
+		 // destination selection dialog
 	{
 		dump("\ndownloadAndConvert: Unknown item " + + "selected, calling user selection dialogue");
 		destPath = this.getFileNameToSaveFromUser(basename);
 	}
+	// if path not empty , start to download
 	if ( destPath != null)
 	{
 		this.download(destPath,dialog.mLauncher.source);
 	}
+},
+
+// Connects filename to path , making sure the path string is valid
+connectPath: function(path,basename)
+{
+	// check that path contains at least one character, if not return just file name
+	if ( path.length < 1 )
+	{
+		return basename;
+	}
+	// check if path ends with '\' , if not add it 
+	if ( path.charAt(path.length-1) != "\\" )
+	{
+		return path + "\\" + basename;
+	}
+	return path + basename;
 },
 
 dialogAccepted: function() {
