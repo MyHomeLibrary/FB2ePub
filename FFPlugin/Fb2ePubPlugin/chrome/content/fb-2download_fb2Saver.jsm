@@ -14,7 +14,7 @@ Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "DownloadCopySaver","resource://gre/modules/DownloadCore.jsm");
 
 XPCOMUtils.defineLazyModuleGetter(this, "Task","resource://gre/modules/Task.jsm");  
-XPCOMUtils.defineLazyModuleGetter(this, "DownloadError","resource://gre/modules/Downloads.jsm");  
+XPCOMUtils.defineLazyModuleGetter(this, "DownloadError","resource://gre/modules/DownloadCore.jsm");  
 XPCOMUtils.defineLazyModuleGetter(this, "OS","resource://gre/modules/osfile.jsm")
 XPCOMUtils.defineLazyModuleGetter(this, "Promise","resource://gre/modules/Promise.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "Services","resource://gre/modules/Services.jsm");
@@ -125,14 +125,59 @@ this.Fb2DownloadCopySaverToEPub.prototype.makeTempFileName = function(length)
                 this._sha256Hash = aSaver.sha256Hash;
                 this._signatureInfo = aSaver.signatureInfo;
                 this._redirects = aSaver.redirects;
-                deferSaveComplete.resolve();
-  			    Fb2ePubConverter.init();
-				var res = Fb2ePubConverter.Convert(targetPath,download.target.path);
+				var res = true;
+				try 
+				{
+					Fb2ePubConverter.init();				
+					res = Fb2ePubConverter.Convert(targetPath,download.target.path);
+				}
+				catch (e2) 
+				{
+					try 
+					{
+						// clean up temporary file
+					  OS.File.remove(targetPath);
+					} 
+					catch (e3) 
+					{
+						dump("Failed deleting file"+ targetPath + "\n" +e3);					
+					}
+					try 
+					{
+						// clean up result file 
+						OS.File.remove(download.target.path);
+					} 
+					catch (e3) 
+					{
+						dump("Failed deleting file"+ download.target.path + "\n" +e3);					
+					}	
+				}
 				Fb2ePubConverter.close();
-				try {
+				try 
+				{
 					// clean up temporary file
-				  //OS.File.remove(targetPath);
+				  OS.File.remove(targetPath);
+				} 
+				catch (e2) 
+				{
+				  dump("Failed deleting file"+ targetPath + "\n" +e2);
+				}
+				if ( res == false )
+				{
+					deferSaveComplete.reject(new DownloadError({message: "Conversion failed"}));
+				}
+				else
+				{
+					deferSaveComplete.resolve();
+				}
+				try {
+					// clean up result file in case of error
+					if ( res == false )
+					{
+						OS.File.remove(download.target.path);
+					}
 				} catch (e2) {
+				  dump("Failed deleting file"+ download.target.path + "\n" +e2);
 				  if (!(e2 instanceof OS.File.Error &&
 						(e2.becauseNoSuchFile || e2.becauseAccessDenied))) {
 					Cu.reportError(e2);
