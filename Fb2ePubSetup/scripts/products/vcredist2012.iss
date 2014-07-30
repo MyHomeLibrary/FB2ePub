@@ -24,7 +24,7 @@ ru.vcredist2012_lcid=/lcid 1049
 ; mind no spaces after =
 ;11.0.61030 (Update4)
 en.VC_2012_REDIST_X86_UP4 ={33d1fd90-4274-48a1-9bc1-97e33d9c2d6f}
-ru.VC_2012_REDIST_X86_UP4 ={a2199617-3609-410f-a8e8-e8806c73545b}
+ru.VC_2012_REDIST_X86_UP4 ={f0080ca2-80ae-4958-b6eb-e8fa916d744a}
 
 
 
