@@ -87,12 +87,12 @@ Source: "{#BuildFolder}Fb2ePub.exe.config"; DestDir: "{app}";  Flags:
 Source: "{#BuildFolder}Fb2ePubGui.exe"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}Fb2ePubGui.exe.config"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}EPubLibrary.dll"; DestDir: "{app}";  Flags:  
-Source: "{#BuildFolder}FB2EPubConverter.dll"; DestDir: "{app}";  Flags: uninsrestartdelete
+Source: "{#BuildFolder}FB2EPubConverter.dll"; DestDir: "{app}";  Flags: uninsrestartdelete restartreplace
 Source: "{#BuildFolder}FB2EPubConverter.dll.config"; DestDir: "{app}";  Flags: 
-Source: "{#BuildFolder}Fb2epubSettings.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}Fb2epubSettings.dll"; DestDir: "{app}";  Flags: uninsrestartdelete restartreplace
 Source: "{#BuildFolder}Fb2FixLib.dll"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}FB2Library.dll"; DestDir: "{app}";  Flags: 
-Source: "{#BuildFolder}FolderSettingsHelper.dll"; DestDir: "{app}";  Flags: 
+Source: "{#BuildFolder}FolderSettingsHelper.dll"; DestDir: "{app}";  Flags: uninsrestartdelete restartreplace
 Source: "{#BuildFolder}FontSettings.dll"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}ICSharpCode.SharpZipLib.dll"; DestDir: "{app}";  Flags: 
 Source: "{#BuildFolder}ISOLanguages.dll"; DestDir: "{app}";  Flags: 
@@ -127,13 +127,13 @@ Source: "{#BuildFolder}DefaultSettings\defsettings_nofonts.xml"; DestDir: "{app}
 ;copy shell extension configuration
 Source: "{#BuildFolder86}FB2EPUBExt.INI"; DestDir: "{commonappdata}\{#MyAppSubfolder}"; Flags: ignoreversion; Permissions: everyone-modify users-modify powerusers-full admins-full;
 
-Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver 32bit
+Source: "{#BuildFolder86}FBE2EpubPlugin.dll"; DestDir: "{app}"; Flags: regserver 32bit 
 
 ; x64
-Source: "{#BuildFolder64}Fb2EpubExt_x64.dll"; DestDir: "{app}";  Check: Is64BitInstallMode; Flags: regserver uninsrestartdelete
+Source: "{#BuildFolder64}Fb2EpubExt_x64.dll"; DestDir: "{app}";  Check: Is64BitInstallMode; Flags: regserver uninsrestartdelete restartreplace
 
 ;x86
-Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Flags: regserver 32bit uninsrestartdelete
+Source: "{#BuildFolder86}Fb2EpubExt.dll"; DestDir: "{app}"; Flags: regserver 32bit uninsrestartdelete restartreplace
 
 ;7-ZIP , used to extract data from ZIP files durring installation, temporary , so far needed only if Firefox plugin installation selected
 Source: "{#ZIPerFolder}7za.exe"; DestDir: "{app}"; Flags: deleteafterinstall; Tasks: installFFPlugin;
