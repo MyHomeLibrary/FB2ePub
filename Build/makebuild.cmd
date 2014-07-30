@@ -98,7 +98,7 @@ if not errorlevel==0 goto failed
 
 rem archive installation files into a ZIP for distribution
 call:PrintParam "Creating XPI extension archive"
-msbuild %PROJ_ROOT%Build\build.tasks /t:CreateFFXPIArchive /p:Archiver=\"%ZIPER%\" /p:ArchiverParams="%ZIPER_PARAMS%"  >> %LOG%   
+msbuild %PROJ_ROOT%Build\build.tasks /t:CreateFFXPIArchive /p:Archiver=\"%ZIPER%\"  >> %LOG%   
 if not errorlevel==0 goto winrar_failed
 
 rem call InnoSetup compiler
