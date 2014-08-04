@@ -1,27 +1,8 @@
-﻿/****************************** Module Header ******************************\
- * Module Name:  IDownloadManager.cs
- * Project:      CSIEDownloadManager
- * Copyright (c) Microsoft Corporation.
- * 
- * Provides access to the method of a custom download manager object that Windows
- * Internet Explorer and WebBrowser applications use to download a file. See
- * http://msdn.microsoft.com/en-us/library/aa753613(VS.85).aspx
- * 
- * 
- * This source is subject to the Microsoft Public License.
- * See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL.
- * All other rights reserved.
- * 
- * THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
- * EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED 
- * WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
-\***************************************************************************/
-
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 
-namespace CSIEDownloadManager.NativeMethods
+namespace IEFb2ePubPlugin.NativeMethods
 {
     [ComVisible(false), ComImport]
     [Guid("988934A4-064B-11D3-BB80-00104B35E7F9")]

@@ -1,6 +1,6 @@
-﻿namespace CSIEDownloadManager
+﻿namespace IEFb2ePubPlugin
 {
-    partial class IEDownloadManagerInstaller
+    partial class IEFb2ePubPluginInstaller
     {
         /// <summary>
         /// Required designer variable.

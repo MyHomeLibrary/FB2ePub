@@ -1,41 +1,21 @@
-﻿/****************************** Module Header ******************************\
- * Module Name:  IEDownloadManagerInstaller.cs
- * Project:      CSIEDownloadManager
- * Copyright (c) Microsoft Corporation.
- * 
- * The class IEDownloadManagerInstaller inherits the class 
- * System.Configuration.Install.Installer. The methods Install and Uninstall will 
- * be run when this application is being installed or uninstalled.
- * 
- * This action has to be added the the custom actions of the installer to take effect. 
- * 
- * This source is subject to the Microsoft Public License.
- * See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL.
- * All other rights reserved.
- * 
- * THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
- * EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED 
- * WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
-\***************************************************************************/
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Configuration.Install;
 using System.Runtime.InteropServices;
 
 
-namespace CSIEDownloadManager
+namespace IEFb2ePubPlugin
 {
     [RunInstaller(true)]
-    public partial class IEDownloadManagerInstaller : Installer
+    public partial class IEFb2ePubPluginInstaller : Installer
     {
-        public IEDownloadManagerInstaller()
+        public IEFb2ePubPluginInstaller()
         {
             InitializeComponent();
         }
 
         /// <summary>
         /// This is called when installer's custom action executes and
-        /// registers the explorer bar as COM server.
+        /// registers the explorer plugin as COM server.
         /// </summary>
         /// <param name="stateSaver"></param>     
         public override void Install(System.Collections.IDictionary stateSaver)
@@ -52,7 +32,7 @@ namespace CSIEDownloadManager
 
         /// <summary>
         /// This is called when installer's custom action executes and
-        /// unregisters the explorer bar.
+        /// unregisters the plugin.
         /// </summary>
         /// <param name="stateSaver"></param>     
         public override void Uninstall(System.Collections.IDictionary savedState)
