@@ -6,7 +6,7 @@ using System.Text;
 
 namespace EPubLibrary.PathUtils
 {
-    class FontOnStorage : IEPubPath
+    public class FontOnStorage : IEPubPath
     {
         private readonly EPubInternalPath _pathInEPub = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/fonts");
         private readonly string _externalPathToFont = string.Empty;

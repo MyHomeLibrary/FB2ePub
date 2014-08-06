@@ -15,7 +15,7 @@ namespace EPubLibrary.Template
     /// <summary>
     /// Contains code for loading and saving adobe XPGT templates
     /// </summary>
-    internal class AdobeTemplate : StyleElement
+    public class AdobeTemplate : StyleElement
     {
         internal static class Logger
         {

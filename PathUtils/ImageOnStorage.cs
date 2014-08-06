@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EPubLibrary.PathUtils
 {
-    class ImageOnStorage : IEPubPath
+    public class ImageOnStorage : IEPubPath
     {
         public static readonly EPubInternalPath DefaultImagesStoragePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/images/");
         private readonly EPubInternalPath _pathInEPub = DefaultImagesStoragePath;

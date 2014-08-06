@@ -6,7 +6,7 @@ using EPubLibrary.PathUtils;
 
 namespace EPubLibrary.Container
 {
-    internal class ContainerFile : IEPubPath
+    public class ContainerFile : IEPubPath
     {
         private readonly XNamespace _localNameSpace = "urn:oasis:names:tc:opendocument:xmlns:container";
 
@@ -15,12 +15,11 @@ namespace EPubLibrary.Container
             SupportFlatStructure = false
         };
 
-        private static readonly EPubInternalPath _ePubDataRoot = new EPubInternalPath("");
+        private static readonly EPubInternalPath EPubDataRoot = new EPubInternalPath("");
 
         public bool FlatStructure { get; set; }
 
         public IEPubPath ContentFilePath { set; get; }
-
 
 
         public void Write(Stream s)
@@ -44,7 +43,7 @@ namespace EPubLibrary.Container
             containerElement.Add(new XAttribute("version", "1.0"));
             XElement rootFilesElement = new XElement(_localNameSpace + "rootfiles");
             XElement rootFileElement = new XElement(_localNameSpace + "rootfile");
-            rootFileElement.Add(new XAttribute("full-path", ContentFilePath.PathInEPUB.GetRelativePath(_ePubDataRoot,FlatStructure)));
+            rootFileElement.Add(new XAttribute("full-path", ContentFilePath.PathInEPUB.GetRelativePath(EPubDataRoot,FlatStructure))); // can be more then one in theory in v3
             rootFileElement.Add(new XAttribute("media-type", @"application/oebps-package+xml"));
             rootFilesElement.Add(rootFileElement);
             containerElement.Add(rootFilesElement);

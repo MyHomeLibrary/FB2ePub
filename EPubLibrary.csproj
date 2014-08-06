@@ -128,12 +128,14 @@
     <Compile Include="Container\ContainerFile.cs" />
     <Compile Include="Content\CalibreMetadata\CalibreMetadata.cs" />
     <Compile Include="Content\ContentFile.cs" />
+    <Compile Include="Content\ContentFile_v3.cs" />
     <Compile Include="Content\Guide\GuideSection.cs" />
     <Compile Include="Content\Guide\GuideElement.cs" />
     <Compile Include="CSS_Items\CSSFile.cs" />
     <Compile Include="CSS_Items\CSSItem.cs" />
     <Compile Include="CSS_Items\FontDefinition.cs" />
     <Compile Include="EPubFile.cs" />
+    <Compile Include="EPubFileV3.cs" />
     <Compile Include="PathUtils\ePubInternalPath.cs" />
     <Compile Include="EPubRoles.cs" />
     <Compile Include="EPubTitleSettings.cs" />

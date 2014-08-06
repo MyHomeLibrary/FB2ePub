@@ -18,12 +18,12 @@ using EPubLibrary.XHTML_Items;
 
 namespace EPubLibrary.Content
 {
-    internal class ContentFile : IEPubPath
+    public class ContentFile : IEPubPath
     {
         public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
 
         private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
-        private readonly XNamespace _FakeOpf = @"http://www.idpf.org/2007/xxx";
+        private readonly XNamespace _fakeOpf = @"http://www.idpf.org/2007/xxx";
 
 
         private readonly GuideSection _guide = new GuideSection();
@@ -32,7 +32,7 @@ namespace EPubLibrary.Content
 
         private readonly SpineSection _spine = new SpineSection();
 
-        private bool _flatStructure = false;
+        protected bool _flatStructure = false;
 
 
         /// <summary>
@@ -50,6 +50,14 @@ namespace EPubLibrary.Content
             set { _flatStructure = value; }
         }
 
+        /// <summary>
+        /// Returns epub version to write into a package
+        /// </summary>
+        /// <returns></returns>
+        protected virtual string GetEPubVersion()
+        {
+            return "2.0";
+        }
 
         private void CreateContentDocument(XDocument document)
         {
@@ -67,7 +75,7 @@ namespace EPubLibrary.Content
         private void AddPackageData(XDocument document)
         {
             XElement packagedata = new XElement(_opfNameSpace + "package");
-            packagedata.Add(new XAttribute("version", "2.0"));
+            packagedata.Add(new XAttribute("version", GetEPubVersion()));
             // we use ID of the first identifier
             packagedata.Add(new XAttribute("unique-identifier", Title.Identifiers[0].IdentifierName));
             packagedata.Add(new XAttribute("xmlns", _opfNameSpace.NamespaceName));
@@ -104,7 +112,7 @@ namespace EPubLibrary.Content
             metadata.Add(new XAttribute(XNamespace.Xmlns + "dc", dc.NamespaceName));
             metadata.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi.NamespaceName));
             metadata.Add(new XAttribute(XNamespace.Xmlns + "dcterms", dcterms.NamespaceName));
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", _FakeOpf.NamespaceName));
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", _fakeOpf.NamespaceName));
             if (CalibreData!= null)
             {
                 CalibreData.InjectNamespace(metadata);
@@ -132,14 +140,14 @@ namespace EPubLibrary.Content
             {
                 XElement identifier = new XElement(dc + "identifier", identifierItem.ID);
                 identifier.Add(new XAttribute("id", identifierItem.IdentifierName));
-                identifier.Add(new XAttribute(_FakeOpf + "scheme", identifierItem.Scheme));
+                identifier.Add(new XAttribute(_fakeOpf + "scheme", identifierItem.Scheme));
                 metadata.Add(identifier);
             }
 
             if ( Title.DatePublished.HasValue)
             {
                 XElement xDate = new XElement(dc + "date",Title.DatePublished.Value.Year);
-                xDate.Add(new XAttribute(_FakeOpf + "event", "original-publication"));
+                xDate.Add(new XAttribute(_fakeOpf + "event", "original-publication"));
                 metadata.Add(xDate);
             }
 
@@ -148,10 +156,10 @@ namespace EPubLibrary.Content
                 if (!string.IsNullOrEmpty(creatorItem.PersonName))
                 {
                     var creator = new XElement(dc + "creator", creatorItem.PersonName);
-                    creator.Add(new XAttribute(_FakeOpf + "role", EPubRoles.ConvertEnumToAttribute(creatorItem.Role)));
+                    creator.Add(new XAttribute(_fakeOpf + "role", EPubRoles.ConvertEnumToAttribute(creatorItem.Role)));
                     if (!string.IsNullOrEmpty(creatorItem.FileAs))
                     {
-                        creator.Add(new XAttribute(_FakeOpf + "file-as",creatorItem.FileAs));
+                        creator.Add(new XAttribute(_fakeOpf + "file-as",creatorItem.FileAs));
                     }
                     if (!string.IsNullOrEmpty(creatorItem.Language))
                     {
@@ -167,10 +175,10 @@ namespace EPubLibrary.Content
                 if (!string.IsNullOrEmpty(contributorItem.PersonName))
                 {
                     var contributor = new XElement(dc + "contributor", contributorItem.PersonName);
-                    contributor.Add(new XAttribute(_FakeOpf + "role", EPubRoles.ConvertEnumToAttribute(contributorItem.Role)));
+                    contributor.Add(new XAttribute(_fakeOpf + "role", EPubRoles.ConvertEnumToAttribute(contributorItem.Role)));
                     if (!string.IsNullOrEmpty(contributorItem.FileAs))
                     {
-                        contributor.Add(new XAttribute(_FakeOpf + "file-as", contributorItem.FileAs));
+                        contributor.Add(new XAttribute(_fakeOpf + "file-as", contributorItem.FileAs));
                     }
                     if (!string.IsNullOrEmpty(contributorItem.Language))
                     {
@@ -183,7 +191,7 @@ namespace EPubLibrary.Content
             if (CreatorSoftwareString != null)
             {
                 var maker = new XElement(dc + "contributor", CreatorSoftwareString);
-                maker.Add(new XAttribute(_FakeOpf + "role",
+                maker.Add(new XAttribute(_fakeOpf + "role",
                     EPubRoles.ConvertEnumToAttribute(RolesEnum.BookProducer)));
                 metadata.Add(maker);
             }
@@ -293,7 +301,7 @@ namespace EPubLibrary.Content
             ms.Read(buffer, 0, buffer.Length);
             UTF8Encoding encoding = new UTF8Encoding();
             string str = encoding.GetString(buffer);
-            str = str.Replace(_FakeOpf.NamespaceName, _opfNameSpace.NamespaceName);
+            str = str.Replace(_fakeOpf.NamespaceName, _opfNameSpace.NamespaceName);
             return str;
         }
 
@@ -353,5 +361,6 @@ namespace EPubLibrary.Content
         /// Get/Set string by software creator to identify creator software
         /// </summary>
         public string CreatorSoftwareString { get; set; }
+
     }
 }
