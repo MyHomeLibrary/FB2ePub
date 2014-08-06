@@ -22,8 +22,8 @@ namespace EPubLibrary.Content
     {
         public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
 
-        private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
-        private readonly XNamespace _fakeOpf = @"http://www.idpf.org/2007/xxx";
+        protected readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
+        protected readonly XNamespace _fakeOpf = @"http://www.idpf.org/2007/xxx";
 
 
         private readonly GuideSection _guide = new GuideSection();
@@ -72,7 +72,7 @@ namespace EPubLibrary.Content
             AddGuideToContentDocument(document.Root);
         }
 
-        private void AddPackageData(XDocument document)
+        protected virtual void AddPackageData(XDocument document)
         {
             XElement packagedata = new XElement(_opfNameSpace + "package");
             packagedata.Add(new XAttribute("version", GetEPubVersion()));
@@ -103,7 +103,7 @@ namespace EPubLibrary.Content
             xElement.Add(spineElement);
         }
 
-        private void AddMetaDataToContentDocument(XElement document)
+        protected virtual void AddMetaDataToContentDocument(XElement document)
         {
             XElement metadata = new XElement(_opfNameSpace + "metadata");
             XNamespace dc = @"http://purl.org/dc/elements/1.1/";

@@ -60,7 +60,6 @@ namespace EPubLibrary
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
         private readonly List<BookDocument> _sections = new List<BookDocument>();
         private readonly TOCFile _tableOfContentFile = new TOCFile();
-        protected readonly ContentFile _content = new ContentFile();
         private readonly Rus2Lat _rule = new Rus2Lat();
         private readonly List<string> _allSequences = new List<string>();
         private readonly List<string> _aboutTexts = new List<string>();
@@ -74,6 +73,7 @@ namespace EPubLibrary
         #region private_properties
         protected bool _flatStructure;
         protected string _coverImage;
+        protected ContentFile _content = new ContentFile();
         #endregion
 
         #region public_properties

@@ -94,12 +94,20 @@ namespace EPubLibrary
         public string SubjectInfo { get; set; }
     }
 
+    public enum TitleType
+    {
+        Main,
+        SourceInfo,
+        PublishInfo,
+    }
+
     /// <summary>
     /// Class to store one title
     /// </summary>
     public class Title : DataWithLanguage
     {
         public string TitleName { get; set; }
+        public TitleType TitleType;
     }
 
     /// <summary>
