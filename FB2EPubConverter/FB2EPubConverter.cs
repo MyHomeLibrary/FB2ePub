@@ -1165,6 +1165,7 @@ namespace Fb2ePubConverter
                 if ((Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreMainTitle) && (Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndPublish) && 
                     Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndSource)
                 {
+                    bookTitle.TitleType = TitleType.Main;
                     epubFile.Title.BookTitles.Add(bookTitle);
                 }
 
@@ -1263,6 +1264,7 @@ namespace Fb2ePubConverter
                 if ((Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreSourceTitle) && (Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndSource) 
                     && Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreSourceAndPublish)
                 {
+                    bookTitle.TitleType = TitleType.SourceInfo;
                     epubFile.Title.BookTitles.Add(bookTitle);
                 }
 
@@ -1311,6 +1313,7 @@ namespace Fb2ePubConverter
                 if ((Settings.IgnoreTitle != IgnoreTitleOptions.IgnorePublishTitle) && (Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndPublish) && 
                     Settings.IgnoreTitle != IgnoreTitleOptions.IgnoreSourceAndPublish)
                 {
+                    bookTitle.TitleType = TitleType.PublishInfo;
                     epubFile.Title.BookTitles.Add(bookTitle);
                 }
             }
