@@ -30,6 +30,12 @@ namespace Fb2epubSettings
         IgnoreSourceAndPublish,
     }
 
+    public enum EPubVersion
+    {
+        VEpub20 =   2,
+        VePub30 =   3,
+    }
+
     [XmlRoot(ElementName = "ConverterSettings")]
     public class ConverterSettings
     {
@@ -60,6 +66,7 @@ namespace Fb2epubSettings
         private readonly AppleConverterSettings _appleEPubSettings = new AppleConverterSettings();
         private bool _addCalibreMetadata = true;
         private bool _fixCodeElement = true;
+        private EPubVersion _standardVersion = EPubVersion.VEpub20;
         #endregion
 
         public ConverterSettings()
@@ -149,6 +156,8 @@ namespace Fb2epubSettings
             //CSSStylableElement css3 = new CSSStylableElement() { Name = "epub" };
             //css3.AssignedFontFamilies.Add(family.Name);
             //_fonts.CssElements.Add(css3);
+
+            _standardVersion = EPubVersion.VePub30;
 
         }
 
@@ -399,6 +408,16 @@ namespace Fb2epubSettings
             set { _appleEPubSettings.CopyFrom(value); }
         }
 
+        /// <summary>
+        /// Version of ePub to generate
+        /// </summary>
+        [XmlElement(ElementName = "EPUBVersion")]
+        public EPubVersion StandardVersion
+        {
+            get { return _standardVersion; }
+            set { _standardVersion = value; }
+        }
+
         #endregion
 
         #region nonserializable_public_Properties
@@ -461,6 +480,7 @@ namespace Fb2epubSettings
             _addCalibreMetadata = temp._addCalibreMetadata;
             _fixCodeElement = temp._fixCodeElement;
             _appleEPubSettings.CopyFrom(temp._appleEPubSettings);
+            _standardVersion = temp._standardVersion;
         }
     }
 }

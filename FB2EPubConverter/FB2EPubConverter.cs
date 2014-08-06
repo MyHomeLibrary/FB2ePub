@@ -622,7 +622,8 @@ namespace Fb2ePubConverter
                 Logger.Log.DebugFormat("Saving totaly {0} file(s)",fb2Files.Count);
                 foreach (var fb2File in fb2Files)
                 {
-                    var epubFile = new EPubFile { FlatStructure = Settings.Flat, EmbedStyles = Settings.EmbedStyles };
+                    EPubFile epubFile;
+                    CreateEpub(out epubFile);
                     Reset();
                     if (string.IsNullOrEmpty(Settings.ResourcesPath))
                     {
@@ -723,6 +724,14 @@ namespace Fb2ePubConverter
                 Logger.Log.ErrorFormat("Error saving file {0} : {1} - {2}", outFileName,ex.StackTrace, ex);
                 throw;
             }
+        }
+
+        private void CreateEpub(out EPubFile epubFile)
+        {
+            if (Settings.StandardVersion == EPubVersion.VePub30)
+                epubFile = new EPubFileV3 { FlatStructure = Settings.Flat, EmbedStyles = Settings.EmbedStyles };
+            else
+                epubFile    =   new EPubFile { FlatStructure = Settings.Flat, EmbedStyles = Settings.EmbedStyles };
         }
 
         private void SetupAppleSettings(EPubFile epubFile)
