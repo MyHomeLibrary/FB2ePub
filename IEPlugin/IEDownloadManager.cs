@@ -9,7 +9,7 @@ using Microsoft.Win32;
 namespace IEFb2ePubPlugin
 {
     [System.Runtime.InteropServices.ComVisible(true)]
-    [System.Runtime.InteropServices.Guid("bdb9c34c-d0ca-448e-b497-8de62e709744")]
+    [System.Runtime.InteropServices.Guid("500DB650-189E-4DB5-BF7D-40C6C2F0664D")]
     public class IEFb2ePubPlugin : NativeMethods.IDownloadManager
     {
         /// <summary>
