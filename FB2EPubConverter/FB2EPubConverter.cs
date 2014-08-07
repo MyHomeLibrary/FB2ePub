@@ -1365,6 +1365,39 @@ namespace Fb2ePubConverter
             epubFile.Title.DateFileCreation = DateTime.Now;
 
             PassCalibreMetadata(fb2File, epubFile);
+            PassSeriesData(fb2File, epubFile);
+        }
+
+        /// <summary>
+        /// Pass sequences to epub collections
+        /// </summary>
+        /// <param name="fb2File"></param>
+        /// <param name="epubFile"></param>
+        private void PassSeriesData(FB2File fb2File, EPubFile epubFile)
+        {
+            epubFile.Collections.CollectionMembers.Clear();
+            foreach (var seq in fb2File.TitleInfo.Sequences)
+            {
+                if (!string.IsNullOrEmpty(seq.Name))
+                {
+                    CollectionMember collectionMember = new CollectionMember();
+                    collectionMember.CollectionName = seq.Name;
+                    collectionMember.Type = CollectionType.Series;
+                    collectionMember.CollectionPosition = seq.Number;
+                    epubFile.Collections.CollectionMembers.Add(collectionMember);
+                    foreach (var subseq in seq.SubSections)
+                    {
+                        if (!string.IsNullOrEmpty(subseq.Name))
+                        {
+                            collectionMember = new CollectionMember();
+                            collectionMember.CollectionName = subseq.Name;
+                            collectionMember.Type = CollectionType.Set;
+                            collectionMember.CollectionPosition = subseq.Number;
+                            epubFile.Collections.CollectionMembers.Add(collectionMember);
+                        }
+                    }
+                }
+            }
         }
 
         private void PassCalibreMetadata(FB2File fb2File, EPubFile epubFile)
