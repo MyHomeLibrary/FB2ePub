@@ -207,49 +207,81 @@ namespace EPubLibrary.Content
 
             }
 
+            // description
+            if (!string.IsNullOrEmpty(Title.Description))
+            {
+
+                var publisher = new XElement(dc + "description", Title.Description);
+                if (Title.Languages.Count > 0 && !string.IsNullOrEmpty(Title.Languages[0]))
+                {
+                    publisher.Add(new XAttribute(XNamespace.Xml + "lang", Title.Languages[0]));
+                }
+                publisher.Add(new XAttribute("id", "id_desc"));
+                metadata.Add(publisher);
+
+                XElement metaRefineDisplay = new XElement(_fakeOpf + "meta",1);
+                metaRefineDisplay.Add(new XAttribute("refines", "#id_desc"));
+                metaRefineDisplay.Add(new XAttribute("property", "display-seq"));
+                metadata.Add(metaRefineDisplay);
+
+            }
+
+
+            // publisher
             if (!string.IsNullOrEmpty(Title.Publisher.PublisherName))
             {
                 var publisher = new XElement(dc + "publisher", Title.Publisher.PublisherName);
                 if (!string.IsNullOrEmpty(Title.Publisher.Language))
                 {
-                    // need to add writing language in "xml:lang — use RFC-3066 format"
-                    // will add when will find an example since unclear
+                    publisher.Add(new XAttribute(XNamespace.Xml + "lang", Title.Publisher.Language));
                 }
                 metadata.Add(publisher);
             }
 
-            if (!string.IsNullOrEmpty(Title.Description))
-            {
 
-                var publisher = new XElement(dc + "description", Title.Description);
-                metadata.Add(publisher);
-            }
-
-
+            // subject
+            int subjectCount = 0;
             foreach (var subjectItem in Title.Subjects)
             {
                 if (!string.IsNullOrEmpty(subjectItem.SubjectInfo))
                 {
-                    var contributor = new XElement(dc + "subject", subjectItem.SubjectInfo);
+                    string subjectID = string.Format("subj_{0}", ++subjectCount);
+                    var subject = new XElement(dc + "subject", subjectItem.SubjectInfo);
+                    subject.Add(new XAttribute("id", subjectID));
                     if (!string.IsNullOrEmpty(subjectItem.Language))
                     {
-                        // need to add writing language in "xml:lang — use RFC-3066 format"
-                        // will add when will find an example since unclear
+                        subject.Add(new XAttribute(XNamespace.Xml + "lang", subjectItem.Language));
                     }
-                    metadata.Add(contributor);
+                    metadata.Add(subject);
+
+                    XElement metaRefineDisplay = new XElement(_fakeOpf + "meta", subjectCount);
+                    metaRefineDisplay.Add(new XAttribute("refines", "#" + subjectID));
+                    metaRefineDisplay.Add(new XAttribute("property", "display-seq"));
+                    metadata.Add(metaRefineDisplay);
                 }
             }
 
-            //<meta property="dcterms:modified">2011-01-01T12:00:00Z</meta>
+            // meta modifyed
+            string modifiedDate = DateTime.UtcNow.ToUniversalTime().ToString("s")+"Z";
+            if (Title.DataFileModification.HasValue)
+            {
+                modifiedDate = Title.DataFileModification.Value.ToUniversalTime().ToString("s")+"Z";
+            }
+            XElement metaModified = new XElement(_fakeOpf + "meta", modifiedDate);
+            metaModified.Add(new XAttribute("property", "dcterms:modified"));
+            metadata.Add(metaModified);
 
 
-            //// This needed for iTunes and other apple made devices/programs to display the cover
+
+
+            // TODO: This need to be updated in future when we know how it's implemented
+
+            // This needed for iTunes and other apple made devices/programs to display the cover
             //if (!string.IsNullOrEmpty(CoverId))
             //{
             //    // <meta name="cover" content="cover.jpg"/>
-            //    var cover = new XElement(_fakeOpf + "meta");
-            //    cover.Add(new XAttribute("name", "cover"));
-            //    cover.Add(new XAttribute("content", CoverId));
+            //    var cover = new XElement(_fakeOpf + "meta",CoverId);
+            //    cover.Add(new XAttribute("property", "cover"));
             //    metadata.Add(cover);
             //}
 
