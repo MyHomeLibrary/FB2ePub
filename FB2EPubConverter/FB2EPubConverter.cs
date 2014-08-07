@@ -27,6 +27,7 @@ using FB2Library.HeaderItems;
 using FontsSettings;
 using ICSharpCode.SharpZipLib.Zip;
 using TranslitRu;
+using XHTMLClassLibrary;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -570,7 +571,7 @@ namespace Fb2ePubConverter
                         }
 
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     return false;
                 }
@@ -729,9 +730,16 @@ namespace Fb2ePubConverter
         private void CreateEpub(out EPubFile epubFile)
         {
             if (Settings.StandardVersion == EPubVersion.VePub30)
-                epubFile = new EPubFileV3 { FlatStructure = Settings.Flat, EmbedStyles = Settings.EmbedStyles };
+            {
+
+                epubFile = new EPubFileV3(Settings.V3SubStandard == EPubV3SubStandard.V30?V3Standard.V30 : V3Standard.V301)
+                {
+                    FlatStructure = Settings.Flat,
+                    EmbedStyles = Settings.EmbedStyles
+                };
+            }
             else
-                epubFile    =   new EPubFile { FlatStructure = Settings.Flat, EmbedStyles = Settings.EmbedStyles };
+                epubFile = new EPubFile {FlatStructure = Settings.Flat, EmbedStyles = Settings.EmbedStyles};
         }
 
         private void SetupAppleSettings(EPubFile epubFile)
@@ -1123,7 +1131,7 @@ namespace Fb2ePubConverter
 
             Logger.Log.Debug("Passing header data from FB2 to EPUB");
             // cReate new Title page
-            epubFile.TitlePage = new TitlePageFile();
+            epubFile.TitlePage = new TitlePageFile(Settings.StandardVersion == EPubVersion.VEpub20 ? XHTMRulesEnum.EPUBCompatible : XHTMRulesEnum.EPUBV3Compatible);
 
             // in case main body title is not defined (empty) 
             if ((fb2File.TitleInfo != null) && (fb2File.TitleInfo.BookTitle != null))
@@ -1174,7 +1182,7 @@ namespace Fb2ePubConverter
                 if (fb2File.TitleInfo.Annotation != null)
                 {
                     epubFile.Title.Description = fb2File.TitleInfo.Annotation.ToString();
-                    epubFile.AnnotationPage = new AnnotationPageFile();
+                    epubFile.AnnotationPage = new AnnotationPageFile(Settings.StandardVersion == EPubVersion.VEpub20?XHTMRulesEnum.EPUBCompatible:XHTMRulesEnum.EPUBV3Compatible);
                     ConverterOptions converterSettings = new ConverterOptions
                     {
                         CapitalDrop = Settings.CapitalDrop,
