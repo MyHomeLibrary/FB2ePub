@@ -30,7 +30,7 @@ namespace EPubLibrary.Content
 
         protected ManifestSection _manifest = new ManifestSection();
 
-        protected readonly SpineSection _spine = new SpineSection();
+        protected SpineSection _spine = new SpineSection();
 
         protected bool _flatStructure = false;
 
@@ -255,6 +255,11 @@ namespace EPubLibrary.Content
         /// Get/Set book title
         /// </summary>
         public EPubTitleSettings Title { get; set; }
+
+        /// <summary>
+        /// Get/set collections
+        /// </summary>
+        public EPubCollections Collections { get; set; }
 
         /// <summary>
         /// get/set Id of the cover image file

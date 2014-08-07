@@ -54,7 +54,8 @@ namespace EPubLibrary
     {
         #region readonly_private_propeties
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
-        private readonly EPubTitleSettings _title = new EPubTitleSettings();
+        protected readonly EPubTitleSettings _title = new EPubTitleSettings();
+        protected readonly EPubCollections  _collections = new EPubCollections();
         private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS",  FileName = "main.css" };
         private readonly AdobeTemplate _adobeTemplate = new AdobeTemplate();
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
@@ -67,7 +68,7 @@ namespace EPubLibrary
         private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
         private readonly AppleDisplayOptionsFile _appleOptionsFile = new AppleDisplayOptionsFile();
         private readonly Dictionary<string,EPUBImage> _images = new Dictionary<string ,EPUBImage>();
-        private readonly CalibreMetadataObject _calibreMetadata =  new CalibreMetadataObject();
+        protected readonly CalibreMetadataObject _calibreMetadata =  new CalibreMetadataObject();
         #endregion
 
         #region private_properties
@@ -162,6 +163,14 @@ namespace EPubLibrary
         public EPubTitleSettings Title
         {
             get { return _title; }
+        }
+
+        /// <summary>
+        /// Get access to the list of collections (series) book belong to
+        /// </summary>
+        public EPubCollections Collections
+        {
+            get { return _collections; }    
         }
 
         /// <summary>
@@ -539,7 +548,7 @@ namespace EPubLibrary
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="pathObject"></param>
-        private void CreateFileEntryInZip(ZipOutputStream stream,IEPubPath pathObject)
+        protected void CreateFileEntryInZip(ZipOutputStream stream,IEPubPath pathObject)
         {
             ZipEntry file = _zipFactory.MakeFileEntry(pathObject.PathInEPUB.GetFilePathInZip(_flatStructure), false);
             file.CompressionMethod = CompressionMethod.Deflated; // as defined by ePub stndard
@@ -730,7 +739,7 @@ namespace EPubLibrary
 
 
 
-        private void AddContentFile(ZipOutputStream stream)
+        protected virtual void AddContentFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
             CreateFileEntryInZip(stream,_content);

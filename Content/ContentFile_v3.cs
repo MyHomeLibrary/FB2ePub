@@ -27,6 +27,7 @@ namespace EPubLibrary.Content
         public ContentFileV3()
         {
             _manifest   =   new ManifestSectionV3();
+            _spine = new SpineSectionV3();
         }
 
         /// <summary>
@@ -59,10 +60,10 @@ namespace EPubLibrary.Content
             metadata.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi.NamespaceName));
             metadata.Add(new XAttribute(XNamespace.Xmlns + "dcterms", dcterms.NamespaceName));
             metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", _fakeOpf.NamespaceName));
-            if (CalibreData != null)
-            {
-                CalibreData.InjectNamespace(metadata);
-            }
+            //if (CalibreData != null)
+            //{
+            //    CalibreData.InjectNamespace(metadata);
+            //}
 
             Onix5SchemaConverter source = null;
             foreach (var identifierItem in Title.Identifiers)
@@ -286,6 +287,22 @@ namespace EPubLibrary.Content
             metaModified.Add(new XAttribute("property", "dcterms:modified"));
             metadata.Add(metaModified);
 
+            // series
+            if (Collections.CollectionMembers.Count > 0)
+            {
+                int collectionCounter = 0;
+                foreach (var collection in Collections.CollectionMembers)
+                {
+                    string collectionID = string.Format("collect_{0}",++collectionCounter);
+                    XElement metaBelongsTo = new XElement(_fakeOpf + "meta", collection.CollectionName);
+                    metaBelongsTo.Add(new XAttribute("property", "belongs-to-collection"));
+                    metaBelongsTo.Add(new XAttribute("id", collectionID));
+                    metadata.Add(metaBelongsTo);
+
+                    XElement metaCollectionType = new XElement(_fakeOpf + "meta", CollectionMember.ToStringType(collection.Type));
+                    metadata.Add(metaCollectionType);
+                }
+            }
 
 
 
@@ -332,6 +349,7 @@ namespace EPubLibrary.Content
             if (baseXhtmlFile.DocumentType != GuideTypeEnum.Ignore) // we do not add objects that to be ignored 
             {
                 SpineItem bookSpine = new SpineItem { Name = baseXhtmlFile.Id };
+                bookSpine.Properties.Add(EPubV3Properties.rendition_flow_auto); //TODO: make this optional, based on settings to define look and find best properties for defaults
                 _spine.Add(bookSpine);
             }
 

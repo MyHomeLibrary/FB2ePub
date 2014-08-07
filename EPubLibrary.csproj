@@ -138,6 +138,7 @@
     <Compile Include="CSS_Items\CSSFile.cs" />
     <Compile Include="CSS_Items\CSSItem.cs" />
     <Compile Include="CSS_Items\FontDefinition.cs" />
+    <Compile Include="EPubCollections.cs" />
     <Compile Include="EPubFile.cs" />
     <Compile Include="EPubFileV3.cs" />
     <Compile Include="PathUtils\ePubInternalPath.cs" />
