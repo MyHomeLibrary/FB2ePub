@@ -128,7 +128,7 @@ namespace FB2EPubConverter
                     progressReporter.Processed(fileName);
                 });
             }
-            catch (OperationCanceledException e)
+            catch (OperationCanceledException )
             {
                 conversionResult = false;
                 Logger.Log.Info("Operation was canceled");
