@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace EPubLibrary.Content.Guide
 {
-    internal class GuideSection
+    public class GuideSection
     {
         private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
 

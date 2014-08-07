@@ -6,11 +6,11 @@ using System.Xml.Linq;
 
 namespace EPubLibrary.Content.Manifest
 {
-    internal class ManifestSection : List<ManifestItem>
+    public class ManifestSection : List<ManifestItem>
     {
-        private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
+        protected readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
 
-        public XElement GenerateManifestElement()
+        public virtual XElement GenerateManifestElement()
         {
             XElement manifestElement = new XElement(_opfNameSpace + "manifest");
 

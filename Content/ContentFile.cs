@@ -26,11 +26,11 @@ namespace EPubLibrary.Content
         protected readonly XNamespace _fakeOpf = @"http://www.idpf.org/2007/xxx";
 
 
-        private readonly GuideSection _guide = new GuideSection();
+        protected readonly GuideSection _guide = new GuideSection();
 
-        private readonly ManifestSection _manifest = new ManifestSection();
+        protected ManifestSection _manifest = new ManifestSection();
 
-        private readonly SpineSection _spine = new SpineSection();
+        protected readonly SpineSection _spine = new SpineSection();
 
         protected bool _flatStructure = false;
 
@@ -305,7 +305,7 @@ namespace EPubLibrary.Content
             return str;
         }
 
-        public void AddXHTMLTextItem(BaseXHTMLFile baseXhtmlFile)
+        public virtual void AddXHTMLTextItem(BaseXHTMLFile baseXhtmlFile)
         {
             ManifestItem bookItem = new ManifestItem { HRef = baseXhtmlFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = baseXhtmlFile.Id, MediaType = @"application/xhtml+xml" };
             _manifest.Add(bookItem);
@@ -319,31 +319,31 @@ namespace EPubLibrary.Content
             _guide.AddGuideItem(bookItem.HRef, baseXhtmlFile.Id, baseXhtmlFile.DocumentType);                
         }
 
-        public void AddTOC()
+        public virtual void AddTOC()
         {
             ManifestItem TOCItem = new ManifestItem { HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), ID = "ncx", MediaType = @"application/x-dtbncx+xml" };
             _manifest.Add(TOCItem);                     
         }
 
-        public void AddImage(ImageOnStorage image)
+        public virtual void AddImage(ImageOnStorage image)
         {
             _manifest.Add(new ManifestItem { HRef = image.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = image.ID, MediaType = EPUBImage.ConvertImageTypeToMediaType(image.ImageType) });
         }
 
-        public void AddCSS(CSSFile cssFile)
+        public virtual void AddCSS(CSSFile cssFile)
         {
             ManifestItem maincss = new ManifestItem { HRef = cssFile.PathInEPUB.GetRelativePath(ContentFilePath,_flatStructure), ID = cssFile.ID, MediaType = CSSFile.MediaType };
             _manifest.Add(maincss);
         }
 
-        public void AddXPGTTemplate(AdobeTemplate template)
+        public virtual void AddXPGTTemplate(AdobeTemplate template)
         {
             ManifestItem maincss = new ManifestItem { HRef = template.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = template.ID, MediaType = template.GetMediaType() };
             _manifest.Add(maincss);
         }
 
 
-        public void AddFontFile(FontOnStorage fontFile)
+        public virtual void AddFontFile(FontOnStorage fontFile)
         {
             _manifest.Add(new ManifestItem() { HRef = fontFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = fontFile.ID, MediaType =fontFile.MediaType });
         }

@@ -132,6 +132,9 @@
     <Compile Include="Content\ContentFile_v3.cs" />
     <Compile Include="Content\Guide\GuideSection.cs" />
     <Compile Include="Content\Guide\GuideElement.cs" />
+    <Compile Include="Content\Manifest\ManifestSectionV3.cs" />
+    <Compile Include="Content\NavigationDocument\NavigationDocumentFile.cs" />
+    <Compile Include="Content\Spine\SpineSectionV3.cs" />
     <Compile Include="CSS_Items\CSSFile.cs" />
     <Compile Include="CSS_Items\CSSItem.cs" />
     <Compile Include="CSS_Items\FontDefinition.cs" />

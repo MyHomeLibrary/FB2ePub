@@ -6,13 +6,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using EPubLibrary.Content.Guide;
+using EPubLibrary.Content.Manifest;
+using EPubLibrary.Content.NavigationDocument;
+using EPubLibrary.Content.Spine;
+using EPubLibrary.CSS_Items;
 using EPubLibrary.ReferenceUtils;
+using EPubLibrary.XHTML_Items;
+using EPubLibrary.TOC;
+using EPubLibrary.PathUtils;
 
 
 namespace EPubLibrary.Content
 {
     public class ContentFileV3 : ContentFile
     {
+
+        private readonly NavigationDocumentFile _navigationDocument = new NavigationDocumentFile();
+
+        public ContentFileV3()
+        {
+            _manifest   =   new ManifestSectionV3();
+        }
 
         /// <summary>
         /// Returns epub version to write into a package
@@ -301,11 +316,65 @@ namespace EPubLibrary.Content
                 case TitleType.Main:
                     return "main";
                 case TitleType.SourceInfo:
-                    return "edition";
+                    return "collection";
                 case TitleType.PublishInfo:
                     return "collection";
             }
-            return "expanded";
+            return "collection";
+        }
+
+
+        public override void AddXHTMLTextItem(BaseXHTMLFile baseXhtmlFile)
+        {
+            ManifestItem bookItem = new ManifestItem { HRef = baseXhtmlFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = baseXhtmlFile.Id, MediaType = @"application/xhtml+xml" };
+            _manifest.Add(bookItem);
+
+            if (baseXhtmlFile.DocumentType != GuideTypeEnum.Ignore) // we do not add objects that to be ignored 
+            {
+                SpineItem bookSpine = new SpineItem { Name = baseXhtmlFile.Id };
+                _spine.Add(bookSpine);
+            }
+
+            _guide.AddGuideItem(bookItem.HRef, baseXhtmlFile.Id, baseXhtmlFile.DocumentType);
+        }
+
+        public override void AddTOC()
+        {
+            ManifestItem TOCItem = new ManifestItem { HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), ID = "ncx", MediaType = @"application/x-dtbncx+xml" };
+            _manifest.Add(TOCItem);
+        }
+
+        public void AddNavigationDocument()
+        {
+            ManifestItem NAVitem = new ManifestItem
+            {
+                HRef = NavigationDocumentFile.NAVFilePath.GetRelativePath(ContentFilePath, _flatStructure), 
+                ID = "nav", 
+                MediaType = "application/xhtml+xml" ,               
+            };
+            NAVitem.Properties.Add("nav");
+            _manifest.Add(NAVitem);
+        }
+
+        public override void AddImage(ImageOnStorage image)
+        {
+            var item = new ManifestItem
+            {
+                HRef = image.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure),
+                ID = image.ID,
+                MediaType = EPUBImage.ConvertImageTypeToMediaType(image.ImageType)
+            };
+            if (CoverId == image.ID)
+            {
+                item.Properties.Add("cover-image");
+            }
+            _manifest.Add(item);
+        }
+
+        public override void AddCSS(CSSFile cssFile)
+        {
+            ManifestItem maincss = new ManifestItem { HRef = cssFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = cssFile.ID, MediaType = CSSFile.MediaType };
+            _manifest.Add(maincss);
         }
 
 

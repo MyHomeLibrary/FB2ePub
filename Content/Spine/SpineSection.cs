@@ -6,11 +6,11 @@ using System.Xml.Linq;
 
 namespace EPubLibrary.Content.Spine
 {
-    internal class SpineSection : List<SpineItem>
+    public class SpineSection : List<SpineItem>
     {
-        private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
+        protected readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
 
-        public XElement GenerateSpineElement()
+        public virtual XElement GenerateSpineElement()
         {
             XElement spineElement = new XElement(_opfNameSpace + "spine");
             spineElement.Add(new XAttribute("toc", "ncx"));
