@@ -8,6 +8,13 @@ namespace EPubLibrary.Content.Manifest
 {
     internal class ManifestSectionV3 : ManifestSection
     {
+        private V3Standard _standard;
+
+        public ManifestSectionV3(V3Standard standard)
+        {
+            _standard = standard;
+        }
+
         public override XElement GenerateManifestElement()
         {
             XElement manifestElement = new XElement(_opfNameSpace + "manifest");

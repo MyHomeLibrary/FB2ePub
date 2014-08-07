@@ -9,7 +9,7 @@ using EPubLibrary.CSS_Items;
 
 namespace EPubLibrary.XHTML_Items
 {
-    interface IBaseXHTMLFile
+    public interface IBaseXHTMLFile
     {
         void Write(Stream stream);
         XDocument Generate();

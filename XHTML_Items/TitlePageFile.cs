@@ -17,7 +17,8 @@ namespace EPubLibrary.XHTML_Items
         private readonly List<string> _authors = new List<string>();
         private readonly List<string> _series = new List<string>();
 
-        public TitlePageFile()
+        public TitlePageFile(XHTMRulesEnum compatibility)
+            : base(compatibility)
         {
             pageTitle = "Title";
             DocumentType = GuideTypeEnum.TitlePage;

@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.PathUtils;
+using XHTMLClassLibrary;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
@@ -13,8 +14,9 @@ namespace EPubLibrary.XHTML_Items
     internal class CoverPageFile : BaseXHTMLFile
     {
         public ImageOnStorage CoverFileName { get; set; }
-        
-        public CoverPageFile()
+
+        public CoverPageFile(XHTMRulesEnum compatibility)
+            : base(compatibility)
         {
             pageTitle = "Cover";
             DocumentType = GuideTypeEnum.Cover;

@@ -15,6 +15,7 @@ using EPubLibrary.ReferenceUtils;
 using EPubLibrary.XHTML_Items;
 using EPubLibrary.TOC;
 using EPubLibrary.PathUtils;
+using ICSharpCode.SharpZipLib.Zip;
 
 
 namespace EPubLibrary.Content
@@ -22,12 +23,13 @@ namespace EPubLibrary.Content
     public class ContentFileV3 : ContentFile
     {
 
-        private readonly NavigationDocumentFile _navigationDocument = new NavigationDocumentFile();
+        protected V3Standard _standard;
 
-        public ContentFileV3()
+        public ContentFileV3(V3Standard standard)
         {
-            _manifest   =   new ManifestSectionV3();
-            _spine = new SpineSectionV3();
+            _standard = standard;
+            _manifest   =   new ManifestSectionV3(standard);
+            _spine = new SpineSectionV3(standard);
         }
 
         /// <summary>
@@ -277,7 +279,7 @@ namespace EPubLibrary.Content
                 }
             }
 
-            // meta modifyed
+            // meta modified
             string modifiedDate = DateTime.UtcNow.ToUniversalTime().ToString("s")+"Z";
             if (Title.DataFileModification.HasValue)
             {
@@ -288,7 +290,9 @@ namespace EPubLibrary.Content
             metadata.Add(metaModified);
 
             // series
-            if (Collections.CollectionMembers.Count > 0)
+            if ((Collections != null) && 
+                (Collections.CollectionMembers.Count > 0) && 
+                V3StandardChecker.IsCollectionsAllowedByStandard(_standard))
             {
                 int collectionCounter = 0;
                 foreach (var collection in Collections.CollectionMembers)
@@ -300,7 +304,26 @@ namespace EPubLibrary.Content
                     metadata.Add(metaBelongsTo);
 
                     XElement metaCollectionType = new XElement(_fakeOpf + "meta", CollectionMember.ToStringType(collection.Type));
+                    metaCollectionType.Add(new XAttribute("property", "collection-type"));
+                    metaCollectionType.Add(new XAttribute("refines", "#" + collectionID));
                     metadata.Add(metaCollectionType);
+
+                    if (collection.CollectionPosition.HasValue)
+                    {
+                        XElement metaPosition = new XElement(_fakeOpf + "meta", collection.CollectionPosition.Value);
+                        metaPosition.Add(new XAttribute("property", "group-position"));
+                        metaPosition.Add(new XAttribute("refines", "#" + collectionID));
+                        metadata.Add(metaPosition);
+                    }
+
+                    if (!string.IsNullOrEmpty(collection.CollectionUID))
+                    {
+                        XElement metaUID = new XElement(_fakeOpf + "meta", collection.CollectionUID);
+                        metaUID.Add(new XAttribute("property", "dcterms:identifier"));
+                        metaUID.Add(new XAttribute("refines", "#" + collectionID));
+                        metadata.Add(metaUID);
+                        
+                    }
                 }
             }
 
@@ -343,30 +366,45 @@ namespace EPubLibrary.Content
 
         public override void AddXHTMLTextItem(BaseXHTMLFile baseXhtmlFile)
         {
-            ManifestItem bookItem = new ManifestItem { HRef = baseXhtmlFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = baseXhtmlFile.Id, MediaType = @"application/xhtml+xml" };
+            ManifestItem bookItem = new ManifestItem
+            {
+                HRef = baseXhtmlFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), 
+                ID = baseXhtmlFile.Id, 
+                MediaType = @"application/xhtml+xml"
+            };
             _manifest.Add(bookItem);
 
             if (baseXhtmlFile.DocumentType != GuideTypeEnum.Ignore) // we do not add objects that to be ignored 
             {
                 SpineItem bookSpine = new SpineItem { Name = baseXhtmlFile.Id };
-                bookSpine.Properties.Add(EPubV3Properties.rendition_flow_auto); //TODO: make this optional, based on settings to define look and find best properties for defaults
+                if (V3StandardChecker.IsRenditionFlowAllowedByStandard(_standard))
+                {
+                    bookSpine.Properties.Add(EPubV3Properties.rendition_flow_auto);
+                       //TODO: make this optional, based on settings to define look and find best properties for defaults
+                }
                 _spine.Add(bookSpine);
             }
 
             _guide.AddGuideItem(bookItem.HRef, baseXhtmlFile.Id, baseXhtmlFile.DocumentType);
         }
 
+
         public override void AddTOC()
         {
-            ManifestItem TOCItem = new ManifestItem { HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), ID = "ncx", MediaType = @"application/x-dtbncx+xml" };
+            ManifestItem TOCItem = new ManifestItem
+            {
+                HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), 
+                ID = "ncx", 
+                MediaType = @"application/x-dtbncx+xml",
+            };
             _manifest.Add(TOCItem);
         }
 
-        public void AddNavigationDocument()
+        public void AddNavigationDocument(NavigationDocumentFile navigationDocument)
         {
             ManifestItem NAVitem = new ManifestItem
             {
-                HRef = NavigationDocumentFile.NAVFilePath.GetRelativePath(ContentFilePath, _flatStructure), 
+                HRef = navigationDocument.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), 
                 ID = "nav", 
                 MediaType = "application/xhtml+xml" ,               
             };

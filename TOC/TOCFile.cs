@@ -11,11 +11,11 @@ using EPubLibrary.XHTML_Items;
 
 namespace EPubLibrary.TOC
 {
-    internal class TOCFile : IEPubPath
+    public class TOCFile : IEPubPath
     {
         public static readonly EPubInternalPath TOCFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/toc.ncx");
 
-        private readonly NavMapElement _navMap = new NavMapElement();
+        protected readonly NavMapElement _navMap = new NavMapElement();
         private string _title;
 
 
@@ -101,7 +101,7 @@ namespace EPubLibrary.TOC
         }
 
 
-        private void CreateTOCDocument(XDocument document)
+        protected virtual void CreateTOCDocument(XDocument document)
         {
             if (ID == null)
             {

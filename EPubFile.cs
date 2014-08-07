@@ -16,6 +16,7 @@ using EPubLibrary.XHTML_Items;
 using FontsSettings;
 using ICSharpCode.SharpZipLib.Zip;
 using TranslitRu;
+using XHTMLClassLibrary;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 using EPubLibrary.AppleEPubV2Extensions;
@@ -56,18 +57,18 @@ namespace EPubLibrary
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
         protected readonly EPubTitleSettings _title = new EPubTitleSettings();
         protected readonly EPubCollections  _collections = new EPubCollections();
-        private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS",  FileName = "main.css" };
+        protected CSSFile _mainCss = new CSSFile { ID = "mainCSS",  FileName = "main.css" };
         private readonly AdobeTemplate _adobeTemplate = new AdobeTemplate();
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
-        private readonly List<BookDocument> _sections = new List<BookDocument>();
-        private readonly TOCFile _tableOfContentFile = new TOCFile();
-        private readonly Rus2Lat _rule = new Rus2Lat();
+        protected List<BookDocument> _sections = new List<BookDocument>();
+        protected TOCFile _tableOfContentFile = new TOCFile();
+        protected Rus2Lat _rule = new Rus2Lat();
         private readonly List<string> _allSequences = new List<string>();
-        private readonly List<string> _aboutTexts = new List<string>();
-        private readonly List<string> _aboutLinks = new List<string>();
+        protected List<string> _aboutTexts = new List<string>();
+        protected List<string> _aboutLinks = new List<string>();
         private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
         private readonly AppleDisplayOptionsFile _appleOptionsFile = new AppleDisplayOptionsFile();
-        private readonly Dictionary<string,EPUBImage> _images = new Dictionary<string ,EPUBImage>();
+        protected Dictionary<string,EPUBImage> _images = new Dictionary<string ,EPUBImage>();
         protected readonly CalibreMetadataObject _calibreMetadata =  new CalibreMetadataObject();
         #endregion
 
@@ -117,7 +118,7 @@ namespace EPubLibrary
         /// <summary>
         /// Get/Set if adobe template XPGT file should be added to resulting file
         /// </summary>
-        public bool UseAdobeTemplate { get; set; }
+        public virtual bool UseAdobeTemplate { get; set; }
 
         /// <summary>
         /// Get/Set Path to Adobe template XPGT file
@@ -249,9 +250,9 @@ namespace EPubLibrary
         /// </summary>
         /// <param name="id">id - title to assign to the new document</param>
         /// <returns></returns>
-        public BookDocument AddDocument(string id)
+        public virtual BookDocument AddDocument(string id)
         {
-            BookDocument section = new BookDocument { PageTitle = id };
+            BookDocument section = new BookDocument(XHTMRulesEnum.EPUBCompatible) { PageTitle = id };
             section.StyleFiles.Add(_mainCss);
             if (UseAdobeTemplate)
             {
@@ -388,7 +389,7 @@ namespace EPubLibrary
         /// Adds actual book "context" 
         /// </summary>
         /// <param name="stream"></param>
-        private void AddBookData(ZipOutputStream stream)
+        protected virtual void AddBookData(ZipOutputStream stream)
         {
             if (InjectLKRLicense)
             {
@@ -405,10 +406,10 @@ namespace EPubLibrary
         /// Adds "license" file 
         /// </summary>
         /// <param name="stream"></param>
-        private void AddLicenseFile(ZipOutputStream stream)
+        protected virtual void AddLicenseFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            LicenseFile licensePage = new LicenseFile
+            LicenseFile licensePage = new LicenseFile(XHTMRulesEnum.EPUBCompatible)
             {
                 FlatStructure = FlatStructure, 
                 EmbedStyles = EmbedStyles, 
@@ -422,7 +423,7 @@ namespace EPubLibrary
         /// Adds embedded font files
         /// </summary>
         /// <param name="stream"></param>
-        private void AddFontFiles(ZipOutputStream stream)
+        protected void AddFontFiles(ZipOutputStream stream)
         {
             if (_fontSettings.NumberOfEmbededFiles > 0)
             {
@@ -458,7 +459,7 @@ namespace EPubLibrary
         /// Adds different additional generated files like cover, annotation etc.
         /// </summary>
         /// <param name="stream"></param>
-        private void AddAdditionalFiles(ZipOutputStream stream)
+        protected void AddAdditionalFiles(ZipOutputStream stream)
         {
             AddAdobeTemplate(stream);
             AddCSSFiles(stream);
@@ -571,7 +572,7 @@ namespace EPubLibrary
 
         }
 
-        private void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
+        protected void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
         {
             xhtmlFile.FlatStructure = FlatStructure;
             xhtmlFile.EmbedStyles = EmbedStyles;
@@ -587,11 +588,11 @@ namespace EPubLibrary
         /// Adds "About" page file
         /// </summary>
         /// <param name="stream"></param>
-        private void AddAbout(ZipOutputStream stream)
+        protected virtual void AddAbout(ZipOutputStream stream)
         {
             stream.SetLevel(9);
 
-            AboutPageFile aboutPage = new AboutPageFile
+            AboutPageFile aboutPage = new AboutPageFile(XHTMRulesEnum.EPUBCompatible)
             {
                 FlatStructure = FlatStructure, 
                 EmbedStyles = EmbedStyles,
@@ -609,7 +610,7 @@ namespace EPubLibrary
         /// Writes book content to the stream
         /// </summary>
         /// <param name="stream">stream to write to</param>
-        private void AddBookContent(ZipOutputStream stream)
+        protected virtual void AddBookContent(ZipOutputStream stream)
         {
             int count = 1;
 
@@ -663,7 +664,7 @@ namespace EPubLibrary
         }
 
 
-        private void AddBookContentSection(BookDocument subsection, int count,int subcount)
+        protected  virtual void AddBookContentSection(BookDocument subsection, int count,int subcount)
         {
             subsection.Id = string.Format("bookcontent{0}_{1}", count, subcount); // generate unique ID
             _content.AddXHTMLTextItem(subsection);
@@ -682,7 +683,7 @@ namespace EPubLibrary
 
 
 
-        private void AddCover(ZipOutputStream stream)
+        protected virtual void AddCover(ZipOutputStream stream)
         {
             if (string.IsNullOrEmpty(_coverImage) )
             {
@@ -698,7 +699,7 @@ namespace EPubLibrary
             // for test let's just create one file
             stream.SetLevel(9);
 
-            CoverPageFile cover = new CoverPageFile
+            CoverPageFile cover = new CoverPageFile(XHTMRulesEnum.EPUBCompatible)
             {
                 CoverFileName = GetCoverImageName(eImage),
             };
@@ -715,7 +716,7 @@ namespace EPubLibrary
             _content.AddXHTMLTextItem(cover);
         }
 
-        private ImageOnStorage GetCoverImageName(EPUBImage eImage)
+        protected ImageOnStorage GetCoverImageName(EPUBImage eImage)
         {
             foreach (var image in _images)
             {
@@ -727,7 +728,7 @@ namespace EPubLibrary
             return new ImageOnStorage(eImage) { FileName = "cover.jpg" };
         }
 
-        private void AddTOCFile(ZipOutputStream stream)
+        protected void AddTOCFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
             CreateFileEntryInZip(stream, _tableOfContentFile);
@@ -753,7 +754,7 @@ namespace EPubLibrary
 
 
 
-        private void AddImages(ZipOutputStream stream)
+        protected void AddImages(ZipOutputStream stream)
         {
             if (_images.Count > 0)
             {

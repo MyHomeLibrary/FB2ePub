@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary.PathUtils;
+using XHTMLClassLibrary;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -31,7 +32,8 @@ namespace EPubLibrary.XHTML_Items
         }
 
 
-        public BookDocument()
+        public BookDocument(XHTMRulesEnum compatibility)
+            : base(compatibility)
         {
             // real limit is 300k but just to be sure
             MaxSize = 300 * 1024;
@@ -121,7 +123,7 @@ namespace EPubLibrary.XHTML_Items
                     if (totlaSize + itemSize > MaxSize)
                     {
                         Content = newContent;
-                        newDoc = new BookDocument();
+                        newDoc = new BookDocument(Compatibility);
                         newDoc.Content = oldContent;
                         newDoc.PageTitle = PageTitle;
                         newDoc.NotPartOfNavigation = true;
@@ -206,7 +208,7 @@ namespace EPubLibrary.XHTML_Items
         private List<BookDocument> SplitSimpleText(SimpleEPubText simpleEPubText)
         {
             List<BookDocument> list = new List<BookDocument>();
-            BookDocument newDoc = new BookDocument();
+            BookDocument newDoc = new BookDocument(Compatibility);
             newDoc.PageTitle = PageTitle;
             newDoc.NotPartOfNavigation = true;
             newDoc.StyleFiles.AddRange(StyleFiles);
@@ -225,7 +227,7 @@ namespace EPubLibrary.XHTML_Items
                 if (itemSize >= MaxSize)
                 {
                     list.Add(newDoc);
-                    newDoc = new BookDocument();
+                    newDoc = new BookDocument(Compatibility);
                     newDoc.PageTitle = PageTitle;
                     newDoc.NotPartOfNavigation = true;
                     newDoc.StyleFiles.AddRange(StyleFiles);

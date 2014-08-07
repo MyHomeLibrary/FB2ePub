@@ -8,6 +8,12 @@ namespace EPubLibrary.Content.Spine
 {
     class SpineSectionV3 : SpineSection
     {
+        private V3Standard _standard;
+
+        public SpineSectionV3(V3Standard standard)
+        {
+            this._standard = standard;
+        }
 
         public override XElement GenerateSpineElement()
         {

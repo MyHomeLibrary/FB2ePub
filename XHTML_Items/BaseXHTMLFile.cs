@@ -21,9 +21,15 @@ namespace EPubLibrary.XHTML_Items
         protected XNamespace XhtmlNamespace = @"http://www.w3.org/1999/xhtml";
         protected string pageTitle;
         protected bool Durty = true;
+        protected XHTMRulesEnum Compatibility = XHTMRulesEnum.EPUBCompatible;
+
+        public BaseXHTMLFile(XHTMRulesEnum compatibility)
+        {
+            Compatibility = compatibility;
+        }
         
 
-        protected EPubInternalPath FileEPubInternalPath= null;
+        protected EPubInternalPath FileEPubInternalPath = null;
 
         private readonly List<StyleElement> _styles = new List<StyleElement>();
         private XDocument _generatedCodeXDocument;
@@ -41,6 +47,7 @@ namespace EPubLibrary.XHTML_Items
         public bool FlatStructure { get; set; }
 
         public string Id { get; set; }
+
 
         public EPubInternalPath PathInEPUB
         {
@@ -116,7 +123,7 @@ namespace EPubLibrary.XHTML_Items
 
         public virtual XDocument Generate()
         {
-            XHTMLDocument mainDocument = new XHTMLDocument(XHTMRulesEnum.EPUBCompatible);
+            XHTMLDocument mainDocument = new XHTMLDocument(Compatibility);
             GenerateHead();
             GenerateBody();
             UTF8Encoding encoding = new UTF8Encoding();

@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.PathUtils;
+using XHTMLClassLibrary;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -14,13 +15,14 @@ namespace EPubLibrary.XHTML_Items
     public class AnnotationPageFile : BaseXHTMLFile
     {
 
-        public AnnotationPageFile()
+        public AnnotationPageFile(XHTMRulesEnum compatibility) : base(compatibility)
         {
             pageTitle = "Annotation";
             DocumentType = GuideTypeEnum.Preface;
             FileName = "annotation.xhtml";
             Id = "annotation";
             FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
+            
         }
 
         public Div BookAnnotation { get; set; }

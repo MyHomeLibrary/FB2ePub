@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace EPubLibrary.TOC.NavMap
 {
-    internal class NavMapElement : List<NavPoint>
+    public class NavMapElement : List<NavPoint>
     {
         public string Name { get; set; }
 

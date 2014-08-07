@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.PathUtils;
+using XHTMLClassLibrary;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -13,7 +14,8 @@ namespace EPubLibrary.XHTML_Items
 {
     class LicenseFile : BaseXHTMLFile
     {
-        internal LicenseFile()
+        internal LicenseFile(XHTMRulesEnum compatibility)
+            : base(compatibility)
         {
             FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/license/");
             Id = "license";
