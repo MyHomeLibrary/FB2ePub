@@ -52,6 +52,15 @@ namespace EPubLibrary
         }
 
 
+        protected bool _generateCompatibleTOC = false;
+
+        public bool GenerateCompatibleTOC
+        {
+            get { return _generateCompatibleTOC; }
+            set { ((ContentFileV3)_content).GenerateCompatibleTOC = _generateCompatibleTOC = value; }
+        }
+
+
         protected override void CreateContainer(out ContainerFile container)
         {
             container = new ContainerFileV3 { FlatStructure = _flatStructure, ContentFilePath = _content };
@@ -135,7 +144,10 @@ namespace EPubLibrary
             AddImages(stream);
             AddFontFiles(stream);
             AddAdditionalFiles(stream);
-            AddTOCFile(stream);
+            if (GenerateCompatibleTOC)
+            {
+                AddTOCFile(stream);
+            }
             AddNavigationFile(stream);
             AddContentFile(stream);
         }

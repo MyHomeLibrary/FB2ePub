@@ -15,10 +15,15 @@ namespace EPubLibrary.Content.Spine
             this._standard = standard;
         }
 
+        public bool GenerateCompatibleTOC { get; set; }
+
         public override XElement GenerateSpineElement()
         {
             XElement spineElement = new XElement(_opfNameSpace + "spine");
-            spineElement.Add(new XAttribute("toc", "ncx"));
+            if (GenerateCompatibleTOC)
+            {
+                spineElement.Add(new XAttribute("toc", "ncx"));
+            }
 
             foreach (var spineItem in this)
             {

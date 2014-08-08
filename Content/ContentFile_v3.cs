@@ -32,6 +32,8 @@ namespace EPubLibrary.Content
             _spine = new SpineSectionV3(standard);
         }
 
+        public bool GenerateCompatibleTOC { get; set; }
+
         /// <summary>
         /// Returns epub version to write into a package
         /// </summary>
@@ -391,6 +393,11 @@ namespace EPubLibrary.Content
 
         public override void AddTOC()
         {
+            (_spine as SpineSectionV3).GenerateCompatibleTOC = GenerateCompatibleTOC;
+            if (!GenerateCompatibleTOC)
+            {
+               return;
+            }
             ManifestItem TOCItem = new ManifestItem
             {
                 HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), 

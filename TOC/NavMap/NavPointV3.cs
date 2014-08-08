@@ -17,6 +17,7 @@ namespace EPubLibrary.TOC.NavMap
         public List<NavPointV3> SubPoints { get { return subpoints; } }
         public string Name { get; set; }
         public string Content { set; get; }
+        public string Id { get; set; }
 
         public int GetDepth()
         {
@@ -64,7 +65,11 @@ namespace EPubLibrary.TOC.NavMap
         internal XElement Generate()
         {
             XElement navXPoint = new XElement(xmlNamespace + "li");
-            //navXPoint.Add(new XAttribute("id", string.Format("NavPoint-{0}", pointnumber)));
+            navXPoint.Add(new XAttribute("id", Id));
+            XElement link = new XElement(xmlNamespace + "a");
+            link.Value = Name;
+            link.Add(new XAttribute("href",Content));
+            navXPoint.Add(link);
             //navXPoint.Add(new XAttribute("playOrder", pointnumber));
 
             //XElement navLabel = new XElement(xmlNamespace + "navLabel");

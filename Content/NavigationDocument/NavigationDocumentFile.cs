@@ -107,12 +107,22 @@ namespace EPubLibrary.Content.NavigationDocument
 
         public void AddNavPoint(BookDocument content, string name)
         {
-            NavPointV3 bookPoint = new NavPointV3 { Content = content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure), Name = name };
+            if (string.IsNullOrEmpty(name))
+            {
+                return;
+            }
+            NavPointV3 bookPoint = new NavPointV3 { Content = content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure), 
+                Name = name,
+            Id =  content.Id};
             _tocNav.Add(bookPoint);
         }
 
         public void AddSubNavPoint(BookDocument content, BookDocument subcontent, string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                return;
+            }
             var point = _tocNav.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure)));
             if (point != null)
             {
