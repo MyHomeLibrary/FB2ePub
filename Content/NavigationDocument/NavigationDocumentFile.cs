@@ -24,7 +24,7 @@ namespace EPubLibrary.Content.NavigationDocument
             NavHeading = "Table of Contents",
         };
 
-        public static readonly EPubInternalPath NAVFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/nav.xhtml");
+        public static readonly EPubInternalPath NAVFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/nav.xhtml");
 
         public EPubInternalPath PathInEPUB
         {
