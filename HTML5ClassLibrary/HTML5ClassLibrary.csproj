@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E596A296-1C1A-42B7-8482-B7B0E95B82D3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HTML5ClassLibrary</RootNamespace>
+    <AssemblyName>HTML5ClassLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonIncludes\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="AttributeDataTypes\Character.cs" />
+    <Compile Include="AttributeDataTypes\Charset.cs" />
+    <Compile Include="AttributeDataTypes\Charsets.cs" />
+    <Compile Include="AttributeDataTypes\ContentType.cs" />
+    <Compile Include="AttributeDataTypes\ContentTypes.cs" />
+    <Compile Include="AttributeDataTypes\Coords.cs" />
+    <Compile Include="AttributeDataTypes\Datetime.cs" />
+    <Compile Include="AttributeDataTypes\HTMLCode.cs" />
+    <Compile Include="AttributeDataTypes\ID.cs" />
+    <Compile Include="AttributeDataTypes\IDReference.cs" />
+    <Compile Include="AttributeDataTypes\LanguageCode.cs" />
+    <Compile Include="AttributeDataTypes\Length.cs" />
+    <Compile Include="AttributeDataTypes\LinkTypes.cs" />
+    <Compile Include="AttributeDataTypes\MediaDescriptions.cs" />
+    <Compile Include="AttributeDataTypes\MIMEType.cs" />
+    <Compile Include="AttributeDataTypes\NameToken.cs" />
+    <Compile Include="AttributeDataTypes\NameTokens.cs" />
+    <Compile Include="AttributeDataTypes\Number.cs" />
+    <Compile Include="AttributeDataTypes\PatternAttributeType.cs" />
+    <Compile Include="AttributeDataTypes\Pixels.cs" />
+    <Compile Include="AttributeDataTypes\Script.cs" />
+    <Compile Include="AttributeDataTypes\Text.cs" />
+    <Compile Include="AttributeDataTypes\URI.cs" />
+    <Compile Include="AttributeDataTypes\URIs.cs" />
+    <Compile Include="Attributes\AbbreviatedAttribute.cs" />
+    <Compile Include="Attributes\AcceptAttribute.cs" />
+    <Compile Include="Attributes\AcceptCharsetsAttribute.cs" />
+    <Compile Include="Attributes\AccessKeyAttribute.cs" />
+    <Compile Include="Attributes\ActionAttribute.cs" />
+    <Compile Include="Attributes\AlignAttribute.cs" />
+    <Compile Include="Attributes\AltAttribute.cs" />
+    <Compile Include="Attributes\ArchiveAttribute.cs" />
+    <Compile Include="Attributes\AutocompleteAttribute.cs" />
+    <Compile Include="Attributes\AutoFocusAttribute.cs" />
+    <Compile Include="Attributes\AutoPlayAttribute.cs" />
+    <Compile Include="Attributes\AxisAttribute.cs" />
+    <Compile Include="Attributes\BaseAttribute.cs" />
+    <Compile Include="Attributes\BorderAttribute.cs" />
+    <Compile Include="Attributes\ButtonTypeAttribute.cs" />
+    <Compile Include="Attributes\CellPaddingAttribute.cs" />
+    <Compile Include="Attributes\CellSpacing.cs" />
+    <Compile Include="Attributes\CharAttribute.cs" />
+    <Compile Include="Attributes\CharOffAttribute.cs" />
+    <Compile Include="Attributes\CharsetAttribute.cs" />
+    <Compile Include="Attributes\CiteAttribute.cs" />
+    <Compile Include="Attributes\ClassAttr.cs" />
+    <Compile Include="Attributes\ClassIDAttribute.cs" />
+    <Compile Include="Attributes\CodeBaseAttribute.cs" />
+    <Compile Include="Attributes\CodeTypeAttribute.cs" />
+    <Compile Include="Attributes\ColsAttribute.cs" />
+    <Compile Include="Attributes\ColSpanAttribute.cs" />
+    <Compile Include="Attributes\CommandAttribute.cs" />
+    <Compile Include="Attributes\ContentAttribute.cs" />
+    <Compile Include="Attributes\ContentTypeAttribute.cs" />
+    <Compile Include="Attributes\ControlsAttribute.cs" />
+    <Compile Include="Attributes\CoordinatesAttribute.cs" />
+    <Compile Include="Attributes\CrossOriginAttribute.cs" />
+    <Compile Include="Attributes\DataAttribute.cs" />
+    <Compile Include="Attributes\DateTimeAttribute.cs" />
+    <Compile Include="Attributes\Direction.cs" />
+    <Compile Include="Attributes\DownloadAttribute.cs" />
+    <Compile Include="Attributes\EncTypeAttribute.cs" />
+    <Compile Include="Attributes\Events\OnBlurEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnChangeEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnClickEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnDblClickEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnFocusEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnKeyDownEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnKeyPressEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnKeyUpEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnLoadEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnMouseDownEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnMouseMoveEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnMouseOutEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnMouseOverEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnMouseUpEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnResetEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnSelectEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnSubmitEventAttribute.cs" />
+    <Compile Include="Attributes\Events\OnUnloadEventAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\BaseFlagAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\ChallengeAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\CheckedAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\DeclareAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\DefaultAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\DeferAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\DisabledAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\MultipleAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\NoHRefAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\ReadOnlyAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\RequiredAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\SelectedAttribute.cs" />
+    <Compile Include="Attributes\ForAttribute.cs" />
+    <Compile Include="Attributes\FormActionAttribute.cs" />
+    <Compile Include="Attributes\FormEncodingTypeAttribute.cs" />
+    <Compile Include="Attributes\FormIdAttribute.cs" />
+    <Compile Include="Attributes\FormMethodAttribute.cs" />
+    <Compile Include="Attributes\FormNoValidateAttribute.cs" />
+    <Compile Include="Attributes\FormTargetAttribute.cs" />
+    <Compile Include="Attributes\FrameAttribute.cs" />
+    <Compile Include="Attributes\HeightAttribute.cs" />
+    <Compile Include="Attributes\HrefAttribute.cs" />
+    <Compile Include="Attributes\HRefLanguageAttribute.cs" />
+    <Compile Include="Attributes\HTTPEquivAttribute.cs" />
+    <Compile Include="Attributes\ICommonAttributes.cs" />
+    <Compile Include="Attributes\IconAttribute.cs" />
+    <Compile Include="Attributes\IdAttribute.cs" />
+    <Compile Include="Attributes\InputTypeAttribute.cs" />
+    <Compile Include="Attributes\ISMapAttribute.cs" />
+    <Compile Include="Attributes\KeyTypeAttribute.cs" />
+    <Compile Include="Attributes\LabelAttribute.cs" />
+    <Compile Include="Attributes\LanguageAttr.cs" />
+    <Compile Include="Attributes\LinkRelationAttribute.cs" />
+    <Compile Include="Attributes\ListAttribute.cs" />
+    <Compile Include="Attributes\LongDescriptionAttribute.cs" />
+    <Compile Include="Attributes\LoopAttribute.cs" />
+    <Compile Include="Attributes\ManifestAttribute.cs" />
+    <Compile Include="Attributes\MaxAttribute.cs" />
+    <Compile Include="Attributes\MaxLengthAttribute.cs" />
+    <Compile Include="Attributes\MediaAttribute.cs" />
+    <Compile Include="Attributes\MenuItemTypeAttribute.cs" />
+    <Compile Include="Attributes\MenuTypeAttribute.cs" />
+    <Compile Include="Attributes\MethodAttribute.cs" />
+    <Compile Include="Attributes\MIME_typeAttribute.cs" />
+    <Compile Include="Attributes\MinAttribute.cs" />
+    <Compile Include="Attributes\MutedAttribute.cs" />
+    <Compile Include="Attributes\NameAttribute.cs" />
+    <Compile Include="Attributes\NoValidateAttribute.cs" />
+    <Compile Include="Attributes\OpenAttribute.cs" />
+    <Compile Include="Attributes\PatternAttribute.cs" />
+    <Compile Include="Attributes\PlaceHolderAttribute.cs" />
+    <Compile Include="Attributes\PreloadAttribute.cs" />
+    <Compile Include="Attributes\ProfileAttribute.cs" />
+    <Compile Include="Attributes\AreaRelationAttribute.cs" />
+    <Compile Include="Attributes\RadioGroupAttribute.cs" />
+    <Compile Include="Attributes\ReverseRelationAttribute.cs" />
+    <Compile Include="Attributes\RowsAttribute.cs" />
+    <Compile Include="Attributes\RowSpanAttribute.cs" />
+    <Compile Include="Attributes\RubyAttributes\RbSpanAttribute.cs" />
+    <Compile Include="Attributes\RulesAttribute.cs" />
+    <Compile Include="Attributes\SandboxAttribute.cs" />
+    <Compile Include="Attributes\SchemeAttribute.cs" />
+    <Compile Include="Attributes\ScopeAttribute.cs" />
+    <Compile Include="Attributes\SeamlessAttribute.cs" />
+    <Compile Include="Attributes\ShapeAttribute.cs" />
+    <Compile Include="Attributes\SizeAttribute.cs" />
+    <Compile Include="Attributes\SizesAttribute.cs" />
+    <Compile Include="Attributes\SourceAttribute.cs" />
+    <Compile Include="Attributes\SourceDocAttribute.cs" />
+    <Compile Include="Attributes\SpanAttribute.cs" />
+    <Compile Include="Attributes\StandByAttribute.cs" />
+    <Compile Include="Attributes\StepAttribute.cs" />
+    <Compile Include="Attributes\StyleAttribute.cs" />
+    <Compile Include="Attributes\SummaryAttribute.cs" />
+    <Compile Include="Attributes\TabIndexAttribute.cs" />
+    <Compile Include="Attributes\TitleAttribute.cs" />
+    <Compile Include="Attributes\TNameAttribute.cs" />
+    <Compile Include="Attributes\UseMapAttribute.cs" />
+    <Compile Include="Attributes\VAlignAttribute.cs" />
+    <Compile Include="Attributes\ValueAttribute.cs" />
+    <Compile Include="Attributes\ValueTypeAttribute.cs" />
+    <Compile Include="Attributes\WidthAttribute.cs" />
+    <Compile Include="Attributes\XmlNSAttribue.cs" />
+    <Compile Include="Attributes\XMLSpaceAttribute.cs" />
+    <Compile Include="BaseElements\BaseContainingElement.cs" />
+    <Compile Include="BaseElements\BlockElements\Address.cs" />
+    <Compile Include="BaseElements\BlockElements\Article.cs" />
+    <Compile Include="BaseElements\BlockElements\Aside.cs" />
+    <Compile Include="BaseElements\BlockElements\Audio.cs" />
+    <Compile Include="BaseElements\BlockElements\BaseBlockElement.cs" />
+    <Compile Include="BaseElements\BlockElements\BaseHeader.cs" />
+    <Compile Include="BaseElements\BlockElements\BlockQuoteElement.cs" />
+    <Compile Include="BaseElements\BlockElements\DefinitionList.cs" />
+    <Compile Include="BaseElements\BlockElements\Details.cs" />
+    <Compile Include="BaseElements\BlockElements\Dialog.cs" />
+    <Compile Include="BaseElements\BlockElements\Div.cs" />
+    <Compile Include="BaseElements\BlockElements\FieldSet.cs" />
+    <Compile Include="BaseElements\BlockElements\Figure.cs" />
+    <Compile Include="BaseElements\BlockElements\Footer.cs" />
+    <Compile Include="BaseElements\BlockElements\Form.cs" />
+    <Compile Include="BaseElements\BlockElements\Header.cs" />
+    <Compile Include="BaseElements\BlockElements\Headers.cs" />
+    <Compile Include="BaseElements\BlockElements\IBlockElement.cs" />
+    <Compile Include="BaseElements\BlockElements\Canvas.cs" />
+    <Compile Include="BaseElements\BlockElements\InlineFrame.cs" />
+    <Compile Include="BaseElements\BlockElements\Main.cs" />
+    <Compile Include="BaseElements\ElementFactory.cs" />
+    <Compile Include="BaseElements\FormMenuOptions\BaseOptionItem.cs" />
+    <Compile Include="BaseElements\FormMenuOptions\Datalist.cs" />
+    <Compile Include="BaseElements\FormMenuOptions\Option.cs" />
+    <Compile Include="BaseElements\FormMenuOptions\OptionGroup.cs" />
+    <Compile Include="BaseElements\IHTML5Item.cs" />
+    <Compile Include="BaseElements\InlineElements\Abbreviation.cs" />
+    <Compile Include="BaseElements\InlineElements\Anchor.cs" />
+    <Compile Include="BaseElements\InlineElements\BaseInlineItem.cs" />
+    <Compile Include="BaseElements\InlineElements\BDI.cs" />
+    <Compile Include="BaseElements\InlineElements\BiDirectionalOverride.cs" />
+    <Compile Include="BaseElements\InlineElements\BoldText.cs" />
+    <Compile Include="BaseElements\BlockElements\Button.cs" />
+    <Compile Include="BaseElements\InlineElements\Cite.cs" />
+    <Compile Include="BaseElements\InlineElements\CodeText.cs" />
+    <Compile Include="BaseElements\InlineElements\Definition.cs" />
+    <Compile Include="BaseElements\InlineElements\DeletedText.cs" />
+    <Compile Include="BaseElements\InlineElements\Embed.cs" />
+    <Compile Include="BaseElements\InlineElements\FigCaption.cs" />
+    <Compile Include="BaseElements\BlockElements\HorizontalRule.cs" />
+    <Compile Include="BaseElements\InlineElements\Image.cs" />
+    <Compile Include="BaseElements\InlineElements\Input.cs" />
+    <Compile Include="BaseElements\InlineElements\InsertedText.cs" />
+    <Compile Include="BaseElements\InlineElements\ItalicText.cs" />
+    <Compile Include="BaseElements\InlineElements\Kbd.cs" />
+    <Compile Include="BaseElements\InlineElements\Keygen.cs" />
+    <Compile Include="BaseElements\InlineElements\Label.cs" />
+    <Compile Include="BaseElements\InlineElements\Map.cs" />
+    <Compile Include="BaseElements\InlineElements\Mark.cs" />
+    <Compile Include="BaseElements\InlineElements\ObjectElm.cs" />
+    <Compile Include="BaseElements\InlineElements\EmphasisedText.cs" />
+    <Compile Include="BaseElements\InlineElements\EmptyLine.cs" />
+    <Compile Include="BaseElements\InlineElements\IInlineItem.cs" />
+    <Compile Include="BaseElements\InlineElements\Source.cs" />
+    <Compile Include="BaseElements\InlineElements\TextBasedElement.cs" />
+    <Compile Include="BaseElements\Legends\Legend.cs" />
+    <Compile Include="BaseElements\ListElements\BaseListElement.cs" />
+    <Compile Include="BaseElements\ListElements\DefinitionDescription.cs" />
+    <Compile Include="BaseElements\ListElements\DefinitionTerms.cs" />
+    <Compile Include="BaseElements\ListElements\ListItem.cs" />
+    <Compile Include="BaseElements\MapAreas\Area.cs" />
+    <Compile Include="BaseElements\ObjectParameters\Param.cs" />
+    <Compile Include="BaseElements\SimpleHTML5Text.cs" />
+    <Compile Include="BaseElements\Structure_Header\Base.cs" />
+    <Compile Include="BaseElements\Structure_Header\Body.cs" />
+    <Compile Include="BaseElements\Structure_Header\Head.cs" />
+    <Compile Include="BaseElements\Structure_Header\HTML.cs" />
+    <Compile Include="BaseElements\Structure_Header\Link.cs" />
+    <Compile Include="BaseElements\Structure_Header\Meta.cs" />
+    <Compile Include="BaseElements\Structure_Header\Style.cs" />
+    <Compile Include="BaseElements\Structure_Header\Title.cs" />
+    <Compile Include="BaseElements\TableElements\BaseTableElement.cs" />
+    <Compile Include="BaseElements\TableElements\ColElement.cs" />
+    <Compile Include="BaseElements\TableElements\ColGroup.cs" />
+    <Compile Include="BaseElements\TableElements\HeaderCell.cs" />
+    <Compile Include="BaseElements\TableElements\TableBody.cs" />
+    <Compile Include="BaseElements\TableElements\TableCaption.cs" />
+    <Compile Include="BaseElements\TableElements\TableData.cs" />
+    <Compile Include="BaseElements\TableElements\TableFooter.cs" />
+    <Compile Include="BaseElements\TableElements\TableHead.cs" />
+    <Compile Include="BaseElements\TableElements\TableRow.cs" />
+    <Compile Include="Exceptions\HTML5ViolationException.cs" />
+    <Compile Include="HTML5Document.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="MenuItem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\isiolanguages\ISOLanguages.csproj">
+      <Project>{58e261a5-b2ea-43f3-820d-902b5c061321}</Project>
+      <Name>ISOLanguages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Exceptions\BlockElements\" />
+    <Folder Include="Exceptions\InlineElements\" />
+    <Folder Include="Exceptions\StructureAndHeader\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
