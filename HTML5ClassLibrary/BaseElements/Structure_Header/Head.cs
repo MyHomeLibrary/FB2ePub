@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.AttributeDataTypes;
 using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.BaseElements.InlineElements;
+using HTML5ClassLibrary.BaseElements.BlockElements;
+using Script = HTML5ClassLibrary.BaseElements.InlineElements.Script;
 
 namespace HTML5ClassLibrary.BaseElements.Structure_Header
 {
@@ -90,8 +90,8 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
                 item is Link    ||
                 item is Meta    ||
                 item is Script  ||
-                item is Style   //||
-                //item is NoScript
+                item is Style   ||
+                item is NoScript
                 )
             {
                 return item.IsValid();

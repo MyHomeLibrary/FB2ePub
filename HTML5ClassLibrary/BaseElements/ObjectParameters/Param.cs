@@ -18,33 +18,18 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
         private readonly ValueAttribute _valueAttribute = new ValueAttribute();
 
 
-        // Advanced attributes
-        private readonly IdAttribute _idattr = new IdAttribute();
-        private readonly ContentTypeAttribute _contentTypeAttribute = new ContentTypeAttribute();
-        private readonly ValueTypeAttribute _valueTypeAttribute = new ValueTypeAttribute();
-
 
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
 
 
-        private const string ElementName = "param";
+        public const string ElementName = "param";
 
 
 
         #region public_properties
 
 
-
-        /// <summary>
-        /// This attribute assigns an ID to an element. 
-        /// This ID must be unique in a document. 
-        /// This ID can be used by client-side scripts (such as JavaScript) to select elements, apply CSS formatting rules, or to build relationships between elements.
-        /// </summary>
-        public IdAttribute ID
-        {
-            get { return _idattr; }
-        }
 
         /// <summary>
         /// his attribute defines the name of a run-time parameter, assumed to be known by the inserted object. 
@@ -59,13 +44,6 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
         /// </summary>
         public ValueAttribute Value { get { return _valueAttribute; } }
 
-        /// <summary>
-        /// This attribute specifies the content type of the resource designated by the value attribute, 
-        /// only in the case where valuetype attribute is set to "ref".
-        /// </summary>
-        public ContentTypeAttribute ContentType { get { return _contentTypeAttribute; } }
-
-        public ValueTypeAttribute ValueType { get { return _valueTypeAttribute;}}
 
         #endregion
 
@@ -89,11 +67,6 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
 
             _nameAttribute.ReadAttribute(xElement);
             _valueAttribute.ReadAttribute(xElement);
-
-            _idattr.ReadAttribute(xElement);
-            _contentTypeAttribute.ReadAttribute(xElement);
-            _valueTypeAttribute.ReadAttribute(xElement);
-
         }
 
         /// <summary>
@@ -106,10 +79,6 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
 
             _nameAttribute.AddAttribute(xElement);
             _valueAttribute.AddAttribute(xElement);
-
-            _idattr.AddAttribute(xElement);
-            _contentTypeAttribute.AddAttribute(xElement);
-            _valueTypeAttribute.AddAttribute(xElement);
 
             return xElement;
         }
@@ -147,6 +116,7 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
         /// Get/Set item parent in the XHTML "tree"
         /// </summary>
         public IHTML5Item Parent { get; set; }
+
 
         #endregion
     }

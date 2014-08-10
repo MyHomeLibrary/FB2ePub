@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Exceptions;
+using HTML5ClassLibrary.BaseElements.InlineElements;
 
-namespace HTML5ClassLibrary.BaseElements.TableElements
+namespace HTML5ClassLibrary.BaseElements.BlockElements
 {
-    /// <summary>
-    /// The tr element defines a table row.
-    /// </summary>
-    public class TableRow : BaseTableElement
+    public class Section : BaseBlockElement 
     {
-        internal const string ElementName = "tr";
-
-        private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
+        public const string ElementName = "section";
 
         public override void Load(XNode xNode)
         {
@@ -29,7 +26,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
 
             ReadAttributes(xElement);
 
-            _content.Clear();
+            Content.Clear();
             IEnumerable<XNode> descendants = xElement.Nodes();
             foreach (var node in descendants)
             {
@@ -44,24 +41,22 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
                     {
                         continue;
                     }
-                    _content.Add(item);
+                    Content.Add(item);
                 }
             }
+
         }
 
-        private bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTML5Item item)
         {
-            if (item is TableData)
-            {
-                return item.IsValid();
-            }
-            if (item is HeaderCell)
+            if (item is IInlineItem ||
+                item is IBlockElement ||
+                item is SimpleHTML5Text)
             {
                 return item.IsValid();
             }
             return false;
         }
-
 
         public override XNode Generate()
         {
@@ -69,7 +64,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
 
             AddAttributes(xElement);
 
-            foreach (var item in _content)
+            foreach (var item in Content)
             {
                 xElement.Add(item.Generate());
             }
@@ -81,35 +76,6 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
             return true;
         }
 
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            if ((item != null) && IsValidSubType(item))
-            {
-                _content.Add(item);
-                item.Parent = this;
-            }
-            else
-            {
-                throw new HTML5ViolationException();
-            }
-        }
 
-        public override void Remove(IHTML5Item item)
-        {
-            if(_content.Remove(item))
-            {
-                item.Parent = null;
-            }
-        }
-
-        public override List<IHTML5Item> SubElements()
-        {
-            return _content;
-        }
     }
 }

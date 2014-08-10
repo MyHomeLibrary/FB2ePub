@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Exceptions;
+using HTML5ClassLibrary.BaseElements.ListElements;
 
-namespace HTML5ClassLibrary.BaseElements.TableElements
+namespace HTML5ClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
-    /// The tr element defines a table row.
+    /// The ul element is used to create unordered lists. 
+    /// An unordered list is a grouping of items whose sequence in the list is not important. 
+    /// For example, the order in which ingredients for a recipe are presented will not affect the outcome of the recipe.
     /// </summary>
-    public class TableRow : BaseTableElement
+    public class UnorderedList : BaseBlockElement
     {
-        internal const string ElementName = "tr";
-
-        private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
+        internal const string ElementName = "ul";
 
         public override void Load(XNode xNode)
         {
@@ -29,7 +29,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
 
             ReadAttributes(xElement);
 
-            _content.Clear();
+            Content.Clear();
             IEnumerable<XNode> descendants = xElement.Nodes();
             foreach (var node in descendants)
             {
@@ -44,24 +44,20 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
                     {
                         continue;
                     }
-                    _content.Add(item);
+                    Content.Add(item);
                 }
             }
+
         }
 
-        private bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTML5Item item)
         {
-            if (item is TableData)
-            {
-                return item.IsValid();
-            }
-            if (item is HeaderCell)
+            if (item is ListItem)
             {
                 return item.IsValid();
             }
             return false;
         }
-
 
         public override XNode Generate()
         {
@@ -69,7 +65,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
 
             AddAttributes(xElement);
 
-            foreach (var item in _content)
+            foreach (var item in Content)
             {
                 xElement.Add(item.Generate());
             }
@@ -78,38 +74,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
 
         public override bool IsValid()
         {
-            return true;
-        }
-
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            if ((item != null) && IsValidSubType(item))
-            {
-                _content.Add(item);
-                item.Parent = this;
-            }
-            else
-            {
-                throw new HTML5ViolationException();
-            }
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            if(_content.Remove(item))
-            {
-                item.Parent = null;
-            }
-        }
-
-        public override List<IHTML5Item> SubElements()
-        {
-            return _content;
+            return (Content.Count > 0);
         }
     }
 }

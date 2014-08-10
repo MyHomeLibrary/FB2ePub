@@ -2,49 +2,33 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.BaseElements.BlockElements;
+using HTML5ClassLibrary.Attributes.RubyAttributes;
 using HTML5ClassLibrary.BaseElements.InlineElements;
 using HTML5ClassLibrary.Exceptions;
 
-namespace HTML5ClassLibrary.BaseElements.TableElements
+namespace HTML5ClassLibrary.BaseElements.Ruby
 {
     /// <summary>
-    /// The td element defines a data cell in a table (i.e. cells that are not header cells).
+    /// The rt element contains ruby text annotations.
     /// </summary>
-    public class TableData : BaseTableElement
+    public class RtElement : BaseRubyItem
     {
-        public const string ElementName = "td";
-
+        /// <summary>
+        /// Internal content of the element
+        /// </summary>
         private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
 
-        // Basic attributes
-        private readonly ColSpanAttribute _colSpanAttribute = new ColSpanAttribute();
-        private readonly RowSpanAttribute _rowSpanAttribue = new RowSpanAttribute();
-        private readonly HeadersAttribute _headersAttribute = new HeadersAttribute();
+        internal const string ElementName = "rt";
 
+        // Basic attribute 
 
-
-
-        /// <summary>
-        /// This attribute specifies the number of columns spanned by the current cell.
-        /// </summary>
-        public ColSpanAttribute ColSpan { get { return _colSpanAttribute; } }
+        #region Overrides of BaseRubyItem
 
 
         /// <summary>
-        /// This attribute specifies the number of rows spanned by the current cell.
+        /// Loads the element from XNode
         /// </summary>
-        public RowSpanAttribute RowSpan { get { return _rowSpanAttribue; } }
-
-
-        /// <summary>
-        /// Specifies one or more header cells a cell is related to
-        /// </summary>
-        public HeadersAttribute Headers { get { return _headersAttribute; }}
-
-
-
+        /// <param name="xNode">node to load element from</param>
         public override void Load(XNode xNode)
         {
             if (xNode.NodeType != XmlNodeType.Element)
@@ -58,11 +42,6 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
             }
 
             ReadAttributes(xElement);
-
-            // Base attributes
-            _colSpanAttribute.ReadAttribute(xElement);
-            _rowSpanAttribue.ReadAttribute(xElement);
-            _headersAttribute.ReadAttribute(xElement);
 
             _content.Clear();
             IEnumerable<XNode> descendants = xElement.Nodes();
@@ -82,53 +61,64 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
                     _content.Add(item);
                 }
             }
+
         }
 
         private bool IsValidSubType(IHTML5Item item)
         {
-            if (item is IInlineItem)
-            {
-                return item.IsValid();
-            }
-            if (item is IBlockElement)
-            {
-                return item.IsValid();
-            }
             if (item is SimpleHTML5Text)
             {
+                return item.IsValid();
+            }
+            if (item is IInlineItem)
+            {
+                if (item is RubyElement)
+                {
+                    return false;
+                }
                 return item.IsValid();
             }
             return false;
         }
 
-
+        /// <summary>
+        /// Generates element to XNode from data
+        /// </summary>
+        /// <returns>
+        /// generated XNode
+        /// </returns>
         public override XNode Generate()
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
-            AddAttributes(xElement);
+            AddAtributes(xElement);
 
-            _colSpanAttribute.AddAttribute(xElement);
-            _rowSpanAttribue.AddAttribute(xElement);
-            _headersAttribute.AddAttribute(xElement);
-
-            foreach (var item in _content)
+            if (_content.Count > 0)
             {
-                xElement.Add(item.Generate());
+                foreach (var item in _content)
+                {
+                    xElement.Add(item.Generate());
+                }
             }
             return xElement;
         }
 
+        /// <summary>
+        /// Checks it element data is valid
+        /// </summary>
+        /// <returns>
+        /// true if valid
+        /// </returns>
         public override bool IsValid()
         {
             return true;
         }
 
         /// <summary>
-        /// Adds sub-item to the item , only if 
+        /// Adds subitem to the item , only if 
         /// allowed by the rules and element can accept content
         /// </summary>
-        /// <param name="item">sub-item to add</param>
+        /// <param name="item">subitem to add</param>
         public override void Add(IHTML5Item item)
         {
             if ((item != null) && IsValidSubType(item))
@@ -138,7 +128,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
             }
             else
             {
-                throw new HTML5ViolationException();
+                throw new HTML5ViolationException(item,"");
             }
         }
 
@@ -154,5 +144,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
         {
             return _content;
         }
+
+        #endregion
     }
 }

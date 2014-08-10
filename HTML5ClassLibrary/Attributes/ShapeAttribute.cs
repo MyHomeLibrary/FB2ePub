@@ -13,6 +13,12 @@ namespace HTML5ClassLibrary.Attributes
             Default,
         }
 
+        private ShapeEnum _shape = ShapeEnum.Invalid;
+
+        private const string AttributeName = "shape";
+
+        #region Overrides of BaseAttribute
+
         public override string Value
         {
             get
@@ -55,11 +61,6 @@ namespace HTML5ClassLibrary.Attributes
         }
 
 
-        private ShapeEnum _shape = ShapeEnum.Invalid;
-
-        private const string AttributeName = "shape";
-
-        #region Overrides of BaseAttribute
 
         public override void AddAttribute(XElement xElement)
         {

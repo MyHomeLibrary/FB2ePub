@@ -5,42 +5,39 @@ using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
 using HTML5ClassLibrary.Attributes.Events;
 using HTML5ClassLibrary.Attributes.FlaggedAttributes;
-using HTML5ClassLibrary.BaseElements.BlockElements;
-using HTML5ClassLibrary.BaseElements.ObjectParameters;
+using HTML5ClassLibrary.BaseElements.FormMenuOptions;
 using HTML5ClassLibrary.Exceptions;
 
 namespace HTML5ClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
-    /// The object element provides a generic way of embedding objects such as images, 
-    /// movies and applications (Java applets, browser plug-ins, etc.) into Web pages. 
-    /// param elements contained inside the object element are used to configure the embedded object. 
-    /// Besides param elements, the object element can contain alternate content which can be text or another object element. 
-    /// Alternate content serves as a fall-back mechanism for browsers that are unable to process the embedded object.
+    /// The select element is used to create an option selector form control which most Web browsers render as a listbox control. 
+    /// The list of values for this control is created using option elements. 
+    /// These values can be grouped together using the optgroup element.
     /// </summary>
-    public class ObjectElm : BaseInlineItem
+    public class Select : BaseInlineItem
     {
         /// <summary>
         /// Internal content of the element
         /// </summary>
         private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
 
-
-        // Base attributes
-        private readonly HeightAttribute _heightAttribute = new HeightAttribute();
-        private readonly NameAttribute _nameAttribute = new NameAttribute();
-        private readonly ContentTypeAttribute _contentTypeAttribute = new ContentTypeAttribute();
-        private readonly WidthAttribute _widthAttribute = new WidthAttribute();
-        private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
-
-        // Advanced attributes
-        private readonly DataAttribute _dataAttribute = new DataAttribute();
-        private readonly MIMETypeAttribute _mimeTypeAttribute= new MIMETypeAttribute();
-        private readonly UseMapAttribute _useMapAttribute = new UseMapAttribute();
-
-
         private readonly LanguageAttr _language = new LanguageAttr();
         private readonly DirectionAttr _direction = new DirectionAttr();
+
+        //Base attributes
+        private readonly MultipleAttribute _multipleAttribute = new MultipleAttribute();
+        private readonly NameAttribute _nameAttribute = new NameAttribute();
+        private readonly SizeAttribute _sizeAttribute = new SizeAttribute();
+        private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+        private readonly AutoFocusAttribute _autoFocusAttribute = new AutoFocusAttribute();
+        private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+        private readonly RequiredAttribute _requiredAttribute = new RequiredAttribute();
+
+        private readonly OnBlurEventAttribute _onBlurEvent = new OnBlurEventAttribute();
+        private readonly OnChangeEventAttribute _onChange = new OnChangeEventAttribute();
+        private readonly OnFocusEventAttribute _onFocus = new OnFocusEventAttribute();
+        private readonly TabIndexAttribute _tabIndexAttrib = new TabIndexAttribute();
 
 
         // Common event attributes
@@ -56,7 +53,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         private readonly OnKeyUpEventAttribute _onKeyUp = new OnKeyUpEventAttribute();
 
 
-        public const string ElementName = "object";
+        internal const string ElementName = "select";
 
 
         /// <summary>
@@ -69,6 +66,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         {
             get { return _direction; }
         }
+
 
         /// <summary>
         /// A client-side script event that occurs when a pointing device button is clicked over an element.
@@ -135,54 +133,64 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
             get { return _language; }
         }
 
-
         /// <summary>
-        /// Object height.
+        /// If set, this attribute allows multiple selections. 
+        /// Possible value is multiple.
         /// </summary>
-        public HeightAttribute Height { get { return _heightAttribute; } }
+        public MultipleAttribute Multiple { get { return _multipleAttribute; } }
 
         /// <summary>
-        /// When the object is used as a form control, this attribute is the name of the form control.
+        /// Form control name.
         /// </summary>
         public NameAttribute Name { get { return _nameAttribute; } }
 
-        /// <summary>
-        /// This attribute specifies the content type for the object. 
-        /// This attribute may be used with or without the data attribute. 
-        /// Most Web browsers use this attribute (instead of classid) to determine how to process the object. 
-        /// For example: application/x-shockwave-flash.
-        /// </summary>
-        public ContentTypeAttribute ContentType { get { return _contentTypeAttribute; } }
 
         /// <summary>
-        /// Object width.
+        /// Number of rows in the list that should be visible at the same time.
         /// </summary>
-        public WidthAttribute Width { get { return _widthAttribute; } }
+        public SizeAttribute Size { get { return _sizeAttribute; } }
 
         /// <summary>
-        /// Specifies one or more forms the object belongs to
+        /// Disables the control for user input. 
+        /// Possible value is disabled.
+        /// </summary>
+        public DisabledAttribute Disabled { get { return _disabledAttribute; } }
+
+        /// <summary>
+        /// Specifies that the drop-down list should automatically get focus when the page loads
+        /// </summary>
+        public AutoFocusAttribute Autofocus { get { return _autoFocusAttribute; }}
+
+        /// <summary>
+        /// Defines one or more forms the select field belongs to
         /// </summary>
         public FormIdAttribute Form { get { return _formIdAttribute; }}
 
         /// <summary>
-        /// This attribute may be used to specify the location of the object's data, 
-        /// for instance image data for objects defining images, 
-        /// or more generally, a serialized form of an object which can be used to recreate it.
+        /// Specifies that the user is required to select a value before submitting the form
         /// </summary>
-        public DataAttribute Data { get { return _dataAttribute; } }
+        public RequiredAttribute Required { get { return _requiredAttribute; }}
 
 
         /// <summary>
-        /// Specifies the MIME type of data specified in the data attribute
+        /// A client-side script event that occurs when an element loses focus either by the pointing device or by tabbing navigation.
         /// </summary>
-        public MIMETypeAttribute TabIndex { get { return _mimeTypeAttribute; } }
+        public OnBlurEventAttribute OnBlur { get { return _onBlurEvent; } }
 
         /// <summary>
-        /// This attribute associates the object to a client-side image map defined by a map element. 
-        /// The value of this attribute must match the id attribute of the map element.
+        /// A client-side script event that occurs when a control loses the input focus and its value is modified before regaining focus.
         /// </summary>
-        public UseMapAttribute UseMap { get { return _useMapAttribute; } }
+        public OnChangeEventAttribute OnChange { get { return _onChange; } }
 
+        /// <summary>
+        /// A client-side script event that occurs when an element receives focus either by the pointing device or by tabbing navigation.
+        /// </summary>
+        public OnFocusEventAttribute OnFocus { get { return _onFocus; } }
+
+        /// <summary>
+        /// Position in tabbing order.
+        /// </summary>
+        public TabIndexAttribute TabIndex { get { return _tabIndexAttrib; } }
 
 
         public override void Load(XNode xNode)
@@ -217,28 +225,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
                     _content.Add(item);
                 }
             }
-
-        }
-
-        private bool IsValidSubType(IHTML5Item item)
-        {
-            if (item is IInlineItem)
-            {
-                return item.IsValid();
-            }
-            if (item is IBlockElement)
-            {
-                return item.IsValid();
-            }
-            if (item is Param)
-            {
-                return item.IsValid();
-            }
-            if (item is SimpleHTML5Text)
-            {
-                return item.IsValid();
-            }
-            return false;
         }
 
         public override XNode Generate()
@@ -255,53 +241,22 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         }
 
-        public override bool IsValid()
-        {
-            return true;
-        }
-
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            if ((item != null) && IsValidSubType(item))
-            {
-                _content.Add(item);
-                item.Parent = this;
-            }
-            else
-            {
-                throw new HTML5ViolationException();
-            }
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            if(_content.Remove(item))
-            {
-                item.Parent = null;
-            }
-        }
-
-        public override List<IHTML5Item> SubElements()
-        {
-            return _content;
-        }
-
         protected override void AddAttributes(XElement xElement)
         {
             base.AddAttributes(xElement);
-            _heightAttribute.AddAttribute(xElement);
+            // Base attributes
+            _multipleAttribute.AddAttribute(xElement);
             _nameAttribute.AddAttribute(xElement);
-            _contentTypeAttribute.AddAttribute(xElement);
-            _widthAttribute.AddAttribute(xElement);
+            _sizeAttribute.AddAttribute(xElement);
+            _autoFocusAttribute.AddAttribute(xElement);
             _formIdAttribute.AddAttribute(xElement);
-            _dataAttribute.AddAttribute(xElement);
-            _mimeTypeAttribute.ReadAttribute(xElement);
-            _useMapAttribute.ReadAttribute(xElement);
+            _requiredAttribute.AddAttribute(xElement);
+            _disabledAttribute.AddAttribute(xElement);
+
+            _onBlurEvent.AddAttribute(xElement);
+            _onChange.AddAttribute(xElement);
+            _onFocus.AddAttribute(xElement);
+            _tabIndexAttrib.AddAttribute(xElement);
 
             _language.AddAttribute(xElement);
             _direction.AddAttribute(xElement);
@@ -318,20 +273,26 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
             _onKeyUp.AddAttribute(xElement);
         }
 
+
         protected override void ReadAttributes(XElement xElement)
         {
             base.ReadAttributes(xElement);
-            _heightAttribute.ReadAttribute(xElement);
-            _nameAttribute.ReadAttribute(xElement);
-            _contentTypeAttribute.ReadAttribute(xElement);
-            _widthAttribute.ReadAttribute(xElement);
-            _formIdAttribute.ReadAttribute(xElement);
-            _dataAttribute.ReadAttribute(xElement);
-            _mimeTypeAttribute.ReadAttribute(xElement);
-            _useMapAttribute.ReadAttribute(xElement);
-
             _language.ReadAttribute(xElement);
             _direction.ReadAttribute(xElement);
+
+            // Base attributes
+            _multipleAttribute.ReadAttribute(xElement);
+            _nameAttribute.ReadAttribute(xElement);
+            _sizeAttribute.ReadAttribute(xElement);
+            _autoFocusAttribute.ReadAttribute(xElement);
+            _formIdAttribute.ReadAttribute(xElement);
+            _requiredAttribute.ReadAttribute(xElement);
+            _disabledAttribute.ReadAttribute(xElement);
+
+            _onBlurEvent.ReadAttribute(xElement);
+            _onChange.ReadAttribute(xElement);
+            _onFocus.ReadAttribute(xElement);
+            _tabIndexAttrib.ReadAttribute(xElement);
 
             _onClick.ReadAttribute(xElement);
             _onDblClick.ReadAttribute(xElement);
@@ -343,6 +304,52 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
             _onKeyPress.ReadAttribute(xElement);
             _onKeyDown.ReadAttribute(xElement);
             _onKeyUp.ReadAttribute(xElement);
+        }
+
+        public override bool IsValid()
+        {
+            // at least one of sub elements have to appear
+            return (_content.Count > 0);
+        }
+
+        /// <summary>
+        /// Adds sub-item to the item , only if 
+        /// allowed by the rules and element can accept content
+        /// </summary>
+        /// <param name="item">sub-item to add</param>
+        public override void Add(IHTML5Item item)
+        {
+            if ((item != null) && IsValidSubType(item))
+            {
+                _content.Add(item);
+                item.Parent = this;
+            }
+            else
+            {
+                throw new HTML5ViolationException(this,"");
+            }
+        }
+
+        public override void Remove(IHTML5Item item)
+        {
+            if(_content.Remove(item))
+            {
+                item.Parent = null;
+            }
+        }
+
+        public override List<IHTML5Item> SubElements()
+        {
+            return _content;
+        }
+
+        private bool IsValidSubType(IHTML5Item item)
+        {
+            if (item is IOptionItem)
+            {
+                return item.IsValid();
+            }
+            return false;
         }
     }
 }

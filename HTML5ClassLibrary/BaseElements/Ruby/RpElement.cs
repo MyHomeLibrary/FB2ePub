@@ -2,49 +2,30 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.BaseElements.BlockElements;
-using HTML5ClassLibrary.BaseElements.InlineElements;
 using HTML5ClassLibrary.Exceptions;
 
-namespace HTML5ClassLibrary.BaseElements.TableElements
+namespace HTML5ClassLibrary.BaseElements.Ruby
 {
     /// <summary>
-    /// The td element defines a data cell in a table (i.e. cells that are not header cells).
+    /// The "rp" tag defines what to show if a browser does NOT support ruby annotations.
+    /// Ruby annotations are used for East Asian typography, to show the pronunciation of East Asian characters.
+    /// Use the "rp" tag together with the "ruby" and the "rt" tags: The "ruby" element consists of one or more characters that needs an explanation/pronunciation, and an "rt" element that gives that information, and an optional "rp" element that defines what to show for browsers that not support ruby annotations.
     /// </summary>
-    public class TableData : BaseTableElement
+    public class RpElement : BaseRubyItem
     {
-        public const string ElementName = "td";
-
+        /// <summary>
+        /// Internal content of the element
+        /// </summary>
         private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
 
-        // Basic attributes
-        private readonly ColSpanAttribute _colSpanAttribute = new ColSpanAttribute();
-        private readonly RowSpanAttribute _rowSpanAttribue = new RowSpanAttribute();
-        private readonly HeadersAttribute _headersAttribute = new HeadersAttribute();
+        internal const string ElementName = "rp";
 
-
-
+        #region Overrides of BaseRubyItem
 
         /// <summary>
-        /// This attribute specifies the number of columns spanned by the current cell.
+        /// Loads the element from XNode
         /// </summary>
-        public ColSpanAttribute ColSpan { get { return _colSpanAttribute; } }
-
-
-        /// <summary>
-        /// This attribute specifies the number of rows spanned by the current cell.
-        /// </summary>
-        public RowSpanAttribute RowSpan { get { return _rowSpanAttribue; } }
-
-
-        /// <summary>
-        /// Specifies one or more header cells a cell is related to
-        /// </summary>
-        public HeadersAttribute Headers { get { return _headersAttribute; }}
-
-
-
+        /// <param name="xNode">node to load element from</param>
         public override void Load(XNode xNode)
         {
             if (xNode.NodeType != XmlNodeType.Element)
@@ -58,11 +39,6 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
             }
 
             ReadAttributes(xElement);
-
-            // Base attributes
-            _colSpanAttribute.ReadAttribute(xElement);
-            _rowSpanAttribue.ReadAttribute(xElement);
-            _headersAttribute.ReadAttribute(xElement);
 
             _content.Clear();
             IEnumerable<XNode> descendants = xElement.Nodes();
@@ -82,18 +58,11 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
                     _content.Add(item);
                 }
             }
+
         }
 
         private bool IsValidSubType(IHTML5Item item)
         {
-            if (item is IInlineItem)
-            {
-                return item.IsValid();
-            }
-            if (item is IBlockElement)
-            {
-                return item.IsValid();
-            }
             if (item is SimpleHTML5Text)
             {
                 return item.IsValid();
@@ -101,24 +70,34 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
             return false;
         }
 
-
+        /// <summary>
+        /// Generates element to XNode from data
+        /// </summary>
+        /// <returns>
+        /// generated XNode
+        /// </returns>
         public override XNode Generate()
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
-            AddAttributes(xElement);
+            AddAtributes(xElement);
 
-            _colSpanAttribute.AddAttribute(xElement);
-            _rowSpanAttribue.AddAttribute(xElement);
-            _headersAttribute.AddAttribute(xElement);
-
-            foreach (var item in _content)
+            if (_content.Count > 0)
             {
-                xElement.Add(item.Generate());
+                foreach (var item in _content)
+                {
+                    xElement.Add(item.Generate());
+                }
             }
             return xElement;
         }
 
+        /// <summary>
+        /// Checks it element data is valid
+        /// </summary>
+        /// <returns>
+        /// true if valid
+        /// </returns>
         public override bool IsValid()
         {
             return true;
@@ -138,7 +117,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
             }
             else
             {
-                throw new HTML5ViolationException();
+                throw new HTML5ViolationException(this,"");
             }
         }
 
@@ -154,5 +133,8 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
         {
             return _content;
         }
+
+        #endregion
+
     }
 }
