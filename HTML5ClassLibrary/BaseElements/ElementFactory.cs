@@ -6,6 +6,8 @@ using HTML5ClassLibrary.BaseElements.InlineElements;
 using HTML5ClassLibrary.BaseElements.Legends;
 using HTML5ClassLibrary.BaseElements.ListElements;
 using HTML5ClassLibrary.BaseElements.MapAreas;
+using HTML5ClassLibrary.BaseElements.ObjectParameters;
+using HTML5ClassLibrary.BaseElements.Ruby;
 using HTML5ClassLibrary.BaseElements.Structure_Header;
 using HTML5ClassLibrary.BaseElements.TableElements;
 
@@ -117,7 +119,7 @@ namespace HTML5ClassLibrary.BaseElements
                     case ItalicText.ElementName:
                         return new ItalicText();
                     case InlineFrame.ElementName:
-                        return new InlineFrame();;
+                        return new InlineFrame();
                     case Image.ElementName:
                         return new Image();
                     case Input.ElementName:
@@ -150,9 +152,92 @@ namespace HTML5ClassLibrary.BaseElements
                         return new Meta();
                     case Meter.ElementName:
                         return new Meter();
-
+                    case Nav.ElementName:
+                        return new Nav();
+                    case NoScript.ElementName:
+                        return new NoScript();
+                    case ObjectElm.ElementName:
+                        return new ObjectElm();
+                    case OrderedList.ElementName:
+                        return new OrderedList();
+                    case OptionGroup.ElementName:
+                        return new OptionGroup();
+                    case Option.ElementName:
+                        return new Option();
+                    case Output.ElementName:
+                        return new Output();
+                    case Paragraph.ElementName:
+                        return new Paragraph();
+                    case Param.ElementName:
+                        return new Param();
+                    case PreFormated.ElementName:
+                        return new PreFormated();
+                    case Progress.ElementName:
+                        return new Progress();
+                    case ShortQuote.ElementName:
+                        return new ShortQuote();
+                    case RpElement.ElementName:
+                        return new RpElement();
+                    case RtElement.ElementName:
+                        return new RtElement();
+                    case RubyElement.ElementName:
+                        return new RubyElement();
+                    case SElement.ElementName:
+                        return new SElement();
+                    case Sample.ElementName:
+                        return new Sample();
+                    case Script.ElementName:
+                        return new Script();
+                    case Section.ElementName:
+                        return new Section();
+                    case Select.ElementName:
+                        return new Select();
+                    case SmallText.ElementName:
+                        return new SmallText();
                     case Source.ElementName:
                         return new Source();
+                    case Span.ElementName:
+                        return new Span();
+                    case Strong.ElementName:
+                        return new Strong();
+                    case Style.ElementName:
+                        return new Style();
+                    case Sub.ElementName:
+                        return new Sub();
+                    case Summary.ElementName:
+                        return new Summary();
+                    case Sup.ElementName:
+                        return new Sup();
+                    case Table.ElementName:
+                        return new Table();
+                    case TableBody.ElementName:
+                        return new TableBody();
+                    case TableData.ElementName:
+                        return new TableData();
+                    case TextArea.ElementName:
+                        return new TextArea();
+                    case TableFooter.ElementName:
+                        return new TableFooter();
+                    case HeaderCell.ElementName:
+                        return new HeaderCell();
+                    case TableHead.ElementName:
+                        return new TableHead();
+                    case Time.ElementName:
+                        return new Time();
+                    case Title.ElementName:
+                        return new Title();
+                    case TableRow.ElementName:
+                        return new TableRow();
+                    case Track.ElementName:
+                        return new Track();
+                    case UnorderedList.ElementName:
+                        return new UnorderedList();
+                    case Var.ElementName:
+                        return new Var();
+                    case Video.ElementName:
+                        return new Video();
+                    case WordBreakOportunity.ElementName:
+                        return  new WordBreakOportunity();
                 }
                 
             }

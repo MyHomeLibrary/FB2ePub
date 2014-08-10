@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.FlaggedAttributes;
 
 namespace HTML5ClassLibrary.BaseElements.Structure_Header
 {
@@ -18,14 +19,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
-        // Basic attributes 
-        private readonly TitleAttribute _titleattr = new TitleAttribute();
         private readonly MediaAttribute _mediaAttribute = new MediaAttribute();
         private readonly ContentTypeAttribute _typeAttribute = new ContentTypeAttribute();
+        private readonly ScopedAttribute _scopedAttribute = new ScopedAttribute();
 
 
-        // Advanced attributes
-        private readonly XMLSpaceAttribute _spaceAttribute = new XMLSpaceAttribute();
 
         private readonly LanguageAttr _language = new LanguageAttr();
         private readonly DirectionAttr _direction = new DirectionAttr();
@@ -36,11 +34,6 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             get { return _content; }
         }
 
-        /// <summary>
-        /// This attribute indicates if white space (extra spaces, tabs) should be preserved. 
-        /// Possible value is "preserve".
-        /// </summary>
-        public XMLSpaceAttribute PreserveSpace { get { return _spaceAttribute; } }
 
         /// <summary>
         /// This attribute specifies the intended destination medium for style information. 
@@ -50,20 +43,17 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         public MediaAttribute Media { get { return _mediaAttribute; } }
 
         /// <summary>
-        /// This attribute offers advisory information
-        /// </summary>
-        public TitleAttribute Title
-        {
-            get { return _titleattr; }
-        }
-
-        /// <summary>
         /// This attribute specifies the style sheet language of the element's contents. 
         /// The style sheet language is specified as a content type. 
         /// For example: text/css. 
         /// This attribute is required.
         /// </summary>
         public ContentTypeAttribute Type { get { return _typeAttribute; } }
+
+        /// <summary>
+        /// Specifies that the styles only apply to this element's parent element and that element's child elements
+        /// </summary>
+        public ScopedAttribute Scoped { get { return _scopedAttribute; }}
 
         /// <summary>
         /// This attribute specifies the base direction of text. 
@@ -98,10 +88,9 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             }
 
             _mediaAttribute.ReadAttribute(xElement);
-            _titleattr.ReadAttribute(xElement);
+            _scopedAttribute.ReadAttribute(xElement);
             _typeAttribute.ReadAttribute(xElement);
 
-            _spaceAttribute.ReadAttribute(xElement);
 
             _language.ReadAttribute(xElement);
             _direction.ReadAttribute(xElement);
@@ -114,10 +103,8 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
             _mediaAttribute.AddAttribute(xElement);
-            _titleattr.AddAttribute(xElement);
+            _scopedAttribute.AddAttribute(xElement);
             _typeAttribute.AddAttribute(xElement);
-
-            _spaceAttribute.AddAttribute(xElement);
 
             _language.AddAttribute(xElement);
             _direction.AddAttribute(xElement);
@@ -127,16 +114,17 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
         }
 
+
         public bool IsValid()
         {
             return _typeAttribute.HasValue();
         }
 
         /// <summary>
-        /// Adds subitem to the item , only if 
+        /// Adds sub-item to the item , only if 
         /// allowed by the rules and element can accept content
         /// </summary>
-        /// <param name="item">subitem to add</param>
+        /// <param name="item">sub-item to add</param>
         public void Add(IHTML5Item item)
         {
             throw new Exception("This element does not contain subitems");

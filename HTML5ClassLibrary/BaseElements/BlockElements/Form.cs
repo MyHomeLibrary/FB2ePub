@@ -14,7 +14,7 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
     /// </summary>
     public class Form : BaseBlockElement
     {
-        internal const string ElementName = "form";
+        public const string ElementName = "form";
 
         // Basic attributes
         private readonly AcceptCharsetsAttribute _acceptCharsetsAttribute = new AcceptCharsetsAttribute();
@@ -118,9 +118,9 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         {
             if (
                 !(item is Input) &&
-                //!(item is TextArea) &&
+                !(item is TextArea) &&
                 !(item is Button) &&
-                //!(item is Select) &&
+                !(item is Select) &&
                 !(item is Option) &&
                 !(item is OptionGroup) &&
                 !(item is Label) &&

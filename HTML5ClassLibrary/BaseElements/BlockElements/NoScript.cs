@@ -2,19 +2,25 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Exceptions;
 
-namespace HTML5ClassLibrary.BaseElements.TableElements
+namespace HTML5ClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
-    /// The tr element defines a table row.
+    /// The noscript element allows authors to provide alternate content when a script is not executed. 
+    /// This can be because the Web browser is configured not to process scripts, or because the given script language is not supported.
     /// </summary>
-    public class TableRow : BaseTableElement
+    public class NoScript : BaseBlockElement 
     {
-        internal const string ElementName = "tr";
 
-        private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
+        internal const string ElementName = "noscript";
 
+
+        #region Overrides of BaseBlockElement 
+
+        /// <summary>
+        /// Loads the element from XNode
+        /// </summary>
+        /// <param name="xNode">node to load element from</param>
         public override void Load(XNode xNode)
         {
             if (xNode.NodeType != XmlNodeType.Element)
@@ -29,7 +35,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
 
             ReadAttributes(xElement);
 
-            _content.Clear();
+            Content.Clear();
             IEnumerable<XNode> descendants = xElement.Nodes();
             foreach (var node in descendants)
             {
@@ -44,18 +50,15 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
                     {
                         continue;
                     }
-                    _content.Add(item);
+                    Content.Add(item);
                 }
             }
+
         }
 
-        private bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTML5Item item)
         {
-            if (item is TableData)
-            {
-                return item.IsValid();
-            }
-            if (item is HeaderCell)
+            if (item is IBlockElement)
             {
                 return item.IsValid();
             }
@@ -63,53 +66,33 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
         }
 
 
+        /// <summary>
+        /// Generates element to XNode from data
+        /// </summary>
+        /// <returns>generated XNode</returns>
         public override XNode Generate()
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
             AddAttributes(xElement);
 
-            foreach (var item in _content)
+            foreach (var item in Content)
             {
                 xElement.Add(item.Generate());
             }
             return xElement;
         }
 
+        /// <summary>
+        /// Checks it element data is valid
+        /// </summary>
+        /// <returns>true if valid</returns>
         public override bool IsValid()
         {
             return true;
         }
 
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            if ((item != null) && IsValidSubType(item))
-            {
-                _content.Add(item);
-                item.Parent = this;
-            }
-            else
-            {
-                throw new HTML5ViolationException();
-            }
-        }
+        #endregion
 
-        public override void Remove(IHTML5Item item)
-        {
-            if(_content.Remove(item))
-            {
-                item.Parent = null;
-            }
-        }
-
-        public override List<IHTML5Item> SubElements()
-        {
-            return _content;
-        }
     }
 }
