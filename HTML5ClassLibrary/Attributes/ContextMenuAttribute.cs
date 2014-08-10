@@ -1,17 +1,21 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml.Linq;
 using HTML5ClassLibrary.AttributeDataTypes;
 
 namespace HTML5ClassLibrary.Attributes
 {
     /// <summary>
-    /// The class attribute specifies one or more classnames for an element.
-    /// The class attribute is mostly used to point to a class in a style sheet. However, it can also be used by a JavaScript (via the HTML DOM) to make changes to HTML elements with a specified class.
+    /// The contextmenu attribute specifies a context menu for an element. The context menu appears when a user right-clicks on the element.
+    /// The value of the contextmenu attribute is the id of the "menu" element to open.
     /// </summary>
-    public class ClassAttr : BaseAttribute
+    public class ContextMenuAttribute : BaseAttribute
     {
-        private NameTokens _attrObject  = new NameTokens();
+        private Id _attrObject = new Id();
 
-        private const string AttributeName = "class";
+        private const string AttributeName = "contextmenu";
 
         #region Overrides of BaseAttribute
 
@@ -28,13 +32,12 @@ namespace HTML5ClassLibrary.Attributes
         {
             _hasValue = false;
             _attrObject = null;
-            XAttribute xClass = element.Attribute(AttributeName);
-            if (xClass != null)
+            XAttribute xObject = element.Attribute(AttributeName);
+            if (xObject != null)
             {
-                _attrObject = new NameTokens {Value = xClass.Value};
+                _attrObject = new Id { Value = xObject.Value };
                 _hasValue = true;
             }
-
         }
 
         public override string Value
@@ -47,5 +50,6 @@ namespace HTML5ClassLibrary.Attributes
             }
         }
         #endregion
+
     }
 }

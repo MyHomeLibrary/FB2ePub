@@ -76,6 +76,7 @@
     <Compile Include="Attributes\ActionAttribute.cs" />
     <Compile Include="Attributes\AlignAttribute.cs" />
     <Compile Include="Attributes\AltAttribute.cs" />
+    <Compile Include="Attributes\AnyDataAttribute.cs" />
     <Compile Include="Attributes\ArchiveAttribute.cs" />
     <Compile Include="Attributes\AutocompleteAttribute.cs" />
     <Compile Include="Attributes\AutoFocusAttribute.cs" />
@@ -98,7 +99,9 @@
     <Compile Include="Attributes\ColSpanAttribute.cs" />
     <Compile Include="Attributes\CommandAttribute.cs" />
     <Compile Include="Attributes\ContentAttribute.cs" />
+    <Compile Include="Attributes\ContentEditableAttribute.cs" />
     <Compile Include="Attributes\ContentTypeAttribute.cs" />
+    <Compile Include="Attributes\ContextMenuAttribute.cs" />
     <Compile Include="Attributes\ControlsAttribute.cs" />
     <Compile Include="Attributes\CoordinatesAttribute.cs" />
     <Compile Include="Attributes\CrossOriginAttribute.cs" />
@@ -155,6 +158,7 @@
     <Compile Include="Attributes\HighAttribute.cs" />
     <Compile Include="Attributes\HrefAttribute.cs" />
     <Compile Include="Attributes\HRefLanguageAttribute.cs" />
+    <Compile Include="Attributes\HTMLGlobalAttributes.cs" />
     <Compile Include="Attributes\HTTPEquivAttribute.cs" />
     <Compile Include="Attributes\ICommonAttributes.cs" />
     <Compile Include="Attributes\IconAttribute.cs" />
