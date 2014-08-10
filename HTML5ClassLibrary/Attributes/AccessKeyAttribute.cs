@@ -3,6 +3,9 @@ using HTML5ClassLibrary.AttributeDataTypes;
 
 namespace HTML5ClassLibrary.Attributes
 {
+    /// <summary>
+    /// The accesskey attribute specifies a shortcut key to activate/focus an element.
+    /// </summary>
     public class AccessKeyAttribute : BaseAttribute
     {
         private Character _attrObject = new Character();
