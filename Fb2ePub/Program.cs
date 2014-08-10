@@ -555,7 +555,7 @@ namespace Fb2ePub
                 }
                 else
                 {
-                    Console.WriteLine("Invalid option {0}.", param);
+                    Console.WriteLine(@"Invalid option {0}.", param);
                 }
             }
         }
