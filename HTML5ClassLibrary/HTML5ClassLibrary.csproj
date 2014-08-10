@@ -51,6 +51,7 @@
     <Compile Include="AttributeDataTypes\ContentTypes.cs" />
     <Compile Include="AttributeDataTypes\Coords.cs" />
     <Compile Include="AttributeDataTypes\Datetime.cs" />
+    <Compile Include="AttributeDataTypes\FloatingNumber.cs" />
     <Compile Include="AttributeDataTypes\HTMLCode.cs" />
     <Compile Include="AttributeDataTypes\ID.cs" />
     <Compile Include="AttributeDataTypes\IDReference.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Attributes\FormTargetAttribute.cs" />
     <Compile Include="Attributes\FrameAttribute.cs" />
     <Compile Include="Attributes\HeightAttribute.cs" />
+    <Compile Include="Attributes\HighAttribute.cs" />
     <Compile Include="Attributes\HrefAttribute.cs" />
     <Compile Include="Attributes\HRefLanguageAttribute.cs" />
     <Compile Include="Attributes\HTTPEquivAttribute.cs" />
@@ -161,12 +163,14 @@
     <Compile Include="Attributes\ListAttribute.cs" />
     <Compile Include="Attributes\LongDescriptionAttribute.cs" />
     <Compile Include="Attributes\LoopAttribute.cs" />
+    <Compile Include="Attributes\LowAttribute.cs" />
     <Compile Include="Attributes\ManifestAttribute.cs" />
     <Compile Include="Attributes\MaxAttribute.cs" />
     <Compile Include="Attributes\MaxLengthAttribute.cs" />
     <Compile Include="Attributes\MediaAttribute.cs" />
     <Compile Include="Attributes\MenuItemTypeAttribute.cs" />
     <Compile Include="Attributes\MenuTypeAttribute.cs" />
+    <Compile Include="Attributes\MeterValueAttribute.cs" />
     <Compile Include="Attributes\MethodAttribute.cs" />
     <Compile Include="Attributes\MIME_typeAttribute.cs" />
     <Compile Include="Attributes\MinAttribute.cs" />
@@ -174,6 +178,7 @@
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\NoValidateAttribute.cs" />
     <Compile Include="Attributes\OpenAttribute.cs" />
+    <Compile Include="Attributes\OptimumAttribute.cs" />
     <Compile Include="Attributes\PatternAttribute.cs" />
     <Compile Include="Attributes\PlaceHolderAttribute.cs" />
     <Compile Include="Attributes\PreloadAttribute.cs" />
@@ -260,6 +265,7 @@
     <Compile Include="BaseElements\InlineElements\Label.cs" />
     <Compile Include="BaseElements\InlineElements\Map.cs" />
     <Compile Include="BaseElements\InlineElements\Mark.cs" />
+    <Compile Include="BaseElements\InlineElements\Meter.cs" />
     <Compile Include="BaseElements\InlineElements\ObjectElm.cs" />
     <Compile Include="BaseElements\InlineElements\EmphasisedText.cs" />
     <Compile Include="BaseElements\InlineElements\EmptyLine.cs" />

@@ -148,6 +148,8 @@ namespace HTML5ClassLibrary.BaseElements
                         return new MenuItem();
                     case Meta.ElementName:
                         return new Meta();
+                    case Meter.ElementName:
+                        return new Meter();
 
                     case Source.ElementName:
                         return new Source();
