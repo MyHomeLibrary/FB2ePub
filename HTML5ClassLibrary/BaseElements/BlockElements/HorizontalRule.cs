@@ -63,17 +63,17 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         /// allowed by the rules and element can accept content
         /// </summary>
         /// <param name="item">sub-item to add</param>
-        public new void Add(IHTML5Item item)
+        public override void Add(IHTML5Item item)
         {
             throw new Exception("This element does not contain sub-items");
         }
 
-        public new void Remove(IHTML5Item item)
+        public override void Remove(IHTML5Item item)
         {
             throw new Exception("This element does not contain sub-items");
         }
 
-        public new List<IHTML5Item> SubElements()
+        public override List<IHTML5Item> SubElements()
         {
             return null;
         }

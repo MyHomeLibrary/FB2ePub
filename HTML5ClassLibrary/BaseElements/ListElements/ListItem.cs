@@ -45,7 +45,6 @@ namespace HTML5ClassLibrary.BaseElements.ListElements
             }
 
             ReadAttributes(xElement);
-            _valueAttribute.ReadAttribute(xElement);
 
             _content.Clear();
             IEnumerable<XNode> descendants = xElement.Nodes();
@@ -95,7 +94,6 @@ namespace HTML5ClassLibrary.BaseElements.ListElements
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
             AddAtributes(xElement);
-            _valueAttribute.AddAttribute(xElement);
 
             foreach (var item in _content)
             {
@@ -145,7 +143,17 @@ namespace HTML5ClassLibrary.BaseElements.ListElements
             return _content;
         }
 
-        
+        protected override void AddAtributes(XElement xElement)
+        {
+            base.AddAtributes(xElement);
+            _valueAttribute.AddAttribute(xElement);
+        }
+
+        protected override void ReadAttributes(XElement xElement)
+        {
+            base.ReadAttributes(xElement);
+            _valueAttribute.ReadAttribute(xElement);
+        }
 
         #endregion
 

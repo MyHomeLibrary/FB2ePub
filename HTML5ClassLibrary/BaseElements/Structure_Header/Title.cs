@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 
 namespace HTML5ClassLibrary.BaseElements.Structure_Header
 {
@@ -15,11 +16,16 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
         private readonly SimpleHTML5Text _content = new SimpleHTML5Text();
 
+        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
+
 
         /// <summary>
         /// Returns title text
         /// </summary>
         public SimpleHTML5Text Content { get { return _content; } }
+
+
+        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
 
 
         /// <summary>
@@ -40,7 +46,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             {
                 throw new Exception(string.Format("xNode is not {0} element", ElementName));
             }
-
+            _globalAttributes.ReadAttributes(xElement);
             _content.Load(xNode);
         }
 
@@ -50,6 +56,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
             xElement.Add(_content.Generate());
 
+            _globalAttributes.AddAttributes(xElement);
             return xElement;
         }
 

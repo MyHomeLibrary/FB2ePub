@@ -12,7 +12,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
     /// <summary>
     /// The th element defines a table header cell.
     /// </summary>
-    public class HeaderCell : BaseTableElement
+    public class TableHeaderCell : BaseTableElement
     {
         internal const string ElementName = "th";
 

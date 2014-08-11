@@ -219,8 +219,8 @@ namespace HTML5ClassLibrary.BaseElements
                         return new TextArea();
                     case TableFooter.ElementName:
                         return new TableFooter();
-                    case HeaderCell.ElementName:
-                        return new HeaderCell();
+                    case TableHeaderCell.ElementName:
+                        return new TableHeaderCell();
                     case TableHead.ElementName:
                         return new TableHead();
                     case Time.ElementName:

@@ -16,11 +16,8 @@ namespace HTML5ClassLibrary.BaseElements.FormMenuOptions
 
         private readonly SimpleHTML5Text _optionText = new SimpleHTML5Text();
 
-        // Basic attributes
         private readonly SelectedAttribute  _selectedAttribute = new SelectedAttribute();
         private readonly ValueAttribute _valueAttribute = new ValueAttribute();
-
-        // Advanced attributes
         private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
         private readonly LabelAttribute _labelAttribute = new LabelAttribute();
 
@@ -66,14 +63,6 @@ namespace HTML5ClassLibrary.BaseElements.FormMenuOptions
 
             ReadAttributes(xElement);
 
-            // Basic attributes
-            _selectedAttribute.ReadAttribute(xElement);
-            _valueAttribute.ReadAttribute(xElement);
-
-            // Advanced attributes
-            _disabledAttribute.ReadAttribute(xElement);
-            _labelAttribute.ReadAttribute(xElement);
-
             _optionText.Load(xNode);
         }
 
@@ -82,14 +71,6 @@ namespace HTML5ClassLibrary.BaseElements.FormMenuOptions
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
             AddAttributes(xElement);
-
-            // Basic attributes
-            _selectedAttribute.AddAttribute(xElement);
-            _valueAttribute.AddAttribute(xElement);
-
-            // Advanced attributes
-            _disabledAttribute.AddAttribute(xElement);
-            _labelAttribute.AddAttribute(xElement);
 
             xElement.Add(_optionText.Generate());
             
@@ -119,6 +100,26 @@ namespace HTML5ClassLibrary.BaseElements.FormMenuOptions
         public override List<IHTML5Item> SubElements()
         {
             return null;
+        }
+
+        protected override void AddAttributes(XElement xElement)
+        {
+            base.AddAttributes(xElement);
+            _selectedAttribute.AddAttribute(xElement);
+            _valueAttribute.AddAttribute(xElement);
+            _disabledAttribute.AddAttribute(xElement);
+            _labelAttribute.AddAttribute(xElement);
+
+        }
+
+        protected override void ReadAttributes(XElement xElement)
+        {
+            base.ReadAttributes(xElement);
+            _selectedAttribute.ReadAttribute(xElement);
+            _valueAttribute.ReadAttribute(xElement);
+            _disabledAttribute.ReadAttribute(xElement);
+            _labelAttribute.ReadAttribute(xElement);
+
         }
     }
 }

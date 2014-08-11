@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 using HTML5ClassLibrary.Exceptions;
 
 namespace HTML5ClassLibrary.BaseElements
@@ -10,7 +11,13 @@ namespace HTML5ClassLibrary.BaseElements
     public abstract class BaseContainingElement : IHTML5Item
     {
         protected readonly List<IHTML5Item> Content = new List<IHTML5Item>();
+        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
 
+
+        public HTMLGlobalAttributes GlobalAttributes
+        {
+            get { return _globalAttributes; }
+        }
 
         #region Implementation of IHTML5Item
 
@@ -37,7 +44,7 @@ namespace HTML5ClassLibrary.BaseElements
         /// allowed by the rules and element can accept content
         /// </summary>
         /// <param name="item">sub-item to add</param>
-        public void Add(IHTML5Item item)
+        public virtual void Add(IHTML5Item item)
         {
             if ((item != null) && IsValidSubType(item))
             {
@@ -55,7 +62,7 @@ namespace HTML5ClassLibrary.BaseElements
         /// Removes sub item 
         /// </summary>
         /// <param name="item">sub item to remove</param>
-        public void Remove(IHTML5Item item)
+        public virtual void Remove(IHTML5Item item)
         {
             if (Content.Remove(item))
             {
@@ -68,7 +75,7 @@ namespace HTML5ClassLibrary.BaseElements
         /// Get list of all sub elements
         /// </summary>
         /// <returns></returns>
-        public List<IHTML5Item> SubElements()
+        public virtual List<IHTML5Item> SubElements()
         {
             return Content;
         }

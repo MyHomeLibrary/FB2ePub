@@ -220,7 +220,6 @@
     <Compile Include="Attributes\HRefLanguageAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\HTMLGlobalAttributes.cs" />
     <Compile Include="Attributes\HTTPEquivAttribute.cs" />
-    <Compile Include="Attributes\ICommonAttributes.cs" />
     <Compile Include="Attributes\IconAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\IdAttribute.cs" />
     <Compile Include="Attributes\InputTypeAttribute.cs" />
@@ -320,7 +319,7 @@
     <Compile Include="BaseElements\BlockElements\OrderedList.cs" />
     <Compile Include="BaseElements\BlockElements\Paragraph.cs" />
     <Compile Include="BaseElements\BlockElements\Section.cs" />
-    <Compile Include="BaseElements\BlockElements\Table.cs" />
+    <Compile Include="BaseElements\TableElements\Table.cs" />
     <Compile Include="BaseElements\BlockElements\UnorderedList.cs" />
     <Compile Include="BaseElements\BlockElements\Video.cs" />
     <Compile Include="BaseElements\ElementFactory.cs" />
@@ -401,7 +400,7 @@
     <Compile Include="BaseElements\TableElements\BaseTableElement.cs" />
     <Compile Include="BaseElements\TableElements\ColElement.cs" />
     <Compile Include="BaseElements\TableElements\ColGroup.cs" />
-    <Compile Include="BaseElements\TableElements\HeaderCell.cs" />
+    <Compile Include="BaseElements\TableElements\TableHeaderCell.cs" />
     <Compile Include="BaseElements\TableElements\TableBody.cs" />
     <Compile Include="BaseElements\TableElements\TableCaption.cs" />
     <Compile Include="BaseElements\TableElements\TableData.cs" />
@@ -410,8 +409,8 @@
     <Compile Include="BaseElements\TableElements\TableRow.cs" />
     <Compile Include="Exceptions\HTML5ViolationException.cs" />
     <Compile Include="HTML5Document.cs" />
-    <Compile Include="Menu.cs" />
-    <Compile Include="MenuItem.cs" />
+    <Compile Include="BaseElements\BlockElements\Menu.cs" />
+    <Compile Include="BaseElements\InlineElements\MenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

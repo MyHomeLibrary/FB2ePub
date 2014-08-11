@@ -1,4 +1,5 @@
-﻿using HTML5ClassLibrary.Attributes;
+﻿using System.Xml.Linq;
+using HTML5ClassLibrary.Attributes;
 
 namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
@@ -51,6 +52,18 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
                 return false;
             }
             return true;
+        }
+
+        protected override void AddAttributes(XElement xElement)
+        {
+            base.AddAttributes(xElement);
+            _xmlspaceAttribute.AddAttribute(xElement);
+        }
+
+        protected override void ReadAttributes(XElement xElement)
+        {
+            base.ReadAttributes(xElement);
+            _xmlspaceAttribute.ReadAttribute(xElement);
         }
     }
 }

@@ -20,31 +20,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
     {
         internal const string ElementName = "head";
 
-        private readonly LanguageAttribute _language = new LanguageAttribute();
-        private readonly DirectionAttribute _direction = new DirectionAttribute();
 
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
 
 
-        /// <summary>
-        /// This attribute specifies the base direction of text. 
-        /// Possible values:
-        /// ltr: Left-to-right 
-        /// rtl: Right-to-left
-        /// </summary>
-        public DirectionAttribute Direction
-        {
-            get { return _direction; }
-        }
-
-        /// <summary>
-        /// This attribute specifies the base language of an element's attribute values and text content.
-        /// </summary>
-        public LanguageAttribute Language
-        {
-            get { return _language; }
-        }
 
         public override void Load(XNode xNode)
         {
@@ -57,10 +37,8 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             {
                 throw new Exception(string.Format("xNode is not {0} element", ElementName));
             }
-
-            _language.ReadAttribute(xElement);
-            _direction.ReadAttribute(xElement);
-
+            
+            GlobalAttributes.ReadAttributes(xElement);
 
             Content.Clear();
             IEnumerable<XNode> descendants = xElement.Nodes();
@@ -105,9 +83,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
-            _language.AddAttribute(xElement);
-            _direction.AddAttribute(xElement);
-
+            GlobalAttributes.AddAttributes(xElement);
 
             foreach (var item in Content)
             {

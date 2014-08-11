@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes.FlaggedAttributes;
-using HTML5ClassLibrary.BaseElements.TableElements;
+using HTML5ClassLibrary.BaseElements.BlockElements;
 
-namespace HTML5ClassLibrary.BaseElements.BlockElements
+namespace HTML5ClassLibrary.BaseElements.TableElements
 {
     /// <summary>
     /// The table element is used to define a table. 

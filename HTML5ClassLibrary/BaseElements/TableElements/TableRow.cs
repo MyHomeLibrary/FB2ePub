@@ -55,7 +55,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
             {
                 return item.IsValid();
             }
-            if (item is HeaderCell)
+            if (item is TableHeaderCell)
             {
                 return item.IsValid();
             }
