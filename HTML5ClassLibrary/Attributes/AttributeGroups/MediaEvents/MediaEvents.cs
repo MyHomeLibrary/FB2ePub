@@ -1,32 +1,35 @@
 ﻿using System.Xml.Linq;
+using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
 
 namespace HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents
 {
     public class MediaEvents
     {
-        private readonly OnMediaAbortEventAttribute _onAbortEventAttribute = new OnMediaAbortEventAttribute();
-        private readonly OnMediaCanPlayEventAttribute _onCanPlayEventAttribute = new OnMediaCanPlayEventAttribute();
-        private readonly OnMediaCanPlayThroughEventAttribute _onCanPlayThroughEventAttribute = new OnMediaCanPlayThroughEventAttribute();
-        private readonly OnMediaDurationChangeEventAttribute _onDurationChangeEventAttribute = new OnMediaDurationChangeEventAttribute();
-        private readonly OnMediaEmptiedEventAttribute _onEmptiedEventAttribute = new OnMediaEmptiedEventAttribute();
-        private readonly OnMediaEndedEventAttribute _onEndedEventAttribute = new OnMediaEndedEventAttribute();
-        private readonly OnMediaErrorEventAttribute _onMediaErrorEventAttribute = new OnMediaErrorEventAttribute();
-        private readonly OnMediaLoadedDataEventAttribute _onMediaLoadedDataEventAttribute = new OnMediaLoadedDataEventAttribute();
-        private readonly OnMediaLoadedMetadateEventAttribute _onMediaLoadedMetadateEventAttribute = new OnMediaLoadedMetadateEventAttribute();
-        private readonly OnMediaLoadStartEventAttribute _onMediaLoadStartEventAttribute = new OnMediaLoadStartEventAttribute();
-        private readonly OnMediaPauseEventAttribute _onMediaPauseEventAttribute = new OnMediaPauseEventAttribute();
-        private readonly OnMediaPlayEventAtrribute _onMediaPlayEventAtrribute = new OnMediaPlayEventAtrribute();
-        private readonly OnMediaPlayingEventAttribute _onMediaPlayingEventAttribute = new OnMediaPlayingEventAttribute();
-        private readonly OnMediaProgressEventAttribute _onMediaProgressEventAttribute = new OnMediaProgressEventAttribute();
-        private readonly OnMediaRateChangeEventAttribute _onMediaRateChangeEventAttribute = new OnMediaRateChangeEventAttribute();
-        private readonly OnMediaReadyStateChangeEventAttribute _onMediaReadyStateChangeEventAttribute = new OnMediaReadyStateChangeEventAttribute();
-        private readonly OnMediaSeekedEventAttribute _onMediaSeekedEventAttribute = new OnMediaSeekedEventAttribute();
+        private readonly OnMediaAbortEventAttribute _onAbortEventAttribute = new OnMediaAbortEventAttribute();  
+        private readonly OnMediaCanPlayEventAttribute _onCanPlayEventAttribute = new OnMediaCanPlayEventAttribute();  
+        private readonly OnMediaCanPlayThroughEventAttribute _onCanPlayThroughEventAttribute = new OnMediaCanPlayThroughEventAttribute();  
+        private readonly OnMediaDurationChangeEventAttribute _onDurationChangeEventAttribute = new OnMediaDurationChangeEventAttribute(); 
+        private readonly OnMediaEmptiedEventAttribute _onEmptiedEventAttribute = new OnMediaEmptiedEventAttribute(); 
+        private readonly OnMediaEndedEventAttribute _onEndedEventAttribute = new OnMediaEndedEventAttribute(); 
+        private readonly OnMediaErrorEventAttribute _onMediaErrorEventAttribute = new OnMediaErrorEventAttribute(); 
+        private readonly OnMediaLoadedDataEventAttribute _onMediaLoadedDataEventAttribute = new OnMediaLoadedDataEventAttribute(); 
+        private readonly OnMediaLoadedMetadateEventAttribute _onMediaLoadedMetadateEventAttribute = new OnMediaLoadedMetadateEventAttribute(); 
+        private readonly OnMediaLoadStartEventAttribute _onMediaLoadStartEventAttribute = new OnMediaLoadStartEventAttribute(); 
+        private readonly OnMediaPauseEventAttribute _onMediaPauseEventAttribute = new OnMediaPauseEventAttribute(); 
+        private readonly OnMediaPlayEventAtrribute _onMediaPlayEventAtrribute = new OnMediaPlayEventAtrribute(); 
+        private readonly OnMediaPlayingEventAttribute _onMediaPlayingEventAttribute = new OnMediaPlayingEventAttribute(); 
+        private readonly OnMediaProgressEventAttribute _onMediaProgressEventAttribute = new OnMediaProgressEventAttribute(); 
+        private readonly OnMediaRateChangeEventAttribute _onMediaRateChangeEventAttribute = new OnMediaRateChangeEventAttribute(); 
+        private readonly OnMediaReadyStateChangeEventAttribute _onMediaReadyStateChangeEventAttribute = new OnMediaReadyStateChangeEventAttribute(); //global
+        private readonly OnMediaSeekedEventAttribute _onMediaSeekedEventAttribute = new OnMediaSeekedEventAttribute(); 
         private readonly OnMediaSeekingEventAttribute _onMediaSeekingEventAttribute = new OnMediaSeekingEventAttribute();
-        private readonly OnMediaStalledEventAttribute _onMediaStalledEventAttribute = new OnMediaStalledEventAttribute();
-        private readonly OnMediaSuspendEventAttribute _onMediaSuspendEventAttribute = new OnMediaSuspendEventAttribute();
-        private readonly OnMediaTimeUpdateEventAttribute _onMediaTimeUpdateEventAttribute = new OnMediaTimeUpdateEventAttribute();
-        private readonly OnMediaVolumeChangeEventAttribute _onMediaVolumeChangeEventAttribute = new OnMediaVolumeChangeEventAttribute();
-        private readonly OnMediaWaitingEventAttribute _onMediaWaitingEventAttribute = new OnMediaWaitingEventAttribute();
+        private readonly OnMediaStalledEventAttribute _onMediaStalledEventAttribute = new OnMediaStalledEventAttribute(); 
+        private readonly OnMediaSuspendEventAttribute _onMediaSuspendEventAttribute = new OnMediaSuspendEventAttribute(); 
+        private readonly OnMediaTimeUpdateEventAttribute _onMediaTimeUpdateEventAttribute = new OnMediaTimeUpdateEventAttribute(); 
+        private readonly OnMediaVolumeChangeEventAttribute _onMediaVolumeChangeEventAttribute = new OnMediaVolumeChangeEventAttribute(); 
+        private readonly OnMediaWaitingEventAttribute _onMediaWaitingEventAttribute = new OnMediaWaitingEventAttribute(); 
+        private readonly OnMediaCueChangeEventAttribute _onMediaCueChangeEventAttribute = new OnMediaCueChangeEventAttribute();
+        private readonly OnMediaCancelEventAttribute _onMediaCancelEventAttribute = new OnMediaCancelEventAttribute(); 
 
 
 
@@ -123,7 +126,7 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents
         /// <summary>
         /// Script to be run each time the ready state changes (the ready state tracks the state of the media data)
         /// </summary>
-        public OnMediaReadyStateChangeEventAttribute OnMediaReadyStateChangeEvent { get { return _onMediaReadyStateChangeEventAttribute; }}
+        public OnMediaReadyStateChangeEventAttribute OnMediaReadyStateChangeEvent { get { return _onMediaReadyStateChangeEventAttribute; } }
 
 
         /// <summary>
@@ -167,6 +170,16 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents
         public OnMediaWaitingEventAttribute OnMediaWaitingEvent { get { return _onMediaWaitingEventAttribute; }}
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public OnMediaCueChangeEventAttribute OnMediaCueChangeEvent { get { return _onMediaCueChangeEventAttribute; }}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public OnMediaCancelEventAttribute OnMediaCancelEvent { get { return _onMediaCancelEventAttribute; }}
+
 
 
         /// <summary>
@@ -198,6 +211,8 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents
             _onMediaTimeUpdateEventAttribute.AddAttribute(xElement);
             _onMediaVolumeChangeEventAttribute.AddAttribute(xElement);
             _onMediaWaitingEventAttribute.AddAttribute(xElement);
+            _onMediaCueChangeEventAttribute.AddAttribute(xElement);
+            _onMediaCancelEventAttribute.AddAttribute(xElement);
         }
 
 
@@ -230,6 +245,8 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents
             _onMediaTimeUpdateEventAttribute.ReadAttribute(xElement);
             _onMediaVolumeChangeEventAttribute.ReadAttribute(xElement);
             _onMediaWaitingEventAttribute.ReadAttribute(xElement);
+            _onMediaCueChangeEventAttribute.ReadAttribute(xElement);
+            _onMediaCancelEventAttribute.ReadAttribute(xElement);
         }
     }
 }

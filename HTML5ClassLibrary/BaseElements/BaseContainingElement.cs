@@ -1,6 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
 using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
 using HTML5ClassLibrary.Exceptions;
 
 namespace HTML5ClassLibrary.BaseElements
@@ -12,12 +17,27 @@ namespace HTML5ClassLibrary.BaseElements
     {
         protected readonly List<IHTML5Item> Content = new List<IHTML5Item>();
         private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
+        private readonly FormEvents _formEvents = new FormEvents();
+        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
+        private readonly MediaEvents _mediaEvents = new MediaEvents();
+        private readonly MouseEvents _mouseEvents = new MouseEvents();
+        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
 
         public HTMLGlobalAttributes GlobalAttributes
         {
             get { return _globalAttributes; }
         }
+
+        public FormEvents FormEvents { get { return _formEvents; }}
+
+        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; }}
+
+        public MediaEvents MediaEvents { get { return _mediaEvents; }}
+
+        public MouseEvents MouseEvents { get { return _mouseEvents; }}
+
+        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; }}
 
         #region Implementation of IHTML5Item
 

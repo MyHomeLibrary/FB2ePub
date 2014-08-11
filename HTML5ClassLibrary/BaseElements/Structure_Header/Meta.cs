@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
 using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
 
 namespace HTML5ClassLibrary.BaseElements.Structure_Header
 {
@@ -21,10 +26,26 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         private readonly HTTPEquivAttribute _httpEqvAttribute = new HTTPEquivAttribute();
         private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
         private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
+        private readonly FormEvents _formEvents = new FormEvents();
+        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
+        private readonly MediaEvents _mediaEvents = new MediaEvents();
+        private readonly MouseEvents _mouseEvents = new MouseEvents();
+        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
 
 
-        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
+        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; } }
+
+        public FormEvents FormEvents { get { return _formEvents; } }
+
+        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; } }
+
+        public MediaEvents MediaEvents { get { return _mediaEvents; } }
+
+        public MouseEvents MouseEvents { get { return _mouseEvents; } }
+
+        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
+
 
         /// <summary>
         /// Specifies the character encoding for the HTML document 
@@ -69,6 +90,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             }
 
             _globalAttributes.ReadAttributes(xElement);
+            _formEvents.ReadAttributes(xElement);
+            _keyboardEvents.ReadAttributes(xElement);
+            _mediaEvents.ReadAttributes(xElement);
+            _mouseEvents.ReadAttributes(xElement);
+            _windowEventAttributes.ReadAttributes(xElement);
             _contentAttribute.ReadAttribute(xElement);
             _nameAttribute.ReadAttribute(xElement);
             _httpEqvAttribute.ReadAttribute(xElement);
@@ -80,6 +106,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
             _globalAttributes.AddAttributes(xElement);
+            _formEvents.AddAttributes(xElement);
+            _keyboardEvents.AddAttributes(xElement);
+            _mediaEvents.AddAttributes(xElement);
+            _mouseEvents.AddAttributes(xElement);
+            _windowEventAttributes.AddAttributes(xElement);
             _contentAttribute.AddAttribute(xElement);
             _nameAttribute.AddAttribute(xElement);
             _httpEqvAttribute.AddAttribute(xElement);

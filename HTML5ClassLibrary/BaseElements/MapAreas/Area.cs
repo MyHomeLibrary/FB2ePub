@@ -6,9 +6,9 @@ using HTML5ClassLibrary.Attributes;
 using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
 using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents;
 using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTML5ClassLibrary.Attributes.Events;
-using HTML5ClassLibrary.Attributes.FlaggedAttributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
 
 namespace HTML5ClassLibrary.BaseElements.MapAreas
 {
@@ -30,6 +30,11 @@ namespace HTML5ClassLibrary.BaseElements.MapAreas
         private readonly FormTargetAttribute _targetAttribute = new FormTargetAttribute();
         private readonly MIMETypeAttribute  _typeAttribute = new MIMETypeAttribute();
         private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
+        private readonly FormEvents _formEvents = new FormEvents();
+        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
+        private readonly MediaEvents _mediaEvents = new MediaEvents();
+        private readonly MouseEvents _mouseEvents = new MouseEvents();
+        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
 
         public const string ElementName = "area";
@@ -41,6 +46,15 @@ namespace HTML5ClassLibrary.BaseElements.MapAreas
         /// </summary>
         public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
 
+        public FormEvents FormEvents { get { return _formEvents; } }
+
+        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; } }
+
+        public MediaEvents MediaEvents { get { return _mediaEvents; } }
+
+        public MouseEvents MouseEvents { get { return _mouseEvents; } }
+
+        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
 
 
         /// <summary>
@@ -126,6 +140,11 @@ namespace HTML5ClassLibrary.BaseElements.MapAreas
             }
 
             _globalAttributes.ReadAttributes(xElement);
+            _formEvents.ReadAttributes(xElement);
+            _keyboardEvents.ReadAttributes(xElement);
+            _mediaEvents.ReadAttributes(xElement);
+            _mouseEvents.ReadAttributes(xElement);
+            _windowEventAttributes.ReadAttributes(xElement);
             _altAttribute.ReadAttribute(xElement);
             _coordAttribute.ReadAttribute(xElement);
             _downloadAttribute.ReadAttribute(xElement);
@@ -147,6 +166,11 @@ namespace HTML5ClassLibrary.BaseElements.MapAreas
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
             _globalAttributes.AddAttributes(xElement);
+            _formEvents.AddAttributes(xElement);
+            _keyboardEvents.AddAttributes(xElement);
+            _mediaEvents.AddAttributes(xElement);
+            _mouseEvents.AddAttributes(xElement);
+            _windowEventAttributes.AddAttributes(xElement);
             _altAttribute.AddAttribute(xElement);
             _coordAttribute.AddAttribute(xElement);
             _downloadAttribute.AddAttribute(xElement);

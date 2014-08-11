@@ -78,6 +78,7 @@
     <Compile Include="Attributes\AttributeGroups\FormEvents\OnFormInputEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\FormEvents\OnInputEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\FormEvents\OnInvalidEventAttribute.cs" />
+    <Compile Include="Attributes\AttributeGroups\FormEvents\OnToggleEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\AccessKeyAttribute.cs" />
     <Compile Include="Attributes\ActionAttribute.cs" />
     <Compile Include="Attributes\AlignAttribute.cs" />
@@ -86,6 +87,8 @@
     <Compile Include="Attributes\ArchiveAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\KeyboardEvents\KeyboardEvents.cs" />
     <Compile Include="Attributes\AttributeGroups\MediaEvents\MediaEvents.cs" />
+    <Compile Include="Attributes\AttributeGroups\MediaEvents\OnMediaCancelEventAttribute.cs" />
+    <Compile Include="Attributes\AttributeGroups\MediaEvents\OnMediaCueChangeEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\MediaEvents\OnMediaWaitingEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\MediaEvents\OnMediaAbortEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\MediaEvents\OnMediaCanPlayEventAttribute.cs" />
@@ -117,6 +120,8 @@
     <Compile Include="Attributes\AttributeGroups\MouseEvents\OnDragOverEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\MouseEvents\OnDragStartEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\MouseEvents\OnDropEventAttribute.cs" />
+    <Compile Include="Attributes\AttributeGroups\MouseEvents\OnMouseEnterEventAttribute.cs" />
+    <Compile Include="Attributes\AttributeGroups\MouseEvents\OnMouseLeaveEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\MouseEvents\OnMouseWheelEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\MouseEvents\OnScrollEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\WindowEventAttributes\WindowEventAttributes.cs" />

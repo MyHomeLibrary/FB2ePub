@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
 using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
 
 namespace HTML5ClassLibrary.BaseElements.Structure_Header
 {
@@ -17,6 +21,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         private readonly SimpleHTML5Text _content = new SimpleHTML5Text();
 
         private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
+        private readonly FormEvents _formEvents = new FormEvents();
+        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
+        private readonly MediaEvents _mediaEvents = new MediaEvents();
+        private readonly MouseEvents _mouseEvents = new MouseEvents();
+        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
 
         /// <summary>
@@ -26,6 +35,16 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
 
         public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
+
+        public FormEvents FormEvents { get { return _formEvents; } }
+
+        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; } }
+
+        public MediaEvents MediaEvents { get { return _mediaEvents; } }
+
+        public MouseEvents MouseEvents { get { return _mouseEvents; } }
+
+        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
 
 
         /// <summary>
@@ -47,6 +66,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
                 throw new Exception(string.Format("xNode is not {0} element", ElementName));
             }
             _globalAttributes.ReadAttributes(xElement);
+            _formEvents.ReadAttributes(xElement);
+            _keyboardEvents.ReadAttributes(xElement);
+            _mediaEvents.ReadAttributes(xElement);
+            _mouseEvents.ReadAttributes(xElement);
+            _windowEventAttributes.ReadAttributes(xElement);
             _content.Load(xNode);
         }
 
@@ -57,6 +81,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             xElement.Add(_content.Generate());
 
             _globalAttributes.AddAttributes(xElement);
+            _formEvents.AddAttributes(xElement);
+            _keyboardEvents.AddAttributes(xElement);
+            _mediaEvents.AddAttributes(xElement);
+            _mouseEvents.AddAttributes(xElement);
+            _windowEventAttributes.AddAttributes(xElement);
             return xElement;
         }
 

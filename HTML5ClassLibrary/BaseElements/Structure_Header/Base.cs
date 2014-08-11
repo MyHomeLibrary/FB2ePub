@@ -3,7 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
+using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
 using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
 using HTML5ClassLibrary.Exceptions;
 
 namespace HTML5ClassLibrary.BaseElements.Structure_Header
@@ -21,10 +26,26 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         private readonly HrefAttribute _hrefAttribute = new HrefAttribute();
         private readonly FormTargetAttribute _targetAttribute = new FormTargetAttribute();
         private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
+        private readonly FormEvents _formEvents = new FormEvents();
+        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
+        private readonly MediaEvents _mediaEvents = new MediaEvents();
+        private readonly MouseEvents _mouseEvents = new MouseEvents();
+        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
 
 
         public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
+
+
+        public FormEvents FormEvents { get { return _formEvents; } }
+
+        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; } }
+
+        public MediaEvents MediaEvents { get { return _mediaEvents; } }
+
+        public MouseEvents MouseEvents { get { return _mouseEvents; } }
+
+        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
 
         /// <summary>
         /// Specifies an absolute URL that acts as the base URL for resolving relative URLs. 
@@ -55,6 +76,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             }
 
             _globalAttributes.ReadAttributes(xElement);
+            _formEvents.ReadAttributes(xElement);
+            _keyboardEvents.ReadAttributes(xElement);
+            _mediaEvents.ReadAttributes(xElement);
+            _mouseEvents.ReadAttributes(xElement);
+            _windowEventAttributes.ReadAttributes(xElement);
             _hrefAttribute.ReadAttribute(xElement);
             _targetAttribute.ReadAttribute(xElement);
         }
@@ -65,6 +91,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             var xElement = new XElement(XhtmlNameSpace + ElementName);
             
             _globalAttributes.AddAttributes(xElement);
+            _formEvents.AddAttributes(xElement);
+            _keyboardEvents.AddAttributes(xElement);
+            _mediaEvents.AddAttributes(xElement);
+            _mouseEvents.AddAttributes(xElement);
+            _windowEventAttributes.AddAttributes(xElement);
             _hrefAttribute.AddAttribute(xElement);
             _targetAttribute.AddAttribute(xElement);
 

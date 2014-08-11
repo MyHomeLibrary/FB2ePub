@@ -39,6 +39,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             }
 
             GlobalAttributes.ReadAttributes(xElement);
+            FormEvents.ReadAttributes(xElement);
+            KeyboardEvents.ReadAttributes(xElement);
+            MediaEvents.ReadAttributes(xElement);
+            MouseEvents.ReadAttributes(xElement);
+            WindowEvents.ReadAttributes(xElement);
             // XhtmlNameSpaceAttribute.ReadAttribute(xElement); - no need to read , always the same value should be there
             _manifestAttribute.ReadAttribute(xElement);
 
@@ -96,6 +101,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             _xhtmlNameSpaceAttribute.AddAttribute(xElement);
             _manifestAttribute.AddAttribute(xElement);
             GlobalAttributes.AddAttributes(xElement);
+            FormEvents.AddAttributes(xElement);
+            KeyboardEvents.AddAttributes(xElement);
+            MediaEvents.AddAttributes(xElement);
+            MouseEvents.AddAttributes(xElement);
+            WindowEvents.AddAttributes(xElement);
             
             foreach (var item in Content)
             {

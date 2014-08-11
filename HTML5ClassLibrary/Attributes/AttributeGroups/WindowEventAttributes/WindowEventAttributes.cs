@@ -11,9 +11,9 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
         private readonly OnAfterPrintEventAttribute _onAfterPrintEventAttribute = new OnAfterPrintEventAttribute();
         private readonly OnBeforePrintEventAttribute _onBeforePrintEventAttribute = new OnBeforePrintEventAttribute();
         private readonly OnBeforeUnloadEventAttribute _onBeforeUnloadEventAttribute = new OnBeforeUnloadEventAttribute();
-        private readonly OnErrorEventAttribute _onErrorEventAttribute = new OnErrorEventAttribute();
+        private readonly OnErrorEventAttribute _onErrorEventAttribute = new OnErrorEventAttribute(); // global
         private readonly OnHasChangeEventAttribute _onHasChangeEventAttribute = new OnHasChangeEventAttribute();
-        private readonly OnLoadEventAttribute _onLoadEventAttribute = new OnLoadEventAttribute();
+        private readonly OnLoadEventAttribute _onLoadEventAttribute = new OnLoadEventAttribute(); // global
         private readonly OnMessageEventAttribute _onMessageEventAttribute = new OnMessageEventAttribute();
         private readonly OnOfflineEventAttribute _onOfflineEventAttribute = new OnOfflineEventAttribute();
         private readonly OnOnlineEventAttribute _onOnlineEventAttribute = new OnOnlineEventAttribute();
@@ -21,7 +21,7 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
         private readonly OnPageShowEventAttribute _onPageShowEventAttribute = new OnPageShowEventAttribute();
         private readonly OnPopStateEventAttribute _onPopStateEventAttribute = new OnPopStateEventAttribute();
         private readonly OnRedoEventAttribute _onRedoEventAttribute = new OnRedoEventAttribute();
-        private readonly OnResizeEventAttribute _onResizeEventAttribute = new OnResizeEventAttribute();
+        private readonly OnResizeEventAttribute _onResizeEventAttribute = new OnResizeEventAttribute(); // global
         private readonly OnStorageEventAttribute _onStorageEventAttribute = new OnStorageEventAttribute();
         private readonly OnUndoEventAttrinute _onUndoEventAttrinute = new OnUndoEventAttrinute();
         private readonly OnUnloadEventAttribute _onUnloadEventAttribute = new OnUnloadEventAttribute();
@@ -107,7 +107,7 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
         /// <summary>
         /// Fires when the browser window is resized
         /// </summary>
-        public OnResizeEventAttribute OnResetEvent { get { return _onResizeEventAttribute; }}
+        public OnResizeEventAttribute OnResizeEvent { get { return _onResizeEventAttribute; }}
 
 
         /// <summary>

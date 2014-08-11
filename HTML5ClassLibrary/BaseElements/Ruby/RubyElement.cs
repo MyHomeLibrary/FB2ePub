@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
+using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
 using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
 using HTML5ClassLibrary.BaseElements.InlineElements;
 using HTML5ClassLibrary.Exceptions;
 
@@ -22,6 +27,12 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
         private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
 
         private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
+        private readonly FormEvents _formEvents = new FormEvents();
+        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
+        private readonly MediaEvents _mediaEvents = new MediaEvents();
+        private readonly MouseEvents _mouseEvents = new MouseEvents();
+        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
+
 
         internal const string ElementName = "ruby";
 
@@ -29,6 +40,17 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
 
 
         public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
+
+        public FormEvents FormEvents { get { return _formEvents; } }
+
+        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; } }
+
+        public MediaEvents MediaEvents { get { return _mediaEvents; } }
+
+        public MouseEvents MouseEvents { get { return _mouseEvents; } }
+
+        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
+
 
         #region Implementation of IEPubTextItem
 
@@ -68,6 +90,11 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
             }
 
             _globalAttributes.ReadAttributes(xElement);
+            _formEvents.ReadAttributes(xElement);
+            _keyboardEvents.ReadAttributes(xElement);
+            _mediaEvents.ReadAttributes(xElement);
+            _mouseEvents.ReadAttributes(xElement);
+            _windowEventAttributes.ReadAttributes(xElement);
         }
 
         private bool IsValidSubType(IHTML5Item item)
@@ -97,7 +124,11 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
             }
 
             _globalAttributes.AddAttributes(xElement);
-
+            _formEvents.AddAttributes(xElement);
+            _keyboardEvents.AddAttributes(xElement);
+            _mediaEvents.AddAttributes(xElement);
+            _mouseEvents.AddAttributes(xElement);
+            _windowEventAttributes.AddAttributes(xElement);
             return xElement;
         }
 
