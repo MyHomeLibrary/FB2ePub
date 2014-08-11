@@ -12,8 +12,6 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
         internal const string ElementName = "html";
 
-        private readonly LanguageAttribute _language = new LanguageAttribute();
-        private readonly DirectionAttribute _direction = new DirectionAttribute();
 
         private readonly XmlNsAttribute _xhtmlNameSpaceAttribute = new XmlNsAttribute();
         private readonly ManifestAttribute _manifestAttribute = new ManifestAttribute();
@@ -28,25 +26,6 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         /// </summary>
         public ManifestAttribute Manifest { get {return _manifestAttribute;}}
 
-        /// <summary>
-        /// This attribute specifies the base direction of text. 
-        /// Possible values:
-        /// ltr: Left-to-right 
-        /// rtl: Right-to-left
-        /// </summary>
-        public DirectionAttribute Direction
-        {
-            get { return _direction; }
-        }
-
-        /// <summary>
-        /// This attribute specifies the base language of an element's attribute values and text content.
-        /// </summary>
-        public LanguageAttribute Language
-        {
-            get { return _language; }
-        }
-
         public override void Load(XNode xNode)
         {
             if (xNode.NodeType != XmlNodeType.Element)
@@ -59,9 +38,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
                 throw new Exception(string.Format("xNode is not {0} element", ElementName));
             }
 
-            _language.ReadAttribute(xElement);
-            _direction.ReadAttribute(xElement);
-
+            GlobalAttributes.ReadAttributes(xElement);
             // XhtmlNameSpaceAttribute.ReadAttribute(xElement); - no need to read , always the same value should be there
             _manifestAttribute.ReadAttribute(xElement);
 
@@ -118,10 +95,8 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
             _xhtmlNameSpaceAttribute.AddAttribute(xElement);
             _manifestAttribute.AddAttribute(xElement);
-
-            _language.AddAttribute(xElement);
-            _direction.AddAttribute(xElement);
-
+            GlobalAttributes.AddAttributes(xElement);
+            
             foreach (var item in Content)
             {
                 xElement.Add(item.Generate());

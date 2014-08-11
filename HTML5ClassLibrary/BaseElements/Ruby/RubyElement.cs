@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
 using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 using HTML5ClassLibrary.BaseElements.InlineElements;
 using HTML5ClassLibrary.Exceptions;
@@ -14,22 +13,22 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
     /// These annotations typically appear in smaller typeface above or to the side of regular text, 
     /// and are meant to help with pronunciation of obscure characters or as a language learning aid.
     /// </summary>
-    public class RubyElement : IInlineItem, ICommonAttributes
+    public class RubyElement : IInlineItem
     {
-        // Common core attributes
-        private readonly ClassAttr _classattr = new ClassAttr();
-        private readonly IdAttribute _idattr = new IdAttribute();
-        private readonly TitleAttribute _titleattr = new TitleAttribute();
-        private readonly StyleAttribute _styleAttr = new StyleAttribute();
 
         /// <summary>
         /// Internal content of the element
         /// </summary>
         private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
 
+        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
+
         internal const string ElementName = "ruby";
 
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
+
+
+        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
 
         #region Implementation of IEPubTextItem
 
@@ -68,10 +67,7 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
                 }
             }
 
-            _classattr.ReadAttribute(xElement);
-            _idattr.ReadAttribute(xElement);
-            _titleattr.ReadAttribute(xElement);
-            _styleAttr.ReadAttribute(xElement);
+            _globalAttributes.ReadAttributes(xElement);
         }
 
         private bool IsValidSubType(IHTML5Item item)
@@ -100,10 +96,7 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
                 }
             }
 
-            _classattr.AddAttribute(xElement);
-            _idattr.AddAttribute(xElement);
-            _titleattr.AddAttribute(xElement);
-            _styleAttr.AddAttribute(xElement);
+            _globalAttributes.AddAttributes(xElement);
 
             return xElement;
         }
@@ -155,28 +148,5 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
 
         #endregion
 
-        #region Implementation of ICommonAttributes
-
-        public ClassAttr Class
-        {
-            get { return _classattr; }
-        }
-
-        public IdAttribute ID
-        {
-            get { return _idattr; }
-        }
-
-        public TitleAttribute Title
-        {
-            get { return _titleattr; } 
-        }
-
-        public StyleAttribute Style
-        {
-            get { return _styleAttr; }
-        }
-
-        #endregion
     }
 }

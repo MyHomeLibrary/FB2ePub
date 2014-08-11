@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
+using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 using HTML5ClassLibrary.Exceptions;
 
 namespace HTML5ClassLibrary.BaseElements.Structure_Header
@@ -19,6 +20,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         // Basic attributes
         private readonly HrefAttribute _hrefAttribute = new HrefAttribute();
         private readonly FormTargetAttribute _targetAttribute = new FormTargetAttribute();
+        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
+
+
+
+        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
 
         /// <summary>
         /// Specifies an absolute URL that acts as the base URL for resolving relative URLs. 
@@ -48,6 +54,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
                 throw new HTML5ViolationException(string.Format("xNode is not {0} element", ElementName));
             }
 
+            _globalAttributes.ReadAttributes(xElement);
             _hrefAttribute.ReadAttribute(xElement);
             _targetAttribute.ReadAttribute(xElement);
         }
@@ -57,6 +64,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
             
+            _globalAttributes.AddAttributes(xElement);
             _hrefAttribute.AddAttribute(xElement);
             _targetAttribute.AddAttribute(xElement);
 

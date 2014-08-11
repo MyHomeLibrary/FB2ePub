@@ -40,8 +40,6 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
             ReadAttributes(xElement);
 
-            _citeAttribute.ReadAttribute(xElement);
-
             Content.Clear();
             IEnumerable<XNode> descendants = xElement.Nodes();
             foreach (var node in descendants)
@@ -87,13 +85,23 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
             AddAttributes(xElement);
 
-            _citeAttribute.AddAttribute(xElement);
-
             foreach (var item in Content)
             {
                 xElement.Add(item.Generate());
             }
             return xElement;
+        }
+
+        protected override void AddAttributes(XElement xElement)
+        {
+            base.AddAttributes(xElement);
+            _citeAttribute.AddAttribute(xElement);
+        }
+
+        protected override void ReadAttributes(XElement xElement)
+        {
+            base.ReadAttributes(xElement);
+            _citeAttribute.ReadAttribute(xElement);
         }
 
         /// <summary>

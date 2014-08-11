@@ -4,10 +4,8 @@ using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
 using HTML5ClassLibrary.Attributes.FlaggedAttributes;
-using HTML5ClassLibrary.BaseElements;
-using HTML5ClassLibrary.BaseElements.InlineElements;
 
-namespace HTML5ClassLibrary
+namespace HTML5ClassLibrary.BaseElements.InlineElements
 {
     public class MenuItem : BaseInlineItem
     {

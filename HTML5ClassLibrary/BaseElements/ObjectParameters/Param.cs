@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 
 namespace HTML5ClassLibrary.BaseElements.ObjectParameters
 {
@@ -13,9 +14,9 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
     /// </summary>
     public class Param : IHTML5Item
     {
-        // Base attributes
         private readonly NameAttribute _nameAttribute = new NameAttribute();
         private readonly ValueAttribute _valueAttribute = new ValueAttribute();
+        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
 
 
 
@@ -30,6 +31,7 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
         #region public_properties
 
 
+        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
 
         /// <summary>
         /// his attribute defines the name of a run-time parameter, assumed to be known by the inserted object. 
@@ -65,6 +67,7 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
                 throw new Exception(string.Format("xNode is not {0} element", ElementName));
             }
 
+            _globalAttributes.ReadAttributes(xElement);
             _nameAttribute.ReadAttribute(xElement);
             _valueAttribute.ReadAttribute(xElement);
         }
@@ -77,6 +80,7 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
+            _globalAttributes.ReadAttributes(xElement);
             _nameAttribute.AddAttribute(xElement);
             _valueAttribute.AddAttribute(xElement);
 
@@ -93,10 +97,10 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
         }
 
         /// <summary>
-        /// Adds subitem to the item , only if 
+        /// Adds sub-item to the item , only if 
         /// allowed by the rules and element can accept content
         /// </summary>
-        /// <param name="item">subitem to add</param>
+        /// <param name="item">sub-item to add</param>
         public void Add(IHTML5Item item)
         {
             throw new Exception("This element does not contain sub-items");

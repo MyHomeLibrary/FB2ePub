@@ -20,8 +20,6 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
 
         internal const string ElementName = "rt";
 
-        // Basic attribute 
-
         #region Overrides of BaseRubyItem
 
 

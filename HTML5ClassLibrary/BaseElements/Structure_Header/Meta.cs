@@ -16,16 +16,15 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         internal const string ElementName = "meta";
 
 
-        private readonly LanguageAttribute _language = new LanguageAttribute();
-        private readonly DirectionAttribute _direction = new DirectionAttribute();
-
-        // Base attributes
         private readonly ContentAttribute _contentAttribute = new ContentAttribute();
         private readonly TokenNameAttribute _nameAttribute = new TokenNameAttribute();
         private readonly HTTPEquivAttribute _httpEqvAttribute = new HTTPEquivAttribute();
         private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
+        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
 
 
+
+        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
 
         /// <summary>
         /// Specifies the character encoding for the HTML document 
@@ -37,25 +36,6 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         /// Web servers use this attribute to gather information for HTTP response message headers.
         /// </summary>
         public HTTPEquivAttribute HTTPEquvalent { get { return _httpEqvAttribute; } }
-
-        /// <summary>
-        /// This attribute specifies the base language of an element's attribute values and text content.
-        /// </summary>
-        public LanguageAttribute Language
-        {
-            get { return _language; }
-        }
-
-        /// <summary>
-        /// This attribute specifies the base direction of text. 
-        /// Possible values:
-        /// ltr: Left-to-right 
-        /// rtl: Right-to-left
-        /// </summary>
-        public DirectionAttribute Direction
-        {
-            get { return _direction; }
-        }
 
         /// <summary>
         /// The property's value.
@@ -88,9 +68,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
                 throw new Exception(string.Format("xNode is not {0} element", ElementName));
             }
 
-            _language.ReadAttribute(xElement);
-            _direction.ReadAttribute(xElement);
-
+            _globalAttributes.ReadAttributes(xElement);
             _contentAttribute.ReadAttribute(xElement);
             _nameAttribute.ReadAttribute(xElement);
             _httpEqvAttribute.ReadAttribute(xElement);
@@ -101,9 +79,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
-            _language.AddAttribute(xElement);
-            _direction.AddAttribute(xElement);
-
+            _globalAttributes.AddAttributes(xElement);
             _contentAttribute.AddAttribute(xElement);
             _nameAttribute.AddAttribute(xElement);
             _httpEqvAttribute.AddAttribute(xElement);

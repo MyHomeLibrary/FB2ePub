@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.BaseElements;
-using HTML5ClassLibrary.BaseElements.BlockElements;
-using HTML5ClassLibrary.Exceptions;
+using HTML5ClassLibrary.BaseElements.InlineElements;
 
-namespace HTML5ClassLibrary
+namespace HTML5ClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// The "menu" tag defines a list/menu of commands.
