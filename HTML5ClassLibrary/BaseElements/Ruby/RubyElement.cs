@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 using HTML5ClassLibrary.BaseElements.InlineElements;
 using HTML5ClassLibrary.Exceptions;
 

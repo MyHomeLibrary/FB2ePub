@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
 using HTML5ClassLibrary.Attributes.Events;
 
 namespace HTML5ClassLibrary.BaseElements.Ruby
@@ -18,8 +21,8 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
         private readonly TitleAttribute titleattr = new TitleAttribute();
 
 
-        private readonly LanguageAttr language = new LanguageAttr();
-        private readonly DirectionAttr direction = new DirectionAttr();
+        private readonly LanguageAttribute language = new LanguageAttribute();
+        private readonly DirectionAttribute direction = new DirectionAttribute();
 
         // Common event attributes
         private readonly OnClickEventAttribute onClick = new OnClickEventAttribute();
@@ -87,7 +90,7 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
         /// ltr: Left-to-right 
         /// rtl: Right-to-left
         /// </summary>
-        public DirectionAttr Direction
+        public DirectionAttribute Direction
         {
             get { return direction; }
         }
@@ -152,7 +155,7 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
         /// <summary>
         /// This attribute specifies the base language of an element's attribute values and text content.
         /// </summary>
-        public LanguageAttr Language
+        public LanguageAttribute Language
         {
             get { return language; }
         }

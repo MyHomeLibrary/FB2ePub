@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
 using HTML5ClassLibrary.Attributes.Events;
 using HTML5ClassLibrary.Exceptions;
 
@@ -17,8 +20,8 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         protected abstract string GetElementName();
 
-        protected readonly LanguageAttr LanguageAttr = new LanguageAttr();
-        protected readonly DirectionAttr DirectionAttr = new DirectionAttr();
+        protected readonly LanguageAttribute LanguageAttr = new LanguageAttribute();
+        protected readonly DirectionAttribute DirectionAttr = new DirectionAttribute();
 
         // Common event attributes
         protected readonly OnClickEventAttribute OnClickEvent = new OnClickEventAttribute();
@@ -40,7 +43,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         /// ltr: Left-to-right 
         /// rtl: Right-to-left
         /// </summary>
-        public DirectionAttr Direction
+        public DirectionAttribute Direction
         {
             get { return DirectionAttr; }
         }
@@ -105,7 +108,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// This attribute specifies the base language of an element's attribute values and text content.
         /// </summary>
-        public LanguageAttr Language
+        public LanguageAttribute Language
         {
             get { return LanguageAttr; }
         }

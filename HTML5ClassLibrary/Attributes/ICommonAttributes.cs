@@ -1,4 +1,6 @@
-﻿namespace HTML5ClassLibrary.Attributes
+﻿using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+
+namespace HTML5ClassLibrary.Attributes
 {
     /// <summary>
     /// Attributes that can be part of any HTML5 element

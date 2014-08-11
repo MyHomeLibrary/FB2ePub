@@ -4,6 +4,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 using HTML5ClassLibrary.BaseElements.BlockElements;
 using Script = HTML5ClassLibrary.BaseElements.InlineElements.Script;
 
@@ -19,8 +20,8 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
     {
         internal const string ElementName = "head";
 
-        private readonly LanguageAttr _language = new LanguageAttr();
-        private readonly DirectionAttr _direction = new DirectionAttr();
+        private readonly LanguageAttribute _language = new LanguageAttribute();
+        private readonly DirectionAttribute _direction = new DirectionAttribute();
 
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
@@ -32,7 +33,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         /// ltr: Left-to-right 
         /// rtl: Right-to-left
         /// </summary>
-        public DirectionAttr Direction
+        public DirectionAttribute Direction
         {
             get { return _direction; }
         }
@@ -40,7 +41,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         /// <summary>
         /// This attribute specifies the base language of an element's attribute values and text content.
         /// </summary>
-        public LanguageAttr Language
+        public LanguageAttribute Language
         {
             get { return _language; }
         }
