@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 
 namespace HTML5ClassLibrary.BaseElements.Structure_Header
 {
@@ -15,8 +16,8 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         internal const string ElementName = "meta";
 
 
-        private readonly LanguageAttr _language = new LanguageAttr();
-        private readonly DirectionAttr _direction = new DirectionAttr();
+        private readonly LanguageAttribute _language = new LanguageAttribute();
+        private readonly DirectionAttribute _direction = new DirectionAttribute();
 
         // Base attributes
         private readonly ContentAttribute _contentAttribute = new ContentAttribute();
@@ -40,7 +41,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         /// <summary>
         /// This attribute specifies the base language of an element's attribute values and text content.
         /// </summary>
-        public LanguageAttr Language
+        public LanguageAttribute Language
         {
             get { return _language; }
         }
@@ -51,7 +52,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         /// ltr: Left-to-right 
         /// rtl: Right-to-left
         /// </summary>
-        public DirectionAttr Direction
+        public DirectionAttribute Direction
         {
             get { return _direction; }
         }

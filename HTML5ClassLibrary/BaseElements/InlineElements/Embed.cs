@@ -5,6 +5,9 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
 using HTML5ClassLibrary.Attributes.Events;
 using HTML5ClassLibrary.Exceptions;
 
@@ -14,8 +17,8 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     {
         public const string ElementName = "embed";
 
-        private readonly LanguageAttr _language = new LanguageAttr();
-        private readonly DirectionAttr _direction = new DirectionAttr();
+        private readonly LanguageAttribute _language = new LanguageAttribute();
+        private readonly DirectionAttribute _direction = new DirectionAttribute();
 
         // Common event attributes
         private readonly OnClickEventAttribute _onClick = new OnClickEventAttribute();
@@ -36,7 +39,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         /// ltr: Left-to-right 
         /// rtl: Right-to-left
         /// </summary>
-        public DirectionAttr Direction
+        public DirectionAttribute Direction
         {
             get { return _direction; }
         }
@@ -101,7 +104,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// This attribute specifies the base language of an element's attribute values and text content.
         /// </summary>
-        public LanguageAttr Language
+        public LanguageAttribute Language
         {
             get { return _language; }
         }

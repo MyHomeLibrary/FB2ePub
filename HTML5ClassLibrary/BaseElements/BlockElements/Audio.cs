@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.FlaggedAttributes;
 using HTML5ClassLibrary.BaseElements.InlineElements;
 
 namespace HTML5ClassLibrary.BaseElements.BlockElements

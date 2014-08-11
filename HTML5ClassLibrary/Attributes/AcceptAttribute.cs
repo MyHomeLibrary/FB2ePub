@@ -27,8 +27,7 @@ namespace HTML5ClassLibrary.Attributes
             XAttribute xObject = element.Attribute(AttributeName);
             if (xObject != null)
             {
-                _attrObject = new ContentType();
-                _attrObject.Value = xObject.Value;
+                _attrObject = new ContentType {Value = xObject.Value};
                 _hasValue = true;
             }
         }

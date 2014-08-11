@@ -1,4 +1,7 @@
 ﻿using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
 using HTML5ClassLibrary.Attributes.Events;
 
 namespace HTML5ClassLibrary.BaseElements.BlockElements
@@ -11,7 +14,7 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         /// ltr: Left-to-right 
         /// rtl: Right-to-left
         /// </summary>
-        DirectionAttr Direction { get; }
+        DirectionAttribute Direction { get; }
 
         /// <summary>
         /// A client-side script event that occurs when a pointing device button is clicked over an element.
@@ -70,7 +73,7 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// This attribute specifies the base language of an element's attribute values and text content.
         /// </summary>
-        LanguageAttr Language { get; }
+        LanguageAttribute Language { get; }
 
         /// <summary>
         /// This attribute assigns a class name or set of class names to an element. 
