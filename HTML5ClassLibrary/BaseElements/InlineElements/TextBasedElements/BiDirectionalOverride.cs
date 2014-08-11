@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
+﻿using System.Xml.Linq;
 using HTML5ClassLibrary.Exceptions;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// Unlike English, which is written from left-to-right (LTR), some languages, such as Arabic and Hebrew, 
@@ -27,7 +23,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         protected override void AddAttributes(XElement xElement)
         {
-            if (!DirectionAttr.HasValue())
+            if (!GlobalAttributes.Direction.HasValue())
             {
                 throw new HTML5ViolationException(this,"The BDO element have to have direction set");
             }

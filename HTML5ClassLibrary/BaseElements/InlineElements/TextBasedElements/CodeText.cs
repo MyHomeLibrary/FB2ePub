@@ -1,11 +1,11 @@
-﻿namespace HTML5ClassLibrary.BaseElements.InlineElements
+﻿namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
-    /// The kbd element indicates input to be entered by the user.
+    /// The code element contains a fragment of computer code.
     /// </summary>
-    public class Kbd : TextBasedElement
+    public class CodeText : TextBasedElement
     {
-        public const string ElementName = "kbd";
+        public const string ElementName = "code";
 
         #region Overrides of TextBasedElement
 

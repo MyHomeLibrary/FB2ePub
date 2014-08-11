@@ -2,48 +2,22 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTML5ClassLibrary.Attributes.Events;
-using HTML5ClassLibrary.BaseElements.BlockElements;
 using HTML5ClassLibrary.Exceptions;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
-    /// <summary>
-    /// The ins element is used to mark up content that has been inserted into the current version of a document. 
-    /// The ins element indicates that content in the previous version of the document has been changed, 
-    /// and that the changes are found inside the ins element.
-    /// </summary>
-    public class InsertedText : BaseInlineItem, IBlockElement
+    public abstract class TextBasedElement : BaseInlineItem
     {
         /// <summary>
         /// Internal content of the element
         /// </summary>
-        private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
+        protected readonly List<IHTML5Item> Content = new List<IHTML5Item>();
+
+        protected abstract string GetElementName();
+
+        
 
 
-        private readonly CiteAttribute _cite = new CiteAttribute();
-        private readonly DateTimeAttribute _datetime = new DateTimeAttribute();
-
-        public const string ElementName = "ins";
-
-        /// <summary>
-        /// This attribute is intended to point to information explaining why content was changed. 
-        /// For example, this can be a URL leading to a Web page that contains such an explanation.
-        /// </summary>
-        public CiteAttribute Cite
-        {
-            get { return _cite; }
-        }
-
-
-        public DateTimeAttribute DateTime
-        {
-            get { return _datetime; }
-        }
 
         #region Overrides of BaseInlineItem
 
@@ -58,14 +32,14 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
                 throw new Exception("xNode is not of element type");
             }
             var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
+            if (xElement.Name.LocalName != GetElementName())
             {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
+                throw new Exception(string.Format("xNode is not {0} element", GetElementName()));
             }
 
             ReadAttributes(xElement);
 
-            _content.Clear();
+            Content.Clear();
             IEnumerable<XNode> descendants = xElement.Nodes();
             foreach (var node in descendants)
             {
@@ -80,12 +54,13 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
                     {
                         continue;
                     }
-                    _content.Add(item);
+                    Content.Add(item);
                 }
             }
+
         }
 
-        private bool IsValidSubType(IHTML5Item item)
+        protected virtual bool IsValidSubType(IHTML5Item item)
         {
             if (item is SimpleHTML5Text)
             {
@@ -95,13 +70,8 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
             {
                 return item.IsValid();
             }
-            if (item is IBlockElement)
-            {
-                return item.IsValid();
-            }
             return false;
         }
-
 
         /// <summary>
         /// Generates element to XNode from data
@@ -111,19 +81,15 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         /// </returns>
         public override XNode Generate()
         {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
+            var xElement = new XElement(XhtmlNameSpace + GetElementName());
 
             AddAttributes(xElement);
 
-            if (_content.Count > 0)
+            foreach (var item in Content)
             {
-                foreach (var item in _content)
-                {
-                    xElement.Add(item.Generate());
-                }
+                xElement.Add(item.Generate());
             }
             return xElement;
-
         }
 
         /// <summary>
@@ -146,7 +112,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         {
             if ((item != null) && IsValidSubType(item))
             {
-                _content.Add(item);
+                Content.Add(item);
                 item.Parent = this;
             }
             else
@@ -157,7 +123,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public override void Remove(IHTML5Item item)
         {
-            if(_content.Remove(item))
+            if(Content.Remove(item))
             {
                 item.Parent = null;
             }
@@ -165,23 +131,9 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public override List<IHTML5Item> SubElements()
         {
-            return _content;
+            return Content;
         }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _cite.AddAttribute(xElement);
-            _datetime.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _cite.ReadAttribute(xElement);
-            _datetime.ReadAttribute(xElement);
-        }
-
         #endregion
+
     }
 }

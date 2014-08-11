@@ -1,4 +1,4 @@
-﻿namespace HTML5ClassLibrary.BaseElements.InlineElements
+﻿namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The sub element indicates that its contents should be regarded as a subscript.

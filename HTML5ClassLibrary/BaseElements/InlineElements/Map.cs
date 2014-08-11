@@ -194,8 +194,8 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
             bool valid = _nameAttribute.HasValue();
             if (valid)
             {
-                if (ID.HasValue() && // if ID set should have same value as Name
-                    string.Compare(ID.Value, _nameAttribute.Value, StringComparison.InvariantCulture) != 0)
+                if (GlobalAttributes.ID.HasValue() && // if ID set should have same value as Name
+                    string.Compare(GlobalAttributes.ID.Value, _nameAttribute.Value, StringComparison.InvariantCulture) != 0)
                 {
                     valid = false;
                 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+﻿namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The "figcaption" tag defines a caption for a "figure" element.

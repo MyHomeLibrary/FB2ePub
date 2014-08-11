@@ -1,4 +1,4 @@
-﻿namespace HTML5ClassLibrary.BaseElements.InlineElements
+﻿namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The sup element indicates that its contents should regarded as superscript.

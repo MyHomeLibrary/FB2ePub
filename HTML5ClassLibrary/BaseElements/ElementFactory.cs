@@ -3,6 +3,7 @@ using System.Xml.Linq;
 using HTML5ClassLibrary.BaseElements.BlockElements;
 using HTML5ClassLibrary.BaseElements.FormMenuOptions;
 using HTML5ClassLibrary.BaseElements.InlineElements;
+using HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements;
 using HTML5ClassLibrary.BaseElements.Legends;
 using HTML5ClassLibrary.BaseElements.ListElements;
 using HTML5ClassLibrary.BaseElements.MapAreas;

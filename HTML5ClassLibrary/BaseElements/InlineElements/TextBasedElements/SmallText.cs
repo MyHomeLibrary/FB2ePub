@@ -1,4 +1,4 @@
-﻿namespace HTML5ClassLibrary.BaseElements.InlineElements
+﻿namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The "small" tag defines smaller text (fine print and other side comments).
