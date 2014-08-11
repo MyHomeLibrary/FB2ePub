@@ -11,11 +11,11 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
         private readonly AccessKeyAttribute _accessKeyAttribute = new AccessKeyAttribute();
         private readonly ClassAttr _classAttribute = new ClassAttr();
         private readonly ContentEditableAttribute _contentEditableAttribute = new ContentEditableAttribute();
-        private readonly ContextMenuAttribute _contextMenuAttribute = new ContextMenuAttribute();
-        private readonly AnyDataAttribute _anyDataAttribute = new AnyDataAttribute();
         private readonly DirectionAttribute _directionAttribute = new DirectionAttribute();
         private readonly DraggableAttribute _draggable = new DraggableAttribute();
         private readonly DropZoneAttribute _dropZoneAttribure = new DropZoneAttribute();
+        private readonly ContextMenuAttribute _contextMenuAttribute = new ContextMenuAttribute();
+        private readonly AnyDataAttribute _anyDataAttribute = new AnyDataAttribute(); // not really global but contain custom elements that can appear on any element so we put it here 
         private readonly HiddenAttribute _hiddenAttribute = new HiddenAttribute();
         private readonly IdAttribute _idAttribute = new IdAttribute();
         private readonly LanguageAttribute _languageAttribute = new LanguageAttribute();

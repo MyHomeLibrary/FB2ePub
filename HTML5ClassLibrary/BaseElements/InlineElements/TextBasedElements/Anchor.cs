@@ -1,5 +1,7 @@
 ﻿using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 
 namespace HTML5ClassLibrary.BaseElements.InlineElements
@@ -11,15 +13,13 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     {
 
         private readonly HrefAttribute _hrefAttrib = new HrefAttribute();
-
-
-        // advanced attributes
         private readonly HRefLanguageAttribute _hrefLangAttrib = new HRefLanguageAttribute();
         private readonly AreaRelationAttribute _relAttrib = new AreaRelationAttribute();
         private readonly DownloadAttribute _downloadAttrib = new DownloadAttribute();
         private readonly MediaAttribute _mediaAttr = new MediaAttribute();
         private readonly FormTargetAttribute _targetAttr = new FormTargetAttribute();
         private readonly MIMETypeAttribute _typeAttr = new MIMETypeAttribute();
+        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
 
 
 #region public_attributes
@@ -103,11 +103,8 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         protected override void ReadAttributes(XElement xElement)
         {
             base.ReadAttributes(xElement);
-
-            // Basic attributes
+            _globalAttributes.ReadAttributes(xElement);
             _hrefAttrib.ReadAttribute(xElement);
-
-            //Advanced attributes
             _hrefLangAttrib.ReadAttribute(xElement);
             _relAttrib.ReadAttribute(xElement);
             _downloadAttrib.ReadAttribute(xElement);
@@ -120,11 +117,8 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         protected override void AddAttributes(XElement xElement)
         {
             base.AddAttributes(xElement);
-
-            // basic attributes
+            _globalAttributes.AddAttributes(xElement);
             _hrefAttrib.AddAttribute(xElement);
-
-            // advanced attributes
             _hrefLangAttrib.AddAttribute(xElement);
             _relAttrib.AddAttribute(xElement);
             _downloadAttrib.AddAttribute(xElement);

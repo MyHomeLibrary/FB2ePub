@@ -1,11 +1,11 @@
-﻿namespace HTML5ClassLibrary.BaseElements.InlineElements
+﻿namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
-    /// The strong element is used to indicate stronger emphasis.
+    /// The em element is used to indicate emphasis.
     /// </summary>
-    public class Strong : TextBasedElement
+    public class EmphasisedText : TextBasedElement
     {
-        internal const string ElementName = "strong";
+        public const string ElementName = "em";
 
         #region Overrides of TextBasedElement
 

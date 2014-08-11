@@ -1,6 +1,6 @@
 ﻿using HTML5ClassLibrary.Attributes;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     public class PreFormated : TextBasedElement
     {

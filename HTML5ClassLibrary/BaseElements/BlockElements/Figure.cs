@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.BaseElements.InlineElements;
+using HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace HTML5ClassLibrary.BaseElements.BlockElements
 {
