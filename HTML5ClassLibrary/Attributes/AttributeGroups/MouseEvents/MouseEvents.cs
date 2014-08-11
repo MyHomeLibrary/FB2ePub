@@ -8,21 +8,24 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents
     /// </summary>
     public class MouseEvents
     {
-        private readonly OnClickEventAttribute _onClickEventAttribute = new OnClickEventAttribute();
-        private readonly OnDblClickEventAttribute _onDblClickEventAttribute = new OnDblClickEventAttribute();
-        private readonly OnDragEventAttribute _onDragEventAttribute = new OnDragEventAttribute();
-        private readonly OnDragEndEventAttribute _onDragEndEventAttribute = new OnDragEndEventAttribute();
-        private readonly OnDragEnterEventAttribute _onDragEnterEventAttribute = new OnDragEnterEventAttribute();
-        private readonly OnDragLeaveEventAttribute _onDragLeaveEventAttribute = new OnDragLeaveEventAttribute();
-        private readonly OnDragOverEventAttribute _onDragOverEventAttribute = new OnDragOverEventAttribute();
-        private readonly OnDragStartEventAttribute _onDragStartEventAttribute = new OnDragStartEventAttribute();
-        private readonly OnDropEventAttribute _onDropEventAttribute = new OnDropEventAttribute();
+        private readonly OnClickEventAttribute _onClickEventAttribute = new OnClickEventAttribute();  
+        private readonly OnDblClickEventAttribute _onDblClickEventAttribute = new OnDblClickEventAttribute(); 
+        private readonly OnDragEventAttribute _onDragEventAttribute = new OnDragEventAttribute(); 
+        private readonly OnDragEndEventAttribute _onDragEndEventAttribute = new OnDragEndEventAttribute(); 
+        private readonly OnDragEnterEventAttribute _onDragEnterEventAttribute = new OnDragEnterEventAttribute(); 
+        private readonly OnDragLeaveEventAttribute _onDragLeaveEventAttribute = new OnDragLeaveEventAttribute(); 
+        private readonly OnDragOverEventAttribute _onDragOverEventAttribute = new OnDragOverEventAttribute(); 
+        private readonly OnDragStartEventAttribute _onDragStartEventAttribute = new OnDragStartEventAttribute(); 
+        private readonly OnDropEventAttribute _onDropEventAttribute = new OnDropEventAttribute(); 
         private readonly OnMouseDownEventAttribute _onMouseDownEventAttribute = new OnMouseDownEventAttribute();
-        private readonly OnMouseMoveEventAttribute _onMouseMoveEventAttribute = new OnMouseMoveEventAttribute();
-        private readonly OnMouseOutEventAttribute _onMouseOutEventAttribute = new OnMouseOutEventAttribute();
-        private readonly OnMouseUpEventAttribute _onMouseUpEventAttribute = new OnMouseUpEventAttribute();
-        private readonly OnMouseWheelEventAttribute _onMouseWheelEventAttribute = new OnMouseWheelEventAttribute();
-        private readonly OnScrollEventAttribute _onScrollEventAttribute = new OnScrollEventAttribute();
+        private readonly OnMouseMoveEventAttribute _onMouseMoveEventAttribute = new OnMouseMoveEventAttribute(); 
+        private readonly OnMouseOutEventAttribute _onMouseOutEventAttribute = new OnMouseOutEventAttribute(); 
+        private readonly OnMouseUpEventAttribute _onMouseUpEventAttribute = new OnMouseUpEventAttribute(); 
+        private readonly OnMouseWheelEventAttribute _onMouseWheelEventAttribute = new OnMouseWheelEventAttribute(); 
+        private readonly OnScrollEventAttribute _onScrollEventAttribute = new OnScrollEventAttribute(); 
+        private readonly OnMouseEnterEventAttribute _onMouseEnterEventAttribute =new OnMouseEnterEventAttribute();
+        private readonly OnMouseLeaveEventAttribute _onMouseLeaveEventAttribute = new OnMouseLeaveEventAttribute();
+        private readonly OnMouseOverEventAttribute _onMouseOverEventAttribute = new OnMouseOverEventAttribute();
 
 
 
@@ -117,6 +120,21 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents
         /// </summary>
         public OnScrollEventAttribute OnScrollEvent { get { return _onScrollEventAttribute; }}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public OnMouseEnterEventAttribute OnMouseEnterEvent { get { return _onMouseEnterEventAttribute; }}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public OnMouseLeaveEventAttribute OnMouseLeaveEvent { get { return _onMouseLeaveEventAttribute; }}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public OnMouseOverEventAttribute OnMouseOverEvent { get { return _onMouseOverEventAttribute; }}
+
 
 
 
@@ -142,6 +160,9 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents
             _onMouseUpEventAttribute.AddAttribute(xElement);
             _onMouseWheelEventAttribute.AddAttribute(xElement);
             _onScrollEventAttribute.AddAttribute(xElement);
+            _onMouseEnterEventAttribute.AddAttribute(xElement);
+            _onMouseLeaveEventAttribute.AddAttribute(xElement);
+            _onMouseOverEventAttribute.AddAttribute(xElement);
         }
 
         /// <summary>
@@ -165,6 +186,9 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents
             _onMouseUpEventAttribute.ReadAttribute(xElement);
             _onMouseWheelEventAttribute.ReadAttribute(xElement);
             _onScrollEventAttribute.ReadAttribute(xElement);
+            _onMouseEnterEventAttribute.ReadAttribute(xElement);
+            _onMouseLeaveEventAttribute.ReadAttribute(xElement);
+            _onMouseOverEventAttribute.ReadAttribute(xElement);
         }
     }
 }

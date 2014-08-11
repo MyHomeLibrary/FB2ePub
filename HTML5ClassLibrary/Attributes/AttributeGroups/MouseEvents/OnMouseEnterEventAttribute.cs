@@ -5,15 +5,14 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents
     /// <summary>
     /// 
     /// </summary>
-    public class OnMouseOverEventAttribute : OnEventAttribute
+    public class OnMouseEnterEventAttribute : OnEventAttribute
     {
         #region Overrides of OnEventAttribute
 
         protected override string GetAttributeName()
         {
-            return "onmouseover";
+            return "mouseenter";
         }
-
         #endregion
     }
 }

@@ -39,6 +39,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             }
             
             GlobalAttributes.ReadAttributes(xElement);
+            FormEvents.ReadAttributes(xElement);
+            KeyboardEvents.ReadAttributes(xElement);
+            MediaEvents.ReadAttributes(xElement);
+            MouseEvents.ReadAttributes(xElement);
+            WindowEvents.ReadAttributes(xElement);
 
             Content.Clear();
             IEnumerable<XNode> descendants = xElement.Nodes();
@@ -84,6 +89,12 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
             GlobalAttributes.AddAttributes(xElement);
+            FormEvents.AddAttributes(xElement);
+            KeyboardEvents.AddAttributes(xElement);
+            MediaEvents.AddAttributes(xElement);
+            MouseEvents.AddAttributes(xElement);
+            WindowEvents.AddAttributes(xElement);
+
 
             foreach (var item in Content)
             {

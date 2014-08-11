@@ -7,9 +7,9 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents
     /// </summary>
     public class KeyboardEvents
     {
-        private readonly OnKeyDownEventAttribute _onKeyDownEventAttribute = new OnKeyDownEventAttribute();
-        private readonly OnKeyPressEventAttribute _onKeyPressEventAttribute = new OnKeyPressEventAttribute();
-        private readonly OnKeyUpEventAttribute _onKeyUpEventAttribute = new OnKeyUpEventAttribute();
+        private readonly OnKeyDownEventAttribute _onKeyDownEventAttribute = new OnKeyDownEventAttribute(); // global
+        private readonly OnKeyPressEventAttribute _onKeyPressEventAttribute = new OnKeyPressEventAttribute(); // global
+        private readonly OnKeyUpEventAttribute _onKeyUpEventAttribute = new OnKeyUpEventAttribute(); // global
 
 
 

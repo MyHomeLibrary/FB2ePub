@@ -7,16 +7,19 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents
     /// </summary>
     public class FormEvents
     {
-        private readonly OnBlurEventAttribute _onBlurEventAttribute = new OnBlurEventAttribute();
-        private readonly OnChangeEventAttribute _onChangeEventAttribute = new OnChangeEventAttribute();
+        private readonly OnBlurEventAttribute _onBlurEventAttribute = new OnBlurEventAttribute(); 
+        private readonly OnChangeEventAttribute _onChangeEventAttribute = new OnChangeEventAttribute();  
         private readonly OnContextMenuAttribute _onContextMenuAttribute = new OnContextMenuAttribute();
-        private readonly OnFocusEventAttribute _onFocusEventAttribute = new OnFocusEventAttribute();
+        private readonly OnFocusEventAttribute _onFocusEventAttribute = new OnFocusEventAttribute(); 
         private readonly OnFormChangeEventAttribute _onFormChangeEventAttribute = new OnFormChangeEventAttribute();
-        private readonly OnFormInputEventAttribute _onFormInputEventAttribute = new OnFormInputEventAttribute();
+        private readonly OnFormInputEventAttribute _onFormInputEventAttribute = new OnFormInputEventAttribute(); 
         private readonly OnInputEventAttribute _onInputEventAttribute = new OnInputEventAttribute();
-        private readonly OnInvalidEventAttribute _onInvalidEventAttribute = new OnInvalidEventAttribute();
-        private readonly OnSelectEventAttribute _onSelectEventAttribute = new OnSelectEventAttribute();
-        private readonly OnSubmitEventAttribute _onSubmitEventAttribute = new OnSubmitEventAttribute();
+        private readonly OnInvalidEventAttribute _onInvalidEventAttribute = new OnInvalidEventAttribute(); 
+        private readonly OnSelectEventAttribute _onSelectEventAttribute = new OnSelectEventAttribute(); 
+        private readonly OnSubmitEventAttribute _onSubmitEventAttribute = new OnSubmitEventAttribute(); 
+        private readonly OnResetEventAttribute _onResetEventAttribute = new OnResetEventAttribute();
+        private readonly OnToggleEventAttribute _onToggleEventAttribute = new OnToggleEventAttribute();
+
 
 
 
@@ -79,6 +82,15 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents
         /// </summary>
         public OnSubmitEventAttribute OnSubmitEvent { get { return _onSubmitEventAttribute; }}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public OnResetEventAttribute OnResetEvent { get { return _onResetEventAttribute; } }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public  OnToggleEventAttribute OnToggleEvent { get { return _onToggleEventAttribute; }}
 
 
         /// <summary>
@@ -97,6 +109,8 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents
             _onInvalidEventAttribute.AddAttribute(xElement);
             _onSelectEventAttribute.AddAttribute(xElement);
             _onSubmitEventAttribute.AddAttribute(xElement);
+            _onResetEventAttribute.AddAttribute(xElement);
+            _onToggleEventAttribute.AddAttribute(xElement);
         }
 
         /// <summary>
@@ -115,6 +129,8 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents
             _onInvalidEventAttribute.ReadAttribute(xElement);
             _onSelectEventAttribute.ReadAttribute(xElement);
             _onSubmitEventAttribute.ReadAttribute(xElement);
+            _onResetEventAttribute.ReadAttribute(xElement);
+            _onToggleEventAttribute.ReadAttribute(xElement);
         }
     }
 }

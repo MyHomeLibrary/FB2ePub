@@ -1,17 +1,17 @@
 ﻿using HTML5ClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents
+namespace HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents
 {
     /// <summary>
     /// 
     /// </summary>
-    public class OnMouseOverEventAttribute : OnEventAttribute
+    public class OnMediaCancelEventAttribute : OnEventAttribute
     {
         #region Overrides of OnEventAttribute
 
         protected override string GetAttributeName()
         {
-            return "onmouseover";
+            return "oncancel";
         }
 
         #endregion

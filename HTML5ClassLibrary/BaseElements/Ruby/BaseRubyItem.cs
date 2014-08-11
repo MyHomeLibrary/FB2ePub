@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
+using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
 using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents;
 using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
 using HTML5ClassLibrary.Attributes.Events;
 
 namespace HTML5ClassLibrary.BaseElements.Ruby
@@ -16,23 +19,48 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
     public abstract class BaseRubyItem : IRubyItem
     {
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
-        private HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
+        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
+        private readonly FormEvents _formEvents = new FormEvents();
+        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
+        private readonly MediaEvents _mediaEvents = new MediaEvents();
+        private readonly MouseEvents _mouseEvents = new MouseEvents();
+        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
 
         #region public_properties
 
         public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
 
+        public FormEvents FormEvents { get { return _formEvents; } }
+
+        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; } }
+
+        public MediaEvents MediaEvents { get { return _mediaEvents; } }
+
+        public MouseEvents MouseEvents { get { return _mouseEvents; } }
+
+        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
+
         #endregion
 
         protected virtual void AddAtributes(XElement xElement)
         {
             _globalAttributes.AddAttributes(xElement);
+            _formEvents.AddAttributes(xElement);
+            _keyboardEvents.AddAttributes(xElement);
+            _mediaEvents.AddAttributes(xElement);
+            _mouseEvents.AddAttributes(xElement);
+            _windowEventAttributes.AddAttributes(xElement);
         }
 
         protected virtual void ReadAttributes(XElement xElement)
         {
             _globalAttributes.ReadAttributes(xElement);
+            _formEvents.ReadAttributes(xElement);
+            _keyboardEvents.ReadAttributes(xElement);
+            _mediaEvents.ReadAttributes(xElement);
+            _mouseEvents.ReadAttributes(xElement);
+            _windowEventAttributes.ReadAttributes(xElement);
         }
 
 
@@ -41,10 +69,10 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
         public abstract bool IsValid();
 
         /// <summary>
-        /// Adds subitem to the item , only if 
+        /// Adds sub-item to the item , only if 
         /// allowed by the rules and element can accept content
         /// </summary>
-        /// <param name="item">subitem to add</param>
+        /// <param name="item">sub-item to add</param>
         public abstract void Add(IHTML5Item item);
 
         public abstract void Remove(IHTML5Item item);

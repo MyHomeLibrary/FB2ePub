@@ -1,10 +1,7 @@
 ﻿using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
-
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// Hyperlink
@@ -19,7 +16,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         private readonly MediaAttribute _mediaAttr = new MediaAttribute();
         private readonly FormTargetAttribute _targetAttr = new FormTargetAttribute();
         private readonly MIMETypeAttribute _typeAttr = new MIMETypeAttribute();
-        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
+ 
 
 
 #region public_attributes
@@ -28,6 +25,8 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         {
             return ElementName;
         }
+
+
 
         /// <summary>
         /// This attribute specifies the location of a Web resource. 
@@ -103,7 +102,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         protected override void ReadAttributes(XElement xElement)
         {
             base.ReadAttributes(xElement);
-            _globalAttributes.ReadAttributes(xElement);
             _hrefAttrib.ReadAttribute(xElement);
             _hrefLangAttrib.ReadAttribute(xElement);
             _relAttrib.ReadAttribute(xElement);
@@ -117,7 +115,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         protected override void AddAttributes(XElement xElement)
         {
             base.AddAttributes(xElement);
-            _globalAttributes.AddAttributes(xElement);
             _hrefAttrib.AddAttribute(xElement);
             _hrefLangAttrib.AddAttribute(xElement);
             _relAttrib.AddAttribute(xElement);
