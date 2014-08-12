@@ -15,7 +15,7 @@ namespace HTML5ClassLibrary.BaseElements.MapAreas
     /// <summary>
     /// The area element identifies geometric regions of a client-side image map, and provides a hyperlink for each region.
     /// </summary>
-    public class Area : IHTML5Item
+    public class Area : HTML5Item
     {
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
@@ -29,32 +29,10 @@ namespace HTML5ClassLibrary.BaseElements.MapAreas
         private readonly ShapeAttribute _shapeAttribute = new ShapeAttribute();
         private readonly FormTargetAttribute _targetAttribute = new FormTargetAttribute();
         private readonly MIMETypeAttribute  _typeAttribute = new MIMETypeAttribute();
-        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
-        private readonly FormEvents _formEvents = new FormEvents();
-        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
-        private readonly MediaEvents _mediaEvents = new MediaEvents();
-        private readonly MouseEvents _mouseEvents = new MouseEvents();
-        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
 
         public const string ElementName = "area";
 
-
-
-        /// <summary>
-        /// HTML common attributes
-        /// </summary>
-        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
-
-        public FormEvents FormEvents { get { return _formEvents; } }
-
-        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; } }
-
-        public MediaEvents MediaEvents { get { return _mediaEvents; } }
-
-        public MouseEvents MouseEvents { get { return _mouseEvents; } }
-
-        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
 
 
         /// <summary>
@@ -127,7 +105,7 @@ namespace HTML5ClassLibrary.BaseElements.MapAreas
         /// Loads the element from XNode
         /// </summary>
         /// <param name="xNode">node to load element from</param>
-        public void Load(XNode xNode)
+        public override void Load(XNode xNode)
         {
             if (xNode.NodeType != XmlNodeType.Element)
             {
@@ -138,13 +116,40 @@ namespace HTML5ClassLibrary.BaseElements.MapAreas
             {
                 throw new Exception(string.Format("xNode is not {0} element", ElementName));
             }
+            ReadAttributes(xElement);
+        }
 
-            _globalAttributes.ReadAttributes(xElement);
-            _formEvents.ReadAttributes(xElement);
-            _keyboardEvents.ReadAttributes(xElement);
-            _mediaEvents.ReadAttributes(xElement);
-            _mouseEvents.ReadAttributes(xElement);
-            _windowEventAttributes.ReadAttributes(xElement);
+        /// <summary>
+        /// Generates element to XNode from data
+        /// </summary>
+        /// <returns>generated XNode</returns>
+        public override XNode Generate()
+        {
+            var xElement = new XElement(XhtmlNameSpace + ElementName);
+
+            AddAttributes(xElement);
+
+            return xElement;
+        }
+
+        protected override void AddAttributes(XElement xElement)
+        {
+            base.AddAttributes(xElement);
+            _altAttribute.AddAttribute(xElement);
+            _coordAttribute.AddAttribute(xElement);
+            _downloadAttribute.AddAttribute(xElement);
+            _hrefAttribute.AddAttribute(xElement);
+            _hrefLangAttribute.AddAttribute(xElement);
+            _mediaAttribute.AddAttribute(xElement);
+            _relationAttribute.AddAttribute(xElement);
+            _shapeAttribute.AddAttribute(xElement);
+            _targetAttribute.AddAttribute(xElement);
+            _typeAttribute.AddAttribute(xElement);
+        }
+
+        protected override void ReadAttributes(XElement xElement)
+        {
+            base.ReadAttributes(xElement);
             _altAttribute.ReadAttribute(xElement);
             _coordAttribute.ReadAttribute(xElement);
             _downloadAttribute.ReadAttribute(xElement);
@@ -158,38 +163,10 @@ namespace HTML5ClassLibrary.BaseElements.MapAreas
         }
 
         /// <summary>
-        /// Generates element to XNode from data
-        /// </summary>
-        /// <returns>generated XNode</returns>
-        public XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            _globalAttributes.AddAttributes(xElement);
-            _formEvents.AddAttributes(xElement);
-            _keyboardEvents.AddAttributes(xElement);
-            _mediaEvents.AddAttributes(xElement);
-            _mouseEvents.AddAttributes(xElement);
-            _windowEventAttributes.AddAttributes(xElement);
-            _altAttribute.AddAttribute(xElement);
-            _coordAttribute.AddAttribute(xElement);
-            _downloadAttribute.AddAttribute(xElement);
-            _hrefAttribute.AddAttribute(xElement);
-            _hrefLangAttribute.AddAttribute(xElement);
-            _mediaAttribute.AddAttribute(xElement);
-            _relationAttribute.AddAttribute(xElement);
-            _shapeAttribute.AddAttribute(xElement);
-            _targetAttribute.AddAttribute(xElement);
-            _typeAttribute.AddAttribute(xElement);
-
-            return xElement;
-        }
-
-        /// <summary>
         /// Checks it element data is valid
         /// </summary>
         /// <returns>true if valid</returns>
-        public  bool IsValid()
+        public  override bool IsValid()
         {
             return (_altAttribute.HasValue());
         }
@@ -199,25 +176,21 @@ namespace HTML5ClassLibrary.BaseElements.MapAreas
         /// allowed by the rules and element can accept content
         /// </summary>
         /// <param name="item">sub-item to add</param>
-        public void Add(IHTML5Item item)
+        public override void Add(IHTML5Item item)
         {
             throw new Exception("This element does not contain sub-items");
         }
 
-        public void Remove(IHTML5Item item)
+        public override void Remove(IHTML5Item item)
         {
             throw new Exception("This element does not contain sub-items");
         }
 
-        public List<IHTML5Item> SubElements()
+        public override List<IHTML5Item> SubElements()
         {
             return null;
         }
 
-        /// <summary>
-        /// Get/Set item parent in the XHTML "tree"
-        /// </summary>
-        public IHTML5Item Parent { get; set; }
 
         #endregion
     }

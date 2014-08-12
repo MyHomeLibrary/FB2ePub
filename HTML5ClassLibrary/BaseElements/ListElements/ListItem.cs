@@ -93,7 +93,7 @@ namespace HTML5ClassLibrary.BaseElements.ListElements
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
-            AddAtributes(xElement);
+            AddAttributes(xElement);
 
             foreach (var item in _content)
             {
@@ -143,9 +143,9 @@ namespace HTML5ClassLibrary.BaseElements.ListElements
             return _content;
         }
 
-        protected override void AddAtributes(XElement xElement)
+        protected override void AddAttributes(XElement xElement)
         {
-            base.AddAtributes(xElement);
+            base.AddAttributes(xElement);
             _valueAttribute.AddAttribute(xElement);
         }
 

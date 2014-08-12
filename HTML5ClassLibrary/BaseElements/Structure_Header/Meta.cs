@@ -16,7 +16,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
     /// The meta element is a generic mechanism for specifying metadata for a Web page. 
     /// Some search engines use this information.
     /// </summary>
-    public class Meta : IHTML5Item
+    public class Meta : HTML5Item
     {
         internal const string ElementName = "meta";
 
@@ -25,26 +25,8 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         private readonly TokenNameAttribute _nameAttribute = new TokenNameAttribute();
         private readonly HTTPEquivAttribute _httpEqvAttribute = new HTTPEquivAttribute();
         private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
-        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
-        private readonly FormEvents _formEvents = new FormEvents();
-        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
-        private readonly MediaEvents _mediaEvents = new MediaEvents();
-        private readonly MouseEvents _mouseEvents = new MouseEvents();
-        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
 
-
-        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; } }
-
-        public FormEvents FormEvents { get { return _formEvents; } }
-
-        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; } }
-
-        public MediaEvents MediaEvents { get { return _mediaEvents; } }
-
-        public MouseEvents MouseEvents { get { return _mouseEvents; } }
-
-        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
 
 
         /// <summary>
@@ -77,7 +59,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         /// </summary>
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
-        public void Load(XNode xNode)
+        public override void Load(XNode xNode)
         {
             if (xNode.NodeType != XmlNodeType.Element)
             {
@@ -89,37 +71,37 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
                 throw new Exception(string.Format("xNode is not {0} element", ElementName));
             }
 
-            _globalAttributes.ReadAttributes(xElement);
-            _formEvents.ReadAttributes(xElement);
-            _keyboardEvents.ReadAttributes(xElement);
-            _mediaEvents.ReadAttributes(xElement);
-            _mouseEvents.ReadAttributes(xElement);
-            _windowEventAttributes.ReadAttributes(xElement);
+            ReadAttributes(xElement);
+        }
+
+        protected override void ReadAttributes(XElement xElement)
+        {
+            base.ReadAttributes(xElement);
             _contentAttribute.ReadAttribute(xElement);
             _nameAttribute.ReadAttribute(xElement);
             _httpEqvAttribute.ReadAttribute(xElement);
             _charsetAttribute.ReadAttribute(xElement);
         }
 
-        public XNode Generate()
+        public override XNode Generate()
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
-            _globalAttributes.AddAttributes(xElement);
-            _formEvents.AddAttributes(xElement);
-            _keyboardEvents.AddAttributes(xElement);
-            _mediaEvents.AddAttributes(xElement);
-            _mouseEvents.AddAttributes(xElement);
-            _windowEventAttributes.AddAttributes(xElement);
-            _contentAttribute.AddAttribute(xElement);
-            _nameAttribute.AddAttribute(xElement);
-            _httpEqvAttribute.AddAttribute(xElement);
-            _charsetAttribute.AddAttribute(xElement);
+            AddAttributes(xElement);
 
             return xElement;
         }
 
-        public bool IsValid()
+        protected override void AddAttributes(XElement xElement)
+        {
+            base.AddAttributes(xElement);
+            _contentAttribute.AddAttribute(xElement);
+            _nameAttribute.AddAttribute(xElement);
+            _httpEqvAttribute.AddAttribute(xElement);
+            _charsetAttribute.AddAttribute(xElement);
+        }
+
+        public override bool IsValid()
         {
             return true;
         }
@@ -129,24 +111,20 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         /// allowed by the rules and element can accept content
         /// </summary>
         /// <param name="item">sub-item to add</param>
-        public void Add(IHTML5Item item)
+        public override void Add(IHTML5Item item)
         {
             throw new Exception("This element does not contain sub-items");
         }
 
-        public void Remove(IHTML5Item item)
+        public override void Remove(IHTML5Item item)
         {
             throw new Exception("This element does not contain sub-items");
         }
 
-        public List<IHTML5Item> SubElements()
+        public override List<IHTML5Item> SubElements()
         {
             return null;
         }
 
-        /// <summary>
-        /// Get/Set item parent in the XHTML "tree"
-        /// </summary>
-        public IHTML5Item Parent { get; set; }
     }
 }

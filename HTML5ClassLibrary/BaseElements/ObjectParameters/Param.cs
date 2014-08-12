@@ -17,16 +17,10 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
     /// The param element is a generic way of passing data to embedded objects in the form of name/value pairs. 
     /// The need for param elements and the number of param elements depends on the embedded object.
     /// </summary>
-    public class Param : IHTML5Item
+    public class Param : HTML5Item
     {
         private readonly NameAttribute _nameAttribute = new NameAttribute();
         private readonly ValueAttribute _valueAttribute = new ValueAttribute();
-        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
-        private readonly FormEvents _formEvents = new FormEvents();
-        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
-        private readonly MediaEvents _mediaEvents = new MediaEvents();
-        private readonly MouseEvents _mouseEvents = new MouseEvents();
-        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
 
 
@@ -39,19 +33,6 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
 
 
         #region public_properties
-
-
-        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
-
-        public FormEvents FormEvents { get { return _formEvents; } }
-
-        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; } }
-
-        public MediaEvents MediaEvents { get { return _mediaEvents; } }
-
-        public MouseEvents MouseEvents { get { return _mouseEvents; } }
-
-        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
 
 
         /// <summary>
@@ -76,7 +57,7 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
         /// Loads the element from XNode
         /// </summary>
         /// <param name="xNode">node to load element from</param>
-        public void Load(XNode xNode)
+        public override void Load(XNode xNode)
         {
             if (xNode.NodeType != XmlNodeType.Element)
             {
@@ -88,12 +69,12 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
                 throw new Exception(string.Format("xNode is not {0} element", ElementName));
             }
 
-            _globalAttributes.ReadAttributes(xElement);
-            _formEvents.ReadAttributes(xElement);
-            _keyboardEvents.ReadAttributes(xElement);
-            _mediaEvents.ReadAttributes(xElement);
-            _mouseEvents.ReadAttributes(xElement);
-            _windowEventAttributes.ReadAttributes(xElement);
+            ReadAttributes(xElement);
+        }
+
+        protected override void ReadAttributes(XElement xElement)
+        {
+            base.ReadAttributes(xElement);
             _nameAttribute.ReadAttribute(xElement);
             _valueAttribute.ReadAttribute(xElement);
         }
@@ -102,27 +83,27 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
         /// Generates element to XNode from data
         /// </summary>
         /// <returns>generated XNode</returns>
-        public XNode Generate()
+        public override XNode Generate()
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            _globalAttributes.ReadAttributes(xElement);
-            _formEvents.AddAttributes(xElement);
-            _keyboardEvents.AddAttributes(xElement);
-            _mediaEvents.AddAttributes(xElement);
-            _mouseEvents.AddAttributes(xElement);
-            _windowEventAttributes.AddAttributes(xElement);
-            _nameAttribute.AddAttribute(xElement);
-            _valueAttribute.AddAttribute(xElement);
+            
+            AddAttributes(xElement);
 
             return xElement;
+        }
+
+        protected override void AddAttributes(XElement xElement)
+        {
+            base.AddAttributes(xElement);
+            _nameAttribute.AddAttribute(xElement);
+            _valueAttribute.AddAttribute(xElement);
         }
 
         /// <summary>
         /// Checks it element data is valid
         /// </summary>
         /// <returns>true if valid</returns>
-        public bool IsValid()
+        public override bool IsValid()
         {
             return (_nameAttribute.HasValue());
         }
@@ -132,25 +113,20 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
         /// allowed by the rules and element can accept content
         /// </summary>
         /// <param name="item">sub-item to add</param>
-        public void Add(IHTML5Item item)
+        public override void Add(IHTML5Item item)
         {
             throw new Exception("This element does not contain sub-items");
         }
 
-        public void Remove(IHTML5Item item)
+        public override void Remove(IHTML5Item item)
         {
             throw new Exception("This element does not contain sub-items");
         }
 
-        public List<IHTML5Item> SubElements()
+        public override List<IHTML5Item> SubElements()
         {
             return null;
         }
-
-        /// <summary>
-        /// Get/Set item parent in the XHTML "tree"
-        /// </summary>
-        public IHTML5Item Parent { get; set; }
 
 
         #endregion

@@ -18,7 +18,7 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
     /// These annotations typically appear in smaller typeface above or to the side of regular text, 
     /// and are meant to help with pronunciation of obscure characters or as a language learning aid.
     /// </summary>
-    public class RubyElement : IInlineItem
+    public class RubyElement : HTML5Item, IInlineItem
     {
 
         /// <summary>
@@ -26,30 +26,10 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
         /// </summary>
         private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
 
-        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
-        private readonly FormEvents _formEvents = new FormEvents();
-        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
-        private readonly MediaEvents _mediaEvents = new MediaEvents();
-        private readonly MouseEvents _mouseEvents = new MouseEvents();
-        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
-
-
         internal const string ElementName = "ruby";
 
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
-
-        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
-
-        public FormEvents FormEvents { get { return _formEvents; } }
-
-        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; } }
-
-        public MediaEvents MediaEvents { get { return _mediaEvents; } }
-
-        public MouseEvents MouseEvents { get { return _mouseEvents; } }
-
-        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
 
 
         #region Implementation of IEPubTextItem
@@ -58,7 +38,7 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
         /// Loads the element from XNode
         /// </summary>
         /// <param name="xNode">node to load element from</param>
-        public void Load(XNode xNode)
+        public override void Load(XNode xNode)
         {
             if (xNode.NodeType != XmlNodeType.Element)
             {
@@ -88,13 +68,7 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
                     _content.Add(item);
                 }
             }
-
-            _globalAttributes.ReadAttributes(xElement);
-            _formEvents.ReadAttributes(xElement);
-            _keyboardEvents.ReadAttributes(xElement);
-            _mediaEvents.ReadAttributes(xElement);
-            _mouseEvents.ReadAttributes(xElement);
-            _windowEventAttributes.ReadAttributes(xElement);
+            ReadAttributes(xElement);
         }
 
         private bool IsValidSubType(IHTML5Item item)
@@ -111,7 +85,7 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
         /// Generates element to XNode from data
         /// </summary>
         /// <returns>generated XNode</returns>
-        public XNode Generate()
+        public override XNode Generate()
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
@@ -122,13 +96,7 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
                     xElement.Add(item.Generate());
                 }
             }
-
-            _globalAttributes.AddAttributes(xElement);
-            _formEvents.AddAttributes(xElement);
-            _keyboardEvents.AddAttributes(xElement);
-            _mediaEvents.AddAttributes(xElement);
-            _mouseEvents.AddAttributes(xElement);
-            _windowEventAttributes.AddAttributes(xElement);
+            AddAttributes(xElement);
             return xElement;
         }
 
@@ -136,7 +104,7 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
         /// Checks it element data is valid
         /// </summary>
         /// <returns>true if valid</returns>
-        public bool IsValid()
+        public override bool IsValid()
         {
             return true;
         }
@@ -146,7 +114,7 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
         /// allowed by the rules and element can accept content
         /// </summary>
         /// <param name="item">sub-item to add</param>
-        public void Add(IHTML5Item item)
+        public override void Add(IHTML5Item item)
         {
             if ((item != null) && IsValidSubType(item))
             {
@@ -159,7 +127,7 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
             }
         }
 
-        public void Remove(IHTML5Item item)
+        public override void Remove(IHTML5Item item)
         {
             if(_content.Remove(item))
             {
@@ -167,15 +135,11 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
             }
         }
 
-        public List<IHTML5Item> SubElements()
+        public override List<IHTML5Item> SubElements()
         {
             return _content;
         }
 
-        /// <summary>
-        /// Get/Set item parent in the XHTML "tree"
-        /// </summary>
-        public IHTML5Item Parent { get; set; }
 
         #endregion
 
