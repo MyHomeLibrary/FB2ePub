@@ -10,71 +10,9 @@ using HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
 
 namespace HTML5ClassLibrary.BaseElements.InlineElements
 {
-    abstract public class BaseInlineItem : IInlineItem
+    abstract public class BaseInlineItem : HTML5Item, IInlineItem
     {
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
-        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
-        private readonly FormEvents _formEvents = new FormEvents();
-        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
-        private readonly MediaEvents _mediaEvents = new MediaEvents();
-        private readonly MouseEvents _mouseEvents = new MouseEvents();
-        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
-
-
-
-        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
-
-        public FormEvents FormEvents { get { return _formEvents; } }
-
-        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; } }
-
-        public MediaEvents MediaEvents { get { return _mediaEvents; } }
-
-        public MouseEvents MouseEvents { get { return _mouseEvents; } }
-
-        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
-
-
-        protected virtual void AddAttributes(XElement xElement)
-        {
-            _globalAttributes.AddAttributes(xElement);
-            _formEvents.AddAttributes(xElement);
-            _keyboardEvents.AddAttributes(xElement);
-            _mediaEvents.AddAttributes(xElement);
-            _mouseEvents.AddAttributes(xElement);
-            _windowEventAttributes.AddAttributes(xElement);
-        }
-
-        protected virtual void ReadAttributes(XElement xElement)
-        {
-            _globalAttributes.ReadAttributes(xElement);
-            _formEvents.ReadAttributes(xElement);
-            _keyboardEvents.ReadAttributes(xElement);
-            _mediaEvents.ReadAttributes(xElement);
-            _mouseEvents.ReadAttributes(xElement);
-            _windowEventAttributes.ReadAttributes(xElement);
-        }
-
-
-        public abstract void Load(XNode xNode);
-        public abstract XNode Generate();
-        public abstract bool IsValid();
-
-        /// <summary>
-        /// Adds sub item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub item to add</param>
-        public abstract void Add(IHTML5Item item);
-
-        public abstract void Remove(IHTML5Item item);
-
-        public abstract List<IHTML5Item> SubElements();
-
-        /// <summary>
-        /// Get/Set item parent in the XHTML "tree"
-        /// </summary>
-        public IHTML5Item Parent { get; set; }
     }
 }

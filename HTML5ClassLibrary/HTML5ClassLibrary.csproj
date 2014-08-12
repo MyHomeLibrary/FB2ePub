@@ -324,6 +324,7 @@
     <Compile Include="BaseElements\BlockElements\OrderedList.cs" />
     <Compile Include="BaseElements\BlockElements\Paragraph.cs" />
     <Compile Include="BaseElements\BlockElements\Section.cs" />
+    <Compile Include="BaseElements\HTML5Item.cs" />
     <Compile Include="BaseElements\TableElements\Table.cs" />
     <Compile Include="BaseElements\BlockElements\UnorderedList.cs" />
     <Compile Include="BaseElements\BlockElements\Video.cs" />

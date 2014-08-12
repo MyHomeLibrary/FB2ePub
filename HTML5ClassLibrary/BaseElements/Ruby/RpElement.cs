@@ -80,7 +80,7 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
-            AddAtributes(xElement);
+            AddAttributes(xElement);
 
             if (_content.Count > 0)
             {

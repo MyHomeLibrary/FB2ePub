@@ -17,7 +17,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
     /// You can have multiple link elements that link to different resources or describe different relationships. 
     /// The link elements can be contained in the head element.
     /// </summary>
-    public class Link : IHTML5Item
+    public class Link : HTML5Item
     {
         internal const string ElementName = "link";
 
@@ -27,30 +27,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         private readonly LinkRelationAttribute _relAttribute = new LinkRelationAttribute();
         private readonly MIMETypeAttribute _typeAttribute = new MIMETypeAttribute();
         private readonly SizesAttribute _sizesAttribute = new SizesAttribute();
-        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
-        private readonly FormEvents _formEvents = new FormEvents();
-        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
-        private readonly MediaEvents _mediaEvents = new MediaEvents();
-        private readonly MouseEvents _mouseEvents = new MouseEvents();
-        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
 
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
         #region public_properties
-
-
-        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
-
-        public FormEvents FormEvents { get { return _formEvents; } }
-
-        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; } }
-
-        public MediaEvents MediaEvents { get { return _mediaEvents; } }
-
-        public MouseEvents MouseEvents { get { return _mouseEvents; } }
-
-        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
 
 
         /// <summary>
@@ -91,7 +72,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
         #endregion
 
-        public void Load(XNode xNode)
+        public override void Load(XNode xNode)
         {
             if (xNode.NodeType != XmlNodeType.Element)
             {
@@ -103,12 +84,12 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
                 throw new Exception(string.Format("xNode is not {0} element", ElementName));
             }
 
-            _globalAttributes.ReadAttributes(xElement);
-            _formEvents.ReadAttributes(xElement);
-            _keyboardEvents.ReadAttributes(xElement);
-            _mediaEvents.ReadAttributes(xElement);
-            _mouseEvents.ReadAttributes(xElement);
-            _windowEventAttributes.ReadAttributes(xElement);
+            ReadAttributes(xElement);
+        }
+
+        protected override void ReadAttributes(XElement xElement)
+        {
+            base.ReadAttributes(xElement);
             _hrefAttribute.ReadAttribute(xElement);
             _mediaAttribute.ReadAttribute(xElement);
             _typeAttribute.ReadAttribute(xElement);
@@ -117,26 +98,25 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             _relAttribute.ReadAttribute(xElement);
         }
 
-        public XNode Generate()
+        public override XNode Generate()
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
-            _globalAttributes.AddAttributes(xElement);
-            _formEvents.AddAttributes(xElement);
-            _keyboardEvents.AddAttributes(xElement);
-            _mediaEvents.AddAttributes(xElement);
-            _mouseEvents.AddAttributes(xElement);
-            _windowEventAttributes.AddAttributes(xElement);
+            return xElement;
+
+        }
+
+        protected override void AddAttributes(XElement xElement)
+        {
+            base.AddAttributes(xElement);
             _hrefAttribute.AddAttribute(xElement);
             _mediaAttribute.AddAttribute(xElement);
             _typeAttribute.AddAttribute(xElement);
             _sizesAttribute.AddAttribute(xElement);
             _hrefLangAttribute.AddAttribute(xElement);
             _relAttribute.AddAttribute(xElement);
-            return xElement;
-
         }
 
-        public bool IsValid()
+        public override bool IsValid()
         {
             return true;
         }
@@ -146,24 +126,20 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         /// allowed by the rules and element can accept content
         /// </summary>
         /// <param name="item">subitem to add</param>
-        public void Add(IHTML5Item item)
+        public override void Add(IHTML5Item item)
         {
             throw new Exception("This element does not contain subitems");
         }
 
-        public void Remove(IHTML5Item item)
+        public override void Remove(IHTML5Item item)
         {
             throw new Exception("This element does not contain subitems");
         }
 
-        public List<IHTML5Item> SubElements()
+        public override List<IHTML5Item> SubElements()
         {
             return null;
         }
 
-        /// <summary>
-        /// Get/Set item parent in the XHTML "tree"
-        /// </summary>
-        public IHTML5Item Parent { get; set; }
     }
 }

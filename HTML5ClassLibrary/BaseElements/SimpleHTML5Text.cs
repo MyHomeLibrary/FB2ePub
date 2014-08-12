@@ -24,7 +24,7 @@ namespace HTML5ClassLibrary.BaseElements
     /// <summary>
     /// Represent a simple HTML 5 text element (XText)
     /// </summary>
-    public class SimpleHTML5Text : IHTML5Item
+    public class SimpleHTML5Text : HTML5Item
     {
         /// <summary>
         /// Textual data contained in element
@@ -44,7 +44,7 @@ namespace HTML5ClassLibrary.BaseElements
         /// Loads a text element from the HTML node
         /// </summary>
         /// <param name="xNode"></param>
-        public void Load(XNode xNode)
+        public override void Load(XNode xNode)
         {
             if (xNode.NodeType != XmlNodeType.Text)
             {
@@ -57,7 +57,7 @@ namespace HTML5ClassLibrary.BaseElements
         /// Creates a XText node from the contained text
         /// </summary>
         /// <returns></returns>
-        public XNode Generate()
+        public override XNode Generate()
         {
             return new XText(_text);
         }
@@ -66,7 +66,7 @@ namespace HTML5ClassLibrary.BaseElements
         /// Check if element is valid
         /// </summary>
         /// <returns></returns>
-        public bool IsValid()
+        public override bool IsValid()
         {
             return (_text != null);
         }
@@ -77,7 +77,7 @@ namespace HTML5ClassLibrary.BaseElements
         /// simple text can't have sub-items so it will always return false
         /// </summary>
         /// <param name="item">sub item to add</param>
-        public void Add(IHTML5Item item)
+        public override void Add(IHTML5Item item)
         {
             throw new Exception("This element does not contain or obtain sub items");
         }
@@ -87,7 +87,7 @@ namespace HTML5ClassLibrary.BaseElements
         /// useless here as can't have sub-items at all
         /// </summary>
         /// <param name="item"></param>
-        public void Remove(IHTML5Item item)
+        public override void Remove(IHTML5Item item)
         {
             throw new Exception("This element does not contain or obtain sub items");
         }
@@ -97,14 +97,10 @@ namespace HTML5ClassLibrary.BaseElements
         /// useless here as can not contain sub-items
         /// </summary>
         /// <returns></returns>
-        public List<IHTML5Item> SubElements()
+        public override List<IHTML5Item> SubElements()
         {
             return null;
         }
 
-        /// <summary>
-        /// Get/Set item parent "node" (IHTML5Item) in the HTML 5 "tree"
-        /// </summary>
-        public IHTML5Item Parent { get; set; }
     }
 }

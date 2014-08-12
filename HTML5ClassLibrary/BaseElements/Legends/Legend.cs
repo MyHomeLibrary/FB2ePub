@@ -17,37 +17,15 @@ namespace HTML5ClassLibrary.BaseElements.Legends
     /// <summary>
     /// The legend element is a caption to a fieldset element.
     /// </summary>
-    public class Legend : IHTML5Item
+    public class Legend : HTML5Item
     {
         public const string ElementName = "legend";
 
         private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
-        private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
-        private readonly FormEvents _formEvents = new FormEvents();
-        private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
-        private readonly MediaEvents _mediaEvents = new MediaEvents();
-        private readonly MouseEvents _mouseEvents = new MouseEvents();
-        private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
 
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
-        #region public_properties
-
-        public HTMLGlobalAttributes GlobalAttributes { get { return _globalAttributes; }}
-
-        public FormEvents FormEvents { get { return _formEvents; } }
-
-        public KeyboardEvents KeyboardEvents { get { return _keyboardEvents; } }
-
-        public MediaEvents MediaEvents { get { return _mediaEvents; } }
-
-        public MouseEvents MouseEvents { get { return _mouseEvents; } }
-
-        public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
-
-
-        #endregion
 
         #region Implementation of IHTML5Item
 
@@ -55,7 +33,7 @@ namespace HTML5ClassLibrary.BaseElements.Legends
         /// Loads the element from XNode
         /// </summary>
         /// <param name="xNode">node to load element from</param>
-        public void Load(XNode xNode)
+        public override void Load(XNode xNode)
         {
             if (xNode.NodeType != XmlNodeType.Element)
             {
@@ -67,12 +45,7 @@ namespace HTML5ClassLibrary.BaseElements.Legends
                 throw new Exception(string.Format("xNode is not {0} element", ElementName));
             }
 
-            _globalAttributes.ReadAttributes(xElement);
-            _formEvents.ReadAttributes(xElement);
-            _keyboardEvents.ReadAttributes(xElement);
-            _mediaEvents.ReadAttributes(xElement);
-            _mouseEvents.ReadAttributes(xElement);
-            _windowEventAttributes.ReadAttributes(xElement);
+            ReadAttributes(xElement);
 
             _content.Clear();
             IEnumerable<XNode> descendants = xElement.Nodes();
@@ -112,16 +85,11 @@ namespace HTML5ClassLibrary.BaseElements.Legends
         /// Generates element to XNode from data
         /// </summary>
         /// <returns>generated XNode</returns>
-        public XNode Generate()
+        public override XNode Generate()
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            _globalAttributes.AddAttributes(xElement);
-            _formEvents.AddAttributes(xElement);
-            _keyboardEvents.AddAttributes(xElement);
-            _mediaEvents.AddAttributes(xElement);
-            _mouseEvents.AddAttributes(xElement);
-            _windowEventAttributes.AddAttributes(xElement);
+    
+            AddAttributes(xElement);
 
             foreach (var item in _content)
             {
@@ -134,7 +102,7 @@ namespace HTML5ClassLibrary.BaseElements.Legends
         /// Checks it element data is valid
         /// </summary>
         /// <returns>true if valid</returns>
-        public bool IsValid()
+        public override bool IsValid()
         {
             return true;
         }
@@ -144,7 +112,7 @@ namespace HTML5ClassLibrary.BaseElements.Legends
         /// allowed by the rules and element can accept content
         /// </summary>
         /// <param name="item">sub-item to add</param>
-        public void Add(IHTML5Item item)
+        public override void Add(IHTML5Item item)
         {
             if (IsValidSubType(item) && (item != null))
             {
@@ -157,7 +125,7 @@ namespace HTML5ClassLibrary.BaseElements.Legends
             }
         }
 
-        public void Remove(IHTML5Item item)
+        public override void Remove(IHTML5Item item)
         {
             if(_content.Remove(item))
             {
@@ -165,15 +133,10 @@ namespace HTML5ClassLibrary.BaseElements.Legends
             }
         }
 
-        public List<IHTML5Item> SubElements()
+        public override List<IHTML5Item> SubElements()
         {
             return _content;
         }
-
-        /// <summary>
-        /// Get/Set item parent in the XHTML "tree"
-        /// </summary>
-        public IHTML5Item Parent { get; set; }
 
         #endregion
     }

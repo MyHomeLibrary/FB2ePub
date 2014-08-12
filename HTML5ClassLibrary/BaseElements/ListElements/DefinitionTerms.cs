@@ -79,7 +79,7 @@ namespace HTML5ClassLibrary.BaseElements.ListElements
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
-            AddAtributes(xElement);
+            AddAttributes(xElement);
 
             foreach (var item in _content)
             {
