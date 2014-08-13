@@ -16,6 +16,13 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
     {
         public const string ElementName = "fieldset";
 
+        public FieldSet()
+        {
+            Attributes.Add(_disabledAttribute);
+            Attributes.Add(_formIdAttribute);
+            Attributes.Add(_nameAttribute);
+        }
+
         private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
         private readonly NameAttribute _nameAttribute = new NameAttribute();
@@ -107,22 +114,6 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         public override bool IsValid()
         {
             return true;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _disabledAttribute.AddAttribute(xElement);
-            _formIdAttribute.AddAttribute(xElement);
-            _nameAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _disabledAttribute.ReadAttribute(xElement);
-            _formIdAttribute.ReadAttribute(xElement);
-            _nameAttribute.ReadAttribute(xElement);
         }
     }
 }

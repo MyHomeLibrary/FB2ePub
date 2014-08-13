@@ -11,6 +11,10 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
     {
         public const string ElementName = "q";
 
+        public ShortQuote()
+        {
+            Attributes.Add(_citeAttribute);
+        }
 
         private readonly CiteAttribute _citeAttribute = new CiteAttribute();
 
@@ -26,19 +30,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
         {
             return ElementName;
         }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _citeAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _citeAttribute.ReadAttribute(xElement);
-        }
-
         #endregion
     }
 }

@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTML5ClassLibrary.Attributes.Events;
 using HTML5ClassLibrary.BaseElements.BlockElements;
 using HTML5ClassLibrary.Exceptions;
 
@@ -18,6 +14,12 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     /// </summary>
     public class DeletedText : BaseInlineItem , IBlockElement
     {
+        public DeletedText()
+        {
+            Attributes.Add(_cite);
+            Attributes.Add(_datetime);
+        }
+
         /// <summary>
         /// Internal content of the element
         /// </summary>
@@ -174,20 +176,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         }
 
         #endregion
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _cite.AddAttribute(xElement);
-            _datetime.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _cite.ReadAttribute(xElement);
-            _datetime.ReadAttribute(xElement);
-        }
     }
 
     

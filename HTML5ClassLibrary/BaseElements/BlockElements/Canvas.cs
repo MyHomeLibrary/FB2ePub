@@ -15,6 +15,12 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
     {
         public const string ElementName = "canvas";
 
+        public Canvas()
+        {
+            Attributes.Add(_height);
+            Attributes.Add(_width);
+        }
+
         private readonly HeightAttribute _height = new HeightAttribute();
         private readonly WidthAttribute _width = new WidthAttribute();
 
@@ -90,20 +96,6 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
                 return item.IsValid();
             }
             return false;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _height.AddAttribute(xElement);
-            _width.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _height.ReadAttribute(xElement);
-            _width.ReadAttribute(xElement);
         }
     }
 }

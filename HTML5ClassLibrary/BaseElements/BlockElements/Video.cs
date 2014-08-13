@@ -16,6 +16,19 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
     {
         public const string ElementName = "video";
 
+        public Video()
+        {
+            Attributes.Add(_autoplay);
+            Attributes.Add(_controls);
+            Attributes.Add(_heightAttribute);
+            Attributes.Add(_loop);
+            Attributes.Add(_muted);
+            Attributes.Add(_posterAttribute);
+            Attributes.Add(_preload);
+            Attributes.Add(_src);
+            Attributes.Add(_widthAttribute);
+        }
+
         private readonly AutoPlayAttribute _autoplay = new AutoPlayAttribute();
         private readonly ControlsAttribute _controls = new ControlsAttribute();
         private readonly HeightAttribute _heightAttribute = new HeightAttribute();
@@ -156,34 +169,5 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
             }
             return false;
         }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _src.AddAttribute(xElement);
-            _autoplay.AddAttribute(xElement);
-            _controls.AddAttribute(xElement);
-            _loop.AddAttribute(xElement);
-            _muted.AddAttribute(xElement);
-            _preload.AddAttribute(xElement);
-            _heightAttribute.AddAttribute(xElement);
-            _widthAttribute.AddAttribute(xElement);
-            _posterAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _src.ReadAttribute(xElement);
-            _autoplay.ReadAttribute(xElement);
-            _controls.ReadAttribute(xElement);
-            _loop.ReadAttribute(xElement);
-            _muted.AddAttribute(xElement);
-            _preload.AddAttribute(xElement);
-            _heightAttribute.ReadAttribute(xElement);
-            _widthAttribute.ReadAttribute(xElement);
-            _posterAttribute.ReadAttribute(xElement);
-        }
-
     }
 }

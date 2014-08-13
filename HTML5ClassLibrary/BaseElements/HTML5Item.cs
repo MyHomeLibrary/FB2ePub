@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using HTML5ClassLibrary.Attributes;
 using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
 using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
@@ -16,6 +17,8 @@ namespace HTML5ClassLibrary.BaseElements
     abstract public class HTML5Item : IHTML5Item
     {
 
+        protected readonly List<IBaseAttribute> Attributes = new List<IBaseAttribute>();
+
         // General common attributes and event attributes for any HTML element
 
         private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
@@ -25,6 +28,15 @@ namespace HTML5ClassLibrary.BaseElements
         private readonly MouseEvents _mouseEvents = new MouseEvents();
         private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
+        protected HTML5Item()
+        {
+            _globalAttributes.AddAttributes(Attributes);
+            _formEvents.AddAttributes(Attributes);
+            _keyboardEvents.AddAttributes(Attributes);
+            _mediaEvents.AddAttributes(Attributes);
+            _mouseEvents.AddAttributes(Attributes);
+            _windowEventAttributes.AddAttributes(Attributes);
+        }
 
         public abstract void Load(XNode xNode);
         public abstract XNode Generate();
@@ -108,28 +120,24 @@ namespace HTML5ClassLibrary.BaseElements
         /// Used to add attributes to any element when generatig it
         /// </summary>
         /// <param name="xElement">XElement to add aattributes to </param>
-        protected virtual void AddAttributes(XElement xElement)
+        protected void AddAttributes(XElement xElement)
         {
-            _globalAttributes.AddAttributes(xElement);
-            _formEvents.AddAttributes(xElement);
-            _keyboardEvents.AddAttributes(xElement);
-            _mediaEvents.AddAttributes(xElement);
-            _mediaEvents.AddAttributes(xElement);
-            _windowEventAttributes.AddAttributes(xElement);           
+            foreach (var attribute in Attributes)
+            {
+                attribute.AddAttribute(xElement);
+            }
         }
 
         /// <summary>
         /// Used to read out attributes from the element passed, when readin/loading it
         /// </summary>
         /// <param name="xElement">XElement to load attributes from</param>
-        protected virtual void ReadAttributes(XElement xElement)
+        protected void ReadAttributes(XElement xElement)
         {
-            _globalAttributes.ReadAttributes(xElement);
-            _formEvents.ReadAttributes(xElement);
-            _keyboardEvents.ReadAttributes(xElement);
-            _mediaEvents.ReadAttributes(xElement);
-            _mouseEvents.ReadAttributes(xElement);
-            _windowEventAttributes.ReadAttributes(xElement);          
+            foreach (var attribute in Attributes)
+            {
+                attribute.ReadAttribute(xElement);
+            }
         }
     }
 }

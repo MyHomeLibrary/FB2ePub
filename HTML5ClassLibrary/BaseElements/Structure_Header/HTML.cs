@@ -12,6 +12,12 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
         internal const string ElementName = "html";
 
+        public HTML()
+        {
+            Attributes.Add(_xhtmlNameSpaceAttribute);
+            Attributes.Add(_manifestAttribute);            
+        }
+
 
         private readonly XmlNsAttribute _xhtmlNameSpaceAttribute = new XmlNsAttribute();
         private readonly ManifestAttribute _manifestAttribute = new ManifestAttribute();
@@ -38,15 +44,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
                 throw new Exception(string.Format("xNode is not {0} element", ElementName));
             }
 
-            GlobalAttributes.ReadAttributes(xElement);
-            FormEvents.ReadAttributes(xElement);
-            KeyboardEvents.ReadAttributes(xElement);
-            MediaEvents.ReadAttributes(xElement);
-            MouseEvents.ReadAttributes(xElement);
-            WindowEvents.ReadAttributes(xElement);
-            // XhtmlNameSpaceAttribute.ReadAttribute(xElement); - no need to read , always the same value should be there
-            _manifestAttribute.ReadAttribute(xElement);
-
+            ReadAttributes(xElement);
 
             Content.Clear();
             IEnumerable<XNode> descendants = xElement.Nodes();
@@ -97,16 +95,9 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         public override XNode Generate()
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
+          
+            AddAttributes(xElement);
 
-            _xhtmlNameSpaceAttribute.AddAttribute(xElement);
-            _manifestAttribute.AddAttribute(xElement);
-            GlobalAttributes.AddAttributes(xElement);
-            FormEvents.AddAttributes(xElement);
-            KeyboardEvents.AddAttributes(xElement);
-            MediaEvents.AddAttributes(xElement);
-            MouseEvents.AddAttributes(xElement);
-            WindowEvents.AddAttributes(xElement);
-            
             foreach (var item in Content)
             {
                 xElement.Add(item.Generate());

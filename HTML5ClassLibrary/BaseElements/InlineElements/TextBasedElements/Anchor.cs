@@ -8,6 +8,16 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
     /// </summary>
     public class Anchor : TextBasedElement
     {
+        public Anchor()
+        {
+            Attributes.Add(_hrefAttrib);
+            Attributes.Add(_hrefLangAttrib);
+            Attributes.Add(_relAttrib);
+            Attributes.Add(_downloadAttrib);
+            Attributes.Add(_mediaAttr);
+            Attributes.Add(_targetAttr);
+            Attributes.Add(_typeAttr);
+        }
 
         private readonly HrefAttribute _hrefAttrib = new HrefAttribute();
         private readonly HRefLanguageAttribute _hrefLangAttrib = new HRefLanguageAttribute();
@@ -96,32 +106,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
                 return false;
             }
             return true;
-        }
-
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _hrefAttrib.ReadAttribute(xElement);
-            _hrefLangAttrib.ReadAttribute(xElement);
-            _relAttrib.ReadAttribute(xElement);
-            _downloadAttrib.ReadAttribute(xElement);
-            _mediaAttr.ReadAttribute(xElement);
-            _targetAttr.ReadAttribute(xElement);
-            _typeAttr.ReadAttribute(xElement);
-        }
-
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _hrefAttrib.AddAttribute(xElement);
-            _hrefLangAttrib.AddAttribute(xElement);
-            _relAttrib.AddAttribute(xElement);
-            _downloadAttrib.AddAttribute(xElement);
-            _mediaAttr.AddAttribute(xElement);
-            _targetAttr.AddAttribute(xElement);
-            _typeAttr.ReadAttribute(xElement);
-        }
+        }     
     }
 }

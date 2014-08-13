@@ -13,6 +13,11 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
     {
         public const string ElementName = "dialog";
 
+        public Dialog()
+        {
+            Attributes.Add(_openAttribute);
+        }
+
         private readonly OpenAttribute _openAttribute = new OpenAttribute();
 
 
@@ -71,18 +76,6 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         public override bool IsValid()
         {
             return true;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _openAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _openAttribute.ReadAttribute(xElement);
         }
 
         protected override bool IsValidSubType(IHTML5Item item)

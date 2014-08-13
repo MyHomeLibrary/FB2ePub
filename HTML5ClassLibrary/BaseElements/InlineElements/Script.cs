@@ -21,6 +21,15 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     public class Script : BaseInlineItem, IBlockElement
     {
         private readonly SimpleHTML5Text _scriptText = new SimpleHTML5Text();
+
+        public Script()
+        {
+            Attributes.Add(_srcAttribute);
+            Attributes.Add(_contentTypeAttribute);
+            Attributes.Add(_charsetAttribute);
+            Attributes.Add(_deferAttribute);
+            Attributes.Add(_asyncAttribute);
+        }
    
         private readonly SourceAttribute _srcAttribute = new SourceAttribute();
         private readonly ContentTypeAttribute _contentTypeAttribute = new ContentTypeAttribute();
@@ -94,27 +103,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
             return xElement;
 
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _srcAttribute.AddAttribute(xElement);
-            _contentTypeAttribute.AddAttribute(xElement);
-            _charsetAttribute.AddAttribute(xElement);
-            _deferAttribute.AddAttribute(xElement);
-            _asyncAttribute.AddAttribute(xElement);
-        }
-
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _srcAttribute.ReadAttribute(xElement);
-            _contentTypeAttribute.ReadAttribute(xElement);
-            _charsetAttribute.ReadAttribute(xElement);
-            _deferAttribute.ReadAttribute(xElement);
-            _asyncAttribute.ReadAttribute(xElement);
         }
 
         public override bool IsValid()

@@ -16,6 +16,12 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
     {
         public const string ElementName = "menu";
 
+        public Menu()
+        {
+            Attributes.Add(_label);
+            Attributes.Add(_menuTypeAttribute);
+        }
+
         private readonly LabelAttribute _label = new LabelAttribute();
         private readonly MenuTypeAttribute _menuTypeAttribute = new MenuTypeAttribute();
 
@@ -82,20 +88,6 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         public override bool IsValid()
         {
             return true;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _label.AddAttribute(xElement);
-            _menuTypeAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _label.ReadAttribute(xElement);
-            _menuTypeAttribute.ReadAttribute(xElement);
         }
     }
 }

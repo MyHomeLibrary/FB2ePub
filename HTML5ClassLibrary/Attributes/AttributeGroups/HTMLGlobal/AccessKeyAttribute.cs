@@ -16,7 +16,7 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 
         public override void AddAttribute(XElement xElement)
         {
-            if (!_hasValue)
+            if (!AttributeHasValue)
             {
                 return;
             }
@@ -25,14 +25,14 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 
         public override void ReadAttribute(XElement element)
         {
-            _hasValue = false;
+            AttributeHasValue = false;
             _attrObject = null;
             XAttribute xObject = element.Attribute(AttributeName);
             if ((xObject != null) && (xObject.Value.Length > 0))
             {
                 _attrObject = new Character();
                 _attrObject.Value = xObject.Value[0];
-                _hasValue = true;
+                AttributeHasValue = true;
             }
 
         }
@@ -45,11 +45,11 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
                 if (value != string.Empty)
                 {
                     _attrObject.Value = value[0];
-                    _hasValue = true;
+                    AttributeHasValue = true;
                 }
                 else
                 {
-                    _hasValue = false;
+                    AttributeHasValue = false;
                 }
             }
         }

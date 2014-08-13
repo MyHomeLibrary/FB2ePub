@@ -21,13 +21,13 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
             return ElementName;
         }
 
-        protected override void AddAttributes(XElement xElement)
+        public override bool IsValid()
         {
-            if (!GlobalAttributes.Direction.HasValue())
+            if(!GlobalAttributes.Direction.HasValue())
             {
-                throw new HTML5ViolationException(this,"The BDO element have to have direction set");
+                return false; //The BDO element have to have direction set
             }
-            base.AddAttributes(xElement);
+            return base.IsValid();
         }
     }
 }

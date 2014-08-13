@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTML5ClassLibrary.Attributes.Events;
 
 namespace HTML5ClassLibrary.BaseElements.InlineElements
 {
@@ -16,6 +12,17 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     public class Image : BaseInlineItem
     {
         public const string ElementName = "img";
+
+        public Image()
+        {
+            Attributes.Add(_altAttribute);
+            Attributes.Add(_heightAttribute);
+            Attributes.Add(_srcAttribute);
+            Attributes.Add(_ismapAttribute);
+            Attributes.Add(_useMapAttribute);
+            Attributes.Add(_widthAttribute);
+            Attributes.Add(_crossOriginAttribute);
+        }
 
 
         private readonly AltAttribute _altAttribute = new AltAttribute();
@@ -160,31 +167,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         {
             return null;
         }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _altAttribute.AddAttribute(xElement);
-            _heightAttribute.AddAttribute(xElement);
-            _widthAttribute.AddAttribute(xElement);
-            _srcAttribute.AddAttribute(xElement);
-            _crossOriginAttribute.AddAttribute(xElement);
-            _ismapAttribute.AddAttribute(xElement);
-            _useMapAttribute.AddAttribute(xElement);
-       }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _altAttribute.ReadAttribute(xElement);
-            _heightAttribute.ReadAttribute(xElement);
-            _widthAttribute.ReadAttribute(xElement);
-            _srcAttribute.ReadAttribute(xElement);
-            _crossOriginAttribute.ReadAttribute(xElement);
-            _ismapAttribute.ReadAttribute(xElement);
-            _useMapAttribute.ReadAttribute(xElement);
-        }
-
         #endregion
     }
 }

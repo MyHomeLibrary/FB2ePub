@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Collections.Generic;
+using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes.Events;
 
 namespace HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents
@@ -136,59 +137,30 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents
         public OnMouseOverEventAttribute OnMouseOverEvent { get { return _onMouseOverEventAttribute; }}
 
 
-
-
-
         /// <summary>
         /// Add all attributes set to specified xElement
         /// </summary>
-        /// <param name="xElement">element to store/write attributes to</param>
-        public void AddAttributes(XElement xElement)
+        /// <param name="attributesList"></param>
+        public void AddAttributes(List<IBaseAttribute> attributesList)
         {
-            _onClickEventAttribute.AddAttribute(xElement);
-            _onDblClickEventAttribute.AddAttribute(xElement);
-            _onDragEventAttribute.AddAttribute(xElement);
-            _onDragEndEventAttribute.AddAttribute(xElement);
-            _onDragEnterEventAttribute.AddAttribute(xElement);
-            _onDragLeaveEventAttribute.AddAttribute(xElement);
-            _onDragOverEventAttribute.AddAttribute(xElement);
-            _onDragStartEventAttribute.AddAttribute(xElement);
-            _onDropEventAttribute.AddAttribute(xElement);
-            _onMouseDownEventAttribute.AddAttribute(xElement);
-            _onMouseMoveEventAttribute.AddAttribute(xElement);
-            _onMouseOutEventAttribute.AddAttribute(xElement);
-            _onMouseUpEventAttribute.AddAttribute(xElement);
-            _onMouseWheelEventAttribute.AddAttribute(xElement);
-            _onScrollEventAttribute.AddAttribute(xElement);
-            _onMouseEnterEventAttribute.AddAttribute(xElement);
-            _onMouseLeaveEventAttribute.AddAttribute(xElement);
-            _onMouseOverEventAttribute.AddAttribute(xElement);
-        }
-
-        /// <summary>
-        /// Loads all attributes from provided xElement
-        /// </summary>
-        /// <param name="xElement">element to load attributes from</param>
-        public void ReadAttributes(XElement xElement)
-        {
-            _onClickEventAttribute.ReadAttribute(xElement);
-            _onDblClickEventAttribute.ReadAttribute(xElement);
-            _onDragEventAttribute.ReadAttribute(xElement);
-            _onDragEndEventAttribute.ReadAttribute(xElement);
-            _onDragEnterEventAttribute.ReadAttribute(xElement);
-            _onDragLeaveEventAttribute.ReadAttribute(xElement);
-            _onDragOverEventAttribute.ReadAttribute(xElement);
-            _onDragStartEventAttribute.ReadAttribute(xElement);
-            _onDropEventAttribute.ReadAttribute(xElement);
-            _onMouseDownEventAttribute.ReadAttribute(xElement);
-            _onMouseMoveEventAttribute.AddAttribute(xElement);
-            _onMouseOutEventAttribute.ReadAttribute(xElement);
-            _onMouseUpEventAttribute.ReadAttribute(xElement);
-            _onMouseWheelEventAttribute.ReadAttribute(xElement);
-            _onScrollEventAttribute.ReadAttribute(xElement);
-            _onMouseEnterEventAttribute.ReadAttribute(xElement);
-            _onMouseLeaveEventAttribute.ReadAttribute(xElement);
-            _onMouseOverEventAttribute.ReadAttribute(xElement);
+            attributesList.Add(_onClickEventAttribute);
+            attributesList.Add(_onDblClickEventAttribute);
+            attributesList.Add(_onDragEventAttribute);
+            attributesList.Add(_onDragEndEventAttribute);
+            attributesList.Add(_onDragEnterEventAttribute);
+            attributesList.Add(_onDragLeaveEventAttribute);
+            attributesList.Add(_onDragOverEventAttribute);
+            attributesList.Add(_onDragStartEventAttribute);
+            attributesList.Add(_onDropEventAttribute);
+            attributesList.Add(_onMouseDownEventAttribute);
+            attributesList.Add(_onMouseMoveEventAttribute);
+            attributesList.Add(_onMouseOutEventAttribute);
+            attributesList.Add(_onMouseUpEventAttribute);
+            attributesList.Add(_onMouseWheelEventAttribute);
+            attributesList.Add(_onScrollEventAttribute);
+            attributesList.Add(_onMouseEnterEventAttribute);
+            attributesList.Add(_onMouseLeaveEventAttribute);
+            attributesList.Add(_onMouseOverEventAttribute);
         }
     }
 }

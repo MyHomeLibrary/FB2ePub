@@ -16,6 +16,11 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         private readonly CiteAttribute _citeAttribute = new CiteAttribute();
 
 
+        public BlockQuoteElement()
+        {
+            Attributes.Add(_citeAttribute);
+        }
+
 
 
         public CiteAttribute Cite { get { return _citeAttribute; } }
@@ -92,17 +97,6 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
             return xElement;
         }
 
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _citeAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _citeAttribute.ReadAttribute(xElement);
-        }
 
         /// <summary>
         /// Checks it element data is valid

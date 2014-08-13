@@ -18,6 +18,16 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
 
         private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
 
+        public TableHeaderCell()
+        {
+            Attributes.Add(_abbrAttribute);
+            Attributes.Add(_colSpanAttribute);
+            Attributes.Add(_headersAttribute);
+            Attributes.Add(_rowSpanAttribue);
+            Attributes.Add(_scopeAttribute);
+            Attributes.Add(_sortedAttribute);
+        }
+
         // Basic attributes
         private readonly AbbreviatedAttribute _abbrAttribute = new AbbreviatedAttribute();
         private readonly ColSpanAttribute _colSpanAttribute = new ColSpanAttribute();
@@ -163,29 +173,6 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
             {
                 item.Parent = null;
             }
-        }
-
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _abbrAttribute.AddAttribute(xElement);
-            _colSpanAttribute.AddAttribute(xElement);
-            _headersAttribute.AddAttribute(xElement);
-            _rowSpanAttribue.AddAttribute(xElement);
-            _scopeAttribute.AddAttribute(xElement);
-            _sortedAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _abbrAttribute.ReadAttribute(xElement);
-            _colSpanAttribute.ReadAttribute(xElement);
-            _headersAttribute.ReadAttribute(xElement);
-            _rowSpanAttribue.ReadAttribute(xElement);
-            _scopeAttribute.ReadAttribute(xElement);
-            _sortedAttribute.ReadAttribute(xElement);
         }
 
         public override List<IHTML5Item> SubElements()

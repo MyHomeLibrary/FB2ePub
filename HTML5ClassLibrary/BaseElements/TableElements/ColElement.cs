@@ -15,6 +15,10 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
     {
         public const string ElementName = "col";
 
+        public ColElement()
+        {
+            Attributes.Add(_spanAttribute);
+        }
 
         // Basic attributes
         private readonly SpanAttribute _spanAttribute = new SpanAttribute();
@@ -40,19 +44,6 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
             }
 
             ReadAttributes(xElement);
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _spanAttribute.AddAttribute(xElement);
-        }
-
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _spanAttribute.ReadAttribute(xElement);
         }
 
         public override XNode Generate()

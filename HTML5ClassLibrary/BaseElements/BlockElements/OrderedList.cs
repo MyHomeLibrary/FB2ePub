@@ -17,6 +17,13 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
     {
         public const string ElementName = "ol";
 
+        public OrderedList()
+        {
+            Attributes.Add(_reversedAttribute);
+            Attributes.Add(_orderedListStartAttribute);
+            Attributes.Add(_orderedListTypeAttribute);
+        }
+
         private readonly ReversedAttribute _reversedAttribute = new ReversedAttribute();
         private readonly OrderedListStartAttribute _orderedListStartAttribute = new OrderedListStartAttribute();
         private readonly OrderedListTypeAttribute _orderedListTypeAttribute = new OrderedListTypeAttribute();
@@ -98,22 +105,6 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         public override bool IsValid()
         {
             return (Content.Count > 0);
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _reversedAttribute.AddAttribute(xElement);
-            _orderedListStartAttribute.AddAttribute(xElement);
-            _orderedListTypeAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _reversedAttribute.ReadAttribute(xElement);
-            _orderedListStartAttribute.ReadAttribute(xElement);
-            _orderedListTypeAttribute.ReadAttribute(xElement);
         }
     }
 }

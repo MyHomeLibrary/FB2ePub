@@ -21,6 +21,18 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         /// </summary>
         private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
 
+        public Select()
+        {
+            Attributes.Add(_multipleAttribute);
+            Attributes.Add(_nameAttribute);
+            Attributes.Add(_sizeAttribute);
+            Attributes.Add(_autoFocusAttribute);
+            Attributes.Add(_formIdAttribute);
+            Attributes.Add(_requiredAttribute);
+            Attributes.Add(_disabledAttribute);
+         
+        }
+
         private readonly MultipleAttribute _multipleAttribute = new MultipleAttribute();
         private readonly NameAttribute _nameAttribute = new NameAttribute();
         private readonly SizeAttribute _sizeAttribute = new SizeAttribute();
@@ -120,31 +132,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
             }
             return xElement;
 
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _multipleAttribute.AddAttribute(xElement);
-            _nameAttribute.AddAttribute(xElement);
-            _sizeAttribute.AddAttribute(xElement);
-            _autoFocusAttribute.AddAttribute(xElement);
-            _formIdAttribute.AddAttribute(xElement);
-            _requiredAttribute.AddAttribute(xElement);
-            _disabledAttribute.AddAttribute(xElement);
-        }
-
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _multipleAttribute.ReadAttribute(xElement);
-            _nameAttribute.ReadAttribute(xElement);
-            _sizeAttribute.ReadAttribute(xElement);
-            _autoFocusAttribute.ReadAttribute(xElement);
-            _formIdAttribute.ReadAttribute(xElement);
-            _requiredAttribute.ReadAttribute(xElement);
-            _disabledAttribute.ReadAttribute(xElement);
         }
 
         public override bool IsValid()

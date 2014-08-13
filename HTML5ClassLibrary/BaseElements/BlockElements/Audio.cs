@@ -19,6 +19,17 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         private readonly MutedAttribute _muted = new MutedAttribute();
         private readonly PreloadAttribute _preload = new PreloadAttribute();
 
+        public Audio ()
+        {
+            Attributes.Add(_src);
+            Attributes.Add(_autoplay);
+            Attributes.Add(_controls);
+            Attributes.Add(_loop);
+            Attributes.Add(_muted);
+            Attributes.Add(_preload);
+
+        }
+
         public SourceAttribute Src
         {
             get { return _src; }
@@ -111,28 +122,6 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
             }
             return false;
         }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _src.AddAttribute(xElement);
-            _autoplay.AddAttribute(xElement);
-            _controls.AddAttribute(xElement);
-            _loop.AddAttribute(xElement);
-            _muted.AddAttribute(xElement);
-            _preload.AddAttribute(xElement);
-        }
-
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _src.ReadAttribute(xElement);
-            _autoplay.ReadAttribute(xElement);
-            _controls.ReadAttribute(xElement);
-            _loop.ReadAttribute(xElement);
-            _muted.AddAttribute(xElement);
-            _preload.AddAttribute(xElement);
-        }
+       
     }
 }

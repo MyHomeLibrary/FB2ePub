@@ -17,6 +17,21 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
     {
         public const string ElementName = "button";
 
+        public Button()
+        {
+            Attributes.Add(_type);
+            Attributes.Add(_name);
+            Attributes.Add(_value);
+            Attributes.Add(_disabled);
+            Attributes.Add(_autofocus);
+            Attributes.Add(_form);
+            Attributes.Add(_formAction);
+            Attributes.Add(_formEncoding);
+            Attributes.Add(_formMethod);
+            Attributes.Add(_formNoValidate);
+            Attributes.Add(_formTarget);
+        }
+
         private readonly ButtonTypeAttribute _type = new ButtonTypeAttribute();
         private readonly NameAttribute      _name = new NameAttribute();
         private readonly ValueAttribute     _value = new ValueAttribute();
@@ -155,38 +170,6 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
                 return item.IsValid();
             }
             return false;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _type.AddAttribute(xElement);
-            _name.AddAttribute(xElement);
-            _value.AddAttribute(xElement);
-            _disabled.AddAttribute(xElement);
-            _autofocus.AddAttribute(xElement);
-            _form.AddAttribute(xElement);
-            _formAction.AddAttribute(xElement);
-            _formEncoding.AddAttribute(xElement);
-            _formMethod.AddAttribute(xElement);
-            _formNoValidate.AddAttribute(xElement);
-            _formTarget.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _type.ReadAttribute(xElement);
-            _name.ReadAttribute(xElement);
-            _value.ReadAttribute(xElement);
-            _disabled.ReadAttribute(xElement);
-            _autofocus.ReadAttribute(xElement);
-            _form.ReadAttribute(xElement);
-            _formAction.ReadAttribute(xElement);
-            _formEncoding.ReadAttribute(xElement);
-            _formMethod.ReadAttribute(xElement);
-            _formNoValidate.ReadAttribute(xElement);
-            _formTarget.ReadAttribute(xElement);
         }
     }
 }

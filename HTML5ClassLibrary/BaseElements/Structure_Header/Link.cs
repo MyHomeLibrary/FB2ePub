@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
+
 
 namespace HTML5ClassLibrary.BaseElements.Structure_Header
 {
@@ -20,6 +15,16 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
     public class Link : HTML5Item
     {
         internal const string ElementName = "link";
+
+        public Link()
+        {
+            Attributes.Add(_hrefAttribute);
+            Attributes.Add(_mediaAttribute);
+            Attributes.Add(_typeAttribute);
+            Attributes.Add(_sizesAttribute);
+            Attributes.Add(_hrefLangAttribute);
+            Attributes.Add(_relAttribute);          
+        }
 
         private readonly HrefAttribute _hrefAttribute = new HrefAttribute();
         private readonly HRefLanguageAttribute _hrefLangAttribute = new HRefLanguageAttribute();
@@ -87,33 +92,11 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             ReadAttributes(xElement);
         }
 
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _hrefAttribute.ReadAttribute(xElement);
-            _mediaAttribute.ReadAttribute(xElement);
-            _typeAttribute.ReadAttribute(xElement);
-            _sizesAttribute.ReadAttribute(xElement);
-            _hrefLangAttribute.ReadAttribute(xElement);
-            _relAttribute.ReadAttribute(xElement);
-        }
-
         public override XNode Generate()
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
             return xElement;
 
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _hrefAttribute.AddAttribute(xElement);
-            _mediaAttribute.AddAttribute(xElement);
-            _typeAttribute.AddAttribute(xElement);
-            _sizesAttribute.AddAttribute(xElement);
-            _hrefLangAttribute.AddAttribute(xElement);
-            _relAttribute.AddAttribute(xElement);
         }
 
         public override bool IsValid()

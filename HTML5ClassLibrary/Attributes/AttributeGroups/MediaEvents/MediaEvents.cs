@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Collections.Generic;
+using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
 
 namespace HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents
@@ -181,72 +182,38 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents
         public OnMediaCancelEventAttribute OnMediaCancelEvent { get { return _onMediaCancelEventAttribute; }}
 
 
-
         /// <summary>
         /// Add all attributes set to specified xElement
         /// </summary>
-        /// <param name="xElement">element to store/write attributes to</param>
-        public void AddAttributes(XElement xElement)
+        /// <param name="attributesList"></param>
+        public void AddAttributes(List<IBaseAttribute> attributesList)
         {
-            _onAbortEventAttribute.AddAttribute(xElement);
-            _onCanPlayEventAttribute.AddAttribute(xElement);
-            _onCanPlayThroughEventAttribute.AddAttribute(xElement);
-            _onDurationChangeEventAttribute.AddAttribute(xElement);
-            _onEmptiedEventAttribute.AddAttribute(xElement);
-            _onEndedEventAttribute.AddAttribute(xElement);
-            _onMediaErrorEventAttribute.AddAttribute(xElement);
-            _onMediaLoadedDataEventAttribute.AddAttribute(xElement);
-            _onMediaLoadedMetadateEventAttribute.AddAttribute(xElement);
-            _onMediaLoadStartEventAttribute.AddAttribute(xElement);
-            _onMediaPauseEventAttribute.AddAttribute(xElement);
-            _onMediaPlayEventAtrribute.AddAttribute(xElement);
-            _onMediaPlayingEventAttribute.AddAttribute(xElement);
-            _onMediaProgressEventAttribute.AddAttribute(xElement);
-            _onMediaRateChangeEventAttribute.AddAttribute(xElement);
-            _onMediaReadyStateChangeEventAttribute.AddAttribute(xElement);
-            _onMediaSeekedEventAttribute.AddAttribute(xElement);
-            _onMediaSeekingEventAttribute.AddAttribute(xElement);
-            _onMediaStalledEventAttribute.AddAttribute(xElement);
-            _onMediaSuspendEventAttribute.AddAttribute(xElement);
-            _onMediaTimeUpdateEventAttribute.AddAttribute(xElement);
-            _onMediaVolumeChangeEventAttribute.AddAttribute(xElement);
-            _onMediaWaitingEventAttribute.AddAttribute(xElement);
-            _onMediaCueChangeEventAttribute.AddAttribute(xElement);
-            _onMediaCancelEventAttribute.AddAttribute(xElement);
+            attributesList.Add(_onAbortEventAttribute);
+            attributesList.Add(_onCanPlayEventAttribute);
+            attributesList.Add(_onCanPlayThroughEventAttribute);
+            attributesList.Add(_onDurationChangeEventAttribute);
+            attributesList.Add(_onEmptiedEventAttribute);
+            attributesList.Add(_onEndedEventAttribute);
+            attributesList.Add(_onMediaErrorEventAttribute);
+            attributesList.Add(_onMediaLoadedDataEventAttribute);
+            attributesList.Add(_onMediaLoadedMetadateEventAttribute);
+            attributesList.Add(_onMediaLoadStartEventAttribute);
+            attributesList.Add(_onMediaPauseEventAttribute);
+            attributesList.Add(_onMediaPlayEventAtrribute);
+            attributesList.Add(_onMediaPlayingEventAttribute);
+            attributesList.Add(_onMediaProgressEventAttribute);
+            attributesList.Add(_onMediaRateChangeEventAttribute);
+            attributesList.Add(_onMediaReadyStateChangeEventAttribute);
+            attributesList.Add(_onMediaSeekedEventAttribute);
+            attributesList.Add(_onMediaSeekingEventAttribute);
+            attributesList.Add(_onMediaStalledEventAttribute);
+            attributesList.Add(_onMediaSuspendEventAttribute);
+            attributesList.Add(_onMediaTimeUpdateEventAttribute);
+            attributesList.Add(_onMediaVolumeChangeEventAttribute);
+            attributesList.Add(_onMediaWaitingEventAttribute);
+            attributesList.Add(_onMediaCueChangeEventAttribute);
+            attributesList.Add(_onMediaCancelEventAttribute);
         }
-
-
-        /// <summary>
-        /// Loads all attributes from provided xElement
-        /// </summary>
-        /// <param name="xElement">element to load attributes from</param>
-        public void ReadAttributes(XElement xElement)
-        {
-            _onAbortEventAttribute.ReadAttribute(xElement);
-            _onCanPlayEventAttribute.ReadAttribute(xElement);
-            _onCanPlayThroughEventAttribute.ReadAttribute(xElement);
-            _onDurationChangeEventAttribute.ReadAttribute(xElement);
-            _onEmptiedEventAttribute.ReadAttribute(xElement);
-            _onEndedEventAttribute.ReadAttribute(xElement);
-            _onMediaErrorEventAttribute.ReadAttribute(xElement);
-            _onMediaLoadedDataEventAttribute.ReadAttribute(xElement);
-            _onMediaLoadedMetadateEventAttribute.ReadAttribute(xElement);
-            _onMediaLoadStartEventAttribute.ReadAttribute(xElement);
-            _onMediaPauseEventAttribute.ReadAttribute(xElement);
-            _onMediaPlayEventAtrribute.ReadAttribute(xElement);
-            _onMediaPlayingEventAttribute.ReadAttribute(xElement);
-            _onMediaProgressEventAttribute.ReadAttribute(xElement);
-            _onMediaRateChangeEventAttribute.ReadAttribute(xElement);
-            _onMediaReadyStateChangeEventAttribute.ReadAttribute(xElement);
-            _onMediaSeekedEventAttribute.ReadAttribute(xElement);
-            _onMediaSeekingEventAttribute.ReadAttribute(xElement);
-            _onMediaStalledEventAttribute.ReadAttribute(xElement);
-            _onMediaSuspendEventAttribute.ReadAttribute(xElement);
-            _onMediaTimeUpdateEventAttribute.ReadAttribute(xElement);
-            _onMediaVolumeChangeEventAttribute.ReadAttribute(xElement);
-            _onMediaWaitingEventAttribute.ReadAttribute(xElement);
-            _onMediaCueChangeEventAttribute.ReadAttribute(xElement);
-            _onMediaCancelEventAttribute.ReadAttribute(xElement);
-        }
+        
     }
 }

@@ -24,7 +24,7 @@ namespace HTML5ClassLibrary.Attributes
 
         public override void AddAttribute(XElement xElement)
         {
-            if (!_hasValue)
+            if (!AttributeHasValue)
             {
                 return;
             }
@@ -33,13 +33,13 @@ namespace HTML5ClassLibrary.Attributes
 
         public override void ReadAttribute(XElement element)
         {
-            _hasValue = false;
+            AttributeHasValue = false;
             _attrObject = null;
             XAttribute xObject = element.Attribute(AttributeName);
             if (xObject != null)
             {
                 _attrObject = new ContentType {Value = xObject.Value};
-                _hasValue = true;
+                AttributeHasValue = true;
             }
         }
 

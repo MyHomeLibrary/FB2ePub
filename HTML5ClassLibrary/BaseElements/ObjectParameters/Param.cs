@@ -19,6 +19,12 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
     /// </summary>
     public class Param : HTML5Item
     {
+        public Param()
+        {
+            Attributes.Add(_nameAttribute);
+            Attributes.Add(_valueAttribute);
+        }
+
         private readonly NameAttribute _nameAttribute = new NameAttribute();
         private readonly ValueAttribute _valueAttribute = new ValueAttribute();
 
@@ -72,12 +78,6 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
             ReadAttributes(xElement);
         }
 
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _nameAttribute.ReadAttribute(xElement);
-            _valueAttribute.ReadAttribute(xElement);
-        }
 
         /// <summary>
         /// Generates element to XNode from data
@@ -92,13 +92,7 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
             return xElement;
         }
 
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _nameAttribute.AddAttribute(xElement);
-            _valueAttribute.AddAttribute(xElement);
-        }
-
+ 
         /// <summary>
         /// Checks it element data is valid
         /// </summary>

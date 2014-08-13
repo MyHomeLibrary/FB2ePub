@@ -24,7 +24,7 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 
         public override void AddAttribute(XElement xElement)
         {
-            if (!_hasValue)
+            if (!AttributeHasValue)
             {
                 return;
             }
@@ -51,11 +51,11 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
         public override void ReadAttribute(XElement element)
         {
             _direction = TextDirection.Unknown;
-            _hasValue = false;
+            AttributeHasValue = false;
             XAttribute xDirection = element.Attribute(AttributeName);
             if (xDirection != null)
             {
-                _hasValue = true;
+                AttributeHasValue = true;
                 switch (xDirection.Value.ToLower())
                 {
                     case "ltr":
@@ -90,7 +90,7 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
             }
             set
             {
-                _hasValue = true;
+                AttributeHasValue = true;
                 switch (value.ToLower())
                 {
                     case "ltr":
@@ -101,7 +101,7 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
                         break;
                     default:
                         _direction = TextDirection.Unknown;
-                        _hasValue = false;
+                        AttributeHasValue = false;
                         break;
                 }
                 

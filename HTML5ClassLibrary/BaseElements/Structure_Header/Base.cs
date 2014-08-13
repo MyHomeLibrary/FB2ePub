@@ -16,6 +16,13 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
     {
         public const string ElementName = "base";
 
+
+        public Base()
+        {
+            Attributes.Add(_hrefAttribute);
+            Attributes.Add(_targetAttribute);
+        }
+
         // Basic attributes
         private readonly HrefAttribute _hrefAttribute = new HrefAttribute();
         private readonly FormTargetAttribute _targetAttribute = new FormTargetAttribute();
@@ -54,12 +61,6 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             ReadAttributes(xElement);
         }
 
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _hrefAttribute.ReadAttribute(xElement);
-            _targetAttribute.ReadAttribute(xElement);
-        }
 
         public override XNode Generate()
         {
@@ -69,12 +70,6 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             return xElement;
         }
 
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _hrefAttribute.AddAttribute(xElement);
-            _targetAttribute.AddAttribute(xElement);
-        }
 
         public override bool IsValid()
         {
