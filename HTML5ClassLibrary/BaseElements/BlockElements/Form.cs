@@ -18,14 +18,14 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
         public Form()
         {
-            Attributes.Add(_acceptCharsetsAttribute);
-            Attributes.Add(_actionAttribute);
-            Attributes.Add(_autocompleteAttribute);
-            Attributes.Add(_encTypeAttribute);
-            Attributes.Add(_methodAttribute);
-            Attributes.Add(_nameAttribute);
-            Attributes.Add(_noValidateAttribute);
-            Attributes.Add(_formTargetAttribute);
+            RegisterAttribute(_acceptCharsetsAttribute);
+            RegisterAttribute(_actionAttribute);
+            RegisterAttribute(_autocompleteAttribute);
+            RegisterAttribute(_encTypeAttribute);
+            RegisterAttribute(_methodAttribute);
+            RegisterAttribute(_nameAttribute);
+            RegisterAttribute(_noValidateAttribute);
+            RegisterAttribute(_formTargetAttribute);
         }
 
         // Basic attributes

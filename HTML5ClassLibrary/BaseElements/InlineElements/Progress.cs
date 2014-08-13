@@ -18,8 +18,8 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public Progress()
         {
-            Attributes.Add(_maxAttribute);
-            Attributes.Add(_valueAttribute);
+            RegisterAttribute(_maxAttribute);
+            RegisterAttribute(_valueAttribute);
         }
 
         private readonly MaxAttribute _maxAttribute = new MaxAttribute();

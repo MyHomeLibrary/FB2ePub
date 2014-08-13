@@ -19,8 +19,8 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
         public Base()
         {
-            Attributes.Add(_hrefAttribute);
-            Attributes.Add(_targetAttribute);
+            RegisterAttribute(_hrefAttribute);
+            RegisterAttribute(_targetAttribute);
         }
 
         // Basic attributes

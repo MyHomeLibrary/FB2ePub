@@ -15,7 +15,7 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
         public Dialog()
         {
-            Attributes.Add(_openAttribute);
+            RegisterAttribute(_openAttribute);
         }
 
         private readonly OpenAttribute _openAttribute = new OpenAttribute();

@@ -24,11 +24,11 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public Script()
         {
-            Attributes.Add(_srcAttribute);
-            Attributes.Add(_contentTypeAttribute);
-            Attributes.Add(_charsetAttribute);
-            Attributes.Add(_deferAttribute);
-            Attributes.Add(_asyncAttribute);
+            RegisterAttribute(_srcAttribute);
+            RegisterAttribute(_contentTypeAttribute);
+            RegisterAttribute(_charsetAttribute);
+            RegisterAttribute(_deferAttribute);
+            RegisterAttribute(_asyncAttribute);
         }
    
         private readonly SourceAttribute _srcAttribute = new SourceAttribute();

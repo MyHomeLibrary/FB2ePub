@@ -20,12 +20,12 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
 
         public TableHeaderCell()
         {
-            Attributes.Add(_abbrAttribute);
-            Attributes.Add(_colSpanAttribute);
-            Attributes.Add(_headersAttribute);
-            Attributes.Add(_rowSpanAttribue);
-            Attributes.Add(_scopeAttribute);
-            Attributes.Add(_sortedAttribute);
+            RegisterAttribute(_abbrAttribute);
+            RegisterAttribute(_colSpanAttribute);
+            RegisterAttribute(_headersAttribute);
+            RegisterAttribute(_rowSpanAttribue);
+            RegisterAttribute(_scopeAttribute);
+            RegisterAttribute(_sortedAttribute);
         }
 
         // Basic attributes

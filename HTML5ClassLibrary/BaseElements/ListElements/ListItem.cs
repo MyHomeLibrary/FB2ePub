@@ -20,7 +20,7 @@ namespace HTML5ClassLibrary.BaseElements.ListElements
 
         public ListItem()
         {
-            Attributes.Add(_valueAttribute);
+            RegisterAttribute(_valueAttribute);
         }
 
         private readonly ValueAttribute _valueAttribute = new ValueAttribute();

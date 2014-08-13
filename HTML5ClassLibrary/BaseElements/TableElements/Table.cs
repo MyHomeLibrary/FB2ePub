@@ -17,7 +17,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
 
         public Table()
         {
-            Attributes.Add(_sortableAttribute);
+            RegisterAttribute(_sortableAttribute);
         }
 
         private readonly SortableAttribute _sortableAttribute = new SortableAttribute();

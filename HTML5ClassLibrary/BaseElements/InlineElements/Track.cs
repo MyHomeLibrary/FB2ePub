@@ -17,11 +17,11 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public Track()
         {
-            Attributes.Add(_defaultAttribute);
-            Attributes.Add(_labelAttribute);
-            Attributes.Add(_sourceAttribute);
-            Attributes.Add(_trackKindAttribute);
-            Attributes.Add(_sourceLanguageAttribute);
+            RegisterAttribute(_defaultAttribute);
+            RegisterAttribute(_labelAttribute);
+            RegisterAttribute(_sourceAttribute);
+            RegisterAttribute(_trackKindAttribute);
+            RegisterAttribute(_sourceLanguageAttribute);
         }
 
         private readonly DefaultAttribute _defaultAttribute = new DefaultAttribute();

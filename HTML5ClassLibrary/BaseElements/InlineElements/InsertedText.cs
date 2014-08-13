@@ -18,8 +18,8 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public InsertedText()
         {
-            Attributes.Add(_cite);
-            Attributes.Add(_datetime);
+            RegisterAttribute(_cite);
+            RegisterAttribute(_datetime);
         }
 
         /// <summary>

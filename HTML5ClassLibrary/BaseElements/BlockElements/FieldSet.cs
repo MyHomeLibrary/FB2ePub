@@ -18,9 +18,9 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
         public FieldSet()
         {
-            Attributes.Add(_disabledAttribute);
-            Attributes.Add(_formIdAttribute);
-            Attributes.Add(_nameAttribute);
+            RegisterAttribute(_disabledAttribute);
+            RegisterAttribute(_formIdAttribute);
+            RegisterAttribute(_nameAttribute);
         }
 
         private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();

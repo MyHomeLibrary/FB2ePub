@@ -17,12 +17,12 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public Keygen()
         {
-            Attributes.Add(_autoFocusAttribute);
-            Attributes.Add(_challengeAttribute);
-            Attributes.Add(_disabledAttribute);
-            Attributes.Add(_formIdAttribute);
-            Attributes.Add(_keyTypeAttribute);
-            Attributes.Add(_nameAttribute);
+            RegisterAttribute(_autoFocusAttribute);
+            RegisterAttribute(_challengeAttribute);
+            RegisterAttribute(_disabledAttribute);
+            RegisterAttribute(_formIdAttribute);
+            RegisterAttribute(_keyTypeAttribute);
+            RegisterAttribute(_nameAttribute);
         }
 
         private readonly AutoFocusAttribute _autoFocusAttribute = new AutoFocusAttribute();

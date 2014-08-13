@@ -19,9 +19,9 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
         public OrderedList()
         {
-            Attributes.Add(_reversedAttribute);
-            Attributes.Add(_orderedListStartAttribute);
-            Attributes.Add(_orderedListTypeAttribute);
+            RegisterAttribute(_reversedAttribute);
+            RegisterAttribute(_orderedListStartAttribute);
+            RegisterAttribute(_orderedListTypeAttribute);
         }
 
         private readonly ReversedAttribute _reversedAttribute = new ReversedAttribute();

@@ -18,17 +18,17 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public TextArea()
         {
-            Attributes.Add(_colsAttribute);
-            Attributes.Add(_nameAttribute);
-            Attributes.Add(_rowsAttribute);
-            Attributes.Add(_autoFocusAttribute);
-            Attributes.Add(_disabledAttribute);
-            Attributes.Add(_formIdAttribute);
-            Attributes.Add(_maxLengthAttribute);
-            Attributes.Add(_placeHolderAttribute);
-            Attributes.Add(_readOnlyAttribute);
-            Attributes.Add(_requiredAttribute);
-            Attributes.Add(_wrapAttribute);
+            RegisterAttribute(_colsAttribute);
+            RegisterAttribute(_nameAttribute);
+            RegisterAttribute(_rowsAttribute);
+            RegisterAttribute(_autoFocusAttribute);
+            RegisterAttribute(_disabledAttribute);
+            RegisterAttribute(_formIdAttribute);
+            RegisterAttribute(_maxLengthAttribute);
+            RegisterAttribute(_placeHolderAttribute);
+            RegisterAttribute(_readOnlyAttribute);
+            RegisterAttribute(_requiredAttribute);
+            RegisterAttribute(_wrapAttribute);
            
         }
 

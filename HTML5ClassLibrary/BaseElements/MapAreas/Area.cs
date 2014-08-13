@@ -15,16 +15,16 @@ namespace HTML5ClassLibrary.BaseElements.MapAreas
 
         public Area()
         {         
-            Attributes.Add(_altAttribute);
-            Attributes.Add(_coordAttribute);
-            Attributes.Add(_downloadAttribute);
-            Attributes.Add(_hrefAttribute);
-            Attributes.Add(_hrefLangAttribute);
-            Attributes.Add(_mediaAttribute);
-            Attributes.Add(_relationAttribute);
-            Attributes.Add(_shapeAttribute);
-            Attributes.Add(_targetAttribute);
-            Attributes.Add(_typeAttribute);
+            RegisterAttribute(_altAttribute);
+            RegisterAttribute(_coordAttribute);
+            RegisterAttribute(_downloadAttribute);
+            RegisterAttribute(_hrefAttribute);
+            RegisterAttribute(_hrefLangAttribute);
+            RegisterAttribute(_mediaAttribute);
+            RegisterAttribute(_relationAttribute);
+            RegisterAttribute(_shapeAttribute);
+            RegisterAttribute(_targetAttribute);
+            RegisterAttribute(_typeAttribute);
             
         }
 

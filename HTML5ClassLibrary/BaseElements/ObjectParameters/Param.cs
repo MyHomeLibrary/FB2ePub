@@ -21,8 +21,8 @@ namespace HTML5ClassLibrary.BaseElements.ObjectParameters
     {
         public Param()
         {
-            Attributes.Add(_nameAttribute);
-            Attributes.Add(_valueAttribute);
+            RegisterAttribute(_nameAttribute);
+            RegisterAttribute(_valueAttribute);
         }
 
         private readonly NameAttribute _nameAttribute = new NameAttribute();

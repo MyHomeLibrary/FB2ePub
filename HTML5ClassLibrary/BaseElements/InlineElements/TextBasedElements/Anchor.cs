@@ -10,13 +10,13 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
     {
         public Anchor()
         {
-            Attributes.Add(_hrefAttrib);
-            Attributes.Add(_hrefLangAttrib);
-            Attributes.Add(_relAttrib);
-            Attributes.Add(_downloadAttrib);
-            Attributes.Add(_mediaAttr);
-            Attributes.Add(_targetAttr);
-            Attributes.Add(_typeAttr);
+            RegisterAttribute(_hrefAttrib);
+            RegisterAttribute(_hrefLangAttrib);
+            RegisterAttribute(_relAttrib);
+            RegisterAttribute(_downloadAttrib);
+            RegisterAttribute(_mediaAttr);
+            RegisterAttribute(_targetAttr);
+            RegisterAttribute(_typeAttr);
         }
 
         private readonly HrefAttribute _hrefAttrib = new HrefAttribute();

@@ -13,7 +13,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 
         public ShortQuote()
         {
-            Attributes.Add(_citeAttribute);
+            RegisterAttribute(_citeAttribute);
         }
 
         private readonly CiteAttribute _citeAttribute = new CiteAttribute();

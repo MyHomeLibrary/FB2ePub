@@ -16,10 +16,10 @@ namespace HTML5ClassLibrary.BaseElements.FormMenuOptions
 
         public Option()
         {
-            Attributes.Add(_selectedAttribute);
-            Attributes.Add(_valueAttribute);
-            Attributes.Add(_disabledAttribute);
-            Attributes.Add(_labelAttribute);
+            RegisterAttribute(_selectedAttribute);
+            RegisterAttribute(_valueAttribute);
+            RegisterAttribute(_disabledAttribute);
+            RegisterAttribute(_labelAttribute);
         }
 
         private readonly SimpleHTML5Text _optionText = new SimpleHTML5Text();

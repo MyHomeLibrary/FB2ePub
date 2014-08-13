@@ -14,8 +14,8 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
         public HTML()
         {
-            Attributes.Add(_xhtmlNameSpaceAttribute);
-            Attributes.Add(_manifestAttribute);            
+            RegisterAttribute(_xhtmlNameSpaceAttribute);
+            RegisterAttribute(_manifestAttribute);            
         }
 
 

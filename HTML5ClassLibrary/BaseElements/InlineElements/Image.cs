@@ -15,13 +15,13 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public Image()
         {
-            Attributes.Add(_altAttribute);
-            Attributes.Add(_heightAttribute);
-            Attributes.Add(_srcAttribute);
-            Attributes.Add(_ismapAttribute);
-            Attributes.Add(_useMapAttribute);
-            Attributes.Add(_widthAttribute);
-            Attributes.Add(_crossOriginAttribute);
+            RegisterAttribute(_altAttribute);
+            RegisterAttribute(_heightAttribute);
+            RegisterAttribute(_srcAttribute);
+            RegisterAttribute(_ismapAttribute);
+            RegisterAttribute(_useMapAttribute);
+            RegisterAttribute(_widthAttribute);
+            RegisterAttribute(_crossOriginAttribute);
         }
 
 

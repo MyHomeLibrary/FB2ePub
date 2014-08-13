@@ -18,12 +18,12 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
         public Link()
         {
-            Attributes.Add(_hrefAttribute);
-            Attributes.Add(_mediaAttribute);
-            Attributes.Add(_typeAttribute);
-            Attributes.Add(_sizesAttribute);
-            Attributes.Add(_hrefLangAttribute);
-            Attributes.Add(_relAttribute);          
+            RegisterAttribute(_hrefAttribute);
+            RegisterAttribute(_mediaAttribute);
+            RegisterAttribute(_typeAttribute);
+            RegisterAttribute(_sizesAttribute);
+            RegisterAttribute(_hrefLangAttribute);
+            RegisterAttribute(_relAttribute);          
         }
 
         private readonly HrefAttribute _hrefAttribute = new HrefAttribute();

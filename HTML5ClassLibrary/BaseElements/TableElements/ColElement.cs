@@ -17,7 +17,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
 
         public ColElement()
         {
-            Attributes.Add(_spanAttribute);
+            RegisterAttribute(_spanAttribute);
         }
 
         // Basic attributes

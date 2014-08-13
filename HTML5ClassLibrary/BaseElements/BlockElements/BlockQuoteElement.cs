@@ -18,7 +18,7 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
         public BlockQuoteElement()
         {
-            Attributes.Add(_citeAttribute);
+            RegisterAttribute(_citeAttribute);
         }
 
 

@@ -22,10 +22,10 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
         public Meta()
         {
-            Attributes.Add(_contentAttribute);
-            Attributes.Add(_nameAttribute);
-            Attributes.Add(_httpEqvAttribute);
-            Attributes.Add(_charsetAttribute);
+            RegisterAttribute(_contentAttribute);
+            RegisterAttribute(_nameAttribute);
+            RegisterAttribute(_httpEqvAttribute);
+            RegisterAttribute(_charsetAttribute);
         }
 
         private readonly ContentAttribute _contentAttribute = new ContentAttribute();

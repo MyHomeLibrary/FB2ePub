@@ -25,9 +25,9 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
         public Style()
         {
-            Attributes.Add(_mediaAttribute);
-            Attributes.Add(_typeAttribute);
-            Attributes.Add(_scopedAttribute);
+            RegisterAttribute(_mediaAttribute);
+            RegisterAttribute(_typeAttribute);
+            RegisterAttribute(_scopedAttribute);
         }
 
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
