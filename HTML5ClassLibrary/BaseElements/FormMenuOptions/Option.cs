@@ -14,6 +14,14 @@ namespace HTML5ClassLibrary.BaseElements.FormMenuOptions
     {
         public const string ElementName = "option";
 
+        public Option()
+        {
+            Attributes.Add(_selectedAttribute);
+            Attributes.Add(_valueAttribute);
+            Attributes.Add(_disabledAttribute);
+            Attributes.Add(_labelAttribute);
+        }
+
         private readonly SimpleHTML5Text _optionText = new SimpleHTML5Text();
 
         private readonly SelectedAttribute  _selectedAttribute = new SelectedAttribute();
@@ -100,26 +108,6 @@ namespace HTML5ClassLibrary.BaseElements.FormMenuOptions
         public override List<IHTML5Item> SubElements()
         {
             return null;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _selectedAttribute.AddAttribute(xElement);
-            _valueAttribute.AddAttribute(xElement);
-            _disabledAttribute.AddAttribute(xElement);
-            _labelAttribute.AddAttribute(xElement);
-
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _selectedAttribute.ReadAttribute(xElement);
-            _valueAttribute.ReadAttribute(xElement);
-            _disabledAttribute.ReadAttribute(xElement);
-            _labelAttribute.ReadAttribute(xElement);
-
         }
     }
 }

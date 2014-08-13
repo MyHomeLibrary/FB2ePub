@@ -16,6 +16,18 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
     {
         public const string ElementName = "form";
 
+        public Form()
+        {
+            Attributes.Add(_acceptCharsetsAttribute);
+            Attributes.Add(_actionAttribute);
+            Attributes.Add(_autocompleteAttribute);
+            Attributes.Add(_encTypeAttribute);
+            Attributes.Add(_methodAttribute);
+            Attributes.Add(_nameAttribute);
+            Attributes.Add(_noValidateAttribute);
+            Attributes.Add(_formTargetAttribute);
+        }
+
         // Basic attributes
         private readonly AcceptCharsetsAttribute _acceptCharsetsAttribute = new AcceptCharsetsAttribute();
         private readonly ActionAttribute _actionAttribute = new ActionAttribute();
@@ -156,32 +168,6 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         public override bool IsValid()
         {
             return true;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _actionAttribute.AddAttribute(xElement);
-            _autocompleteAttribute.AddAttribute(xElement);
-            _methodAttribute.AddAttribute(xElement);
-            _acceptCharsetsAttribute.AddAttribute(xElement);
-            _encTypeAttribute.AddAttribute(xElement);
-            _nameAttribute.AddAttribute(xElement);
-            _noValidateAttribute.AddAttribute(xElement);
-            _formTargetAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _actionAttribute.ReadAttribute(xElement);
-            _autocompleteAttribute.ReadAttribute(xElement);
-            _methodAttribute.ReadAttribute(xElement);
-            _acceptCharsetsAttribute.ReadAttribute(xElement);
-            _encTypeAttribute.ReadAttribute(xElement);
-            _nameAttribute.ReadAttribute(xElement);
-            _noValidateAttribute.ReadAttribute(xElement);
-            _formTargetAttribute.ReadAttribute(xElement);
         }
 
         #endregion

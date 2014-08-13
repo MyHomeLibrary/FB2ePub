@@ -19,6 +19,44 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     /// </summary>
     public class Input : BaseInlineItem
     {
+        public Input()
+        {
+            Attributes.Add(_altAttribute);
+            Attributes.Add(_autocompleteAttribute);
+            Attributes.Add(_autoFocusAttribute);
+            Attributes.Add(_nameAttribute);
+            Attributes.Add(_pattern);
+            Attributes.Add(_placeHolderAttribute);
+            Attributes.Add(_checkedAttribute);
+            Attributes.Add(_maxLenghtAttribute);
+            Attributes.Add(_minAttribute);
+            Attributes.Add(_multipleAttribute);
+            Attributes.Add(_sizeAttribute);
+            Attributes.Add(_inputTypeAttribute);
+            Attributes.Add(_valueAttribute);
+            Attributes.Add(_acceptAttribute);
+            Attributes.Add(_disabledAttribute);
+            Attributes.Add(_formIdAttribute);
+            Attributes.Add(_formActionAttribute);
+            Attributes.Add(_formEncodingTypeAttribute);
+            Attributes.Add(_formNoValidateAttribute);
+            Attributes.Add(_formTargetAttribute);
+            Attributes.Add(_formMethodAttribute);
+            Attributes.Add(_heightAttribute);
+            Attributes.Add(_widthAttribute);
+            Attributes.Add(_listAttribute);
+            Attributes.Add(_maxAttribute);
+            Attributes.Add(_isMapAttribute);
+            Attributes.Add(_onChange);
+            Attributes.Add(_onSelect);
+            Attributes.Add(_readonlyAttribute);
+            Attributes.Add(_requiredAttribute);
+            Attributes.Add(_srcAttribute);
+            Attributes.Add(_stepAttribute);
+            Attributes.Add(_useMapAttribute);
+            
+        }
+
         private readonly AcceptAttribute _acceptAttribute = new AcceptAttribute();
         private readonly AltAttribute _altAttribute = new AltAttribute();
         private readonly AutocompleteAttribute _autocompleteAttribute = new AutocompleteAttribute();
@@ -330,84 +368,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         {
             return null;
         }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _altAttribute.AddAttribute(xElement);
-            _autocompleteAttribute.AddAttribute(xElement);
-            _autoFocusAttribute.AddAttribute(xElement);
-            _nameAttribute.AddAttribute(xElement);
-            _pattern.AddAttribute(xElement);
-            _placeHolderAttribute.AddAttribute(xElement);
-            _checkedAttribute.AddAttribute(xElement);
-            _maxLenghtAttribute.AddAttribute(xElement);
-            _minAttribute.AddAttribute(xElement);
-            _multipleAttribute.AddAttribute(xElement);
-            _sizeAttribute.AddAttribute(xElement);
-            _inputTypeAttribute.AddAttribute(xElement);
-            _valueAttribute.AddAttribute(xElement);
-            _acceptAttribute.AddAttribute(xElement);
-            _disabledAttribute.AddAttribute(xElement);
-            _formIdAttribute.AddAttribute(xElement);
-            _formActionAttribute.AddAttribute(xElement);
-            _formEncodingTypeAttribute.AddAttribute(xElement);
-            _formNoValidateAttribute.AddAttribute(xElement);
-            _formTargetAttribute.AddAttribute((xElement));
-            _formMethodAttribute.AddAttribute(xElement);
-            _heightAttribute.AddAttribute(xElement);
-            _widthAttribute.AddAttribute(xElement);
-            _listAttribute.AddAttribute(xElement);
-            _maxAttribute.AddAttribute(xElement);
-            _isMapAttribute.AddAttribute(xElement);
-            _onChange.AddAttribute(xElement);
-            _onSelect.AddAttribute(xElement);
-            _readonlyAttribute.AddAttribute(xElement);
-            _requiredAttribute.AddAttribute(xElement);
-            _srcAttribute.AddAttribute(xElement);
-            _stepAttribute.AddAttribute(xElement);
-            _useMapAttribute.AddAttribute(xElement);
-        }
-
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _altAttribute.ReadAttribute(xElement);
-            _autocompleteAttribute.ReadAttribute(xElement);
-            _autoFocusAttribute.ReadAttribute(xElement);
-            _nameAttribute.ReadAttribute(xElement);
-            _pattern.ReadAttribute(xElement);
-            _placeHolderAttribute.ReadAttribute(xElement);
-            _checkedAttribute.ReadAttribute(xElement);
-            _maxLenghtAttribute.ReadAttribute(xElement);
-            _minAttribute.ReadAttribute(xElement);
-            _multipleAttribute.ReadAttribute(xElement);
-            _sizeAttribute.ReadAttribute(xElement);
-            _inputTypeAttribute.ReadAttribute(xElement);
-            _valueAttribute.ReadAttribute(xElement);
-            _acceptAttribute.ReadAttribute(xElement);
-            _disabledAttribute.ReadAttribute(xElement);
-            _formIdAttribute.ReadAttribute(xElement);
-            _formActionAttribute.ReadAttribute(xElement);
-            _formEncodingTypeAttribute.ReadAttribute(xElement);
-            _formNoValidateAttribute.ReadAttribute(xElement);
-            _formTargetAttribute.ReadAttribute(xElement);
-            _formMethodAttribute.ReadAttribute(xElement);
-            _heightAttribute.ReadAttribute(xElement);
-            _widthAttribute.ReadAttribute(xElement);
-            _listAttribute.ReadAttribute(xElement);
-            _maxAttribute.ReadAttribute(xElement);
-            _isMapAttribute.ReadAttribute(xElement);
-            _onChange.ReadAttribute(xElement);
-            _onSelect.ReadAttribute(xElement);
-            _readonlyAttribute.ReadAttribute(xElement);
-            _requiredAttribute.ReadAttribute(xElement);
-            _srcAttribute.ReadAttribute(xElement);
-            _stepAttribute.ReadAttribute(xElement);
-            _useMapAttribute.ReadAttribute(xElement);
-        }
-
         #endregion
     }
 }

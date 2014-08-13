@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents
 {
@@ -35,23 +36,11 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents
         /// <summary>
         /// Add all attributes set to specified xElement
         /// </summary>
-        /// <param name="xElement">element to store/write attributes to</param>
-        public void AddAttributes(XElement xElement)
+        public void AddAttributes(List<IBaseAttribute> attributesList)
         {
-            _onKeyDownEventAttribute.AddAttribute(xElement);
-            _onKeyPressEventAttribute.AddAttribute(xElement);
-            _onKeyUpEventAttribute.AddAttribute(xElement);
-        }
-
-        /// <summary>
-        /// Loads all attributes from provided xElement
-        /// </summary>
-        /// <param name="xElement">element to load attributes from</param>
-        public void ReadAttributes(XElement xElement)
-        {
-            _onKeyDownEventAttribute.ReadAttribute(xElement);
-            _onKeyPressEventAttribute.ReadAttribute(xElement);
-            _onKeyUpEventAttribute.ReadAttribute(xElement);
+            attributesList.Add(_onKeyDownEventAttribute);
+            attributesList.Add(_onKeyPressEventAttribute);
+            attributesList.Add(_onKeyUpEventAttribute);
         }
 
     }

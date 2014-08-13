@@ -16,6 +16,17 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     {
         public const string ElementName = "meter";
 
+        public Meter()
+        {
+            Attributes.Add(_formIdAttribute);
+            Attributes.Add(_highAttribute);
+            Attributes.Add(_lowAttribute);
+            Attributes.Add(_maxAttribute);
+            Attributes.Add(_minAttribute);
+            Attributes.Add(_openAttribute);
+            Attributes.Add(_meterValueAttribute);
+        }
+
         private string _innerText;
 
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
@@ -115,30 +126,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         public override List<IHTML5Item> SubElements()
         {
             return null;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _formIdAttribute.AddAttribute(xElement);
-            _highAttribute.AddAttribute(xElement);
-            _lowAttribute.AddAttribute(xElement);
-            _maxAttribute.AddAttribute(xElement);
-            _minAttribute.AddAttribute(xElement);
-            _openAttribute.AddAttribute(xElement);
-            _meterValueAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _formIdAttribute.ReadAttribute(xElement);
-            _highAttribute.ReadAttribute(xElement);
-            _lowAttribute.ReadAttribute(xElement);
-            _maxAttribute.ReadAttribute(xElement);
-            _minAttribute.ReadAttribute(xElement);
-            _openAttribute.ReadAttribute(xElement);
-            _meterValueAttribute.ReadAttribute(xElement);
         }
     }
 }

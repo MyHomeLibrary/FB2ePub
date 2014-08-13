@@ -14,6 +14,11 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     /// </summary>
     public class Map : BaseInlineItem
     {
+        public Map()
+        {
+            Attributes.Add(_nameAttribute);
+        }
+
         /// <summary>
         /// Internal content of the element
         /// </summary>
@@ -134,18 +139,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         public override List<IHTML5Item> SubElements()
         {
             return _content;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _nameAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _nameAttribute.ReadAttribute(xElement);
         }
     }
 }

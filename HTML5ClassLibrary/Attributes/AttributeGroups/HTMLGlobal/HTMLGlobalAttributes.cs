@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Collections.Generic;
+using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes.FlaggedAttributes;
 
 namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
@@ -15,7 +16,7 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
         private readonly DraggableAttribute _draggable = new DraggableAttribute();
         private readonly DropZoneAttribute _dropZoneAttribure = new DropZoneAttribute();
         private readonly ContextMenuAttribute _contextMenuAttribute = new ContextMenuAttribute();
-        private readonly AnyDataAttribute _anyDataAttribute = new AnyDataAttribute(); // not really global but contain custom elements that can appear on any element so we put it here 
+        //private readonly AnyDataAttribute _anyDataAttribute = new AnyDataAttribute(); // not really global but contain custom elements that can appear on any element so we put it here 
         private readonly HiddenAttribute _hiddenAttribute = new HiddenAttribute();
         private readonly IdAttribute _idAttribute = new IdAttribute();
         private readonly LanguageAttribute _languageAttribute = new LanguageAttribute();
@@ -47,10 +48,10 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
         /// </summary>
         public ContextMenuAttribute ContextMenu {get { return _contextMenuAttribute; }}
 
-        /// <summary>
-        /// Used to store custom data private to the page or application
-        /// </summary>
-        public AnyDataAttribute DataAll { get { return _anyDataAttribute; }}
+        ///// <summary>
+        ///// Used to store custom data private to the page or application
+        ///// </summary>
+        //public AnyDataAttribute DataAll { get { return _anyDataAttribute; }}
 
         /// <summary>
         /// Specifies the text direction for the content in an element
@@ -111,54 +112,29 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
         public TranslateAttribute Translate { get { return _translateAttribute; }}
 
 
-
-
         /// <summary>
         /// Add all global attributes set to specified xElement
         /// </summary>
-        /// <param name="xElement">element to store/write attributes to</param>
-        public void AddAttributes(XElement xElement)
+        /// <param name="attributesList"></param>
+        public void AddAttributes(List<IBaseAttribute> attributesList)
         {
-            _accessKeyAttribute.AddAttribute(xElement);
-            _classAttribute.AddAttribute(xElement);
-            _contentEditableAttribute.AddAttribute(xElement);
-            _contextMenuAttribute.AddAttribute(xElement);
-            _anyDataAttribute.AddAttribute(xElement);
-            _directionAttribute.AddAttribute(xElement);
-            _draggable.AddAttribute(xElement);
-            _dropZoneAttribure.AddAttribute(xElement);
-            _hiddenAttribute.AddAttribute(xElement);
-            _idAttribute.AddAttribute(xElement);
-            _languageAttribute.AddAttribute(xElement);
-            _spellCheckAttribute.AddAttribute(xElement);
-            _styleAttribute.AddAttribute(xElement);
-            _tabIndexAttribute.AddAttribute(xElement);
-            _titleAttribute.AddAttribute(xElement);
-            _translateAttribute.AddAttribute(xElement);
+            attributesList.Add(_accessKeyAttribute);
+            attributesList.Add(_classAttribute);
+            attributesList.Add(_contentEditableAttribute);
+            attributesList.Add(_contextMenuAttribute);
+            //attributesList.Add(_anyDataAttribute);
+            attributesList.Add(_directionAttribute);
+            attributesList.Add(_draggable);
+            attributesList.Add(_dropZoneAttribure);
+            attributesList.Add(_hiddenAttribute);
+            attributesList.Add(_idAttribute);
+            attributesList.Add(_languageAttribute);
+            attributesList.Add(_spellCheckAttribute);
+            attributesList.Add(_styleAttribute);
+            attributesList.Add(_tabIndexAttribute);
+            attributesList.Add(_titleAttribute);
+            attributesList.Add(_translateAttribute);
         }
 
-        /// <summary>
-        /// Loads all global attributes from provided xElement
-        /// </summary>
-        /// <param name="xElement">element to load attributes from</param>
-        public void ReadAttributes(XElement xElement)
-        {
-            _accessKeyAttribute.ReadAttribute(xElement);
-            _classAttribute.ReadAttribute(xElement);
-            _contentEditableAttribute.ReadAttribute(xElement);
-            _contextMenuAttribute.ReadAttribute(xElement);
-            _anyDataAttribute.ReadAttribute(xElement);
-            _directionAttribute.ReadAttribute(xElement);
-            _draggable.ReadAttribute(xElement);
-            _dropZoneAttribure.ReadAttribute(xElement);
-            _hiddenAttribute.ReadAttribute(xElement);
-            _idAttribute.ReadAttribute(xElement);
-            _languageAttribute.ReadAttribute(xElement);
-            _spellCheckAttribute.ReadAttribute(xElement);
-            _styleAttribute.ReadAttribute(xElement);
-            _tabIndexAttribute.ReadAttribute(xElement);
-            _titleAttribute.ReadAttribute(xElement);
-            _translateAttribute.ReadAttribute(xElement);
-        }
     }
 }

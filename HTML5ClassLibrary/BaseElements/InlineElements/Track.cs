@@ -15,6 +15,15 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     {
         public const string ElementName = "track";
 
+        public Track()
+        {
+            Attributes.Add(_defaultAttribute);
+            Attributes.Add(_labelAttribute);
+            Attributes.Add(_sourceAttribute);
+            Attributes.Add(_trackKindAttribute);
+            Attributes.Add(_sourceLanguageAttribute);
+        }
+
         private readonly DefaultAttribute _defaultAttribute = new DefaultAttribute();
         private readonly LabelAttribute _labelAttribute = new LabelAttribute();
         private readonly SourceAttribute _sourceAttribute = new SourceAttribute();
@@ -91,26 +100,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         public override List<IHTML5Item> SubElements()
         {
             return null;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _defaultAttribute.AddAttribute(xElement);
-            _labelAttribute.AddAttribute(xElement);
-            _sourceAttribute.AddAttribute(xElement);
-            _trackKindAttribute.AddAttribute(xElement);
-            _sourceLanguageAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _defaultAttribute.ReadAttribute(xElement);
-            _labelAttribute.ReadAttribute(xElement);
-            _sourceAttribute.ReadAttribute(xElement);
-            _trackKindAttribute.ReadAttribute(xElement);
-            _sourceLanguageAttribute.ReadAttribute(xElement);
         }
     }
 }

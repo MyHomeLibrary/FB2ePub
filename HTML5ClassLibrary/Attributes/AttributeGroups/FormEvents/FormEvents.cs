@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents
 {
@@ -96,41 +97,20 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents
         /// <summary>
         /// Add all attributes set to specified xElement
         /// </summary>
-        /// <param name="xElement">element to store/write attributes to</param>
-        public void AddAttributes(XElement xElement)
+        public void AddAttributes(List<IBaseAttribute>  attributesList)
         {
-            _onBlurEventAttribute.AddAttribute(xElement);
-            _onChangeEventAttribute.AddAttribute(xElement);
-            _onContextMenuAttribute.AddAttribute(xElement);
-            _onFocusEventAttribute.AddAttribute(xElement);
-            _onFormChangeEventAttribute.AddAttribute(xElement);
-            _onFormInputEventAttribute.AddAttribute(xElement);
-            _onInputEventAttribute.AddAttribute(xElement);
-            _onInvalidEventAttribute.AddAttribute(xElement);
-            _onSelectEventAttribute.AddAttribute(xElement);
-            _onSubmitEventAttribute.AddAttribute(xElement);
-            _onResetEventAttribute.AddAttribute(xElement);
-            _onToggleEventAttribute.AddAttribute(xElement);
-        }
-
-        /// <summary>
-        /// Loads all attributes from provided xElement
-        /// </summary>
-        /// <param name="xElement">element to load attributes from</param>
-        public void ReadAttributes(XElement xElement)
-        {
-            _onBlurEventAttribute.ReadAttribute(xElement);
-            _onChangeEventAttribute.ReadAttribute(xElement);
-            _onContextMenuAttribute.ReadAttribute(xElement);
-            _onFocusEventAttribute.ReadAttribute(xElement);
-            _onFormChangeEventAttribute.ReadAttribute(xElement);
-            _onFormInputEventAttribute.ReadAttribute(xElement);
-            _onInputEventAttribute.ReadAttribute(xElement);
-            _onInvalidEventAttribute.ReadAttribute(xElement);
-            _onSelectEventAttribute.ReadAttribute(xElement);
-            _onSubmitEventAttribute.ReadAttribute(xElement);
-            _onResetEventAttribute.ReadAttribute(xElement);
-            _onToggleEventAttribute.ReadAttribute(xElement);
+            attributesList.Add(_onBlurEventAttribute);
+            attributesList.Add(_onChangeEventAttribute);
+            attributesList.Add(_onContextMenuAttribute);
+            attributesList.Add(_onFocusEventAttribute);
+            attributesList.Add(_onFormChangeEventAttribute);
+            attributesList.Add(_onFormInputEventAttribute);
+            attributesList.Add(_onInputEventAttribute);
+            attributesList.Add(_onInvalidEventAttribute);
+            attributesList.Add(_onSelectEventAttribute);
+            attributesList.Add(_onSubmitEventAttribute);
+            attributesList.Add(_onResetEventAttribute);
+            attributesList.Add(_onToggleEventAttribute);
         }
     }
 }

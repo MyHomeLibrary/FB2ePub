@@ -23,6 +23,13 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
         private readonly SimpleHTML5Text _content = new SimpleHTML5Text();
 
+        public Style()
+        {
+            Attributes.Add(_mediaAttribute);
+            Attributes.Add(_typeAttribute);
+            Attributes.Add(_scopedAttribute);
+        }
+
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
         private readonly MediaAttribute _mediaAttribute = new MediaAttribute();
@@ -74,14 +81,6 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             _content.Load(xNode);
         }
 
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _mediaAttribute.ReadAttribute(xElement);
-            _scopedAttribute.ReadAttribute(xElement);
-            _typeAttribute.ReadAttribute(xElement);
-        }
-
         public override XNode Generate()
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
@@ -90,15 +89,6 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
             xElement.Add(_content.Generate());
             return xElement;
-        }
-
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _mediaAttribute.AddAttribute(xElement);
-            _scopedAttribute.AddAttribute(xElement);
-            _typeAttribute.AddAttribute(xElement);
         }
 
 

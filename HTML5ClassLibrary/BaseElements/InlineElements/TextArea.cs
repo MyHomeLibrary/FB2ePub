@@ -16,7 +16,22 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         private readonly SimpleHTML5Text _scriptText = new SimpleHTML5Text();
 
-        // Base Attributes
+        public TextArea()
+        {
+            Attributes.Add(_colsAttribute);
+            Attributes.Add(_nameAttribute);
+            Attributes.Add(_rowsAttribute);
+            Attributes.Add(_autoFocusAttribute);
+            Attributes.Add(_disabledAttribute);
+            Attributes.Add(_formIdAttribute);
+            Attributes.Add(_maxLengthAttribute);
+            Attributes.Add(_placeHolderAttribute);
+            Attributes.Add(_readOnlyAttribute);
+            Attributes.Add(_requiredAttribute);
+            Attributes.Add(_wrapAttribute);
+           
+        }
+
         private readonly ColsAttribute _colsAttribute = new ColsAttribute();
         private readonly NameAttribute _nameAttribute = new NameAttribute();
         private readonly RowsAttribute _rowsAttribute = new RowsAttribute();
@@ -125,40 +140,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         }
 
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _colsAttribute.AddAttribute(xElement);
-            _nameAttribute.AddAttribute(xElement);
-            _rowsAttribute.AddAttribute(xElement);
-            _autoFocusAttribute.AddAttribute(xElement);
-            _disabledAttribute.AddAttribute(xElement);
-            _formIdAttribute.AddAttribute(xElement);
-            _maxLengthAttribute.AddAttribute(xElement);
-            _placeHolderAttribute.AddAttribute(xElement);
-            _readOnlyAttribute.AddAttribute(xElement);
-            _requiredAttribute.AddAttribute(xElement);
-            _wrapAttribute.AddAttribute(xElement);
-
-        }
-
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _colsAttribute.ReadAttribute(xElement);
-            _nameAttribute.ReadAttribute(xElement);
-            _rowsAttribute.ReadAttribute(xElement);
-            _autoFocusAttribute.ReadAttribute(xElement);
-            _disabledAttribute.ReadAttribute(xElement);
-            _formIdAttribute.ReadAttribute(xElement);
-            _maxLengthAttribute.ReadAttribute(xElement);
-            _placeHolderAttribute.ReadAttribute(xElement);
-            _readOnlyAttribute.ReadAttribute(xElement);
-            _requiredAttribute.ReadAttribute(xElement);
-            _wrapAttribute.ReadAttribute(xElement);
-        }
-
+    
         public override bool IsValid()
         {
             return (_colsAttribute.HasValue() && _rowsAttribute.HasValue());

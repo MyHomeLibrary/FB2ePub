@@ -20,6 +20,13 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     /// </summary>
     public class Label : BaseInlineItem
     {
+
+        public Label()
+        {
+            Attributes.Add(_forAttribute);
+            Attributes.Add(_formIdAttribute);
+        }
+
         /// <summary>
         /// Internal content of the element
         /// </summary>
@@ -164,21 +171,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         {
             return _content;
         }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _forAttribute.AddAttribute(xElement);
-            _formIdAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _forAttribute.ReadAttribute(xElement);
-            _formIdAttribute.ReadAttribute(xElement);
-        }
-
         #endregion
     }
 }

@@ -7,6 +7,13 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
     {
         public const string ElementName = "source";
 
+        public Source()
+        {
+            Attributes.Add(_srcAttrib);
+            Attributes.Add(_mediaAttrib);
+            Attributes.Add(_mimeType);
+        }
+
         private readonly SourceAttribute _srcAttrib = new SourceAttribute();
         private readonly MediaAttribute _mediaAttrib = new MediaAttribute();
         private  readonly MIMETypeAttribute _mimeType = new MIMETypeAttribute();
@@ -30,22 +37,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
         public MIMETypeAttribute Type
         {
             get { return _mimeType; }
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _srcAttrib.AddAttribute(xElement);
-            _mediaAttrib.AddAttribute(xElement);
-            _mimeType.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _srcAttrib.ReadAttribute(xElement);
-            _mediaAttrib.ReadAttribute(xElement);
-            _mimeType.ReadAttribute(xElement);
         }
     }
 }

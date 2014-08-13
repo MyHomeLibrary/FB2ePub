@@ -23,6 +23,19 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         /// </summary>
         private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
 
+        public ObjectElm()
+        {
+            Attributes.Add(_heightAttribute);
+            Attributes.Add(_nameAttribute);
+            Attributes.Add(_contentTypeAttribute);
+            Attributes.Add(_widthAttribute);
+            Attributes.Add(_formIdAttribute);
+            Attributes.Add(_dataAttribute);
+            Attributes.Add(_mimeTypeAttribute);
+            Attributes.Add(_useMapAttribute);
+           
+        }
+
 
         private readonly HeightAttribute _heightAttribute = new HeightAttribute();
         private readonly NameAttribute _nameAttribute = new NameAttribute();
@@ -191,32 +204,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         public override List<IHTML5Item> SubElements()
         {
             return _content;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _heightAttribute.AddAttribute(xElement);
-            _nameAttribute.AddAttribute(xElement);
-            _contentTypeAttribute.AddAttribute(xElement);
-            _widthAttribute.AddAttribute(xElement);
-            _formIdAttribute.AddAttribute(xElement);
-            _dataAttribute.AddAttribute(xElement);
-            _mimeTypeAttribute.ReadAttribute(xElement);
-            _useMapAttribute.ReadAttribute(xElement);
-       }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _heightAttribute.ReadAttribute(xElement);
-            _nameAttribute.ReadAttribute(xElement);
-            _contentTypeAttribute.ReadAttribute(xElement);
-            _widthAttribute.ReadAttribute(xElement);
-            _formIdAttribute.ReadAttribute(xElement);
-            _dataAttribute.ReadAttribute(xElement);
-            _mimeTypeAttribute.ReadAttribute(xElement);
-            _useMapAttribute.ReadAttribute(xElement);
         }
     }
 }

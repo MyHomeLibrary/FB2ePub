@@ -16,6 +16,12 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     {
         public const string ElementName = "progress";
 
+        public Progress()
+        {
+            Attributes.Add(_maxAttribute);
+            Attributes.Add(_valueAttribute);
+        }
+
         private readonly MaxAttribute _maxAttribute = new MaxAttribute();
         private readonly MeterValueAttribute _valueAttribute = new MeterValueAttribute();
 
@@ -75,20 +81,5 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         {
             return null;
         }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _maxAttribute.AddAttribute(xElement);
-            _valueAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _maxAttribute.ReadAttribute(xElement);
-            _valueAttribute.ReadAttribute(xElement);
-        }
-
     }
 }

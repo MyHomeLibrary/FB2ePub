@@ -18,6 +18,11 @@ namespace HTML5ClassLibrary.BaseElements.ListElements
 
         private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
 
+        public ListItem()
+        {
+            Attributes.Add(_valueAttribute);
+        }
+
         private readonly ValueAttribute _valueAttribute = new ValueAttribute();
 
 
@@ -141,18 +146,6 @@ namespace HTML5ClassLibrary.BaseElements.ListElements
         public override List<IHTML5Item> SubElements()
         {
             return _content;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _valueAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _valueAttribute.ReadAttribute(xElement);
         }
 
         #endregion

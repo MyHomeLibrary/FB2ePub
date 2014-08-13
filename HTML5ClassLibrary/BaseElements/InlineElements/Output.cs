@@ -15,6 +15,13 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     {
         public const string ElementName = "output";
 
+        public Output()
+        {
+            Attributes.Add(_forAttribute);
+            Attributes.Add(_formIdAttribute);
+            Attributes.Add(_nameAttribute);
+        }
+
         private readonly OutputForAttribute _forAttribute = new OutputForAttribute();
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
         private readonly NameAttribute _nameAttribute = new NameAttribute();
@@ -77,22 +84,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         public override List<IHTML5Item> SubElements()
         {
             return null;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _forAttribute.AddAttribute(xElement);
-            _formIdAttribute.AddAttribute(xElement);
-            _nameAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _forAttribute.ReadAttribute(xElement);
-            _formIdAttribute.ReadAttribute(xElement);
-            _nameAttribute.ReadAttribute(xElement);
         }
     }
 }

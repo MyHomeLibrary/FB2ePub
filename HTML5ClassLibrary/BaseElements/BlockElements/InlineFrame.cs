@@ -13,6 +13,17 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
     {
         public const string ElementName = "iframe";
 
+        public InlineFrame()
+        {
+            Attributes.Add(_heightAttribute);
+            Attributes.Add(_widthAttribute);
+            Attributes.Add(_sourceAttribute);
+            Attributes.Add(_nameAttribute);
+            Attributes.Add(_sandboxAttribute);
+            Attributes.Add(_seamlessAttribute);
+            Attributes.Add(_sourceDocAttribute);
+        }
+
         private readonly HeightAttribute _heightAttribute = new HeightAttribute();
         private readonly WidthAttribute _widthAttribute = new WidthAttribute();
         private readonly SourceAttribute _sourceAttribute = new SourceAttribute();
@@ -120,28 +131,5 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
             return true;
         }
 
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _heightAttribute.AddAttribute(xElement);
-            _widthAttribute.AddAttribute(xElement);
-            _sourceAttribute.AddAttribute(xElement);
-            _nameAttribute.AddAttribute(xElement);
-            _sandboxAttribute.AddAttribute(xElement);
-            _seamlessAttribute.AddAttribute(xElement);
-            _sourceDocAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _heightAttribute.ReadAttribute(xElement);
-            _widthAttribute.ReadAttribute(xElement);
-            _sourceAttribute.ReadAttribute(xElement);
-            _nameAttribute.ReadAttribute(xElement);
-            _sandboxAttribute.ReadAttribute(xElement);
-            _seamlessAttribute.ReadAttribute(xElement);
-            _sourceDocAttribute.ReadAttribute(xElement);
-        }
     }
 }

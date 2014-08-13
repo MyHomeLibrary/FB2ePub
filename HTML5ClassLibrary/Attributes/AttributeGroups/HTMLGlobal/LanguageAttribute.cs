@@ -15,7 +15,7 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 
         public override void AddAttribute(XElement xElement)
         {
-            if (!_hasValue)
+            if (!AttributeHasValue)
             {
                 return;
             }
@@ -25,13 +25,13 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 
         public override void ReadAttribute(XElement element)
         {
-            _hasValue = false;
+            AttributeHasValue = false;
             XAttribute xLanguage = element.Attribute(XNamespace.Xml + AttributeName);
             if (xLanguage != null)
             {
                 _language = new Languages();
                 _language.SetLanguageId(xLanguage.Value);
-                _hasValue = true;
+                AttributeHasValue = true;
             }
 
         }
@@ -41,7 +41,7 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
             set
             {
                 _language.SetLanguageId(value);
-                _hasValue = (_language.Language != LanguagesEnum.Unknown);
+                AttributeHasValue = (_language.Language != LanguagesEnum.Unknown);
             }
         }
 

@@ -38,12 +38,7 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
                 throw new Exception(string.Format("xNode is not {0} element", ElementName));
             }
             
-            GlobalAttributes.ReadAttributes(xElement);
-            FormEvents.ReadAttributes(xElement);
-            KeyboardEvents.ReadAttributes(xElement);
-            MediaEvents.ReadAttributes(xElement);
-            MouseEvents.ReadAttributes(xElement);
-            WindowEvents.ReadAttributes(xElement);
+            ReadAttributes(xElement);
 
             Content.Clear();
             IEnumerable<XNode> descendants = xElement.Nodes();
@@ -88,14 +83,8 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
 
-            GlobalAttributes.AddAttributes(xElement);
-            FormEvents.AddAttributes(xElement);
-            KeyboardEvents.AddAttributes(xElement);
-            MediaEvents.AddAttributes(xElement);
-            MouseEvents.AddAttributes(xElement);
-            WindowEvents.AddAttributes(xElement);
-
-
+            AddAttributes(xElement);
+        
             foreach (var item in Content)
             {
                 xElement.Add(item.Generate());

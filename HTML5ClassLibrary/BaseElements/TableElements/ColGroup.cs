@@ -23,7 +23,11 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
 
         private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
 
-        // Basic attributes
+        public ColGroup()
+        {
+            Attributes.Add(_spanAttribute);
+        }
+
         private readonly SpanAttribute _spanAttribute = new SpanAttribute();
 
         /// <summary>
@@ -75,18 +79,6 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
                 return item.IsValid();
             }
             return false;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _spanAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _spanAttribute.ReadAttribute(xElement);
         }
 
         public override XNode Generate()

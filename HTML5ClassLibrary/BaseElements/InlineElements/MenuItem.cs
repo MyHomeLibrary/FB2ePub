@@ -11,6 +11,18 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     {
         public const string ElementName = "menuitem";
 
+        public MenuItem()
+        {
+            Attributes.Add(_checkedAttribute);
+            Attributes.Add(_disabledAttribute);
+            Attributes.Add(_labelAttribute);
+            Attributes.Add(_commandAttribute);
+            Attributes.Add(_defaultAttribute);
+            Attributes.Add(_iconAttribute);
+            Attributes.Add(_radioGroupAttribute);
+            Attributes.Add(_menuItemTypeAttribute);
+        }
+
         private readonly CheckedAttribute _checkedAttribute = new CheckedAttribute();
         private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
         private readonly LabelAttribute _labelAttribute = new LabelAttribute();
@@ -127,33 +139,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         {
             return null;
         }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _checkedAttribute.AddAttribute(xElement);
-            _disabledAttribute.AddAttribute(xElement);
-            _labelAttribute.AddAttribute(xElement);
-            _commandAttribute.AddAttribute(xElement);
-            _defaultAttribute.AddAttribute(xElement);
-            _iconAttribute.AddAttribute(xElement);
-            _radioGroupAttribute.AddAttribute(xElement);
-            _menuItemTypeAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _checkedAttribute.ReadAttribute(xElement);
-            _disabledAttribute.ReadAttribute(xElement);
-            _labelAttribute.ReadAttribute(xElement);
-            _commandAttribute.ReadAttribute(xElement);
-            _defaultAttribute.ReadAttribute(xElement);
-            _iconAttribute.ReadAttribute(xElement);
-            _radioGroupAttribute.ReadAttribute(xElement);
-            _menuItemTypeAttribute.ReadAttribute(xElement);
-        }
-
         #endregion
 
     }

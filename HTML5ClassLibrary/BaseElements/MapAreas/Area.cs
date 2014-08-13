@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
 
 namespace HTML5ClassLibrary.BaseElements.MapAreas
 {
@@ -18,6 +12,21 @@ namespace HTML5ClassLibrary.BaseElements.MapAreas
     public class Area : HTML5Item
     {
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
+
+        public Area()
+        {         
+            Attributes.Add(_altAttribute);
+            Attributes.Add(_coordAttribute);
+            Attributes.Add(_downloadAttribute);
+            Attributes.Add(_hrefAttribute);
+            Attributes.Add(_hrefLangAttribute);
+            Attributes.Add(_mediaAttribute);
+            Attributes.Add(_relationAttribute);
+            Attributes.Add(_shapeAttribute);
+            Attributes.Add(_targetAttribute);
+            Attributes.Add(_typeAttribute);
+            
+        }
 
         private readonly AltAttribute _altAttribute = new AltAttribute();
         private readonly CoordinatesAttribute _coordAttribute = new CoordinatesAttribute();
@@ -130,36 +139,6 @@ namespace HTML5ClassLibrary.BaseElements.MapAreas
             AddAttributes(xElement);
 
             return xElement;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _altAttribute.AddAttribute(xElement);
-            _coordAttribute.AddAttribute(xElement);
-            _downloadAttribute.AddAttribute(xElement);
-            _hrefAttribute.AddAttribute(xElement);
-            _hrefLangAttribute.AddAttribute(xElement);
-            _mediaAttribute.AddAttribute(xElement);
-            _relationAttribute.AddAttribute(xElement);
-            _shapeAttribute.AddAttribute(xElement);
-            _targetAttribute.AddAttribute(xElement);
-            _typeAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _altAttribute.ReadAttribute(xElement);
-            _coordAttribute.ReadAttribute(xElement);
-            _downloadAttribute.ReadAttribute(xElement);
-            _hrefAttribute.ReadAttribute(xElement);
-            _hrefLangAttribute.ReadAttribute(xElement);
-            _mediaAttribute.ReadAttribute(xElement);
-            _relationAttribute.ReadAttribute(xElement);
-            _shapeAttribute.ReadAttribute(xElement);
-            _targetAttribute.ReadAttribute(xElement);
-            _typeAttribute.ReadAttribute(xElement);
         }
 
         /// <summary>

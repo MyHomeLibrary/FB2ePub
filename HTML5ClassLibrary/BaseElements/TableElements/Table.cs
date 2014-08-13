@@ -15,6 +15,11 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
     {
         internal const string ElementName = "table";
 
+        public Table()
+        {
+            Attributes.Add(_sortableAttribute);
+        }
+
         private readonly SortableAttribute _sortableAttribute = new SortableAttribute();
 
 
@@ -132,18 +137,6 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
         }
 
 
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _sortableAttribute.AddAttribute(xElement);
-        }
-
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _sortableAttribute.ReadAttribute(xElement);
-     }
 
         public override bool IsValid()
         {

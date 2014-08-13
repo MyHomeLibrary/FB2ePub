@@ -15,6 +15,16 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     {
         public const string ElementName = "keygen";
 
+        public Keygen()
+        {
+            Attributes.Add(_autoFocusAttribute);
+            Attributes.Add(_challengeAttribute);
+            Attributes.Add(_disabledAttribute);
+            Attributes.Add(_formIdAttribute);
+            Attributes.Add(_keyTypeAttribute);
+            Attributes.Add(_nameAttribute);
+        }
+
         private readonly AutoFocusAttribute _autoFocusAttribute = new AutoFocusAttribute();
         private readonly ChallengeAttribute _challengeAttribute = new ChallengeAttribute();
         private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
@@ -94,28 +104,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         public override List<IHTML5Item> SubElements()
         {
             return null;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _autoFocusAttribute.AddAttribute(xElement);
-            _challengeAttribute.AddAttribute(xElement);
-            _disabledAttribute.AddAttribute(xElement);
-            _formIdAttribute.AddAttribute(xElement);
-            _keyTypeAttribute.AddAttribute(xElement);
-            _nameAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _autoFocusAttribute.ReadAttribute(xElement);
-            _challengeAttribute.ReadAttribute(xElement);
-            _disabledAttribute.ReadAttribute(xElement);
-            _formIdAttribute.ReadAttribute(xElement);
-            _keyTypeAttribute.ReadAttribute(xElement);
-            _nameAttribute.ReadAttribute(xElement);
         }
     }
 }

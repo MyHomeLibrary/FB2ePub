@@ -46,7 +46,7 @@ namespace HTML5ClassLibrary.Attributes
 
             set
             {
-                _hasValue = true;
+                AttributeHasValue = true;
                 switch (value.ToLower())
                 {
                     case "allow-forms":
@@ -66,7 +66,7 @@ namespace HTML5ClassLibrary.Attributes
                         break;
                     default:
                         _restriction = Restrictions.Invalid;
-                        _hasValue = false;
+                        AttributeHasValue = false;
                         break;
                 }
             }
@@ -76,7 +76,7 @@ namespace HTML5ClassLibrary.Attributes
 
         public override void AddAttribute(XElement xElement)
         {
-            if (!_hasValue)
+            if (!AttributeHasValue)
             {
                 return;
             }
@@ -85,7 +85,7 @@ namespace HTML5ClassLibrary.Attributes
 
         public override void ReadAttribute(XElement element)
         {
-            _hasValue = false;
+            AttributeHasValue = false;
             XAttribute xObject = element.Attribute(AttributeName);
             if (xObject != null)
             {

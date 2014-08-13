@@ -7,14 +7,10 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
     {
         internal const string ElementName = "pre";
 
-        private readonly XMLSpaceAttribute _xmlspaceAttribute = new XMLSpaceAttribute();
-
-
-        /// <summary>
-        /// This attribute indicates if white space (extra spaces, tabs) should be preserved. 
-        /// Possible value is "preserve".
-        /// </summary>
-        public XMLSpaceAttribute PreserveSpace { get { return _xmlspaceAttribute; } }
+        public PreFormated()
+        {
+                            
+        }
 
         protected override string GetElementName()
         {
@@ -52,18 +48,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
                 return false;
             }
             return true;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _xmlspaceAttribute.AddAttribute(xElement);
-        }
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _xmlspaceAttribute.ReadAttribute(xElement);
         }
     }
 }

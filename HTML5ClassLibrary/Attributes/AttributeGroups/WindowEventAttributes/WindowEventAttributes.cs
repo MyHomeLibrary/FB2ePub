@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Collections.Generic;
+using System.Xml.Linq;
 using HTML5ClassLibrary.Attributes.Events;
 
 namespace HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
@@ -128,55 +129,29 @@ namespace HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
         public OnUnloadEventAttribute OnUnloadEvent { get { return _onUnloadEventAttribute; }}
 
 
-
         /// <summary>
         /// Add all attributes set to specified xElement
         /// </summary>
-        /// <param name="xElement">element to store/write attributes to</param>
-        public void AddAttributes(XElement xElement)
+        /// <param name="attributesList"></param>
+        public void AddAttributes(List<IBaseAttribute> attributesList)
         {
-            _onAfterPrintEventAttribute.AddAttribute(xElement);
-            _onBeforePrintEventAttribute.AddAttribute(xElement);
-            _onBeforeUnloadEventAttribute.AddAttribute(xElement);
-            _onErrorEventAttribute.AddAttribute(xElement);
-            _onHasChangeEventAttribute.AddAttribute(xElement);
-            _onLoadEventAttribute.AddAttribute(xElement);
-            _onMessageEventAttribute.AddAttribute(xElement);
-            _onOfflineEventAttribute.AddAttribute(xElement);
-            _onOnlineEventAttribute.AddAttribute(xElement);
-            _onPageHideEventAttribute.AddAttribute(xElement);
-            _onPageShowEventAttribute.AddAttribute(xElement);
-            _onPopStateEventAttribute.AddAttribute(xElement);
-            _onRedoEventAttribute.AddAttribute(xElement);
-            _onResizeEventAttribute.AddAttribute(xElement);
-            _onStorageEventAttribute.AddAttribute(xElement);
-            _onUndoEventAttrinute.AddAttribute(xElement);
-            _onUnloadEventAttribute.AddAttribute(xElement);
-        }
-
-        /// <summary>
-        /// Loads all attributes from provided xElement
-        /// </summary>
-        /// <param name="xElement">element to load attributes from</param>
-        public void ReadAttributes(XElement xElement)
-        {
-            _onAfterPrintEventAttribute.ReadAttribute(xElement);
-            _onBeforePrintEventAttribute.ReadAttribute(xElement);
-            _onBeforeUnloadEventAttribute.ReadAttribute(xElement);
-            _onErrorEventAttribute.ReadAttribute(xElement);
-            _onHasChangeEventAttribute.ReadAttribute(xElement);
-            _onLoadEventAttribute.ReadAttribute(xElement);
-            _onMessageEventAttribute.ReadAttribute(xElement);
-            _onOfflineEventAttribute.ReadAttribute(xElement);
-            _onOnlineEventAttribute.ReadAttribute(xElement);
-            _onPageHideEventAttribute.ReadAttribute(xElement);
-            _onPageShowEventAttribute.ReadAttribute(xElement);
-            _onPopStateEventAttribute.ReadAttribute(xElement);
-            _onRedoEventAttribute.ReadAttribute(xElement);
-            _onResizeEventAttribute.ReadAttribute(xElement);
-            _onStorageEventAttribute.ReadAttribute(xElement);
-            _onUndoEventAttrinute.ReadAttribute(xElement);
-            _onUnloadEventAttribute.ReadAttribute(xElement);
+             attributesList.Add(_onAfterPrintEventAttribute);
+             attributesList.Add(_onBeforePrintEventAttribute);
+             attributesList.Add(_onBeforeUnloadEventAttribute);
+             attributesList.Add(_onErrorEventAttribute);
+             attributesList.Add(_onHasChangeEventAttribute);
+             attributesList.Add(_onLoadEventAttribute);
+             attributesList.Add(_onMessageEventAttribute);
+             attributesList.Add(_onOfflineEventAttribute);
+             attributesList.Add(_onOnlineEventAttribute);
+             attributesList.Add(_onPageHideEventAttribute);
+             attributesList.Add(_onPageShowEventAttribute);
+             attributesList.Add(_onPopStateEventAttribute);
+             attributesList.Add(_onRedoEventAttribute);
+             attributesList.Add(_onResizeEventAttribute);
+             attributesList.Add(_onStorageEventAttribute);
+             attributesList.Add(_onUndoEventAttrinute);
+             attributesList.Add(_onUnloadEventAttribute);
         }
     }
 }

@@ -15,6 +15,12 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
     {
         internal const string ElementName = "time";
 
+
+        public Time()
+        {
+            Attributes.Add(_dateTimeAttribute);
+        }
+
         private readonly DateTimeAttribute _dateTimeAttribute = new DateTimeAttribute();
 
 
@@ -102,19 +108,6 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         public override bool IsValid()
         {
             return true;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _dateTimeAttribute.AddAttribute(xElement);
-        }
-
-
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _dateTimeAttribute.ReadAttribute(xElement);
         }
 
         #endregion

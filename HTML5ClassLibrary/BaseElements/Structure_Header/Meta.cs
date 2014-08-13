@@ -20,6 +20,13 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
     {
         internal const string ElementName = "meta";
 
+        public Meta()
+        {
+            Attributes.Add(_contentAttribute);
+            Attributes.Add(_nameAttribute);
+            Attributes.Add(_httpEqvAttribute);
+            Attributes.Add(_charsetAttribute);
+        }
 
         private readonly ContentAttribute _contentAttribute = new ContentAttribute();
         private readonly TokenNameAttribute _nameAttribute = new TokenNameAttribute();
@@ -74,15 +81,6 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             ReadAttributes(xElement);
         }
 
-        protected override void ReadAttributes(XElement xElement)
-        {
-            base.ReadAttributes(xElement);
-            _contentAttribute.ReadAttribute(xElement);
-            _nameAttribute.ReadAttribute(xElement);
-            _httpEqvAttribute.ReadAttribute(xElement);
-            _charsetAttribute.ReadAttribute(xElement);
-        }
-
         public override XNode Generate()
         {
             var xElement = new XElement(XhtmlNameSpace + ElementName);
@@ -90,15 +88,6 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             AddAttributes(xElement);
 
             return xElement;
-        }
-
-        protected override void AddAttributes(XElement xElement)
-        {
-            base.AddAttributes(xElement);
-            _contentAttribute.AddAttribute(xElement);
-            _nameAttribute.AddAttribute(xElement);
-            _httpEqvAttribute.AddAttribute(xElement);
-            _charsetAttribute.AddAttribute(xElement);
         }
 
         public override bool IsValid()
