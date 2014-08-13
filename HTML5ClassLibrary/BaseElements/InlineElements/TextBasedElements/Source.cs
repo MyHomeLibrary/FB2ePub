@@ -9,9 +9,9 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 
         public Source()
         {
-            Attributes.Add(_srcAttrib);
-            Attributes.Add(_mediaAttrib);
-            Attributes.Add(_mimeType);
+            RegisterAttribute(_srcAttrib);
+            RegisterAttribute(_mediaAttrib);
+            RegisterAttribute(_mimeType);
         }
 
         private readonly SourceAttribute _srcAttrib = new SourceAttribute();

@@ -13,14 +13,14 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public MenuItem()
         {
-            Attributes.Add(_checkedAttribute);
-            Attributes.Add(_disabledAttribute);
-            Attributes.Add(_labelAttribute);
-            Attributes.Add(_commandAttribute);
-            Attributes.Add(_defaultAttribute);
-            Attributes.Add(_iconAttribute);
-            Attributes.Add(_radioGroupAttribute);
-            Attributes.Add(_menuItemTypeAttribute);
+            RegisterAttribute(_checkedAttribute);
+            RegisterAttribute(_disabledAttribute);
+            RegisterAttribute(_labelAttribute);
+            RegisterAttribute(_commandAttribute);
+            RegisterAttribute(_defaultAttribute);
+            RegisterAttribute(_iconAttribute);
+            RegisterAttribute(_radioGroupAttribute);
+            RegisterAttribute(_menuItemTypeAttribute);
         }
 
         private readonly CheckedAttribute _checkedAttribute = new CheckedAttribute();

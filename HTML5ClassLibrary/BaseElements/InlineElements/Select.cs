@@ -23,13 +23,13 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public Select()
         {
-            Attributes.Add(_multipleAttribute);
-            Attributes.Add(_nameAttribute);
-            Attributes.Add(_sizeAttribute);
-            Attributes.Add(_autoFocusAttribute);
-            Attributes.Add(_formIdAttribute);
-            Attributes.Add(_requiredAttribute);
-            Attributes.Add(_disabledAttribute);
+            RegisterAttribute(_multipleAttribute);
+            RegisterAttribute(_nameAttribute);
+            RegisterAttribute(_sizeAttribute);
+            RegisterAttribute(_autoFocusAttribute);
+            RegisterAttribute(_formIdAttribute);
+            RegisterAttribute(_requiredAttribute);
+            RegisterAttribute(_disabledAttribute);
          
         }
 

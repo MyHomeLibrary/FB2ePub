@@ -25,14 +25,14 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public ObjectElm()
         {
-            Attributes.Add(_heightAttribute);
-            Attributes.Add(_nameAttribute);
-            Attributes.Add(_contentTypeAttribute);
-            Attributes.Add(_widthAttribute);
-            Attributes.Add(_formIdAttribute);
-            Attributes.Add(_dataAttribute);
-            Attributes.Add(_mimeTypeAttribute);
-            Attributes.Add(_useMapAttribute);
+            RegisterAttribute(_heightAttribute);
+            RegisterAttribute(_nameAttribute);
+            RegisterAttribute(_contentTypeAttribute);
+            RegisterAttribute(_widthAttribute);
+            RegisterAttribute(_formIdAttribute);
+            RegisterAttribute(_dataAttribute);
+            RegisterAttribute(_mimeTypeAttribute);
+            RegisterAttribute(_useMapAttribute);
            
         }
 

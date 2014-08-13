@@ -19,17 +19,17 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
         public Button()
         {
-            Attributes.Add(_type);
-            Attributes.Add(_name);
-            Attributes.Add(_value);
-            Attributes.Add(_disabled);
-            Attributes.Add(_autofocus);
-            Attributes.Add(_form);
-            Attributes.Add(_formAction);
-            Attributes.Add(_formEncoding);
-            Attributes.Add(_formMethod);
-            Attributes.Add(_formNoValidate);
-            Attributes.Add(_formTarget);
+            RegisterAttribute(_type);
+            RegisterAttribute(_name);
+            RegisterAttribute(_value);
+            RegisterAttribute(_disabled);
+            RegisterAttribute(_autofocus);
+            RegisterAttribute(_form);
+            RegisterAttribute(_formAction);
+            RegisterAttribute(_formEncoding);
+            RegisterAttribute(_formMethod);
+            RegisterAttribute(_formNoValidate);
+            RegisterAttribute(_formTarget);
         }
 
         private readonly ButtonTypeAttribute _type = new ButtonTypeAttribute();

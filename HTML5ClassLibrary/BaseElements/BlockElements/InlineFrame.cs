@@ -15,13 +15,13 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
         public InlineFrame()
         {
-            Attributes.Add(_heightAttribute);
-            Attributes.Add(_widthAttribute);
-            Attributes.Add(_sourceAttribute);
-            Attributes.Add(_nameAttribute);
-            Attributes.Add(_sandboxAttribute);
-            Attributes.Add(_seamlessAttribute);
-            Attributes.Add(_sourceDocAttribute);
+            RegisterAttribute(_heightAttribute);
+            RegisterAttribute(_widthAttribute);
+            RegisterAttribute(_sourceAttribute);
+            RegisterAttribute(_nameAttribute);
+            RegisterAttribute(_sandboxAttribute);
+            RegisterAttribute(_seamlessAttribute);
+            RegisterAttribute(_sourceDocAttribute);
         }
 
         private readonly HeightAttribute _heightAttribute = new HeightAttribute();

@@ -25,7 +25,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
 
         public ColGroup()
         {
-            Attributes.Add(_spanAttribute);
+            RegisterAttribute(_spanAttribute);
         }
 
         private readonly SpanAttribute _spanAttribute = new SpanAttribute();

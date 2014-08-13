@@ -18,13 +18,13 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public Meter()
         {
-            Attributes.Add(_formIdAttribute);
-            Attributes.Add(_highAttribute);
-            Attributes.Add(_lowAttribute);
-            Attributes.Add(_maxAttribute);
-            Attributes.Add(_minAttribute);
-            Attributes.Add(_openAttribute);
-            Attributes.Add(_meterValueAttribute);
+            RegisterAttribute(_formIdAttribute);
+            RegisterAttribute(_highAttribute);
+            RegisterAttribute(_lowAttribute);
+            RegisterAttribute(_maxAttribute);
+            RegisterAttribute(_minAttribute);
+            RegisterAttribute(_openAttribute);
+            RegisterAttribute(_meterValueAttribute);
         }
 
         private string _innerText;

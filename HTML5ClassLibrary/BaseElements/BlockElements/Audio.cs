@@ -21,12 +21,12 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
         public Audio ()
         {
-            Attributes.Add(_src);
-            Attributes.Add(_autoplay);
-            Attributes.Add(_controls);
-            Attributes.Add(_loop);
-            Attributes.Add(_muted);
-            Attributes.Add(_preload);
+            RegisterAttribute(_src);
+            RegisterAttribute(_autoplay);
+            RegisterAttribute(_controls);
+            RegisterAttribute(_loop);
+            RegisterAttribute(_muted);
+            RegisterAttribute(_preload);
 
         }
 

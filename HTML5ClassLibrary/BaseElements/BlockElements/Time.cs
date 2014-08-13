@@ -18,7 +18,7 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
         public Time()
         {
-            Attributes.Add(_dateTimeAttribute);
+            RegisterAttribute(_dateTimeAttribute);
         }
 
         private readonly DateTimeAttribute _dateTimeAttribute = new DateTimeAttribute();

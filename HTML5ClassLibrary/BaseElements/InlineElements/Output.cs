@@ -17,9 +17,9 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public Output()
         {
-            Attributes.Add(_forAttribute);
-            Attributes.Add(_formIdAttribute);
-            Attributes.Add(_nameAttribute);
+            RegisterAttribute(_forAttribute);
+            RegisterAttribute(_formIdAttribute);
+            RegisterAttribute(_nameAttribute);
         }
 
         private readonly OutputForAttribute _forAttribute = new OutputForAttribute();

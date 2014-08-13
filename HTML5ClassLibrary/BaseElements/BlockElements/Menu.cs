@@ -18,8 +18,8 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
         public Menu()
         {
-            Attributes.Add(_label);
-            Attributes.Add(_menuTypeAttribute);
+            RegisterAttribute(_label);
+            RegisterAttribute(_menuTypeAttribute);
         }
 
         private readonly LabelAttribute _label = new LabelAttribute();

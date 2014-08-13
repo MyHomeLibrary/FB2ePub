@@ -23,8 +23,8 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
         public Label()
         {
-            Attributes.Add(_forAttribute);
-            Attributes.Add(_formIdAttribute);
+            RegisterAttribute(_forAttribute);
+            RegisterAttribute(_formIdAttribute);
         }
 
         /// <summary>

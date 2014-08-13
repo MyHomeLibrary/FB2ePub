@@ -18,15 +18,15 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
         public Video()
         {
-            Attributes.Add(_autoplay);
-            Attributes.Add(_controls);
-            Attributes.Add(_heightAttribute);
-            Attributes.Add(_loop);
-            Attributes.Add(_muted);
-            Attributes.Add(_posterAttribute);
-            Attributes.Add(_preload);
-            Attributes.Add(_src);
-            Attributes.Add(_widthAttribute);
+            RegisterAttribute(_autoplay);
+            RegisterAttribute(_controls);
+            RegisterAttribute(_heightAttribute);
+            RegisterAttribute(_loop);
+            RegisterAttribute(_muted);
+            RegisterAttribute(_posterAttribute);
+            RegisterAttribute(_preload);
+            RegisterAttribute(_src);
+            RegisterAttribute(_widthAttribute);
         }
 
         private readonly AutoPlayAttribute _autoplay = new AutoPlayAttribute();

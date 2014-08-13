@@ -18,7 +18,7 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
         public Details()
         {
-            Attributes.Add(_openAttribute);
+            RegisterAttribute(_openAttribute);
         }
 
         private readonly OpenAttribute _openAttribute = new OpenAttribute();

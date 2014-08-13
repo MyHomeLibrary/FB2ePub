@@ -17,8 +17,8 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
 
         public Canvas()
         {
-            Attributes.Add(_height);
-            Attributes.Add(_width);
+            RegisterAttribute(_height);
+            RegisterAttribute(_width);
         }
 
         private readonly HeightAttribute _height = new HeightAttribute();

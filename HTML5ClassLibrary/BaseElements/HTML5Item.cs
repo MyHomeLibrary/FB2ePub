@@ -17,7 +17,7 @@ namespace HTML5ClassLibrary.BaseElements
     abstract public class HTML5Item : IHTML5Item
     {
 
-        protected readonly List<IBaseAttribute> Attributes = new List<IBaseAttribute>();
+        private readonly List<IBaseAttribute> _attributes = new List<IBaseAttribute>();
 
         // General common attributes and event attributes for any HTML element
 
@@ -30,17 +30,25 @@ namespace HTML5ClassLibrary.BaseElements
 
         protected HTML5Item()
         {
-            _globalAttributes.AddAttributes(Attributes);
-            _formEvents.AddAttributes(Attributes);
-            _keyboardEvents.AddAttributes(Attributes);
-            _mediaEvents.AddAttributes(Attributes);
-            _mouseEvents.AddAttributes(Attributes);
-            _windowEventAttributes.AddAttributes(Attributes);
+            _globalAttributes.AddAttributes(_attributes);
+            _formEvents.AddAttributes(_attributes);
+            _keyboardEvents.AddAttributes(_attributes);
+            _mediaEvents.AddAttributes(_attributes);
+            _mouseEvents.AddAttributes(_attributes);
+            _windowEventAttributes.AddAttributes(_attributes);
         }
 
         public abstract void Load(XNode xNode);
         public abstract XNode Generate();
 
+        /// <summary>
+        /// Register attribute as belong to element
+        /// </summary>
+        /// <param name="attribute"></param>
+        protected void RegisterAttribute(IBaseAttribute attribute)
+        {
+            _attributes.Add(attribute);
+        }
 
         /// <summary>
         /// Check if element valid 
@@ -71,7 +79,7 @@ namespace HTML5ClassLibrary.BaseElements
         }
 
         /// <summary>
-        /// Retutns list of sub-items
+        /// Returns list of sub-items
         /// </summary>
         /// <returns></returns>
         public virtual List<IHTML5Item> SubElements()
@@ -112,29 +120,29 @@ namespace HTML5ClassLibrary.BaseElements
         public MouseEvents MouseEvents { get { return _mouseEvents; } }
 
         /// <summary>
-        /// Window events , not always working for all types of elements, mostrl for windows like "body"
+        /// Window events , not always working for all types of elements, mostly for windows like "body"
         /// </summary>
         public WindowEventAttributes WindowEvents { get { return _windowEventAttributes; } }
 
         /// <summary>
-        /// Used to add attributes to any element when generatig it
+        /// Used to add attributes to any element when generating it
         /// </summary>
-        /// <param name="xElement">XElement to add aattributes to </param>
+        /// <param name="xElement">XElement to add attributes to </param>
         protected void AddAttributes(XElement xElement)
         {
-            foreach (var attribute in Attributes)
+            foreach (var attribute in _attributes)
             {
                 attribute.AddAttribute(xElement);
             }
         }
 
         /// <summary>
-        /// Used to read out attributes from the element passed, when readin/loading it
+        /// Used to read out attributes from the element passed, when reading/loading it
         /// </summary>
         /// <param name="xElement">XElement to load attributes from</param>
         protected void ReadAttributes(XElement xElement)
         {
-            foreach (var attribute in Attributes)
+            foreach (var attribute in _attributes)
             {
                 attribute.ReadAttribute(xElement);
             }

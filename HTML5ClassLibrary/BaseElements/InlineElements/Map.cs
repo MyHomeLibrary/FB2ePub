@@ -16,7 +16,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     {
         public Map()
         {
-            Attributes.Add(_nameAttribute);
+            RegisterAttribute(_nameAttribute);
         }
 
         /// <summary>
