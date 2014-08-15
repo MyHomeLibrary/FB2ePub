@@ -228,6 +228,10 @@
       <Project>{97C916FF-6271-44F8-9A20-6E0A0389524B}</Project>
       <Name>FolderSettingsHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HTML5ClassLibrary\HTMLClassLibrary.csproj">
+      <Project>{e596a296-1c1a-42b7-8482-b7b0e95b82d3}</Project>
+      <Name>HTMLClassLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

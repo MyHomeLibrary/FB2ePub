@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using HTMLClassLibrary.Attributes.FlaggedAttributes;
+using HTMLClassLibrary.BaseElements;
 
 namespace HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 {

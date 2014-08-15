@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
 using HTMLClassLibrary.Attributes;
@@ -27,11 +30,17 @@ namespace HTMLClassLibrary.BaseElements
 
 
         // General common attributes and event attributes for any HTML element
+        [AttributeBlockAttribute]
         private readonly HTMLGlobalAttributes _globalAttributes = new HTMLGlobalAttributes();
+        [AttributeBlockAttribute]
         private readonly FormEvents _formEvents = new FormEvents();
+        [AttributeBlockAttribute]
         private readonly KeyboardEvents _keyboardEvents = new KeyboardEvents();
+        [AttributeBlockAttribute]
         private readonly MediaEvents _mediaEvents = new MediaEvents();
+        [AttributeBlockAttribute]
         private readonly MouseEvents _mouseEvents = new MouseEvents();
+        [AttributeBlockAttribute]
         private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
         protected HTMLItem()
@@ -42,6 +51,7 @@ namespace HTMLClassLibrary.BaseElements
             _mediaEvents.AddAttributes(_attributes);
             _mouseEvents.AddAttributes(_attributes);
             _windowEventAttributes.AddAttributes(_attributes);
+            RegisterAttributes();
         }
 
         /// <summary>
@@ -64,6 +74,98 @@ namespace HTMLClassLibrary.BaseElements
             }
         }
 
+
+        public static IEnumerable<FieldInfo> GetAllFields(Type t,BindingFlags flags)
+        {
+            if (t == null)
+                return Enumerable.Empty<FieldInfo>();
+
+            //BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic |
+            //                     BindingFlags.Static | BindingFlags.Instance |
+            //                     BindingFlags.DeclaredOnly;
+            return t.GetFields(flags).Concat(GetAllFields(t.BaseType,flags));
+        }
+
+
+        private void RegisterAttributes()
+        {
+            _attributes.Clear();
+            var fieldInfo = GetAllFields(GetType(),(BindingFlags.NonPublic | BindingFlags.Instance));
+            foreach (var field in fieldInfo)
+            {
+                var attributes =
+                    (Attribute[])
+                        field.GetCustomAttributes(typeof(AttributeTypeAttributeMember), false);
+                if (attributes != null &&
+                    attributes.Length > 0)
+                {
+                    var attributeType = attributes[0] as AttributeTypeAttributeMember;
+                    if (attributeType != null &&
+                        attributeType.SupportedStandards.HasFlag(_htmlStandard))
+                    {
+                        RegisterSingleAttribute(field,this);
+                    }
+                }
+                attributes =
+                    (Attribute[])
+                        field.GetCustomAttributes(typeof(AttributeBlockAttribute), false);
+                if (attributes != null &&
+                    attributes.Length > 0)
+                {
+                    var attributeBlock = attributes[0] as AttributeBlockAttribute;
+                    if (attributeBlock != null)
+                    {
+                        RegisterAttributeBlock(field);
+                    }
+                }
+
+
+            }
+        }
+
+        private void RegisterAttributeBlock(FieldInfo field)
+        {
+            var blockFields = field.FieldType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+            foreach (var blockField in blockFields)
+            {
+                var attributes =
+                    (Attribute[])
+                        blockField.GetCustomAttributes(typeof(AttributeTypeAttributeMember), false);
+                if (attributes != null &&
+                    attributes.Length > 0)
+                {
+                    var attributeType = attributes[0] as AttributeTypeAttributeMember;
+                    if (attributeType != null &&
+                        attributeType.SupportedStandards.HasFlag(_htmlStandard))
+                    {
+                        var containingMemeber = field.GetValue(this);
+                        if (containingMemeber != null)
+                        {
+                            RegisterSingleAttribute(blockField,containingMemeber);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private void RegisterSingleAttribute(FieldInfo field,object instanceObject)
+        {
+            var interfaces = field.FieldType.GetInterfaces();
+            if (interfaces != null &&
+                interfaces.Length > 0)
+            {
+                if (interfaces.Contains(typeof(IBaseAttribute)))
+                {
+                    var memberItem = field.GetValue(instanceObject);
+                    _attributes.Add((IBaseAttribute)memberItem);
+                }
+                else
+                {
+                    throw new ArgumentException(string.Format("The item {0} passed is not implements IBaseAttribute interface",field.Name),"field");
+                }
+            }
+        }
 
         /// <summary>
         /// Loads an element and it's data from a node

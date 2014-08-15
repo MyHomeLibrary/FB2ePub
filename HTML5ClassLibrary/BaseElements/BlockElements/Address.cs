@@ -9,7 +9,6 @@ namespace HTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "address", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Address : HTMLItem, IBlockElement 
     {
-
         protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is Header)
