@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
 
-namespace HTML5ClassLibrary.BaseElements
+namespace HTMLClassLibrary.BaseElements
 {
+    public interface ISimpleText : IHTMLItem
+    {
+        string Text { get; set; }
+    }
+
+
     /// <summary>
     /// Interface defining behavior of basic HTML 5 item
     /// </summary>
-    public interface IHTML5Item
+    public interface IHTMLItem
     {
         /// <summary>
         /// Loads the element from XNode
@@ -19,9 +22,9 @@ namespace HTML5ClassLibrary.BaseElements
         void Load(XNode xNode);
 
         /// <summary>
-        /// Generates element to XNode from data
+        /// Create XElement element and serializes data to it
         /// </summary>
-        /// <returns>generated XNode</returns>
+        /// <returns>generated XElement</returns>
         XNode Generate();
 
         /// <summary>
@@ -35,24 +38,29 @@ namespace HTML5ClassLibrary.BaseElements
         /// allowed by the rules and element can accept content
         /// </summary>
         /// <param name="item">sub item to add</param>
-        void Add(IHTML5Item item);
+        void Add(IHTMLItem item);
 
         /// <summary>
         /// Removes sub item 
         /// </summary>
         /// <param name="item">sub item to remove</param>
-        void Remove(IHTML5Item item);
+        void Remove(IHTMLItem item);
 
         /// <summary>
         /// Get list of all sub elements
         /// </summary>
         /// <returns></returns>
-        List<IHTML5Item> SubElements();
+        List<IHTMLItem> SubElements();
 
         /// <summary>
         /// Get/Set item parent in the HTML5 "tree"
         /// </summary>
-        IHTML5Item Parent { get; set; }
+        IHTMLItem Parent { get; set; }
+
+        /// <summary>
+        /// Internal text item if available
+        /// </summary>
+        ISimpleText InternalTextItem { get; }
 
 
     }

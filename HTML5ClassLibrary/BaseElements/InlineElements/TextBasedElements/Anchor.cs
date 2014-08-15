@@ -1,11 +1,12 @@
 ﻿using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
+namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// Hyperlink
     /// </summary>
+    [HTMLItemAttribute(ElementName = "a", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Anchor : TextBasedElement
     {
         public Anchor()
@@ -30,13 +31,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 
 
 #region public_attributes
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
-
 
         /// <summary>
         /// This attribute specifies the location of a Web resource. 
@@ -77,10 +71,8 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 
 #endregion
 
-        public const string ElementName = "a";
 
-
-        protected override  bool IsValidSubType(IHTML5Item item)
+        protected override  bool IsValidSubType(IHTMLItem item)
         {
 
             if (item is IInlineItem)
@@ -101,11 +93,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
 
         public override bool IsValid()
         {
-            if (HRef == null)
-            {
-                return false;
-            }
-            return true;
-        }     
+            return HRef != null;
+        }
     }
 }

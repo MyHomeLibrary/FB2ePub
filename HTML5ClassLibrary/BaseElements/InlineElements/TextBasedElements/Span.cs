@@ -1,19 +1,10 @@
-﻿namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
+﻿namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The span element offers a generic way of adding structure to content.
     /// </summary>
+    [HTMLItemAttribute(ElementName = "span", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Span : TextBasedElement
-    {
-        internal const string ElementName = "span";
-
-        #region Overrides of TextBasedElement
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
-        #endregion
+    {   
     }
 }

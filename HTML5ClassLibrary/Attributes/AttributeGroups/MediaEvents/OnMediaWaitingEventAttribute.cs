@@ -1,6 +1,6 @@
-﻿using HTML5ClassLibrary.Attributes.Events;
+﻿using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.MediaEvents
 {
     /// <summary>
     /// Script to be run when the media has paused but is expected to resume (like when the media pauses to buffer more data)

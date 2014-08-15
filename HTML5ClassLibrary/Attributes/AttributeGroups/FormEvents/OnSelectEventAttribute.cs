@@ -1,7 +1,7 @@
 ﻿
-using HTML5ClassLibrary.Attributes.Events;
+using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.FormEvents
 {
     /// <summary>
     /// The onselect attribute fires after some text has been selected in an element.

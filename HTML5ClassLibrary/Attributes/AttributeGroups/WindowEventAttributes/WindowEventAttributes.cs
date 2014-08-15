@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes.Events;
+using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
+namespace HTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
 {
     /// <summary>
     /// Events triggered for the window object (applies to the "body" tag):

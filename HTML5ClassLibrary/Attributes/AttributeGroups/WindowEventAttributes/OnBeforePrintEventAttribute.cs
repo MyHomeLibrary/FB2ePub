@@ -1,6 +1,6 @@
-﻿using HTML5ClassLibrary.Attributes.Events;
+﻿using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
+namespace HTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
 {
     /// <summary>
     /// The onbeforeprint attribute fires immediately after the user has set the page to print, but before the print dialogue box appears.

@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.BaseElements.InlineElements;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTML5ClassLibrary.BaseElements.BlockElements
+namespace HTMLClassLibrary.BaseElements.BlockElements
 {
-    public class Dialog: BaseBlockElement
+    /// <summary>
+    /// The "dialog" tag defines a dialog box or window.
+    ///The "dialog" element makes it easy to create popup dialogs and modals on a web page.
+    ///</summary>
+    [HTMLItemAttribute(ElementName = "dialog", SupportedStandards = HTMLElementType.HTML5 )]
+    public class Dialog: HTMLItem, IBlockElement
     {
-        public const string ElementName = "dialog";
-
         public Dialog()
         {
             RegisterAttribute(_openAttribute);
@@ -26,59 +27,12 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         /// </summary>
         public OpenAttribute Open { get { return _openAttribute; }}
 
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-
-            Content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item))
-                {
-                    try
-                    {
-                        item.Load(node);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    Content.Add(item);
-                }
-            }
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            foreach (var item in Content)
-            {
-                xElement.Add(item.Generate());
-            }
-            return xElement;
-        }
-
         public override bool IsValid()
         {
             return true;
         }
 
-        protected override bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is IInlineItem ||
                 item is IBlockElement ||

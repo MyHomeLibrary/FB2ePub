@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
+namespace HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 {
     /// <summary>
     /// The contenteditable attribute specifies whether the content of an element is editable or not.

@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace HTML5ClassLibrary.Attributes
+namespace HTMLClassLibrary.Attributes
 {
     /// <summary>
     /// The type attribute specifies the kind of marker to use in the list (letters or numbers).

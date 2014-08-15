@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.BaseElements.InlineElements;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTML5ClassLibrary.BaseElements.BlockElements
+namespace HTMLClassLibrary.BaseElements.BlockElements
 {
-    public class InlineFrame : BaseBlockElement
+    [HTMLItemAttribute(ElementName = "iframe", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+    public class InlineFrame : HTMLItem, IBlockElement
     {
-        public const string ElementName = "iframe";
-
         public InlineFrame()
         {
             RegisterAttribute(_heightAttribute);
@@ -67,42 +66,8 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         /// </summary>
         public SourceDocAttribute SrcDoc { get { return _sourceDocAttribute; }}
 
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
 
-            ReadAttributes(xElement);
-
-            Content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item))
-                {
-                    try
-                    {
-                        item.Load(node);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    Content.Add(item);
-                }
-            }
-
-        }
-
-        protected override bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is IInlineItem ||
                 item is IBlockElement ||
@@ -113,18 +78,6 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
             return false;
         }
 
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            foreach (var item in Content)
-            {
-                xElement.Add(item.Generate());
-            }
-            return xElement;
-        }
 
         public override bool IsValid()
         {

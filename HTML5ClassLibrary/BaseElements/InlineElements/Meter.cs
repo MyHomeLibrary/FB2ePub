@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Exceptions;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.Exceptions;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The "meter" tag defines a scalar measurement within a known range, or a fractional value. This is also known as a gauge.
     /// Examples: Disk usage, the relevance of a query result, etc.
     /// Note: The "meter" tag should not be used to indicate progress (as in a progress bar). For progress bars, use the "progress" tag.
     ///</summary>
-    public class Meter : BaseInlineItem
+    [HTMLItemAttribute(ElementName = "meter", SupportedStandards = HTMLElementType.HTML5 )]
+    public class Meter : HTMLItem, IInlineItem
     {
-        public const string ElementName = "meter";
-
         public Meter()
         {
             RegisterAttribute(_formIdAttribute);
@@ -25,9 +24,9 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
             RegisterAttribute(_minAttribute);
             RegisterAttribute(_openAttribute);
             RegisterAttribute(_meterValueAttribute);
-        }
 
-        private string _innerText;
+            TextContent = new SimpleHTML5Text();
+        }
 
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
         private readonly HighAttribute _highAttribute = new HighAttribute();
@@ -37,14 +36,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         private readonly OptimumAttribute _openAttribute = new OptimumAttribute();
         private readonly MeterValueAttribute _meterValueAttribute = new MeterValueAttribute(); 
 
-        /// <summary>
-        /// Get/set content of the element to measure
-        /// </summary>
-        public string Content
-        {
-            get { return _innerText; }
-            set { _innerText = value; }
-        }
 
         /// <summary>
         /// Specifies one or more forms the "meter" element belongs to
@@ -82,48 +73,12 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         public MeterValueAttribute Value { get { return _meterValueAttribute; }}
 
 
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception("xNode is not empty line element");
-            }
-            ReadAttributes(xElement);
-            if (!string.IsNullOrEmpty(xElement.Value))
-            {
-                _innerText = xElement.Value;
-            }
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-            AddAttributes(xElement);
-            xElement.Value = _innerText;
-            return xElement;
-        }
-
         public override bool IsValid()
         {
             return _meterValueAttribute.HasValue();
         }
 
-        public override void Add(IHTML5Item item)
-        {
-            throw new HTML5ViolationException(item, "");
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            throw new HTML5ViolationException(item,"");
-        }
-
-        public override List<IHTML5Item> SubElements()
+        public override List<IHTMLItem> SubElements()
         {
             return null;
         }

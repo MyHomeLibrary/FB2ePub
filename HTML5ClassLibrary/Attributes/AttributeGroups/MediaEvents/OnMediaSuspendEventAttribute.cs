@@ -1,6 +1,6 @@
-﻿using HTML5ClassLibrary.Attributes.Events;
+﻿using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.MediaEvents
 {
     /// <summary>
     /// Script to be run when fetching the media data is stopped before it is completely loaded for whatever reason

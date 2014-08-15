@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace HTML5ClassLibrary.AttributeDataTypes
+namespace HTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     ///     Date and time information in the ISO-8601 format. For example: YYYY-MM-DDThh:mm:ss.

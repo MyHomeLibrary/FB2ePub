@@ -1,7 +1,4 @@
-﻿using System.Xml.Linq;
-using HTML5ClassLibrary.Exceptions;
-
-namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
+﻿namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// Unlike English, which is written from left-to-right (LTR), some languages, such as Arabic and Hebrew, 
@@ -11,16 +8,9 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
     /// However, situations may arise when the browser's bidirectional algorithm results in incorrect presentation. 
     /// To correct this, the bdo element allows authors to turn off the bidirectional algorithm for selected fragments of text.
     /// </summary>
+    [HTMLItemAttribute(ElementName = "bdo", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class BiDirectionalOverride : TextBasedElement
     {
-        public const string ElementName = "bdo";
-
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
         public override bool IsValid()
         {
             if(!GlobalAttributes.Direction.HasValue())

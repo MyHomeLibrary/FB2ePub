@@ -1,19 +1,10 @@
-﻿namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
+﻿namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The dfn element contains the defining instance of the enclosed term.
     /// </summary>
+    [HTMLItemAttribute(ElementName = "dfn", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Definition : TextBasedElement
     {
-        public const string ElementName = "dfn";
-
-        #region Overrides of TextBasedElement
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
-        #endregion
     }
 }

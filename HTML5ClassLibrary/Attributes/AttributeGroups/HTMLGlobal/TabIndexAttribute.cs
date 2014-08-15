@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using HTML5ClassLibrary.AttributeDataTypes;
+using HTMLClassLibrary.AttributeDataTypes;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
+namespace HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 {
     /// <summary>
     /// The tabindex attribute specifies the tab order of an element (when the "tab" button is used for navigating).

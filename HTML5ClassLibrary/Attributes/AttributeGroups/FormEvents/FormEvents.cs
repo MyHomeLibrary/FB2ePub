@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.FormEvents
 {
     /// <summary>
     /// Events triggered by actions inside a HTML form (applies to almost all HTML elements, but is most used in form elements):

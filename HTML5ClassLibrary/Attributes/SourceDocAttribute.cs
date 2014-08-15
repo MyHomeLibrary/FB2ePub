@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using HTML5ClassLibrary.AttributeDataTypes;
+using HTMLClassLibrary.AttributeDataTypes;
 
-namespace HTML5ClassLibrary.Attributes
+namespace HTMLClassLibrary.Attributes
 {
     /// <summary>
     /// The srcdoc attribute specifies the HTML content of the page to show in the inline frame.

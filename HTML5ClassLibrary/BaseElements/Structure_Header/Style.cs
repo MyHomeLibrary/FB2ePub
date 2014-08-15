@@ -1,46 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
-using HTML5ClassLibrary.Attributes.FlaggedAttributes;
+﻿using System.Collections.Generic;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes.FlaggedAttributes;
 
-namespace HTML5ClassLibrary.BaseElements.Structure_Header
+namespace HTMLClassLibrary.BaseElements.Structure_Header
 {
     /// <summary>
     /// The style element can contain CSS rules (called embedded CSS) or 
     /// a URL that leads to a file containing CSS rules (called external CSS).
     /// </summary>
-    public class Style : HTML5Item
+    [HTMLItemAttribute(ElementName = "style", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    public class Style : HTMLItem
     {
-        internal const string ElementName = "style";
-
-        private readonly SimpleHTML5Text _content = new SimpleHTML5Text();
-
         public Style()
         {
             RegisterAttribute(_mediaAttribute);
             RegisterAttribute(_typeAttribute);
             RegisterAttribute(_scopedAttribute);
+
+            TextContent = new SimpleHTML5Text();
         }
 
-        public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
         private readonly MediaAttribute _mediaAttribute = new MediaAttribute();
         private readonly ContentTypeAttribute _typeAttribute = new ContentTypeAttribute();
         private readonly ScopedAttribute _scopedAttribute = new ScopedAttribute();
-
-        
-        public SimpleHTML5Text Content
-        {
-            get { return _content; }
-        }
 
 
         /// <summary>
@@ -64,55 +47,12 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         public ScopedAttribute Scoped { get { return _scopedAttribute; }}
 
 
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-
-            _content.Load(xNode);
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            xElement.Add(_content.Generate());
-            return xElement;
-        }
-
-
         public override bool IsValid()
         {
             return _typeAttribute.HasValue();
         }
 
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain subitems");
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain subitems");
-        }
-
-        public override List<IHTML5Item> SubElements()
+        public override List<IHTMLItem> SubElements()
         {
             return null;
         }

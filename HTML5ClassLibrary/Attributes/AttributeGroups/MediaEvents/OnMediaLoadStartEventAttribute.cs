@@ -1,6 +1,6 @@
-﻿using HTML5ClassLibrary.Attributes.Events;
+﻿using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.MediaEvents
 {
     /// <summary>
     /// Script to be run just as the file begins to load before anything is actually loaded

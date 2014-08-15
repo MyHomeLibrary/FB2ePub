@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace HTML5ClassLibrary.Attributes
+namespace HTMLClassLibrary.Attributes
 {
     public class MenuTypeAttribute : BaseAttribute
     {

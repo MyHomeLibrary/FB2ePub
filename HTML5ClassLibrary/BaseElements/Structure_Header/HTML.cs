@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 
-namespace HTML5ClassLibrary.BaseElements.Structure_Header
+namespace HTMLClassLibrary.BaseElements.Structure_Header
 {
-    public class HTML :BaseContainingElement
+    /// <summary>
+    /// The "html" tag tells the browser that this is an HTML document.
+    ///The "html" tag represents the root of an HTML document.
+    ///The "html" tag is the container for all other HTML elements (except for the "!DOCTYPE" tag).
+    /// </summary>
+    [HTMLItemAttribute(ElementName = "html", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    public class HTML : HTMLItem
     {
-
-        internal const string ElementName = "html";
-
         public HTML()
         {
             RegisterAttribute(_xhtmlNameSpaceAttribute);
@@ -23,65 +26,27 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         private readonly ManifestAttribute _manifestAttribute = new ManifestAttribute();
 
 
-        public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
-
-
         /// <summary>
         /// This attribute has been deprecated (made outdated). 
         /// It is redundant, because version information is now provided by the DOCTYPE.
         /// </summary>
         public ManifestAttribute Manifest { get {return _manifestAttribute;}}
 
-        public override void Load(XNode xNode)
+
+        protected override bool IsValidSubType(IHTMLItem item)
         {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-
-            Content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item))
-                {
-                    try
-                    {
-                        item.Load(node);
-                   }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    Content.Add(item);
-                }
-            }
-
-
-        }
-
-        protected override bool IsValidSubType(IHTML5Item item)
-        {
-            if (Content.Count >= 2) // no more than two sub elements
+            if (Subitems.Count >= 2) // no more than two sub elements
             {
                 return false;
             }
-            if (Content.Count == 0) // head have to be first
+            if (Subitems.Count == 0) // head have to be first
             {
                 if (!(item is Head)  )
                 {
                     return false;
                 }
             }
-            if (Content.Count == 1) // body have to be second
+            if (Subitems.Count == 1) // body have to be second
             {
                 if (!(item is Body)  )
                 {
@@ -92,37 +57,22 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
             return item.IsValid();
         }
 
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-          
-            AddAttributes(xElement);
-
-            foreach (var item in Content)
-            {
-                xElement.Add(item.Generate());
-            }
-
-
-            return xElement;
-
-        }
 
         public override bool IsValid()
         {
-            if (Content.Count != 2)
+            if (Subitems.Count != 2)
             {
                 return false;
             }
-            if (!(Content[0] is Head))
+            if (!(Subitems[0] is Head))
             {
                 return false;
             }
-            if (!(Content[1] is Body))
+            if (!(Subitems[1] is Body))
             {
                 return false;
             }
-            return (Content[0].IsValid() && Content[1].IsValid());
+            return (Subitems[0].IsValid() && Subitems[1].IsValid());
         }
     }
 }

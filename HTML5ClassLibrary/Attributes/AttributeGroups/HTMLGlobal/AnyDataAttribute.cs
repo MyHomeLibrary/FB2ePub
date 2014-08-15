@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
+namespace HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 {
     /// <summary>
     /// The data-* attributes is used to store custom data private to the page or application.

@@ -1,19 +1,10 @@
-﻿namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
+﻿namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The em element is used to indicate emphasis.
     /// </summary>
+    [HTMLItemAttribute(ElementName = "em", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class EmphasisedText : TextBasedElement
     {
-        public const string ElementName = "em";
-
-        #region Overrides of TextBasedElement
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
-        #endregion
     }
 }

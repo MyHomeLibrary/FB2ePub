@@ -1,87 +1,33 @@
-﻿namespace HTML5ClassLibrary.BaseElements.BlockElements
+﻿namespace HTMLClassLibrary.BaseElements.BlockElements
 {
+    [HTMLItemAttribute(ElementName = "h1", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class H1 : BaseHeader
     {
-        #region Overrides of BaseHeader
-
-        public const string ElementName = "h1";
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
-        #endregion
     }
 
+    [HTMLItemAttribute(ElementName = "h2", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class H2 : BaseHeader
     {
-        #region Overrides of BaseHeader
-
-        public const string ElementName = "h2";
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
-        #endregion
     }
 
+    [HTMLItemAttribute(ElementName = "h3", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class H3 : BaseHeader
     {
-        #region Overrides of BaseHeader
-
-        public const string ElementName = "h3";
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
-        #endregion
     }
 
+    [HTMLItemAttribute(ElementName = "h4", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class H4 : BaseHeader
     {
-        #region Overrides of BaseHeader
-
-        public const string ElementName = "h4";
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
-        #endregion
     }
 
+    [HTMLItemAttribute(ElementName = "h5", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class H5 : BaseHeader
     {
-        #region Overrides of BaseHeader
-
-        public const string ElementName = "h5";
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
-        #endregion
     }
 
+    [HTMLItemAttribute(ElementName = "h6", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class H6 : BaseHeader
     {
-        #region Overrides of BaseHeader
-
-        public const string ElementName = "h6";
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
-        #endregion
     }
 
 }

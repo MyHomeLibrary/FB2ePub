@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.BaseElements.InlineElements;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTML5ClassLibrary.BaseElements.BlockElements
+namespace HTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// The "menu" tag defines a list/menu of commands.
     /// The "menu" tag is used for context menus, toolbars and for listing form controls and commands.
     /// 
     /// </summary>
-    public class Menu : BaseBlockElement
+    [HTMLItemAttribute(ElementName = "menu", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+    public class Menu : HTMLItem, IBlockElement
     {
-        public const string ElementName = "menu";
-
         public Menu()
         {
             RegisterAttribute(_label);
@@ -36,53 +35,9 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         /// </summary>
         public MenuTypeAttribute Type { get { return _menuTypeAttribute; }}
 
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception("xNode is not empty line element");
-            }
-            ReadAttributes(xElement);
-            Content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item))
-                {
-                    try
-                    {
-                        item.Load(node);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    Content.Add(item);
-                }
-            }
-
-        }
-
-        protected override bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTMLItem item)
         {
             return (item is MenuItem);
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-            AddAttributes(xElement);
-            foreach (var item in Content)
-            {
-                xElement.Add(item.Generate());
-            }
-            return xElement;
         }
 
         public override bool IsValid()

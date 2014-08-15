@@ -1,16 +1,15 @@
 ﻿using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
+namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The "q" tag defines a short quotation.
     /// Browsers normally insert quotation marks around the quotation
     /// </summary>
+    [HTMLItemAttribute(ElementName = "q", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class ShortQuote : TextBasedElement
     {
-        public const string ElementName = "q";
-
         public ShortQuote()
         {
             RegisterAttribute(_citeAttribute);
@@ -23,13 +22,5 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
         /// 
         /// </summary>
         public CiteAttribute Cite { get { return _citeAttribute; }}
-
-        #region Overrides of TextBasedElement
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-        #endregion
     }
 }

@@ -1,8 +1,10 @@
 ﻿
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTMLClassLibrary.BaseElements.InlineElements
 {
-    public interface IInlineItem : IHTML5Item
+    /// <summary>
+    /// This interface marks item as inline item, item that can't contain "block" items like paragraph
+    /// </summary>
+    public interface IInlineItem : IHTMLItem
     {
-
     }
 }

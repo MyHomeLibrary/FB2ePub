@@ -1,12 +1,14 @@
 ﻿using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
+namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    [HTMLItemAttribute(ElementName = "source", SupportedStandards = HTMLElementType.HTML5)]
     public class Source : TextBasedElement
     {
-        public const string ElementName = "source";
-
         public Source()
         {
             RegisterAttribute(_srcAttrib);
@@ -17,12 +19,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
         private readonly SourceAttribute _srcAttrib = new SourceAttribute();
         private readonly MediaAttribute _mediaAttrib = new MediaAttribute();
         private  readonly MIMETypeAttribute _mimeType = new MIMETypeAttribute();
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
 
         public SourceAttribute Src
         {

@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.FlaggedAttributes;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes.FlaggedAttributes;
 
-namespace HTML5ClassLibrary.BaseElements.FormMenuOptions
+namespace HTMLClassLibrary.BaseElements.FormMenuOptions
 {
     /// <summary>
     /// The option element represents a choice offered by select form controls.
     /// </summary>
-    public class Option : BaseOptionItem
+    [HTMLItemAttribute(ElementName = "option", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    public class Option : HTMLItem, IOptionItem
     {
-        public const string ElementName = "option";
-
         public Option()
         {
             RegisterAttribute(_selectedAttribute);
@@ -57,55 +56,13 @@ namespace HTML5ClassLibrary.BaseElements.FormMenuOptions
         /// </summary>
         public LabelAttribute Label { get { return _labelAttribute; } }
 
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-
-            _optionText.Load(xNode);
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            xElement.Add(_optionText.Generate());
-            
-            return xElement;
-        }
 
         public override bool IsValid()
         {
             return true;
         }
 
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain sub-items");
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain sub-items");
-        }
-
-        public override List<IHTML5Item> SubElements()
+        public override List<IHTMLItem> SubElements()
         {
             return null;
         }

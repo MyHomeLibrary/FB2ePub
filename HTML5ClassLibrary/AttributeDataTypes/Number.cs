@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HTML5ClassLibrary.AttributeDataTypes
+namespace HTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     ///     One or more digits.

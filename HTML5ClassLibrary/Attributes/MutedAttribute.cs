@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace HTML5ClassLibrary.Attributes
+namespace HTMLClassLibrary.Attributes
 {
     public class MutedAttribute : BaseAttribute
     {

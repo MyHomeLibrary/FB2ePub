@@ -1,6 +1,6 @@
-﻿using HTML5ClassLibrary.Attributes.Events;
+﻿using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.FormEvents
 {
     /// <summary>
     /// The onchange attribute fires the moment when the value of the element is changed.

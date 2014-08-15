@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents
 {
     /// <summary>
     /// 

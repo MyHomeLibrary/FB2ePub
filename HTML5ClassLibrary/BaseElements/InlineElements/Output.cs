@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The "output" tag represents the result of a calculation (like one performed by a script).
     /// </summary>
-    public class Output : BaseInlineItem
+    [HTMLItemAttribute(ElementName = "output", SupportedStandards = HTMLElementType.HTML5)]
+    public class Output : HTMLItem, IInlineItem
     {
-        public const string ElementName = "output";
-
         public Output()
         {
             RegisterAttribute(_forAttribute);
@@ -42,46 +41,12 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         /// </summary>
         public NameAttribute Name { get { return _nameAttribute; }}
 
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            return xElement;
-        }
-
         public override bool IsValid()
         {
             return true;
         }
 
-        public override void Add(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain sub-items");
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain sub-items");
-        }
-
-        public override List<IHTML5Item> SubElements()
+        public override List<IHTMLItem> SubElements()
         {
             return null;
         }

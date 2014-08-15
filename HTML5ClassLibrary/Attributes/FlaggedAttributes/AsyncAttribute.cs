@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HTML5ClassLibrary.Attributes.FlaggedAttributes
+namespace HTMLClassLibrary.Attributes.FlaggedAttributes
 {
     /// <summary>
     /// The async attribute is a boolean attribute.

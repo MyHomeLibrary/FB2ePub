@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.FlaggedAttributes;
-using HTML5ClassLibrary.BaseElements.InlineElements;
-using HTML5ClassLibrary.BaseElements.Legends;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes.FlaggedAttributes;
+using HTMLClassLibrary.BaseElements.InlineElements;
+using HTMLClassLibrary.BaseElements.Legends;
 
-namespace HTML5ClassLibrary.BaseElements.BlockElements
+namespace HTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// The fieldset element adds structure to forms by grouping together related controls and labels.
     /// </summary>
-    public class FieldSet : BaseBlockElement
+    [HTMLItemAttribute(ElementName = "fieldset", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    public class FieldSet : HTMLItem, IBlockElement
     {
-        public const string ElementName = "fieldset";
-
         public FieldSet()
         {
             RegisterAttribute(_disabledAttribute);
@@ -42,42 +41,7 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
         /// </summary>
         public NameAttribute Name { get { return _nameAttribute; }}
 
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-
-            Content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item))
-                {
-                    try
-                    {
-                        item.Load(node);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    Content.Add(item);
-                }
-            }
-
-        }
-
-        protected override bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is IInlineItem)
             {
@@ -96,19 +60,6 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
                 return item.IsValid();
             }
             return false;
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            foreach (var item in Content)
-            {
-                xElement.Add(item.Generate());
-            }
-            return xElement;
         }
 
         public override bool IsValid()

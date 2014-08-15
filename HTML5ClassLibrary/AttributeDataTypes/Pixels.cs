@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HTML5ClassLibrary.AttributeDataTypes
+namespace HTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     /// The value is an integer that represents the number of pixels of the canvas (screen, paper). 
