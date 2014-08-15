@@ -16,7 +16,8 @@ namespace HTMLClassLibrary.BaseElements
     /// <summary>
     /// This is a class marking any HTML item as such and providing some properties like name etc
     /// </summary>
-    public class HTMLItemAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    public sealed class HTMLItemAttribute : Attribute
     {
         private HTMLElementType _standard = HTMLElementType.UnknownType;
 

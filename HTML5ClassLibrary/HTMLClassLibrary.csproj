@@ -125,6 +125,7 @@
     <Compile Include="Attributes\AttributeGroups\MouseEvents\OnMouseWheelEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\MouseEvents\OnScrollEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\WindowEventAttributes\WindowEventAttributes.cs" />
+    <Compile Include="Attributes\AttributeTypeAttribute.cs" />
     <Compile Include="Attributes\AutocompleteAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\DropZoneAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\WindowEventAttributes\OnAfterPrintEventAttribute.cs" />

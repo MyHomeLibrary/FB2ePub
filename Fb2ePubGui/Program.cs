@@ -5,9 +5,9 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using HTMLClassLibrary.BaseElements;
 using log4net;
 using FolderSettingsHelper;
-using HTMLClassLibrary.BaseElements;
 
 // Configure log4net using the .config file
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
@@ -23,6 +23,7 @@ namespace Fb2ePubGui
         [STAThread]
         static void Main()
         {
+            ElementFactory.CreateElement(new XElement("a"), HTMLElementType.HTML5);
             string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(), @"Lord_KiRon\");
             GlobalContext.Properties["LogName"] = logPath;
             log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
