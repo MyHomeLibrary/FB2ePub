@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.FlaggedAttributes;
-using HTML5ClassLibrary.BaseElements.FormMenuOptions;
-using HTML5ClassLibrary.Exceptions;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes.FlaggedAttributes;
+using HTMLClassLibrary.BaseElements.FormMenuOptions;
+using HTMLClassLibrary.Exceptions;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The select element is used to create an option selector form control which most Web browsers render as a listbox control. 
     /// The list of values for this control is created using option elements. 
     /// These values can be grouped together using the optgroup element.
     /// </summary>
-    public class Select : BaseInlineItem
+    [HTMLItemAttribute(ElementName = "select", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]    
+    public class Select : HTMLItem, IInlineItem
     {
         /// <summary>
         /// Internal content of the element
         /// </summary>
-        private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
+        private readonly List<IHTMLItem> _content = new List<IHTMLItem>();
 
         public Select()
         {
@@ -40,10 +41,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         private readonly AutoFocusAttribute _autoFocusAttribute = new AutoFocusAttribute();
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
         private readonly RequiredAttribute _requiredAttribute = new RequiredAttribute();
-
-
-        internal const string ElementName = "select";
-
 
 
         /// <summary>
@@ -86,92 +83,18 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
 
 
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-
-            _content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item))
-                {
-                    try
-                    {
-                        item.Load(node);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    _content.Add(item);
-                }
-            }
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            foreach (var item in _content)
-            {
-                xElement.Add(item.Generate());
-            }
-            return xElement;
-
-        }
-
         public override bool IsValid()
         {
             // at least one of sub elements have to appear
             return (_content.Count > 0);
         }
 
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            if ((item != null) && IsValidSubType(item))
-            {
-                _content.Add(item);
-                item.Parent = this;
-            }
-            else
-            {
-                throw new HTML5ViolationException(this,"");
-            }
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            if(_content.Remove(item))
-            {
-                item.Parent = null;
-            }
-        }
-
-        public override List<IHTML5Item> SubElements()
+        public override List<IHTMLItem> SubElements()
         {
             return _content;
         }
 
-        private bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is IOptionItem)
             {

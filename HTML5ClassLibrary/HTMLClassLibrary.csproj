@@ -7,8 +7,8 @@
     <ProjectGuid>{E596A296-1C1A-42B7-8482-B7B0E95B82D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HTML5ClassLibrary</RootNamespace>
-    <AssemblyName>HTML5ClassLibrary</AssemblyName>
+    <RootNamespace>HTMLClassLibrary</RootNamespace>
+    <AssemblyName>HTMLClassLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -297,12 +297,10 @@
     <Compile Include="Attributes\WrapAttribute.cs" />
     <Compile Include="Attributes\XmlNSAttribue.cs" />
     <Compile Include="Attributes\XMLSpaceAttribute.cs" />
-    <Compile Include="BaseElements\BaseContainingElement.cs" />
     <Compile Include="BaseElements\BlockElements\Address.cs" />
     <Compile Include="BaseElements\BlockElements\Article.cs" />
     <Compile Include="BaseElements\BlockElements\Aside.cs" />
     <Compile Include="BaseElements\BlockElements\Audio.cs" />
-    <Compile Include="BaseElements\BlockElements\BaseBlockElement.cs" />
     <Compile Include="BaseElements\BlockElements\BaseHeader.cs" />
     <Compile Include="BaseElements\BlockElements\BlockQuoteElement.cs" />
     <Compile Include="BaseElements\BlockElements\DefinitionList.cs" />
@@ -321,22 +319,22 @@
     <Compile Include="BaseElements\BlockElements\Main.cs" />
     <Compile Include="BaseElements\BlockElements\Nav.cs" />
     <Compile Include="BaseElements\BlockElements\NoScript.cs" />
-    <Compile Include="BaseElements\BlockElements\OrderedList.cs" />
+    <Compile Include="BaseElements\ListElements\OrderedList.cs" />
     <Compile Include="BaseElements\BlockElements\Paragraph.cs" />
     <Compile Include="BaseElements\BlockElements\Section.cs" />
-    <Compile Include="BaseElements\HTML5Item.cs" />
+    <Compile Include="BaseElements\HTMLItem.cs" />
+    <Compile Include="BaseElements\HTMLItemAttribute.cs" />
     <Compile Include="BaseElements\TableElements\Table.cs" />
-    <Compile Include="BaseElements\BlockElements\UnorderedList.cs" />
+    <Compile Include="BaseElements\ListElements\UnorderedList.cs" />
     <Compile Include="BaseElements\BlockElements\Video.cs" />
     <Compile Include="BaseElements\ElementFactory.cs" />
-    <Compile Include="BaseElements\FormMenuOptions\BaseOptionItem.cs" />
+    <Compile Include="BaseElements\FormMenuOptions\IOptionItem.cs" />
     <Compile Include="BaseElements\FormMenuOptions\Datalist.cs" />
     <Compile Include="BaseElements\FormMenuOptions\Option.cs" />
     <Compile Include="BaseElements\FormMenuOptions\OptionGroup.cs" />
-    <Compile Include="BaseElements\IHTML5Item.cs" />
+    <Compile Include="BaseElements\IHTMLItem.cs" />
     <Compile Include="BaseElements\InlineElements\TextBasedElements\Abbreviation.cs" />
     <Compile Include="BaseElements\InlineElements\TextBasedElements\Anchor.cs" />
-    <Compile Include="BaseElements\InlineElements\BaseInlineItem.cs" />
     <Compile Include="BaseElements\InlineElements\TextBasedElements\BDI.cs" />
     <Compile Include="BaseElements\InlineElements\TextBasedElements\BiDirectionalOverride.cs" />
     <Compile Include="BaseElements\InlineElements\TextBasedElements\BoldText.cs" />
@@ -347,7 +345,7 @@
     <Compile Include="BaseElements\InlineElements\DeletedText.cs" />
     <Compile Include="BaseElements\InlineElements\Embed.cs" />
     <Compile Include="BaseElements\InlineElements\TextBasedElements\FigCaption.cs" />
-    <Compile Include="BaseElements\BlockElements\HorizontalRule.cs" />
+    <Compile Include="BaseElements\BlockElements\HorizontalRuler.cs" />
     <Compile Include="BaseElements\InlineElements\Image.cs" />
     <Compile Include="BaseElements\InlineElements\Input.cs" />
     <Compile Include="BaseElements\InlineElements\InsertedText.cs" />
@@ -355,7 +353,7 @@
     <Compile Include="BaseElements\InlineElements\TextBasedElements\Kbd.cs" />
     <Compile Include="BaseElements\InlineElements\Keygen.cs" />
     <Compile Include="BaseElements\InlineElements\Label.cs" />
-    <Compile Include="BaseElements\InlineElements\Map.cs" />
+    <Compile Include="BaseElements\MapAreas\Map.cs" />
     <Compile Include="BaseElements\InlineElements\TextBasedElements\Mark.cs" />
     <Compile Include="BaseElements\InlineElements\Meter.cs" />
     <Compile Include="BaseElements\InlineElements\ObjectElm.cs" />
@@ -384,13 +382,12 @@
     <Compile Include="BaseElements\InlineElements\TextBasedElements\Var.cs" />
     <Compile Include="BaseElements\InlineElements\WordBreakOportunity.cs" />
     <Compile Include="BaseElements\Legends\Legend.cs" />
-    <Compile Include="BaseElements\ListElements\BaseListElement.cs" />
     <Compile Include="BaseElements\ListElements\DefinitionDescription.cs" />
     <Compile Include="BaseElements\ListElements\DefinitionTerms.cs" />
     <Compile Include="BaseElements\ListElements\ListItem.cs" />
     <Compile Include="BaseElements\MapAreas\Area.cs" />
     <Compile Include="BaseElements\ObjectParameters\Param.cs" />
-    <Compile Include="BaseElements\Ruby\BaseRubyItem.cs" />
+    <Compile Include="BaseElements\Ruby\IRubyItem.cs" />
     <Compile Include="BaseElements\Ruby\RpElement.cs" />
     <Compile Include="BaseElements\Ruby\RtElement.cs" />
     <Compile Include="BaseElements\Ruby\RubyElement.cs" />
@@ -403,7 +400,6 @@
     <Compile Include="BaseElements\Structure_Header\Meta.cs" />
     <Compile Include="BaseElements\Structure_Header\Style.cs" />
     <Compile Include="BaseElements\Structure_Header\Title.cs" />
-    <Compile Include="BaseElements\TableElements\BaseTableElement.cs" />
     <Compile Include="BaseElements\TableElements\ColElement.cs" />
     <Compile Include="BaseElements\TableElements\ColGroup.cs" />
     <Compile Include="BaseElements\TableElements\TableHeaderCell.cs" />
@@ -413,8 +409,9 @@
     <Compile Include="BaseElements\TableElements\TableFooter.cs" />
     <Compile Include="BaseElements\TableElements\TableHead.cs" />
     <Compile Include="BaseElements\TableElements\TableRow.cs" />
+    <Compile Include="ElementConvertor.cs" />
     <Compile Include="Exceptions\HTML5ViolationException.cs" />
-    <Compile Include="HTML5Document.cs" />
+    <Compile Include="HTMLDocument.cs" />
     <Compile Include="BaseElements\BlockElements\Menu.cs" />
     <Compile Include="BaseElements\InlineElements\MenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

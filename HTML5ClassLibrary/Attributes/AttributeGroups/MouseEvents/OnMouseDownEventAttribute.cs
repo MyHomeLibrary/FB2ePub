@@ -1,7 +1,7 @@
 ﻿
-using HTML5ClassLibrary.Attributes.Events;
+using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.MouseEvents
 {
     /// <summary>
     /// The onmousedown attribute fires when a mouse button is pressed down on the element.

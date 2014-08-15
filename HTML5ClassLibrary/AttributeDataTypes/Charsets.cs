@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HTML5ClassLibrary.AttributeDataTypes;
+using HTMLClassLibrary.AttributeDataTypes;
 
-namespace HTML5ClassLibrary.AttributeDataTypes
+namespace HTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     /// A space-separated list of character encodings.

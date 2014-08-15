@@ -2,24 +2,23 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
+using HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTMLClassLibrary.Attributes.AttributeGroups.MediaEvents;
+using HTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using HTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
 
-namespace HTML5ClassLibrary.BaseElements.Structure_Header
+namespace HTMLClassLibrary.BaseElements.Structure_Header
 {
     /// <summary>
     /// The meta element is a generic mechanism for specifying metadata for a Web page. 
     /// Some search engines use this information.
     /// </summary>
-    public class Meta : HTML5Item
+    [HTMLItemAttribute(ElementName = "meta", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    public class Meta : HTMLItem
     {
-        internal const string ElementName = "meta";
-
         public Meta()
         {
             RegisterAttribute(_contentAttribute);
@@ -59,58 +58,13 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
         /// </summary>
         public TokenNameAttribute Name { get { return _nameAttribute; } }
 
-
-        /// <summary>
-        /// Specifies an absolute URL that acts as the base URL for resolving relative URLs. 
-        /// This attribute is required.
-        /// </summary>
-        public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
-
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            return xElement;
-        }
-
+     
         public override bool IsValid()
         {
             return true;
         }
 
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain sub-items");
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain sub-items");
-        }
-
-        public override List<IHTML5Item> SubElements()
+        public override List<IHTMLItem> SubElements()
         {
             return null;
         }

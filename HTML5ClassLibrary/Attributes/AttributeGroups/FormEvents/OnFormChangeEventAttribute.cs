@@ -1,6 +1,6 @@
-﻿using HTML5ClassLibrary.Attributes.Events;
+﻿using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.FormEvents
 {
     /// <summary>
     /// Script to be run when a form changes

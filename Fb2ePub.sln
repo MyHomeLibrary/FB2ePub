@@ -55,7 +55,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FBE2EpubPlugin", "FBE2EpubP
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{00762258-A3B0-43F5-B490-A4A1B58137FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTML5ClassLibrary", "HTML5ClassLibrary\HTML5ClassLibrary.csproj", "{E596A296-1C1A-42B7-8482-B7B0E95B82D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTMLClassLibrary", "HTML5ClassLibrary\HTMLClassLibrary.csproj", "{E596A296-1C1A-42B7-8482-B7B0E95B82D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

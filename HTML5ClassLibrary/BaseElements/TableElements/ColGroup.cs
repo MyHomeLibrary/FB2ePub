@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Exceptions;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.Exceptions;
 
-namespace HTML5ClassLibrary.BaseElements.TableElements
+namespace HTMLClassLibrary.BaseElements.TableElements
 {
     /// <summary>
     /// In XHTML, tables are physically constructed from rows, rather than columns. 
@@ -17,11 +17,10 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
     /// 
     /// The colgroup element contains col elements that represent individual columns.
     /// </summary>
-    public class ColGroup : BaseTableElement
+    [HTMLItemAttribute(ElementName = "colgroup", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    public class ColGroup : HTMLItem
     {
-        public const string ElementName = "colgroup";
-
-        private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
+        private readonly List<IHTMLItem> _content = new List<IHTMLItem>();
 
         public ColGroup()
         {
@@ -37,42 +36,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
         public SpanAttribute Span { get { return _spanAttribute; } }
 
 
-
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-
-            _content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item))
-                {
-                    try
-                    {
-                        item.Load(node);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    _content.Add(item);
-                }
-            }
-        }
-
-        private bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is ColElement)
             {
@@ -81,53 +45,9 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
             return false;
         }
 
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            foreach (var item in _content)
-            {
-                xElement.Add(item.Generate());
-            }
-            return xElement;
-        }
-
         public override bool IsValid()
         {
             return true;
-        }
-
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            if ((item != null) && IsValidSubType(item))
-            {
-                _content.Add(item);
-                item.Parent = this;
-            }
-            else
-            {
-                throw new HTML5ViolationException(item,"");
-            }
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            if(_content.Remove(item))
-            {
-                item.Parent = null;
-            }
-        }
-
-        public override List<IHTML5Item> SubElements()
-        {
-            return _content;
         }
     }
 }

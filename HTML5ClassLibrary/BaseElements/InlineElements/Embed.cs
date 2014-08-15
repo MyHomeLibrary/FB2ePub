@@ -2,52 +2,22 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Exceptions;
+using HTMLClassLibrary.Exceptions;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTMLClassLibrary.BaseElements.InlineElements
 {
-    public class Embed : BaseInlineItem
-    {
-        public const string ElementName = "embed";
-
-
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-            ReadAttributes(xElement);
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-            AddAttributes(xElement);
-            return xElement;           
-        }
-
+    /// <summary>
+    /// The "embed" tag defines a container for an external application or interactive content (a plug-in).
+    ///</summary>
+    [HTMLItemAttribute(ElementName = "embed", SupportedStandards = HTMLElementType.HTML5)]
+    public class Embed : HTMLItem, IInlineItem
+    {      
         public override bool IsValid()
         {
             return true;
         }
 
-        public override void Add(IHTML5Item item)
-        {
-            throw new HTML5ViolationException("Embed element can not have children");
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            throw new HTML5ViolationException("Embed element can not have children");
-        }
-
-        public override List<IHTML5Item> SubElements()
+        public override List<IHTMLItem> SubElements()
         {
             return null;
         }

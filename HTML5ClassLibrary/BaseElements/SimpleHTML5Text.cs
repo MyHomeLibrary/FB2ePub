@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace HTML5ClassLibrary.BaseElements
+namespace HTMLClassLibrary.BaseElements
 {
     public enum TextStyles
     {
@@ -21,10 +21,11 @@ namespace HTML5ClassLibrary.BaseElements
     }
 
 
+
     /// <summary>
     /// Represent a simple HTML 5 text element (XText)
     /// </summary>
-    public class SimpleHTML5Text : HTML5Item
+    public class SimpleHTML5Text : HTMLItem , ISimpleText
     {
         /// <summary>
         /// Textual data contained in element
@@ -77,7 +78,7 @@ namespace HTML5ClassLibrary.BaseElements
         /// simple text can't have sub-items so it will always return false
         /// </summary>
         /// <param name="item">sub item to add</param>
-        public override void Add(IHTML5Item item)
+        public override void Add(IHTMLItem item)
         {
             throw new Exception("This element does not contain or obtain sub items");
         }
@@ -87,7 +88,7 @@ namespace HTML5ClassLibrary.BaseElements
         /// useless here as can't have sub-items at all
         /// </summary>
         /// <param name="item"></param>
-        public override void Remove(IHTML5Item item)
+        public override void Remove(IHTMLItem item)
         {
             throw new Exception("This element does not contain or obtain sub items");
         }
@@ -97,7 +98,7 @@ namespace HTML5ClassLibrary.BaseElements
         /// useless here as can not contain sub-items
         /// </summary>
         /// <returns></returns>
-        public override List<IHTML5Item> SubElements()
+        public override List<IHTMLItem> SubElements()
         {
             return null;
         }

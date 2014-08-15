@@ -1,19 +1,10 @@
-﻿namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
+﻿namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The var element is used to indicate an instance of a computer code variable or program argument.
     /// </summary>
+    [HTMLItemAttribute(ElementName = "var", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Var : TextBasedElement
     {
-        internal const string ElementName = "var";
-
-        #region Overrides of TextBasedElement
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
-        #endregion
     }
 }

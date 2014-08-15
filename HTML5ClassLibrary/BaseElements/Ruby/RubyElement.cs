@@ -2,76 +2,20 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
-using HTML5ClassLibrary.BaseElements.InlineElements;
-using HTML5ClassLibrary.Exceptions;
+using HTMLClassLibrary.BaseElements.InlineElements;
+using HTMLClassLibrary.Exceptions;
 
-namespace HTML5ClassLibrary.BaseElements.Ruby
+namespace HTMLClassLibrary.BaseElements.Ruby
 {
     /// <summary>
     /// Ruby is mechanism for adding annotations to characters of East Asian languages such as Chinese and Japanese. 
     /// These annotations typically appear in smaller typeface above or to the side of regular text, 
     /// and are meant to help with pronunciation of obscure characters or as a language learning aid.
     /// </summary>
-    public class RubyElement : HTML5Item, IInlineItem
+    [HTMLItemAttribute(ElementName = "ruby", SupportedStandards = HTMLElementType.HTML5)]
+    public class RubyElement : HTMLItem, IInlineItem
     {
-
-        /// <summary>
-        /// Internal content of the element
-        /// </summary>
-        private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
-
-        internal const string ElementName = "ruby";
-
-        public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
-
-
-
-        #region Implementation of IEPubTextItem
-
-        /// <summary>
-        /// Loads the element from XNode
-        /// </summary>
-        /// <param name="xNode">node to load element from</param>
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            _content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item))
-                {
-                    try
-                    {
-                        item.Load(node);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    _content.Add(item);
-                }
-            }
-            ReadAttributes(xElement);
-        }
-
-        private bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTMLItem item)
         {
             // TODO: full check for ruby sequence
             if (item is IRubyItem)
@@ -82,25 +26,6 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
         }
 
         /// <summary>
-        /// Generates element to XNode from data
-        /// </summary>
-        /// <returns>generated XNode</returns>
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            if (_content.Count > 0)
-            {
-                foreach (var item in _content)
-                {
-                    xElement.Add(item.Generate());
-                }
-            }
-            AddAttributes(xElement);
-            return xElement;
-        }
-
-        /// <summary>
         /// Checks it element data is valid
         /// </summary>
         /// <returns>true if valid</returns>
@@ -108,40 +33,5 @@ namespace HTML5ClassLibrary.BaseElements.Ruby
         {
             return true;
         }
-
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            if ((item != null) && IsValidSubType(item))
-            {
-                _content.Add(item);
-                item.Parent = this;
-            }
-            else
-            {
-                throw new HTML5ViolationException(item,"");
-            }
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            if(_content.Remove(item))
-            {
-                item.Parent = null;
-            }
-        }
-
-        public override List<IHTML5Item> SubElements()
-        {
-            return _content;
-        }
-
-
-        #endregion
-
     }
 }

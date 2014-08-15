@@ -1,6 +1,6 @@
-﻿using HTML5ClassLibrary.Attributes.Events;
+﻿using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
+namespace HTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
 {
     /// <summary>
     /// The onunload attribute fires once a page has unloaded (or the browser window has been closed).

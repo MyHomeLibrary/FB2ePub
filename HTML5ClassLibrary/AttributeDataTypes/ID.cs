@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using HTML5ClassLibrary.Exceptions;
+using HTMLClassLibrary.Exceptions;
 
-namespace HTML5ClassLibrary.AttributeDataTypes
+namespace HTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     /// A document-unique identifier. For maximum compatability, 

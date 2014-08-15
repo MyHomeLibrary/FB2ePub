@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using HTML5ClassLibrary.AttributeDataTypes;
+using HTMLClassLibrary.AttributeDataTypes;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
+namespace HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 {
     /// <summary>
     /// The id attribute specifies a unique id for an HTML element (the value must be unique within the HTML document).

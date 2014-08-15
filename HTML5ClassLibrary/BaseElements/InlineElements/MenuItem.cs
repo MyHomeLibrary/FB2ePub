@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.FlaggedAttributes;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes.FlaggedAttributes;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTMLClassLibrary.BaseElements.InlineElements
 {
-    public class MenuItem : BaseInlineItem
+    /// <summary>
+    /// 
+    /// </summary>
+    [HTMLItemAttribute(ElementName = "menuitem", SupportedStandards = HTMLElementType.HTML5 )]
+    public class MenuItem : HTMLItem, IInlineItem
     {
-        public const string ElementName = "menuitem";
-
         public MenuItem()
         {
             RegisterAttribute(_checkedAttribute);
@@ -73,42 +75,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         /// </summary>
         public MenuItemTypeAttribute Type { get { return _menuItemTypeAttribute; }}
 
-        #region Overrides of BaseInlineItem
-
-
-        /// <summary>
-        /// Loads the element from XNode
-        /// </summary>
-        /// <param name="xNode">node to load element from</param>
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-        }
-
-        /// <summary>
-        /// Generates element to XNode from data
-        /// </summary>
-        /// <returns>
-        /// generated XNode
-        /// </returns>
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-            return xElement;
-        }
-
         /// <summary>
         /// Checks it element data is valid
         /// </summary>
@@ -120,26 +86,9 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
             return _labelAttribute.HasValue();
         }
 
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain sub-items");
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain sub-items");
-        }
-
-        public override List<IHTML5Item> SubElements()
+        public override List<IHTMLItem> SubElements()
         {
             return null;
         }
-        #endregion
-
     }
 }

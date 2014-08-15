@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTML5ClassLibrary.Attributes.Events;
-using HTML5ClassLibrary.Attributes.FlaggedAttributes;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
+using HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using HTMLClassLibrary.Attributes.Events;
+using HTMLClassLibrary.Attributes.FlaggedAttributes;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The "input" tag specifies an input field where the user can enter data.
     /// "input" elements are used within a "form" element to declare input controls that allow users to input data.
     /// An input field can vary in many ways, depending on the type attribute.
     /// </summary>
-    public class Input : BaseInlineItem
+    [HTMLItemAttribute(ElementName = "input", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
+    public class Input : HTMLItem, IInlineItem
     {
         public Input()
         {
@@ -90,9 +91,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         private readonly OnChangeEventAttribute _onChange = new OnChangeEventAttribute();
         private readonly OnSelectEventAttribute _onSelect = new OnSelectEventAttribute();
         private readonly UseMapAttribute _useMapAttribute = new UseMapAttribute();
-
-
-        public const string ElementName = "input";
 
 
         /// <summary>
@@ -301,42 +299,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         /// </summary>
         public ValueAttribute Value { get { return _valueAttribute; } }
 
-        #region Overrides of BaseInlineItem
-
-        /// <summary>
-        /// Loads the element from XNode
-        /// </summary>
-        /// <param name="xNode">node to load element from</param>
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-        }
-
-        /// <summary>
-        /// Generates element to XNode from data
-        /// </summary>
-        /// <returns>
-        /// generated XNode
-        /// </returns>
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            return xElement;
-
-        }
 
         /// <summary>
         /// Checks it element data is valid
@@ -349,25 +311,9 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
             return true;
         }
 
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain sub-items");
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain sub-items");
-        }
-
-        public override List<IHTML5Item> SubElements()
+        public override List<IHTMLItem> SubElements()
         {
             return null;
         }
-        #endregion
     }
 }

@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTML5ClassLibrary.Attributes.Events;
-using HTML5ClassLibrary.Exceptions;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
+using HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using HTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using HTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using HTMLClassLibrary.Attributes.Events;
+using HTMLClassLibrary.Exceptions;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The label element associates a label with form controls such as input, textarea, select and object. 
@@ -18,7 +18,8 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
     /// focus is automatically set in the associated form control. For users of assistive technology, 
     /// establishing associations between labels and controls helps clarify the spatial relationships found in forms and makes them easier to navigate.
     /// </summary>
-    public class Label : BaseInlineItem
+   [HTMLItemAttribute(ElementName = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    public class Label : HTMLItem, IInlineItem
     {
 
         public Label()
@@ -30,9 +31,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Internal content of the element
         /// </summary>
-        private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
-
-        public const string ElementName = "label";
+        private readonly List<IHTMLItem> _content = new List<IHTMLItem>();
 
         private readonly ForAttribute _forAttribute = new ForAttribute();
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
@@ -52,48 +51,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
 
 
 
-        #region Overrides of BaseInlineItem
-
-        /// <summary>
-        /// Loads the element from XNode
-        /// </summary>
-        /// <param name="xNode">node to load element from</param>
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-
-            _content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item)) // can't include labels
-                {
-                    try
-                    {
-                        item.Load(node);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    _content.Add(item);
-                }
-            }
-
-        }
-
-        private bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is IInlineItem)
             {
@@ -111,24 +69,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
             return false;
         }
 
-        /// <summary>
-        /// Generates element to XNode from data
-        /// </summary>
-        /// <returns>
-        /// generated XNode
-        /// </returns>
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            foreach (var item in _content)
-            {
-                xElement.Add(item.Generate());
-            }
-            return xElement;
-        }
 
         /// <summary>
         /// Checks it element data is valid
@@ -141,36 +81,9 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
             return true;
         }
 
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            if ((item != null) && IsValidSubType(item))
-            {
-                _content.Add(item);
-                item.Parent = this;
-            }
-            else
-            {
-                throw new HTML5ViolationException(item,"");
-            }
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            if(_content.Remove(item))
-            {
-                item.Parent = null;
-            }
-        }
-
-        public override List<IHTML5Item> SubElements()
+        public override List<IHTMLItem> SubElements()
         {
             return _content;
         }
-        #endregion
     }
 }

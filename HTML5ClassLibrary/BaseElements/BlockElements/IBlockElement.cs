@@ -1,12 +1,9 @@
-﻿using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTML5ClassLibrary.Attributes.Events;
-
-namespace HTML5ClassLibrary.BaseElements.BlockElements
+﻿namespace HTMLClassLibrary.BaseElements.BlockElements
 {
-    public interface IBlockElement : IHTML5Item
+    /// <summary>
+    /// specifies that element is a "block" - able to hold other "block" elements
+    /// </summary>
+    public interface IBlockElement 
     {
 
     }

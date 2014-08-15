@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes.AttributeGroups.FormEvents;
+using HTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.MediaEvents
 {
     public class MediaEvents
     {

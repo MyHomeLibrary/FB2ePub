@@ -1,8 +1,8 @@
 ﻿using System;
 
-using HTML5ClassLibrary.BaseElements;
+using HTMLClassLibrary.BaseElements;
 
-namespace HTML5ClassLibrary.Exceptions
+namespace HTMLClassLibrary.Exceptions
 {
     public class HTML5ViolationException : Exception
     {
@@ -16,7 +16,7 @@ namespace HTML5ClassLibrary.Exceptions
             
         }
 
-        public HTML5ViolationException(IHTML5Item item, string addMessage)
+        public HTML5ViolationException(IHTMLItem item, string addMessage)
             : base(string.Format("Adding this element <{0}> violates HTML5 structure rules: {1}", item.GetType(), addMessage))
         {
 

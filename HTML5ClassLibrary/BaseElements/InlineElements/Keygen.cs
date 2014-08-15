@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.FlaggedAttributes;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes.FlaggedAttributes;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The "keygen" tag specifies a key-pair generator field used for forms.
     /// When the form is submitted, the private key is stored locally, and the public key is sent to the server.
     /// </summary>
-    public class Keygen : BaseInlineItem
+    [HTMLItemAttribute(ElementName = "keygen", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
+    public class Keygen : HTMLItem, IInlineItem
     {
-        public const string ElementName = "keygen";
-
         public Keygen()
         {
             RegisterAttribute(_autoFocusAttribute);
@@ -64,44 +63,13 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         /// </summary>
         public NameAttribute Name { get { return _nameAttribute; }}
 
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-            ReadAttributes(xElement);
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-            return xElement;
-        }
 
         public override bool IsValid()
         {
             return true;
         }
 
-        public override void Add(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain sub-items");
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain sub-items");
-        }
-
-        public override List<IHTML5Item> SubElements()
+        public override List<IHTMLItem> SubElements()
         {
             return null;
         }

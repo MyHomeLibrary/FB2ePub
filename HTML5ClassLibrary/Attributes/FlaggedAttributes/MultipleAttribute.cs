@@ -1,5 +1,5 @@
 ﻿
-namespace HTML5ClassLibrary.Attributes.FlaggedAttributes
+namespace HTMLClassLibrary.Attributes.FlaggedAttributes
 {
     public class MultipleAttribute : BaseFlagAttribute
     {

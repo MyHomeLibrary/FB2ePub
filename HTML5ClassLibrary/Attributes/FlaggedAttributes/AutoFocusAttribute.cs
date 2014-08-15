@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace HTML5ClassLibrary.Attributes.FlaggedAttributes
+namespace HTMLClassLibrary.Attributes.FlaggedAttributes
 {
 
     public class AutoFocusAttribute : BaseFlagAttribute

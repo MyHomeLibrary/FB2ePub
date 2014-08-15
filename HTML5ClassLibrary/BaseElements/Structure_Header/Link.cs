@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes;
 
 
-namespace HTML5ClassLibrary.BaseElements.Structure_Header
+namespace HTMLClassLibrary.BaseElements.Structure_Header
 {
     /// <summary>
     /// The link element conveys relationship information that can be used by Web browsers and search engines. 
     /// You can have multiple link elements that link to different resources or describe different relationships. 
     /// The link elements can be contained in the head element.
     /// </summary>
-    public class Link : HTML5Item
+    [HTMLItemAttribute(ElementName = "link", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
+    public class Link : HTMLItem
     {
-        internal const string ElementName = "link";
-
         public Link()
         {
             RegisterAttribute(_hrefAttribute);
@@ -77,49 +76,13 @@ namespace HTML5ClassLibrary.BaseElements.Structure_Header
 
         #endregion
 
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-            return xElement;
-
-        }
 
         public override bool IsValid()
         {
             return true;
         }
 
-        /// <summary>
-        /// Adds subitem to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">subitem to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain subitems");
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            throw new Exception("This element does not contain subitems");
-        }
-
-        public override List<IHTML5Item> SubElements()
+        public override List<IHTMLItem> SubElements()
         {
             return null;
         }

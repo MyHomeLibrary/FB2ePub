@@ -1,6 +1,6 @@
-﻿using HTML5ClassLibrary.Attributes.Events;
+﻿using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.MediaEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.MediaEvents
 {
     /// <summary>
     /// Script to be run when the playing position has changed (like when the user fast forwards to a different point in the media)

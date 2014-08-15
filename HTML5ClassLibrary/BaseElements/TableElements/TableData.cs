@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.BaseElements.BlockElements;
-using HTML5ClassLibrary.BaseElements.InlineElements;
-using HTML5ClassLibrary.Exceptions;
+﻿using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.BaseElements.BlockElements;
+using HTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTML5ClassLibrary.BaseElements.TableElements
+namespace HTMLClassLibrary.BaseElements.TableElements
 {
     /// <summary>
     /// The td element defines a data cell in a table (i.e. cells that are not header cells).
     /// </summary>
-    public class TableData : BaseTableElement
+    [HTMLItemAttribute(ElementName = "td", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    public class TableData : HTMLItem
     {
-        public const string ElementName = "td";
-
-        private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
-
-        // Basic attributes
+        public TableData()
+        {
+            RegisterAttribute(_colSpanAttribute);
+            RegisterAttribute(_rowSpanAttribue);
+            RegisterAttribute(_headersAttribute);
+        }
         private readonly ColSpanAttribute _colSpanAttribute = new ColSpanAttribute();
         private readonly RowSpanAttribute _rowSpanAttribue = new RowSpanAttribute();
         private readonly HeadersAttribute _headersAttribute = new HeadersAttribute();
@@ -43,48 +40,7 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
         /// </summary>
         public HeadersAttribute Headers { get { return _headersAttribute; }}
 
-
-
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-
-            // Base attributes
-            _colSpanAttribute.ReadAttribute(xElement);
-            _rowSpanAttribue.ReadAttribute(xElement);
-            _headersAttribute.ReadAttribute(xElement);
-
-            _content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item))
-                {
-                    try
-                    {
-                        item.Load(node);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    _content.Add(item);
-                }
-            }
-        }
-
-        private bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is IInlineItem)
             {
@@ -101,58 +57,9 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
             return false;
         }
 
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            _colSpanAttribute.AddAttribute(xElement);
-            _rowSpanAttribue.AddAttribute(xElement);
-            _headersAttribute.AddAttribute(xElement);
-
-            foreach (var item in _content)
-            {
-                xElement.Add(item.Generate());
-            }
-            return xElement;
-        }
-
         public override bool IsValid()
         {
             return true;
-        }
-
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            if ((item != null) && IsValidSubType(item))
-            {
-                _content.Add(item);
-                item.Parent = this;
-            }
-            else
-            {
-                throw new HTML5ViolationException();
-            }
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            if(_content.Remove(item))
-            {
-                item.Parent = null;
-            }
-        }
-
-        public override List<IHTML5Item> SubElements()
-        {
-            return _content;
         }
     }
 }

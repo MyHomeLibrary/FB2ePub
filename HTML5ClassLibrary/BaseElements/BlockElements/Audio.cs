@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.Attributes.FlaggedAttributes;
-using HTML5ClassLibrary.BaseElements.InlineElements;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.Attributes.FlaggedAttributes;
+using HTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTML5ClassLibrary.BaseElements.BlockElements
+namespace HTMLClassLibrary.BaseElements.BlockElements
 {
-    public class Audio : BaseBlockElement
+    /// <summary>
+    /// The "audio" tag defines sound, such as music or other audio streams.
+    /// Currently, there are 3 supported file formats for the "audio" element: MP3, Wav, and Ogg:
+    /// </summary>
+    [HTMLItemAttribute(ElementName = "audio", SupportedStandards = HTMLElementType.HTML5)]
+    public class Audio : HTMLItem, IBlockElement
     {
-        public const string ElementName = "audio";
-
         private readonly SourceAttribute _src = new SourceAttribute();
         private readonly AutoPlayAttribute _autoplay = new AutoPlayAttribute();
         private readonly ControlsAttribute _controls = new ControlsAttribute();
@@ -60,59 +63,12 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
             get { return _preload; }
         }
 
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-
-            Content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item))
-                {
-                    try
-                    {
-                        item.Load(node);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    Content.Add(item);
-                }
-            }
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            foreach (var item in Content)
-            {
-                xElement.Add(item.Generate());
-            }
-            return xElement;
-        }
-
         public override bool IsValid()
         {
             return true;
         }
 
-        protected override bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is IInlineItem ||
                 item is IBlockElement ||

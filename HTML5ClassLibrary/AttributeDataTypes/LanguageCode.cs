@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using ISOLanguages;
 
-namespace HTML5ClassLibrary.AttributeDataTypes
+namespace HTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     /// A language code. For example, fr or en-gb

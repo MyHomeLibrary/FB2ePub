@@ -4,64 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.BaseElements.InlineElements;
+using HTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTML5ClassLibrary.BaseElements.BlockElements
+namespace HTMLClassLibrary.BaseElements.BlockElements
 {
-    public class Aside : BaseBlockElement
+    /// <summary>
+    /// The "aside" tag defines some content aside from the content it is placed in.
+    /// The aside content should be related to the surrounding content.
+    /// </summary>
+    [HTMLItemAttribute(ElementName = "aside", SupportedStandards = HTMLElementType.HTML5)]
+    public class Aside : HTMLItem, IBlockElement
     {
-        public const string ElementName = "aside";
-
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-
-            Content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item))
-                {
-                    try
-                    {
-                        item.Load(node);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    Content.Add(item);
-                }
-            }
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            foreach (var item in Content)
-            {
-                xElement.Add(item.Generate());
-            }
-            return xElement;
-        }
 
         public override bool IsValid()
         {
-            foreach (var item in Content)
+            foreach (var item in Subitems)
             {
                 if (!item.IsValid())
                 {
@@ -71,7 +28,7 @@ namespace HTML5ClassLibrary.BaseElements.BlockElements
             return true;
         }
 
-        protected override bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is IInlineItem ||
                 item is IBlockElement ||

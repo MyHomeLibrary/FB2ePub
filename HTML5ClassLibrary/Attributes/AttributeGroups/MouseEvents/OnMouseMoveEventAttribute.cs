@@ -1,7 +1,7 @@
 ﻿
-using HTML5ClassLibrary.Attributes.Events;
+using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.MouseEvents
 {
     /// <summary>
     /// The onmousemove attribute fires when the mouse pointer moves over an element.

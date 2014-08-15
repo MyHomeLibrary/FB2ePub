@@ -1,6 +1,6 @@
-﻿using HTML5ClassLibrary.Attributes.Events;
+﻿using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
+namespace HTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
 {
     /// <summary>
     /// Script to be run before the document is unloaded

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.HTMLGlobal
+namespace HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 {
     public enum TextDirection
     {

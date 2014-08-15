@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HTML5ClassLibrary.Attributes.Events;
+using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.MouseEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.MouseEvents
 {
     /// <summary>
     /// 

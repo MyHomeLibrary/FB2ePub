@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes.FlaggedAttributes;
-using HTML5ClassLibrary.BaseElements.BlockElements;
+﻿using HTMLClassLibrary.Attributes.FlaggedAttributes;
+using HTMLClassLibrary.BaseElements.BlockElements;
 
-namespace HTML5ClassLibrary.BaseElements.TableElements
+namespace HTMLClassLibrary.BaseElements.TableElements
 {
     /// <summary>
     /// The table element is used to define a table. 
     /// A table is a construct where data is organized into rows and columns of cells.
     /// </summary>
-    public class Table : BaseBlockElement
+    [HTMLItemAttribute(ElementName = "table", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    public class Table : HTMLItem, IBlockElement
     {
-        internal const string ElementName = "table";
-
         public Table()
         {
             RegisterAttribute(_sortableAttribute);
@@ -28,51 +23,16 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
         /// </summary>
         public SortableAttribute Sortable { get { return _sortableAttribute; }}
 
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-
-            Content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item))
-                {
-                    try
-                    {
-                        item.Load(node);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    Content.Add(item);
-                }
-            }
-
-        }
-
-        protected override bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTMLItem item)
         {
             // may appear only once and only as first element
             if (item is TableCaption)
             {
-                if (Content.Count > 0)
+                if (Subitems.Count > 0)
                 {
                     return false;
                 }
-                IHTML5Item seekItem = Content.Find(x => x is TableCaption);
+                IHTMLItem seekItem = Subitems.Find(x => x is TableCaption);
                 if (seekItem != null)
                 {
                     return false;
@@ -89,12 +49,12 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
             }
             if (item is TableBody)
             {
-                IHTML5Item seekItem = Content.Find(x => x is TableBody);
+                IHTMLItem seekItem = Subitems.Find(x => x is TableBody);
                 if (seekItem != null)
                 {
                     return false;
                 }
-                seekItem = Content.Find(x => x is TableRow);
+                seekItem = Subitems.Find(x => x is TableRow);
                 if (seekItem != null)
                 {
                     return false;
@@ -103,17 +63,17 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
             }
             if (item is TableRow)
             {
-                IHTML5Item seekItem = Content.Find(x => x is TableBody);
+                IHTMLItem seekItem = Subitems.Find(x => x is TableBody);
                 if (seekItem != null)
                 {
                     return false;
                 }
-                seekItem = Content.Find(x => x is TableHead);
+                seekItem = Subitems.Find(x => x is TableHead);
                 if (seekItem != null)
                 {
                     return false;
                 }
-                seekItem = Content.Find(x => x is TableFooter);
+                seekItem = Subitems.Find(x => x is TableFooter);
                 if (seekItem != null)
                 {
                     return false;
@@ -121,19 +81,6 @@ namespace HTML5ClassLibrary.BaseElements.TableElements
                 return item.IsValid();
             }
             return false;
-        }
-
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            foreach (var item in Content)
-            {
-                xElement.Add(item.Generate());
-            }
-            return xElement;
         }
 
 

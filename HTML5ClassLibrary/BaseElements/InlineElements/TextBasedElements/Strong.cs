@@ -1,19 +1,10 @@
-﻿namespace HTML5ClassLibrary.BaseElements.InlineElements.TextBasedElements
+﻿namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The strong element is used to indicate stronger emphasis.
     /// </summary>
+    [HTMLItemAttribute(ElementName = "strong", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Strong : TextBasedElement
     {
-        internal const string ElementName = "strong";
-
-        #region Overrides of TextBasedElement
-
-        protected override string GetElementName()
-        {
-            return ElementName;
-        }
-
-        #endregion
     }
 }

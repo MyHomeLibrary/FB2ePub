@@ -2,27 +2,23 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTML5ClassLibrary.Attributes;
-using HTML5ClassLibrary.BaseElements.BlockElements;
-using HTML5ClassLibrary.BaseElements.ObjectParameters;
-using HTML5ClassLibrary.Exceptions;
+using HTMLClassLibrary.Attributes;
+using HTMLClassLibrary.BaseElements.BlockElements;
+using HTMLClassLibrary.BaseElements.ObjectParameters;
+using HTMLClassLibrary.Exceptions;
 
-namespace HTML5ClassLibrary.BaseElements.InlineElements
+namespace HTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The object element provides a generic way of embedding objects such as images, 
     /// movies and applications (Java applets, browser plug-ins, etc.) into Web pages. 
-    /// param elements contained inside the object element are used to configure the embedded object. 
-    /// Besides param elements, the object element can contain alternate content which can be text or another object element. 
+    /// "param" elements contained inside the object element are used to configure the embedded object. 
+    /// Besides "param" elements, the object element can contain alternate content which can be text or another object element. 
     /// Alternate content serves as a fall-back mechanism for browsers that are unable to process the embedded object.
     /// </summary>
-    public class ObjectElm : BaseInlineItem
+    [HTMLItemAttribute(ElementName = "object", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]    
+    public class ObjectElm : HTMLItem, IInlineItem
     {
-        /// <summary>
-        /// Internal content of the element
-        /// </summary>
-        private readonly List<IHTML5Item> _content = new List<IHTML5Item>();
-
         public ObjectElm()
         {
             RegisterAttribute(_heightAttribute);
@@ -45,10 +41,6 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         private readonly DataAttribute _dataAttribute = new DataAttribute();
         private readonly MIMETypeAttribute _mimeTypeAttribute= new MIMETypeAttribute();
         private readonly UseMapAttribute _useMapAttribute = new UseMapAttribute();
-
-
-        public const string ElementName = "object";
-
 
 
         /// <summary>
@@ -99,43 +91,7 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
         public UseMapAttribute UseMap { get { return _useMapAttribute; } }
 
 
-
-        public override void Load(XNode xNode)
-        {
-            if (xNode.NodeType != XmlNodeType.Element)
-            {
-                throw new Exception("xNode is not of element type");
-            }
-            var xElement = (XElement)xNode;
-            if (xElement.Name.LocalName != ElementName)
-            {
-                throw new Exception(string.Format("xNode is not {0} element", ElementName));
-            }
-
-            ReadAttributes(xElement);
-
-            _content.Clear();
-            IEnumerable<XNode> descendants = xElement.Nodes();
-            foreach (var node in descendants)
-            {
-                IHTML5Item item = ElementFactory.CreateElement(node);
-                if ((item != null) && IsValidSubType(item))
-                {
-                    try
-                    {
-                        item.Load(node);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                    _content.Add(item);
-                }
-            }
-
-        }
-
-        private bool IsValidSubType(IHTML5Item item)
+        protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is IInlineItem)
             {
@@ -156,54 +112,9 @@ namespace HTML5ClassLibrary.BaseElements.InlineElements
             return false;
         }
 
-        public override XNode Generate()
-        {
-            var xElement = new XElement(XhtmlNameSpace + ElementName);
-
-            AddAttributes(xElement);
-
-            foreach (var item in _content)
-            {
-                xElement.Add(item.Generate());
-            }
-            return xElement;
-
-        }
-
         public override bool IsValid()
         {
             return true;
-        }
-
-        /// <summary>
-        /// Adds sub-item to the item , only if 
-        /// allowed by the rules and element can accept content
-        /// </summary>
-        /// <param name="item">sub-item to add</param>
-        public override void Add(IHTML5Item item)
-        {
-            if ((item != null) && IsValidSubType(item))
-            {
-                _content.Add(item);
-                item.Parent = this;
-            }
-            else
-            {
-                throw new HTML5ViolationException();
-            }
-        }
-
-        public override void Remove(IHTML5Item item)
-        {
-            if(_content.Remove(item))
-            {
-                item.Parent = null;
-            }
-        }
-
-        public override List<IHTML5Item> SubElements()
-        {
-            return _content;
         }
     }
 }

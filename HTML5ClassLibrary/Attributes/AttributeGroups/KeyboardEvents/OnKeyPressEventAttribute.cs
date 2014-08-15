@@ -1,6 +1,6 @@
-﻿using HTML5ClassLibrary.Attributes.Events;
+﻿using HTMLClassLibrary.Attributes.Events;
 
-namespace HTML5ClassLibrary.Attributes.AttributeGroups.KeyboardEvents
+namespace HTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents
 {
     /// <summary>
     /// The onkeypress attribute fires when the user presses a key (on the keyboard).
