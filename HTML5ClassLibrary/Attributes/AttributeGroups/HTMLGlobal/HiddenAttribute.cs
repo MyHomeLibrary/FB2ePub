@@ -1,6 +1,6 @@
-﻿using HTMLClassLibrary.Attributes.FlaggedAttributes;
+﻿using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 {
     /// <summary>
     /// The hidden attribute is a boolean attribute.

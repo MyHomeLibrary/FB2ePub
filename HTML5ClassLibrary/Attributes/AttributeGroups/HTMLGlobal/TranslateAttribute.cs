@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 {
     /// <summary>
     /// The translate attribute specifies whether the content of an element should be translated or not.

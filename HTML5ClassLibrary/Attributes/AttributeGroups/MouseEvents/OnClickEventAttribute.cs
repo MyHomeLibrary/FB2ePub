@@ -1,6 +1,6 @@
-﻿using HTMLClassLibrary.Attributes.Events;
+﻿using XHTMLClassLibrary.Attributes.Events;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.MouseEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents
 {
     /// <summary>
     /// The onclick attribute fires on a mouse click on the element.

@@ -1,6 +1,6 @@
-﻿using HTMLClassLibrary.Attributes.Events;
+﻿using XHTMLClassLibrary.Attributes.Events;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents
 {
     /// <summary>
     /// The onkeyup attribute fires when the user releases a key (on the keyboard).

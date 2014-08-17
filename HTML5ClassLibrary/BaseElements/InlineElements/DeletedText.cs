@@ -1,23 +1,18 @@
-﻿using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.BaseElements.BlockElements;
+﻿using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The del element is used to mark up modifications made to a document. 
     /// Specifically, the del element is used to indicate that a section of content has changed and has therefore been removed.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "del", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "del", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class DeletedText : HTMLItem, IInlineItem , IBlockElement
     {
-        public DeletedText()
-        {
-            RegisterAttribute(_cite);
-            RegisterAttribute(_datetime);
-        }
-
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CiteAttribute _cite = new CiteAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly DateTimeAttribute _datetime = new DateTimeAttribute();
 
         /// <summary>

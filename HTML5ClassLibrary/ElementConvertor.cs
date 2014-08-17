@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HTMLClassLibrary.BaseElements;
+using XHTMLClassLibrary.BaseElements;
 
-namespace HTMLClassLibrary
+namespace XHTMLClassLibrary
 {
     /// <summary>
     /// Represent one element creator 

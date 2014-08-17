@@ -1,36 +1,83 @@
 ﻿using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// Hyperlink
     /// </summary>
-    [HTMLItemAttribute(ElementName = "a", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    [HTMLItemAttribute(ElementName = "a", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Anchor : TextBasedElement
     {
-        public Anchor()
-        {
-            RegisterAttribute(_hrefAttrib);
-            RegisterAttribute(_hrefLangAttrib);
-            RegisterAttribute(_relAttrib);
-            RegisterAttribute(_downloadAttrib);
-            RegisterAttribute(_mediaAttr);
-            RegisterAttribute(_targetAttr);
-            RegisterAttribute(_typeAttr);
-        }
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
 
-        private readonly HrefAttribute _hrefAttrib = new HrefAttribute();
-        private readonly HRefLanguageAttribute _hrefLangAttrib = new HRefLanguageAttribute();
-        private readonly AreaRelationAttribute _relAttrib = new AreaRelationAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private  readonly CoordinatesAttribute _coordinatesAttribute = new CoordinatesAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly DownloadAttribute _downloadAttrib = new DownloadAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly HrefAttribute _hrefAttrib = new HrefAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly HRefLanguageAttribute _hrefLangAttrib = new HRefLanguageAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MediaAttribute _mediaAttr = new MediaAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly NameAttribute _nameAttribute = new NameAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly AreaRelationAttribute _relAttrib = new AreaRelationAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ReverseRelationAttribute _reverseRelationAttribute = new ReverseRelationAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ShapeAttribute _shapeAttribute = new ShapeAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FormTargetAttribute _targetAttr = new FormTargetAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MIMETypeAttribute _typeAttr = new MIMETypeAttribute();
  
 
 
 #region public_attributes
+
+        /// <summary>
+        /// Specifies the shape of a link
+        /// Not supported in HTML5
+        /// </summary>
+        public ShapeAttribute Shape { get { return _shapeAttribute; }}
+
+        /// <summary>
+        /// Specifies the relationship between the linked document and the current document
+        /// Not supported in HTML5.
+        /// </summary>
+        public ReverseRelationAttribute ReverseRelation { get { return _reverseRelationAttribute; }}
+
+        /// <summary>
+        /// Specifies the name of an anchor
+        /// Not supported in HTML5. Use the id attribute instead
+        /// </summary>
+        public NameAttribute Name { get { return _nameAttribute; }}
+
+        /// <summary>
+        /// Specifies the coordinates of a link
+        /// Not supported in HTML5.
+        /// </summary>
+        public CoordinatesAttribute Coordinates { get { return _coordinatesAttribute; }}
+
+        /// <summary>
+        ///  Specifies the character-set of a linked document
+        /// Not supported in HTML5.
+        /// </summary>
+        public CharsetAttribute Charset { get { return _charsetAttribute; }}
 
         /// <summary>
         /// This attribute specifies the location of a Web resource. 

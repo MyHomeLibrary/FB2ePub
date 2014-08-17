@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using HTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.AttributeDataTypes;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 {
     /// <summary>
     /// The accesskey attribute specifies a shortcut key to activate/focus an element.

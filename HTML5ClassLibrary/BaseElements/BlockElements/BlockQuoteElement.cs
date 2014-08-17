@@ -1,26 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.Attributes;
 
-namespace HTMLClassLibrary.BaseElements.BlockElements
+namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// The blockquote element is used to identify larger amounts of quoted text.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "blockquote", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "blockquote", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class BlockQuoteElement : HTMLItem, IBlockElement 
     {
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CiteAttribute _citeAttribute = new CiteAttribute();
-
-
-        public BlockQuoteElement()
-        {
-            RegisterAttribute(_citeAttribute);
-        }
-
-
 
         public CiteAttribute Cite { get { return _citeAttribute; } }
 

@@ -1,13 +1,13 @@
-﻿using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.BaseElements.BlockElements;
-using HTMLClassLibrary.BaseElements.InlineElements;
+﻿using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.BaseElements.BlockElements;
+using XHTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTMLClassLibrary.BaseElements.TableElements
+namespace XHTMLClassLibrary.BaseElements.TableElements
 {
     /// <summary>
     /// The td element defines a data cell in a table (i.e. cells that are not header cells).
     /// </summary>
-    [HTMLItemAttribute(ElementName = "td", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    [HTMLItemAttribute(ElementName = "td", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class TableData : HTMLItem
     {
         public TableData()

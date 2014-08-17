@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.FlaggedAttributes;
-using HTMLClassLibrary.BaseElements.InlineElements;
-using HTMLClassLibrary.BaseElements.Legends;
+﻿using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
+using XHTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.BaseElements.Legends;
 
-namespace HTMLClassLibrary.BaseElements.BlockElements
+namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// The fieldset element adds structure to forms by grouping together related controls and labels.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "fieldset", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "fieldset", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class FieldSet : HTMLItem, IBlockElement
     {
-        public FieldSet()
-        {
-            RegisterAttribute(_disabledAttribute);
-            RegisterAttribute(_formIdAttribute);
-            RegisterAttribute(_nameAttribute);
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly NameAttribute _nameAttribute = new NameAttribute();
 
         /// <summary>

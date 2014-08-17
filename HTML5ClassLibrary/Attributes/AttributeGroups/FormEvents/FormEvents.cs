@@ -1,24 +1,47 @@
 ﻿using System.Collections.Generic;
-using System.Xml.Linq;
+using XHTMLClassLibrary.BaseElements;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.FormEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.FormEvents
 {
     /// <summary>
     /// Events triggered by actions inside a HTML form (applies to almost all HTML elements, but is most used in form elements):
     /// </summary>
     public class FormEvents
     {
-        private readonly OnBlurEventAttribute _onBlurEventAttribute = new OnBlurEventAttribute(); 
-        private readonly OnChangeEventAttribute _onChangeEventAttribute = new OnChangeEventAttribute();  
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnBlurEventAttribute _onBlurEventAttribute = new OnBlurEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnChangeEventAttribute _onChangeEventAttribute = new OnChangeEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly OnContextMenuAttribute _onContextMenuAttribute = new OnContextMenuAttribute();
-        private readonly OnFocusEventAttribute _onFocusEventAttribute = new OnFocusEventAttribute(); 
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnFocusEventAttribute _onFocusEventAttribute = new OnFocusEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly OnFormChangeEventAttribute _onFormChangeEventAttribute = new OnFormChangeEventAttribute();
-        private readonly OnFormInputEventAttribute _onFormInputEventAttribute = new OnFormInputEventAttribute(); 
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnFormInputEventAttribute _onFormInputEventAttribute = new OnFormInputEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly OnInputEventAttribute _onInputEventAttribute = new OnInputEventAttribute();
-        private readonly OnInvalidEventAttribute _onInvalidEventAttribute = new OnInvalidEventAttribute(); 
-        private readonly OnSelectEventAttribute _onSelectEventAttribute = new OnSelectEventAttribute(); 
-        private readonly OnSubmitEventAttribute _onSubmitEventAttribute = new OnSubmitEventAttribute(); 
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnInvalidEventAttribute _onInvalidEventAttribute = new OnInvalidEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnSelectEventAttribute _onSelectEventAttribute = new OnSelectEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnSubmitEventAttribute _onSubmitEventAttribute = new OnSubmitEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly OnResetEventAttribute _onResetEventAttribute = new OnResetEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly OnToggleEventAttribute _onToggleEventAttribute = new OnToggleEventAttribute();
 
 

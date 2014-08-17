@@ -1,4 +1,4 @@
-﻿namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
+﻿namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The b element renders text in element style.
@@ -6,7 +6,7 @@
     /// The element has no semantic meaning and is only used for formatting. 
     /// Equivalent formatting can be achieved using CSS.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "b", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "b", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class BoldText : TextBasedElement
     {
     }

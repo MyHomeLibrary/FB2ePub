@@ -1,6 +1,6 @@
-﻿using HTMLClassLibrary.BaseElements.InlineElements;
+﻿using XHTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTMLClassLibrary.BaseElements.Ruby
+namespace XHTMLClassLibrary.BaseElements.Ruby
 {
     /// <summary>
     /// The rt element contains ruby text annotations.

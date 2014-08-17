@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The "meter" tag defines a scalar measurement within a known range, or a fractional value. This is also known as a gauge.

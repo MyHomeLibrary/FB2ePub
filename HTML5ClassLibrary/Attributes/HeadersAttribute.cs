@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using HTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.AttributeDataTypes;
 
-namespace HTMLClassLibrary.Attributes
+namespace XHTMLClassLibrary.Attributes
 {
     /// <summary>
     /// The headers attribute specifies one or more header cells a table cell is related to.

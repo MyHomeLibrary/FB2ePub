@@ -1,5 +1,5 @@
 ﻿
-namespace HTMLClassLibrary.Attributes.FlaggedAttributes
+namespace XHTMLClassLibrary.Attributes.FlaggedAttributes
 {
     public class NoHRefAttribute : BaseFlagAttribute
     {

@@ -1,4 +1,4 @@
-﻿namespace HTMLClassLibrary
+﻿namespace XHTMLClassLibrary
 {
     public class HTMLDocument
     {

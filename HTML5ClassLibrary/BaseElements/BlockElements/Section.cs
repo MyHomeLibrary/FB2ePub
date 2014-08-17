@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTMLClassLibrary.BaseElements.BlockElements
+namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// The "section" tag defines sections in a document, such as chapters, headers, footers, or any other sections of the document.

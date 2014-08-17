@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace HTMLClassLibrary.BaseElements.BlockElements
+namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// The hr element is used to separate sections of content. 
     /// Though the name of the hr element is "horizontal rule", most visual Web browsers render hr as a horizontal line.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "hr", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "hr", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class HorizontalRuler : HTMLItem, IBlockElement 
     {
         /// <summary>

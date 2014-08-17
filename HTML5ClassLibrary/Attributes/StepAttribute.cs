@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using HTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.AttributeDataTypes;
 
-namespace HTMLClassLibrary.Attributes
+namespace XHTMLClassLibrary.Attributes
 {
     /// <summary>
     /// The step attribute specifies the legal number intervals for an "input" element.

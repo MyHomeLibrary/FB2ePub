@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTMLClassLibrary.BaseElements.BlockElements
+namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// The p element represents a paragraph.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "p", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    [HTMLItemAttribute(ElementName = "p", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Paragraph : HTMLItem, IBlockElement
     {
         protected override bool IsValidSubType(IHTMLItem item)

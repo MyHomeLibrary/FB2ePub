@@ -1,6 +1,6 @@
-﻿using HTMLClassLibrary.Attributes.Events;
+﻿using XHTMLClassLibrary.Attributes.Events;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.FormEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.FormEvents
 {
     /// <summary>
     /// The onblur attribute fires the moment that the element loses focus.

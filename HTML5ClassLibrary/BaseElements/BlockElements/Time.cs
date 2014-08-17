@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTMLClassLibrary.BaseElements.BlockElements
+namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// The "time" tag defines either a time (24 hour clock), or a date in the Gregorian calendar, optionally with a time and a time-zone offset.

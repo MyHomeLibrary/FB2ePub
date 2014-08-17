@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// 

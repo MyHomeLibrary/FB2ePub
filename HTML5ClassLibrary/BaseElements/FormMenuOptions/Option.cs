@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.FlaggedAttributes;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
-namespace HTMLClassLibrary.BaseElements.FormMenuOptions
+namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
 {
     /// <summary>
     /// The option element represents a choice offered by select form controls.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "option", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    [HTMLItemAttribute(ElementName = "option", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Option : HTMLItem, IOptionItem
     {
         public Option()

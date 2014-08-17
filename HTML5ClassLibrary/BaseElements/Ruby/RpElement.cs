@@ -1,4 +1,4 @@
-﻿namespace HTMLClassLibrary.BaseElements.Ruby
+﻿namespace XHTMLClassLibrary.BaseElements.Ruby
 {
     /// <summary>
     /// The "rp" tag defines what to show if a browser does NOT support ruby annotations.

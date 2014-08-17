@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.FlaggedAttributes;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements.FormMenuOptions
+namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
 {
     /// <summary>
     /// The "datalist" tag specifies a list of pre-defined options for an "input" element.

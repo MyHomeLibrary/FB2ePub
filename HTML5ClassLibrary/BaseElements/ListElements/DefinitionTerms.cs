@@ -1,11 +1,11 @@
-﻿using HTMLClassLibrary.BaseElements.InlineElements;
+﻿using XHTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTMLClassLibrary.BaseElements.ListElements
+namespace XHTMLClassLibrary.BaseElements.ListElements
 {
     /// <summary>
     /// The dt element is a definition term for an item in a definition list.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "dt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "dt", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class DefinitionTerms : HTMLItem 
     {
         protected override bool IsValidSubType(IHTMLItem item)

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 
-namespace HTMLClassLibrary.BaseElements.Structure_Header
+namespace XHTMLClassLibrary.BaseElements.Structure_Header
 {
     /// <summary>
     /// The "html" tag tells the browser that this is an HTML document.
     ///The "html" tag represents the root of an HTML document.
     ///The "html" tag is the container for all other HTML elements (except for the "!DOCTYPE" tag).
     /// </summary>
-    [HTMLItemAttribute(ElementName = "html", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "html", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class HTML : HTMLItem
     {
         public HTML()

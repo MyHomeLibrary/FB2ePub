@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HTMLClassLibrary.BaseElements
+namespace XHTMLClassLibrary.BaseElements
 {
     [Flags]
     public enum  HTMLElementType 
@@ -11,6 +11,7 @@ namespace HTMLClassLibrary.BaseElements
         Transitional = 4 ,
         Strict = 8,
         FrameSet = 16,
+        XHTML5 = 32,
     }
 
     /// <summary>

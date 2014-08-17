@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTMLClassLibrary.BaseElements.BlockElements
+namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// The "details" tag specifies additional details that the user can view or hide on demand.
@@ -15,11 +15,7 @@ namespace HTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "details", SupportedStandards = HTMLElementType.HTML5)]
     public class Details : HTMLItem, IBlockElement 
     {
-        public Details()
-        {
-            RegisterAttribute(_openAttribute);
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly OpenAttribute _openAttribute = new OpenAttribute();
 
 

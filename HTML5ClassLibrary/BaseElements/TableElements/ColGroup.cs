@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements.TableElements
+namespace XHTMLClassLibrary.BaseElements.TableElements
 {
     /// <summary>
     /// In XHTML, tables are physically constructed from rows, rather than columns. 
@@ -17,23 +17,66 @@ namespace HTMLClassLibrary.BaseElements.TableElements
     /// 
     /// The colgroup element contains col elements that represent individual columns.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "colgroup", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "colgroup", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class ColGroup : HTMLItem
     {
-        private readonly List<IHTMLItem> _content = new List<IHTMLItem>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly AlignAttribute _alignAttribute = new AlignAttribute();
 
-        public ColGroup()
-        {
-            RegisterAttribute(_spanAttribute);
-        }
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly CharAttribute _charAttribute = new CharAttribute();
 
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly CharOffAttribute _charOffAttribute = new CharOffAttribute();
+        
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SpanAttribute _spanAttribute = new SpanAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly VAlignAttribute _vAlignAttribute = new VAlignAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly WidthAttribute _widthAttribute = new WidthAttribute();
 
         /// <summary>
         /// A single col element can represent (or "span") multiple columns. 
         /// This attribute contains a number of columns "spanned" by the col element.
         /// </summary>
         public SpanAttribute Span { get { return _spanAttribute; } }
+
+        /// <summary>
+        /// Not supported in HTML5.
+        /// Aligns the content in a column group
+        /// </summary>
+        public AlignAttribute Align { get { return _alignAttribute; } }
+
+
+        /// <summary>
+        /// Aligns the content in a column group to a character
+        /// Not supported in HTML5.
+        /// </summary>
+        public CharAttribute Char { get { return _charAttribute; } }
+
+
+        /// <summary>
+        /// Sets the number of characters the content will be aligned from the character specified by the char attribute
+        /// Not supported in HTML5.
+        /// </summary>
+        public CharOffAttribute CharOff { get { return _charOffAttribute; } }
+
+
+        /// <summary>
+        /// Vertical aligns the content in a column group
+        /// Not supported in HTML5.
+        /// </summary>
+        public VAlignAttribute VAlign { get { return _vAlignAttribute; } }
+
+
+        /// <summary>
+        /// Specifies the width of a column group
+        /// Not supported in HTML5.
+        /// </summary>
+        public WidthAttribute Width { get { return _widthAttribute; } }
 
 
         protected override bool IsValidSubType(IHTMLItem item)

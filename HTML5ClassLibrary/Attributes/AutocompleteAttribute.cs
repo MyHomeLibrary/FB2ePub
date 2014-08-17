@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace HTMLClassLibrary.Attributes
+namespace XHTMLClassLibrary.Attributes
 {
     public class AutocompleteAttribute : BaseAttribute
     {

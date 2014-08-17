@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTMLClassLibrary.BaseElements.BlockElements
+namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// The "menu" tag defines a list/menu of commands.
     /// The "menu" tag is used for context menus, toolbars and for listing form controls and commands.
     /// 
     /// </summary>
-    [HTMLItemAttribute(ElementName = "menu", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "menu", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.FrameSet)]
     public class Menu : HTMLItem, IBlockElement
     {
         public Menu()

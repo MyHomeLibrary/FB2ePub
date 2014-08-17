@@ -1,13 +1,13 @@
-﻿using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.BaseElements.BlockElements;
-using HTMLClassLibrary.BaseElements.InlineElements;
+﻿using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.BaseElements.BlockElements;
+using XHTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTMLClassLibrary.BaseElements.ListElements
+namespace XHTMLClassLibrary.BaseElements.ListElements
 {
     /// <summary>
     /// The li element represents a list item in ordered lists and unordered lists.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "li", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "li", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class ListItem : HTMLItem 
     {
         public ListItem()

@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using HTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.AttributeDataTypes;
 
-namespace HTMLClassLibrary.Attributes.FlaggedAttributes
+namespace XHTMLClassLibrary.Attributes.FlaggedAttributes
 {
     public abstract class BaseFlagAttribute : BaseAttribute
     {

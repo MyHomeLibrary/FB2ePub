@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.FlaggedAttributes;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The textarea element is used to create a multi-line text input form control.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "textarea", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    [HTMLItemAttribute(ElementName = "textarea", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class TextArea : HTMLItem, IInlineItem
     {
         private readonly SimpleHTML5Text _scriptText = new SimpleHTML5Text();

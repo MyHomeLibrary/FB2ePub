@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     public abstract class TextBasedElement : HTMLItem, IInlineItem
     {

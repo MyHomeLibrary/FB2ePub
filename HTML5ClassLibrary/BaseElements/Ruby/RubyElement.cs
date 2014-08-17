@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.BaseElements.InlineElements;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements.Ruby
+namespace XHTMLClassLibrary.BaseElements.Ruby
 {
     /// <summary>
     /// Ruby is mechanism for adding annotations to characters of East Asian languages such as Chinese and Japanese. 

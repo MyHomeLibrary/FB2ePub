@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HTMLClassLibrary.AttributeDataTypes
+namespace XHTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     /// The value may be either in pixels or a percentage of the available horizontal or vertical space. 

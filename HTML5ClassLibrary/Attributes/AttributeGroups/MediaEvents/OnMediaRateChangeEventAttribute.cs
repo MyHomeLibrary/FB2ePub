@@ -1,6 +1,6 @@
-﻿using HTMLClassLibrary.Attributes.Events;
+﻿using XHTMLClassLibrary.Attributes.Events;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.MediaEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.MediaEvents
 {
     /// <summary>
     /// Script to be run each time the playback rate changes (like when a user switches to a slow motion or fast forward mode)

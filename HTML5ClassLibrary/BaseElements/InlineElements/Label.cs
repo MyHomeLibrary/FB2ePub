@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
-using HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTMLClassLibrary.Attributes.Events;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
+using XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using XHTMLClassLibrary.Attributes.Events;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The label element associates a label with form controls such as input, textarea, select and object. 
@@ -18,7 +18,7 @@ namespace HTMLClassLibrary.BaseElements.InlineElements
     /// focus is automatically set in the associated form control. For users of assistive technology, 
     /// establishing associations between labels and controls helps clarify the spatial relationships found in forms and makes them easier to navigate.
     /// </summary>
-   [HTMLItemAttribute(ElementName = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+   [HTMLItemAttribute(ElementName = "label", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Label : HTMLItem, IInlineItem
     {
 

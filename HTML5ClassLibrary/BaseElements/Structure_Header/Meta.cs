@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
-using HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTMLClassLibrary.Attributes.AttributeGroups.MediaEvents;
-using HTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
+using XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using XHTMLClassLibrary.Attributes.AttributeGroups.MediaEvents;
+using XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using XHTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
 
-namespace HTMLClassLibrary.BaseElements.Structure_Header
+namespace XHTMLClassLibrary.BaseElements.Structure_Header
 {
     /// <summary>
     /// The meta element is a generic mechanism for specifying metadata for a Web page. 
     /// Some search engines use this information.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "meta", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    [HTMLItemAttribute(ElementName = "meta", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Meta : HTMLItem
     {
         public Meta()

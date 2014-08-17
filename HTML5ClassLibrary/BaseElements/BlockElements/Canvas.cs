@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTMLClassLibrary.BaseElements.BlockElements
+namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// The "canvas" tag is used to draw graphics, on the fly, via scripting (usually JavaScript).
@@ -14,13 +14,10 @@ namespace HTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "canvas", SupportedStandards = HTMLElementType.HTML5)]
     public class Canvas : HTMLItem, IBlockElement
     {
-        public Canvas()
-        {
-            RegisterAttribute(_height);
-            RegisterAttribute(_width);
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly HeightAttribute _height = new HeightAttribute();
+        
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly WidthAttribute _width = new WidthAttribute();
 
 

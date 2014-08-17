@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using HTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.AttributeDataTypes;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 {
     /// <summary>
     /// The contextmenu attribute specifies a context menu for an element. The context menu appears when a user right-clicks on the element.

@@ -1,6 +1,6 @@
-﻿using HTMLClassLibrary.Attributes.Events;
+﻿using XHTMLClassLibrary.Attributes.Events;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.MediaEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.MediaEvents
 {
     /// <summary>
     /// Script to be run each time the volume is changed which (includes setting the volume to "mute")

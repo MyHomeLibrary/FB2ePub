@@ -1,13 +1,13 @@
 ﻿using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The "pre" tag defines preformatted text.
     ///Text in a "pre" element is displayed in a fixed-width font (usually Courier), and it preserves both spaces and line breaks.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "pre", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    [HTMLItemAttribute(ElementName = "pre", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class PreFormated : TextBasedElement
     {
         public PreFormated()

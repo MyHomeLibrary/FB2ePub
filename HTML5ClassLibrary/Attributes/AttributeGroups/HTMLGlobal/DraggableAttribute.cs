@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 {
     /// <summary>
     /// The draggable attribute specifies whether an element is draggable or not.

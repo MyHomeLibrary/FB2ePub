@@ -1,8 +1,8 @@
 ﻿using System;
 
-using HTMLClassLibrary.BaseElements;
+using XHTMLClassLibrary.BaseElements;
 
-namespace HTMLClassLibrary.Exceptions
+namespace XHTMLClassLibrary.Exceptions
 {
     public class HTML5ViolationException : Exception
     {

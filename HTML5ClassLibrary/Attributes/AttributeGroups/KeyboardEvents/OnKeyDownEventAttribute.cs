@@ -1,6 +1,6 @@
-﻿using HTMLClassLibrary.Attributes.Events;
+﻿using XHTMLClassLibrary.Attributes.Events;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents
 {
     /// <summary>
     /// The onkeydown attribute fires when the user is pressing a key (on the keyboard).

@@ -1,6 +1,6 @@
-﻿using HTMLClassLibrary.Attributes.Events;
+﻿using XHTMLClassLibrary.Attributes.Events;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.FormEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.FormEvents
 {
     /// <summary>
     /// The onsubmit attribute fires when a form is submitted.

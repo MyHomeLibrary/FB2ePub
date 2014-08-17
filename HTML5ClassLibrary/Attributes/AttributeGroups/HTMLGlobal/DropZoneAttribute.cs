@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 {
     /// <summary>
     /// The dropzone attribute specifies whether the dragged data is copied, moved, or linked, when it is dropped on an element.

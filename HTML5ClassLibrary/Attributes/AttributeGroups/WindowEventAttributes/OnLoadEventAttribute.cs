@@ -1,6 +1,6 @@
-﻿using HTMLClassLibrary.Attributes.Events;
+﻿using XHTMLClassLibrary.Attributes.Events;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
 {
     /// <summary>
     /// The onload attribute fires when an object has been loaded.

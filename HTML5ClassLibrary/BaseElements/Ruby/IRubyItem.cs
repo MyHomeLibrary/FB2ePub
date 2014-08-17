@@ -1,4 +1,4 @@
-﻿namespace HTMLClassLibrary.BaseElements.Ruby
+﻿namespace XHTMLClassLibrary.BaseElements.Ruby
 {
     /// <summary>
     /// interface define Ruby item

@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace HTMLClassLibrary.BaseElements
+namespace XHTMLClassLibrary.BaseElements
 {
     public static class ElementFactory
     {
@@ -19,6 +19,7 @@ namespace HTMLClassLibrary.BaseElements
             Converters.Add(HTMLElementType.Strict, new ElementConvertor());
             Converters.Add(HTMLElementType.Transitional, new ElementConvertor());
             Converters.Add(HTMLElementType.XHTML11, new ElementConvertor());
+            Converters.Add(HTMLElementType.XHTML5, new ElementConvertor());
             // initialize converters
             Assembly currentAssembly = Assembly.GetAssembly(typeof(ElementFactory));
             Type[] types = currentAssembly.GetTypes();
@@ -27,8 +28,7 @@ namespace HTMLClassLibrary.BaseElements
                 if (type.GetInterface(typeof(IHTMLItem).ToString()) != null)
                 {
                     var attributes = (HTMLItemAttribute[])type.GetCustomAttributes(typeof(HTMLItemAttribute), false);
-                    if (attributes != null &&
-                        attributes.Length > 0)
+                    if (attributes.Length > 0)
                     {
                         HTMLElementType compatibilityMask = attributes[0].SupportedStandards;
                         if (compatibilityMask.HasFlag(HTMLElementType.FrameSet))
@@ -69,10 +69,11 @@ namespace HTMLClassLibrary.BaseElements
         public static bool CheckIfValidStandardArgument(HTMLElementType standardType)
         {
             if (standardType == HTMLElementType.FrameSet ||
-                standardType == HTMLElementType.HTML5 ||
+                standardType == HTMLElementType.HTML5  ||
                 standardType == HTMLElementType.Strict ||
                 standardType == HTMLElementType.Transitional ||
-                standardType == HTMLElementType.XHTML11)
+                standardType == HTMLElementType.XHTML11 ||
+                standardType == HTMLElementType.XHTML5 )
             {
                 return true;
             }

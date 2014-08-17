@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.FlaggedAttributes;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// 

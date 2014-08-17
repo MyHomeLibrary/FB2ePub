@@ -1,44 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
+﻿using System.Collections.Generic;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
-namespace HTMLClassLibrary.BaseElements.MapAreas
+namespace XHTMLClassLibrary.BaseElements.MapAreas
 {
     /// <summary>
     /// The area element identifies geometric regions of a client-side image map, and provides a hyperlink for each region.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "area", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "area", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Area : HTMLItem
     {
-        public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
-
-        public Area()
-        {         
-            RegisterAttribute(_altAttribute);
-            RegisterAttribute(_coordAttribute);
-            RegisterAttribute(_downloadAttribute);
-            RegisterAttribute(_hrefAttribute);
-            RegisterAttribute(_hrefLangAttribute);
-            RegisterAttribute(_mediaAttribute);
-            RegisterAttribute(_relationAttribute);
-            RegisterAttribute(_shapeAttribute);
-            RegisterAttribute(_targetAttribute);
-            RegisterAttribute(_typeAttribute);
-            
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly AltAttribute _altAttribute = new AltAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CoordinatesAttribute _coordAttribute = new CoordinatesAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly DownloadAttribute  _downloadAttribute = new DownloadAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly HrefAttribute _hrefAttribute = new HrefAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly HRefLanguageAttribute _hrefLangAttribute = new HRefLanguageAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MediaAttribute _mediaAttribute = new MediaAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly NoHRefAttribute _noHRefAttribute = new NoHRefAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 )]
         private readonly AreaRelationAttribute _relationAttribute = new AreaRelationAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ShapeAttribute _shapeAttribute = new ShapeAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FormTargetAttribute _targetAttribute = new FormTargetAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 )]
         private readonly MIMETypeAttribute  _typeAttribute = new MIMETypeAttribute();
+
+
+
+
+        /// <summary>
+        /// Specifies that an area has no associated link
+        /// Not supported in HTML5
+        /// </summary>
+        public NoHRefAttribute NoHRef { get { return _noHRefAttribute; }}
 
 
         /// <summary>
