@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using HTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.AttributeDataTypes;
 
-namespace HTMLClassLibrary.Attributes.RubyAttributes
+namespace XHTMLClassLibrary.Attributes.RubyAttributes
 {
     public class RbSpanAttribute : BaseAttribute
     {

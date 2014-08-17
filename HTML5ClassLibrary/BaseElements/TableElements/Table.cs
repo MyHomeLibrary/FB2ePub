@@ -1,13 +1,13 @@
-﻿using HTMLClassLibrary.Attributes.FlaggedAttributes;
-using HTMLClassLibrary.BaseElements.BlockElements;
+﻿using XHTMLClassLibrary.Attributes.FlaggedAttributes;
+using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace HTMLClassLibrary.BaseElements.TableElements
+namespace XHTMLClassLibrary.BaseElements.TableElements
 {
     /// <summary>
     /// The table element is used to define a table. 
     /// A table is a construct where data is organized into rows and columns of cells.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "table", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    [HTMLItemAttribute(ElementName = "table", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Table : HTMLItem, IBlockElement
     {
         public Table()

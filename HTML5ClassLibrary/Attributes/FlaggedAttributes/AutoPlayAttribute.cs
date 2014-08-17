@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace HTMLClassLibrary.Attributes.FlaggedAttributes
+namespace XHTMLClassLibrary.Attributes.FlaggedAttributes
 {
     public class AutoPlayAttribute : BaseFlagAttribute
     {

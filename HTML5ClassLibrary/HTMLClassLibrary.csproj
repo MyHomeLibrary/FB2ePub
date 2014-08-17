@@ -7,8 +7,8 @@
     <ProjectGuid>{E596A296-1C1A-42B7-8482-B7B0E95B82D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HTMLClassLibrary</RootNamespace>
-    <AssemblyName>HTMLClassLibrary</AssemblyName>
+    <RootNamespace>XHTMLClassLibrary</RootNamespace>
+    <AssemblyName>XHTMLClassLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -72,6 +72,7 @@
     <Compile Include="Attributes\AbbreviatedAttribute.cs" />
     <Compile Include="Attributes\AcceptAttribute.cs" />
     <Compile Include="Attributes\AcceptCharsetsAttribute.cs" />
+    <Compile Include="Attributes\ALinkAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\FormEvents\FormEvents.cs" />
     <Compile Include="Attributes\AttributeGroups\FormEvents\OnContextMenuAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\FormEvents\OnFormChangeEventAttribute.cs" />
@@ -143,6 +144,12 @@
     <Compile Include="Attributes\AttributeGroups\WindowEventAttributes\OnResizeEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\WindowEventAttributes\OnStorageEventAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\WindowEventAttributes\OnUndoEventAttrinute.cs" />
+    <Compile Include="Attributes\BackGroundAttribute.cs" />
+    <Compile Include="Attributes\BackgroundColorAttribute.cs" />
+    <Compile Include="Attributes\BiDirectionalAlignAttribute.cs" />
+    <Compile Include="Attributes\ColorAttribute.cs" />
+    <Compile Include="Attributes\CodeAttribute.cs" />
+    <Compile Include="Attributes\FaceAttribute.cs" />
     <Compile Include="Attributes\FlaggedAttributes\AutoFocusAttribute.cs" />
     <Compile Include="Attributes\FlaggedAttributes\AutoPlayAttribute.cs" />
     <Compile Include="Attributes\AxisAttribute.cs" />
@@ -198,6 +205,7 @@
     <Compile Include="Attributes\FlaggedAttributes\BaseFlagAttribute.cs" />
     <Compile Include="Attributes\FlaggedAttributes\ChallengeAttribute.cs" />
     <Compile Include="Attributes\FlaggedAttributes\CheckedAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\CompactAttribute.cs" />
     <Compile Include="Attributes\FlaggedAttributes\DeclareAttribute.cs" />
     <Compile Include="Attributes\FlaggedAttributes\DefaultAttribute.cs" />
     <Compile Include="Attributes\FlaggedAttributes\DeferAttribute.cs" />
@@ -225,6 +233,7 @@
     <Compile Include="Attributes\HrefAttribute.cs" />
     <Compile Include="Attributes\HRefLanguageAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\HTMLGlobalAttributes.cs" />
+    <Compile Include="Attributes\HSpaceAttribute.cs" />
     <Compile Include="Attributes\HTTPEquivAttribute.cs" />
     <Compile Include="Attributes\IconAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\IdAttribute.cs" />
@@ -233,6 +242,7 @@
     <Compile Include="Attributes\KeyTypeAttribute.cs" />
     <Compile Include="Attributes\LabelAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\LanguageAttribute.cs" />
+    <Compile Include="Attributes\LinkAttribute.cs" />
     <Compile Include="Attributes\LinkRelationAttribute.cs" />
     <Compile Include="Attributes\ListAttribute.cs" />
     <Compile Include="Attributes\LongDescriptionAttribute.cs" />
@@ -251,6 +261,7 @@
     <Compile Include="Attributes\MutedAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\NoValidateAttribute.cs" />
+    <Compile Include="Attributes\ObjectAttribute.cs" />
     <Compile Include="Attributes\OpenAttribute.cs" />
     <Compile Include="Attributes\OptimumAttribute.cs" />
     <Compile Include="Attributes\OrderedListStartAttribute.cs" />
@@ -287,6 +298,7 @@
     <Compile Include="Attributes\SummaryAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\TabIndexAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\TitleAttribute.cs" />
+    <Compile Include="Attributes\TextColorAttribute.cs" />
     <Compile Include="Attributes\TNameAttribute.cs" />
     <Compile Include="Attributes\TrackKindAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\TranslateAttribute.cs" />
@@ -294,6 +306,8 @@
     <Compile Include="Attributes\VAlignAttribute.cs" />
     <Compile Include="Attributes\ValueAttribute.cs" />
     <Compile Include="Attributes\ValueTypeAttribute.cs" />
+    <Compile Include="Attributes\VLinkAttribute.cs" />
+    <Compile Include="Attributes\VSpaceAttribute.cs" />
     <Compile Include="Attributes\WidthAttribute.cs" />
     <Compile Include="Attributes\WrapAttribute.cs" />
     <Compile Include="Attributes\XmlNSAttribue.cs" />
@@ -320,6 +334,12 @@
     <Compile Include="BaseElements\BlockElements\Main.cs" />
     <Compile Include="BaseElements\BlockElements\Nav.cs" />
     <Compile Include="BaseElements\BlockElements\NoScript.cs" />
+    <Compile Include="BaseElements\InlineElements\Applet.cs" />
+    <Compile Include="BaseElements\InlineElements\BaseFont.cs" />
+    <Compile Include="BaseElements\InlineElements\TextBasedElements\Acronym.cs" />
+    <Compile Include="BaseElements\InlineElements\TextBasedElements\BigText.cs" />
+    <Compile Include="BaseElements\InlineElements\TextBasedElements\Center.cs" />
+    <Compile Include="BaseElements\ListElements\DirectoryList.cs" />
     <Compile Include="BaseElements\ListElements\OrderedList.cs" />
     <Compile Include="BaseElements\BlockElements\Paragraph.cs" />
     <Compile Include="BaseElements\BlockElements\Section.cs" />

@@ -1,37 +1,84 @@
 ﻿using System.Collections.Generic;
-using System.Xml.Linq;
-using HTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
+using XHTMLClassLibrary.BaseElements;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.MediaEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.MediaEvents
 {
     public class MediaEvents
     {
-        private readonly OnMediaAbortEventAttribute _onAbortEventAttribute = new OnMediaAbortEventAttribute();  
-        private readonly OnMediaCanPlayEventAttribute _onCanPlayEventAttribute = new OnMediaCanPlayEventAttribute();  
-        private readonly OnMediaCanPlayThroughEventAttribute _onCanPlayThroughEventAttribute = new OnMediaCanPlayThroughEventAttribute();  
-        private readonly OnMediaDurationChangeEventAttribute _onDurationChangeEventAttribute = new OnMediaDurationChangeEventAttribute(); 
-        private readonly OnMediaEmptiedEventAttribute _onEmptiedEventAttribute = new OnMediaEmptiedEventAttribute(); 
-        private readonly OnMediaEndedEventAttribute _onEndedEventAttribute = new OnMediaEndedEventAttribute(); 
-        private readonly OnMediaErrorEventAttribute _onMediaErrorEventAttribute = new OnMediaErrorEventAttribute(); 
-        private readonly OnMediaLoadedDataEventAttribute _onMediaLoadedDataEventAttribute = new OnMediaLoadedDataEventAttribute(); 
-        private readonly OnMediaLoadedMetadateEventAttribute _onMediaLoadedMetadateEventAttribute = new OnMediaLoadedMetadateEventAttribute(); 
-        private readonly OnMediaLoadStartEventAttribute _onMediaLoadStartEventAttribute = new OnMediaLoadStartEventAttribute(); 
-        private readonly OnMediaPauseEventAttribute _onMediaPauseEventAttribute = new OnMediaPauseEventAttribute(); 
-        private readonly OnMediaPlayEventAtrribute _onMediaPlayEventAtrribute = new OnMediaPlayEventAtrribute(); 
-        private readonly OnMediaPlayingEventAttribute _onMediaPlayingEventAttribute = new OnMediaPlayingEventAttribute(); 
-        private readonly OnMediaProgressEventAttribute _onMediaProgressEventAttribute = new OnMediaProgressEventAttribute(); 
-        private readonly OnMediaRateChangeEventAttribute _onMediaRateChangeEventAttribute = new OnMediaRateChangeEventAttribute(); 
-        private readonly OnMediaReadyStateChangeEventAttribute _onMediaReadyStateChangeEventAttribute = new OnMediaReadyStateChangeEventAttribute(); //global
-        private readonly OnMediaSeekedEventAttribute _onMediaSeekedEventAttribute = new OnMediaSeekedEventAttribute(); 
-        private readonly OnMediaSeekingEventAttribute _onMediaSeekingEventAttribute = new OnMediaSeekingEventAttribute();
-        private readonly OnMediaStalledEventAttribute _onMediaStalledEventAttribute = new OnMediaStalledEventAttribute(); 
-        private readonly OnMediaSuspendEventAttribute _onMediaSuspendEventAttribute = new OnMediaSuspendEventAttribute(); 
-        private readonly OnMediaTimeUpdateEventAttribute _onMediaTimeUpdateEventAttribute = new OnMediaTimeUpdateEventAttribute(); 
-        private readonly OnMediaVolumeChangeEventAttribute _onMediaVolumeChangeEventAttribute = new OnMediaVolumeChangeEventAttribute(); 
-        private readonly OnMediaWaitingEventAttribute _onMediaWaitingEventAttribute = new OnMediaWaitingEventAttribute(); 
-        private readonly OnMediaCueChangeEventAttribute _onMediaCueChangeEventAttribute = new OnMediaCueChangeEventAttribute();
-        private readonly OnMediaCancelEventAttribute _onMediaCancelEventAttribute = new OnMediaCancelEventAttribute(); 
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnMediaAbortEventAttribute _onAbortEventAttribute = new OnMediaAbortEventAttribute();
 
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaCanPlayEventAttribute _onCanPlayEventAttribute = new OnMediaCanPlayEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaCanPlayThroughEventAttribute _onCanPlayThroughEventAttribute = new OnMediaCanPlayThroughEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaDurationChangeEventAttribute _onDurationChangeEventAttribute = new OnMediaDurationChangeEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaEmptiedEventAttribute _onEmptiedEventAttribute = new OnMediaEmptiedEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaEndedEventAttribute _onEndedEventAttribute = new OnMediaEndedEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaErrorEventAttribute _onMediaErrorEventAttribute = new OnMediaErrorEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaLoadedDataEventAttribute _onMediaLoadedDataEventAttribute = new OnMediaLoadedDataEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaLoadedMetadateEventAttribute _onMediaLoadedMetadateEventAttribute = new OnMediaLoadedMetadateEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaLoadStartEventAttribute _onMediaLoadStartEventAttribute = new OnMediaLoadStartEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaPauseEventAttribute _onMediaPauseEventAttribute = new OnMediaPauseEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaPlayEventAtrribute _onMediaPlayEventAtrribute = new OnMediaPlayEventAtrribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaPlayingEventAttribute _onMediaPlayingEventAttribute = new OnMediaPlayingEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaProgressEventAttribute _onMediaProgressEventAttribute = new OnMediaProgressEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaRateChangeEventAttribute _onMediaRateChangeEventAttribute = new OnMediaRateChangeEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaReadyStateChangeEventAttribute _onMediaReadyStateChangeEventAttribute = new OnMediaReadyStateChangeEventAttribute(); //global
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaSeekedEventAttribute _onMediaSeekedEventAttribute = new OnMediaSeekedEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaSeekingEventAttribute _onMediaSeekingEventAttribute = new OnMediaSeekingEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaStalledEventAttribute _onMediaStalledEventAttribute = new OnMediaStalledEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaSuspendEventAttribute _onMediaSuspendEventAttribute = new OnMediaSuspendEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaTimeUpdateEventAttribute _onMediaTimeUpdateEventAttribute = new OnMediaTimeUpdateEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaVolumeChangeEventAttribute _onMediaVolumeChangeEventAttribute = new OnMediaVolumeChangeEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaWaitingEventAttribute _onMediaWaitingEventAttribute = new OnMediaWaitingEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaCueChangeEventAttribute _onMediaCueChangeEventAttribute = new OnMediaCueChangeEventAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnMediaCancelEventAttribute _onMediaCancelEventAttribute = new OnMediaCancelEventAttribute(); 
 
 
 

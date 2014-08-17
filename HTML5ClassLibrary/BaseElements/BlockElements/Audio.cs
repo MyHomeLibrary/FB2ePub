@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.FlaggedAttributes;
-using HTMLClassLibrary.BaseElements.InlineElements;
+﻿using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
+using XHTMLClassLibrary.BaseElements.InlineElements;
 
-namespace HTMLClassLibrary.BaseElements.BlockElements
+namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// The "audio" tag defines sound, such as music or other audio streams.
@@ -15,49 +11,72 @@ namespace HTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "audio", SupportedStandards = HTMLElementType.HTML5)]
     public class Audio : HTMLItem, IBlockElement
     {
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SourceAttribute _src = new SourceAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly AutoPlayAttribute _autoplay = new AutoPlayAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly ControlsAttribute _controls = new ControlsAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly LoopAttribute  _loop = new LoopAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MutedAttribute _muted = new MutedAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly PreloadAttribute _preload = new PreloadAttribute();
 
-        public Audio ()
-        {
-            RegisterAttribute(_src);
-            RegisterAttribute(_autoplay);
-            RegisterAttribute(_controls);
-            RegisterAttribute(_loop);
-            RegisterAttribute(_muted);
-            RegisterAttribute(_preload);
 
-        }
 
+        /// <summary>
+        /// Specifies the URL of the audio file
+        /// </summary>
         public SourceAttribute Src
         {
             get { return _src; }
         }
 
+        /// <summary>
+        /// Specifies that the audio will start playing as soon as it is ready
+        /// </summary>
         public AutoPlayAttribute AutoPlay
         {
             get { return _autoplay; }
         }
 
+
+        /// <summary>
+        /// Specifies that audio controls should be displayed (such as a play/pause button etc)
+        /// </summary>
         public ControlsAttribute Controls
         {
             get { return _controls; }    
         }
 
+
+        /// <summary>
+        /// Specifies that the audio will start over again, every time it is finished
+        /// </summary>
         public LoopAttribute Loop
         {
             get { return _loop; }
         }
 
+
+        /// <summary>
+        /// Specifies that the audio output should be muted
+        /// </summary>
         public MutedAttribute Muted
         {
             get { return _muted; }
         }
 
+        /// <summary>
+        /// Specifies if and how the author thinks the audio should be loaded when the page loads
+        /// </summary>
         public PreloadAttribute Preload
         {
             get { return _preload; }

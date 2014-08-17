@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.FlaggedAttributes;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
-namespace HTMLClassLibrary.BaseElements.Structure_Header
+namespace XHTMLClassLibrary.BaseElements.Structure_Header
 {
     /// <summary>
     /// The style element can contain CSS rules (called embedded CSS) or 
     /// a URL that leads to a file containing CSS rules (called external CSS).
     /// </summary>
-    [HTMLItemAttribute(ElementName = "style", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    [HTMLItemAttribute(ElementName = "style", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Style : HTMLItem
     {
         public Style()

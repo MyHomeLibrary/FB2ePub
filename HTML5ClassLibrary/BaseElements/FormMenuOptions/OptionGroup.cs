@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.FlaggedAttributes;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements.FormMenuOptions
+namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
 {
     /// <summary>
     /// The "optgroup" element is used to group the choices offered in select form controls. 
     /// Users find it easier to work with long lists if related sections are grouped together. 
     /// </summary>
-    [HTMLItemAttribute(ElementName = "optgroup", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    [HTMLItemAttribute(ElementName = "optgroup", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class OptionGroup : HTMLItem, IOptionItem
     {
         public OptionGroup()

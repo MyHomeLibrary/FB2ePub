@@ -1,16 +1,21 @@
 ﻿using System.Collections.Generic;
-using System.Xml.Linq;
+using XHTMLClassLibrary.BaseElements;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents
 {
     /// <summary>
     /// 
     /// </summary>
     public class KeyboardEvents
     {
-        private readonly OnKeyDownEventAttribute _onKeyDownEventAttribute = new OnKeyDownEventAttribute(); // global
-        private readonly OnKeyPressEventAttribute _onKeyPressEventAttribute = new OnKeyPressEventAttribute(); // global
-        private readonly OnKeyUpEventAttribute _onKeyUpEventAttribute = new OnKeyUpEventAttribute(); // global
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnKeyDownEventAttribute _onKeyDownEventAttribute = new OnKeyDownEventAttribute(); 
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnKeyPressEventAttribute _onKeyPressEventAttribute = new OnKeyPressEventAttribute(); 
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnKeyUpEventAttribute _onKeyUpEventAttribute = new OnKeyUpEventAttribute(); 
 
 
 

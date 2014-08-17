@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.BaseElements.BlockElements;
-using HTMLClassLibrary.BaseElements.ObjectParameters;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.BaseElements.BlockElements;
+using XHTMLClassLibrary.BaseElements.ObjectParameters;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The object element provides a generic way of embedding objects such as images, 
@@ -16,7 +16,7 @@ namespace HTMLClassLibrary.BaseElements.InlineElements
     /// Besides "param" elements, the object element can contain alternate content which can be text or another object element. 
     /// Alternate content serves as a fall-back mechanism for browsers that are unable to process the embedded object.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "object", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]    
+    [HTMLItemAttribute(ElementName = "object", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]    
     public class ObjectElm : HTMLItem, IInlineItem
     {
         public ObjectElm()

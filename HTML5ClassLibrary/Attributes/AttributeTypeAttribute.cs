@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using HTMLClassLibrary.BaseElements;
+using XHTMLClassLibrary.BaseElements;
 
-namespace HTMLClassLibrary.Attributes
+namespace XHTMLClassLibrary.Attributes
 {
     /// <summary>
     /// This is a class marking any member as HTML attribute and providing some properties like name etc

@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.BaseElements.BlockElements;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.BaseElements.BlockElements;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The ins element is used to mark up content that has been inserted into the current version of a document. 
     /// The ins element indicates that content in the previous version of the document has been changed, 
     /// and that the changes are found inside the ins element.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "ins", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "ins", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 |  HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class InsertedText : HTMLItem, IInlineItem, IBlockElement
     {
 

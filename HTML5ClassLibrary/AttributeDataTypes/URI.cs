@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HTMLClassLibrary.AttributeDataTypes
+namespace XHTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     /// A Uniform Resource Identifier reference. URI can be an Internet address. 

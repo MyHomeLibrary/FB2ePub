@@ -1,28 +1,24 @@
-﻿using HTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements.Structure_Header
+namespace XHTMLClassLibrary.BaseElements.Structure_Header
 {
     /// <summary>
     /// To resolve relative URLs, Web browsers will use the base URL from where the Web page was downloaded. 
     /// In some circumstances, it is necessary to instruct the Web browser to use a different base URL, 
     /// in which case the base element is used.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "base", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "base", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Base : HTMLItem
     {
-        public Base()
-        {
-            RegisterAttribute(_hrefAttribute);
-            RegisterAttribute(_targetAttribute);
-        }
-
-        // Basic attributes
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly HrefAttribute _hrefAttribute = new HrefAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FormTargetAttribute _targetAttribute = new FormTargetAttribute();
 
 

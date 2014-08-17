@@ -1,13 +1,13 @@
 ﻿using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The "q" tag defines a short quotation.
     /// Browsers normally insert quotation marks around the quotation
     /// </summary>
-    [HTMLItemAttribute(ElementName = "q", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    [HTMLItemAttribute(ElementName = "q", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class ShortQuote : TextBasedElement
     {
         public ShortQuote()

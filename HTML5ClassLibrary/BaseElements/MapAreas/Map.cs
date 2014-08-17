@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.BaseElements.BlockElements;
-using HTMLClassLibrary.BaseElements.InlineElements;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.BaseElements.BlockElements;
+using XHTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements.MapAreas
+namespace XHTMLClassLibrary.BaseElements.MapAreas
 {
     /// <summary>
     /// The map element specifies a client-side image map that may be referenced by elements such as img, select and object.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "map", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "map", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Map : HTMLItem, IInlineItem
     {
         public Map()

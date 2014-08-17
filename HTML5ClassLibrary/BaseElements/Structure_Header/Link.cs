@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes;
 
 
-namespace HTMLClassLibrary.BaseElements.Structure_Header
+namespace XHTMLClassLibrary.BaseElements.Structure_Header
 {
     /// <summary>
     /// The link element conveys relationship information that can be used by Web browsers and search engines. 
     /// You can have multiple link elements that link to different resources or describe different relationships. 
     /// The link elements can be contained in the head element.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "link", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
+    [HTMLItemAttribute(ElementName = "link", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
     public class Link : HTMLItem
     {
         public Link()

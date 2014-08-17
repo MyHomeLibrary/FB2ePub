@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using HTMLClassLibrary.BaseElements.Structure_Header;
+using XHTMLClassLibrary.BaseElements.Structure_Header;
 
-namespace HTMLClassLibrary.Attributes
+namespace XHTMLClassLibrary.Attributes
 {
     /// <summary>
     /// The keytype attribute specifies a key type to be used.

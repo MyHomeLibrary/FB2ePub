@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using ISOLanguages;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
 {
     /// <summary>
     /// The lang attribute specifies the language of the element's content.

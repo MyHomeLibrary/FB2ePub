@@ -1,4 +1,4 @@
-﻿namespace HTMLClassLibrary.AttributeDataTypes
+﻿namespace XHTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     /// A character encoding. For example, UTF-8 or ISO-8859-1.

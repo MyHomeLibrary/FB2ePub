@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HTMLClassLibrary.AttributeDataTypes
+namespace XHTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     ///     Comma separated list of coordinates to use in defining areas. For example: 0,0,118,28.

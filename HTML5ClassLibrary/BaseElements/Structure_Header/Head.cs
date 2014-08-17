@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTMLClassLibrary.BaseElements.BlockElements;
-using Script = HTMLClassLibrary.BaseElements.InlineElements.Script;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using XHTMLClassLibrary.BaseElements.BlockElements;
+using Script = XHTMLClassLibrary.BaseElements.InlineElements.Script;
 
-namespace HTMLClassLibrary.BaseElements.Structure_Header
+namespace XHTMLClassLibrary.BaseElements.Structure_Header
 {
     /// <summary>
     /// The head element contains information about the current document, such as its title, 
@@ -16,7 +16,7 @@ namespace HTMLClassLibrary.BaseElements.Structure_Header
     /// and other data that is not considered to be document content. 
     /// This information is usually not displayed by browsers.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "head", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "head", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Head : HTMLItem
     {
 

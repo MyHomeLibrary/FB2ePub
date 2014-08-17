@@ -1,4 +1,4 @@
-﻿namespace HTMLClassLibrary.BaseElements.BlockElements
+﻿namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
     /// specifies that element is a "block" - able to hold other "block" elements

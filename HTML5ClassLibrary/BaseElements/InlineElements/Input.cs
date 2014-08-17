@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
-using HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTMLClassLibrary.Attributes.Events;
-using HTMLClassLibrary.Attributes.FlaggedAttributes;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
+using XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using XHTMLClassLibrary.Attributes.Events;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The "input" tag specifies an input field where the user can enter data.
     /// "input" elements are used within a "form" element to declare input controls that allow users to input data.
     /// An input field can vary in many ways, depending on the type attribute.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "input", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
+    [HTMLItemAttribute(ElementName = "input", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
     public class Input : HTMLItem, IInlineItem
     {
         public Input()

@@ -1,4 +1,4 @@
-﻿namespace HTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
+﻿namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     /// <summary>
     /// The "figcaption" tag defines a caption for a "figure" element.

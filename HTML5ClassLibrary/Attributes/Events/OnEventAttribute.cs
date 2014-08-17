@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using HTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.AttributeDataTypes;
 
-namespace HTMLClassLibrary.Attributes.Events
+namespace XHTMLClassLibrary.Attributes.Events
 {
     /// <summary>
     /// Defines base class for event attribute

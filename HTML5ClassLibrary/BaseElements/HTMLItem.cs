@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
-using HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTMLClassLibrary.Attributes.AttributeGroups.MediaEvents;
-using HTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
+using XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using XHTMLClassLibrary.Attributes.AttributeGroups.MediaEvents;
+using XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using XHTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements
+namespace XHTMLClassLibrary.BaseElements
 {
     /// <summary>
     /// A base class for any HTML item

@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.BaseElements.InlineElements;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements.Legends
+namespace XHTMLClassLibrary.BaseElements.Legends
 {
     /// <summary>
     /// The legend element is a caption to a fieldset element.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "legend", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
+    [HTMLItemAttribute(ElementName = "legend", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
     public class Legend : HTMLItem
     {
 

@@ -2,7 +2,7 @@
 using System.Xml.Linq;
 
 
-namespace HTMLClassLibrary.BaseElements
+namespace XHTMLClassLibrary.BaseElements
 {
     public interface ISimpleText : IHTMLItem
     {

@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.BaseElements.BlockElements;
-using HTMLClassLibrary.BaseElements.InlineElements;
-using HTMLClassLibrary.Exceptions;
+using XHTMLClassLibrary.BaseElements.BlockElements;
+using XHTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.Exceptions;
 
-namespace HTMLClassLibrary.BaseElements.ListElements
+namespace XHTMLClassLibrary.BaseElements.ListElements
 {
     /// <summary>
     /// The dd element is a definition description for an item in a definition list.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "dd", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+    [HTMLItemAttribute(ElementName = "dd", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class DefinitionDescription : HTMLItem 
     {
         protected override bool IsValidSubType(IHTMLItem item)

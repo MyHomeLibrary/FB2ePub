@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace HTMLClassLibrary.BaseElements
+namespace XHTMLClassLibrary.BaseElements
 {
     public enum TextStyles
     {

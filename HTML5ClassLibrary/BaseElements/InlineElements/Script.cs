@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using HTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using HTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using HTMLClassLibrary.Attributes.Events;
-using HTMLClassLibrary.Attributes.FlaggedAttributes;
-using HTMLClassLibrary.BaseElements.BlockElements;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
+using XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
+using XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
+using XHTMLClassLibrary.Attributes.Events;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
+using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace HTMLClassLibrary.BaseElements.InlineElements
+namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
     /// <summary>
     /// The script element places a client-side script, such as JavaScript, within a document. 
@@ -18,7 +18,7 @@ namespace HTMLClassLibrary.BaseElements.InlineElements
     /// The script element may contain a script (called an embedded script) or 
     /// point via the src attribute to a file containing a script (an external script).
     /// </summary>
-    [HTMLItemAttribute(ElementName = "script", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+    [HTMLItemAttribute(ElementName = "script", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Script : HTMLItem, IInlineItem, IBlockElement
     {
         private readonly SimpleHTML5Text _scriptText = new SimpleHTML5Text();

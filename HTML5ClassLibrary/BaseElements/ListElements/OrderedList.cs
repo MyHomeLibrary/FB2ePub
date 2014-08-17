@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
-using HTMLClassLibrary.Attributes;
-using HTMLClassLibrary.Attributes.FlaggedAttributes;
-using HTMLClassLibrary.BaseElements.BlockElements;
+using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
+using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace HTMLClassLibrary.BaseElements.ListElements
+namespace XHTMLClassLibrary.BaseElements.ListElements
 {
     /// <summary>
     /// The ol element is used to create ordered lists. 
     /// An ordered list is a grouping of items whose sequence in the list is important. 
     /// For example, the sequence of steps in a recipe is important if the result is to be the intended one.
     /// </summary>
-    [HTMLItemAttribute(ElementName = "ol", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]    
+    [HTMLItemAttribute(ElementName = "ol", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]    
     public class OrderedList : HTMLItem, IBlockElement
     {
         public OrderedList()

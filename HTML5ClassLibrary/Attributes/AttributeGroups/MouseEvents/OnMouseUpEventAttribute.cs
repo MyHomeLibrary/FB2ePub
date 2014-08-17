@@ -1,7 +1,7 @@
 ﻿
-using HTMLClassLibrary.Attributes.Events;
+using XHTMLClassLibrary.Attributes.Events;
 
-namespace HTMLClassLibrary.Attributes.AttributeGroups.MouseEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents
 {
     /// <summary>
     /// The onmouseup attribute fires when a mouse button is released over the element.

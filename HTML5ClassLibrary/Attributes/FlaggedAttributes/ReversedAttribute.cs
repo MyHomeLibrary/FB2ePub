@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HTMLClassLibrary.Attributes.FlaggedAttributes
+namespace XHTMLClassLibrary.Attributes.FlaggedAttributes
 {
     public class ReversedAttribute : BaseFlagAttribute
     {
