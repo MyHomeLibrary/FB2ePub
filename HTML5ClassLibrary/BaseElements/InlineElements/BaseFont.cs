@@ -3,7 +3,7 @@ using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
-    [HTMLItemAttribute(ElementName = "object", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]    
+    [HTMLItemAttribute(ElementName = "basefont", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]    
     public class BaseFont : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]

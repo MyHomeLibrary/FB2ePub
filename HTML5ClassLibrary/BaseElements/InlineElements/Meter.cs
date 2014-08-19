@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Exceptions;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
@@ -15,25 +11,25 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "meter", SupportedStandards = HTMLElementType.HTML5 )]
     public class Meter : HTMLItem, IInlineItem
     {
-        public Meter()
-        {
-            RegisterAttribute(_formIdAttribute);
-            RegisterAttribute(_highAttribute);
-            RegisterAttribute(_lowAttribute);
-            RegisterAttribute(_maxAttribute);
-            RegisterAttribute(_minAttribute);
-            RegisterAttribute(_openAttribute);
-            RegisterAttribute(_meterValueAttribute);
-
-            TextContent = new SimpleHTML5Text();
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly HighAttribute _highAttribute = new HighAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly LowAttribute _lowAttribute = new LowAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MaxAttribute _maxAttribute = new MaxAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MinAttribute _minAttribute = new MinAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly OptimumAttribute _openAttribute = new OptimumAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MeterValueAttribute _meterValueAttribute = new MeterValueAttribute(); 
 
 

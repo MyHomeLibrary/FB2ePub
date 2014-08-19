@@ -10,13 +10,20 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
     [HTMLItemAttribute(ElementName = "li", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class ListItem : HTMLItem 
     {
-        public ListItem()
-        {
-            RegisterAttribute(_valueAttribute);
-        }
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private ListItemTypeAtttribute _listItemTypeAtttribute = new ListItemTypeAtttribute();
 
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ValueAttribute _valueAttribute = new ValueAttribute();
 
+
+
+
+        /// <summary>
+        ///  Specifies which kind of bullet point will be used
+        /// Not supported in HTML5.
+        /// </summary>
+        public ListItemTypeAtttribute Type { get { return _listItemTypeAtttribute; }}
 
         /// <summary>
         /// Specifies the value of a list item. 

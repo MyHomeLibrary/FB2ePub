@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Linq;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using Script = XHTMLClassLibrary.BaseElements.InlineElements.Script;
 
@@ -19,6 +14,15 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     [HTMLItemAttribute(ElementName = "head", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Head : HTMLItem
     {
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ProfileAttribute _profileAttribute = new ProfileAttribute();
+
+
+        /// <summary>
+        /// Specifies a URL to a document that contains a set of rules. The rules can be read by browsers to clearly understand the information in the <meta> tag's content attribute
+        /// Not supported in HTML5.
+        /// </summary>
+        public ProfileAttribute Profile { get { return _profileAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

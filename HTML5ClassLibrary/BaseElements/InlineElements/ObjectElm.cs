@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.ObjectParameters;
 using XHTMLClassLibrary.Exceptions;
@@ -19,47 +20,125 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "object", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]    
     public class ObjectElm : HTMLItem, IInlineItem
     {
-        public ObjectElm()
-        {
-            RegisterAttribute(_heightAttribute);
-            RegisterAttribute(_nameAttribute);
-            RegisterAttribute(_contentTypeAttribute);
-            RegisterAttribute(_widthAttribute);
-            RegisterAttribute(_formIdAttribute);
-            RegisterAttribute(_dataAttribute);
-            RegisterAttribute(_mimeTypeAttribute);
-            RegisterAttribute(_useMapAttribute);
-           
-        }
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly AlignAttribute _alignAttribute = new AlignAttribute();
 
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ArchiveAttribute _archiveAttribute = new ArchiveAttribute();
 
-        private readonly HeightAttribute _heightAttribute = new HeightAttribute();
-        private readonly NameAttribute _nameAttribute = new NameAttribute();
-        private readonly ContentTypeAttribute _contentTypeAttribute = new ContentTypeAttribute();
-        private readonly WidthAttribute _widthAttribute = new WidthAttribute();
-        private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly BorderAttribute _borderAttribute = new BorderAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ClassIDAttribute _classIDAttribute = new ClassIDAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly CodeBaseAttribute _codeBaseAttribute = new CodeBaseAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly CodeTypeAttribute _codeTypeAttribute = new CodeTypeAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly DataAttribute _dataAttribute = new DataAttribute();
-        private readonly MIMETypeAttribute _mimeTypeAttribute= new MIMETypeAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly DeclareAttribute _declareAttribute = new DeclareAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly HeightAttribute _heightAttribute = new HeightAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly HSpaceAttribute _hSpaceAttribute = new HSpaceAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly NameAttribute _nameAttribute = new NameAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly StandByAttribute _standByAttribute = new StandByAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly MIMETypeAttribute _mimeTypeAttribute = new MIMETypeAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly UseMapAttribute _useMapAttribute = new UseMapAttribute();
 
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly VSpaceAttribute _vSpaceAttribute = new VSpaceAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly WidthAttribute _widthAttribute = new WidthAttribute();
+
+
+
+
+
+        /// <summary>
+        ///  Specifies the alignment of the "object" element according to surrounding elements
+        /// Not supported in HTML5.
+        /// </summary>
+        public AlignAttribute Align { get { return _alignAttribute; }}
+
+
+        /// <summary>
+        /// A space separated list of URL's to archives. The archives contains resources relevant to the object
+        /// Not supported in HTML5.
+        /// </summary>
+        public ArchiveAttribute Archive { get { return _archiveAttribute; }}
+
+
+        /// <summary>
+        ///  Specifies the width of the border around an <object>
+        /// Not supported in HTML5.
+        /// </summary>
+        public BorderAttribute Border { get { return _borderAttribute; }}
+
+
+        /// <summary>
+        /// Defines a class ID value as set in the Windows Registry or a URL
+        /// Not supported in HTML5.
+        /// </summary>
+        public ClassIDAttribute ClassID { get { return _classIDAttribute; }}
+
+
+        /// <summary>
+        /// Defines where to find the code for the object
+        /// Not supported in HTML5.
+        /// </summary>
+        public CodeBaseAttribute CodeBase { get { return _codeBaseAttribute; }}
+
+
+        /// <summary>
+        /// The media type of the code referred to by the classid attribute
+        /// Not supported in HTML5.
+        /// </summary>
+        public CodeTypeAttribute CodeType { get { return _codeTypeAttribute; }}
 
         /// <summary>
         /// Object height.
         /// </summary>
         public HeightAttribute Height { get { return _heightAttribute; } }
 
+
+        /// <summary>
+        ///  Specifies the whitespace on left and right side of an object
+        /// Not supported in HTML5.
+        /// </summary>
+        public HSpaceAttribute HSpace { get { return _hSpaceAttribute; }}
+
         /// <summary>
         /// When the object is used as a form control, this attribute is the name of the form control.
         /// </summary>
         public NameAttribute Name { get { return _nameAttribute; } }
 
+
         /// <summary>
-        /// This attribute specifies the content type for the object. 
-        /// This attribute may be used with or without the data attribute. 
-        /// Most Web browsers use this attribute (instead of classid) to determine how to process the object. 
-        /// For example: application/x-shockwave-flash.
+        /// Defines a text to display while the object is loading
+        /// Not supported in HTML5.
         /// </summary>
-        public ContentTypeAttribute ContentType { get { return _contentTypeAttribute; } }
+        public StandByAttribute StandBy { get { return _standByAttribute; }}
 
         /// <summary>
         /// Object width.
@@ -80,6 +159,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
 
 
         /// <summary>
+        /// Defines that the object should only be declared, not created or instantiated until needed
+        /// Not supported in HTML5.
+        /// </summary>
+        public DeclareAttribute Declare { get { return _declareAttribute; }}
+
+
+        /// <summary>
         /// Specifies the MIME type of data specified in the data attribute
         /// </summary>
         public MIMETypeAttribute TabIndex { get { return _mimeTypeAttribute; } }
@@ -89,6 +175,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// The value of this attribute must match the id attribute of the map element.
         /// </summary>
         public UseMapAttribute UseMap { get { return _useMapAttribute; } }
+
+
+        /// <summary>
+        ///  Specifies the whitespace on top and bottom of an object
+        /// Not supported in HTML5.
+        /// </summary>
+        public VSpaceAttribute VSpace { get { return _vSpaceAttribute; }}
 
 
         protected override bool IsValidSubType(IHTMLItem item)

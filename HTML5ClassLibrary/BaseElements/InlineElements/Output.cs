@@ -14,15 +14,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "output", SupportedStandards = HTMLElementType.HTML5)]
     public class Output : HTMLItem, IInlineItem
     {
-        public Output()
-        {
-            RegisterAttribute(_forAttribute);
-            RegisterAttribute(_formIdAttribute);
-            RegisterAttribute(_nameAttribute);
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly OutputForAttribute _forAttribute = new OutputForAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly NameAttribute _nameAttribute = new NameAttribute();
 
 

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
-using XHTMLClassLibrary.Exceptions;
 
 namespace XHTMLClassLibrary.BaseElements.MapAreas
 {
@@ -15,16 +11,7 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
     [HTMLItemAttribute(ElementName = "map", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Map : HTMLItem, IInlineItem
     {
-        public Map()
-        {
-            RegisterAttribute(_nameAttribute);
-        }
-
-        /// <summary>
-        /// Internal content of the element
-        /// </summary>
-        private readonly List<IHTMLItem> _content = new List<IHTMLItem>();
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly NameAttribute _nameAttribute = new NameAttribute();
 
         /// <summary>

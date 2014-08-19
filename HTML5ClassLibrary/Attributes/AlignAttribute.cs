@@ -14,6 +14,10 @@ namespace XHTMLClassLibrary.Attributes
             Char,
         }
 
+        private Align _align = Align.Invalid;
+
+        private const string AttributeName = "align";
+
         public override string Value
         {
             get
@@ -61,9 +65,6 @@ namespace XHTMLClassLibrary.Attributes
         }
 
 
-        private Align _align = Align.Invalid;
-
-        private  const string AttributeName = "align";
 
         #region Overrides of BaseAttribute
 

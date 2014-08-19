@@ -14,21 +14,22 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "keygen", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
     public class Keygen : HTMLItem, IInlineItem
     {
-        public Keygen()
-        {
-            RegisterAttribute(_autoFocusAttribute);
-            RegisterAttribute(_challengeAttribute);
-            RegisterAttribute(_disabledAttribute);
-            RegisterAttribute(_formIdAttribute);
-            RegisterAttribute(_keyTypeAttribute);
-            RegisterAttribute(_nameAttribute);
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly AutoFocusAttribute _autoFocusAttribute = new AutoFocusAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly ChallengeAttribute _challengeAttribute = new ChallengeAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly KeyTypeAttribute _keyTypeAttribute = new KeyTypeAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly NameAttribute _nameAttribute = new NameAttribute();
 
 

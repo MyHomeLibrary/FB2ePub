@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
-using XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using XHTMLClassLibrary.Attributes.AttributeGroups.MediaEvents;
-using XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using XHTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
 
 namespace XHTMLClassLibrary.BaseElements.Structure_Header
 {
@@ -19,19 +10,20 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     [HTMLItemAttribute(ElementName = "meta", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Meta : HTMLItem
     {
-        public Meta()
-        {
-            RegisterAttribute(_contentAttribute);
-            RegisterAttribute(_nameAttribute);
-            RegisterAttribute(_httpEqvAttribute);
-            RegisterAttribute(_charsetAttribute);
-        }
-
-        private readonly ContentAttribute _contentAttribute = new ContentAttribute();
-        private readonly TokenNameAttribute _nameAttribute = new TokenNameAttribute();
-        private readonly HTTPEquivAttribute _httpEqvAttribute = new HTTPEquivAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
 
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ContentAttribute _contentAttribute = new ContentAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly HTTPEquivAttribute _httpEqvAttribute = new HTTPEquivAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TokenNameAttribute _nameAttribute = new TokenNameAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly SchemeAttribute _schemeAttribute = new SchemeAttribute();
 
 
 
@@ -50,6 +42,13 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// The property's value.
         /// </summary>
         public ContentAttribute Content { get { return _contentAttribute; } }
+
+
+        /// <summary>
+        /// Specifies a scheme to be used to interpret the value of the content attribute
+        /// Not supported in HTML5.
+        /// </summary>
+        public SchemeAttribute Scheme { get { return _schemeAttribute; }}
 
 
         /// <summary>
