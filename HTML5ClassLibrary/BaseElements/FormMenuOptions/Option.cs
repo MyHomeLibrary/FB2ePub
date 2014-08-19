@@ -13,25 +13,17 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
     [HTMLItemAttribute(ElementName = "option", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Option : HTMLItem, IOptionItem
     {
-        public Option()
-        {
-            RegisterAttribute(_selectedAttribute);
-            RegisterAttribute(_valueAttribute);
-            RegisterAttribute(_disabledAttribute);
-            RegisterAttribute(_labelAttribute);
-        }
-
-        private readonly SimpleHTML5Text _optionText = new SimpleHTML5Text();
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SelectedAttribute  _selectedAttribute = new SelectedAttribute();
-        private readonly ValueAttribute _valueAttribute = new ValueAttribute();
-        private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
-        private readonly LabelAttribute _labelAttribute = new LabelAttribute();
 
-        /// <summary>
-        /// The script text itself
-        /// </summary>
-        public SimpleHTML5Text OptionText { get { return _optionText; } }
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ValueAttribute _valueAttribute = new ValueAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly LabelAttribute _labelAttribute = new LabelAttribute();
 
 
         /// <summary>

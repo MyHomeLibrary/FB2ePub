@@ -16,18 +16,27 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
     [HTMLItemAttribute(ElementName = "ol", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]    
     public class OrderedList : HTMLItem, IBlockElement
     {
-        public OrderedList()
-        {
-            RegisterAttribute(_reversedAttribute);
-            RegisterAttribute(_orderedListStartAttribute);
-            RegisterAttribute(_orderedListTypeAttribute);
-        }
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly CompactAttribute _compactAttribute = new CompactAttribute();
 
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly ReversedAttribute _reversedAttribute = new ReversedAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly OrderedListStartAttribute _orderedListStartAttribute = new OrderedListStartAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly OrderedListTypeAttribute _orderedListTypeAttribute = new OrderedListTypeAttribute();
 
 
+
+
+
+        /// <summary>
+        ///  Specifies that the list should render smaller than normal
+        /// Not supported in HTML5.
+        /// </summary>
+        public CompactAttribute Compact { get { return _compactAttribute; }}
 
         /// <summary>
         /// Specifies the start value of an ordered list

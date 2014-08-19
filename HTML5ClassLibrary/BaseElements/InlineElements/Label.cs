@@ -21,19 +21,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
    [HTMLItemAttribute(ElementName = "label", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Label : HTMLItem, IInlineItem
     {
-
-        public Label()
-        {
-            RegisterAttribute(_forAttribute);
-            RegisterAttribute(_formIdAttribute);
-        }
-
-        /// <summary>
-        /// Internal content of the element
-        /// </summary>
-        private readonly List<IHTMLItem> _content = new List<IHTMLItem>();
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ForAttribute _forAttribute = new ForAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
 
 

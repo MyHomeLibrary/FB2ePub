@@ -13,25 +13,28 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "menuitem", SupportedStandards = HTMLElementType.HTML5 )]
     public class MenuItem : HTMLItem, IInlineItem
     {
-        public MenuItem()
-        {
-            RegisterAttribute(_checkedAttribute);
-            RegisterAttribute(_disabledAttribute);
-            RegisterAttribute(_labelAttribute);
-            RegisterAttribute(_commandAttribute);
-            RegisterAttribute(_defaultAttribute);
-            RegisterAttribute(_iconAttribute);
-            RegisterAttribute(_radioGroupAttribute);
-            RegisterAttribute(_menuItemTypeAttribute);
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly CheckedAttribute _checkedAttribute = new CheckedAttribute();
-        private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
-        private readonly LabelAttribute _labelAttribute = new LabelAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly CommandAttribute _commandAttribute = new CommandAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly DefaultAttribute _defaultAttribute = new DefaultAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly IconAttribute _iconAttribute = new IconAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly LabelAttribute _labelAttribute = new LabelAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly RadioGroupAttribute _radioGroupAttribute = new RadioGroupAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MenuItemTypeAttribute _menuItemTypeAttribute = new MenuItemTypeAttribute();
 
         /// <summary>

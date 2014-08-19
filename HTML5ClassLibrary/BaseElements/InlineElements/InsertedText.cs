@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
-using XHTMLClassLibrary.Exceptions;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
@@ -16,20 +11,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "ins", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 |  HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class InsertedText : HTMLItem, IInlineItem, IBlockElement
     {
-
-        public InsertedText()
-        {
-            RegisterAttribute(_cite);
-            RegisterAttribute(_datetime);
-        }
-
-        /// <summary>
-        /// Internal content of the element
-        /// </summary>
-        private readonly List<IHTMLItem> _content = new List<IHTMLItem>();
-
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CiteAttribute _cite = new CiteAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly DateTimeAttribute _datetime = new DateTimeAttribute();
 
         /// <summary>
@@ -74,11 +59,6 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         public override bool IsValid()
         {
             return true;
-        }
-
-        public override List<IHTMLItem> SubElements()
-        {
-            return _content;
         }
     }
 }

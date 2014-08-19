@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using XHTMLClassLibrary.Attributes;
 
@@ -15,28 +13,41 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     [HTMLItemAttribute(ElementName = "link", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
     public class Link : HTMLItem
     {
-        public Link()
-        {
-            RegisterAttribute(_hrefAttribute);
-            RegisterAttribute(_mediaAttribute);
-            RegisterAttribute(_typeAttribute);
-            RegisterAttribute(_sizesAttribute);
-            RegisterAttribute(_hrefLangAttribute);
-            RegisterAttribute(_relAttribute);          
-        }
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
 
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly HrefAttribute _hrefAttribute = new HrefAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly HRefLanguageAttribute _hrefLangAttribute = new HRefLanguageAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly MediaAttribute _mediaAttribute = new MediaAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly LinkRelationAttribute _relAttribute = new LinkRelationAttribute();
-        private readonly MIMETypeAttribute _typeAttribute = new MIMETypeAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ReverseRelationAttribute _reverseRelationAttribute = new ReverseRelationAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SizesAttribute _sizesAttribute = new SizesAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly MIMETypeAttribute _typeAttribute = new MIMETypeAttribute();
 
 
         public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
         #region public_properties
 
+
+        /// <summary>
+        /// Specifies the character encoding of the linked document
+        /// Not supported in HTML5.
+        /// </summary>
+        public CharsetAttribute Charset { get { return _charsetAttribute; }}
 
         /// <summary>
         /// Specifies the primary language of the resource designated by href and may only be used when href is specified.
@@ -48,6 +59,13 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// The value of this attribute is a space-separated list of link types.
         /// </summary>
         public LinkRelationAttribute Relation { get { return _relAttribute; } }
+
+
+        /// <summary>
+        /// Specifies the relationship between the linked document and the current document
+        /// Not supported in HTML5.
+        /// </summary>
+        public ReverseRelationAttribute Rev { get { return _reverseRelationAttribute; }}
 
         /// <summary>
         /// This attribute specifies the location of a Web resource.

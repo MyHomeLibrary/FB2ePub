@@ -10,7 +10,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     /// The "header>" tag specifies a header for a document or section.
     /// The "header>" element should be used as a container for introductory content or set of navigational links.
     /// You can have several "header>" elements in one document. 
-    /// Note: A "header>" tag cannot be placed within a "footer", "address" or another "header" element.
+    /// Note: A "header" tag cannot be placed within a "footer", "address" or another "header" element.
     /// </summary>
     [HTMLItemAttribute(ElementName = "header", SupportedStandards = HTMLElementType.HTML5)]    
     public class Header : HTMLItem, IBlockElement

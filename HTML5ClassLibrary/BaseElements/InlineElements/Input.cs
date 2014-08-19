@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
-using XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using XHTMLClassLibrary.Attributes.Events;
 using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
@@ -20,77 +12,95 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "input", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
     public class Input : HTMLItem, IInlineItem
     {
-        public Input()
-        {
-            RegisterAttribute(_altAttribute);
-            RegisterAttribute(_autocompleteAttribute);
-            RegisterAttribute(_autoFocusAttribute);
-            RegisterAttribute(_nameAttribute);
-            RegisterAttribute(_pattern);
-            RegisterAttribute(_placeHolderAttribute);
-            RegisterAttribute(_checkedAttribute);
-            RegisterAttribute(_maxLenghtAttribute);
-            RegisterAttribute(_minAttribute);
-            RegisterAttribute(_multipleAttribute);
-            RegisterAttribute(_sizeAttribute);
-            RegisterAttribute(_inputTypeAttribute);
-            RegisterAttribute(_valueAttribute);
-            RegisterAttribute(_acceptAttribute);
-            RegisterAttribute(_disabledAttribute);
-            RegisterAttribute(_formIdAttribute);
-            RegisterAttribute(_formActionAttribute);
-            RegisterAttribute(_formEncodingTypeAttribute);
-            RegisterAttribute(_formNoValidateAttribute);
-            RegisterAttribute(_formTargetAttribute);
-            RegisterAttribute(_formMethodAttribute);
-            RegisterAttribute(_heightAttribute);
-            RegisterAttribute(_widthAttribute);
-            RegisterAttribute(_listAttribute);
-            RegisterAttribute(_maxAttribute);
-            RegisterAttribute(_isMapAttribute);
-            RegisterAttribute(_onChange);
-            RegisterAttribute(_onSelect);
-            RegisterAttribute(_readonlyAttribute);
-            RegisterAttribute(_requiredAttribute);
-            RegisterAttribute(_srcAttribute);
-            RegisterAttribute(_stepAttribute);
-            RegisterAttribute(_useMapAttribute);
-            
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly AcceptAttribute _acceptAttribute = new AcceptAttribute();
+
+         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly BiDirectionalAlignAttribute _alignAttribute = new BiDirectionalAlignAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly AltAttribute _altAttribute = new AltAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly AutocompleteAttribute _autocompleteAttribute = new AutocompleteAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly AutoFocusAttribute _autoFocusAttribute = new AutoFocusAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CheckedAttribute _checkedAttribute = new CheckedAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormActionAttribute _formActionAttribute = new FormActionAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormEncodingTypeAttribute _formEncodingTypeAttribute = new FormEncodingTypeAttribute();
-        private readonly FormNoValidateAttribute _formNoValidateAttribute = new FormNoValidateAttribute();
-        private readonly FormTargetAttribute _formTargetAttribute = new FormTargetAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormMethodAttribute _formMethodAttribute = new FormMethodAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FormNoValidateAttribute _formNoValidateAttribute = new FormNoValidateAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FormTargetAttribute _formTargetAttribute = new FormTargetAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly HeightAttribute _heightAttribute = new HeightAttribute();
-        private readonly WidthAttribute _widthAttribute = new WidthAttribute();   
+      
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]     
         private readonly ListAttribute _listAttribute = new ListAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MaxAttribute _maxAttribute = new MaxAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MaxLengthAttribute _maxLenghtAttribute = new MaxLengthAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MinAttribute _minAttribute = new MinAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MultipleAttribute _multipleAttribute = new MultipleAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly NameAttribute _nameAttribute = new NameAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly PatternAttribute _pattern = new PatternAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly PlaceHolderAttribute _placeHolderAttribute = new PlaceHolderAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ReadOnlyAttribute _readonlyAttribute = new ReadOnlyAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly RequiredAttribute _requiredAttribute = new RequiredAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SizeAttribute _sizeAttribute = new SizeAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SourceAttribute _srcAttribute = new SourceAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly StepAttribute _stepAttribute = new StepAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly InputTypeAttribute _inputTypeAttribute = new InputTypeAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ValueAttribute _valueAttribute = new ValueAttribute();
-        private readonly ISMapAttribute _isMapAttribute = new ISMapAttribute();
-        private readonly OnChangeEventAttribute _onChange = new OnChangeEventAttribute();
-        private readonly OnSelectEventAttribute _onSelect = new OnSelectEventAttribute();
-        private readonly UseMapAttribute _useMapAttribute = new UseMapAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly WidthAttribute _widthAttribute = new WidthAttribute();
 
 
         /// <summary>
@@ -189,6 +199,14 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         public AcceptAttribute Accept { get { return _acceptAttribute; } }
 
 
+
+        /// <summary>
+        ///  Specifies the alignment of an image input (only for type="image")
+        /// Not supported in HTML5.
+        /// </summary>
+        public BiDirectionalAlignAttribute Align { get { return _alignAttribute; }}
+
+
         /// <summary>
         /// Disables the control for user input. Possible value is disabled.
         /// </summary>
@@ -250,22 +268,6 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         public MaxAttribute Max { get { return _maxAttribute; }}
 
         /// <summary>
-        /// If present, this attribute specifies that a server-side image map should be used. Possible value is ismap.
-        /// </summary>
-        public ISMapAttribute ISMap { get { return _isMapAttribute; } }
-
-        /// <summary>
-        /// A client-side script event that occurs when a control loses the input focus and its value is modified prior
-        /// to its next receiving focus
-        /// </summary>
-        public OnChangeEventAttribute OnChange { get { return _onChange; } }
-
-        /// <summary>
-        /// A client-side script event that occurs when a user selects some text in a text field.
-        /// </summary>
-        public OnSelectEventAttribute OnSelect { get { return _onSelect; } }
-
-        /// <summary>
         /// If present, this attribute prohibits changes to the value in the control. 
         /// Possible value is "readonly".
         /// </summary>
@@ -286,12 +288,6 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// Specifies the legal number intervals for an input field
         /// </summary>
         public StepAttribute Step { get { return _stepAttribute; }}
-
-        /// <summary>
-        /// When the type attribute has the value image, this attribute associates the image to a client-side image map defined by a map element. 
-        /// The value of this attribute must match the id attribute of the map element.
-        /// </summary>
-        public UseMapAttribute UseMap { get { return _useMapAttribute; } }
 
 
         /// <summary>
