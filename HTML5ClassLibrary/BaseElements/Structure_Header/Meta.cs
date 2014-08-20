@@ -13,8 +13,8 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ContentAttribute _contentAttribute = new ContentAttribute();
+        [AttributeTypeAttributeMember(Name = "content", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _contentAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly HTTPEquivAttribute _httpEqvAttribute = new HTTPEquivAttribute();
@@ -41,7 +41,7 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// <summary>
         /// The property's value.
         /// </summary>
-        public ContentAttribute Content { get { return _contentAttribute; } }
+        public TextValueAttribute Content { get { return _contentAttribute; } }
 
 
         /// <summary>

@@ -22,8 +22,8 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagAttribute _disabledAttribute = new FlagAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LabelAttribute _labelAttribute = new LabelAttribute();
+        [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _labelAttribute = new TextValueAttribute();
 
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         /// <summary>
         /// Shorter label.
         /// </summary>
-        public LabelAttribute Label { get { return _labelAttribute; } }
+        public TextValueAttribute Label { get { return _labelAttribute; } }
 
 
         public override bool IsValid()

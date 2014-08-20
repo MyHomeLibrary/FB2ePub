@@ -12,13 +12,13 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     public class TableData : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "abbr", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AbbreviatedAttribute _abbreviatedAttribute = new AbbreviatedAttribute();
+        private readonly TextValueAttribute _abbreviatedAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly AlignAttribute _alignAttribute = new AlignAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AxisAttribute _axisAttribute = new AxisAttribute();
+        [AttributeTypeAttributeMember(Name = "axis", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _axisAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly BackgroundColorAttribute _backgroundColorAttribute = new BackgroundColorAttribute();
@@ -59,7 +59,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// Specifies an abbreviated version of the content in a cell
         /// Not supported in HTML5.
         /// </summary>
-        public AbbreviatedAttribute Abbr { get { return _abbreviatedAttribute; } }
+        public TextValueAttribute Abbr { get { return _abbreviatedAttribute; } }
 
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// Categorizes cells
         /// Not supported in HTML5.
         /// </summary>
-        public AxisAttribute Axis { get { return _axisAttribute; }}
+        public TextValueAttribute Axis { get { return _axisAttribute; }}
 
 
         /// <summary>

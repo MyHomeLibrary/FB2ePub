@@ -9,8 +9,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
         private readonly ColorAttribute _colorAttribute = new ColorAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly FaceAttribute _faceAttribute = new FaceAttribute();
+        [AttributeTypeAttributeMember(Name = "face", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _faceAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
         private readonly SizeAttribute _sizeAttribute = new SizeAttribute();
@@ -24,7 +24,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the default font for text in a document
         /// </summary>
-        public FaceAttribute Face { get { return _faceAttribute; }}
+        public TextValueAttribute Face { get { return _faceAttribute; }}
 
 
         /// <summary>

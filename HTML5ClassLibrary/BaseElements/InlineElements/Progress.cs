@@ -15,8 +15,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "progress", SupportedStandards = HTMLElementType.HTML5)]
     public class Progress: HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MaxAttribute _maxAttribute = new MaxAttribute();
+        [AttributeTypeAttributeMember(Name = "max", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TextValueAttribute _maxAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MeterValueAttribute _valueAttribute = new MeterValueAttribute();
@@ -25,7 +25,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies how much work the task requires in total
         /// </summary>
-        public MaxAttribute Max { get { return _maxAttribute; }}
+        public TextValueAttribute Max { get { return _maxAttribute; }}
 
         /// <summary>
         /// Specifies how much of the task has been completed

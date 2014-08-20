@@ -18,8 +18,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
         private readonly BiDirectionalAlignAttribute _alignAttribute = new BiDirectionalAlignAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly AltAttribute _altAttribute = new AltAttribute();
+        [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _altAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
         private readonly ArchiveAttribute _archiveAttribute = new ArchiveAttribute();
@@ -86,7 +86,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies an alternate text for an applet
         /// </summary>
-        public AltAttribute Alt { get { return _altAttribute; }}
+        public TextValueAttribute Alt { get { return _altAttribute; }}
 
         /// <summary>
         /// Specifies the alignment of an applet according to surrounding elements

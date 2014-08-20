@@ -44,15 +44,15 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
         
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SpellCheckAttribute _spellCheckAttribute = new SpellCheckAttribute();
-        
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly StyleAttribute _styleAttribute = new StyleAttribute();
+
+        [AttributeTypeAttributeMember(Name = "style", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _styleAttribute = new TextValueAttribute();
         
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly TabIndexAttribute _tabIndexAttribute = new TabIndexAttribute();
-        
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TitleAttribute _titleAttribute = new TitleAttribute();
+
+        [AttributeTypeAttributeMember(Name = "title", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _titleAttribute = new TextValueAttribute();
         
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly TranslateAttribute _translateAttribute = new TranslateAttribute();
@@ -122,7 +122,7 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
         /// <summary>
         /// Specifies an inline CSS style for an element
         /// </summary>
-        public StyleAttribute Style { get { return _styleAttribute; }}
+        public TextValueAttribute Style { get { return _styleAttribute; }}
 
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
         /// <summary>C:\Project\GoogleCode\fb2epub\HTML5ClassLibrary\Attributes\XMLSpaceAttribute.cs
         /// Specifies extra information about an element
         /// </summary>
-        public TitleAttribute Title { get { return _titleAttribute; }}
+        public TextValueAttribute Title { get { return _titleAttribute; }}
 
 
         /// <summary>

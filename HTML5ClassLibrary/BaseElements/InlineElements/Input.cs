@@ -18,8 +18,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
          [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly BiDirectionalAlignAttribute _alignAttribute = new BiDirectionalAlignAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AltAttribute _altAttribute = new AltAttribute();
+        [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _altAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly AutocompleteAttribute _autocompleteAttribute = new AutocompleteAttribute();
@@ -57,8 +57,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]     
         private readonly ListAttribute _listAttribute = new ListAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MaxAttribute _maxAttribute = new MaxAttribute();
+        [AttributeTypeAttributeMember(Name = "max", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TextValueAttribute _maxAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MaxLengthAttribute _maxLenghtAttribute = new MaxLengthAttribute();
@@ -106,7 +106,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Alternate text for controls of the type image.
         /// </summary>
-        public AltAttribute Alt
+        public TextValueAttribute Alt
         {
             get { return _altAttribute; }
         }
@@ -265,7 +265,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the maximum value for an "input" element
         /// </summary>
-        public MaxAttribute Max { get { return _maxAttribute; }}
+        public TextValueAttribute Max { get { return _maxAttribute; }}
 
         /// <summary>
         /// If present, this attribute prohibits changes to the value in the control. 

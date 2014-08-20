@@ -17,8 +17,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(Name = "default", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagAttribute _defaultAttribute = new FlagAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LabelAttribute _labelAttribute = new LabelAttribute();
+        [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TextValueAttribute _labelAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SourceAttribute _sourceAttribute = new SourceAttribute();
@@ -48,7 +48,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the title of the text track
         /// </summary>
-        public LabelAttribute Label { get { return _labelAttribute; }}
+        public TextValueAttribute Label { get { return _labelAttribute; }}
 
         /// <summary>
         /// Specifies that the track is to be enabled if the user's preferences do not indicate that another track would be more appropriate

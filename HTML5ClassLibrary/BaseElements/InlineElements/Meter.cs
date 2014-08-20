@@ -20,8 +20,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly LowAttribute _lowAttribute = new LowAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MaxAttribute _maxAttribute = new MaxAttribute();
+        [AttributeTypeAttributeMember(Name = "max", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TextValueAttribute _maxAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MinAttribute _minAttribute = new MinAttribute();
@@ -51,7 +51,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the maximum value of the range
         /// </summary>
-        public MaxAttribute Max { get { return _maxAttribute; }}
+        public TextValueAttribute Max { get { return _maxAttribute; }}
 
         /// <summary>
         /// Specifies the minimum value of the range

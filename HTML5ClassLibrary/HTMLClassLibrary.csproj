@@ -69,7 +69,6 @@
     <Compile Include="AttributeDataTypes\Text.cs" />
     <Compile Include="AttributeDataTypes\URI.cs" />
     <Compile Include="AttributeDataTypes\URIs.cs" />
-    <Compile Include="Attributes\AbbreviatedAttribute.cs" />
     <Compile Include="Attributes\AcceptAttribute.cs" />
     <Compile Include="Attributes\AcceptCharsetsAttribute.cs" />
     <Compile Include="Attributes\ALinkAttribute.cs" />
@@ -77,7 +76,6 @@
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\AccessKeyAttribute.cs" />
     <Compile Include="Attributes\ActionAttribute.cs" />
     <Compile Include="Attributes\AlignAttribute.cs" />
-    <Compile Include="Attributes\AltAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\AnyDataAttribute.cs" />
     <Compile Include="Attributes\ArchiveAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\KeyboardEvents.cs" />
@@ -92,8 +90,6 @@
     <Compile Include="Attributes\BiDirectionalAlignAttribute.cs" />
     <Compile Include="Attributes\ColorAttribute.cs" />
     <Compile Include="Attributes\CodeAttribute.cs" />
-    <Compile Include="Attributes\FaceAttribute.cs" />
-    <Compile Include="Attributes\AxisAttribute.cs" />
     <Compile Include="Attributes\BaseAttribute.cs" />
     <Compile Include="Attributes\BorderAttribute.cs" />
     <Compile Include="Attributes\ButtonTypeAttribute.cs" />
@@ -109,8 +105,6 @@
     <Compile Include="Attributes\CodeTypeAttribute.cs" />
     <Compile Include="Attributes\ColsAttribute.cs" />
     <Compile Include="Attributes\ColSpanAttribute.cs" />
-    <Compile Include="Attributes\CommandAttribute.cs" />
-    <Compile Include="Attributes\ContentAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\ContentEditableAttribute.cs" />
     <Compile Include="Attributes\ContentTypeAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\ContextMenuAttribute.cs" />
@@ -147,7 +141,6 @@
     <Compile Include="Attributes\InputTypeAttribute.cs" />
     <Compile Include="Attributes\ISMapAttribute.cs" />
     <Compile Include="Attributes\KeyTypeAttribute.cs" />
-    <Compile Include="Attributes\LabelAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\LanguageAttribute.cs" />
     <Compile Include="Attributes\LinkAttribute.cs" />
     <Compile Include="Attributes\LinkRelationAttribute.cs" />
@@ -159,7 +152,6 @@
     <Compile Include="Attributes\ManifestAttribute.cs" />
     <Compile Include="Attributes\MarginHeightAttribute.cs" />
     <Compile Include="Attributes\MarginWidthAttribute.cs" />
-    <Compile Include="Attributes\MaxAttribute.cs" />
     <Compile Include="Attributes\MaxLengthAttribute.cs" />
     <Compile Include="Attributes\MediaAttribute.cs" />
     <Compile Include="Attributes\MenuItemTypeAttribute.cs" />
@@ -205,11 +197,10 @@
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\SpellCheckAttribute.cs" />
     <Compile Include="Attributes\StandByAttribute.cs" />
     <Compile Include="Attributes\StepAttribute.cs" />
-    <Compile Include="Attributes\AttributeGroups\HTMLGlobal\StyleAttribute.cs" />
     <Compile Include="Attributes\SummaryAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\TabIndexAttribute.cs" />
-    <Compile Include="Attributes\AttributeGroups\HTMLGlobal\TitleAttribute.cs" />
     <Compile Include="Attributes\TextColorAttribute.cs" />
+    <Compile Include="Attributes\TextValueAttribute.cs" />
     <Compile Include="Attributes\TNameAttribute.cs" />
     <Compile Include="Attributes\TrackKindAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobal\TranslateAttribute.cs" />
