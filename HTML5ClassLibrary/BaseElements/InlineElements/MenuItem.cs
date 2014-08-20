@@ -13,17 +13,17 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "menuitem", SupportedStandards = HTMLElementType.HTML5 )]
     public class MenuItem : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly CheckedAttribute _checkedAttribute = new CheckedAttribute();
+        [AttributeTypeAttributeMember(Name = "checked", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _checkedAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly CommandAttribute _commandAttribute = new CommandAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly DefaultAttribute _defaultAttribute = new DefaultAttribute();
+        [AttributeTypeAttributeMember(Name = "default", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _defaultAttribute = new FlagAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+        [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _disabledAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly IconAttribute _iconAttribute = new IconAttribute();
@@ -40,12 +40,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies that the command/menu item should be checked when the page loads. Only for type="radio" or type="checkbox"
         /// </summary>
-        public CheckedAttribute Checked { get { return _checkedAttribute; }}
+        public FlagAttribute Checked { get { return _checkedAttribute; }}
 
         /// <summary>
         /// Specifies that the command/menu item should be disabled
         /// </summary>
-        public DisabledAttribute Disabled { get { return _disabledAttribute; }}
+        public FlagAttribute Disabled { get { return _disabledAttribute; }}
 
         /// <summary>
         /// Required. Specifies the name of the command/menu item, as shown to the user
@@ -61,7 +61,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Marks the command/menu item as being a default command
         /// </summary>
-        public DefaultAttribute Default { get { return _defaultAttribute; }}
+        public FlagAttribute Default { get { return _defaultAttribute; }}
 
         /// <summary>
         /// Specifies an icon for the command/menu item

@@ -12,23 +12,23 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "select", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]    
     public class Select : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly AutoFocusAttribute _autoFocusAttribute = new AutoFocusAttribute();
+        [AttributeTypeAttributeMember(Name = "autofocus", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _autoFocusAttribute = new FlagAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+        [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _disabledAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly MultipleAttribute _multipleAttribute = new MultipleAttribute();
+        [AttributeTypeAttributeMember(Name = "multiple", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _multipleAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly NameAttribute _nameAttribute = new NameAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly RequiredAttribute _requiredAttribute = new RequiredAttribute();
+        [AttributeTypeAttributeMember(Name = "required", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _requiredAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SizeAttribute _sizeAttribute = new SizeAttribute();
@@ -39,7 +39,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// If set, this attribute allows multiple selections. 
         /// Possible value is multiple.
         /// </summary>
-        public MultipleAttribute Multiple { get { return _multipleAttribute; } }
+        public FlagAttribute Multiple { get { return _multipleAttribute; } }
 
         /// <summary>
         /// Form control name.
@@ -56,12 +56,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// Disables the control for user input. 
         /// Possible value is disabled.
         /// </summary>
-        public DisabledAttribute Disabled { get { return _disabledAttribute; } }
+        public FlagAttribute Disabled { get { return _disabledAttribute; } }
 
         /// <summary>
         /// Specifies that the drop-down list should automatically get focus when the page loads
         /// </summary>
-        public AutoFocusAttribute Autofocus { get { return _autoFocusAttribute; }}
+        public FlagAttribute Autofocus { get { return _autoFocusAttribute; }}
 
         /// <summary>
         /// Defines one or more forms the select field belongs to
@@ -71,7 +71,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies that the user is required to select a value before submitting the form
         /// </summary>
-        public RequiredAttribute Required { get { return _requiredAttribute; }}
+        public FlagAttribute Required { get { return _requiredAttribute; }}
 
 
 

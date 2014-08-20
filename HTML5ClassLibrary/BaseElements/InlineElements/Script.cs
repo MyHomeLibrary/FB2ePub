@@ -14,14 +14,14 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "script", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Script : HTMLItem, IInlineItem, IBlockElement
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly AsyncAttribute _asyncAttribute = new AsyncAttribute();
+        [AttributeTypeAttributeMember(Name = "async", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _asyncAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly DeferAttribute _deferAttribute = new DeferAttribute();
+        [AttributeTypeAttributeMember(Name = "defer", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _deferAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SourceAttribute _srcAttribute = new SourceAttribute();
@@ -42,7 +42,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies that the script is executed asynchronously (only for external scripts)
         /// </summary>
-        public AsyncAttribute Async { get { return _asyncAttribute; }}
+        public FlagAttribute Async { get { return _asyncAttribute; }}
 
         /// <summary>
         /// This attribute specifies the scripting language of the element's contents. 
@@ -61,7 +61,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// permitting the Web browser to continue parsing and rendering the rest of the page. 
         /// Possible value is defer.
         /// </summary>
-        public DeferAttribute Defer { get { return _deferAttribute; } }
+        public FlagAttribute Defer { get { return _deferAttribute; } }
 
 
         public override bool IsValid()

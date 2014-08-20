@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.BaseElements;
 
 namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
@@ -32,8 +33,8 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly DropZoneAttribute _dropZoneAttribure = new DropZoneAttribute();
         
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly HiddenAttribute _hiddenAttribute = new HiddenAttribute();
+        [AttributeTypeAttributeMember(Name = "hidden", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _hiddenAttribute = new FlagAttribute();
         
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly IdAttribute _idAttribute = new IdAttribute();
@@ -101,7 +102,7 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
         /// <summary>
         /// Specifies that an element is not yet, or is no longer, relevant
         /// </summary>
-        public HiddenAttribute Hidden { get { return _hiddenAttribute; }}
+        public FlagAttribute Hidden { get { return _hiddenAttribute; }}
 
         /// <summary>
         /// Specifies a unique id for an element

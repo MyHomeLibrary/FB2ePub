@@ -24,14 +24,14 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly AutocompleteAttribute _autocompleteAttribute = new AutocompleteAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly AutoFocusAttribute _autoFocusAttribute = new AutoFocusAttribute();
+        [AttributeTypeAttributeMember(Name = "autofocus", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _autoFocusAttribute = new FlagAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CheckedAttribute _checkedAttribute = new CheckedAttribute();
+        [AttributeTypeAttributeMember(Name = "checked", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _checkedAttribute = new FlagAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+        [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _disabledAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
@@ -66,8 +66,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MinAttribute _minAttribute = new MinAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MultipleAttribute _multipleAttribute = new MultipleAttribute();
+        [AttributeTypeAttributeMember(Name = "multiple", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _multipleAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly NameAttribute _nameAttribute = new NameAttribute();
@@ -78,11 +78,11 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly PlaceHolderAttribute _placeHolderAttribute = new PlaceHolderAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ReadOnlyAttribute _readonlyAttribute = new ReadOnlyAttribute();
+        [AttributeTypeAttributeMember(Name = "readonly", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _readonlyAttribute = new FlagAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly RequiredAttribute _requiredAttribute = new RequiredAttribute();
+        [AttributeTypeAttributeMember(Name = "required", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _requiredAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SizeAttribute _sizeAttribute = new SizeAttribute();
@@ -122,7 +122,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies that an "input" element should automatically get focus when the page loads
         /// </summary>
-        public AutoFocusAttribute Autofocus
+        public FlagAttribute Autofocus
         {
             get { return _autoFocusAttribute; }
         }
@@ -149,7 +149,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// When the type attribute has the value radio or checkbox, 
         /// this attribute specifies that the radio/checkbox is selected.
         /// </summary>
-        public CheckedAttribute Checked
+        public FlagAttribute Checked
         {
             get { return _checkedAttribute; }
         }
@@ -172,7 +172,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies that a user can enter more than one value in an "input" element
         /// </summary>
-        public MultipleAttribute Multiple { get { return _multipleAttribute; }}
+        public FlagAttribute Multiple { get { return _multipleAttribute; }}
 
         /// <summary>
         /// This attribute tells the Web browser the initial width of the control. 
@@ -210,7 +210,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Disables the control for user input. Possible value is disabled.
         /// </summary>
-        public DisabledAttribute Disabled { get { return _disabledAttribute; } }
+        public FlagAttribute Disabled { get { return _disabledAttribute; } }
 
 
         /// <summary>
@@ -271,12 +271,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// If present, this attribute prohibits changes to the value in the control. 
         /// Possible value is "readonly".
         /// </summary>
-        public ReadOnlyAttribute ReadOnly { get { return _readonlyAttribute; } }
+        public FlagAttribute ReadOnly { get { return _readonlyAttribute; } }
 
         /// <summary>
         /// Specifies that an input field must be filled out before submitting the form
         /// </summary>
-        public RequiredAttribute Required { get { return _requiredAttribute; }}
+        public FlagAttribute Required { get { return _requiredAttribute; }}
 
         /// <summary>
         /// When the type attribute has the value image, 

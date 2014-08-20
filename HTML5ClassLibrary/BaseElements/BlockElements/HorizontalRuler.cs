@@ -15,8 +15,8 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly  AlignAttribute _alignAttribute = new AlignAttribute();
 
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-        private readonly NoShadeAttribute _noShadeAttribute = new NoShadeAttribute();
+        [AttributeTypeAttributeMember(Name = "noshade", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+        private readonly FlagAttribute _noShadeAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
         private readonly SizeAttribute _sizeAttribute = new SizeAttribute();
@@ -30,7 +30,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         ///  Specifies that a "hr" element should render in one solid color (noshaded), instead of a shaded color
         /// Not supported in HTML5.
         /// </summary>
-        public NoShadeAttribute NoShade { get { return _noShadeAttribute; }}
+        public FlagAttribute NoShade { get { return _noShadeAttribute; }}
 
 
         /// <summary>

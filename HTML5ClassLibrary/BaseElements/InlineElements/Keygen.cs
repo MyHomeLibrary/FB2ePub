@@ -14,14 +14,14 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "keygen", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
     public class Keygen : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly AutoFocusAttribute _autoFocusAttribute = new AutoFocusAttribute();
+        [AttributeTypeAttributeMember(Name = "autofocus", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _autoFocusAttribute = new FlagAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ChallengeAttribute _challengeAttribute = new ChallengeAttribute();
+        [AttributeTypeAttributeMember(Name = "challenge", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _challengeAttribute = new FlagAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+        [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _disabledAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
@@ -37,17 +37,17 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies that a "keygen" element should automatically get focus when the page loads
         /// </summary>
-        public AutoFocusAttribute Autofocus { get { return _autoFocusAttribute; }}
+        public FlagAttribute Autofocus { get { return _autoFocusAttribute; }}
 
         /// <summary>
         /// Specifies that the value of the "keygen" element should be challenged when submitted
         /// </summary>
-        public ChallengeAttribute Challenge { get { return _challengeAttribute; }}
+        public FlagAttribute Challenge { get { return _challengeAttribute; }}
 
         /// <summary>
         /// Specifies that a "keygen" element should be disabled
         /// </summary>
-        public DisabledAttribute Disable { get { return _disabledAttribute; }}
+        public FlagAttribute Disable { get { return _disabledAttribute; }}
 
         /// <summary>
         /// Specifies one or more forms the keygen element belongs to
