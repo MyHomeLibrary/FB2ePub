@@ -6,11 +6,9 @@ namespace XHTMLClassLibrary.Attributes.Events
     /// <summary>
     /// Defines base class for event attribute
     /// </summary>
-    public abstract class OnEventAttribute : BaseAttribute
+    public class OnEventAttribute : BaseAttribute
     {
         private Script _attrObject = new Script();
-
-        protected abstract string GetAttributeName();
 
         #region Overrides of BaseAttribute
 
