@@ -214,6 +214,7 @@
     <Compile Include="Attributes\FlaggedAttributes\MultipleAttribute.cs" />
     <Compile Include="Attributes\FlaggedAttributes\NoHRefAttribute.cs" />
     <Compile Include="Attributes\FlaggedAttributes\NoShadeAttribute.cs" />
+    <Compile Include="Attributes\FlaggedAttributes\NoWrapAttribute.cs" />
     <Compile Include="Attributes\FlaggedAttributes\ReadOnlyAttribute.cs" />
     <Compile Include="Attributes\FlaggedAttributes\RequiredAttribute.cs" />
     <Compile Include="Attributes\FlaggedAttributes\ReversedAttribute.cs" />
@@ -347,6 +348,8 @@
     <Compile Include="BaseElements\InlineElements\TextBasedElements\Acronym.cs" />
     <Compile Include="BaseElements\InlineElements\TextBasedElements\BigText.cs" />
     <Compile Include="BaseElements\InlineElements\TextBasedElements\Center.cs" />
+    <Compile Include="BaseElements\InlineElements\TextBasedElements\Teletext.cs" />
+    <Compile Include="BaseElements\InlineElements\TextBasedElements\Underlined.cs" />
     <Compile Include="BaseElements\ListElements\DirectoryList.cs" />
     <Compile Include="BaseElements\ListElements\OrderedList.cs" />
     <Compile Include="BaseElements\BlockElements\Paragraph.cs" />

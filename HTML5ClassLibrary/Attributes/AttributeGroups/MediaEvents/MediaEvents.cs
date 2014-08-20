@@ -228,39 +228,6 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups.MediaEvents
         /// </summary>
         public OnMediaCancelEventAttribute OnMediaCancelEvent { get { return _onMediaCancelEventAttribute; }}
 
-
-        /// <summary>
-        /// Add all attributes set to specified xElement
-        /// </summary>
-        /// <param name="attributesList"></param>
-        public void AddAttributes(List<IBaseAttribute> attributesList)
-        {
-            attributesList.Add(_onAbortEventAttribute);
-            attributesList.Add(_onCanPlayEventAttribute);
-            attributesList.Add(_onCanPlayThroughEventAttribute);
-            attributesList.Add(_onDurationChangeEventAttribute);
-            attributesList.Add(_onEmptiedEventAttribute);
-            attributesList.Add(_onEndedEventAttribute);
-            attributesList.Add(_onMediaErrorEventAttribute);
-            attributesList.Add(_onMediaLoadedDataEventAttribute);
-            attributesList.Add(_onMediaLoadedMetadateEventAttribute);
-            attributesList.Add(_onMediaLoadStartEventAttribute);
-            attributesList.Add(_onMediaPauseEventAttribute);
-            attributesList.Add(_onMediaPlayEventAtrribute);
-            attributesList.Add(_onMediaPlayingEventAttribute);
-            attributesList.Add(_onMediaProgressEventAttribute);
-            attributesList.Add(_onMediaRateChangeEventAttribute);
-            attributesList.Add(_onMediaReadyStateChangeEventAttribute);
-            attributesList.Add(_onMediaSeekedEventAttribute);
-            attributesList.Add(_onMediaSeekingEventAttribute);
-            attributesList.Add(_onMediaStalledEventAttribute);
-            attributesList.Add(_onMediaSuspendEventAttribute);
-            attributesList.Add(_onMediaTimeUpdateEventAttribute);
-            attributesList.Add(_onMediaVolumeChangeEventAttribute);
-            attributesList.Add(_onMediaWaitingEventAttribute);
-            attributesList.Add(_onMediaCueChangeEventAttribute);
-            attributesList.Add(_onMediaCancelEventAttribute);
-        }
-        
+      
     }
 }

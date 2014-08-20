@@ -9,16 +9,14 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
     [HTMLItemAttribute(ElementName = "source", SupportedStandards = HTMLElementType.HTML5)]
     public class Source : TextBasedElement
     {
-        public Source()
-        {
-            RegisterAttribute(_srcAttrib);
-            RegisterAttribute(_mediaAttrib);
-            RegisterAttribute(_mimeType);
-        }
-
-        private readonly SourceAttribute _srcAttrib = new SourceAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MediaAttribute _mediaAttrib = new MediaAttribute();
-        private  readonly MIMETypeAttribute _mimeType = new MIMETypeAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly MIMETypeAttribute _mimeType = new MIMETypeAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly SourceAttribute _srcAttrib = new SourceAttribute();
 
         public SourceAttribute Src
         {

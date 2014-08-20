@@ -15,27 +15,31 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "video", SupportedStandards = HTMLElementType.HTML5)]
     public class Video : HTMLItem, IBlockElement
     {
-        public Video()
-        {
-            RegisterAttribute(_autoplay);
-            RegisterAttribute(_controls);
-            RegisterAttribute(_heightAttribute);
-            RegisterAttribute(_loop);
-            RegisterAttribute(_muted);
-            RegisterAttribute(_posterAttribute);
-            RegisterAttribute(_preload);
-            RegisterAttribute(_src);
-            RegisterAttribute(_widthAttribute);
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly AutoPlayAttribute _autoplay = new AutoPlayAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly ControlsAttribute _controls = new ControlsAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly HeightAttribute _heightAttribute = new HeightAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly LoopAttribute _loop = new LoopAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MutedAttribute _muted = new MutedAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly  PosterAttribute _posterAttribute = new PosterAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly PreloadAttribute _preload = new PreloadAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SourceAttribute _src = new SourceAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly WidthAttribute _widthAttribute = new WidthAttribute();
 
 

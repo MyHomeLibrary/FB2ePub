@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.AttributeGroups.FormEvents;
-using XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using XHTMLClassLibrary.Attributes.Events;
-using XHTMLClassLibrary.Exceptions;
+﻿using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
@@ -70,11 +60,6 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         public override bool IsValid()
         {
             return true;
-        }
-
-        public override List<IHTMLItem> SubElements()
-        {
-            return _content;
         }
     }
 }

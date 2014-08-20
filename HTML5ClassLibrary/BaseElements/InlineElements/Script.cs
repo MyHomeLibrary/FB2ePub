@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal;
-using XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using XHTMLClassLibrary.Attributes.Events;
 using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
@@ -21,27 +14,25 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "script", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Script : HTMLItem, IInlineItem, IBlockElement
     {
-        private readonly SimpleHTML5Text _scriptText = new SimpleHTML5Text();
-
-        public Script()
-        {
-            RegisterAttribute(_srcAttribute);
-            RegisterAttribute(_contentTypeAttribute);
-            RegisterAttribute(_charsetAttribute);
-            RegisterAttribute(_deferAttribute);
-            RegisterAttribute(_asyncAttribute);
-        }
-   
-        private readonly SourceAttribute _srcAttribute = new SourceAttribute();
-        private readonly ContentTypeAttribute _contentTypeAttribute = new ContentTypeAttribute();
-        private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
-        private readonly DeferAttribute _deferAttribute = new DeferAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly AsyncAttribute _asyncAttribute = new AsyncAttribute();
 
-        /// <summary>
-        /// The script text itself
-        /// </summary>
-        public SimpleHTML5Text ScriptText { get { return _scriptText; } }
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly DeferAttribute _deferAttribute = new DeferAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly SourceAttribute _srcAttribute = new SourceAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ContentTypeAttribute _contentTypeAttribute = new ContentTypeAttribute();
+
+        // xml:space 	preserve 	Not supported in HTML5. Specifies whether whitespace in code should be preserved
+
+
+
 
         /// <summary>
         /// Location of an external script.

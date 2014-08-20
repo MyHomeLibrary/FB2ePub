@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using XHTMLClassLibrary.BaseElements;
+﻿using XHTMLClassLibrary.BaseElements;
 
 namespace XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents
 {
@@ -170,31 +169,5 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents
         /// </summary>
         public OnMouseOverEventAttribute OnMouseOverEvent { get { return _onMouseOverEventAttribute; }}
 
-
-        /// <summary>
-        /// Add all attributes set to specified xElement
-        /// </summary>
-        /// <param name="attributesList"></param>
-        public void AddAttributes(List<IBaseAttribute> attributesList)
-        {
-            attributesList.Add(_onClickEventAttribute);
-            attributesList.Add(_onDblClickEventAttribute);
-            attributesList.Add(_onDragEventAttribute);
-            attributesList.Add(_onDragEndEventAttribute);
-            attributesList.Add(_onDragEnterEventAttribute);
-            attributesList.Add(_onDragLeaveEventAttribute);
-            attributesList.Add(_onDragOverEventAttribute);
-            attributesList.Add(_onDragStartEventAttribute);
-            attributesList.Add(_onDropEventAttribute);
-            attributesList.Add(_onMouseDownEventAttribute);
-            attributesList.Add(_onMouseMoveEventAttribute);
-            attributesList.Add(_onMouseOutEventAttribute);
-            attributesList.Add(_onMouseUpEventAttribute);
-            attributesList.Add(_onMouseWheelEventAttribute);
-            attributesList.Add(_onScrollEventAttribute);
-            attributesList.Add(_onMouseEnterEventAttribute);
-            attributesList.Add(_onMouseLeaveEventAttribute);
-            attributesList.Add(_onMouseOverEventAttribute);
-        }
     }
 }

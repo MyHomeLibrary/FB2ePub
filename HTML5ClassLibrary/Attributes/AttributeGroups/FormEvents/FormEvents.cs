@@ -116,24 +116,5 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups.FormEvents
         /// </summary>
         public  OnToggleEventAttribute OnToggleEvent { get { return _onToggleEventAttribute; }}
 
-
-        /// <summary>
-        /// Add all attributes set to specified xElement
-        /// </summary>
-        public void AddAttributes(List<IBaseAttribute>  attributesList)
-        {
-            attributesList.Add(_onBlurEventAttribute);
-            attributesList.Add(_onChangeEventAttribute);
-            attributesList.Add(_onContextMenuAttribute);
-            attributesList.Add(_onFocusEventAttribute);
-            attributesList.Add(_onFormChangeEventAttribute);
-            attributesList.Add(_onFormInputEventAttribute);
-            attributesList.Add(_onInputEventAttribute);
-            attributesList.Add(_onInvalidEventAttribute);
-            attributesList.Add(_onSelectEventAttribute);
-            attributesList.Add(_onSubmitEventAttribute);
-            attributesList.Add(_onResetEventAttribute);
-            attributesList.Add(_onToggleEventAttribute);
-        }
     }
 }

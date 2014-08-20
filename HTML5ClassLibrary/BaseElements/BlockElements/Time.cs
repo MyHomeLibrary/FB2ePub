@@ -14,11 +14,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "time", SupportedStandards = HTMLElementType.HTML5)]
     public class Time : HTMLItem, IBlockElement
     {
-        public Time()
-        {
-            RegisterAttribute(_dateTimeAttribute);
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly DateTimeAttribute _dateTimeAttribute = new DateTimeAttribute();
 
 

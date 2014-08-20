@@ -140,30 +140,5 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups.HTMLGlobal
         /// </summary>
         public TranslateAttribute Translate { get { return _translateAttribute; }}
 
-
-        /// <summary>
-        /// Add all global attributes set to specified xElement
-        /// </summary>
-        /// <param name="attributesList"></param>
-        public void AddAttributes(List<IBaseAttribute> attributesList)
-        {
-            attributesList.Add(_accessKeyAttribute);
-            attributesList.Add(_classAttribute);
-            attributesList.Add(_contentEditableAttribute);
-            attributesList.Add(_contextMenuAttribute);
-            //attributesList.Add(_anyDataAttribute);
-            attributesList.Add(_directionAttribute);
-            attributesList.Add(_draggable);
-            attributesList.Add(_dropZoneAttribure);
-            attributesList.Add(_hiddenAttribute);
-            attributesList.Add(_idAttribute);
-            attributesList.Add(_languageAttribute);
-            attributesList.Add(_spellCheckAttribute);
-            attributesList.Add(_styleAttribute);
-            attributesList.Add(_tabIndexAttribute);
-            attributesList.Add(_titleAttribute);
-            attributesList.Add(_translateAttribute);
-        }
-
     }
 }

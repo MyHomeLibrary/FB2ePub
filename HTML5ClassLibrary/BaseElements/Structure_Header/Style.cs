@@ -11,19 +11,14 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     [HTMLItemAttribute(ElementName = "style", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Style : HTMLItem
     {
-        public Style()
-        {
-            RegisterAttribute(_mediaAttribute);
-            RegisterAttribute(_typeAttribute);
-            RegisterAttribute(_scopedAttribute);
-
-            TextContent = new SimpleHTML5Text();
-        }
-
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly MediaAttribute _mediaAttribute = new MediaAttribute();
-        private readonly ContentTypeAttribute _typeAttribute = new ContentTypeAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly ScopedAttribute _scopedAttribute = new ScopedAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ContentTypeAttribute _typeAttribute = new ContentTypeAttribute();
 
 
         /// <summary>
