@@ -6,10 +6,12 @@ namespace XHTMLClassLibrary.Attributes
     /// <summary>
     /// This is a class marking any member as HTML attribute and providing some properties like name etc
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field, Inherited = false)]
-    public sealed class AttributeTypeAttributeMember : Attribute
+    [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+    public class AttributeTypeAttributeMember : Attribute
     {
         private HTMLElementType _standard = HTMLElementType.UnknownType;
+        private string _attributeName = string.Empty;
+
         /// <summary>
         /// Mask containing set of standards element supports
         /// </summary>
@@ -17,6 +19,15 @@ namespace XHTMLClassLibrary.Attributes
         {
             get { return _standard; }
             set { _standard = value; }
+        }
+
+        /// <summary>
+        /// Name of the attribute as it apperars in XML
+        /// </summary>
+        public string Name
+        {
+            get { return _attributeName; }
+            set { _attributeName = value; }
         }
     }
 
