@@ -14,8 +14,8 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly MediaAttribute _mediaAttribute = new MediaAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ScopedAttribute _scopedAttribute = new ScopedAttribute();
+        [AttributeTypeAttributeMember(Name = "scoped", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _scopedAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ContentTypeAttribute _typeAttribute = new ContentTypeAttribute();
@@ -39,7 +39,7 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// <summary>
         /// Specifies that the styles only apply to this element's parent element and that element's child elements
         /// </summary>
-        public ScopedAttribute Scoped { get { return _scopedAttribute; }}
+        public FlagAttribute Scoped { get { return _scopedAttribute; }}
 
 
         public override bool IsValid()

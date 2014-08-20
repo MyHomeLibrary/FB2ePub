@@ -15,8 +15,8 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "video", SupportedStandards = HTMLElementType.HTML5)]
     public class Video : HTMLItem, IBlockElement
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly AutoPlayAttribute _autoplay = new AutoPlayAttribute();
+        [AttributeTypeAttributeMember(Name = "autoplay",SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _autoplay = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly ControlsAttribute _controls = new ControlsAttribute();
@@ -73,7 +73,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the video will start playing as soon as it is ready
         /// </summary>
-        public AutoPlayAttribute AutoPlay
+        public FlagAttribute AutoPlay
         {
             get { return _autoplay; }
         }

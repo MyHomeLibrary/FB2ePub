@@ -14,8 +14,8 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SourceAttribute _src = new SourceAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly AutoPlayAttribute _autoplay = new AutoPlayAttribute();
+        [AttributeTypeAttributeMember(Name = "autoplay", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _autoplay = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly ControlsAttribute _controls = new ControlsAttribute();
@@ -42,7 +42,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the audio will start playing as soon as it is ready
         /// </summary>
-        public AutoPlayAttribute AutoPlay
+        public FlagAttribute AutoPlay
         {
             get { return _autoplay; }
         }

@@ -11,7 +11,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     [HTMLItemAttribute(ElementName = "td", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class TableData : HTMLItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "abbr", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly AbbreviatedAttribute _abbreviatedAttribute = new AbbreviatedAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
@@ -38,8 +38,8 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly HeightAttribute _heightAttribute = new HeightAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NoWrapAttribute _noWrapAttribute = new NoWrapAttribute();
+        [AttributeTypeAttributeMember(Name = "nowrap", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _noWrapAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly RowSpanAttribute _rowSpanAttribue = new RowSpanAttribute();
@@ -59,7 +59,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// Specifies an abbreviated version of the content in a cell
         /// Not supported in HTML5.
         /// </summary>
-        public AbbreviatedAttribute Abbr { get { return _abbreviatedAttribute; }}
+        public AbbreviatedAttribute Abbr { get { return _abbreviatedAttribute; } }
 
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         ///  Specifies that the content inside a cell should not wrap
         /// Not supported in HTML5.
         /// </summary>
-        public NoWrapAttribute NoWrap { get { return _noWrapAttribute; }}
+        public FlagAttribute NoWrap { get { return _noWrapAttribute; }}
 
 
         /// <summary>

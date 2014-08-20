@@ -16,11 +16,11 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
     [HTMLItemAttribute(ElementName = "ol", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]    
     public class OrderedList : HTMLItem, IBlockElement
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CompactAttribute _compactAttribute = new CompactAttribute();
+        [AttributeTypeAttributeMember(Name = "compact", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _compactAttribute = new FlagAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ReversedAttribute _reversedAttribute = new ReversedAttribute();
+        [AttributeTypeAttributeMember(Name = "reversed", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _reversedAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly OrderedListStartAttribute _orderedListStartAttribute = new OrderedListStartAttribute();
@@ -36,7 +36,7 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         ///  Specifies that the list should render smaller than normal
         /// Not supported in HTML5.
         /// </summary>
-        public CompactAttribute Compact { get { return _compactAttribute; }}
+        public FlagAttribute Compact { get { return _compactAttribute; }}
 
         /// <summary>
         /// Specifies the start value of an ordered list
@@ -51,7 +51,7 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         /// <summary>
         /// Specifies that the list order should be descending (9,8,7...)
         /// </summary>
-        public ReversedAttribute Reversed { get { return _reversedAttribute; }}
+        public FlagAttribute Reversed { get { return _reversedAttribute; }}
 
 
         protected override bool IsValidSubType(IHTMLItem item)

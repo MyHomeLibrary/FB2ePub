@@ -13,14 +13,14 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "textarea", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class TextArea : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly AutoFocusAttribute _autoFocusAttribute = new AutoFocusAttribute();
+        [AttributeTypeAttributeMember(Name = "autofocus", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _autoFocusAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ColsAttribute _colsAttribute = new ColsAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+        [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _disabledAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
@@ -34,11 +34,11 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly PlaceHolderAttribute _placeHolderAttribute = new PlaceHolderAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ReadOnlyAttribute _readOnlyAttribute = new ReadOnlyAttribute();
+        [AttributeTypeAttributeMember(Name = "readonly", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _readOnlyAttribute = new FlagAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly RequiredAttribute _requiredAttribute = new RequiredAttribute();
+        [AttributeTypeAttributeMember(Name = "required", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _requiredAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly RowsAttribute _rowsAttribute = new RowsAttribute();
@@ -52,12 +52,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies that a text area should automatically get focus when the page loads
         /// </summary>
-        public AutoFocusAttribute AutoFocus { get { return _autoFocusAttribute; }}
+        public FlagAttribute AutoFocus { get { return _autoFocusAttribute; }}
 
         /// <summary>
         /// Specifies that a text area should be disabled
         /// </summary>
-        public DisabledAttribute Disabled { get { return _disabledAttribute; }}
+        public FlagAttribute Disabled { get { return _disabledAttribute; }}
 
         /// <summary>
         /// Specifies one or more forms the text area belongs to
@@ -77,12 +77,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies that a text area should be read-only
         /// </summary>
-        public ReadOnlyAttribute ReadOnly { get { return _readOnlyAttribute; }}
+        public FlagAttribute ReadOnly { get { return _readOnlyAttribute; }}
 
         /// <summary>
         /// Specifies that a text area is required/must be filled out
         /// </summary>
-        public RequiredAttribute Required { get { return _requiredAttribute; }}
+        public FlagAttribute Required { get { return _requiredAttribute; }}
 
         /// <summary>
         /// Specifies how the text in a text area is to be wrapped when submitted in a form

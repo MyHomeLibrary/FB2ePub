@@ -7,15 +7,15 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
     [HTMLItemAttribute(ElementName = "dir", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]    
     public class DirectoryList : HTMLItem, IBlockElement
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly CompactAttribute _compactAttribute = new CompactAttribute();
+        [AttributeTypeAttributeMember(Name = "compact", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _compactAttribute = new FlagAttribute();
 
 
         /// <summary>
         /// Specifies that the list should render smaller than normal
         /// Not supported in HTML5.
         /// </summary>
-        public CompactAttribute Compact { get { return _compactAttribute; }}
+        public FlagAttribute Compact { get { return _compactAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

@@ -14,8 +14,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "track", SupportedStandards = HTMLElementType.HTML5)]
     public class Track : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly DefaultAttribute _defaultAttribute = new DefaultAttribute();
+        [AttributeTypeAttributeMember(Name = "default", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagAttribute _defaultAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly LabelAttribute _labelAttribute = new LabelAttribute();
@@ -53,7 +53,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies that the track is to be enabled if the user's preferences do not indicate that another track would be more appropriate
         /// </summary>
-        public DefaultAttribute Default { get { return _defaultAttribute; }}
+        public FlagAttribute Default { get { return _defaultAttribute; }}
 
         public override bool IsValid()
         {

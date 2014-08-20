@@ -32,8 +32,8 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly RulesAttribute _rulesAttribute = new RulesAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly SortableAttribute _sortableAttribute = new SortableAttribute();
+        [AttributeTypeAttributeMember(Name = "sortable", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _sortableAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SummaryAttribute _summaryAttribute = new SummaryAttribute();
@@ -96,7 +96,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// <summary>
         /// Specifies that the table should be sortable
         /// </summary>
-        public SortableAttribute Sortable { get { return _sortableAttribute; }}
+        public FlagAttribute Sortable { get { return _sortableAttribute; }}
 
 
         /// <summary>

@@ -3,11 +3,9 @@ using XHTMLClassLibrary.AttributeDataTypes;
 
 namespace XHTMLClassLibrary.Attributes.FlaggedAttributes
 {
-    public abstract class BaseFlagAttribute : BaseAttribute
+    public class FlagAttribute : BaseAttribute
     {
         private Text _attrObject = new Text();
-
-        public abstract string GetElementName();
 
         #region Overrides of BaseAttribute
 
@@ -19,7 +17,7 @@ namespace XHTMLClassLibrary.Attributes.FlaggedAttributes
         {
             if (flag)
             {
-                _attrObject.Value = GetElementName();
+                _attrObject.Value = GetAttributeName();
                 AttributeHasValue = true;
             }
             else
@@ -35,18 +33,17 @@ namespace XHTMLClassLibrary.Attributes.FlaggedAttributes
             {
                 return;
             }
-            xElement.Add(new XAttribute(GetElementName(), _attrObject.Value));
+            xElement.Add(new XAttribute(GetAttributeName(), _attrObject.Value));
         }
 
         public override void ReadAttribute(XElement element)
         {
             AttributeHasValue = false;
             _attrObject = null;
-            XAttribute xObject = element.Attribute(GetElementName());
+            XAttribute xObject = element.Attribute(GetAttributeName());
             if (xObject != null)
             {
-                _attrObject = new Text();
-                _attrObject.Value = xObject.Value;
+                _attrObject = new Text {Value = xObject.Value};
                 AttributeHasValue = true;
             }
         }

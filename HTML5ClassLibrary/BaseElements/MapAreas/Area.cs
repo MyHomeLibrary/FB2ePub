@@ -28,8 +28,8 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MediaAttribute _mediaAttribute = new MediaAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NoHRefAttribute _noHRefAttribute = new NoHRefAttribute();
+        [AttributeTypeAttributeMember(Name = "nohref", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _noHRefAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 )]
         private readonly AreaRelationAttribute _relationAttribute = new AreaRelationAttribute();
@@ -50,7 +50,7 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         /// Specifies that an area has no associated link
         /// Not supported in HTML5
         /// </summary>
-        public NoHRefAttribute NoHRef { get { return _noHRefAttribute; }}
+        public FlagAttribute NoHRef { get { return _noHRefAttribute; }}
 
 
         /// <summary>

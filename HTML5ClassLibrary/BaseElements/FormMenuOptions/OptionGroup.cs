@@ -18,8 +18,8 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly LabelAttribute _labelAttribute = new LabelAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+        [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _disabledAttribute = new FlagAttribute();
 
 
 
@@ -33,7 +33,7 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         /// Disables the control for user input. 
         /// Possible value is "disabled".
         /// </summary>
-        public DisabledAttribute Disabled { get { return _disabledAttribute; } }
+        public FlagAttribute Disabled { get { return _disabledAttribute; } }
 
 
 

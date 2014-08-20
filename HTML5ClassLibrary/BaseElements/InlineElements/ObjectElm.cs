@@ -41,8 +41,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly DataAttribute _dataAttribute = new DataAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly DeclareAttribute _declareAttribute = new DeclareAttribute();
+        [AttributeTypeAttributeMember(Name = "declare", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagAttribute _declareAttribute = new FlagAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
@@ -162,7 +162,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// Defines that the object should only be declared, not created or instantiated until needed
         /// Not supported in HTML5.
         /// </summary>
-        public DeclareAttribute Declare { get { return _declareAttribute; }}
+        public FlagAttribute Declare { get { return _declareAttribute; }}
 
 
         /// <summary>
