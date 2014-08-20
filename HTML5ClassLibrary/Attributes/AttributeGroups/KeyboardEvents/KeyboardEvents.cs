@@ -35,18 +35,5 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents
         /// </summary>
         public OnKeyUpEventAttribute OnKeyUpEvent   { get { return _onKeyUpEventAttribute; }}
 
-
-
-
-        /// <summary>
-        /// Add all attributes set to specified xElement
-        /// </summary>
-        public void AddAttributes(List<IBaseAttribute> attributesList)
-        {
-            attributesList.Add(_onKeyDownEventAttribute);
-            attributesList.Add(_onKeyPressEventAttribute);
-            attributesList.Add(_onKeyUpEventAttribute);
-        }
-
     }
 }

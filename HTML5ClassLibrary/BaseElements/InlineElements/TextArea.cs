@@ -13,34 +13,37 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "textarea", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class TextArea : HTMLItem, IInlineItem
     {
-        private readonly SimpleHTML5Text _scriptText = new SimpleHTML5Text();
-
-        public TextArea()
-        {
-            RegisterAttribute(_colsAttribute);
-            RegisterAttribute(_nameAttribute);
-            RegisterAttribute(_rowsAttribute);
-            RegisterAttribute(_autoFocusAttribute);
-            RegisterAttribute(_disabledAttribute);
-            RegisterAttribute(_formIdAttribute);
-            RegisterAttribute(_maxLengthAttribute);
-            RegisterAttribute(_placeHolderAttribute);
-            RegisterAttribute(_readOnlyAttribute);
-            RegisterAttribute(_requiredAttribute);
-            RegisterAttribute(_wrapAttribute);
-           
-        }
-
-        private readonly ColsAttribute _colsAttribute = new ColsAttribute();
-        private readonly NameAttribute _nameAttribute = new NameAttribute();
-        private readonly RowsAttribute _rowsAttribute = new RowsAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly AutoFocusAttribute _autoFocusAttribute = new AutoFocusAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ColsAttribute _colsAttribute = new ColsAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MaxLengthAttribute _maxLengthAttribute = new MaxLengthAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly NameAttribute _nameAttribute = new NameAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly PlaceHolderAttribute _placeHolderAttribute = new PlaceHolderAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ReadOnlyAttribute _readOnlyAttribute = new ReadOnlyAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly RequiredAttribute _requiredAttribute = new RequiredAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly RowsAttribute _rowsAttribute = new RowsAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly WrapAttribute _wrapAttribute = new WrapAttribute();
 
 
@@ -85,11 +88,6 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// Specifies how the text in a text area is to be wrapped when submitted in a form
         /// </summary>
         public WrapAttribute Wrap { get { return _wrapAttribute; }}
-
-        /// <summary>
-        /// The script text itself
-        /// </summary>
-        public SimpleHTML5Text ScriptText { get { return _scriptText; } }
 
         /// <summary>
         /// This attribute specifies the visible width in average character widths. 

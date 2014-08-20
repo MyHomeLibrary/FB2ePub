@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes.FlaggedAttributes;
+﻿using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace XHTMLClassLibrary.BaseElements.TableElements
@@ -10,18 +11,108 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     [HTMLItemAttribute(ElementName = "table", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Table : HTMLItem, IBlockElement
     {
-        public Table()
-        {
-            RegisterAttribute(_sortableAttribute);
-        }
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly AlignAttribute _alignAttribute = new AlignAttribute();
 
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly BackgroundColorAttribute _backgroundColorAttribute = new BackgroundColorAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly BorderAttribute _borderAttribute = new BorderAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly CellPaddingAttribute _cellPaddingAttribute = new CellPaddingAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly CellSpacingAttribute _cellSpacingAttribute = new CellSpacingAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FrameAttribute _frameAttribute = new FrameAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly RulesAttribute _rulesAttribute = new RulesAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SortableAttribute _sortableAttribute = new SortableAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly SummaryAttribute _summaryAttribute = new SummaryAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly WidthAttribute _widthAttribute = new WidthAttribute();
+
+
+
+
+        /// <summary>
+        ///  Specifies the alignment of a table according to surrounding text
+        /// Not supported in HTML5.
+        /// </summary>
+        public AlignAttribute Align { get { return _alignAttribute; }}
+
+
+        /// <summary>
+        ///  Specifies the background color for a table
+        /// Not supported in HTML5.
+        /// </summary>
+        public BackgroundColorAttribute BgColor { get { return _backgroundColorAttribute; }}
+
+
+        /// <summary>
+        /// Specifies whether the table cells should have borders or not
+        /// Not supported in HTML5.
+        /// </summary>
+        public BorderAttribute Border { get { return _borderAttribute; }}
+
+
+        /// <summary>
+        /// Specifies the space between the cell wall and the cell content
+        /// Not supported in HTML5.
+        /// </summary>
+        public CellPaddingAttribute CellPadding { get { return _cellPaddingAttribute; }}
+
+
+        /// <summary>
+        /// Specifies the space between cells
+        /// Not supported in HTML5.
+        /// </summary>
+        public CellSpacingAttribute CellSpacing { get { return _cellSpacingAttribute; }}
+
+
+        /// <summary>
+        /// Specifies which parts of the outside borders that should be visible
+        /// Not supported in HTML5.
+        /// </summary>
+        public FrameAttribute Frame { get { return _frameAttribute; }}
+
+
+        /// <summary>
+        /// Specifies which parts of the inside borders that should be visible
+        /// Not supported in HTML5.
+        /// </summary>
+        public RulesAttribute Rules { get { return _rulesAttribute; }}
 
 
         /// <summary>
         /// Specifies that the table should be sortable
         /// </summary>
         public SortableAttribute Sortable { get { return _sortableAttribute; }}
+
+
+        /// <summary>
+        /// Specifies a summary of the content of a table
+        /// Not supported in HTML5.
+        /// </summary>
+        public SummaryAttribute Summary { get { return _summaryAttribute; }}
+
+
+        /// <summary>
+        /// Specifies the width of a table
+        /// Not supported in HTML5.
+        /// </summary>
+        public WidthAttribute Width { get { return _widthAttribute; }}
+
+
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.BaseElements.FormMenuOptions;
-using XHTMLClassLibrary.Exceptions;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
@@ -17,30 +12,27 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "select", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]    
     public class Select : HTMLItem, IInlineItem
     {
-        /// <summary>
-        /// Internal content of the element
-        /// </summary>
-        private readonly List<IHTMLItem> _content = new List<IHTMLItem>();
-
-        public Select()
-        {
-            RegisterAttribute(_multipleAttribute);
-            RegisterAttribute(_nameAttribute);
-            RegisterAttribute(_sizeAttribute);
-            RegisterAttribute(_autoFocusAttribute);
-            RegisterAttribute(_formIdAttribute);
-            RegisterAttribute(_requiredAttribute);
-            RegisterAttribute(_disabledAttribute);
-         
-        }
-
-        private readonly MultipleAttribute _multipleAttribute = new MultipleAttribute();
-        private readonly NameAttribute _nameAttribute = new NameAttribute();
-        private readonly SizeAttribute _sizeAttribute = new SizeAttribute();
-        private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly AutoFocusAttribute _autoFocusAttribute = new AutoFocusAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly DisabledAttribute _disabledAttribute = new DisabledAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly MultipleAttribute _multipleAttribute = new MultipleAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly NameAttribute _nameAttribute = new NameAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly RequiredAttribute _requiredAttribute = new RequiredAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly SizeAttribute _sizeAttribute = new SizeAttribute();
+        
 
 
         /// <summary>
@@ -86,12 +78,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         public override bool IsValid()
         {
             // at least one of sub elements have to appear
-            return (_content.Count > 0);
-        }
-
-        public override List<IHTMLItem> SubElements()
-        {
-            return _content;
+            return (Subitems.Count > 0);
         }
 
         protected override bool IsValidSubType(IHTMLItem item)

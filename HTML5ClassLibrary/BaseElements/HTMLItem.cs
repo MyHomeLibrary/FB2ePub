@@ -44,12 +44,6 @@ namespace XHTMLClassLibrary.BaseElements
 
         protected HTMLItem()
         {
-            _globalAttributes.AddAttributes(_attributes);
-            _formEvents.AddAttributes(_attributes);
-            _keyboardEvents.AddAttributes(_attributes);
-            _mediaEvents.AddAttributes(_attributes);
-            _mouseEvents.AddAttributes(_attributes);
-            _windowEventAttributes.AddAttributes(_attributes);
             RegisterAttributes();
         }
 
@@ -95,8 +89,7 @@ namespace XHTMLClassLibrary.BaseElements
                 var attributes =
                     (Attribute[])
                         field.GetCustomAttributes(typeof(AttributeTypeAttributeMember), false);
-                if (attributes != null &&
-                    attributes.Length > 0)
+                if (attributes.Length > 0)
                 {
                     var attributeType = attributes[0] as AttributeTypeAttributeMember;
                     if (attributeType != null &&
@@ -108,8 +101,7 @@ namespace XHTMLClassLibrary.BaseElements
                 attributes =
                     (Attribute[])
                         field.GetCustomAttributes(typeof(AttributeBlockAttribute), false);
-                if (attributes != null &&
-                    attributes.Length > 0)
+                if (attributes.Length > 0)
                 {
                     var attributeBlock = attributes[0] as AttributeBlockAttribute;
                     if (attributeBlock != null)
@@ -265,15 +257,6 @@ namespace XHTMLClassLibrary.BaseElements
             return false; // by default nothing valid - means nothing added as subtype
         }
 
-
-        /// <summary>
-        /// Register attribute as belong to element
-        /// </summary>
-        /// <param name="attribute"></param>
-        protected void RegisterAttribute(IBaseAttribute attribute)
-        {
-            _attributes.Add(attribute);
-        }
 
         /// <summary>
         /// Check if element valid 

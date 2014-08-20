@@ -160,30 +160,5 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
         /// </summary>
         public OnUnloadEventAttribute OnUnloadEvent { get { return _onUnloadEventAttribute; }}
 
-
-        /// <summary>
-        /// Add all attributes set to specified xElement
-        /// </summary>
-        /// <param name="attributesList"></param>
-        public void AddAttributes(List<IBaseAttribute> attributesList)
-        {
-             attributesList.Add(_onAfterPrintEventAttribute);
-             attributesList.Add(_onBeforePrintEventAttribute);
-             attributesList.Add(_onBeforeUnloadEventAttribute);
-             attributesList.Add(_onErrorEventAttribute);
-             attributesList.Add(_onHasChangeEventAttribute);
-             attributesList.Add(_onLoadEventAttribute);
-             attributesList.Add(_onMessageEventAttribute);
-             attributesList.Add(_onOfflineEventAttribute);
-             attributesList.Add(_onOnlineEventAttribute);
-             attributesList.Add(_onPageHideEventAttribute);
-             attributesList.Add(_onPageShowEventAttribute);
-             attributesList.Add(_onPopStateEventAttribute);
-             attributesList.Add(_onRedoEventAttribute);
-             attributesList.Add(_onResizeEventAttribute);
-             attributesList.Add(_onStorageEventAttribute);
-             attributesList.Add(_onUndoEventAttrinute);
-             attributesList.Add(_onUnloadEventAttribute);
-        }
     }
 }

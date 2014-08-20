@@ -14,11 +14,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "dialog", SupportedStandards = HTMLElementType.HTML5 )]
     public class Dialog: HTMLItem, IBlockElement
     {
-        public Dialog()
-        {
-            RegisterAttribute(_openAttribute);
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly OpenAttribute _openAttribute = new OpenAttribute();
 
 

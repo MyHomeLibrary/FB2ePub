@@ -14,19 +14,19 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "track", SupportedStandards = HTMLElementType.HTML5)]
     public class Track : HTMLItem, IInlineItem
     {
-        public Track()
-        {
-            RegisterAttribute(_defaultAttribute);
-            RegisterAttribute(_labelAttribute);
-            RegisterAttribute(_sourceAttribute);
-            RegisterAttribute(_trackKindAttribute);
-            RegisterAttribute(_sourceLanguageAttribute);
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly DefaultAttribute _defaultAttribute = new DefaultAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly LabelAttribute _labelAttribute = new LabelAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SourceAttribute _sourceAttribute = new SourceAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly TrackKindAttribute _trackKindAttribute = new TrackKindAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SourceLanguageAttribute _sourceLanguageAttribute = new SourceLanguageAttribute();
 
 

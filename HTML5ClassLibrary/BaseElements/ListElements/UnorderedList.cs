@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
+﻿using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
-using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace XHTMLClassLibrary.BaseElements.ListElements
 {
@@ -15,6 +12,29 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
     [HTMLItemAttribute(ElementName = "ul", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class UnorderedList : HTMLItem, IBlockElement
     {
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly CompactAttribute _compactAttribute = new CompactAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ListItemTypeAtttribute _listItemTypeAtttribute = new ListItemTypeAtttribute();
+
+
+
+
+
+        /// <summary>
+        ///  Specifies that the list should render smaller than normal
+        /// Not supported in HTML5.
+        /// </summary>
+        public CompactAttribute Compact { get { return _compactAttribute; }}
+
+
+        /// <summary>
+        ///  Specifies the kind of marker to use in the list
+        /// Not supported in HTML5.
+        /// </summary>
+        public ListItemTypeAtttribute Type { get { return _listItemTypeAtttribute; }}
+
         protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is ListItem)

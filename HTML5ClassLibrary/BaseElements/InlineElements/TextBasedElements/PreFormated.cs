@@ -10,10 +10,15 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
     [HTMLItemAttribute(ElementName = "pre", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class PreFormated : TextBasedElement
     {
-        public PreFormated()
-        {
-                            
-        }
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly WidthAttribute _widthAttribute = new WidthAttribute();
+
+
+        /// <summary>
+        ///  Specifies the maximum number of characters per line
+        /// Not supported in HTML5.
+        /// </summary>
+        public WidthAttribute Width { get { return _widthAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

@@ -15,13 +15,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "progress", SupportedStandards = HTMLElementType.HTML5)]
     public class Progress: HTMLItem, IInlineItem
     {
-        public Progress()
-        {
-            RegisterAttribute(_maxAttribute);
-            RegisterAttribute(_valueAttribute);
-        }
-
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MaxAttribute _maxAttribute = new MaxAttribute();
+
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MeterValueAttribute _valueAttribute = new MeterValueAttribute();
 
 
