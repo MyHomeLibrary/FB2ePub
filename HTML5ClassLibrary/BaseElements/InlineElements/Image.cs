@@ -15,8 +15,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly BiDirectionalAlignAttribute _alignAttribute = new BiDirectionalAlignAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AltAttribute _altAttribute = new AltAttribute();
+        [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _altAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly BorderAttribute _borderAttribute = new BorderAttribute();
@@ -62,7 +62,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// Alternate text for the image. This attribute is required. 
         /// The value should be left blank for decorative images.
         /// </summary>
-        public AltAttribute Alt
+        public TextValueAttribute Alt
         {
             get
             {

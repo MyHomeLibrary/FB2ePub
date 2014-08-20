@@ -12,13 +12,13 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     public class TableHeaderCell : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "abbr", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AbbreviatedAttribute _abbrAttribute = new AbbreviatedAttribute();
+        private readonly TextValueAttribute _abbrAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly AlignAttribute _alignAttribute = new AlignAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AxisAttribute _axisAttribute = new AxisAttribute();
+        [AttributeTypeAttributeMember(Name = "axis", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _axisAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly BackgroundColorAttribute _backgroundColorAttribute = new BackgroundColorAttribute();
@@ -61,7 +61,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// <summary>
         /// Abbreviated form of the cell's content.
         /// </summary>
-        public AbbreviatedAttribute Abbr { get { return _abbrAttribute; } }
+        public TextValueAttribute Abbr { get { return _abbrAttribute; } }
 
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         ///  Categorizes header cells
         /// Not supported in HTML5.
         /// </summary>
-        public AxisAttribute Axis { get { return _axisAttribute; }}
+        public TextValueAttribute Axis { get { return _axisAttribute; }}
 
 
         /// <summary>

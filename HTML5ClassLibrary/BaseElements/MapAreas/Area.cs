@@ -10,8 +10,8 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
     [HTMLItemAttribute(ElementName = "area", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Area : HTMLItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AltAttribute _altAttribute = new AltAttribute();
+        [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _altAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CoordinatesAttribute _coordAttribute = new CoordinatesAttribute();
@@ -56,7 +56,7 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         /// <summary>
         /// Alternate text. This attribute is required.
         /// </summary>
-        public AltAttribute Alt { get { return _altAttribute; } }
+        public TextValueAttribute Alt { get { return _altAttribute; } }
 
 
         /// <summary>

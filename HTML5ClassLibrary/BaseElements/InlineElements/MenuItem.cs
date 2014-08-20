@@ -16,8 +16,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(Name = "checked", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagAttribute _checkedAttribute = new FlagAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly CommandAttribute _commandAttribute = new CommandAttribute();
+        [AttributeTypeAttributeMember(Name = "command", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TextValueAttribute _commandAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(Name = "default", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagAttribute _defaultAttribute = new FlagAttribute();
@@ -28,8 +28,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly IconAttribute _iconAttribute = new IconAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LabelAttribute _labelAttribute = new LabelAttribute();
+        [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TextValueAttribute _labelAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly RadioGroupAttribute _radioGroupAttribute = new RadioGroupAttribute();
@@ -50,12 +50,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Required. Specifies the name of the command/menu item, as shown to the user
         /// </summary>
-        public LabelAttribute Label {get { return _labelAttribute; }}
+        public TextValueAttribute Label {get { return _labelAttribute; }}
 
         /// <summary>
         /// 
         /// </summary>
-        public CommandAttribute Command { get { return _commandAttribute; }}
+        public TextValueAttribute Command { get { return _commandAttribute; }}
 
 
         /// <summary>
