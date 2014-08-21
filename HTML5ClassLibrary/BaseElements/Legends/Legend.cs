@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
-using XHTMLClassLibrary.Exceptions;
 
 namespace XHTMLClassLibrary.BaseElements.Legends
 {
@@ -14,8 +9,8 @@ namespace XHTMLClassLibrary.BaseElements.Legends
     [HTMLItemAttribute(ElementName = "legend", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
     public class Legend : HTMLItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AlignAttribute _alignAttribute = new AlignAttribute();
+        [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
 
 
 
@@ -23,7 +18,7 @@ namespace XHTMLClassLibrary.BaseElements.Legends
         ///  Specifies the alignment of the caption
         /// Not supported in HTML5.
         /// </summary>
-        public  AlignAttribute Align { get { return _alignAttribute; }}
+        public  AlignTypeAttribute Align { get { return _alignAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

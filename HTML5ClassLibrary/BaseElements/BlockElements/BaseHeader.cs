@@ -14,15 +14,15 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     /// </summary>
     public abstract class BaseHeader : HTMLItem, IBlockElement  , IHeader
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AlignAttribute _alignAttribute = new AlignAttribute();
+        [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
 
 
         /// <summary>
         ///  Specifies the alignment of a heading
         /// Not supported in HTML5.
         /// </summary>
-        public AlignAttribute Align { get { return _alignAttribute; }}
+        public AlignTypeAttribute Align { get { return _alignAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

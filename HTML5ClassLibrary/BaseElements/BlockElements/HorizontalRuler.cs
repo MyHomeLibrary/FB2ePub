@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
 namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
@@ -11,18 +10,18 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "hr", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class HorizontalRuler : HTMLItem, IBlockElement 
     {
-        [AttributeTypeAttributeMember(SupportedStandards =  HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-        private readonly  AlignAttribute _alignAttribute = new AlignAttribute();
+        [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+        private readonly  AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
 
 
         [AttributeTypeAttributeMember(Name = "noshade", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-        private readonly FlagAttribute _noShadeAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _noShadeAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-        private readonly SizeAttribute _sizeAttribute = new SizeAttribute();
+        [AttributeTypeAttributeMember(Name = "size", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+        private readonly NumberAttribute _sizeAttribute = new NumberAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-        private readonly  WidthAttribute _widthAttribute = new WidthAttribute();
+        [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+        private readonly  LengthAttribute _widthAttribute = new LengthAttribute();
 
 
 
@@ -30,28 +29,28 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         ///  Specifies that a "hr" element should render in one solid color (noshaded), instead of a shaded color
         /// Not supported in HTML5.
         /// </summary>
-        public FlagAttribute NoShade { get { return _noShadeAttribute; }}
+        public FlagTypeAttribute NoShade { get { return _noShadeAttribute; }}
 
 
         /// <summary>
         ///  Specifies the alignment of a "hr" element
         /// Not supported in HTML5.
         /// </summary>
-        public AlignAttribute Align { get { return _alignAttribute; }}
+        public AlignTypeAttribute Align { get { return _alignAttribute; }}
 
 
         /// <summary>
         ///  Specifies the height of a "hr" element
         /// Not supported in HTML5.
         /// </summary>
-        public SizeAttribute Size { get { return _sizeAttribute; }}
+        public NumberAttribute Size { get { return _sizeAttribute; }}
 
 
         /// <summary>
         ///  Specifies the width of a "hr" element
         /// Not supported in HTML5.
         /// </summary>
-        public WidthAttribute Width { get { return _widthAttribute; }}
+        public LengthAttribute Width { get { return _widthAttribute; }}
 
         /// <summary>
         /// Checks it element data is valid

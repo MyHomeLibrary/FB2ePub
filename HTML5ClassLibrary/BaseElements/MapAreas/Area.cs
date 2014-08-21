@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
 namespace XHTMLClassLibrary.BaseElements.MapAreas
 {
@@ -13,26 +12,26 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly TextValueAttribute _altAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CoordinatesAttribute _coordAttribute = new CoordinatesAttribute();
+        [AttributeTypeAttributeMember(Name = "coords", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly CoordinatesTypeAttribute _coordAttribute = new CoordinatesTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly DownloadAttribute  _downloadAttribute = new DownloadAttribute();
+        [AttributeTypeAttributeMember(Name = "download", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly URITypeAttribute  _downloadAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly HrefAttribute _hrefAttribute = new HrefAttribute();
+        [AttributeTypeAttributeMember(Name = "href", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly URITypeAttribute _hrefAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly HRefLanguageAttribute _hrefLangAttribute = new HRefLanguageAttribute();
+        [AttributeTypeAttributeMember(Name = "hreflang", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly LanguageAttribute _hrefLangAttribute = new LanguageAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MediaAttribute _mediaAttribute = new MediaAttribute();
+        [AttributeTypeAttributeMember(Name = "media", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly MediaDescriptionsAttribute _mediaAttribute = new MediaDescriptionsAttribute();
 
         [AttributeTypeAttributeMember(Name = "nohref", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute _noHRefAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _noHRefAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 )]
-        private readonly AreaRelationAttribute _relationAttribute = new AreaRelationAttribute();
+        [AttributeTypeAttributeMember(Name = "rel", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly AreaRelationTypeAttribute _relationAttribute = new AreaRelationTypeAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ShapeAttribute _shapeAttribute = new ShapeAttribute();
@@ -50,7 +49,7 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         /// Specifies that an area has no associated link
         /// Not supported in HTML5
         /// </summary>
-        public FlagAttribute NoHRef { get { return _noHRefAttribute; }}
+        public FlagTypeAttribute NoHRef { get { return _noHRefAttribute; }}
 
 
         /// <summary>
@@ -69,33 +68,33 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         /// The first and the last x and y coordinate pair should be the same, in order to close the polygon.
         /// Coordinates are relative to the top-left corner of the object. All values are separated by commas.
         /// </summary>
-        public CoordinatesAttribute Coords { get { return _coordAttribute; } }
+        public CoordinatesTypeAttribute Coords { get { return _coordAttribute; } }
 
         /// <summary>
         /// Specifies that the target will be downloaded when a user clicks on the hyperlink
         /// </summary>
-        public DownloadAttribute Download { get { return _downloadAttribute; }}
+        public URITypeAttribute Download { get { return _downloadAttribute; }}
 
         /// <summary>
         /// Specifies the location of a Web resource.
         /// </summary>
-        public HrefAttribute HRef { get { return _hrefAttribute; } }
+        public URITypeAttribute HRef { get { return _hrefAttribute; } }
 
         /// <summary>
         /// Specifies the language of the target URL
         /// </summary>
-        public HRefLanguageAttribute HRefLang { get { return _hrefLangAttribute; }}
+        public LanguageAttribute HRefLang { get { return _hrefLangAttribute; }}
 
         /// <summary>
         /// Specifies what media/device the target URL is optimized for
         /// </summary>
-        public MediaAttribute Media { get { return _mediaAttribute; }}
+        public MediaDescriptionsAttribute Media { get { return _mediaAttribute; }}
 
         /// <summary>
         /// The rel attribute specifies the relationship between the current document and the linked document.
         /// Only used if the href attribute is present.
         /// </summary>
-        public AreaRelationAttribute Rel { get { return _relationAttribute; } }
+        public AreaRelationTypeAttribute Rel { get { return _relationAttribute; } }
 
         /// <summary>
         /// Specifies the shape of a region. 

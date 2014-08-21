@@ -11,23 +11,23 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "ins", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 |  HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class InsertedText : HTMLItem, IInlineItem, IBlockElement
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CiteAttribute _cite = new CiteAttribute();
+        [AttributeTypeAttributeMember(Name = "cite", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly URITypeAttribute _cite = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly DateTimeAttribute _datetime = new DateTimeAttribute();
+        [AttributeTypeAttributeMember(Name = "datetime", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly DateTimeTypeAttribute _datetime = new DateTimeTypeAttribute();
 
         /// <summary>
         /// This attribute is intended to point to information explaining why content was changed. 
         /// For example, this can be a URL leading to a Web page that contains such an explanation.
         /// </summary>
-        public CiteAttribute Cite
+        public URITypeAttribute Cite
         {
             get { return _cite; }
         }
 
 
-        public DateTimeAttribute DateTime
+        public DateTimeTypeAttribute DateTime
         {
             get { return _datetime; }
         }

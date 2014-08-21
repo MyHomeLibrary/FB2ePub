@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using XHTMLClassLibrary.AttributeDataTypes;
 
 namespace XHTMLClassLibrary.Attributes
 {
     public class ButtonTypeAttribute :BaseAttribute
     {
+        private ContentType _attrObject = new ContentType();
+
         private enum ButtonTypeEnum
         {
             Invalid,
@@ -18,8 +16,6 @@ namespace XHTMLClassLibrary.Attributes
         }
 
         private ButtonTypeEnum _buttonType = ButtonTypeEnum.Invalid;
-        private const string AttributeName = "type";
-        private ContentType _attrObject = new ContentType();
 
         public override void AddAttribute(XElement xElement)
         {
@@ -27,14 +23,14 @@ namespace XHTMLClassLibrary.Attributes
             {
                 return;
             }
-            xElement.Add(new XAttribute(AttributeName, _attrObject.Value));
+            xElement.Add(new XAttribute(GetAttributeName(), _attrObject.Value));
         }
 
         public override void ReadAttribute(XElement element)
         {
             AttributeHasValue = false;
             _attrObject = null;
-            XAttribute xObject = element.Attribute(AttributeName);
+            XAttribute xObject = element.Attribute(GetAttributeName());
             if (xObject != null)
             {
                 _attrObject = new ContentType();

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Exceptions;
+﻿using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.TableElements
 {
@@ -20,40 +15,40 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     [HTMLItemAttribute(ElementName = "colgroup", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class ColGroup : HTMLItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AlignAttribute _alignAttribute = new AlignAttribute();
+        [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "char", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CharAttribute _charAttribute = new CharAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CharOffAttribute _charOffAttribute = new CharOffAttribute();
-        
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly SpanAttribute _spanAttribute = new SpanAttribute();
+
+        [AttributeTypeAttributeMember(Name = "span", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly NumberAttribute _spanAttribute = new NumberAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly VAlignAttribute _vAlignAttribute = new VAlignAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly WidthAttribute _widthAttribute = new WidthAttribute();
+        [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
 
         /// <summary>
         /// A single col element can represent (or "span") multiple columns. 
         /// This attribute contains a number of columns "spanned" by the col element.
         /// </summary>
-        public SpanAttribute Span { get { return _spanAttribute; } }
+        public NumberAttribute Span { get { return _spanAttribute; } }
 
         /// <summary>
         /// Not supported in HTML5.
         /// Aligns the content in a column group
         /// </summary>
-        public AlignAttribute Align { get { return _alignAttribute; } }
+        public AlignTypeAttribute Align { get { return _alignAttribute; } }
 
 
         /// <summary>
         /// Aligns the content in a column group to a character
-        /// Not supported in HTML5.
+        /// NotAlignTypeAttributeHTML5.
         /// </summary>
         public CharAttribute Char { get { return _charAttribute; } }
 
@@ -76,7 +71,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// Specifies the width of a column group
         /// Not supported in HTML5.
         /// </summary>
-        public WidthAttribute Width { get { return _widthAttribute; } }
+        public LengthAttribute Width { get { return _widthAttribute; } }
 
 
         protected override bool IsValidSubType(IHTMLItem item)

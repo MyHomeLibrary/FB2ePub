@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
@@ -15,18 +14,18 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     public class Script : HTMLItem, IInlineItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "async", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _asyncAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _asyncAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "charset", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
 
         [AttributeTypeAttributeMember(Name = "defer", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute _deferAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _deferAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly SourceAttribute _srcAttribute = new SourceAttribute();
+        [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly URITypeAttribute _srcAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ContentTypeAttribute _contentTypeAttribute = new ContentTypeAttribute();
 
         // xml:space 	preserve 	Not supported in HTML5. Specifies whether whitespace in code should be preserved
@@ -37,12 +36,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Location of an external script.
         /// </summary>
-        public SourceAttribute Src { get { return _srcAttribute; } }
+        public URITypeAttribute Src { get { return _srcAttribute; } }
 
         /// <summary>
         /// Specifies that the script is executed asynchronously (only for external scripts)
         /// </summary>
-        public FlagAttribute Async { get { return _asyncAttribute; }}
+        public FlagTypeAttribute Async { get { return _asyncAttribute; }}
 
         /// <summary>
         /// This attribute specifies the scripting language of the element's contents. 
@@ -61,7 +60,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// permitting the Web browser to continue parsing and rendering the rest of the page. 
         /// Possible value is defer.
         /// </summary>
-        public FlagAttribute Defer { get { return _deferAttribute; } }
+        public FlagTypeAttribute Defer { get { return _deferAttribute; } }
 
 
         public override bool IsValid()

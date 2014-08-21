@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
 namespace XHTMLClassLibrary.BaseElements.Structure_Header
 {
@@ -11,13 +10,13 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     [HTMLItemAttribute(ElementName = "style", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Style : HTMLItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly MediaAttribute _mediaAttribute = new MediaAttribute();
+        [AttributeTypeAttributeMember(Name = "media", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly MediaDescriptionsAttribute _mediaAttribute = new MediaDescriptionsAttribute();
 
         [AttributeTypeAttributeMember(Name = "scoped", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _scopedAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _scopedAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ContentTypeAttribute _typeAttribute = new ContentTypeAttribute();
 
 
@@ -26,7 +25,7 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// It may be a single media descriptor or a comma-separated list. 
         /// The default value for this attribute is screen.
         /// </summary>
-        public MediaAttribute Media { get { return _mediaAttribute; } }
+        public MediaDescriptionsAttribute Media { get { return _mediaAttribute; } }
 
         /// <summary>
         /// This attribute specifies the style sheet language of the element's contents. 
@@ -39,7 +38,7 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// <summary>
         /// Specifies that the styles only apply to this element's parent element and that element's child elements
         /// </summary>
-        public FlagAttribute Scoped { get { return _scopedAttribute; }}
+        public FlagTypeAttribute Scoped { get { return _scopedAttribute; }}
 
 
         public override bool IsValid()

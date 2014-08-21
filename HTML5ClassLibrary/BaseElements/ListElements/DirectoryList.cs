@@ -1,5 +1,4 @@
 ﻿using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace XHTMLClassLibrary.BaseElements.ListElements
@@ -8,14 +7,14 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
     public class DirectoryList : HTMLItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "compact", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute _compactAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _compactAttribute = new FlagTypeAttribute();
 
 
         /// <summary>
         /// Specifies that the list should render smaller than normal
         /// Not supported in HTML5.
         /// </summary>
-        public FlagAttribute Compact { get { return _compactAttribute; }}
+        public FlagTypeAttribute Compact { get { return _compactAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

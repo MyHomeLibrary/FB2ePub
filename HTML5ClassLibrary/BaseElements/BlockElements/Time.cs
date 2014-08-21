@@ -14,14 +14,14 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "time", SupportedStandards = HTMLElementType.HTML5)]
     public class Time : HTMLItem, IBlockElement
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly DateTimeAttribute _dateTimeAttribute = new DateTimeAttribute();
+        [AttributeTypeAttributeMember(Name = "datetime", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly DateTimeTypeAttribute _dateTimeAttribute = new DateTimeTypeAttribute();
 
 
         /// <summary>
         /// Gives the date/time being specified. Otherwise, the date/time is given by the element's contents
         /// </summary>
-        public DateTimeAttribute DateTime { get { return _dateTimeAttribute; }}
+        public DateTimeTypeAttribute DateTime { get { return _dateTimeAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

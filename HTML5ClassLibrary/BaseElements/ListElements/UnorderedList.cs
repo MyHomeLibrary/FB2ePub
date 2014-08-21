@@ -1,5 +1,4 @@
 ﻿using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace XHTMLClassLibrary.BaseElements.ListElements
@@ -13,7 +12,7 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
     public class UnorderedList : HTMLItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "compact", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute _compactAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _compactAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ListItemTypeAtttribute _listItemTypeAtttribute = new ListItemTypeAtttribute();
@@ -26,7 +25,7 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         ///  Specifies that the list should render smaller than normal
         /// Not supported in HTML5.
         /// </summary>
-        public FlagAttribute Compact { get { return _compactAttribute; }}
+        public FlagTypeAttribute Compact { get { return _compactAttribute; }}
 
 
         /// <summary>

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace XHTMLClassLibrary.AttributeDataTypes
@@ -16,7 +14,7 @@ namespace XHTMLClassLibrary.AttributeDataTypes
         {
             get
             {
-                StringBuilder builder = new StringBuilder();
+                var builder = new StringBuilder();
                 foreach (var token in _tokens)
                 {
                     builder.AppendFormat("{0} ", token.Value);

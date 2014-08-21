@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using XHTMLClassLibrary.AttributeDataTypes;
 
 namespace XHTMLClassLibrary.AttributeDataTypes
 {
@@ -17,7 +14,7 @@ namespace XHTMLClassLibrary.AttributeDataTypes
         {
             get
             {
-                StringBuilder builder = new StringBuilder();
+                var builder = new StringBuilder();
                 foreach (var charset in _charsets)
                 {
                     builder.AppendFormat("{0} ",charset.Value);
@@ -31,8 +28,7 @@ namespace XHTMLClassLibrary.AttributeDataTypes
                 string[] ar = value.Split(' ');
                 foreach (var s in ar)
                 {
-                    Charset charset = new Charset();
-                    charset.Value = s;
+                    var charset = new Charset {Value = s};
                     _charsets.Add(charset);
                 }
             }

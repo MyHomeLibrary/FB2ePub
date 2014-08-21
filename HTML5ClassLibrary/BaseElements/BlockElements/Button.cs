@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Linq;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.BlockElements
@@ -17,18 +13,18 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     public class Button : HTMLItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "autofocus", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _autofocus = new FlagAttribute();
+        private readonly FlagTypeAttribute _autofocus = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute _disabled = new FlagAttribute();
+        private readonly FlagTypeAttribute _disabled = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormIdAttribute _form = new FormIdAttribute();
+        [AttributeTypeAttributeMember(Name = "form", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly URITypeAttribute _form = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormActionAttribute _formAction = new FormActionAttribute();
+        [AttributeTypeAttributeMember(Name = "formaction", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly URITypeAttribute _formAction = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        [AttributeTypeAttributeMember(Name = "enctype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormEncodingTypeAttribute _formEncoding = new FormEncodingTypeAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
@@ -40,14 +36,14 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormTargetAttribute _formTarget = new FormTargetAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NameAttribute _name = new NameAttribute();
+        [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _name = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ButtonTypeAttribute _type = new ButtonTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValueAttribute     _value = new ValueAttribute();
+        [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _value = new TextValueAttribute();
 
 
 
@@ -56,32 +52,32 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
             get { return _type; }
         }
 
-        public NameAttribute Name
+        public TextValueAttribute Name
         {
             get { return _name; }
         }
 
-        public ValueAttribute Value
+        public TextValueAttribute Value
         {
             get { return _value; }
         }
 
-        public FlagAttribute Disabled
+        public FlagTypeAttribute Disabled
         {
             get { return _disabled; }
         }
 
-        public FlagAttribute Autofocus
+        public FlagTypeAttribute Autofocus
         {
             get { return _autofocus; }
         }
 
-        public FormIdAttribute Form
+        public URITypeAttribute Form
         {
             get { return _form; }
         }
 
-        public FormActionAttribute FormAction
+        public URITypeAttribute FormAction
         {
             get { return _formAction; }
         }
@@ -109,14 +105,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
 
         public override bool IsValid()
         {
-            foreach (var item in Subitems)
-            {
-                if (!item.IsValid())
-                {
-                    return false;
-                }
-            }
-            return true;
+            return Subitems.All(item => item.IsValid());
         }
 
         protected override bool IsValidSubType(IHTMLItem item)

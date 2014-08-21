@@ -1,7 +1,7 @@
 ﻿using XHTMLClassLibrary.Attributes.Events;
 using XHTMLClassLibrary.BaseElements;
 
-namespace XHTMLClassLibrary.Attributes.AttributeGroups.FormEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups
 {
     /// <summary>
     /// Events triggered by actions inside a HTML form (applies to almost all HTML elements, but is most used in form elements):

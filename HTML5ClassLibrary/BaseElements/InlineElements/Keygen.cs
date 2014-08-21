@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
@@ -15,44 +14,44 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     public class Keygen : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "autofocus", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _autoFocusAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _autoFocusAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "challenge", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _challengeAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _challengeAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _disabledAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+        [AttributeTypeAttributeMember(Name = "form", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly KeyTypeAttribute _keyTypeAttribute = new KeyTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly NameAttribute _nameAttribute = new NameAttribute();
+        [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
 
 
 
         /// <summary>
         /// Specifies that a "keygen" element should automatically get focus when the page loads
         /// </summary>
-        public FlagAttribute Autofocus { get { return _autoFocusAttribute; }}
+        public FlagTypeAttribute Autofocus { get { return _autoFocusAttribute; }}
 
         /// <summary>
         /// Specifies that the value of the "keygen" element should be challenged when submitted
         /// </summary>
-        public FlagAttribute Challenge { get { return _challengeAttribute; }}
+        public FlagTypeAttribute Challenge { get { return _challengeAttribute; }}
 
         /// <summary>
         /// Specifies that a "keygen" element should be disabled
         /// </summary>
-        public FlagAttribute Disable { get { return _disabledAttribute; }}
+        public FlagTypeAttribute Disable { get { return _disabledAttribute; }}
 
         /// <summary>
         /// Specifies one or more forms the keygen element belongs to
         /// </summary>
-        public FormIdAttribute Form { get { return _formIdAttribute; }}
+        public URITypeAttribute Form { get { return _formIdAttribute; }}
 
         /// <summary>
         /// Specifies the security algorithm of the key
@@ -62,7 +61,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Defines a name for the "keygen" element
         /// </summary>
-        public NameAttribute Name { get { return _nameAttribute; }}
+        public TextValueAttribute Name { get { return _nameAttribute; }}
 
 
         public override bool IsValid()

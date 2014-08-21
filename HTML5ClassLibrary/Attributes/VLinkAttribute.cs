@@ -5,7 +5,7 @@ using System.Text;
 
 namespace XHTMLClassLibrary.Attributes
 {
-    public class VLinkAttribute: ColorAttribute
+    public class VLinkAttribute: ColorTypeAttribute
     {
         private const string AttributeName = "vlink";
     }

@@ -8,9 +8,7 @@ namespace XHTMLClassLibrary.Attributes.Events
     /// </summary>
     public class OnEventAttribute : BaseAttribute
     {
-        private Script _attrObject = new Script();
-
-        #region Overrides of BaseAttribute
+        private ScriptType _attrObject = new ScriptType();
 
         public override void AddAttribute(XElement xElement)
         {
@@ -28,7 +26,7 @@ namespace XHTMLClassLibrary.Attributes.Events
             XAttribute xObject = element.Attribute(GetAttributeName());
             if (xObject != null)
             {
-                _attrObject = new Script {Value = xObject.Value};
+                _attrObject = new ScriptType{Value = xObject.Value};
                 AttributeHasValue = true;
             }
         }
@@ -45,7 +43,5 @@ namespace XHTMLClassLibrary.Attributes.Events
                 AttributeHasValue = true;
             }
         }
-
-        #endregion
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.FormMenuOptions;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
@@ -15,26 +11,26 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "form", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Form : HTMLItem, IBlockElement
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AcceptAttribute _acceptAttribute = new AcceptAttribute();
+        [AttributeTypeAttributeMember(Name = "accept", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ContentTypeAttribute _acceptAttribute = new ContentTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AcceptCharsetsAttribute _acceptCharsetsAttribute = new AcceptCharsetsAttribute();
+        [AttributeTypeAttributeMember(Name = "accept-charsets", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly CharsetsAttribute _acceptCharsetsAttribute = new CharsetsAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ActionAttribute _actionAttribute = new ActionAttribute();
+        [AttributeTypeAttributeMember(Name = "action", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly URITypeAttribute _actionAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly AutocompleteAttribute _autocompleteAttribute = new AutocompleteAttribute();
+        [AttributeTypeAttributeMember(Name = "autocomplete", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnOffTypeAttribute _autocompleteAttribute = new OnOffTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "enctype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FormEncodingTypeAttribute _encTypeAttribute = new FormEncodingTypeAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly MethodAttribute _methodAttribute = new MethodAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NameAttribute _nameAttribute = new NameAttribute();
+        [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly NoValidateAttribute _noValidateAttribute = new NoValidateAttribute();
@@ -49,17 +45,17 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// Specifies a comma-separated list of file types  that the server accepts (that can be submitted through the file upload)
         /// Not supported in HTML5.
         /// </summary>
-        public AcceptAttribute Accept { get { return _acceptAttribute; }}
+        public ContentTypeAttribute Accept { get { return _acceptAttribute; }}
 
         /// <summary>
         /// Specifies the location of the server-side script used to process data collected in the form.
         /// </summary>
-        public ActionAttribute Action { get { return _actionAttribute; } }
+        public URITypeAttribute Action { get { return _actionAttribute; } }
 
         /// <summary>
         /// Specifies whether a form should have autocomplete on or off
         /// </summary>
-        public AutocompleteAttribute Autocomplete { get { return _autocompleteAttribute; }}
+        public OnOffTypeAttribute Autocomplete { get { return _autocompleteAttribute; }}
 
         /// <summary>
         /// Specifies the type of HTTP method used to send data to the server. 
@@ -71,12 +67,12 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies the name of a form
         /// </summary>
-        public NameAttribute Name { get { return _nameAttribute; }}
+        public TextValueAttribute Name { get { return _nameAttribute; }}
 
         /// <summary>
         /// This attribute specifies the list of character encodings for input data that are accepted by the server processing the form.
         /// </summary>
-        public AcceptCharsetsAttribute AcceptCharsets { get { return _acceptCharsetsAttribute; } }
+        public CharsetsAttribute AcceptCharsets { get { return _acceptCharsetsAttribute; } }
 
 
         /// <summary>

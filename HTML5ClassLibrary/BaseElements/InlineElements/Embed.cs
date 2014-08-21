@@ -9,29 +9,29 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "embed", SupportedStandards = HTMLElementType.HTML5)]
     public class Embed : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly HeightAttribute _heightAttribute = new HeightAttribute();
+        [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly LengthAttribute _heightAttribute = new LengthAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly SourceAttribute _sourceAttribute = new SourceAttribute();
+        [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly URITypeAttribute _sourceAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MIMETypeAttribute _typeAttribute = new MIMETypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly WidthAttribute _widthAttribute = new WidthAttribute();
+        [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
 
 
         /// <summary>
         /// Specifies the height of the embedded content
         /// </summary>
-        public HeightAttribute Height { get { return _heightAttribute; }}
+        public LengthAttribute Height { get { return _heightAttribute; }}
 
 
         /// <summary>
         /// Specifies the address of the external file to embed
         /// </summary>
-        public SourceAttribute Src { get { return _sourceAttribute; }}
+        public URITypeAttribute Src { get { return _sourceAttribute; }}
 
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the width of the embedded content
         /// </summary>
-        public WidthAttribute Width { get { return _widthAttribute; }}
+        public LengthAttribute Width { get { return _widthAttribute; }}
 
         public override bool IsValid()
         {

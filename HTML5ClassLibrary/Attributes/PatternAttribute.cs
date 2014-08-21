@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using XHTMLClassLibrary.AttributeDataTypes;
 
 namespace XHTMLClassLibrary.Attributes
@@ -11,24 +7,20 @@ namespace XHTMLClassLibrary.Attributes
     {
         private PatternAttributeType _attrObject = new PatternAttributeType();
 
-        private const string AttributeName = "pattern";
-
-        #region Overrides of BaseAttribute
-
         public override void AddAttribute(XElement xElement)
         {
             if (!AttributeHasValue)
             {
                 return;
             }
-            xElement.Add(new XAttribute(AttributeName, _attrObject.Value));
+            xElement.Add(new XAttribute(GetAttributeName(), _attrObject.Value));
         }
 
         public override void ReadAttribute(XElement element)
         {
             AttributeHasValue = false;
             _attrObject = null;
-            XAttribute xObject = element.Attribute(AttributeName);
+            XAttribute xObject = element.Attribute(GetAttributeName());
             if (xObject != null)
             {
                 _attrObject = new PatternAttributeType { Value = xObject.Value };
@@ -45,7 +37,5 @@ namespace XHTMLClassLibrary.Attributes
                 AttributeHasValue = (value != string.Empty);
             }
         }
-        #endregion
-
     }
 }
