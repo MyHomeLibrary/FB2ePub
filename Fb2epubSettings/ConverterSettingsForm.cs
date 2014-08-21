@@ -490,7 +490,7 @@ namespace Fb2epubSettings
         private void listBoxPaths_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.AppendFormat("{0})  {1} [{2}]", e.Index+1, ((Location) listBoxPaths.Items[e.Index]).Name,
                             ((Location) listBoxPaths.Items[e.Index]).Path);
             Brush textBrush = new SolidBrush(e.ForeColor);
@@ -512,9 +512,7 @@ namespace Fb2epubSettings
             if (currentLocation != null)
             {
 
-                AddPathForm editPathForm = new AddPathForm();
-                editPathForm.PathName = currentLocation.Name;
-                editPathForm.PathFolder = currentLocation.Path;
+                var editPathForm = new AddPathForm {PathName = currentLocation.Name, PathFolder = currentLocation.Path};
                 DialogResult result = editPathForm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
