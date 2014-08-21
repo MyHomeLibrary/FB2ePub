@@ -1,5 +1,4 @@
 ﻿using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 using XHTMLClassLibrary.BaseElements.Legends;
 
@@ -12,28 +11,28 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     public class FieldSet : HTMLItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _disabledAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+        [AttributeTypeAttributeMember(Name = "form", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly NameAttribute _nameAttribute = new NameAttribute();
+        [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
 
         /// <summary>
         /// Specifies that a group of related form elements should be disabled
         /// </summary>
-        public FlagAttribute Disabled { get { return _disabledAttribute; }}
+        public FlagTypeAttribute Disabled { get { return _disabledAttribute; }}
 
         /// <summary>
         /// Specifies one or more forms the fieldset belongs to
         /// </summary>
-        public FormIdAttribute Form { get { return _formIdAttribute; }}
+        public URITypeAttribute Form { get { return _formIdAttribute; }}
 
         /// <summary>
         /// Specifies a name for the fieldset
         /// </summary>
-        public NameAttribute Name { get { return _nameAttribute; }}
+        public TextValueAttribute Name { get { return _nameAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

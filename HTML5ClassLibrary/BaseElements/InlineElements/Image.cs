@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
@@ -12,41 +9,41 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "img", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Image : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly BiDirectionalAlignAttribute _alignAttribute = new BiDirectionalAlignAttribute();
+        [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly BiDirectionalAlignTypeAttribute _alignAttribute = new BiDirectionalAlignTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly TextValueAttribute _altAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly BorderAttribute _borderAttribute = new BorderAttribute();
+        [AttributeTypeAttributeMember(Name = "border", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly PixelsTypeAttribute _borderAttribute = new PixelsTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly CrossOriginAttribute _crossOriginAttribute = new CrossOriginAttribute();
+        [AttributeTypeAttributeMember(Name = "crossorigin", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly CrossOriginTypeAttribute _crossOriginAttribute = new CrossOriginTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly HeightAttribute _heightAttribute = new HeightAttribute();
+        [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly LengthAttribute _heightAttribute = new LengthAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly HSpaceAttribute _hSpaceAttribute = new HSpaceAttribute();
+        [AttributeTypeAttributeMember(Name = "hspace", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly LengthAttribute _hSpaceAttribute = new LengthAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ISMapAttribute _ismapAttribute = new ISMapAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LongDescriptionAttribute _longDescriptionAttribute = new LongDescriptionAttribute();
+        [AttributeTypeAttributeMember(Name = "longdesc", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly URITypeAttribute _longDescriptionAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly SourceAttribute _srcAttribute = new SourceAttribute();
+        [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly URITypeAttribute _srcAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly UseMapAttribute _useMapAttribute = new UseMapAttribute();
+        [AttributeTypeAttributeMember(Name = "usemap", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly IdReferenceAttribute _useMapAttribute = new IdReferenceAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly VSpaceAttribute _vSpaceAttribute = new VSpaceAttribute();
+        [AttributeTypeAttributeMember(Name = "vspace", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly LengthAttribute _vSpaceAttribute = new LengthAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly WidthAttribute _widthAttribute = new WidthAttribute();
+        [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
 
 
         #region public_attributes
@@ -56,7 +53,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the alignment of an image according to surrounding elements
         /// Not supported in HTML5.
         /// </summary>
-        public BiDirectionalAlignAttribute Align { get { return _alignAttribute; }}
+        public BiDirectionalAlignTypeAttribute Align { get { return _alignAttribute; }}
 
         /// <summary>
         /// Alternate text for the image. This attribute is required. 
@@ -74,12 +71,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the width of the border around an image
         /// Not supported in HTML5.
         /// </summary>
-        public BorderAttribute Border { get { return _borderAttribute; }}
+        public PixelsTypeAttribute Border { get { return _borderAttribute; }}
 
         /// <summary>
         /// Image height.
         /// </summary>
-        public HeightAttribute Height
+        public LengthAttribute Height
         {
             get { return _heightAttribute; }
         }
@@ -89,13 +86,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the whitespace on left and right side of an image
         /// Not supported in HTML5.
         /// </summary>
-        public HSpaceAttribute HSpace { get { return _hSpaceAttribute; }}
+        public LengthAttribute HSpace { get { return _hSpaceAttribute; }}
 
 
         /// <summary>
         /// Image width.
         /// </summary>
-        public  WidthAttribute Width
+        public  LengthAttribute Width
         {
             get { return _widthAttribute; }
         }
@@ -103,7 +100,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// This required attribute specifies the location of the image source.
         /// </summary>
-        public  SourceAttribute Source
+        public  URITypeAttribute Source
         {
             get { return _srcAttribute; }
         }
@@ -122,13 +119,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the URL to a document that contains a long description of an image
         /// Not supported in HTML5.
         /// </summary>
-        public LongDescriptionAttribute LongDescription { get { return _longDescriptionAttribute; }}
+        public URITypeAttribute LongDescription { get { return _longDescriptionAttribute; }}
 
         /// <summary>
         /// This attribute associates the image to a client-side image map defined by a map element. 
         /// The value of this attribute must match the id attribute of the map element.
         /// </summary>
-        public UseMapAttribute UseMap
+        public IdReferenceAttribute UseMap
         {
             get { return _useMapAttribute; }
         }
@@ -138,12 +135,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the whitespace on top and bottom of an image
         /// Not supported in HTML5.
         /// </summary>
-        public VSpaceAttribute VSpace { get { return _vSpaceAttribute; }}
+        public LengthAttribute VSpace { get { return _vSpaceAttribute; }}
 
         /// <summary>
         /// Allow images from third-party sites that allow cross-origin access to be used with canvas
         /// </summary>
-        public CrossOriginAttribute Crossorigin { get { return _crossOriginAttribute; }}
+        public CrossOriginTypeAttribute Crossorigin { get { return _crossOriginAttribute; }}
 
         #endregion
 

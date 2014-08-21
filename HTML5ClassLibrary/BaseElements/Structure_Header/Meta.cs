@@ -10,20 +10,20 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     [HTMLItemAttribute(ElementName = "meta", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Meta : HTMLItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        [AttributeTypeAttributeMember(Name = "charset", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
 
         [AttributeTypeAttributeMember(Name = "content", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly TextValueAttribute _contentAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly HTTPEquivAttribute _httpEqvAttribute = new HTTPEquivAttribute();
+        [AttributeTypeAttributeMember(Name = "http-equiv", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly NameTokenAttribute _httpEqvAttribute = new NameTokenAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TokenNameAttribute _nameAttribute = new TokenNameAttribute();
+        [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly NameTokenAttribute _nameAttribute = new NameTokenAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly SchemeAttribute _schemeAttribute = new SchemeAttribute();
+        [AttributeTypeAttributeMember(Name = "scheme", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _schemeAttribute = new TextValueAttribute();
 
 
 
@@ -36,7 +36,7 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// This attribute may be used in place of the name attribute. 
         /// Web servers use this attribute to gather information for HTTP response message headers.
         /// </summary>
-        public HTTPEquivAttribute HTTPEquvalent { get { return _httpEqvAttribute; } }
+        public NameTokenAttribute HTTPEquvalent { get { return _httpEqvAttribute; } }
 
         /// <summary>
         /// The property's value.
@@ -48,14 +48,14 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// Specifies a scheme to be used to interpret the value of the content attribute
         /// Not supported in HTML5.
         /// </summary>
-        public SchemeAttribute Scheme { get { return _schemeAttribute; }}
+        public TextValueAttribute Scheme { get { return _schemeAttribute; }}
 
 
         /// <summary>
         /// Property name. 
         /// This attribute is required.
         /// </summary>
-        public TokenNameAttribute Name { get { return _nameAttribute; } }
+        public NameTokenAttribute Name { get { return _nameAttribute; } }
 
      
         public override bool IsValid()

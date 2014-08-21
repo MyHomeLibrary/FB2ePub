@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Xml.Linq;
-using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System.Collections.Generic;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
@@ -18,8 +12,8 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(Name = "max", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly TextValueAttribute _maxAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MeterValueAttribute _valueAttribute = new MeterValueAttribute();
+        [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FloatingNumberTypeAttribute _valueAttribute = new FloatingNumberTypeAttribute();
 
 
         /// <summary>
@@ -30,7 +24,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies how much of the task has been completed
         /// </summary>
-        public MeterValueAttribute Value { get { return _valueAttribute; }}
+        public FloatingNumberTypeAttribute Value { get { return _valueAttribute; }}
 
         public override bool IsValid()
         {

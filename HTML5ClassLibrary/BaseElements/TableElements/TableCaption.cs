@@ -10,15 +10,15 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     [HTMLItemAttribute(ElementName = "caption", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class TableCaption : HTMLItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly BiDirectionalAlignAttribute _alignAttribute = new BiDirectionalAlignAttribute();
+        [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly BiDirectionalAlignTypeAttribute _alignAttribute = new BiDirectionalAlignTypeAttribute();
 
 
         /// <summary>
         /// Defines the alignment of the caption
         /// Not supported in HTML5
         /// </summary>
-        public BiDirectionalAlignAttribute Align { get { return _alignAttribute; }}
+        public BiDirectionalAlignTypeAttribute Align { get { return _alignAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

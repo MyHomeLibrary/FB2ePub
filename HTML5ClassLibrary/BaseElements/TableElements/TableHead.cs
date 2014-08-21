@@ -9,10 +9,10 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     [HTMLItemAttribute(ElementName = "thead", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class TableHead : HTMLItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AlignAttribute _alignAttribute = new AlignAttribute();
+        [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "char", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CharAttribute _charAttribute = new CharAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
@@ -28,7 +28,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// Aligns the content inside the "thead" element
         /// Not supported in HTML5.
         /// </summary>
-        public AlignAttribute Align { get { return _alignAttribute; } }
+        public AlignTypeAttribute Align { get { return _alignAttribute; } }
 
 
         /// <summary>

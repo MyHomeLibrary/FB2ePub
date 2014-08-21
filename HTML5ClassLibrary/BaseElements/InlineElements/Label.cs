@@ -11,11 +11,11 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
    [HTMLItemAttribute(ElementName = "label", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Label : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ForAttribute _forAttribute = new ForAttribute();
+        [AttributeTypeAttributeMember(Name = "for", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly IdReferenceAttribute _forAttribute = new IdReferenceAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+        [AttributeTypeAttributeMember(Name = "form", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
 
 
 
@@ -23,12 +23,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// This attribute explicitly associates the label with a form control. 
         /// When present, the value of this attribute must be the same as the value of the id attribute of the form control in the same document. When absent, the label being defined is associated with the control inside the label element.
         /// </summary>
-        public ForAttribute For { get { return _forAttribute; } }
+        public IdReferenceAttribute For { get { return _forAttribute; } }
 
         /// <summary>
         /// Specifies one or more forms the label belongs to
         /// </summary>
-        public FormIdAttribute Form { get { return _formIdAttribute; }}
+        public URITypeAttribute Form { get { return _formIdAttribute; }}
 
 
 

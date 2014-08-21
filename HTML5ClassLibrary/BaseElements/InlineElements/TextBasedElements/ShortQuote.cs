@@ -9,13 +9,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
     [HTMLItemAttribute(ElementName = "q", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class ShortQuote : TextBasedElement
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CiteAttribute _citeAttribute = new CiteAttribute();
+        [AttributeTypeAttributeMember(Name = "cite", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly URITypeAttribute _citeAttribute = new URITypeAttribute();
 
 
         /// <summary>
         /// 
         /// </summary>
-        public CiteAttribute Cite { get { return _citeAttribute; }}
+        public URITypeAttribute Cite { get { return _citeAttribute; }}
     }
 }

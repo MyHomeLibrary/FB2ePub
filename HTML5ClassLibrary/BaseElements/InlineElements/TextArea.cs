@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
@@ -14,34 +10,34 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     public class TextArea : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "autofocus", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _autoFocusAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _autoFocusAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ColsAttribute _colsAttribute = new ColsAttribute();
+        [AttributeTypeAttributeMember(Name = "cols", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly NumberAttribute _colsAttribute = new NumberAttribute();
 
         [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute _disabledAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+        [AttributeTypeAttributeMember(Name = "form", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MaxLengthAttribute _maxLengthAttribute = new MaxLengthAttribute();
+        [AttributeTypeAttributeMember(Name = "maxlength", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly NumberAttribute _maxLengthAttribute = new NumberAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NameAttribute _nameAttribute = new NameAttribute();
+        [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly PlaceHolderAttribute _placeHolderAttribute = new PlaceHolderAttribute();
+        [AttributeTypeAttributeMember(Name = "placeholder", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TextValueAttribute _placeHolderAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(Name = "readonly", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute _readOnlyAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _readOnlyAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "required", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _requiredAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _requiredAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly RowsAttribute _rowsAttribute = new RowsAttribute();
+        [AttributeTypeAttributeMember(Name = "rows", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly NumberAttribute _rowsAttribute = new NumberAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly WrapAttribute _wrapAttribute = new WrapAttribute();
@@ -52,37 +48,37 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies that a text area should automatically get focus when the page loads
         /// </summary>
-        public FlagAttribute AutoFocus { get { return _autoFocusAttribute; }}
+        public FlagTypeAttribute AutoFocus { get { return _autoFocusAttribute; }}
 
         /// <summary>
         /// Specifies that a text area should be disabled
         /// </summary>
-        public FlagAttribute Disabled { get { return _disabledAttribute; }}
+        public FlagTypeAttribute Disabled { get { return _disabledAttribute; }}
 
         /// <summary>
         /// Specifies one or more forms the text area belongs to
         /// </summary>
-        public FormIdAttribute Form { get { return _formIdAttribute; }}
+        public URITypeAttribute Form { get { return _formIdAttribute; }}
 
         /// <summary>
         /// Specifies the maximum number of characters allowed in the text area
         /// </summary>
-        public MaxLengthAttribute MaxLength { get { return _maxLengthAttribute; }}
+        public NumberAttribute MaxLength { get { return _maxLengthAttribute; }}
 
         /// <summary>
         /// Specifies a short hint that describes the expected value of a text area
         /// </summary>
-        public PlaceHolderAttribute PlaceHolder { get { return _placeHolderAttribute; }}
+        public TextValueAttribute PlaceHolder { get { return _placeHolderAttribute; }}
 
         /// <summary>
         /// Specifies that a text area should be read-only
         /// </summary>
-        public FlagAttribute ReadOnly { get { return _readOnlyAttribute; }}
+        public FlagTypeAttribute ReadOnly { get { return _readOnlyAttribute; }}
 
         /// <summary>
         /// Specifies that a text area is required/must be filled out
         /// </summary>
-        public FlagAttribute Required { get { return _requiredAttribute; }}
+        public FlagTypeAttribute Required { get { return _requiredAttribute; }}
 
         /// <summary>
         /// Specifies how the text in a text area is to be wrapped when submitted in a form
@@ -93,18 +89,18 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// This attribute specifies the visible width in average character widths. 
         /// This attribute is required.
         /// </summary>
-        public ColsAttribute Cols { get { return _colsAttribute; } }
+        public NumberAttribute Cols { get { return _colsAttribute; } }
 
         /// <summary>
         /// Form control name.
         /// </summary>
-        public NameAttribute Name { get { return _nameAttribute; } }
+        public TextValueAttribute Name { get { return _nameAttribute; } }
 
         /// <summary>
         /// This attribute specifies the number of visible text lines. 
         /// This attribute is required.
         /// </summary>
-        public RowsAttribute Rows { get { return _rowsAttribute; } }
+        public NumberAttribute Rows { get { return _rowsAttribute; } }
 
  
         public override bool IsValid()

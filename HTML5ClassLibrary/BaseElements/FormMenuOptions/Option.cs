@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
 namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
 {
@@ -14,13 +13,13 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
     public class Option : HTMLItem, IOptionItem
     {
         [AttributeTypeAttributeMember(Name = "selected", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute  _selectedAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute  _selectedAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValueAttribute _valueAttribute = new ValueAttribute();
+        [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _valueAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute _disabledAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly TextValueAttribute _labelAttribute = new TextValueAttribute();
@@ -30,18 +29,18 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         /// When set, this attribute specifies that an option is pre-selected. 
         /// Possible value is "selected".
         /// </summary>
-        public FlagAttribute Selected { get { return _selectedAttribute; } }
+        public FlagTypeAttribute Selected { get { return _selectedAttribute; } }
 
         /// <summary>
         /// Value associated with a selection option.
         /// </summary>
-        public ValueAttribute Value { get { return _valueAttribute; } }
+        public TextValueAttribute Value { get { return _valueAttribute; } }
 
         /// <summary>
         /// Disables an option in a list of selectable options. 
         /// Possible value is "disabled".
         /// </summary>
-        public FlagAttribute Disabled { get { return _disabledAttribute; } }
+        public FlagTypeAttribute Disabled { get { return _disabledAttribute; } }
 
         /// <summary>
         /// Shorter label.

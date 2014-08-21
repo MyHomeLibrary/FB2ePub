@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace XHTMLClassLibrary.AttributeDataTypes
+﻿namespace XHTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     /// Arbitrary textual data, likely meant to be human-readable.

@@ -1,5 +1,4 @@
 ﻿using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.BlockElements
@@ -11,14 +10,14 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "audio", SupportedStandards = HTMLElementType.HTML5)]
     public class Audio : HTMLItem, IBlockElement
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly SourceAttribute _src = new SourceAttribute();
+        [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly URITypeAttribute _src = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "autoplay", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _autoplay = new FlagAttribute();
+        private readonly FlagTypeAttribute _autoplay = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ControlsAttribute _controls = new ControlsAttribute();
+        [AttributeTypeAttributeMember(Name = "controls", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagTypeAttribute _controls = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly LoopAttribute  _loop = new LoopAttribute();
@@ -34,7 +33,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies the URL of the audio file
         /// </summary>
-        public SourceAttribute Src
+        public URITypeAttribute Src
         {
             get { return _src; }
         }
@@ -42,7 +41,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the audio will start playing as soon as it is ready
         /// </summary>
-        public FlagAttribute AutoPlay
+        public FlagTypeAttribute AutoPlay
         {
             get { return _autoplay; }
         }
@@ -51,7 +50,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that audio controls should be displayed (such as a play/pause button etc)
         /// </summary>
-        public ControlsAttribute Controls
+        public FlagTypeAttribute  Controls
         {
             get { return _controls; }    
         }

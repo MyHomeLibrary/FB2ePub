@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.Exceptions;
 
 namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
@@ -19,7 +18,7 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         private readonly TextValueAttribute _labelAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember( Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute _disabledAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute();
 
 
 
@@ -33,7 +32,7 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         /// Disables the control for user input. 
         /// Possible value is "disabled".
         /// </summary>
-        public FlagAttribute Disabled { get { return _disabledAttribute; } }
+        public FlagTypeAttribute Disabled { get { return _disabledAttribute; } }
 
 
 

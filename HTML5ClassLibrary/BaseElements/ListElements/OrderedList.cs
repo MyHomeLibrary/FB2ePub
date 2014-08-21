@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace XHTMLClassLibrary.BaseElements.ListElements
@@ -17,13 +16,13 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
     public class OrderedList : HTMLItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "compact", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute _compactAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _compactAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "reversed", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _reversedAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _reversedAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OrderedListStartAttribute _orderedListStartAttribute = new OrderedListStartAttribute();
+        [AttributeTypeAttributeMember(Name = "high", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly NumberAttribute _orderedListStartAttribute = new NumberAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly OrderedListTypeAttribute _orderedListTypeAttribute = new OrderedListTypeAttribute();
@@ -36,12 +35,12 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         ///  Specifies that the list should render smaller than normal
         /// Not supported in HTML5.
         /// </summary>
-        public FlagAttribute Compact { get { return _compactAttribute; }}
+        public FlagTypeAttribute Compact { get { return _compactAttribute; }}
 
         /// <summary>
         /// Specifies the start value of an ordered list
         /// </summary>
-        public OrderedListStartAttribute Start { get { return _orderedListStartAttribute; }}
+        public NumberAttribute Start { get { return _orderedListStartAttribute; }}
 
         /// <summary>
         /// Specifies the kind of marker to use in the list
@@ -51,7 +50,7 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         /// <summary>
         /// Specifies that the list order should be descending (9,8,7...)
         /// </summary>
-        public FlagAttribute Reversed { get { return _reversedAttribute; }}
+        public FlagTypeAttribute Reversed { get { return _reversedAttribute; }}
 
 
         protected override bool IsValidSubType(IHTMLItem item)

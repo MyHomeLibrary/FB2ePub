@@ -51,30 +51,23 @@ namespace XHTMLClassLibrary.Attributes
 
         private EncodingTypes _encodingType = EncodingTypes.Invalid;
 
-        private const string AttributeName = "formenctype";
-
-        #region Overrides of BaseAttribute
-
         public override void AddAttribute(XElement xElement)
         {
             if (!AttributeHasValue)
             {
                 return;
             }
-            xElement.Add(new XAttribute(AttributeName, Value));
+            xElement.Add(new XAttribute(GetAttributeName(), Value));
         }
 
         public override void ReadAttribute(XElement element)
         {
             AttributeHasValue = false;
-            XAttribute xObject = element.Attribute(AttributeName);
+            XAttribute xObject = element.Attribute(GetAttributeName());
             if (xObject != null)
             {
                 Value = xObject.Value;
             }
         }
-
-        #endregion
-
     }
 }

@@ -11,42 +11,42 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "meter", SupportedStandards = HTMLElementType.HTML5 )]
     public class Meter : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+        [AttributeTypeAttributeMember(Name = "form", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly HighAttribute _highAttribute = new HighAttribute();
+        [AttributeTypeAttributeMember(Name = "high", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FloatingNumberTypeAttribute _highAttribute = new FloatingNumberTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LowAttribute _lowAttribute = new LowAttribute();
+        [AttributeTypeAttributeMember(Name = "low", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FloatingNumberTypeAttribute _lowAttribute = new FloatingNumberTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "max", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly TextValueAttribute _maxAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MinAttribute _minAttribute = new MinAttribute();
+        [AttributeTypeAttributeMember(Name = "min", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TextValueAttribute _minAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OptimumAttribute _openAttribute = new OptimumAttribute();
+        [AttributeTypeAttributeMember(Name = "optimum", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FloatingNumberTypeAttribute _openAttribute = new FloatingNumberTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MeterValueAttribute _meterValueAttribute = new MeterValueAttribute(); 
+        [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FloatingNumberTypeAttribute _meterValueAttribute = new FloatingNumberTypeAttribute(); 
 
 
         /// <summary>
         /// Specifies one or more forms the "meter" element belongs to
         /// </summary>
-        public FormIdAttribute Form { get { return _formIdAttribute; }}
+        public URITypeAttribute Form { get { return _formIdAttribute; }}
 
         /// <summary>
         /// Specifies the range that is considered to be a high value
         /// </summary>
-        public HighAttribute High { get { return _highAttribute; }}
+        public FloatingNumberTypeAttribute High { get { return _highAttribute; }}
 
         /// <summary>
         /// Specifies the range that is considered to be a low value
         /// </summary>
-        public LowAttribute Low { get { return _lowAttribute; }}
+        public FloatingNumberTypeAttribute Low { get { return _lowAttribute; }}
 
         /// <summary>
         /// Specifies the maximum value of the range
@@ -56,17 +56,17 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the minimum value of the range
         /// </summary>
-        public MinAttribute Min { get { return _minAttribute; }}
+        public TextValueAttribute Min { get { return _minAttribute; }}
 
         /// <summary>
         /// Specifies what value is the optimal value for the gauge
         /// </summary>
-        public OptimumAttribute Optimum { get { return _openAttribute; }}
+        public FloatingNumberTypeAttribute Optimum { get { return _openAttribute; }}
 
         /// <summary>
         /// Required. Specifies the current value of the gauge
         /// </summary>
-        public MeterValueAttribute Value { get { return _meterValueAttribute; }}
+        public FloatingNumberTypeAttribute Value { get { return _meterValueAttribute; }}
 
 
         public override bool IsValid()

@@ -15,8 +15,8 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     [HTMLItemAttribute(ElementName = "base", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Base : HTMLItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly HrefAttribute _hrefAttribute = new HrefAttribute();
+        [AttributeTypeAttributeMember(Name = "href", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly URITypeAttribute _hrefAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FormTargetAttribute _targetAttribute = new FormTargetAttribute();
@@ -25,7 +25,7 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// <summary>
         /// Specifies the base URL for all relative URLs in the page
         /// </summary>
-        public HrefAttribute HRef { get { return _hrefAttribute; } }
+        public URITypeAttribute HRef { get { return _hrefAttribute; } }
 
         /// <summary>
         /// Specifies the default target for all hyperlinks and forms in the page

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using XHTMLClassLibrary.AttributeDataTypes;
 
 namespace XHTMLClassLibrary.Attributes
 {
     public class FormTargetAttribute: BaseAttribute
     {
-        private URI _frameNameURI = new URI();
+        private readonly URI _frameNameURI = new URI();
 
         private enum TargetType
         {

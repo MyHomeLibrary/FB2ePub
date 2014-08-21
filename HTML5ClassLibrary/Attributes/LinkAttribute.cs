@@ -5,7 +5,7 @@ using System.Text;
 
 namespace XHTMLClassLibrary.Attributes
 {
-    public class LinkAttribute : ColorAttribute
+    public class LinkAttribute : ColorTypeAttribute
     {
         private const string AttributeName = "link";
     }

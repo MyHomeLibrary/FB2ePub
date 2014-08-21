@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Attributes.FlaggedAttributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
@@ -12,34 +11,34 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "input", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
     public class Input : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AcceptAttribute _acceptAttribute = new AcceptAttribute();
+        [AttributeTypeAttributeMember(Name = "accept", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ContentTypeAttribute _acceptAttribute = new ContentTypeAttribute();
 
-         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly BiDirectionalAlignAttribute _alignAttribute = new BiDirectionalAlignAttribute();
+         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly BiDirectionalAlignTypeAttribute _alignAttribute = new BiDirectionalAlignTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly TextValueAttribute _altAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly AutocompleteAttribute _autocompleteAttribute = new AutocompleteAttribute();
+        [AttributeTypeAttributeMember(Name = "autocomplete", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnOffTypeAttribute _autocompleteAttribute = new OnOffTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "autofocus", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _autoFocusAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _autoFocusAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "checked", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute _checkedAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _checkedAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute _disabledAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormIdAttribute _formIdAttribute = new FormIdAttribute();
+        [AttributeTypeAttributeMember(Name = "form", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormActionAttribute _formActionAttribute = new FormActionAttribute();
+        [AttributeTypeAttributeMember(Name = "formaction", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly URITypeAttribute _formActionAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        [AttributeTypeAttributeMember(Name = "enctype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormEncodingTypeAttribute _formEncodingTypeAttribute = new FormEncodingTypeAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
@@ -51,56 +50,56 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormTargetAttribute _formTargetAttribute = new FormTargetAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly HeightAttribute _heightAttribute = new HeightAttribute();
+        [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly LengthAttribute _heightAttribute = new LengthAttribute();
       
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]     
-        private readonly ListAttribute _listAttribute = new ListAttribute();
+        [AttributeTypeAttributeMember(Name = "list", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]     
+        private readonly URITypeAttribute _listAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "max", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly TextValueAttribute _maxAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MaxLengthAttribute _maxLenghtAttribute = new MaxLengthAttribute();
+        [AttributeTypeAttributeMember(Name = "maxlength", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly NumberAttribute _maxLenghtAttribute = new NumberAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MinAttribute _minAttribute = new MinAttribute();
+        [AttributeTypeAttributeMember(Name = "min", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TextValueAttribute _minAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(Name = "multiple", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _multipleAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _multipleAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NameAttribute _nameAttribute = new NameAttribute();
+        [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        [AttributeTypeAttributeMember(Name = "pattern", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly PatternAttribute _pattern = new PatternAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly PlaceHolderAttribute _placeHolderAttribute = new PlaceHolderAttribute();
+        [AttributeTypeAttributeMember(Name = "placeholder", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TextValueAttribute _placeHolderAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(Name = "readonly", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagAttribute _readonlyAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _readonlyAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "required", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FlagAttribute _requiredAttribute = new FlagAttribute();
+        private readonly FlagTypeAttribute _requiredAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly SizeAttribute _sizeAttribute = new SizeAttribute();
+        [AttributeTypeAttributeMember(Name = "size", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly NumberAttribute _sizeAttribute = new NumberAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly SourceAttribute _srcAttribute = new SourceAttribute();
+        [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly URITypeAttribute _srcAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly StepAttribute _stepAttribute = new StepAttribute();
+        [AttributeTypeAttributeMember(Name = "step", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TextValueAttribute _stepAttribute = new TextValueAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly InputTypeAttribute _inputTypeAttribute = new InputTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValueAttribute _valueAttribute = new ValueAttribute();
+        [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _valueAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly WidthAttribute _widthAttribute = new WidthAttribute();
+        [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
 
 
         /// <summary>
@@ -114,7 +113,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies whether an "input" element should have autocomplete enabled
         /// </summary>
-        public AutocompleteAttribute Autocomplete
+        public OnOffTypeAttribute Autocomplete
         {
             get { return _autocompleteAttribute; }
         }
@@ -122,7 +121,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies that an "input" element should automatically get focus when the page loads
         /// </summary>
-        public FlagAttribute Autofocus
+        public FlagTypeAttribute Autofocus
         {
             get { return _autoFocusAttribute; }
         }
@@ -130,7 +129,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Form control name.
         /// </summary>
-        public NameAttribute Name
+        public TextValueAttribute Name
         {
             get { return _nameAttribute; }
         }
@@ -143,13 +142,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies a short hint that describes the expected value of an "input" element
         /// </summary>
-        public PlaceHolderAttribute Placeholder { get { return _placeHolderAttribute; }}
+        public TextValueAttribute Placeholder { get { return _placeHolderAttribute; }}
 
         /// <summary>
         /// When the type attribute has the value radio or checkbox, 
         /// this attribute specifies that the radio/checkbox is selected.
         /// </summary>
-        public FlagAttribute Checked
+        public FlagTypeAttribute Checked
         {
             get { return _checkedAttribute; }
         }
@@ -158,7 +157,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// When the type attribute has the value text or password, this attribute specifies the maximum number of characters the user may enter. 
         /// This number should not exceed the value specified in the size attribute.
         /// </summary>
-        public MaxLengthAttribute MaxLength
+        public NumberAttribute MaxLength
         {
             get { return _maxLenghtAttribute; }
         }
@@ -166,20 +165,20 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies a minimum value for an "input" element
         /// </summary>
-        public MinAttribute Min { get { return _minAttribute; }}
+        public TextValueAttribute Min { get { return _minAttribute; }}
 
 
         /// <summary>
         /// Specifies that a user can enter more than one value in an "input" element
         /// </summary>
-        public FlagAttribute Multiple { get { return _multipleAttribute; }}
+        public FlagTypeAttribute Multiple { get { return _multipleAttribute; }}
 
         /// <summary>
         /// This attribute tells the Web browser the initial width of the control. 
         /// The width is given in pixels except when the type attribute has the value text or password. 
         /// In such cases, its value is the number of characters.
         /// </summary>
-        public SizeAttribute Size
+        public NumberAttribute Size
         {
             get { return _sizeAttribute; }
         }
@@ -196,7 +195,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// This attribute specifies a comma-separated list of content types that a server processing this form will handle correctly.
         /// </summary>
-        public AcceptAttribute Accept { get { return _acceptAttribute; } }
+        public ContentTypeAttribute Accept { get { return _acceptAttribute; } }
 
 
 
@@ -204,25 +203,25 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the alignment of an image input (only for type="image")
         /// Not supported in HTML5.
         /// </summary>
-        public BiDirectionalAlignAttribute Align { get { return _alignAttribute; }}
+        public BiDirectionalAlignTypeAttribute Align { get { return _alignAttribute; }}
 
 
         /// <summary>
         /// Disables the control for user input. Possible value is disabled.
         /// </summary>
-        public FlagAttribute Disabled { get { return _disabledAttribute; } }
+        public FlagTypeAttribute Disabled { get { return _disabledAttribute; } }
 
 
         /// <summary>
         /// Specifies one or more forms the "input" element belongs to
         /// </summary>
-        public FormIdAttribute Form { get { return _formIdAttribute; }}
+        public URITypeAttribute Form { get { return _formIdAttribute; }}
 
 
         /// <summary>
         /// Specifies the URL of the file that will process the input control when the form is submitted (for type="submit" and type="image")
         /// </summary>
-        public FormActionAttribute FormAction { get { return _formActionAttribute; }}
+        public URITypeAttribute FormAction { get { return _formActionAttribute; }}
 
 
         /// <summary>
@@ -249,18 +248,18 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the height of an "input" element (only for type="image")
         /// </summary>
-        public HeightAttribute Height { get { return _heightAttribute; }}
+        public LengthAttribute Height { get { return _heightAttribute; }}
 
         /// <summary>
         /// Specifies the width of an "input" element (only for type="image")
         /// </summary>
-        public WidthAttribute Width { get { return _widthAttribute; }}
+        public LengthAttribute Width { get { return _widthAttribute; }}
 
 
         /// <summary>
         /// Refers to a "datalist" element that contains pre-defined options for an "input" element
         /// </summary>
-        public ListAttribute List { get { return _listAttribute; }} 
+        public URITypeAttribute List { get { return _listAttribute; }} 
 
         /// <summary>
         /// Specifies the maximum value for an "input" element
@@ -271,29 +270,29 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// If present, this attribute prohibits changes to the value in the control. 
         /// Possible value is "readonly".
         /// </summary>
-        public FlagAttribute ReadOnly { get { return _readonlyAttribute; } }
+        public FlagTypeAttribute ReadOnly { get { return _readonlyAttribute; } }
 
         /// <summary>
         /// Specifies that an input field must be filled out before submitting the form
         /// </summary>
-        public FlagAttribute Required { get { return _requiredAttribute; }}
+        public FlagTypeAttribute Required { get { return _requiredAttribute; }}
 
         /// <summary>
         /// When the type attribute has the value image, 
         /// this attribute specifies the location of the image to be used to decorate the graphical submit button.
         /// </summary>
-        public SourceAttribute Src { get { return _srcAttribute; } }
+        public URITypeAttribute Src { get { return _srcAttribute; } }
 
         /// <summary>
         /// Specifies the legal number intervals for an input field
         /// </summary>
-        public StepAttribute Step { get { return _stepAttribute; }}
+        public TextValueAttribute Step { get { return _stepAttribute; }}
 
 
         /// <summary>
         /// Value associated with a control.
         /// </summary>
-        public ValueAttribute Value { get { return _valueAttribute; } }
+        public TextValueAttribute Value { get { return _valueAttribute; } }
 
 
         /// <summary>

@@ -11,13 +11,13 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
     [HTMLItemAttribute(ElementName = "map", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Map : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NameAttribute _nameAttribute = new NameAttribute();
+        [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
 
         /// <summary>
         /// Required. Specifies the name of an image-map
         /// </summary>
-        public NameAttribute Name { get { return _nameAttribute; }}
+        public TextValueAttribute Name { get { return _nameAttribute; }}
 
 
         protected override bool IsValidSubType(IHTMLItem item)

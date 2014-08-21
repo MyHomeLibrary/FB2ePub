@@ -1,5 +1,4 @@
-﻿using System.Xml.Linq;
-using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
@@ -9,32 +8,32 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
     [HTMLItemAttribute(ElementName = "a", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Anchor : TextBasedElement
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "charset", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private  readonly CoordinatesAttribute _coordinatesAttribute = new CoordinatesAttribute();
+        [AttributeTypeAttributeMember(Name = "coords", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private  readonly CoordinatesTypeAttribute _coordinatesAttribute = new CoordinatesTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly DownloadAttribute _downloadAttrib = new DownloadAttribute();
+        [AttributeTypeAttributeMember(Name = "download", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly URITypeAttribute _downloadAttrib = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly HrefAttribute _hrefAttrib = new HrefAttribute();
+        [AttributeTypeAttributeMember(Name = "href", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly URITypeAttribute _hrefAttrib = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly HRefLanguageAttribute _hrefLangAttrib = new HRefLanguageAttribute();
+        [AttributeTypeAttributeMember(Name = "hreflang", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly LanguageAttribute _hrefLangAttrib = new LanguageAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MediaAttribute _mediaAttr = new MediaAttribute();
+        [AttributeTypeAttributeMember(Name = "media", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly MediaDescriptionsAttribute _mediaAttr = new MediaDescriptionsAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NameAttribute _nameAttribute = new NameAttribute();
+        [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AreaRelationAttribute _relAttrib = new AreaRelationAttribute();
+        [AttributeTypeAttributeMember(Name = "rel", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly AreaRelationTypeAttribute _relAttrib = new AreaRelationTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ReverseRelationAttribute _reverseRelationAttribute = new ReverseRelationAttribute();
+        [AttributeTypeAttributeMember(Name = "rev", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly LinkTypeAttribute _reverseRelationAttribute = new LinkTypeAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ShapeAttribute _shapeAttribute = new ShapeAttribute();
@@ -59,19 +58,19 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         /// Specifies the relationship between the linked document and the current document
         /// Not supported in HTML5.
         /// </summary>
-        public ReverseRelationAttribute ReverseRelation { get { return _reverseRelationAttribute; }}
+        public LinkTypeAttribute ReverseRelation { get { return _reverseRelationAttribute; }}
 
         /// <summary>
         /// Specifies the name of an anchor
         /// Not supported in HTML5. Use the id attribute instead
         /// </summary>
-        public NameAttribute Name { get { return _nameAttribute; }}
+        public TextValueAttribute Name { get { return _nameAttribute; }}
 
         /// <summary>
         /// Specifies the coordinates of a link
         /// Not supported in HTML5.
         /// </summary>
-        public CoordinatesAttribute Coordinates { get { return _coordinatesAttribute; }}
+        public CoordinatesTypeAttribute Coordinates { get { return _coordinatesAttribute; }}
 
         /// <summary>
         ///  Specifies the character-set of a linked document
@@ -83,28 +82,28 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         /// This attribute specifies the location of a Web resource. 
         /// For example: http://xhtml.com/ or mailto:info@xhtml.com.
         /// </summary>
-        public HrefAttribute HRef { get { return _hrefAttrib; } }
+        public URITypeAttribute HRef { get { return _hrefAttrib; } }
 
         /// <summary>
         /// Specifies the primary language of the resource designated by href and may only be used when href is specified.
         /// </summary>
-        public HRefLanguageAttribute HrefLanguage { get { return _hrefLangAttrib; } }
+        public LanguageAttribute HrefLanguage { get { return _hrefLangAttrib; } }
 
         /// <summary>
         /// Describes the relationship from the current document to the resource specified by the href attribute. The value of this attribute is a space-separated list of link types. 
         /// For example: appendix.
         /// </summary>
-        public AreaRelationAttribute Rel { get { return _relAttrib; } }
+        public AreaRelationTypeAttribute Rel { get { return _relAttrib; } }
 
         /// <summary>
         /// Specifies that the target will be downloaded when a user clicks on the hyperlink
         /// </summary>
-        public DownloadAttribute Download {get { return _downloadAttrib; }}
+        public URITypeAttribute Download {get { return _downloadAttrib; }}
 
         /// <summary>
         /// Specifies what media/device the linked document is optimized for
         /// </summary>
-        public MediaAttribute Media { get { return _mediaAttr; }}
+        public MediaDescriptionsAttribute Media { get { return _mediaAttr; }}
 
         /// <summary>
         /// Specifies where to open the linked document

@@ -9,38 +9,38 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "applet", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
     public class Applet : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly CodeAttribute _codeAttribute = new CodeAttribute();
+        [AttributeTypeAttributeMember(Name = "code", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly URITypeAttribute _codeAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly ObjectAttribute _objectAttribute = new ObjectAttribute();
+        [AttributeTypeAttributeMember(Name = "object", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _objectAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly BiDirectionalAlignAttribute _alignAttribute = new BiDirectionalAlignAttribute();
+        [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly BiDirectionalAlignTypeAttribute _alignAttribute = new BiDirectionalAlignTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
         private readonly TextValueAttribute _altAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly ArchiveAttribute _archiveAttribute = new ArchiveAttribute();
+        [AttributeTypeAttributeMember(Name = "archive", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly URIsTypeAttribute _archiveAttribute = new URIsTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly CodeBaseAttribute _codeBaseAttribute = new CodeBaseAttribute();
+        [AttributeTypeAttributeMember(Name = "codebase", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly URITypeAttribute _codeBaseAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly HeightAttribute _height = new HeightAttribute();
+        [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly LengthAttribute _height = new LengthAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly HSpaceAttribute _hSpaceAttribute = new HSpaceAttribute();
+        [AttributeTypeAttributeMember(Name = "hspace", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly LengthAttribute _hSpaceAttribute = new LengthAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly NameAttribute _nameAttribute = new NameAttribute();
+        [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly VSpaceAttribute _vSpaceAttribute = new VSpaceAttribute();
+        [AttributeTypeAttributeMember(Name = "vspace", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly LengthAttribute _vSpaceAttribute = new LengthAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly WidthAttribute _widthAttribute = new WidthAttribute();
+        [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
 
 
 
@@ -49,39 +49,39 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the width of an applet
         /// </summary>
-        public WidthAttribute Width { get { return _widthAttribute; }}
+        public LengthAttribute Width { get { return _widthAttribute; }}
 
 
         /// <summary>
         /// Defines the vertical spacing around an applet
         /// </summary>
-        public VSpaceAttribute VSpace { get { return _vSpaceAttribute; }}
+        public LengthAttribute VSpace { get { return _vSpaceAttribute; }}
            
 
         /// <summary>
         /// Defines the name for an applet (to use in scripts)
         /// </summary>
-        public NameAttribute Name { get { return _nameAttribute; }}
+        public TextValueAttribute Name { get { return _nameAttribute; }}
 
         /// <summary>
         /// Defines the horizontal spacing around an applet
         /// </summary>
-        public HSpaceAttribute HSpace { get { return _hSpaceAttribute; }}
+        public LengthAttribute HSpace { get { return _hSpaceAttribute; }}
 
         /// <summary>
         /// Specifies the height of an applet
         /// </summary>
-        public HeightAttribute Height { get { return _height; }}
+        public LengthAttribute Height { get { return _height; }}
 
         /// <summary>
         /// Specifies a relative base URL for applets specified in the code attribute
         /// </summary>
-        public CodeBaseAttribute CodeBase { get { return _codeBaseAttribute; }}
+        public URITypeAttribute CodeBase { get { return _codeBaseAttribute; }}
 
         /// <summary>
         /// Specifies the location of an archive file
         /// </summary>
-        public ArchiveAttribute Archive { get { return _archiveAttribute; }}
+        public URIsTypeAttribute Archive { get { return _archiveAttribute; }}
 
         /// <summary>
         /// Specifies an alternate text for an applet
@@ -91,17 +91,17 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the alignment of an applet according to surrounding elements
         /// </summary>
-        public BiDirectionalAlignAttribute Align { get { return _alignAttribute; }}
+        public BiDirectionalAlignTypeAttribute Align { get { return _alignAttribute; }}
 
         /// <summary>
         /// Specifies the file name of a Java applet
         /// </summary>
-        public CodeAttribute Code { get { return _codeAttribute; }}
+        public URITypeAttribute Code { get { return _codeAttribute; }}
 
         /// <summary>
         /// Specifies a reference to a serialized representation of an applet
         /// </summary>
-        public ObjectAttribute Object { get { return _objectAttribute; }}
+        public TextValueAttribute Object { get { return _objectAttribute; }}
 
 
         public override bool IsValid()
