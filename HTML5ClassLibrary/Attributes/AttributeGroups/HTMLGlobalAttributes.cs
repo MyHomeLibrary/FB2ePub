@@ -11,13 +11,13 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         private readonly CharAttribute _accessKeyAttribute = new CharAttribute();
        
         [AttributeTypeAttributeMember(Name = "class", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NameTokensAttribute _classAttribute = new NameTokensAttribute();
+        private readonly NameTokensTypeAttribute _classAttribute = new NameTokensTypeAttribute();
         
         [AttributeTypeAttributeMember(Name = "contenteditable", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly BooleanSimpleTypeAttribute _contentEditableAttribute = new BooleanSimpleTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "contextmenu", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly IdAttribute _contextMenuAttribute = new IdAttribute();
+        private readonly IdTypeAttribute _contextMenuAttribute = new IdTypeAttribute();
         
         //[AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         //private readonly AnyDataAttribute _anyDataAttribute = new AnyDataAttribute(); // not really global but contain custom elements that can appear on any element so we put it here 
@@ -35,7 +35,7 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         private readonly FlagTypeAttribute _hiddenAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "id", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly IdAttribute _idAttribute = new IdAttribute();
+        private readonly IdTypeAttribute _idAttribute = new IdTypeAttribute();
         
         [AttributeTypeAttributeMember(Name = "lang", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly LanguagesTypeAttribute _languageAttribute = new LanguagesTypeAttribute();
@@ -44,13 +44,13 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         private readonly BooleanSimpleTypeAttribute _spellCheckAttribute = new BooleanSimpleTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "style", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _styleAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _styleAttribute = new TextValueTypeAttribute();
         
         [AttributeTypeAttributeMember(Name = "tabindex", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NumberAttribute _tabIndexAttribute = new NumberAttribute();
+        private readonly NumberTypeAttribute _tabIndexAttribute = new NumberTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "title", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _titleAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _titleAttribute = new TextValueTypeAttribute();
         
         [AttributeTypeAttributeMember(Name = "translate", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly YesNoTypeAttribute _translateAttribute = new YesNoTypeAttribute();
@@ -64,7 +64,7 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         /// <summary>
         /// Specifies one or more classnames for an element (refers to a class in a style sheet)
         /// </summary>
-        public NameTokensAttribute Class { get { return _classAttribute; }}
+        public NameTokensTypeAttribute Class { get { return _classAttribute; }}
 
         /// <summary>
         /// Specifies whether the content of an element is editable or not
@@ -74,7 +74,7 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         /// <summary>
         /// Specifies a context menu for an element. The context menu appears when a user right-clicks on the element 
         /// </summary>
-        public IdAttribute ContextMenu {get { return _contextMenuAttribute; }}
+        public IdTypeAttribute ContextMenu {get { return _contextMenuAttribute; }}
 
         ///// <summary>
         ///// Used to store custom data private to the page or application
@@ -105,7 +105,7 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         /// <summary>
         /// Specifies a unique id for an element
         /// </summary>
-        public IdAttribute ID { get { return _idAttribute; }}
+        public IdTypeAttribute ID { get { return _idAttribute; }}
 
         /// <summary>
         /// Specifies the language of the element's content
@@ -120,18 +120,18 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         /// <summary>
         /// Specifies an inline CSS style for an element
         /// </summary>
-        public TextValueAttribute Style { get { return _styleAttribute; }}
+        public TextValueTypeAttribute Style { get { return _styleAttribute; }}
 
 
         /// <summary>
         /// Specifies the tabbing order of an element
         /// </summary>
-        public NumberAttribute TabIndex { get { return _tabIndexAttribute; }}
+        public NumberTypeAttribute TabIndex { get { return _tabIndexAttribute; }}
 
         /// <summary>C:\Project\GoogleCode\fb2epub\HTML5ClassLibrary\Attributes\XMLSpaceAttribute.cs
         /// Specifies extra information about an element
         /// </summary>
-        public TextValueAttribute Title { get { return _titleAttribute; }}
+        public TextValueTypeAttribute Title { get { return _titleAttribute; }}
 
 
         /// <summary>

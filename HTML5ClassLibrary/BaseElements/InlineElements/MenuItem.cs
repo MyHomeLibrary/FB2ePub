@@ -16,7 +16,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly FlagTypeAttribute _checkedAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "command", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueAttribute _commandAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _commandAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "default", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _defaultAttribute = new FlagTypeAttribute();
@@ -28,7 +28,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly URITypeAttribute _iconAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueAttribute _labelAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _labelAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "radiogroup", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly URITypeAttribute _radioGroupAttribute = new URITypeAttribute();
@@ -49,12 +49,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Required. Specifies the name of the command/menu item, as shown to the user
         /// </summary>
-        public TextValueAttribute Label {get { return _labelAttribute; }}
+        public TextValueTypeAttribute Label {get { return _labelAttribute; }}
 
         /// <summary>
         /// 
         /// </summary>
-        public TextValueAttribute Command { get { return _commandAttribute; }}
+        public TextValueTypeAttribute Command { get { return _commandAttribute; }}
 
 
         /// <summary>

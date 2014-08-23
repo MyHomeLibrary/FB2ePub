@@ -17,25 +17,25 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly FlagTypeAttribute _controls = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LengthAttribute _heightAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _heightAttribute = new LengthTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LoopAttribute _loop = new LoopAttribute();
+        [AttributeTypeAttributeMember(Name = "loop", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagTypeAttribute _loop = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MutedAttribute _muted = new MutedAttribute();
+        [AttributeTypeAttributeMember(Name = "muted", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagTypeAttribute _muted = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "poster", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly  URITypeAttribute _posterAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly PreloadAttribute _preload = new PreloadAttribute();
+        [AttributeTypeAttributeMember(Name = "preload", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly PreloadTypeAttribute _preload = new PreloadTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly URITypeAttribute _src = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
 
 
 
@@ -47,12 +47,12 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Sets the width of the video player
         /// </summary>
-        public LengthAttribute  Width   { get { return _widthAttribute; }}
+        public LengthTypeAttribute  Width   { get { return _widthAttribute; }}
 
         /// <summary>
         /// Sets the height of the video player
         /// </summary>
-        public LengthAttribute LengthAttribute
+        public LengthTypeAttribute LengthAttribute
         {
             get { return _heightAttribute; }
         }
@@ -84,7 +84,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the video will start over again, every time it is finished
         /// </summary>
-        public LoopAttribute Loop
+        public FlagTypeAttribute Loop
         {
             get { return _loop; }
         }
@@ -92,7 +92,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the audio output of the video should be muted
         /// </summary>
-        public MutedAttribute Muted
+        public FlagTypeAttribute Muted
         {
             get { return _muted; }
         }
@@ -100,7 +100,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies if and how the author thinks the video should be loaded when the page loads
         /// </summary>
-        public PreloadAttribute Preload
+        public PreloadTypeAttribute Preload
         {
             get { return _preload; }
         }

@@ -18,10 +18,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly FlagTypeAttribute _noShadeAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "size", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-        private readonly NumberAttribute _sizeAttribute = new NumberAttribute();
+        private readonly NumberTypeAttribute _sizeAttribute = new NumberTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-        private readonly  LengthAttribute _widthAttribute = new LengthAttribute();
+        private readonly  LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
 
 
 
@@ -43,14 +43,14 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         ///  Specifies the height of a "hr" element
         /// Not supported in HTML5.
         /// </summary>
-        public NumberAttribute Size { get { return _sizeAttribute; }}
+        public NumberTypeAttribute Size { get { return _sizeAttribute; }}
 
 
         /// <summary>
         ///  Specifies the width of a "hr" element
         /// Not supported in HTML5.
         /// </summary>
-        public LengthAttribute Width { get { return _widthAttribute; }}
+        public LengthTypeAttribute Width { get { return _widthAttribute; }}
 
         /// <summary>
         /// Checks it element data is valid

@@ -11,18 +11,18 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     public class Canvas : HTMLItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LengthAttribute _height = new LengthAttribute();
+        private readonly LengthTypeAttribute _height = new LengthTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LengthAttribute _width = new LengthAttribute();
+        private readonly LengthTypeAttribute _width = new LengthTypeAttribute();
 
 
-        public LengthAttribute Height
+        public LengthTypeAttribute Height
         {
             get { return _height; }
         }
 
-        public LengthAttribute Width
+        public LengthTypeAttribute Width
         {
             get { return _width; }
         }

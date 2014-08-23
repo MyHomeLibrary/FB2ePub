@@ -11,13 +11,13 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     public class TableHeaderCell : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "abbr", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _abbrAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _abbrAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "axis", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _axisAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _axisAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "bgcolor", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ColorTypeAttribute _backgroundColorAttribute = new ColorTypeAttribute();
@@ -25,42 +25,42 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         [AttributeTypeAttributeMember(Name = "char", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CharAttribute _charAttribute = new CharAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharOffAttribute _charOffAttribute = new CharOffAttribute();
+        [AttributeTypeAttributeMember(Name = "charoff", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly LengthTypeAttribute _charOffAttribute = new LengthTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "colspan", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NumberAttribute _colSpanAttribute = new NumberAttribute();
+        private readonly NumberTypeAttribute _colSpanAttribute = new NumberTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "headers", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NameTokensAttribute _headersAttribute = new NameTokensAttribute();
+        private readonly NameTokensTypeAttribute _headersAttribute = new NameTokensTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _heightAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _heightAttribute = new LengthTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "nowrap", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _noWrapAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "rowspan", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NumberAttribute _rowSpanAttribue = new NumberAttribute();
+        private readonly NumberTypeAttribute _rowSpanAttribue = new NumberTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ScopeAttribute _scopeAttribute = new ScopeAttribute();
+        [AttributeTypeAttributeMember(Name = "scope", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ScopeTypeAttribute _scopeAttribute = new ScopeTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly SortedAttribute _sortedAttribute = new SortedAttribute();
+        [AttributeTypeAttributeMember(Name = "sorted", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly SortedTypeAttribute _sortedAttribute = new SortedTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly VAlignAttribute _vAlignAttribute = new VAlignAttribute();
+        [AttributeTypeAttributeMember(Name = "valign", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly VAlignTypeAttribute _vAlignAttribute = new VAlignTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
 
 
 
         /// <summary>
         /// Abbreviated form of the cell's content.
         /// </summary>
-        public TextValueAttribute Abbr { get { return _abbrAttribute; } }
+        public TextValueTypeAttribute Abbr { get { return _abbrAttribute; } }
 
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         ///  Categorizes header cells
         /// Not supported in HTML5.
         /// </summary>
-        public TextValueAttribute Axis { get { return _axisAttribute; }}
+        public TextValueTypeAttribute Axis { get { return _axisAttribute; }}
 
 
         /// <summary>
@@ -95,25 +95,25 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         ///  Sets the number of characters the content will be aligned from the character specified by the char attribute
         /// Not supported in HTML5.
         /// </summary>
-        public CharOffAttribute CharOff { get { return _charOffAttribute; }}
+        public LengthTypeAttribute CharOff { get { return _charOffAttribute; }}
 
         /// <summary>
         /// This attribute specifies the number of columns spanned by the current cell.
         /// </summary>
-        public NumberAttribute ColSpan { get { return _colSpanAttribute; } }
+        public NumberTypeAttribute ColSpan { get { return _colSpanAttribute; } }
 
 
         /// <summary>
         /// Specifies one or more header cells a cell is related to
         /// </summary>
-        public NameTokensAttribute Headers { get { return _headersAttribute; }}
+        public NameTokensTypeAttribute Headers { get { return _headersAttribute; }}
 
 
         /// <summary>
         ///  Sets the height of a header cell
         /// Not supported in HTML5.
         /// </summary>
-        public LengthAttribute Height { get { return _heightAttribute; }}
+        public LengthTypeAttribute Height { get { return _heightAttribute; }}
 
 
         /// <summary>
@@ -125,13 +125,13 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// <summary>
         /// This attribute specifies the number of rows spanned by the current cell.
         /// </summary>
-        public NumberAttribute RowSpan { get { return _rowSpanAttribue; } }
+        public NumberTypeAttribute RowSpan { get { return _rowSpanAttribue; } }
 
 
         /// <summary>
         /// Defines the sort direction of a column
         /// </summary>
-        public SortedAttribute Sorted { get { return _sortedAttribute; }}
+        public SortedTypeAttribute Sorted { get { return _sortedAttribute; }}
 
 
         /// <summary>
@@ -143,21 +143,21 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// * rowgroup: The header cell provides header information for the rest of the row group that contains it.
         /// * colgroup: The header cell provides header information for the rest of the column group that contains it.
         /// </summary>
-        public ScopeAttribute Scope { get { return _scopeAttribute; } }
+        public ScopeTypeAttribute Scope { get { return _scopeAttribute; } }
 
 
         /// <summary>
         ///  Vertical aligns the content in a header cell
         /// Not supported in HTML5.
         /// </summary>
-        public VAlignAttribute VAlign { get { return _vAlignAttribute; }}
+        public VAlignTypeAttribute VAlign { get { return _vAlignAttribute; }}
 
 
         /// <summary>
         ///  Specifies the width of a header cell
         /// Not supported in HTML5.
         /// </summary>
-        public LengthAttribute Width { get { return _widthAttribute; }}
+        public LengthTypeAttribute Width { get { return _widthAttribute; }}
 
 
 

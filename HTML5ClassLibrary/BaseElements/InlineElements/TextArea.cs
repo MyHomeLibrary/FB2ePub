@@ -13,7 +13,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly FlagTypeAttribute _autoFocusAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "cols", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NumberAttribute _colsAttribute = new NumberAttribute();
+        private readonly NumberTypeAttribute _colsAttribute = new NumberTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute();
@@ -22,13 +22,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "maxlength", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly NumberAttribute _maxLengthAttribute = new NumberAttribute();
+        private readonly NumberTypeAttribute _maxLengthAttribute = new NumberTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "placeholder", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueAttribute _placeHolderAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _placeHolderAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "readonly", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _readOnlyAttribute = new FlagTypeAttribute();
@@ -37,10 +37,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly FlagTypeAttribute _requiredAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "rows", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NumberAttribute _rowsAttribute = new NumberAttribute();
+        private readonly NumberTypeAttribute _rowsAttribute = new NumberTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly WrapAttribute _wrapAttribute = new WrapAttribute();
+        [AttributeTypeAttributeMember(Name = "wrap", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly WrapTypeAttribute _wrapAttribute = new WrapTypeAttribute();
 
 
 
@@ -63,12 +63,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the maximum number of characters allowed in the text area
         /// </summary>
-        public NumberAttribute MaxLength { get { return _maxLengthAttribute; }}
+        public NumberTypeAttribute MaxLength { get { return _maxLengthAttribute; }}
 
         /// <summary>
         /// Specifies a short hint that describes the expected value of a text area
         /// </summary>
-        public TextValueAttribute PlaceHolder { get { return _placeHolderAttribute; }}
+        public TextValueTypeAttribute PlaceHolder { get { return _placeHolderAttribute; }}
 
         /// <summary>
         /// Specifies that a text area should be read-only
@@ -83,24 +83,24 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies how the text in a text area is to be wrapped when submitted in a form
         /// </summary>
-        public WrapAttribute Wrap { get { return _wrapAttribute; }}
+        public WrapTypeAttribute Wrap { get { return _wrapAttribute; }}
 
         /// <summary>
         /// This attribute specifies the visible width in average character widths. 
         /// This attribute is required.
         /// </summary>
-        public NumberAttribute Cols { get { return _colsAttribute; } }
+        public NumberTypeAttribute Cols { get { return _colsAttribute; } }
 
         /// <summary>
         /// Form control name.
         /// </summary>
-        public TextValueAttribute Name { get { return _nameAttribute; } }
+        public TextValueTypeAttribute Name { get { return _nameAttribute; } }
 
         /// <summary>
         /// This attribute specifies the number of visible text lines. 
         /// This attribute is required.
         /// </summary>
-        public NumberAttribute Rows { get { return _rowsAttribute; } }
+        public NumberTypeAttribute Rows { get { return _rowsAttribute; } }
 
  
         public override bool IsValid()

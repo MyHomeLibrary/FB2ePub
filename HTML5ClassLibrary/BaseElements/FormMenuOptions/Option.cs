@@ -16,13 +16,13 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         private readonly FlagTypeAttribute  _selectedAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _valueAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _valueAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _labelAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _labelAttribute = new TextValueTypeAttribute();
 
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         /// <summary>
         /// Value associated with a selection option.
         /// </summary>
-        public TextValueAttribute Value { get { return _valueAttribute; } }
+        public TextValueTypeAttribute Value { get { return _valueAttribute; } }
 
         /// <summary>
         /// Disables an option in a list of selectable options. 
@@ -45,7 +45,7 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         /// <summary>
         /// Shorter label.
         /// </summary>
-        public TextValueAttribute Label { get { return _labelAttribute; } }
+        public TextValueTypeAttribute Label { get { return _labelAttribute; } }
 
 
         public override bool IsValid()

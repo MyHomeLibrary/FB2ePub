@@ -12,7 +12,7 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
     [HTMLItem(ElementName = "frame", SupportedStandards = HTMLElementType.FrameSet)]
     public class Frame : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "frameborder", SupportedStandards = HTMLElementType.FrameSet)]
         private readonly FrameBorderAttribute _frameBorderAttribute = new FrameBorderAttribute();
 
         [AttributeTypeAttributeMember(Name = "longdesc", SupportedStandards = HTMLElementType.FrameSet)]
@@ -25,13 +25,13 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
         private readonly PixelsTypeAttribute _marginWidthAttribute = new PixelsTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly NoResizeAttribute _noResizeAttribute = new NoResizeAttribute();
+        [AttributeTypeAttributeMember(Name = "noresize", SupportedStandards = HTMLElementType.FrameSet)]
+        private readonly FlagTypeAttribute _noResizeAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly ScrollingAttribute _scrollingAttribute = new ScrollingAttribute();
+        [AttributeTypeAttributeMember(Name = "scrolling", SupportedStandards = HTMLElementType.FrameSet)]
+        private readonly YesNoAutoTypeAttribute _scrollingAttribute = new YesNoAutoTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.FrameSet)]
         private readonly URITypeAttribute _sourceAttribute = new URITypeAttribute();
@@ -72,21 +72,21 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
         /// Specifies the name of a frame
         /// Not supported in HTML5.
         /// </summary>
-        public TextValueAttribute Name { get { return _nameAttribute; }}
+        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
 
 
         /// <summary>
         /// Specifies that a frame is not resizable
         /// Not supported in HTML5.
         /// </summary>
-        public NoResizeAttribute NoResize { get { return _noResizeAttribute; }}
+        public FlagTypeAttribute NoResize { get { return _noResizeAttribute; }}
 
 
         /// <summary>
         /// Specifies whether or not to display scrollbars in a frame
         /// Not supported in HTML5.
         /// </summary>
-        public ScrollingAttribute Scrolling { get { return _scrollingAttribute; }}
+        public YesNoAutoTypeAttribute Scrolling { get { return _scrollingAttribute; }}
 
 
         /// <summary>

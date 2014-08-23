@@ -9,7 +9,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
     public class Anchor : TextBasedElement
     {
         [AttributeTypeAttributeMember(Name = "charset", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
+        private readonly CharsetTypeAttribute _charsetAttribute = new CharsetTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "coords", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private  readonly CoordinatesTypeAttribute _coordinatesAttribute = new CoordinatesTypeAttribute();
@@ -21,13 +21,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         private readonly URITypeAttribute _hrefAttrib = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "hreflang", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LanguageAttribute _hrefLangAttrib = new LanguageAttribute();
+        private readonly LanguageTypeAttribute _hrefLangAttrib = new LanguageTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "media", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MediaDescriptionsAttribute _mediaAttr = new MediaDescriptionsAttribute();
+        private readonly MediaDescriptionsTypeAttribute _mediaAttr = new MediaDescriptionsTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "rel", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly AreaRelationTypeAttribute _relAttrib = new AreaRelationTypeAttribute();
@@ -35,13 +35,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         [AttributeTypeAttributeMember(Name = "rev", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly LinkTypeAttribute _reverseRelationAttribute = new LinkTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ShapeAttribute _shapeAttribute = new ShapeAttribute();
+        [AttributeTypeAttributeMember(Name = "shape", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ShapeTypeAttribute _shapeAttribute = new ShapeTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FormTargetAttribute _targetAttr = new FormTargetAttribute();
+        [AttributeTypeAttributeMember(Name = "target", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FormTargetTypeAttribute _targetAttr = new FormTargetTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MIMETypeAttribute _typeAttr = new MIMETypeAttribute();
  
 
@@ -52,7 +52,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         /// Specifies the shape of a link
         /// Not supported in HTML5
         /// </summary>
-        public ShapeAttribute Shape { get { return _shapeAttribute; }}
+        public ShapeTypeAttribute Shape { get { return _shapeAttribute; }}
 
         /// <summary>
         /// Specifies the relationship between the linked document and the current document
@@ -64,7 +64,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         /// Specifies the name of an anchor
         /// Not supported in HTML5. Use the id attribute instead
         /// </summary>
-        public TextValueAttribute Name { get { return _nameAttribute; }}
+        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
 
         /// <summary>
         /// Specifies the coordinates of a link
@@ -76,7 +76,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         ///  Specifies the character-set of a linked document
         /// Not supported in HTML5.
         /// </summary>
-        public CharsetAttribute Charset { get { return _charsetAttribute; }}
+        public CharsetTypeAttribute Charset { get { return _charsetAttribute; }}
 
         /// <summary>
         /// This attribute specifies the location of a Web resource. 
@@ -87,7 +87,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         /// <summary>
         /// Specifies the primary language of the resource designated by href and may only be used when href is specified.
         /// </summary>
-        public LanguageAttribute HrefLanguage { get { return _hrefLangAttrib; } }
+        public LanguageTypeAttribute HrefLanguage { get { return _hrefLangAttrib; } }
 
         /// <summary>
         /// Describes the relationship from the current document to the resource specified by the href attribute. The value of this attribute is a space-separated list of link types. 
@@ -103,12 +103,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         /// <summary>
         /// Specifies what media/device the linked document is optimized for
         /// </summary>
-        public MediaDescriptionsAttribute Media { get { return _mediaAttr; }}
+        public MediaDescriptionsTypeAttribute Media { get { return _mediaAttr; }}
 
         /// <summary>
         /// Specifies where to open the linked document
         /// </summary>
-        public FormTargetAttribute Target { get { return _targetAttr; }}
+        public FormTargetTypeAttribute Target { get { return _targetAttr; }}
 
         /// <summary>
         /// Specifies the MIME type of the linked document

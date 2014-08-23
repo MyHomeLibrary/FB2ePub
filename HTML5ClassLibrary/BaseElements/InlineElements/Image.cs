@@ -13,7 +13,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly BiDirectionalAlignTypeAttribute _alignAttribute = new BiDirectionalAlignTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _altAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _altAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "border", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly PixelsTypeAttribute _borderAttribute = new PixelsTypeAttribute();
@@ -22,13 +22,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly CrossOriginTypeAttribute _crossOriginAttribute = new CrossOriginTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _heightAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _heightAttribute = new LengthTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "hspace", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _hSpaceAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _hSpaceAttribute = new LengthTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ISMapAttribute _ismapAttribute = new ISMapAttribute();
+        [AttributeTypeAttributeMember(Name = "ismap", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ISMapTypeAttribute _ismapAttribute = new ISMapTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "longdesc", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly URITypeAttribute _longDescriptionAttribute = new URITypeAttribute();
@@ -37,13 +37,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly URITypeAttribute _srcAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "usemap", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly IdReferenceAttribute _useMapAttribute = new IdReferenceAttribute();
+        private readonly IdReferenceTypeAttribute _useMapAttribute = new IdReferenceTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "vspace", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _vSpaceAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _vSpaceAttribute = new LengthTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
 
 
         #region public_attributes
@@ -59,7 +59,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// Alternate text for the image. This attribute is required. 
         /// The value should be left blank for decorative images.
         /// </summary>
-        public TextValueAttribute Alt
+        public TextValueTypeAttribute Alt
         {
             get
             {
@@ -76,7 +76,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Image height.
         /// </summary>
-        public LengthAttribute Height
+        public LengthTypeAttribute Height
         {
             get { return _heightAttribute; }
         }
@@ -86,13 +86,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the whitespace on left and right side of an image
         /// Not supported in HTML5.
         /// </summary>
-        public LengthAttribute HSpace { get { return _hSpaceAttribute; }}
+        public LengthTypeAttribute HSpace { get { return _hSpaceAttribute; }}
 
 
         /// <summary>
         /// Image width.
         /// </summary>
-        public  LengthAttribute Width
+        public  LengthTypeAttribute Width
         {
             get { return _widthAttribute; }
         }
@@ -109,7 +109,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// If present, this attribute specifies that a server-side image map should be used. 
         /// Possible value is "ismap".
         /// </summary>
-        public ISMapAttribute ISMap
+        public ISMapTypeAttribute ISMap
         {
             get { return _ismapAttribute; }
         }
@@ -125,7 +125,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// This attribute associates the image to a client-side image map defined by a map element. 
         /// The value of this attribute must match the id attribute of the map element.
         /// </summary>
-        public IdReferenceAttribute UseMap
+        public IdReferenceTypeAttribute UseMap
         {
             get { return _useMapAttribute; }
         }
@@ -135,7 +135,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the whitespace on top and bottom of an image
         /// Not supported in HTML5.
         /// </summary>
-        public LengthAttribute VSpace { get { return _vSpaceAttribute; }}
+        public LengthTypeAttribute VSpace { get { return _vSpaceAttribute; }}
 
         /// <summary>
         /// Allow images from third-party sites that allow cross-origin access to be used with canvas

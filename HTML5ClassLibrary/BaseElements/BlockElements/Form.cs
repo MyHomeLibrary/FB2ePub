@@ -15,7 +15,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly ContentTypeAttribute _acceptAttribute = new ContentTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "accept-charsets", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharsetsAttribute _acceptCharsetsAttribute = new CharsetsAttribute();
+        private readonly CharsetsTypeAttribute _acceptCharsetsAttribute = new CharsetsTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "action", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly URITypeAttribute _actionAttribute = new URITypeAttribute();
@@ -26,17 +26,17 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         [AttributeTypeAttributeMember(Name = "enctype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FormEncodingTypeAttribute _encTypeAttribute = new FormEncodingTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly MethodAttribute _methodAttribute = new MethodAttribute();
+        [AttributeTypeAttributeMember(Name = "method", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FormMethodTypeAttribute _methodAttribute = new FormMethodTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly NoValidateAttribute _noValidateAttribute = new NoValidateAttribute();
+        [AttributeTypeAttributeMember(Name = "novalidate", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagTypeAttribute _noValidateAttribute = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FormTargetAttribute _formTargetAttribute = new FormTargetAttribute();
+        [AttributeTypeAttributeMember(Name = "target", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FormTargetTypeAttribute _formTargetAttribute = new FormTargetTypeAttribute();
 
 
 
@@ -62,17 +62,17 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// The default is get when the form data is sent to the server encoded into the URL specified in the action attribute. 
         /// Most forms use post when form data is sent to the server in the body of the HTTP message.
         /// </summary>
-        public MethodAttribute Method { get { return _methodAttribute; } }
+        public FormMethodTypeAttribute Method { get { return _methodAttribute; } }
 
         /// <summary>
         /// Specifies the name of a form
         /// </summary>
-        public TextValueAttribute Name { get { return _nameAttribute; }}
+        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
 
         /// <summary>
         /// This attribute specifies the list of character encodings for input data that are accepted by the server processing the form.
         /// </summary>
-        public CharsetsAttribute AcceptCharsets { get { return _acceptCharsetsAttribute; } }
+        public CharsetsTypeAttribute AcceptCharsets { get { return _acceptCharsetsAttribute; } }
 
 
         /// <summary>
@@ -85,12 +85,12 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the form should not be validated when submitted
         /// </summary>
-        public NoValidateAttribute NoValidate { get { return _noValidateAttribute; }}
+        public FlagTypeAttribute NoValidate { get { return _noValidateAttribute; }}
 
         /// <summary>
         /// Specifies where to display the response that is received after submitting the form
         /// </summary>
-        public FormTargetAttribute Target{ get { return _formTargetAttribute; } }
+        public FormTargetTypeAttribute Target{ get { return _formTargetAttribute; } }
 
         #region Overrides of IBlockElement
 

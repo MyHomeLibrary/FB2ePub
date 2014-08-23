@@ -22,9 +22,9 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         private readonly FlagTypeAttribute _reversedAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "high", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NumberAttribute _orderedListStartAttribute = new NumberAttribute();
+        private readonly NumberTypeAttribute _orderedListStartAttribute = new NumberTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly OrderedListTypeAttribute _orderedListTypeAttribute = new OrderedListTypeAttribute();
 
 
@@ -40,7 +40,7 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         /// <summary>
         /// Specifies the start value of an ordered list
         /// </summary>
-        public NumberAttribute Start { get { return _orderedListStartAttribute; }}
+        public NumberTypeAttribute Start { get { return _orderedListStartAttribute; }}
 
         /// <summary>
         /// Specifies the kind of marker to use in the list

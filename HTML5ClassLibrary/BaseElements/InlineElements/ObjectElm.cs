@@ -42,28 +42,28 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _heightAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _heightAttribute = new LengthTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "hspace", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _hSpaceAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _hSpaceAttribute = new LengthTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "standby", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _standByAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _standByAttribute = new TextValueTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly MIMETypeAttribute _mimeTypeAttribute = new MIMETypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "usemap", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly IdReferenceAttribute _useMapAttribute = new IdReferenceAttribute();
+        private readonly IdReferenceTypeAttribute _useMapAttribute = new IdReferenceTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "vspace", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _vSpaceAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _vSpaceAttribute = new LengthTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
 
 
 
@@ -113,31 +113,31 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Object height.
         /// </summary>
-        public LengthAttribute Height { get { return _heightAttribute; } }
+        public LengthTypeAttribute Height { get { return _heightAttribute; } }
 
 
         /// <summary>
         ///  Specifies the whitespace on left and right side of an object
         /// Not supported in HTML5.
         /// </summary>
-        public LengthAttribute HSpace { get { return _hSpaceAttribute; }}
+        public LengthTypeAttribute HSpace { get { return _hSpaceAttribute; }}
 
         /// <summary>
         /// When the object is used as a form control, this attribute is the name of the form control.
         /// </summary>
-        public TextValueAttribute Name { get { return _nameAttribute; } }
+        public TextValueTypeAttribute Name { get { return _nameAttribute; } }
 
 
         /// <summary>
         /// Defines a text to display while the object is loading
         /// Not supported in HTML5.
         /// </summary>
-        public TextValueAttribute StandBy { get { return _standByAttribute; }}
+        public TextValueTypeAttribute StandBy { get { return _standByAttribute; }}
 
         /// <summary>
         /// Object width.
         /// </summary>
-        public LengthAttribute Width { get { return _widthAttribute; } }
+        public LengthTypeAttribute Width { get { return _widthAttribute; } }
 
         /// <summary>
         /// Specifies one or more forms the object belongs to
@@ -168,14 +168,14 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// This attribute associates the object to a client-side image map defined by a map element. 
         /// The value of this attribute must match the id attribute of the map element.
         /// </summary>
-        public IdReferenceAttribute UseMap { get { return _useMapAttribute; } }
+        public IdReferenceTypeAttribute UseMap { get { return _useMapAttribute; } }
 
 
         /// <summary>
         ///  Specifies the whitespace on top and bottom of an object
         /// Not supported in HTML5.
         /// </summary>
-        public LengthAttribute VSpace { get { return _vSpaceAttribute; }}
+        public LengthTypeAttribute VSpace { get { return _vSpaceAttribute; }}
 
 
         protected override bool IsValidSubType(IHTMLItem item)

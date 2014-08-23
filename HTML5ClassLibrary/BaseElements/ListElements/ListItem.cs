@@ -10,11 +10,11 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
     [HTMLItemAttribute(ElementName = "li", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class ListItem : HTMLItem 
     {
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ListItemTypeAtttribute _listItemTypeAtttribute = new ListItemTypeAtttribute();
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _valueAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _valueAttribute = new TextValueTypeAttribute();
 
 
 
@@ -28,7 +28,7 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         /// <summary>
         /// Specifies the value of a list item. 
         /// </summary>
-        public TextValueAttribute Value { get { return _valueAttribute; }}
+        public TextValueTypeAttribute Value { get { return _valueAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

@@ -21,23 +21,23 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         [AttributeTypeAttributeMember(Name = "char", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CharAttribute _charAttribute = new CharAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharOffAttribute _charOffAttribute = new CharOffAttribute();
+        [AttributeTypeAttributeMember(Name = "charoff", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly LengthTypeAttribute _charOffAttribute = new LengthTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "span", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NumberAttribute _spanAttribute = new NumberAttribute();
+        private readonly NumberTypeAttribute _spanAttribute = new NumberTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly VAlignAttribute _vAlignAttribute = new VAlignAttribute();
+        [AttributeTypeAttributeMember(Name = "valign", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly VAlignTypeAttribute _vAlignAttribute = new VAlignTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
 
         /// <summary>
         /// A single col element can represent (or "span") multiple columns. 
         /// This attribute contains a number of columns "spanned" by the col element.
         /// </summary>
-        public NumberAttribute Span { get { return _spanAttribute; } }
+        public NumberTypeAttribute Span { get { return _spanAttribute; } }
 
         /// <summary>
         /// Not supported in HTML5.
@@ -57,21 +57,21 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// Sets the number of characters the content will be aligned from the character specified by the char attribute
         /// Not supported in HTML5.
         /// </summary>
-        public CharOffAttribute CharOff { get { return _charOffAttribute; } }
+        public LengthTypeAttribute CharOff { get { return _charOffAttribute; } }
 
 
         /// <summary>
         /// Vertical aligns the content in a column group
         /// Not supported in HTML5.
         /// </summary>
-        public VAlignAttribute VAlign { get { return _vAlignAttribute; } }
+        public VAlignTypeAttribute VAlign { get { return _vAlignAttribute; } }
 
 
         /// <summary>
         /// Specifies the width of a column group
         /// Not supported in HTML5.
         /// </summary>
-        public LengthAttribute Width { get { return _widthAttribute; } }
+        public LengthTypeAttribute Width { get { return _widthAttribute; } }
 
 
         protected override bool IsValidSubType(IHTMLItem item)

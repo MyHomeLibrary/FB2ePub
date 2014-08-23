@@ -10,7 +10,7 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
     public class Area : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _altAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _altAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "coords", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CoordinatesTypeAttribute _coordAttribute = new CoordinatesTypeAttribute();
@@ -22,10 +22,10 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         private readonly URITypeAttribute _hrefAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "hreflang", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LanguageAttribute _hrefLangAttribute = new LanguageAttribute();
+        private readonly LanguageTypeAttribute _hrefLangAttribute = new LanguageTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "media", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MediaDescriptionsAttribute _mediaAttribute = new MediaDescriptionsAttribute();
+        private readonly MediaDescriptionsTypeAttribute _mediaAttribute = new MediaDescriptionsTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "nohref", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _noHRefAttribute = new FlagTypeAttribute();
@@ -33,13 +33,13 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         [AttributeTypeAttributeMember(Name = "rel", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly AreaRelationTypeAttribute _relationAttribute = new AreaRelationTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ShapeAttribute _shapeAttribute = new ShapeAttribute();
+        [AttributeTypeAttributeMember(Name = "shape", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ShapeTypeAttribute _shapeAttribute = new ShapeTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FormTargetAttribute _targetAttribute = new FormTargetAttribute();
+        [AttributeTypeAttributeMember(Name = "target", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FormTargetTypeAttribute _targetAttribute = new FormTargetTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 )]
+        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MIMETypeAttribute  _typeAttribute = new MIMETypeAttribute();
 
 
@@ -55,7 +55,7 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         /// <summary>
         /// Alternate text. This attribute is required.
         /// </summary>
-        public TextValueAttribute Alt { get { return _altAttribute; } }
+        public TextValueTypeAttribute Alt { get { return _altAttribute; } }
 
 
         /// <summary>
@@ -83,12 +83,12 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         /// <summary>
         /// Specifies the language of the target URL
         /// </summary>
-        public LanguageAttribute HRefLang { get { return _hrefLangAttribute; }}
+        public LanguageTypeAttribute HRefLang { get { return _hrefLangAttribute; }}
 
         /// <summary>
         /// Specifies what media/device the target URL is optimized for
         /// </summary>
-        public MediaDescriptionsAttribute Media { get { return _mediaAttribute; }}
+        public MediaDescriptionsTypeAttribute Media { get { return _mediaAttribute; }}
 
         /// <summary>
         /// The rel attribute specifies the relationship between the current document and the linked document.
@@ -104,12 +104,12 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         /// * circle: Defines a circular region.
         /// * poly: Defines a polygonal region.
         /// </summary>
-        public ShapeAttribute Shape { get { return _shapeAttribute; } }
+        public ShapeTypeAttribute Shape { get { return _shapeAttribute; } }
 
         /// <summary>
         /// Specifies where to open the target URL
         /// </summary>
-        public FormTargetAttribute Target { get { return _targetAttribute; } }
+        public FormTargetTypeAttribute Target { get { return _targetAttribute; } }
 
         /// <summary>
         /// Specifies the MIME type of the target URL

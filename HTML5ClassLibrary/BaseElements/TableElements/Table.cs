@@ -20,25 +20,25 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         private readonly PixelsTypeAttribute _borderAttribute = new PixelsTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "cellpadding", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _cellPaddingAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _cellPaddingAttribute = new LengthTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "cellspacing", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _cellSpacingAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _cellSpacingAttribute = new LengthTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FrameAttribute _frameAttribute = new FrameAttribute();
+        [AttributeTypeAttributeMember(Name = "frame", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FrameTypeAttribute _frameAttribute = new FrameTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly RulesAttribute _rulesAttribute = new RulesAttribute();
+        [AttributeTypeAttributeMember(Name = "rules", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly RulesTypeAttribute _rulesAttribute = new RulesTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "sortable", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _sortableAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "summary", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _summaryAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _summaryAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
 
 
 
@@ -68,28 +68,28 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// Specifies the space between the cell wall and the cell content
         /// Not supported in HTML5.
         /// </summary>
-        public LengthAttribute CellPadding { get { return _cellPaddingAttribute; }}
+        public LengthTypeAttribute CellPadding { get { return _cellPaddingAttribute; }}
 
 
         /// <summary>
         /// Specifies the space between cells
         /// Not supported in HTML5.
         /// </summary>
-        public LengthAttribute CellSpacing { get { return _cellSpacingAttribute; }}
+        public LengthTypeAttribute CellSpacing { get { return _cellSpacingAttribute; }}
 
 
         /// <summary>
         /// Specifies which parts of the outside borders that should be visible
         /// Not supported in HTML5.
         /// </summary>
-        public FrameAttribute Frame { get { return _frameAttribute; }}
+        public FrameTypeAttribute Frame { get { return _frameAttribute; }}
 
 
         /// <summary>
         /// Specifies which parts of the inside borders that should be visible
         /// Not supported in HTML5.
         /// </summary>
-        public RulesAttribute Rules { get { return _rulesAttribute; }}
+        public RulesTypeAttribute Rules { get { return _rulesAttribute; }}
 
 
         /// <summary>
@@ -102,14 +102,14 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// Specifies a summary of the content of a table
         /// Not supported in HTML5.
         /// </summary>
-        public TextValueAttribute Summary { get { return _summaryAttribute; }}
+        public TextValueTypeAttribute Summary { get { return _summaryAttribute; }}
 
 
         /// <summary>
         /// Specifies the width of a table
         /// Not supported in HTML5.
         /// </summary>
-        public LengthAttribute Width { get { return _widthAttribute; }}
+        public LengthTypeAttribute Width { get { return _widthAttribute; }}
 
 
 

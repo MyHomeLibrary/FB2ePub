@@ -14,27 +14,27 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly FlagTypeAttribute _defaultAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueAttribute _labelAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _labelAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly URITypeAttribute _sourceAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TrackKindAttribute _trackKindAttribute = new TrackKindAttribute();
+        [AttributeTypeAttributeMember(Name = "kind", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly TrackKindTypeAttribute _trackKindAttribute = new TrackKindTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "srclang", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LanguageAttribute _sourceLanguageAttribute = new LanguageAttribute();
+        private readonly LanguageTypeAttribute _sourceLanguageAttribute = new LanguageTypeAttribute();
 
 
         /// <summary>
         /// Specifies the language of the track text data (required if kind="subtitles")
         /// </summary>
-        public LanguageAttribute SourceLanguage { get { return _sourceLanguageAttribute; }}
+        public LanguageTypeAttribute SourceLanguage { get { return _sourceLanguageAttribute; }}
 
         /// <summary>
         /// Specifies the kind of text track
         /// </summary>
-        public TrackKindAttribute Kind { get { return _trackKindAttribute; }}
+        public TrackKindTypeAttribute Kind { get { return _trackKindAttribute; }}
 
         /// <summary>
         /// Required. Specifies the URL of the track file
@@ -44,7 +44,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the title of the text track
         /// </summary>
-        public TextValueAttribute Label { get { return _labelAttribute; }}
+        public TextValueTypeAttribute Label { get { return _labelAttribute; }}
 
         /// <summary>
         /// Specifies that the track is to be enabled if the user's preferences do not indicate that another track would be more appropriate

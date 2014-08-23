@@ -12,12 +12,12 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
     public class Map : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
 
         /// <summary>
         /// Required. Specifies the name of an image-map
         /// </summary>
-        public TextValueAttribute Name { get { return _nameAttribute; }}
+        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
 
 
         protected override bool IsValidSubType(IHTMLItem item)

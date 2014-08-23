@@ -10,19 +10,19 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     public class Output : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "for", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly NameTokensAttribute _forAttribute = new NameTokensAttribute();
+        private readonly NameTokensTypeAttribute _forAttribute = new NameTokensTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "form", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
 
 
         /// <summary>
         /// Specifies the relationship between the result of the calculation, and the elements used in the calculation
         /// </summary>
-        public NameTokensAttribute For { get { return _forAttribute; } }
+        public NameTokensTypeAttribute For { get { return _forAttribute; } }
 
         /// <summary>
         /// Specifies one or more forms the output element belongs to
@@ -32,7 +32,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies a name for the output element
         /// </summary>
-        public TextValueAttribute Name { get { return _nameAttribute; }}
+        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
 
         public override bool IsValid()
         {

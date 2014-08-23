@@ -32,10 +32,6 @@ namespace XHTMLClassLibrary.Attributes
 
         private ListItemType _type = ListItemType.Invalid;
 
-        private const string AttributeName = "type";
-
-        #region Overrides of BaseAttribute
-
         public override string Value
         {
             get
@@ -105,20 +101,17 @@ namespace XHTMLClassLibrary.Attributes
             {
                 return;
             }
-            xElement.Add(new XAttribute(AttributeName, Value));
+            xElement.Add(new XAttribute(GetAttributeName(), Value));
         }
 
         public override void ReadAttribute(XElement element)
         {
             AttributeHasValue = false;
-            XAttribute xObject = element.Attribute(AttributeName);
+            XAttribute xObject = element.Attribute(GetAttributeName());
             if (xObject != null)
             {
                 Value = xObject.Value;
             }
         }
-
-        #endregion
-
     }
 }
