@@ -10,10 +10,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly ColorTypeAttribute _colorAttribute = new ColorTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "face", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _faceAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _faceAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "size", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly NumberAttribute _sizeAttribute = new NumberAttribute();
+        private readonly NumberTypeAttribute _sizeAttribute = new NumberTypeAttribute();
 
 
         /// <summary>
@@ -24,13 +24,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the default font for text in a document
         /// </summary>
-        public TextValueAttribute Face { get { return _faceAttribute; }}
+        public TextValueTypeAttribute Face { get { return _faceAttribute; }}
 
 
         /// <summary>
         /// Specifies the default size of text in a document
         /// </summary>
-        public NumberAttribute Size { get { return _sizeAttribute; }}
+        public NumberTypeAttribute Size { get { return _sizeAttribute; }}
 
         public override bool IsValid()
         {

@@ -17,7 +17,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly FlagTypeAttribute _asyncAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "charset", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
+        private readonly CharsetTypeAttribute _charsetAttribute = new CharsetTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "defer", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _deferAttribute = new FlagTypeAttribute();
@@ -53,7 +53,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Character encoding of the resource designated by src.
         /// </summary>
-        public CharsetAttribute Charset { get { return _charsetAttribute; } }
+        public CharsetTypeAttribute Charset { get { return _charsetAttribute; } }
 
         /// <summary>
         /// When set, this attribute provides a hint to the Web browser that the script is not going to generate any document content (no document.write in javascript for example), 

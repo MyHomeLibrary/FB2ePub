@@ -1,9 +1,5 @@
 ﻿using XHTMLClassLibrary.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using XHTMLClassLibrary.Exceptions;
+
 
 namespace XHTMLClassLibrary.BaseElements.Structure_Header
 {
@@ -18,8 +14,8 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         [AttributeTypeAttributeMember(Name = "href", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly URITypeAttribute _hrefAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FormTargetAttribute _targetAttribute = new FormTargetAttribute();
+        [AttributeTypeAttributeMember(Name = "target", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FormTargetTypeAttribute _targetAttribute = new FormTargetTypeAttribute();
 
 
         /// <summary>
@@ -30,7 +26,7 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// <summary>
         /// Specifies the default target for all hyperlinks and forms in the page
         /// </summary>
-        public FormTargetAttribute Target { get { return _targetAttribute; }}
+        public FormTargetTypeAttribute Target { get { return _targetAttribute; }}
         
 
         public override bool IsValid()

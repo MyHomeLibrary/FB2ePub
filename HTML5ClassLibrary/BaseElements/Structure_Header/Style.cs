@@ -11,7 +11,7 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     public class Style : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "media", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly MediaDescriptionsAttribute _mediaAttribute = new MediaDescriptionsAttribute();
+        private readonly MediaDescriptionsTypeAttribute _mediaAttribute = new MediaDescriptionsTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "scoped", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _scopedAttribute = new FlagTypeAttribute();
@@ -25,7 +25,7 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// It may be a single media descriptor or a comma-separated list. 
         /// The default value for this attribute is screen.
         /// </summary>
-        public MediaDescriptionsAttribute Media { get { return _mediaAttribute; } }
+        public MediaDescriptionsTypeAttribute Media { get { return _mediaAttribute; } }
 
         /// <summary>
         /// This attribute specifies the style sheet language of the element's contents. 

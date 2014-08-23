@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using XHTMLClassLibrary.BaseElements.Structure_Header;
+﻿using System.Xml.Linq;
 
 namespace XHTMLClassLibrary.Attributes
 {
@@ -22,8 +17,6 @@ namespace XHTMLClassLibrary.Attributes
         }
 
         private KeyTypes _type = KeyTypes.Invalid;
-
-        private const string AttributeName = "keytype";
 
         public override string Value
         {
@@ -63,7 +56,6 @@ namespace XHTMLClassLibrary.Attributes
 
 
 
-        #region Overrides of BaseAttribute
 
         public override void AddAttribute(XElement xElement)
         {
@@ -71,21 +63,18 @@ namespace XHTMLClassLibrary.Attributes
             {
                 return;
             }
-            xElement.Add(new XAttribute(AttributeName, Value));
+            xElement.Add(new XAttribute(GetAttributeName(), Value));
         }
 
         public override void ReadAttribute(XElement element)
         {
             AttributeHasValue = false;
-            XAttribute xObject = element.Attribute(AttributeName);
+            XAttribute xObject = element.Attribute(GetAttributeName());
             if (xObject != null)
             {
                 Value = xObject.Value;
             }
         }
-
-        #endregion
-
 
     }
 }

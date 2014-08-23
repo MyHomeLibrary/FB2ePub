@@ -12,16 +12,16 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     public class Menu : HTMLItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueAttribute _label = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _label = new TextValueTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MenuTypeAttribute _menuTypeAttribute = new MenuTypeAttribute();
 
 
         /// <summary>
         /// Specifies a visible label for the menu
         /// </summary>
-        public TextValueAttribute Label { get { return _label; }}
+        public TextValueTypeAttribute Label { get { return _label; }}
 
         /// <summary>
         /// Specifies which type of menu to display

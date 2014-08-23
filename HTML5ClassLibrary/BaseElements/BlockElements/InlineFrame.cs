@@ -9,11 +9,11 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly BiDirectionalAlignTypeAttribute _alignAttribute = new BiDirectionalAlignTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "frameborder", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FrameBorderAttribute _frameBorderAttribute = new FrameBorderAttribute();
 
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _heightAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _heightAttribute = new LengthTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "longdesc", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly URITypeAttribute _longDescriptionAttribute = new URITypeAttribute();
@@ -25,25 +25,25 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly PixelsTypeAttribute _marginWidthAttribute = new PixelsTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly SandboxAttribute _sandboxAttribute = new SandboxAttribute();
+        [AttributeTypeAttributeMember(Name = "sandbox", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly SandboxTypeAttribute _sandboxAttribute = new SandboxTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ScrollingAttribute _scrollingAttribute = new ScrollingAttribute();
+        [AttributeTypeAttributeMember(Name = "scrolling", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly YesNoAutoTypeAttribute _scrollingAttribute = new YesNoAutoTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly SeamlessAttribute _seamlessAttribute = new SeamlessAttribute();
+        [AttributeTypeAttributeMember(Name = "seamless", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagTypeAttribute _seamlessAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly URITypeAttribute _sourceAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "srcdoc", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly HTMLCodeAttribute _sourceDocAttribute = new HTMLCodeAttribute();
+        private readonly HTMLCodeTypeAttribute _sourceDocAttribute = new HTMLCodeTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
 
         
 
@@ -67,7 +67,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies the height of an "iframe"
         /// </summary>
-        public LengthAttribute Height { get { return _heightAttribute; }}
+        public LengthTypeAttribute Height { get { return _heightAttribute; }}
 
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies the width of an "iframe"
         /// </summary>
-        public LengthAttribute Width { get { return _widthAttribute; }}
+        public LengthTypeAttribute Width { get { return _widthAttribute; }}
 
         /// <summary>
         /// Specifies the address of the document to embed in the "iframe"
@@ -103,29 +103,29 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies the name of an "iframe"
         /// </summary>
-        public TextValueAttribute Name { get { return _nameAttribute; }}
+        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
 
         /// <summary>
         /// Enables a set of extra restrictions for the content in the "iframe"
         /// </summary>
-        public SandboxAttribute Sandbox { get { return _sandboxAttribute; }}
+        public SandboxTypeAttribute Sandbox { get { return _sandboxAttribute; }}
 
 
         /// <summary>
         /// Specifies whether or not to display scrollbars in an "iframe"
         /// Not supported in HTML5.
         /// </summary>
-        public ScrollingAttribute Scrolling { get { return _scrollingAttribute; }}
+        public YesNoAutoTypeAttribute Scrolling { get { return _scrollingAttribute; }}
 
         /// <summary>
         /// Specifies that the "iframe" should look like it is a part of the containing document
         /// </summary>
-        public SeamlessAttribute Seamless { get { return _seamlessAttribute; }}
+        public FlagTypeAttribute Seamless { get { return _seamlessAttribute; }}
 
         /// <summary>
         /// Specifies the HTML content of the page to show in the "iframe"
         /// </summary>
-        public HTMLCodeAttribute SrcDoc { get { return _sourceDocAttribute; }}
+        public HTMLCodeTypeAttribute SrcDoc { get { return _sourceDocAttribute; }}
 
 
         protected override bool IsValidSubType(IHTMLItem item)

@@ -19,14 +19,14 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         [AttributeTypeAttributeMember(Name = "controls", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _controls = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LoopAttribute  _loop = new LoopAttribute();
+        [AttributeTypeAttributeMember(Name = "loop", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagTypeAttribute  _loop = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MutedAttribute _muted = new MutedAttribute();
+        [AttributeTypeAttributeMember(Name = "muted", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagTypeAttribute _muted = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly PreloadAttribute _preload = new PreloadAttribute();
+        [AttributeTypeAttributeMember(Name = "preload", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly PreloadTypeAttribute _preload = new PreloadTypeAttribute();
 
 
 
@@ -59,7 +59,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the audio will start over again, every time it is finished
         /// </summary>
-        public LoopAttribute Loop
+        public FlagTypeAttribute Loop
         {
             get { return _loop; }
         }
@@ -68,7 +68,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the audio output should be muted
         /// </summary>
-        public MutedAttribute Muted
+        public FlagTypeAttribute Muted
         {
             get { return _muted; }
         }
@@ -76,7 +76,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies if and how the author thinks the audio should be loaded when the page loads
         /// </summary>
-        public PreloadAttribute Preload
+        public PreloadTypeAttribute Preload
         {
             get { return _preload; }
         }

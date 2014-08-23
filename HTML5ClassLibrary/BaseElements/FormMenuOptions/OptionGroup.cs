@@ -15,7 +15,7 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
     public class OptionGroup : HTMLItem, IOptionItem
     {
         [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _labelAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _labelAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember( Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute();
@@ -25,7 +25,7 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         /// <summary>
         /// Label for the option group.
         /// </summary>
-        public TextValueAttribute Label { get { return _labelAttribute; } }
+        public TextValueTypeAttribute Label { get { return _labelAttribute; } }
 
 
         /// <summary>

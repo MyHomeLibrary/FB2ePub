@@ -12,13 +12,13 @@ namespace XHTMLClassLibrary.BaseElements.ObjectParameters
     public class Param : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly MIMETypeAttribute _typeAttribute = new MIMETypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _valueAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _valueAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ValueTypeAttribute _valueTypeAttribute = new ValueTypeAttribute();
@@ -33,7 +33,7 @@ namespace XHTMLClassLibrary.BaseElements.ObjectParameters
         /// Whether the property name is case-sensitive or not depends on the specific object implementation. 
         /// This attribute is required.
         /// </summary>
-        public TextValueAttribute Name { get { return _nameAttribute; } }
+        public TextValueTypeAttribute Name { get { return _nameAttribute; } }
 
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace XHTMLClassLibrary.BaseElements.ObjectParameters
         /// This attribute specifies the value of a run-time parameter specified by the name attribute. 
         /// Property values have no meaning in XHTML; their meaning is determined by the object in question.
         /// </summary>
-        public TextValueAttribute Value { get { return _valueAttribute; } }
+        public TextValueTypeAttribute Value { get { return _valueAttribute; } }
 
 
         /// <summary>

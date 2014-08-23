@@ -18,14 +18,14 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         [AttributeTypeAttributeMember(Name = "bgcolor", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ColorTypeAttribute _backgroundColorAttribute = new ColorTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LinkAttribute _linkAttribute = new LinkAttribute();
+        [AttributeTypeAttributeMember(Name = "link", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ColorTypeAttribute _linkAttribute = new ColorTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextColorAttribute _textAttribute = new TextColorAttribute();
+        [AttributeTypeAttributeMember(Name = "text", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ColorTypeAttribute _textAttribute = new ColorTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly VLinkAttribute _vLinkAttribute = new VLinkAttribute();
+        [AttributeTypeAttributeMember(Name = "vlink", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ColorTypeAttribute _vLinkAttribute = new ColorTypeAttribute();
 
 
 
@@ -52,20 +52,20 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// Specifies the color of unvisited links in a document
         /// Not supported in HTML5. 
         /// </summary>
-        public LinkAttribute Link { get { return _linkAttribute; }}
+        public ColorTypeAttribute Link { get { return _linkAttribute; }}
 
 
         /// <summary>
         /// Specifies the color of visited links in a document
         /// Not supported in HTML5. 
         /// </summary>
-        public VLinkAttribute VLink { get { return _vLinkAttribute; }}
+        public ColorTypeAttribute VLink { get { return _vLinkAttribute; }}
 
         /// <summary>
         /// Specifies the color of the text in a document
         /// Not supported in HTML5. 
         /// </summary>
-        public TextColorAttribute Text { get { return _textAttribute; }}
+        public ColorTypeAttribute Text { get { return _textAttribute; }}
 
         public override bool IsValid()
         {

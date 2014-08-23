@@ -10,22 +10,22 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     public class Embed : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LengthAttribute _heightAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _heightAttribute = new LengthTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly URITypeAttribute _sourceAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly MIMETypeAttribute _typeAttribute = new MIMETypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
 
 
         /// <summary>
         /// Specifies the height of the embedded content
         /// </summary>
-        public LengthAttribute Height { get { return _heightAttribute; }}
+        public LengthTypeAttribute Height { get { return _heightAttribute; }}
 
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the width of the embedded content
         /// </summary>
-        public LengthAttribute Width { get { return _widthAttribute; }}
+        public LengthTypeAttribute Width { get { return _widthAttribute; }}
 
         public override bool IsValid()
         {

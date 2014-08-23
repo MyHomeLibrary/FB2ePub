@@ -27,23 +27,23 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         [AttributeTypeAttributeMember(Name = "enctype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormEncodingTypeAttribute _formEncoding = new FormEncodingTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormMethodAttribute _formMethod = new FormMethodAttribute();
+        [AttributeTypeAttributeMember(Name = "formmethod", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FormMethodTypeAttribute _formMethod = new FormMethodTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormNoValidateAttribute _formNoValidate = new FormNoValidateAttribute();
+        [AttributeTypeAttributeMember(Name = "formnovalidate", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FlagTypeAttribute _formNoValidate = new FlagTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormTargetAttribute _formTarget = new FormTargetAttribute();
+        [AttributeTypeAttributeMember(Name = "formtarget", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly FormTargetTypeAttribute _formTarget = new FormTargetTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _name = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _name = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ButtonTypeAttribute _type = new ButtonTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueAttribute _value = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _value = new TextValueTypeAttribute();
 
 
 
@@ -52,12 +52,12 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
             get { return _type; }
         }
 
-        public TextValueAttribute Name
+        public TextValueTypeAttribute Name
         {
             get { return _name; }
         }
 
-        public TextValueAttribute Value
+        public TextValueTypeAttribute Value
         {
             get { return _value; }
         }
@@ -87,17 +87,17 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
             get { return _formEncoding; }
         }
 
-        public FormMethodAttribute FormMethod
+        public FormMethodTypeAttribute FormMethod
         {
             get { return _formMethod; }
         }
 
-        public FormNoValidateAttribute FormNoValidate
+        public FlagTypeAttribute FormNoValidate
         {
             get { return _formNoValidate; }
         }
 
-        public FormTargetAttribute FormTarget
+        public FormTargetTypeAttribute FormTarget
         {
             get { return _formTarget; }
         }

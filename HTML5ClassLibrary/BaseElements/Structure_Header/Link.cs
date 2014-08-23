@@ -14,27 +14,27 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     public class Link : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "charset", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharsetAttribute _charsetAttribute = new CharsetAttribute();
+        private readonly CharsetTypeAttribute _charsetAttribute = new CharsetTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "href", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly URITypeAttribute _hrefAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "hreflang", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LanguageAttribute _hrefLangAttribute = new LanguageAttribute();
+        private readonly LanguageTypeAttribute _hrefLangAttribute = new LanguageTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "media", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly MediaDescriptionsAttribute _mediaAttribute = new MediaDescriptionsAttribute();
+        private readonly MediaDescriptionsTypeAttribute _mediaAttribute = new MediaDescriptionsTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LinkRelationAttribute _relAttribute = new LinkRelationAttribute();
+        [AttributeTypeAttributeMember(Name = "rel", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly LinkRelationTypeAttribute _relAttribute = new LinkRelationTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "rev", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly LinkTypeAttribute _reverseRelationAttribute = new LinkTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly SizesAttribute _sizesAttribute = new SizesAttribute();
+        [AttributeTypeAttributeMember(Name = "sizes", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly SizesTypeAttribute _sizesAttribute = new SizesTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly MIMETypeAttribute _typeAttribute = new MIMETypeAttribute();
 
 
@@ -47,18 +47,18 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// Specifies the character encoding of the linked document
         /// Not supported in HTML5.
         /// </summary>
-        public CharsetAttribute Charset { get { return _charsetAttribute; }}
+        public CharsetTypeAttribute Charset { get { return _charsetAttribute; }}
 
         /// <summary>
         /// Specifies the primary language of the resource designated by href and may only be used when href is specified.
         /// </summary>
-        public LanguageAttribute RefLanguage { get { return _hrefLangAttribute;}}
+        public LanguageTypeAttribute RefLanguage { get { return _hrefLangAttribute;}}
 
         /// <summary>
         /// Describes the forward relationship from the current document to the resource specified by the href attribute. 
         /// The value of this attribute is a space-separated list of link types.
         /// </summary>
-        public LinkRelationAttribute Relation { get { return _relAttribute; } }
+        public LinkRelationTypeAttribute Relation { get { return _relAttribute; } }
 
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// It may be a single media descriptor or a comma-separated list. 
         /// The default value for this attribute is "screen".
         /// </summary>
-        public MediaDescriptionsAttribute Media { get { return _mediaAttribute; } }
+        public MediaDescriptionsTypeAttribute Media { get { return _mediaAttribute; } }
 
         /// <summary>
         /// Style sheet language. 
@@ -89,7 +89,7 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// <summary>
         /// Specifies the size of the linked resource. Only for rel="icon"
         /// </summary>
-        public SizesAttribute Sizes { get { return _sizesAttribute; }}
+        public SizesTypeAttribute Sizes { get { return _sizesAttribute; }}
 
 
         #endregion

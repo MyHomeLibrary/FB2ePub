@@ -11,14 +11,14 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
     public class PreFormated : TextBasedElement
     {
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthAttribute _widthAttribute = new LengthAttribute();
+        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
 
 
         /// <summary>
         ///  Specifies the maximum number of characters per line
         /// Not supported in HTML5.
         /// </summary>
-        public LengthAttribute Width { get { return _widthAttribute; }}
+        public LengthTypeAttribute Width { get { return _widthAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

@@ -16,11 +16,11 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         [AttributeTypeAttributeMember(Name = "char", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CharAttribute _charAttribute = new CharAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharOffAttribute _charOffAttribute = new CharOffAttribute();
+        [AttributeTypeAttributeMember(Name = "charoff",SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly LengthTypeAttribute _charOffAttribute = new LengthTypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly VAlignAttribute _vAlignAttribute = new VAlignAttribute();
+        [AttributeTypeAttributeMember(Name = "valign", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly VAlignTypeAttribute _vAlignAttribute = new VAlignTypeAttribute();
 
 
 
@@ -44,14 +44,14 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// Sets the number of characters the content inside the "tbody" element will be aligned from the character specified by the char attribute
         /// Not supported in HTML5.
         /// </summary>
-        public CharOffAttribute CharOff { get { return _charOffAttribute; }}
+        public LengthTypeAttribute CharOff { get { return _charOffAttribute; }}
 
 
         /// <summary>
         /// Vertical aligns the content inside the "tbody" element
         /// Not supported in HTML5.
         /// </summary>
-        public VAlignAttribute VAlign { get { return _vAlignAttribute; }}
+        public VAlignTypeAttribute VAlign { get { return _vAlignAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

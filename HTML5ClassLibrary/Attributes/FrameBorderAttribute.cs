@@ -17,8 +17,6 @@ namespace XHTMLClassLibrary.Attributes
 
         private BorderPresence _borderPresence = BorderPresence.Invalid;
 
-        private const string AttributeName = "frameborder";
-
         public override string Value
         {
             get
@@ -51,7 +49,6 @@ namespace XHTMLClassLibrary.Attributes
         }
 
 
-        #region Overrides of BaseAttribute
 
         public override void AddAttribute(XElement xElement)
         {
@@ -59,20 +56,17 @@ namespace XHTMLClassLibrary.Attributes
             {
                 return;
             }
-            xElement.Add(new XAttribute(AttributeName, Value));
+            xElement.Add(new XAttribute(GetAttributeName(), Value));
         }
 
         public override void ReadAttribute(XElement element)
         {
             AttributeHasValue = false;
-            XAttribute xObject = element.Attribute(AttributeName);
+            XAttribute xObject = element.Attribute(GetAttributeName());
             if (xObject != null)
             {
                 Value = xObject.Value;
             }
         }
-
-        #endregion
-
     }
 }

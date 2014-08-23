@@ -25,11 +25,11 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(Name = "form", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        [AttributeTypeAttributeMember(Name = "keytype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly KeyTypeAttribute _keyTypeAttribute = new KeyTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
 
 
 
@@ -61,7 +61,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Defines a name for the "keygen" element
         /// </summary>
-        public TextValueAttribute Name { get { return _nameAttribute; }}
+        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
 
 
         public override bool IsValid()

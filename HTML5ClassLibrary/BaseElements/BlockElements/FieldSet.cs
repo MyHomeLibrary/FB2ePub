@@ -17,7 +17,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueAttribute _nameAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
 
         /// <summary>
         /// Specifies that a group of related form elements should be disabled
@@ -32,7 +32,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies a name for the fieldset
         /// </summary>
-        public TextValueAttribute Name { get { return _nameAttribute; }}
+        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

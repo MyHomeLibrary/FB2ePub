@@ -18,8 +18,6 @@ namespace XHTMLClassLibrary.Attributes
     {
         private TextDirection _direction = TextDirection.Unknown;
 
-        private const string AttributeName = "dir";
-
         #region Implementation of IBaseAttribute
 
         public override void AddAttribute(XElement xElement)
@@ -43,7 +41,7 @@ namespace XHTMLClassLibrary.Attributes
                 default:
                     throw new InvalidEnumArgumentException();
             }
-            var xLang = new XAttribute(AttributeName, dir);
+            var xLang = new XAttribute(GetAttributeName(), dir);
             xElement.Add(xLang);
 
         }
@@ -52,7 +50,7 @@ namespace XHTMLClassLibrary.Attributes
         {
             _direction = TextDirection.Unknown;
             AttributeHasValue = false;
-            XAttribute xDirection = element.Attribute(AttributeName);
+            XAttribute xDirection = element.Attribute(GetAttributeName());
             if (xDirection != null)
             {
                 AttributeHasValue = true;

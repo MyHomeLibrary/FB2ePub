@@ -21,10 +21,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly FloatingNumberTypeAttribute _lowAttribute = new FloatingNumberTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "max", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueAttribute _maxAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _maxAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "min", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueAttribute _minAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _minAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "optimum", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FloatingNumberTypeAttribute _openAttribute = new FloatingNumberTypeAttribute();
@@ -51,12 +51,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the maximum value of the range
         /// </summary>
-        public TextValueAttribute Max { get { return _maxAttribute; }}
+        public TextValueTypeAttribute Max { get { return _maxAttribute; }}
 
         /// <summary>
         /// Specifies the minimum value of the range
         /// </summary>
-        public TextValueAttribute Min { get { return _minAttribute; }}
+        public TextValueTypeAttribute Min { get { return _minAttribute; }}
 
         /// <summary>
         /// Specifies what value is the optimal value for the gauge

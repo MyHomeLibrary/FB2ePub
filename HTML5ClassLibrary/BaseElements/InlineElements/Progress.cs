@@ -10,7 +10,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     public class Progress: HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "max", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueAttribute _maxAttribute = new TextValueAttribute();
+        private readonly TextValueTypeAttribute _maxAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FloatingNumberTypeAttribute _valueAttribute = new FloatingNumberTypeAttribute();
@@ -19,7 +19,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies how much work the task requires in total
         /// </summary>
-        public TextValueAttribute Max { get { return _maxAttribute; }}
+        public TextValueTypeAttribute Max { get { return _maxAttribute; }}
 
         /// <summary>
         /// Specifies how much of the task has been completed
