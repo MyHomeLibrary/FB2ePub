@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace XHTMLClassLibrary.AttributeDataTypes
+﻿namespace XHTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     /// Contain regex pattern
     /// </summary>
-    public class PatternAttributeType
+    public class PatternAttributeType : IAttributeDataType
     {
         public string Value { set; get; }
     }

@@ -52,6 +52,7 @@
     <Compile Include="AttributeDataTypes\Datetime.cs" />
     <Compile Include="AttributeDataTypes\FloatingNumber.cs" />
     <Compile Include="AttributeDataTypes\HTMLCode.cs" />
+    <Compile Include="AttributeDataTypes\IAttributeDataType.cs" />
     <Compile Include="AttributeDataTypes\ID.cs" />
     <Compile Include="AttributeDataTypes\IDReference.cs" />
     <Compile Include="AttributeDataTypes\LanguageCode.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Attributes\CharsetsTypeAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\FormEvents.cs" />
     <Compile Include="Attributes\CrossOriginTypeAttribute.cs" />
+    <Compile Include="Attributes\SimpleSingleTypeAttribute.cs" />
     <Compile Include="Attributes\URITypeAttribute.cs" />
     <Compile Include="Attributes\AlignTypeAttribute.cs" />
     <Compile Include="Attributes\AnyDataAttribute.cs" />

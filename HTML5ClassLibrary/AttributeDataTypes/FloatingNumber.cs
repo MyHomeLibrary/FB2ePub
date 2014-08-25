@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace XHTMLClassLibrary.AttributeDataTypes
+﻿namespace XHTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     /// 
     /// </summary>
-    public class FloatingNumber
+    public class FloatingNumber : IAttributeDataType
     {
         private float? _number = null;
 

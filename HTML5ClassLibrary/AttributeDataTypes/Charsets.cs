@@ -6,7 +6,7 @@ namespace XHTMLClassLibrary.AttributeDataTypes
     /// <summary>
     /// A space-separated list of character encodings.
     /// </summary>
-    public class Charsets
+    public class Charsets : IAttributeDataType
     {
         private readonly List<Charset> _charsets = new List<Charset>();
 

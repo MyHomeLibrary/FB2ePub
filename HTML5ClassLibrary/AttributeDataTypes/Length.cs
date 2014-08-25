@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace XHTMLClassLibrary.AttributeDataTypes
 {
@@ -9,7 +6,7 @@ namespace XHTMLClassLibrary.AttributeDataTypes
     /// The value may be either in pixels or a percentage of the available horizontal or vertical space. 
     /// Thus, the value "50%" means half of the available space.
     /// </summary>
-    public class Length
+    public class Length : IAttributeDataType
     {
         private enum DataType
         {

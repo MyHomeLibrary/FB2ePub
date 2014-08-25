@@ -11,7 +11,7 @@ namespace XHTMLClassLibrary.AttributeDataTypes
     /// URI can also be an identification of a resource without an Internet location. 
     /// For example: urn:ISBN 88-7633-000-3.
     /// </summary>
-    public class URI
+    public class URI : IAttributeDataType
     {
         public string Value { get; set; }
     }

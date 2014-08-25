@@ -7,7 +7,7 @@ namespace XHTMLClassLibrary.AttributeDataTypes
     /// A comma-separated list of media descriptors. 
     /// The following is a list of recognized media descriptors: screen, tty, tv, projection, handheld, print, braille, aural and all.
     /// </summary>
-    public class MediaDescriptions
+    public class MediaDescriptions : IAttributeDataType
     {
         private enum MediaDescriptionsEnum
         {

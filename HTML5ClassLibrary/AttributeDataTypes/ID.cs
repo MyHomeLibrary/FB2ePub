@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 using XHTMLClassLibrary.Exceptions;
 
@@ -12,7 +9,7 @@ namespace XHTMLClassLibrary.AttributeDataTypes
     /// this value should start with a letter from the English aphabet (A-Z or a-z) and 
     /// then followed by either letters, numbers, dashes, underscores or periods.
     /// </summary>
-    public class Id
+    public class Id : IAttributeDataType
     {
         private string _internalIDValue = string.Empty;
 

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace XHTMLClassLibrary.AttributeDataTypes
+﻿namespace XHTMLClassLibrary.AttributeDataTypes
 {
     /// <summary>
     ///     One or more digits.
     /// </summary>
-    public class Number
+    public class Number : IAttributeDataType
     {
         private int? _number = null;
 

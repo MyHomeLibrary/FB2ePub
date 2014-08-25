@@ -4,7 +4,7 @@
     /// A predefined classification of hyperlinks. 
     /// The following is a list of predefined values: Alternate, Stylesheet, Start, Next, Prev, Contents, Index, Glossary, Copyright, Chapter, Section, Subsection, Appendix, Help and Bookmark. These values are case-insensitive.
     /// </summary>
-    public class LinkTypes
+    public class LinkTypes : IAttributeDataType
     {
         private enum LinkTypesEnum
         {
