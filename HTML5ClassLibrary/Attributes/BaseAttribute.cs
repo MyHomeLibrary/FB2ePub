@@ -16,6 +16,8 @@ namespace XHTMLClassLibrary.Attributes
     {
         protected bool AttributeHasValue = false;
 
+        private AttributeTypeAttributeMember _attributeTypeAttribute = null;
+
         #region Implementation of IBaseAttribute
 
         public abstract void AddAttribute(XElement xElement);
@@ -31,11 +33,15 @@ namespace XHTMLClassLibrary.Attributes
         #endregion
 
         /// <summary>
-        ///  Extracts attribute name from custom attributes
+        /// Get the data from the attached attribute (cached)
         /// </summary>
-        /// <returns>name of the attribute as it in XML/HTML</returns>
-        protected string GetAttributeName()
+        /// <returns></returns>
+        private AttributeTypeAttributeMember GetAttributeTypeAttribute()
         {
+            if (_attributeTypeAttribute != null)
+            {
+                return _attributeTypeAttribute;
+            }
             var attributes = (AttributeTypeAttributeMember[])GetType().GetCustomAttributes(typeof(AttributeTypeAttributeMember), false);
             if (attributes.Length < 1) // check the we havr attribute set
             {
@@ -45,7 +51,16 @@ namespace XHTMLClassLibrary.Attributes
             {
                 throw new CustomAttributeFormatException(string.Format("The {0} object does not have AttributeTypeAttributeMember attribute Name set", GetType()));
             }
-            return attributes[0].Name;
+            return _attributeTypeAttribute = attributes[0];            
+        }
+
+        /// <summary>
+        ///  Extracts attribute name from custom attributes
+        /// </summary>
+        /// <returns>name of the attribute as it in XML/HTML</returns>
+        protected string GetAttributeName()
+        {
+            return GetAttributeTypeAttribute().Name;
         }
     }
 }

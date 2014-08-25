@@ -1,45 +1,11 @@
-﻿using System.Xml.Linq;
-using XHTMLClassLibrary.AttributeDataTypes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
 
 namespace XHTMLClassLibrary.Attributes
 {
     /// <summary>
-    /// Base class cor content type attributes
+    /// Base class for content type attributes
     /// </summary>
-    public class ContentTypeAttribute : BaseAttribute
+    public class ContentTypeAttribute : SimpleSingleTypeAttribute<ContentType>
     {
-        private ContentType _attrObject = new ContentType();
-
-
-        public override void AddAttribute(XElement xElement)
-        {
-            if (!AttributeHasValue)
-            {
-                return;
-            }
-            xElement.Add(new XAttribute(GetAttributeName(), _attrObject.Value));
-        }
-
-        public override void ReadAttribute(XElement element)
-        {
-            AttributeHasValue = false;
-            _attrObject = null;
-            XAttribute xObject = element.Attribute(GetAttributeName());
-            if (xObject != null)
-            {
-                _attrObject = new ContentType {Value = xObject.Value};
-                AttributeHasValue = true;
-            }
-        }
-
-        public override string Value
-        {
-            get { return _attrObject.Value; }
-            set
-            {
-                _attrObject.Value = value;
-                AttributeHasValue = (value != string.Empty);
-            }
-        }
     }
 }

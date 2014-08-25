@@ -6,7 +6,7 @@ namespace XHTMLClassLibrary.AttributeDataTypes
     /// <summary>
     /// A space-separated list of URI values.
     /// </summary>
-    public class URIs
+    public class URIs : IAttributeDataType
     {
         private readonly List<URI> _locations = new List<URI>();
 

@@ -5,7 +5,7 @@ namespace XHTMLClassLibrary.AttributeDataTypes
     /// <summary>
     ///     Date and time information in the ISO-8601 format. For example: YYYY-MM-DDThh:mm:ss.
     /// </summary>
-    public class Datetime
+    public class Datetime : IAttributeDataType
     {
         private DateTime _date = DateTime.MinValue;
         public string Value

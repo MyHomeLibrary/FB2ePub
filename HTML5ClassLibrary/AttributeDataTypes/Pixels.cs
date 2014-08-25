@@ -4,7 +4,7 @@
     /// The value is an integer that represents the number of pixels of the canvas (screen, paper). 
     /// Thus, the value "50" means fifty pixels.
     /// </summary>
-    public class Pixels
+    public class Pixels : IAttributeDataType
     {
         private int? _number = null;
 

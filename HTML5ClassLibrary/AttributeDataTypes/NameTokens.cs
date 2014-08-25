@@ -6,7 +6,7 @@ namespace XHTMLClassLibrary.AttributeDataTypes
     /// <summary>
     /// One or more white space separated NameToken values.
     /// </summary>
-    public class NameTokens
+    public class NameTokens : IAttributeDataType
     {
         private readonly List<NameToken> _tokens = new List<NameToken>();
 
