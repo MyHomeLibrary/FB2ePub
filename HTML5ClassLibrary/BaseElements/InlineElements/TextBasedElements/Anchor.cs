@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
@@ -30,7 +31,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "rel", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AreaRelationTypeAttribute _relAttrib = new AreaRelationTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _relAttrib = new ValuesSelectionTypeAttribute<Text>("alternate;author;bookmark;help;license;next;nofollow;norefferer;prefetch;prev;search;tag");
 
         [AttributeTypeAttributeMember(Name = "rev", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly LinkTypeAttribute _reverseRelationAttribute = new LinkTypeAttribute();
@@ -93,7 +94,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         /// Describes the relationship from the current document to the resource specified by the href attribute. The value of this attribute is a space-separated list of link types. 
         /// For example: appendix.
         /// </summary>
-        public AreaRelationTypeAttribute Rel { get { return _relAttrib; } }
+        public SimpleSingleTypeAttribute<Text> Rel { get { return _relAttrib; } }
 
         /// <summary>
         /// Specifies that the target will be downloaded when a user clicks on the hyperlink

@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.ObjectParameters;
 
@@ -15,7 +16,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     public class ObjectElm : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
 
         [AttributeTypeAttributeMember(Name = "archive", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly URIsTypeAttribute _archiveAttribute = new URIsTypeAttribute();
@@ -73,109 +74,109 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the alignment of the "object" element according to surrounding elements
         /// Not supported in HTML5.
         /// </summary>
-        public AlignTypeAttribute Align { get { return _alignAttribute; }}
+        public IAttributeDataAccess Align { get { return _alignAttribute; } }
 
 
         /// <summary>
         /// A space separated list of URL's to archives. The archives contains resources relevant to the object
         /// Not supported in HTML5.
         /// </summary>
-        public URIsTypeAttribute Archive { get { return _archiveAttribute; }}
+        public IAttributeDataAccess Archive { get { return _archiveAttribute; } }
 
 
         /// <summary>
         ///  Specifies the width of the border around an <object>
         /// Not supported in HTML5.
         /// </summary>
-        public PixelsTypeAttribute Border { get { return _borderAttribute; }}
+        public IAttributeDataAccess Border { get { return _borderAttribute; } }
 
 
         /// <summary>
         /// Defines a class ID value as set in the Windows Registry or a URL
         /// Not supported in HTML5.
         /// </summary>
-        public URITypeAttribute ClassID { get { return _classIDAttribute; }}
+        public IAttributeDataAccess ClassID { get { return _classIDAttribute; } }
 
 
         /// <summary>
         /// Defines where to find the code for the object
         /// Not supported in HTML5.
         /// </summary>
-        public URITypeAttribute CodeBase { get { return _codeBaseAttribute; }}
+        public IAttributeDataAccess CodeBase { get { return _codeBaseAttribute; } }
 
 
         /// <summary>
         /// The media type of the code referred to by the classid attribute
         /// Not supported in HTML5.
         /// </summary>
-        public ContentTypeAttribute CodeType { get { return _codeTypeAttribute; }}
+        public IAttributeDataAccess CodeType { get { return _codeTypeAttribute; } }
 
         /// <summary>
         /// Object height.
         /// </summary>
-        public LengthTypeAttribute Height { get { return _heightAttribute; } }
+        public IAttributeDataAccess Height { get { return _heightAttribute; } }
 
 
         /// <summary>
         ///  Specifies the whitespace on left and right side of an object
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute HSpace { get { return _hSpaceAttribute; }}
+        public IAttributeDataAccess HSpace { get { return _hSpaceAttribute; } }
 
         /// <summary>
         /// When the object is used as a form control, this attribute is the name of the form control.
         /// </summary>
-        public TextValueTypeAttribute Name { get { return _nameAttribute; } }
+        public IAttributeDataAccess Name { get { return _nameAttribute; } }
 
 
         /// <summary>
         /// Defines a text to display while the object is loading
         /// Not supported in HTML5.
         /// </summary>
-        public TextValueTypeAttribute StandBy { get { return _standByAttribute; }}
+        public IAttributeDataAccess StandBy { get { return _standByAttribute; } }
 
         /// <summary>
         /// Object width.
         /// </summary>
-        public LengthTypeAttribute Width { get { return _widthAttribute; } }
+        public IAttributeDataAccess Width { get { return _widthAttribute; } }
 
         /// <summary>
         /// Specifies one or more forms the object belongs to
         /// </summary>
-        public URITypeAttribute Form { get { return _formIdAttribute; }}
+        public IAttributeDataAccess Form { get { return _formIdAttribute; } }
 
         /// <summary>
         /// This attribute may be used to specify the location of the object's data, 
         /// for instance image data for objects defining images, 
         /// or more generally, a serialized form of an object which can be used to recreate it.
         /// </summary>
-        public URITypeAttribute Data { get { return _dataAttribute; } }
+        public IAttributeDataAccess Data { get { return _dataAttribute; } }
 
 
         /// <summary>
         /// Defines that the object should only be declared, not created or instantiated until needed
         /// Not supported in HTML5.
         /// </summary>
-        public FlagTypeAttribute Declare { get { return _declareAttribute; }}
+        public IAttributeDataAccess Declare { get { return _declareAttribute; } }
 
 
         /// <summary>
         /// Specifies the MIME type of data specified in the data attribute
         /// </summary>
-        public MIMETypeAttribute TabIndex { get { return _mimeTypeAttribute; } }
+        public IAttributeDataAccess TabIndex { get { return _mimeTypeAttribute; } }
 
         /// <summary>
         /// This attribute associates the object to a client-side image map defined by a map element. 
         /// The value of this attribute must match the id attribute of the map element.
         /// </summary>
-        public IdReferenceTypeAttribute UseMap { get { return _useMapAttribute; } }
+        public IAttributeDataAccess UseMap { get { return _useMapAttribute; } }
 
 
         /// <summary>
         ///  Specifies the whitespace on top and bottom of an object
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute VSpace { get { return _vSpaceAttribute; }}
+        public IAttributeDataAccess VSpace { get { return _vSpaceAttribute; } }
 
 
         protected override bool IsValidSubType(IHTMLItem item)

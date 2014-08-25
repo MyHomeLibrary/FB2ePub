@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.FormMenuOptions;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
@@ -24,7 +25,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly OnOffTypeAttribute _autocompleteAttribute = new OnOffTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "enctype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FormEncodingTypeAttribute _encTypeAttribute = new FormEncodingTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _encTypeAttribute = new ValuesSelectionTypeAttribute<Text>(@"application/x-www-form-urlencoded;multipart/form-data;text/plain");
 
         [AttributeTypeAttributeMember(Name = "method", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FormMethodTypeAttribute _methodAttribute = new FormMethodTypeAttribute();
@@ -45,34 +46,34 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// Specifies a comma-separated list of file types  that the server accepts (that can be submitted through the file upload)
         /// Not supported in HTML5.
         /// </summary>
-        public ContentTypeAttribute Accept { get { return _acceptAttribute; }}
+        public IAttributeDataAccess Accept { get { return _acceptAttribute; }}
 
         /// <summary>
         /// Specifies the location of the server-side script used to process data collected in the form.
         /// </summary>
-        public URITypeAttribute Action { get { return _actionAttribute; } }
+        public IAttributeDataAccess Action { get { return _actionAttribute; } }
 
         /// <summary>
         /// Specifies whether a form should have autocomplete on or off
         /// </summary>
-        public OnOffTypeAttribute Autocomplete { get { return _autocompleteAttribute; }}
+        public IAttributeDataAccess Autocomplete { get { return _autocompleteAttribute; } }
 
         /// <summary>
         /// Specifies the type of HTTP method used to send data to the server. 
         /// The default is get when the form data is sent to the server encoded into the URL specified in the action attribute. 
         /// Most forms use post when form data is sent to the server in the body of the HTTP message.
         /// </summary>
-        public FormMethodTypeAttribute Method { get { return _methodAttribute; } }
+        public IAttributeDataAccess Method { get { return _methodAttribute; } }
 
         /// <summary>
         /// Specifies the name of a form
         /// </summary>
-        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
+        public IAttributeDataAccess Name { get { return _nameAttribute; } }
 
         /// <summary>
         /// This attribute specifies the list of character encodings for input data that are accepted by the server processing the form.
         /// </summary>
-        public CharsetsTypeAttribute AcceptCharsets { get { return _acceptCharsetsAttribute; } }
+        public IAttributeDataAccess AcceptCharsets { get { return _acceptCharsetsAttribute; } }
 
 
         /// <summary>
@@ -80,17 +81,17 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// The default value for this attribute is "application/x-www-form-urlencoded". 
         /// If a form contains a file upload control (input element with type value of file), then this attribute value should be "multipart/form-data".
         /// </summary>
-        public FormEncodingTypeAttribute EncType { get { return _encTypeAttribute; } }
+        public IAttributeDataAccess EncType { get { return _encTypeAttribute; } }
 
         /// <summary>
         /// Specifies that the form should not be validated when submitted
         /// </summary>
-        public FlagTypeAttribute NoValidate { get { return _noValidateAttribute; }}
+        public IAttributeDataAccess NoValidate { get { return _noValidateAttribute; } }
 
         /// <summary>
         /// Specifies where to display the response that is received after submitting the form
         /// </summary>
-        public FormTargetTypeAttribute Target{ get { return _formTargetAttribute; } }
+        public IAttributeDataAccess Target { get { return _formTargetAttribute; } }
 
         #region Overrides of IBlockElement
 

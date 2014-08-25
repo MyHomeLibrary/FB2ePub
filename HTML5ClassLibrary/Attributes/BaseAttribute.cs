@@ -3,10 +3,14 @@ using System.Xml.Linq;
 
 namespace XHTMLClassLibrary.Attributes
 {
-    public interface IBaseAttribute
+    public interface IAttributeDataAccess
     {
         bool HasValue();
-        string Value { get; set;}
+        string Value { get; set; }       
+    }
+
+    public interface IBaseAttribute : IAttributeDataAccess
+    {
 
         void AddAttribute(XElement xElement);
         void ReadAttribute(XElement element);

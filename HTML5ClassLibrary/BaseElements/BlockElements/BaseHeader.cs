@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.BlockElements
@@ -15,14 +16,14 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     public abstract class BaseHeader : HTMLItem, IBlockElement  , IHeader
     {
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
 
 
         /// <summary>
         ///  Specifies the alignment of a heading
         /// Not supported in HTML5.
         /// </summary>
-        public AlignTypeAttribute Align { get { return _alignAttribute; }}
+        public IAttributeDataAccess Align { get { return _alignAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

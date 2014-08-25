@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.MapAreas
@@ -31,7 +32,7 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         private readonly FlagTypeAttribute _noHRefAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "rel", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly AreaRelationTypeAttribute _relationAttribute = new AreaRelationTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _relationAttribute = new ValuesSelectionTypeAttribute<Text>("alternate;author;bookmark;help;license;next;nofollow;norefferer;prefetch;prev;search;tag");
 
         [AttributeTypeAttributeMember(Name = "shape", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ShapeTypeAttribute _shapeAttribute = new ShapeTypeAttribute();
@@ -49,13 +50,13 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         /// Specifies that an area has no associated link
         /// Not supported in HTML5
         /// </summary>
-        public FlagTypeAttribute NoHRef { get { return _noHRefAttribute; }}
+        public IAttributeDataAccess NoHRef { get { return _noHRefAttribute; } }
 
 
         /// <summary>
         /// Alternate text. This attribute is required.
         /// </summary>
-        public TextValueTypeAttribute Alt { get { return _altAttribute; } }
+        public IAttributeDataAccess Alt { get { return _altAttribute; } }
 
 
         /// <summary>
@@ -68,33 +69,33 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         /// The first and the last x and y coordinate pair should be the same, in order to close the polygon.
         /// Coordinates are relative to the top-left corner of the object. All values are separated by commas.
         /// </summary>
-        public CoordinatesTypeAttribute Coords { get { return _coordAttribute; } }
+        public IAttributeDataAccess Coords { get { return _coordAttribute; } }
 
         /// <summary>
         /// Specifies that the target will be downloaded when a user clicks on the hyperlink
         /// </summary>
-        public URITypeAttribute Download { get { return _downloadAttribute; }}
+        public IAttributeDataAccess Download { get { return _downloadAttribute; } }
 
         /// <summary>
         /// Specifies the location of a Web resource.
         /// </summary>
-        public URITypeAttribute HRef { get { return _hrefAttribute; } }
+        public IAttributeDataAccess HRef { get { return _hrefAttribute; } }
 
         /// <summary>
         /// Specifies the language of the target URL
         /// </summary>
-        public LanguageTypeAttribute HRefLang { get { return _hrefLangAttribute; }}
+        public IAttributeDataAccess HRefLang { get { return _hrefLangAttribute; } }
 
         /// <summary>
         /// Specifies what media/device the target URL is optimized for
         /// </summary>
-        public MediaDescriptionsTypeAttribute Media { get { return _mediaAttribute; }}
+        public IAttributeDataAccess Media { get { return _mediaAttribute; } }
 
         /// <summary>
         /// The rel attribute specifies the relationship between the current document and the linked document.
         /// Only used if the href attribute is present.
         /// </summary>
-        public AreaRelationTypeAttribute Rel { get { return _relationAttribute; } }
+        public IAttributeDataAccess Rel { get { return _relationAttribute; } }
 
         /// <summary>
         /// Specifies the shape of a region. 
@@ -104,17 +105,17 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         /// * circle: Defines a circular region.
         /// * poly: Defines a polygonal region.
         /// </summary>
-        public ShapeTypeAttribute Shape { get { return _shapeAttribute; } }
+        public IAttributeDataAccess Shape { get { return _shapeAttribute; } }
 
         /// <summary>
         /// Specifies where to open the target URL
         /// </summary>
-        public FormTargetTypeAttribute Target { get { return _targetAttribute; } }
+        public IAttributeDataAccess Target { get { return _targetAttribute; } }
 
         /// <summary>
         /// Specifies the MIME type of the target URL
         /// </summary>
-        public MIMETypeAttribute Type { get { return _typeAttribute; }}
+        public IAttributeDataAccess Type { get { return _typeAttribute; } }
 
 
         /// <summary>

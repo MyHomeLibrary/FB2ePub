@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.TableElements
@@ -12,7 +13,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     public class ColElement : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
 
         [AttributeTypeAttributeMember(Name = "char", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CharAttribute _charAttribute = new CharAttribute();
@@ -34,42 +35,42 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// A single col element can represent (or "span") multiple columns. 
         /// This attribute contains a number of columns "spanned" by the col element.
         /// </summary>
-        public NumberTypeAttribute Span { get { return _spanAttribute; } }
+        public IAttributeDataAccess Span { get { return _spanAttribute; } }
 
 
         /// <summary>
         /// Not supported in HTML5.
         /// Specifies the alignment of the content related to a "col" element
         /// </summary>
-        public AlignTypeAttribute Align { get { return _alignAttribute; }}
+        public IAttributeDataAccess Align { get { return _alignAttribute; } }
 
 
         /// <summary>
         /// Specifies the alignment of the content related to a "col" element to a character
         /// Not supported in HTML5.
         /// </summary>
-        public CharAttribute Char { get { return _charAttribute; }}
+        public IAttributeDataAccess Char { get { return _charAttribute; } }
 
 
         /// <summary>
         /// Specifies the number of characters the content will be aligned from the character specified by the char attribute
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute CharOff { get { return _charOffAttribute; }}
+        public IAttributeDataAccess CharOff { get { return _charOffAttribute; } }
 
 
         /// <summary>
         /// Specifies the vertical alignment of the content related to a "col" element
         /// Not supported in HTML5.
         /// </summary>
-        public VAlignTypeAttribute VAlign { get { return _vAlignAttribute; }}
+        public IAttributeDataAccess VAlign { get { return _vAlignAttribute; } }
 
 
         /// <summary>
         /// Specifies the width of a "col" element
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute Width { get { return _widthAttribute; }}
+        public IAttributeDataAccess Width { get { return _widthAttribute; } }
 
 
 

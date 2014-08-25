@@ -1,5 +1,4 @@
-﻿using System.Xml.Linq;
-using XHTMLClassLibrary.AttributeDataTypes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
 
 namespace XHTMLClassLibrary.Attributes
 {
