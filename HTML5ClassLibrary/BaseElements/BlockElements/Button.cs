@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
@@ -25,7 +26,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly URITypeAttribute _formAction = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "enctype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormEncodingTypeAttribute _formEncoding = new FormEncodingTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _formEncoding = new ValuesSelectionTypeAttribute<Text>(@"application/x-www-form-urlencoded;multipart/form-data;text/plain");
 
         [AttributeTypeAttributeMember(Name = "formmethod", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormMethodTypeAttribute _formMethod = new FormMethodTypeAttribute();
@@ -40,64 +41,64 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly TextValueTypeAttribute _name = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ButtonTypeAttribute _type = new ButtonTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<ContentType> _type = new ValuesSelectionTypeAttribute<ContentType>("reset;button;submit");
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly TextValueTypeAttribute _value = new TextValueTypeAttribute();
 
 
 
-        public ButtonTypeAttribute Type
+        public IAttributeDataAccess Type
         {
             get { return _type; }
         }
 
-        public TextValueTypeAttribute Name
+        public IAttributeDataAccess Name
         {
             get { return _name; }
         }
 
-        public TextValueTypeAttribute Value
+        public IAttributeDataAccess Value
         {
             get { return _value; }
         }
 
-        public FlagTypeAttribute Disabled
+        public IAttributeDataAccess Disabled
         {
             get { return _disabled; }
         }
 
-        public FlagTypeAttribute Autofocus
+        public IAttributeDataAccess Autofocus
         {
             get { return _autofocus; }
         }
 
-        public URITypeAttribute Form
+        public IAttributeDataAccess Form
         {
             get { return _form; }
         }
 
-        public URITypeAttribute FormAction
+        public IAttributeDataAccess FormAction
         {
             get { return _formAction; }
         }
 
-        public FormEncodingTypeAttribute FormEncoding
+        public IAttributeDataAccess FormEncoding
         {
             get { return _formEncoding; }
         }
 
-        public FormMethodTypeAttribute FormMethod
+        public IAttributeDataAccess FormMethod
         {
             get { return _formMethod; }
         }
 
-        public FlagTypeAttribute FormNoValidate
+        public IAttributeDataAccess FormNoValidate
         {
             get { return _formNoValidate; }
         }
 
-        public FormTargetTypeAttribute FormTarget
+        public IAttributeDataAccess FormTarget
         {
             get { return _formTarget; }
         }

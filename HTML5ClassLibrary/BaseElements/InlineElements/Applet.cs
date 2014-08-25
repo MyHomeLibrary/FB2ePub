@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
@@ -16,7 +17,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly TextValueTypeAttribute _objectAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly BiDirectionalAlignTypeAttribute _alignAttribute = new BiDirectionalAlignTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("middle;baseline;bottom;top;left;right");
 
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
         private readonly TextValueTypeAttribute _altAttribute = new TextValueTypeAttribute();
@@ -49,59 +50,59 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies the width of an applet
         /// </summary>
-        public LengthTypeAttribute Width { get { return _widthAttribute; }}
+        public IAttributeDataAccess Width { get { return _widthAttribute; }}
 
 
         /// <summary>
         /// Defines the vertical spacing around an applet
         /// </summary>
-        public LengthTypeAttribute VSpace { get { return _vSpaceAttribute; }}
+        public IAttributeDataAccess VSpace { get { return _vSpaceAttribute; } }
            
 
         /// <summary>
         /// Defines the name for an applet (to use in scripts)
         /// </summary>
-        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
+        public IAttributeDataAccess Name { get { return _nameAttribute; } }
 
         /// <summary>
         /// Defines the horizontal spacing around an applet
         /// </summary>
-        public LengthTypeAttribute HSpace { get { return _hSpaceAttribute; }}
+        public IAttributeDataAccess HSpace { get { return _hSpaceAttribute; } }
 
         /// <summary>
         /// Specifies the height of an applet
         /// </summary>
-        public LengthTypeAttribute Height { get { return _height; }}
+        public IAttributeDataAccess Height { get { return _height; } }
 
         /// <summary>
         /// Specifies a relative base URL for applets specified in the code attribute
         /// </summary>
-        public URITypeAttribute CodeBase { get { return _codeBaseAttribute; }}
+        public IAttributeDataAccess CodeBase { get { return _codeBaseAttribute; } }
 
         /// <summary>
         /// Specifies the location of an archive file
         /// </summary>
-        public URIsTypeAttribute Archive { get { return _archiveAttribute; }}
+        public IAttributeDataAccess Archive { get { return _archiveAttribute; } }
 
         /// <summary>
         /// Specifies an alternate text for an applet
         /// </summary>
-        public TextValueTypeAttribute Alt { get { return _altAttribute; }}
+        public IAttributeDataAccess Alt { get { return _altAttribute; } }
 
         /// <summary>
         /// Specifies the alignment of an applet according to surrounding elements
         /// </summary>
-        public BiDirectionalAlignTypeAttribute Align { get { return _alignAttribute; }}
+        public IAttributeDataAccess Align { get { return _alignAttribute; } }
 
         /// <summary>
         /// Specifies the file name of a Java applet
         /// </summary>
-        public URITypeAttribute Code { get { return _codeAttribute; }}
+        public IAttributeDataAccess Code { get { return _codeAttribute; } }
 
         /// <summary>
         /// Specifies a reference to a serialized representation of an applet
         /// </summary>
-        public TextValueTypeAttribute Object { get { return _objectAttribute; }}
+        public IAttributeDataAccess Object { get { return _objectAttribute; } }
 
 
         public override bool IsValid()

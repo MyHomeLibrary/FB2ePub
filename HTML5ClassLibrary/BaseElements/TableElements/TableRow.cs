@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.TableElements
 {
@@ -9,7 +10,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     public class TableRow : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
 
         [AttributeTypeAttributeMember(Name = "char", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly CharAttribute _charAttribute = new CharAttribute();
@@ -27,28 +28,28 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// Aligns the content inside the "tr" element
         /// Not supported in HTML5.
         /// </summary>
-        public AlignTypeAttribute Align { get { return _alignAttribute; } }
+        public IAttributeDataAccess Align { get { return _alignAttribute; } }
 
 
         /// <summary>
         /// Aligns the content inside the "tr" element to a character
         /// Not supported in HTML5.
         /// </summary>
-        public CharAttribute Char { get { return _charAttribute; } }
+        public IAttributeDataAccess Char { get { return _charAttribute; } }
 
 
         /// <summary>
         /// Sets the number of characters the content inside the "tr" element will be aligned from the character specified by the char attribute
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute CharOff { get { return _charOffAttribute; } }
+        public IAttributeDataAccess CharOff { get { return _charOffAttribute; } }
 
 
         /// <summary>
         /// Vertical aligns the content inside the "tr" element
         /// Not supported in HTML5.
         /// </summary>
-        public VAlignTypeAttribute VAlign { get { return _vAlignAttribute; } }
+        public IAttributeDataAccess VAlign { get { return _vAlignAttribute; } }
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

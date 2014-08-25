@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.Legends
@@ -10,7 +11,7 @@ namespace XHTMLClassLibrary.BaseElements.Legends
     public class Legend : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
 
 
 
@@ -18,7 +19,7 @@ namespace XHTMLClassLibrary.BaseElements.Legends
         ///  Specifies the alignment of the caption
         /// Not supported in HTML5.
         /// </summary>
-        public  AlignTypeAttribute Align { get { return _alignAttribute; }}
+        public IAttributeDataAccess Align { get { return _alignAttribute; } }
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

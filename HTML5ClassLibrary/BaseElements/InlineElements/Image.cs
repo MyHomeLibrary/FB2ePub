@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
@@ -10,7 +11,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     public class Image : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly BiDirectionalAlignTypeAttribute _alignAttribute = new BiDirectionalAlignTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("middle;baseline;bottom;top;left;right");
 
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly TextValueTypeAttribute _altAttribute = new TextValueTypeAttribute();
@@ -19,7 +20,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly PixelsTypeAttribute _borderAttribute = new PixelsTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "crossorigin", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly CrossOriginTypeAttribute _crossOriginAttribute = new CrossOriginTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _crossOriginAttribute = new ValuesSelectionTypeAttribute<Text>("anonymous;use-credentials");
 
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly LengthTypeAttribute _heightAttribute = new LengthTypeAttribute();
@@ -53,13 +54,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the alignment of an image according to surrounding elements
         /// Not supported in HTML5.
         /// </summary>
-        public BiDirectionalAlignTypeAttribute Align { get { return _alignAttribute; }}
+        public IAttributeDataAccess Align { get { return _alignAttribute; } }
 
         /// <summary>
         /// Alternate text for the image. This attribute is required. 
         /// The value should be left blank for decorative images.
         /// </summary>
-        public TextValueTypeAttribute Alt
+        public IAttributeDataAccess Alt
         {
             get
             {
@@ -71,7 +72,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the width of the border around an image
         /// Not supported in HTML5.
         /// </summary>
-        public PixelsTypeAttribute Border { get { return _borderAttribute; }}
+        public IAttributeDataAccess Border { get { return _borderAttribute; } }
 
         /// <summary>
         /// Image height.
@@ -86,13 +87,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the whitespace on left and right side of an image
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute HSpace { get { return _hSpaceAttribute; }}
+        public IAttributeDataAccess HSpace { get { return _hSpaceAttribute; } }
 
 
         /// <summary>
         /// Image width.
         /// </summary>
-        public  LengthTypeAttribute Width
+        public IAttributeDataAccess Width
         {
             get { return _widthAttribute; }
         }
@@ -100,7 +101,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// This required attribute specifies the location of the image source.
         /// </summary>
-        public  URITypeAttribute Source
+        public IAttributeDataAccess Source
         {
             get { return _srcAttribute; }
         }
@@ -109,7 +110,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// If present, this attribute specifies that a server-side image map should be used. 
         /// Possible value is "ismap".
         /// </summary>
-        public ISMapTypeAttribute ISMap
+        public IAttributeDataAccess ISMap
         {
             get { return _ismapAttribute; }
         }
@@ -119,13 +120,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the URL to a document that contains a long description of an image
         /// Not supported in HTML5.
         /// </summary>
-        public URITypeAttribute LongDescription { get { return _longDescriptionAttribute; }}
+        public IAttributeDataAccess LongDescription { get { return _longDescriptionAttribute; } }
 
         /// <summary>
         /// This attribute associates the image to a client-side image map defined by a map element. 
         /// The value of this attribute must match the id attribute of the map element.
         /// </summary>
-        public IdReferenceTypeAttribute UseMap
+        public IAttributeDataAccess UseMap
         {
             get { return _useMapAttribute; }
         }
@@ -135,12 +136,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the whitespace on top and bottom of an image
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute VSpace { get { return _vSpaceAttribute; }}
+        public IAttributeDataAccess VSpace { get { return _vSpaceAttribute; } }
 
         /// <summary>
         /// Allow images from third-party sites that allow cross-origin access to be used with canvas
         /// </summary>
-        public CrossOriginTypeAttribute Crossorigin { get { return _crossOriginAttribute; }}
+        public IAttributeDataAccess Crossorigin { get { return _crossOriginAttribute; } }
 
         #endregion
 

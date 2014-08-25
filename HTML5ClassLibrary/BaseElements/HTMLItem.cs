@@ -121,8 +121,7 @@ namespace XHTMLClassLibrary.BaseElements
                 var attributes =
                     (Attribute[])
                         blockField.GetCustomAttributes(typeof(AttributeTypeAttributeMember), false);
-                if (attributes != null &&
-                    attributes.Length > 0)
+                if (attributes.Length > 0)
                 {
                     var attributeType = attributes[0] as AttributeTypeAttributeMember;
                     if (attributeType != null &&
@@ -142,8 +141,7 @@ namespace XHTMLClassLibrary.BaseElements
         private void RegisterSingleAttribute(FieldInfo field,object instanceObject)
         {
             var interfaces = field.FieldType.GetInterfaces();
-            if (interfaces != null &&
-                interfaces.Length > 0)
+            if (interfaces.Length > 0)
             {
                 if (interfaces.Contains(typeof(IBaseAttribute)))
                 {
@@ -209,7 +207,7 @@ namespace XHTMLClassLibrary.BaseElements
         private string GetObjectElementName()
         {
             // get current object type
-            System.Reflection.MemberInfo inf = GetType();
+            var inf = GetType();
             // get all attributes of HTMLItemAttribute type
             var attributes = (HTMLItemAttribute[])inf.GetCustomAttributes(typeof(HTMLItemAttribute), false);
             // check if the item has attributes attribute

@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
@@ -14,7 +15,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         private readonly TextValueTypeAttribute _abbreviatedAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
 
         [AttributeTypeAttributeMember(Name = "axis", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly TextValueTypeAttribute _axisAttribute = new TextValueTypeAttribute();
@@ -58,94 +59,94 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         /// Specifies an abbreviated version of the content in a cell
         /// Not supported in HTML5.
         /// </summary>
-        public TextValueTypeAttribute Abbr { get { return _abbreviatedAttribute; } }
+        public IAttributeDataAccess Abbr { get { return _abbreviatedAttribute; } }
 
 
         /// <summary>
         /// Aligns the content in a cell
         /// Not supported in HTML5.
         /// </summary>
-        public AlignTypeAttribute Align { get { return _alignAttribute; }}
+        public IAttributeDataAccess Align { get { return _alignAttribute; } }
 
 
         /// <summary>
         /// Categorizes cells
         /// Not supported in HTML5.
         /// </summary>
-        public TextValueTypeAttribute Axis { get { return _axisAttribute; }}
+        public IAttributeDataAccess Axis { get { return _axisAttribute; } }
 
 
         /// <summary>
         ///  Specifies the background color of a cell
         /// Not supported in HTML5.
         /// </summary>
-        public ColorTypeAttribute BgColor { get { return _backgroundColorAttribute; }}
+        public IAttributeDataAccess BgColor { get { return _backgroundColorAttribute; } }
 
 
         /// <summary>
         /// Aligns the content in a cell to a character
         /// Not supported in HTML5.
         /// </summary>
-        public CharAttribute Char { get { return _charAttribute; } }
+        public IAttributeDataAccess Char { get { return _charAttribute; } }
 
 
         /// <summary>
         /// Sets the number of characters the content will be aligned from the character specified by the char attribute
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute CharOff { get { return _charOffAttribute; }}
+        public IAttributeDataAccess CharOff { get { return _charOffAttribute; } }
 
         /// <summary>
         /// This attribute specifies the number of columns spanned by the current cell.
         /// </summary>
-        public NumberTypeAttribute ColSpan { get { return _colSpanAttribute; } }
+        public IAttributeDataAccess ColSpan { get { return _colSpanAttribute; } }
 
 
         /// <summary>
         /// This attribute specifies the number of rows spanned by the current cell.
         /// </summary>
-        public NumberTypeAttribute RowSpan { get { return _rowSpanAttribue; } }
+        public IAttributeDataAccess RowSpan { get { return _rowSpanAttribue; } }
 
 
         /// <summary>
         /// Specifies one or more header cells a cell is related to
         /// </summary>
-        public NameTokensTypeAttribute Headers { get { return _headersAttribute; }}
+        public IAttributeDataAccess Headers { get { return _headersAttribute; } }
 
 
         /// <summary>
         ///  Sets the height of a cell
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute Height { get { return _heightAttribute; }}
+        public IAttributeDataAccess Height { get { return _heightAttribute; } }
 
 
         /// <summary>
         ///  Specifies that the content inside a cell should not wrap
         /// Not supported in HTML5.
         /// </summary>
-        public FlagTypeAttribute NoWrap { get { return _noWrapAttribute; }}
+        public IAttributeDataAccess NoWrap { get { return _noWrapAttribute; } }
 
 
         /// <summary>
         /// Defines a way to associate header cells and data cells in a table
         /// Not supported in HTML5.
         /// </summary>
-        public ScopeTypeAttribute Scope { get { return _scopeAttribute; }}
+        public IAttributeDataAccess Scope { get { return _scopeAttribute; } }
 
 
         /// <summary>
         /// Vertical aligns the content in a cell
         /// Not supported in HTML5.
         /// </summary>
-        public VAlignTypeAttribute VAlign { get { return _vAlignAttribute; }}
+        public IAttributeDataAccess VAlign { get { return _vAlignAttribute; } }
 
 
         /// <summary>
         ///  Specifies the width of a cell
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute Width { get { return _widthAttribute; }}
+        public IAttributeDataAccess Width { get { return _widthAttribute; } }
 
 
 

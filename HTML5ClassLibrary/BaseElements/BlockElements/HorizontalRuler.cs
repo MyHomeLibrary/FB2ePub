@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.BlockElements
@@ -11,7 +12,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     public class HorizontalRuler : HTMLItem, IBlockElement 
     {
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-        private readonly  AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
+        private readonly  ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
 
 
         [AttributeTypeAttributeMember(Name = "noshade", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
@@ -29,28 +30,28 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         ///  Specifies that a "hr" element should render in one solid color (noshaded), instead of a shaded color
         /// Not supported in HTML5.
         /// </summary>
-        public FlagTypeAttribute NoShade { get { return _noShadeAttribute; }}
+        public IAttributeDataAccess NoShade { get { return _noShadeAttribute; } }
 
 
         /// <summary>
         ///  Specifies the alignment of a "hr" element
         /// Not supported in HTML5.
         /// </summary>
-        public AlignTypeAttribute Align { get { return _alignAttribute; }}
+        public IAttributeDataAccess Align { get { return _alignAttribute; } }
 
 
         /// <summary>
         ///  Specifies the height of a "hr" element
         /// Not supported in HTML5.
         /// </summary>
-        public NumberTypeAttribute Size { get { return _sizeAttribute; }}
+        public IAttributeDataAccess Size { get { return _sizeAttribute; } }
 
 
         /// <summary>
         ///  Specifies the width of a "hr" element
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute Width { get { return _widthAttribute; }}
+        public IAttributeDataAccess Width { get { return _widthAttribute; } }
 
         /// <summary>
         /// Checks it element data is valid

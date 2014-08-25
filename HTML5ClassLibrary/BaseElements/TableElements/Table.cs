@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace XHTMLClassLibrary.BaseElements.TableElements
@@ -11,7 +12,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     public class Table : HTMLItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly AlignTypeAttribute _alignAttribute = new AlignTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
 
         [AttributeTypeAttributeMember(Name = "bgcolor", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ColorTypeAttribute _backgroundColorAttribute = new ColorTypeAttribute();
@@ -47,69 +48,69 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         ///  Specifies the alignment of a table according to surrounding text
         /// Not supported in HTML5.
         /// </summary>
-        public AlignTypeAttribute Align { get { return _alignAttribute; }}
+        public IAttributeDataAccess Align { get { return _alignAttribute; } }
 
 
         /// <summary>
         ///  Specifies the background color for a table
         /// Not supported in HTML5.
         /// </summary>
-        public ColorTypeAttribute BgColor { get { return _backgroundColorAttribute; }}
+        public IAttributeDataAccess BgColor { get { return _backgroundColorAttribute; } }
 
 
         /// <summary>
         /// Specifies whether the table cells should have borders or not
         /// Not supported in HTML5.
         /// </summary>
-        public PixelsTypeAttribute Border { get { return _borderAttribute; }}
+        public IAttributeDataAccess Border { get { return _borderAttribute; } }
 
 
         /// <summary>
         /// Specifies the space between the cell wall and the cell content
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute CellPadding { get { return _cellPaddingAttribute; }}
+        public IAttributeDataAccess CellPadding { get { return _cellPaddingAttribute; } }
 
 
         /// <summary>
         /// Specifies the space between cells
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute CellSpacing { get { return _cellSpacingAttribute; }}
+        public IAttributeDataAccess CellSpacing { get { return _cellSpacingAttribute; } }
 
 
         /// <summary>
         /// Specifies which parts of the outside borders that should be visible
         /// Not supported in HTML5.
         /// </summary>
-        public FrameTypeAttribute Frame { get { return _frameAttribute; }}
+        public IAttributeDataAccess Frame { get { return _frameAttribute; } }
 
 
         /// <summary>
         /// Specifies which parts of the inside borders that should be visible
         /// Not supported in HTML5.
         /// </summary>
-        public RulesTypeAttribute Rules { get { return _rulesAttribute; }}
+        public IAttributeDataAccess Rules { get { return _rulesAttribute; } }
 
 
         /// <summary>
         /// Specifies that the table should be sortable
         /// </summary>
-        public FlagTypeAttribute Sortable { get { return _sortableAttribute; }}
+        public IAttributeDataAccess Sortable { get { return _sortableAttribute; } }
 
 
         /// <summary>
         /// Specifies a summary of the content of a table
         /// Not supported in HTML5.
         /// </summary>
-        public TextValueTypeAttribute Summary { get { return _summaryAttribute; }}
+        public IAttributeDataAccess Summary { get { return _summaryAttribute; } }
 
 
         /// <summary>
         /// Specifies the width of a table
         /// Not supported in HTML5.
         /// </summary>
-        public LengthTypeAttribute Width { get { return _widthAttribute; }}
+        public IAttributeDataAccess Width { get { return _widthAttribute; } }
 
 
 

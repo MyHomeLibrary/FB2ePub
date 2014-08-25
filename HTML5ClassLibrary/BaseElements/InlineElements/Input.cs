@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
@@ -15,7 +16,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly ContentTypeAttribute _acceptAttribute = new ContentTypeAttribute();
 
          [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly BiDirectionalAlignTypeAttribute _alignAttribute = new BiDirectionalAlignTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("middle;baseline;bottom;top;left;right");
 
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly TextValueTypeAttribute _altAttribute = new TextValueTypeAttribute();
@@ -39,7 +40,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly URITypeAttribute _formActionAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "enctype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormEncodingTypeAttribute _formEncodingTypeAttribute = new FormEncodingTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _formEncodingTypeAttribute = new ValuesSelectionTypeAttribute<Text>(@"application/x-www-form-urlencoded;multipart/form-data;text/plain");
 
         [AttributeTypeAttributeMember(Name = "formmethod", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FormMethodTypeAttribute _formMethodAttribute = new FormMethodTypeAttribute();
@@ -105,7 +106,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Alternate text for controls of the type image.
         /// </summary>
-        public TextValueTypeAttribute Alt
+        public IAttributeDataAccess Alt
         {
             get { return _altAttribute; }
         }
@@ -113,7 +114,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies whether an "input" element should have autocomplete enabled
         /// </summary>
-        public OnOffTypeAttribute Autocomplete
+        public IAttributeDataAccess Autocomplete
         {
             get { return _autocompleteAttribute; }
         }
@@ -121,7 +122,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies that an "input" element should automatically get focus when the page loads
         /// </summary>
-        public FlagTypeAttribute Autofocus
+        public IAttributeDataAccess Autofocus
         {
             get { return _autoFocusAttribute; }
         }
@@ -129,7 +130,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Form control name.
         /// </summary>
-        public TextValueTypeAttribute Name
+        public IAttributeDataAccess Name
         {
             get { return _nameAttribute; }
         }
@@ -137,18 +138,18 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies a regular expression that an "input" element's value is checked against
         /// </summary>
-        public PatternTypeAttribute Pattern { get { return _pattern; }}
+        public IAttributeDataAccess Pattern { get { return _pattern; } }
 
         /// <summary>
         /// Specifies a short hint that describes the expected value of an "input" element
         /// </summary>
-        public TextValueTypeAttribute Placeholder { get { return _placeHolderAttribute; }}
+        public IAttributeDataAccess Placeholder { get { return _placeHolderAttribute; } }
 
         /// <summary>
         /// When the type attribute has the value radio or checkbox, 
         /// this attribute specifies that the radio/checkbox is selected.
         /// </summary>
-        public FlagTypeAttribute Checked
+        public IAttributeDataAccess Checked
         {
             get { return _checkedAttribute; }
         }
@@ -157,7 +158,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// When the type attribute has the value text or password, this attribute specifies the maximum number of characters the user may enter. 
         /// This number should not exceed the value specified in the size attribute.
         /// </summary>
-        public NumberTypeAttribute MaxLength
+        public IAttributeDataAccess MaxLength
         {
             get { return _maxLenghtAttribute; }
         }
@@ -165,20 +166,20 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies a minimum value for an "input" element
         /// </summary>
-        public TextValueTypeAttribute Min { get { return _minAttribute; }}
+        public IAttributeDataAccess Min { get { return _minAttribute; } }
 
 
         /// <summary>
         /// Specifies that a user can enter more than one value in an "input" element
         /// </summary>
-        public FlagTypeAttribute Multiple { get { return _multipleAttribute; }}
+        public IAttributeDataAccess Multiple { get { return _multipleAttribute; } }
 
         /// <summary>
         /// This attribute tells the Web browser the initial width of the control. 
         /// The width is given in pixels except when the type attribute has the value text or password. 
         /// In such cases, its value is the number of characters.
         /// </summary>
-        public NumberTypeAttribute Size
+        public IAttributeDataAccess Size
         {
             get { return _sizeAttribute; }
         }
@@ -186,7 +187,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Type of control to create.
         /// </summary>
-        public InputTypeAttribute InputType
+        public IAttributeDataAccess InputType
         {
             get { return _inputTypeAttribute; }
         }
@@ -195,7 +196,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// This attribute specifies a comma-separated list of content types that a server processing this form will handle correctly.
         /// </summary>
-        public ContentTypeAttribute Accept { get { return _acceptAttribute; } }
+        public IAttributeDataAccess Accept { get { return _acceptAttribute; } }
 
 
 
@@ -203,96 +204,95 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         ///  Specifies the alignment of an image input (only for type="image")
         /// Not supported in HTML5.
         /// </summary>
-        public BiDirectionalAlignTypeAttribute Align { get { return _alignAttribute; }}
+        public IAttributeDataAccess Align { get { return _alignAttribute; } }
 
 
         /// <summary>
         /// Disables the control for user input. Possible value is disabled.
         /// </summary>
-        public FlagTypeAttribute Disabled { get { return _disabledAttribute; } }
+        public IAttributeDataAccess Disabled { get { return _disabledAttribute; } }
 
 
         /// <summary>
         /// Specifies one or more forms the "input" element belongs to
         /// </summary>
-        public URITypeAttribute Form { get { return _formIdAttribute; }}
+        public IAttributeDataAccess Form { get { return _formIdAttribute; } }
 
 
         /// <summary>
         /// Specifies the URL of the file that will process the input control when the form is submitted (for type="submit" and type="image")
         /// </summary>
-        public URITypeAttribute FormAction { get { return _formActionAttribute; }}
+        public IAttributeDataAccess FormAction { get { return _formActionAttribute; } }
 
 
         /// <summary>
         /// Specifies how the form-data should be encoded when submitting it to the server (for type="submit" and type="image")
         /// </summary>
-        public FormEncodingTypeAttribute FormEncType { get { return _formEncodingTypeAttribute; }}
+        public IAttributeDataAccess FormEncType { get { return _formEncodingTypeAttribute; } }
 
 
         /// <summary>
         /// Defines that form elements should not be validated when submitted
         /// </summary>
-        public FlagTypeAttribute FormNoValidate { get { return _formNoValidateAttribute; }}
+        public IAttributeDataAccess FormNoValidate { get { return _formNoValidateAttribute; } }
 
         /// <summary>
         /// Specifies where to display the response that is received after submitting the form (for type="submit" and type="image")
         /// </summary>
-        public FormTargetTypeAttribute FormTarget { get { return _formTargetAttribute; }}
+        public IAttributeDataAccess FormTarget { get { return _formTargetAttribute; } }
 
         /// <summary>
         /// Defines the HTTP method for sending data to the action URL (for type="submit" and type="image")
         /// </summary>
-        public FormMethodTypeAttribute FormMethod { get { return _formMethodAttribute; }}
+        public IAttributeDataAccess FormMethod { get { return _formMethodAttribute; } }
 
         /// <summary>
         /// Specifies the height of an "input" element (only for type="image")
         /// </summary>
-        public LengthTypeAttribute Height { get { return _heightAttribute; }}
+        public IAttributeDataAccess Height { get { return _heightAttribute; } }
 
         /// <summary>
         /// Specifies the width of an "input" element (only for type="image")
         /// </summary>
-        public LengthTypeAttribute Width { get { return _widthAttribute; }}
+        public IAttributeDataAccess Width { get { return _widthAttribute; } }
 
 
         /// <summary>
         /// Refers to a "datalist" element that contains pre-defined options for an "input" element
         /// </summary>
-        public URITypeAttribute List { get { return _listAttribute; }} 
+        public IAttributeDataAccess List { get { return _listAttribute; } } 
 
         /// <summary>
         /// Specifies the maximum value for an "input" element
         /// </summary>
-        public TextValueTypeAttribute Max { get { return _maxAttribute; }}
+        public IAttributeDataAccess Max { get { return _maxAttribute; } }
 
         /// <summary>
         /// If present, this attribute prohibits changes to the value in the control. 
         /// Possible value is "readonly".
         /// </summary>
-        public FlagTypeAttribute ReadOnly { get { return _readonlyAttribute; } }
+        public IAttributeDataAccess ReadOnly { get { return _readonlyAttribute; } }
 
         /// <summary>
         /// Specifies that an input field must be filled out before submitting the form
         /// </summary>
-        public FlagTypeAttribute Required { get { return _requiredAttribute; }}
+        public IAttributeDataAccess Required { get { return _requiredAttribute; } }
 
         /// <summary>
         /// When the type attribute has the value image, 
         /// this attribute specifies the location of the image to be used to decorate the graphical submit button.
         /// </summary>
-        public URITypeAttribute Src { get { return _srcAttribute; } }
+        public IAttributeDataAccess Src { get { return _srcAttribute; } }
 
         /// <summary>
         /// Specifies the legal number intervals for an input field
         /// </summary>
-        public TextValueTypeAttribute Step { get { return _stepAttribute; }}
-
+        public IAttributeDataAccess Step { get { return _stepAttribute; } }
 
         /// <summary>
         /// Value associated with a control.
         /// </summary>
-        public TextValueTypeAttribute Value { get { return _valueAttribute; } }
+        public IAttributeDataAccess Value { get { return _valueAttribute; } }
 
 
         /// <summary>
