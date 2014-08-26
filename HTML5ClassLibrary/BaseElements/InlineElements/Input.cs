@@ -22,7 +22,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly TextValueTypeAttribute _altAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "autocomplete", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnOffTypeAttribute _autocompleteAttribute = new OnOffTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _autocompleteAttribute = new ValuesSelectionTypeAttribute<Text>("on;off");
 
         [AttributeTypeAttributeMember(Name = "autofocus", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _autoFocusAttribute = new FlagTypeAttribute();
@@ -43,7 +43,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly ValuesSelectionTypeAttribute<Text> _formEncodingTypeAttribute = new ValuesSelectionTypeAttribute<Text>(@"application/x-www-form-urlencoded;multipart/form-data;text/plain");
 
         [AttributeTypeAttributeMember(Name = "formmethod", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormMethodTypeAttribute _formMethodAttribute = new FormMethodTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _formMethodAttribute = new ValuesSelectionTypeAttribute<Text>("get;post");
 
         [AttributeTypeAttributeMember(Name = "formnovalidate", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _formNoValidateAttribute = new FlagTypeAttribute();
@@ -94,7 +94,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly TextValueTypeAttribute _stepAttribute = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly InputTypeAttribute _inputTypeAttribute = new InputTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _inputTypeAttribute = new ValuesSelectionTypeAttribute<Text>("password;radio;checkbox;text;submit;image;reset;button;hidden;file;color;date;datetime;datetime-local;email;month;number;range;search;tel;time;url;week");
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly TextValueTypeAttribute _valueAttribute = new TextValueTypeAttribute();

@@ -22,13 +22,13 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly URITypeAttribute _actionAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "autocomplete", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnOffTypeAttribute _autocompleteAttribute = new OnOffTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _autocompleteAttribute = new ValuesSelectionTypeAttribute<Text>("on;off");
 
         [AttributeTypeAttributeMember(Name = "enctype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ValuesSelectionTypeAttribute<Text> _encTypeAttribute = new ValuesSelectionTypeAttribute<Text>(@"application/x-www-form-urlencoded;multipart/form-data;text/plain");
 
         [AttributeTypeAttributeMember(Name = "method", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FormMethodTypeAttribute _methodAttribute = new FormMethodTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _methodAttribute = new ValuesSelectionTypeAttribute<Text>("get;post");
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();

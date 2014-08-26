@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
@@ -11,7 +12,7 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
     public class ListItem : HTMLItem 
     {
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ListItemTypeAtttribute _listItemTypeAtttribute = new ListItemTypeAtttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _listItemTypeAtttribute = new ValuesSelectionTypeAttribute<Text>("1;A;a;I;i;disc;square;circle");
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly TextValueTypeAttribute _valueAttribute = new TextValueTypeAttribute();
@@ -23,12 +24,13 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         ///  Specifies which kind of bullet point will be used
         /// Not supported in HTML5.
         /// </summary>
-        public ListItemTypeAtttribute Type { get { return _listItemTypeAtttribute; }}
+        public IAttributeDataAccess Type { get { return _listItemTypeAtttribute; }}
 
         /// <summary>
         /// Specifies the value of a list item. 
         /// </summary>
-        public TextValueTypeAttribute Value { get { return _valueAttribute; }}
+        public IAttributeDataAccess Value { get { return _valueAttribute; } }
+
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

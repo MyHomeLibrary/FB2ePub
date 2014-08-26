@@ -79,7 +79,6 @@
     <Compile Include="Attributes\AttributeGroups\MouseEvents.cs" />
     <Compile Include="Attributes\AttributeGroups\WindowEventAttributes.cs" />
     <Compile Include="Attributes\AttributeTypeAttribute.cs" />
-    <Compile Include="Attributes\OnOffTypeAttribute.cs" />
     <Compile Include="Attributes\ColorTypeAttribute.cs" />
     <Compile Include="Attributes\BaseAttribute.cs" />
     <Compile Include="Attributes\PixelsTypeAttribute.cs" />
@@ -93,9 +92,7 @@
     <Compile Include="Attributes\Events\OnEventAttribute.cs" />
     <Compile Include="Attributes\FlagTypeAttribute.cs" />
     <Compile Include="Attributes\IdReferenceTypeAttribute.cs" />
-    <Compile Include="Attributes\FormMethodTypeAttribute.cs" />
     <Compile Include="Attributes\FormTargetTypeAttribute.cs" />
-    <Compile Include="Attributes\FrameTypeAttribute.cs" />
     <Compile Include="Attributes\FrameBorderAttribute.cs" />
     <Compile Include="Attributes\NameTokensTypeAttribute.cs" />
     <Compile Include="Attributes\FloatingNumberTypeAttribute.cs" />
@@ -103,14 +100,8 @@
     <Compile Include="Attributes\AttributeGroups\HTMLGlobalAttributes.cs" />
     <Compile Include="Attributes\NameTokenTypeAttribute.cs" />
     <Compile Include="Attributes\IdTypeAttribute.cs" />
-    <Compile Include="Attributes\InputTypeAttribute.cs" />
     <Compile Include="Attributes\ISMapTypeAttribute.cs" />
-    <Compile Include="Attributes\KeyTypeAttribute.cs" />
-    <Compile Include="Attributes\LanguagesTypeAttribute.cs" />
-    <Compile Include="Attributes\LinkRelationTypeAttribute.cs" />
-    <Compile Include="Attributes\ListItemTypeAtttribute.cs" />
     <Compile Include="Attributes\MediaDescriptionsTypeAttribute.cs" />
-    <Compile Include="Attributes\MenuTypeAttribute.cs" />
     <Compile Include="Attributes\MIME_TypeAttribute.cs" />
     <Compile Include="Attributes\OrderedListTypeAttribute.cs" />
     <Compile Include="Attributes\PatternTypeAttribute.cs" />

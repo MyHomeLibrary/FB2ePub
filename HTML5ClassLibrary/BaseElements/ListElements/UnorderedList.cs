@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace XHTMLClassLibrary.BaseElements.ListElements
@@ -15,7 +16,7 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         private readonly FlagTypeAttribute _compactAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ListItemTypeAtttribute _listItemTypeAtttribute = new ListItemTypeAtttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _listItemTypeAtttribute = new ValuesSelectionTypeAttribute<Text>("1;A;a;I;i;disc;square;circle");
 
 
 
@@ -25,14 +26,14 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         ///  Specifies that the list should render smaller than normal
         /// Not supported in HTML5.
         /// </summary>
-        public FlagTypeAttribute Compact { get { return _compactAttribute; }}
+        public IAttributeDataAccess Compact { get { return _compactAttribute; }}
 
 
         /// <summary>
         ///  Specifies the kind of marker to use in the list
         /// Not supported in HTML5.
         /// </summary>
-        public ListItemTypeAtttribute Type { get { return _listItemTypeAtttribute; }}
+        public IAttributeDataAccess Type { get { return _listItemTypeAtttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

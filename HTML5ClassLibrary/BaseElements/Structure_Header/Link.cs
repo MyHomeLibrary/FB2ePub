@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 
@@ -26,7 +27,7 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         private readonly MediaDescriptionsTypeAttribute _mediaAttribute = new MediaDescriptionsTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "rel", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LinkRelationTypeAttribute _relAttribute = new LinkRelationTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _relAttribute = new ValuesSelectionTypeAttribute<Text>("alternate;archives;author;bookmark;external;first;help;icon;last;license;next;nofollow;norefferer;pingback;prefetch;prev;search;sidebar;stylesheet;tag;up");
 
         [AttributeTypeAttributeMember(Name = "rev", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly LinkTypeAttribute _reverseRelationAttribute = new LinkTypeAttribute();
@@ -47,49 +48,49 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// Specifies the character encoding of the linked document
         /// Not supported in HTML5.
         /// </summary>
-        public CharsetTypeAttribute Charset { get { return _charsetAttribute; }}
+        public IAttributeDataAccess Charset { get { return _charsetAttribute; }}
 
         /// <summary>
         /// Specifies the primary language of the resource designated by href and may only be used when href is specified.
         /// </summary>
-        public LanguageTypeAttribute RefLanguage { get { return _hrefLangAttribute;}}
+        public IAttributeDataAccess RefLanguage { get { return _hrefLangAttribute; } }
 
         /// <summary>
         /// Describes the forward relationship from the current document to the resource specified by the href attribute. 
         /// The value of this attribute is a space-separated list of link types.
         /// </summary>
-        public LinkRelationTypeAttribute Relation { get { return _relAttribute; } }
+        public IAttributeDataAccess Relation { get { return _relAttribute; } }
 
 
         /// <summary>
         /// Specifies the relationship between the linked document and the current document
         /// Not supported in HTML5.
         /// </summary>
-        public LinkTypeAttribute Rev { get { return _reverseRelationAttribute; }}
+        public IAttributeDataAccess Rev { get { return _reverseRelationAttribute; } }
 
         /// <summary>
         /// This attribute specifies the location of a Web resource.
         /// </summary>
-        public URITypeAttribute HRef { get { return _hrefAttribute; } }
+        public IAttributeDataAccess HRef { get { return _hrefAttribute; } }
 
         /// <summary>
         /// his attribute specifies the intended destination medium for style information. 
         /// It may be a single media descriptor or a comma-separated list. 
         /// The default value for this attribute is "screen".
         /// </summary>
-        public MediaDescriptionsTypeAttribute Media { get { return _mediaAttribute; } }
+        public IAttributeDataAccess Media { get { return _mediaAttribute; } }
 
         /// <summary>
         /// Style sheet language. 
         /// For example: text/css.
         /// </summary>
-        public MIMETypeAttribute Type { get { return _typeAttribute; } }
+        public IAttributeDataAccess Type { get { return _typeAttribute; } }
 
 
         /// <summary>
         /// Specifies the size of the linked resource. Only for rel="icon"
         /// </summary>
-        public SizesTypeAttribute Sizes { get { return _sizesAttribute; }}
+        public IAttributeDataAccess Sizes { get { return _sizesAttribute; } }
 
 
         #endregion
