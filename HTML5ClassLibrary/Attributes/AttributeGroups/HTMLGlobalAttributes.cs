@@ -39,7 +39,7 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         private readonly IdTypeAttribute _idAttribute = new IdTypeAttribute();
         
         [AttributeTypeAttributeMember(Name = "lang", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LanguagesTypeAttribute _languageAttribute = new LanguagesTypeAttribute();
+        private readonly LanguageTypeAttribute _languageAttribute = new LanguageTypeAttribute();
         
         [AttributeTypeAttributeMember(Name = "spellcheck", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly ValuesSelectionTypeAttribute<Text> _spellCheckAttribute = new ValuesSelectionTypeAttribute<Text>("true;false");

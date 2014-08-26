@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
@@ -26,7 +27,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "keytype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly KeyTypeAttribute _keyTypeAttribute = new KeyTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _keyTypeAttribute = new ValuesSelectionTypeAttribute<Text>("rsa;dsa;ec");
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
@@ -36,32 +37,32 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Specifies that a "keygen" element should automatically get focus when the page loads
         /// </summary>
-        public FlagTypeAttribute Autofocus { get { return _autoFocusAttribute; }}
+        public IAttributeDataAccess Autofocus { get { return _autoFocusAttribute; }}
 
         /// <summary>
         /// Specifies that the value of the "keygen" element should be challenged when submitted
         /// </summary>
-        public FlagTypeAttribute Challenge { get { return _challengeAttribute; }}
+        public IAttributeDataAccess Challenge { get { return _challengeAttribute; } }
 
         /// <summary>
         /// Specifies that a "keygen" element should be disabled
         /// </summary>
-        public FlagTypeAttribute Disable { get { return _disabledAttribute; }}
+        public IAttributeDataAccess Disable { get { return _disabledAttribute; } }
 
         /// <summary>
         /// Specifies one or more forms the keygen element belongs to
         /// </summary>
-        public URITypeAttribute Form { get { return _formIdAttribute; }}
+        public IAttributeDataAccess Form { get { return _formIdAttribute; } }
 
         /// <summary>
         /// Specifies the security algorithm of the key
         /// </summary>
-        public KeyTypeAttribute Keytype { get { return _keyTypeAttribute; }}
+        public IAttributeDataAccess Keytype { get { return _keyTypeAttribute; } }
 
         /// <summary>
         /// Defines a name for the "keygen" element
         /// </summary>
-        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
+        public IAttributeDataAccess Name { get { return _nameAttribute; } }
 
 
         public override bool IsValid()

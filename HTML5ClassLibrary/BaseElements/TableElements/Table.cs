@@ -27,7 +27,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         private readonly LengthTypeAttribute _cellSpacingAttribute = new LengthTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "frame", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FrameTypeAttribute _frameAttribute = new FrameTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _frameAttribute = new ValuesSelectionTypeAttribute<Text>("above;hsides;below;void;vsides;lhs;rhs;box;border");
 
         [AttributeTypeAttributeMember(Name = "rules", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly RulesTypeAttribute _rulesAttribute = new RulesTypeAttribute();

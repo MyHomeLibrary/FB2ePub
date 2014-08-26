@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.BlockElements
@@ -15,18 +16,18 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly TextValueTypeAttribute _label = new TextValueTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MenuTypeAttribute _menuTypeAttribute = new MenuTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _menuTypeAttribute = new ValuesSelectionTypeAttribute<Text>("popup;toolbar;context");
 
 
         /// <summary>
         /// Specifies a visible label for the menu
         /// </summary>
-        public TextValueTypeAttribute Label { get { return _label; }}
+        public IAttributeDataAccess Label { get { return _label; }}
 
         /// <summary>
         /// Specifies which type of menu to display
         /// </summary>
-        public MenuTypeAttribute Type { get { return _menuTypeAttribute; }}
+        public IAttributeDataAccess Type { get { return _menuTypeAttribute; } }
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

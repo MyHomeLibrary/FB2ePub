@@ -29,7 +29,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly ValuesSelectionTypeAttribute<Text> _formEncoding = new ValuesSelectionTypeAttribute<Text>(@"application/x-www-form-urlencoded;multipart/form-data;text/plain");
 
         [AttributeTypeAttributeMember(Name = "formmethod", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormMethodTypeAttribute _formMethod = new FormMethodTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _formMethod = new ValuesSelectionTypeAttribute<Text>("get;post");
 
         [AttributeTypeAttributeMember(Name = "formnovalidate", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _formNoValidate = new FlagTypeAttribute();
