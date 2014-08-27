@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.BlockElements
@@ -11,13 +12,13 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     public class Time : HTMLItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "datetime", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly DateTimeTypeAttribute _dateTimeAttribute = new DateTimeTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Datetime> _dateTimeAttribute = new SimpleSingleTypeAttribute<Datetime>();
 
 
         /// <summary>
         /// Gives the date/time being specified. Otherwise, the date/time is given by the element's contents
         /// </summary>
-        public DateTimeTypeAttribute DateTime { get { return _dateTimeAttribute; }}
+        public IAttributeDataAccess DateTime { get { return _dateTimeAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

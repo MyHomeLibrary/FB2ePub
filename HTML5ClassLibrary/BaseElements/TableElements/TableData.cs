@@ -12,46 +12,46 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     public class TableData : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "abbr", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _abbreviatedAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _abbreviatedAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
 
         [AttributeTypeAttributeMember(Name = "axis", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _axisAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _axisAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "bgcolor", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ColorTypeAttribute _backgroundColorAttribute = new ColorTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Color> _backgroundColorAttribute = new SimpleSingleTypeAttribute<Color>();
 
         [AttributeTypeAttributeMember(Name = "char", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharAttribute _charAttribute = new CharAttribute();
+        private readonly SimpleSingleTypeAttribute<Character> _charAttribute = new SimpleSingleTypeAttribute<Character>();
 
         [AttributeTypeAttributeMember(Name = "charoff", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _charOffAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _charOffAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "colspan", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NumberTypeAttribute _colSpanAttribute = new NumberTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Number> _colSpanAttribute = new SimpleSingleTypeAttribute<Number>();
 
         [AttributeTypeAttributeMember(Name = "headers", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NameTokensTypeAttribute _headersAttribute = new NameTokensTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<NameTokens> _headersAttribute = new SimpleSingleTypeAttribute<NameTokens>();
 
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _heightAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _heightAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "nowrap", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _noWrapAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "rowspan", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NumberTypeAttribute _rowSpanAttribue = new NumberTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Number> _rowSpanAttribue = new SimpleSingleTypeAttribute<Number>();
 
         [AttributeTypeAttributeMember(Name = "scope", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ScopeTypeAttribute _scopeAttribute = new ScopeTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _scopeAttribute = new ValuesSelectionTypeAttribute<Text>("col;colgroup;row;rowgroup");
 
         [AttributeTypeAttributeMember(Name = "valign", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly VAlignTypeAttribute _vAlignAttribute = new VAlignTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _vAlignAttribute = new ValuesSelectionTypeAttribute<Text>("middle;baseline;bottom;top");
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>();
 
 
 

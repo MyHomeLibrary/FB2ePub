@@ -9,16 +9,16 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
     public class HTMLGlobalAttributes
     {
         [AttributeTypeAttributeMember(Name = "accesskey", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharAttribute _accessKeyAttribute = new CharAttribute();
+        private readonly SimpleSingleTypeAttribute<Character> _accessKeyAttribute = new SimpleSingleTypeAttribute<Character>();
        
         [AttributeTypeAttributeMember(Name = "class", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NameTokensTypeAttribute _classAttribute = new NameTokensTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<NameTokens> _classAttribute = new SimpleSingleTypeAttribute<NameTokens>();
         
         [AttributeTypeAttributeMember(Name = "contenteditable", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly ValuesSelectionTypeAttribute<Text> _contentEditableAttribute = new ValuesSelectionTypeAttribute<Text>("true;false");
 
         [AttributeTypeAttributeMember(Name = "contextmenu", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly IdTypeAttribute _contextMenuAttribute = new IdTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Id> _contextMenuAttribute = new SimpleSingleTypeAttribute<Id>();
         
         //[AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         //private readonly AnyDataAttribute _anyDataAttribute = new AnyDataAttribute(); // not really global but contain custom elements that can appear on any element so we put it here 
@@ -36,25 +36,25 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         private readonly FlagTypeAttribute _hiddenAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "id", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly IdTypeAttribute _idAttribute = new IdTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Id> _idAttribute = new SimpleSingleTypeAttribute<Id>();
         
         [AttributeTypeAttributeMember(Name = "lang", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LanguageTypeAttribute _languageAttribute = new LanguageTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<LanguageCode> _languageAttribute = new SimpleSingleTypeAttribute<LanguageCode>();
         
         [AttributeTypeAttributeMember(Name = "spellcheck", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly ValuesSelectionTypeAttribute<Text> _spellCheckAttribute = new ValuesSelectionTypeAttribute<Text>("true;false");
 
         [AttributeTypeAttributeMember(Name = "style", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _styleAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _styleAttribute = new SimpleSingleTypeAttribute<Text>();
         
         [AttributeTypeAttributeMember(Name = "tabindex", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NumberTypeAttribute _tabIndexAttribute = new NumberTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Number> _tabIndexAttribute = new SimpleSingleTypeAttribute<Number>();
 
         [AttributeTypeAttributeMember(Name = "title", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _titleAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _titleAttribute = new SimpleSingleTypeAttribute<Text>();
         
         [AttributeTypeAttributeMember(Name = "translate", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly YesNoTypeAttribute _translateAttribute = new YesNoTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _translateAttribute = new ValuesSelectionTypeAttribute<Text>("yes;no");
 
 
         /// <summary>

@@ -14,13 +14,13 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
 
         [AttributeTypeAttributeMember(Name = "char", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharAttribute _charAttribute = new CharAttribute();
+        private readonly SimpleSingleTypeAttribute<Character> _charAttribute = new SimpleSingleTypeAttribute<Character>();
 
         [AttributeTypeAttributeMember(Name = "charoff", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _charOffAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _charOffAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "valign", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly VAlignTypeAttribute _vAlignAttribute = new VAlignTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _vAlignAttribute = new ValuesSelectionTypeAttribute<Text>("middle;baseline;bottom;top");
 
 
 

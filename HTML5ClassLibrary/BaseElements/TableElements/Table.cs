@@ -15,31 +15,31 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
 
         [AttributeTypeAttributeMember(Name = "bgcolor", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ColorTypeAttribute _backgroundColorAttribute = new ColorTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Color> _backgroundColorAttribute = new SimpleSingleTypeAttribute<Color>();
 
         [AttributeTypeAttributeMember(Name = "border", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly PixelsTypeAttribute _borderAttribute = new PixelsTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Pixels> _borderAttribute = new SimpleSingleTypeAttribute<Pixels>();
 
         [AttributeTypeAttributeMember(Name = "cellpadding", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _cellPaddingAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _cellPaddingAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "cellspacing", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _cellSpacingAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _cellSpacingAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "frame", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ValuesSelectionTypeAttribute<Text> _frameAttribute = new ValuesSelectionTypeAttribute<Text>("above;hsides;below;void;vsides;lhs;rhs;box;border");
 
         [AttributeTypeAttributeMember(Name = "rules", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly RulesTypeAttribute _rulesAttribute = new RulesTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _rulesAttribute = new ValuesSelectionTypeAttribute<Text>("groups;cols;rows;none;all");
 
         [AttributeTypeAttributeMember(Name = "sortable", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _sortableAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "summary", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _summaryAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _summaryAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>();
 
 
 

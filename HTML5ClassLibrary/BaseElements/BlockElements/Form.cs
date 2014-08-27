@@ -13,13 +13,13 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     public class Form : HTMLItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "accept", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ContentTypeAttribute _acceptAttribute = new ContentTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<ContentType> _acceptAttribute = new SimpleSingleTypeAttribute<ContentType>();
 
         [AttributeTypeAttributeMember(Name = "accept-charsets", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharsetsTypeAttribute _acceptCharsetsAttribute = new CharsetsTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Charsets> _acceptCharsetsAttribute = new SimpleSingleTypeAttribute<Charsets>();
 
         [AttributeTypeAttributeMember(Name = "action", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _actionAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _actionAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "autocomplete", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly ValuesSelectionTypeAttribute<Text> _autocompleteAttribute = new ValuesSelectionTypeAttribute<Text>("on;off");
@@ -31,13 +31,13 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly ValuesSelectionTypeAttribute<Text> _methodAttribute = new ValuesSelectionTypeAttribute<Text>("get;post");
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "novalidate", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _noValidateAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "target", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FormTargetTypeAttribute _formTargetAttribute = new FormTargetTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<TargetType> _formTargetAttribute = new SimpleSingleTypeAttribute<TargetType>();
 
 
 

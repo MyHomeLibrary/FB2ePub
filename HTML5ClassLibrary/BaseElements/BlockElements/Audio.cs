@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.BlockElements
@@ -11,7 +12,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     public class Audio : HTMLItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly URITypeAttribute _src = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _src = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "autoplay", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _autoplay = new FlagTypeAttribute();
@@ -26,14 +27,14 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly FlagTypeAttribute _muted = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "preload", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly PreloadTypeAttribute _preload = new PreloadTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _preload = new ValuesSelectionTypeAttribute<Text>("auto;metadata;none");
 
 
 
         /// <summary>
         /// Specifies the URL of the audio file
         /// </summary>
-        public URITypeAttribute Src
+        public IAttributeDataAccess Src
         {
             get { return _src; }
         }
@@ -41,7 +42,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the audio will start playing as soon as it is ready
         /// </summary>
-        public FlagTypeAttribute AutoPlay
+        public IAttributeDataAccess AutoPlay
         {
             get { return _autoplay; }
         }
@@ -50,7 +51,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that audio controls should be displayed (such as a play/pause button etc)
         /// </summary>
-        public FlagTypeAttribute  Controls
+        public IAttributeDataAccess Controls
         {
             get { return _controls; }    
         }
@@ -59,7 +60,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the audio will start over again, every time it is finished
         /// </summary>
-        public FlagTypeAttribute Loop
+        public IAttributeDataAccess Loop
         {
             get { return _loop; }
         }
@@ -68,7 +69,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the audio output should be muted
         /// </summary>
-        public FlagTypeAttribute Muted
+        public IAttributeDataAccess Muted
         {
             get { return _muted; }
         }
@@ -76,7 +77,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies if and how the author thinks the audio should be loaded when the page loads
         /// </summary>
-        public PreloadTypeAttribute Preload
+        public IAttributeDataAccess Preload
         {
             get { return _preload; }
         }

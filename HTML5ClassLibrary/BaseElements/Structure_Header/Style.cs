@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.Structure_Header
@@ -11,13 +12,13 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     public class Style : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "media", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly MediaDescriptionsTypeAttribute _mediaAttribute = new MediaDescriptionsTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<MediaDescriptions> _mediaAttribute = new SimpleSingleTypeAttribute<MediaDescriptions>();
 
         [AttributeTypeAttributeMember(Name = "scoped", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _scopedAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ContentTypeAttribute _typeAttribute = new ContentTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<ContentType> _typeAttribute = new SimpleSingleTypeAttribute<ContentType>();
 
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// It may be a single media descriptor or a comma-separated list. 
         /// The default value for this attribute is screen.
         /// </summary>
-        public MediaDescriptionsTypeAttribute Media { get { return _mediaAttribute; } }
+        public IAttributeDataAccess Media { get { return _mediaAttribute; } }
 
         /// <summary>
         /// This attribute specifies the style sheet language of the element's contents. 
@@ -33,12 +34,12 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         /// For example: text/css. 
         /// This attribute is required.
         /// </summary>
-        public ContentTypeAttribute Type { get { return _typeAttribute; } }
+        public IAttributeDataAccess Type { get { return _typeAttribute; } }
 
         /// <summary>
         /// Specifies that the styles only apply to this element's parent element and that element's child elements
         /// </summary>
-        public FlagTypeAttribute Scoped { get { return _scopedAttribute; }}
+        public IAttributeDataAccess Scoped { get { return _scopedAttribute; } }
 
 
         public override bool IsValid()

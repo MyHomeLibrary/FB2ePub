@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
@@ -16,36 +14,36 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         private readonly FlagTypeAttribute  _selectedAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _valueAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _valueAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _labelAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _labelAttribute = new SimpleSingleTypeAttribute<Text>();
 
 
         /// <summary>
         /// When set, this attribute specifies that an option is pre-selected. 
         /// Possible value is "selected".
         /// </summary>
-        public FlagTypeAttribute Selected { get { return _selectedAttribute; } }
+        public IAttributeDataAccess Selected { get { return _selectedAttribute; } }
 
         /// <summary>
         /// Value associated with a selection option.
         /// </summary>
-        public TextValueTypeAttribute Value { get { return _valueAttribute; } }
+        public IAttributeDataAccess Value { get { return _valueAttribute; } }
 
         /// <summary>
         /// Disables an option in a list of selectable options. 
         /// Possible value is "disabled".
         /// </summary>
-        public FlagTypeAttribute Disabled { get { return _disabledAttribute; } }
+        public IAttributeDataAccess Disabled { get { return _disabledAttribute; } }
 
         /// <summary>
         /// Shorter label.
         /// </summary>
-        public TextValueTypeAttribute Label { get { return _labelAttribute; } }
+        public IAttributeDataAccess Label { get { return _labelAttribute; } }
 
 
         public override bool IsValid()

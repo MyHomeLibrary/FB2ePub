@@ -15,7 +15,7 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         private readonly ValuesSelectionTypeAttribute<Text> _listItemTypeAtttribute = new ValuesSelectionTypeAttribute<Text>("1;A;a;I;i;disc;square;circle");
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _valueAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _valueAttribute = new SimpleSingleTypeAttribute<Text>();
 
 
 

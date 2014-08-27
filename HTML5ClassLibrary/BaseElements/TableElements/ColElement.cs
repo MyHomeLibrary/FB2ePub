@@ -16,19 +16,19 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
 
         [AttributeTypeAttributeMember(Name = "char", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharAttribute _charAttribute = new CharAttribute();
+        private readonly SimpleSingleTypeAttribute<Character> _charAttribute = new SimpleSingleTypeAttribute<Character>();
 
         [AttributeTypeAttributeMember(Name = "charoff", SupportedStandards =  HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _charOffAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _charOffAttribute = new SimpleSingleTypeAttribute<Length>();
         
         [AttributeTypeAttributeMember(Name = "span", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NumberTypeAttribute _spanAttribute = new NumberTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Number> _spanAttribute = new SimpleSingleTypeAttribute<Number>();
 
         [AttributeTypeAttributeMember(Name = "valign", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly VAlignTypeAttribute _vAlignAttribute = new VAlignTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _vAlignAttribute = new ValuesSelectionTypeAttribute<Text>("middle;baseline;bottom;top");
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>();
 
 
         /// <summary>

@@ -19,52 +19,52 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
 
         [AttributeTypeAttributeMember(Name = "archive", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly URIsTypeAttribute _archiveAttribute = new URIsTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URIs> _archiveAttribute = new SimpleSingleTypeAttribute<URIs>();
 
         [AttributeTypeAttributeMember(Name = "border", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly PixelsTypeAttribute _borderAttribute = new PixelsTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Pixels> _borderAttribute = new SimpleSingleTypeAttribute<Pixels>();
 
         [AttributeTypeAttributeMember(Name = "classid", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _classIDAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _classIDAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "codebase", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _codeBaseAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _codeBaseAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "codetype", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ContentTypeAttribute _codeTypeAttribute = new ContentTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<ContentType> _codeTypeAttribute = new SimpleSingleTypeAttribute<ContentType>();
 
         [AttributeTypeAttributeMember(Name = "data", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _dataAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _dataAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "declare", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _declareAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "form", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _formIdAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _heightAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _heightAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "hspace", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _hSpaceAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _hSpaceAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "standby", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _standByAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _standByAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly MIMETypeAttribute _mimeTypeAttribute = new MIMETypeAttribute();
+        private readonly SimpleSingleTypeAttribute<MIME_Type> _mimeTypeAttribute = new SimpleSingleTypeAttribute<MIME_Type>();
 
         [AttributeTypeAttributeMember(Name = "usemap", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly IdReferenceTypeAttribute _useMapAttribute = new IdReferenceTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<IdReference> _useMapAttribute = new SimpleSingleTypeAttribute<IdReference>();
 
         [AttributeTypeAttributeMember(Name = "vspace", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _vSpaceAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _vSpaceAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>();
 
 
 

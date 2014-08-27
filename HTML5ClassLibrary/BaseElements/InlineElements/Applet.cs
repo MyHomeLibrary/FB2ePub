@@ -11,37 +11,37 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     public class Applet : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "code", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _codeAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _codeAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "object", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _objectAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _objectAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
         private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("middle;baseline;bottom;top;left;right");
 
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _altAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _altAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "archive", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly URIsTypeAttribute _archiveAttribute = new URIsTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URIs> _archiveAttribute = new SimpleSingleTypeAttribute<URIs>();
 
         [AttributeTypeAttributeMember(Name = "codebase", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _codeBaseAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _codeBaseAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _height = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _height = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "hspace", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _hSpaceAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _hSpaceAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "vspace", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _vSpaceAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _vSpaceAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>();
 
 
 

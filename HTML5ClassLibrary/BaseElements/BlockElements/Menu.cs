@@ -13,7 +13,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     public class Menu : HTMLItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueTypeAttribute _label = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _label = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly ValuesSelectionTypeAttribute<Text> _menuTypeAttribute = new ValuesSelectionTypeAttribute<Text>("popup;toolbar;context");

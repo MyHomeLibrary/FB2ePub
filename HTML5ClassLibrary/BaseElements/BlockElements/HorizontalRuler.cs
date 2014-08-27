@@ -19,10 +19,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly FlagTypeAttribute _noShadeAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "size", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-        private readonly NumberTypeAttribute _sizeAttribute = new NumberTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Number> _sizeAttribute = new SimpleSingleTypeAttribute<Number>();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-        private readonly  LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>();
 
 
 

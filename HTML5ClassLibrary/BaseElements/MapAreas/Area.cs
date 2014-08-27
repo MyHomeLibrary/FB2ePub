@@ -11,22 +11,22 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
     public class Area : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _altAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _altAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "coords", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CoordinatesTypeAttribute _coordAttribute = new CoordinatesTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Coords> _coordAttribute = new SimpleSingleTypeAttribute<Coords>();
 
         [AttributeTypeAttributeMember(Name = "download", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly URITypeAttribute  _downloadAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _downloadAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "href", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _hrefAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _hrefAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "hreflang", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LanguageTypeAttribute _hrefLangAttribute = new LanguageTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<LanguageCode> _hrefLangAttribute = new SimpleSingleTypeAttribute<LanguageCode>();
 
         [AttributeTypeAttributeMember(Name = "media", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MediaDescriptionsTypeAttribute _mediaAttribute = new MediaDescriptionsTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<MediaDescriptions> _mediaAttribute = new SimpleSingleTypeAttribute<MediaDescriptions>();
 
         [AttributeTypeAttributeMember(Name = "nohref", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _noHRefAttribute = new FlagTypeAttribute();
@@ -35,13 +35,13 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         private readonly ValuesSelectionTypeAttribute<Text> _relationAttribute = new ValuesSelectionTypeAttribute<Text>("alternate;author;bookmark;help;license;next;nofollow;norefferer;prefetch;prev;search;tag");
 
         [AttributeTypeAttributeMember(Name = "shape", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ShapeTypeAttribute _shapeAttribute = new ShapeTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _shapeAttribute = new ValuesSelectionTypeAttribute<Text>("circle;default;poly;rect");
 
         [AttributeTypeAttributeMember(Name = "target", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FormTargetTypeAttribute _targetAttribute = new FormTargetTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<TargetType> _targetAttribute = new SimpleSingleTypeAttribute<TargetType>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MIMETypeAttribute  _typeAttribute = new MIMETypeAttribute();
+        private readonly SimpleSingleTypeAttribute<MIME_Type> _typeAttribute = new SimpleSingleTypeAttribute<MIME_Type>();
 
 
 

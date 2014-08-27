@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
@@ -10,12 +11,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
     public class ShortQuote : TextBasedElement
     {
         [AttributeTypeAttributeMember(Name = "cite", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _citeAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _citeAttribute = new SimpleSingleTypeAttribute<URI>();
 
 
         /// <summary>
         /// 
         /// </summary>
-        public URITypeAttribute Cite { get { return _citeAttribute; }}
+        public IAttributeDataAccess Cite { get { return _citeAttribute; }}
     }
 }

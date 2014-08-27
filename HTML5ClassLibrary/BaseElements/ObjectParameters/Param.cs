@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.ObjectParameters
@@ -12,16 +13,16 @@ namespace XHTMLClassLibrary.BaseElements.ObjectParameters
     public class Param : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly MIMETypeAttribute _typeAttribute = new MIMETypeAttribute();
+        private readonly SimpleSingleTypeAttribute<MIME_Type> _typeAttribute = new SimpleSingleTypeAttribute<MIME_Type>();
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _valueAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _valueAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValueTypeAttribute _valueTypeAttribute = new ValueTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _valueTypeAttribute = new ValuesSelectionTypeAttribute<Text>("ref;object;data");
 
 
         
@@ -33,27 +34,27 @@ namespace XHTMLClassLibrary.BaseElements.ObjectParameters
         /// Whether the property name is case-sensitive or not depends on the specific object implementation. 
         /// This attribute is required.
         /// </summary>
-        public TextValueTypeAttribute Name { get { return _nameAttribute; } }
+        public IAttributeDataAccess Name { get { return _nameAttribute; } }
 
 
         /// <summary>
         /// Specifies the media type of the parameter
         /// Not supported in HTML5.
         /// </summary>
-        public MIMETypeAttribute Type { get { return _typeAttribute; }}
+        public IAttributeDataAccess Type { get { return _typeAttribute; } }
 
         /// <summary>
         /// This attribute specifies the value of a run-time parameter specified by the name attribute. 
         /// Property values have no meaning in XHTML; their meaning is determined by the object in question.
         /// </summary>
-        public TextValueTypeAttribute Value { get { return _valueAttribute; } }
+        public IAttributeDataAccess Value { get { return _valueAttribute; } }
 
 
         /// <summary>
         /// Specifies the type of the value
         /// Not supported in HTML5.
         /// </summary>
-        public ValueTypeAttribute ValueType { get { return _valueTypeAttribute; }}
+        public IAttributeDataAccess ValueType { get { return _valueTypeAttribute; } }
 
 
         #endregion

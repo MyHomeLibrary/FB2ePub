@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
-using XHTMLClassLibrary.Exceptions;
 
 namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
 {
@@ -15,7 +11,7 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
     public class OptionGroup : HTMLItem, IOptionItem
     {
         [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _labelAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _labelAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember( Name = "disabled", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute();
@@ -25,14 +21,14 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         /// <summary>
         /// Label for the option group.
         /// </summary>
-        public TextValueTypeAttribute Label { get { return _labelAttribute; } }
+        public IAttributeDataAccess Label { get { return _labelAttribute; } }
 
 
         /// <summary>
         /// Disables the control for user input. 
         /// Possible value is "disabled".
         /// </summary>
-        public FlagTypeAttribute Disabled { get { return _disabledAttribute; } }
+        public IAttributeDataAccess Disabled { get { return _disabledAttribute; } }
 
 
 

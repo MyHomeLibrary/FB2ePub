@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using Script = XHTMLClassLibrary.BaseElements.InlineElements.Script;
@@ -15,14 +16,14 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     public class Head : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "profile", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly URIsTypeAttribute _profileAttribute = new URIsTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URIs> _profileAttribute = new SimpleSingleTypeAttribute<URIs>();
 
 
         /// <summary>
         /// Specifies a URL to a document that contains a set of rules. The rules can be read by browsers to clearly understand the information in the <meta> tag's content attribute
         /// Not supported in HTML5.
         /// </summary>
-        public URIsTypeAttribute Profile { get { return _profileAttribute; }}
+        public IAttributeDataAccess Profile { get { return _profileAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

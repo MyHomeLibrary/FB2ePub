@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
@@ -9,9 +10,9 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     public class BlockQuoteElement : HTMLItem, IBlockElement 
     {
         [AttributeTypeAttributeMember(Name = "cite", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _citeAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _citeAttribute = new SimpleSingleTypeAttribute<URI>();
 
-        public URITypeAttribute Cite { get { return _citeAttribute; } }
+        public IAttributeDataAccess Cite { get { return _citeAttribute; } }
 
         #region Overrides of IBlockElement
 

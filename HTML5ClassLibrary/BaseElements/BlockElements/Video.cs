@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.BlockElements
@@ -17,7 +18,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly FlagTypeAttribute _controls = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LengthTypeAttribute _heightAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _heightAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "loop", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _loop = new FlagTypeAttribute();
@@ -26,33 +27,33 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly FlagTypeAttribute _muted = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "poster", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly  URITypeAttribute _posterAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _posterAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "preload", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly PreloadTypeAttribute _preload = new PreloadTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _preload = new ValuesSelectionTypeAttribute<Text>("auto;metadata;none");
 
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly URITypeAttribute _src = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _src = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>();
 
 
 
         /// <summary>
         /// Specifies an image to be shown while the video is downloading, or until the user hits the play button
         /// </summary>
-        public URITypeAttribute Poster { get { return _posterAttribute; }}
+        public IAttributeDataAccess Poster { get { return _posterAttribute; }}
 
         /// <summary>
         /// Sets the width of the video player
         /// </summary>
-        public LengthTypeAttribute  Width   { get { return _widthAttribute; }}
+        public IAttributeDataAccess Width { get { return _widthAttribute; } }
 
         /// <summary>
         /// Sets the height of the video player
         /// </summary>
-        public LengthTypeAttribute LengthAttribute
+        public IAttributeDataAccess LengthAttribute
         {
             get { return _heightAttribute; }
         }
@@ -60,7 +61,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies the URL of the video file
         /// </summary>
-        public URITypeAttribute Src
+        public IAttributeDataAccess Src
         {
             get { return _src; }
         }
@@ -68,7 +69,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the video will start playing as soon as it is ready
         /// </summary>
-        public FlagTypeAttribute AutoPlay
+        public IAttributeDataAccess AutoPlay
         {
             get { return _autoplay; }
         }
@@ -76,7 +77,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that video controls should be displayed (such as a play/pause button etc).
         /// </summary>
-        public FlagTypeAttribute Controls
+        public IAttributeDataAccess Controls
         {
             get { return _controls; }
         }
@@ -84,7 +85,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the video will start over again, every time it is finished
         /// </summary>
-        public FlagTypeAttribute Loop
+        public IAttributeDataAccess Loop
         {
             get { return _loop; }
         }
@@ -92,7 +93,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies that the audio output of the video should be muted
         /// </summary>
-        public FlagTypeAttribute Muted
+        public IAttributeDataAccess Muted
         {
             get { return _muted; }
         }
@@ -100,7 +101,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// <summary>
         /// Specifies if and how the author thinks the video should be loaded when the page loads
         /// </summary>
-        public PreloadTypeAttribute Preload
+        public IAttributeDataAccess Preload
         {
             get { return _preload; }
         }

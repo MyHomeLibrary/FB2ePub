@@ -20,10 +20,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly FlagTypeAttribute _disabled = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "form", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly URITypeAttribute _form = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _form = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "formaction", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly URITypeAttribute _formAction = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _formAction = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "enctype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly ValuesSelectionTypeAttribute<Text> _formEncoding = new ValuesSelectionTypeAttribute<Text>(@"application/x-www-form-urlencoded;multipart/form-data;text/plain");
@@ -35,16 +35,16 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly FlagTypeAttribute _formNoValidate = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "formtarget", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FormTargetTypeAttribute _formTarget = new FormTargetTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<TargetType> _formTarget = new SimpleSingleTypeAttribute<TargetType>();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _name = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _name = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ValuesSelectionTypeAttribute<ContentType> _type = new ValuesSelectionTypeAttribute<ContentType>("reset;button;submit");
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _value = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _value = new SimpleSingleTypeAttribute<Text>();
 
 
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
@@ -15,31 +16,29 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     public class Link : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "charset", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharsetTypeAttribute _charsetAttribute = new CharsetTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Charset> _charsetAttribute = new SimpleSingleTypeAttribute<Charset>();
 
         [AttributeTypeAttributeMember(Name = "href", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _hrefAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _hrefAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "hreflang", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LanguageTypeAttribute _hrefLangAttribute = new LanguageTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<LanguageCode> _hrefLangAttribute = new SimpleSingleTypeAttribute<LanguageCode>();
 
         [AttributeTypeAttributeMember(Name = "media", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly MediaDescriptionsTypeAttribute _mediaAttribute = new MediaDescriptionsTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<MediaDescriptions> _mediaAttribute = new SimpleSingleTypeAttribute<MediaDescriptions>();
 
         [AttributeTypeAttributeMember(Name = "rel", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ValuesSelectionTypeAttribute<Text> _relAttribute = new ValuesSelectionTypeAttribute<Text>("alternate;archives;author;bookmark;external;first;help;icon;last;license;next;nofollow;norefferer;pingback;prefetch;prev;search;sidebar;stylesheet;tag;up");
 
         [AttributeTypeAttributeMember(Name = "rev", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly LinkTypeAttribute _reverseRelationAttribute = new LinkTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<LinkTypes> _reverseRelationAttribute = new SimpleSingleTypeAttribute<LinkTypes>();
 
         [AttributeTypeAttributeMember(Name = "sizes", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly SizesTypeAttribute _sizesAttribute = new SizesTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Sizes> _sizesAttribute = new SimpleSingleTypeAttribute<Sizes>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly MIMETypeAttribute _typeAttribute = new MIMETypeAttribute();
+        private readonly SimpleSingleTypeAttribute<MIME_Type> _typeAttribute = new SimpleSingleTypeAttribute<MIME_Type>();
 
-
-        public static XNamespace XhtmlNameSpace = @"http://www.w3.org/1999/xhtml";
 
         #region public_properties
 
