@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 
 
 namespace XHTMLClassLibrary.BaseElements.Structure_Header
@@ -12,21 +13,21 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     public class Base : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "href", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _hrefAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _hrefAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "target", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FormTargetTypeAttribute _targetAttribute = new FormTargetTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<TargetType> _targetAttribute = new SimpleSingleTypeAttribute<TargetType>();
 
 
         /// <summary>
         /// Specifies the base URL for all relative URLs in the page
         /// </summary>
-        public URITypeAttribute HRef { get { return _hrefAttribute; } }
+        public IAttributeDataAccess HRef { get { return _hrefAttribute; } }
 
         /// <summary>
         /// Specifies the default target for all hyperlinks and forms in the page
         /// </summary>
-        public FormTargetTypeAttribute Target { get { return _targetAttribute; }}
+        public IAttributeDataAccess Target { get { return _targetAttribute; }}
         
 
         public override bool IsValid()

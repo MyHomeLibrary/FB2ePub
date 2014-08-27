@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.Frameset
@@ -13,10 +14,10 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
     public class Frameset : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "cols", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly NumberTypeAttribute _colsAttribute = new NumberTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Number> _colsAttribute = new SimpleSingleTypeAttribute<Number>();
 
         [AttributeTypeAttributeMember(Name = "rows", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly NumberTypeAttribute _rowsAttribute = new NumberTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Number> _rowsAttribute = new SimpleSingleTypeAttribute<Number>();
 
 
 
@@ -25,14 +26,14 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
         /// Specifies the number and size of columns in a frameset
         /// Not supported in HTML5.
         /// </summary>
-        public NumberTypeAttribute Cols { get { return _colsAttribute; }}
+        public IAttributeDataAccess Cols { get { return _colsAttribute; }}
 
 
         /// <summary>
         /// Specifies the number and size of rows in a frameset
         /// Not supported in HTML5.
         /// </summary>
-        public NumberTypeAttribute Rows { get { return _rowsAttribute; }}
+        public IAttributeDataAccess Rows { get { return _rowsAttribute; }}
 
 
         public override bool IsValid()

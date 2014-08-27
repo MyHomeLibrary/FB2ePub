@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
@@ -16,7 +17,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly FlagTypeAttribute _checkedAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "command", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueTypeAttribute _commandAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _commandAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "default", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _defaultAttribute = new FlagTypeAttribute();
@@ -25,57 +26,57 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "icon", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly URITypeAttribute _iconAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _iconAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueTypeAttribute _labelAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _labelAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "radiogroup", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly URITypeAttribute _radioGroupAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _radioGroupAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ContentTypeAttribute _menuItemTypeAttribute = new ContentTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<ContentType> _menuItemTypeAttribute = new SimpleSingleTypeAttribute<ContentType>();
 
         /// <summary>
         /// Specifies that the command/menu item should be checked when the page loads. Only for type="radio" or type="checkbox"
         /// </summary>
-        public FlagTypeAttribute Checked { get { return _checkedAttribute; }}
+        public IAttributeDataAccess Checked { get { return _checkedAttribute; }}
 
         /// <summary>
         /// Specifies that the command/menu item should be disabled
         /// </summary>
-        public FlagTypeAttribute Disabled { get { return _disabledAttribute; }}
+        public IAttributeDataAccess Disabled { get { return _disabledAttribute; }}
 
         /// <summary>
         /// Required. Specifies the name of the command/menu item, as shown to the user
         /// </summary>
-        public TextValueTypeAttribute Label {get { return _labelAttribute; }}
+        public IAttributeDataAccess Label {get { return _labelAttribute; }}
 
         /// <summary>
         /// 
         /// </summary>
-        public TextValueTypeAttribute Command { get { return _commandAttribute; }}
+        public IAttributeDataAccess Command { get { return _commandAttribute; }}
 
 
         /// <summary>
         /// Marks the command/menu item as being a default command
         /// </summary>
-        public FlagTypeAttribute Default { get { return _defaultAttribute; }}
+        public IAttributeDataAccess Default { get { return _defaultAttribute; }}
 
         /// <summary>
         /// Specifies an icon for the command/menu item
         /// </summary>
-        public URITypeAttribute Icon { get { return _iconAttribute; }}
+        public IAttributeDataAccess Icon { get { return _iconAttribute; }}
 
         /// <summary>
         /// Specifies the name of the group of commands that will be toggled when the command/menu item itself is toggled. Only for type="radio"
         /// </summary>
-        public URITypeAttribute RadioGroup{ get { return _radioGroupAttribute; }}
+        public IAttributeDataAccess RadioGroup{ get { return _radioGroupAttribute; }}
 
         /// <summary>
         /// Specifies the type of command/menu item. Default is "command"
         /// </summary>
-        public ContentTypeAttribute Type { get { return _menuItemTypeAttribute; }}
+        public IAttributeDataAccess Type { get { return _menuItemTypeAttribute; }}
 
         /// <summary>
         /// Checks it element data is valid

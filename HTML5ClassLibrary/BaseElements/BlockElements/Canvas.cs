@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.BlockElements
@@ -11,18 +12,18 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     public class Canvas : HTMLItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LengthTypeAttribute _height = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _height = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LengthTypeAttribute _width = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _width = new SimpleSingleTypeAttribute<Length>();
 
 
-        public LengthTypeAttribute Height
+        public IAttributeDataAccess Height
         {
             get { return _height; }
         }
 
-        public LengthTypeAttribute Width
+        public IAttributeDataAccess Width
         {
             get { return _width; }
         }

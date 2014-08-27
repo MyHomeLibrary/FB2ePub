@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
@@ -9,25 +10,25 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
     public class Source : TextBasedElement
     {
         [AttributeTypeAttributeMember(Name = "media", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MediaDescriptionsTypeAttribute _mediaAttrib = new MediaDescriptionsTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<MediaDescriptions> _mediaAttrib = new SimpleSingleTypeAttribute<MediaDescriptions>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MIMETypeAttribute _mimeType = new MIMETypeAttribute();
+        private readonly SimpleSingleTypeAttribute<MIME_Type> _mimeType = new SimpleSingleTypeAttribute<MIME_Type>();
 
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly URITypeAttribute _srcAttrib = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _srcAttrib = new SimpleSingleTypeAttribute<URI>();
 
-        public URITypeAttribute Src
+        public IAttributeDataAccess Src
         {
             get { return _srcAttrib; }
         }
 
-        public MediaDescriptionsTypeAttribute Media
+        public IAttributeDataAccess Media
         {
             get { return _mediaAttrib; }
         }
 
-        public MIMETypeAttribute Type
+        public IAttributeDataAccess Type
         {
             get { return _mimeType; }
         }

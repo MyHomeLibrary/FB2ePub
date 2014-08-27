@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
@@ -17,16 +18,16 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly FlagTypeAttribute _asyncAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "charset", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly CharsetTypeAttribute _charsetAttribute = new CharsetTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Charset> _charsetAttribute = new SimpleSingleTypeAttribute<Charset>();
 
         [AttributeTypeAttributeMember(Name = "defer", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _deferAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _srcAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _srcAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ContentTypeAttribute _contentTypeAttribute = new ContentTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<ContentType> _contentTypeAttribute = new SimpleSingleTypeAttribute<ContentType>();
 
         // xml:space 	preserve 	Not supported in HTML5. Specifies whether whitespace in code should be preserved
 
@@ -36,31 +37,31 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// <summary>
         /// Location of an external script.
         /// </summary>
-        public URITypeAttribute Src { get { return _srcAttribute; } }
+        public IAttributeDataAccess Src { get { return _srcAttribute; } }
 
         /// <summary>
         /// Specifies that the script is executed asynchronously (only for external scripts)
         /// </summary>
-        public FlagTypeAttribute Async { get { return _asyncAttribute; }}
+        public IAttributeDataAccess Async { get { return _asyncAttribute; } }
 
         /// <summary>
         /// This attribute specifies the scripting language of the element's contents. 
         /// The scripting language is specified as a content type. For example: text/javascript. 
         /// This attribute is required.
         /// </summary>
-        public ContentTypeAttribute Type { get { return _contentTypeAttribute; } }
+        public IAttributeDataAccess Type { get { return _contentTypeAttribute; } }
 
         /// <summary>
         /// Character encoding of the resource designated by src.
         /// </summary>
-        public CharsetTypeAttribute Charset { get { return _charsetAttribute; } }
+        public IAttributeDataAccess Charset { get { return _charsetAttribute; } }
 
         /// <summary>
         /// When set, this attribute provides a hint to the Web browser that the script is not going to generate any document content (no document.write in javascript for example), 
         /// permitting the Web browser to continue parsing and rendering the rest of the page. 
         /// Possible value is defer.
         /// </summary>
-        public FlagTypeAttribute Defer { get { return _deferAttribute; } }
+        public IAttributeDataAccess Defer { get { return _deferAttribute; } }
 
 
         public override bool IsValid()

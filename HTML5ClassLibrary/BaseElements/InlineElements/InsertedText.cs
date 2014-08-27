@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
@@ -12,22 +13,22 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     public class InsertedText : HTMLItem, IInlineItem, IBlockElement
     {
         [AttributeTypeAttributeMember(Name = "cite", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _cite = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _cite = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "datetime", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly DateTimeTypeAttribute _datetime = new DateTimeTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Datetime> _datetime = new SimpleSingleTypeAttribute<Datetime>();
 
         /// <summary>
         /// This attribute is intended to point to information explaining why content was changed. 
         /// For example, this can be a URL leading to a Web page that contains such an explanation.
         /// </summary>
-        public URITypeAttribute Cite
+        public IAttributeDataAccess Cite
         {
             get { return _cite; }
         }
 
 
-        public DateTimeTypeAttribute DateTime
+        public IAttributeDataAccess DateTime
         {
             get { return _datetime; }
         }

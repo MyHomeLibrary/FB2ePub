@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
@@ -14,42 +15,42 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly FlagTypeAttribute _defaultAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueTypeAttribute _labelAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _labelAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly URITypeAttribute _sourceAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _sourceAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "kind", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TrackKindTypeAttribute _trackKindAttribute = new TrackKindTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _trackKindAttribute = new ValuesSelectionTypeAttribute<Text>("captions;chapters;descriptions;metadata;subtitles");
 
         [AttributeTypeAttributeMember(Name = "srclang", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LanguageTypeAttribute _sourceLanguageAttribute = new LanguageTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<LanguageCode> _sourceLanguageAttribute = new SimpleSingleTypeAttribute<LanguageCode>();
 
 
         /// <summary>
         /// Specifies the language of the track text data (required if kind="subtitles")
         /// </summary>
-        public LanguageTypeAttribute SourceLanguage { get { return _sourceLanguageAttribute; }}
+        public IAttributeDataAccess SourceLanguage { get { return _sourceLanguageAttribute; }}
 
         /// <summary>
         /// Specifies the kind of text track
         /// </summary>
-        public TrackKindTypeAttribute Kind { get { return _trackKindAttribute; }}
+        public IAttributeDataAccess Kind { get { return _trackKindAttribute; } }
 
         /// <summary>
         /// Required. Specifies the URL of the track file
         /// </summary>
-        public URITypeAttribute Source { get { return _sourceAttribute; }}
+        public IAttributeDataAccess Source { get { return _sourceAttribute; } }
 
         /// <summary>
         /// Specifies the title of the text track
         /// </summary>
-        public TextValueTypeAttribute Label { get { return _labelAttribute; }}
+        public IAttributeDataAccess Label { get { return _labelAttribute; } }
 
         /// <summary>
         /// Specifies that the track is to be enabled if the user's preferences do not indicate that another track would be more appropriate
         /// </summary>
-        public FlagTypeAttribute Default { get { return _defaultAttribute; }}
+        public IAttributeDataAccess Default { get { return _defaultAttribute; } }
 
         public override bool IsValid()
         {

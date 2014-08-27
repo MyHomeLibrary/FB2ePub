@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
@@ -13,28 +14,28 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
     public class Frame : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "frameborder", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly FrameBorderAttribute _frameBorderAttribute = new FrameBorderAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _frameBorderAttribute = new ValuesSelectionTypeAttribute<Text>("0;1");
 
         [AttributeTypeAttributeMember(Name = "longdesc", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _longDescriptionAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _longDescriptionAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "marginheight", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly PixelsTypeAttribute _marginHeightAttribute = new PixelsTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Pixels> _marginHeightAttribute = new SimpleSingleTypeAttribute<Pixels>();
 
         [AttributeTypeAttributeMember(Name = "marginwidth", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly PixelsTypeAttribute _marginWidthAttribute = new PixelsTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Pixels> _marginWidthAttribute = new SimpleSingleTypeAttribute<Pixels>();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "noresize", SupportedStandards = HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _noResizeAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "scrolling", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly YesNoAutoTypeAttribute _scrollingAttribute = new YesNoAutoTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _scrollingAttribute = new ValuesSelectionTypeAttribute<Text>("auto;yes;no");
 
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly URITypeAttribute _sourceAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _sourceAttribute = new SimpleSingleTypeAttribute<URI>();
 
 
 
@@ -44,56 +45,56 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
         /// Specifies whether or not to display a border around a frame
         /// Not supported in HTML5.
         /// </summary>
-        public FrameBorderAttribute FrameBorder { get { return _frameBorderAttribute; }}
+        public IAttributeDataAccess FrameBorder { get { return _frameBorderAttribute; }}
 
 
         /// <summary>
         /// Specifies a page that contains a long description of the content of a frame
         /// Not supported in HTML5.
         /// </summary>
-        public URITypeAttribute LongDescription { get { return _longDescriptionAttribute; }}
+        public IAttributeDataAccess LongDescription { get { return _longDescriptionAttribute; } }
 
 
         /// <summary>
         /// Specifies the top and bottom margins of a frame
         /// Not supported in HTML5.
         /// </summary>
-        public PixelsTypeAttribute MarginHeight { get { return _marginHeightAttribute; }}
+        public IAttributeDataAccess MarginHeight { get { return _marginHeightAttribute; } }
 
 
         /// <summary>
         /// Specifies the left and right margins of a frame
         /// Not supported in HTML5.
         /// </summary>
-        public PixelsTypeAttribute MarginWidth { get { return _marginWidthAttribute; }}
+        public IAttributeDataAccess MarginWidth { get { return _marginWidthAttribute; } }
 
 
         /// <summary>
         /// Specifies the name of a frame
         /// Not supported in HTML5.
         /// </summary>
-        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
+        public IAttributeDataAccess Name { get { return _nameAttribute; } }
 
 
         /// <summary>
         /// Specifies that a frame is not resizable
         /// Not supported in HTML5.
         /// </summary>
-        public FlagTypeAttribute NoResize { get { return _noResizeAttribute; }}
+        public IAttributeDataAccess NoResize { get { return _noResizeAttribute; } }
 
 
         /// <summary>
         /// Specifies whether or not to display scrollbars in a frame
         /// Not supported in HTML5.
         /// </summary>
-        public YesNoAutoTypeAttribute Scrolling { get { return _scrollingAttribute; }}
+        public IAttributeDataAccess Scrolling { get { return _scrollingAttribute; } }
 
 
         /// <summary>
         /// Specifies the URL of the document to show in a frame
         /// Not supported in HTML5.
         /// </summary>
-        public URITypeAttribute Src { get { return _sourceAttribute; }}
+        public IAttributeDataAccess Src { get { return _sourceAttribute; } }
 
 
 

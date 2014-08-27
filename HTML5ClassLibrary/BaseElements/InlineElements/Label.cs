@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
 {
@@ -12,10 +13,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     public class Label : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "for", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly IdReferenceTypeAttribute _forAttribute = new IdReferenceTypeAttribute();
+       private readonly SimpleSingleTypeAttribute<IdReference> _forAttribute = new SimpleSingleTypeAttribute<IdReference>();
 
         [AttributeTypeAttributeMember(Name = "form", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _formIdAttribute = new SimpleSingleTypeAttribute<URI>();
 
 
 
@@ -23,12 +24,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         /// This attribute explicitly associates the label with a form control. 
         /// When present, the value of this attribute must be the same as the value of the id attribute of the form control in the same document. When absent, the label being defined is associated with the control inside the label element.
         /// </summary>
-        public IdReferenceTypeAttribute For { get { return _forAttribute; } }
+        public IAttributeDataAccess For { get { return _forAttribute; } }
 
         /// <summary>
         /// Specifies one or more forms the label belongs to
         /// </summary>
-        public URITypeAttribute Form { get { return _formIdAttribute; }}
+        public IAttributeDataAccess Form { get { return _formIdAttribute; }}
 
 
 

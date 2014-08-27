@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
@@ -22,10 +23,10 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         private readonly FlagTypeAttribute _reversedAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "high", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly NumberTypeAttribute _orderedListStartAttribute = new NumberTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Number> _orderedListStartAttribute = new SimpleSingleTypeAttribute<Number>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OrderedListTypeAttribute _orderedListTypeAttribute = new OrderedListTypeAttribute();
+        private readonly ValuesSelectionTypeAttribute<Text> _orderedListTypeAttribute = new ValuesSelectionTypeAttribute<Text>("1;A;a;I;i");
 
 
 
@@ -35,22 +36,22 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         ///  Specifies that the list should render smaller than normal
         /// Not supported in HTML5.
         /// </summary>
-        public FlagTypeAttribute Compact { get { return _compactAttribute; }}
+        public IAttributeDataAccess Compact { get { return _compactAttribute; }}
 
         /// <summary>
         /// Specifies the start value of an ordered list
         /// </summary>
-        public NumberTypeAttribute Start { get { return _orderedListStartAttribute; }}
+        public IAttributeDataAccess Start { get { return _orderedListStartAttribute; } }
 
         /// <summary>
         /// Specifies the kind of marker to use in the list
         /// </summary>
-        public OrderedListTypeAttribute Type { get { return _orderedListTypeAttribute; }}
+        public IAttributeDataAccess Type { get { return _orderedListTypeAttribute; } }
 
         /// <summary>
         /// Specifies that the list order should be descending (9,8,7...)
         /// </summary>
-        public FlagTypeAttribute Reversed { get { return _reversedAttribute; }}
+        public IAttributeDataAccess Reversed { get { return _reversedAttribute; } }
 
 
         protected override bool IsValidSubType(IHTMLItem item)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
@@ -10,40 +11,40 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     public class Embed : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LengthTypeAttribute _heightAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _heightAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly URITypeAttribute _sourceAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _sourceAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly MIMETypeAttribute _typeAttribute = new MIMETypeAttribute();
+        private readonly SimpleSingleTypeAttribute<MIME_Type> _typeAttribute = new SimpleSingleTypeAttribute<MIME_Type>();
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly LengthTypeAttribute _widthAttribute = new LengthTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>();
 
 
         /// <summary>
         /// Specifies the height of the embedded content
         /// </summary>
-        public LengthTypeAttribute Height { get { return _heightAttribute; }}
+        public IAttributeDataAccess Height { get { return _heightAttribute; }}
 
 
         /// <summary>
         /// Specifies the address of the external file to embed
         /// </summary>
-        public URITypeAttribute Src { get { return _sourceAttribute; }}
+        public IAttributeDataAccess Src { get { return _sourceAttribute; } }
 
 
         /// <summary>
         /// Specifies the media type of the embedded content
         /// </summary>
-        public MIMETypeAttribute Type { get { return _typeAttribute; }}
+        public IAttributeDataAccess Type { get { return _typeAttribute; } }
 
 
         /// <summary>
         /// Specifies the width of the embedded content
         /// </summary>
-        public LengthTypeAttribute Width { get { return _widthAttribute; }}
+        public IAttributeDataAccess Width { get { return _widthAttribute; } }
 
         public override bool IsValid()
         {

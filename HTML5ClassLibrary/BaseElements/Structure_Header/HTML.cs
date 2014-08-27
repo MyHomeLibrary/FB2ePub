@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.Structure_Header
 {
@@ -11,14 +12,14 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     public class HTML : HTMLItem
     {
         [AttributeTypeAttributeMember(Name = "manifest", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-        private readonly URITypeAttribute _manifestAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _manifestAttribute = new SimpleSingleTypeAttribute<URI>();
 
 
         /// <summary>
         /// This attribute has been deprecated (made outdated). 
         /// It is redundant, because version information is now provided by the DOCTYPE.
         /// </summary>
-        public URITypeAttribute Manifest { get {return _manifestAttribute;}}
+        public IAttributeDataAccess Manifest { get {return _manifestAttribute;}}
 
 
         protected override bool IsValidSubType(IHTMLItem item)

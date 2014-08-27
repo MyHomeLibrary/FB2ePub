@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements
@@ -10,21 +11,21 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     public class Progress: HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "max", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueTypeAttribute _maxAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _maxAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly FloatingNumberTypeAttribute _valueAttribute = new FloatingNumberTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<FloatingNumber> _valueAttribute = new SimpleSingleTypeAttribute<FloatingNumber>();
 
 
         /// <summary>
         /// Specifies how much work the task requires in total
         /// </summary>
-        public TextValueTypeAttribute Max { get { return _maxAttribute; }}
+        public IAttributeDataAccess Max { get { return _maxAttribute; }}
 
         /// <summary>
         /// Specifies how much of the task has been completed
         /// </summary>
-        public FloatingNumberTypeAttribute Value { get { return _valueAttribute; }}
+        public IAttributeDataAccess Value { get { return _valueAttribute; } }
 
         public override bool IsValid()
         {

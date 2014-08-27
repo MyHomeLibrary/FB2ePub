@@ -1,4 +1,5 @@
 ﻿using System;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -12,12 +13,12 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
     public class Map : HTMLItem, IInlineItem
     {
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>();
 
         /// <summary>
         /// Required. Specifies the name of an image-map
         /// </summary>
-        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
+        public IAttributeDataAccess Name { get { return _nameAttribute; }}
 
 
         protected override bool IsValidSubType(IHTMLItem item)

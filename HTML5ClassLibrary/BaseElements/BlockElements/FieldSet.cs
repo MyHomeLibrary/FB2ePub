@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.Attributes;
+﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 using XHTMLClassLibrary.BaseElements.Legends;
 
@@ -14,25 +15,25 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "form", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly URITypeAttribute _formIdAttribute = new URITypeAttribute();
+        private readonly SimpleSingleTypeAttribute<URI> _formIdAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly TextValueTypeAttribute _nameAttribute = new TextValueTypeAttribute();
+        private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>();
 
         /// <summary>
         /// Specifies that a group of related form elements should be disabled
         /// </summary>
-        public FlagTypeAttribute Disabled { get { return _disabledAttribute; }}
+        public IAttributeDataAccess Disabled { get { return _disabledAttribute; }}
 
         /// <summary>
         /// Specifies one or more forms the fieldset belongs to
         /// </summary>
-        public URITypeAttribute Form { get { return _formIdAttribute; }}
+        public IAttributeDataAccess Form { get { return _formIdAttribute; }}
 
         /// <summary>
         /// Specifies a name for the fieldset
         /// </summary>
-        public TextValueTypeAttribute Name { get { return _nameAttribute; }}
+        public IAttributeDataAccess Name { get { return _nameAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {
