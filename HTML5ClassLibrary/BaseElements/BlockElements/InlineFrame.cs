@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System.ComponentModel;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
@@ -7,8 +8,37 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "iframe", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.FrameSet)]
     public class InlineFrame : HTMLItem, IBlockElement
     {
+
+#region Attribute_Values_Enums
+
+        /// <summary>
+        /// "align" attribute possible values
+        /// </summary>
+        public enum AlignAttributeOptions
+        {
+            [Description("baseline")]
+            Baseline,
+
+            [Description("bottom")]
+            Bottom,
+
+            [Description("left")]
+            Left,
+
+            [Description("middle")]
+            Middle,
+
+            [Description("right")]
+            Right,
+
+            [Description("top")]
+            Top,
+        }
+
+#endregion
+
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("middle;baseline;bottom;top;left;right");
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(AlignAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "frameborder", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ValuesSelectionTypeAttribute<Text> _frameBorderAttribute = new ValuesSelectionTypeAttribute<Text>("0;1");

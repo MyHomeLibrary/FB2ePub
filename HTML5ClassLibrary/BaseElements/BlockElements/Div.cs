@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System.ComponentModel;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
@@ -10,8 +11,34 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "div", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Div : HTMLItem, IBlockElement
     {
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "align" attribute possible values
+        /// </summary>
+        public enum AlignAttributePossibleValues
+        {
+            [Description("center")]
+            Center,
+
+            [Description("justify")]
+            Justify,
+
+            [Description("right")]
+            Right,
+
+            [Description("left")]
+            Left,
+
+            [Description("char")]
+            Char,
+        }
+
+        #endregion
+
+
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(AlignAttributePossibleValues));
 
 
         /// <summary>
