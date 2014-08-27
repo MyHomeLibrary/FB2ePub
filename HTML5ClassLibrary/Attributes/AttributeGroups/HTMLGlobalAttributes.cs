@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System.ComponentModel;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.BaseElements;
 
 namespace XHTMLClassLibrary.Attributes.AttributeGroups
@@ -8,6 +9,95 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
     /// </summary>
     public class HTMLGlobalAttributes
     {
+
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "contenteditable" possible values
+        /// </summary>
+        public enum ContentEditableAttributeOptions
+        {
+            [Description("true")]
+            True,
+
+            [Description("false")]
+            False,
+        }
+
+        /// <summary>
+        /// "dir" (direction) attribute possible values
+        /// </summary>
+        public enum DirectionAttributeOptions
+        {
+            [Description("ltr")]
+            LeftToRight,
+
+            [Description("rtl")]
+            RightToLeft,
+
+            [Description("auto")]
+            Auto,
+        }
+
+
+        /// <summary>
+        /// "draggable" attribute possible values
+        /// </summary>
+        public enum DraggableAttributeOptions
+        {
+            [Description("true")]
+            True,
+
+            [Description("false")]
+            False,
+
+            [Description("auto")]
+            Auto,
+        }
+
+
+        /// <summary>
+        /// "dropzone" attribute possible values
+        /// </summary>
+        public enum DropZoneAttributeOptions
+        {
+            [Description("copy")]
+            Copy,
+
+            [Description("move")]
+            Move,
+
+            [Description("link")]
+            Link,
+        }
+
+        /// <summary>
+        /// "spellcheck" attribute possible options
+        /// </summary>
+        public enum SpellCheckAttributeOptions
+        {
+            [Description("true")]
+            True,
+
+            [Description("false")]
+            False,           
+        }
+
+
+        /// <summary>
+        /// "translate" attribute possible options
+        /// </summary>
+        public enum TranslateAttributeOptions
+        {
+            [Description("yes")]
+            Yes,
+
+            [Description("no")]
+            No,
+        }
+
+#endregion
+
         [AttributeTypeAttributeMember(Name = "accesskey", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Character> _accessKeyAttribute = new SimpleSingleTypeAttribute<Character>();
        
@@ -15,7 +105,7 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         private readonly SimpleSingleTypeAttribute<NameTokens> _classAttribute = new SimpleSingleTypeAttribute<NameTokens>();
         
         [AttributeTypeAttributeMember(Name = "contenteditable", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _contentEditableAttribute = new ValuesSelectionTypeAttribute<Text>("true;false");
+        private readonly ValuesSelectionTypeAttribute<Text> _contentEditableAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(ContentEditableAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "contextmenu", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SimpleSingleTypeAttribute<Id> _contextMenuAttribute = new SimpleSingleTypeAttribute<Id>();
@@ -24,13 +114,13 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         //private readonly AnyDataAttribute _anyDataAttribute = new AnyDataAttribute(); // not really global but contain custom elements that can appear on any element so we put it here 
         
         [AttributeTypeAttributeMember(Name = "dir", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _directionAttribute = new ValuesSelectionTypeAttribute<Text>("ltr;rtl;auto");
+        private readonly ValuesSelectionTypeAttribute<Text> _directionAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(DirectionAttributeOptions));
         
         [AttributeTypeAttributeMember(Name = "draggable", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _draggable = new ValuesSelectionTypeAttribute<Text>("true;false;auto");
+        private readonly ValuesSelectionTypeAttribute<Text> _draggable = new ValuesSelectionTypeAttribute<Text>(typeof(DraggableAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "dropzone", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _dropZoneAttribure = new ValuesSelectionTypeAttribute<Text>("copy;move;link");
+        private readonly ValuesSelectionTypeAttribute<Text> _dropZoneAttribure = new ValuesSelectionTypeAttribute<Text>(typeof(DropZoneAttributeOptions));
         
         [AttributeTypeAttributeMember(Name = "hidden", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _hiddenAttribute = new FlagTypeAttribute();
@@ -42,7 +132,7 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         private readonly SimpleSingleTypeAttribute<LanguageCode> _languageAttribute = new SimpleSingleTypeAttribute<LanguageCode>();
         
         [AttributeTypeAttributeMember(Name = "spellcheck", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _spellCheckAttribute = new ValuesSelectionTypeAttribute<Text>("true;false");
+        private readonly ValuesSelectionTypeAttribute<Text> _spellCheckAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(SpellCheckAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "style", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Text> _styleAttribute = new SimpleSingleTypeAttribute<Text>();
@@ -54,7 +144,7 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         private readonly SimpleSingleTypeAttribute<Text> _titleAttribute = new SimpleSingleTypeAttribute<Text>();
         
         [AttributeTypeAttributeMember(Name = "translate", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _translateAttribute = new ValuesSelectionTypeAttribute<Text>("yes;no");
+        private readonly ValuesSelectionTypeAttribute<Text> _translateAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(TranslateAttributeOptions));
 
 
         /// <summary>
