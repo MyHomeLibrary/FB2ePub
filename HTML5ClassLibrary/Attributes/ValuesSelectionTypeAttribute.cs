@@ -10,17 +10,7 @@ namespace XHTMLClassLibrary.Attributes
         private readonly List<string> _possibleValues = new List<string>();
 
 
-        public ValuesSelectionTypeAttribute(string listOfPossibleValues)
-        {
-            var values = listOfPossibleValues.Split(';');
-            foreach (var item in values)
-            {
-                _possibleValues.Add(item);
-            }
-        }
-
-   
-        /// <summary>
+  /// <summary>
         /// Initialize based on enum values
         /// </summary>
         /// <param name="possibleValues">thould be Enum based type</param>
@@ -39,8 +29,12 @@ namespace XHTMLClassLibrary.Attributes
                 var memInfo = type.GetMember(name);
                 var attributes = (DescriptionAttribute[])memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute),
                     false);
-                // if attribute present - use it , if not use enum member name directly
-                _possibleValues.Add(attributes.Length > 1 ? attributes[0].Description : name);
+                if (attributes.Length < 1)
+                {
+                    throw new ArgumentException(string.Format("The argument type {0} have to have Description attribute set on all it's members, Description on member {1} is missing", possibleValues,name), "possibleValues");
+                }
+                // if attribute present - use it 
+                _possibleValues.Add(attributes[0].Description);
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System.ComponentModel;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.FormMenuOptions;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -12,6 +13,52 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "form", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Form : HTMLItem, IBlockElement
     {
+
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "autocomplete" attribute possible values
+        /// </summary>
+        public enum AutocompleteAttributeOptions
+        {
+            [Description("on")]
+            On,
+
+            [Description("off")]
+            Off,
+        }
+
+
+        /// <summary>
+        /// "enctype" attribute possible values
+        /// </summary>
+        public enum EncodingTypeAttributeOptions
+        {
+            [Description(@"application/x-www-form-urlencoded")]
+            Application,
+
+            [Description(@"multipart/form-data")]
+            Multipart,
+
+            [Description(@"text/plain")]
+            Text,
+        }
+
+        /// <summary>
+        /// "method" attribute possible values
+        /// </summary>
+        public enum MethodAttributeOptions
+        {
+            [Description("get")]
+            Get,
+
+            [Description("post")]
+            Post,
+        }
+
+        #endregion
+
+
         [AttributeTypeAttributeMember(Name = "accept", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<ContentType> _acceptAttribute = new SimpleSingleTypeAttribute<ContentType>();
 
@@ -22,13 +69,13 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly SimpleSingleTypeAttribute<URI> _actionAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "autocomplete", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _autocompleteAttribute = new ValuesSelectionTypeAttribute<Text>("on;off");
+        private readonly ValuesSelectionTypeAttribute<Text> _autocompleteAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(AutocompleteAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "enctype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _encTypeAttribute = new ValuesSelectionTypeAttribute<Text>(@"application/x-www-form-urlencoded;multipart/form-data;text/plain");
+        private readonly ValuesSelectionTypeAttribute<Text> _encTypeAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(EncodingTypeAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "method", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _methodAttribute = new ValuesSelectionTypeAttribute<Text>("get;post");
+        private readonly ValuesSelectionTypeAttribute<Text> _methodAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(MethodAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>();

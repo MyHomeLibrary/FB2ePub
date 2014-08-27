@@ -1,9 +1,30 @@
-﻿using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System.ComponentModel;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
+    #region Attribute_Values_Enums
+
+    /// <summary>
+    /// "preload" attribute possible values
+    /// </summary>
+    public enum PreloadAttributeOptions
+    {
+        [Description("auto")]
+        Auto,
+
+        [Description("metadata")]
+        Metadata,
+
+        [Description("none")]
+        None,
+    }
+
+    #endregion
+
+
     /// <summary>
     /// The "audio" tag defines sound, such as music or other audio streams.
     /// Currently, there are 3 supported file formats for the "audio" element: MP3, Wav, and Ogg:
@@ -27,7 +48,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly FlagTypeAttribute _muted = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "preload", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _preload = new ValuesSelectionTypeAttribute<Text>("auto;metadata;none");
+        private readonly ValuesSelectionTypeAttribute<Text> _preload = new ValuesSelectionTypeAttribute<Text>(typeof(PreloadAttributeOptions));
 
 
 

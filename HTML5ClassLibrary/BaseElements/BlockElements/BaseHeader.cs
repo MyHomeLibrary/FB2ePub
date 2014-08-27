@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System.ComponentModel;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
@@ -15,8 +16,36 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     /// </summary>
     public abstract class BaseHeader : HTMLItem, IBlockElement  , IHeader
     {
+
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "align" attribute possible values
+        /// </summary>
+        public enum AlignAttributeOptions
+        {
+            [Description("center")]
+            Center,
+
+            [Description("justify")]
+            Justify,
+
+            [Description("right")]
+            Right,
+
+            [Description("left")]
+            Left,
+
+            [Description("char")]
+            Char,
+        }
+
+        #endregion 
+
+
+
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(AlignAttributeOptions));
 
 
         /// <summary>
