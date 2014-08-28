@@ -35,13 +35,61 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
             Top,
         }
 
+
+        /// <summary>
+        /// "frameborder" attribute possible values
+        /// </summary>
+        public enum FrameBorderAttributeOptions
+        {
+            [Description("0")]
+            Disabled,
+
+            [Description("1")]
+            Enabled,
+        }
+
+
+        /// <summary>
+        /// "sandbox" attribute possible values
+        /// </summary>
+        public enum SendboxAttributeOptions
+        {
+            [Description("allow-forms")]
+            AllowForms,
+
+            [Description("allow-same-origins")]
+            AllowSameOrigins,
+
+            [Description("allow-scripts")]
+            AllowScripts,
+
+            [Description("allow-top-navigation")]
+            AllowTopNavigation,
+        }
+
+
+        /// <summary>
+        /// "scrolling" attribute possible values
+        /// </summary>
+        public enum ScrollingAttributeOptions
+        {
+            [Description("auto")]
+            Auto,
+
+            [Description("yes")]
+            Yes,
+
+            [Description("no")]
+            No,
+        }
+
 #endregion
 
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(AlignAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "frameborder", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _frameBorderAttribute = new ValuesSelectionTypeAttribute<Text>("0;1");
+        private readonly ValuesSelectionTypeAttribute<Text> _frameBorderAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(FrameBorderAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Length> _heightAttribute = new SimpleSingleTypeAttribute<Length>();
@@ -59,10 +107,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "sandbox", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _sandboxAttribute = new ValuesSelectionTypeAttribute<Text>("allow-forms;allow-same-origins;allow-scripts;allow-top-navigation");
+        private readonly ValuesSelectionTypeAttribute<Text> _sandboxAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(SendboxAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "scrolling", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _scrollingAttribute = new ValuesSelectionTypeAttribute<Text>("auto;yes;no");
+        private readonly ValuesSelectionTypeAttribute<Text> _scrollingAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(ScrollingAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "seamless", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _seamlessAttribute = new FlagTypeAttribute();
