@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml;
 using System.Xml.Linq;
 using XHTMLClassLibrary.AttributeDataTypes;
@@ -16,6 +17,31 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
     [HTMLItemAttribute(ElementName = "ol", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]    
     public class OrderedList : HTMLItem, IBlockElement
     {
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "type" attribute possible values
+        /// </summary>
+        public enum OrderedListTypeAttributeOptions
+        {
+            [Description("1")]
+            Diggit,
+
+            [Description("A")]
+            CapitalA,
+
+            [Description("a")]
+            SmallA,
+
+            [Description("I")]
+            CapitalI,
+
+            [Description("i")]
+            SmallI,          
+        }
+
+        #endregion
+
         [AttributeTypeAttributeMember(Name = "compact", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _compactAttribute = new FlagTypeAttribute();
 
@@ -26,7 +52,7 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         private readonly SimpleSingleTypeAttribute<Number> _orderedListStartAttribute = new SimpleSingleTypeAttribute<Number>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _orderedListTypeAttribute = new ValuesSelectionTypeAttribute<Text>("1;A;a;I;i");
+        private readonly ValuesSelectionTypeAttribute<Text> _orderedListTypeAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(OrderedListTypeAttributeOptions));
 
 
 

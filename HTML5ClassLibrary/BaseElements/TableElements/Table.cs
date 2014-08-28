@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System.ComponentModel;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
@@ -11,8 +12,91 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     [HTMLItemAttribute(ElementName = "table", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Table : HTMLItem, IBlockElement
     {
+
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "align" attribute possible values
+        /// </summary>
+        public enum AlignAttributeOptions
+        {
+            [Description("center")]
+            Center,
+
+            [Description("char")]
+            Char,
+
+            [Description("justify")]
+            Justify,
+
+            [Description("left")]
+            Left,
+
+            [Description("right")]
+            Right,
+        }
+
+
+        /// <summary>
+        /// "frame" attribute possible values
+        /// </summary>
+        public enum FrameAttributeOptions
+        {
+            [Description("above")]
+            Above,
+
+            [Description("below")]
+            Below,
+
+            [Description("border")]
+            Border,
+
+            [Description("box")]
+            Box,
+
+            [Description("hsides")]
+            HSides,
+
+            [Description("lhs")]
+            Lhs,
+
+            [Description("rhs")]
+            Rhs,
+
+            [Description("void")]
+            Void,
+
+            [Description("vsides")]
+            VSides,
+        }
+
+
+        /// <summary>
+        /// "rules" attribute possible values
+        /// </summary>
+        public enum RulesAttributeOptions
+        {
+            [Description("all")]
+            All,
+
+            [Description("cols")]
+            Cols,
+
+            [Description("groups")]
+            Groups,
+
+            [Description("none")]
+            None,
+
+            [Description("rows")]
+            Rows,
+        }
+
+        #endregion
+
+
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(AlignAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "bgcolor", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Color> _backgroundColorAttribute = new SimpleSingleTypeAttribute<Color>();
@@ -27,10 +111,10 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         private readonly SimpleSingleTypeAttribute<Length> _cellSpacingAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "frame", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _frameAttribute = new ValuesSelectionTypeAttribute<Text>("above;hsides;below;void;vsides;lhs;rhs;box;border");
+        private readonly ValuesSelectionTypeAttribute<Text> _frameAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(FrameAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "rules", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _rulesAttribute = new ValuesSelectionTypeAttribute<Text>("groups;cols;rows;none;all");
+        private readonly ValuesSelectionTypeAttribute<Text> _rulesAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(RulesAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "sortable", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _sortableAttribute = new FlagTypeAttribute();

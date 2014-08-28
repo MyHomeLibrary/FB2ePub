@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
@@ -10,6 +11,37 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "applet", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
     public class Applet : HTMLItem, IInlineItem
     {
+
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "align" attribute possible values
+        /// </summary>
+        public enum AlignAttributeOptions
+        {
+            [Description("baseline")]
+            Baseline,
+
+            [Description("bottom")]
+            Bottom,
+
+            [Description("left")]
+            Left,
+
+            [Description("middle")]
+            Middle,
+
+            [Description("right")]
+            Right,
+
+            [Description("top")]
+            Top,
+
+        }
+
+        #endregion 
+
+
         [AttributeTypeAttributeMember(Name = "code", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<URI> _codeAttribute = new SimpleSingleTypeAttribute<URI>();
 
@@ -17,7 +49,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly SimpleSingleTypeAttribute<Text> _objectAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("middle;baseline;bottom;top;left;right");
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(AlignAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Text> _altAttribute = new SimpleSingleTypeAttribute<Text>();

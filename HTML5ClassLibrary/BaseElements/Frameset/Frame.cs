@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -13,8 +14,42 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
     [HTMLItem(ElementName = "frame", SupportedStandards = HTMLElementType.FrameSet)]
     public class Frame : HTMLItem, IInlineItem
     {
+
+#region Attribute_Values_Enums
+
+        /// <summary>
+        /// "frameborder" attribute possible values
+        /// </summary>
+        public enum FrameBorderAttributeOptions
+        {
+            [Description("0")]
+            Disabled,
+
+            [Description("1")]
+            Enabled,
+        }
+
+
+        /// <summary>
+        /// "scrolling" attribute possible values
+        /// </summary>
+        public enum ScrollingAttributeOptions
+        {
+            [Description("auto")]
+            Auto,
+
+            [Description("yes")]
+            Yes,
+
+            [Description("no")]
+            No,
+        }
+
+#endregion
+
+
         [AttributeTypeAttributeMember(Name = "frameborder", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _frameBorderAttribute = new ValuesSelectionTypeAttribute<Text>("0;1");
+        private readonly ValuesSelectionTypeAttribute<Text> _frameBorderAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(FrameBorderAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "longdesc", SupportedStandards = HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<URI> _longDescriptionAttribute = new SimpleSingleTypeAttribute<URI>();
@@ -32,7 +67,7 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
         private readonly FlagTypeAttribute _noResizeAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "scrolling", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _scrollingAttribute = new ValuesSelectionTypeAttribute<Text>("auto;yes;no");
+        private readonly ValuesSelectionTypeAttribute<Text> _scrollingAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(ScrollingAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<URI> _sourceAttribute = new SimpleSingleTypeAttribute<URI>();
