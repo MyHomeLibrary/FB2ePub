@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
@@ -9,10 +10,36 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     /// Though the name of the hr element is "horizontal rule", most visual Web browsers render hr as a horizontal line.
     /// </summary>
     [HTMLItemAttribute(ElementName = "hr", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-    public class HorizontalRuler : HTMLItem, IBlockElement 
+    public class HorizontalRuler : HTMLItem, IBlockElement
     {
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "align" attribute possible values
+        /// </summary>
+        public enum AlignAttributeOptions
+        {
+            [Description("center")]
+            Center,
+
+            [Description("char")]
+            Char,
+
+            [Description("justify")]
+            Justify,
+
+            [Description("left")]
+            Left,
+
+            [Description("right")]
+            Right,
+        }
+
+        #endregion 
+
+
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-        private readonly  ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(AlignAttributeOptions));
 
 
         [AttributeTypeAttributeMember(Name = "noshade", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]

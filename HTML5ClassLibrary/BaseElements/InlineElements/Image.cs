@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
@@ -10,8 +11,51 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "img", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Image : HTMLItem, IInlineItem
     {
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "align" attribute possible options
+        /// </summary>
+        public enum AlignAttributeOptions
+        {
+            [Description("baseline")]
+            Baseline,
+
+            [Description("bottom")]
+            Bottom,
+
+            [Description("left")]
+            Left,
+
+            [Description("middle")]
+            Middle,
+
+            [Description("right")]
+            Right,
+
+            [Description("top")]
+            Top
+        }
+
+
+        /// <summary>
+        /// "crossorigin" attribute possible values
+        /// </summary>
+        public enum CrossOriginAttributeOptions
+        {
+            [Description("anonymous")]
+            Anonymous,
+
+            [Description("use-credentials")]
+            UseCredentials,
+        }
+
+        #endregion 
+
+
+
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("middle;baseline;bottom;top;left;right");
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(AlignAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Text> _altAttribute = new SimpleSingleTypeAttribute<Text>();
@@ -20,7 +64,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly SimpleSingleTypeAttribute<Pixels> _borderAttribute = new SimpleSingleTypeAttribute<Pixels>();
 
         [AttributeTypeAttributeMember(Name = "crossorigin", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _crossOriginAttribute = new ValuesSelectionTypeAttribute<Text>("anonymous;use-credentials");
+        private readonly ValuesSelectionTypeAttribute<Text> _crossOriginAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(CrossOriginAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "height", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Length> _heightAttribute = new SimpleSingleTypeAttribute<Length>();

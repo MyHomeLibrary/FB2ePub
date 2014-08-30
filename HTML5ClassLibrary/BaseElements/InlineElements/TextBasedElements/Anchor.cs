@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System.ComponentModel;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
 namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
@@ -9,6 +10,72 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
     [HTMLItemAttribute(ElementName = "a", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Anchor : TextBasedElement
     {
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "rel" attribute possible values
+        /// </summary>
+        public enum RelAttributeOptions
+        {
+            [Description("alternate")]
+            Alternate,
+
+            [Description("author")]
+            Author,
+
+            [Description("bookmark")]
+            Bookmark,
+
+            [Description("help")]
+            Help,
+
+            [Description("license")]
+            License,
+
+            [Description("nofollow")]
+            NoFollow,
+
+            [Description("next")]
+            Next,
+
+            [Description("norefferer")]
+            NoRefferer,
+
+            [Description("prefetch")]
+            Prefetch,
+
+            [Description("prev")]
+            Prev,
+
+            [Description("search")]
+            Search,
+
+            [Description("tag")]
+            Tag,
+        }
+
+
+        /// <summary>
+        /// "shape" attribute possible values
+        /// </summary>
+        public enum ShapeAttributeOptions
+        {
+            [Description("circle")]
+            Circle,
+
+            [Description("default")]
+            Default,
+
+            [Description("poly")]
+            Poly,
+
+            [Description("rect")]
+            Rect,
+        }
+
+        #endregion
+
+
         [AttributeTypeAttributeMember(Name = "charset", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Charset> _charsetAttribute = new SimpleSingleTypeAttribute<Charset>();
 
@@ -31,13 +98,13 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "rel", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _relAttrib = new ValuesSelectionTypeAttribute<Text>("alternate;author;bookmark;help;license;next;nofollow;norefferer;prefetch;prev;search;tag");
+        private readonly ValuesSelectionTypeAttribute<Text> _relAttrib = new ValuesSelectionTypeAttribute<Text>(typeof(RelAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "rev", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<LinkTypes> _reverseRelationAttribute = new SimpleSingleTypeAttribute<LinkTypes>();
 
         [AttributeTypeAttributeMember(Name = "shape", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _shapeAttribute = new ValuesSelectionTypeAttribute<Text>("circle;default;poly;rect");
+        private readonly ValuesSelectionTypeAttribute<Text> _shapeAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(ShapeAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "target", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<TargetType> _targetAttr = new SimpleSingleTypeAttribute<TargetType>();

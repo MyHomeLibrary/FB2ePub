@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel;
+using System.Linq;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -13,6 +14,54 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "button", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Button : HTMLItem, IBlockElement
     {
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "enctype" attribute possible values
+        /// </summary>
+        public enum EncodingTypeAttributeOptions
+        {
+            [Description(@"application/x-www-form-urlencoded")]
+            ApplicationURLEnocoded,
+
+            [Description(@"multipart/form-data")]
+            MultipartFormData,
+
+            [Description(@"text/plain")]
+            TextPlain,
+        }
+
+
+        /// <summary>
+        /// "formmethod" attribute possible values
+        /// </summary>
+        public enum FormMethodAttributeOptions
+        {
+            [Description("get")]
+            Get,
+
+            [Description("post")]
+            Post,
+        }
+
+
+        /// <summary>
+        /// "type" attribute possible values
+        /// </summary>
+        public enum TypeAttributeOptions
+        {
+            [Description("reset")]
+            Reset,
+
+            [Description("button")]
+            Button,
+
+            [Description("submit")]
+            Submit,
+        }
+
+        #endregion 
+
         [AttributeTypeAttributeMember(Name = "autofocus", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _autofocus = new FlagTypeAttribute();
 
@@ -26,10 +75,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly SimpleSingleTypeAttribute<URI> _formAction = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "enctype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _formEncoding = new ValuesSelectionTypeAttribute<Text>(@"application/x-www-form-urlencoded;multipart/form-data;text/plain");
+        private readonly ValuesSelectionTypeAttribute<Text> _formEncoding = new ValuesSelectionTypeAttribute<Text>(typeof(EncodingTypeAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "formmethod", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _formMethod = new ValuesSelectionTypeAttribute<Text>("get;post");
+        private readonly ValuesSelectionTypeAttribute<Text> _formMethod = new ValuesSelectionTypeAttribute<Text>(typeof(FormMethodAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "formnovalidate", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _formNoValidate = new FlagTypeAttribute();
@@ -41,7 +90,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly SimpleSingleTypeAttribute<Text> _name = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<ContentType> _type = new ValuesSelectionTypeAttribute<ContentType>("reset;button;submit");
+        private readonly ValuesSelectionTypeAttribute<ContentType> _type = new ValuesSelectionTypeAttribute<ContentType>(typeof(TypeAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Text> _value = new SimpleSingleTypeAttribute<Text>();

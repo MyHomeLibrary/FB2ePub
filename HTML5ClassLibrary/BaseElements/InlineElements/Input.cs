@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
@@ -12,17 +13,165 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "input", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
     public class Input : HTMLItem, IInlineItem
     {
+
+        #region Attribute_Values_Enums
+
+
+        /// <summary>
+        /// "align" attribute possible values
+        /// </summary>
+        public enum AlignAttributeOptions
+        {
+            [Description("baseline")]
+            Baseline,
+
+            [Description("bottom")]
+            Bottom,
+
+            [Description("left")]
+            Left,
+
+            [Description("middle")]
+            Middle,
+
+            [Description("right")]
+            Right,
+
+            [Description("top")]
+            Top,
+        }
+
+
+        /// <summary>
+        /// "autocomplete" attribute possible values
+        /// </summary>
+        public enum AutocompleteAttributeOptions
+        {
+            [Description("on")]
+            On,
+
+            [Description("off")]
+            Off,
+        }
+
+
+        /// <summary>
+        /// "enctype" attribute possible values
+        /// </summary>
+        public enum EncodingTypeAttributeOptions
+        {
+            [Description(@"application/x-www-form-urlencoded")]
+            ApplicationURLEnocoded,
+
+            [Description(@"multipart/form-data")]
+            MultipartFormData,
+
+            [Description(@"text/plain")]
+            TextPlain,           
+        }
+
+        /// <summary>
+        /// "formmethod" attribute possible values
+        /// </summary>
+        public enum FormMethodAttributeOptions
+        {
+            [Description("get")]
+            Get,
+
+            [Description("post")]
+            Post,
+        }
+
+        /// <summary>
+        /// "type" attribute possible values
+        /// </summary>
+        public enum InputTypeAttributeOptions
+        {
+            [Description("button")]
+            Button,
+
+            [Description("checkbox")]
+            Checkbox,
+
+            [Description("color")]
+            Color,
+
+            [Description("date")]
+            Date,
+
+            [Description("datetime")]
+            DateTime,
+
+            [Description("datetime-local")]
+            DateTimeLocal,
+
+            [Description("email")]
+            EMail,
+
+            [Description("file")]
+            File,
+
+            [Description("hidden")]
+            Hidden,
+
+            [Description("image")]
+            Image,
+
+            [Description("month")]
+            Month,
+
+            [Description("number")]
+            Number,
+
+            [Description("password")]
+            Password,
+
+            [Description("radio")]
+            Radio,
+
+            [Description("reset")]
+            Reset,
+
+            [Description("range")]
+            Range,
+
+            [Description("submit")]
+            Submit,
+
+            [Description("search")]
+            Search,
+
+            [Description("text")]
+            Text,
+
+            [Description("tel")]
+            Tel,
+
+            [Description("time")]
+            Time,
+
+            [Description("url")]
+            Url,
+
+            [Description("week")]
+            Week,
+        }
+
+
+        #endregion
+
+
         [AttributeTypeAttributeMember(Name = "accept", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<ContentType> _acceptAttribute = new SimpleSingleTypeAttribute<ContentType>();
 
          [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("middle;baseline;bottom;top;left;right");
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(AlignAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "alt", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
          private readonly SimpleSingleTypeAttribute<Text> _altAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "autocomplete", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _autocompleteAttribute = new ValuesSelectionTypeAttribute<Text>("on;off");
+        private readonly ValuesSelectionTypeAttribute<Text> _autocompleteAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(AutocompleteAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "autofocus", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _autoFocusAttribute = new FlagTypeAttribute();
@@ -40,10 +189,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly SimpleSingleTypeAttribute<URI> _formActionAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "enctype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _formEncodingTypeAttribute = new ValuesSelectionTypeAttribute<Text>(@"application/x-www-form-urlencoded;multipart/form-data;text/plain");
+        private readonly ValuesSelectionTypeAttribute<Text> _formEncodingTypeAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(EncodingTypeAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "formmethod", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _formMethodAttribute = new ValuesSelectionTypeAttribute<Text>("get;post");
+        private readonly ValuesSelectionTypeAttribute<Text> _formMethodAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(FormMethodAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "formnovalidate", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _formNoValidateAttribute = new FlagTypeAttribute();
@@ -94,7 +243,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly SimpleSingleTypeAttribute<Text> _stepAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _inputTypeAttribute = new ValuesSelectionTypeAttribute<Text>("password;radio;checkbox;text;submit;image;reset;button;hidden;file;color;date;datetime;datetime-local;email;month;number;range;search;tel;time;url;week");
+        private readonly ValuesSelectionTypeAttribute<Text> _inputTypeAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(InputTypeAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Text> _valueAttribute = new SimpleSingleTypeAttribute<Text>();

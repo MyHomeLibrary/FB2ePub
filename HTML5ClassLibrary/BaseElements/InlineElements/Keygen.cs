@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
@@ -11,6 +12,26 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "keygen", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
     public class Keygen : HTMLItem, IInlineItem
     {
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "keytype" attribute possible values
+        /// </summary>
+        public enum KeyTypeAttributeOptions
+        {
+            [Description("rsa")]
+            RSA,
+
+            [Description("dsa")]
+            DSA,
+
+            [Description("ec")]
+            EC,
+        }
+
+
+        #endregion 
+
         [AttributeTypeAttributeMember(Name = "autofocus", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _autoFocusAttribute = new FlagTypeAttribute();
 
@@ -24,7 +45,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly SimpleSingleTypeAttribute<URI> _formIdAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "keytype", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _keyTypeAttribute = new ValuesSelectionTypeAttribute<Text>("rsa;dsa;ec");
+        private readonly ValuesSelectionTypeAttribute<Text> _keyTypeAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(KeyTypeAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>();
