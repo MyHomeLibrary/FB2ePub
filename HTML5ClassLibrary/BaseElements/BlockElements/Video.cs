@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System.ComponentModel;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
@@ -11,6 +12,27 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "video", SupportedStandards = HTMLElementType.HTML5)]
     public class Video : HTMLItem, IBlockElement
     {
+
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "preload" attribute possible values
+        /// </summary>
+        public enum PreloadAttributeOptions
+        {
+            [Description("auto")]
+            Auto,
+
+            [Description("metadata")]
+            Metadata,
+
+            [Description("none")]
+            None,
+        }
+
+        #endregion
+
+
         [AttributeTypeAttributeMember(Name = "autoplay",SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _autoplay = new FlagTypeAttribute();
 
@@ -30,7 +52,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly SimpleSingleTypeAttribute<URI> _posterAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "preload", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _preload = new ValuesSelectionTypeAttribute<Text>("auto;metadata;none");
+        private readonly ValuesSelectionTypeAttribute<Text> _preload = new ValuesSelectionTypeAttribute<Text>(typeof(PreloadAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SimpleSingleTypeAttribute<URI> _src = new SimpleSingleTypeAttribute<URI>();

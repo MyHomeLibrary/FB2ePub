@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System.ComponentModel;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
@@ -12,11 +13,46 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
     [HTMLItemAttribute(ElementName = "ul", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class UnorderedList : HTMLItem, IBlockElement
     {
+
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "type" attribute possible values
+        /// </summary>
+        public enum ListItemTypeAttributeOptions
+        {
+            [Description("1")]
+            Diggit,
+
+            [Description("A")]
+            CapitalA,
+
+            [Description("a")]
+            SmallA,
+
+            [Description("I")]
+            CapitalI,
+
+            [Description("i")]
+            SmallI,
+
+            [Description("disc")]
+            Disc,
+
+            [Description("square")]
+            Square,
+
+            [Description("circle")]
+            Circle,
+        }
+
+        #endregion
+
         [AttributeTypeAttributeMember(Name = "compact", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly FlagTypeAttribute _compactAttribute = new FlagTypeAttribute();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _listItemTypeAtttribute = new ValuesSelectionTypeAttribute<Text>("1;A;a;I;i;disc;square;circle");
+        private readonly ValuesSelectionTypeAttribute<Text> _listItemTypeAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(ListItemTypeAttributeOptions));
 
 
 
@@ -33,7 +69,7 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         ///  Specifies the kind of marker to use in the list
         /// Not supported in HTML5.
         /// </summary>
-        public IAttributeDataAccess Type { get { return _listItemTypeAtttribute; }}
+        public IAttributeDataAccess Type { get { return _listItemTypeAttribute; }}
 
         protected override bool IsValidSubType(IHTMLItem item)
         {
