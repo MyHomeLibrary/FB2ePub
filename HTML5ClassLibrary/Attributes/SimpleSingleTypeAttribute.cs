@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using XHTMLClassLibrary.AttributeDataTypes;
 
 
@@ -30,13 +31,24 @@ namespace XHTMLClassLibrary.Attributes
 
         }
 
-        public override string Value
+        public override object Value
         {
             get { return AttrObject.Value; }
             set
             {
-                AttrObject.Value = value;
-                AttributeHasValue = (value != string.Empty);
+                if (!(value is string) && !(value is T)) 
+                    throw new ArgumentException(string.Format("The value set can be only of string or {0} type",typeof(T).Name));
+
+                if (value is string)
+                {
+                    AttrObject.Value = value as string;
+                    AttributeHasValue = (value as string != string.Empty);
+                }
+                else
+                {
+                    AttrObject = (T) value;
+                    AttributeHasValue = AttrObject.Value != string.Empty;
+                }
             }
         }
     }

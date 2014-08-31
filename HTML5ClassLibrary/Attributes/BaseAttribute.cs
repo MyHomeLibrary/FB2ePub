@@ -6,7 +6,7 @@ namespace XHTMLClassLibrary.Attributes
     public interface IAttributeDataAccess
     {
         bool HasValue();
-        string Value { get; set; }       
+        object Value { get; set; }       
     }
 
     public interface IBaseAttribute : IAttributeDataAccess
@@ -32,7 +32,7 @@ namespace XHTMLClassLibrary.Attributes
             return AttributeHasValue;
         }
 
-        public abstract string Value { get; set; }
+        public abstract object Value { get; set; }
 
         #endregion
 

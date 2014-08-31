@@ -25,7 +25,7 @@ namespace Fb2ePubGui
         static void Main()
         {
             var item = (Anchor)ElementFactory.CreateElement(new XElement("a"), HTMLElementType.HTML5);
-            item.Charset.Value = "us";
+            item.Rel.Value = Anchor.RelAttributeOptions.Author;
             string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(), @"Lord_KiRon\");
             GlobalContext.Properties["LogName"] = logPath;
             log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());

@@ -41,7 +41,7 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
             if (valid)
             {
                 if (GlobalAttributes.ID.HasValue() && // if ID set should have same value as Name
-                    string.Compare(GlobalAttributes.ID.Value, _nameAttribute.Value, StringComparison.InvariantCulture) != 0)
+                    string.Compare(GlobalAttributes.ID.Value.ToString(), _nameAttribute.Value.ToString(), StringComparison.InvariantCulture) != 0)
                 {
                     valid = false;
                 }

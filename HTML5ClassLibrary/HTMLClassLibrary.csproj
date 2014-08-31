@@ -83,7 +83,6 @@
     <Compile Include="Attributes\Events\OnEventAttribute.cs" />
     <Compile Include="Attributes\FlagTypeAttribute.cs" />
     <Compile Include="Attributes\AttributeGroups\HTMLGlobalAttributes.cs" />
-    <Compile Include="Attributes\ISMapTypeAttribute.cs" />
     <Compile Include="Attributes\ValuesSelectionTypeAttribute.cs" />
     <Compile Include="BaseElements\BlockElements\Address.cs" />
     <Compile Include="BaseElements\BlockElements\Article.cs" />
