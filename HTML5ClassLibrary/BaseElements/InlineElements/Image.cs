@@ -73,7 +73,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly SimpleSingleTypeAttribute<Length> _hSpaceAttribute = new SimpleSingleTypeAttribute<Length>();
 
         [AttributeTypeAttributeMember(Name = "ismap", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ISMapTypeAttribute _ismapAttribute = new ISMapTypeAttribute();
+        private readonly FlagTypeAttribute _ismapAttribute = new FlagTypeAttribute(true);
 
         [AttributeTypeAttributeMember(Name = "longdesc", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<URI> _longDescriptionAttribute = new SimpleSingleTypeAttribute<URI>();

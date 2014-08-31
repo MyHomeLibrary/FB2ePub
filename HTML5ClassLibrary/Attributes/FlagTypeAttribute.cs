@@ -1,28 +1,21 @@
-﻿using System.Xml.Linq;
-using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System;
+using System.Xml.Linq;
 
 namespace XHTMLClassLibrary.Attributes
 {
     public class FlagTypeAttribute : BaseAttribute
     {
-        private Text _attrObject = new Text();
+        private readonly bool _putValue;
 
-        /// <summary>
-        /// Set the attribute to on/off (disabled or not)
-        /// </summary>
-        /// <param name="flag">on/off Boolean flag</param>
-        public void SetFlag(bool flag)
+
+        public FlagTypeAttribute(bool putNameAsValue)
         {
-            if (flag)
-            {
-                _attrObject.Value = GetAttributeName();
-                AttributeHasValue = true;
-            }
-            else
-            {
-                _attrObject.Value = string.Empty;
-                AttributeHasValue = false;
-            }
+            _putValue = putNameAsValue;
+        }
+
+        public FlagTypeAttribute()
+        {
+            _putValue = false;
         }
 
         public override void AddAttribute(XElement xElement)
@@ -31,31 +24,47 @@ namespace XHTMLClassLibrary.Attributes
             {
                 return;
             }
-            xElement.Add(new XAttribute(GetAttributeName(), _attrObject.Value));
+            xElement.Add(new XAttribute(GetAttributeName(), _putValue?GetAttributeName():string.Empty));
         }
 
         public override void ReadAttribute(XElement element)
         {
             AttributeHasValue = false;
-            _attrObject = null;
             XAttribute xObject = element.Attribute(GetAttributeName());
             if (xObject != null)
             {
-                _attrObject = new Text {Value = xObject.Value};
                 AttributeHasValue = true;
             }
         }
 
-        public override string Value
+        public override object Value
         {
             get
             {
-                return _attrObject.Value;
+                return GetAttributeName();
             }
             set
             {
-                _attrObject.Value = value;
-                AttributeHasValue = (value != string.Empty);
+                AttributeHasValue = false;
+                if ( !(value is bool) && !(value is string))
+                    return;
+                if (value is bool)
+                {
+                    AttributeHasValue = (bool)value;
+                    return;
+                }
+                if (string.Compare((value as string), GetAttributeName(), StringComparison.Ordinal) == 0)
+                {
+                    AttributeHasValue = true;
+                }
+                else
+                {
+                    bool hasValue;
+                    if (bool.TryParse(value as string, out hasValue))
+                    {
+                        AttributeHasValue = hasValue;
+                    }
+                }
             }
         }
     }
