@@ -73,6 +73,70 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
             Rect,
         }
 
+        /// <summary>
+        /// "rev" attribute possible values
+        /// </summary>
+        public enum RevAttributeOptions
+        {
+            [Description("alternate")]
+            Alternate, //	An alternate version of the document (i.e. print page, translated or mirror)
+
+            [Description("stylesheet")]
+            Stylesheet, 	//An external style sheet for the document
+
+            [Description("start")]
+            Start, 	//The first document in a selection
+
+            [Description("next")]
+            Next, 	//The next document in a selection
+
+            [Description("prev")]
+            Prev, 	//The previous document in a selection
+
+            [Description("contents")]
+            Contents, 	//A table of contents for the document
+
+            [Description("index")]
+            Index, 	//An index for the document
+
+            [Description("glossary")]
+            Glossary, 	//A glossary (explanation) of words used in the document
+
+            [Description("copyright")]
+            Copyright, 	//A document containing copyright information
+
+            [Description("chapter")]
+            Chapter, 	//A chapter of the document
+
+            [Description("section")]
+            Section, 	//A section of the document
+
+            [Description("subsection")]
+            Subsection, 	//A subsection of the document
+
+            [Description("appendix")]
+            Appendix, 	//An appendix for the document
+
+            [Description("help")]
+            Help, 	//A help document
+
+            [Description("bookmark")]
+            Bookmark, // A related document
+
+            [Description("nofollow")]
+            Nofollow, // "nofollow" is used by Google, to specify that the Google search spider should not follow that link (mostly used for paid links)
+
+            [Description("licence")]
+            Licence,
+
+            [Description("tag")]
+            Tag,
+
+            [Description("friend")]
+            Friend,
+        }
+
+
         #endregion
 
 
@@ -101,7 +165,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         private readonly ValuesSelectionTypeAttribute<Text> _relAttrib = new ValuesSelectionTypeAttribute<Text>(typeof(RelAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "rev", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly SimpleSingleTypeAttribute<LinkTypes> _reverseRelationAttribute = new SimpleSingleTypeAttribute<LinkTypes>();
+        private readonly ValuesSelectionTypeAttribute<Text> _reverseRelationAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(RevAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "shape", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly ValuesSelectionTypeAttribute<Text> _shapeAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(ShapeAttributeOptions));

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml.Linq;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
@@ -15,6 +16,130 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     [HTMLItemAttribute(ElementName = "link", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]    
     public class Link : HTMLItem
     {
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "rel" attribute possible values
+        /// </summary>
+        public enum RelAttributeOptions
+        {
+            [Description("alternate")]
+            Alternate,
+
+            [Description("archives")]
+            Archives,
+
+            [Description("author")]
+            Author,
+
+            [Description("bookmark")]
+            Bookmark,
+
+            [Description("external")]
+            External,
+
+            [Description("first")]
+            First,
+
+            [Description("help")]
+            Help,
+
+            [Description("icon")]
+            Icon,
+
+            [Description("last")]
+            Last,
+
+            [Description("license")]
+            License,
+
+            [Description("next")]
+            Next,
+
+            [Description("nofollow")]
+            Nofollow,
+
+            [Description("noreferrer")]
+            Noreferrer,
+
+            [Description("pingback")]
+            Pingback,
+
+            [Description("prefetch")]
+            Prefetch,
+
+            [Description("prev")]
+            Prev,
+
+            [Description("search")]
+            Search,
+
+            [Description("sidebar")]
+            Sidebar,
+
+            [Description("stylesheet")]
+            Stylesheet,
+
+            [Description("tag")]
+            Tag,
+
+            [Description("up")]
+            Up,
+        }
+
+        /// <summary>
+        /// "rev" attribute possible values
+        /// </summary>
+        public enum RevAttributeOptions
+        {
+            [Description("alternate")]
+            Alternate, //	An alternate version of the document (i.e. print page, translated or mirror)
+
+            [Description("stylesheet")]
+            Stylesheet, 	//An external style sheet for the document
+
+            [Description("start")]
+            Start, 	//The first document in a selection
+
+            [Description("next")]
+            Next, 	//The next document in a selection
+
+            [Description("prev")]
+            Prev, 	//The previous document in a selection
+
+            [Description("contents")]
+            Contents, 	//A table of contents for the document
+
+            [Description("index")]
+            Index, 	//An index for the document
+
+            [Description("glossary")]
+            Glossary, 	//A glossary (explanation) of words used in the document
+
+            [Description("copyright")]
+            Copyright, 	//A document containing copyright information
+
+            [Description("chapter")]
+            Chapter, 	//A chapter of the document
+
+            [Description("section")]
+            Section, 	//A section of the document
+
+            [Description("subsection")]
+            Subsection, 	//A subsection of the document
+
+            [Description("appendix")]
+            Appendix, 	//An appendix for the document
+
+            [Description("help")]
+            Help, 	//A help document
+
+            [Description("bookmark")]
+            Bookmark,
+        }
+
+        #endregion
+
         [AttributeTypeAttributeMember(Name = "charset", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Charset> _charsetAttribute = new SimpleSingleTypeAttribute<Charset>();
 
@@ -28,10 +153,10 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         private readonly SimpleSingleTypeAttribute<MediaDescriptions> _mediaAttribute = new SimpleSingleTypeAttribute<MediaDescriptions>();
 
         [AttributeTypeAttributeMember(Name = "rel", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _relAttribute = new ValuesSelectionTypeAttribute<Text>("alternate;archives;author;bookmark;external;first;help;icon;last;license;next;nofollow;norefferer;pingback;prefetch;prev;search;sidebar;stylesheet;tag;up");
+        private readonly ValuesSelectionTypeAttribute<Text> _relAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(RelAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "rev", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly SimpleSingleTypeAttribute<LinkTypes> _reverseRelationAttribute = new SimpleSingleTypeAttribute<LinkTypes>();
+        private readonly ValuesSelectionTypeAttribute<Text> _reverseRelationAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(RevAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "sizes", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SimpleSingleTypeAttribute<Sizes> _sizesAttribute = new SimpleSingleTypeAttribute<Sizes>();

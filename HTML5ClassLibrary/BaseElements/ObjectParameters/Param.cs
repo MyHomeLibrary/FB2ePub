@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
@@ -12,6 +13,26 @@ namespace XHTMLClassLibrary.BaseElements.ObjectParameters
     [HTMLItemAttribute(ElementName = "param", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class Param : HTMLItem
     {
+        
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "valuetype" attribute possible values
+        /// </summary>
+        public enum TypeAttributeOptions
+        {
+            [Description("data")]
+            Data,
+
+            [Description("object")]
+            Object,
+
+            [Description("ref")]
+            Ref,
+        }
+        #endregion
+
+
         [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>();
 
@@ -21,8 +42,8 @@ namespace XHTMLClassLibrary.BaseElements.ObjectParameters
         [AttributeTypeAttributeMember(Name = "value", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Text> _valueAttribute = new SimpleSingleTypeAttribute<Text>();
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _valueTypeAttribute = new ValuesSelectionTypeAttribute<Text>("ref;object;data");
+        [AttributeTypeAttributeMember(Name = "valuetype", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ValuesSelectionTypeAttribute<Text> _valueTypeAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(TypeAttributeOptions));
 
 
         
