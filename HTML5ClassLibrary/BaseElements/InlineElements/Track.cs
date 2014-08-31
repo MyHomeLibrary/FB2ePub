@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
@@ -11,6 +12,31 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "track", SupportedStandards = HTMLElementType.HTML5)]
     public class Track : HTMLItem, IInlineItem
     {
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "kind" attribute possible values
+        /// </summary>
+        public enum KindAttributeOptions
+        {
+            [Description("captions")]
+            Captions,
+
+            [Description("chapters")]
+            Chapters,
+
+            [Description("descriptions")]
+            Descriptions,
+
+            [Description("metadata")]
+            Metadata,
+
+            [Description("subtitles")]
+            Subtitles,
+        }
+
+        #endregion
+
         [AttributeTypeAttributeMember(Name = "default", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _defaultAttribute = new FlagTypeAttribute();
 
@@ -21,7 +47,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly SimpleSingleTypeAttribute<URI> _sourceAttribute = new SimpleSingleTypeAttribute<URI>();
 
         [AttributeTypeAttributeMember(Name = "kind", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _trackKindAttribute = new ValuesSelectionTypeAttribute<Text>("captions;chapters;descriptions;metadata;subtitles");
+        private readonly ValuesSelectionTypeAttribute<Text> _trackKindAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(KindAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "srclang", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SimpleSingleTypeAttribute<LanguageCode> _sourceLanguageAttribute = new SimpleSingleTypeAttribute<LanguageCode>();

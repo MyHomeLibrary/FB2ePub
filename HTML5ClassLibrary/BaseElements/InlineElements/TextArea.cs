@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 
@@ -10,6 +11,23 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "textarea", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class TextArea : HTMLItem, IInlineItem
     {
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "wrap" attribute possible values
+        /// </summary>
+        public enum WrapAttributeOptions
+        {
+            [Description("hard")]
+            Hard,
+
+            [Description("soft")]
+            Soft,
+        }
+
+        #endregion 
+
+
         [AttributeTypeAttributeMember(Name = "autofocus", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly FlagTypeAttribute _autoFocusAttribute = new FlagTypeAttribute();
 
@@ -41,7 +59,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly SimpleSingleTypeAttribute<Number> _rowsAttribute = new SimpleSingleTypeAttribute<Number>();
 
         [AttributeTypeAttributeMember(Name = "wrap", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _wrapAttribute = new ValuesSelectionTypeAttribute<Text>("hard;soft");
+        private readonly ValuesSelectionTypeAttribute<Text> _wrapAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(WrapAttributeOptions));
 
 
 

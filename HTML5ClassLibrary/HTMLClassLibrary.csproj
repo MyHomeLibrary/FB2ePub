@@ -58,7 +58,6 @@
     <Compile Include="AttributeDataTypes\IDReference.cs" />
     <Compile Include="AttributeDataTypes\LanguageCode.cs" />
     <Compile Include="AttributeDataTypes\Length.cs" />
-    <Compile Include="AttributeDataTypes\LinkTypes.cs" />
     <Compile Include="AttributeDataTypes\MediaDescriptions.cs" />
     <Compile Include="AttributeDataTypes\MIME_Type.cs" />
     <Compile Include="AttributeDataTypes\NameToken.cs" />

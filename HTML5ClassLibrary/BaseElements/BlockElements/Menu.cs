@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System.ComponentModel;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
@@ -12,11 +13,30 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "menu", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.FrameSet)]
     public class Menu : HTMLItem, IBlockElement
     {
+        #region Attribute_Values_Enums
+
+        /// <summary>
+        /// "type" attribute possible values
+        /// </summary>
+        public enum TypeAttributeOptions
+        {
+            [Description("context")]
+            Context,
+
+            [Description("popup")]
+            Popup,
+
+            [Description("toolbar")]
+            Toolbar,
+        }
+
+        #endregion
+
         [AttributeTypeAttributeMember(Name = "label", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SimpleSingleTypeAttribute<Text> _label = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly ValuesSelectionTypeAttribute<Text> _menuTypeAttribute = new ValuesSelectionTypeAttribute<Text>("popup;toolbar;context");
+        private readonly ValuesSelectionTypeAttribute<Text> _menuTypeAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(TypeAttributeOptions));
 
 
         /// <summary>

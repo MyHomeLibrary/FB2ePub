@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.AttributeDataTypes;
+﻿using System.ComponentModel;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -11,11 +12,91 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     [HTMLItemAttribute(ElementName = "th", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class TableHeaderCell : HTMLItem
     {
+        #region Attribute_Values_Enums
+        /// <summary>
+        /// align attribute possible values
+        /// </summary>
+        public enum AlignAttributeOptions
+        {
+            [Description("center")]
+            Center,
+
+            [Description("char")]
+            Char,
+
+            [Description("justify")]
+            Justify,
+
+            [Description("left")]
+            Left,
+
+            [Description("right")]
+            Right,
+        }
+
+        /// <summary>
+        /// "valign" attribute possible values
+        /// </summary>
+        public enum VAlignAttributeOptions
+        {
+            [Description("baseline")]
+            Baseline,
+
+            [Description("bottom")]
+            Bottom,
+
+            [Description("middle")]
+            Middle,
+
+            [Description("top")]
+            Top,
+        }
+
+
+        /// <summary>
+        /// "scope" attribute possible values
+        /// </summary>
+        public enum ScopeAttributeOptions
+        {
+            [Description("col")]
+            Col,
+
+            [Description("colgroup")]
+            ColGroup,
+
+            [Description("row")]
+            Row,
+
+            [Description("rowgroup")]
+            RowGroup,
+        }
+
+        /// <summary>
+        /// "sorted" attribute possible values
+        /// </summary>
+        public enum SortedAttributeOptions
+        {
+            [Description("reversed")]
+            Reversed,
+
+            [Description("number")]
+            Number,
+
+            [Description("reversed number")]
+            ReversedNumber,
+
+            [Description("number reversed")]
+            NumberReversed,
+        }
+
+
+        #endregion
+
         [AttributeTypeAttributeMember(Name = "abbr", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Text> _abbrAttribute = new SimpleSingleTypeAttribute<Text>();
 
         [AttributeTypeAttributeMember(Name = "align", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("center;justify;right;left;char");
+        private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(AlignAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "axis", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Text> _axisAttribute = new SimpleSingleTypeAttribute<Text>();
@@ -45,13 +126,13 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         private readonly SimpleSingleTypeAttribute<Number> _rowSpanAttribue = new SimpleSingleTypeAttribute<Number>();
 
         [AttributeTypeAttributeMember(Name = "scope", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _scopeAttribute = new ValuesSelectionTypeAttribute<Text>("col;colgroup;row;rowgroup");
+        private readonly ValuesSelectionTypeAttribute<Text> _scopeAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(ScopeAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "sorted", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _sortedAttribute = new ValuesSelectionTypeAttribute<Text>("reversed;number;number reversed;reversed number");
+        private readonly ValuesSelectionTypeAttribute<Text> _sortedAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(SortedAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "valign", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _vAlignAttribute = new ValuesSelectionTypeAttribute<Text>("middle;baseline;bottom;top");
+        private readonly ValuesSelectionTypeAttribute<Text> _vAlignAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(VAlignAttributeOptions));
 
         [AttributeTypeAttributeMember(Name = "width", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>();
