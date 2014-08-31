@@ -12,7 +12,7 @@ namespace XHTMLClassLibrary.Attributes
     public interface IBaseAttribute : IAttributeDataAccess
     {
 
-        void AddAttribute(XElement xElement);
+        void AddAttribute(XElement xElement,XNamespace ns);
         void ReadAttribute(XElement element);
     }
 
@@ -24,7 +24,7 @@ namespace XHTMLClassLibrary.Attributes
 
         #region Implementation of IBaseAttribute
 
-        public abstract void AddAttribute(XElement xElement);
+        public abstract void AddAttribute(XElement xElement, XNamespace ns);
         public abstract void ReadAttribute(XElement element);
 
         public bool HasValue()

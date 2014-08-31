@@ -9,13 +9,13 @@ namespace XHTMLClassLibrary.Attributes
     {
         protected T AttrObject = new T();
 
-        public override void AddAttribute(XElement xElement)
+        public override void AddAttribute(XElement xElement, XNamespace ns)
         {
             if (!AttributeHasValue)
             {
                 return;
             }
-            xElement.Add(new XAttribute(GetAttributeName(), AttrObject.Value));
+            xElement.Add(new XAttribute(ns + GetAttributeName(), AttrObject.Value));
         }
 
         public override void ReadAttribute(XElement element)
