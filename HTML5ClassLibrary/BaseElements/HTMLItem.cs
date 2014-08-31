@@ -67,7 +67,21 @@ namespace XHTMLClassLibrary.BaseElements
         }
 
 
-        public static IEnumerable<FieldInfo> GetAllFields(Type t,BindingFlags flags)
+        /// <summary>
+        /// Check if speciffic standard is XML format or not
+        /// </summary>
+        /// <param name="standard"></param>
+        /// <returns></returns>
+        public static bool IsXMLFormat(HTMLElementType standard)
+        {
+            if (standard == HTMLElementType.XHTML11 ||
+                standard == HTMLElementType.XHTML5)
+                return true;
+            return false;
+        }
+
+
+        private static IEnumerable<FieldInfo> GetAllFields(Type t,BindingFlags flags)
         {
             if (t == null)
                 return Enumerable.Empty<FieldInfo>();
@@ -226,9 +240,14 @@ namespace XHTMLClassLibrary.BaseElements
         public virtual XNode Generate()
         {
             string currentObjectElementName = GetObjectElementName();
-            var xElement = new XElement(/* namespace + ?*/currentObjectElementName);
+            XNamespace namespaceElm = XNamespace.None;
+            if (IsXMLFormat(_htmlStandard))
+            {
+                namespaceElm = @"http://www.w3.org/1999/xhtml";
+            }
+            var xElement = new XElement(namespaceElm + currentObjectElementName);
 
-            AddAttributes(xElement);
+            AddAttributes(xElement,namespaceElm);
 
             foreach (var item in Subitems)
             {
@@ -352,11 +371,12 @@ namespace XHTMLClassLibrary.BaseElements
         /// Used to add attributes to any element when generating it
         /// </summary>
         /// <param name="xElement">XElement to add attributes to </param>
-        protected void AddAttributes(XElement xElement)
+        /// <param name="ns">Namespace of the attribute</param>
+        protected void AddAttributes(XElement xElement,XNamespace ns)
         {
             foreach (var attribute in _attributes)
             {
-                attribute.AddAttribute(xElement);
+                attribute.AddAttribute(xElement,ns);
             }
         }
 

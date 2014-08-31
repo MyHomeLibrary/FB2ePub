@@ -18,13 +18,13 @@ namespace XHTMLClassLibrary.Attributes
             _putValue = false;
         }
 
-        public override void AddAttribute(XElement xElement)
+        public override void AddAttribute(XElement xElement, XNamespace ns)
         {
             if (!AttributeHasValue)
             {
                 return;
             }
-            xElement.Add(new XAttribute(GetAttributeName(), _putValue?GetAttributeName():string.Empty));
+            xElement.Add(new XAttribute(ns + GetAttributeName(), _putValue?GetAttributeName():string.Empty));
         }
 
         public override void ReadAttribute(XElement element)
