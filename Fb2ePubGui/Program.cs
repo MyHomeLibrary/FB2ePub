@@ -17,18 +17,19 @@ namespace Fb2ePubGui
 {
     static class Program
     {
-        public static ILog log;
+        public static ILog Log;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            var item = (Anchor)ElementFactory.CreateElement(new XElement("a"), HTMLElementType.HTML5);
-            item.Rel.Value = Anchor.RelAttributeOptions.Author;
+            //var item = (Anchor)ElementFactory.CreateElement(new XElement("a"), HTMLElementType.HTML5);
+            //item.Rel.Value = Anchor.RelAttributeOptions.Author;
+            //var test = item.Generate();
             string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(), @"Lord_KiRon\");
             GlobalContext.Properties["LogName"] = logPath;
-            log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
+            Log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

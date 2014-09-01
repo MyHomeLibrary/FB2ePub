@@ -34,7 +34,7 @@ namespace Fb2ePubGui
             }
             catch (Exception ex)
             {
-                Program.log.ErrorFormat("Error loading file {0} : {1} ",_logFileName,ex);
+                Program.Log.ErrorFormat("Error loading file {0} : {1} ",_logFileName,ex);
             }
         }
         
