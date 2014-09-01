@@ -273,7 +273,7 @@ namespace Fb2ePubGui
             if (!locations.Init())
             {
                 string error = "No FB2EPUBExt.INI file found in any of the paths";
-                Program.log.Error(error);
+                Program.Log.Error(error);
             }
             locations.Load();
             string defaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
