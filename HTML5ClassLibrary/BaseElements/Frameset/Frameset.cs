@@ -13,11 +13,11 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
     [HTMLItem(ElementName = "frameset", SupportedStandards = HTMLElementType.FrameSet)]
     public class Frameset : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(Name = "cols", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly SimpleSingleTypeAttribute<Number> _colsAttribute = new SimpleSingleTypeAttribute<Number>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.FrameSet)]
+        private readonly SimpleSingleTypeAttribute<Number> _colsAttribute = new SimpleSingleTypeAttribute<Number>("cols");
 
-        [AttributeTypeAttributeMember(Name = "rows", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly SimpleSingleTypeAttribute<Number> _rowsAttribute = new SimpleSingleTypeAttribute<Number>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.FrameSet)]
+        private readonly SimpleSingleTypeAttribute<Number> _rowsAttribute = new SimpleSingleTypeAttribute<Number>("rows");
 
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.BaseElements;
 
 
 namespace XHTMLClassLibrary.Attributes
@@ -8,6 +9,12 @@ namespace XHTMLClassLibrary.Attributes
     public class SimpleSingleTypeAttribute<T> : BaseAttribute where T : IAttributeDataType, new()
     {
         protected T AttrObject = new T();
+
+
+        public SimpleSingleTypeAttribute(string name)
+            : base(name)
+        {
+        }
 
         public override void AddAttribute(XElement xElement, XNamespace ns)
         {

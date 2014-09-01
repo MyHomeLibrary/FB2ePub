@@ -1,66 +1,66 @@
 ﻿using XHTMLClassLibrary.Attributes.Events;
 using XHTMLClassLibrary.BaseElements;
 
-namespace XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups
 {
     /// <summary>
     /// Mouse global events
     /// </summary>
     public class MouseEvents
     {
-        [AttributeTypeAttributeMember(Name = "onclick", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onClickEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onClickEventAttribute = new OnEventAttribute("onclick");
 
-        [AttributeTypeAttributeMember(Name = "ondblclick", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onDblClickEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onDblClickEventAttribute = new OnEventAttribute("ondblclick");
 
-        [AttributeTypeAttributeMember(Name = "ondrag", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onDragEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onDragEventAttribute = new OnEventAttribute("ondrag");
 
-        [AttributeTypeAttributeMember(Name = "ondragend", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onDragEndEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onDragEndEventAttribute = new OnEventAttribute("ondragend");
 
-        [AttributeTypeAttributeMember(Name = "ondragenter", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onDragEnterEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onDragEnterEventAttribute = new OnEventAttribute("ondragenter");
 
-        [AttributeTypeAttributeMember(Name = "ondragleave", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onDragLeaveEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onDragLeaveEventAttribute = new OnEventAttribute("ondragleave");
 
-        [AttributeTypeAttributeMember(Name = "ondragover", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onDragOverEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onDragOverEventAttribute = new OnEventAttribute("ondragover");
 
-        [AttributeTypeAttributeMember(Name = "ondragstart", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onDragStartEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onDragStartEventAttribute = new OnEventAttribute("ondragstart");
 
-        [AttributeTypeAttributeMember(Name = "ondrop", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onDropEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onDropEventAttribute = new OnEventAttribute("ondrop");
 
-        [AttributeTypeAttributeMember(Name = "onmousedown", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onMouseDownEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onMouseDownEventAttribute = new OnEventAttribute("onmousedown");
 
-        [AttributeTypeAttributeMember(Name = "onmousemove", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onMouseMoveEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onMouseMoveEventAttribute = new OnEventAttribute("onmousemove");
 
-        [AttributeTypeAttributeMember(Name = "onmouseout", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onMouseOutEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onMouseOutEventAttribute = new OnEventAttribute("onmouseout");
 
-        [AttributeTypeAttributeMember(Name = "onmouseover", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onMouseOverEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onMouseOverEventAttribute = new OnEventAttribute("onmouseover");
 
-        [AttributeTypeAttributeMember(Name = "onmouseup", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onMouseUpEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onMouseUpEventAttribute = new OnEventAttribute("onmouseup");
 
-        [AttributeTypeAttributeMember(Name = "onmousewheel", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onMouseWheelEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onMouseWheelEventAttribute = new OnEventAttribute("onmousewheel");
 
-        [AttributeTypeAttributeMember(Name = "onscroll", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onScrollEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onScrollEventAttribute = new OnEventAttribute("onscroll");
 
-        [AttributeTypeAttributeMember(Name = "mouseenter", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onMouseEnterEventAttribute =new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onMouseEnterEventAttribute =new OnEventAttribute("mouseenter");
 
-        [AttributeTypeAttributeMember(Name = "mouseleave", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onMouseLeaveEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onMouseLeaveEventAttribute = new OnEventAttribute("mouseleave");
 
 
 

@@ -7,14 +7,14 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "basefont", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]    
     public class BaseFont : HTMLItem, IInlineItem
     {
-        [AttributeTypeAttributeMember(Name = "color", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly SimpleSingleTypeAttribute<Color> _colorAttribute = new SimpleSingleTypeAttribute<Color>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly SimpleSingleTypeAttribute<Color> _colorAttribute = new SimpleSingleTypeAttribute<Color>("color");
 
-        [AttributeTypeAttributeMember(Name = "face", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly SimpleSingleTypeAttribute<Text> _faceAttribute = new SimpleSingleTypeAttribute<Text>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly SimpleSingleTypeAttribute<Text> _faceAttribute = new SimpleSingleTypeAttribute<Text>("face");
 
-        [AttributeTypeAttributeMember(Name = "size", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly SimpleSingleTypeAttribute<Number> _sizeAttribute = new SimpleSingleTypeAttribute<Number>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly SimpleSingleTypeAttribute<Number> _sizeAttribute = new SimpleSingleTypeAttribute<Number>("size");
 
 
         /// <summary>

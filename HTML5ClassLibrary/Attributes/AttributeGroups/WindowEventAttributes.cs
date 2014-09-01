@@ -1,63 +1,63 @@
 ﻿using XHTMLClassLibrary.Attributes.Events;
 using XHTMLClassLibrary.BaseElements;
 
-namespace XHTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes
+namespace XHTMLClassLibrary.Attributes.AttributeGroups
 {
     /// <summary>
     /// Events triggered for the window object (applies to the "body" tag):
     /// </summary>
     public class WindowEventAttributes
     {
-        [AttributeTypeAttributeMember(Name = "onafterprint", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onAfterPrintEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onAfterPrintEventAttribute = new OnEventAttribute("onafterprint");
 
-        [AttributeTypeAttributeMember(Name = "onbeforeprint", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onBeforePrintEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onBeforePrintEventAttribute = new OnEventAttribute("onbeforeprint");
 
-        [AttributeTypeAttributeMember(Name = "onbeforeunload", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onBeforeUnloadEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onBeforeUnloadEventAttribute = new OnEventAttribute("onbeforeunload");
 
-        [AttributeTypeAttributeMember(Name = "onerror", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onErrorEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onErrorEventAttribute = new OnEventAttribute( "onerror");
 
-        [AttributeTypeAttributeMember(Name = "onhaschange", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onHasChangeEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onHasChangeEventAttribute = new OnEventAttribute("onhaschange");
 
-        [AttributeTypeAttributeMember(Name = "onload", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onLoadEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onLoadEventAttribute = new OnEventAttribute("onload");
 
-        [AttributeTypeAttributeMember(Name = "onmessage", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onMessageEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onMessageEventAttribute = new OnEventAttribute("onmessage");
 
-        [AttributeTypeAttributeMember(Name = "onoffline", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onOfflineEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onOfflineEventAttribute = new OnEventAttribute("onoffline");
 
-        [AttributeTypeAttributeMember(Name = "ononline", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onOnlineEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onOnlineEventAttribute = new OnEventAttribute("ononline");
 
-        [AttributeTypeAttributeMember(Name = "onpagehide", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onPageHideEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onPageHideEventAttribute = new OnEventAttribute("onpagehide");
 
-        [AttributeTypeAttributeMember(Name = "onpageshow", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onPageShowEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onPageShowEventAttribute = new OnEventAttribute("onpageshow");
 
-        [AttributeTypeAttributeMember(Name = "onpopstate", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onPopStateEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onPopStateEventAttribute = new OnEventAttribute("onpopstate");
 
-        [AttributeTypeAttributeMember(Name = "onredo", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onRedoEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onRedoEventAttribute = new OnEventAttribute("onredo");
 
-        [AttributeTypeAttributeMember(Name = "onresize", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onResizeEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onResizeEventAttribute = new OnEventAttribute("onresize");
 
-        [AttributeTypeAttributeMember(Name = "onstorage", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onStorageEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onStorageEventAttribute = new OnEventAttribute("onstorage");
 
-        [AttributeTypeAttributeMember(Name = "onundo", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onUndoEventAttrinute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly OnEventAttribute _onUndoEventAttrinute = new OnEventAttribute("onundo");
 
-        [AttributeTypeAttributeMember(Name = "onunload", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onUnloadEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onUnloadEventAttribute = new OnEventAttribute("onunload");
 
 
 

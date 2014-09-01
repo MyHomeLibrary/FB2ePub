@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using XHTMLClassLibrary.BaseElements;
 
 namespace XHTMLClassLibrary.Attributes
 {
@@ -8,12 +9,14 @@ namespace XHTMLClassLibrary.Attributes
         private readonly bool _putValue;
 
 
-        public FlagTypeAttribute(bool putNameAsValue)
+        public FlagTypeAttribute(string name, bool putNameAsValue)
+            : base(name)
         {
             _putValue = putNameAsValue;
         }
 
-        public FlagTypeAttribute()
+        public FlagTypeAttribute(string name)
+            : base(name)
         {
             _putValue = false;
         }
