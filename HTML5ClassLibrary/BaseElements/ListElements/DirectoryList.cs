@@ -6,8 +6,8 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
     [HTMLItemAttribute(ElementName = "dir", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]    
     public class DirectoryList : HTMLItem, IBlockElement
     {
-        [AttributeTypeAttributeMember(Name = "compact", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
-        private readonly FlagTypeAttribute _compactAttribute = new FlagTypeAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet)]
+        private readonly FlagTypeAttribute _compactAttribute = new FlagTypeAttribute("compact");
 
 
         /// <summary>

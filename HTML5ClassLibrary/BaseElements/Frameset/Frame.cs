@@ -48,29 +48,29 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
 #endregion
 
 
-        [AttributeTypeAttributeMember(Name = "frameborder", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _frameBorderAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(FrameBorderAttributeOptions));
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.FrameSet)]
+        private readonly ValuesSelectionTypeAttribute<Text> _frameBorderAttribute = new ValuesSelectionTypeAttribute<Text>("frameborder",typeof(FrameBorderAttributeOptions));
 
-        [AttributeTypeAttributeMember(Name = "longdesc", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly SimpleSingleTypeAttribute<URI> _longDescriptionAttribute = new SimpleSingleTypeAttribute<URI>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.FrameSet)]
+        private readonly SimpleSingleTypeAttribute<URI> _longDescriptionAttribute = new SimpleSingleTypeAttribute<URI>("longdesc");
 
-        [AttributeTypeAttributeMember(Name = "marginheight", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly SimpleSingleTypeAttribute<Pixels> _marginHeightAttribute = new SimpleSingleTypeAttribute<Pixels>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.FrameSet)]
+        private readonly SimpleSingleTypeAttribute<Pixels> _marginHeightAttribute = new SimpleSingleTypeAttribute<Pixels>("marginheight");
 
-        [AttributeTypeAttributeMember(Name = "marginwidth", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly SimpleSingleTypeAttribute<Pixels> _marginWidthAttribute = new SimpleSingleTypeAttribute<Pixels>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.FrameSet)]
+        private readonly SimpleSingleTypeAttribute<Pixels> _marginWidthAttribute = new SimpleSingleTypeAttribute<Pixels>("marginwidth");
 
-        [AttributeTypeAttributeMember(Name = "name", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.FrameSet)]
+        private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>("name");
 
-        [AttributeTypeAttributeMember(Name = "noresize", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly FlagTypeAttribute _noResizeAttribute = new FlagTypeAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.FrameSet)]
+        private readonly FlagTypeAttribute _noResizeAttribute = new FlagTypeAttribute("noresize");
 
-        [AttributeTypeAttributeMember(Name = "scrolling", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _scrollingAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(ScrollingAttributeOptions));
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.FrameSet)]
+        private readonly ValuesSelectionTypeAttribute<Text> _scrollingAttribute = new ValuesSelectionTypeAttribute<Text>( "scrolling",typeof(ScrollingAttributeOptions));
 
-        [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.FrameSet)]
-        private readonly SimpleSingleTypeAttribute<URI> _sourceAttribute = new SimpleSingleTypeAttribute<URI>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.FrameSet)]
+        private readonly SimpleSingleTypeAttribute<URI> _sourceAttribute = new SimpleSingleTypeAttribute<URI>("src");
 
 
 

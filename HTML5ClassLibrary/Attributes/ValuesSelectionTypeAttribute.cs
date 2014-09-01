@@ -11,11 +11,13 @@ namespace XHTMLClassLibrary.Attributes
         private readonly Type _dataType;
 
 
-  /// <summary>
+        /// <summary>
         /// Initialize based on enum values
         /// </summary>
+        /// <param name="attrName">attribute id name</param>
         /// <param name="possibleValues">thould be Enum based type</param>
-        public ValuesSelectionTypeAttribute(Type possibleValues)
+        public ValuesSelectionTypeAttribute(string attrName, Type possibleValues)
+            : base(attrName)
         {
             if (!possibleValues.IsEnum)
             {

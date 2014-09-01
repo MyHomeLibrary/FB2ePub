@@ -99,7 +99,7 @@ namespace Fb2ePubGui.UpdateSettingsControl
             }
             catch (WebException webEx)
             {
-                Program.log.Error("Error obtaining version file", webEx);
+                Program.Log.Error("Error obtaining version file", webEx);
                 if (showErrorMessages)
                 {
                     MessageBox.Show(_baseWindow, webEx.Message,
@@ -110,7 +110,7 @@ namespace Fb2ePubGui.UpdateSettingsControl
             }
             catch (Exception ex)
             {
-                Program.log.Error("Error obtaining version file", ex);
+                Program.Log.Error("Error obtaining version file", ex);
                 if (showErrorMessages)
                 {
                     MessageBox.Show(_baseWindow, ex.Message,
@@ -161,7 +161,7 @@ namespace Fb2ePubGui.UpdateSettingsControl
             }
             catch (Exception ex)
             {
-                Program.log.Error("Error loading downloaded version file", ex);
+                Program.Log.Error("Error loading downloaded version file", ex);
                 if (showErrorMessages)
                 {
                     MessageBox.Show(_baseWindow, ex.Message,

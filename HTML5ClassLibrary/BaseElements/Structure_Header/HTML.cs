@@ -11,8 +11,8 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     [HTMLItemAttribute(ElementName = "html", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class HTML : HTMLItem
     {
-        [AttributeTypeAttributeMember(Name = "manifest", SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-        private readonly SimpleSingleTypeAttribute<URI> _manifestAttribute = new SimpleSingleTypeAttribute<URI>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
+        private readonly SimpleSingleTypeAttribute<URI> _manifestAttribute = new SimpleSingleTypeAttribute<URI>("manifest");
 
 
         /// <summary>

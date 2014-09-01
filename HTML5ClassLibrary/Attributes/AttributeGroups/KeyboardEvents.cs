@@ -1,21 +1,21 @@
 ﻿using XHTMLClassLibrary.Attributes.Events;
 using XHTMLClassLibrary.BaseElements;
 
-namespace XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents
+namespace XHTMLClassLibrary.Attributes.AttributeGroups
 {
     /// <summary>
     /// 
     /// </summary>
     public class KeyboardEvents
     {
-        [AttributeTypeAttributeMember(Name = "onkeydown", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onKeyDownEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onKeyDownEventAttribute = new OnEventAttribute("onkeydown");
 
-        [AttributeTypeAttributeMember(Name = "onkeypress", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onKeyPressEventAttribute = new OnEventAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onKeyPressEventAttribute = new OnEventAttribute("onkeypress");
 
-        [AttributeTypeAttributeMember(Name = "onkeyup", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly OnEventAttribute _onKeyUpEventAttribute = new OnEventAttribute(); 
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly OnEventAttribute _onKeyUpEventAttribute = new OnEventAttribute("onkeyup"); 
 
 
 

@@ -9,14 +9,14 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
     [HTMLItemAttribute(ElementName = "source", SupportedStandards = HTMLElementType.HTML5)]
     public class Source : TextBasedElement
     {
-        [AttributeTypeAttributeMember(Name = "media", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly SimpleSingleTypeAttribute<MediaDescriptions> _mediaAttrib = new SimpleSingleTypeAttribute<MediaDescriptions>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly SimpleSingleTypeAttribute<MediaDescriptions> _mediaAttrib = new SimpleSingleTypeAttribute<MediaDescriptions>("media");
 
-        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly SimpleSingleTypeAttribute<MIME_Type> _mimeType = new SimpleSingleTypeAttribute<MIME_Type>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly SimpleSingleTypeAttribute<MIME_Type> _mimeType = new SimpleSingleTypeAttribute<MIME_Type>("type");
 
-        [AttributeTypeAttributeMember(Name = "src", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly SimpleSingleTypeAttribute<URI> _srcAttrib = new SimpleSingleTypeAttribute<URI>();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        private readonly SimpleSingleTypeAttribute<URI> _srcAttrib = new SimpleSingleTypeAttribute<URI>("src");
 
         public IAttributeDataAccess Src
         {

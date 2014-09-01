@@ -1,4 +1,5 @@
 ﻿using XHTMLClassLibrary.AttributeDataTypes;
+using XHTMLClassLibrary.BaseElements;
 
 namespace XHTMLClassLibrary.Attributes.Events
 {
@@ -7,5 +8,9 @@ namespace XHTMLClassLibrary.Attributes.Events
     /// </summary>
     public class OnEventAttribute : SimpleSingleTypeAttribute<ScriptType>
     {
+        public OnEventAttribute(string name)
+            : base(name)
+        {
+        }
     }
 }

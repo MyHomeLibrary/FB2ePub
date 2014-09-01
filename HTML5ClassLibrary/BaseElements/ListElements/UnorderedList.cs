@@ -48,11 +48,11 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
 
         #endregion
 
-        [AttributeTypeAttributeMember(Name = "compact", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly FlagTypeAttribute _compactAttribute = new FlagTypeAttribute();
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly FlagTypeAttribute _compactAttribute = new FlagTypeAttribute("compact");
 
-        [AttributeTypeAttributeMember(Name = "type", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-        private readonly ValuesSelectionTypeAttribute<Text> _listItemTypeAttribute = new ValuesSelectionTypeAttribute<Text>(typeof(ListItemTypeAttributeOptions));
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
+        private readonly ValuesSelectionTypeAttribute<Text> _listItemTypeAttribute = new ValuesSelectionTypeAttribute<Text>("type", typeof(ListItemTypeAttributeOptions));
 
 
 

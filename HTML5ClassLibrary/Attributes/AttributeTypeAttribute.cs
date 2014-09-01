@@ -10,7 +10,6 @@ namespace XHTMLClassLibrary.Attributes
     public class AttributeTypeAttributeMember : Attribute
     {
         private HTMLElementType _standard = HTMLElementType.UnknownType;
-        private string _attributeName = string.Empty;
 
         /// <summary>
         /// Mask containing set of standards element supports
@@ -19,15 +18,6 @@ namespace XHTMLClassLibrary.Attributes
         {
             get { return _standard; }
             set { _standard = value; }
-        }
-
-        /// <summary>
-        /// Name of the attribute as it apperars in XML
-        /// </summary>
-        public string Name
-        {
-            get { return _attributeName; }
-            set { _attributeName = value; }
         }
     }
 

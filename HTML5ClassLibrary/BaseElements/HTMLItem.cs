@@ -7,10 +7,6 @@ using System.Xml;
 using System.Xml.Linq;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.Attributes.AttributeGroups;
-using XHTMLClassLibrary.Attributes.AttributeGroups.KeyboardEvents;
-using XHTMLClassLibrary.Attributes.AttributeGroups.MediaEvents;
-using XHTMLClassLibrary.Attributes.AttributeGroups.MouseEvents;
-using XHTMLClassLibrary.Attributes.AttributeGroups.WindowEventAttributes;
 using XHTMLClassLibrary.Exceptions;
 
 namespace XHTMLClassLibrary.BaseElements
