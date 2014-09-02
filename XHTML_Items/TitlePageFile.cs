@@ -33,25 +33,25 @@ namespace EPubLibrary.XHTML_Items
         public override void GenerateBody()
         {
             base.GenerateBody();
-            Div titlePage = new Div();
+            var titlePage = new Div(Compatibility);
             titlePage.GlobalAttributes.Class.Value = "titlepage";
             if (!string.IsNullOrEmpty(BookTitle))
             {
                 // try to use FB2 book's title
-                var p = new H2();
-                p.Add(new SimpleHTML5Text { Text = BookTitle });
+                var p = new H2(Compatibility);
+                p.Add(new SimpleHTML5Text(Compatibility) { Text = BookTitle });
                 string itemClass = string.Format("title{0}", 1);
                 p.GlobalAttributes.Class.Value = itemClass;
                 titlePage.Add(p);
             }
             else
             {
-                titlePage.Add(new SimpleHTML5Text { Text = "Unnamed" });
+                titlePage.Add(new SimpleHTML5Text(Compatibility) { Text = "Unnamed" });
             }
 
-            titlePage.Add(new EmptyLine());
+            titlePage.Add(new EmptyLine(Compatibility));
 
-            StringBuilder sbSeries = new StringBuilder();
+            var sbSeries = new StringBuilder();
             foreach (var serie in _series)
             {
                 if (!string.IsNullOrEmpty(sbSeries.ToString()))
@@ -62,10 +62,10 @@ namespace EPubLibrary.XHTML_Items
             }
             if (sbSeries.ToString() != string.Empty)
             {
-                var seriesItem = new SimpleHTML5Text { Text = string.Format("( {0} )", sbSeries) };
-                var containingText = new EmphasisedText();
+                var seriesItem = new SimpleHTML5Text(Compatibility) { Text = string.Format("( {0} )", sbSeries) };
+                var containingText = new EmphasisedText(Compatibility);
                 containingText.Add(seriesItem);
-                H3 seriesHeading = new H3();
+                var seriesHeading = new H3(Compatibility);
                 seriesHeading.GlobalAttributes.Class.Value = "title_series";
                 seriesHeading.Add(containingText);
                 titlePage.Add(seriesHeading);
@@ -73,8 +73,8 @@ namespace EPubLibrary.XHTML_Items
 
             foreach (var author in _authors)
             {
-                var authorsHeading = new H3();
-                var authorLine = new SimpleHTML5Text { Text = author };
+                var authorsHeading = new H3(Compatibility);
+                var authorLine = new SimpleHTML5Text(Compatibility) { Text = author };
                 authorsHeading.Add(authorLine);
                 authorsHeading.GlobalAttributes.Class.Value = "title_authors";
                 titlePage.Add(authorsHeading);

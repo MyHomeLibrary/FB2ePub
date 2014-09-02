@@ -94,26 +94,19 @@ namespace EPubLibrary.XHTML_Items
         public override void GenerateBody()
         {
             base.GenerateBody();
-            if (_content != null)
-            {
-                BodyElement.Add(_content);
-            }
-            else // just to make sure it's valid element
-            {
-                BodyElement.Add(new EmptyLine());
-            }
+            BodyElement.Add(_content ?? new EmptyLine(Compatibility));
         }
 
 
 
         public List<BookDocument> Split()
         {
-            List<BookDocument> list = new List<BookDocument>();
+            var list = new List<BookDocument>();
             BookDocument newDoc = null;
-            List<IHTMLItem> listToRemove = new List<IHTMLItem>();
+            var listToRemove = new List<IHTMLItem>();
             long totlaSize = 0;
             IHTMLItem oldContent = _content;
-            IHTMLItem newContent = new Div();
+            var newContent = new Div(Compatibility);
             if (_content != null)
             {
                 foreach (var subElement in _content.SubElements())
@@ -122,10 +115,12 @@ namespace EPubLibrary.XHTML_Items
                     if (totlaSize + itemSize > MaxSize)
                     {
                         Content = newContent;
-                        newDoc = new BookDocument(Compatibility);
-                        newDoc.Content = oldContent;
-                        newDoc.PageTitle = PageTitle;
-                        newDoc.NotPartOfNavigation = true;
+                        newDoc = new BookDocument(Compatibility)
+                        {
+                            Content = oldContent,
+                            PageTitle = PageTitle,
+                            NotPartOfNavigation = true
+                        };
                         newDoc.StyleFiles.AddRange(StyleFiles);
                         newDoc.DocumentType = DocumentType;
                         newDoc.NavigationParent = NavigationParent;
@@ -149,7 +144,7 @@ namespace EPubLibrary.XHTML_Items
                     {
                         if ((newDoc.Content.SubElements() != null) && (newDoc.Content.SubElements().Count > 1)) // in case we have only one sub-element we can't split
                         {
-                            List<BookDocument> subList = newDoc.Split();
+                            var subList = newDoc.Split();
                             list.AddRange(subList);
                             list.Remove(newDoc);                     
                         }
@@ -175,10 +170,10 @@ namespace EPubLibrary.XHTML_Items
 
         private List<BookDocument> SplitParagraph(Paragraph paragraph)
         {
-            List<BookDocument> list = new List<BookDocument>();
+            var list = new List<BookDocument>();
             foreach (var subElement in paragraph.SubElements())
             {
-                Paragraph newParagraph = new Paragraph();
+                var newParagraph = new Paragraph(Compatibility);
                 newParagraph.Add(subElement);
                 long itemSize = EstimateSize(newParagraph);
                 if (itemSize > MaxSize)
@@ -206,17 +201,15 @@ namespace EPubLibrary.XHTML_Items
 
         private List<BookDocument> SplitSimpleText(SimpleHTML5Text simpleEPubText)
         {
-            List<BookDocument> list = new List<BookDocument>();
-            BookDocument newDoc = new BookDocument(Compatibility);
-            newDoc.PageTitle = PageTitle;
-            newDoc.NotPartOfNavigation = true;
+            var list = new List<BookDocument>();
+            var newDoc = new BookDocument(Compatibility) {PageTitle = PageTitle, NotPartOfNavigation = true};
             newDoc.StyleFiles.AddRange(StyleFiles);
             newDoc.DocumentType = DocumentType;
             newDoc.NavigationParent = NavigationParent;
-            newDoc.Content = new Div();
-            Paragraph newParagraph = new Paragraph();
+            newDoc.Content = new Div(Compatibility);
+            var newParagraph = new Paragraph(Compatibility);
             newDoc.Content.Add(newParagraph);
-            SimpleHTML5Text newText = new SimpleHTML5Text{Text = ""};
+            var newText = new SimpleHTML5Text(Compatibility) { Text = "" };
             newParagraph.Add(newText);
             foreach (var word in simpleEPubText.Text.Split(' '))
             {
@@ -226,16 +219,14 @@ namespace EPubLibrary.XHTML_Items
                 if (itemSize >= MaxSize)
                 {
                     list.Add(newDoc);
-                    newDoc = new BookDocument(Compatibility);
-                    newDoc.PageTitle = PageTitle;
-                    newDoc.NotPartOfNavigation = true;
+                    newDoc = new BookDocument(Compatibility) {PageTitle = PageTitle, NotPartOfNavigation = true};
                     newDoc.StyleFiles.AddRange(StyleFiles);
                     newDoc.DocumentType = DocumentType;
                     newDoc.NavigationParent = NavigationParent;
-                    newDoc.Content = new Div();
-                    newParagraph = new Paragraph();
+                    newDoc.Content = new Div(Compatibility);
+                    newParagraph = new Paragraph(Compatibility);
                     newDoc.Content.Add(newParagraph);
-                    newText = new SimpleHTML5Text { Text = "" };
+                    newText = new SimpleHTML5Text(Compatibility) { Text = "" };
                     newParagraph.Add(newText);
                 }
             }

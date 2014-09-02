@@ -35,7 +35,7 @@ namespace EPubLibrary.XHTML_Items
 
         public virtual void GenerateHead()
         {
-            HeadElement = new Head();
+            HeadElement = new Head(Compatibility);
         }
 
         public GuideTypeEnum DocumentType { get; set; }
@@ -130,7 +130,7 @@ namespace EPubLibrary.XHTML_Items
                 IHTMLItem styleElement;
                 if (EmbedStyles)
                 {
-                    Style styleElementEntry = new Style();
+                    var styleElementEntry = new Style(Compatibility);
                     styleElement = styleElementEntry;
                     styleElementEntry.Type.Value = CSSFile.MediaType;
                     try
@@ -147,7 +147,7 @@ namespace EPubLibrary.XHTML_Items
                 }
                 else
                 {
-                    Link cssStyleShit = new Link();
+                    var cssStyleShit = new Link(Compatibility);
                     styleElement = cssStyleShit;
                     cssStyleShit.Relation.Value = "stylesheet";
                     cssStyleShit.Type.Value = file.GetMediaType();
@@ -166,7 +166,7 @@ namespace EPubLibrary.XHTML_Items
             }
 
 
-            var titleElm = new XHTMLClassLibrary.BaseElements.Structure_Header.Title();
+            var titleElm = new XHTMLClassLibrary.BaseElements.Structure_Header.Title(Compatibility);
             titleElm.InternalTextItem.Text = pageTitle;
             HeadElement.Add(titleElm);
             
@@ -179,7 +179,7 @@ namespace EPubLibrary.XHTML_Items
 
         public virtual void GenerateBody()
         {
-            BodyElement = new Body();
+            BodyElement = new Body(Compatibility);
             BodyElement.GlobalAttributes.Class.Value = "epub";           
         }
 

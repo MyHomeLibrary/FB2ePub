@@ -23,11 +23,11 @@ namespace EPubLibrary.XHTML_Items
         public override void GenerateBody()
         {
             base.GenerateBody();
-            Div coverPage = new Div();
+            var coverPage = new Div(Compatibility);
             coverPage.GlobalAttributes.Class.Value = "coverpage";
             //            coverPage.Style.Value = "text-align: center; page-break-after: always;";
 
-            Image coverImage = new Image();
+            var coverImage = new Image(Compatibility);
             coverImage.GlobalAttributes.Class.Value = "coverimage";
             coverImage.Source.Value = CoverFileName.PathInEPUB.GetRelativePath(FileEPubInternalPath, FlatStructure);
             coverImage.Alt.Value = "Cover";

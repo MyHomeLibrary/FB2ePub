@@ -67,16 +67,16 @@ namespace EPubLibrary.Content.NavigationDocument
             XNamespace xhtmlNamespace = @"http://www.w3.org/1999/xhtml";
             XNamespace ePubNamespace = @"http://www.idpf.org/2007/ops";
 
-            XElement html = new XElement(xhtmlNamespace + "html");
+            var html = new XElement(xhtmlNamespace + "html");
             html.Add(new XAttribute(XNamespace.Xmlns + "epub", ePubNamespace));
             contentDocument.Add(html);
 
-            XElement head = new XElement(xhtmlNamespace + "head");
+            var head = new XElement(xhtmlNamespace + "head");
             html.Add(head);
-            XElement meta = new XElement(xhtmlNamespace + "meta");
+            var meta = new XElement(xhtmlNamespace + "meta");
             meta.Add(new XAttribute("charset","utf-8"));
             head.Add(meta);
-            XElement title = new XElement(xhtmlNamespace + "title");
+            var title = new XElement(xhtmlNamespace + "title");
             if (string.IsNullOrEmpty(PageTitle))
             {
                 title.Value = "Table of Contents";
@@ -88,13 +88,11 @@ namespace EPubLibrary.Content.NavigationDocument
             head.Add(title);
             foreach (var file in _styles)
             {
-                IHTMLItem styleElement;
-                var cssStyleShit = new Link();
-                styleElement = cssStyleShit;
+                var cssStyleShit = new Link(HTMLElementType.HTML5);
                 cssStyleShit.Relation.Value = "stylesheet";
                 cssStyleShit.Type.Value = file.GetMediaType();
                 cssStyleShit.HRef.Value = file.PathInEPUB.GetRelativePath(NAVFilePath, FlatStructure);
-                head.Add(styleElement.Generate());
+                head.Add(cssStyleShit.Generate());
             }
 
             XElement body = new XElement(xhtmlNamespace + "body");

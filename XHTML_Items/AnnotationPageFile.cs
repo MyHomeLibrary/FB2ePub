@@ -25,7 +25,7 @@ namespace EPubLibrary.XHTML_Items
         public override void GenerateBody()
         {
             base.GenerateBody();
-            Div annotationPage = new Div();
+            var annotationPage = new Div(Compatibility);
             annotationPage.GlobalAttributes.Class.Value = "annotation";
             if (BookAnnotation != null)
             {
@@ -36,10 +36,10 @@ namespace EPubLibrary.XHTML_Items
             }
             else
             {
-                annotationPage.Add(new SimpleHTML5Text { Text = "Unnamed" });
+                annotationPage.Add(new SimpleHTML5Text(Compatibility) { Text = "Unnamed" });
             }
 
-            annotationPage.Add(new EmptyLine());
+            annotationPage.Add(new EmptyLine(Compatibility));
 
             BodyElement.Add(annotationPage);
         }

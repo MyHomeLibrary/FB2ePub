@@ -33,29 +33,27 @@ namespace EPubLibrary.XHTML_Items
         public override void GenerateBody()
         {
             base.GenerateBody();
-            Div page = new Div();
+            Div page = new Div(Compatibility);
             page.GlobalAttributes.Class.Value = "about";
-            H1 heading = new H1();
-            heading.Add(new SimpleHTML5Text { Text = "About" });
+            H1 heading = new H1(Compatibility);
+            heading.Add(new SimpleHTML5Text(Compatibility) { Text = "About" });
             page.Add(heading);
 
             foreach (var text in AboutTexts)
             {
-                Paragraph p1 = new Paragraph();
-                SimpleHTML5Text text1 = new SimpleHTML5Text();
-                text1.Text = text;
+                var p1 = new Paragraph(Compatibility);
+                var text1 = new SimpleHTML5Text(Compatibility) {Text = text};
                 p1.Add(text1);
                 page.Add(p1);
             }
 
             foreach (var text in AboutLinks)
             {
-                var p1 = new Paragraph();
-                var anch = new Anchor();
+                var p1 = new Paragraph(Compatibility);
+                var anch = new Anchor(Compatibility);
                 anch.HRef.Value = text;
                 anch.GlobalAttributes.Title.Value = text;
-                var text3 = new SimpleHTML5Text();
-                text3.Text = text;
+                var text3 = new SimpleHTML5Text(Compatibility) {Text = text};
                 anch.Add(text3);
                 p1.Add(anch);
                 page.Add(p1);
