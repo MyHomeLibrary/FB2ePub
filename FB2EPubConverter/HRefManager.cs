@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using EPubLibrary;
 using EPubLibrary.XHTML_Items;
 using FB2Library.Elements;
-using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 using EPubLibrary.ReferenceUtils;
+using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 using Logger=Fb2ePubConverter.Logger;
 
 namespace FB2EPubConverter
@@ -20,7 +21,7 @@ namespace FB2EPubConverter
         /// <summary>
         /// List of IDs 
         /// </summary>
-        private readonly Dictionary<string, IXHTMLItem> _ids = new Dictionary<string, IXHTMLItem>();
+        private readonly Dictionary<string, IHTMLItem> _ids = new Dictionary<string, IHTMLItem>();
 
 
         /// <summary>
@@ -60,7 +61,7 @@ namespace FB2EPubConverter
             string validName = MakeValidImageName(item.HRef);
             if (!_images.ContainsKey(validName))
             {
-                List<Image> entryList = new List<Image>();
+                var entryList = new List<Image>();
                 _images.Add(validName, entryList);
             }
             _images[validName].Add(img);
@@ -78,7 +79,7 @@ namespace FB2EPubConverter
             
             if (!_images.ContainsKey(validName))
             {
-                List<Image> entryList = new List<Image>();
+               var entryList = new List<Image>();
                 _images.Add(validName, entryList);
             }
             _images[validName].Add(img);
@@ -107,7 +108,7 @@ namespace FB2EPubConverter
         /// <param name="id">Id to list as used</param>
         /// <param name="item">item that ID belong to</param>
         /// <returns>returns and registers the id if available, empty string if ID already exists</returns>
-        public string AddIdUsed(string id,IXHTMLItem item)
+        public string AddIdUsed(string id,IHTMLItem item)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -157,7 +158,7 @@ namespace FB2EPubConverter
             {
                 reference = EnsureGoodReference(reference); // make sure that reference name is valid according to HTML rules
 
-                List<Anchor> list = null;
+                List<Anchor> list;
                 if (!_references.ContainsKey(reference)) // if this a first time we see "jump" to this ID
                 {
                     list = new List<Anchor>(); //allocate new list of referenced objects
@@ -167,7 +168,7 @@ namespace FB2EPubConverter
                 {
                     list = _references[reference]; // find this ID in references dictionary
                 }
-                if (string.IsNullOrEmpty(anchor.ID.Value)) // if anchor does not have ID already (FB2 link element does not have ID so this is just in case), we need this for backlinking
+                if (string.IsNullOrEmpty((string)anchor.GlobalAttributes.ID.Value)) // if anchor does not have ID already (FB2 link element does not have ID so this is just in case), we need this for backlinking
                 {
                     string backLink = string.Format("{0}_back", reference); // generate back link
                     if (backLink.StartsWith("#"))
@@ -179,9 +180,9 @@ namespace FB2EPubConverter
                     {
                         backLink += "x";
                     }
-                    anchor.ID.Value = backLink;
+                    anchor.GlobalAttributes.ID.Value = backLink;
                 }
-                anchor.ID.Value = AddIdUsed(anchor.ID.Value, anchor);              
+                anchor.GlobalAttributes.ID.Value = AddIdUsed((string)anchor.GlobalAttributes.ID.Value, anchor);              
                 list.Add(anchor);
             }
         }
@@ -193,7 +194,7 @@ namespace FB2EPubConverter
             {
                 reference = EnsureGoodReference(reference); // make sure that reference name is valid according to HTML rules
 
-                List<Anchor> list = null;
+                List<Anchor> list;
                 if (!_references.ContainsKey(reference)) // if this a first time we see "jump" to this ID
                 {
                     list = new List<Anchor>(); //allocate new list of referenced objects
@@ -215,7 +216,7 @@ namespace FB2EPubConverter
         /// </summary>
         public void RemoveInvalidAnchors()
         {
-            List<string> listToRemove = new List<string>();
+            var listToRemove = new List<string>();
             foreach (var reference in _references)
             {
                 // If reference does not points on one of valid IDs and it's not external reference
@@ -229,10 +230,10 @@ namespace FB2EPubConverter
                         // we remove it and in case it has some meaningful content
                         // replace with span that is meaningless non-block element
                         // so contained text etc are kept
-                        if (element.Content.Count != 0)
+                        if (element.SubElements().Count != 0)
                         {
-                            Span spanElement = new Span();
-                            foreach (var subElement in element.Content)
+                            var spanElement = new Span();
+                            foreach (var subElement in element.SubElements())
                             {
                                 spanElement.Add(subElement);
                             }
@@ -245,12 +246,12 @@ namespace FB2EPubConverter
                                     element.Parent.SubElements().Insert(index, spanElement);
                                 }                                
                             }
-                            if (!string.IsNullOrEmpty(element.ID.Value))
+                            if (!string.IsNullOrEmpty((string)element.GlobalAttributes.ID.Value))
                             {
-                                spanElement.ID.Value = element.ID.Value; // Copy ID anyway - may be someone "jumps" here
-                                _ids[element.ID.Value] = spanElement;     // and update the "pointer" to element                           
+                                spanElement.GlobalAttributes.ID.Value = element.GlobalAttributes.ID.Value; // Copy ID anyway - may be someone "jumps" here
+                                _ids[(string)element.GlobalAttributes.ID.Value] = spanElement;     // and update the "pointer" to element                           
                             }
-                            spanElement.Class.Value = "ex_bad_link";
+                            spanElement.GlobalAttributes.Class.Value = "ex_bad_link";
                         }
                         if (element.Parent != null)
                         {
@@ -289,9 +290,9 @@ namespace FB2EPubConverter
                 return _attributesRemap[id];
             }
             bool remaped = false;
-            StringBuilder res = new StringBuilder();
-            Regex pattern = new Regex(@"[^a-zA-Z]");
-            if (pattern.IsMatch(id[0].ToString()))
+            var res = new StringBuilder();
+            var pattern = new Regex(@"[^a-zA-Z]");
+            if (pattern.IsMatch(id[0].ToString(CultureInfo.InvariantCulture)))
             {
                 res.Append("ID");
                 remaped = true;
@@ -299,7 +300,7 @@ namespace FB2EPubConverter
             const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
             foreach (var character in id)
             {
-                if (validChars.Contains(character.ToString()))
+                if (validChars.Contains(character.ToString(CultureInfo.InvariantCulture)))
                 {
                     res.Append(character);
                 }
@@ -313,7 +314,7 @@ namespace FB2EPubConverter
             {
                 while (_attributesRemap.Keys.Any(x => x == id))
                 {
-                    res.Append(new Random().Next(0, 9).ToString());
+                    res.Append(new Random().Next(0, 9).ToString(CultureInfo.InvariantCulture));
                 }
                 _attributesRemap.Add(id, res.ToString());
             }
@@ -345,17 +346,17 @@ namespace FB2EPubConverter
                         foreach (var anchor in link.Value)
                         {
                             BaseXHTMLFile idDocument = GetIDParentDocument(epubFile, anchor);
-                            IXHTMLItem referencedItem = _ids[anchor.HRef.Value];
-                            IXHTMLItem newParent = DetectParentContainer(referencedItem);
+                            IHTMLItem referencedItem = _ids[(string)anchor.HRef.Value];
+                            IHTMLItem newParent = DetectParentContainer(referencedItem);
                             if (newParent == null)
                             {
                                 continue;
                             }
-                            Anchor newAnchor = new Anchor();
+                            var newAnchor = new Anchor();
                             if (idDocument == iDDocument)
                             {
                                 anchor.HRef.Value = string.Format("#{0}", idString);
-                                newAnchor.HRef.Value = string.Format("#{0}", anchor.ID.Value);
+                                newAnchor.HRef.Value = string.Format("#{0}", anchor.GlobalAttributes.ID.Value);
                             }
                             else
                             {
@@ -364,15 +365,15 @@ namespace FB2EPubConverter
                                 {
                                     continue;
                                 }
-                                newAnchor.HRef.Value = string.Format("{0}#{1}", idDocument.FileName, anchor.ID.Value);
+                                newAnchor.HRef.Value = string.Format("{0}#{1}", idDocument.FileName, anchor.GlobalAttributes.ID.Value);
                             }
                             if ((iDDocument is BookDocument) && ((iDDocument as BookDocument).Type == SectionTypeEnum.Links))  // if it's FBE notes section
                             {
-                                newAnchor.Class.Value = "note_anchor";
+                                newAnchor.GlobalAttributes.Class.Value = "note_anchor";
                                 newParent.Add(new EmptyLine());
                                 newParent.Add(newAnchor);
                                 count++;
-                                newAnchor.Add(new SimpleEPubText { Text = (link.Value.Count > 1) ? string.Format("(<< back {0})  ",count) : string.Format("(<< back)  ") });
+                                newAnchor.Add(new SimpleHTML5Text { Text = (link.Value.Count > 1) ? string.Format("(<< back {0})  ",count) : string.Format("(<< back)  ") });
                             }
                         }
                     }
@@ -380,7 +381,7 @@ namespace FB2EPubConverter
                     {
                         //throw new Exception("Internal consistency error - Used ID has to be in one of the book documents objects");
                         Logger.Log.Error("Internal consistency error - Used ID has to be in one of the book documents objects");
-                        continue;
+                        //continue;
                     }
                 }
             }
@@ -391,13 +392,13 @@ namespace FB2EPubConverter
         /// </summary>
         /// <param name="referencedItem"></param>
         /// <returns></returns>
-        private static IXHTMLItem DetectParentContainer(IXHTMLItem referencedItem)
+        private static IHTMLItem DetectParentContainer(IHTMLItem referencedItem)
         {
             if (referencedItem is IBlockElement)
             {
                 return referencedItem;
             }
-            else if (referencedItem.Parent is IBlockElement)
+            if (referencedItem.Parent is IBlockElement)
             {
                 return referencedItem.Parent;
             }
@@ -406,20 +407,13 @@ namespace FB2EPubConverter
 
 
 
-        private BaseXHTMLFile GetIDParentDocument(EPubFile file, IXHTMLItem value)
+        private BaseXHTMLFile GetIDParentDocument(EPubFile file, IHTMLItem value)
         {
             if ((file.AnnotationPage != null) && file.AnnotationPage.PartOfDocument(value))
             {
                 return file.AnnotationPage;
             }
-            foreach (var document in file.BookDocuments)
-            {
-                if (document.PartOfDocument(value))
-                {
-                    return document;
-                }    
-            }
-            return null;
+            return file.BookDocuments.FirstOrDefault(document => document.PartOfDocument(value));
         }
 
 

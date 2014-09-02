@@ -12,15 +12,15 @@ namespace FB2EPubConverter.ElementConverters
     internal static class XhtmlItemExtender
     {
         /// <summary>
-        /// Extends IXHTMLItem class to evaluate the size of generated output
+        /// Extends IHTMLItem class to evaluate the size of generated output
         /// </summary>
         /// <param name="item">item to evaluate</param>
         /// <returns></returns>
-        public static long EstimateSize(this IXHTMLItem item)
+        public static long EstimateSize(this IHTMLItem item)
         {
-            MemoryStream stream = new MemoryStream();
-            XNode node = item.Generate();
-            XDocument doc = new XDocument();
+            var stream = new MemoryStream();
+            var node = item.Generate();
+            var doc = new XDocument();
             doc.Add(node);
             using (var writer = XmlWriter.Create(stream))
             {

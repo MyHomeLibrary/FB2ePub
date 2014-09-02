@@ -29,42 +29,42 @@ namespace FB2EPubConverter.ElementConverters
             {
                 if (item is SubTitleItem)
                 {
-                    SubtitleConverter subtitleConverter = new SubtitleConverter {Settings = Settings};
+                    var  subtitleConverter = new SubtitleConverter {Settings = Settings};
                     citation.Add(subtitleConverter.Convert(item as SubTitleItem));
                 }
                 else if (item is ParagraphItem)
                 {
-                    ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
+                    var paragraphConverter = new ParagraphConverter {Settings = Settings};
                     citation.Add(paragraphConverter.Convert(item as ParagraphItem,ParagraphConvTargetEnum.Paragraph));
                 }
                 else if (item is PoemItem)
                 {
-                    PoemConverter poemConverter = new PoemConverter {Settings = Settings};
+                    var poemConverter = new PoemConverter {Settings = Settings};
                     citation.Add(poemConverter.Convert(item as PoemItem,level + 1));
                 }
                 else if (item is EmptyLineItem)
                 {
-                    EmptyLineConverter emptyLineConverter = new EmptyLineConverter();
+                    var emptyLineConverter = new EmptyLineConverter();
                     citation.Add(emptyLineConverter.Convert());
                 }
                 else if (item is TableItem)
                 {
-                    TableConverter tableConverter = new TableConverter {Settings = Settings};
+                    var tableConverter = new TableConverter {Settings = Settings};
                     citation.Add(tableConverter.Convert(item as TableItem));
                 }
             }
 
             foreach (var author in citeItem.TextAuthors)
             {
-                CitationAuthorConverter citationAuthorConverter = new CitationAuthorConverter() { Settings = Settings };
+                var citationAuthorConverter = new CitationAuthorConverter() { Settings = Settings };
                 citation.Add(citationAuthorConverter.Convert(author));
             }
 
-            citation.ID.Value = Settings.ReferencesManager.AddIdUsed(citeItem.ID, citation);
+            citation.GlobalAttributes.ID.Value = Settings.ReferencesManager.AddIdUsed(citeItem.ID, citation);
 
             if (citeItem.Lang != null)
             {
-                citation.Language.Value = citeItem.Lang;
+                citation.GlobalAttributes.Language.Value = citeItem.Lang;
             }
             SetClassType(citation);
             return citation;

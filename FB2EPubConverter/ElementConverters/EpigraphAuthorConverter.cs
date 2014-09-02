@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FB2Library.Elements;
+using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace FB2EPubConverter.ElementConverters
@@ -14,16 +12,16 @@ namespace FB2EPubConverter.ElementConverters
         /// </summary>
         /// <param name="textAuthorItem">item to convert</param>
         /// <returns>XHTML representation</returns>
-        public IBlockElement Convert(TextAuthorItem textAuthorItem)
+        public IHTMLItem Convert(TextAuthorItem textAuthorItem)
         {
             if (textAuthorItem == null)
             {
                 throw new ArgumentNullException("textAuthorItem");
             }
-            Div epigraphAuthor = new Div();
-            ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
+            var epigraphAuthor = new Div();
+            var paragraphConverter = new ParagraphConverter {Settings = Settings};
             epigraphAuthor.Add(paragraphConverter.Convert(textAuthorItem, ParagraphConvTargetEnum.Paragraph));
-            epigraphAuthor.Class.Value = "epigraph_author";
+            epigraphAuthor.GlobalAttributes.Class.Value = "epigraph_author";
             return epigraphAuthor;
         }
 

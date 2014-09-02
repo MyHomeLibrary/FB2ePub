@@ -34,8 +34,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPubLibrary", "..\epublibra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FontsSettings", "..\fontsettings\FontsSettings.csproj", "{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XHTMLClassLibrary", "..\xhtmlclasslibrary\XHTMLClassLibrary.csproj", "{FFCCD288-4F11-44A5-AB04-3CACF840935C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FB2Library", "..\fb2librarynet\FB2Library.csproj", "{4DEC5888-E71A-4D00-93B7-7F11C92D0A3F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslitRu", "..\translitrunet\TranslitRu.csproj", "{CDFF6D0A-EB28-4817-8635-D6B0A9FDE833}"
@@ -217,22 +215,6 @@ Global
 		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Release|Win32.Build.0 = Release|x86
 		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Release|x64.ActiveCfg = Release|x64
 		{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}.Release|x86.ActiveCfg = Release|x86
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Debug|Win32.ActiveCfg = Debug|x86
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Debug|Win32.Build.0 = Debug|x86
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Debug|x64.ActiveCfg = Debug|x64
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Debug|x86.ActiveCfg = Debug|x86
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Release|Mixed Platforms.Build.0 = Release|x86
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Release|Win32.ActiveCfg = Release|x86
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Release|Win32.Build.0 = Release|x86
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Release|x64.ActiveCfg = Release|x64
-		{FFCCD288-4F11-44A5-AB04-3CACF840935C}.Release|x86.ActiveCfg = Release|x86
 		{4DEC5888-E71A-4D00-93B7-7F11C92D0A3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4DEC5888-E71A-4D00-93B7-7F11C92D0A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DEC5888-E71A-4D00-93B7-7F11C92D0A3F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86

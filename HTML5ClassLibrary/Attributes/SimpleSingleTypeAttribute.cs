@@ -22,7 +22,9 @@ namespace XHTMLClassLibrary.Attributes
             {
                 return;
             }
-            xElement.Add(new XAttribute(ns + GetAttributeName(), AttrObject.Value));
+            xElement.Add(ns != null
+                ? new XAttribute(ns + GetAttributeName(), AttrObject.Value)
+                : new XAttribute(GetAttributeName(), AttrObject.Value));
         }
 
         public override void ReadAttribute(XElement element)

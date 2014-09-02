@@ -186,10 +186,6 @@
       <Project>{CDFF6D0A-EB28-4817-8635-D6B0A9FDE833}</Project>
       <Name>TranslitRu</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\xhtmlclasslibrary\XHTMLClassLibrary.csproj">
-      <Project>{FFCCD288-4F11-44A5-AB04-3CACF840935C}</Project>
-      <Name>XHTMLClassLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fb2epubSettings\Fb2epubSettings.csproj">
       <Project>{BB87C009-1337-43FF-ADF6-6E7861AA9343}</Project>
       <Name>Fb2epubSettings</Name>
@@ -197,6 +193,10 @@
     <ProjectReference Include="..\FolderSettingsHelper\FolderSettingsHelper.csproj">
       <Project>{97c916ff-6271-44f8-9a20-6e0a0389524b}</Project>
       <Name>FolderSettingsHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HTML5ClassLibrary\HTMLClassLibrary.csproj">
+      <Project>{e596a296-1c1a-42b7-8482-b7b0e95b82d3}</Project>
+      <Name>HTMLClassLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\XMLFixerLibrary\XMLFixerLibrary.csproj">
       <Project>{AD23A99E-89FE-47C9-BD2C-25C416F327F3}</Project>

@@ -29,7 +29,7 @@ namespace FB2EPubConverter.ElementConverters
             {
                 if (element is ParagraphItem)
                 {
-                    ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
+                    var paragraphConverter = new ParagraphConverter {Settings = Settings};
                     resAnnotation.Add(paragraphConverter.Convert(element as ParagraphItem,ParagraphConvTargetEnum.Paragraph));
                 }
                 else if (element is PoemItem)
@@ -59,7 +59,7 @@ namespace FB2EPubConverter.ElementConverters
                 }
             }
 
-            resAnnotation.ID.Value = Settings.ReferencesManager.AddIdUsed(annotationItem.ID, resAnnotation);
+            resAnnotation.GlobalAttributes.ID.Value = Settings.ReferencesManager.AddIdUsed(annotationItem.ID, resAnnotation);
 
             SetClassType(resAnnotation);
             return resAnnotation;

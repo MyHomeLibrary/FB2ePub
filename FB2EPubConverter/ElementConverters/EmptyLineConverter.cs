@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using XHTMLClassLibrary.BaseElements;
+﻿using XHTMLClassLibrary.BaseElements;
+using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace FB2EPubConverter.ElementConverters
 {
@@ -12,10 +9,10 @@ namespace FB2EPubConverter.ElementConverters
         /// Converts empty line FB2 element 
         /// </summary>
         /// <returns>XHTML representation</returns>
-        public IXHTMLItem Convert()
+        public IHTMLItem Convert()
         {
-            Paragraph el = new Paragraph();
-            el.Add(new SimpleEPubText { Text = "\u00A0" });
+            var el = new Paragraph();
+            el.Add(new SimpleHTML5Text { Text = "\u00A0" });
             SetClassType(el);
             return el;
         }

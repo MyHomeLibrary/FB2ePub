@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FB2Library.Elements;
+using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace FB2EPubConverter.ElementConverters
@@ -14,15 +15,15 @@ namespace FB2EPubConverter.ElementConverters
         /// </summary>
         /// <param name="subtitleItem">item to convert</param>
         /// <returns>XHTML representation</returns>
-        public IBlockElement Convert(SubTitleItem subtitleItem)
+        public IHTMLItem Convert(SubTitleItem subtitleItem)
         {
             if (subtitleItem == null)
             {
                 throw new ArgumentNullException("subtitleItem");
             }
             //Div subtitle = new Div();
-            ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
-            IBlockElement internalData = paragraphConverter.Convert(subtitleItem,ParagraphConvTargetEnum.Paragraph);
+            var paragraphConverter = new ParagraphConverter {Settings = Settings};
+            var internalData = (HTMLItem)paragraphConverter.Convert(subtitleItem, ParagraphConvTargetEnum.Paragraph);
             SetClassType(internalData);
             //subtitle.Add(internalData);
 

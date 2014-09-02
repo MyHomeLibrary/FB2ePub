@@ -164,7 +164,7 @@ namespace Fb2epubSettings
             //css3.AssignedFontFamilies.Add(family.Name);
             //_fonts.CssElements.Add(css3);
 
-            _standardVersion = EPubVersion.VePub30;
+            //_standardVersion = EPubVersion.VePub30;
             _v3SubStandard  =   EPubV3SubStandard.V30;
 
         }

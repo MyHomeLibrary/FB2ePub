@@ -8,9 +8,6 @@ using log4net;
 using FolderSettingsHelper;
 
 // Configure log4net using the .config file
-using XHTMLClassLibrary.BaseElements;
-using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
-
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace Fb2ePubGui

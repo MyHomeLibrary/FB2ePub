@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using FB2Library.Elements;
 using FB2Library.Elements.Poem;
 using XHTMLClassLibrary.BaseElements;
@@ -18,23 +16,23 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="poemItem">item to convert</param>
         /// <param name="level">"deepness" level - affects representation</param>
         /// <returns>XHTML representation</returns>
-        public  IXHTMLItem Convert(PoemItem poemItem,int level)
+        public  IHTMLItem Convert(PoemItem poemItem,int level)
         {
             if (poemItem == null)
             {
                 throw new ArgumentNullException("poemItem");
             }
-            Div poemContent = new Div();
+            var poemContent = new Div();
 
             if (poemItem.Title != null)
             {
-                PoemTitleConverter titleConverter = new PoemTitleConverter { Settings = Settings };
+                var titleConverter = new PoemTitleConverter { Settings = Settings };
                 poemContent.Add(titleConverter.Convert(poemItem.Title, level));
             }
 
             foreach (var epigraph in poemItem.Epigraphs)
             {
-                PoemEpigraphConverter epigraphConverter = new PoemEpigraphConverter { Settings = Settings };
+                var epigraphConverter = new PoemEpigraphConverter { Settings = Settings };
                 poemContent.Add(epigraphConverter.Convert(epigraph,level + 1));
             }
 
@@ -42,12 +40,12 @@ namespace FB2EPubConverter.ElementConverters
             {
                 if (poemElement is StanzaItem)
                 {
-                    StanzaConverter stanzaConverter = new StanzaConverter {Settings = Settings};
+                    var stanzaConverter = new StanzaConverter {Settings = Settings};
                     poemContent.Add(stanzaConverter.Convert(poemElement as StanzaItem, level + 1));
                 }
                 else if (poemElement is SubTitleItem)
                 {
-                    PoemSubtitleConverter subtitleConverter = new PoemSubtitleConverter { Settings = Settings };
+                    var subtitleConverter = new PoemSubtitleConverter { Settings = Settings };
                     poemContent.Add(subtitleConverter.Convert(poemElement as SubTitleItem));
                 }
             }
@@ -55,21 +53,21 @@ namespace FB2EPubConverter.ElementConverters
 
             foreach (var author in poemItem.Authors)
             {
-                PoemAuthorConverter poemAuthorConverter = new PoemAuthorConverter() { Settings = Settings };
+                var poemAuthorConverter = new PoemAuthorConverter { Settings = Settings };
                 poemContent.Add(poemAuthorConverter.Convert(author));
             }
 
             if (poemItem.Date != null)
             {
-                PoemDateConverter poemDateConverter = new PoemDateConverter {Settings = Settings};
+                var poemDateConverter = new PoemDateConverter {Settings = Settings};
                 poemContent.Add(poemDateConverter.Convert(poemItem.Date));
             }
 
-            poemContent.ID.Value = Settings.ReferencesManager.AddIdUsed(poemItem.ID, poemContent);
+            poemContent.GlobalAttributes.ID.Value = Settings.ReferencesManager.AddIdUsed(poemItem.ID, poemContent);
 
             if (poemItem.Lang != null)
             {
-                poemContent.Language.Value = poemItem.Lang;
+                poemContent.GlobalAttributes.Language.Value = poemItem.Lang;
             }
             SetClassType(poemContent);
             return poemContent;

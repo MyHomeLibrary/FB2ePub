@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FB2Library.Elements;
 using FB2Library.Elements.Poem;
 using XHTMLClassLibrary.BaseElements.BlockElements;
@@ -23,41 +20,41 @@ namespace FB2EPubConverter.ElementConverters
             {
                 throw new ArgumentNullException("epigraphItem");
             }
-            Div content = new Div();
+            var content = new Div();
 
             foreach (var element in epigraphItem.EpigraphData)
             {
                 if (element is ParagraphItem)
                 {
-                    ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
+                    var paragraphConverter = new ParagraphConverter {Settings = Settings};
                     content.Add(paragraphConverter.Convert(element as ParagraphItem,ParagraphConvTargetEnum.Paragraph));
                 }
                 if (element is PoemItem)
                 {
-                    PoemConverter poemConverter = new PoemConverter {Settings = Settings};
+                    var poemConverter = new PoemConverter {Settings = Settings};
                     content.Add(poemConverter.Convert(element as PoemItem,level + 1));
                 }
                 if (element is CiteItem)
                 {
-                    CitationConverter citationConverter = new CitationConverter {Settings = Settings};
+                    var citationConverter = new CitationConverter {Settings = Settings};
                     content.Add(citationConverter.Convert(element as CiteItem,level + 1));
                 }
                 if (element is EmptyLineItem)
                 {
-                    EmptyLineConverter emptyLineConverter = new EmptyLineConverter {Settings = Settings};
+                    var emptyLineConverter = new EmptyLineConverter {Settings = Settings};
                     content.Add(emptyLineConverter.Convert());
                 }
             }
 
             foreach (var author in epigraphItem.TextAuthors)
             {
-                EpigraphAuthorConverter epigraphAuthorConverter = new EpigraphAuthorConverter {Settings = Settings};
+                var epigraphAuthorConverter = new EpigraphAuthorConverter {Settings = Settings};
                 content.Add(epigraphAuthorConverter.Convert(author as TextAuthorItem));
             }
 
             SetClassType(content);
 
-            content.ID.Value = Settings.ReferencesManager.AddIdUsed(epigraphItem.ID, content);
+            content.GlobalAttributes.ID.Value = Settings.ReferencesManager.AddIdUsed(epigraphItem.ID, content);
 
             return content;
         }
