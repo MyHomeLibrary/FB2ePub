@@ -22,40 +22,40 @@ namespace FB2EPubConverter.ElementConverters
         /// </summary>
         /// <param name="sectionItem">item to convert</param>
         /// <returns>XHTML representation</returns>
-        public List<IXHTMLItem> Convert(SectionItem sectionItem)
+        public List<IHTMLItem> Convert(SectionItem sectionItem)
         {
             if (sectionItem == null)
             {
                 throw new ArgumentNullException("sectionItem");
             }
-            List<IXHTMLItem> resList = new List<IXHTMLItem>();
+            var resList = new List<IHTMLItem>();
             Logger.Log.Debug("Convering section");
 
-            IBlockElement content = new Div();
+            var content = new Div();
             long documentSize = 0;
 
-            content.Class.Value = string.Format("section{0}", RecursionLevel);
+            content.GlobalAttributes.Class.Value = string.Format("section{0}", RecursionLevel);
 
-            content.ID.Value = Settings.ReferencesManager.AddIdUsed(sectionItem.ID, content);
+            content.GlobalAttributes.ID.Value = Settings.ReferencesManager.AddIdUsed(sectionItem.ID, content);
 
             if (sectionItem.Lang != null)
             {
-                content.Language.Value = sectionItem.Lang;
+                content.GlobalAttributes.Language.Value = sectionItem.Lang;
             }
 
 
             // Load Title
             if (sectionItem.Title != null)
             {
-                IXHTMLItem titleItem = null;
+                IHTMLItem titleItem = null;
                 if (!LinkSection)
                 {
-                    TitleConverter titleConverter = new TitleConverter {Settings = Settings};
+                    var titleConverter = new TitleConverter {Settings = Settings};
                     titleItem = titleConverter.Convert(sectionItem.Title, RecursionLevel + 1);
                 }
                 else
                 {
-                    LinkSectionConverter linkSectionConverter = new LinkSectionConverter {Settings = Settings};
+                    var linkSectionConverter = new LinkSectionConverter {Settings = Settings};
                     titleItem = linkSectionConverter.Convert(sectionItem);
                 }
                 if (titleItem != null)
@@ -63,11 +63,11 @@ namespace FB2EPubConverter.ElementConverters
                     long itemSize = titleItem.EstimateSize();
                     if (documentSize + itemSize >= Settings.MaxSize)
                     {
-                        IBlockElement oldContent = content;
+                        var oldContent = content;
                         resList.Add(content);
                         content = new Div();
-                        content.Class.Value = oldContent.Class.Value;
-                        content.Language.Value = oldContent.Language.Value;
+                        content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
+                        content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                         documentSize = 0;
                     }
                     if (itemSize < Settings.MaxSize) // if we can "fit" element into a max size XHTML document
@@ -84,11 +84,11 @@ namespace FB2EPubConverter.ElementConverters
                                 itemSize = splitedItem.EstimateSize();
                                 if (documentSize + itemSize >= Settings.MaxSize)
                                 {
-                                    IBlockElement oldContent = content;
+                                    var oldContent = content;
                                     resList.Add(content);
                                     content = new Div();
-                                    content.Class.Value = oldContent.Class.Value;
-                                    content.Language.Value = oldContent.Language.Value;
+                                    content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
+                                    content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                                     documentSize = 0;
                                 }
                                 if (itemSize < Settings.MaxSize) // if we can "fit" element into a max size XHTML document
@@ -106,16 +106,16 @@ namespace FB2EPubConverter.ElementConverters
             foreach (var epigraph in sectionItem.Epigraphs)
             {
 
-                EpigraphConverter epigraphConverter = new EpigraphConverter {Settings = Settings};
-                IXHTMLItem epigraphItem = epigraphConverter.Convert(epigraph,RecursionLevel + 1);
+                var epigraphConverter = new EpigraphConverter {Settings = Settings};
+                IHTMLItem epigraphItem = epigraphConverter.Convert(epigraph,RecursionLevel + 1);
                 long itemSize = epigraphItem.EstimateSize();
                 if (documentSize + itemSize >= Settings.MaxSize)
                 {
-                    IBlockElement oldContent = content;
+                    var oldContent = content;
                     resList.Add(content);
                     content = new Div();
-                    content.Class.Value = oldContent.Class.Value;
-                    content.Language.Value = oldContent.Language.Value;
+                    content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
+                    content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                     documentSize = 0;
                 }
                 if (itemSize < Settings.MaxSize) // if we can "fit" element into a max size XHTML document
@@ -132,11 +132,11 @@ namespace FB2EPubConverter.ElementConverters
                             itemSize = splitedItem.EstimateSize();
                             if (documentSize + itemSize >= Settings.MaxSize)
                             {
-                                IBlockElement oldContent = content;
+                                var oldContent = content;
                                 resList.Add(content);
                                 content = new Div();
-                                content.Class.Value = oldContent.Class.Value;
-                                content.Language.Value = oldContent.Language.Value;
+                                content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
+                                content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                                 documentSize = 0;
                             }
                             if (itemSize < Settings.MaxSize) // if we can "fit" element into a max size XHTML document
@@ -158,29 +158,29 @@ namespace FB2EPubConverter.ElementConverters
                     {
                         if (Settings.Images.IsImageIdReal(sectionImage.HRef))
                         {
-                            Div container = new Div();
-                            Image sectionImagemage = new Image();
+                            var container = new Div();
+                            var sectionImagemage = new Image();
                             if (sectionImage.AltText != null)
                             {
                                 sectionImagemage.Alt.Value = sectionImage.AltText;
                             }
                             sectionImagemage.Source.Value = Settings.ReferencesManager.AddImageRefferenced(sectionImage, sectionImagemage);
-                            sectionImagemage.ID.Value = Settings.ReferencesManager.AddIdUsed(sectionImage.ID,
+                            sectionImagemage.GlobalAttributes.ID.Value = Settings.ReferencesManager.AddIdUsed(sectionImage.ID,
                                                                                     sectionImagemage);
                             if (sectionImage.Title != null)
                             {
-                                sectionImagemage.Title.Value = sectionImage.Title;
+                                sectionImagemage.GlobalAttributes.Title.Value = sectionImage.Title;
                             }
-                            container.Class.Value = "section_image";
+                            container.GlobalAttributes.Class.Value = "section_image";
                             container.Add(sectionImagemage);
                             long itemSize = container.EstimateSize();
                             if (documentSize + itemSize >= Settings.MaxSize)
                             {
-                                IBlockElement oldContent = content;
+                                var oldContent = content;
                                 resList.Add(content);
                                 content = new Div();
-                                content.Class.Value = oldContent.Class.Value;
-                                content.Language.Value = oldContent.Language.Value;
+                                content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
+                                content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                                 documentSize = 0;
                             }
                             documentSize += itemSize;
@@ -195,16 +195,16 @@ namespace FB2EPubConverter.ElementConverters
             // Load annotations
             if (sectionItem.Annotation != null)
             {
-                AnnotationConverter annotationConverter = new AnnotationConverter {Settings = Settings};
-                IXHTMLItem annotationItem = annotationConverter.Convert(sectionItem.Annotation,RecursionLevel + 1);
+                var annotationConverter = new AnnotationConverter {Settings = Settings};
+                IHTMLItem annotationItem = annotationConverter.Convert(sectionItem.Annotation,RecursionLevel + 1);
                 long itemSize = annotationItem.EstimateSize();
                 if (documentSize + itemSize >= Settings.MaxSize)
                 {
-                    IBlockElement oldContent = content;
+                    var oldContent = content;
                     resList.Add(content);
                     content = new Div();
-                    content.Class.Value = oldContent.Class.Value;
-                    content.Language.Value = oldContent.Language.Value;
+                    content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
+                    content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                     documentSize = 0;
                 }
                 if (itemSize < Settings.MaxSize) // if we can "fit" element into a max size XHTML document
@@ -221,11 +221,11 @@ namespace FB2EPubConverter.ElementConverters
                             itemSize = splitedItem.EstimateSize();
                             if (documentSize + itemSize >= Settings.MaxSize)
                             {
-                                IBlockElement oldContent = content;
+                                var oldContent = content;
                                 resList.Add(content);
                                 content = new Div();
-                                content.Class.Value = oldContent.Class.Value;
-                                content.Language.Value = oldContent.Language.Value;
+                                content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
+                                content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                                 documentSize = 0;
                             }
                             if (itemSize < Settings.MaxSize) // if we can "fit" element into a max size XHTML document
@@ -244,50 +244,50 @@ namespace FB2EPubConverter.ElementConverters
                 bool startSection = true;
                 foreach (var item in sectionItem.Content)
                 {
-                    IXHTMLItem newItem = null;
+                    IHTMLItem newItem = null;
                     if (item is SubTitleItem)
                     {
-                        SubtitleConverter subtitleConverter = new SubtitleConverter {Settings = Settings};
+                        var subtitleConverter = new SubtitleConverter {Settings = Settings};
                         newItem = subtitleConverter.Convert(item as SubTitleItem);
                     }
                     else if (item is ParagraphItem)
                     {
-                        ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
+                        var paragraphConverter = new ParagraphConverter {Settings = Settings};
                         newItem = paragraphConverter.Convert(item as ParagraphItem,ParagraphConvTargetEnum.Paragraph, startSection);
                         startSection = false;
                     }
                     else if (item is PoemItem)
                     {
-                        PoemConverter poemConverter = new PoemConverter {Settings = Settings};
+                        var poemConverter = new PoemConverter {Settings = Settings};
                         newItem = poemConverter.Convert(item as PoemItem,RecursionLevel + 1);
                     }
                     else if (item is CiteItem)
                     {
-                        CitationConverter citationConverter = new CitationConverter {Settings = Settings};
+                        var citationConverter = new CitationConverter {Settings = Settings};
                         newItem = citationConverter.Convert(item as CiteItem,RecursionLevel + 1);
                     }
                     else if (item is EmptyLineItem)
                     {
-                        EmptyLineConverter emptyLineConverter = new EmptyLineConverter();
+                        var emptyLineConverter = new EmptyLineConverter();
                         newItem = emptyLineConverter.Convert();
                     }
                     else if (item is TableItem)
                     {
-                        TableConverter tableConverter = new TableConverter {Settings = Settings};
+                        var tableConverter = new TableConverter {Settings = Settings};
                         newItem = tableConverter.Convert(item as TableItem);
                     }
                     else if ((item is ImageItem) && Settings.Images.HasRealImages())
                     {
-                        ImageItem fb2Img = item as ImageItem;
+                        var fb2Img = item as ImageItem;
                         // if it's not section image and it's used
                         if ((sectionItem.SectionImages.Find(x => x == fb2Img) == null) && (fb2Img.HRef != null))
                         {
                             if (Settings.Images.IsImageIdReal(fb2Img.HRef))
                             {
-                                Div enclosing = new Div(); // we use the enclosing so the user can style center it
-                                ImageConverter imageConverter = new ImageConverter {Settings = Settings};
+                                var enclosing = new Div(); // we use the enclosing so the user can style center it
+                                var imageConverter = new ImageConverter {Settings = Settings};
                                 enclosing.Add(imageConverter.Convert(fb2Img));
-                                enclosing.Class.Value = "normal_image";
+                                enclosing.GlobalAttributes.Class.Value = "normal_image";
                                 newItem = enclosing;
                             }
                         }
@@ -297,11 +297,11 @@ namespace FB2EPubConverter.ElementConverters
                         long itemSize = newItem.EstimateSize();
                         if (documentSize + itemSize >= Settings.MaxSize)
                         {
-                            IBlockElement oldContent = content;
+                            var oldContent = content;
                             resList.Add(content);
                             content = new Div();
-                            content.Class.Value = oldContent.Class.Value;
-                            content.Language.Value = oldContent.Language.Value;
+                            content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
+                            content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                             documentSize = 0;
                         }
                         if (itemSize < Settings.MaxSize) // if we can "fit" element into a max size XHTML document
@@ -318,11 +318,11 @@ namespace FB2EPubConverter.ElementConverters
                                     itemSize = splitedItem.EstimateSize();
                                     if (documentSize + itemSize >= Settings.MaxSize)
                                     {
-                                        IBlockElement oldContent = content;
+                                        var oldContent = content;
                                         resList.Add(content);
                                         content = new Div();
-                                        content.Class.Value = oldContent.Class.Value;
-                                        content.Language.Value = oldContent.Language.Value;
+                                        content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
+                                        content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                                         documentSize = 0;
                                     }
                                     if (itemSize < Settings.MaxSize) // if we can "fit" element into a max size XHTML document
@@ -341,12 +341,12 @@ namespace FB2EPubConverter.ElementConverters
             return resList;          
         }
 
-        private List<IXHTMLItem> SplitDiv(Div div, long documentSize)
+        private List<IHTMLItem> SplitDiv(Div div, long documentSize)
         {
-            List<IXHTMLItem> resList = new List<IXHTMLItem>();
+            var resList = new List<IHTMLItem>();
             long newDocumentSize = documentSize;
-            Div container = new Div();
-            container.ID.Value = div.ID.Value;
+            var container = new Div();
+            container.GlobalAttributes.ID.Value = div.GlobalAttributes.ID.Value;
             foreach (var element in div.SubElements())
             {
                 long elementSize = element.EstimateSize();
@@ -354,8 +354,8 @@ namespace FB2EPubConverter.ElementConverters
                 {
                     resList.Add(container);
                     container = new Div();
-                    container.Class.Value = div.Class.Value;
-                    container.Language.Value = div.Language.Value;
+                    container.GlobalAttributes.Class.Value = div.GlobalAttributes.Class.Value;
+                    container.GlobalAttributes.Language.Value = div.GlobalAttributes.Language.Value;
                     newDocumentSize = 0;
                 }
                 if (elementSize < Settings.MaxSize)

@@ -16,7 +16,7 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="stanzaItem">item to convert</param>
         /// <param name="level">"deepness" level</param>
         /// <returns>XHTML representation</returns>
-        public IXHTMLItem Convert(StanzaItem stanzaItem,int level)
+        public IHTMLItem Convert(StanzaItem stanzaItem,int level)
         {
             if (stanzaItem == null)
             {
@@ -44,7 +44,7 @@ namespace FB2EPubConverter.ElementConverters
 
             if (stanzaItem.Lang != null)
             {
-                stanzaSection.Language.Value = stanzaItem.Lang;
+                stanzaSection.GlobalAttributes.Language.Value = stanzaItem.Lang;
             }
 
             SetClassType(stanzaSection);

@@ -14,9 +14,9 @@ namespace FB2EPubConverter.ElementConverters
 
         abstract public  string GetElementType();
 
-        protected void SetClassType(IBlockElement item)
+        protected void SetClassType(HTMLItem item)
         {
-            item.Class.Value = GetElementType();
+            item.GlobalAttributes.Class.Value = GetElementType();
         }
     }
 }

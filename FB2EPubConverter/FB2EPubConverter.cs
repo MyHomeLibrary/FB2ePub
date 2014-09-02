@@ -902,7 +902,7 @@ namespace Fb2ePubConverter
 
                     ImageConverter imageConverter = new ImageConverter { Settings = converterSettings };
                     enclosing.Add(imageConverter.Convert(fb2File.MainBody.ImageName));
-                    enclosing.Class.Value = "body_image";
+                    enclosing.GlobalAttributes.Class.Value = "body_image";
                     mainDocument.Content.Add(enclosing);
                 }
 
@@ -919,7 +919,7 @@ namespace Fb2ePubConverter
                     mainDocument.NavigationParent = null;
                     mainDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
                 }
-                ConverterOptions converterSettings = new ConverterOptions
+                var converterSettings = new ConverterOptions
                 {
                     CapitalDrop = Settings.CapitalDrop,
                     Images = images,
@@ -927,7 +927,7 @@ namespace Fb2ePubConverter
                     ReferencesManager = referencesManager,
                 };
 
-                MainEpigraphConverter epigraphConverter = new MainEpigraphConverter { Settings = converterSettings };
+                var epigraphConverter = new MainEpigraphConverter { Settings = converterSettings };
                 mainDocument.Content.Add(epigraphConverter.Convert(ep,1));
             }
 
@@ -972,14 +972,14 @@ namespace Fb2ePubConverter
             sectionDocument.Content = new Div();
             if (bodyItem.Title != null)
             {
-                ConverterOptions converterSettings = new ConverterOptions
+                var converterSettings = new ConverterOptions
                 {
                     CapitalDrop = false,
                     Images = images,
                     MaxSize = MaxSize,
                     ReferencesManager = referencesManager,
                 };
-                TitleConverter titleConverter = new TitleConverter { Settings = converterSettings };
+                var titleConverter = new TitleConverter { Settings = converterSettings };
                 sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title, 1));
             }
             sectionDocument.NavigationParent = null;
@@ -1019,14 +1019,14 @@ namespace Fb2ePubConverter
             sectionDocument.Content = new Div();
             if (bodyItem.Title != null)
             {
-                ConverterOptions converterSettings = new ConverterOptions
+                var converterSettings = new ConverterOptions
                 {
                     CapitalDrop = Settings.CapitalDrop,
                     Images = images,
                     MaxSize = MaxSize,
                     ReferencesManager = referencesManager,
                 };
-                TitleConverter titleConverter = new TitleConverter {Settings = converterSettings};
+                var titleConverter = new TitleConverter {Settings = converterSettings};
                 sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,1));
             }
             sectionDocument.NavigationParent = null;
@@ -1131,7 +1131,7 @@ namespace Fb2ePubConverter
 
             Logger.Log.Debug("Passing header data from FB2 to EPUB");
             // cReate new Title page
-            epubFile.TitlePage = new TitlePageFile(Settings.StandardVersion == EPubVersion.VEpub20 ? XHTMRulesEnum.EPUBCompatible : XHTMRulesEnum.EPUBV3Compatible);
+            epubFile.TitlePage = new TitlePageFile(Settings.StandardVersion == EPubVersion.VEpub20 ? HTMLElementType.XHTML11 : HTMLElementType.HTML5);
 
             // in case main body title is not defined (empty) 
             if ((fb2File.TitleInfo != null) && (fb2File.TitleInfo.BookTitle != null))
@@ -1182,7 +1182,7 @@ namespace Fb2ePubConverter
                 if (fb2File.TitleInfo.Annotation != null)
                 {
                     epubFile.Title.Description = fb2File.TitleInfo.Annotation.ToString();
-                    epubFile.AnnotationPage = new AnnotationPageFile(Settings.StandardVersion == EPubVersion.VEpub20?XHTMRulesEnum.EPUBCompatible:XHTMRulesEnum.EPUBV3Compatible);
+                    epubFile.AnnotationPage = new AnnotationPageFile(Settings.StandardVersion == EPubVersion.VEpub20 ? HTMLElementType.XHTML11 : HTMLElementType.HTML5);
                     ConverterOptions converterSettings = new ConverterOptions
                     {
                         CapitalDrop = Settings.CapitalDrop,

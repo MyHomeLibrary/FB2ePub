@@ -27,7 +27,9 @@ namespace XHTMLClassLibrary.Attributes
             {
                 return;
             }
-            xElement.Add(new XAttribute(ns + GetAttributeName(), _putValue?GetAttributeName():string.Empty));
+            xElement.Add(ns != null
+                ? new XAttribute(ns + GetAttributeName(), _putValue ? GetAttributeName() : string.Empty)
+                : new XAttribute(GetAttributeName(), _putValue ? GetAttributeName() : string.Empty));
         }
 
         public override void ReadAttribute(XElement element)

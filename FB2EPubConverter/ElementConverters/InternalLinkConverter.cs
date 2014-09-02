@@ -1,32 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using EPubLibrary.ReferenceUtils;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
-using XHTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace FB2EPubConverter.ElementConverters
 {
     internal class InternalLinkConverter : BaseElementConverter
     {
-
         /// <summary>
         /// Convert FB2 internal link 
         /// </summary>
         /// <param name="internalLinkItem">item to convert</param>
+        /// <param name="needToInsertDrop"></param>
         /// <returns>XHTML representation</returns>
-        public List<IXHTMLItem> Convert(InternalLinkItem internalLinkItem, bool needToInsertDrop)
+        public List<IHTMLItem> Convert(InternalLinkItem internalLinkItem, bool needToInsertDrop)
         {
             if (internalLinkItem == null)
             {
                 throw new ArgumentNullException("internalLinkItem");
             }
-            List<IXHTMLItem> list = new List<IXHTMLItem>();
+            var list = new List<IHTMLItem>();
             if (!string.IsNullOrEmpty(internalLinkItem.HRef) && internalLinkItem.HRef != "#")
             {
-                Anchor anchor = new Anchor();
+                var anchor = new Anchor();
                 bool internalLink = false;
                 if (!ReferencesUtils.IsExternalLink(internalLinkItem.HRef))
                 {
@@ -44,17 +42,17 @@ namespace FB2EPubConverter.ElementConverters
                 }
                 if (internalLinkItem.LinkText != null)
                 {
-                    SimpleTextElementConverter tempConverter = new SimpleTextElementConverter {Settings = Settings};
+                    var tempConverter = new SimpleTextElementConverter {Settings = Settings};
                     foreach (var s in tempConverter.Convert(internalLinkItem.LinkText,needToInsertDrop))
                     {
                         s.Parent = anchor;
-                        anchor.Content.Add(s);
+                        anchor.InternalTextItem.Add(s);
                     }
                 }
                 list.Add(anchor);
                 return list;
             }
-            SimpleTextElementConverter converter = new SimpleTextElementConverter {Settings = Settings};
+            var converter = new SimpleTextElementConverter {Settings = Settings};
             return converter.Convert(internalLinkItem.LinkText,needToInsertDrop);
         }
 

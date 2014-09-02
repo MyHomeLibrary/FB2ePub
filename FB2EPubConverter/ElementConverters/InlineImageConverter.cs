@@ -15,13 +15,13 @@ namespace FB2EPubConverter.ElementConverters
         /// Converts FB2 inline image
         /// </summary>
         /// <returns></returns>
-        public IXHTMLItem Convert(InlineImageItem inlineImageItem)
+        public IHTMLItem Convert(InlineImageItem inlineImageItem)
         {
             if (inlineImageItem == null)
             {
                 throw new ArgumentNullException("inlineImageItem");
             }
-            Image img = new Image();
+            var img = new Image();
             if (inlineImageItem.AltText != null)
             {
                 img.Alt.Value = inlineImageItem.AltText;
@@ -29,7 +29,7 @@ namespace FB2EPubConverter.ElementConverters
 
             img.Source.Value = Settings.ReferencesManager.AddImageRefferenced(inlineImageItem, img);
 
-            img.Class.Value = "int_image";
+            img.GlobalAttributes.Class.Value = "int_image";
             return img;
         }
 

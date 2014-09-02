@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
@@ -27,7 +24,7 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="paragraphItem">item to convert</param>
         /// <param name="resultType">type of the resulting block container in EPUB</param>
         /// <returns></returns>
-        public IBlockElement Convert(ParagraphItem paragraphItem,ParagraphConvTargetEnum resultType)
+        public HTMLItem Convert(ParagraphItem paragraphItem,ParagraphConvTargetEnum resultType)
         {
             return Convert(paragraphItem,resultType, false);
         }
@@ -39,26 +36,26 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="resultType">type of the resulting block container in EPUB</param>
         /// <param name="startSection"> if this is a first paragraph in section</param>
         /// <returns></returns>
-        public  IBlockElement Convert(ParagraphItem paragraphItem,ParagraphConvTargetEnum resultType, bool startSection)
+        public  HTMLItem Convert(ParagraphItem paragraphItem,ParagraphConvTargetEnum resultType, bool startSection)
         {
             if (paragraphItem == null)
             {
                 throw new ArgumentNullException("paragraphItem");
             }
-            IBlockElement paragraph = CreateBlock(resultType);
+            var paragraph = CreateBlock(resultType);
             bool needToInsertDrop = Settings.CapitalDrop && startSection;
 
             foreach (var item in paragraphItem.ParagraphData)
             {
                 if (item is SimpleText)
                 {
-                    SimpleTextElementConverter textConverter = new SimpleTextElementConverter {Settings = Settings};
+                    var textConverter = new SimpleTextElementConverter {Settings = Settings};
                     foreach (var s in textConverter.Convert(item,needToInsertDrop))
                     {
                         if (needToInsertDrop)
                         {
                             needToInsertDrop = false;
-                            paragraph.Class.Value = "drop";
+                            paragraph.GlobalAttributes.Class.Value = "drop";
                         }
                         paragraph.Add(s);
                     }
@@ -68,10 +65,10 @@ namespace FB2EPubConverter.ElementConverters
                     // if no image data - do not insert link
                     if (Settings.Images.HasRealImages())
                     {
-                        InlineImageItem inlineItem = item as InlineImageItem;
+                        var inlineItem = item as InlineImageItem;
                         if (Settings.Images.IsImageIdReal(inlineItem.HRef))
                         {
-                            InlineImageConverter inlineImageConverter = new InlineImageConverter {Settings = Settings};
+                            var inlineImageConverter = new InlineImageConverter {Settings = Settings};
                             paragraph.Add(inlineImageConverter.Convert(inlineItem));
                         }
                         Settings.Images.ImageIdUsed(inlineItem.HRef);
@@ -83,13 +80,13 @@ namespace FB2EPubConverter.ElementConverters
                 }
                 else if (item is InternalLinkItem)
                 {
-                    InternalLinkConverter internalLinkConverter = new InternalLinkConverter {Settings = Settings};
+                    var internalLinkConverter = new InternalLinkConverter {Settings = Settings};
                     foreach (var s in internalLinkConverter.Convert(item as InternalLinkItem, needToInsertDrop))
                     {
                         if (needToInsertDrop)
                         {
                             needToInsertDrop = false;
-                            paragraph.Class.Value = "drop";
+                            paragraph.GlobalAttributes.Class.Value = "drop";
                         }
                         paragraph.Add(s);
                     }
@@ -97,7 +94,7 @@ namespace FB2EPubConverter.ElementConverters
             }
 
             //SetClassType(paragraph);
-            paragraph.ID.Value = Settings.ReferencesManager.AddIdUsed(paragraphItem.ID, paragraph);
+            paragraph.GlobalAttributes.ID.Value = Settings.ReferencesManager.AddIdUsed(paragraphItem.ID, paragraph);
 
             return paragraph;
         }
@@ -107,9 +104,9 @@ namespace FB2EPubConverter.ElementConverters
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        private static IBlockElement CreateBlock(ParagraphConvTargetEnum type)
+        private static HTMLItem CreateBlock(ParagraphConvTargetEnum type)
         {
-            IBlockElement paragraph;
+            HTMLItem paragraph;
             switch (type)
             {
                 case ParagraphConvTargetEnum.H1:

@@ -5,7 +5,7 @@ using FB2Library;
 using FB2Library.HeaderItems;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
-using XHTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 using XHTMLClassLibrary.BaseElements.ListElements;
 
 namespace FB2EPubConverter.ElementConverters
@@ -15,94 +15,94 @@ namespace FB2EPubConverter.ElementConverters
     /// </summary>
     internal class Fb2EpubInfoConverter : BaseElementConverter
     {
-        public IXHTMLItem ConvertInfo(FB2File fb2File)
+        public IHTMLItem ConvertInfo(FB2File fb2File)
         {
-            Div info = new Div();
-            H3 header = new H3();
-            header.Add(new SimpleEPubText() { Text = "FB2 document info"});
+            var info = new Div();
+            var header = new H3();
+            header.Add(new SimpleHTML5Text { Text = "FB2 document info"});
             info.Add(header);
             if (fb2File.DocumentInfo != null)
             {
                 if ( !string.IsNullOrEmpty(fb2File.DocumentInfo.ID) )
                 {
-                    Paragraph p = new Paragraph();
-                    p.Add(new SimpleEPubText() { Text = string.Format("Document ID:  {0}", fb2File.DocumentInfo.ID) });
+                    var p = new Paragraph();
+                    p.Add(new SimpleHTML5Text { Text = string.Format("Document ID:  {0}", fb2File.DocumentInfo.ID) });
                     info.Add(p);
                 }
                 if (fb2File.DocumentInfo.DocumentVersion.HasValue)
                 {
-                    Paragraph p = new Paragraph();
-                    p.Add(new SimpleEPubText() { Text = string.Format("Document version:  {0}", fb2File.DocumentInfo.DocumentVersion) });
+                    var p = new Paragraph();
+                    p.Add(new SimpleHTML5Text { Text = string.Format("Document version:  {0}", fb2File.DocumentInfo.DocumentVersion) });
                     info.Add(p);                    
                 }
                 if ((fb2File.DocumentInfo.DocumentDate != null) && !string.IsNullOrEmpty(fb2File.DocumentInfo.DocumentDate.Text))
                 {
-                    Paragraph p = new Paragraph();
-                    p.Add(new SimpleEPubText() { Text = string.Format("Document creation date:  {0}", fb2File.DocumentInfo.DocumentDate.Text) });
+                    var p = new Paragraph();
+                    p.Add(new SimpleHTML5Text { Text = string.Format("Document creation date:  {0}", fb2File.DocumentInfo.DocumentDate.Text) });
                     info.Add(p);
                 }
                 if ( (fb2File.DocumentInfo.ProgramUsed2Create != null) && !string.IsNullOrEmpty(fb2File.DocumentInfo.ProgramUsed2Create.Text) )
                 {
-                    Paragraph p = new Paragraph();
-                    p.Add(new SimpleEPubText() { Text = string.Format("Created using:  {0} software", fb2File.DocumentInfo.ProgramUsed2Create.Text) });
+                    var p = new Paragraph();
+                    p.Add(new SimpleHTML5Text { Text = string.Format("Created using:  {0} software", fb2File.DocumentInfo.ProgramUsed2Create.Text) });
                     info.Add(p);                    
                 }
                 if ((fb2File.DocumentInfo.SourceOCR != null) && !string.IsNullOrEmpty(fb2File.DocumentInfo.SourceOCR.Text))
                 {
-                    Paragraph p = new Paragraph();
-                    p.Add(new SimpleEPubText() { Text = string.Format("OCR Source:  {0}", fb2File.DocumentInfo.SourceOCR.Text) });
+                    var p = new Paragraph();
+                    p.Add(new SimpleHTML5Text { Text = string.Format("OCR Source:  {0}", fb2File.DocumentInfo.SourceOCR.Text) });
                     info.Add(p);                                        
                 }
                 if ((fb2File.DocumentInfo.DocumentAuthors != null) && (fb2File.DocumentInfo.DocumentAuthors.Count > 0))
                 {
-                    H4 heading = new H4();
-                    heading.Add(new SimpleEPubText() { Text = "Document authors :" });
+                    var heading = new H4();
+                    heading.Add(new SimpleHTML5Text { Text = "Document authors :" });
                     info.Add(heading);
-                    UnorderedList authors = new UnorderedList() ;
+                    var authors = new UnorderedList() ;
                     foreach (var author in fb2File.DocumentInfo.DocumentAuthors)
                     {
-                        ListItem li = new ListItem();
-                        li.Add(new SimpleEPubText() { Text = GetAuthorAsSting(author)});
+                        var li = new ListItem();
+                        li.Add(new SimpleHTML5Text { Text = GetAuthorAsSting(author)});
                         authors.Add(li);
                     }
                     info.Add(authors);
                 }
                 if ((fb2File.DocumentInfo.DocumentPublishers != null) && (fb2File.DocumentInfo.DocumentPublishers.Count > 0))
                 {
-                    H4 heading = new H4();
-                    heading.Add(new SimpleEPubText() { Text = "Document publishers :" });
+                    var heading = new H4();
+                    heading.Add(new SimpleHTML5Text { Text = "Document publishers :" });
                     info.Add(heading);
 
-                    UnorderedList publishers = new UnorderedList();
+                    var publishers = new UnorderedList();
                     foreach (var publisher in fb2File.DocumentInfo.DocumentPublishers)
                     {
-                        ListItem li = new ListItem();
-                        li.Add(new SimpleEPubText() { Text = GetAuthorAsSting(publisher) });
+                        var li = new ListItem();
+                        li.Add(new SimpleHTML5Text { Text = GetAuthorAsSting(publisher) });
                         publishers.Add(li);
                     }
                     info.Add(publishers);
                 }
 
-                if ((fb2File.DocumentInfo.SourceURLs != null) && (fb2File.DocumentInfo.SourceURLs.Count() > 0))
+                if ((fb2File.DocumentInfo.SourceURLs != null) && (fb2File.DocumentInfo.SourceURLs.Any()))
                 {
-                    H4 heading = new H4();
-                    heading.Add(new SimpleEPubText() { Text = "Source URLs :" });
+                    var heading = new H4();
+                    heading.Add(new SimpleHTML5Text { Text = "Source URLs :" });
                     info.Add(heading);
 
-                    UnorderedList urls = new UnorderedList();
+                    var urls = new UnorderedList();
                     foreach (var url in fb2File.DocumentInfo.SourceURLs)
                     {
-                        ListItem li = new ListItem();
+                        var li = new ListItem();
                         if (ReferencesUtils.IsExternalLink(url))
                         {
-                            Anchor link = new Anchor();
+                            var link = new Anchor();
                             link.HRef.Value = url;
-                            link.Add(new SimpleEPubText() {Text = url});
+                            link.Add(new SimpleHTML5Text {Text = url});
                             li.Add(link);
                         }
                         else
                         {
-                            li.Add(new SimpleEPubText() { Text = url });
+                            li.Add(new SimpleHTML5Text { Text = url });
                         }
                         urls.Add(li);
                     }
@@ -111,13 +111,13 @@ namespace FB2EPubConverter.ElementConverters
 
                 if (fb2File.DocumentInfo.History != null)
                 {
-                    H4 heading = new H4();
-                    heading.Add(new SimpleEPubText() { Text = "Document history:" });
+                    var heading = new H4();
+                    heading.Add(new SimpleHTML5Text { Text = "Document history:" });
                     info.Add(heading);
-                    AnnotationConverter annotationConverter = new AnnotationConverter {Settings = Settings};
+                    var annotationConverter = new AnnotationConverter {Settings = Settings};
                     info.Add(annotationConverter.Convert(fb2File.DocumentInfo.History,1));
                     //Paragraph p = new Paragraph();
-                    //p.Add(new SimpleEPubText() { Text = fb2File.DocumentInfo.History.ToString() });
+                    //p.Add(new SimpleHTML5Text() { Text = fb2File.DocumentInfo.History.ToString() });
                     //info.Add(p);                                                            
                 }
             }
@@ -128,13 +128,13 @@ namespace FB2EPubConverter.ElementConverters
                 info.Remove(header);
             }
 
-            info.Class.Value = "fb2_info";
+            info.GlobalAttributes.Class.Value = "fb2_info";
             return info;
         }
 
         private static string GetAuthorAsSting(AuthorType author)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             if ((author.FirstName != null) && !string.IsNullOrEmpty(author.FirstName.Text))
             {
                 sb.AppendFormat("{0} ", author.FirstName.Text);
@@ -152,14 +152,7 @@ namespace FB2EPubConverter.ElementConverters
 
             if ((author.NickName != null) && !string.IsNullOrEmpty(author.NickName.Text))
             {
-                if (sb.Length == 0)
-                {
-                    sb.AppendFormat("{0} ", author.NickName.Text);
-                }
-                else
-                {
-                    sb.AppendFormat("({0}) ", author.NickName.Text);
-                }
+                sb.AppendFormat(sb.Length == 0 ? "{0} " : "({0}) ", author.NickName.Text);
             }
 
             if ((author.UID != null) && !string.IsNullOrEmpty(author.UID.Text))

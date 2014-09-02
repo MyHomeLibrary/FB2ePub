@@ -236,14 +236,19 @@ namespace XHTMLClassLibrary.BaseElements
         public virtual XNode Generate()
         {
             string currentObjectElementName = GetObjectElementName();
-            XNamespace namespaceElm = XNamespace.None;
+            XElement xElement = null;
             if (IsXMLFormat(_htmlStandard))
             {
-                namespaceElm = @"http://www.w3.org/1999/xhtml";
+                XNamespace namespaceElm = @"http://www.w3.org/1999/xhtml";
+                xElement = new XElement(namespaceElm + currentObjectElementName);
+                AddAttributes(xElement, namespaceElm);
             }
-            var xElement = new XElement(namespaceElm + currentObjectElementName);
+            else
+            {
+                xElement = new XElement(currentObjectElementName);
+                AddAttributes(xElement,null);
+            }
 
-            AddAttributes(xElement,namespaceElm);
 
             foreach (var item in Subitems)
             {

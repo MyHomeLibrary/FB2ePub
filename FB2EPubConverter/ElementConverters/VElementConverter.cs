@@ -14,14 +14,14 @@ namespace FB2EPubConverter.ElementConverters
         /// Converts "v" (poem) sub-element
         /// </summary>
         /// <returns>XHTML formated representation</returns>
-        public IXHTMLItem Convert(VPoemParagraph paragraphItem)
+        public IHTMLItem Convert(VPoemParagraph paragraphItem)
         {
             if (paragraphItem == null)
             {
                 throw new ArgumentNullException("paragraphItem");
             }
-            ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings,};
-            IBlockElement item = paragraphConverter.Convert(paragraphItem,ParagraphConvTargetEnum.Paragraph);
+            var paragraphConverter = new ParagraphConverter {Settings = Settings,};
+            var item = paragraphConverter.Convert(paragraphItem,ParagraphConvTargetEnum.Paragraph);
 
             SetClassType(item);
 

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Fb2ePubConverter;
 using FB2Library.Elements.Table;
 using XHTMLClassLibrary.BaseElements;
@@ -13,7 +10,7 @@ namespace FB2EPubConverter.ElementConverters
     internal class RowConverter : BaseElementConverter
     {
 
-        public IXHTMLItem Convert(TableRowItem tableRowItem)
+        public IHTMLItem Convert(TableRowItem tableRowItem)
         {
             if (tableRowItem == null)
             {
@@ -25,10 +22,10 @@ namespace FB2EPubConverter.ElementConverters
             {
                 if (element is TableHeadingItem)
                 {
-                    TableHeadingItem th = element as TableHeadingItem;
-                    HeaderCell cell = new HeaderCell();
-                    ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
-                    IBlockElement cellData = paragraphConverter.Convert(th,ParagraphConvTargetEnum.Paragraph);
+                    var th = element as TableHeadingItem;
+                    var cell = new TableHeaderCell();
+                    var paragraphConverter = new ParagraphConverter {Settings = Settings};
+                    var cellData = paragraphConverter.Convert(th,ParagraphConvTargetEnum.Paragraph);
                     if (cellData.SubElements() != null)
                     {
                         foreach (var subElement in cellData.SubElements())
@@ -40,7 +37,7 @@ namespace FB2EPubConverter.ElementConverters
                     {
                         cell.Add(cellData);
                     }
-                    //cell.Add(new SimpleEPubText { Text = th.Text });
+                    //cell.Add(new SimpleHTML5Text { Text = th.Text });
                     if (th.ColSpan.HasValue)
                     {
                         cell.ColSpan.Value = th.ColSpan.ToString();
@@ -64,23 +61,23 @@ namespace FB2EPubConverter.ElementConverters
                     switch (th.VAlign)
                     {
                         case TableVAlignmentsEnum.Top:
-                            cell.VerticalAlign.Value = "top";
+                            cell.VAlign.Value = "top";
                             break;
                         case TableVAlignmentsEnum.Middle:
-                            cell.VerticalAlign.Value = "middle";
+                            cell.VAlign.Value = "middle";
                             break;
                         case TableVAlignmentsEnum.Bottom:
-                            cell.VerticalAlign.Value = "bottom";
+                            cell.VAlign.Value = "bottom";
                             break;
                     }
                     tableRow.Add(cell);
                 }
                 else if (element is TableCellItem)
                 {
-                    TableCellItem td = element as TableCellItem;
-                    TableData cell = new TableData();
-                    ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
-                    IBlockElement cellData = paragraphConverter.Convert(td,ParagraphConvTargetEnum.Paragraph);
+                    var td = element as TableCellItem;
+                    var cell = new TableData();
+                    var paragraphConverter = new ParagraphConverter {Settings = Settings};
+                    var cellData = paragraphConverter.Convert(td,ParagraphConvTargetEnum.Paragraph);
                     if (cellData.SubElements() != null)
                     {
                         foreach (var subElement in cellData.SubElements())
@@ -92,7 +89,7 @@ namespace FB2EPubConverter.ElementConverters
                     {
                         cell.Add(cellData);
                     }
-                    //cell.Add(new SimpleEPubText { Text = td.Text });
+                    //cell.Add(new SimpleHTML5Text { Text = td.Text });
                     if (td.ColSpan.HasValue)
                     {
                         cell.ColSpan.Value = td.ColSpan.ToString();
@@ -116,13 +113,13 @@ namespace FB2EPubConverter.ElementConverters
                     switch (td.VAlign)
                     {
                         case TableVAlignmentsEnum.Top:
-                            cell.VerticalAlign.Value = "top";
+                            cell.VAlign.Value = "top";
                             break;
                         case TableVAlignmentsEnum.Middle:
-                            cell.VerticalAlign.Value = "middle";
+                            cell.VAlign.Value = "middle";
                             break;
                         case TableVAlignmentsEnum.Bottom:
-                            cell.VerticalAlign.Value = "bottom";
+                            cell.VAlign.Value = "bottom";
                             break;
                     }
                     tableRow.Add(cell);

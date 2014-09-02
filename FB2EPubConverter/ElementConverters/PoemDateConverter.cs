@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
+using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace FB2EPubConverter.ElementConverters
 {
@@ -14,14 +12,14 @@ namespace FB2EPubConverter.ElementConverters
         /// </summary>
         /// <param name="poemDateItem">item to convert </param>
         /// <returns>XHTML representation</returns>
-        public IXHTMLItem Convert(DateItem poemDateItem)
+        public IHTMLItem Convert(DateItem poemDateItem)
         {
             if (poemDateItem == null)
             {
                 throw new ArgumentNullException("poemDateItem");
             }
-            Paragraph date = new Paragraph();
-            date.Add(new SimpleEPubText { Text = poemDateItem.Text });
+            var date = new Paragraph();
+            date.Add(new SimpleHTML5Text { Text = poemDateItem.Text });
             SetClassType(date);
             return date;
         }

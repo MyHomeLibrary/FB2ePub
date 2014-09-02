@@ -16,7 +16,7 @@ namespace FB2EPubConverter.ElementConverters
         /// </summary>
         /// <param name="paragraphItem">item to convert</param>
         /// <returns>XHTML representation</returns>
-        public IXHTMLItem Convert(ParagraphItem paragraphItem)
+        public IHTMLItem Convert(ParagraphItem paragraphItem)
         {
             if (paragraphItem == null)
             {
