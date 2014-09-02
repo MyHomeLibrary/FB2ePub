@@ -242,7 +242,7 @@ namespace XHTMLClassLibrary.BaseElements
             {
                 XNamespace namespaceElm = @"http://www.w3.org/1999/xhtml";
                 xElement = new XElement(namespaceElm + currentObjectElementName);
-                AddAttributes(xElement, namespaceElm);
+                AddAttributes(xElement, null);
             }
             else
             {
