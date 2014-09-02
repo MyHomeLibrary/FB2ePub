@@ -17,6 +17,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Datetime> _datetime = new SimpleSingleTypeAttribute<Datetime>("datetime");
 
+        public DeletedText(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// This attribute is intended to point to information explaining why content was changed. 
         /// For example, this can be a URL leading to a Web page that contains such an explanation.

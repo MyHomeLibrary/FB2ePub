@@ -41,6 +41,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("align",typeof(AlignAttributePossibleValues));
 
 
+        public Div(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Specifies the alignment of the content inside a "div" element
         /// Not supported in HTML5.

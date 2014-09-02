@@ -17,6 +17,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly SimpleSingleTypeAttribute<FloatingNumber> _valueAttribute = new SimpleSingleTypeAttribute<FloatingNumber>("value");
 
 
+        public Progress(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Specifies how much work the task requires in total
         /// </summary>

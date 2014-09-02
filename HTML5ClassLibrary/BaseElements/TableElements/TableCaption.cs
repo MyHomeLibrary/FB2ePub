@@ -40,6 +40,10 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("align",typeof(AlignAttributeOptions));
 
 
+        public TableCaption(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Defines the alignment of the caption
         /// Not supported in HTML5

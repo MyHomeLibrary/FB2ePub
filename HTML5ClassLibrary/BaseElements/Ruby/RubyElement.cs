@@ -15,6 +15,10 @@ namespace XHTMLClassLibrary.BaseElements.Ruby
     [HTMLItemAttribute(ElementName = "ruby", SupportedStandards = HTMLElementType.HTML5)]
     public class RubyElement : HTMLItem, IInlineItem
     {
+        public RubyElement(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         protected override bool IsValidSubType(IHTMLItem item)
         {
             // TODO: full check for ruby sequence

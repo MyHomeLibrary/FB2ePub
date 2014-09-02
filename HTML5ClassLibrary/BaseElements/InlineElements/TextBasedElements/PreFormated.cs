@@ -14,6 +14,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>("width");
 
 
+        public PreFormated(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         ///  Specifies the maximum number of characters per line
         /// Not supported in HTML5.

@@ -1,13 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace FB2EPubConverter.ElementConverters
 {
+    internal class InlineImageConverterParams
+    {
+        public ConverterOptions Settings { get; set; }
+    }
+
     internal class InlineImageConverter : BaseElementConverter
     {
 
@@ -15,27 +17,22 @@ namespace FB2EPubConverter.ElementConverters
         /// Converts FB2 inline image
         /// </summary>
         /// <returns></returns>
-        public IHTMLItem Convert(InlineImageItem inlineImageItem)
+        public IHTMLItem Convert(InlineImageItem inlineImageItem,HTMLElementType compatibility,InlineImageConverterParams inlineImageConverterParams)
         {
             if (inlineImageItem == null)
             {
                 throw new ArgumentNullException("inlineImageItem");
             }
-            var img = new Image();
+            var img = new Image(compatibility);
             if (inlineImageItem.AltText != null)
             {
                 img.Alt.Value = inlineImageItem.AltText;
             }
 
-            img.Source.Value = Settings.ReferencesManager.AddImageRefferenced(inlineImageItem, img);
+            img.Source.Value = inlineImageConverterParams.Settings.ReferencesManager.AddImageRefferenced(inlineImageItem, img);
 
-            img.GlobalAttributes.Class.Value = "int_image";
+            SetClassType(img,"int_image");
             return img;
-        }
-
-        public override string GetElementType()
-        {
-            return  "int_image";
         }
     }
 }

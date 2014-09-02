@@ -20,7 +20,9 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
         private readonly SimpleSingleTypeAttribute<Number> _rowsAttribute = new SimpleSingleTypeAttribute<Number>("rows");
 
 
-
+        public Frameset(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Specifies the number and size of columns in a frameset

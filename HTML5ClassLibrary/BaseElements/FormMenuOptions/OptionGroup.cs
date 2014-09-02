@@ -17,6 +17,9 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         private readonly FlagTypeAttribute _disabledAttribute = new FlagTypeAttribute("disabled");
 
 
+        public OptionGroup(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Label for the option group.

@@ -41,6 +41,9 @@ namespace XHTMLClassLibrary.BaseElements.Legends
         private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("align",typeof(AlignAttributeOptions));
 
 
+        public Legend(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         ///  Specifies the alignment of the caption

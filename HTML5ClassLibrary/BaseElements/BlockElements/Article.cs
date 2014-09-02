@@ -20,6 +20,9 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "article", SupportedStandards = HTMLElementType.HTML5)]
     public class Article : HTMLItem, IBlockElement
     {
+        public Article(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         public override bool IsValid()
         {

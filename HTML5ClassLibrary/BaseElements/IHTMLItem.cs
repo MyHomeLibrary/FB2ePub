@@ -63,5 +63,6 @@ namespace XHTMLClassLibrary.BaseElements
         ISimpleText InternalTextItem { get; }
 
 
+        HTMLElementType HTMLStandard { get; }
     }
 }

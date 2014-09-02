@@ -8,6 +8,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     public abstract class TextBasedElement : HTMLItem, IInlineItem
     {
+        protected TextBasedElement(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is SimpleHTML5Text)

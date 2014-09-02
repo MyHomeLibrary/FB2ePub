@@ -8,5 +8,8 @@
     [HTMLItemAttribute(ElementName = "bdi", SupportedStandards = HTMLElementType.HTML5)]
     public class BDI : TextBasedElement
     {
+        public BDI(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
     }
 }

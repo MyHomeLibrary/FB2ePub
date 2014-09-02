@@ -53,6 +53,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly SimpleSingleTypeAttribute<LanguageCode> _sourceLanguageAttribute = new SimpleSingleTypeAttribute<LanguageCode>("srclang");
 
 
+        public Track(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Specifies the language of the track text data (required if kind="subtitles")
         /// </summary>

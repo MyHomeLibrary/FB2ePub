@@ -15,6 +15,9 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "dl", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class DefinitionList : HTMLItem, IBlockElement
     {
+        public DefinitionList(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

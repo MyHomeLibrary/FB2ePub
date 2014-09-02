@@ -14,6 +14,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly FlagTypeAttribute _openAttribute = new FlagTypeAttribute("open");
 
 
+        public Dialog(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Specifies that the dialog should be visible (open) to the user
         /// </summary>

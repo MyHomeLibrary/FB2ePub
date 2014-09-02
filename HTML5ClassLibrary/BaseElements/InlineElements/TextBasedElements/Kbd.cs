@@ -6,5 +6,8 @@
     [HTMLItemAttribute(ElementName = "kbd", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Kbd : TextBasedElement
     {
+        public Kbd(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
     }
 }

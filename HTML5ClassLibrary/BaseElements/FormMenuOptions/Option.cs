@@ -23,6 +23,10 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         private readonly SimpleSingleTypeAttribute<Text> _labelAttribute = new SimpleSingleTypeAttribute<Text>("label");
 
 
+        public Option(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// When set, this attribute specifies that an option is pre-selected. 
         /// Possible value is "selected".

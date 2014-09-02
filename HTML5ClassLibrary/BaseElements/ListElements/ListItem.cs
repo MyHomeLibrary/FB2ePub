@@ -54,7 +54,9 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         private readonly SimpleSingleTypeAttribute<Text> _valueAttribute = new SimpleSingleTypeAttribute<Text>("value");
 
 
-
+        public ListItem(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         ///  Specifies which kind of bullet point will be used

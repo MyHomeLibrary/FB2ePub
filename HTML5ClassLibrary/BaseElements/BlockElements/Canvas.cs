@@ -18,6 +18,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly SimpleSingleTypeAttribute<Length> _width = new SimpleSingleTypeAttribute<Length>("width");
 
 
+        public Canvas(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         public IAttributeDataAccess Height
         {
             get { return _height; }

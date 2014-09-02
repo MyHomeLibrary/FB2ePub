@@ -18,6 +18,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SimpleSingleTypeAttribute<URI> _srcAttrib = new SimpleSingleTypeAttribute<URI>("src");
 
+        public Source(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         public IAttributeDataAccess Src
         {
             get { return _srcAttrib; }

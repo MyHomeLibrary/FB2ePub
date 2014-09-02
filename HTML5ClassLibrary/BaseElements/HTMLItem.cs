@@ -37,8 +37,9 @@ namespace XHTMLClassLibrary.BaseElements
         [AttributeBlockAttribute]
         private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
-        protected HTMLItem()
+        protected HTMLItem(HTMLElementType htmlStandard)
         {
+            _htmlStandard = htmlStandard;
             RegisterAttributes();
         }
 

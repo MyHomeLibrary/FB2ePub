@@ -11,6 +11,10 @@
     [HTMLItemAttribute(ElementName = "bdo", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class BiDirectionalOverride : TextBasedElement
     {
+        public BiDirectionalOverride(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         public override bool IsValid()
         {
             if(!GlobalAttributes.Direction.HasValue())

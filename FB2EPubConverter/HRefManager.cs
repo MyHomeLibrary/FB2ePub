@@ -232,7 +232,7 @@ namespace FB2EPubConverter
                         // so contained text etc are kept
                         if (element.SubElements().Count != 0)
                         {
-                            var spanElement = new Span();
+                            var spanElement = new Span(element.HTMLStandard);
                             foreach (var subElement in element.SubElements())
                             {
                                 spanElement.Add(subElement);
@@ -346,13 +346,13 @@ namespace FB2EPubConverter
                         foreach (var anchor in link.Value)
                         {
                             BaseXHTMLFile idDocument = GetIDParentDocument(epubFile, anchor);
-                            IHTMLItem referencedItem = _ids[(string)anchor.HRef.Value];
-                            IHTMLItem newParent = DetectParentContainer(referencedItem);
+                            var referencedItem = _ids[(string)anchor.HRef.Value];
+                            var newParent = DetectParentContainer(referencedItem);
                             if (newParent == null)
                             {
                                 continue;
                             }
-                            var newAnchor = new Anchor();
+                            var newAnchor = new Anchor(newParent.HTMLStandard);
                             if (idDocument == iDDocument)
                             {
                                 anchor.HRef.Value = string.Format("#{0}", idString);
@@ -370,10 +370,10 @@ namespace FB2EPubConverter
                             if ((iDDocument is BookDocument) && ((iDDocument as BookDocument).Type == SectionTypeEnum.Links))  // if it's FBE notes section
                             {
                                 newAnchor.GlobalAttributes.Class.Value = "note_anchor";
-                                newParent.Add(new EmptyLine());
+                                newParent.Add(new EmptyLine(newParent.HTMLStandard));
                                 newParent.Add(newAnchor);
                                 count++;
-                                newAnchor.Add(new SimpleHTML5Text { Text = (link.Value.Count > 1) ? string.Format("(<< back {0})  ",count) : string.Format("(<< back)  ") });
+                                newAnchor.Add(new SimpleHTML5Text(newAnchor.HTMLStandard) { Text = (link.Value.Count > 1) ? string.Format("(<< back {0})  ", count) : string.Format("(<< back)  ") });
                             }
                         }
                     }

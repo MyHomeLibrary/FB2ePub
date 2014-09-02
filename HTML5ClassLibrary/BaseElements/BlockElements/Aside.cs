@@ -15,6 +15,9 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "aside", SupportedStandards = HTMLElementType.HTML5)]
     public class Aside : HTMLItem, IBlockElement
     {
+        public Aside(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         public override bool IsValid()
         {

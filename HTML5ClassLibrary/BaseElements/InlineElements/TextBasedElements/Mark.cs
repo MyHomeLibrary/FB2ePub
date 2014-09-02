@@ -7,5 +7,8 @@
     [HTMLItemAttribute(ElementName = "mark", SupportedStandards = HTMLElementType.HTML5)]
     public class Mark : TextBasedElement
     {
+        public Mark(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
     }
 }

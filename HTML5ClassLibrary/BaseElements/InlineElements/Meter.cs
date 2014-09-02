@@ -31,8 +31,12 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly SimpleSingleTypeAttribute<FloatingNumber> _openAttribute = new SimpleSingleTypeAttribute<FloatingNumber>("optimum");
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly SimpleSingleTypeAttribute<FloatingNumber> _meterValueAttribute = new SimpleSingleTypeAttribute<FloatingNumber>("value"); 
+        private readonly SimpleSingleTypeAttribute<FloatingNumber> _meterValueAttribute = new SimpleSingleTypeAttribute<FloatingNumber>("value");
 
+
+        public Meter(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Specifies one or more forms the "meter" element belongs to

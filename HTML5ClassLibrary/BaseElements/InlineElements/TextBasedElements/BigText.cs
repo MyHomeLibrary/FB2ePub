@@ -6,5 +6,8 @@
     [HTMLItemAttribute(ElementName = "big", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class BigText : TextBasedElement
     {
+        public BigText(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
     }
 }

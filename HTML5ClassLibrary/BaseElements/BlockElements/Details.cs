@@ -15,6 +15,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly FlagTypeAttribute _openAttribute = new FlagTypeAttribute("open");
 
 
+        public Details(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Specifies that the details should be visible (open) to the user
         /// </summary>

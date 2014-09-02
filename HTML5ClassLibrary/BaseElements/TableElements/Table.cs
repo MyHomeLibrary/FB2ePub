@@ -126,7 +126,9 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>("width");
 
 
-
+        public Table(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         ///  Specifies the alignment of a table according to surrounding text

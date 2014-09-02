@@ -19,6 +19,10 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         private readonly SimpleSingleTypeAttribute<URIs> _profileAttribute = new SimpleSingleTypeAttribute<URIs>("profile");
 
 
+        public Head(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Specifies a URL to a document that contains a set of rules. The rules can be read by browsers to clearly understand the information in the "meta" tag's content attribute
         /// Not supported in HTML5.

@@ -138,6 +138,9 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>("width");
 
 
+        public TableHeaderCell(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Abbreviated form of the cell's content.

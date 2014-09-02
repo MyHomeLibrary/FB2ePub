@@ -7,15 +7,23 @@ using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace FB2EPubConverter.ElementConverters
 {
+    internal class InternalLinkConverterParams
+    {
+        public ConverterOptions Settings { get; set; }
+        public bool NeedToInsertDrop { get; set; }
+    }
+
     internal class InternalLinkConverter : BaseElementConverter
     {
         /// <summary>
         /// Convert FB2 internal link 
         /// </summary>
         /// <param name="internalLinkItem">item to convert</param>
-        /// <param name="needToInsertDrop"></param>
+        /// <param name="compatibility"></param>
+        /// <param name="internalLinkConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public List<IHTMLItem> Convert(InternalLinkItem internalLinkItem, bool needToInsertDrop)
+        public List<IHTMLItem> Convert(InternalLinkItem internalLinkItem, HTMLElementType compatibility,
+            InternalLinkConverterParams internalLinkConverterParams)
         {
             if (internalLinkItem == null)
             {
@@ -24,7 +32,7 @@ namespace FB2EPubConverter.ElementConverters
             var list = new List<IHTMLItem>();
             if (!string.IsNullOrEmpty(internalLinkItem.HRef) && internalLinkItem.HRef != "#")
             {
-                var anchor = new Anchor();
+                var anchor = new Anchor(compatibility);
                 bool internalLink = false;
                 if (!ReferencesUtils.IsExternalLink(internalLinkItem.HRef))
                 {
@@ -32,18 +40,25 @@ namespace FB2EPubConverter.ElementConverters
                     {
                         internalLinkItem.HRef = internalLinkItem.HRef.Substring(1);
                     }
-                    internalLinkItem.HRef = Settings.ReferencesManager.EnsureGoodId(internalLinkItem.HRef);
+                    internalLinkItem.HRef =
+                        internalLinkConverterParams.Settings.ReferencesManager.EnsureGoodId(internalLinkItem.HRef);
                     internalLink = true;
                 }
                 anchor.HRef.Value = internalLinkItem.HRef;
                 if (internalLink)
                 {
-                    Settings.ReferencesManager.AddReference(internalLinkItem.HRef, anchor);
+                    internalLinkConverterParams.Settings.ReferencesManager.AddReference(internalLinkItem.HRef, anchor);
                 }
                 if (internalLinkItem.LinkText != null)
                 {
-                    var tempConverter = new SimpleTextElementConverter {Settings = Settings};
-                    foreach (var s in tempConverter.Convert(internalLinkItem.LinkText,needToInsertDrop))
+                    var tempConverter = new SimpleTextElementConverter();
+                    foreach (var s in tempConverter.Convert(internalLinkItem.LinkText, compatibility,
+                        new SimpleTextElementConverterParams
+                        {
+                            Settings = internalLinkConverterParams.Settings,
+                            NeedToInsertDrop = internalLinkConverterParams.NeedToInsertDrop
+                        }
+                        ))
                     {
                         s.Parent = anchor;
                         anchor.InternalTextItem.Add(s);
@@ -52,14 +67,13 @@ namespace FB2EPubConverter.ElementConverters
                 list.Add(anchor);
                 return list;
             }
-            var converter = new SimpleTextElementConverter {Settings = Settings};
-            return converter.Convert(internalLinkItem.LinkText,needToInsertDrop);
-        }
-
-
-        public override string GetElementType()
-        {
-            return string.Empty;
+            var converter = new SimpleTextElementConverter();
+            return converter.Convert(internalLinkItem.LinkText, compatibility,
+                new SimpleTextElementConverterParams
+                {
+                    Settings = internalLinkConverterParams.Settings,
+                    NeedToInsertDrop = internalLinkConverterParams.NeedToInsertDrop
+                });
         }
     }
 }

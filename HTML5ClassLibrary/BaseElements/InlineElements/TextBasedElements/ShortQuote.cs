@@ -14,6 +14,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         private readonly SimpleSingleTypeAttribute<URI> _citeAttribute = new SimpleSingleTypeAttribute<URI>("cite");
 
 
+        public ShortQuote(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// 
         /// </summary>

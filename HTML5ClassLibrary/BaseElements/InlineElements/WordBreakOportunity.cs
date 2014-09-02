@@ -12,9 +12,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
     [HTMLItemAttribute(ElementName = "wbr", SupportedStandards = HTMLElementType.HTML5)]
     public class WordBreakOportunity : HTMLItem, IInlineItem
     {
-        public WordBreakOportunity()
+        public WordBreakOportunity(HTMLElementType htmlStandard)
+            : base(htmlStandard)
         {
-            TextContent = new SimpleHTML5Text();
+            TextContent = new SimpleHTML5Text(htmlStandard);
         }
 
         public override bool IsValid()

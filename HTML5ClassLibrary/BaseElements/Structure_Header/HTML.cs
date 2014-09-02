@@ -11,9 +11,18 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
     [HTMLItemAttribute(ElementName = "html", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class HTML : HTMLItem
     {
+        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.XHTML5 | HTMLElementType.XHTML11)]
+        private readonly SimpleSingleTypeAttribute<Text> _namespaceAttribute = new SimpleSingleTypeAttribute<Text>("xmlns");
+        
+            
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
         private readonly SimpleSingleTypeAttribute<URI> _manifestAttribute = new SimpleSingleTypeAttribute<URI>("manifest");
 
+
+        public HTML(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+            //_namespaceAttribute.Value = @"http://www.w3.org/1999/xhtml";
+        }
 
         /// <summary>
         /// This attribute has been deprecated (made outdated). 

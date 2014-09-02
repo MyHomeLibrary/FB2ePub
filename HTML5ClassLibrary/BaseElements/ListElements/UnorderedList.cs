@@ -55,8 +55,9 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         private readonly ValuesSelectionTypeAttribute<Text> _listItemTypeAttribute = new ValuesSelectionTypeAttribute<Text>("type", typeof(ListItemTypeAttributeOptions));
 
 
-
-
+        public UnorderedList(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         ///  Specifies that the list should render smaller than normal

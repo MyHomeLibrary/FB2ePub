@@ -9,5 +9,8 @@
     [HTMLItemAttribute(ElementName = "b", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class BoldText : TextBasedElement
     {
+        public BoldText(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
     }
 }

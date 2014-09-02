@@ -49,6 +49,9 @@ namespace XHTMLClassLibrary.BaseElements.ObjectParameters
         
         #region public_properties
 
+        public Param(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// his attribute defines the name of a run-time parameter, assumed to be known by the inserted object. 

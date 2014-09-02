@@ -6,5 +6,8 @@
     [HTMLItemAttribute(ElementName = "u", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Underlined : TextBasedElement
     {
+        public Underlined(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
     }
 }

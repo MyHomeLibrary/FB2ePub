@@ -1,55 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using FB2Library.Elements;
+using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace FB2EPubConverter.ElementConverters
 {
+    internal class TitleConverterParams
+    {
+        public ConverterOptions Settings { get; set; }  
+        public int TitleLevel { get; set; }
+    }
+
     internal class TitleConverter : BaseElementConverter
     {
-        private int level;
+        private int _level;
+
         /// <summary>
         /// Converts FB2 Title object to XHTML Title 
         /// </summary>
         /// <param name="titleItem">title item to convert</param>
-        /// <param name="titleLevel"></param>
+        /// <param name="compatibility"></param>
+        /// <param name="titleConverterParams"></param>
         /// <returns></returns>
-        public Div Convert(TitleItem titleItem,int titleLevel)
+        public Div Convert(TitleItem titleItem,HTMLElementType compatibility,TitleConverterParams titleConverterParams)
         {
             if (titleItem == null)
             {
                 throw new ArgumentNullException("titleItem");
             }
-            level = titleLevel;
-            Div title = new Div();
+            _level = titleConverterParams.TitleLevel;
+            var title = new Div(compatibility);
             foreach (var fb2TextItem in titleItem.TitleData)
             {
                 if (fb2TextItem is ParagraphItem)
                 {
-                    ParagraphConvTargetEnum paragraphStyle = GetParagraphStyleByLevel(titleLevel);
-                    ParagraphConverter paragraphConverter = new ParagraphConverter {Settings = Settings};
-                    title.Add(paragraphConverter.Convert(fb2TextItem as ParagraphItem,paragraphStyle));
+                    var paragraphStyle = GetParagraphStyleByLevel(_level);
+                    var paragraphConverter = new ParagraphConverter();
+                    title.Add(paragraphConverter.Convert(fb2TextItem as ParagraphItem, compatibility,
+                        new ParagraphConverterParams { ResultType = paragraphStyle, Settings = titleConverterParams.Settings, StartSection = false}));
                 }
                 else if (fb2TextItem is EmptyLineItem)
                 {
-                    EmptyLineConverter emptyLineConverter = new EmptyLineConverter();
-                    title.Add(emptyLineConverter.Convert());
+                    var emptyLineConverter = new EmptyLineConverter();
+                    title.Add(emptyLineConverter.Convert(compatibility));
                 }
                 else
                 {
-                    Debug.WriteLine(string.Format("invalid type in Title - {0}", fb2TextItem.GetType()));
+                    Debug.WriteLine("invalid type in Title - {0}", fb2TextItem.GetType());
                 }
             }
-            SetClassType(title);
+            SetClassType(title, string.Format("title{0}", _level));
             return title;
         }
 
         private static ParagraphConvTargetEnum GetParagraphStyleByLevel(int titleLevel)
         {
-            ParagraphConvTargetEnum paragraphStyle = ParagraphConvTargetEnum.H6;
+            var paragraphStyle = ParagraphConvTargetEnum.H6;
             switch (titleLevel)
             {
                 case 1:
@@ -69,12 +76,6 @@ namespace FB2EPubConverter.ElementConverters
                     break;
             }
             return paragraphStyle;
-        }
-
-
-        public override string GetElementType()
-        {
-            return string.Format("title{0}", level);
         }
     }
 }

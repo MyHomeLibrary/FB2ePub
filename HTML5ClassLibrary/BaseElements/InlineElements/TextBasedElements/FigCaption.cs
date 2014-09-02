@@ -7,5 +7,8 @@
     [HTMLItemAttribute(ElementName = "figcaption", SupportedStandards = HTMLElementType.HTML5)]
     public class FigCaption : TextBasedElement
     {
+        public FigCaption(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
     }
 }

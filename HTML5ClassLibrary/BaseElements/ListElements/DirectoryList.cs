@@ -10,6 +10,10 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         private readonly FlagTypeAttribute _compactAttribute = new FlagTypeAttribute("compact");
 
 
+        public DirectoryList(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Specifies that the list should render smaller than normal
         /// Not supported in HTML5.
