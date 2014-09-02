@@ -11,7 +11,7 @@ using EPubLibrary.TOC;
 using EPubLibrary.XHTML_Items;
 using ICSharpCode.SharpZipLib.Zip;
 using TranslitRu;
-using XHTMLClassLibrary;
+using XHTMLClassLibrary.BaseElements;
 
 namespace EPubLibrary
 {
@@ -83,7 +83,7 @@ namespace EPubLibrary
         /// <returns></returns>
         public override BookDocument AddDocument(string id)
         {
-            BookDocument section = new BookDocument(XHTMRulesEnum.EPUBV3Compatible) { PageTitle = id };
+            var section = new BookDocument(HTMLElementType.HTML5) { PageTitle = id };
             section.StyleFiles.Add(_mainCss);
 
             _sections.Add(section);
@@ -97,7 +97,7 @@ namespace EPubLibrary
         protected override void AddLicenseFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            LicenseFile licensePage = new LicenseFile(XHTMRulesEnum.EPUBV3Compatible)
+            var licensePage = new LicenseFile(HTMLElementType.HTML5)
             {
                 FlatStructure = FlatStructure,
                 EmbedStyles = EmbedStyles,
@@ -116,7 +116,7 @@ namespace EPubLibrary
         {
             stream.SetLevel(9);
 
-            AboutPageFile aboutPage = new AboutPageFile(XHTMRulesEnum.EPUBV3Compatible)
+            var aboutPage = new AboutPageFile(HTMLElementType.HTML5)
             {
                 FlatStructure = FlatStructure,
                 EmbedStyles = EmbedStyles,
@@ -179,7 +179,7 @@ namespace EPubLibrary
             // for test let's just create one file
             stream.SetLevel(9);
 
-            CoverPageFile cover = new CoverPageFile(XHTMRulesEnum.EPUBV3Compatible)
+            var cover = new CoverPageFile(HTMLElementType.HTML5)
             {
                 CoverFileName = GetCoverImageName(eImage),
             };

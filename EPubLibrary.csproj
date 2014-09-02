@@ -199,6 +199,10 @@
     <None Include="license.docx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\fb2epub\HTML5ClassLibrary\HTMLClassLibrary.csproj">
+      <Project>{e596a296-1c1a-42b7-8482-b7b0e95b82d3}</Project>
+      <Name>HTMLClassLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\fontsettings\FontsSettings.csproj">
       <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
       <Name>FontsSettings</Name>
@@ -210,10 +214,6 @@
     <ProjectReference Include="..\translitrunet\TranslitRu.csproj">
       <Project>{CDFF6D0A-EB28-4817-8635-D6B0A9FDE833}</Project>
       <Name>TranslitRu</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\xhtmlclasslibrary\XHTMLClassLibrary.csproj">
-      <Project>{FFCCD288-4F11-44A5-AB04-3CACF840935C}</Project>
-      <Name>XHTMLClassLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

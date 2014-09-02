@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Xml;
@@ -89,8 +88,8 @@ namespace EPubLibrary.Content.NavigationDocument
             head.Add(title);
             foreach (var file in _styles)
             {
-                IXHTMLItem styleElement;
-                Link cssStyleShit = new Link();
+                IHTMLItem styleElement;
+                var cssStyleShit = new Link();
                 styleElement = cssStyleShit;
                 cssStyleShit.Relation.Value = "stylesheet";
                 cssStyleShit.Type.Value = file.GetMediaType();

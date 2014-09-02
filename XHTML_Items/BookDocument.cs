@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary.PathUtils;
-using XHTMLClassLibrary;
+using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace EPubLibrary.XHTML_Items
 {
@@ -22,17 +21,17 @@ namespace EPubLibrary.XHTML_Items
     public class BookDocument : BaseXHTMLFile
     {
         public readonly static EPubInternalPath DefaultTextFilesFolder= new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
-        private readonly Dictionary<Anchor,ICommonAttributes> _references = new Dictionary<Anchor, ICommonAttributes>();
-        private IXHTMLItem _content;
-        
+        private readonly Dictionary<Anchor, IAttributeDataAccess> _references = new Dictionary<Anchor, IAttributeDataAccess>();
+        private IHTMLItem _content;
 
-        public Dictionary<Anchor,ICommonAttributes> Refrences
+
+        public Dictionary<Anchor, IAttributeDataAccess> Refrences
         {
             get { return _references; }    
         }
 
 
-        public BookDocument(XHTMRulesEnum compatibility)
+        public BookDocument(HTMLElementType compatibility)
             : base(compatibility)
         {
             // real limit is 300k but just to be sure
@@ -81,7 +80,7 @@ namespace EPubLibrary.XHTML_Items
         public BookDocument NavigationParent { get; set; }
 
 
-        public IXHTMLItem Content
+        public IHTMLItem Content
         {
             get { return _content; }
             set
@@ -111,10 +110,10 @@ namespace EPubLibrary.XHTML_Items
         {
             List<BookDocument> list = new List<BookDocument>();
             BookDocument newDoc = null;
-            List<IXHTMLItem> listToRemove = new List<IXHTMLItem>();
+            List<IHTMLItem> listToRemove = new List<IHTMLItem>();
             long totlaSize = 0;
-            IXHTMLItem oldContent = _content;
-            IXHTMLItem newContent = new Div();
+            IHTMLItem oldContent = _content;
+            IHTMLItem newContent = new Div();
             if (_content != null)
             {
                 foreach (var subElement in _content.SubElements())
@@ -187,9 +186,9 @@ namespace EPubLibrary.XHTML_Items
                     if (Content.SubElements() != null )
                     {
                         List<BookDocument> subList = null;
-                        if (subElement.GetType() == typeof(SimpleEPubText))
+                        if (subElement.GetType() == typeof(SimpleHTML5Text))
                         {
-                            subList = SplitSimpleText(subElement as SimpleEPubText);
+                            subList = SplitSimpleText(subElement as SimpleHTML5Text);
                         }
                         if (subList != null)
                         {
@@ -205,7 +204,7 @@ namespace EPubLibrary.XHTML_Items
             return list;
         }
 
-        private List<BookDocument> SplitSimpleText(SimpleEPubText simpleEPubText)
+        private List<BookDocument> SplitSimpleText(SimpleHTML5Text simpleEPubText)
         {
             List<BookDocument> list = new List<BookDocument>();
             BookDocument newDoc = new BookDocument(Compatibility);
@@ -217,7 +216,7 @@ namespace EPubLibrary.XHTML_Items
             newDoc.Content = new Div();
             Paragraph newParagraph = new Paragraph();
             newDoc.Content.Add(newParagraph);
-            SimpleEPubText newText = new SimpleEPubText{Text = ""};
+            SimpleHTML5Text newText = new SimpleHTML5Text{Text = ""};
             newParagraph.Add(newText);
             foreach (var word in simpleEPubText.Text.Split(' '))
             {
@@ -236,7 +235,7 @@ namespace EPubLibrary.XHTML_Items
                     newDoc.Content = new Div();
                     newParagraph = new Paragraph();
                     newDoc.Content.Add(newParagraph);
-                    newText = new SimpleEPubText { Text = "" };
+                    newText = new SimpleHTML5Text { Text = "" };
                     newParagraph.Add(newText);
                 }
             }
@@ -245,7 +244,7 @@ namespace EPubLibrary.XHTML_Items
             return list;
         }
 
-        private static long EstimateSize(IXHTMLItem item)
+        private static long EstimateSize(IHTMLItem item)
         {
             MemoryStream stream = new MemoryStream();
             XNode node = item.Generate();
@@ -261,13 +260,13 @@ namespace EPubLibrary.XHTML_Items
         /// </summary>
         /// <param name="value">element to check</param>
         /// <returns>true if part of this document, false otherwise</returns>
-        public override bool PartOfDocument(IXHTMLItem value)
+        public override bool PartOfDocument(IHTMLItem value)
         {
             if (Content == null)
             {
                 return false;
             }
-            IXHTMLItem parent = value;
+            IHTMLItem parent = value;
             while (parent.Parent != null)
             {
                 parent = parent.Parent;

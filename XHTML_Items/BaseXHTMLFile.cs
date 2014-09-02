@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -18,12 +17,11 @@ namespace EPubLibrary.XHTML_Items
     {
         protected Head HeadElement = null;
         protected Body BodyElement = null;
-        protected XNamespace XhtmlNamespace = @"http://www.w3.org/1999/xhtml";
         protected string pageTitle;
         protected bool Durty = true;
-        protected XHTMRulesEnum Compatibility = XHTMRulesEnum.EPUBCompatible;
+        protected HTMLElementType Compatibility = HTMLElementType.XHTML11;
 
-        public BaseXHTMLFile(XHTMRulesEnum compatibility)
+        public BaseXHTMLFile(HTMLElementType compatibility)
         {
             Compatibility = compatibility;
         }
@@ -101,7 +99,7 @@ namespace EPubLibrary.XHTML_Items
 
         public void Write(Stream stream)
         {
-            XmlWriterSettings settings = new XmlWriterSettings();
+            var settings = new XmlWriterSettings();
             settings.CloseOutput = false;
             settings.Encoding = Encoding.UTF8;
             settings.Indent = true;
@@ -123,13 +121,13 @@ namespace EPubLibrary.XHTML_Items
 
         public virtual XDocument Generate()
         {
-            XHTMLDocument mainDocument = new XHTMLDocument(Compatibility);
+            var mainDocument = new HTMLDocument(Compatibility);
             GenerateHead();
             GenerateBody();
-            UTF8Encoding encoding = new UTF8Encoding();
+            var encoding = new UTF8Encoding();
             foreach (var file in _styles)
             {
-                IXHTMLItem styleElement;
+                IHTMLItem styleElement;
                 if (EmbedStyles)
                 {
                     Style styleElementEntry = new Style();
@@ -137,10 +135,10 @@ namespace EPubLibrary.XHTML_Items
                     styleElementEntry.Type.Value = CSSFile.MediaType;
                     try
                     {
-                        using (MemoryStream outStream = new MemoryStream())
+                        using (var outStream = new MemoryStream())
                         {
                             file.Write(outStream);
-                            styleElementEntry.Content.Text = encoding.GetString(outStream.ToArray());
+                            styleElementEntry.InternalTextItem.Text = encoding.GetString(outStream.ToArray());
                         }
                     }
                     catch (Exception)
@@ -169,7 +167,7 @@ namespace EPubLibrary.XHTML_Items
 
 
             var titleElm = new XHTMLClassLibrary.BaseElements.Structure_Header.Title();
-            titleElm.Content.Text = pageTitle;
+            titleElm.InternalTextItem.Text = pageTitle;
             HeadElement.Add(titleElm);
             
 
@@ -182,7 +180,7 @@ namespace EPubLibrary.XHTML_Items
         public virtual void GenerateBody()
         {
             BodyElement = new Body();
-            BodyElement.Class.Value = "epub";           
+            BodyElement.GlobalAttributes.Class.Value = "epub";           
         }
 
         /// <summary>
@@ -190,7 +188,7 @@ namespace EPubLibrary.XHTML_Items
         /// </summary>
         /// <param name="value">element to check</param>
         /// <returns>true if part of this document, false otherwise</returns>
-        public virtual  bool PartOfDocument(IXHTMLItem value)
+        public virtual  bool PartOfDocument(IHTMLItem value)
         {
             return false;
         }

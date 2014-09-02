@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using EPubLibrary.Content.Guide;
+﻿using EPubLibrary.Content.Guide;
 using EPubLibrary.PathUtils;
-using XHTMLClassLibrary;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -15,7 +9,7 @@ namespace EPubLibrary.XHTML_Items
     public class AnnotationPageFile : BaseXHTMLFile
     {
 
-        public AnnotationPageFile(XHTMRulesEnum compatibility) : base(compatibility)
+        public AnnotationPageFile(HTMLElementType compatibility) : base(compatibility)
         {
             pageTitle = "Annotation";
             DocumentType = GuideTypeEnum.Preface;
@@ -32,7 +26,7 @@ namespace EPubLibrary.XHTML_Items
         {
             base.GenerateBody();
             Div annotationPage = new Div();
-            annotationPage.Class.Value = "annotation";
+            annotationPage.GlobalAttributes.Class.Value = "annotation";
             if (BookAnnotation != null)
             {
                 foreach (var item in BookAnnotation.SubElements())
@@ -42,7 +36,7 @@ namespace EPubLibrary.XHTML_Items
             }
             else
             {
-                annotationPage.Add(new SimpleEPubText { Text = "Unnamed" });
+                annotationPage.Add(new SimpleHTML5Text { Text = "Unnamed" });
             }
 
             annotationPage.Add(new EmptyLine());
@@ -56,13 +50,13 @@ namespace EPubLibrary.XHTML_Items
         /// </summary>
         /// <param name="value">elemenrt to check</param>
         /// <returns>true idf part of this document, false otherwise</returns>
-        public new bool PartOfDocument(IXHTMLItem value)
+        public new bool PartOfDocument(IHTMLItem value)
         {
             if (BookAnnotation == null)
             {
                 return false;
             }
-            IXHTMLItem parent = value;
+            IHTMLItem parent = value;
             while (parent.Parent != null)
             {
                 parent = parent.Parent;

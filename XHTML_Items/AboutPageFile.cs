@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.PathUtils;
-using XHTMLClassLibrary;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
-using XHTMLClassLibrary.BaseElements.InlineElements;
+using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace EPubLibrary.XHTML_Items
 {
     internal class AboutPageFile : BaseXHTMLFile
     {
-        public AboutPageFile(XHTMRulesEnum compatibility)
+        public AboutPageFile(HTMLElementType compatibility)
             : base(compatibility)
         {
             DocumentType = GuideTypeEnum.CopyrightPage;
@@ -40,15 +34,15 @@ namespace EPubLibrary.XHTML_Items
         {
             base.GenerateBody();
             Div page = new Div();
-            page.Class.Value = "about";
+            page.GlobalAttributes.Class.Value = "about";
             H1 heading = new H1();
-            heading.Add(new SimpleEPubText { Text = "About" });
+            heading.Add(new SimpleHTML5Text { Text = "About" });
             page.Add(heading);
 
             foreach (var text in AboutTexts)
             {
                 Paragraph p1 = new Paragraph();
-                SimpleEPubText text1 = new SimpleEPubText();
+                SimpleHTML5Text text1 = new SimpleHTML5Text();
                 text1.Text = text;
                 p1.Add(text1);
                 page.Add(p1);
@@ -56,11 +50,11 @@ namespace EPubLibrary.XHTML_Items
 
             foreach (var text in AboutLinks)
             {
-                Paragraph p1 = new Paragraph();
-                Anchor anch = new Anchor();
+                var p1 = new Paragraph();
+                var anch = new Anchor();
                 anch.HRef.Value = text;
-                anch.Title.Value = text;
-                SimpleEPubText text3 = new SimpleEPubText();
+                anch.GlobalAttributes.Title.Value = text;
+                var text3 = new SimpleHTML5Text();
                 text3.Text = text;
                 anch.Add(text3);
                 p1.Add(anch);

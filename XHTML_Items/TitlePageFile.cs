@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Xml.Linq;
 using EPubLibrary.PathUtils;
-using XHTMLClassLibrary;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 using EPubLibrary.Content.Guide;
+using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace EPubLibrary.XHTML_Items
 {
@@ -17,7 +14,7 @@ namespace EPubLibrary.XHTML_Items
         private readonly List<string> _authors = new List<string>();
         private readonly List<string> _series = new List<string>();
 
-        public TitlePageFile(XHTMRulesEnum compatibility)
+        public TitlePageFile(HTMLElementType compatibility)
             : base(compatibility)
         {
             pageTitle = "Title";
@@ -37,19 +34,19 @@ namespace EPubLibrary.XHTML_Items
         {
             base.GenerateBody();
             Div titlePage = new Div();
-            titlePage.Class.Value = "titlepage";
+            titlePage.GlobalAttributes.Class.Value = "titlepage";
             if (!string.IsNullOrEmpty(BookTitle))
             {
                 // try to use FB2 book's title
-                IBlockElement p = new H2();
-                p.Add(new SimpleEPubText { Text = BookTitle });
+                var p = new H2();
+                p.Add(new SimpleHTML5Text { Text = BookTitle });
                 string itemClass = string.Format("title{0}", 1);
-                p.Class.Value = itemClass;
+                p.GlobalAttributes.Class.Value = itemClass;
                 titlePage.Add(p);
             }
             else
             {
-                titlePage.Add(new SimpleEPubText { Text = "Unnamed" });
+                titlePage.Add(new SimpleHTML5Text { Text = "Unnamed" });
             }
 
             titlePage.Add(new EmptyLine());
@@ -65,21 +62,21 @@ namespace EPubLibrary.XHTML_Items
             }
             if (sbSeries.ToString() != string.Empty)
             {
-                SimpleEPubText seriesItem = new SimpleEPubText { Text = string.Format("( {0} )", sbSeries) };
-                EmphasisedText containingText = new EmphasisedText();
+                var seriesItem = new SimpleHTML5Text { Text = string.Format("( {0} )", sbSeries) };
+                var containingText = new EmphasisedText();
                 containingText.Add(seriesItem);
                 H3 seriesHeading = new H3();
-                seriesHeading.Class.Value = "title_series";
+                seriesHeading.GlobalAttributes.Class.Value = "title_series";
                 seriesHeading.Add(containingText);
                 titlePage.Add(seriesHeading);
             }
 
             foreach (var author in _authors)
             {
-                H3 authorsHeading = new H3();
-                SimpleEPubText authorLine = new SimpleEPubText { Text = author };
+                var authorsHeading = new H3();
+                var authorLine = new SimpleHTML5Text { Text = author };
                 authorsHeading.Add(authorLine);
-                authorsHeading.Class.Value = "title_authors";
+                authorsHeading.GlobalAttributes.Class.Value = "title_authors";
                 titlePage.Add(authorsHeading);
             }
 

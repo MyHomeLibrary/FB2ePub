@@ -16,10 +16,9 @@ using EPubLibrary.XHTML_Items;
 using FontsSettings;
 using ICSharpCode.SharpZipLib.Zip;
 using TranslitRu;
-using XHTMLClassLibrary;
-using XHTMLClassLibrary.BaseElements;
-using XHTMLClassLibrary.BaseElements.InlineElements;
 using EPubLibrary.AppleEPubV2Extensions;
+using XHTMLClassLibrary.BaseElements;
+using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace EPubLibrary
 {
@@ -252,7 +251,7 @@ namespace EPubLibrary
         /// <returns></returns>
         public virtual BookDocument AddDocument(string id)
         {
-            BookDocument section = new BookDocument(XHTMRulesEnum.EPUBCompatible) { PageTitle = id };
+            BookDocument section = new BookDocument(HTMLElementType.XHTML11) { PageTitle = id };
             section.StyleFiles.Add(_mainCss);
             if (UseAdobeTemplate)
             {
@@ -409,7 +408,7 @@ namespace EPubLibrary
         protected virtual void AddLicenseFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            LicenseFile licensePage = new LicenseFile(XHTMRulesEnum.EPUBCompatible)
+            LicenseFile licensePage = new LicenseFile(HTMLElementType.XHTML11)
             {
                 FlatStructure = FlatStructure, 
                 EmbedStyles = EmbedStyles, 
@@ -592,7 +591,7 @@ namespace EPubLibrary
         {
             stream.SetLevel(9);
 
-            AboutPageFile aboutPage = new AboutPageFile(XHTMRulesEnum.EPUBCompatible)
+            AboutPageFile aboutPage = new AboutPageFile(HTMLElementType.XHTML11)
             {
                 FlatStructure = FlatStructure, 
                 EmbedStyles = EmbedStyles,
@@ -699,7 +698,7 @@ namespace EPubLibrary
             // for test let's just create one file
             stream.SetLevel(9);
 
-            CoverPageFile cover = new CoverPageFile(XHTMRulesEnum.EPUBCompatible)
+            var cover = new CoverPageFile(HTMLElementType.XHTML11)
             {
                 CoverFileName = GetCoverImageName(eImage),
             };
@@ -855,7 +854,7 @@ namespace EPubLibrary
 
 
     /// <summary>
-    /// Extends IXHTMLItem class with functionality
+    /// Extends IHTMLItem class with functionality
     /// </summary>
     public static class XHTMLExtensions
     {
@@ -865,7 +864,7 @@ namespace EPubLibrary
         /// <param name="iXHTMLItem"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static bool IsIdPresent(this IXHTMLItem iXHTMLItem, string value)
+        public static bool IsIdPresent(this IHTMLItem iXHTMLItem, string value)
         {
             if (iXHTMLItem.SubElements() == null)
             {
@@ -875,10 +874,10 @@ namespace EPubLibrary
             {
                 if (s is Anchor)
                 {
-                    Anchor a = s as Anchor;
-                    if (a.ID != null)
+                    var a = s as Anchor;
+                    if (a.GlobalAttributes.ID!= null)
                     {
-                        if (a.ID.Value == value)
+                        if ((string)(a.GlobalAttributes.ID.Value) == value)
                         {
                             return true;
                         }
