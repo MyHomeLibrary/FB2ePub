@@ -48,6 +48,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly ValuesSelectionTypeAttribute<Text> _alignAttribute = new ValuesSelectionTypeAttribute<Text>("align",typeof(AlignAttributeOptions));
 
 
+        protected BaseHeader(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         ///  Specifies the alignment of a heading
         /// Not supported in HTML5.

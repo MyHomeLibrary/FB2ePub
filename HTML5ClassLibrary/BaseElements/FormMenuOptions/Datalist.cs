@@ -23,6 +23,10 @@ namespace XHTMLClassLibrary.BaseElements.FormMenuOptions
         private readonly List<IHTMLItem> _content = new List<IHTMLItem>();
 
 
+        public Datalist(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         public override bool IsValid()
         {
             return true;

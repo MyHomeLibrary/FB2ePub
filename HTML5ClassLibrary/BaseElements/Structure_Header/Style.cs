@@ -21,6 +21,10 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         private readonly SimpleSingleTypeAttribute<ContentType> _typeAttribute = new SimpleSingleTypeAttribute<ContentType>("type");
 
 
+        public Style(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// This attribute specifies the intended destination medium for style information. 
         /// It may be a single media descriptor or a comma-separated list. 

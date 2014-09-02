@@ -8,5 +8,8 @@
     [HTMLItemAttribute(ElementName = "acronym", SupportedStandards = HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Acronym : TextBasedElement
     {
+        public Acronym(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
     }
 }

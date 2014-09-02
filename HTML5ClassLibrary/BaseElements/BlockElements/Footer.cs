@@ -15,6 +15,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "footer", SupportedStandards = HTMLElementType.HTML5)]
     public class Footer : HTMLItem, IBlockElement
     {
+        public Footer(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is IInlineItem ||

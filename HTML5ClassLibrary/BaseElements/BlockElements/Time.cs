@@ -15,6 +15,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly SimpleSingleTypeAttribute<Datetime> _dateTimeAttribute = new SimpleSingleTypeAttribute<Datetime>("datetime");
 
 
+        public Time(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Gives the date/time being specified. Otherwise, the date/time is given by the element's contents
         /// </summary>

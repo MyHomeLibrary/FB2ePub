@@ -51,8 +51,9 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         private readonly ValuesSelectionTypeAttribute<Text> _orderedListTypeAttribute = new ValuesSelectionTypeAttribute<Text>("type",typeof(OrderedListTypeAttributeOptions));
 
 
-
-
+        public OrderedList(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         ///  Specifies that the list should render smaller than normal

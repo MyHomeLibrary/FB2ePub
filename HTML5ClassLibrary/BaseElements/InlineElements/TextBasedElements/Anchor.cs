@@ -180,6 +180,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 
 #region public_attributes
 
+        public Anchor(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Specifies the shape of a link
         /// Not supported in HTML5

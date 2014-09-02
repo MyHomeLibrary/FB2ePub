@@ -2,30 +2,41 @@
 using Fb2ePubConverter;
 using FB2Library.Elements.Table;
 using XHTMLClassLibrary.BaseElements;
-using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.TableElements;
 
 namespace FB2EPubConverter.ElementConverters
 {
+    internal class RowConverterParams
+    {
+        public ConverterOptions Settings { get; set; }  
+    }
+
     internal class RowConverter : BaseElementConverter
     {
-
-        public IHTMLItem Convert(TableRowItem tableRowItem)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tableRowItem"></param>
+        /// <param name="compatibility"></param>
+        /// <param name="rowConverterParams"></param>
+        /// <returns></returns>
+        public IHTMLItem Convert(TableRowItem tableRowItem, HTMLElementType compatibility,RowConverterParams rowConverterParams)
         {
             if (tableRowItem == null)
             {
                 throw new ArgumentNullException("tableRowItem");
             }
-            TableRow tableRow = new TableRow();
+            var tableRow = new TableRow(compatibility);
 
             foreach (var element in tableRowItem.Cells)
             {
                 if (element is TableHeadingItem)
                 {
                     var th = element as TableHeadingItem;
-                    var cell = new TableHeaderCell();
-                    var paragraphConverter = new ParagraphConverter {Settings = Settings};
-                    var cellData = paragraphConverter.Convert(th,ParagraphConvTargetEnum.Paragraph);
+                    var cell = new TableHeaderCell(compatibility);
+                    var paragraphConverter = new ParagraphConverter();
+                    var cellData = paragraphConverter.Convert(th, compatibility,
+                        new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, Settings = rowConverterParams .Settings,StartSection = false});
                     if (cellData.SubElements() != null)
                     {
                         foreach (var subElement in cellData.SubElements())
@@ -75,9 +86,10 @@ namespace FB2EPubConverter.ElementConverters
                 else if (element is TableCellItem)
                 {
                     var td = element as TableCellItem;
-                    var cell = new TableData();
-                    var paragraphConverter = new ParagraphConverter {Settings = Settings};
-                    var cellData = paragraphConverter.Convert(td,ParagraphConvTargetEnum.Paragraph);
+                    var cell = new TableData(compatibility);
+                    var paragraphConverter = new ParagraphConverter();
+                    var cellData = paragraphConverter.Convert(td, compatibility, 
+                        new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, Settings = rowConverterParams.Settings, StartSection = false });
                     if (cellData.SubElements() != null)
                     {
                         foreach (var subElement in cellData.SubElements())
@@ -127,18 +139,13 @@ namespace FB2EPubConverter.ElementConverters
                 else
                 {
                     // invalid structure , we ignore
-                    Logger.Log.ErrorFormat("Invalid/unexpected table row sub element type : {0}", element.GetType().ToString());
-                    continue;
+                    Logger.Log.ErrorFormat("Invalid/unexpected table row sub element type : {0}", element.GetType());
+                    //continue;
                 }
             }
             tableRow.Align.Value = tableRowItem.Align ?? "left";
             return tableRow;
         }
 
-
-        public override string GetElementType()
-        {
-            return string.Empty;
-        }
     }
 }

@@ -29,6 +29,9 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         private readonly SimpleSingleTypeAttribute<Color> _vLinkAttribute = new SimpleSingleTypeAttribute<Color>("vlink");
 
 
+        public Body(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Specifies the color of an active link in a document

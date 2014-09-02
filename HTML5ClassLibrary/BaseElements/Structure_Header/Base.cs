@@ -19,6 +19,10 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         private readonly SimpleSingleTypeAttribute<TargetType> _targetAttribute = new SimpleSingleTypeAttribute<TargetType>("target");
 
 
+        public Base(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Specifies the base URL for all relative URLs in the page
         /// </summary>

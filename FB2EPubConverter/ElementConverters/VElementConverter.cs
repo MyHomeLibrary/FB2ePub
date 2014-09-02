@@ -1,38 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FB2Library.Elements.Poem;
 using XHTMLClassLibrary.BaseElements;
-using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace FB2EPubConverter.ElementConverters
 {
+    internal class VElementConverterParams
+    {
+        public ConverterOptions Settings { get; set; }  
+    }
+
     internal class VElementConverter : BaseElementConverter
     {
         /// <summary>
         /// Converts "v" (poem) sub-element
         /// </summary>
         /// <returns>XHTML formated representation</returns>
-        public IHTMLItem Convert(VPoemParagraph paragraphItem)
+        public IHTMLItem Convert(VPoemParagraph paragraphItem,HTMLElementType compatibility,VElementConverterParams vElementConverterParams)
         {
             if (paragraphItem == null)
             {
                 throw new ArgumentNullException("paragraphItem");
             }
-            var paragraphConverter = new ParagraphConverter {Settings = Settings,};
-            var item = paragraphConverter.Convert(paragraphItem,ParagraphConvTargetEnum.Paragraph);
+            var paragraphConverter = new ParagraphConverter();
+            var item = paragraphConverter.Convert(paragraphItem,compatibility,
+                new ParagraphConverterParams
+                {
+                    ResultType =
+                        ParagraphConvTargetEnum.Paragraph,
+                    Settings = vElementConverterParams.Settings,
+                    StartSection = false,
+                });
 
-            SetClassType(item);
+            SetClassType(item, "v");
 
             //item.ID.Value = Settings.ReferencesManager.AddIdUsed(paragraphItem.ID, item);
 
             return item;
-        }
-
-        public override string GetElementType()
-        {
-            return "v";
         }
     }
 }

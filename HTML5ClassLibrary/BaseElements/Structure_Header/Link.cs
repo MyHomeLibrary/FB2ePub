@@ -167,6 +167,9 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
 
         #region public_properties
 
+        public Link(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Specifies the character encoding of the linked document

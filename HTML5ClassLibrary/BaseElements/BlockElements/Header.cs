@@ -15,6 +15,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "header", SupportedStandards = HTMLElementType.HTML5)]    
     public class Header : HTMLItem, IBlockElement
     {
+        public Header(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is Header)

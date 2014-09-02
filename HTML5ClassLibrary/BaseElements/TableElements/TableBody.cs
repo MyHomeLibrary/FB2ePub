@@ -67,7 +67,9 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         private readonly ValuesSelectionTypeAttribute<Text> _vAlignAttribute = new ValuesSelectionTypeAttribute<Text>("valign",typeof(VAlignAttributeOptions));
 
 
-
+        public TableBody(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Aligns the content inside the "tbody" element

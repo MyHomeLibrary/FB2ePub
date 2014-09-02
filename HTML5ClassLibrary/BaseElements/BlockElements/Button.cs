@@ -96,6 +96,9 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly SimpleSingleTypeAttribute<Text> _value = new SimpleSingleTypeAttribute<Text>("value");
 
 
+        public Button(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         public IAttributeDataAccess Type
         {

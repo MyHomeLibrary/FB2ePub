@@ -77,6 +77,10 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>("width");
 
+        public ColGroup(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// A single col element can represent (or "span") multiple columns. 
         /// This attribute contains a number of columns "spanned" by the col element.

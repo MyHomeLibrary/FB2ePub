@@ -62,7 +62,9 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly ValuesSelectionTypeAttribute<Text> _wrapAttribute = new ValuesSelectionTypeAttribute<Text>("wrap",typeof(WrapAttributeOptions));
 
 
-
+        public TextArea(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Specifies that a text area should automatically get focus when the page loads

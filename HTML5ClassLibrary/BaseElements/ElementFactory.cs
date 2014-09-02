@@ -95,7 +95,7 @@ namespace XHTMLClassLibrary.BaseElements
             }
             else if (xNode.NodeType == XmlNodeType.Text)
             {
-                return new SimpleHTML5Text();
+                return new SimpleHTML5Text(standardType);
             }
             return null;
         }

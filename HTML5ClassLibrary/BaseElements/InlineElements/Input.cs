@@ -252,6 +252,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>("width");
 
 
+        public Input(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Alternate text for controls of the type image.
         /// </summary>

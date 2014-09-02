@@ -13,7 +13,7 @@ namespace XHTMLClassLibrary
         public HTMLDocument(HTMLElementType standard)
         {
             _documentStandard = standard;
-            _htmlRoot = new HTML { HTMLStandard = _documentStandard};
+            _htmlRoot = new HTML(standard);
         }
 
         public HTML RootHTML { get { return _htmlRoot; } }

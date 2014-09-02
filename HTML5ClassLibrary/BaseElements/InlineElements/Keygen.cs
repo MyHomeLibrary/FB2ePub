@@ -51,6 +51,9 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         private readonly SimpleSingleTypeAttribute<Text> _nameAttribute = new SimpleSingleTypeAttribute<Text>("name");
 
 
+        public Keygen(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Specifies that a "keygen" element should automatically get focus when the page loads

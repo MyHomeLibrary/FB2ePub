@@ -12,6 +12,9 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "noscript", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
     public class NoScript : HTMLItem, IBlockElement 
     {
+        public NoScript(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         protected override bool IsValidSubType(IHTMLItem item)
         {

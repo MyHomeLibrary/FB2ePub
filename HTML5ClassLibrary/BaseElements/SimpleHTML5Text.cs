@@ -32,6 +32,10 @@ namespace XHTMLClassLibrary.BaseElements
         /// </summary>
         private string _text;
 
+        public SimpleHTML5Text(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Get/Set actual text contained in element
         /// </summary>

@@ -12,6 +12,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "section", SupportedStandards = HTMLElementType.HTML5)]
     public class Section : HTMLItem, IBlockElement 
     {
+        public Section(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is IInlineItem ||

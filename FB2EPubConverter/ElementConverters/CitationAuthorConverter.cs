@@ -1,39 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
-using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace FB2EPubConverter.ElementConverters
 {
+    internal class CitationAuthorConverterParams
+    {
+        public ConverterOptions Settings { get; set; }    
+    }
+
     internal class CitationAuthorConverter : BaseElementConverter
     {
         /// <summary>
         /// Converts FB2 citation author element
         /// </summary>
         /// <param name="paragraphItem">item to convert</param>
+        /// <param name="compatibility"></param>
+        /// <param name="citationAuthorConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(ParagraphItem paragraphItem)
+        public IHTMLItem Convert(ParagraphItem paragraphItem, HTMLElementType compatibility,CitationAuthorConverterParams citationAuthorConverterParams)
         {
             if (paragraphItem == null)
             {
                 throw new ArgumentNullException("paragraphItem");
             }
-            Div cite = new Div();
+            var cite = new Div(compatibility);
 
-            ParagraphConverter paragraphConverter = new ParagraphConverter { Settings = Settings };
-            cite.Add(paragraphConverter.Convert(paragraphItem, ParagraphConvTargetEnum.Paragraph));
+            var paragraphConverter = new ParagraphConverter();
+            cite.Add(paragraphConverter.Convert(paragraphItem,compatibility,
+                new ParagraphConverterParams {Settings =citationAuthorConverterParams.Settings, ResultType = ParagraphConvTargetEnum.Paragraph, StartSection = false}));
 
-            SetClassType(cite);
+            SetClassType(cite, "citation_author");
             return cite;
         }
 
-        public override string GetElementType()
-        {
-            return "citation_author";
-        }
     }
 }

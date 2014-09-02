@@ -87,7 +87,9 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly SimpleSingleTypeAttribute<TargetType> _formTargetAttribute = new SimpleSingleTypeAttribute<TargetType>("target");
 
 
-
+        public Form(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Specifies a comma-separated list of file types  that the server accepts (that can be submitted through the file upload)

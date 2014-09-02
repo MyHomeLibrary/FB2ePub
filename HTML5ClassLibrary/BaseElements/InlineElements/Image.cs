@@ -93,6 +93,9 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
 
         #region public_attributes
 
+        public Image(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         ///  Specifies the alignment of an image according to surrounding elements

@@ -37,6 +37,10 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly SimpleSingleTypeAttribute<ContentType> _menuItemTypeAttribute = new SimpleSingleTypeAttribute<ContentType>("type");
 
+        public MenuItem(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         /// <summary>
         /// Specifies that the command/menu item should be checked when the page loads. Only for type="radio" or type="checkbox"
         /// </summary>

@@ -8,5 +8,8 @@
     [HTMLItemAttribute(ElementName = "abbr", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class Abbreviation : TextBasedElement
     {
+        public Abbreviation(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
     }
 }

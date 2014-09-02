@@ -12,6 +12,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
         private readonly SimpleSingleTypeAttribute<URI> _citeAttribute = new SimpleSingleTypeAttribute<URI>("cite");
 
+        public BlockQuoteElement(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         public IAttributeDataAccess Cite { get { return _citeAttribute; } }
 
         #region Overrides of IBlockElement

@@ -32,7 +32,9 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements
         // xml:space 	preserve 	Not supported in HTML5. Specifies whether whitespace in code should be preserved
 
 
-
+        public Script(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Location of an external script.

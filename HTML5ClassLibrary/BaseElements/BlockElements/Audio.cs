@@ -51,6 +51,9 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly ValuesSelectionTypeAttribute<Text> _preload = new ValuesSelectionTypeAttribute<Text>("preload",typeof(PreloadAttributeOptions));
 
 
+        public Audio(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Specifies the URL of the audio file

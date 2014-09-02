@@ -16,6 +16,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
     [HTMLItemAttribute(ElementName = "nav", SupportedStandards = HTMLElementType.HTML5)]
     public class Nav : HTMLItem, IBlockElement
     {
+        public Nav(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is IInlineItem ||

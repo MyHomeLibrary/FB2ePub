@@ -61,6 +61,9 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         private readonly SimpleSingleTypeAttribute<Length> _widthAttribute = new SimpleSingleTypeAttribute<Length>("width");
 
 
+        public Video(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Specifies an image to be shown while the video is downloading, or until the user hits the play button

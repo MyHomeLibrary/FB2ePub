@@ -111,7 +111,9 @@ namespace XHTMLClassLibrary.BaseElements.MapAreas
         private readonly SimpleSingleTypeAttribute<MIME_Type> _typeAttribute = new SimpleSingleTypeAttribute<MIME_Type>("type");
 
 
-
+        public Area(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Specifies that an area has no associated link

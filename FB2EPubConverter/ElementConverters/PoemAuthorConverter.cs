@@ -8,30 +8,32 @@ using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace FB2EPubConverter.ElementConverters
 {
+    internal class PoemAuthorConverterParams
+    {
+        public ConverterOptions Settings { get; set; }  
+    }
+
     internal class PoemAuthorConverter : BaseElementConverter
     {
         /// <summary>
         /// Converts FB2 poem  author element
         /// </summary>
         /// <param name="paragraphItem">item to convert</param>
+        /// <param name="compatibility"></param>
+        /// <param name="poemAuthorConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(ParagraphItem paragraphItem)
+        public IHTMLItem Convert(ParagraphItem paragraphItem,HTMLElementType compatibility,PoemAuthorConverterParams poemAuthorConverterParams)
         {
             if (paragraphItem == null)
             {
                 throw new ArgumentNullException("paragraphItem");
             }
 
-            var paragraphConverter = new ParagraphConverter { Settings = Settings };
-            var item = paragraphConverter.Convert(paragraphItem, ParagraphConvTargetEnum.Paragraph);
+            var paragraphConverter = new ParagraphConverter();
+            var item = paragraphConverter.Convert(paragraphItem, compatibility, new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, StartSection = false, Settings = poemAuthorConverterParams .Settings});
 
-            SetClassType(item);
+            SetClassType(item,"poem_author");
             return item;
-        }
-
-        public override string GetElementType()
-        {
-            return "poem_author";
         }
     }
 }

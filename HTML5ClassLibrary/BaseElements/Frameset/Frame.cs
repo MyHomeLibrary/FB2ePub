@@ -73,8 +73,9 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
         private readonly SimpleSingleTypeAttribute<URI> _sourceAttribute = new SimpleSingleTypeAttribute<URI>("src");
 
 
-
-
+        public Frame(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Specifies whether or not to display a border around a frame

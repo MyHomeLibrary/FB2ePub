@@ -27,6 +27,9 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         private readonly SimpleSingleTypeAttribute<Text> _schemeAttribute = new SimpleSingleTypeAttribute<Text>("scheme");
 
 
+        public Meta(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
 
         /// <summary>
         /// Specifies the character encoding for the HTML document 

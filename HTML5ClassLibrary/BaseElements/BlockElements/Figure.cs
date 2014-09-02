@@ -15,6 +15,10 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         public const string ElementName = "figure";
 
 
+        public Figure(HTMLElementType htmlStandard) : base(htmlStandard)
+        {
+        }
+
         public override bool IsValid()
         {
             IEnumerable<IHTMLItem> captions = Subitems.FindAll(x => x is FigCaption);
