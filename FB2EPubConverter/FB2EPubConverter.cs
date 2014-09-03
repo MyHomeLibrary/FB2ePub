@@ -636,8 +636,8 @@ namespace Fb2ePubConverter
                     {
                         epubFile.TranslitMode = TranslitModeEnum.None;
                     }
-                    epubFile.AdobeTemplatePath = string.IsNullOrEmpty(Settings.AdobeTemplatePath) ? @".\Template\template.xpgt" : Settings.AdobeTemplatePath;
-                    epubFile.UseAdobeTemplate = Settings.EnableAdobeTemplate;
+                    epubFile.AdobeTemplatePath = string.IsNullOrEmpty(Settings.V2Settings.AdobeTemplatePath) ? @".\Template\template.xpgt" : Settings.V2Settings.AdobeTemplatePath;
+                    epubFile.UseAdobeTemplate = Settings.V2Settings.EnableAdobeTemplate;
                     epubFile.TranliterateToc = Settings.TransliterateToc;
                     Logger.Log.DebugFormat("Transliteration mode : {0}", epubFile.TranslitMode);
                     _images.RemoveAlpha = Settings.ConvertAlphaPng;
@@ -714,7 +714,7 @@ namespace Fb2ePubConverter
             if (Settings.StandardVersion == EPubVersion.VePub30)
             {
 
-                epubFile = new EPubFileV3(Settings.V3SubStandard == EPubV3SubStandard.V30?V3Standard.V30 : V3Standard.V301)
+                epubFile = new EPubFileV3(Settings.V3Settings.V3SubStandard == EPubV3SubStandard.V30 ? V3Standard.V30 : V3Standard.V301)
                 {
                     FlatStructure = Settings.Flat,
                     EmbedStyles = Settings.EmbedStyles
@@ -732,7 +732,7 @@ namespace Fb2ePubConverter
             }
             // setup epub2 options
             epubFile.AppleOptions.Reset();
-            foreach (var platform in Settings.AppleConverterEPubSettings.V2Settings.Platforms)
+            foreach (var platform in Settings.V2Settings.AppleConverterEPubSettings.V2Settings.Platforms)
             {
                 var targetPlatform = new AppleTargetPlatform();
                 switch (platform.Name)
@@ -1424,9 +1424,9 @@ namespace Fb2ePubConverter
 
         private void PassCalibreMetadata(FB2File fb2File, EPubFile epubFile)
         {
-            epubFile.AddCalibreMetadata = Settings.AddCalibreMetadata;
-            
-            if (!Settings.AddCalibreMetadata)
+            epubFile.AddCalibreMetadata = Settings.V2Settings.AddCalibreMetadata;
+
+            if (!Settings.V2Settings.AddCalibreMetadata)
             {
                 return;
             }

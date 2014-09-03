@@ -1,9 +1,6 @@
 ﻿using Fb2epubSettings.AppleSettings;
 using FontsSettings;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace Fb2epubSettings
@@ -63,17 +60,14 @@ namespace Fb2epubSettings
         private string _fileAsFormat = string.Empty;
         private bool _capitalDrop = false;
         private bool _skipAboutPage = false;
-        private bool _enableAdobeTemplate = false;
         private IgnoreTitleOptions _ignoreTitle = IgnoreTitleOptions.IgnoreNothing;
-        private string _adobeTemplatePath = string.Empty;
         private bool _decorateFontNames = false;
         private readonly EPubFontSettings _fonts = new EPubFontSettings();
         private string _resourcesPath = string.Empty;
-        private readonly AppleConverterSettings _appleEPubSettings = new AppleConverterSettings();
-        private bool _addCalibreMetadata = true;
         private bool _fixCodeElement = true;
         private EPubVersion _standardVersion = EPubVersion.VEpub20;
-        private EPubV3SubStandard _v3SubStandard = EPubV3SubStandard.V30;
+        private readonly EPubV2Settings _v2Settings = new EPubV2Settings();
+        private readonly EPubV3Settings _v3Settings = new EPubV3Settings();
         #endregion
 
         public ConverterSettings()
@@ -102,14 +96,12 @@ namespace Fb2epubSettings
             _fileAsFormat = @"%l.c%%f.c%";
             _capitalDrop = true;
             _skipAboutPage = false;
-            _enableAdobeTemplate = false;
             _ignoreTitle = IgnoreTitleOptions.IgnoreNothing;
-            _adobeTemplatePath = string.Empty;
             _decorateFontNames = true;
             _resourcesPath = string.Empty;
-            _addCalibreMetadata = true;
             _fixCodeElement = true;
-            _appleEPubSettings.SetupDefaults();
+            _v2Settings.SetupDefaults();
+            _v3Settings.SetupDefaults();
 
             _fonts.FontFamilies.Clear();
             //CSSFontFamily family = new CSSFontFamily() { Name = @"LiberationSerif" };
@@ -165,7 +157,6 @@ namespace Fb2epubSettings
             //_fonts.CssElements.Add(css3);
 
             //_standardVersion = EPubVersion.VePub30;
-            _v3SubStandard  =   EPubV3SubStandard.V30;
 
         }
 
@@ -180,16 +171,6 @@ namespace Fb2epubSettings
         {
             get { return _transliterate; }
             set { _transliterate = value; }
-        }
-
-        /// <summary>
-        /// Get/Set if Calibre metadata should be added
-        /// </summary>
-        [XmlElement(ElementName = "AddCalibreMetadata")]
-        public bool AddCalibreMetadata
-        {
-            get { return _addCalibreMetadata; }
-            set { _addCalibreMetadata = value; }
         }
 
         /// <summary>
@@ -343,16 +324,6 @@ namespace Fb2epubSettings
             set { _skipAboutPage = value; }
         }
 
-        /// <summary>
-        /// Enable/Disable embedding of Adobe XPGT Template into a resulting file
-        /// </summary>
-        [XmlElement(ElementName = "EnableAdobeTemplateUsage")]
-        public bool EnableAdobeTemplate 
-        {
-            get { return _enableAdobeTemplate; }
-            set { _enableAdobeTemplate = value; }
-        }
-
 
         /// <summary>
         /// Controls which titles should be ignored when generating ePub
@@ -363,16 +334,6 @@ namespace Fb2epubSettings
         {
             get { return _ignoreTitle; }
             set { _ignoreTitle = value; } 
-        }
-
-        /// <summary>
-        /// Path to location of Adobe XPGT template
-        /// </summary>
-        [XmlElement(ElementName = "AdobeTemplatePath")]
-        public string AdobeTemplatePath 
-        {
-            get { return _adobeTemplatePath; }
-            set { _adobeTemplatePath = value; }
         }
 
         /// <summary>
@@ -395,6 +356,25 @@ namespace Fb2epubSettings
             set { _fonts.CopyFrom(value); }
         }
 
+        /// <summary>
+        /// Get/Set V2 settings
+        /// </summary>
+        [XmlElement(ElementName = "V2Settings")]
+        public EPubV2Settings V2Settings
+        {
+            get { return _v2Settings; }
+            set { _v2Settings.CopyFrom(value); }
+        }
+
+        /// <summary>
+        /// Get/Set V3 settings
+        /// </summary>
+        [XmlElement(ElementName = "V3Settings")]
+        public EPubV3Settings V3Settings
+        {
+            get { return _v3Settings; }
+            set { _v3Settings.CopyFrom(value); }
+        }
 
         /// <summary>
         /// Get/Set path to conversion resources location (CSS, fonts etc)
@@ -406,15 +386,6 @@ namespace Fb2epubSettings
             set { _resourcesPath = value; }
         }
 
-        /// <summary>
-        /// Return reference to set of apple/iBook related settings
-        /// </summary>
-        [XmlElement(ElementName = "AppleConverterEPub2Settings")]
-        public AppleConverterSettings AppleConverterEPubSettings
-        {
-            get { return _appleEPubSettings; }
-            set { _appleEPubSettings.CopyFrom(value); }
-        }
 
         /// <summary>
         /// Version of ePub to generate
@@ -424,16 +395,6 @@ namespace Fb2epubSettings
         {
             get { return _standardVersion; }
             set { _standardVersion = value; }
-        }
-
-        /// <summary>
-        /// Variant (revision) of V3 standard 
-        /// </summary>
-        [XmlElement(ElementName = "EPUB3SubVersion")]
-        public EPubV3SubStandard V3SubStandard
-        {
-            get { return _v3SubStandard; }
-            set { _v3SubStandard = value; }
         }
 
 
@@ -491,17 +452,14 @@ namespace Fb2epubSettings
             _fileAsFormat = temp._fileAsFormat;
             _capitalDrop = temp._capitalDrop;
             _skipAboutPage = temp._skipAboutPage;
-            _enableAdobeTemplate = temp._enableAdobeTemplate;
             _ignoreTitle = temp._ignoreTitle;
-            _adobeTemplatePath = temp._adobeTemplatePath;
             _decorateFontNames = temp._decorateFontNames;
             _fonts.CopyFrom(temp._fonts);
             _resourcesPath = temp._resourcesPath;
-            _addCalibreMetadata = temp._addCalibreMetadata;
             _fixCodeElement = temp._fixCodeElement;
-            _appleEPubSettings.CopyFrom(temp._appleEPubSettings);
             _standardVersion = temp._standardVersion;
-            _v3SubStandard = temp._v3SubStandard;
+            _v2Settings.CopyFrom(temp.V2Settings);
+            _v3Settings.CopyFrom(temp.V3Settings);
         }
 
     }

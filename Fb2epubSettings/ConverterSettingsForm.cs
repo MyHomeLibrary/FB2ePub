@@ -74,8 +74,8 @@ namespace Fb2epubSettings
 
         private void saveXPGT()
         {
-            _settings.EnableAdobeTemplate = checkBoxUseXPGT.Checked;
-            _settings.AdobeTemplatePath = textBoxTemplatePath.Text;
+            _settings.V2Settings.EnableAdobeTemplate = checkBoxUseXPGT.Checked;
+            _settings.V2Settings.AdobeTemplatePath = textBoxTemplatePath.Text;
         }
 
         private void savePathsList()
@@ -147,17 +147,17 @@ namespace Fb2epubSettings
             checkBoxFlatStructure.Checked = _settings.Flat;
             checkBoxEmbedStyles.Checked = _settings.EmbedStyles;
             checkBoxCapitalize.Checked = _settings.CapitalDrop;
-            checkBoxCalibreMetadata.Checked = _settings.AddCalibreMetadata;
+            checkBoxCalibreMetadata.Checked = _settings.V2Settings.AddCalibreMetadata;
             checkBoxSkipAboutPage.Checked = _settings.SkipAboutPage;
-            checkBoxUseXPGT.Checked = _settings.EnableAdobeTemplate;
-            textBoxTemplatePath.Text = _settings.AdobeTemplatePath;
+            checkBoxUseXPGT.Checked = _settings.V2Settings.EnableAdobeTemplate;
+            textBoxTemplatePath.Text = _settings.V2Settings.AdobeTemplatePath;
             LoadFixMode();
             LoadIgnoreTitleMode();
             UpdateSequencesGroup();
             _locationsLoaded = _locations.Init();
             if (!_locationsLoaded)
             {
-                string error = "No FB2EPUBExt.INI file found in any of the paths";
+                const string error = "No FB2EPUBExt.INI file found in any of the paths";
                 toolTipControl.SetToolTip(tabPagePaths, error);
                 toolTipControl.SetToolTip(listBoxPaths, error);
                 Logger.Log.Error(error);
@@ -603,7 +603,7 @@ namespace Fb2epubSettings
 
         private void checkBoxUseXPGT_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.EnableAdobeTemplate = checkBoxUseXPGT.Checked;
+            _settings.V2Settings.EnableAdobeTemplate = checkBoxUseXPGT.Checked;
             UpdateXPGTGroupGUI();
         }
 
@@ -806,7 +806,7 @@ namespace Fb2epubSettings
 
         private void checkBoxCalibreMetadata_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.AddCalibreMetadata = checkBoxCalibreMetadata.Checked;
+            _settings.V2Settings.AddCalibreMetadata = checkBoxCalibreMetadata.Checked;
         }
 
         private void checkBoxVisibleInExt_Click(object sender, EventArgs e)

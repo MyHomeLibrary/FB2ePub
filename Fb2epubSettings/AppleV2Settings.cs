@@ -115,7 +115,7 @@ namespace Fb2epubSettings
         {
             SuspendLayout();
 
-            LoadUsedPlatformsFromSettings(settings.AppleConverterEPubSettings.V2Settings.Platforms);
+            LoadUsedPlatformsFromSettings(settings.V2Settings.AppleConverterEPubSettings.V2Settings.Platforms);
 
             ResumeLayout();            
         }
@@ -403,12 +403,12 @@ namespace Fb2epubSettings
         /// <param name="settings"></param>
         public override void SaveToSettings(ConverterSettings settings)
         {
-            settings.AppleConverterEPubSettings.V2Settings.Platforms.Clear();
+            settings.V2Settings.AppleConverterEPubSettings.V2Settings.Platforms.Clear();
             foreach (var platform in _used.Values)
             {
-                AppleEPub2PlatformSettings createdSettings = new AppleEPub2PlatformSettings();
+                var createdSettings = new AppleEPub2PlatformSettings();
                 createdSettings.CopyFrom(platform);
-                settings.AppleConverterEPubSettings.V2Settings.Platforms.Add(createdSettings);
+                settings.V2Settings.AppleConverterEPubSettings.V2Settings.Platforms.Add(createdSettings);
             }
             base.SaveToSettings(settings);
 
