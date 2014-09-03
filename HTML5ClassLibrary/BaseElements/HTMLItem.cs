@@ -237,7 +237,7 @@ namespace XHTMLClassLibrary.BaseElements
         public virtual XNode Generate()
         {
             string currentObjectElementName = GetObjectElementName();
-            XElement xElement = null;
+            XElement xElement;
             if (IsXMLFormat(_htmlStandard))
             {
                 XNamespace namespaceElm = @"http://www.w3.org/1999/xhtml";

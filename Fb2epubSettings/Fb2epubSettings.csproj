@@ -139,6 +139,8 @@
     <Compile Include="EditFontFamilyForm.Designer.cs">
       <DependentUpon>EditFontFamilyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EPubV2Settings.cs" />
+    <Compile Include="EPubV3Settings.cs" />
     <Compile Include="ImportExportForm.cs">
       <SubType>Form</SubType>
     </Compile>
