@@ -3,23 +3,23 @@ using FB2Library.Elements.Table;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.TableElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class TableConverterParams
+    internal class TableConverterParamsV2
     {
-        public ConverterOptions Settings { get; set; }  
+        public ConverterOptionsV2 Settings { get; set; }  
     }
 
-    internal class TableConverter : BaseElementConverter
+    internal class TableConverterV2 : BaseElementConverterV2
     {
         /// <summary>
-        /// Converts FB2 Table object into XHTML reperesentation
+        /// Converts FB2 Table object into XHTML representation
         /// </summary>
         /// <param name="tableItem">item to convert</param>
         /// <param name="compatibility"></param>
         /// <param name="tableConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(TableItem tableItem,HTMLElementType compatibility,TableConverterParams tableConverterParams)
+        public IHTMLItem Convert(TableItem tableItem,HTMLElementType compatibility,TableConverterParamsV2 tableConverterParams)
         {
             if (tableItem == null)
             {
@@ -29,8 +29,8 @@ namespace FB2EPubConverter.ElementConverters
 
             foreach (var row in tableItem.Rows)
             {
-                var rowConverter = new RowConverter();
-                table.Add(rowConverter.Convert(row, compatibility, new RowConverterParams { Settings = tableConverterParams.Settings}));
+                var rowConverter = new RowConverterV2();
+                table.Add(rowConverter.Convert(row, compatibility, new RowConverterParamsV2 { Settings = tableConverterParams.Settings}));
             }
 
             SetClassType(table,string.Empty);

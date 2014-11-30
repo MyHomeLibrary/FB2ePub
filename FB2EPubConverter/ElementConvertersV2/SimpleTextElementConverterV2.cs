@@ -6,15 +6,15 @@ using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class SimpleTextElementConverterParams
+    internal class SimpleTextElementConverterParamsV2
     {
-        public ConverterOptions Settings { get; set; }  
+        public ConverterOptionsV2 Settings { get; set; }  
         public bool NeedToInsertDrop { get; set; }
     }
 
-    internal class SimpleTextElementConverter : BaseElementConverter
+    internal class SimpleTextElementConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Converts FB2 simple text 
@@ -24,7 +24,7 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="compatibility"></param>
         /// <param name="simpleTextElementConverterParams"></param>
         /// <returns></returns>
-        public List<IHTMLItem> Convert(StyleType styletypeItem,HTMLElementType compatibility,SimpleTextElementConverterParams simpleTextElementConverterParams)
+        public List<IHTMLItem> Convert(StyleType styletypeItem,HTMLElementType compatibility,SimpleTextElementConverterParamsV2 simpleTextElementConverterParams)
         {
 
             if (styletypeItem == null)
@@ -162,17 +162,17 @@ namespace FB2EPubConverter.ElementConverters
             }
             else if (styletypeItem is InternalLinkItem)
             {
-                var linkConverter = new InternalLinkConverter();
-                list.AddRange(linkConverter.Convert(styletypeItem as InternalLinkItem, compatibility, new InternalLinkConverterParams
+                var linkConverter = new InternalLinkConverterV2();
+                list.AddRange(linkConverter.Convert(styletypeItem as InternalLinkItem, compatibility, new InternalLinkConverterParamsV2
                 {
                     NeedToInsertDrop = simpleTextElementConverterParams.NeedToInsertDrop, Settings = simpleTextElementConverterParams.Settings,
                 }));
             }
             else if (styletypeItem is InlineImageItem)
             {
-                var inlineImageConverter = new InlineImageConverter();
+                var inlineImageConverter = new InlineImageConverterV2();
                 list.Add(inlineImageConverter.Convert(styletypeItem as InlineImageItem,compatibility,
-                    new InlineImageConverterParams { Settings = simpleTextElementConverterParams.Settings}));
+                    new InlineImageConverterParamsV2 { Settings = simpleTextElementConverterParams.Settings}));
             }
 
             return list;

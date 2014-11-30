@@ -5,15 +5,15 @@ using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class InternalLinkConverterParams
+    internal class InternalLinkConverterParamsV2
     {
-        public ConverterOptions Settings { get; set; }
+        public ConverterOptionsV2 Settings { get; set; }
         public bool NeedToInsertDrop { get; set; }
     }
 
-    internal class InternalLinkConverter : BaseElementConverter
+    internal class InternalLinkConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Convert FB2 internal link 
@@ -23,7 +23,7 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="internalLinkConverterParams"></param>
         /// <returns>XHTML representation</returns>
         public List<IHTMLItem> Convert(InternalLinkItem internalLinkItem, HTMLElementType compatibility,
-            InternalLinkConverterParams internalLinkConverterParams)
+            InternalLinkConverterParamsV2 internalLinkConverterParams)
         {
             if (internalLinkItem == null)
             {
@@ -51,9 +51,9 @@ namespace FB2EPubConverter.ElementConverters
                 }
                 if (internalLinkItem.LinkText != null)
                 {
-                    var tempConverter = new SimpleTextElementConverter();
+                    var tempConverter = new SimpleTextElementConverterV2();
                     foreach (var s in tempConverter.Convert(internalLinkItem.LinkText, compatibility,
-                        new SimpleTextElementConverterParams
+                        new SimpleTextElementConverterParamsV2
                         {
                             Settings = internalLinkConverterParams.Settings,
                             NeedToInsertDrop = internalLinkConverterParams.NeedToInsertDrop
@@ -67,9 +67,9 @@ namespace FB2EPubConverter.ElementConverters
                 list.Add(anchor);
                 return list;
             }
-            var converter = new SimpleTextElementConverter();
+            var converter = new SimpleTextElementConverterV2();
             return converter.Convert(internalLinkItem.LinkText, compatibility,
-                new SimpleTextElementConverterParams
+                new SimpleTextElementConverterParamsV2
                 {
                     Settings = internalLinkConverterParams.Settings,
                     NeedToInsertDrop = internalLinkConverterParams.NeedToInsertDrop

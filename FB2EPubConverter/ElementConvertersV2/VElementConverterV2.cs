@@ -2,26 +2,26 @@
 using FB2Library.Elements.Poem;
 using XHTMLClassLibrary.BaseElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class VElementConverterParams
+    internal class VElementConverterParamsV2
     {
-        public ConverterOptions Settings { get; set; }  
+        public ConverterOptionsV2 Settings { get; set; }  
     }
 
-    internal class VElementConverter : BaseElementConverter
+    internal class VElementConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Converts "v" (poem) sub-element
         /// </summary>
-        /// <returns>XHTML formated representation</returns>
-        public IHTMLItem Convert(VPoemParagraph paragraphItem,HTMLElementType compatibility,VElementConverterParams vElementConverterParams)
+        /// <returns>XHTML formatted representation</returns>
+        public IHTMLItem Convert(VPoemParagraph paragraphItem,HTMLElementType compatibility,VElementConverterParamsV2 vElementConverterParams)
         {
             if (paragraphItem == null)
             {
                 throw new ArgumentNullException("paragraphItem");
             }
-            var paragraphConverter = new ParagraphConverter();
+            var paragraphConverter = new ParagraphConverterV2();
             var item = paragraphConverter.Convert(paragraphItem,compatibility,
                 new ParagraphConverterParams
                 {

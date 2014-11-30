@@ -128,37 +128,37 @@
     </Compile>
     <Compile Include="ConvertProcessor.cs" />
     <Compile Include="ConvertProcessorSettings.cs" />
-    <Compile Include="ElementConverters\AnnotationConverter.cs" />
-    <Compile Include="ElementConverters\BaseElementConverter.cs" />
-    <Compile Include="ElementConverters\CitationAuthorConverter.cs" />
-    <Compile Include="ElementConverters\CitationConverter.cs" />
-    <Compile Include="ElementConverters\ConverterOptions.cs" />
-    <Compile Include="ElementConverters\EmptyLineConverter.cs" />
-    <Compile Include="ElementConverters\EpigraphAuthorConverter.cs" />
-    <Compile Include="ElementConverters\EpigraphConverter.cs" />
-    <Compile Include="ElementConverters\ImageConverter.cs" />
-    <Compile Include="ElementConverters\InlineImageConverter.cs" />
-    <Compile Include="ElementConverters\InternalLinkConverter.cs" />
-    <Compile Include="ElementConverters\LinkSectionConverter.cs" />
-    <Compile Include="ElementConverters\MainEpigraphConverter.cs" />
-    <Compile Include="ElementConverters\ParagraphConverter.cs" />
-    <Compile Include="ElementConverters\PoemAuthorConverter.cs" />
-    <Compile Include="ElementConverters\PoemConverter.cs" />
-    <Compile Include="ElementConverters\PoemDateConverter.cs" />
-    <Compile Include="ElementConverters\PoemEpigraphConverter.cs" />
-    <Compile Include="ElementConverters\PoemSubtitleConverter.cs" />
-    <Compile Include="ElementConverters\PoemTitleConverter.cs" />
-    <Compile Include="ElementConverters\RowConverter.cs" />
-    <Compile Include="ElementConverters\SimpleTextElementConverter.cs" />
-    <Compile Include="ElementConverters\StanzaConverter.cs" />
-    <Compile Include="ElementConverters\SubtitleConverter.cs" />
-    <Compile Include="ElementConverters\TableConverter.cs" />
-    <Compile Include="ElementConverters\TitleConverter.cs" />
-    <Compile Include="ElementConverters\VElementConverter.cs" />
-    <Compile Include="ElementConverters\XhtmlItemExtender.cs" />
+    <Compile Include="ElementConvertersV2\AnnotationConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\BaseElementConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\CitationAuthorConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\CitationConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\ConverterOptionsV2.cs" />
+    <Compile Include="ElementConvertersV2\EmptyLineConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\EpigraphAuthorConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\EpigraphConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\ImageConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\InlineImageConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\InternalLinkConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\LinkSectionConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\MainEpigraphConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\ParagraphConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\PoemAuthorConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\PoemConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\PoemDateConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\PoemEpigraphConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\PoemSubtitleConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\PoemTitleConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\RowConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\SimpleTextElementConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\StanzaConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\SubtitleConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\TableConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\TitleConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\VElementConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\XhtmlItemExtenderV2.cs" />
     <Compile Include="Interfaces\ePubConverterInterface.cs" />
     <Compile Include="FB2EPubConverter.cs" />
-    <Compile Include="ElementConverters\Fb2EpubInfoConverter.cs" />
+    <Compile Include="ElementConvertersV2\Fb2EpubInfoConverterV2.cs" />
     <Compile Include="HRefManager.cs" />
     <Compile Include="ImageManager.cs" />
     <Compile Include="ProcessAuthorFormat.cs" />
@@ -166,7 +166,7 @@
     <Compile Include="Interfaces\ProgressUpdateInterface.cs" />
     <Compile Include="ProgressUpdateWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ElementConverters\SectionConverter.cs" />
+    <Compile Include="ElementConvertersV2\SectionConverterV2.cs" />
     <Compile Include="UnicodeHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -281,7 +281,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ElementConvertersV3\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>call "$(DevEnvDir)..\..\VC\vcvarsall.bat"

@@ -472,11 +472,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.EnableAdobeTemplate = false;
+                            settings.Settings.V2Settings.EnableAdobeTemplate = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.EnableAdobeTemplate = true;
+                            settings.Settings.V2Settings.EnableAdobeTemplate = true;
                         }
                         else
                         {
@@ -486,7 +486,7 @@ namespace Fb2ePub
                 }
                 else if (command.StartsWith("xpgtpath:"))
                 {
-                    settings.Settings.AdobeTemplatePath =  command.Substring(9);
+                    settings.Settings.V2Settings.AdobeTemplatePath = command.Substring(9);
                 }
                 else if (command.StartsWith("ignoretitle:"))
                 {
@@ -536,11 +536,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.AddCalibreMetadata = false;
+                            settings.Settings.V2Settings.AddCalibreMetadata = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.AddCalibreMetadata = true;
+                            settings.Settings.V2Settings.AddCalibreMetadata = true;
                         }
                         else
                         {

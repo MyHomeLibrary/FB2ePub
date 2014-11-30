@@ -4,16 +4,15 @@ using FB2Library.Elements.Poem;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
     internal class PoemConverterParams
     {
         public int Level { get; set; }
-        public ConverterOptions Settings { get; set; }  
+        public ConverterOptionsV2 Settings { get; set; }  
     }
 
-    internal class PoemConverter : BaseElementConverter
+    internal class PoemConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Convert poem FB2 element
@@ -32,14 +31,14 @@ namespace FB2EPubConverter.ElementConverters
 
             if (poemItem.Title != null)
             {
-                var titleConverter = new PoemTitleConverter();
+                var titleConverter = new PoemTitleConverterV2();
                 poemContent.Add(titleConverter.Convert(poemItem.Title,compatibility,
-                    new TitleConverterParams{ TitleLevel = poemConverterParams.Level,Settings = poemConverterParams.Settings}));
+                    new TitleConverterParamsV2{ TitleLevel = poemConverterParams.Level,Settings = poemConverterParams.Settings}));
             }
 
             foreach (var epigraph in poemItem.Epigraphs)
             {
-                var epigraphConverter = new PoemEpigraphConverter();
+                var epigraphConverter = new PoemEpigraphConverterV2();
                 poemContent.Add(epigraphConverter.Convert(epigraph,compatibility,
                     new EpigraphConverterParams{Level = poemConverterParams.Level+ 1,Settings = poemConverterParams.Settings}
                     ));
@@ -49,29 +48,29 @@ namespace FB2EPubConverter.ElementConverters
             {
                 if (poemElement is StanzaItem)
                 {
-                    var stanzaConverter = new StanzaConverter();
+                    var stanzaConverter = new StanzaConverterV2();
                     poemContent.Add(stanzaConverter.Convert(poemElement as StanzaItem,compatibility, 
-                        new StanzaConverterParams {Level = poemConverterParams.Level + 1,Settings = poemConverterParams.Settings}));
+                        new StanzaConverterParamsV2 {Level = poemConverterParams.Level + 1,Settings = poemConverterParams.Settings}));
                 }
                 else if (poemElement is SubTitleItem)
                 {
-                    var subtitleConverter = new PoemSubtitleConverter();
+                    var subtitleConverter = new PoemSubtitleConverterV2();
                     poemContent.Add(subtitleConverter.Convert(poemElement as SubTitleItem,compatibility,
-                        new SubtitleConverterParams { Settings = poemConverterParams.Settings}));
+                        new SubtitleConverterParamsV2 { Settings = poemConverterParams.Settings}));
                 }
             }
 
 
             foreach (var author in poemItem.Authors)
             {
-                var poemAuthorConverter = new PoemAuthorConverter();
+                var poemAuthorConverter = new PoemAuthorConverterV2();
                 poemContent.Add(poemAuthorConverter.Convert(author,compatibility,
-                    new PoemAuthorConverterParams { Settings = poemConverterParams .Settings}));
+                    new PoemAuthorConverterParamsV2 { Settings = poemConverterParams .Settings}));
             }
 
             if (poemItem.Date != null)
             {
-                var poemDateConverter = new PoemDateConverter();
+                var poemDateConverter = new PoemDateConverterV2();
                 poemContent.Add(poemDateConverter.Convert(poemItem.Date,compatibility));
             }
 

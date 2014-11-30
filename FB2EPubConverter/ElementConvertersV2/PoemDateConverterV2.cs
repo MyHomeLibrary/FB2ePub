@@ -3,9 +3,9 @@ using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    class PoemDateConverter : BaseElementConverter
+    class PoemDateConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Converts poemdate FB2 element 

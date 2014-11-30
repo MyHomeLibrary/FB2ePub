@@ -1,24 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    class PoemSubtitleConverter : BaseElementConverter
+    class PoemSubtitleConverterV2 : BaseElementConverterV2
     {
 
-        public IHTMLItem Convert(SubTitleItem subtitleItem, HTMLElementType compatibility, SubtitleConverterParams subtitleConverterParams)
+        public IHTMLItem Convert(SubTitleItem subtitleItem, HTMLElementType compatibility, SubtitleConverterParamsV2 subtitleConverterParams)
         {
             if (subtitleItem == null)
             {
                 throw new ArgumentNullException("subtitleItem");
             }
             //Div subtitle = new Div();
-            var paragraphConverter = new ParagraphConverter();
+            var paragraphConverter = new ParagraphConverterV2();
             var internalData = paragraphConverter.Convert(subtitleItem, compatibility,
                 new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, Settings = subtitleConverterParams.Settings, StartSection = false });
             SetClassType(internalData, "poem_subtitle");

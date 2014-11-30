@@ -3,21 +3,21 @@ using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class InlineImageConverterParams
+    internal class InlineImageConverterParamsV2
     {
-        public ConverterOptions Settings { get; set; }
+        public ConverterOptionsV2 Settings { get; set; }
     }
 
-    internal class InlineImageConverter : BaseElementConverter
+    internal class InlineImageConverterV2 : BaseElementConverterV2
     {
 
         /// <summary>
         /// Converts FB2 inline image
         /// </summary>
         /// <returns></returns>
-        public IHTMLItem Convert(InlineImageItem inlineImageItem,HTMLElementType compatibility,InlineImageConverterParams inlineImageConverterParams)
+        public IHTMLItem Convert(InlineImageItem inlineImageItem,HTMLElementType compatibility,InlineImageConverterParamsV2 inlineImageConverterParams)
         {
             if (inlineImageItem == null)
             {

@@ -3,15 +3,15 @@ using FB2Library.Elements.Poem;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class StanzaConverterParams
+    internal class StanzaConverterParamsV2
     {
-        public ConverterOptions Settings { get; set; }  
+        public ConverterOptionsV2 Settings { get; set; }  
         public int Level { get; set; }
     }
 
-    internal class StanzaConverter : BaseElementConverter
+    internal class StanzaConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Converts FB2 Stanza element into XHTML representation
@@ -20,7 +20,7 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="compatibility"></param>
         /// <param name="stanzaConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(StanzaItem stanzaItem,HTMLElementType compatibility,StanzaConverterParams stanzaConverterParams)
+        public IHTMLItem Convert(StanzaItem stanzaItem,HTMLElementType compatibility,StanzaConverterParamsV2 stanzaConverterParams)
         {
             if (stanzaItem == null)
             {
@@ -30,20 +30,20 @@ namespace FB2EPubConverter.ElementConverters
 
             if (stanzaItem.Title != null)
             {
-                var titleConverter = new TitleConverter();
-                stanzaSection.Add(titleConverter.Convert(stanzaItem.Title, compatibility, new TitleConverterParams { TitleLevel = stanzaConverterParams.Level, Settings = stanzaConverterParams .Settings}));
+                var titleConverter = new TitleConverterV2();
+                stanzaSection.Add(titleConverter.Convert(stanzaItem.Title, compatibility, new TitleConverterParamsV2 { TitleLevel = stanzaConverterParams.Level, Settings = stanzaConverterParams .Settings}));
             }
 
             if (stanzaItem.SubTitle != null)
             {
-                var subtitleConverter = new SubtitleConverter();
-                stanzaSection.Add(subtitleConverter.Convert(stanzaItem.SubTitle, compatibility, new SubtitleConverterParams { Settings = stanzaConverterParams .Settings}));
+                var subtitleConverter = new SubtitleConverterV2();
+                stanzaSection.Add(subtitleConverter.Convert(stanzaItem.SubTitle, compatibility, new SubtitleConverterParamsV2 { Settings = stanzaConverterParams .Settings}));
             }
 
             foreach (var line in stanzaItem.Lines)
             {
-                var vElementConverter = new VElementConverter();
-                stanzaSection.Add(vElementConverter.Convert(line, compatibility, new VElementConverterParams { Settings = stanzaConverterParams .Settings}));
+                var vElementConverter = new VElementConverterV2();
+                stanzaSection.Add(vElementConverter.Convert(line, compatibility, new VElementConverterParamsV2 { Settings = stanzaConverterParams .Settings}));
             }
 
             if (stanzaItem.Lang != null)

@@ -9,12 +9,12 @@ using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 using XHTMLClassLibrary.BaseElements.ListElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
     /// <summary>
     /// Used to convert FB2 information section into EPUB document content to generate FB2Info page(s)
     /// </summary>
-    internal class Fb2EpubInfoConverter : BaseElementConverter
+    internal class Fb2EpubInfoConverterV2 : BaseElementConverterV2
     {
         private static string GetAuthorAsSting(AuthorType author)
         {
@@ -47,7 +47,7 @@ namespace FB2EPubConverter.ElementConverters
         }
 
 
-        public HTMLItem Convert(FB2File fb2File, HTMLElementType compatibility, ConverterOptions settings)
+        public HTMLItem Convert(FB2File fb2File, HTMLElementType compatibility, ConverterOptionsV2 settings)
         {
             if (fb2File == null)
             {
@@ -150,7 +150,7 @@ namespace FB2EPubConverter.ElementConverters
                     var heading = new H4(compatibility);
                     heading.Add(new SimpleHTML5Text(compatibility) { Text = "Document history:" });
                     info.Add(heading);
-                    var annotationConverter = new AnnotationConverter();
+                    var annotationConverter = new AnnotationConverterV2();
                     info.Add(annotationConverter.Convert(fb2File.DocumentInfo.History, compatibility, new AnnotationConverterParams { Level = 1, Settings = settings }));
                     //Paragraph p = new Paragraph();
                     //p.Add(new SimpleHTML5Text() { Text = fb2File.DocumentInfo.History.ToString() });

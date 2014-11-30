@@ -5,16 +5,16 @@ using FB2Library.Elements.Table;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
 
     internal class CitationConverterParams
     {
-        public ConverterOptions Settings { get; set; }
+        public ConverterOptionsV2 Settings { get; set; }
         public int Level { get; set; }       
     }
 
-    internal class CitationConverter : BaseElementConverter
+    internal class CitationConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Convert FB2 citation element
@@ -40,39 +40,39 @@ namespace FB2EPubConverter.ElementConverters
             {
                 if (item is SubTitleItem)
                 {
-                    var subtitleConverter = new SubtitleConverter();
+                    var subtitleConverter = new SubtitleConverterV2();
                     citation.Add(subtitleConverter.Convert(item as SubTitleItem,compatibility,
-                        new SubtitleConverterParams { Settings = citationConverterParams.Settings}));
+                        new SubtitleConverterParamsV2 { Settings = citationConverterParams.Settings}));
                 }
                 else if (item is ParagraphItem)
                 {
-                    var paragraphConverter = new ParagraphConverter();
+                    var paragraphConverter = new ParagraphConverterV2();
                     citation.Add(paragraphConverter.Convert(item as ParagraphItem,compatibility, 
                         new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, Settings = citationConverterParams.Settings, StartSection = false}));
                 }
                 else if (item is PoemItem)
                 {
-                    var poemConverter = new PoemConverter();
+                    var poemConverter = new PoemConverterV2();
                     citation.Add(poemConverter.Convert(item as PoemItem, compatibility,
                         new PoemConverterParams { Settings = citationConverterParams.Settings, Level = citationConverterParams.Level + 1 } 
                         ));
                 }
                 else if (item is EmptyLineItem)
                 {
-                    var emptyLineConverter = new EmptyLineConverter();
+                    var emptyLineConverter = new EmptyLineConverterV2();
                     citation.Add(emptyLineConverter.Convert(compatibility));
                 }
                 else if (item is TableItem)
                 {
-                    var tableConverter = new TableConverter();
+                    var tableConverter = new TableConverterV2();
                     citation.Add(tableConverter.Convert(item as TableItem,compatibility,
-                        new TableConverterParams { Settings = citationConverterParams.Settings}));
+                        new TableConverterParamsV2 { Settings = citationConverterParams.Settings}));
                 }
             }
 
             foreach (var author in citeItem.TextAuthors)
             {
-                var citationAuthorConverter = new CitationAuthorConverter();
+                var citationAuthorConverter = new CitationAuthorConverterV2();
                 citation.Add(citationAuthorConverter.Convert(author,compatibility,new CitationAuthorConverterParams { Settings = citationConverterParams.Settings}));
             }
 

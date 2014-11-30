@@ -1,9 +1,9 @@
 ﻿using XHTMLClassLibrary.BaseElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
 
-    internal abstract class  BaseElementConverter
+    internal abstract class  BaseElementConverterV2
     {
         protected void SetClassType(HTMLItem item, string elementClassName)
         {
