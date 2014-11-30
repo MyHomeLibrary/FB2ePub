@@ -22,7 +22,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// <param name="compatibility"></param>
         /// <param name="internalLinkConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public List<IHTMLItem> Convert(InternalLinkItem internalLinkItem, HTMLElementType compatibility,
+        public List<IHTMLItem> Convert(InternalLinkItem internalLinkItem, 
             InternalLinkConverterParamsV2 internalLinkConverterParams)
         {
             if (internalLinkItem == null)
@@ -32,7 +32,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             var list = new List<IHTMLItem>();
             if (!string.IsNullOrEmpty(internalLinkItem.HRef) && internalLinkItem.HRef != "#")
             {
-                var anchor = new Anchor(compatibility);
+                var anchor = new Anchor(HTMLElementType.XHTML11);
                 bool internalLink = false;
                 if (!ReferencesUtils.IsExternalLink(internalLinkItem.HRef))
                 {
@@ -52,7 +52,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 if (internalLinkItem.LinkText != null)
                 {
                     var tempConverter = new SimpleTextElementConverterV2();
-                    foreach (var s in tempConverter.Convert(internalLinkItem.LinkText, compatibility,
+                    foreach (var s in tempConverter.Convert(internalLinkItem.LinkText,
                         new SimpleTextElementConverterParamsV2
                         {
                             Settings = internalLinkConverterParams.Settings,
@@ -68,7 +68,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 return list;
             }
             var converter = new SimpleTextElementConverterV2();
-            return converter.Convert(internalLinkItem.LinkText, compatibility,
+            return converter.Convert(internalLinkItem.LinkText, 
                 new SimpleTextElementConverterParamsV2
                 {
                     Settings = internalLinkConverterParams.Settings,

@@ -2,6 +2,12 @@
 
 namespace Fb2epubSettings
 {
+    public enum EPubV3SubStandard
+    {
+        V30,
+        V301,
+    }
+
     [XmlRoot(ElementName = "EPubV3Settings")]
     public class EPubV3Settings
     {

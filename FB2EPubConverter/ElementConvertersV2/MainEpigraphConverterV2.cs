@@ -12,49 +12,48 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// Converts FB2 epigraph element
         /// </summary>
         /// <param name="epigraphItem"></param>
-        /// <param name="compatibility"></param>
         /// <param name="epigraphConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public Div Convert(EpigraphItem epigraphItem, HTMLElementType compatibility, EpigraphConverterParams epigraphConverterParams)
+        public Div Convert(EpigraphItem epigraphItem,  EpigraphConverterParams epigraphConverterParams)
         {
             if (epigraphItem == null)
             {
                 throw new ArgumentNullException("epigraphItem");
             }
-            var content = new Div(compatibility);
+            var content = new Div(HTMLElementType.XHTML11);
 
             foreach (var element in epigraphItem.EpigraphData)
             {
                 if (element is ParagraphItem)
                 {
                     var paragraphConverter = new ParagraphConverterV2();
-                    content.Add(paragraphConverter.Convert(element as ParagraphItem, compatibility,
+                    content.Add(paragraphConverter.Convert(element as ParagraphItem, 
                         new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, Settings = epigraphConverterParams.Settings, StartSection = false }));
                 }
                 if (element is PoemItem)
                 {
                     var poemConverter = new PoemConverterV2();
-                    content.Add(poemConverter.Convert(element as PoemItem, compatibility,
+                    content.Add(poemConverter.Convert(element as PoemItem,
                     new PoemConverterParams { Level = epigraphConverterParams.Level + 1, Settings = epigraphConverterParams.Settings }
                     ));
                 }
                 if (element is CiteItem)
                 {
                     var citationConverter = new CitationConverterV2();
-                    content.Add(citationConverter.Convert(element as CiteItem, compatibility,
+                    content.Add(citationConverter.Convert(element as CiteItem, 
                         new CitationConverterParams { Level = epigraphConverterParams.Level + 1, Settings = epigraphConverterParams.Settings }));
                 }
                 if (element is EmptyLineItem)
                 {
                     var emptyLineConverter = new EmptyLineConverterV2();
-                    content.Add(emptyLineConverter.Convert(compatibility));
+                    content.Add(emptyLineConverter.Convert());
                 }
             }
 
             foreach (var author in epigraphItem.TextAuthors)
             {
                 var epigraphAuthorConverter = new EpigraphAuthorConverterV2();
-                content.Add(epigraphAuthorConverter.Convert(author as TextAuthorItem, compatibility, new EpigraphAuthorConverterParams { Settings = epigraphConverterParams.Settings }));
+                content.Add(epigraphAuthorConverter.Convert(author as TextAuthorItem,  new EpigraphAuthorConverterParams { Settings = epigraphConverterParams.Settings }));
             }
 
             SetClassType(content, "epigraph_main");

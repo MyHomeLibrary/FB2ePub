@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="ConvertProcessor.cs" />
     <Compile Include="ConvertProcessorSettings.cs" />
+    <Compile Include="DescriptionConverters.cs" />
     <Compile Include="ElementConvertersV2\AnnotationConverterV2.cs" />
     <Compile Include="ElementConvertersV2\BaseElementConverterV2.cs" />
     <Compile Include="ElementConvertersV2\CitationAuthorConverterV2.cs" />
@@ -156,8 +157,11 @@
     <Compile Include="ElementConvertersV2\TitleConverterV2.cs" />
     <Compile Include="ElementConvertersV2\VElementConverterV2.cs" />
     <Compile Include="ElementConvertersV2\XhtmlItemExtenderV2.cs" />
+    <Compile Include="ElementConvertersV3\Fb2EpubInfoConverterV3.cs" />
+    <Compile Include="Fb2EPubConverterEngineV2.cs" />
+    <Compile Include="Fb2EPubConverterEngineV3.cs" />
     <Compile Include="Interfaces\ePubConverterInterface.cs" />
-    <Compile Include="FB2EPubConverter.cs" />
+    <Compile Include="Fb2EPubConverterEngineBase.cs" />
     <Compile Include="ElementConvertersV2\Fb2EpubInfoConverterV2.cs" />
     <Compile Include="HRefManager.cs" />
     <Compile Include="ImageManager.cs" />
@@ -281,9 +285,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ElementConvertersV3\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>call "$(DevEnvDir)..\..\VC\vcvarsall.bat"

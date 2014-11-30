@@ -13,14 +13,14 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// <param name="poemDateItem">item to convert </param>
         /// <param name="compatibility"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(DateItem poemDateItem,HTMLElementType compatibility)
+        public IHTMLItem Convert(DateItem poemDateItem)
         {
             if (poemDateItem == null)
             {
                 throw new ArgumentNullException("poemDateItem");
             }
-            var date = new Paragraph(compatibility);
-            date.Add(new SimpleHTML5Text(compatibility) { Text = poemDateItem.Text });
+            var date = new Paragraph(HTMLElementType.XHTML11);
+            date.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = poemDateItem.Text });
             SetClassType(date,"poemdate");
             return date;
         }
