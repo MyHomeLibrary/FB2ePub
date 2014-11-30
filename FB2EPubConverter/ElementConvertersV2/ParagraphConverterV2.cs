@@ -3,7 +3,7 @@ using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
     public enum ParagraphConvTargetEnum
     {
@@ -18,12 +18,12 @@ namespace FB2EPubConverter.ElementConverters
 
     internal class ParagraphConverterParams
     {
-        public ConverterOptions Settings { get; set; }  
+        public ConverterOptionsV2 Settings { get; set; }  
         public ParagraphConvTargetEnum ResultType { get; set; }
         public bool StartSection { get; set; }
     }
 
-    internal class ParagraphConverter : BaseElementConverter
+    internal class ParagraphConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Converts FB2 Paragraph to EPUB paragraph
@@ -45,9 +45,9 @@ namespace FB2EPubConverter.ElementConverters
             {
                 if (item is SimpleText)
                 {
-                    var textConverter = new SimpleTextElementConverter();
+                    var textConverter = new SimpleTextElementConverterV2();
                     foreach (var s in textConverter.Convert(item,compatibility, 
-                        new SimpleTextElementConverterParams { Settings = paragraphConverterParams.Settings, NeedToInsertDrop = needToInsertDrop}))
+                        new SimpleTextElementConverterParamsV2 { Settings = paragraphConverterParams.Settings, NeedToInsertDrop = needToInsertDrop}))
                     {
                         if (needToInsertDrop)
                         {
@@ -65,8 +65,8 @@ namespace FB2EPubConverter.ElementConverters
                         var inlineItem = item as InlineImageItem;
                         if (paragraphConverterParams.Settings.Images.IsImageIdReal(inlineItem.HRef))
                         {
-                            var inlineImageConverter = new InlineImageConverter();
-                            paragraph.Add(inlineImageConverter.Convert(inlineItem,compatibility,new InlineImageConverterParams{ Settings = paragraphConverterParams.Settings }));
+                            var inlineImageConverter = new InlineImageConverterV2();
+                            paragraph.Add(inlineImageConverter.Convert(inlineItem,compatibility,new InlineImageConverterParamsV2{ Settings = paragraphConverterParams.Settings }));
                         }
                         paragraphConverterParams.Settings.Images.ImageIdUsed(inlineItem.HRef);
                         if (needToInsertDrop) // in case this is "drop" image - no need to create a drop
@@ -77,9 +77,9 @@ namespace FB2EPubConverter.ElementConverters
                 }
                 else if (item is InternalLinkItem)
                 {
-                    var internalLinkConverter = new InternalLinkConverter();
+                    var internalLinkConverter = new InternalLinkConverterV2();
                     foreach (var s in internalLinkConverter.Convert(item as InternalLinkItem,compatibility,
-                        new InternalLinkConverterParams{ Settings = paragraphConverterParams.Settings,  NeedToInsertDrop = needToInsertDrop}))
+                        new InternalLinkConverterParamsV2{ Settings = paragraphConverterParams.Settings,  NeedToInsertDrop = needToInsertDrop}))
                     {
                         if (needToInsertDrop)
                         {

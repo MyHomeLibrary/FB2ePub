@@ -4,15 +4,15 @@ using FB2Library.Elements.Poem;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
     internal class EpigraphConverterParams
     {
-        public ConverterOptions Settings { get; set; }    
+        public ConverterOptionsV2 Settings { get; set; }    
         public int Level { get; set; }
     }
 
-    internal class EpigraphConverter : BaseElementConverter
+    internal class EpigraphConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Converts FB2 epigraph element
@@ -33,33 +33,33 @@ namespace FB2EPubConverter.ElementConverters
             {
                 if (element is ParagraphItem)
                 {
-                    var paragraphConverter = new ParagraphConverter();
+                    var paragraphConverter = new ParagraphConverterV2();
                     content.Add(paragraphConverter.Convert(element as ParagraphItem, compatibility,
                         new ParagraphConverterParams {ResultType = ParagraphConvTargetEnum.Paragraph , Settings = epigraphConverterParams.Settings, StartSection = false}));
                 }
                 if (element is PoemItem)
                 {
-                    var poemConverter = new PoemConverter();
+                    var poemConverter = new PoemConverterV2();
                     content.Add(poemConverter.Convert(element as PoemItem,compatibility,
                         new PoemConverterParams { Level = epigraphConverterParams.Level + 1 ,Settings = epigraphConverterParams.Settings}
                         ));
                 }
                 if (element is CiteItem)
                 {
-                    var citationConverter = new CitationConverter();
+                    var citationConverter = new CitationConverterV2();
                     content.Add(citationConverter.Convert(element as CiteItem, compatibility,
                         new CitationConverterParams { Level = epigraphConverterParams.Level + 1,Settings = epigraphConverterParams.Settings}));
                 }
                 if (element is EmptyLineItem)
                 {
-                    var emptyLineConverter = new EmptyLineConverter();
+                    var emptyLineConverter = new EmptyLineConverterV2();
                     content.Add(emptyLineConverter.Convert(compatibility));
                 }
             }
 
             foreach (var author in epigraphItem.TextAuthors)
             {
-                var epigraphAuthorConverter = new EpigraphAuthorConverter();
+                var epigraphAuthorConverter = new EpigraphAuthorConverterV2();
                 content.Add(epigraphAuthorConverter.Convert(author as TextAuthorItem, compatibility, new EpigraphAuthorConverterParams { Settings = epigraphConverterParams.Settings }));
             }
 

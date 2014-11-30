@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using XHTMLClassLibrary.BaseElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal static class XhtmlItemExtender
+    internal static class XhtmlItemExtenderV2
     {
         /// <summary>
         /// Extends IHTMLItem class to evaluate the size of generated output

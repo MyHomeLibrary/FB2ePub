@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace FB2EPubConverter.ElementConverters
+﻿namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class ConverterOptions
+    internal class ConverterOptionsV2
     {
         public HRefManager ReferencesManager { get; set; }
         public ImageManager Images { get; set; }

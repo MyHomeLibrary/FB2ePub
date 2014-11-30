@@ -4,14 +4,14 @@ using FB2Library.Elements.Table;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.TableElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class RowConverterParams
+    internal class RowConverterParamsV2
     {
-        public ConverterOptions Settings { get; set; }  
+        public ConverterOptionsV2 Settings { get; set; }  
     }
 
-    internal class RowConverter : BaseElementConverter
+    internal class RowConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// 
@@ -20,7 +20,7 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="compatibility"></param>
         /// <param name="rowConverterParams"></param>
         /// <returns></returns>
-        public IHTMLItem Convert(TableRowItem tableRowItem, HTMLElementType compatibility,RowConverterParams rowConverterParams)
+        public IHTMLItem Convert(TableRowItem tableRowItem, HTMLElementType compatibility,RowConverterParamsV2 rowConverterParams)
         {
             if (tableRowItem == null)
             {
@@ -34,7 +34,7 @@ namespace FB2EPubConverter.ElementConverters
                 {
                     var th = element as TableHeadingItem;
                     var cell = new TableHeaderCell(compatibility);
-                    var paragraphConverter = new ParagraphConverter();
+                    var paragraphConverter = new ParagraphConverterV2();
                     var cellData = paragraphConverter.Convert(th, compatibility,
                         new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, Settings = rowConverterParams .Settings,StartSection = false});
                     if (cellData.SubElements() != null)
@@ -87,7 +87,7 @@ namespace FB2EPubConverter.ElementConverters
                 {
                     var td = element as TableCellItem;
                     var cell = new TableData(compatibility);
-                    var paragraphConverter = new ParagraphConverter();
+                    var paragraphConverter = new ParagraphConverterV2();
                     var cellData = paragraphConverter.Convert(td, compatibility, 
                         new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, Settings = rowConverterParams.Settings, StartSection = false });
                     if (cellData.SubElements() != null)

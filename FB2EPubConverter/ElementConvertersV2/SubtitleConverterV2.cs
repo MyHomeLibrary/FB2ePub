@@ -2,14 +2,14 @@
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class SubtitleConverterParams
+    internal class SubtitleConverterParamsV2
     {
-        public ConverterOptions Settings { get; set; }  
+        public ConverterOptionsV2 Settings { get; set; }  
     }
 
-    internal class SubtitleConverter : BaseElementConverter
+    internal class SubtitleConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Converts FB2 subtitle element into XHTML representation
@@ -18,14 +18,14 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="compatibility"></param>
         /// <param name="subtitleConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(SubTitleItem subtitleItem,HTMLElementType compatibility,SubtitleConverterParams subtitleConverterParams)
+        public IHTMLItem Convert(SubTitleItem subtitleItem,HTMLElementType compatibility,SubtitleConverterParamsV2 subtitleConverterParams)
         {
             if (subtitleItem == null)
             {
                 throw new ArgumentNullException("subtitleItem");
             }
             //Div subtitle = new Div();
-            var paragraphConverter = new ParagraphConverter();
+            var paragraphConverter = new ParagraphConverterV2();
             var internalData = paragraphConverter.Convert(subtitleItem,compatibility,
                 new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, Settings = subtitleConverterParams.Settings, StartSection = false });
             SetClassType(internalData,"subtitle");

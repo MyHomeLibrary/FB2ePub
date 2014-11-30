@@ -4,14 +4,14 @@ using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class LinkSectionConverterParams
+    internal class LinkSectionConverterParamsV2
     {
-        public ConverterOptions Settings { get; set; }
+        public ConverterOptionsV2 Settings { get; set; }
     }
 
-    internal class LinkSectionConverter : BaseElementConverter
+    internal class LinkSectionConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Convert FB2 "notes" and "comments" and other "additional" sections
@@ -20,7 +20,7 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="compatibility"></param>
         /// <param name="linkSectionConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(SectionItem linkSectionItem,HTMLElementType compatibility,LinkSectionConverterParams linkSectionConverterParams)
+        public IHTMLItem Convert(SectionItem linkSectionItem,HTMLElementType compatibility,LinkSectionConverterParamsV2 linkSectionConverterParams)
         {
             if (linkSectionItem == null)
             {
@@ -28,8 +28,8 @@ namespace FB2EPubConverter.ElementConverters
             }
             var content = new Div(compatibility);
             var a = new Anchor(compatibility);
-            var titleConverter = new TitleConverter();
-            foreach (var item in titleConverter.Convert(linkSectionItem.Title,compatibility,new TitleConverterParams{Settings = linkSectionConverterParams.Settings,TitleLevel = 2}).SubElements())
+            var titleConverter = new TitleConverterV2();
+            foreach (var item in titleConverter.Convert(linkSectionItem.Title,compatibility,new TitleConverterParamsV2{Settings = linkSectionConverterParams.Settings,TitleLevel = 2}).SubElements())
             {
                 content.Add(item);                    
             }

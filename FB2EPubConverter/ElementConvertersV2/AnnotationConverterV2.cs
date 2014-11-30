@@ -4,20 +4,19 @@ using FB2Library.Elements.Poem;
 using FB2Library.Elements.Table;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
-using XHTMLClassLibrary.BaseElements.Structure_Header;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
     internal class AnnotationConverterParams
     {
-        public ConverterOptions Settings { get; set; }
+        public ConverterOptionsV2 Settings { get; set; }
         public int Level { get; set; }
     }
 
-    internal class AnnotationConverter : BaseElementConverter
+    internal class AnnotationConverterV2 : BaseElementConverterV2
     {
         /// <summary>
-        /// Converts FB2 annotation elememt
+        /// Converts FB2 annotation element
         /// </summary>
         /// <param name="annotationItem">item to convert</param>
         /// <param name="compatibility"></param>
@@ -35,38 +34,38 @@ namespace FB2EPubConverter.ElementConverters
             {
                 if (element is SubTitleItem)
                 {
-                    var subtitleConverter = new SubtitleConverter();
+                    var subtitleConverter = new SubtitleConverterV2();
                     resAnnotation.Add(subtitleConverter.Convert(element as SubTitleItem,compatibility,
-                        new SubtitleConverterParams{Settings = converterParams.Settings}));
+                        new SubtitleConverterParamsV2{Settings = converterParams.Settings}));
                 }
                 else if (element is ParagraphItem)
                 {
-                    var paragraphConverter = new ParagraphConverter();
+                    var paragraphConverter = new ParagraphConverterV2();
                     resAnnotation.Add(paragraphConverter.Convert(element as ParagraphItem,compatibility,
                         new ParagraphConverterParams{ Settings = converterParams.Settings,ResultType = ParagraphConvTargetEnum.Paragraph, StartSection = false}));
                 }
                 else if (element is PoemItem)
                 {
-                    var poemConverter = new PoemConverter();
+                    var poemConverter = new PoemConverterV2();
                     resAnnotation.Add(poemConverter.Convert(element as PoemItem,compatibility,
                         new PoemConverterParams { Level = converterParams.Level + 1, Settings = converterParams.Settings}));
                 }
                 else if (element is CiteItem)
                 {
-                    var citationConverter = new CitationConverter();
+                    var citationConverter = new CitationConverterV2();
                     resAnnotation.Add(citationConverter.Convert(element as CiteItem,compatibility ,
                         new CitationConverterParams {Level = converterParams.Level + 1,Settings = converterParams.Settings}));
                 }
                 else if (element is TableItem)
                 {
-                    var tableConverter = new TableConverter();
+                    var tableConverter = new TableConverterV2();
                     resAnnotation.Add(tableConverter.Convert(element as TableItem,compatibility,
-                        new TableConverterParams { Settings = converterParams.Settings}
+                        new TableConverterParamsV2 { Settings = converterParams.Settings}
                         ));
                 }
                 else if (element is EmptyLineItem)
                 {
-                    var emptyLineConverter = new EmptyLineConverter();
+                    var emptyLineConverter = new EmptyLineConverterV2();
                     resAnnotation.Add(emptyLineConverter.Convert(compatibility));
                 }
             }

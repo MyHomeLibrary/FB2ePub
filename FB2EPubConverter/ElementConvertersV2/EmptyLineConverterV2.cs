@@ -1,9 +1,9 @@
 ﻿using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class EmptyLineConverter : BaseElementConverter
+    internal class EmptyLineConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Converts empty line FB2 element 

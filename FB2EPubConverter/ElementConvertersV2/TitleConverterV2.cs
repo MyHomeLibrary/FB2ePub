@@ -1,16 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class PoemTitleConverter : BaseElementConverter
+    internal class TitleConverterParamsV2
+    {
+        public ConverterOptionsV2 Settings { get; set; }  
+        public int TitleLevel { get; set; }
+    }
+
+    internal class TitleConverterV2 : BaseElementConverterV2
     {
         private int _level;
 
@@ -21,7 +23,7 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="compatibility"></param>
         /// <param name="titleConverterParams"></param>
         /// <returns></returns>
-        public Div Convert(TitleItem titleItem, HTMLElementType compatibility, TitleConverterParams titleConverterParams)
+        public Div Convert(TitleItem titleItem,HTMLElementType compatibility,TitleConverterParamsV2 titleConverterParams)
         {
             if (titleItem == null)
             {
@@ -34,13 +36,13 @@ namespace FB2EPubConverter.ElementConverters
                 if (fb2TextItem is ParagraphItem)
                 {
                     var paragraphStyle = GetParagraphStyleByLevel(_level);
-                    var paragraphConverter = new ParagraphConverter();
+                    var paragraphConverter = new ParagraphConverterV2();
                     title.Add(paragraphConverter.Convert(fb2TextItem as ParagraphItem, compatibility,
-                        new ParagraphConverterParams { ResultType = paragraphStyle, Settings = titleConverterParams.Settings, StartSection = false }));
+                        new ParagraphConverterParams { ResultType = paragraphStyle, Settings = titleConverterParams.Settings, StartSection = false}));
                 }
                 else if (fb2TextItem is EmptyLineItem)
                 {
-                    var emptyLineConverter = new EmptyLineConverter();
+                    var emptyLineConverter = new EmptyLineConverterV2();
                     title.Add(emptyLineConverter.Convert(compatibility));
                 }
                 else
@@ -48,7 +50,7 @@ namespace FB2EPubConverter.ElementConverters
                     Debug.WriteLine("invalid type in Title - {0}", fb2TextItem.GetType());
                 }
             }
-            SetClassType(title, "poem_title");
+            SetClassType(title, string.Format("title{0}", _level));
             return title;
         }
 
@@ -75,6 +77,5 @@ namespace FB2EPubConverter.ElementConverters
             }
             return paragraphStyle;
         }
-
     }
 }

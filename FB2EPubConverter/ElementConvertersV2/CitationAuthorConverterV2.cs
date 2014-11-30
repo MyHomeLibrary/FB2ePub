@@ -3,14 +3,14 @@ using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
     internal class CitationAuthorConverterParams
     {
-        public ConverterOptions Settings { get; set; }    
+        public ConverterOptionsV2 Settings { get; set; }    
     }
 
-    internal class CitationAuthorConverter : BaseElementConverter
+    internal class CitationAuthorConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Converts FB2 citation author element
@@ -27,7 +27,7 @@ namespace FB2EPubConverter.ElementConverters
             }
             var cite = new Div(compatibility);
 
-            var paragraphConverter = new ParagraphConverter();
+            var paragraphConverter = new ParagraphConverterV2();
             cite.Add(paragraphConverter.Convert(paragraphItem,compatibility,
                 new ParagraphConverterParams {Settings =citationAuthorConverterParams.Settings, ResultType = ParagraphConvTargetEnum.Paragraph, StartSection = false}));
 

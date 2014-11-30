@@ -3,17 +3,17 @@ using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
     internal class EpigraphAuthorConverterParams
     {
-        public ConverterOptions Settings { get; set; }  
+        public ConverterOptionsV2 Settings { get; set; }  
     }
 
-    internal class EpigraphAuthorConverter : BaseElementConverter
+    internal class EpigraphAuthorConverterV2 : BaseElementConverterV2
     {
         /// <summary>
-        /// Convert epigrah author FB2 element
+        /// Convert epigraph author FB2 element
         /// </summary>
         /// <param name="textAuthorItem">item to convert</param>
         /// <param name="compatibility"></param>
@@ -26,7 +26,7 @@ namespace FB2EPubConverter.ElementConverters
                 throw new ArgumentNullException("textAuthorItem");
             }
             var epigraphAuthor = new Div(compatibility);
-            var paragraphConverter = new ParagraphConverter();
+            var paragraphConverter = new ParagraphConverterV2();
             epigraphAuthor.Add(paragraphConverter.Convert(textAuthorItem,compatibility,
                 new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, Settings = epigraphAuthorConverterParams.Settings, StartSection = false }));
             SetClassType(epigraphAuthor,"epigraph_author");

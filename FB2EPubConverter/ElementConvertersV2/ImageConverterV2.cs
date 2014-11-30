@@ -3,14 +3,14 @@ using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class ImageConverterParams
+    internal class ImageConverterParamsV2
     {
-        public ConverterOptions Settings { get; set; }
+        public ConverterOptionsV2 Settings { get; set; }
     }
 
-    internal class ImageConverter : BaseElementConverter
+    internal class ImageConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Convert FB2 image item
@@ -19,7 +19,7 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="compatibility"></param>
         /// <param name="imageConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(ImageItem imageItem,HTMLElementType compatibility,ImageConverterParams imageConverterParams)
+        public IHTMLItem Convert(ImageItem imageItem,HTMLElementType compatibility,ImageConverterParamsV2 imageConverterParams)
         {
             if (imageItem == null)
             {

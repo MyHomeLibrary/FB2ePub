@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
-using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConverters
+namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class PoemAuthorConverterParams
+    internal class PoemAuthorConverterParamsV2
     {
-        public ConverterOptions Settings { get; set; }  
+        public ConverterOptionsV2 Settings { get; set; }  
     }
 
-    internal class PoemAuthorConverter : BaseElementConverter
+    internal class PoemAuthorConverterV2 : BaseElementConverterV2
     {
         /// <summary>
         /// Converts FB2 poem  author element
@@ -22,14 +18,14 @@ namespace FB2EPubConverter.ElementConverters
         /// <param name="compatibility"></param>
         /// <param name="poemAuthorConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(ParagraphItem paragraphItem,HTMLElementType compatibility,PoemAuthorConverterParams poemAuthorConverterParams)
+        public IHTMLItem Convert(ParagraphItem paragraphItem,HTMLElementType compatibility,PoemAuthorConverterParamsV2 poemAuthorConverterParams)
         {
             if (paragraphItem == null)
             {
                 throw new ArgumentNullException("paragraphItem");
             }
 
-            var paragraphConverter = new ParagraphConverter();
+            var paragraphConverter = new ParagraphConverterV2();
             var item = paragraphConverter.Convert(paragraphItem, compatibility, new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, StartSection = false, Settings = poemAuthorConverterParams .Settings});
 
             SetClassType(item,"poem_author");
