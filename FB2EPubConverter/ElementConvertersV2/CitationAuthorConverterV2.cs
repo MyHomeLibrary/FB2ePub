@@ -19,16 +19,16 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// <param name="compatibility"></param>
         /// <param name="citationAuthorConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(ParagraphItem paragraphItem, HTMLElementType compatibility,CitationAuthorConverterParams citationAuthorConverterParams)
+        public IHTMLItem Convert(ParagraphItem paragraphItem, CitationAuthorConverterParams citationAuthorConverterParams)
         {
             if (paragraphItem == null)
             {
                 throw new ArgumentNullException("paragraphItem");
             }
-            var cite = new Div(compatibility);
+            var cite = new Div(HTMLElementType.XHTML11);
 
             var paragraphConverter = new ParagraphConverterV2();
-            cite.Add(paragraphConverter.Convert(paragraphItem,compatibility,
+            cite.Add(paragraphConverter.Convert(paragraphItem,
                 new ParagraphConverterParams {Settings =citationAuthorConverterParams.Settings, ResultType = ParagraphConvTargetEnum.Paragraph, StartSection = false}));
 
             SetClassType(cite, "citation_author");

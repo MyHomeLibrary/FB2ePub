@@ -29,16 +29,15 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// Converts FB2 Paragraph to EPUB paragraph
         /// </summary>
         /// <param name="paragraphItem">item to convert</param>
-        /// <param name="compatibility"></param>
         /// <param name="paragraphConverterParams"></param>
         /// <returns></returns>
-        public  HTMLItem Convert(ParagraphItem paragraphItem,HTMLElementType compatibility,ParagraphConverterParams paragraphConverterParams)
+        public  HTMLItem Convert(ParagraphItem paragraphItem,ParagraphConverterParams paragraphConverterParams)
         {
             if (paragraphItem == null)
             {
                 throw new ArgumentNullException("paragraphItem");
             }
-            var paragraph = CreateBlock(paragraphConverterParams.ResultType,compatibility);
+            var paragraph = CreateBlock(paragraphConverterParams.ResultType);
             bool needToInsertDrop = paragraphConverterParams.Settings.CapitalDrop && paragraphConverterParams.StartSection;
 
             foreach (var item in paragraphItem.ParagraphData)
@@ -46,7 +45,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 if (item is SimpleText)
                 {
                     var textConverter = new SimpleTextElementConverterV2();
-                    foreach (var s in textConverter.Convert(item,compatibility, 
+                    foreach (var s in textConverter.Convert(item, 
                         new SimpleTextElementConverterParamsV2 { Settings = paragraphConverterParams.Settings, NeedToInsertDrop = needToInsertDrop}))
                     {
                         if (needToInsertDrop)
@@ -66,7 +65,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                         if (paragraphConverterParams.Settings.Images.IsImageIdReal(inlineItem.HRef))
                         {
                             var inlineImageConverter = new InlineImageConverterV2();
-                            paragraph.Add(inlineImageConverter.Convert(inlineItem,compatibility,new InlineImageConverterParamsV2{ Settings = paragraphConverterParams.Settings }));
+                            paragraph.Add(inlineImageConverter.Convert(inlineItem,new InlineImageConverterParamsV2{ Settings = paragraphConverterParams.Settings }));
                         }
                         paragraphConverterParams.Settings.Images.ImageIdUsed(inlineItem.HRef);
                         if (needToInsertDrop) // in case this is "drop" image - no need to create a drop
@@ -78,7 +77,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 else if (item is InternalLinkItem)
                 {
                     var internalLinkConverter = new InternalLinkConverterV2();
-                    foreach (var s in internalLinkConverter.Convert(item as InternalLinkItem,compatibility,
+                    foreach (var s in internalLinkConverter.Convert(item as InternalLinkItem,
                         new InternalLinkConverterParamsV2{ Settings = paragraphConverterParams.Settings,  NeedToInsertDrop = needToInsertDrop}))
                     {
                         if (needToInsertDrop)
@@ -101,33 +100,32 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// Creates block element based on paragraph type
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="compatibility"></param>
         /// <returns></returns>
-        private static HTMLItem CreateBlock(ParagraphConvTargetEnum type,HTMLElementType compatibility)
+        private static HTMLItem CreateBlock(ParagraphConvTargetEnum type)
         {
             HTMLItem paragraph;
             switch (type)
             {
                 case ParagraphConvTargetEnum.H1:
-                    paragraph = new H1(compatibility);
+                    paragraph = new H1(HTMLElementType.XHTML11);
                     break;
                 case ParagraphConvTargetEnum.H2:
-                    paragraph = new H2(compatibility);
+                    paragraph = new H2(HTMLElementType.XHTML11);
                     break;
                 case ParagraphConvTargetEnum.H3:
-                    paragraph = new H3(compatibility);
+                    paragraph = new H3(HTMLElementType.XHTML11);
                     break;
                 case ParagraphConvTargetEnum.H4:
-                    paragraph = new H4(compatibility);
+                    paragraph = new H4(HTMLElementType.XHTML11);
                     break;
                 case ParagraphConvTargetEnum.H5:
-                    paragraph = new H5(compatibility);
+                    paragraph = new H5(HTMLElementType.XHTML11);
                     break;
                 case ParagraphConvTargetEnum.H6:
-                    paragraph = new H6(compatibility);
+                    paragraph = new H6(HTMLElementType.XHTML11);
                     break;
                 default: // Paragraph or anything else
-                    paragraph = new Paragraph(compatibility);
+                    paragraph = new Paragraph(HTMLElementType.XHTML11);
                     break;
 
             }

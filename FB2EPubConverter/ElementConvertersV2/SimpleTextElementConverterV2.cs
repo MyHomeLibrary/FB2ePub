@@ -21,10 +21,9 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// ( simple text is normal text or text with one of the "styles")
         /// </summary>
         /// <param name="styletypeItem">item to convert</param>
-        /// <param name="compatibility"></param>
         /// <param name="simpleTextElementConverterParams"></param>
         /// <returns></returns>
-        public List<IHTMLItem> Convert(StyleType styletypeItem,HTMLElementType compatibility,SimpleTextElementConverterParamsV2 simpleTextElementConverterParams)
+        public List<IHTMLItem> Convert(StyleType styletypeItem,SimpleTextElementConverterParamsV2 simpleTextElementConverterParams)
         {
 
             if (styletypeItem == null)
@@ -42,57 +41,57 @@ namespace FB2EPubConverter.ElementConvertersV2
                     case FB2Library.Elements.TextStyles.Normal:
                         if (text.HasChildren)
                         {
-                            list.AddRange(text.Children.SelectMany(x=>Convert(x,compatibility,simpleTextElementConverterParams)));
+                            list.AddRange(text.Children.SelectMany(x=>Convert(x,simpleTextElementConverterParams)));
                         }
                         else
                         {
                             if (simpleTextElementConverterParams.NeedToInsertDrop && text.Text.Length > 0)
                             {
-                                AddAsDrop(list,text,compatibility);
+                                AddAsDrop(list,text);
                             }
                             else
                             {
-                                list.Add(new SimpleHTML5Text(compatibility) { Text = text.Text });
+                                list.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = text.Text });
                             }
                         }
                         break;
                     case FB2Library.Elements.TextStyles.Code:
-                        var code = new CodeText(compatibility);
+                        var code = new CodeText(HTMLElementType.XHTML11);
                         if (text.HasChildren)
                         {
-                            foreach (var item in text.Children.SelectMany(x=>Convert(x,compatibility,simpleTextElementConverterParams)))
+                            foreach (var item in text.Children.SelectMany(x=>Convert(x,simpleTextElementConverterParams)))
                             {
                                 code.Add(item);
                             }
                         }
                         else
                         {
-                            code.Add(new SimpleHTML5Text(compatibility) { Text = text.Text });
+                            code.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = text.Text });
                         }
                         list.Add(code);
                         break;
                     case FB2Library.Elements.TextStyles.Emphasis:
-                        var emph = new EmphasisedText(compatibility);
+                        var emph = new EmphasisedText(HTMLElementType.XHTML11);
                         if (text.HasChildren)
                         {
-                            foreach (var item in text.Children.SelectMany(x=>Convert(x,compatibility,simpleTextElementConverterParams)))
+                            foreach (var item in text.Children.SelectMany(x=>Convert(x,simpleTextElementConverterParams)))
                             {
                                 emph.Add(item);
                             }
                         }
                         else
                         {
-                            emph.Add(new SimpleHTML5Text(compatibility) { Text = text.Text });
+                            emph.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = text.Text });
                         }
                         list.Add(emph);
                         break;
                     case FB2Library.Elements.TextStyles.Strong:
-                        var str = new Strong(compatibility);
+                        var str = new Strong(HTMLElementType.XHTML11);
                         if (text.HasChildren)
                         {
                             foreach (var child in text.Children)
                             {
-                                foreach (var item in Convert(child, compatibility,simpleTextElementConverterParams))
+                                foreach (var item in Convert(child, simpleTextElementConverterParams))
                                 {
                                     str.Add(item);
                                 }
@@ -100,17 +99,17 @@ namespace FB2EPubConverter.ElementConvertersV2
                         }
                         else
                         {
-                            str.Add(new SimpleHTML5Text(compatibility) { Text = text.Text });
+                            str.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = text.Text });
                         }
                         list.Add(str);
                         break;
                     case FB2Library.Elements.TextStyles.Sub:
-                        var sub = new Sub(compatibility);
+                        var sub = new Sub(HTMLElementType.XHTML11);
                         if (text.HasChildren)
                         {
                             foreach (var child in text.Children)
                             {
-                                foreach (var item in Convert(child,compatibility,simpleTextElementConverterParams))
+                                foreach (var item in Convert(child,simpleTextElementConverterParams))
                                 {
                                     sub.Add(item);
                                 }
@@ -118,17 +117,17 @@ namespace FB2EPubConverter.ElementConvertersV2
                         }
                         else
                         {
-                            sub.Add(new SimpleHTML5Text(compatibility) { Text = text.Text });
+                            sub.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = text.Text });
                         }
                         list.Add(sub);
                         break;
                     case FB2Library.Elements.TextStyles.Sup:
-                        var sup = new Sup(compatibility);
+                        var sup = new Sup(HTMLElementType.XHTML11);
                         if (text.HasChildren)
                         {
                             foreach (var child in text.Children)
                             {
-                                foreach (var item in Convert(child,compatibility,simpleTextElementConverterParams))
+                                foreach (var item in Convert(child,simpleTextElementConverterParams))
                                 {
                                     sup.Add(item);
                                 }
@@ -136,17 +135,17 @@ namespace FB2EPubConverter.ElementConvertersV2
                         }
                         else
                         {
-                            sup.Add(new SimpleHTML5Text(compatibility) { Text = text.Text });
+                            sup.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = text.Text });
                         }
                         list.Add(sup);
                         break;
                     case FB2Library.Elements.TextStyles.Strikethrough:
-                        var strike = new DeletedText(compatibility);
+                        var strike = new DeletedText(HTMLElementType.XHTML11);
                         if (text.HasChildren)
                         {
                             foreach (var child in text.Children)
                             {
-                                foreach (var item in Convert(child,compatibility,simpleTextElementConverterParams))
+                                foreach (var item in Convert(child,simpleTextElementConverterParams))
                                 {
                                     strike.Add(item);
                                 }
@@ -154,7 +153,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                         }
                         else
                         {
-                            strike.Add(new SimpleHTML5Text(compatibility) { Text = text.Text });
+                            strike.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = text.Text });
                         }
                         list.Add(strike);
                         break;
@@ -163,7 +162,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             else if (styletypeItem is InternalLinkItem)
             {
                 var linkConverter = new InternalLinkConverterV2();
-                list.AddRange(linkConverter.Convert(styletypeItem as InternalLinkItem, compatibility, new InternalLinkConverterParamsV2
+                list.AddRange(linkConverter.Convert(styletypeItem as InternalLinkItem,  new InternalLinkConverterParamsV2
                 {
                     NeedToInsertDrop = simpleTextElementConverterParams.NeedToInsertDrop, Settings = simpleTextElementConverterParams.Settings,
                 }));
@@ -171,7 +170,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             else if (styletypeItem is InlineImageItem)
             {
                 var inlineImageConverter = new InlineImageConverterV2();
-                list.Add(inlineImageConverter.Convert(styletypeItem as InlineImageItem,compatibility,
+                list.Add(inlineImageConverter.Convert(styletypeItem as InlineImageItem,
                     new InlineImageConverterParamsV2 { Settings = simpleTextElementConverterParams.Settings}));
             }
 
@@ -183,10 +182,9 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// </summary>
         /// <param name="parent">parent container insert into</param>
         /// <param name="text">text to insert</param>
-        /// <param name="compatibility"></param>
-        private static void AddAsDrop(List<IHTMLItem> parent, SimpleText text,HTMLElementType compatibility)
+        private static void AddAsDrop(List<IHTMLItem> parent, SimpleText text)
         {
-            var span1 = new Span(compatibility);
+            var span1 = new Span(HTMLElementType.XHTML11);
             span1.GlobalAttributes.Class.Value = "drop";
             int dropEnd = 0;
             // "pad" the white spaces so drop starts from visible character
@@ -196,7 +194,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             }
             if (dropEnd >= text.Text.Length) // in case the text is too short for drop
             {
-                parent.Add(new SimpleHTML5Text(compatibility) { Text = text.Text });
+                parent.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = text.Text });
                 return;
             }
             // calculate the initial drop part
@@ -221,12 +219,12 @@ namespace FB2EPubConverter.ElementConvertersV2
                 // update drop part with the "string" we calculated
                 dropPart += text.Text.Substring(dropEnd + 1, nondropPosition - dropEnd - 1);
             }
-            span1.Add(new SimpleHTML5Text(compatibility) { Text = dropPart });
+            span1.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = dropPart });
             parent.Add(span1);
             string substring = text.Text.Substring(nondropPosition);
             if (substring.Length > 0)
             {
-                parent.Add(new SimpleHTML5Text(compatibility) { Text = substring });
+                parent.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = substring });
             }
 
         }

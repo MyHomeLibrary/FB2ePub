@@ -15,14 +15,14 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// Converts "v" (poem) sub-element
         /// </summary>
         /// <returns>XHTML formatted representation</returns>
-        public IHTMLItem Convert(VPoemParagraph paragraphItem,HTMLElementType compatibility,VElementConverterParamsV2 vElementConverterParams)
+        public IHTMLItem Convert(VPoemParagraph paragraphItem,VElementConverterParamsV2 vElementConverterParams)
         {
             if (paragraphItem == null)
             {
                 throw new ArgumentNullException("paragraphItem");
             }
             var paragraphConverter = new ParagraphConverterV2();
-            var item = paragraphConverter.Convert(paragraphItem,compatibility,
+            var item = paragraphConverter.Convert(paragraphItem,
                 new ParagraphConverterParams
                 {
                     ResultType =

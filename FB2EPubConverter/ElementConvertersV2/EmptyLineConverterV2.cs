@@ -9,10 +9,10 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// Converts empty line FB2 element 
         /// </summary>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(HTMLElementType compatibility)
+        public IHTMLItem Convert()
         {
-            var el = new Paragraph(compatibility);
-            el.Add(new SimpleHTML5Text(compatibility) { Text = "\u00A0" });
+            var el = new Paragraph(HTMLElementType.XHTML11);
+            el.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = "\u00A0" });
             SetClassType(el,"empty-line");
             return el;
         }

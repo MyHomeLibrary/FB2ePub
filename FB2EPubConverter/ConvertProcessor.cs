@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
 using System.Xml.Linq;
 using Fb2ePubConverter;
 using FB2EPubConverter.Interfaces;
 using System.Runtime.InteropServices;
 using Fb2epubSettings;
-using System.Configuration;
 using log4net.Config;
 using FolderSettingsHelper;
 
@@ -56,11 +54,7 @@ namespace FB2EPubConverter
 
         public bool PerformConvertOperation(string[] filesInMask, string outputFileName)
         {
-            List<string> files = new List<string>();
-            foreach (var mask in filesInMask)
-            {
-                files.Add(mask);
-            }
+            var files = filesInMask.ToList();
             return PerformConvertOperation(files, outputFileName);
         }
 
@@ -72,33 +66,32 @@ namespace FB2EPubConverter
         public bool PerformConvertOperation(List<string> filesInMask, string outputFileName)
         {
             int filesCount = filesInMask.Count;
-            int successfullyConverted = 0;
 
             Logger.Log.InfoFormat("Using resources from: {0}",_processorSettings.Settings.ResourcesPath);
-            ProgressUpdateWrapper progressReporter = new ProgressUpdateWrapper(_processorSettings.ProgressCallbacks);
+            var progressReporter = new ProgressUpdateWrapper(_processorSettings.ProgressCallbacks);
             progressReporter.ConvertStarted(filesCount);
             Logger.Log.InfoFormat("Conversion process started at {0}",DateTime.Now.ToString("f"));
 
-            ParallelOptions po = new ParallelOptions();
-            po.CancellationToken = _cts.Token;
-            po.MaxDegreeOfParallelism = Environment.ProcessorCount;
+            var po = new ParallelOptions
+            {
+                CancellationToken = _cts.Token,
+                MaxDegreeOfParallelism = Environment.ProcessorCount
+            };
 
             bool conversionResult = true;
 
             try
             {
-                Parallel.ForEach(filesInMask, po, (file) =>
+                Parallel.ForEach(filesInMask, po, file =>
                 {
                     po.CancellationToken.ThrowIfCancellationRequested();
 
-                    Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine()
-                    {
-                        Settings = _processorSettings.Settings
-                    };
+                    Fb2EPubConverterEngineBase converter = CreateConverterEngine(_processorSettings.Settings);
+
                     try
                     {
                         progressReporter.ProcessingStarted(file);
-                        if (!converter.ConvertFile(file))
+                        if (!converter.LoadAndCheckFB2Files(file))
                         {
                             string error = string.Format("Conversion of a file {0} failed", file);
                             Logger.Log.Error(error);
@@ -112,7 +105,7 @@ namespace FB2EPubConverter
                     }
                     catch (Exception ex)
                     {
-                        string error = "Conversion error";
+                        const string error = "Conversion error";
                         Logger.Log.Error(error, ex);
                         progressReporter.SkippedDueError(file);
                         if (_processorSettings.SingleFile)
@@ -141,11 +134,23 @@ namespace FB2EPubConverter
             }
             finally
             {
-                progressReporter.ConvertFinished(successfullyConverted);
+                progressReporter.ConvertFinished(0);
                 Logger.Log.Info("Conversion process finished");
             }
 
             return conversionResult;
+        }
+
+        private Fb2EPubConverterEngineBase CreateConverterEngine(ConverterSettings converterSettings)
+        {
+            switch (converterSettings.StandardVersion)
+            {
+                case EPubVersion.VEpub20:
+                    return new Fb2EPubConverterEngineV2 { Settings = converterSettings };
+                case EPubVersion.VePub30:
+                    return new Fb2EPubConverterEngineV3 { Settings = converterSettings };
+            }
+            throw new InvalidEnumArgumentException(string.Format("Unknown EPubVersion enum: {0}",converterSettings.StandardVersion));
         }
 
         /// <summary>
@@ -167,13 +172,9 @@ namespace FB2EPubConverter
             else // if no output file name specified , means "outputFileName" empty and as result "fileName" empty at this point
             {
                 string fileNameWithoutExtension =
-                    Path.GetFileNameWithoutExtension(file); // get input file name without extension 
-                if (fileNameWithoutExtension == null) // if file starts with "." 
-                {
-                    fileNameWithoutExtension = "$tmp$"; //create temporary name for it
-                }
+                    Path.GetFileNameWithoutExtension(file) ?? "$tmp$"; // get input file name without extension 
 
-                string fileLocation = fileLocation = _processorSettings.Settings.OutPutPath;
+                string fileLocation = _processorSettings.Settings.OutPutPath;
 
                 // if output file path in settings not set we need to build it
                 // creating from the input file path   
@@ -206,7 +207,7 @@ namespace FB2EPubConverter
             return string.Format("{0}.epub",fileNameWithoutExtension);           
         }
 
-        private void SaveAndCleanUp(Fb2EPubConverterEngine converter, string fileName, string inFileName)
+        private void SaveAndCleanUp(Fb2EPubConverterEngineBase converter, string fileName, string inFileName)
         {
             try
             {
@@ -245,7 +246,9 @@ namespace FB2EPubConverter
             bool folderExists = Directory.Exists(fileParams[0]);
             if (fileParams[0].Contains("*") || fileParams[0].Contains("?") || folderExists || fileParams[0].EndsWith("."))
             {
-                if (folderExists && !fileParams[0].EndsWith(Path.DirectorySeparatorChar.ToString()) && !fileParams[0].EndsWith(Path.AltDirectorySeparatorChar.ToString()) && !fileParams[0].EndsWith(".")) //just to make sure we have a folder
+                if (folderExists && !fileParams[0].EndsWith(Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture)) && 
+                    !fileParams[0].EndsWith(Path.AltDirectorySeparatorChar.ToString(CultureInfo.InvariantCulture)) && 
+                    !fileParams[0].EndsWith(".")) //just to make sure we have a folder
                 {
                     fileParams[0] += Path.DirectorySeparatorChar;
                 }
@@ -262,8 +265,8 @@ namespace FB2EPubConverter
                 }
                 foreach (var subMask in fileName.Split(','))
                 {
-                    if (fileParams[0].Contains(Path.DirectorySeparatorChar.ToString()) ||
-                        fileParams[0].Contains(Path.AltDirectorySeparatorChar.ToString()))
+                    if (fileParams[0].Contains(Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture)) ||
+                        fileParams[0].Contains(Path.AltDirectorySeparatorChar.ToString(CultureInfo.InvariantCulture)))
                     // if does not have dir. separators then it's current folder
                     {
                         filesInMask.AddRange(Directory.GetFiles(Path.GetDirectoryName(fileParams[0]),
@@ -318,11 +321,10 @@ namespace FB2EPubConverter
             LoadSettings();
             ProcessorSettings.ProgressCallbacks = progress;
             ProcessorSettings.Settings.OutPutPath = outputFolder;
-            List<string> fileParams = new List<string>();
-            fileParams.Add(inputPath);
+            var fileParams = new List<string> {inputPath};
             ProcessorSettings.LookInSubFolders = true;
             ProcessorSettings.Settings.ResourcesPath = GetResourcesPath();
-            List<string> filesInMask = new List<string>();
+            var filesInMask = new List<string>();
             DetectFilesToProcess(fileParams, ref filesInMask);
             PerformConvertOperation(filesInMask, null);
         }
@@ -348,8 +350,7 @@ namespace FB2EPubConverter
             ProcessorSettings.ProgressCallbacks = progress;
             ProcessorSettings.Settings.ResourcesPath = GetResourcesPath();
             ProcessorSettings.SingleFile = true;
-            List<string> filesInMask = new List<string>();
-            filesInMask.Add(inputPath);
+            var filesInMask = new List<string> {inputPath};
             bool conversionSucceeded = PerformConvertOperation(filesInMask, outputName);
             if (!conversionSucceeded)
             {
@@ -373,16 +374,12 @@ namespace FB2EPubConverter
         {
             LoadSettings();
             _processorSettings.DeleteSource = false;
-            int successfullyConverted = 0;
 
-            ProgressUpdateWrapper progressReporter = new ProgressUpdateWrapper(_processorSettings.ProgressCallbacks);
+            var progressReporter = new ProgressUpdateWrapper(_processorSettings.ProgressCallbacks);
             progressReporter.ConvertStarted(1);
 
 
-            Fb2EPubConverterEngine converter = new Fb2EPubConverterEngine()
-            {
-                Settings = _processorSettings.Settings
-            };
+            Fb2EPubConverterEngineBase converter = CreateConverterEngine(_processorSettings.Settings);
 
             try
             {
@@ -397,15 +394,14 @@ namespace FB2EPubConverter
             progressReporter.ProcessingSaving(outFileName);
             SaveAndCleanUp(converter, outFileName, "");
             progressReporter.Processed(outFileName);
-            progressReporter.ConvertFinished(successfullyConverted);
+            progressReporter.ConvertFinished(0);
         }
 
         #endregion
 
         public static bool ShowSettingsDialog(IWin32Window parent)
         {
-            ConverterSettingsForm settingsForm = new ConverterSettingsForm();
-            settingsForm.TopLevel = true;
+            var settingsForm = new ConverterSettingsForm {TopLevel = true};
             return (settingsForm.ShowDialog(parent) == DialogResult.OK);
 
         }
@@ -415,14 +411,14 @@ namespace FB2EPubConverter
         /// </summary>
         public void LoadSettings()
         {
-            ConverterSettingsFile file = new ConverterSettingsFile();
+            var file = new ConverterSettingsFile();
             if (string.IsNullOrEmpty(_processorSettings.SettingsFileToUse) || !File.Exists(ProcessorSettings.SettingsFileToUse))
             {
-                string filePath = null;
                 if ( !string.IsNullOrEmpty(_processorSettings.SettingsFileToUse) )
                 {
                     Logger.Log.ErrorFormat("LoadSettings - the specified settings file \"{0}\" not found, going to use standard settings file",_processorSettings.SettingsFileToUse);
                 }
+                string filePath;
                 DefaultSettingsLocatorHelper.EnsureDefaultSettingsFilePresent(out filePath, file.Settings);
                 ProcessorSettings.SettingsFileToUse = filePath;
             }
@@ -433,7 +429,7 @@ namespace FB2EPubConverter
             }
             catch (Exception ex)
             {
-                Logger.Log.ErrorFormat("LoadSettings - unable to load file {0} , exception: {1}", _processorSettings.SettingsFileToUse, ex.ToString());
+                Logger.Log.ErrorFormat("LoadSettings - unable to load file {0} , exception: {1}", _processorSettings.SettingsFileToUse, ex);
             }
             try
             {
@@ -441,7 +437,7 @@ namespace FB2EPubConverter
             }
             catch (Exception ex)
             {
-                Logger.Log.ErrorFormat("LoadSettings - unable to copy settings , exception: {0}",  ex.ToString());
+                Logger.Log.ErrorFormat("LoadSettings - unable to copy settings , exception: {0}",  ex);
             }
         }
     }

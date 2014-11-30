@@ -16,21 +16,20 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// Converts FB2 Table object into XHTML representation
         /// </summary>
         /// <param name="tableItem">item to convert</param>
-        /// <param name="compatibility"></param>
         /// <param name="tableConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(TableItem tableItem,HTMLElementType compatibility,TableConverterParamsV2 tableConverterParams)
+        public IHTMLItem Convert(TableItem tableItem,TableConverterParamsV2 tableConverterParams)
         {
             if (tableItem == null)
             {
                 throw new ArgumentNullException("tableItem");
             }
-            var table = new Table(compatibility);
+            var table = new Table(HTMLElementType.XHTML11);
 
             foreach (var row in tableItem.Rows)
             {
                 var rowConverter = new RowConverterV2();
-                table.Add(rowConverter.Convert(row, compatibility, new RowConverterParamsV2 { Settings = tableConverterParams.Settings}));
+                table.Add(rowConverter.Convert(row,  new RowConverterParamsV2 { Settings = tableConverterParams.Settings}));
             }
 
             SetClassType(table,string.Empty);

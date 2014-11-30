@@ -16,16 +16,15 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// Convert FB2 image item
         /// </summary>
         /// <param name="imageItem">item to convert</param>
-        /// <param name="compatibility"></param>
         /// <param name="imageConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(ImageItem imageItem,HTMLElementType compatibility,ImageConverterParamsV2 imageConverterParams)
+        public IHTMLItem Convert(ImageItem imageItem,ImageConverterParamsV2 imageConverterParams)
         {
             if (imageItem == null)
             {
                 throw new ArgumentNullException("imageItem");
             }
-            var image = new Image(compatibility);
+            var image = new Image(HTMLElementType.XHTML11);
             if (imageItem.AltText != null)
             {
                 image.Alt.Value = imageItem.AltText;

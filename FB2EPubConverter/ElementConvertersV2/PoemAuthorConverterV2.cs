@@ -15,10 +15,9 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// Converts FB2 poem  author element
         /// </summary>
         /// <param name="paragraphItem">item to convert</param>
-        /// <param name="compatibility"></param>
         /// <param name="poemAuthorConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(ParagraphItem paragraphItem,HTMLElementType compatibility,PoemAuthorConverterParamsV2 poemAuthorConverterParams)
+        public IHTMLItem Convert(ParagraphItem paragraphItem,PoemAuthorConverterParamsV2 poemAuthorConverterParams)
         {
             if (paragraphItem == null)
             {
@@ -26,7 +25,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             }
 
             var paragraphConverter = new ParagraphConverterV2();
-            var item = paragraphConverter.Convert(paragraphItem, compatibility, new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, StartSection = false, Settings = poemAuthorConverterParams .Settings});
+            var item = paragraphConverter.Convert(paragraphItem,  new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, StartSection = false, Settings = poemAuthorConverterParams .Settings});
 
             SetClassType(item,"poem_author");
             return item;

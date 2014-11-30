@@ -56,9 +56,9 @@ namespace Fb2epubSettings
             }
             savePathsList();
             saveXPGT();
-            _fontSettings.StoreTo(_settings.Fonts);
+            _fontSettings.StoreTo(_settings.CommonSettings.Fonts);
             appleV2SettingsControl.SaveToSettings(_settings);
-            ConverterSettingsFile settingsFile = new ConverterSettingsFile();
+            var settingsFile = new ConverterSettingsFile();
             settingsFile.Settings.CopyFrom(_settings);
             try
             {
@@ -133,22 +133,22 @@ namespace Fb2epubSettings
             catch (Exception)
             {
             }
-            checkBoxTransliterateTOC.Checked = _settings.TransliterateToc;
-            checkBoxTransliterateFileName.Checked = _settings.TransliterateFileName;
-            checkBoxTransliterateAdditional.Checked = _settings.Transliterate;
-            textBoxAuthorFormat.Text = _settings.AuthorFormat;
-            textBoxFileAsFormat.Text = _settings.FileAsFormat;
-            textBoxNoSequenceFormat.Text = _settings.NoSequenceFormat;
-            textBoxSequenceFormat.Text = _settings.SequenceFormat;
-            textBoxNoSeriesFormat.Text = _settings.NoSeriesFormat;
-            checkBoxAddSequences.Checked = _settings.AddSeqToTitle;
-            checkBoxFb2Info.Checked = _settings.Fb2Info;
-            checkBoxConvertAlphaPNG.Checked = _settings.ConvertAlphaPng;
-            checkBoxFlatStructure.Checked = _settings.Flat;
-            checkBoxEmbedStyles.Checked = _settings.EmbedStyles;
-            checkBoxCapitalize.Checked = _settings.CapitalDrop;
+            checkBoxTransliterateTOC.Checked = _settings.CommonSettings.TransliterateToc;
+            checkBoxTransliterateFileName.Checked = _settings.CommonSettings.TransliterateFileName;
+            checkBoxTransliterateAdditional.Checked = _settings.CommonSettings.Transliterate;
+            textBoxAuthorFormat.Text = _settings.CommonSettings.AuthorFormat;
+            textBoxFileAsFormat.Text = _settings.CommonSettings.FileAsFormat;
+            textBoxNoSequenceFormat.Text = _settings.CommonSettings.NoSequenceFormat;
+            textBoxSequenceFormat.Text = _settings.CommonSettings.SequenceFormat;
+            textBoxNoSeriesFormat.Text = _settings.CommonSettings.NoSeriesFormat;
+            checkBoxAddSequences.Checked = _settings.CommonSettings.AddSeqToTitle;
+            checkBoxFb2Info.Checked = _settings.CommonSettings.Fb2Info;
+            checkBoxConvertAlphaPNG.Checked = _settings.Fb2ImportSettings.ConvertAlphaPng;
+            checkBoxFlatStructure.Checked = _settings.CommonSettings.Flat;
+            checkBoxEmbedStyles.Checked = _settings.CommonSettings.EmbedStyles;
+            checkBoxCapitalize.Checked = _settings.CommonSettings.CapitalDrop;
             checkBoxCalibreMetadata.Checked = _settings.V2Settings.AddCalibreMetadata;
-            checkBoxSkipAboutPage.Checked = _settings.SkipAboutPage;
+            checkBoxSkipAboutPage.Checked = _settings.CommonSettings.SkipAboutPage;
             checkBoxUseXPGT.Checked = _settings.V2Settings.EnableAdobeTemplate;
             textBoxTemplatePath.Text = _settings.V2Settings.AdobeTemplatePath;
             LoadFixMode();
@@ -188,7 +188,7 @@ namespace Fb2epubSettings
 
         private void LoadIgnoreTitleMode()
         {
-            comboBoxIgnoreTitle.SelectedIndex = (int)_settings.IgnoreTitle;
+            comboBoxIgnoreTitle.SelectedIndex = (int)_settings.CommonSettings.IgnoreTitle;
         }
 
         private void SetupCSSElements()
@@ -240,7 +240,7 @@ namespace Fb2epubSettings
 
         private void LoadFontsList()
         {
-            _fontSettings.Load(_settings.Fonts,string.Empty); 
+            _fontSettings.Load(_settings.CommonSettings.Fonts, string.Empty); 
         }
 
         private void UpdateXPGTGroupGUI()
@@ -305,93 +305,93 @@ namespace Fb2epubSettings
             comboBoxFixMode.Items.Add("Internal");
             comboBoxFixMode.Items.Add("Fb2Fix");
             comboBoxFixMode.Items.Add("FixAlways");
-            comboBoxFixMode.SelectedIndex = (int)_settings.FixMode;
+            comboBoxFixMode.SelectedIndex = (int)_settings.Fb2ImportSettings.FixMode;
         }
 
         private void checkBoxTransliterateTOC_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.TransliterateToc = checkBoxTransliterateTOC.Checked;
+            _settings.CommonSettings.TransliterateToc = checkBoxTransliterateTOC.Checked;
         }
 
         private void checkBoxTransliterateFileName_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.TransliterateFileName = checkBoxTransliterateFileName.Checked;
+            _settings.CommonSettings.TransliterateFileName = checkBoxTransliterateFileName.Checked;
         }
 
         private void checkBoxTransliterateAdditional_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.Transliterate = checkBoxTransliterateAdditional.Checked;
+            _settings.CommonSettings.Transliterate = checkBoxTransliterateAdditional.Checked;
         }
 
         private void textBoxSequenceFormat_TextChanged(object sender, EventArgs e)
         {
-            _settings.SequenceFormat = textBoxSequenceFormat.Text;
+            _settings.CommonSettings.SequenceFormat = textBoxSequenceFormat.Text;
         }
 
         private void textBoxNoSequenceFormat_TextChanged(object sender, EventArgs e)
         {
-            _settings.NoSequenceFormat = textBoxNoSequenceFormat.Text;
+            _settings.CommonSettings.NoSequenceFormat = textBoxNoSequenceFormat.Text;
         }
 
         private void textBoxAuthorFormat_TextChanged(object sender, EventArgs e)
         {
-            _settings.AuthorFormat = textBoxAuthorFormat.Text;
+            _settings.CommonSettings.AuthorFormat = textBoxAuthorFormat.Text;
         }
 
         private void textBoxFileAsFormat_TextChanged(object sender, EventArgs e)
         {
-            _settings.FileAsFormat = textBoxFileAsFormat.Text;
+            _settings.CommonSettings.FileAsFormat = textBoxFileAsFormat.Text;
         }
 
         private void checkBoxAddSequences_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.AddSeqToTitle = checkBoxAddSequences.Checked;
+            _settings.CommonSettings.AddSeqToTitle = checkBoxAddSequences.Checked;
             UpdateSequencesGroup();
         }
 
         private void checkBoxFb2Info_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.Fb2Info= checkBoxFb2Info.Checked;
+            _settings.CommonSettings.Fb2Info = checkBoxFb2Info.Checked;
         }
 
         private void checkBoxConvertAlphaPNG_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.ConvertAlphaPng = checkBoxConvertAlphaPNG.Checked;
+            _settings.Fb2ImportSettings.ConvertAlphaPng = checkBoxConvertAlphaPNG.Checked;
         }
 
         private void checkBoxFlatStructure_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.Flat = checkBoxFlatStructure.Checked;
+            _settings.CommonSettings.Flat = checkBoxFlatStructure.Checked;
         }
 
         private void checkBoxEmbedStyles_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.EmbedStyles = checkBoxEmbedStyles.Checked;
+            _settings.CommonSettings.EmbedStyles = checkBoxEmbedStyles.Checked;
         }
 
         private void checkBoxCapitalize_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.CapitalDrop = checkBoxCapitalize.Checked;
+            _settings.CommonSettings.CapitalDrop = checkBoxCapitalize.Checked;
         }
 
         private void checkBoxSkipAboutPage_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.SkipAboutPage = checkBoxSkipAboutPage.Checked;
+            _settings.CommonSettings.SkipAboutPage = checkBoxSkipAboutPage.Checked;
         }
 
         private void comboBoxFixMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _settings.FixMode = (FixOptions)comboBoxFixMode.SelectedIndex;
+            _settings.Fb2ImportSettings.FixMode = (FixOptions)comboBoxFixMode.SelectedIndex;
         }
 
         private void textBoxNoSeriesFormat_TextChanged(object sender, EventArgs e)
         {
-            _settings.NoSeriesFormat = textBoxNoSeriesFormat.Text;
+            _settings.CommonSettings.NoSeriesFormat = textBoxNoSeriesFormat.Text;
         }
 
         private void buttonDeletePath_Click(object sender, EventArgs e)
         {
-            Location currentLocation = (Location)listBoxPaths.SelectedItem;
+            var currentLocation = (Location)listBoxPaths.SelectedItem;
             if (currentLocation != null)
             {
                 _locations.Remove(currentLocation);
@@ -779,10 +779,10 @@ namespace Fb2epubSettings
 
         private void buttonDeleteCSSFont_Click(object sender, EventArgs e)
         {
-            CSSFontFamily currentFont = _myDataSourceCSSFonts.Current as CSSFontFamily;
+            var currentFont = _myDataSourceCSSFonts.Current as CSSFontFamily;
             if (currentFont != null)
             {
-                CSSElementListItem currentElement = _myDataSourceCSS.Current as CSSElementListItem;
+                var currentElement = _myDataSourceCSS.Current as CSSElementListItem;
                 if (currentElement != null)
                 {
                     _fontSettings.CssElements[currentElement.Name][currentElement.Class].Remove(currentFont);
@@ -794,12 +794,12 @@ namespace Fb2epubSettings
 
         private void comboBoxIgnoreTitle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _settings.IgnoreTitle= (IgnoreTitleOptions)comboBoxIgnoreTitle.SelectedIndex;
+            _settings.CommonSettings.IgnoreTitle = (IgnoreTitleOptions)comboBoxIgnoreTitle.SelectedIndex;
         }
 
         private void buttonImportExport_Click(object sender, EventArgs e)
         {
-            ImportExportForm form = new ImportExportForm(_settings);
+            var form = new ImportExportForm(_settings);
             DialogResult result =  form.ShowDialog();
             ConverterSettingsForm_Load(this, null);
         }

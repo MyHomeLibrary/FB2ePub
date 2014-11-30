@@ -16,18 +16,17 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// Convert epigraph author FB2 element
         /// </summary>
         /// <param name="textAuthorItem">item to convert</param>
-        /// <param name="compatibility"></param>
         /// <param name="epigraphAuthorConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(TextAuthorItem textAuthorItem,HTMLElementType compatibility,EpigraphAuthorConverterParams epigraphAuthorConverterParams)
+        public IHTMLItem Convert(TextAuthorItem textAuthorItem,EpigraphAuthorConverterParams epigraphAuthorConverterParams)
         {
             if (textAuthorItem == null)
             {
                 throw new ArgumentNullException("textAuthorItem");
             }
-            var epigraphAuthor = new Div(compatibility);
+            var epigraphAuthor = new Div(HTMLElementType.XHTML11);
             var paragraphConverter = new ParagraphConverterV2();
-            epigraphAuthor.Add(paragraphConverter.Convert(textAuthorItem,compatibility,
+            epigraphAuthor.Add(paragraphConverter.Convert(textAuthorItem,
                 new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, Settings = epigraphAuthorConverterParams.Settings, StartSection = false }));
             SetClassType(epigraphAuthor,"epigraph_author");
             return epigraphAuthor;
