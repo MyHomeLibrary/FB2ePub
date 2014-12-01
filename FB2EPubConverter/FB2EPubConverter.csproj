@@ -171,6 +171,11 @@
     <Compile Include="ProgressUpdateWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ElementConvertersV2\SectionConverterV2.cs" />
+    <Compile Include="SourceDataInclusionControls\IDataInclusionBase.cs" />
+    <Compile Include="SourceDataInclusionControls\PublishDataInclusion.cs.cs" />
+    <Compile Include="SourceDataInclusionControls\SourceDataInclusion.cs" />
+    <Compile Include="SourceDataInclusionControls\SourceDataInclusionControl.cs" />
+    <Compile Include="SourceDataInclusionControls\TitleDataInclusion.cs" />
     <Compile Include="UnicodeHelpers.cs" />
   </ItemGroup>
   <ItemGroup>

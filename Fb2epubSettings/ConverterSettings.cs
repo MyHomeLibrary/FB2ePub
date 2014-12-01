@@ -15,7 +15,7 @@ namespace Fb2epubSettings
         Fb2FixAlways, // always use Fb2Fix
     }
 
-    public enum IgnoreTitleOptions
+    public enum IgnoreInfoSourceOptions
     {
         IgnoreNothing = 0,
         IgnoreMainTitle,
