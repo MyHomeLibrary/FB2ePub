@@ -20,7 +20,10 @@ namespace Fb2epubSettings
         private string _fileAsFormat = string.Empty;
         private bool _capitalDrop = false;
         private bool _skipAboutPage = false;
-        private IgnoreTitleOptions _ignoreTitle = IgnoreTitleOptions.IgnoreNothing;
+        private IgnoreInfoSourceOptions _ignoreTitle = IgnoreInfoSourceOptions.IgnoreNothing;
+        private IgnoreInfoSourceOptions _ignoreAuthors= IgnoreInfoSourceOptions.IgnoreNothing;
+        private IgnoreInfoSourceOptions _ignoreTranslators = IgnoreInfoSourceOptions.IgnoreNothing;
+        private IgnoreInfoSourceOptions _ignoreGenres = IgnoreInfoSourceOptions.IgnoreNothing;
         private bool _decorateFontNames = false;
         private readonly EPubFontSettings _fonts = new EPubFontSettings();
         private bool _fixCodeElement = true;
@@ -52,6 +55,9 @@ namespace Fb2epubSettings
             _capitalDrop = temp._capitalDrop;
             _skipAboutPage = temp._skipAboutPage;
             _ignoreTitle = temp._ignoreTitle;
+            _ignoreAuthors = temp._ignoreAuthors;
+            _ignoreTranslators = temp._ignoreTranslators;
+            _ignoreGenres = temp._ignoreGenres;
             _decorateFontNames = temp._decorateFontNames;
             _fonts.CopyFrom(temp._fonts);
             _fixCodeElement = temp._fixCodeElement;
@@ -73,7 +79,10 @@ namespace Fb2epubSettings
             _fileAsFormat = @"%l.c% %f.c%";
             _capitalDrop = true;
             _skipAboutPage = false;
-            _ignoreTitle = IgnoreTitleOptions.IgnoreNothing;
+            _ignoreTitle = IgnoreInfoSourceOptions.IgnoreNothing;
+            _ignoreAuthors = IgnoreInfoSourceOptions.IgnoreNothing;
+            _ignoreTranslators = IgnoreInfoSourceOptions.IgnoreNothing;
+            _ignoreGenres = IgnoreInfoSourceOptions.IgnoreNothing;
             _decorateFontNames = true;
             _fixCodeElement = true;
 
@@ -280,14 +289,47 @@ namespace Fb2epubSettings
 
 
         /// <summary>
-        /// Controls which titles should be ignored when generating ePub
+        /// Controls which titles source should be ignored when generating ePub
         /// by default - nothing
         /// </summary>
         [XmlElement(ElementName = "IgnoreTitleOption")]
-        public IgnoreTitleOptions IgnoreTitle
+        public IgnoreInfoSourceOptions IgnoreTitle
         {
             get { return _ignoreTitle; }
             set { _ignoreTitle = value; }
+        }
+
+        /// <summary>
+        /// Controls which Authors source should be ignored when generating ePub
+        /// by default - nothing
+        /// </summary>
+        [XmlElement(ElementName = "IgnoreAuthorsOption")]
+        public IgnoreInfoSourceOptions IgnoreAuthors
+        {
+            get { return _ignoreAuthors; }
+            set { _ignoreAuthors = value; }
+        }
+
+        /// <summary>
+        /// Controls which Translators source should be ignored when generating ePub
+        /// by default - nothing
+        /// </summary>
+        [XmlElement(ElementName = "IgnoreTranstatorsOption")]
+        public IgnoreInfoSourceOptions IgnoreTranslators
+        {
+            get { return _ignoreTranslators; }
+            set { _ignoreTranslators= value; }
+        }
+
+        /// <summary>
+        /// Controls which Genres source should be ignored when generating ePub
+        /// by default - nothing
+        /// </summary>
+        [XmlElement(ElementName = "IgnoreGenresOption")]
+        public IgnoreInfoSourceOptions IgnoreGenres
+        {
+            get { return _ignoreGenres; }
+            set { _ignoreGenres = value; }
         }
 
         /// <summary>

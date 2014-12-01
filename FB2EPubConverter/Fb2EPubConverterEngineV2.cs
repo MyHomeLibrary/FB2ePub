@@ -3,9 +3,10 @@ using System.IO;
 using System.Reflection;
 using EPubLibrary;
 using Fb2ePubConverter;
-using Fb2epubSettings;
+using FB2EPubConverter.SourceDataInclusionControls;
 using FB2Library;
 using FB2Library.Elements;
+using FB2Library.HeaderItems;
 using XHTMLClassLibrary.BaseElements;
 using Logger = Fb2ePubConverter.Logger;
 using EPubLibrary.CSS_Items;
@@ -398,122 +399,23 @@ namespace FB2EPubConverter
 
             Logger.Log.Debug("Passing header data from FB2 to EPUB");
 
+            PassTitleInfoFromFB2EPub(fb2File.TitleInfo, epubFile);
+            PassMainIDData(epubFile, fb2File.DocumentInfo.ID);
+            PassSourceInfoFromFB2EPub(fb2File, epubFile);
 
-            PassTitleInfoFromFB2EPub(fb2File, epubFile);
 
-            // Getting information from FB2 document section
-            var bookId = new Identifier
-            {
-                ID =
-                    !string.IsNullOrEmpty(fb2File.DocumentInfo.ID) ? fb2File.DocumentInfo.ID : Guid.NewGuid().ToString(),
-                IdentifierName = "FB2BookID",
-                Scheme = "URI"
-            };
-            epubFile.Title.Identifiers.Add(bookId);
-
-            if ((fb2File.DocumentInfo.SourceOCR != null) && !string.IsNullOrEmpty(fb2File.DocumentInfo.SourceOCR.Text))
-            {
-                epubFile.Title.Source = new Source { SourceData = fb2File.DocumentInfo.SourceOCR.Text };
-            }
-
-            foreach (var docAuthor in fb2File.DocumentInfo.DocumentAuthors)
-            {
-                var person = new PersoneWithRole
-                {
-                    PersonName =
-                        epubFile.Transliterator.Translate(GenerateAuthorString(docAuthor), epubFile.TranslitMode),
-                    FileAs = GenerateFileAsString(docAuthor),
-                    Role = RolesEnum.Adapter
-                };
-                if (fb2File.TitleInfo != null)
-                {
-                    person.Language = fb2File.TitleInfo.Language;
-                }
-                epubFile.Title.Contributors.Add(person);
-            }
-
-            // Getting information from FB2 Source Title Info section
-            if ((fb2File.SourceTitleInfo.BookTitle != null) && !string.IsNullOrEmpty(fb2File.SourceTitleInfo.BookTitle.Text))
+            if (fb2File.PublishInfo.BookTitle != null)
             {
                 var bookTitle = new Title
                 {
                     TitleName =
-                        epubFile.Transliterator.Translate(fb2File.SourceTitleInfo.BookTitle.Text, epubFile.TranslitMode),
+                        epubFile.Transliterator.Translate(fb2File.PublishInfo.BookTitle.Text, epubFile.TranslitMode),
                     Language =
-                        string.IsNullOrEmpty(fb2File.SourceTitleInfo.BookTitle.Language) && (fb2File.TitleInfo != null)
-                            ? fb2File.TitleInfo.Language
-                            : fb2File.SourceTitleInfo.BookTitle.Language
-                };
-                if ((Settings.CommonSettings.IgnoreTitle != IgnoreTitleOptions.IgnoreSourceTitle) && (Settings.CommonSettings.IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndSource)
-                    && Settings.CommonSettings.IgnoreTitle != IgnoreTitleOptions.IgnoreSourceAndPublish)
-                {
-                    bookTitle.TitleType = TitleType.SourceInfo;
-                    epubFile.Title.BookTitles.Add(bookTitle);
-                }
-
-                epubFile.Title.Languages.Add(fb2File.SourceTitleInfo.Language);
-            }
-
-            // add authors
-            foreach (var author in fb2File.SourceTitleInfo.BookAuthors)
-            {
-                var person = new PersoneWithRole
-                {
-                    PersonName =
-                        epubFile.Transliterator.Translate(
-                            string.Format("{0} {1} {2}", author.FirstName, author.MiddleName, author.LastName),
-                            epubFile.TranslitMode),
-                    FileAs = GenerateFileAsString(author),
-                    Role = RolesEnum.Author,
-                    Language = fb2File.SourceTitleInfo.Language
-                };
-                epubFile.Title.Creators.Add(person);
-            }
-
-            foreach (var translator in fb2File.SourceTitleInfo.Translators)
-            {
-                var person = new PersoneWithRole
-                {
-                    PersonName =
-                        epubFile.Transliterator.Translate(
-                            string.Format("{0} {1} {2}", translator.FirstName, translator.MiddleName,
-                                translator.LastName), epubFile.TranslitMode),
-                    FileAs = GenerateFileAsString(translator),
-                    Role = RolesEnum.Translator,
-                    Language = fb2File.SourceTitleInfo.Language
-                };
-                epubFile.Title.Contributors.Add(person);
-            }
-
-
-            foreach (var genre in fb2File.SourceTitleInfo.Genres)
-            {
-                var item = new Subject
-                {
-                    SubjectInfo =
-                        epubFile.Transliterator.Translate(Fb2GenreToDescription(genre.Genre), epubFile.TranslitMode)
-                };
-                if (epubFile.Title.Subjects.Contains(item))
-                {
-                    epubFile.Title.Subjects.Add(item);
-                }
-
-            }
-
-
-            if (fb2File.PublishInfo.BookName != null)
-            {
-                var bookTitle = new Title
-                {
-                    TitleName =
-                        epubFile.Transliterator.Translate(fb2File.PublishInfo.BookName.Text, epubFile.TranslitMode),
-                    Language =
-                        !string.IsNullOrEmpty(fb2File.PublishInfo.BookName.Language)
-                            ? fb2File.PublishInfo.BookName.Language
+                        !string.IsNullOrEmpty(fb2File.PublishInfo.BookTitle.Language)
+                            ? fb2File.PublishInfo.BookTitle.Language
                             : fb2File.TitleInfo.Language
                 };
-                if ((Settings.CommonSettings.IgnoreTitle != IgnoreTitleOptions.IgnorePublishTitle) && (Settings.CommonSettings.IgnoreTitle != IgnoreTitleOptions.IgnoreMainAndPublish) &&
-                    Settings.CommonSettings.IgnoreTitle != IgnoreTitleOptions.IgnoreSourceAndPublish)
+                if (!InclusionControl.IsIgnoreInfoSource(SourceDataInclusionControl.DataTypes.Publish, Settings.CommonSettings.IgnoreTitle))
                 {
                     bookTitle.TitleType = TitleType.PublishInfo;
                     epubFile.Title.BookTitles.Add(bookTitle);
@@ -523,7 +425,7 @@ namespace FB2EPubConverter
 
             if (fb2File.PublishInfo.ISBN != null)
             {
-                bookId = new Identifier
+                var bookId = new Identifier
                 {
                     IdentifierName = "BookISBN",
                     ID = fb2File.PublishInfo.ISBN.Text,
@@ -570,47 +472,123 @@ namespace FB2EPubConverter
             PassSeriesData(fb2File, epubFile);
         }
 
-        private void PassTitleInfoFromFB2EPub(FB2File fb2File, EPubFile epubFile)
+        private void PassSourceInfoFromFB2EPub(FB2File fb2File, EPubFile epubFile)
+        {
+            if ((fb2File.DocumentInfo.SourceOCR != null) && !string.IsNullOrEmpty(fb2File.DocumentInfo.SourceOCR.Text))
+            {
+                epubFile.Title.Source = new Source { SourceData = fb2File.DocumentInfo.SourceOCR.Text };
+            }
+
+            foreach (var docAuthor in fb2File.DocumentInfo.DocumentAuthors)
+            {
+                var person = new PersoneWithRole
+                {
+                    PersonName =
+                        epubFile.Transliterator.Translate(GenerateAuthorString(docAuthor), epubFile.TranslitMode),
+                    FileAs = GenerateFileAsString(docAuthor),
+                    Role = RolesEnum.Adapter
+                };
+                if (fb2File.TitleInfo != null)
+                {
+                    person.Language = fb2File.TitleInfo.Language;
+                }
+                epubFile.Title.Contributors.Add(person);
+            }
+
+            // Getting information from FB2 Source Title Info section
+            if ((fb2File.SourceTitleInfo.BookTitle != null) && !string.IsNullOrEmpty(fb2File.SourceTitleInfo.BookTitle.Text))
+            {
+                var bookTitle = new Title
+                {
+                    TitleName =
+                        epubFile.Transliterator.Translate(fb2File.SourceTitleInfo.BookTitle.Text, epubFile.TranslitMode),
+                    Language =
+                        string.IsNullOrEmpty(fb2File.SourceTitleInfo.BookTitle.Language) && (fb2File.TitleInfo != null)
+                            ? fb2File.TitleInfo.Language
+                            : fb2File.SourceTitleInfo.BookTitle.Language
+                };
+                if (!InclusionControl.IsIgnoreInfoSource(SourceDataInclusionControl.DataTypes.Source,Settings.CommonSettings.IgnoreTitle))
+                {
+                    bookTitle.TitleType = TitleType.SourceInfo;
+                    epubFile.Title.BookTitles.Add(bookTitle);
+                }
+
+                epubFile.Title.Languages.Add(fb2File.SourceTitleInfo.Language);
+            }
+
+            // add authors
+            foreach (var author in fb2File.SourceTitleInfo.BookAuthors)
+            {
+                var person = new PersoneWithRole
+                {
+                    PersonName =
+                        epubFile.Transliterator.Translate(GenerateAuthorString(author),
+                            epubFile.TranslitMode),
+                    FileAs = GenerateFileAsString(author),
+                    Role = RolesEnum.Author,
+                    Language = fb2File.SourceTitleInfo.Language
+                };
+                epubFile.Title.Creators.Add(person);
+            }
+
+            ConvertTranslators(fb2File.SourceTitleInfo,epubFile);
+            ConvertGenres(fb2File.SourceTitleInfo,epubFile);
+        }
+
+
+        private void PassMainIDData(EPubFile epubFile, string fb2ID)
+        {
+            // Getting information from FB2 document section
+            var bookId = new Identifier
+            {
+                ID =
+                    !string.IsNullOrEmpty(fb2ID) ? fb2ID : Guid.NewGuid().ToString(),
+                IdentifierName = "FB2BookID",
+                Scheme = "URI"
+            };
+            epubFile.Title.Identifiers.Add(bookId);
+        }
+
+        private void PassTitleInfoFromFB2EPub(ItemTitleInfo itemTitleInfo, EPubFile epubFile)
         {
             // cReate new Title page
             epubFile.TitlePage = new TitlePageFile(HTMLElementType.XHTML11);
 
             // in case main body title is not defined (empty) 
-            if ((fb2File.TitleInfo != null) && (fb2File.TitleInfo.BookTitle != null))
+            if ((itemTitleInfo != null) && (itemTitleInfo.BookTitle != null))
             {
-                epubFile.TitlePage.BookTitle = fb2File.TitleInfo.BookTitle.Text;
+                epubFile.TitlePage.BookTitle = itemTitleInfo.BookTitle.Text;
             }
 
-            // Pass all sequences 
             epubFile.AllSequences.Clear();
 
-            if (fb2File.TitleInfo != null)
+            if (itemTitleInfo != null)
             {
-                ConvertSequences(fb2File, epubFile);
+                ConvertSequences(itemTitleInfo, epubFile);
 
                 // Getting information from FB2 Title section
-                ConvertMainTitle(fb2File, epubFile);
+                ConvertMainTitle(itemTitleInfo, epubFile);
 
-                ConvertAnnotation(fb2File, epubFile);
+                ConvertAnnotation(itemTitleInfo, epubFile);
 
                 // add authors
-                ConvertAuthors(fb2File, epubFile);
+                ConvertAuthors(itemTitleInfo, epubFile);
 
                 // add translators
-                ConvertTranslators(fb2File, epubFile);
+                ConvertTranslators(itemTitleInfo, epubFile);
 
                 // genres
-                ConvertGenres(fb2File, epubFile);
+                ConvertGenres(itemTitleInfo, epubFile);
 
             }
         }
 
-        protected override void ConvertAnnotation(FB2File fb2File, EPubFile epubFile)
+        protected override void ConvertAnnotation(ItemTitleInfo titleInfo, EPubFile epubFile)
         {
-            if (fb2File.TitleInfo.Annotation != null)
+            if (titleInfo.Annotation != null)
             {
-                epubFile.Title.Description = fb2File.TitleInfo.Annotation.ToString();
-                epubFile.AnnotationPage = new AnnotationPageFile(Settings.StandardVersion == EPubVersion.VEpub20 ? HTMLElementType.XHTML11 : HTMLElementType.HTML5);
+                epubFile.Title.Description = titleInfo.Annotation.ToString();
+                epubFile.AnnotationPage = new AnnotationPageFile(HTMLElementType.XHTML11);
                 var converterSettings = new ConverterOptionsV2
                 {
                     CapitalDrop = Settings.CommonSettings.CapitalDrop,
@@ -619,7 +597,7 @@ namespace FB2EPubConverter
                     ReferencesManager = ReferencesManager,
                 };
                 var annotationConverter = new AnnotationConverterV2();
-                epubFile.AnnotationPage.BookAnnotation = (Div)annotationConverter.Convert(fb2File.TitleInfo.Annotation,
+                epubFile.AnnotationPage.BookAnnotation = (Div)annotationConverter.Convert(titleInfo.Annotation,
                    new AnnotationConverterParams { Settings = converterSettings, Level = 1 });
             }
         }

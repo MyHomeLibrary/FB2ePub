@@ -496,31 +496,31 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreTitleOptions.IgnoreNothing;
+                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreNothing;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreTitleOptions.IgnoreMainTitle;
+                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreMainTitle;
                         }
                         else if (value == 2)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreTitleOptions.IgnoreSourceTitle;
+                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreSourceTitle;
                         }
                         else if (value == 3)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreTitleOptions.IgnorePublishTitle;
+                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnorePublishTitle;
                         }
                         else if (value == 4)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreTitleOptions.IgnoreMainAndSource;
+                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreMainAndSource;
                         }
                         else if (value == 5)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreTitleOptions.IgnoreMainAndPublish;
+                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreMainAndPublish;
                         }
                         else if (value == 6)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreTitleOptions.IgnoreSourceAndPublish;
+                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreSourceAndPublish;
                         }
                         else
                         {

@@ -794,7 +794,7 @@ namespace Fb2epubSettings
 
         private void comboBoxIgnoreTitle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _settings.CommonSettings.IgnoreTitle = (IgnoreTitleOptions)comboBoxIgnoreTitle.SelectedIndex;
+            _settings.CommonSettings.IgnoreTitle = (IgnoreInfoSourceOptions)comboBoxIgnoreTitle.SelectedIndex;
         }
 
         private void buttonImportExport_Click(object sender, EventArgs e)
