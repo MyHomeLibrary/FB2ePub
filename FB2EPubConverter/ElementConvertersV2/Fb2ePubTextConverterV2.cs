@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EPubLibrary;
+﻿using EPubLibrary;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.XHTML_Items;
 using Fb2epubSettings;
@@ -19,32 +15,18 @@ namespace FB2EPubConverter.ElementConvertersV2
         private readonly EPubCommonSettings _commonSettings;
         private readonly ImageManager _images;
         private readonly HRefManager _referencesManager;
+        private readonly long _maxSize;
 
-        private long _maxSize = 245 * 1024;
         private int _sectionCounter;
 
-        internal Fb2EPubTextConverterV2(EPubCommonSettings commonSettings, ImageManager images, HRefManager referencesManager)
+        internal Fb2EPubTextConverterV2(EPubCommonSettings commonSettings, ImageManager images, HRefManager referencesManager,long maxSize)
         {
             _commonSettings = commonSettings;
             _images = images;
             _referencesManager = referencesManager;
+            _maxSize = maxSize;
         }
 
-        /// <summary>
-        /// Get/Set max document size in bytes
-        /// </summary>
-        public long MaxSize
-        {
-            get { return _maxSize; }
-            set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentException("value");
-                }
-                _maxSize = value;
-            }
-        }
 
         public void Convert(EPubFile epubFile, FB2File fb2File)
         {
@@ -60,7 +42,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 {
                     CapitalDrop = _commonSettings.CapitalDrop,
                     Images = _images,
-                    MaxSize = MaxSize,
+                    MaxSize = _maxSize,
                     ReferencesManager = _referencesManager,
                 };
                 var titleConverter = new TitleConverterV2();
@@ -75,7 +57,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             if (!string.IsNullOrEmpty(fb2File.MainBody.Name))
             {
                 string docTitle = fb2File.MainBody.Name;
-                Fb2ePubConverter.Logger.Log.DebugFormat("Adding section : {0}", docTitle);
+                Logger.Log.DebugFormat("Adding section : {0}", docTitle);
                 mainDocument = epubFile.AddDocument(docTitle);
                 mainDocument.DocumentType = GuideTypeEnum.Text;
                 mainDocument.Content = new Div(HTMLElementType.XHTML11);
@@ -101,7 +83,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     {
                         CapitalDrop = _commonSettings.CapitalDrop,
                         Images = _images,
-                        MaxSize = MaxSize,
+                        MaxSize = _maxSize,
                         ReferencesManager = _referencesManager,
                     };
 
@@ -128,7 +110,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 {
                     CapitalDrop = _commonSettings.CapitalDrop,
                     Images = _images,
-                    MaxSize = MaxSize,
+                    MaxSize = _maxSize,
                     ReferencesManager = _referencesManager,
                 };
 
@@ -137,7 +119,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     new EpigraphConverterParams { Settings = converterSettings, Level = 1 }));
             }
 
-            Fb2ePubConverter.Logger.Log.Debug("Adding main sections");
+            Logger.Log.Debug("Adding main sections");
             foreach (var section in fb2File.MainBody.Sections)
             {
                 AddSection(epubFile, section, mainDocument, false);
@@ -176,7 +158,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             {
                 CapitalDrop = !fbeNotesSection && _commonSettings.CapitalDrop,
                 Images = _images,
-                MaxSize = MaxSize,
+                MaxSize = _maxSize,
                 ReferencesManager = _referencesManager,
             };
             var sectionConverter = new SectionConverterV2
@@ -234,7 +216,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 {
                     CapitalDrop = false,
                     Images = _images,
-                    MaxSize = MaxSize,
+                    MaxSize = _maxSize,
                     ReferencesManager = _referencesManager,
                 };
                 var titleConverter = new TitleConverterV2();
@@ -281,7 +263,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 {
                     CapitalDrop = _commonSettings.CapitalDrop,
                     Images = _images,
-                    MaxSize = MaxSize,
+                    MaxSize = _maxSize,
                     ReferencesManager = _referencesManager,
                 };
                 var titleConverter = new TitleConverterV2();

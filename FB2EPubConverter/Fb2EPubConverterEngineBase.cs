@@ -1,22 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary;
 using EPubLibrary.CSS_Items;
 using FB2EPubConverter;
+using FB2EPubConverter.FB2Loaders;
 using FB2Library;
-using FB2Library.HeaderItems;
-using ICSharpCode.SharpZipLib.Zip;
 using TranslitRu;
-using XMLFixerLibrary;
-using ZipEntry=ICSharpCode.SharpZipLib.Zip.ZipEntry;
-using FB2Fix;
-using NUnrar.Archive;
 using Fb2epubSettings;
 
 
@@ -82,7 +74,12 @@ namespace Fb2ePubConverter
             {
                 case FileTypesEnum.FileTypeZIP:
                     Logger.Log.InfoFormat("Loading ZIP : {0}",fileName);
-                    if (!LoadFb2ZipFile(fileName))
+                    var fb2ZipLoader = new FB2ZipFileLoader();
+                    try
+                    {
+                        FB2Files.AddRange(fb2ZipLoader.LoadFile(fileName, Settings.Fb2ImportSettings));
+                    }
+                    catch (Exception)
                     {
                         Logger.Log.ErrorFormat("Error loading ZIP {0} :",fileName);
                         return false;
@@ -90,7 +87,12 @@ namespace Fb2ePubConverter
                     break;
                 case FileTypesEnum.FileTypeFB2:
                     Logger.Log.InfoFormat("Processing {0} ...", fileName);
-                    if (!LoadFb2File(fileName))
+                    var fb2FileLoader = new FB2FileLoader();
+                    try
+                    {
+                        FB2Files.AddRange(fb2FileLoader.LoadFile(fileName,Settings.Fb2ImportSettings));
+                    }
+                    catch (Exception)
                     {
                         Logger.Log.ErrorFormat("Error loading FB2 {0} :", fileName);
                         return false;
@@ -98,7 +100,12 @@ namespace Fb2ePubConverter
                     break;
                 case FileTypesEnum.FileTypeRAR:
                     Logger.Log.InfoFormat("Loading RAR : {0}", fileName);
-                    if (!LoadFb2RarFile(fileName))
+                    var fb2RarLoader = new FB2RarLoader();
+                    try
+                    {
+                        FB2Files.AddRange(fb2RarLoader.LoadFile(fileName,Settings.Fb2ImportSettings));
+                    }
+                    catch (Exception)
                     {
                         Logger.Log.ErrorFormat("Error loading RAR {0} :", fileName);
                         return false;
@@ -109,358 +116,6 @@ namespace Fb2ePubConverter
                     return false;
             }
             return true;
-        }
-
-        /// <summary>
-        /// Loads FB2 from RAR files
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
-        private bool LoadFb2RarFile(string fileName)
-        {
-            bool fb2FileFound = false;
-            bool fb2FileLoaded = false;
-            try
-            {
-                RarArchive rarFile = RarArchive.Open(fileName);
-
-                int n = rarFile.Entries.Count;
-                Logger.Log.DebugFormat("Detected {0} entries in RAR file", n);
-                foreach(var entry in rarFile.Entries)
-                {
-                    if (entry.IsDirectory) 
-                    {
-                        Logger.Log.DebugFormat("{0} is not file but folder", fileName);
-                        continue;
-                    }
-                    var extension = Path.GetExtension(entry.FilePath);
-                    if (extension != null && extension.ToUpper() == ".FB2")
-                    {
-                        fb2FileFound = true;
-                        try
-                        {
-                            string tempPath = Path.GetTempPath();
-                            entry.WriteToDirectory(tempPath);
-                            string fileNameOnly = Path.GetFileName(entry.FilePath);
-                            Logger.Log.InfoFormat("Processing {0} ...", fileNameOnly);
-                            if (!LoadFb2File(string.Format(@"{0}\{1}", tempPath, fileNameOnly)))
-                            {
-                                Logger.Log.ErrorFormat("Unable to load {0}", fileNameOnly);
-                                //continue;
-                            }
-                            else
-                            {
-                                fb2FileLoaded = true;
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Logger.Log.ErrorFormat("Unable to unrar file entry {0} : {1}", entry.FilePath, ex);
-                            //continue;
-                        }
-                    }
-                    else
-                    {
-                        Logger.Log.InfoFormat("{0} is not FB2 file", entry.FilePath);
-                        //continue;                        
-                    }
-                    
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Log.ErrorFormat("Error loading RAR file : {0}",ex);
-                return false;
-            }
-            return fb2FileFound && fb2FileLoaded;
-        }
-
-        /// <summary>
-        /// Loads FB2 file
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
-        private bool LoadFb2File(string fileName)
-        {
-            try
-            {
-                Stream s = File.OpenRead(fileName);
-
-                if (Settings.Fb2ImportSettings.FixMode == FixOptions.Fb2FixAlways)
-                {
-                    LoadFB2StreamWithFix(s, ReadFb2FileStream);
-                }
-                else
-                {
-                    try
-                    {
-                        try
-                        {
-                            ReadFb2FileStream(s);
-                        }
-                        catch (XmlException)
-                        {
-                            if (Settings.Fb2ImportSettings.FixMode == FixOptions.DoNotFix)
-                            {
-                                Logger.Log.ErrorFormat("Error in file, not fixing ");
-                                return false;
-                            }
-                            Logger.Log.Info("Error loading file - invalid XML content - attempting to repair...");
-                            // try to read broken XML
-                            s.Seek(0, SeekOrigin.Begin);
-                            ReadBrokenXmlFb2FileStream(s);
-                        }
-                        s.Close();
-                    }
-                    catch (XmlException)
-                    {
-                        if (Settings.Fb2ImportSettings.FixMode == FixOptions.MinimalFix)
-                        {
-                            Logger.Log.ErrorFormat("Error in file, not fixing ");
-                            return false;
-                        }
-                        Logger.Log.Info("Repair attempt failed - attempting to repair using Fb2Fix...");
-                        // try to read broken XML
-                        s.Seek(0, SeekOrigin.Begin);
-                        LoadFB2StreamWithFix(s, ReadFb2FileStream);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Log.ErrorFormat("Error loading FB2 file : {0}", ex);
-                return false;
-            }
-
-            return true;
-        }
-
-        private void LoadFB2StreamWithFix(Stream s, Action<Stream> streamLoader)
-        {
-            var options = new Fb2FixArguments
-            {
-                incversion = true,
-                regenerateId = false,
-                indentBody = false,
-                indentHeader = true,
-                mapGenres = true,
-                encoding = Encoding.UTF8
-            };
-
-            using (Stream output = Fb2Fix.Process(s, options))
-            {
-                streamLoader(output);
-            }
-            
-        }
-
-        private void ReadFb2FileStream(Stream s)
-        {
-            Logger.Log.Debug("Starting to load FB2 stream");
-            var settings = new XmlReaderSettings
-                                             {
-                                                 ValidationType = ValidationType.None,
-                                                 DtdProcessing = DtdProcessing.Prohibit,
-                                                 CheckCharacters = false
-                                                 
-            };
-            XDocument fb2Document;
-            try
-            {
-                    using (XmlReader reader = XmlReader.Create(s, settings))
-                    {
-                        fb2Document = XDocument.Load(reader, LoadOptions.PreserveWhitespace);
-                        reader.Close();
-                    }
-
-            }
-            catch(XmlException) // we handle this on top
-            {
-               throw;
-            }
-            catch (Exception ex)
-            {
-                Logger.Log.ErrorFormat("Error loading file : {0}", ex);
-                throw;
-            }
-            var file = new FB2File();
-            try
-            {
-                file.Load(fb2Document,false);
-                FB2Files.Add(file);
-            }
-            catch (Exception ex)
-            {
-                Logger.Log.ErrorFormat("Error loading file : {0}",ex);
-            }
-            Logger.Log.Debug("FB2 stream loaded");
-        }
-
-        private bool LoadFb2ZipFile(string fileName)
-        {
-            Logger.Log.DebugFormat("Starting to load ZIP file {0}",fileName);
-            try
-            {
-                Exception returnEx = null;
-                bool fb2FileFound = false;
-                bool fb2FileLoaded = false;
-                using (var s = new ZipInputStream(File.OpenRead(fileName)))
-                {
-                    try
-                    {
-                        ZipEntry theEntry;
-                        while ((theEntry = s.GetNextEntry()) != null)
-                        {
-                            if (!theEntry.IsFile || !theEntry.CanDecompress)
-                            {
-                                Logger.Log.InfoFormat("{0} is not file or not decompresable",fileName);
-                                continue;
-                            }
-                            Logger.Log.InfoFormat("Processing {0} ...", theEntry.Name);
-                            var extension = Path.GetExtension(theEntry.Name);
-                            if (extension != null && extension.ToUpper() == ".FB2")
-                            {
-                                fb2FileFound = true;
-
-                                if (Settings.Fb2ImportSettings.FixMode == FixOptions.Fb2FixAlways)
-                                {
-                                    using (var s1 = new ZipInputStream(File.OpenRead(fileName)))
-                                    {
-                                        // reach the same position in ZIP
-                                        while (theEntry.ToString() != s1.GetNextEntry().ToString())
-                                        {
-                                        }
-                                        LoadFB2StreamWithFix(s1, ReadFb2FileStream);
-                                        fb2FileLoaded = true;
-                                    }
-                                }
-                                else
-                                {
-                                    try
-                                    {
-                                        ReadFb2FileStream(s);
-                                        fb2FileLoaded = true;
-                                    }
-                                    catch (XmlException) // broken/malformed Xml detected
-                                    {
-                                        if (Settings.Fb2ImportSettings.FixMode == FixOptions.DoNotFix)
-                                        {
-                                            Logger.Log.ErrorFormat("Error in file, not fixing ");
-                                            continue;
-                                        }
-                                        // try to run work around case 
-                                        Logger.Log.Info(
-                                            "Error loading file - invalid XML content - attempting to repair...");
-                                        using (var s1 = new ZipInputStream(File.OpenRead(fileName)))
-                                        {
-                                            // reach the same position in ZIP
-                                            while (theEntry.ToString() != s1.GetNextEntry().ToString())
-                                            {
-                                            }
-                                            // try to read broken XML
-                                            try
-                                            {
-                                                ReadBrokenXmlFb2FileStream(s1);
-                                                fb2FileLoaded = true;
-                                            }
-                                            catch (XmlException)
-                                            {
-                                                if (Settings.Fb2ImportSettings.FixMode == FixOptions.MinimalFix)
-                                                {
-                                                    Logger.Log.ErrorFormat("Error in file, not fixing ");
-                                                    continue;
-                                                }
-                                                s1.Close();
-                                                using (var s2 = new ZipInputStream(File.OpenRead(fileName)))
-                                                {
-                                                    // reach the same position in ZIP
-                                                    while (theEntry.ToString() != s2.GetNextEntry().ToString())
-                                                    {
-                                                    }
-
-                                                    Logger.Log.Info(
-                                                        "Repair attempt failed - attempting to repair using Fb2Fix...");
-                                                    // try to read broken XML
-                                                    try
-                                                    {
-                                                        try
-                                                        {
-                                                            LoadFB2StreamWithFix(s2, ReadFb2FileStream);
-                                                            fb2FileLoaded = true;
-                                                        }
-                                                        catch (XmlException)
-                                                        {
-                                                            Logger.Log.ErrorFormat("Error in file - unable to fix");
-                                                            //continue;
-                                                        }
-                                                    }
-                                                    catch (Exception ex)
-                                                    {
-                                                        Logger.Log.ErrorFormat("Error in file - Fb2Fix crashes - unable to fix. \nError {0}",ex.Message);
-                                                        //continue;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    catch(ZipException ze)
-                    {
-                        Logger.Log.ErrorFormat("{0} - problem decompressing the file, UnZip error: {1}", fileName,ze.Message);
-                        s.Close();
-                        returnEx = ze;
-                    }
-                    catch (Exception ex)
-                    {
-                       Logger.Log.ErrorFormat("{0} - problem decompressing the file, error: {1}", fileName, ex);
-                        s.Close();
-                        returnEx = ex;
-                    }
-                    s.Close();
-                }
-                Logger.Log.DebugFormat("ZIP file {0} loaded successfully", fileName);
-                if (returnEx != null)
-                {
-                    throw returnEx;
-                }
-                return fb2FileFound && fb2FileLoaded;
-            }
-            catch (Exception ex)
-            {
-                Logger.Log.ErrorFormat("Error loading ZIP file {0} : {1}",fileName,ex);
-            }
-            return false;
-            
-        }
-
-        private void ReadBrokenXmlFb2FileStream(Stream stream)
-        {
-            Logger.Log.Debug("Starting to load FB2 stream");
-            try
-            {
-                using (var ms = new MemoryStream())
-                {
-                    var fixer = new XmlRepair();
-                    fixer.Repair(stream,ms);
-                    ms.Seek(0, SeekOrigin.Begin);
-                    ReadFb2FileStream(ms);
-                }
-
-            }
-            catch(XmlException xex)
-            {
-                Logger.Log.WarnFormat("Error loading file - invalid XML content : {0} \nRepair attempt failed", xex);
-                throw;
-
-            }
-            catch (Exception ex)
-            {
-                Logger.Log.ErrorFormat("Error loading file : {0}", ex);
-                throw;
-            }
         }
 
 
@@ -487,17 +142,17 @@ namespace Fb2ePubConverter
                         return FileTypesEnum.FileTypeRAR;
                     default:
                         Logger.Log.Debug("Can't use extension - attempting to detect");
-                        if (IsZipFile(fileName))
+                        if (FB2ZipFileLoader.IsZipFile(fileName))
                         {
                             Logger.Log.Debug("The file is ZIP file");
                             return FileTypesEnum.FileTypeZIP;                        
                         }
-                        if (IsRarFile(fileName))
+                        if (FB2RarLoader.IsRarFile(fileName))
                         {
                             Logger.Log.Debug("The file is RAR file");
                             return FileTypesEnum.FileTypeRAR;
                         }
-                        if (IsFB2File(fileName))
+                        if (FB2FileLoader.IsFB2File(fileName))
                         {
                             Logger.Log.Debug("The file is FB2 file");
                             return FileTypesEnum.FileTypeFB2;                       
@@ -506,75 +161,6 @@ namespace Fb2ePubConverter
                 }
             Logger.Log.Debug("The file is unknown file type");
             return FileTypesEnum.FileTypeUnknown;
-        }
-
-        private static bool IsFB2File(string fileName)
-        {
-            using (var s = File.OpenRead(fileName))
-            {
-                var settings = new XmlReaderSettings
-                                                 {
-                                                     ValidationType = ValidationType.None,
-                                                     DtdProcessing = DtdProcessing.Prohibit,
-                                                     CheckCharacters = false
-                                                 
-                };
-                try
-                {
-                        using (XmlReader reader = XmlReader.Create(s, settings))
-                        {
-                            XNamespace fb2Namespace = "http://www.gribuser.ru/xml/fictionbook/2.0";
-                            XDocument fb2Document= XDocument.Load(reader, LoadOptions.PreserveWhitespace);
-                            if (fb2Document.Root != null &&
-                                fb2Document.Root.Name.LocalName == "FictionBook" &&
-                                fb2Document.Root.Name.Namespace == fb2Namespace) 
-                            {
-                                reader.Close();
-                                return true;
-                            }
-                            reader.Close();
-                        }
-
-                }
-                catch (Exception )
-                {
-                    return false;
-                }
-            }
-            return false;
-        }
-
-        private static bool IsRarFile(string fileName)
-        {
-            try
-            {
-                return RarArchive.IsRarFile(fileName);
-            }
-            catch (Exception ex)
-            {
-                Logger.Log.Debug(ex.Message);
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Checks if input file is a ZIP archive
-        /// </summary>
-        /// <param name="fileName">file to check</param>
-        /// <returns>true if file is ZIP archive, false otherwise</returns>
-        private static bool IsZipFile(string fileName)
-        {
-            try
-            {
-                using (new ZipFile(fileName))
-                {
-                }
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            return true;
         }
 
         /// <summary>
@@ -718,9 +304,6 @@ namespace Fb2ePubConverter
         }
 
 
-
-
-        protected abstract void ConvertAnnotation(ItemTitleInfo titleInfo, EPubFile epubFile);
 
         protected void SetupCSS(EPubFile epubFile)
         {

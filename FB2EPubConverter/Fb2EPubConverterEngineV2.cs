@@ -1,26 +1,38 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
 using EPubLibrary;
 using Fb2ePubConverter;
-using FB2EPubConverter.SourceDataInclusionControls;
 using FB2Library;
-using FB2Library.Elements;
 using FB2Library.HeaderItems;
 using XHTMLClassLibrary.BaseElements;
 using Logger = Fb2ePubConverter.Logger;
-using EPubLibrary.CSS_Items;
 using EPubLibrary.AppleEPubV2Extensions;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.XHTML_Items;
 using FB2EPubConverter.ElementConvertersV2;
 using XHTMLClassLibrary.BaseElements.BlockElements;
-using System.Linq;
+
 
 namespace FB2EPubConverter
 {
     internal class Fb2EPubConverterEngineV2 : Fb2EPubConverterEngineBase
     {
+        private long _maxSize = 245 * 1024;
+
+        /// <summary>
+        /// Get/Set max document size in bytes
+        /// </summary>
+        public long MaxSize
+        {
+            get { return _maxSize; }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("value");
+                }
+                _maxSize = value;
+            }
+        }
 
         protected override void ConvertContent(FB2File fb2File, EPubFile epubFile)
         {
@@ -129,7 +141,7 @@ namespace FB2EPubConverter
 
         private void PassTextFromFb2ToEpub(EPubFile epubFile, FB2File fb2File)
         {
-            var converter = new Fb2EPubTextConverterV2(Settings.CommonSettings,Images,ReferencesManager);
+            var converter = new Fb2EPubTextConverterV2(Settings.CommonSettings,Images,ReferencesManager,_maxSize);
             converter.Convert(epubFile,fb2File);
         }
 
@@ -166,7 +178,7 @@ namespace FB2EPubConverter
 
 
 
-        protected override void ConvertAnnotation(ItemTitleInfo titleInfo, EPubFile epubFile)
+        private void ConvertAnnotation(ItemTitleInfo titleInfo, EPubFile epubFile)
         {
             if (titleInfo.Annotation != null)
             {

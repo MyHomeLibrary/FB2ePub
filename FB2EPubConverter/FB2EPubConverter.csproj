@@ -182,6 +182,11 @@
     <Compile Include="ElementConvertersV3\TranslatorsInfoConverterV3.cs" />
     <Compile Include="Fb2EPubConverterEngineV2.cs" />
     <Compile Include="Fb2EPubConverterEngineV3.cs" />
+    <Compile Include="FB2Loaders\BaseFB2Loader.cs" />
+    <Compile Include="FB2Loaders\FB2FileLoader.cs" />
+    <Compile Include="FB2Loaders\FB2RarLoader.cs" />
+    <Compile Include="FB2Loaders\FB2ZipFileLoader.cs" />
+    <Compile Include="FB2Loaders\IFB2Loader.cs" />
     <Compile Include="Interfaces\ePubConverterInterface.cs" />
     <Compile Include="Fb2EPubConverterEngineBase.cs" />
     <Compile Include="ElementConvertersV2\Fb2EpubInfoConverterV2.cs" />
