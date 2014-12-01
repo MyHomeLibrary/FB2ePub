@@ -140,6 +140,7 @@
     <Compile Include="ElementConvertersV2\EmptyLineConverterV2.cs" />
     <Compile Include="ElementConvertersV2\EpigraphAuthorConverterV2.cs" />
     <Compile Include="ElementConvertersV2\EpigraphConverterV2.cs" />
+    <Compile Include="ElementConvertersV2\Fb2ePubTextConverterV2.cs" />
     <Compile Include="ElementConvertersV2\GenresInfoConverterV3.cs" />
     <Compile Include="ElementConvertersV3\BookIDConverterV3.cs" />
     <Compile Include="ElementConvertersV3\GenresInfoConverterV3.cs" />
