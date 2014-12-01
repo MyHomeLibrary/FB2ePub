@@ -142,7 +142,7 @@ namespace FB2EPubConverter
         }
 
 
-        protected override void ConvertAnnotation(ItemTitleInfo titleInfo, EPubFile epubFile)
+        private void ConvertAnnotation(ItemTitleInfo titleInfo, EPubFile epubFile)
         {
             if (titleInfo.Annotation != null)
             {
