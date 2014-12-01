@@ -16,12 +16,26 @@ namespace FB2EPubConverter.SourceDataInclusionControls
         }
 
         private readonly Dictionary<DataTypes,IDataInclusionBase>  _inclusionControls = new Dictionary<DataTypes, IDataInclusionBase>();
+        private readonly static SourceDataInclusionControl SingleTone;
 
-        public SourceDataInclusionControl()
+        private  SourceDataInclusionControl()
         {
             _inclusionControls.Add(DataTypes.Title, new TitleDataInclusion());
             _inclusionControls.Add(DataTypes.Source,new SourceDataInclusion());
             _inclusionControls.Add(DataTypes.Publish,new PublishDataInclusion());
+        }
+
+        static SourceDataInclusionControl()
+        {
+            if (SingleTone == null)
+            {
+                SingleTone = new SourceDataInclusionControl();
+            }
+        }
+
+        public static SourceDataInclusionControl Instance
+        {
+            get { return SingleTone; }
         }
 
         public bool IsIgnoreInfoSource(DataTypes type,IgnoreInfoSourceOptions ignoreInfoSourceOptions)
