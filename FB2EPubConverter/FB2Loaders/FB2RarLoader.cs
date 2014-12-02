@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Fb2ePubConverter;
 using Fb2epubSettings;
 using FB2Library;
 using NUnrar.Archive;
 
 namespace FB2EPubConverter.FB2Loaders
 {
+    /// <summary>
+    /// Base class for all FB2 files loaders
+    /// </summary>
     internal class FB2RarLoader : BaseFB2Loader
     {
         public override List<FB2File> LoadFile(string fileName, FB2ImportSettings settings)
@@ -33,6 +35,11 @@ namespace FB2EPubConverter.FB2Loaders
                         {
                             string tempPath = Path.GetTempPath();
                             entry.WriteToDirectory(tempPath);
+                            if (FileTypeDetector.DetectFileType(tempPath) != FileTypeDetector.FileTypesEnum.FileTypeFB2)
+                            {
+                                Logger.Log.ErrorFormat("{0} is not FB2 file", entry.FilePath);
+                                continue;
+                            }
                             string fileNameOnly = Path.GetFileName(entry.FilePath);
                             Logger.Log.InfoFormat("Processing {0} ...", fileNameOnly);
                             var fb2Loader = new FB2FileLoader();

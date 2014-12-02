@@ -19,32 +19,33 @@ using FolderSettingsHelper;
 
 namespace FB2EPubConverter
 {
+    internal static class Logger
+    {
+        static Logger()
+        {
+            // in case we run from DLL
+            if (Assembly.GetEntryAssembly() == null)
+            {
+                // detect assembly path, the config file should be right near it
+                string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                if (!string.IsNullOrEmpty(path))
+                {
+                    // set the path to location were we wish to log to
+                    log4net.GlobalContext.Properties["LogName"] = Path.Combine(FolderLocator.GetLocalAppDataFolder(), @"Lord_KiRon\");
+                    // load .config file containing loggers
+                    XmlConfigurator.Configure(new FileInfo(path + @"\FB2EPubConverter.dll.config"));
+                }
+            }
+        }
+
+        // Create a logger for use in this class
+        public static readonly log4net.ILog Log = log4net.LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
+
+    }
+
     [Guid("0FF011AD-18A5-4CF2-8AB1-011AA9AA2BDF"),ComVisible(true)]
     public class ConvertProcessor : IEPubConverterInterface
     {
-        internal static class Logger
-        {
-            static Logger()
-            {
-                // in case we run from DLL
-                if (Assembly.GetEntryAssembly() == null)
-                {
-                    // detect assembly path, the config file should be right near it
-                    string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                    if (!string.IsNullOrEmpty(path))
-                    {
-                        // set the path to location were we wish to log to
-                        log4net.GlobalContext.Properties["LogName"] = Path.Combine(FolderLocator.GetLocalAppDataFolder(), @"Lord_KiRon\");
-                        // load .config file containing loggers
-                        XmlConfigurator.Configure(new FileInfo(path + @"\FB2EPubConverter.dll.config"));
-                    }
-                }
-            }
-
-            // Create a logger for use in this class
-            public static readonly log4net.ILog Log = log4net.LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
-
-        }
 
         private readonly ConvertProcessorSettings _processorSettings = new ConvertProcessorSettings();
         private  CancellationTokenSource _cts = new CancellationTokenSource();

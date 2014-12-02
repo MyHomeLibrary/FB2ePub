@@ -4,7 +4,6 @@ using Fb2ePubConverter;
 using FB2Library;
 using FB2Library.HeaderItems;
 using XHTMLClassLibrary.BaseElements;
-using Logger = Fb2ePubConverter.Logger;
 using EPubLibrary.AppleEPubV2Extensions;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.XHTML_Items;

@@ -9,6 +9,9 @@ using ICSharpCode.SharpZipLib.Zip;
 
 namespace FB2EPubConverter.FB2Loaders
 {
+    /// <summary>
+    /// Used to load ZIP files with FB2 files inside
+    /// </summary>
     internal class FB2ZipFileLoader : BaseFB2Loader
     {
         public override List<FB2File> LoadFile(string fileName, FB2ImportSettings settings)

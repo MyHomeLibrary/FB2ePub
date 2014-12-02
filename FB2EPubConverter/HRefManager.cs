@@ -12,7 +12,6 @@ using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 using EPubLibrary.ReferenceUtils;
 using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
-using Logger=Fb2ePubConverter.Logger;
 
 namespace FB2EPubConverter
 {
