@@ -10,33 +10,14 @@ using FB2EPubConverter.FB2Loaders;
 using FB2Library;
 using TranslitRu;
 using Fb2epubSettings;
+using Logger = FB2EPubConverter.Logger;
 
 
 namespace Fb2ePubConverter
 {
 
-
-    internal static class Logger
-    {
-        // Create a logger for use in this class
-        public static readonly log4net.ILog Log = log4net.LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
-        
-    }
-
-
-
     internal abstract class Fb2EPubConverterEngineBase
     {
-        /// <summary>
-        /// Represent acceptable input file types
-        /// </summary>
-        private enum FileTypesEnum
-        {
-            FileTypeZIP,
-            FileTypeFB2,
-            FileTypeRAR,
-            FileTypeUnknown,
-        }
 
         protected readonly ImageManager Images = new ImageManager();
         protected readonly HRefManager ReferencesManager = new HRefManager();
@@ -70,9 +51,9 @@ namespace Fb2ePubConverter
                 Logger.Log.ErrorFormat("Unable to locate file {0} on disk.", fileName);
                 return false;
             }
-            switch (DetectFileType(fileName))
+            switch (FileTypeDetector.DetectFileType(fileName))
             {
-                case FileTypesEnum.FileTypeZIP:
+                case FileTypeDetector.FileTypesEnum.FileTypeZIP:
                     Logger.Log.InfoFormat("Loading ZIP : {0}",fileName);
                     var fb2ZipLoader = new FB2ZipFileLoader();
                     try
@@ -85,7 +66,7 @@ namespace Fb2ePubConverter
                         return false;
                     }
                     break;
-                case FileTypesEnum.FileTypeFB2:
+                case FileTypeDetector.FileTypesEnum.FileTypeFB2:
                     Logger.Log.InfoFormat("Processing {0} ...", fileName);
                     var fb2FileLoader = new FB2FileLoader();
                     try
@@ -98,7 +79,7 @@ namespace Fb2ePubConverter
                         return false;
                     }
                     break;
-                case FileTypesEnum.FileTypeRAR:
+                case FileTypeDetector.FileTypesEnum.FileTypeRAR:
                     Logger.Log.InfoFormat("Loading RAR : {0}", fileName);
                     var fb2RarLoader = new FB2RarLoader();
                     try
@@ -119,49 +100,6 @@ namespace Fb2ePubConverter
         }
 
 
-        /// <summary>
-        /// Detects file type of the input file
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
-        private static FileTypesEnum DetectFileType(string fileName)
-        {
-            Logger.Log.DebugFormat("Detecting file type for {0}",fileName);
-            var extension = Path.GetExtension(fileName);
-            if (extension != null)
-                switch (extension.ToUpper())
-                {
-                    case ".FB2":
-                        Logger.Log.Debug("The file is FB2 file");
-                        return FileTypesEnum.FileTypeFB2;
-                    case ".ZIP":
-                        Logger.Log.Debug("The file is ZIP file");
-                        return FileTypesEnum.FileTypeZIP;
-                    case ".RAR":
-                        Logger.Log.Debug("The file is RAR file");
-                        return FileTypesEnum.FileTypeRAR;
-                    default:
-                        Logger.Log.Debug("Can't use extension - attempting to detect");
-                        if (FB2ZipFileLoader.IsZipFile(fileName))
-                        {
-                            Logger.Log.Debug("The file is ZIP file");
-                            return FileTypesEnum.FileTypeZIP;                        
-                        }
-                        if (FB2RarLoader.IsRarFile(fileName))
-                        {
-                            Logger.Log.Debug("The file is RAR file");
-                            return FileTypesEnum.FileTypeRAR;
-                        }
-                        if (FB2FileLoader.IsFB2File(fileName))
-                        {
-                            Logger.Log.Debug("The file is FB2 file");
-                            return FileTypesEnum.FileTypeFB2;                       
-                        }
-                        break;
-                }
-            Logger.Log.Debug("The file is unknown file type");
-            return FileTypesEnum.FileTypeUnknown;
-        }
 
         /// <summary>
         /// Saves the loaded FB2 file(s) to the destination as ePub

@@ -9,6 +9,9 @@ using FB2Library;
 
 namespace FB2EPubConverter.FB2Loaders
 {
+    /// <summary>
+    /// Used to load FB2 files
+    /// </summary>
     internal class FB2FileLoader : BaseFB2Loader
     {
         public override List<FB2File> LoadFile(string fileName, FB2ImportSettings settings)
@@ -101,8 +104,6 @@ namespace FB2EPubConverter.FB2Loaders
             }
             return false;
         }
-
-
 
     }
 }

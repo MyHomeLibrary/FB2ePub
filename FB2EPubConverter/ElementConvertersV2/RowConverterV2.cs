@@ -1,5 +1,4 @@
 ﻿using System;
-using Fb2ePubConverter;
 using FB2Library.Elements.Table;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.TableElements;

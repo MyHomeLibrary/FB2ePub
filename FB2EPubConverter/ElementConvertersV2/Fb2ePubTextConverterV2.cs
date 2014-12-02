@@ -6,7 +6,6 @@ using FB2Library;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
-using Logger = Fb2ePubConverter.Logger;
 
 namespace FB2EPubConverter.ElementConvertersV2
 {

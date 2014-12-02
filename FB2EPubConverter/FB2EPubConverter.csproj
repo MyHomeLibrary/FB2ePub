@@ -186,6 +186,7 @@
     <Compile Include="FB2Loaders\FB2FileLoader.cs" />
     <Compile Include="FB2Loaders\FB2RarLoader.cs" />
     <Compile Include="FB2Loaders\FB2ZipFileLoader.cs" />
+    <Compile Include="FB2Loaders\FileTypeDetector.cs" />
     <Compile Include="FB2Loaders\IFB2Loader.cs" />
     <Compile Include="Interfaces\ePubConverterInterface.cs" />
     <Compile Include="Fb2EPubConverterEngineBase.cs" />
