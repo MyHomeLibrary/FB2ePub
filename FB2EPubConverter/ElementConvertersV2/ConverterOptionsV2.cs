@@ -2,7 +2,7 @@
 {
     internal class ConverterOptionsV2
     {
-        public HRefManager ReferencesManager { get; set; }
+        public HRefManagerV2 ReferencesManager { get; set; }
         public ImageManager Images { get; set; }
         public bool CapitalDrop { get; set; }
         public long MaxSize;
