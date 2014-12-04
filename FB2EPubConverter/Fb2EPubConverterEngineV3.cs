@@ -16,6 +16,7 @@ namespace FB2EPubConverter
     {
         protected override void ConvertContent(FB2File fb2File,EPubFile epubFile)
         {
+            ReferencesManager = new HRefManagerV3();
             PassHeaderDataFromFb2ToEpub(epubFile, fb2File);
             ConvertAnnotation(fb2File.TitleInfo, epubFile);
             PassCoverImageFromFB2(fb2File.TitleInfo.Cover, epubFile);
@@ -191,9 +192,13 @@ namespace FB2EPubConverter
             }
         }
 
-        protected override void Reset()
+        protected override EPubFile CreateEpub()
         {
-            base.Reset();
+            return new EPubFileV3(Settings.V3Settings.V3SubStandard == EPubV3SubStandard.V30 ? V3Standard.V30 : V3Standard.V301)
+            {
+                FlatStructure = Settings.CommonSettings.Flat,
+                EmbedStyles = Settings.CommonSettings.EmbedStyles
+            };
         }
     }
 }

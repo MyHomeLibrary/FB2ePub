@@ -20,7 +20,7 @@ namespace Fb2ePubConverter
     {
 
         protected readonly ImageManager Images = new ImageManager();
-        protected readonly HRefManager ReferencesManager = new HRefManager();
+        protected IHRefManager ReferencesManager;
         protected readonly List<FB2File> FB2Files = new List<FB2File>();
 
 
@@ -227,20 +227,7 @@ namespace Fb2ePubConverter
             ReferencesManager.Reset();           
         }
 
-        private EPubFile CreateEpub()
-        {
-            if (Settings.StandardVersion == EPubVersion.VePub30)
-            {
-
-                return new EPubFileV3(Settings.V3Settings.V3SubStandard == EPubV3SubStandard.V30 ? V3Standard.V30 : V3Standard.V301)
-                {
-                    FlatStructure = Settings.CommonSettings.Flat,
-                    EmbedStyles = Settings.CommonSettings.EmbedStyles
-                };
-            }
-            return new EPubFile { FlatStructure = Settings.CommonSettings.Flat, EmbedStyles = Settings.CommonSettings.EmbedStyles };
-        }
-
+        protected abstract EPubFile CreateEpub();
 
 
         protected void SetupCSS(EPubFile epubFile)
@@ -265,7 +252,7 @@ namespace Fb2ePubConverter
             epubFile.SetEPubFonts(Settings.CommonSettings.Fonts, Settings.ResourcesPath, Settings.CommonSettings.DecorateFontNames);
         }
 
-        public void ConvertXml(XDocument fb2Document)
+        public void LoadFB2FileFromXML(XDocument fb2Document)
         {
             FB2Files.Clear();
             var file = new FB2File();

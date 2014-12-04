@@ -188,10 +188,12 @@
     <Compile Include="FB2Loaders\FB2ZipFileLoader.cs" />
     <Compile Include="FB2Loaders\FileTypeDetector.cs" />
     <Compile Include="FB2Loaders\IFB2Loader.cs" />
+    <Compile Include="HRefManagerV3.cs" />
+    <Compile Include="IHRefManager.cs" />
     <Compile Include="Interfaces\ePubConverterInterface.cs" />
     <Compile Include="Fb2EPubConverterEngineBase.cs" />
     <Compile Include="ElementConvertersV2\Fb2EpubInfoConverterV2.cs" />
-    <Compile Include="HRefManager.cs" />
+    <Compile Include="HRefManagerV2.cs" />
     <Compile Include="ImageManager.cs" />
     <Compile Include="ProcessAuthorFormat.cs" />
     <Compile Include="ProcessSeqFormatString.cs" />

@@ -35,6 +35,7 @@ namespace FB2EPubConverter
 
         protected override void ConvertContent(FB2File fb2File, EPubFile epubFile)
         {
+            ReferencesManager = new HRefManagerV2();
             SetAdobeOptions(epubFile);
             PassHeaderDataFromFb2ToEpub(epubFile, fb2File);
             ConvertAnnotation(fb2File.TitleInfo,epubFile);
@@ -125,7 +126,7 @@ namespace FB2EPubConverter
                 CapitalDrop = false,
                 Images = Images,
                 MaxSize = MaxSize,
-                ReferencesManager = ReferencesManager,
+                ReferencesManager = (HRefManagerV2)ReferencesManager,
             };
             var infoConverter = new Fb2EpubInfoConverterV2();
             infoDocument.Content = infoConverter.Convert(fb2File, converterSettings);
@@ -140,7 +141,7 @@ namespace FB2EPubConverter
 
         private void PassTextFromFb2ToEpub(EPubFile epubFile, FB2File fb2File)
         {
-            var converter = new Fb2EPubTextConverterV2(Settings.CommonSettings,Images,ReferencesManager,_maxSize);
+            var converter = new Fb2EPubTextConverterV2(Settings.CommonSettings, Images, (HRefManagerV2)ReferencesManager, _maxSize);
             converter.Convert(epubFile,fb2File);
         }
 
@@ -188,7 +189,7 @@ namespace FB2EPubConverter
                     CapitalDrop = Settings.CommonSettings.CapitalDrop,
                     Images = Images,
                     MaxSize = MaxSize,
-                    ReferencesManager = ReferencesManager,
+                    ReferencesManager = (HRefManagerV2)ReferencesManager,
                 };
                 var annotationConverter = new AnnotationConverterV2();
                 epubFile.AnnotationPage.BookAnnotation = (Div)annotationConverter.Convert(titleInfo.Annotation,
@@ -197,12 +198,9 @@ namespace FB2EPubConverter
         }
 
 
-        /// <summary>
-        /// Reset the object to default (nothing converted) state
-        /// </summary>
-        protected override void Reset()
+        protected override EPubFile CreateEpub()
         {
-            base.Reset();
+            return new EPubFile { FlatStructure = Settings.CommonSettings.Flat, EmbedStyles = Settings.CommonSettings.EmbedStyles };
         }
 
 

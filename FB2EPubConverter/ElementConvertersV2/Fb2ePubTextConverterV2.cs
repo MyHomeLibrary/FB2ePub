@@ -13,12 +13,12 @@ namespace FB2EPubConverter.ElementConvertersV2
     {
         private readonly EPubCommonSettings _commonSettings;
         private readonly ImageManager _images;
-        private readonly HRefManager _referencesManager;
+        private readonly HRefManagerV2 _referencesManager;
         private readonly long _maxSize;
 
         private int _sectionCounter;
 
-        internal Fb2EPubTextConverterV2(EPubCommonSettings commonSettings, ImageManager images, HRefManager referencesManager,long maxSize)
+        internal Fb2EPubTextConverterV2(EPubCommonSettings commonSettings, ImageManager images, HRefManagerV2 referencesManager,long maxSize)
         {
             _commonSettings = commonSettings;
             _images = images;

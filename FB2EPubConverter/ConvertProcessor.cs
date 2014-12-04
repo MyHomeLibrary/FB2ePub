@@ -385,7 +385,7 @@ namespace FB2EPubConverter
             try
             {
                 progressReporter.ProcessingStarted(outFileName);
-                converter.ConvertXml(doc);
+                converter.LoadFB2FileFromXML(doc);
             }
             catch (Exception ex)
             {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices.ComTypes;
+using System.Linq;
 using System.Windows.Media;
 using EPubLibrary;
 using FB2Library.Elements;
@@ -14,7 +14,7 @@ namespace FB2EPubConverter
         /// <summary>
         /// List of images present in binary form in the FB2 file
         /// </summary>
-        private readonly Dictionary<string,bool> presentImagesList = new Dictionary<string,bool>();
+        private readonly Dictionary<string,bool> _presentImagesList = new Dictionary<string,bool>();
 
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace FB2EPubConverter
         public void RegisterBinaryImageId(string imageId)
         {
             string key = imageId.TrimStart('#');
-            presentImagesList.Add(key,false);   
+            _presentImagesList.Add(key,false);   
         }
 
 
@@ -42,9 +42,9 @@ namespace FB2EPubConverter
         public void RemoveBinaryImageId(string imageId)
         {
             string key = imageId.TrimStart('#');
-            if (presentImagesList.ContainsKey(key))
+            if (_presentImagesList.ContainsKey(key))
             {
-                presentImagesList.Remove(key);                
+                _presentImagesList.Remove(key);                
             }
         }
 
@@ -54,7 +54,7 @@ namespace FB2EPubConverter
         /// </summary>
         public void Reset()
         {
-            presentImagesList.Clear();
+            _presentImagesList.Clear();
         }
 
         /// <summary>
@@ -63,11 +63,11 @@ namespace FB2EPubConverter
         /// <param name="binaryImageList">Fb2 binary section</param>
         public void LoadFromBinarySection(Dictionary<string,BinaryItem> binaryImageList)
         {
-            presentImagesList.Clear();
+            _presentImagesList.Clear();
             foreach (var binaryItem in binaryImageList)
             {
                 string imageName = binaryItem.Value.Id;
-                while (presentImagesList.ContainsKey(imageName))
+                while (_presentImagesList.ContainsKey(imageName))
                 {
                     imageName = string.Format("_{0}",imageName);
                 }
@@ -77,7 +77,7 @@ namespace FB2EPubConverter
                     binaryItem.Value.Id = imageName;
                     binaryImageList.Add(imageName,binaryItem.Value);
                 }
-                presentImagesList.Add(imageName,false);
+                _presentImagesList.Add(imageName,false);
             }
         }
 
@@ -88,7 +88,7 @@ namespace FB2EPubConverter
         /// <returns>true if binary data at least for some images exists, false otherwise</returns>
         public bool HasRealImages()
         {
-            return (presentImagesList.Count > 0);
+            return (_presentImagesList.Count > 0);
         }
 
 
@@ -99,7 +99,7 @@ namespace FB2EPubConverter
         /// <returns>true it in list, false otherwise</returns>
         public bool IsImageIdReal(string imageId)
         {
-            if (presentImagesList.ContainsKey(imageId.TrimStart('#')))
+            if (_presentImagesList.ContainsKey(imageId.TrimStart('#')))
             {
                 return true;
             }
@@ -116,9 +116,9 @@ namespace FB2EPubConverter
         public void ImageIdUsed(string imageId)
         {
             string key = imageId.TrimStart('#');
-            if (presentImagesList.ContainsKey(key))
+            if (_presentImagesList.ContainsKey(key))
             {
-                presentImagesList[key] = true;
+                _presentImagesList[key] = true;
             }
         }
 
@@ -130,9 +130,9 @@ namespace FB2EPubConverter
         private bool IsImageIdUsed(string imageId)
         {
             string key = imageId.TrimStart('#');
-            if (presentImagesList.ContainsKey(key))
+            if (_presentImagesList.ContainsKey(key))
             {
-                return presentImagesList[key];
+                return _presentImagesList[key];
             }
             return false;
         }
@@ -147,8 +147,7 @@ namespace FB2EPubConverter
             epubImages.Clear();
             foreach (var item in fb2Images)
             {
-                EPUBImage image = new EPUBImage();
-                image.ID = item.Value.Id;
+                var image = new EPUBImage {ID = item.Value.Id};
                 Logger.Log.DebugFormat("Image ID : {0}", image.ID);
                 image.ImageData = item.Value.BinaryData;
                 if (item.Value.ContentType == ContentTypeEnum.ContentTypeJpeg)
@@ -190,16 +189,16 @@ namespace FB2EPubConverter
 
         private byte[] GetPNGWithoutAlpha(byte[] bytes)
         {
-            using (MemoryStream pngStream = new MemoryStream(bytes))
+            using (var pngStream = new MemoryStream(bytes))
             {
-                PngBitmapDecoder decoder = new PngBitmapDecoder(pngStream,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.Default);
+                var decoder = new PngBitmapDecoder(pngStream,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.Default);
                 if (!AlphaPalette(decoder.Frames[0].Palette))
                 {
                     return bytes;
                 }
-                PngBitmapEncoder encoder = new PngBitmapEncoder();
+                var encoder = new PngBitmapEncoder();
 
-                FormatConvertedBitmap newFormatedBitmapSource = new FormatConvertedBitmap();
+                var newFormatedBitmapSource = new FormatConvertedBitmap();
 
                 newFormatedBitmapSource.BeginInit();
                 newFormatedBitmapSource.Source = decoder.Frames[0];
@@ -208,7 +207,7 @@ namespace FB2EPubConverter
              
                 encoder.Frames.Add(BitmapFrame.Create(newFormatedBitmapSource));
                 encoder.Interlace = PngInterlaceOption.Off;
-                using (MemoryStream outStream = new MemoryStream())
+                using (var outStream = new MemoryStream())
                 {
                     encoder.Save(outStream);
                     return outStream.ToArray();
@@ -224,14 +223,7 @@ namespace FB2EPubConverter
             {
                 return false;
             }
-            foreach (var color in palette.Colors)
-            {
-                if ( color.ScA != 0.0)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return palette.Colors.Any(color => Math.Abs(color.ScA) > float.Epsilon);
         }
     }
 }
