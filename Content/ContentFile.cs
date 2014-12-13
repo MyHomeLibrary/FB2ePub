@@ -312,7 +312,7 @@ namespace EPubLibrary.Content
 
         public virtual void AddXHTMLTextItem(BaseXHTMLFile baseXhtmlFile)
         {
-            ManifestItem bookItem = new ManifestItem { HRef = baseXhtmlFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = baseXhtmlFile.Id, MediaType = @"application/xhtml+xml" };
+            ManifestItem bookItem = new ManifestItem { HRef = baseXhtmlFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = baseXhtmlFile.Id, MediaType = EPubCoreMediaType.ApplicationXhtmlXml };
             _manifest.Add(bookItem);
 
             if (baseXhtmlFile.DocumentType != GuideTypeEnum.Ignore) // we do not add objects that to be ignored 
@@ -326,7 +326,7 @@ namespace EPubLibrary.Content
 
         public virtual void AddTOC()
         {
-            ManifestItem TOCItem = new ManifestItem { HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), ID = "ncx", MediaType = @"application/x-dtbncx+xml" };
+            ManifestItem TOCItem = new ManifestItem { HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), ID = "ncx", MediaType = EPubCoreMediaType.ApplicationNCX };
             _manifest.Add(TOCItem);                     
         }
 

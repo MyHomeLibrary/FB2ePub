@@ -368,17 +368,17 @@ namespace EPubLibrary.Content
 
         public override void AddXHTMLTextItem(BaseXHTMLFile baseXhtmlFile)
         {
-            ManifestItem bookItem = new ManifestItem
+            var bookItem = new ManifestItem
             {
                 HRef = baseXhtmlFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), 
                 ID = baseXhtmlFile.Id, 
-                MediaType = @"application/xhtml+xml"
+                MediaType = EPubCoreMediaType.ApplicationXhtmlXml
             };
             _manifest.Add(bookItem);
 
             if (baseXhtmlFile.DocumentType != GuideTypeEnum.Ignore) // we do not add objects that to be ignored 
             {
-                SpineItem bookSpine = new SpineItem { Name = baseXhtmlFile.Id };
+                var bookSpine = new SpineItem { Name = baseXhtmlFile.Id };
                 if (V3StandardChecker.IsRenditionFlowAllowedByStandard(_standard))
                 {
                     bookSpine.Properties.Add(EPubV3Properties.rendition_flow_auto);
@@ -398,22 +398,22 @@ namespace EPubLibrary.Content
             {
                return;
             }
-            ManifestItem TOCItem = new ManifestItem
+            var TOCItem = new ManifestItem
             {
                 HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), 
                 ID = "ncx", 
-                MediaType = @"application/x-dtbncx+xml",
+                MediaType = EPubCoreMediaType.ApplicationNCX,
             };
             _manifest.Add(TOCItem);
         }
 
         public void AddNavigationDocument(NavigationDocumentFile navigationDocument)
         {
-            ManifestItem NAVitem = new ManifestItem
+            var NAVitem = new ManifestItem
             {
                 HRef = navigationDocument.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), 
                 ID = "nav", 
-                MediaType = "application/xhtml+xml" ,               
+                MediaType = EPubCoreMediaType.ApplicationXhtmlXml ,               
             };
             NAVitem.Properties.Add("nav");
             _manifest.Add(NAVitem);

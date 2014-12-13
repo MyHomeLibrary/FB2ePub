@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using EPubLibrary.Content;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
@@ -132,7 +133,7 @@ namespace EPubLibrary.XHTML_Items
                 {
                     var styleElementEntry = new Style(Compatibility);
                     styleElement = styleElementEntry;
-                    styleElementEntry.Type.Value = CSSFile.MediaType;
+                    styleElementEntry.Type.Value = CSSFile.MediaType.GetAsSerializableString();
                     try
                     {
                         using (var outStream = new MemoryStream())
@@ -147,11 +148,11 @@ namespace EPubLibrary.XHTML_Items
                 }
                 else
                 {
-                    var cssStyleShit = new Link(Compatibility);
-                    styleElement = cssStyleShit;
-                    cssStyleShit.Relation.Value = "stylesheet";
-                    cssStyleShit.Type.Value = file.GetMediaType();
-                    cssStyleShit.HRef.Value = file.PathInEPUB.GetRelativePath(FileEPubInternalPath, FlatStructure);
+                    var cssStyleSheet = new Link(Compatibility);
+                    styleElement = cssStyleSheet;
+                    cssStyleSheet.Relation.Value = "stylesheet";
+                    cssStyleSheet.Type.Value = file.GetMediaType().GetAsSerializableString();
+                    cssStyleSheet.HRef.Value = file.PathInEPUB.GetRelativePath(FileEPubInternalPath, FlatStructure);
                 }
                 HeadElement.Add(styleElement);
             }

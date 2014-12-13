@@ -88,11 +88,11 @@ namespace EPubLibrary.Content.NavigationDocument
             head.Add(title);
             foreach (var file in _styles)
             {
-                var cssStyleShit = new Link(HTMLElementType.HTML5);
-                cssStyleShit.Relation.Value = "stylesheet";
-                cssStyleShit.Type.Value = file.GetMediaType();
-                cssStyleShit.HRef.Value = file.PathInEPUB.GetRelativePath(NAVFilePath, FlatStructure);
-                head.Add(cssStyleShit.Generate());
+                var cssStyleSheet = new Link(HTMLElementType.HTML5);
+                cssStyleSheet.Relation.Value = "stylesheet";
+                cssStyleSheet.Type.Value = file.GetMediaType().GetAsSerializableString();
+                cssStyleSheet.HRef.Value = file.PathInEPUB.GetRelativePath(NAVFilePath, FlatStructure);
+                head.Add(cssStyleSheet.Generate());
             }
 
             XElement body = new XElement(xhtmlNamespace + "body");

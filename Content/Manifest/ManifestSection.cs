@@ -8,18 +8,18 @@ namespace EPubLibrary.Content.Manifest
 {
     public class ManifestSection : List<ManifestItem>
     {
-        protected readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
+        protected readonly XNamespace OpfNameSpace = @"http://www.idpf.org/2007/opf";
 
         public virtual XElement GenerateManifestElement()
         {
-            XElement manifestElement = new XElement(_opfNameSpace + "manifest");
+            var manifestElement = new XElement(OpfNameSpace + "manifest");
 
             foreach (var manifestItem in this)
             {
-                XElement tocElement = new XElement(_opfNameSpace + "item");
+                var tocElement = new XElement(OpfNameSpace + "item");
                 tocElement.Add(new XAttribute("id", manifestItem.ID));
                 tocElement.Add(new XAttribute("href", manifestItem.HRef));
-                tocElement.Add(new XAttribute("media-type", manifestItem.MediaType));
+                tocElement.Add(new XAttribute("media-type", manifestItem.MediaType.GetAsSerializableString()));
                 manifestElement.Add(tocElement);
             }
 

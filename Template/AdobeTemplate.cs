@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using EPubLibrary.Content;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
 using ICSharpCode.SharpZipLib.Zip;
@@ -112,9 +113,9 @@ namespace EPubLibrary.Template
         }
 
 
-        public override string GetMediaType()
+        public override EPubCoreMediaType GetMediaType()
         {
-            return @"application/adobe-page-template+xml";;
+            return EPubCoreMediaType.AdditionalAddobeTemplateXml;
         }
     }
 }

@@ -17,21 +17,21 @@ namespace EPubLibrary.Content.Manifest
 
         public override XElement GenerateManifestElement()
         {
-            XElement manifestElement = new XElement(_opfNameSpace + "manifest");
+            var manifestElement = new XElement(OpfNameSpace + "manifest");
 
             foreach (var manifestItem in this)
             {
-                XElement tocElement = new XElement(_opfNameSpace + "item");
+                var tocElement = new XElement(OpfNameSpace + "item");
                 tocElement.Add(new XAttribute("id", manifestItem.ID));
                 tocElement.Add(new XAttribute("href", manifestItem.HRef));
-                tocElement.Add(new XAttribute("media-type", manifestItem.MediaType));
+                tocElement.Add(new XAttribute("media-type", manifestItem.MediaType.GetAsSerializableString()));
                 if (!string.IsNullOrEmpty(manifestItem.Fallback))
                 {
                     tocElement.Add(new XAttribute("fallback", manifestItem.Fallback));
                 }
                 if (manifestItem.Properties.Count > 0)
                 {
-                    StringBuilder sb = new StringBuilder();
+                    var sb = new StringBuilder();
                     bool first = true;
                     foreach (var property in manifestItem.Properties)
                     {

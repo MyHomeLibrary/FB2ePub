@@ -1,4 +1,5 @@
 ﻿using System;
+using EPubLibrary.Content;
 
 namespace EPubLibrary
 {
@@ -15,18 +16,18 @@ namespace EPubLibrary
         public string ID { get; set; }
         public EPUBImageTypeEnum ImageType { get; set; }
 
-        public static string ConvertImageTypeToMediaType(EPUBImageTypeEnum imageType)
+        public static EPubCoreMediaType ConvertImageTypeToMediaType(EPUBImageTypeEnum imageType)
         {
             switch (imageType)
             {
                 case EPUBImageTypeEnum.ImageGIF:
-                    return "image/gif";
+                    return EPubCoreMediaType.ImageGif;
                 case EPUBImageTypeEnum.ImageJPG:
-                    return "image/jpeg";
+                    return EPubCoreMediaType.ImageJpeg;
                 case EPUBImageTypeEnum.ImagePNG:
-                    return "image/png";
+                    return EPubCoreMediaType.ImagePng;
                 case EPUBImageTypeEnum.ImageSVG:
-                    return "image/svg+xml";
+                    return EPubCoreMediaType.ImageSvgXml;
             }
             throw new Exception("unknown image type passed");
         }

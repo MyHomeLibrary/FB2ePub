@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using EPubLibrary.Content;
 using EPubLibrary.PathUtils;
 
 namespace EPubLibrary.CSS_Items
@@ -7,7 +8,7 @@ namespace EPubLibrary.CSS_Items
     {
         abstract public void Write(Stream stream);
         public abstract EPubInternalPath PathInEPUB { get; }
-        public abstract string GetMediaType();
+        public abstract EPubCoreMediaType GetMediaType();
 
     }
 }

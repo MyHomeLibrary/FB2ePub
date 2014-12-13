@@ -5,11 +5,12 @@ using System.Text;
 
 namespace EPubLibrary.Content.Manifest
 {
+        
     public class ManifestItem
     {
         public string ID { get; set; }
         public string HRef { get; set; }
-        public string MediaType { get; set; }
+        public EPubCoreMediaType MediaType { get; set; }
 
         // the following are supported only in V3
         public string Fallback { get; set; }

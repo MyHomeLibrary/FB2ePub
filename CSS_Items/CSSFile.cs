@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using EPubLibrary.Content;
 using EPubLibrary.PathUtils;
 
 namespace EPubLibrary.CSS_Items
@@ -32,7 +33,7 @@ namespace EPubLibrary.CSS_Items
         /// <summary>
         /// Get default CSS media type
         /// </summary>
-        public static string MediaType { get { return @"text/css"; } }
+        public static EPubCoreMediaType MediaType { get { return EPubCoreMediaType.TextCss; } }
 
         public override EPubInternalPath PathInEPUB
         {
@@ -166,7 +167,7 @@ namespace EPubLibrary.CSS_Items
         }
 
 
-        public override string GetMediaType()
+        public override EPubCoreMediaType GetMediaType()
         {
             return MediaType;
         }

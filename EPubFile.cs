@@ -429,14 +429,14 @@ namespace EPubLibrary
                 stream.SetLevel(9);
                 foreach (var embededFileLocation in _fontSettings.EmbededFilesLocations)
                 {
-                    FontOnStorage fontFile = new FontOnStorage(embededFileLocation, _fontSettings.GetMediaType(embededFileLocation));
+                    var fontFile = new FontOnStorage(embededFileLocation, ConvertFontToMediaType(_fontSettings.GetFontFormat(embededFileLocation)));
                     CreateFileEntryInZip(stream,fontFile);
                     try
                     {
                         using (var reader = new BinaryReader(File.OpenRead(embededFileLocation)))
                         {
                             int iCount;
-                            Byte[] buffer = new Byte[2048];
+                            var buffer = new Byte[2048];
                             while ((iCount = reader.Read(buffer, 0, 2048)) != 0)
                             {
                                 stream.Write(buffer, 0, iCount);
@@ -451,6 +451,15 @@ namespace EPubLibrary
                     _content.AddFontFile(fontFile);
                 }
             }
+        }
+
+        private EPubCoreMediaType ConvertFontToMediaType(FontFormat fontFormat)
+        {
+            if (fontFormat == FontFormat.WOFF)
+            {
+                return EPubCoreMediaType.ApplicationFontWoff;
+            }
+            return EPubCoreMediaType.ApplicationFontMSOpen;
         }
 
 
