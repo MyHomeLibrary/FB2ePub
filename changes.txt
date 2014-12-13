@@ -1,4 +1,6 @@
-﻿1.0.6.0
+﻿1.0.7.0
+*Small client related refactoring for mediatypes, now handled in clients
+1.0.6.0
 * Updates and additions needed toi save configuration settings in separate file, not .config
 1.0.5.0 
 * Fixed case of generating font family names when decoration contained '{' or '}' that caused readers not to apply fonts
