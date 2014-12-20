@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 
 namespace EPubLibrary.Content.Spine
 {
-    class SpineSectionV3 : SpineSection
+    class SpineSectionV3 : List<SpineItemV3>
     {
+        private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
         private V3Standard _standard;
 
         public SpineSectionV3(V3Standard standard)
         {
-            this._standard = standard;
+            _standard = standard;
         }
 
         public bool GenerateCompatibleTOC { get; set; }
 
-        public override XElement GenerateSpineElement()
+        public XElement GenerateSpineElement()
         {
-            XElement spineElement = new XElement(_opfNameSpace + "spine");
+            var spineElement = new XElement(_opfNameSpace + "spine");
             if (GenerateCompatibleTOC)
             {
                 spineElement.Add(new XAttribute("toc", "ncx"));
@@ -27,7 +26,7 @@ namespace EPubLibrary.Content.Spine
 
             foreach (var spineItem in this)
             {
-                XElement itemref = new XElement(_opfNameSpace + "itemref");
+                var itemref = new XElement(_opfNameSpace + "itemref");
                 itemref.Add(new XAttribute("idref", spineItem.Name));
                 if (!spineItem.Linear) // true by default so no need to set
                 {
@@ -39,7 +38,7 @@ namespace EPubLibrary.Content.Spine
                 }
                 if (spineItem.Properties.Count > 0)
                 {
-                    StringBuilder sb = new StringBuilder();
+                    var sb = new StringBuilder();
                     bool first = true;
                     foreach (var property in spineItem.Properties)
                     {

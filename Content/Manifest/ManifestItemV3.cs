@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace EPubLibrary.Content.Manifest
 {
-        
-    public class ManifestItem
+    class ManifestItemV3
     {
         public string ID { get; set; }
         public string HRef { get; set; }
@@ -15,13 +11,13 @@ namespace EPubLibrary.Content.Manifest
         // the following are supported only in V3
         public string Fallback { get; set; }
 
-        private readonly List<string> _properties = new List<string>(); 
+        private readonly List<string> _properties = new List<string>();
 
         public List<string> Properties
         {
             get { return _properties; }
         }
 
-        public  string MediaOverlay { get; set; }
+        public string MediaOverlay { get; set; }
     }
 }

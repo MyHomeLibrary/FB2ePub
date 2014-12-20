@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -18,21 +15,20 @@ using EPubLibrary.XHTML_Items;
 
 namespace EPubLibrary.Content
 {
-    public class ContentFile : IEPubPath
+    public class ContentFileV2 : IEPubPath
     {
         public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
 
-        protected readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
-        protected readonly XNamespace _fakeOpf = @"http://www.idpf.org/2007/xxx";
+        private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
+        private readonly XNamespace _fakeOpf = @"http://www.idpf.org/2007/xxx";
 
 
-        protected readonly GuideSection _guide = new GuideSection();
+        private readonly GuideSection _guide = new GuideSection();
 
-        protected ManifestSection _manifest = new ManifestSection();
+        private readonly SpineSectionV2 _spine = new SpineSectionV2();
 
-        protected SpineSection _spine = new SpineSection();
-
-        protected bool _flatStructure = false;
+        private bool _flatStructure;
+        private readonly ManifestSectionV2 _manifest = new ManifestSectionV2();
 
 
         /// <summary>
@@ -74,7 +70,7 @@ namespace EPubLibrary.Content
 
         protected virtual void AddPackageData(XDocument document)
         {
-            XElement packagedata = new XElement(_opfNameSpace + "package");
+            var packagedata = new XElement(_opfNameSpace + "package");
             packagedata.Add(new XAttribute("version", GetEPubVersion()));
             // we use ID of the first identifier
             packagedata.Add(new XAttribute("unique-identifier", Title.Identifiers[0].IdentifierName));
@@ -105,7 +101,7 @@ namespace EPubLibrary.Content
 
         protected virtual void AddMetaDataToContentDocument(XElement document)
         {
-            XElement metadata = new XElement(_opfNameSpace + "metadata");
+            var metadata = new XElement(_opfNameSpace + "metadata");
             XNamespace dc = @"http://purl.org/dc/elements/1.1/";
             XNamespace xsi = @"http://www.w3.org/2001/XMLSchema-instance";
             XNamespace dcterms = @"http://purl.org/dc/terms/";
@@ -131,14 +127,14 @@ namespace EPubLibrary.Content
 
             foreach (var languageItem in Title.Languages)
             {
-                XElement language = new XElement(dc + "language", languageItem);
+                var language = new XElement(dc + "language", languageItem);
                 language.Add(new XAttribute(xsi + "type", "dcterms:RFC3066"));
                 metadata.Add(language);
             }
 
             foreach (var identifierItem in Title.Identifiers)
             {
-                XElement identifier = new XElement(dc + "identifier", identifierItem.ID);
+                var identifier = new XElement(dc + "identifier", identifierItem.ID);
                 identifier.Add(new XAttribute("id", identifierItem.IdentifierName));
                 identifier.Add(new XAttribute(_fakeOpf + "scheme", identifierItem.Scheme));
                 metadata.Add(identifier);
@@ -146,7 +142,7 @@ namespace EPubLibrary.Content
 
             if ( Title.DatePublished.HasValue)
             {
-                XElement xDate = new XElement(dc + "date",Title.DatePublished.Value.Year);
+                var xDate = new XElement(dc + "date",Title.DatePublished.Value.Year);
                 xDate.Add(new XAttribute(_fakeOpf + "event", "original-publication"));
                 metadata.Add(xDate);
             }
@@ -272,10 +268,10 @@ namespace EPubLibrary.Content
         /// <param name="s"></param>
         public void Write (Stream s)
         {
-            XDocument contentDocument = new XDocument();
+            var contentDocument = new XDocument();
             CreateContentDocument(contentDocument);
             string str = FixDocument(contentDocument);
-            UTF8Encoding encoding = new UTF8Encoding();
+            var encoding = new UTF8Encoding();
             s.Write(encoding.GetBytes(str), 0, encoding.GetByteCount(str));            
 
         }
@@ -292,65 +288,62 @@ namespace EPubLibrary.Content
         /// <returns></returns>
         private string FixDocument(XDocument contentDocument)
         {
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.CloseOutput = false;
-            settings.Encoding = Encoding.UTF8;
-            settings.Indent = true;
-            MemoryStream ms = new MemoryStream();
+            var settings = new XmlWriterSettings {CloseOutput = false, Encoding = Encoding.UTF8, Indent = true};
+            var ms = new MemoryStream();
             using (var writer = XmlWriter.Create(ms, settings))
             {
                 contentDocument.WriteTo(writer);
             }
             ms.Seek(0, SeekOrigin.Begin);
-            byte[] buffer = new byte[ms.Length];
+            var buffer = new byte[ms.Length];
             ms.Read(buffer, 0, buffer.Length);
-            UTF8Encoding encoding = new UTF8Encoding();
+            var encoding = new UTF8Encoding();
             string str = encoding.GetString(buffer);
             str = str.Replace(_fakeOpf.NamespaceName, _opfNameSpace.NamespaceName);
             return str;
         }
 
-        public virtual void AddXHTMLTextItem(BaseXHTMLFile baseXhtmlFile)
+        public void AddXHTMLTextItem(BaseXHTMLFile baseXhtmlFile)
         {
-            ManifestItem bookItem = new ManifestItem { HRef = baseXhtmlFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = baseXhtmlFile.Id, MediaType = EPubCoreMediaType.ApplicationXhtmlXml };
+            var bookItem = new ManifestItemV2 { HRef = baseXhtmlFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = baseXhtmlFile.Id, MediaType = EPubCoreMediaType.ApplicationXhtmlXml };
             _manifest.Add(bookItem);
 
             if (baseXhtmlFile.DocumentType != GuideTypeEnum.Ignore) // we do not add objects that to be ignored 
             {
-                SpineItem bookSpine = new SpineItem {Name = baseXhtmlFile.Id};
+                var bookSpine = new SpineItemV2 {Name = baseXhtmlFile.Id};
                 _spine.Add(bookSpine);
             }
 
             _guide.AddGuideItem(bookItem.HRef, baseXhtmlFile.Id, baseXhtmlFile.DocumentType);                
         }
 
-        public virtual void AddTOC()
+        public void AddTOC()
         {
-            ManifestItem TOCItem = new ManifestItem { HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), ID = "ncx", MediaType = EPubCoreMediaType.ApplicationNCX };
+            var TOCItem = new ManifestItemV2 { HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), ID = "ncx", MediaType = EPubCoreMediaType.ApplicationNCX };
             _manifest.Add(TOCItem);                     
         }
 
-        public virtual void AddImage(ImageOnStorage image)
+        public void AddImage(ImageOnStorage image)
         {
-            _manifest.Add(new ManifestItem { HRef = image.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = image.ID, MediaType = EPUBImage.ConvertImageTypeToMediaType(image.ImageType) });
+            _manifest.Add(new ManifestItemV2 { HRef = image.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = image.ID, MediaType = EPUBImage.ConvertImageTypeToMediaType(image.ImageType) });
         }
 
-        public virtual void AddCSS(CSSFile cssFile)
+        public void AddCSS(CSSFile cssFile)
         {
-            ManifestItem maincss = new ManifestItem { HRef = cssFile.PathInEPUB.GetRelativePath(ContentFilePath,_flatStructure), ID = cssFile.ID, MediaType = CSSFile.MediaType };
+            var maincss = new ManifestItemV2 { HRef = cssFile.PathInEPUB.GetRelativePath(ContentFilePath,_flatStructure), ID = cssFile.ID, MediaType = CSSFile.MediaType };
             _manifest.Add(maincss);
         }
 
-        public virtual void AddXPGTTemplate(AdobeTemplate template)
+        public void AddXPGTTemplate(AdobeTemplate template)
         {
-            ManifestItem maincss = new ManifestItem { HRef = template.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = template.ID, MediaType = template.GetMediaType() };
+            var maincss = new ManifestItemV2 { HRef = template.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = template.ID, MediaType = template.GetMediaType() };
             _manifest.Add(maincss);
         }
 
 
-        public virtual void AddFontFile(FontOnStorage fontFile)
+        public void AddFontFile(FontOnStorage fontFile)
         {
-            _manifest.Add(new ManifestItem() { HRef = fontFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = fontFile.ID, MediaType =fontFile.MediaType });
+            _manifest.Add(new ManifestItemV2 { HRef = fontFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = fontFile.ID, MediaType =fontFile.MediaType });
         }
 
 

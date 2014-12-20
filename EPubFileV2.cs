@@ -38,7 +38,7 @@ namespace EPubLibrary
     {
         public static long EstimateSize(this XNode node)
         {
-            MemoryStream stream = new MemoryStream();
+            var stream = new MemoryStream();
             using (var writer = XmlWriter.Create(stream))
             {
                 node.WriteTo(writer);
@@ -50,31 +50,32 @@ namespace EPubLibrary
     /// <summary>
     /// This class represent the actual ePub file to be generated
     /// </summary>
-    public class EPubFile
+    public class EPubFileV2 : IEpubFile
     {
         #region readonly_private_propeties
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
-        protected readonly EPubTitleSettings _title = new EPubTitleSettings();
-        protected readonly EPubCollections  _collections = new EPubCollections();
-        protected CSSFile _mainCss = new CSSFile { ID = "mainCSS",  FileName = "main.css" };
+        private readonly EPubTitleSettings _title = new EPubTitleSettings();
+        private readonly EPubCollections  _collections = new EPubCollections();
+        private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS",  FileName = "main.css" };
         private readonly AdobeTemplate _adobeTemplate = new AdobeTemplate();
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
-        protected List<BookDocument> _sections = new List<BookDocument>();
-        protected TOCFile _tableOfContentFile = new TOCFile();
-        protected Rus2Lat _rule = new Rus2Lat();
+        private readonly List<BookDocument> _sections = new List<BookDocument>();
+        private readonly TOCFile _tableOfContentFile = new TOCFile();
+        private readonly Rus2Lat _rule = new Rus2Lat();
         private readonly List<string> _allSequences = new List<string>();
-        protected List<string> _aboutTexts = new List<string>();
-        protected List<string> _aboutLinks = new List<string>();
+        private readonly List<string> _aboutTexts = new List<string>();
+        private readonly List<string> _aboutLinks = new List<string>();
         private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
         private readonly AppleDisplayOptionsFile _appleOptionsFile = new AppleDisplayOptionsFile();
-        protected Dictionary<string,EPUBImage> _images = new Dictionary<string ,EPUBImage>();
-        protected readonly CalibreMetadataObject _calibreMetadata =  new CalibreMetadataObject();
+        private readonly Dictionary<string, EPUBImage> _images = new Dictionary<string, EPUBImage>();
+        private readonly CalibreMetadataObject _calibreMetadata =  new CalibreMetadataObject();
+        private readonly ContentFileV2 _content = new ContentFileV2();
         #endregion
 
         #region private_properties
-        protected bool _flatStructure;
-        protected string _coverImage;
-        protected ContentFile _content = new ContentFile();
+        private bool _flatStructure;
+        private string _coverImage;
+        private TranslitModeEnum _translitMode = TranslitModeEnum.ExternalRuleFile;
         #endregion
 
         #region public_properties
@@ -141,7 +142,11 @@ namespace EPubLibrary
         /// <summary>
         /// Transliteration mode
         /// </summary>
-        public TranslitModeEnum TranslitMode = TranslitModeEnum.ExternalRuleFile;
+        public TranslitModeEnum TranslitMode
+        {
+            get { return _translitMode; }
+            set { _translitMode = value; }
+        }
 
         // All sequences in the book
         public List<string> AllSequences { get { return _allSequences; } }
@@ -251,7 +256,7 @@ namespace EPubLibrary
         /// <returns></returns>
         public virtual BookDocument AddDocument(string id)
         {
-            BookDocument section = new BookDocument(HTMLElementType.XHTML11) { PageTitle = id };
+            var section = new BookDocument(HTMLElementType.XHTML11) { PageTitle = id };
             section.StyleFiles.Add(_mainCss);
             if (UseAdobeTemplate)
             {
@@ -261,6 +266,7 @@ namespace EPubLibrary
             _sections.Add(section);
             return section;
         }
+
 
 
         /// <summary>
@@ -809,8 +815,8 @@ namespace EPubLibrary
             {
                 foreach (var elementClass in cssElements[elementName].Keys)
                 {
-                    BaseCSSItem cssItem = new BaseCSSItem();
-                    StringBuilder sb = new StringBuilder();
+                    var cssItem = new BaseCSSItem();
+                    var sb = new StringBuilder();
                     sb.Append(elementName);
                     if (!string.IsNullOrEmpty(elementClass))
                     {
@@ -821,14 +827,17 @@ namespace EPubLibrary
                     // now build a list of fonts
                     sb.Clear();
                     int counter = 0;
-                    foreach (var fontFamily in cssElements[elementName][elementClass])
+                    if (elementClass != null)
                     {
-                        sb.AppendFormat("\"{0}\"",fontFamily.Name);
-                        if (counter!= 0)
+                        foreach (var fontFamily in cssElements[elementName][elementClass])
                         {
-                            sb.Append(", ");
+                            sb.AppendFormat("\"{0}\"", fontFamily.Name);
+                            if (counter != 0)
+                            {
+                                sb.Append(", ");
+                            }
+                            counter++;
                         }
-                        counter++;
                     }
                     cssItem.Parameters.Add("font-family", sb.ToString());
                     _mainCss.AddTarget(cssItem);
@@ -902,5 +911,7 @@ namespace EPubLibrary
             }
             return false;
         }
+        
+
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Xml.Serialization;
 
 namespace EPubLibrary.Content.Spine
 {
@@ -23,7 +22,7 @@ namespace EPubLibrary.Content.Spine
 
             MemberInfo[] memInfo = type.GetMember(en.ToString());
 
-            if ( memInfo.Length > 0)
+            if (memInfo.Length > 0)
             {
 
                 object[] attrs = memInfo[0].GetCustomAttributes(typeof(Description),
@@ -46,43 +45,53 @@ namespace EPubLibrary.Content.Spine
     public enum EPubV3Properties
     {
         [PropertyDescription("rendition:align-x-center")]
-        rendition_align_x_center,
+        RenditionAlignXCenter,
         [PropertyDescription("rendition:flow-auto ")]
-        rendition_flow_auto,
+        RenditionFlowAuto,
         [PropertyDescription("rendition:flow-paginated")]
-        rendition_flow_paginated,
+        RenditionFlowPaginated,
         [PropertyDescription("rendition:flow-scrolled-continuous")]
-        rendition_flow_scrolled_continuous,
+        RenditionFlowScrolledContinuous,
         [PropertyDescription("rendition:flow-scrolled-doc")]
-        rendition_flow_scrolled_doc,
+        RenditionFlowScrolledDoc,
         [PropertyDescription("rendition:layout-pre-paginated")]
-        rendition_layout_pre_paginated,
+        RenditionLayoutPrePaginated,
         [PropertyDescription("rendition:layout-reflowable")]
-        rendition_layout_reflowable,
+        RenditionLayoutReflowable,
         [PropertyDescription("rendition:orientation-auto")]
-        rendition_orientation_auto,
+        RenditionOrientationAuto,
         [PropertyDescription("rendition:orientation-landscape")]
-        rendition_orientation_landscape,
+        RenditionOrientationLandscape,
         [PropertyDescription("rendition:orientation-portrait")]
-        rendition_orientation_portrait,
+        RenditionOrientationPortrait,
         [PropertyDescription("rendition:page-spread-center")]
-        rendition_page_spread_center,
+        RenditionPageSpreadCenter,
         [PropertyDescription("page-spread-right")]
-        page_spread_right,
+        PageSpreadRight,
         [PropertyDescription("rendition:spread-auto")]
-        rendition_spread_auto,
+        RenditionSpreadAuto,
         [PropertyDescription("rendition:spread-both")]
-        rendition_spread_both,
+        RenditionSpreadBoth,
         [PropertyDescription("rendition:spread-landscape")]
-        rendition_spread_landscape,
+        RenditionSpreadLandscape,
         [PropertyDescription("rendition:spread-none")]
-        rendition_spread_none,
+        RenditionSpreadNone,
         [PropertyDescription("rendition:spread-portrait")]
-        rendition_spread_portrait,
+        RenditionSpreadPortrait,
     }
 
-    public class SpineItem
+
+
+    class SpineItemV3
     {
+
+        private readonly List<EPubV3Properties> _properties = new List<EPubV3Properties>();
+
+        public List<EPubV3Properties> Properties
+        {
+            get { return _properties; }
+        }
+
 
         public string Name { get; set; }
 
@@ -92,18 +101,12 @@ namespace EPubLibrary.Content.Spine
 
         public bool Linear
         {
-            get { return _linear; } 
+            get { return _linear; }
             set { _linear = value; }
         }
 
 
         public string ID { get; set; }
 
-        private readonly List<EPubV3Properties> _properties = new List<EPubV3Properties>();
-
-        public List<EPubV3Properties> Properties
-        {
-            get { return _properties; }
-        }
     }
 }

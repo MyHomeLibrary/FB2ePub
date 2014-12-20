@@ -7,8 +7,11 @@ using System.Xml.Linq;
 using EPubLibrary.Container;
 using EPubLibrary.Content;
 using EPubLibrary.Content.NavigationDocument;
+using EPubLibrary.CSS_Items;
+using EPubLibrary.PathUtils;
 using EPubLibrary.TOC;
 using EPubLibrary.XHTML_Items;
+using FontsSettings;
 using ICSharpCode.SharpZipLib.Zip;
 using TranslitRu;
 using XHTMLClassLibrary.BaseElements;
@@ -25,19 +28,35 @@ namespace EPubLibrary
     /// <summary>
     /// Implements v3 of ePub standard
     /// </summary>
-    public class EPubFileV3 : EPubFile
+    public class EPubFileV3 : IEpubFile
     {
-        protected V3Standard _standard  = V3Standard.V301;
         private readonly NavigationDocumentFile _navigationDocument = new NavigationDocumentFile();
 
+        #region readonly_private_propeties
+        private readonly V3Standard _standard = V3Standard.V301;
+        private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
+        private readonly EPubTitleSettings _title = new EPubTitleSettings();
+        private readonly EPubCollections _collections = new EPubCollections();
+        private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS", FileName = "main.css" };
+        private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
+        private readonly List<BookDocument> _sections = new List<BookDocument>();
+        private readonly TOCFile _tableOfContentFile = new TOCFile();
+        private readonly Rus2Lat _rule = new Rus2Lat();
+        private readonly List<string> _allSequences = new List<string>();
+        private readonly List<string> _aboutTexts = new List<string>();
+        private readonly List<string> _aboutLinks = new List<string>();
+        private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
+        private readonly Dictionary<string, EPUBImage> _images = new Dictionary<string, EPUBImage>();
+        private readonly ContentFileV3 _content;
+        #endregion
 
-        /// <summary>
-        /// Get/Set if adobe template XPGT file should be added to resulting file
-        /// </summary>
-        public override bool UseAdobeTemplate
-        {
-            get { return false; }
-        }
+        #region private_properties
+        private bool _flatStructure;
+        private bool _generateCompatibleTOC;
+        private TranslitModeEnum _translitMode = TranslitModeEnum.ExternalRuleFile;
+        private string _coverImage;
+        #endregion
+
 
         public V3Standard EPubV3Standard
         {
@@ -52,22 +71,21 @@ namespace EPubLibrary
         }
 
 
-        protected bool _generateCompatibleTOC = false;
 
         public bool GenerateCompatibleTOC
         {
             get { return _generateCompatibleTOC; }
-            set { ((ContentFileV3)_content).GenerateCompatibleTOC = _generateCompatibleTOC = value; }
+            set { _content.GenerateCompatibleTOC = _generateCompatibleTOC = value; }
         }
 
 
-        protected override void CreateContainer(out ContainerFile container)
+        protected void CreateContainer(out ContainerFile container)
         {
             container = new ContainerFileV3 { FlatStructure = _flatStructure, ContentFilePath = _content };
         }
 
 
-        protected override void AddContentFile(ZipOutputStream stream)
+        protected void AddContentFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
             CreateFileEntryInZip(stream, _content);
@@ -77,11 +95,20 @@ namespace EPubLibrary
         }
 
         /// <summary>
+        /// Assign image (by id) to be cover image
+        /// </summary>
+        /// <param name="imageRef">image reference name</param>
+        public void AddCoverImage(string imageRef)
+        {
+            _coverImage = imageRef;
+        }
+
+        /// <summary>
         /// Adds (creates) a new empty document in a list of book content documents
         /// </summary>
         /// <param name="id">id - title to assign to the new document</param>
         /// <returns></returns>
-        public override BookDocument AddDocument(string id)
+        public BookDocument AddDocument(string id)
         {
             var section = new BookDocument(HTMLElementType.HTML5) { PageTitle = id };
             section.StyleFiles.Add(_mainCss);
@@ -94,7 +121,7 @@ namespace EPubLibrary
         /// Adds "license" file 
         /// </summary>
         /// <param name="stream"></param>
-        protected override void AddLicenseFile(ZipOutputStream stream)
+        protected void AddLicenseFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
             var licensePage = new LicenseFile(HTMLElementType.HTML5)
@@ -112,7 +139,7 @@ namespace EPubLibrary
         /// Adds "About" page file
         /// </summary>
         /// <param name="stream"></param>
-        protected override void AddAbout(ZipOutputStream stream)
+        protected void AddAbout(ZipOutputStream stream)
         {
             stream.SetLevel(9);
 
@@ -135,7 +162,7 @@ namespace EPubLibrary
         /// Adds actual book "context" 
         /// </summary>
         /// <param name="stream"></param>
-        protected override void AddBookData(ZipOutputStream stream)
+        protected void AddBookData(ZipOutputStream stream)
         {
             if (InjectLKRLicense)
             {
@@ -152,6 +179,166 @@ namespace EPubLibrary
             AddContentFile(stream);
         }
 
+        protected void AddTOCFile(ZipOutputStream stream)
+        {
+            stream.SetLevel(9);
+            CreateFileEntryInZip(stream, _tableOfContentFile);
+            _tableOfContentFile.ID = _title.Identifiers[0].ID;
+            _tableOfContentFile.Title = _rule.Translate(_title.BookTitles[0].TitleName, TranslitMode);
+            _tableOfContentFile.Write(stream);
+            _content.AddTOC();
+        }
+
+
+        /// <summary>
+        /// Adds different additional generated files like cover, annotation etc.
+        /// </summary>
+        /// <param name="stream"></param>
+        protected void AddAdditionalFiles(ZipOutputStream stream)
+        {
+            AddCSSFiles(stream);
+            AddCover(stream);
+            AddTitle(stream);
+            AddAnnotation(stream);
+            AddBookContent(stream);
+            if (_aboutTexts.Count > 0 || _aboutLinks.Count > 0)
+            {
+                AddAbout(stream);
+            }
+        }
+
+        /// <summary>
+        /// Adds annotation page file
+        /// </summary>
+        /// <param name="stream"></param>
+        private void AddAnnotation(ZipOutputStream stream)
+        {
+            if (AnnotationPage != null)
+            {
+                stream.SetLevel(9);
+                CreateFileEntryInZip(stream, AnnotationPage);
+                PutPageToFile(stream, AnnotationPage);
+                _content.AddXHTMLTextItem(AnnotationPage);
+            }
+        }
+
+        /// <summary>
+        /// Adds title page file
+        /// </summary>
+        /// <param name="stream"></param>
+        private void AddTitle(ZipOutputStream stream)
+        {
+            if (TitlePage != null)
+            {
+                stream.SetLevel(9);
+                CreateFileEntryInZip(stream, TitlePage);
+                PutPageToFile(stream, TitlePage);
+                _content.AddXHTMLTextItem(TitlePage);
+            }
+
+        }
+
+
+
+        /// <summary>
+        /// Adds CSS styles files
+        /// </summary>
+        /// <param name="stream"></param>
+        private void AddCSSFiles(ZipOutputStream stream)
+        {
+            foreach (var cssFile in CSSFiles)
+            {
+                _mainCss.Load(cssFile.FilePathOnDisk, true);
+            }
+            if (EmbedStyles)
+            {
+                return;
+            }
+            AddMainCSS(stream);
+        }
+
+        /// <summary>
+        /// Add CSS file to ZIP stream
+        /// </summary>
+        /// <param name="stream"></param>
+        private void AddMainCSS(ZipOutputStream stream)
+        {
+            stream.SetLevel(9);
+            CreateFileEntryInZip(stream, _mainCss);
+            _mainCss.Write(stream);
+            _content.AddCSS(_mainCss);
+        }
+
+
+
+        /// <summary>
+        /// Adds embedded font files
+        /// </summary>
+        /// <param name="stream"></param>
+        protected void AddFontFiles(ZipOutputStream stream)
+        {
+            if (_fontSettings.NumberOfEmbededFiles > 0)
+            {
+                stream.SetLevel(9);
+                foreach (var embededFileLocation in _fontSettings.EmbededFilesLocations)
+                {
+                    var fontFile = new FontOnStorage(embededFileLocation, ConvertFontToMediaType(_fontSettings.GetFontFormat(embededFileLocation)));
+                    CreateFileEntryInZip(stream, fontFile);
+                    try
+                    {
+                        using (var reader = new BinaryReader(File.OpenRead(embededFileLocation)))
+                        {
+                            int iCount;
+                            var buffer = new Byte[2048];
+                            while ((iCount = reader.Read(buffer, 0, 2048)) != 0)
+                            {
+                                stream.Write(buffer, 0, iCount);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log.ErrorFormat("Error loading font file {0} : {1}", embededFileLocation, ex);
+                        continue;
+                    }
+                    _content.AddFontFile(fontFile);
+                }
+            }
+        }
+
+        private EPubCoreMediaType ConvertFontToMediaType(FontFormat fontFormat)
+        {
+            if (fontFormat == FontFormat.WOFF)
+            {
+                return EPubCoreMediaType.ApplicationFontWoff;
+            }
+            return EPubCoreMediaType.ApplicationFontMSOpen;
+        }
+
+
+
+
+        protected void AddImages(ZipOutputStream stream)
+        {
+            if (_images.Count > 0)
+            {
+                AddImagesFiles(stream);
+            }
+        }
+
+        private void AddImagesFiles(ZipOutputStream stream)
+        {
+            stream.SetLevel(9);
+            foreach (var epubImage in _images)
+            {
+                var imageFile = new ImageOnStorage(epubImage.Value) { FileName = epubImage.Value.ID };
+                CreateFileEntryInZip(stream, imageFile);
+                stream.Write(epubImage.Value.ImageData, 0, epubImage.Value.ImageData.Length);
+                _content.AddImage(imageFile);
+            }
+
+        }
+
         protected void AddNavigationFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
@@ -159,11 +346,10 @@ namespace EPubLibrary
             _navigationDocument.PageTitle = _title.BookTitles[0].TitleName;
             _navigationDocument.StyleFiles.Add(_mainCss);
             _navigationDocument.Write(stream);
-            var contentFileV3 = _content as ContentFileV3;
-            if (contentFileV3 != null) contentFileV3.AddNavigationDocument(_navigationDocument);
+            _content.AddNavigationDocument(_navigationDocument);
         }
 
-        protected override void AddCover(ZipOutputStream stream)
+        protected void AddCover(ZipOutputStream stream)
         {
             if (string.IsNullOrEmpty(_coverImage))
             {
@@ -191,16 +377,23 @@ namespace EPubLibrary
             {
                 _content.CoverId = eImage.ID;
             }
-
-
             _content.AddXHTMLTextItem(cover);
+        }
+
+        protected ImageOnStorage GetCoverImageName(EPUBImage eImage)
+        {
+            if (_images.Any(image => image.Key == _coverImage))
+            {
+                return new ImageOnStorage(eImage) { FileName = eImage.ID };
+            }
+            return new ImageOnStorage(eImage) { FileName = "cover.jpg" };
         }
 
         /// <summary>
         /// Writes book content to the stream
         /// </summary>
         /// <param name="stream">stream to write to</param>
-        protected override void AddBookContent(ZipOutputStream stream)
+        protected void AddBookContent(ZipOutputStream stream)
         {
             int count = 1;
 
@@ -255,7 +448,7 @@ namespace EPubLibrary
         }
 
 
-        protected override void AddBookContentSection(BookDocument subsection, int count, int subcount)
+        protected void AddBookContentSection(BookDocument subsection, int count, int subcount)
         {
             subsection.Id = string.Format("bookcontent{0}_{1}", count, subcount); // generate unique ID
             _content.AddXHTMLTextItem(subsection);
@@ -274,6 +467,319 @@ namespace EPubLibrary
             }
         }
 
+        /// <summary>
+        /// Get/Set "flat" mode , when flat mode is set no subfolders created inside the ZIP
+        /// used to work around bugs in some readers
+        /// </summary>
+        public bool FlatStructure
+        {
+            get { return _flatStructure; }
+            set
+            {
+                _content.FlatStructure = value;
+                _flatStructure = value;
+            }
+        }
+
+        /// <summary>
+        /// Get/Set embedding styles into xHTML files instead of referencing style files
+        /// </summary>
+        public bool EmbedStyles { get; set; }
+
+        /// <summary>
+        /// Transliteration mode
+        /// </summary>
+        public TranslitModeEnum TranslitMode
+        {
+            get { return _translitMode; }
+            set { _translitMode = value; }
+        }
+
+        /// <summary>
+        /// Controls if Lord Kiron's license need to be added to file
+        /// </summary>
+        public bool InjectLKRLicense { get; set; }
+
+        /// <summary>
+        /// Return transliteration rule object
+        /// </summary>
+        public Rus2Lat Transliterator { get { return _rule; } }
+
+        /// <summary>
+        /// Return reference to the list of the CSS style files
+        /// </summary>
+        public List<CSSFile> CSSFiles { get { return _cssFiles; } }
+
+        /// <summary>
+        /// Get access to main CSS file included in all 
+        /// xhtml book files 
+        /// </summary>
+        public CSSFile MainCSS { get { return _mainCss; } }
+
+        /// <summary>
+        /// Set/Get title page object
+        /// </summary>
+        public TitlePageFile TitlePage { get; set; }
+
+        /// <summary>
+        /// Set/get Annotation object
+        /// </summary>
+        public AnnotationPageFile AnnotationPage { get; set; }
+
+        /// <summary>
+        /// Set/get it Table of Content (TOC) entries should be transliterated
+        /// </summary>
+        public bool TranliterateToc { set; get; }
+
+        // All sequences in the book
+        public List<string> AllSequences { get { return _allSequences; } }
+
+
+        /// <summary>
+        /// Get access to book's title data
+        /// </summary>
+        public EPubTitleSettings Title
+        {
+            get { return _title; }
+        }
+
+        /// <summary>
+        /// Get access to the list of collections (series) book belong to
+        /// </summary>
+        public EPubCollections Collections
+        {
+            get { return _collections; }
+        }
+
+        /// <summary>
+        /// Used to set creator software string
+        /// </summary>
+        public string CreatorSoftwareString
+        {
+            set { _content.CreatorSoftwareString = value; }
+        }
+
+        /// <summary>
+        /// Strings added to about page
+        /// </summary>
+        public List<string> AboutTexts
+        {
+            get
+            {
+                return _aboutTexts;
+            }
+        }
+
+        /// <summary>
+        /// Links added to about page
+        /// </summary>
+        public List<string> AboutLinks
+        {
+            get
+            {
+                return _aboutLinks;
+            }
+        }
+
+        /// <summary>
+        /// Return reference to the list of images
+        /// </summary>
+        public Dictionary<string, EPUBImage> Images
+        {
+            get { return _images; }
+        }
+
+        /// <summary>
+        /// Create a file in the ZIP stream
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="pathObject"></param>
+        protected void CreateFileEntryInZip(ZipOutputStream stream, IEPubPath pathObject)
+        {
+            ZipEntry file = _zipFactory.MakeFileEntry(pathObject.PathInEPUB.GetFilePathInZip(_flatStructure), false);
+            file.CompressionMethod = CompressionMethod.Deflated; // as defined by ePub stndard
+            stream.PutNextEntry(file);
+        }
+
+        protected void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
+        {
+            xhtmlFile.FlatStructure = FlatStructure;
+            xhtmlFile.EmbedStyles = EmbedStyles;
+            xhtmlFile.StyleFiles.Add(_mainCss);
+            xhtmlFile.Write(stream);
+        }
+
+        /// <summary>
+        /// Writes (generates) file to disk
+        /// </summary>
+        /// <param name="outFileName"></param>
+        public void Generate(string outFileName)
+        {
+            Logger.Log.DebugFormat("Generating file : {0}", outFileName);
+            if (!IsValid())
+            {
+                Logger.Log.Error("File data not valid. Can't generate. Aborting.");
+                return;
+            }
+            try
+            {
+                string folder = Path.GetDirectoryName(outFileName);
+                if (!string.IsNullOrEmpty(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.ErrorFormat("Error creating folder {0}, exception thrown : {1}", Path.GetDirectoryName(outFileName), ex);
+            }
+            try
+            {
+                using (var fileStream = File.Create(outFileName))
+                {
+                    using (var s = new ZipOutputStream(fileStream))
+                    {
+                        // The EPub does not like 64 bit "patched" headers due to mimetype entry
+                        s.UseZip64 = UseZip64.Off;
+                        AddMimeTypeEntry(s);
+                        AddBookData(s);
+                        AddMetaData(s);
+                        s.Finish();
+                    }
+                    fileStream.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.ErrorFormat("Error generating file, exception thrown : {0}", ex);
+                File.Delete(outFileName);
+            }
+        }
+
+        /// <summary>
+        /// Check if epub file data is valid (ready to be generated)
+        /// </summary>
+        /// <returns></returns>
+        private bool IsValid()
+        {
+            if (!_title.IsValid())
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private void AddMimeTypeEntry(ZipOutputStream s)
+        {
+            s.SetLevel(0);
+            ZipEntry entry = _zipFactory.MakeFileEntry("mimetype", false);
+            entry.CompressionMethod = CompressionMethod.Stored;
+            entry.IsUnicodeText = false;
+            entry.ZipFileIndex = 0;
+            s.PutNextEntry(entry);
+            const string mimetype = "application/epub+zip";
+            var encoding = new ASCIIEncoding();
+            byte[] buffer = encoding.GetBytes(mimetype);
+            s.Write(buffer, 0, buffer.Length);
+            s.CloseEntry();
+        }
+
+        /// <summary>
+        /// Adds content of META-INF subfolder
+        /// </summary>
+        /// <param name="stream"></param>
+        private void AddMetaData(ZipOutputStream stream)
+        {
+            AddMetaDataFile(stream);
+        }
+
+
+        /// <summary>
+        /// Adds container.xml
+        /// </summary>
+        /// <param name="stream"></param>
+        private void AddMetaDataFile(ZipOutputStream stream)
+        {
+            stream.SetLevel(9);
+            ContainerFile container;
+            CreateContainer(out container);
+            CreateFileEntryInZip(stream, container);
+            container.Write(stream);
+            stream.CloseEntry();
+        }
+        /// <summary>
+        /// Assign ePub fonts from set of Fonts settings
+        /// </summary>
+        /// <param name="fonts">font settings to use</param>
+        /// <param name="resourcesPath">path to program's "resources"</param>
+        /// <param name="decorateFontNames">add or not random decoration to the font names</param>
+        public void SetEPubFonts(EPubFontSettings fonts, string resourcesPath, bool decorateFontNames)
+        {
+            _fontSettings.ResourceMask = resourcesPath;
+            _fontSettings.Load(fonts, decorateFontNames ? Title.Identifiers[0].IdentifierName : string.Empty);
+
+            AddFontsToCSS(_fontSettings.Fonts);
+            AddCssElementsToCSS(_fontSettings.CssElements);
+        }
+
+        private void AddCssElementsToCSS(Dictionary<string, Dictionary<string, List<CSSFontFamily>>> cssElements)
+        {
+            // Now add the elements
+            foreach (var elementName in cssElements.Keys)
+            {
+                foreach (var elementClass in cssElements[elementName].Keys)
+                {
+                    var cssItem = new BaseCSSItem();
+                    var sb = new StringBuilder();
+                    sb.Append(elementName);
+                    if (!string.IsNullOrEmpty(elementClass))
+                    {
+                        sb.AppendFormat(".{0}", elementClass);
+                    }
+                    cssItem.Name = sb.ToString();
+
+                    // now build a list of fonts
+                    sb.Clear();
+                    int counter = 0;
+                    if (elementClass != null)
+                    {
+                        foreach (var fontFamily in cssElements[elementName][elementClass])
+                        {
+                            sb.AppendFormat("\"{0}\"", fontFamily.Name);
+                            if (counter != 0)
+                            {
+                                sb.Append(", ");
+                            }
+                            counter++;
+                        }
+                    }
+                    cssItem.Parameters.Add("font-family", sb.ToString());
+                    _mainCss.AddTarget(cssItem);
+                }
+            }
+        }
+
+
+        private void AddFontsToCSS(Dictionary<string, CSSFontFamily> fontsFamilies)
+        {
+            // Add the fonts to CSS
+            foreach (var cssFontFamily in fontsFamilies)
+            {
+                foreach (var subFont in cssFontFamily.Value.Fonts)
+                {
+                    var cssFont = new CssFontDefinition
+                    {
+                        Family = cssFontFamily.Key,
+                        FontStyle = CssFontDefinition.FromStyle(subFont.FontStyle),
+                        FontWidth = CssFontDefinition.FromWidth(subFont.FontWidth)
+                    };
+                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, EmbedStyles, FlatStructure)).ToList();
+                    cssFont.FontSrcs = sources;
+                    _mainCss.AddFont(cssFont);
+                }
+            }
+        }
 
     }
+
 }
