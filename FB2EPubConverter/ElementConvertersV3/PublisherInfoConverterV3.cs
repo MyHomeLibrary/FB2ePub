@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using EPubLibrary;
 using FB2EPubConverter.SourceDataInclusionControls;
 using Fb2epubSettings;
@@ -18,7 +15,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             _commonSettings = commonSettings;
         }
 
-        public void Convert(EPubFile epubFile, FB2File fb2File)
+        public void Convert(EPubFileV3 epubFile, FB2File fb2File)
         {
             if (fb2File.PublishInfo.BookTitle != null)
             {

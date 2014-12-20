@@ -6,7 +6,7 @@ namespace FB2EPubConverter.ElementConvertersV2
 {
     internal class SeriesDataConverterV2
     {
-        public void Convert(FB2File fb2File, EPubFile epubFile)
+        public void Convert(FB2File fb2File, EPubFileV2 epubFile)
         {
             epubFile.Collections.CollectionMembers.Clear();
             foreach (var seq in fb2File.TitleInfo.Sequences)

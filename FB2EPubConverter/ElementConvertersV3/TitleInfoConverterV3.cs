@@ -20,7 +20,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             _commonSettings = commonSettings;
         }
 
-        public void Convert(ItemTitleInfo itemTitleInfo, EPubFile epubFile)
+        public void Convert(ItemTitleInfo itemTitleInfo, EPubFileV3 epubFile)
         {
             epubFile.Title.Languages.Clear();
             epubFile.Title.Creators.Clear();
@@ -59,7 +59,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             epubFile.Title.DateFileCreation = DateTime.Now;
         }
 
-        private void ConvertMainTitle(ItemTitleInfo titleInfo, EPubFile epubFile)
+        private void ConvertMainTitle(ItemTitleInfo titleInfo, EPubFileV3 epubFile)
         {
             if (!SourceDataInclusionControl.Instance.IsIgnoreInfoSource(SourceDataInclusionControl.DataTypes.Title, _commonSettings.IgnoreTitle))
             {

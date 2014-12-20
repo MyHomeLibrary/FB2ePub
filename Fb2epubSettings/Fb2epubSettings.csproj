@@ -125,7 +125,9 @@
     </Compile>
     <Compile Include="ConverterSettings.cs" />
     <Compile Include="ConverterSettingsFile.cs" />
-    <Compile Include="ConverterSettingsForm.cs" />
+    <Compile Include="ConverterSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ConverterSettingsForm.Designer.cs">
       <DependentUpon>ConverterSettingsForm.cs</DependentUpon>
     </Compile>

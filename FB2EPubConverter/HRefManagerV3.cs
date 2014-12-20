@@ -8,7 +8,7 @@ using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace FB2EPubConverter
 {
-    internal class HRefManagerV3 : IHRefManager
+    internal class HRefManagerV3 
     {
         public bool FlatStructure { get; set; }
 
@@ -57,7 +57,7 @@ namespace FB2EPubConverter
             throw new NotImplementedException();
         }
 
-        public void RemapAnchors(EPubFile epubFile)
+        public void RemapAnchors(EPubFileV3 epubFile)
         {
             throw new NotImplementedException();
         }
