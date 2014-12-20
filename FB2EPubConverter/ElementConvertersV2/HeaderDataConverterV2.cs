@@ -21,7 +21,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             _calibreMetadataConverter   =   new CalibreMetadataConverter(v2Settings);
         }
 
-        public void Convert(EPubFile epubFile, FB2File fb2File)
+        public void Convert(EPubFileV2 epubFile, FB2File fb2File)
         {
             _titleInfoConverter.Convert(fb2File.TitleInfo, epubFile);
             _bookIDConverter.Convert(fb2File, epubFile);

@@ -6,7 +6,7 @@ namespace FB2EPubConverter.ElementConvertersV3
 {
     internal class BookIDConverterV3
     {
-        public void Convert(FB2File fb2File, EPubFile epubFile)
+        public void Convert(FB2File fb2File, EPubFileV3 epubFile)
         {
             // Getting information from FB2 document section
             var bookId = new Identifier

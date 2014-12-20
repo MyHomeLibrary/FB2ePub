@@ -5,7 +5,7 @@ namespace FB2EPubConverter.ElementConvertersV3
 {
     internal static class GenresInfoConverterV3
     {
-        public static void Convert(ItemTitleInfo titleInfo, EPubFile epubFile)
+        public static void Convert(ItemTitleInfo titleInfo, EPubFileV3 epubFile)
         {
             foreach (var genre in titleInfo.Genres)
             {

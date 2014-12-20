@@ -27,7 +27,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         }
 
 
-        public void Convert(EPubFile epubFile, FB2File fb2File)
+        public void Convert(EPubFileV2 epubFile, FB2File fb2File)
         {
             // create second title page
             if ((fb2File.MainBody.Title != null) && (!string.IsNullOrEmpty(fb2File.MainBody.Title.ToString())))
@@ -143,7 +143,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             }          
         }
 
-        private void AddSection(EPubFile epubFile, SectionItem section, BookDocument navParent, bool fbeNotesSection)
+        private void AddSection(EPubFileV2 epubFile, SectionItem section, BookDocument navParent, bool fbeNotesSection)
         {
             string docTitle = string.Empty;
             if (section.Title != null)
@@ -201,7 +201,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// </summary>
         /// <param name="epubFile"></param>
         /// <param name="bodyItem"></param>
-        private void AddFbeNotesBody(EPubFile epubFile, BodyItem bodyItem)
+        private void AddFbeNotesBody(EPubFileV2 epubFile, BodyItem bodyItem)
         {
             string docTitle = bodyItem.Name;
             Logger.Log.DebugFormat("Adding section : {0}", docTitle);
@@ -237,7 +237,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// </summary>
         /// <param name="epubFile"></param>
         /// <param name="bodyItem"></param>
-        private void AddSecondaryBody(EPubFile epubFile, BodyItem bodyItem)
+        private void AddSecondaryBody(EPubFileV2 epubFile, BodyItem bodyItem)
         {
             string docTitle = string.Empty;
             if (string.IsNullOrEmpty(bodyItem.Name))

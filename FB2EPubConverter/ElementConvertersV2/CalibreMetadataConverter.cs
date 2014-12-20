@@ -18,7 +18,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         }
 
 
-        internal void Convert(FB2File fb2File, EPubFile epubFile)
+        internal void Convert(FB2File fb2File, EPubFileV2 epubFile)
         {
             epubFile.AddCalibreMetadata = _v2Settings.AddCalibreMetadata;
 

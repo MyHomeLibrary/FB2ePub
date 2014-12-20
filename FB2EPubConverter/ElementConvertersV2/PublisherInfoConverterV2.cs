@@ -18,7 +18,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             _commonSettings = commonSettings;
         }
 
-        public void Convert(FB2File fb2File, EPubFile epubFile)
+        public void Convert(FB2File fb2File, EPubFileV2 epubFile)
         {
             if (fb2File.PublishInfo.BookTitle != null)
             {

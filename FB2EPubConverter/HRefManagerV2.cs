@@ -15,7 +15,7 @@ using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace FB2EPubConverter
 {
-    internal class HRefManagerV2 : IHRefManager
+    internal class HRefManagerV2 
     {
         /// <summary>
         /// List of IDs 
@@ -329,7 +329,7 @@ namespace FB2EPubConverter
         }
 
 
-        public void RemapAnchors(EPubFile epubFile)
+        public void RemapAnchors(EPubFileV2 epubFile)
         {
             foreach (var link in _references)
             {
@@ -404,7 +404,7 @@ namespace FB2EPubConverter
 
 
 
-        private BaseXHTMLFile GetIDParentDocument(EPubFile file, IHTMLItem value)
+        private BaseXHTMLFile GetIDParentDocument(EPubFileV2 file, IHTMLItem value)
         {
             if ((file.AnnotationPage != null) && file.AnnotationPage.PartOfDocument(value))
             {

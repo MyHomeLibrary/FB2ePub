@@ -17,7 +17,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             _commonSettings = commonSettings;
         }
 
-        public void Convert(ItemTitleInfo itemTitleInfo, EPubFile epubFile)
+        public void Convert(ItemTitleInfo itemTitleInfo, EPubFileV2 epubFile)
         {
             epubFile.Title.Languages.Clear();
             epubFile.Title.Creators.Clear();
@@ -57,7 +57,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         }
 
 
-        private void ConvertMainTitle(ItemTitleInfo titleInfo, EPubFile epubFile)
+        private void ConvertMainTitle(ItemTitleInfo titleInfo, EPubFileV2 epubFile)
         {
             if (!SourceDataInclusionControl.Instance.IsIgnoreInfoSource(SourceDataInclusionControl.DataTypes.Title, _commonSettings.IgnoreTitle))
             {

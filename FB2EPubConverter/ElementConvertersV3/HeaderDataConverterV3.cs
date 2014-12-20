@@ -20,7 +20,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             _publisherInfoConverter = new PublisherInfoConverterV3(commonSettings);
         }
 
-        public void Convert(EPubFile epubFile, FB2File fb2File)
+        public void Convert(EPubFileV3 epubFile, FB2File fb2File)
         {
             _titleInfoConverter.Convert(fb2File.TitleInfo,epubFile);
             _bookIDConverter.Convert(fb2File, epubFile);

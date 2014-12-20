@@ -6,7 +6,7 @@ namespace FB2EPubConverter.ElementConvertersV3
 {
     internal static class SequencesInfoConverterV3
     {
-        public static void Convert(ItemTitleInfo itemInfo, EPubFile epubFile)
+        public static void Convert(ItemTitleInfo itemInfo, EPubFileV3 epubFile)
         {
             foreach (var seq in itemInfo.Sequences)
             {
