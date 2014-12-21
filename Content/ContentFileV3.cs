@@ -387,7 +387,7 @@ namespace EPubLibrary.Content
                 var bookSpine = new SpineItemV3 { Name = baseXhtmlFile.Id };
                 if (V3StandardChecker.IsRenditionFlowAllowedByStandard(_standard))
                 {
-                    bookSpine.Properties.Add(EPubV3Properties.RenditionFlowAuto);
+                    bookSpine.Flow = SpineItemV3.FlowOptions.Auto;
                        //TODO: make this optional, based on settings to define look and find best properties for defaults
                 }
                 _spine.Add(bookSpine);
@@ -404,7 +404,7 @@ namespace EPubLibrary.Content
 
         public void AddTOC()
         {
-             _spine.GenerateCompatibleTOC = GenerateCompatibleTOC;
+
             if (!GenerateCompatibleTOC)
             {
                return;
@@ -415,6 +415,7 @@ namespace EPubLibrary.Content
                 ID = "ncx", 
                 MediaType = EPubCoreMediaType.ApplicationNCX,
             };
+            _spine.TOCId = tocItem.ID;
             _manifest.Add(tocItem);
         }
 

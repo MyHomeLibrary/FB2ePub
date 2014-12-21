@@ -6,99 +6,67 @@ using System.Text;
 
 namespace EPubLibrary.Content.Spine
 {
-    class PropertyDescription : Attribute
-    {
-        public string Text;
-
-        public PropertyDescription(string text)
-        {
-            Text = text;
-        }
-
-        public static string GetDescription(Enum en)
-        {
-
-            Type type = en.GetType();
-
-            MemberInfo[] memInfo = type.GetMember(en.ToString());
-
-            if (memInfo.Length > 0)
-            {
-
-                object[] attrs = memInfo[0].GetCustomAttributes(typeof(Description),
-                false);
-
-                if (attrs.Length > 0)
-
-                    return ((PropertyDescription)attrs[0]).Text;
-
-            }
-
-            return en.ToString();
-
-        }
-    }
-
     /// <summary>
-    /// http://www.idpf.org/epub/301/spec/epub-publications.html#sec-itemref-property-values
+    /// Represents a spine item in a V3 spine section of the content document
     /// </summary>
-    public enum EPubV3Properties
-    {
-        [PropertyDescription("rendition:align-x-center")]
-        RenditionAlignXCenter,
-        [PropertyDescription("rendition:flow-auto ")]
-        RenditionFlowAuto,
-        [PropertyDescription("rendition:flow-paginated")]
-        RenditionFlowPaginated,
-        [PropertyDescription("rendition:flow-scrolled-continuous")]
-        RenditionFlowScrolledContinuous,
-        [PropertyDescription("rendition:flow-scrolled-doc")]
-        RenditionFlowScrolledDoc,
-        [PropertyDescription("rendition:layout-pre-paginated")]
-        RenditionLayoutPrePaginated,
-        [PropertyDescription("rendition:layout-reflowable")]
-        RenditionLayoutReflowable,
-        [PropertyDescription("rendition:orientation-auto")]
-        RenditionOrientationAuto,
-        [PropertyDescription("rendition:orientation-landscape")]
-        RenditionOrientationLandscape,
-        [PropertyDescription("rendition:orientation-portrait")]
-        RenditionOrientationPortrait,
-        [PropertyDescription("rendition:page-spread-center")]
-        RenditionPageSpreadCenter,
-        [PropertyDescription("page-spread-right")]
-        PageSpreadRight,
-        [PropertyDescription("rendition:spread-auto")]
-        RenditionSpreadAuto,
-        [PropertyDescription("rendition:spread-both")]
-        RenditionSpreadBoth,
-        [PropertyDescription("rendition:spread-landscape")]
-        RenditionSpreadLandscape,
-        [PropertyDescription("rendition:spread-none")]
-        RenditionSpreadNone,
-        [PropertyDescription("rendition:spread-portrait")]
-        RenditionSpreadPortrait,
-    }
-
-
-
     class SpineItemV3
     {
-
-        private readonly List<EPubV3Properties> _properties = new List<EPubV3Properties>();
-
-        public List<EPubV3Properties> Properties
+        public enum FlowOptions
         {
-            get { return _properties; }
+            NotSet,                 //  Not set - default
+            Auto,                   //  Indicates no preference for overflow content handling by the Author. 
+            Paginated,              //  Indicates the Author preference is to dynamically paginate content overflow. 
+            ScrolledContinuous,     //  Indicates the Author preference is to provide a scrolled view for overflow content, and that consecutive spine items with this property are to be rendered as a continuous scroll.
+            ScrolledDoc,            //  Indicates the Author preference is to provide a scrolled view for overflow content, and each spine item with this property is to be rendered as separate scrollable document. 
+        }
+
+        public enum LayoutOptions
+        {
+            NotSet,             //  Not set - default
+            PrePaginated,       //  Specifies that the given spine item is pre-paginated. 
+            Reflowable,         //  Specifies that the given spine item is reflowable. 
+        }
+
+        public enum OrientationOptions
+        {
+            NotSet,             //  Not set - default
+            Auto,               //  Specifies that the Reading System can determine the orientation to rendered the spine item in. 
+            Landscape,          //  Specifies that the given spine item is to be rendered in landscape orientation. 
+            Portrait,           //  Specifies that the given spine item is to be rendered in portrait orientation. 
+        }
+
+        public enum PageSpreadOptions
+        {
+            NotSet,             //  Not set - default
+            Center,             //  Specifies the forced placement of a Content Document in a Synthetic Spread 
+            Left,               //  The page-spread-left property indicates that the first page of the associated item element's EPUB Content Document represents the left-hand side of a two-page spread.
+            Right,              //  The page-spread-right property indicates that the first page of the associated item element's EPUB Content Document represents the right-hand side of a two-page spread.
+        }
+
+        public enum SpreadOrientationOptions
+        {
+            NotSet,             //  Not set - default
+            Auto,               //  Specifies the Reading System can determine when to render a synthetic spread for the spine item. 
+            Both,               //  Specifies the Reading System should render a synthetic spread for the spine item in both portrait and landscape orientations. 
+            Landscape,          //  Specifies the Reading System should render a synthetic spread for the spine item only when in landscape orientation. 
+            None,               //  Specifies the Reading System should not render a synthetic spread for the spine item. 
+            Portrait,
         }
 
 
+
+        /// <summary>
+        /// Itemref name - An IDREF [XML] that identifies a manifest item.
+        /// </summary>
         public string Name { get; set; }
 
         // the following is for V3 only
 
         private bool _linear = true;
 
+        /// <summary>
+        /// Specifies whether the referenced content is primary.
+        /// </summary>
         public bool Linear
         {
             get { return _linear; }
@@ -106,7 +74,40 @@ namespace EPubLibrary.Content.Spine
         }
 
 
+        /// <summary>
+        /// The ID [XML] of this element, which must be unique within the document scope.
+        /// </summary>
         public string ID { get; set; }
 
+        /// <summary>
+        ///  Specifies that the given spine item should be centered horizontally in the viewport or spread. 
+        /// </summary>
+        public bool AlignXCenter { get; set; }
+
+        /// <summary>
+        /// One of the flow options 
+        /// </summary>
+        public FlowOptions Flow { get; set; }
+
+        /// <summary>
+        /// One of the layout options
+        /// </summary>
+        public LayoutOptions Layout { get; set; }
+
+        /// <summary>
+        /// One of the page orientation options
+        /// </summary>
+        public OrientationOptions PageOrientation { get; set; }
+
+
+        /// <summary>
+        /// One of page spread options
+        /// </summary>
+        public PageSpreadOptions PageSpread { get; set; }
+
+        /// <summary>
+        /// One of the spread orientation options
+        /// </summary>
+        public SpreadOrientationOptions SpreadOrientation { get; set; }
     }
 }
