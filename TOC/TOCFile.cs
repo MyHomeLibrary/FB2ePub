@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -15,13 +13,13 @@ namespace EPubLibrary.TOC
     {
         public static readonly EPubInternalPath TOCFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/toc.ncx");
 
-        protected readonly NavMapElement _navMap = new NavMapElement();
+        protected readonly NavMapElement NavMap = new NavMapElement();
         private string _title;
 
 
         public bool IsNavMapEmpty()
         {
-            return (_navMap.Count == 0);
+            return (NavMap.Count == 0);
         }
 
         public string Title
@@ -41,14 +39,11 @@ namespace EPubLibrary.TOC
 
         public void Write(Stream s)
         {
-            XDocument tocDocument = new XDocument();
+            var tocDocument = new XDocument();
 
             CreateTOCDocument(tocDocument);
 
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.CloseOutput = false;
-            settings.Encoding = Encoding.UTF8;
-            settings.Indent = true;
+            var settings = new XmlWriterSettings {CloseOutput = false, Encoding = Encoding.UTF8, Indent = true};
             using (var writer = XmlWriter.Create(s, settings))
             {
                 tocDocument.WriteTo(writer);
@@ -58,20 +53,20 @@ namespace EPubLibrary.TOC
 
         public void AddNavPoint(BookDocument content, string name)
         {
-            NavPoint bookPoint = new NavPoint { Content = content.PathInEPUB.GetRelativePath(TOCFilePath, content.FlatStructure), Name = name };
-            _navMap.Add(bookPoint);
+            var bookPoint = new NavPoint { Content = content.PathInEPUB.GetRelativePath(TOCFilePath, content.FlatStructure), Name = name };
+            NavMap.Add(bookPoint);
         }
 
         public void AddSubNavPoint(BookDocument content, BookDocument subcontent, string name)
         {
-            var point = _navMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(TOCFilePath, content.FlatStructure)));
+            var point = NavMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(TOCFilePath, content.FlatStructure)));
             if (point != null)
             {
                 point.SubPoints.Add(new NavPoint { Content = subcontent.PathInEPUB.GetRelativePath(TOCFilePath, subcontent.FlatStructure), Name = name });
             }
             else
             {
-                foreach (var element in _navMap)
+                foreach (var element in NavMap)
                 {
                     point = element.AllContent().Find(x => (x.Content == content.PathInEPUB.GetRelativePath(TOCFilePath, content.FlatStructure)));
                     if (point != null)
@@ -88,7 +83,7 @@ namespace EPubLibrary.TOC
 
         public void AddSubLink(BookDocument content, BookDocument subcontent, string name)
         {
-            var point = _navMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(TOCFilePath,content.FlatStructure)));
+            var point = NavMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(TOCFilePath,content.FlatStructure)));
             if (point != null)
             {
                 point.SubPoints.Add(new NavPoint { Content = string.Format("{0}#{1}", content, subcontent), Name = name });
@@ -107,30 +102,29 @@ namespace EPubLibrary.TOC
             {
                 throw new NullReferenceException("ID need to be set first");
             }
-            XNamespace ncxNamespace = @"http://www.daisy.org/z3986/2005/ncx/";
-            XElement ncxElement = new XElement(ncxNamespace + "ncx");
+            var ncxElement = new XElement(DaisyNamespaces.NCXNamespace + "ncx");
             ncxElement.Add(new XAttribute("version", "2005-1"));
 
 
             // Add head block
-            XElement headElement = new XElement(ncxNamespace + "head");
+            var headElement = new XElement(DaisyNamespaces.NCXNamespace + "head");
 
-            XElement metaID = new XElement(ncxNamespace + "meta");
+            var metaID = new XElement(DaisyNamespaces.NCXNamespace + "meta");
             metaID.Add(new XAttribute("name", "dtb:uid"));
             metaID.Add(new XAttribute("content", ID));
             headElement.Add(metaID);
 
-            XElement metaDepth = new XElement(ncxNamespace + "meta");
+            var metaDepth = new XElement(DaisyNamespaces.NCXNamespace + "meta");
             metaDepth.Add(new XAttribute("name", "dtb:depth"));
-            metaDepth.Add(new XAttribute("content", _navMap.GetDepth()));
+            metaDepth.Add(new XAttribute("content", NavMap.GetDepth()));
             headElement.Add(metaDepth);
 
-            XElement metaTotalPageCount = new XElement(ncxNamespace + "meta");
+            var metaTotalPageCount = new XElement(DaisyNamespaces.NCXNamespace + "meta");
             metaTotalPageCount.Add(new XAttribute("name", "dtb:totalPageCount"));
             metaTotalPageCount.Add(new XAttribute("content", "0"));
             headElement.Add(metaTotalPageCount);
 
-            XElement metaMaxPageNumber = new XElement(ncxNamespace + "meta");
+            var metaMaxPageNumber = new XElement(DaisyNamespaces.NCXNamespace + "meta");
             metaMaxPageNumber.Add(new XAttribute("name", "dtb:maxPageNumber"));
             metaMaxPageNumber.Add(new XAttribute("content", "0"));
             headElement.Add(metaMaxPageNumber);
@@ -138,12 +132,12 @@ namespace EPubLibrary.TOC
             ncxElement.Add(headElement);
 
             // Add DocTitle block
-            XElement docTitleElement = new XElement(ncxNamespace + "docTitle");
-            XElement textElement = new XElement(ncxNamespace + "text", Title);
+            var docTitleElement = new XElement(DaisyNamespaces.NCXNamespace + "docTitle");
+            var textElement = new XElement(DaisyNamespaces.NCXNamespace + "text", Title);
             docTitleElement.Add(textElement);
             ncxElement.Add(docTitleElement);
 
-            ncxElement.Add(_navMap.GenerateXMLMap());
+            ncxElement.Add(NavMap.GenerateXMLMap());
 
             document.Add(new XDocumentType("ncx", @"-//NISO//DTD ncx 2005-1//EN", @"http://www.daisy.org/z3986/2005/ncx-2005-1.dtd", null));
             document.Add(ncxElement);
@@ -152,17 +146,17 @@ namespace EPubLibrary.TOC
 
         internal void Consolidate()
         {
-            foreach (var point in _navMap)
+            foreach (var point in NavMap)
             {
                 point.RemoveDeadEnds();
             }
 
-            var points = _navMap.FindAll(x => (string.IsNullOrEmpty(x.Name)));
+            var points = NavMap.FindAll(x => (string.IsNullOrEmpty(x.Name)));
             foreach (var navPoint in points)
             {
                 if (navPoint.SubPoints.Count == 0)
                 {
-                    _navMap.Remove(navPoint);
+                    NavMap.Remove(navPoint);
                 }
             }
         }

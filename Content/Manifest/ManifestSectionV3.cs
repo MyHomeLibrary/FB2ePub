@@ -6,8 +6,6 @@ namespace EPubLibrary.Content.Manifest
 {
     internal class ManifestSectionV3 : List<ManifestItemV3>
     {
-        protected readonly XNamespace OpfNameSpace = @"http://www.idpf.org/2007/opf";
-
         private V3Standard _standard;
 
         public ManifestSectionV3(V3Standard standard)
@@ -17,11 +15,11 @@ namespace EPubLibrary.Content.Manifest
 
         public XElement GenerateManifestElement()
         {
-            var manifestElement = new XElement(OpfNameSpace + "manifest");
+            var manifestElement = new XElement(EPubNamespaces.OpfNameSpace + "manifest");
 
             foreach (var manifestItem in this)
             {
-                var tocElement = new XElement(OpfNameSpace + "item");
+                var tocElement = new XElement(EPubNamespaces.OpfNameSpace + "item");
                 tocElement.Add(new XAttribute("id", manifestItem.ID));
                 tocElement.Add(new XAttribute("href", manifestItem.HRef));
                 tocElement.Add(new XAttribute("media-type", manifestItem.MediaType.GetAsSerializableString()));

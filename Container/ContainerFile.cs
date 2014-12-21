@@ -24,12 +24,9 @@ namespace EPubLibrary.Container
 
         public void Write(Stream s)
         {
-            XDocument metaDataDocument = new XDocument();
+            var metaDataDocument = new XDocument();
             FillMetaDataDocument(metaDataDocument);
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.CloseOutput = false;
-            settings.Encoding = Encoding.UTF8;
-            settings.Indent = true;
+            var settings = new XmlWriterSettings {CloseOutput = false, Encoding = Encoding.UTF8, Indent = true};
             using (var writer = XmlWriter.Create(s, settings))
             {
                 metaDataDocument.WriteTo(writer);
@@ -39,10 +36,10 @@ namespace EPubLibrary.Container
 
         private void FillMetaDataDocument(XDocument document)
         {
-            XElement containerElement = new XElement(_localNameSpace + "container");
+            var containerElement = new XElement(_localNameSpace + "container");
             containerElement.Add(new XAttribute("version", "1.0"));
-            XElement rootFilesElement = new XElement(_localNameSpace + "rootfiles");
-            XElement rootFileElement = new XElement(_localNameSpace + "rootfile");
+            var rootFilesElement = new XElement(_localNameSpace + "rootfiles");
+            var rootFileElement = new XElement(_localNameSpace + "rootfile");
             rootFileElement.Add(new XAttribute("full-path", ContentFilePath.PathInEPUB.GetRelativePath(EPubDataRoot,FlatStructure))); // can be more then one in theory in v3
             rootFileElement.Add(new XAttribute("media-type", @"application/oebps-package+xml"));
             rootFilesElement.Add(rootFileElement);

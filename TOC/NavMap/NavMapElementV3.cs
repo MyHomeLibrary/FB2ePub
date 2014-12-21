@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace EPubLibrary.TOC.NavMap
@@ -9,7 +8,7 @@ namespace EPubLibrary.TOC.NavMap
     public enum NavigationTableType
     {
         TOC,
-        TOC_Brief,
+        TOCBrief,
         Landmarks,
         LOA,
         LOI,
@@ -41,21 +40,18 @@ namespace EPubLibrary.TOC.NavMap
 
         public XElement GenerateXMLMap()
         {
-            XNamespace ePubNamespace = @"http://www.idpf.org/2007/ops";
-
-            XElement navMap = new XElement(NavPointV3.xmlNamespace + "nav");
+            var navMap = new XElement(DaisyNamespaces.NCXNamespace + "nav");
             string typeAsString = TypeToString(_type);
-            navMap.Add(new XAttribute(ePubNamespace + "type", typeAsString));
+            navMap.Add(new XAttribute(EPubNamespaces.OpsNamespace + "type", typeAsString));
             navMap.Add(new XAttribute("id", typeAsString)); // use same as id
 
             if (!string.IsNullOrEmpty(NavHeading))
             {
-                XElement h1 = new XElement(NavPointV3.xmlNamespace + "h1");
-                h1.Value = NavHeading;
+                var h1 = new XElement(DaisyNamespaces.NCXNamespace + "h1") { Value = NavHeading };
                 navMap.Add(h1);              
             }
 
-            XElement subElements = new XElement(NavPointV3.xmlNamespace + "ol");
+            var subElements = new XElement(DaisyNamespaces.NCXNamespace + "ol");
             foreach (var point in this)
             {
                 XElement navXPoint = point.Generate();
@@ -71,7 +67,7 @@ namespace EPubLibrary.TOC.NavMap
             {
                 case NavigationTableType.TOC:
                     return "toc";
-                case NavigationTableType.TOC_Brief:
+                case NavigationTableType.TOCBrief:
                     return "toc-brief";
                 case NavigationTableType.Landmarks:
                     return "landmarks";

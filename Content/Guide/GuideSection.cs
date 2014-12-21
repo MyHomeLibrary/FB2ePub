@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace EPubLibrary.Content.Guide
 {
     public class GuideSection
     {
-        private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
-
         private readonly List<GuideElement> _content = new List<GuideElement>();
 
         public XElement GenerateGuide()
         {
-            XElement xGuide = new XElement(_opfNameSpace + "guide");
+            var xGuide = new XElement(EPubNamespaces.OpfNameSpace + "guide");
             foreach (var guideElement in _content)
             {
                 if (guideElement.IsValid())
                 {
-                    XElement xRef = new XElement(_opfNameSpace + "reference");
+                    var xRef = new XElement(EPubNamespaces.OpfNameSpace + "reference");
                     xRef.Add(new XAttribute("type",guideElement.GetTypeAsString()));
                     xRef.Add(new XAttribute("title",guideElement.Title));
                     xRef.Add(new XAttribute("href",guideElement.Link));
@@ -31,8 +26,7 @@ namespace EPubLibrary.Content.Guide
 
         public void AddGuideItem(string link, string title, GuideTypeEnum type)
         {
-            GuideElement element = new GuideElement { Link = link.Replace('\\', '/'), Title = title, Type = type };
-
+            var element = new GuideElement { Link = link.Replace('\\', '/'), Title = title, Type = type };
             _content.Add(element);
         }
 

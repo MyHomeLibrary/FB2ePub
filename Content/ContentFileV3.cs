@@ -20,9 +20,6 @@ namespace EPubLibrary.Content
     {
         public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
 
-        private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
-        private readonly XNamespace _fakeOpf = @"http://www.idpf.org/2007/xxx";
-
         private readonly V3Standard _standard;   
         private readonly ManifestSectionV3 _manifest;
         private readonly GuideSection _guide = new GuideSection();
@@ -61,39 +58,32 @@ namespace EPubLibrary.Content
 
         protected void AddPackageData(XDocument document)
         {
-            var packagedata = new XElement(_opfNameSpace + "package");
+            var packagedata = new XElement(EPubNamespaces.OpfNameSpace + "package");
             packagedata.Add(new XAttribute("version", GetEPubVersion()));
             // we use ID of the first identifier
             packagedata.Add(new XAttribute("unique-identifier", Title.Identifiers[0].IdentifierName));
-            packagedata.Add(new XAttribute("xmlns", _opfNameSpace.NamespaceName));
+            packagedata.Add(new XAttribute("xmlns", EPubNamespaces.OpfNameSpace.NamespaceName));
             packagedata.Add(new XAttribute(XNamespace.Xml + "lang",Title.Languages[0]));
             document.Add(packagedata);
         }
 
         protected void AddMetaDataToContentDocument(XElement document)
         {
-            var metadata = new XElement(_opfNameSpace + "metadata");
-            XNamespace dc = @"http://purl.org/dc/elements/1.1/";
-            XNamespace xsi = @"http://www.w3.org/2001/XMLSchema-instance";
-            XNamespace dcterms = @"http://purl.org/dc/terms/";
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "dc", dc.NamespaceName));
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi.NamespaceName));
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "dcterms", dcterms.NamespaceName));
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", _fakeOpf.NamespaceName));
-            //if (CalibreData != null)
-            //{
-            //    CalibreData.InjectNamespace(metadata);
-            //}
+            var metadata = new XElement(EPubNamespaces.OpfNameSpace + "metadata");
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "dc", PURLNamespaces.DCElements));
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "xsi", WWWNamespaces.XSI));
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "dcterms", PURLNamespaces.DCTerms));
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", EPubNamespaces.FakeOpf.NamespaceName));
 
             Onix5SchemaConverter source = null;
             foreach (var identifierItem in Title.Identifiers)
             {
                 var schemaConverter = new Onix5SchemaConverter(identifierItem);
-                var identifier = new XElement(dc + "identifier", schemaConverter.GetIdentifier());
+                var identifier = new XElement(PURLNamespaces.DCElements + "identifier", schemaConverter.GetIdentifier());
                 identifier.Add(new XAttribute("id", identifierItem.IdentifierName));
                 metadata.Add(identifier);
 
-                var metaRefine = new XElement(_fakeOpf + "meta", schemaConverter.GetIdentifierType());
+                var metaRefine = new XElement(EPubNamespaces.FakeOpf + "meta", schemaConverter.GetIdentifierType());
                 metaRefine.Add(new XAttribute("refines", "#" + identifierItem.IdentifierName));
                 metaRefine.Add(new XAttribute("property", "identifier-type"));
                 metaRefine.Add(new XAttribute("scheme", Onix5SchemaConverter.GetScheme()));
@@ -110,16 +100,16 @@ namespace EPubLibrary.Content
             foreach (var titleItem in Title.BookTitles)
             {
                 string idString = string.Format("t{0}",++titleIdCounter);
-                var titleElement = new XElement(dc + "title", titleItem.TitleName);
+                var titleElement = new XElement(PURLNamespaces.DCElements + "title", titleItem.TitleName);
                 titleElement.Add(new XAttribute("id",idString));
                 metadata.Add(titleElement);
 
-                var metaRefineType = new XElement(_fakeOpf + "meta",GetTitleType(titleItem));
+                var metaRefineType = new XElement(EPubNamespaces.FakeOpf + "meta",GetTitleType(titleItem));
                 metaRefineType.Add(new XAttribute("refines", "#" + idString));
                 metaRefineType.Add(new XAttribute("property", "title-type"));
                 metadata.Add(metaRefineType);
 
-                var metaRefineDisplay= new XElement(_fakeOpf + "meta", titleIdCounter);
+                var metaRefineDisplay= new XElement(EPubNamespaces.FakeOpf + "meta", titleIdCounter);
                 metaRefineDisplay.Add(new XAttribute("refines", "#" + idString));
                 metaRefineDisplay.Add(new XAttribute("property", "display-seq"));
                 metadata.Add(metaRefineDisplay);
@@ -128,7 +118,7 @@ namespace EPubLibrary.Content
 
             foreach (var languageItem in Title.Languages)
             {
-                var language = new XElement(dc + "language", languageItem);
+                var language = new XElement(PURLNamespaces.DCElements + "language", languageItem);
                 metadata.Add(language);
             }
 
@@ -140,11 +130,11 @@ namespace EPubLibrary.Content
                 if (!string.IsNullOrEmpty(creatorItem.PersonName))
                 {
                     string creatorId = string.Format("creator{0}", ++creatorCounter);
-                    var creator = new XElement(dc + "creator", creatorItem.PersonName);
+                    var creator = new XElement(PURLNamespaces.DCElements + "creator", creatorItem.PersonName);
                     creator.Add(new XAttribute("id", creatorId));
                     metadata.Add(creator);
 
-                    var metaRefineRole= new XElement(_fakeOpf + "meta",EPubRoles.ConvertEnumToAttribute(creatorItem.Role) );
+                    var metaRefineRole= new XElement(EPubNamespaces.FakeOpf + "meta",EPubRoles.ConvertEnumToAttribute(creatorItem.Role) );
                     metaRefineRole.Add(new XAttribute("refines", "#" + creatorId));
                     metaRefineRole.Add(new XAttribute("property", "role"));
                     metaRefineRole.Add(new XAttribute("scheme", "marc:relators"));
@@ -152,13 +142,13 @@ namespace EPubLibrary.Content
 
                     if (!string.IsNullOrEmpty(creatorItem.FileAs))
                     {
-                        var metaRefineFileAs= new XElement(_fakeOpf + "meta",creatorItem.FileAs );
+                        var metaRefineFileAs= new XElement(EPubNamespaces.FakeOpf + "meta",creatorItem.FileAs );
                         metaRefineFileAs.Add(new XAttribute("refines", "#" + creatorId));
                         metaRefineFileAs.Add(new XAttribute("property", "file-as"));
                         metadata.Add(metaRefineFileAs);
                     }
 
-                    var metaRefineDisplay = new XElement(_fakeOpf + "meta", creatorCounter);
+                    var metaRefineDisplay = new XElement(EPubNamespaces.FakeOpf + "meta", creatorCounter);
                     metaRefineDisplay.Add(new XAttribute("refines", "#" + creatorId));
                     metaRefineDisplay.Add(new XAttribute("property", "display-seq"));
                     metadata.Add(metaRefineDisplay);
@@ -172,12 +162,12 @@ namespace EPubLibrary.Content
                 if (!string.IsNullOrEmpty(contributorItem.PersonName))
                 {
                     string contributorId = string.Format("contributor{0}", ++contributorCounter);
-                    var contributor = new XElement(dc + "contributor", contributorItem.PersonName);
+                    var contributor = new XElement(PURLNamespaces.DCElements + "contributor", contributorItem.PersonName);
                     contributor.Add(new XAttribute("id", contributorId));
                     metadata.Add(contributor);
 
 
-                    var metaRefineRole = new XElement(_fakeOpf + "meta", EPubRoles.ConvertEnumToAttribute(contributorItem.Role));
+                    var metaRefineRole = new XElement(EPubNamespaces.FakeOpf + "meta", EPubRoles.ConvertEnumToAttribute(contributorItem.Role));
                     metaRefineRole.Add(new XAttribute("refines", "#" + contributorId));
                     metaRefineRole.Add(new XAttribute("property", "role"));
                     metaRefineRole.Add(new XAttribute("scheme", "marc:relators"));
@@ -186,13 +176,13 @@ namespace EPubLibrary.Content
 
                     if (!string.IsNullOrEmpty(contributorItem.FileAs))
                     {
-                        var metaRefineFileAs = new XElement(_fakeOpf + "meta", contributorItem.FileAs);
+                        var metaRefineFileAs = new XElement(EPubNamespaces.FakeOpf + "meta", contributorItem.FileAs);
                         metaRefineFileAs.Add(new XAttribute("refines", "#" + contributorId));
                         metaRefineFileAs.Add(new XAttribute("property", "file-as"));
                         metadata.Add(metaRefineFileAs);
                     }
 
-                    var metaRefineDisplay = new XElement(_fakeOpf + "meta", contributorCounter);
+                    var metaRefineDisplay = new XElement(EPubNamespaces.FakeOpf + "meta", contributorCounter);
                     metaRefineDisplay.Add(new XAttribute("refines", "#" + contributorId));
                     metaRefineDisplay.Add(new XAttribute("property", "display-seq"));
                     metadata.Add(metaRefineDisplay);
@@ -202,17 +192,17 @@ namespace EPubLibrary.Content
             if (CreatorSoftwareString != null)
             {
                 string contributorId = string.Format("contributor{0}", ++contributorCounter);
-                var maker = new XElement(dc + "contributor", CreatorSoftwareString);
+                var maker = new XElement(PURLNamespaces.DCElements + "contributor", CreatorSoftwareString);
                 maker.Add(new XAttribute("id", contributorId));
                 metadata.Add(maker);
 
-                var metaRefineRole = new XElement(_fakeOpf + "meta", EPubRoles.ConvertEnumToAttribute(RolesEnum.BookProducer));
+                var metaRefineRole = new XElement(EPubNamespaces.FakeOpf + "meta", EPubRoles.ConvertEnumToAttribute(RolesEnum.BookProducer));
                 metaRefineRole.Add(new XAttribute("refines", "#" + contributorId));
                 metaRefineRole.Add(new XAttribute("property", "role"));
                 metaRefineRole.Add(new XAttribute("scheme", "marc:relators"));
                 metadata.Add(metaRefineRole);
 
-                var metaRefineDisplay = new XElement(_fakeOpf + "meta", contributorCounter);
+                var metaRefineDisplay = new XElement(EPubNamespaces.FakeOpf + "meta", contributorCounter);
                 metaRefineDisplay.Add(new XAttribute("refines", "#" + contributorId));
                 metaRefineDisplay.Add(new XAttribute("property", "display-seq"));
                 metadata.Add(metaRefineDisplay);
@@ -223,7 +213,7 @@ namespace EPubLibrary.Content
             // date
             if (Title.DatePublished.HasValue)
             {
-                var xDate = new XElement(dc + "date", Title.DatePublished.Value.Year);
+                var xDate = new XElement(PURLNamespaces.DCElements + "date", Title.DatePublished.Value.Year);
                 metadata.Add(xDate);
             }
 
@@ -231,11 +221,11 @@ namespace EPubLibrary.Content
             // source
             if (source != null)
             {
-                var sourceElm = new XElement(dc + "source", source.GetIdentifier());
+                var sourceElm = new XElement(PURLNamespaces.DCElements + "source", source.GetIdentifier());
                 sourceElm.Add(new XAttribute("id","src_id"));
                 metadata.Add(sourceElm);
 
-                var metaRefine = new XElement(_fakeOpf + "meta", source.GetIdentifierType());
+                var metaRefine = new XElement(EPubNamespaces.FakeOpf + "meta", source.GetIdentifierType());
                 metaRefine.Add(new XAttribute("refines", "#" + "src_id"));
                 metaRefine.Add(new XAttribute("property", "identifier-type"));
                 metaRefine.Add(new XAttribute("scheme", Onix5SchemaConverter.GetScheme()));
@@ -247,7 +237,7 @@ namespace EPubLibrary.Content
             if (!string.IsNullOrEmpty(Title.Description))
             {
 
-                var publisher = new XElement(dc + "description", Title.Description);
+                var publisher = new XElement(PURLNamespaces.DCElements + "description", Title.Description);
                 if (Title.Languages.Count > 0 && !string.IsNullOrEmpty(Title.Languages[0]))
                 {
                     publisher.Add(new XAttribute(XNamespace.Xml + "lang", Title.Languages[0]));
@@ -255,7 +245,7 @@ namespace EPubLibrary.Content
                 publisher.Add(new XAttribute("id", "id_desc"));
                 metadata.Add(publisher);
 
-                var metaRefineDisplay = new XElement(_fakeOpf + "meta",1);
+                var metaRefineDisplay = new XElement(EPubNamespaces.FakeOpf + "meta",1);
                 metaRefineDisplay.Add(new XAttribute("refines", "#id_desc"));
                 metaRefineDisplay.Add(new XAttribute("property", "display-seq"));
                 metadata.Add(metaRefineDisplay);
@@ -266,7 +256,7 @@ namespace EPubLibrary.Content
             // publisher
             if (!string.IsNullOrEmpty(Title.Publisher.PublisherName))
             {
-                var publisher = new XElement(dc + "publisher", Title.Publisher.PublisherName);
+                var publisher = new XElement(PURLNamespaces.DCElements + "publisher", Title.Publisher.PublisherName);
                 if (!string.IsNullOrEmpty(Title.Publisher.Language))
                 {
                     publisher.Add(new XAttribute(XNamespace.Xml + "lang", Title.Publisher.Language));
@@ -282,7 +272,7 @@ namespace EPubLibrary.Content
                 if (!string.IsNullOrEmpty(subjectItem.SubjectInfo))
                 {
                     string subjectID = string.Format("subj_{0}", ++subjectCount);
-                    var subject = new XElement(dc + "subject", subjectItem.SubjectInfo);
+                    var subject = new XElement(PURLNamespaces.DCElements + "subject", subjectItem.SubjectInfo);
                     subject.Add(new XAttribute("id", subjectID));
                     if (!string.IsNullOrEmpty(subjectItem.Language))
                     {
@@ -290,7 +280,7 @@ namespace EPubLibrary.Content
                     }
                     metadata.Add(subject);
 
-                    var metaRefineDisplay = new XElement(_fakeOpf + "meta", subjectCount);
+                    var metaRefineDisplay = new XElement(EPubNamespaces.FakeOpf + "meta", subjectCount);
                     metaRefineDisplay.Add(new XAttribute("refines", "#" + subjectID));
                     metaRefineDisplay.Add(new XAttribute("property", "display-seq"));
                     metadata.Add(metaRefineDisplay);
@@ -303,7 +293,7 @@ namespace EPubLibrary.Content
             {
                 modifiedDate = Title.DataFileModification.Value.ToUniversalTime().ToString("s")+"Z";
             }
-            var metaModified = new XElement(_fakeOpf + "meta", modifiedDate);
+            var metaModified = new XElement(EPubNamespaces.FakeOpf + "meta", modifiedDate);
             metaModified.Add(new XAttribute("property", "dcterms:modified"));
             metadata.Add(metaModified);
 
@@ -316,19 +306,19 @@ namespace EPubLibrary.Content
                 foreach (var collection in Collections.CollectionMembers)
                 {
                     string collectionID = string.Format("collect_{0}",++collectionCounter);
-                    var metaBelongsTo = new XElement(_fakeOpf + "meta", collection.CollectionName);
+                    var metaBelongsTo = new XElement(EPubNamespaces.FakeOpf + "meta", collection.CollectionName);
                     metaBelongsTo.Add(new XAttribute("property", "belongs-to-collection"));
                     metaBelongsTo.Add(new XAttribute("id", collectionID));
                     metadata.Add(metaBelongsTo);
 
-                    var metaCollectionType = new XElement(_fakeOpf + "meta", CollectionMember.ToStringType(collection.Type));
+                    var metaCollectionType = new XElement(EPubNamespaces.FakeOpf + "meta", CollectionMember.ToStringType(collection.Type));
                     metaCollectionType.Add(new XAttribute("property", "collection-type"));
                     metaCollectionType.Add(new XAttribute("refines", "#" + collectionID));
                     metadata.Add(metaCollectionType);
 
                     if (collection.CollectionPosition.HasValue)
                     {
-                        var metaPosition = new XElement(_fakeOpf + "meta", collection.CollectionPosition.Value);
+                        var metaPosition = new XElement(EPubNamespaces.FakeOpf + "meta", collection.CollectionPosition.Value);
                         metaPosition.Add(new XAttribute("property", "group-position"));
                         metaPosition.Add(new XAttribute("refines", "#" + collectionID));
                         metadata.Add(metaPosition);
@@ -336,7 +326,7 @@ namespace EPubLibrary.Content
 
                     if (!string.IsNullOrEmpty(collection.CollectionUID))
                     {
-                        var metaUID = new XElement(_fakeOpf + "meta", collection.CollectionUID);
+                        var metaUID = new XElement(EPubNamespaces.FakeOpf + "meta", collection.CollectionUID);
                         metaUID.Add(new XAttribute("property", "dcterms:identifier"));
                         metaUID.Add(new XAttribute("refines", "#" + collectionID));
                         metadata.Add(metaUID);
@@ -353,7 +343,7 @@ namespace EPubLibrary.Content
             //if (!string.IsNullOrEmpty(CoverId))
             //{
             //    // <meta name="cover" content="cover.jpg"/>
-            //    var cover = new XElement(_fakeOpf + "meta",CoverId);
+            //    var cover = new XElement(EpubNamespaces.FakeOpf + "meta",CoverId);
             //    cover.Add(new XAttribute("property", "cover"));
             //    metadata.Add(cover);
             //}
@@ -419,25 +409,25 @@ namespace EPubLibrary.Content
             {
                return;
             }
-            var TOCItem = new ManifestItemV3
+            var tocItem = new ManifestItemV3
             {
                 HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), 
                 ID = "ncx", 
                 MediaType = EPubCoreMediaType.ApplicationNCX,
             };
-            _manifest.Add(TOCItem);
+            _manifest.Add(tocItem);
         }
 
         public void AddNavigationDocument(NavigationDocumentFile navigationDocument)
         {
-            var NAVitem = new ManifestItemV3
+            var navItem = new ManifestItemV3
             {
                 HRef = navigationDocument.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure),
                 ID = "nav",
                 MediaType = EPubCoreMediaType.ApplicationXhtmlXml,
                 Nav = true,
             };
-            _manifest.Add(NAVitem);
+            _manifest.Add(navItem);
         }
 
         public void AddImage(ImageOnStorage image)
@@ -497,7 +487,7 @@ namespace EPubLibrary.Content
             ms.Read(buffer, 0, buffer.Length);
             var encoding = new UTF8Encoding();
             string str = encoding.GetString(buffer);
-            str = str.Replace(_fakeOpf.NamespaceName, _opfNameSpace.NamespaceName);
+            str = str.Replace(EPubNamespaces.FakeOpf.NamespaceName, EPubNamespaces.OpfNameSpace.NamespaceName);
             return str;
         }
 

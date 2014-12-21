@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -10,11 +9,9 @@ namespace EPubLibrary.TOC.NavMap
 {
     public class NavPointV3
     {
-        private List<NavPointV3> subpoints = new List<NavPointV3>();
+        private readonly List<NavPointV3> _subpoints = new List<NavPointV3>();
 
-        internal static XNamespace xmlNamespace = @"http://www.w3.org/1999/xhtml";
-
-        public List<NavPointV3> SubPoints { get { return subpoints; } }
+        public List<NavPointV3> SubPoints { get { return _subpoints; } }
         public string Name { get; set; }
         public string Content { set; get; }
         public string Id { get; set; }
@@ -22,20 +19,20 @@ namespace EPubLibrary.TOC.NavMap
         public int GetDepth()
         {
             int depth = 1;
-            if (subpoints.Count > 0)
+            if (_subpoints.Count > 0)
             {
-                depth += subpoints.Max(x => x.GetDepth());
+                depth += _subpoints.Max(x => x.GetDepth());
             }
             return depth;
         }
 
         public List<NavPointV3> AllContent()
         {
-            List<NavPointV3> resList = new List<NavPointV3>();
+            var resList = new List<NavPointV3>();
 
-            resList.AddRange(subpoints);
+            resList.AddRange(_subpoints);
 
-            foreach (var subpoint in subpoints)
+            foreach (var subpoint in _subpoints)
             {
                 resList.AddRange(subpoint.AllContent());
             }
@@ -44,7 +41,7 @@ namespace EPubLibrary.TOC.NavMap
 
         internal void RemoveDeadEnds()
         {
-            List<NavPointV3> listToDelete = new List<NavPointV3>();
+            var listToDelete = new List<NavPointV3>();
             foreach (var point in SubPoints)
             {
                 if (point.SubPoints.Count == 0 && string.IsNullOrEmpty(point.Name))
@@ -64,10 +61,9 @@ namespace EPubLibrary.TOC.NavMap
 
         internal XElement Generate()
         {
-            XElement navXPoint = new XElement(xmlNamespace + "li");
+            var navXPoint = new XElement(WWWNamespaces.XHTML + "li");
             navXPoint.Add(new XAttribute("id", Id));
-            XElement link = new XElement(xmlNamespace + "a");
-            link.Value = Name;
+            var link = new XElement(WWWNamespaces.XHTML + "a") {Value = Name};
             link.Add(new XAttribute("href",Content));
             navXPoint.Add(link);
             //navXPoint.Add(new XAttribute("playOrder", pointnumber));
@@ -83,7 +79,7 @@ namespace EPubLibrary.TOC.NavMap
 
             if (SubPoints.Count > 0)
             {
-                XElement subElements = new XElement(xmlNamespace + "ol");
+                var subElements = new XElement(WWWNamespaces.XHTML + "ol");
                 foreach (var subPoint in SubPoints)
                 {
                     XElement navSubXPoint = subPoint.Generate();

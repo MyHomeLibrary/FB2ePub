@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace EPubLibrary.TOC
@@ -14,30 +11,29 @@ namespace EPubLibrary.TOC
             {
                 throw new NullReferenceException("ID need to be set first");
             }
-            XNamespace ncxNamespace = @"http://www.daisy.org/z3986/2005/ncx/";
-            XElement ncxElement = new XElement(ncxNamespace + "ncx");
+            var ncxElement = new XElement(DaisyNamespaces.NCXNamespace + "ncx");
             ncxElement.Add(new XAttribute("version", "2005-1"));
 
 
             // Add head block
-            XElement headElement = new XElement(ncxNamespace + "head");
+            var headElement = new XElement(DaisyNamespaces.NCXNamespace + "head");
 
-            XElement metaID = new XElement(ncxNamespace + "meta");
+            var metaID = new XElement(DaisyNamespaces.NCXNamespace + "meta");
             metaID.Add(new XAttribute("name", "dtb:uid"));
             metaID.Add(new XAttribute("content", ID));
             headElement.Add(metaID);
 
-            XElement metaDepth = new XElement(ncxNamespace + "meta");
+            var metaDepth = new XElement(DaisyNamespaces.NCXNamespace + "meta");
             metaDepth.Add(new XAttribute("name", "dtb:depth"));
-            metaDepth.Add(new XAttribute("content", _navMap.GetDepth()));
+            metaDepth.Add(new XAttribute("content", NavMap.GetDepth()));
             headElement.Add(metaDepth);
 
-            XElement metaTotalPageCount = new XElement(ncxNamespace + "meta");
+            var metaTotalPageCount = new XElement(DaisyNamespaces.NCXNamespace + "meta");
             metaTotalPageCount.Add(new XAttribute("name", "dtb:totalPageCount"));
             metaTotalPageCount.Add(new XAttribute("content", "0"));
             headElement.Add(metaTotalPageCount);
 
-            XElement metaMaxPageNumber = new XElement(ncxNamespace + "meta");
+            var metaMaxPageNumber = new XElement(DaisyNamespaces.NCXNamespace + "meta");
             metaMaxPageNumber.Add(new XAttribute("name", "dtb:maxPageNumber"));
             metaMaxPageNumber.Add(new XAttribute("content", "0"));
             headElement.Add(metaMaxPageNumber);
@@ -45,12 +41,12 @@ namespace EPubLibrary.TOC
             ncxElement.Add(headElement);
 
             // Add DocTitle block
-            XElement docTitleElement = new XElement(ncxNamespace + "docTitle");
-            XElement textElement = new XElement(ncxNamespace + "text", Title);
+            var docTitleElement = new XElement(DaisyNamespaces.NCXNamespace + "docTitle");
+            var textElement = new XElement(DaisyNamespaces.NCXNamespace + "text", Title);
             docTitleElement.Add(textElement);
             ncxElement.Add(docTitleElement);
 
-            ncxElement.Add(_navMap.GenerateXMLMap());
+            ncxElement.Add(NavMap.GenerateXMLMap());
 
             // external namespaces not allowed in V3
             //document.Add(new XDocumentType("ncx", @"-//NISO//DTD ncx 2005-1//EN", @"http://www.daisy.org/z3986/2005/ncx-2005-1.dtd", null));

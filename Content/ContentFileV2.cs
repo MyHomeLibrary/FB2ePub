@@ -19,10 +19,6 @@ namespace EPubLibrary.Content
     {
         public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
 
-        private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
-        private readonly XNamespace _fakeOpf = @"http://www.idpf.org/2007/xxx";
-
-
         private readonly GuideSection _guide = new GuideSection();
 
         private readonly SpineSectionV2 _spine = new SpineSectionV2();
@@ -70,11 +66,11 @@ namespace EPubLibrary.Content
 
         protected virtual void AddPackageData(XDocument document)
         {
-            var packagedata = new XElement(_opfNameSpace + "package");
+            var packagedata = new XElement(EPubNamespaces.OpfNameSpace + "package");
             packagedata.Add(new XAttribute("version", GetEPubVersion()));
             // we use ID of the first identifier
             packagedata.Add(new XAttribute("unique-identifier", Title.Identifiers[0].IdentifierName));
-            packagedata.Add(new XAttribute("xmlns", _opfNameSpace.NamespaceName));
+            packagedata.Add(new XAttribute("xmlns", EPubNamespaces.OpfNameSpace.NamespaceName));
             document.Add(packagedata);
         }
 
@@ -101,14 +97,11 @@ namespace EPubLibrary.Content
 
         protected virtual void AddMetaDataToContentDocument(XElement document)
         {
-            var metadata = new XElement(_opfNameSpace + "metadata");
-            XNamespace dc = @"http://purl.org/dc/elements/1.1/";
-            XNamespace xsi = @"http://www.w3.org/2001/XMLSchema-instance";
-            XNamespace dcterms = @"http://purl.org/dc/terms/";
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "dc", dc.NamespaceName));
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "xsi", xsi.NamespaceName));
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "dcterms", dcterms.NamespaceName));
-            metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", _fakeOpf.NamespaceName));
+            var metadata = new XElement(EPubNamespaces.OpfNameSpace + "metadata");
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "dc", PURLNamespaces.DCElements.NamespaceName));
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "xsi", WWWNamespaces.XSI.NamespaceName));
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "dcterms", PURLNamespaces.DCTerms.NamespaceName));
+            metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", EPubNamespaces.FakeOpf.NamespaceName));
             if (CalibreData!= null)
             {
                 CalibreData.InjectNamespace(metadata);
@@ -116,7 +109,7 @@ namespace EPubLibrary.Content
 
             foreach (var titleItem in Title.BookTitles)
             {
-                var titleElement = new XElement(dc + "title", titleItem.TitleName);
+                var titleElement = new XElement(PURLNamespaces.DCElements + "title", titleItem.TitleName);
                 if (!string.IsNullOrEmpty(titleItem.Language))
                 {
                     // need to add writing language in "xml:lang — use RFC-3066 format"
@@ -127,23 +120,23 @@ namespace EPubLibrary.Content
 
             foreach (var languageItem in Title.Languages)
             {
-                var language = new XElement(dc + "language", languageItem);
-                language.Add(new XAttribute(xsi + "type", "dcterms:RFC3066"));
+                var language = new XElement(PURLNamespaces.DCElements + "language", languageItem);
+                language.Add(new XAttribute(WWWNamespaces.XSI + "type", "dcterms:RFC3066"));
                 metadata.Add(language);
             }
 
             foreach (var identifierItem in Title.Identifiers)
             {
-                var identifier = new XElement(dc + "identifier", identifierItem.ID);
+                var identifier = new XElement(PURLNamespaces.DCElements + "identifier", identifierItem.ID);
                 identifier.Add(new XAttribute("id", identifierItem.IdentifierName));
-                identifier.Add(new XAttribute(_fakeOpf + "scheme", identifierItem.Scheme));
+                identifier.Add(new XAttribute(EPubNamespaces.FakeOpf + "scheme", identifierItem.Scheme));
                 metadata.Add(identifier);
             }
 
             if ( Title.DatePublished.HasValue)
             {
-                var xDate = new XElement(dc + "date",Title.DatePublished.Value.Year);
-                xDate.Add(new XAttribute(_fakeOpf + "event", "original-publication"));
+                var xDate = new XElement(PURLNamespaces.DCElements + "date", Title.DatePublished.Value.Year);
+                xDate.Add(new XAttribute(EPubNamespaces.FakeOpf + "event", "original-publication"));
                 metadata.Add(xDate);
             }
 
@@ -151,11 +144,11 @@ namespace EPubLibrary.Content
             {
                 if (!string.IsNullOrEmpty(creatorItem.PersonName))
                 {
-                    var creator = new XElement(dc + "creator", creatorItem.PersonName);
-                    creator.Add(new XAttribute(_fakeOpf + "role", EPubRoles.ConvertEnumToAttribute(creatorItem.Role)));
+                    var creator = new XElement(PURLNamespaces.DCElements + "creator", creatorItem.PersonName);
+                    creator.Add(new XAttribute(EPubNamespaces.FakeOpf + "role", EPubRoles.ConvertEnumToAttribute(creatorItem.Role)));
                     if (!string.IsNullOrEmpty(creatorItem.FileAs))
                     {
-                        creator.Add(new XAttribute(_fakeOpf + "file-as",creatorItem.FileAs));
+                        creator.Add(new XAttribute(EPubNamespaces.FakeOpf + "file-as",creatorItem.FileAs));
                     }
                     if (!string.IsNullOrEmpty(creatorItem.Language))
                     {
@@ -170,11 +163,11 @@ namespace EPubLibrary.Content
             {
                 if (!string.IsNullOrEmpty(contributorItem.PersonName))
                 {
-                    var contributor = new XElement(dc + "contributor", contributorItem.PersonName);
-                    contributor.Add(new XAttribute(_fakeOpf + "role", EPubRoles.ConvertEnumToAttribute(contributorItem.Role)));
+                    var contributor = new XElement(PURLNamespaces.DCElements + "contributor", contributorItem.PersonName);
+                    contributor.Add(new XAttribute(EPubNamespaces.FakeOpf + "role", EPubRoles.ConvertEnumToAttribute(contributorItem.Role)));
                     if (!string.IsNullOrEmpty(contributorItem.FileAs))
                     {
-                        contributor.Add(new XAttribute(_fakeOpf + "file-as", contributorItem.FileAs));
+                        contributor.Add(new XAttribute(EPubNamespaces.FakeOpf + "file-as", contributorItem.FileAs));
                     }
                     if (!string.IsNullOrEmpty(contributorItem.Language))
                     {
@@ -186,15 +179,15 @@ namespace EPubLibrary.Content
             }
             if (CreatorSoftwareString != null)
             {
-                var maker = new XElement(dc + "contributor", CreatorSoftwareString);
-                maker.Add(new XAttribute(_fakeOpf + "role",
+                var maker = new XElement(PURLNamespaces.DCElements + "contributor", CreatorSoftwareString);
+                maker.Add(new XAttribute(EPubNamespaces.FakeOpf + "role",
                     EPubRoles.ConvertEnumToAttribute(RolesEnum.BookProducer)));
                 metadata.Add(maker);
             }
 
             if (!string.IsNullOrEmpty(Title.Publisher.PublisherName))
             {
-                var publisher = new XElement(dc + "publisher", Title.Publisher.PublisherName);
+                var publisher = new XElement(PURLNamespaces.DCElements + "publisher", Title.Publisher.PublisherName);
                 if (!string.IsNullOrEmpty(Title.Publisher.Language))
                 {
                     // need to add writing language in "xml:lang — use RFC-3066 format"
@@ -206,7 +199,7 @@ namespace EPubLibrary.Content
             if (!string.IsNullOrEmpty(Title.Description))
             {
 
-                var publisher = new XElement(dc + "description", Title.Description);
+                var publisher = new XElement(PURLNamespaces.DCElements + "description", Title.Description);
                 metadata.Add(publisher);                
             }
 
@@ -215,7 +208,7 @@ namespace EPubLibrary.Content
             {
                 if (!string.IsNullOrEmpty(subjectItem.SubjectInfo))
                 {
-                    var contributor = new XElement(dc + "subject", subjectItem.SubjectInfo);
+                    var contributor = new XElement(PURLNamespaces.DCElements + "subject", subjectItem.SubjectInfo);
                     if (!string.IsNullOrEmpty(subjectItem.Language))
                     {
                         // need to add writing language in "xml:lang — use RFC-3066 format"
@@ -231,7 +224,7 @@ namespace EPubLibrary.Content
             if (!string.IsNullOrEmpty(CoverId))
             {
                 // <meta name="cover" content="cover.jpg"/>
-                var cover = new XElement(_opfNameSpace + "meta");
+                var cover = new XElement(EPubNamespaces.OpfNameSpace + "meta");
                 cover.Add(new XAttribute("name","cover"));
                 cover.Add(new XAttribute("content", CoverId));
                 metadata.Add(cover);
@@ -299,7 +292,7 @@ namespace EPubLibrary.Content
             ms.Read(buffer, 0, buffer.Length);
             var encoding = new UTF8Encoding();
             string str = encoding.GetString(buffer);
-            str = str.Replace(_fakeOpf.NamespaceName, _opfNameSpace.NamespaceName);
+            str = str.Replace(EPubNamespaces.FakeOpf.NamespaceName, EPubNamespaces.OpfNameSpace.NamespaceName);
             return str;
         }
 
@@ -319,8 +312,8 @@ namespace EPubLibrary.Content
 
         public void AddTOC()
         {
-            var TOCItem = new ManifestItemV2 { HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), ID = "ncx", MediaType = EPubCoreMediaType.ApplicationNCX };
-            _manifest.Add(TOCItem);                     
+            var tocItem = new ManifestItemV2 { HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), ID = "ncx", MediaType = EPubCoreMediaType.ApplicationNCX };
+            _manifest.Add(tocItem);                     
         }
 
         public void AddImage(ImageOnStorage image)

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace EPubLibrary.TOC.NavMap
@@ -22,7 +19,7 @@ namespace EPubLibrary.TOC.NavMap
 
         public XElement GenerateXMLMap()
         {
-            XElement navMap = new XElement(NavPoint.ncxNamespace + "navMap");
+            var navMap = new XElement(DaisyNamespaces.NCXNamespace + "navMap");
             int pointnumber = 1;
             foreach (var point in this)
             {

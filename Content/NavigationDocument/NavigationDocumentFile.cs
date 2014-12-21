@@ -17,7 +17,7 @@ namespace EPubLibrary.Content.NavigationDocument
     public class NavigationDocumentFile : IEPubPath
     {
         private readonly List<StyleElement> _styles = new List<StyleElement>();
-        protected readonly NavMapElementV3 _tocNav = new NavMapElementV3
+        private readonly NavMapElementV3 _tocNav = new NavMapElementV3
         {
             Type = NavigationTableType.TOC,
             NavHeading = "Table of Contents",
@@ -48,12 +48,9 @@ namespace EPubLibrary.Content.NavigationDocument
         /// <param name="s"></param>
         public void Write(Stream s)
         {
-            XDocument contentDocument = new XDocument();
+            var contentDocument = new XDocument();
             CreateNAVDocument(contentDocument);
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.CloseOutput = false;
-            settings.Encoding = Encoding.UTF8;
-            settings.Indent = true;
+            var settings = new XmlWriterSettings {CloseOutput = false, Encoding = Encoding.UTF8, Indent = true};
             using (var writer = XmlWriter.Create(s, settings))
             {
                 contentDocument.WriteTo(writer);
@@ -64,19 +61,16 @@ namespace EPubLibrary.Content.NavigationDocument
 
         private void CreateNAVDocument(XDocument contentDocument)
         {
-            XNamespace xhtmlNamespace = @"http://www.w3.org/1999/xhtml";
-            XNamespace ePubNamespace = @"http://www.idpf.org/2007/ops";
-
-            var html = new XElement(xhtmlNamespace + "html");
-            html.Add(new XAttribute(XNamespace.Xmlns + "epub", ePubNamespace));
+            var html = new XElement(WWWNamespaces.XHTML + "html");
+            html.Add(new XAttribute(XNamespace.Xmlns + "epub", EPubNamespaces.OpsNamespace));
             contentDocument.Add(html);
 
-            var head = new XElement(xhtmlNamespace + "head");
+            var head = new XElement(WWWNamespaces.XHTML + "head");
             html.Add(head);
-            var meta = new XElement(xhtmlNamespace + "meta");
+            var meta = new XElement(WWWNamespaces.XHTML + "meta");
             meta.Add(new XAttribute("charset","utf-8"));
             head.Add(meta);
-            var title = new XElement(xhtmlNamespace + "title");
+            var title = new XElement(WWWNamespaces.XHTML + "title");
             if (string.IsNullOrEmpty(PageTitle))
             {
                 title.Value = "Table of Contents";
@@ -95,10 +89,10 @@ namespace EPubLibrary.Content.NavigationDocument
                 head.Add(cssStyleSheet.Generate());
             }
 
-            XElement body = new XElement(xhtmlNamespace + "body");
+            var body = new XElement(WWWNamespaces.XHTML + "body");
             html.Add(body);
 
-            XElement navElement = _tocNav.GenerateXMLMap();
+            var navElement = _tocNav.GenerateXMLMap();
             body.Add(navElement);          
         }
 
@@ -108,7 +102,7 @@ namespace EPubLibrary.Content.NavigationDocument
             {
                 return;
             }
-            NavPointV3 bookPoint = new NavPointV3 { Content = content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure), 
+            var bookPoint = new NavPointV3 { Content = content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure), 
                 Name = name,
             Id =  content.Id};
             _tocNav.Add(bookPoint);

@@ -6,7 +6,6 @@ namespace EPubLibrary.Content.Spine
 {
     class SpineSectionV3 : List<SpineItemV3>
     {
-        private readonly XNamespace _opfNameSpace = @"http://www.idpf.org/2007/opf";
         private V3Standard _standard;
 
         public SpineSectionV3(V3Standard standard)
@@ -18,7 +17,7 @@ namespace EPubLibrary.Content.Spine
 
         public XElement GenerateSpineElement()
         {
-            var spineElement = new XElement(_opfNameSpace + "spine");
+            var spineElement = new XElement(EPubNamespaces.OpfNameSpace + "spine");
             if (GenerateCompatibleTOC)
             {
                 spineElement.Add(new XAttribute("toc", "ncx"));
@@ -26,7 +25,7 @@ namespace EPubLibrary.Content.Spine
 
             foreach (var spineItem in this)
             {
-                var itemref = new XElement(_opfNameSpace + "itemref");
+                var itemref = new XElement(EPubNamespaces.OpfNameSpace + "itemref");
                 itemref.Add(new XAttribute("idref", spineItem.Name));
                 if (!spineItem.Linear) // true by default so no need to set
                 {

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
@@ -10,31 +7,29 @@ namespace EPubLibrary.TOC.NavMap
 {
     public class NavPoint 
     {
-        private List<NavPoint> subpoints = new List<NavPoint>();
+        private readonly List<NavPoint> _subpoints = new List<NavPoint>();
         
-        internal static XNamespace ncxNamespace = @"http://www.daisy.org/z3986/2005/ncx/";
-
-        public List<NavPoint> SubPoints { get { return subpoints; } }
+        public List<NavPoint> SubPoints { get { return _subpoints; } }
         public string Name { get; set; }
         public string Content { set; get; }
 
         public int GetDepth()
         {
             int depth = 1;
-            if (subpoints.Count > 0)
+            if (_subpoints.Count > 0)
             {   
-                depth += subpoints.Max(x => x.GetDepth());
+                depth += _subpoints.Max(x => x.GetDepth());
             }
             return depth;
         }
 
         public List<NavPoint> AllContent()
         {
-            List<NavPoint> resList = new List<NavPoint>();
+            var resList = new List<NavPoint>();
 
-            resList.AddRange(subpoints);
+            resList.AddRange(_subpoints);
 
-            foreach (var subpoint in subpoints)
+            foreach (var subpoint in _subpoints)
             {           
                 resList.AddRange(subpoint.AllContent());
             }
@@ -43,7 +38,7 @@ namespace EPubLibrary.TOC.NavMap
 
         internal void RemoveDeadEnds()
         {
-            List<NavPoint> listToDelete = new List<NavPoint>();
+            var listToDelete = new List<NavPoint>();
             foreach (var point in SubPoints)
             {
                 if (point.SubPoints.Count == 0 && string.IsNullOrEmpty(point.Name))
@@ -63,16 +58,16 @@ namespace EPubLibrary.TOC.NavMap
 
         internal XElement Generate(ref int pointnumber)
         {
-            XElement navXPoint = new XElement(ncxNamespace + "navPoint");
+            var navXPoint = new XElement(DaisyNamespaces.NCXNamespace + "navPoint");
             navXPoint.Add(new XAttribute("id", string.Format("NavPoint-{0}", pointnumber)));
             navXPoint.Add(new XAttribute("playOrder", pointnumber));
 
-            XElement navLabel = new XElement(ncxNamespace + "navLabel");
-            XElement text = new XElement(ncxNamespace + "text", EnsureValid(Name));
+            var navLabel = new XElement(DaisyNamespaces.NCXNamespace + "navLabel");
+            var text = new XElement(DaisyNamespaces.NCXNamespace + "text", EnsureValid(Name));
             navLabel.Add(text);
             navXPoint.Add(navLabel);
 
-            XElement content = new XElement(ncxNamespace + "content");
+            var content = new XElement(DaisyNamespaces.NCXNamespace + "content");
             content.Add(new XAttribute("src", Content));
             navXPoint.Add(content);
 
@@ -91,11 +86,11 @@ namespace EPubLibrary.TOC.NavMap
         /// Makes sure that the Name does not contains invalid 
         /// (control) characters that might confuse the reader (ADE etc)
         /// </summary>
-        /// <param name="Name"></param>
+        /// <param name="name"></param>
         /// <returns></returns>
-        private static string EnsureValid(string Name)
+        private static string EnsureValid(string name)
         {
-            return Regex.Replace(Name, @"[\x00-\x1f]", string.Empty).Trim();
+            return Regex.Replace(name, @"[\x00-\x1f]", string.Empty).Trim();
         }
     }
 }

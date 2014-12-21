@@ -145,6 +145,7 @@
     <Compile Include="EPubCollections.cs" />
     <Compile Include="EPubFileV2.cs" />
     <Compile Include="EPubFileV3.cs" />
+    <Compile Include="EpubNamespaces.cs" />
     <Compile Include="IEpubFile.cs" />
     <Compile Include="PathUtils\ePubInternalPath.cs" />
     <Compile Include="EPubRoles.cs" />
