@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using System;
+using EPubLibrary.Content.Bindings;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.Content.Manifest;
 using EPubLibrary.Content.NavigationDocument;
@@ -23,6 +24,7 @@ namespace EPubLibrary.Content
         private readonly V3Standard _standard;   
         private readonly ManifestSectionV3 _manifest;
         private readonly GuideSection _guide = new GuideSection();
+        private readonly BindingsV3 _bindings = new BindingsV3();
 
         private readonly SpineSectionV3 _spine;
 
@@ -503,6 +505,16 @@ namespace EPubLibrary.Content
             AddManifestToContentDocument(document.Root);
             AddSpineToContentDocument(document.Root);
             AddGuideToContentDocument(document.Root);
+            AddBindingsToContentDocument(document.Root);
+        }
+
+        private void AddBindingsToContentDocument(XElement document)
+        {
+            XElement bindingsElement = _bindings.GenerateBindingsElement();
+            if (bindingsElement != null)
+            {
+                document.Add(bindingsElement);
+            }
         }
 
         private void AddManifestToContentDocument(XElement document)

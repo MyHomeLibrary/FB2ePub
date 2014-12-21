@@ -1,17 +1,29 @@
-﻿using System.Collections.Generic;
-
-namespace EPubLibrary.Content.Manifest
+﻿namespace EPubLibrary.Content.Manifest
 {
     class ManifestItemV3
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string ID { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string HRef { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public EPubCoreMediaType MediaType { get; set; }
 
         // the following are supported only in V3
         public string Fallback { get; set; }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string MediaOverlay { get; set; }
 
 

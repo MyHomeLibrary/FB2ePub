@@ -127,6 +127,8 @@
     <Compile Include="AppleEPubV2Extensions\AppleTargetPlatform.cs" />
     <Compile Include="Container\ContainerFile.cs" />
     <Compile Include="Container\ContainerFileV3.cs" />
+    <Compile Include="Content\Bindings\BindingsMediaTypeV3.cs" />
+    <Compile Include="Content\Bindings\BindingsV3.cs" />
     <Compile Include="Content\CalibreMetadata\CalibreMetadata.cs" />
     <Compile Include="Content\ContentFileV2.cs" />
     <Compile Include="Content\ContentFileV3.cs" />

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-
-namespace EPubLibrary.Content.Spine
+﻿namespace EPubLibrary.Content.Spine
 {
     /// <summary>
     /// Represents a spine item in a V3 spine section of the content document
@@ -66,6 +60,7 @@ namespace EPubLibrary.Content.Spine
 
         /// <summary>
         /// Specifies whether the referenced content is primary.
+        /// The linear attribute may be used to enable Reading Systems to distinguish presentation of body content from supplementary content which might be, for example, presented in a popup window or omitted from an aural rendering. Reading Systems should provide Users the ability to control whether non-linear content is rendered in the default reading order.
         /// </summary>
         public bool Linear
         {
