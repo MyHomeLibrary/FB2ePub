@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using System.Xml.Linq;
 
 namespace EPubLibrary.Content.Spine
@@ -49,52 +48,17 @@ namespace EPubLibrary.Content.Spine
                 spineElement.Add(new XAttribute("id", ID));
             }
 
-            AddPageProgressionDirectionm(spineElement);
+            AddPageProgressionDirection(spineElement);
 
             foreach (var spineItem in this)
             {
-                var itemref = new XElement(EPubNamespaces.OpfNameSpace + "itemref");
-                itemref.Add(new XAttribute("idref", spineItem.Name));
-                if (!spineItem.Linear) // true by default so no need to set
-                {
-                    itemref.Add(new XAttribute("linear", "false"));
-                }
-                if (!string.IsNullOrEmpty(spineItem.ID))
-                {
-                    itemref.Add(new XAttribute("id", spineItem.ID));
-                }
-                var properties = new List<string>();
-                AddAlignXCenter(spineItem,properties);
-                AddFlowOptions(spineItem, properties);
-                AddLayoutOptions(spineItem, properties);
-                AddPageOrientationOptions(spineItem, properties);
-                AddPageSpreadOptions(spineItem, properties);
-                AddSpreadOrientationOptions(spineItem, properties);
-                if (properties.Count > 0)
-                {
-                    var sb = new StringBuilder();
-                    bool first = true;
-                    foreach (var property in properties)
-                    {
-                        if (!first)
-                        {
-                            sb.AppendFormat(" {0}", property);
-                        }
-                        else
-                        {
-                            sb.AppendFormat("{0}", property);
-                            first = false;
-                        }
-                    }
-                    itemref.Add(new XAttribute("properties", sb.ToString()));
-                  
-                }
+                XElement itemref = spineItem.GenerateElement();
                 spineElement.Add(itemref);
             }
             return spineElement;
         }
 
-        private void AddPageProgressionDirectionm(XElement spineElement)
+        private void AddPageProgressionDirection(XElement spineElement)
         {
             switch (PageProgressionDirection)
             {
@@ -107,100 +71,6 @@ namespace EPubLibrary.Content.Spine
                 case PageProgressionDirectionOptions.RightToLeft:
                     spineElement.Add(new XAttribute("page-progression-direction", "rtl")); 
                     break;
-            }
-        }
-
-        private void AddPageSpreadOptions(SpineItemV3 spineItem, List<string> properties)
-        {
-            switch (spineItem.PageSpread)
-            {
-                case SpineItemV3.PageSpreadOptions.Center:
-                    properties.Add("rendition:page-spread-center");
-                    break;
-                case SpineItemV3.PageSpreadOptions.Left:
-                    properties.Add("page-spread-left");
-                    break;
-                case SpineItemV3.PageSpreadOptions.Right:
-                    properties.Add("page-spread-right");
-                    break;
-            }
-        }
-
-        private void AddSpreadOrientationOptions(SpineItemV3 spineItem, List<string> properties)
-        {
-            switch (spineItem.SpreadOrientation)
-            {
-                case SpineItemV3.SpreadOrientationOptions.Auto:
-                    properties.Add("rendition:spread-auto");
-                    break;
-                case SpineItemV3.SpreadOrientationOptions.Both:
-                    properties.Add("rendition:spread-both");
-                    break;
-                case SpineItemV3.SpreadOrientationOptions.Landscape:
-                    properties.Add("rendition:spread-landscape");
-                    break;
-                case SpineItemV3.SpreadOrientationOptions.None:
-                    properties.Add("rendition:spread-none");
-                    break;
-                case SpineItemV3.SpreadOrientationOptions.Portrait:
-                    properties.Add("rendition:spread-portrait");
-                    break;
-            }
-        }
-
-        private void AddPageOrientationOptions(SpineItemV3 spineItem, List<string> properties)
-        {
-            switch (spineItem.PageOrientation)
-            {
-                case SpineItemV3.OrientationOptions.Auto:
-                    properties.Add("rendition:orientation-auto");
-                    break;
-                case SpineItemV3.OrientationOptions.Landscape:
-                    properties.Add("rendition:orientation-landscape");
-                    break;
-                case SpineItemV3.OrientationOptions.Portrait:
-                    properties.Add("rendition:orientation-portrait");
-                    break;
-            }
-        }
-
-        private void AddLayoutOptions(SpineItemV3 spineItem, List<string> properties)
-        {
-            switch (spineItem.Layout)
-            {
-                case SpineItemV3.LayoutOptions.PrePaginated:
-                    properties.Add("rendition:layout-pre-paginated");
-                    break;
-                case SpineItemV3.LayoutOptions.Reflowable:
-                    properties.Add("rendition:layout-reflowable");
-                    break;
-            }
-        }
-
-        private void AddFlowOptions(SpineItemV3 spineItem, List<string> properties)
-        {
-            switch (spineItem.Flow)
-            {
-                case SpineItemV3.FlowOptions.Auto:
-                    properties.Add("rendition:flow-auto");
-                    break;
-                case SpineItemV3.FlowOptions.Paginated:
-                    properties.Add("rendition:flow-paginated");
-                    break;
-                case SpineItemV3.FlowOptions.ScrolledContinuous:
-                    properties.Add("rendition:flow-scrolled-continuous");
-                    break;
-                case SpineItemV3.FlowOptions.ScrolledDoc:
-                    properties.Add("rendition:flow-scrolled-doc");
-                    break;
-            }
-        }
-
-        private void AddAlignXCenter(SpineItemV3 spineItem, List<string> properties)
-        {
-            if (spineItem.AlignXCenter)
-            {
-                properties.Add("rendition:align-x-center");
             }
         }
 

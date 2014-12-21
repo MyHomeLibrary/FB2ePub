@@ -1,4 +1,8 @@
-﻿namespace EPubLibrary.Content.Spine
+﻿using System.Collections.Generic;
+using System.Text;
+using System.Xml.Linq;
+
+namespace EPubLibrary.Content.Spine
 {
     /// <summary>
     /// Represents a spine item in a V3 spine section of the content document
@@ -104,5 +108,139 @@
         /// One of the spread orientation options
         /// </summary>
         public SpreadOrientationOptions SpreadOrientation { get; set; }
+
+        public XElement GenerateElement()
+        {
+            var itemref = new XElement(EPubNamespaces.OpfNameSpace + "itemref");
+            itemref.Add(new XAttribute("idref", Name));
+            if (!Linear) // true by default so no need to set
+            {
+                itemref.Add(new XAttribute("linear", "false"));
+            }
+            if (!string.IsNullOrEmpty(ID))
+            {
+                itemref.Add(new XAttribute("id", ID));
+            }
+            var properties = new List<string>();
+            AddAlignXCenter( properties);
+            AddFlowOptions(properties);
+            AddLayoutOptions(properties);
+            AddPageOrientationOptions(properties);
+            AddPageSpreadOptions(properties);
+            AddSpreadOrientationOptions(properties);
+            if (properties.Count > 0)
+            {
+                var sb = new StringBuilder();
+                bool first = true;
+                foreach (var property in properties)
+                {
+                    if (!first)
+                    {
+                        sb.AppendFormat(" {0}", property);
+                    }
+                    else
+                    {
+                        sb.AppendFormat("{0}", property);
+                        first = false;
+                    }
+                }
+                itemref.Add(new XAttribute("properties", sb.ToString()));
+            }
+            return itemref;
+        }
+        private void AddPageSpreadOptions(List<string> properties)
+        {
+            switch (PageSpread)
+            {
+                case PageSpreadOptions.Center:
+                    properties.Add("rendition:page-spread-center");
+                    break;
+                case PageSpreadOptions.Left:
+                    properties.Add("page-spread-left");
+                    break;
+                case PageSpreadOptions.Right:
+                    properties.Add("page-spread-right");
+                    break;
+            }
+        }
+
+        private void AddSpreadOrientationOptions(List<string> properties)
+        {
+            switch (SpreadOrientation)
+            {
+                case SpreadOrientationOptions.Auto:
+                    properties.Add("rendition:spread-auto");
+                    break;
+                case SpreadOrientationOptions.Both:
+                    properties.Add("rendition:spread-both");
+                    break;
+                case SpreadOrientationOptions.Landscape:
+                    properties.Add("rendition:spread-landscape");
+                    break;
+                case SpreadOrientationOptions.None:
+                    properties.Add("rendition:spread-none");
+                    break;
+                case SpreadOrientationOptions.Portrait:
+                    properties.Add("rendition:spread-portrait");
+                    break;
+            }
+        }
+
+        private void AddPageOrientationOptions(List<string> properties)
+        {
+            switch (PageOrientation)
+            {
+                case OrientationOptions.Auto:
+                    properties.Add("rendition:orientation-auto");
+                    break;
+                case OrientationOptions.Landscape:
+                    properties.Add("rendition:orientation-landscape");
+                    break;
+                case OrientationOptions.Portrait:
+                    properties.Add("rendition:orientation-portrait");
+                    break;
+            }
+        }
+
+        private void AddLayoutOptions(List<string> properties)
+        {
+            switch (Layout)
+            {
+                case LayoutOptions.PrePaginated:
+                    properties.Add("rendition:layout-pre-paginated");
+                    break;
+                case LayoutOptions.Reflowable:
+                    properties.Add("rendition:layout-reflowable");
+                    break;
+            }
+        }
+
+        private void AddFlowOptions(List<string> properties)
+        {
+            switch (Flow)
+            {
+                case FlowOptions.Auto:
+                    properties.Add("rendition:flow-auto");
+                    break;
+                case FlowOptions.Paginated:
+                    properties.Add("rendition:flow-paginated");
+                    break;
+                case FlowOptions.ScrolledContinuous:
+                    properties.Add("rendition:flow-scrolled-continuous");
+                    break;
+                case FlowOptions.ScrolledDoc:
+                    properties.Add("rendition:flow-scrolled-doc");
+                    break;
+            }
+        }
+
+        private void AddAlignXCenter(List<string> properties)
+        {
+            if (AlignXCenter)
+            {
+                properties.Add("rendition:align-x-center");
+            }
+        }
+
     }
 }
