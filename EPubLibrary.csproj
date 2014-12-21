@@ -130,6 +130,7 @@
     <Compile Include="Content\Bindings\BindingsMediaTypeV3.cs" />
     <Compile Include="Content\Bindings\BindingsV3.cs" />
     <Compile Include="Content\CalibreMetadata\CalibreMetadata.cs" />
+    <Compile Include="Content\Collections\SeriesCollectionMember.cs" />
     <Compile Include="Content\ContentFileV2.cs" />
     <Compile Include="Content\ContentFileV3.cs" />
     <Compile Include="Content\EPubCoreMediaTypesConverter.cs" />
@@ -144,7 +145,7 @@
     <Compile Include="CSS_Items\CSSFile.cs" />
     <Compile Include="CSS_Items\CSSItem.cs" />
     <Compile Include="CSS_Items\FontDefinition.cs" />
-    <Compile Include="EPubCollections.cs" />
+    <Compile Include="Content\Collections\EPubSeriesCollections.cs" />
     <Compile Include="EPubFileV2.cs" />
     <Compile Include="EPubFileV3.cs" />
     <Compile Include="EpubNamespaces.cs" />

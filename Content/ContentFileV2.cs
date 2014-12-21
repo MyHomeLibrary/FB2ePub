@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary.Content.CalibreMetadata;
+using EPubLibrary.Content.Collections;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.Content.Manifest;
 using EPubLibrary.Content.Spine;
@@ -244,11 +245,6 @@ namespace EPubLibrary.Content
         /// Get/Set book title
         /// </summary>
         public EPubTitleSettings Title { get; set; }
-
-        /// <summary>
-        /// Get/set collections
-        /// </summary>
-        public EPubCollections Collections { get; set; }
 
         /// <summary>
         /// get/set Id of the cover image file

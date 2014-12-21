@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml.Linq;
 using EPubLibrary.Container;
 using EPubLibrary.Content;
+using EPubLibrary.Content.Collections;
 using EPubLibrary.Content.NavigationDocument;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
@@ -36,7 +37,6 @@ namespace EPubLibrary
         private readonly V3Standard _standard = V3Standard.V301;
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
         private readonly EPubTitleSettings _title = new EPubTitleSettings();
-        private readonly EPubCollections _collections = new EPubCollections();
         private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS", FileName = "main.css" };
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
         private readonly List<BookDocument> _sections = new List<BookDocument>();
@@ -78,6 +78,15 @@ namespace EPubLibrary
             set { _content.GenerateCompatibleTOC = _generateCompatibleTOC = value; }
         }
 
+        /// <summary>
+        /// Adds new series collection to ePub
+        /// </summary>
+        /// <param name="collection"></param>
+        public void AddNewCollection(SeriesCollectionMember collection)
+        {
+            _content.SeriesCollections.CollectionMembers.Add(collection);
+        }
+
 
         protected void CreateContainer(out ContainerFile container)
         {
@@ -90,7 +99,6 @@ namespace EPubLibrary
             stream.SetLevel(9);
             CreateFileEntryInZip(stream, _content);
             _content.Title = _title;
-            _content.Collections = _collections;
             _content.Write(stream);
         }
 
@@ -543,14 +551,7 @@ namespace EPubLibrary
             get { return _title; }
         }
 
-        /// <summary>
-        /// Get access to the list of collections (series) book belong to
-        /// </summary>
-        public EPubCollections Collections
-        {
-            get { return _collections; }
-        }
-
+        
         /// <summary>
         /// Used to set creator software string
         /// </summary>

@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using EPubLibrary.Container;
 using EPubLibrary.Content;
 using EPubLibrary.Content.CalibreMetadata;
+using EPubLibrary.Content.Collections;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
 using EPubLibrary.Template;
@@ -55,7 +56,7 @@ namespace EPubLibrary
         #region readonly_private_propeties
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
         private readonly EPubTitleSettings _title = new EPubTitleSettings();
-        private readonly EPubCollections  _collections = new EPubCollections();
+        private readonly EPubSeriesCollections  _collections = new EPubSeriesCollections();
         private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS",  FileName = "main.css" };
         private readonly AdobeTemplate _adobeTemplate = new AdobeTemplate();
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
@@ -170,13 +171,6 @@ namespace EPubLibrary
             get { return _title; }
         }
 
-        /// <summary>
-        /// Get access to the list of collections (series) book belong to
-        /// </summary>
-        public EPubCollections Collections
-        {
-            get { return _collections; }    
-        }
 
         /// <summary>
         /// Get/Set embedding styles into xHTML files instead of referencing style files

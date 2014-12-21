@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
 using System;
 using EPubLibrary.Content.Bindings;
+using EPubLibrary.Content.Collections;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.Content.Manifest;
 using EPubLibrary.Content.NavigationDocument;
@@ -25,6 +26,8 @@ namespace EPubLibrary.Content
         private readonly ManifestSectionV3 _manifest;
         private readonly GuideSection _guide = new GuideSection();
         private readonly BindingsV3 _bindings = new BindingsV3();
+        private readonly  EPubSeriesCollections _seriesCollections  = new EPubSeriesCollections();
+
 
         private readonly SpineSectionV3 _spine;
 
@@ -48,6 +51,8 @@ namespace EPubLibrary.Content
         }
 
         public bool GenerateCompatibleTOC { get; set; }
+
+        public EPubSeriesCollections SeriesCollections { get { return _seriesCollections; }}
 
         /// <summary>
         /// Returns epub version to write into a package
@@ -300,41 +305,9 @@ namespace EPubLibrary.Content
             metadata.Add(metaModified);
 
             // series
-            if ((Collections != null) && 
-                (Collections.CollectionMembers.Count > 0) && 
-                V3StandardChecker.IsCollectionsAllowedByStandard(_standard))
+            if (V3StandardChecker.IsCollectionsAllowedByStandard(_standard))
             {
-                int collectionCounter = 0;
-                foreach (var collection in Collections.CollectionMembers)
-                {
-                    string collectionID = string.Format("collect_{0}",++collectionCounter);
-                    var metaBelongsTo = new XElement(EPubNamespaces.FakeOpf + "meta", collection.CollectionName);
-                    metaBelongsTo.Add(new XAttribute("property", "belongs-to-collection"));
-                    metaBelongsTo.Add(new XAttribute("id", collectionID));
-                    metadata.Add(metaBelongsTo);
-
-                    var metaCollectionType = new XElement(EPubNamespaces.FakeOpf + "meta", CollectionMember.ToStringType(collection.Type));
-                    metaCollectionType.Add(new XAttribute("property", "collection-type"));
-                    metaCollectionType.Add(new XAttribute("refines", "#" + collectionID));
-                    metadata.Add(metaCollectionType);
-
-                    if (collection.CollectionPosition.HasValue)
-                    {
-                        var metaPosition = new XElement(EPubNamespaces.FakeOpf + "meta", collection.CollectionPosition.Value);
-                        metaPosition.Add(new XAttribute("property", "group-position"));
-                        metaPosition.Add(new XAttribute("refines", "#" + collectionID));
-                        metadata.Add(metaPosition);
-                    }
-
-                    if (!string.IsNullOrEmpty(collection.CollectionUID))
-                    {
-                        var metaUID = new XElement(EPubNamespaces.FakeOpf + "meta", collection.CollectionUID);
-                        metaUID.Add(new XAttribute("property", "dcterms:identifier"));
-                        metaUID.Add(new XAttribute("refines", "#" + collectionID));
-                        metadata.Add(metaUID);
-                        
-                    }
-                }
+                _seriesCollections.AddCollectionsToElement(metadata);
             }
 
 
@@ -506,6 +479,13 @@ namespace EPubLibrary.Content
             AddSpineToContentDocument(document.Root);
             AddGuideToContentDocument(document.Root);
             AddBindingsToContentDocument(document.Root);
+            AddCollectionsToContentDocument(document.Root);
+        }
+
+// ReSharper disable once UnusedParameter.Local
+        private void AddCollectionsToContentDocument(XElement document)
+        {
+            // not implemented for now, we not support ePub v3 collections yet
         }
 
         private void AddBindingsToContentDocument(XElement document)
@@ -551,11 +531,6 @@ namespace EPubLibrary.Content
         /// Get/Set book title
         /// </summary>
         public EPubTitleSettings Title { get; set; }
-
-        /// <summary>
-        /// Get/set collections
-        /// </summary>
-        public EPubCollections Collections { get; set; }
 
         /// <summary>
         /// get/set Id of the cover image file
