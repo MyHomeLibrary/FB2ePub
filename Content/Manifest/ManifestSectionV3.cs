@@ -29,11 +29,16 @@ namespace EPubLibrary.Content.Manifest
                 {
                     tocElement.Add(new XAttribute("fallback", manifestItem.Fallback));
                 }
-                if (manifestItem.Properties.Count > 0)
+
+                List<string> properties;
+                BuildPropertiesList(manifestItem, out properties);
+
+
+                if (properties.Count > 0)
                 {
                     var sb = new StringBuilder();
                     bool first = true;
-                    foreach (var property in manifestItem.Properties)
+                    foreach (var property in properties)
                     {
                         if (!first)
                         {
@@ -57,6 +62,46 @@ namespace EPubLibrary.Content.Manifest
             }
 
             return manifestElement;
+        }
+
+        private void BuildPropertiesList(ManifestItemV3 manifestItem, out List<string> properties)
+        {
+            properties = new List<string>();
+            
+            if (manifestItem.ContainsRemoteResources)
+            {
+                properties.Add("remote-resources");
+            }
+
+            if (manifestItem.CoverImage)
+            {
+                properties.Add("cover-image");
+            }
+
+            if (manifestItem.MathML)
+            {
+                properties.Add("mathml");
+            }
+
+            if (manifestItem.Nav)
+            {
+                properties.Add("nav");
+            }
+
+            if (manifestItem.SVG)
+            {
+                properties.Add("svg");
+            }
+
+            if (manifestItem.Scripted)
+            {
+                properties.Add("scripted");
+            }
+
+            if (manifestItem.Switch)
+            {
+                properties.Add("switch");
+            }
         }
 
     }

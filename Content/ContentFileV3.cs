@@ -432,11 +432,11 @@ namespace EPubLibrary.Content
         {
             var NAVitem = new ManifestItemV3
             {
-                HRef = navigationDocument.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), 
-                ID = "nav", 
-                MediaType = EPubCoreMediaType.ApplicationXhtmlXml ,               
+                HRef = navigationDocument.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure),
+                ID = "nav",
+                MediaType = EPubCoreMediaType.ApplicationXhtmlXml,
+                Nav = true,
             };
-            NAVitem.Properties.Add("nav");
             _manifest.Add(NAVitem);
         }
 
@@ -450,7 +450,7 @@ namespace EPubLibrary.Content
             };
             if (CoverId == image.ID)
             {
-                item.Properties.Add("cover-image");
+                item.CoverImage = true;
             }
             _manifest.Add(item);
         }
