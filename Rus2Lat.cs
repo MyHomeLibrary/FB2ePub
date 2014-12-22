@@ -16,6 +16,18 @@ namespace TranslitRu
 
     public class Rus2Lat
     {
+        public static Rus2Lat Instance;
+
+        static Rus2Lat()
+        {
+            Instance = new Rus2Lat();
+        }
+
+        private Rus2Lat()
+        {
+            
+        }
+
         /// <summary>
         /// Name of the rule file used
         /// </summary>
@@ -23,7 +35,6 @@ namespace TranslitRu
 
         public string Translate(string stringWithCyrillic, TranslitModeEnum mode)
         {
-            StringBuilder result = new StringBuilder();
             ITranslitConverter converter;
             switch (mode)
             {
@@ -40,8 +51,9 @@ namespace TranslitRu
                     return converter.ConvertString(stringWithCyrillic);
                 default:
                     Debug.Fail(string.Format("Invalid transliteration mode : {0}",mode));
-                    return stringWithCyrillic;
+                    break;
             }
+            return stringWithCyrillic;
         }
     }
 }
