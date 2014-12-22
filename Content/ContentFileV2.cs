@@ -4,7 +4,6 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary.Content.CalibreMetadata;
-using EPubLibrary.Content.Collections;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.Content.Manifest;
 using EPubLibrary.Content.Spine;
@@ -13,14 +12,13 @@ using EPubLibrary.PathUtils;
 using EPubLibrary.Template;
 using EPubLibrary.TOC;
 using EPubLibrary.XHTML_Items;
+using EPubLibrary.Content.NavigationManagement;
 
 namespace EPubLibrary.Content
 {
     public class ContentFileV2 : IEPubPath
     {
-        public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
-
-        private readonly GuideSection _guide = new GuideSection();
+        private readonly NavigationManagerV2 _navigationManager = new NavigationManagerV2();
 
         private readonly SpineSectionV2 _spine = new SpineSectionV2();
 
@@ -82,12 +80,9 @@ namespace EPubLibrary.Content
         }
 
 
-        private void AddGuideToContentDocument(XElement xElement)
+        private void AddGuideToContentDocument(XElement document)
         {
-            if (_guide.HasData())
-            {
-                xElement.Add(_guide.GenerateGuide());
-            }
+            _navigationManager.WriteNavigationItemsToContentDocumentElement(document);
         }
 
         private void AddSpineToContentDocument(XElement xElement)
@@ -294,7 +289,7 @@ namespace EPubLibrary.Content
 
         public void AddXHTMLTextItem(BaseXHTMLFile baseXhtmlFile)
         {
-            var bookItem = new ManifestItemV2 { HRef = baseXhtmlFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = baseXhtmlFile.Id, MediaType = EPubCoreMediaType.ApplicationXhtmlXml };
+            var bookItem = new ManifestItemV2 { HRef = baseXhtmlFile.HRef, ID = baseXhtmlFile.Id, MediaType = EPubCoreMediaType.ApplicationXhtmlXml };
             _manifest.Add(bookItem);
 
             if (baseXhtmlFile.DocumentType != GuideTypeEnum.Ignore) // we do not add objects that to be ignored 
@@ -303,36 +298,36 @@ namespace EPubLibrary.Content
                 _spine.Add(bookSpine);
             }
 
-            _guide.AddGuideItem(bookItem.HRef, baseXhtmlFile.Id, baseXhtmlFile.DocumentType);                
+            _navigationManager.AddDocumentToNavigation(baseXhtmlFile);                
         }
 
         public void AddTOC()
         {
-            var tocItem = new ManifestItemV2 { HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), ID = "ncx", MediaType = EPubCoreMediaType.ApplicationNCX };
+            var tocItem = new ManifestItemV2 { HRef = TOCFile.TOCFilePath.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure), ID = "ncx", MediaType = EPubCoreMediaType.ApplicationNCX };
             _manifest.Add(tocItem);                     
         }
 
         public void AddImage(ImageOnStorage image)
         {
-            _manifest.Add(new ManifestItemV2 { HRef = image.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = image.ID, MediaType = EPUBImage.ConvertImageTypeToMediaType(image.ImageType) });
+            _manifest.Add(new ManifestItemV2 { HRef = image.PathInEPUB.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure), ID = image.ID, MediaType = EPUBImage.ConvertImageTypeToMediaType(image.ImageType) });
         }
 
         public void AddCSS(CSSFile cssFile)
         {
-            var maincss = new ManifestItemV2 { HRef = cssFile.PathInEPUB.GetRelativePath(ContentFilePath,_flatStructure), ID = cssFile.ID, MediaType = CSSFile.MediaType };
+            var maincss = new ManifestItemV2 { HRef = cssFile.PathInEPUB.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure), ID = cssFile.ID, MediaType = CSSFile.MediaType };
             _manifest.Add(maincss);
         }
 
         public void AddXPGTTemplate(AdobeTemplate template)
         {
-            var maincss = new ManifestItemV2 { HRef = template.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = template.ID, MediaType = template.GetMediaType() };
+            var maincss = new ManifestItemV2 { HRef = template.PathInEPUB.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure), ID = template.ID, MediaType = template.GetMediaType() };
             _manifest.Add(maincss);
         }
 
 
         public void AddFontFile(FontOnStorage fontFile)
         {
-            _manifest.Add(new ManifestItemV2 { HRef = fontFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = fontFile.ID, MediaType =fontFile.MediaType });
+            _manifest.Add(new ManifestItemV2 { HRef = fontFile.PathInEPUB.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure), ID = fontFile.ID, MediaType = fontFile.MediaType });
         }
 
 
@@ -341,7 +336,7 @@ namespace EPubLibrary.Content
         /// </summary>
         public EPubInternalPath PathInEPUB
         {
-            get { return ContentFilePath; }
+            get { return DefaultInternalPaths.ContentFilePath; }
         }
 
         /// <summary>

@@ -17,7 +17,7 @@ namespace EPubLibrary.XHTML_Items
         public TitlePageFile(HTMLElementType compatibility)
             : base(compatibility)
         {
-            pageTitle = "Title";
+            InternalPageTitle = "Title";
             DocumentType = GuideTypeEnum.TitlePage;
             FileName = "title.xhtml";
             FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");

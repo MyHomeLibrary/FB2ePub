@@ -13,7 +13,7 @@ namespace EPubLibrary.XHTML_Items
             : base(compatibility)
         {
             DocumentType = GuideTypeEnum.CopyrightPage;
-            pageTitle = "About";
+            InternalPageTitle = "About";
             Id = "about";
             FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
             FileName = "about.xhtml";

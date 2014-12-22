@@ -133,6 +133,7 @@
     <Compile Include="Content\Collections\SeriesCollectionMember.cs" />
     <Compile Include="Content\ContentFileV2.cs" />
     <Compile Include="Content\ContentFileV3.cs" />
+    <Compile Include="Content\DefaultInternalPaths.cs" />
     <Compile Include="Content\EPubCoreMediaTypesConverter.cs" />
     <Compile Include="Content\Guide\GuideSection.cs" />
     <Compile Include="Content\Guide\GuideElement.cs" />
@@ -140,6 +141,8 @@
     <Compile Include="Content\Manifest\ManifestSectionV3.cs" />
     <Compile Include="Content\EPubCoreMediaTypeAttribute.cs" />
     <Compile Include="Content\NavigationDocument\NavigationDocumentFile.cs" />
+    <Compile Include="Content\NavigationManagement\NavigationManagerV2.cs" />
+    <Compile Include="Content\NavigationManagement\NavigationManagerV3.cs" />
     <Compile Include="Content\Spine\SpineItemV3.cs" />
     <Compile Include="Content\Spine\SpineSectionV3.cs" />
     <Compile Include="CSS_Items\CSSFile.cs" />

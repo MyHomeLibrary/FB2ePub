@@ -11,7 +11,7 @@ namespace EPubLibrary.XHTML_Items
 
         public AnnotationPageFile(HTMLElementType compatibility) : base(compatibility)
         {
-            pageTitle = "Annotation";
+            InternalPageTitle = "Annotation";
             DocumentType = GuideTypeEnum.Preface;
             FileName = "annotation.xhtml";
             Id = "annotation";

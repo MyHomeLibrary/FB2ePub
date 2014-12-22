@@ -20,7 +20,7 @@ namespace EPubLibrary.XHTML_Items
         public override void GenerateBody()
         {
             base.GenerateBody();
-            pageTitle = "License";
+            InternalPageTitle = "License";
             var page = new Div(Compatibility);
             var heading = new H1(Compatibility);
             heading.Add(new SimpleHTML5Text(Compatibility) { Text = "Converter use license" });

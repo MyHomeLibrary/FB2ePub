@@ -18,7 +18,7 @@ namespace EPubLibrary.XHTML_Items
     {
         protected Head HeadElement = null;
         protected Body BodyElement = null;
-        protected string pageTitle;
+        protected string InternalPageTitle;
         protected bool Durty = true;
         protected HTMLElementType Compatibility = HTMLElementType.XHTML11;
 
@@ -61,6 +61,11 @@ namespace EPubLibrary.XHTML_Items
             
         }
 
+        public string HRef
+        {
+            get { return PathInEPUB.GetRelativePath(DefaultInternalPaths.ContentFilePath, FlatStructure); }
+        }
+
         /// <summary>
         /// Get/Set file name to be used when saving into EPUB
         /// </summary>
@@ -84,10 +89,10 @@ namespace EPubLibrary.XHTML_Items
         /// </summary>
         public string PageTitle
         {
-            get { return pageTitle; }
+            get { return InternalPageTitle; }
             set
             {
-                pageTitle = value;
+                InternalPageTitle = value;
                 Durty = true;
             }
         }
@@ -168,7 +173,7 @@ namespace EPubLibrary.XHTML_Items
 
 
             var titleElm = new XHTMLClassLibrary.BaseElements.Structure_Header.Title(Compatibility);
-            titleElm.InternalTextItem.Text = pageTitle;
+            titleElm.InternalTextItem.Text = InternalPageTitle;
             HeadElement.Add(titleElm);
             
 

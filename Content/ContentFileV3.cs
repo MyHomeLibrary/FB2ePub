@@ -5,6 +5,7 @@ using EPubLibrary.Content.Collections;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.Content.Manifest;
 using EPubLibrary.Content.NavigationDocument;
+using EPubLibrary.Content.NavigationManagement;
 using EPubLibrary.Content.Spine;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.ReferenceUtils;
@@ -20,13 +21,12 @@ namespace EPubLibrary.Content
 {
     public class ContentFileV3 : IEPubPath
     {
-        public static readonly EPubInternalPath ContentFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/content.opf");
 
         private readonly V3Standard _standard;   
         private readonly ManifestSectionV3 _manifest;
-        private readonly GuideSection _guide = new GuideSection();
         private readonly BindingsV3 _bindings = new BindingsV3();
         private readonly  EPubSeriesCollections _seriesCollections  = new EPubSeriesCollections();
+        private readonly NavigationManagerV3 _navigationManager =   new NavigationManagerV3();
 
 
         private readonly SpineSectionV3 _spine;
@@ -295,7 +295,7 @@ namespace EPubLibrary.Content
             }
 
             // meta modified
-            string modifiedDate = DateTime.UtcNow.ToUniversalTime().ToString("s")+"Z";
+            string modifiedDate = DateTime.UtcNow.ToString("s")+"Z";
             if (Title.DataFileModification.HasValue)
             {
                 modifiedDate = Title.DataFileModification.Value.ToUniversalTime().ToString("s")+"Z";
@@ -309,25 +309,6 @@ namespace EPubLibrary.Content
             {
                 _seriesCollections.AddCollectionsToElement(metadata);
             }
-
-
-
-            // TODO: This need to be updated in future when we know how it's implemented
-
-            // This needed for iTunes and other apple made devices/programs to display the cover
-            //if (!string.IsNullOrEmpty(CoverId))
-            //{
-            //    // <meta name="cover" content="cover.jpg"/>
-            //    var cover = new XElement(EpubNamespaces.FakeOpf + "meta",CoverId);
-            //    cover.Add(new XAttribute("property", "cover"));
-            //    metadata.Add(cover);
-            //}
-
-            //if (CalibreData != null)
-            //{
-            //    CalibreData.InjectData(metadata);
-            //}
-
             document.Add(metadata);
         }
 
@@ -351,7 +332,7 @@ namespace EPubLibrary.Content
         {
             var bookItem = new ManifestItemV3
             {
-                HRef = baseXhtmlFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), 
+                HRef = baseXhtmlFile.HRef, 
                 ID = baseXhtmlFile.Id, 
                 MediaType = EPubCoreMediaType.ApplicationXhtmlXml
             };
@@ -367,13 +348,12 @@ namespace EPubLibrary.Content
                 }
                 _spine.Add(bookSpine);
             }
-
-            _guide.AddGuideItem(bookItem.HRef, baseXhtmlFile.Id, baseXhtmlFile.DocumentType);
+            _navigationManager.AddDocumentToNavigation(baseXhtmlFile);
         }
 
         public void AddFontFile(FontOnStorage fontFile)
         {
-            _manifest.Add(new ManifestItemV3 { HRef = fontFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = fontFile.ID, MediaType = fontFile.MediaType });
+            _manifest.Add(new ManifestItemV3 { HRef = fontFile.PathInEPUB.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure), ID = fontFile.ID, MediaType = fontFile.MediaType });
         }
 
 
@@ -386,7 +366,7 @@ namespace EPubLibrary.Content
             }
             var tocItem = new ManifestItemV3
             {
-                HRef = TOCFile.TOCFilePath.GetRelativePath(ContentFilePath, _flatStructure), 
+                HRef = TOCFile.TOCFilePath.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure), 
                 ID = "ncx", 
                 MediaType = EPubCoreMediaType.ApplicationNCX,
             };
@@ -398,7 +378,7 @@ namespace EPubLibrary.Content
         {
             var navItem = new ManifestItemV3
             {
-                HRef = navigationDocument.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure),
+                HRef = navigationDocument.PathInEPUB.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure),
                 ID = "nav",
                 MediaType = EPubCoreMediaType.ApplicationXhtmlXml,
                 Nav = true,
@@ -410,7 +390,7 @@ namespace EPubLibrary.Content
         {
             var item = new ManifestItemV3
             {
-                HRef = image.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure),
+                HRef = image.PathInEPUB.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure),
                 ID = image.ID,
                 MediaType = EPUBImage.ConvertImageTypeToMediaType(image.ImageType)
             };
@@ -423,7 +403,7 @@ namespace EPubLibrary.Content
 
         public void AddCSS(CSSFile cssFile)
         {
-            var maincss = new ManifestItemV3 { HRef = cssFile.PathInEPUB.GetRelativePath(ContentFilePath, _flatStructure), ID = cssFile.ID, MediaType = CSSFile.MediaType };
+            var maincss = new ManifestItemV3 { HRef = cssFile.PathInEPUB.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure), ID = cssFile.ID, MediaType = CSSFile.MediaType };
             _manifest.Add(maincss);
         }
 
@@ -504,12 +484,9 @@ namespace EPubLibrary.Content
         }
 
 
-        private void AddGuideToContentDocument(XElement xElement)
+        private void AddGuideToContentDocument(XElement document)
         {
-            if (_guide.HasData())
-            {
-                xElement.Add(_guide.GenerateGuide());
-            }
+            _navigationManager.WriteNavigationItemsToContentDocumentElement(document);
         }
 
         private void AddSpineToContentDocument(XElement xElement)
@@ -524,7 +501,7 @@ namespace EPubLibrary.Content
         /// </summary>
         public EPubInternalPath PathInEPUB
         {
-            get { return ContentFilePath; }
+            get { return DefaultInternalPaths.ContentFilePath; }
         }
 
         /// <summary>

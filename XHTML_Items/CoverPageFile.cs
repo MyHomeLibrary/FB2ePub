@@ -13,7 +13,7 @@ namespace EPubLibrary.XHTML_Items
         public CoverPageFile(HTMLElementType compatibility)
             : base(compatibility)
         {
-            pageTitle = "Cover";
+            InternalPageTitle = "Cover";
             DocumentType = GuideTypeEnum.Cover;
             Id = "cover";
             FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
