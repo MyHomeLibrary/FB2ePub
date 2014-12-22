@@ -2,6 +2,7 @@
 using FB2EPubConverter.SourceDataInclusionControls;
 using Fb2epubSettings;
 using FB2Library;
+using TranslitRu;
 
 namespace FB2EPubConverter.ElementConvertersV2
 {
@@ -26,7 +27,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 var person = new PersoneWithRole
                 {
                     PersonName =
-                        epubFile.Transliterator.Translate(DescriptionConverters.GenerateAuthorString(docAuthor, _commonSettings), epubFile.TranslitMode),
+                        Rus2Lat.Instance.Translate(DescriptionConverters.GenerateAuthorString(docAuthor, _commonSettings), epubFile.TranslitMode),
                     FileAs = DescriptionConverters.GenerateFileAsString(docAuthor, _commonSettings),
                     Role = RolesEnum.Adapter
                 };
@@ -45,7 +46,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     var bookTitle = new Title
                     {
                         TitleName =
-                            epubFile.Transliterator.Translate(fb2File.SourceTitleInfo.BookTitle.Text,
+                            Rus2Lat.Instance.Translate(fb2File.SourceTitleInfo.BookTitle.Text,
                                 epubFile.TranslitMode),
                         Language =
                             string.IsNullOrEmpty(fb2File.SourceTitleInfo.BookTitle.Language) &&
@@ -64,7 +65,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 var person = new PersoneWithRole
                 {
                     PersonName =
-                        epubFile.Transliterator.Translate(DescriptionConverters.GenerateAuthorString(author, _commonSettings),
+                        Rus2Lat.Instance.Translate(DescriptionConverters.GenerateAuthorString(author, _commonSettings),
                             epubFile.TranslitMode),
                     FileAs = DescriptionConverters.GenerateFileAsString(author, _commonSettings),
                     Role = RolesEnum.Author,

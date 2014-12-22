@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using EPubLibrary;
-using EPubLibrary.Content;
-using EPubLibrary.Content.Collections;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.XHTML_Items;
 using Fb2ePubConverter;
@@ -12,8 +9,8 @@ using FB2EPubConverter.ElementConvertersV3;
 using Fb2epubSettings;
 using FB2Library;
 using FB2Library.HeaderItems;
+using TranslitRu;
 using XHTMLClassLibrary.BaseElements;
-using Logger = EPubLibrary.Logger;
 
 namespace FB2EPubConverter
 {
@@ -152,7 +149,7 @@ namespace FB2EPubConverter
                 var bookTitle = new Title
                 {
                     TitleName =
-                        epubFile.Transliterator.Translate(fb2File.PublishInfo.BookTitle.Text, epubFile.TranslitMode),
+                        Rus2Lat.Instance.Translate(fb2File.PublishInfo.BookTitle.Text, epubFile.TranslitMode),
                     Language =
                         !string.IsNullOrEmpty(fb2File.PublishInfo.BookTitle.Language)
                             ? fb2File.PublishInfo.BookTitle.Language
@@ -181,7 +178,7 @@ namespace FB2EPubConverter
 
             if (fb2File.PublishInfo.Publisher != null)
             {
-                epubFile.Title.Publisher.PublisherName = epubFile.Transliterator.Translate(fb2File.PublishInfo.Publisher.Text, epubFile.TranslitMode);
+                epubFile.Title.Publisher.PublisherName = Rus2Lat.Instance.Translate(fb2File.PublishInfo.Publisher.Text, epubFile.TranslitMode);
             }
 
 
