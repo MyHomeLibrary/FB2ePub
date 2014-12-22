@@ -7,10 +7,9 @@ using System.Xml.Linq;
 using EPubLibrary.Container;
 using EPubLibrary.Content;
 using EPubLibrary.Content.Collections;
-using EPubLibrary.Content.NavigationDocument;
+using EPubLibrary.Content.NavigationManagement;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
-using EPubLibrary.TOC;
 using EPubLibrary.XHTML_Items;
 using FontsSettings;
 using ICSharpCode.SharpZipLib.Zip;
@@ -31,8 +30,6 @@ namespace EPubLibrary
     /// </summary>
     public class EPubFileV3 : IEpubFile
     {
-        private readonly NavigationDocumentFile _navigationDocument = new NavigationDocumentFile();
-
         #region readonly_private_propeties
         private readonly V3Standard _standard = V3Standard.V301;
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
@@ -40,14 +37,13 @@ namespace EPubLibrary
         private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS", FileName = "main.css" };
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
         private readonly List<BookDocument> _sections = new List<BookDocument>();
-        private readonly TOCFile _tableOfContentFile = new TOCFile();
-        private readonly Rus2Lat _rule = new Rus2Lat();
         private readonly List<string> _allSequences = new List<string>();
         private readonly List<string> _aboutTexts = new List<string>();
         private readonly List<string> _aboutLinks = new List<string>();
         private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
         private readonly Dictionary<string, EPUBImage> _images = new Dictionary<string, EPUBImage>();
         private readonly ContentFileV3 _content;
+        private readonly NavigationManagerV3 _navigationManager = new NavigationManagerV3();
         #endregion
 
         #region private_properties
@@ -67,7 +63,6 @@ namespace EPubLibrary
         {
             _standard = standard;
             _content = new ContentFileV3(standard);
-            _tableOfContentFile = new TOCFileV3Transitional();
         }
 
 
@@ -179,24 +174,37 @@ namespace EPubLibrary
             AddImages(stream);
             AddFontFiles(stream);
             AddAdditionalFiles(stream);
+            AddNavigation(stream);
+            AddContentFile(stream);
+        }
+
+        private void AddNavigation(ZipOutputStream stream)
+        {
+            _navigationManager.SetupBookNavigation(_title.Identifiers[0].ID, Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, TranslitMode));
+
             if (GenerateCompatibleTOC)
             {
                 AddTOCFile(stream);
             }
             AddNavigationFile(stream);
-            AddContentFile(stream);
         }
 
         protected void AddTOCFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            CreateFileEntryInZip(stream, _tableOfContentFile);
-            _tableOfContentFile.ID = _title.Identifiers[0].ID;
-            _tableOfContentFile.Title = _rule.Translate(_title.BookTitles[0].TitleName, TranslitMode);
-            _tableOfContentFile.Write(stream);
+            CreateFileEntryInZip(stream, _navigationManager.TableOfContentFile);
+            _navigationManager.TableOfContentFile.Write(stream);
             _content.AddTOC();
         }
 
+        protected void AddNavigationFile(ZipOutputStream stream)
+        {
+            stream.SetLevel(9);
+            CreateFileEntryInZip(stream, _navigationManager.NavigationDocument);
+            _navigationManager.NavigationDocument.StyleFiles.Add(_mainCss);
+            _navigationManager.NavigationDocument.Write(stream);
+            _content.AddNavigationDocument(_navigationManager.NavigationDocument);
+        }
 
         /// <summary>
         /// Adds different additional generated files like cover, annotation etc.
@@ -347,15 +355,6 @@ namespace EPubLibrary
 
         }
 
-        protected void AddNavigationFile(ZipOutputStream stream)
-        {
-            stream.SetLevel(9);
-            CreateFileEntryInZip(stream, _navigationDocument);
-            _navigationDocument.PageTitle = _title.BookTitles[0].TitleName;
-            _navigationDocument.StyleFiles.Add(_mainCss);
-            _navigationDocument.Write(stream);
-            _content.AddNavigationDocument(_navigationDocument);
-        }
 
         protected void AddCover(ZipOutputStream stream)
         {
@@ -445,13 +444,12 @@ namespace EPubLibrary
             }
 
             // remove navigation leaf end points with empty names
-            _tableOfContentFile.Consolidate();
+            _navigationManager.Consolidate();
 
             // to be valid we need at least one NAVPoint
-            if (_tableOfContentFile.IsNavMapEmpty() && (_sections.Count > 0))
+            if (_navigationManager.TableOfContentFile.IsNavMapEmpty() && (_sections.Count > 0))
             {
-                _tableOfContentFile.AddNavPoint(_sections[0], _rule.Translate(_title.BookTitles[0].TitleName, TranliterateToc ? TranslitMode : TranslitModeEnum.None));
-                _navigationDocument.AddNavPoint(_sections[0], _rule.Translate(_title.BookTitles[0].TitleName, TranliterateToc ? TranslitMode : TranslitModeEnum.None));
+                _navigationManager.AddBookSubsection(_sections[0], Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, TranliterateToc ? TranslitMode : TranslitModeEnum.None));
             }
         }
 
@@ -460,19 +458,7 @@ namespace EPubLibrary
         {
             subsection.Id = string.Format("bookcontent{0}_{1}", count, subcount); // generate unique ID
             _content.AddXHTMLTextItem(subsection);
-            if (!subsection.NotPartOfNavigation)
-            {
-                if (subsection.NavigationLevel <= 1)
-                {
-                    _tableOfContentFile.AddNavPoint(subsection, _rule.Translate(subsection.PageTitle, TranliterateToc ? TranslitMode : TranslitModeEnum.None));
-                    _navigationDocument.AddNavPoint(subsection, _rule.Translate(subsection.PageTitle, TranliterateToc ? TranslitMode : TranslitModeEnum.None));
-                }
-                else
-                {
-                    _tableOfContentFile.AddSubNavPoint(subsection.NavigationParent, subsection, _rule.Translate(subsection.PageTitle, TranliterateToc ? TranslitMode : TranslitModeEnum.None));
-                    _navigationDocument.AddSubNavPoint(subsection.NavigationParent, subsection, _rule.Translate(subsection.PageTitle, TranliterateToc ? TranslitMode : TranslitModeEnum.None));
-                }
-            }
+            _navigationManager.AddBookSubsection(subsection, Rus2Lat.Instance.Translate(subsection.PageTitle, TranliterateToc ? TranslitMode : TranslitModeEnum.None));
         }
 
         /// <summary>
@@ -507,11 +493,6 @@ namespace EPubLibrary
         /// Controls if Lord Kiron's license need to be added to file
         /// </summary>
         public bool InjectLKRLicense { get; set; }
-
-        /// <summary>
-        /// Return transliteration rule object
-        /// </summary>
-        public Rus2Lat Transliterator { get { return _rule; } }
 
         /// <summary>
         /// Return reference to the list of the CSS style files

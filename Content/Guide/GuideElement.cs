@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace EPubLibrary.Content.Guide
+﻿namespace EPubLibrary.Content.Guide
 {
     public enum GuideTypeEnum
     {

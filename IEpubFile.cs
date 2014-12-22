@@ -5,10 +5,6 @@ namespace EPubLibrary
     public interface IEpubFile
     {
         #region Transliteration_common_properties
-        /// <summary>
-        /// Return transliteration rule object
-        /// </summary>
-        Rus2Lat Transliterator { get; }
 
         /// <summary>
         /// Transliteration mode

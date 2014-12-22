@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using EPubLibrary.XHTML_Items;
 
 namespace EPubLibrary.Content.Guide
 {
@@ -24,7 +25,7 @@ namespace EPubLibrary.Content.Guide
             return xGuide;
         }
 
-        public void AddGuideItem(string link, string title, GuideTypeEnum type)
+        private void AddGuideItem(string link, string title, GuideTypeEnum type)
         {
             var element = new GuideElement { Link = link.Replace('\\', '/'), Title = title, Type = type };
             _content.Add(element);
@@ -34,5 +35,15 @@ namespace EPubLibrary.Content.Guide
         {
             return (_content.Count>0);
         }
+
+        /// <summary>
+        /// Add new document to be a part of navigation
+        /// </summary>
+        /// <param name="baseXhtmlFile"></param>
+        public void AddDocumentToNavigation(BaseXHTMLFile baseXhtmlFile)
+        {
+            AddGuideItem(baseXhtmlFile.HRef, baseXhtmlFile.Id, baseXhtmlFile.DocumentType);
+        }
+
     }
 }

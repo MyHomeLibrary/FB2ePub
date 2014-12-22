@@ -10,20 +10,17 @@ using EPubLibrary.Content.Spine;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
 using EPubLibrary.Template;
-using EPubLibrary.TOC;
 using EPubLibrary.XHTML_Items;
-using EPubLibrary.Content.NavigationManagement;
 
 namespace EPubLibrary.Content
 {
     public class ContentFileV2 : IEPubPath
     {
-        private readonly NavigationManagerV2 _navigationManager = new NavigationManagerV2();
-
         private readonly SpineSectionV2 _spine = new SpineSectionV2();
 
         private bool _flatStructure;
         private readonly ManifestSectionV2 _manifest = new ManifestSectionV2();
+        private readonly GuideSection _guide = new GuideSection();
 
 
         /// <summary>
@@ -82,7 +79,12 @@ namespace EPubLibrary.Content
 
         private void AddGuideToContentDocument(XElement document)
         {
-            _navigationManager.WriteNavigationItemsToContentDocumentElement(document);
+            // if guide has data
+            if (_guide.HasData())
+            {
+                // write guide to content
+                document.Add(_guide.GenerateGuide());
+            }           
         }
 
         private void AddSpineToContentDocument(XElement xElement)
@@ -298,12 +300,12 @@ namespace EPubLibrary.Content
                 _spine.Add(bookSpine);
             }
 
-            _navigationManager.AddDocumentToNavigation(baseXhtmlFile);                
+            _guide.AddDocumentToNavigation(baseXhtmlFile);                
         }
 
         public void AddTOC()
         {
-            var tocItem = new ManifestItemV2 { HRef = TOCFile.TOCFilePath.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure), ID = "ncx", MediaType = EPubCoreMediaType.ApplicationNCX };
+            var tocItem = new ManifestItemV2 { HRef = DefaultInternalPaths.TOCFilePath.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure), ID = "ncx", MediaType = EPubCoreMediaType.ApplicationNCX };
             _manifest.Add(tocItem);                     
         }
 

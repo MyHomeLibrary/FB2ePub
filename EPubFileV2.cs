@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
@@ -8,7 +9,7 @@ using System.Xml.Linq;
 using EPubLibrary.Container;
 using EPubLibrary.Content;
 using EPubLibrary.Content.CalibreMetadata;
-using EPubLibrary.Content.Collections;
+using EPubLibrary.Content.NavigationManagement;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
 using EPubLibrary.Template;
@@ -56,13 +57,11 @@ namespace EPubLibrary
         #region readonly_private_propeties
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
         private readonly EPubTitleSettings _title = new EPubTitleSettings();
-        private readonly EPubSeriesCollections  _collections = new EPubSeriesCollections();
         private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS",  FileName = "main.css" };
         private readonly AdobeTemplate _adobeTemplate = new AdobeTemplate();
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
         private readonly List<BookDocument> _sections = new List<BookDocument>();
-        private readonly TOCFile _tableOfContentFile = new TOCFile();
-        private readonly Rus2Lat _rule = new Rus2Lat();
+        private readonly NavigationManagerV2 _navigationManager = new NavigationManagerV2();
         private readonly List<string> _allSequences = new List<string>();
         private readonly List<string> _aboutTexts = new List<string>();
         private readonly List<string> _aboutLinks = new List<string>();
@@ -110,11 +109,6 @@ namespace EPubLibrary
         /// Controls if Lord Kiron's license need to be added to file
         /// </summary>
         public bool InjectLKRLicense { get; set; }
-
-        /// <summary>
-        /// Return transliteration rule object
-        /// </summary>
-        public Rus2Lat Transliterator { get { return _rule; } }
 
         /// <summary>
         /// Get/Set if adobe template XPGT file should be added to resulting file
@@ -397,8 +391,14 @@ namespace EPubLibrary
             AddImages(stream);
             AddFontFiles(stream);
             AddAdditionalFiles(stream);
-            AddTOCFile(stream);
+            AddNavigation(stream);
             AddContentFile(stream);
+        }
+
+        private void AddNavigation(ZipOutputStream stream)
+        {
+            _navigationManager.SetupBookNavigation(_title.Identifiers[0].ID, Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, TranslitMode));
+            AddTOCFile(stream);
         }
 
         /// <summary>
@@ -408,7 +408,7 @@ namespace EPubLibrary
         protected virtual void AddLicenseFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            LicenseFile licensePage = new LicenseFile(HTMLElementType.XHTML11)
+            var licensePage = new LicenseFile(HTMLElementType.XHTML11)
             {
                 FlatStructure = FlatStructure, 
                 EmbedStyles = EmbedStyles, 
@@ -600,7 +600,7 @@ namespace EPubLibrary
         {
             stream.SetLevel(9);
 
-            AboutPageFile aboutPage = new AboutPageFile(HTMLElementType.XHTML11)
+            var aboutPage = new AboutPageFile(HTMLElementType.XHTML11)
             {
                 FlatStructure = FlatStructure, 
                 EmbedStyles = EmbedStyles,
@@ -662,12 +662,12 @@ namespace EPubLibrary
             }
 
             // remove navigation leaf end points with empty names
-            _tableOfContentFile.Consolidate();
+            _navigationManager.Consolidate();
 
             // to be valid we need at least one NAVPoint
-            if ( _tableOfContentFile.IsNavMapEmpty() && (_sections.Count > 0) )
+            if (_navigationManager.TableOfContentFile.IsNavMapEmpty() && (_sections.Count > 0))
             {
-                _tableOfContentFile.AddNavPoint(_sections[0], _rule.Translate(_title.BookTitles[0].TitleName, TranliterateToc ? TranslitMode : TranslitModeEnum.None));                        
+                _navigationManager.AddBookSubsection(_sections[0], Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, TranliterateToc ? TranslitMode : TranslitModeEnum.None));                        
             }
         }
 
@@ -676,17 +676,8 @@ namespace EPubLibrary
         {
             subsection.Id = string.Format("bookcontent{0}_{1}", count, subcount); // generate unique ID
             _content.AddXHTMLTextItem(subsection);
-            if (!subsection.NotPartOfNavigation)
-            {
-                if (subsection.NavigationLevel <= 1)
-                {
-                    _tableOfContentFile.AddNavPoint(subsection, _rule.Translate(subsection.PageTitle, TranliterateToc? TranslitMode : TranslitModeEnum.None));
-                }
-                else
-                {
-                    _tableOfContentFile.AddSubNavPoint(subsection.NavigationParent, subsection, _rule.Translate(subsection.PageTitle, TranliterateToc ? TranslitMode : TranslitModeEnum.None));
-                }
-            }
+            _navigationManager.AddBookSubsection(subsection,
+                Rus2Lat.Instance.Translate(subsection.PageTitle, TranliterateToc ? TranslitMode : TranslitModeEnum.None));
         }
 
 
@@ -726,12 +717,9 @@ namespace EPubLibrary
 
         protected ImageOnStorage GetCoverImageName(EPUBImage eImage)
         {
-            foreach (var image in _images)
+            if (_images.Any(image => image.Key == _coverImage))
             {
-                if (image.Key == _coverImage)
-                {
-                    return new ImageOnStorage(eImage) {FileName = eImage.ID};
-                }
+                return new ImageOnStorage(eImage) {FileName = eImage.ID};
             }
             return new ImageOnStorage(eImage) { FileName = "cover.jpg" };
         }
@@ -739,10 +727,8 @@ namespace EPubLibrary
         protected void AddTOCFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            CreateFileEntryInZip(stream, _tableOfContentFile);
-            _tableOfContentFile.ID = _title.Identifiers[0].ID;
-            _tableOfContentFile.Title = _rule.Translate(_title.BookTitles[0].TitleName,TranslitMode);
-            _tableOfContentFile.Write(stream);
+            CreateFileEntryInZip(stream, _navigationManager.TableOfContentFile);
+            _navigationManager.TableOfContentFile.Write(stream);
             _content.AddTOC();
         }
 
@@ -775,7 +761,7 @@ namespace EPubLibrary
             stream.SetLevel(9);
             foreach (var epubImage in _images)
             {
-                ImageOnStorage imageFile = new ImageOnStorage(epubImage.Value) {FileName = epubImage.Value.ID};
+                var imageFile = new ImageOnStorage(epubImage.Value) {FileName = epubImage.Value.ID};
                 CreateFileEntryInZip(stream,imageFile);
                 stream.Write(epubImage.Value.ImageData, 0, epubImage.Value.ImageData.Length);
                 _content.AddImage(imageFile);
@@ -794,7 +780,7 @@ namespace EPubLibrary
             entry.ZipFileIndex = 0;
             s.PutNextEntry(entry);
             const string mimetype = "application/epub+zip";
-            ASCIIEncoding encoding = new ASCIIEncoding();
+            var encoding = new ASCIIEncoding();
             byte[] buffer = encoding.GetBytes(mimetype);
             s.Write(buffer, 0, buffer.Length);
             s.CloseEntry();
@@ -847,15 +833,13 @@ namespace EPubLibrary
             {
                 foreach (var subFont in cssFontFamily.Value.Fonts)
                 {
-                    CssFontDefinition cssFont = new CssFontDefinition();
-                    cssFont.Family = cssFontFamily.Key;
-                    cssFont.FontStyle = CssFontDefinition.FromStyle(subFont.FontStyle);
-                    cssFont.FontWidth = CssFontDefinition.FromWidth(subFont.FontWidth);
-                    List<string> sources = new List<string>();
-                    foreach (var fontSource in subFont.Sources)
+                    var cssFont = new CssFontDefinition
                     {
-                        sources.Add(CssFontDefinition.ConvertToSourceString(fontSource, EmbedStyles, FlatStructure));
-                    }
+                        Family = cssFontFamily.Key,
+                        FontStyle = CssFontDefinition.FromStyle(subFont.FontStyle),
+                        FontWidth = CssFontDefinition.FromWidth(subFont.FontWidth)
+                    };
+                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, EmbedStyles, FlatStructure)).ToList();
                     cssFont.FontSrcs = sources;
                     _mainCss.AddFont(cssFont);
                 }

@@ -1,34 +1,45 @@
-﻿using EPubLibrary.Content.Guide;
+﻿using EPubLibrary.TOC;
 using EPubLibrary.XHTML_Items;
 
 namespace EPubLibrary.Content.NavigationManagement
 {
     internal class NavigationManagerV2
     {
-        private readonly GuideSection _guide = new GuideSection();
+        private readonly TOCFile _tableOfContentFile = new TOCFile();
 
-        /// <summary>
-        /// Add new document to be a part of navigation
-        /// </summary>
-        /// <param name="baseXhtmlFile"></param>
-        public void AddDocumentToNavigation(BaseXHTMLFile baseXhtmlFile)
+
+
+        public TOCFile TableOfContentFile
         {
-            _guide.AddGuideItem(baseXhtmlFile.HRef, baseXhtmlFile.Id, baseXhtmlFile.DocumentType);
+            get { return _tableOfContentFile; }
         }
 
 
-        /// <summary>
-        /// Add all the relevant navigation documents to content document
-        /// </summary>
-        /// <param name="document"></param>
-        public void WriteNavigationItemsToContentDocumentElement(System.Xml.Linq.XElement document)
+        public void Consolidate()
         {
-            // if guide has data
-            if (_guide.HasData())
+            _tableOfContentFile.Consolidate();
+        }
+
+        public void AddBookSubsection(BookDocument subsection, string name)
+        {
+            if (!subsection.NotPartOfNavigation)
             {
-                // write guide to content
-                document.Add(_guide.GenerateGuide());
+                if (subsection.NavigationLevel <= 1)
+                {
+                    _tableOfContentFile.AddNavPoint(subsection, name);
+                }
+                else
+                {
+                    _tableOfContentFile.AddSubNavPoint(subsection.NavigationParent, subsection, name);
+                }
             }
+
+        }
+
+        public void SetupBookNavigation(string id, string title)
+        {
+            _tableOfContentFile.ID = id;
+            _tableOfContentFile.Title = title;
         }
 
     }

@@ -11,8 +11,6 @@ namespace EPubLibrary.TOC
 {
     public class TOCFile : IEPubPath
     {
-        public static readonly EPubInternalPath TOCFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/toc.ncx");
-
         protected readonly NavMapElement NavMap = new NavMapElement();
         private string _title;
 
@@ -53,25 +51,25 @@ namespace EPubLibrary.TOC
 
         public void AddNavPoint(BookDocument content, string name)
         {
-            var bookPoint = new NavPoint { Content = content.PathInEPUB.GetRelativePath(TOCFilePath, content.FlatStructure), Name = name };
+            var bookPoint = new NavPoint { Content = content.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, content.FlatStructure), Name = name };
             NavMap.Add(bookPoint);
         }
 
         public void AddSubNavPoint(BookDocument content, BookDocument subcontent, string name)
         {
-            var point = NavMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(TOCFilePath, content.FlatStructure)));
+            var point = NavMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, content.FlatStructure)));
             if (point != null)
             {
-                point.SubPoints.Add(new NavPoint { Content = subcontent.PathInEPUB.GetRelativePath(TOCFilePath, subcontent.FlatStructure), Name = name });
+                point.SubPoints.Add(new NavPoint { Content = subcontent.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, subcontent.FlatStructure), Name = name });
             }
             else
             {
                 foreach (var element in NavMap)
                 {
-                    point = element.AllContent().Find(x => (x.Content == content.PathInEPUB.GetRelativePath(TOCFilePath, content.FlatStructure)));
+                    point = element.AllContent().Find(x => (x.Content == content.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, content.FlatStructure)));
                     if (point != null)
                     {
-                        point.SubPoints.Add(new NavPoint { Content = subcontent.PathInEPUB.GetRelativePath(TOCFilePath, subcontent.FlatStructure), Name = name });
+                        point.SubPoints.Add(new NavPoint { Content = subcontent.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, subcontent.FlatStructure), Name = name });
                         return;
                     }
                 }
@@ -83,7 +81,7 @@ namespace EPubLibrary.TOC
 
         public void AddSubLink(BookDocument content, BookDocument subcontent, string name)
         {
-            var point = NavMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(TOCFilePath,content.FlatStructure)));
+            var point = NavMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, content.FlatStructure)));
             if (point != null)
             {
                 point.SubPoints.Add(new NavPoint { Content = string.Format("{0}#{1}", content, subcontent), Name = name });
@@ -96,7 +94,7 @@ namespace EPubLibrary.TOC
         }
 
 
-        protected virtual void CreateTOCDocument(XDocument document)
+        protected void CreateTOCDocument(XDocument document)
         {
             if (ID == null)
             {
@@ -139,8 +137,13 @@ namespace EPubLibrary.TOC
 
             ncxElement.Add(NavMap.GenerateXMLMap());
 
-            document.Add(new XDocumentType("ncx", @"-//NISO//DTD ncx 2005-1//EN", @"http://www.daisy.org/z3986/2005/ncx-2005-1.dtd", null));
+            AddNamespaces(document);
             document.Add(ncxElement);
+        }
+
+        protected virtual void AddNamespaces(XDocument document)
+        {
+            document.Add(new XDocumentType("ncx", @"-//NISO//DTD ncx 2005-1//EN", @"http://www.daisy.org/z3986/2005/ncx-2005-1.dtd", null));
         }
 
 
@@ -163,7 +166,7 @@ namespace EPubLibrary.TOC
 
         public EPubInternalPath PathInEPUB
         {
-            get { return TOCFilePath; }
+            get { return DefaultInternalPaths.TOCFilePath; }
         }
     }
 }

@@ -5,12 +5,10 @@ using EPubLibrary.Content.Collections;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.Content.Manifest;
 using EPubLibrary.Content.NavigationDocument;
-using EPubLibrary.Content.NavigationManagement;
 using EPubLibrary.Content.Spine;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.ReferenceUtils;
 using EPubLibrary.XHTML_Items;
-using EPubLibrary.TOC;
 using EPubLibrary.PathUtils;
 using System.IO;
 using System.Text;
@@ -26,7 +24,8 @@ namespace EPubLibrary.Content
         private readonly ManifestSectionV3 _manifest;
         private readonly BindingsV3 _bindings = new BindingsV3();
         private readonly  EPubSeriesCollections _seriesCollections  = new EPubSeriesCollections();
-        private readonly NavigationManagerV3 _navigationManager =   new NavigationManagerV3();
+        private readonly GuideSection _guide = new GuideSection();
+
 
 
         private readonly SpineSectionV3 _spine;
@@ -348,7 +347,7 @@ namespace EPubLibrary.Content
                 }
                 _spine.Add(bookSpine);
             }
-            _navigationManager.AddDocumentToNavigation(baseXhtmlFile);
+            _guide.AddDocumentToNavigation(baseXhtmlFile);
         }
 
         public void AddFontFile(FontOnStorage fontFile)
@@ -366,7 +365,7 @@ namespace EPubLibrary.Content
             }
             var tocItem = new ManifestItemV3
             {
-                HRef = TOCFile.TOCFilePath.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure), 
+                HRef = DefaultInternalPaths.TOCFilePath.GetRelativePath(DefaultInternalPaths.ContentFilePath, _flatStructure), 
                 ID = "ncx", 
                 MediaType = EPubCoreMediaType.ApplicationNCX,
             };
@@ -486,7 +485,12 @@ namespace EPubLibrary.Content
 
         private void AddGuideToContentDocument(XElement document)
         {
-            _navigationManager.WriteNavigationItemsToContentDocumentElement(document);
+            // if guide has data
+            if (_guide.HasData())
+            {
+                // write guide to content
+                document.Add(_guide.GenerateGuide());
+            }
         }
 
         private void AddSpineToContentDocument(XElement xElement)
