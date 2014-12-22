@@ -4,6 +4,7 @@ using EPubLibrary.XHTML_Items;
 using FB2EPubConverter.SourceDataInclusionControls;
 using Fb2epubSettings;
 using FB2Library.HeaderItems;
+using TranslitRu;
 using XHTMLClassLibrary.BaseElements;
 
 namespace FB2EPubConverter.ElementConvertersV2
@@ -63,7 +64,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             {
                 var bookTitle = new Title
                 {
-                    TitleName = epubFile.Transliterator.Translate(DescriptionConverters.FormatBookTitle(titleInfo, _commonSettings),
+                    TitleName = Rus2Lat.Instance.Translate(DescriptionConverters.FormatBookTitle(titleInfo, _commonSettings),
                         epubFile.TranslitMode),
                     Language = string.IsNullOrEmpty(titleInfo.BookTitle.Language)
                         ? titleInfo.Language

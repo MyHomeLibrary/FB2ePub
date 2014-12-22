@@ -149,7 +149,7 @@ namespace Fb2ePubConverter
             Logger.Log.DebugFormat("Transliteration of file names set to : {0}", Settings.CommonSettings.TransliterateFileName);
             if (Settings.CommonSettings.TransliterateFileName)
             {
-                outFileName = epubFile.Transliterator.Translate(outFileName, epubFile.TranslitMode);
+                outFileName = Rus2Lat.Instance.Translate(outFileName, epubFile.TranslitMode);
                 Logger.Log.DebugFormat("New transliterated file name : {0}", outFileName);
             }
             string outFile = outFileName;
@@ -175,14 +175,14 @@ namespace Fb2ePubConverter
 
         private void SetTransliterationOptions(IEpubFile epubFile)
         {
-            epubFile.Transliterator.RuleFile = string.IsNullOrEmpty(Settings.ResourcesPath) ? @".\Translit\translit.xml" : string.Format(@"{0}\Translit\translit.xml", Settings.ResourcesPath);
-            Logger.Log.DebugFormat("Using transliteration rule file : {0}", epubFile.Transliterator.RuleFile);
+            Rus2Lat.Instance.RuleFile = string.IsNullOrEmpty(Settings.ResourcesPath) ? @".\Translit\translit.xml" : string.Format(@"{0}\Translit\translit.xml", Settings.ResourcesPath);
+            Logger.Log.DebugFormat("Using transliteration rule file : {0}", Rus2Lat.Instance.RuleFile);
             if (Settings.CommonSettings.Transliterate)
             {
                 epubFile.TranslitMode = TranslitModeEnum.ExternalRuleFile;
-                if (!File.Exists(epubFile.Transliterator.RuleFile))
+                if (!File.Exists(Rus2Lat.Instance.RuleFile))
                 {
-                    Console.WriteLine(@"Unable to locate translation file {0}", epubFile.Transliterator.RuleFile);
+                    Console.WriteLine(@"Unable to locate translation file {0}", Rus2Lat.Instance.RuleFile);
                 }
             }
             else

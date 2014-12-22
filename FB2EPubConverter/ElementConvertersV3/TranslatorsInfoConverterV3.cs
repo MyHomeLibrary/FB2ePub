@@ -1,6 +1,7 @@
 ﻿using EPubLibrary;
 using Fb2epubSettings;
 using FB2Library.HeaderItems;
+using TranslitRu;
 
 namespace FB2EPubConverter.ElementConvertersV3
 {
@@ -12,7 +13,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             {
                 var person = new PersoneWithRole
                 {
-                    PersonName = epubFile.Transliterator.Translate(DescriptionConverters.GenerateAuthorString(translator, settings),
+                    PersonName = Rus2Lat.Instance.Translate(DescriptionConverters.GenerateAuthorString(translator, settings),
                         epubFile.TranslitMode),
                     FileAs = DescriptionConverters.GenerateFileAsString(translator, settings),
                     Role = RolesEnum.Translator,
