@@ -9,7 +9,7 @@ namespace EPubLibrary
         /// <summary>
         /// Transliteration mode
         /// </summary>
-        TranslitModeEnum TranslitMode { get; set; }
+        TransliterationSettings TranslitMode { get; set; }
 
         /// <summary>
         /// Set/get it Table of Content (TOC) entries should be transliterated

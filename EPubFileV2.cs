@@ -75,7 +75,7 @@ namespace EPubLibrary
         #region private_properties
         private bool _flatStructure;
         private string _coverImage;
-        private TranslitModeEnum _translitMode = TranslitModeEnum.ExternalRuleFile;
+        private TransliterationSettings _translitMode = new TransliterationSettings {Mode = TranslitModeEnum.ExternalRuleFile};
         #endregion
 
         #region public_properties
@@ -135,9 +135,9 @@ namespace EPubLibrary
         }
 
         /// <summary>
-        /// Transliteration mode
+        /// Transliteration settings
         /// </summary>
-        public TranslitModeEnum TranslitMode
+        public TransliterationSettings TranslitMode
         {
             get { return _translitMode; }
             set { _translitMode = value; }
@@ -667,7 +667,7 @@ namespace EPubLibrary
             // to be valid we need at least one NAVPoint
             if (_navigationManager.TableOfContentFile.IsNavMapEmpty() && (_sections.Count > 0))
             {
-                _navigationManager.AddBookSubsection(_sections[0], Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, TranliterateToc ? TranslitMode : TranslitModeEnum.None));                        
+                _navigationManager.AddBookSubsection(_sections[0], TranliterateToc ? Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, _translitMode) : _title.BookTitles[0].TitleName);                        
             }
         }
 
@@ -677,7 +677,7 @@ namespace EPubLibrary
             subsection.Id = string.Format("bookcontent{0}_{1}", count, subcount); // generate unique ID
             _content.AddXHTMLTextItem(subsection);
             _navigationManager.AddBookSubsection(subsection,
-                Rus2Lat.Instance.Translate(subsection.PageTitle, TranliterateToc ? TranslitMode : TranslitModeEnum.None));
+                TranliterateToc? Rus2Lat.Instance.Translate(subsection.PageTitle,  _translitMode):subsection.PageTitle);
         }
 
 
