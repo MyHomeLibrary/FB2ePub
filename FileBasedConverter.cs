@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,51 +14,51 @@ namespace TranslitRu
     internal  class FileBasedConverter : BaseTrasLitConverter
     {
 
-        private readonly Dictionary<char,string> ruleTable = new Dictionary<char, string>();
-        private string fileName;
+        private readonly Dictionary<char,string> _ruleTable = new Dictionary<char, string>();
+        private string _fileName;
 
         public string FileName
         {
             get
             {
-                return fileName;
+                return _fileName;
             }
             set
             {
-                fileName = value;
-                ruleTable.Clear();
+                _fileName = value;
+                _ruleTable.Clear();
             }
         }
 
 
         public override string ConvertCharacter(char inputCharacter)
         {
-            if (ruleTable.Count == 0)
+            if (_ruleTable.Count == 0)
             {
                 LoadRuleFile();
             }
             // temporary
-            if (ruleTable.ContainsKey(inputCharacter))
+            if (_ruleTable.ContainsKey(inputCharacter))
             {
-                return ruleTable[inputCharacter];
+                return _ruleTable[inputCharacter];
             }
-            return inputCharacter.ToString();
+            return inputCharacter.ToString(CultureInfo.InvariantCulture);
         }
 
         private void LoadRuleFile()
         {
-            if (string.IsNullOrEmpty(fileName))
+            if (string.IsNullOrEmpty(_fileName))
             {
                 throw new NullReferenceException("Please set file name first");
             }
-            if (!File.Exists(fileName))
+            if (!File.Exists(_fileName))
             {
-                throw new Exception(string.Format("File {0} does not exists on disk",Path.GetFullPath(fileName)));
+                throw new Exception(string.Format("File {0} does not exists on disk",Path.GetFullPath(_fileName)));
             }
 
-            using (Stream stream = File.OpenRead(fileName))
+            using (Stream stream = File.OpenRead(_fileName))
             {
-                XmlReaderSettings settings = new XmlReaderSettings
+                var settings = new XmlReaderSettings
                 {
                     ValidationType = ValidationType.Schema,
                 };
@@ -89,7 +90,7 @@ namespace TranslitRu
 
             XNamespace nameSpace = "http://www.lordkiron.com/translit";
 
-            ruleTable.Clear();
+            _ruleTable.Clear();
             foreach (var element in fileDocument.Root.Elements(nameSpace + "map"))
             {
                 XAttribute xin = element.Attribute("in");
@@ -104,7 +105,7 @@ namespace TranslitRu
                     Debug.Fail(string.Format("Invalid file format, 'out' attribute is required"));
                     continue;
                 }
-                ruleTable.Add(xin.Value[0],xout.Value);
+                _ruleTable.Add(xin.Value[0],xout.Value);
             }
 
         }
