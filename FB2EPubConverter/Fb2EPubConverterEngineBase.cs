@@ -175,22 +175,23 @@ namespace Fb2ePubConverter
 
         private void SetTransliterationOptions(IEpubFile epubFile)
         {
-            Rus2Lat.Instance.RuleFile = string.IsNullOrEmpty(Settings.ResourcesPath) ? @".\Translit\translit.xml" : string.Format(@"{0}\Translit\translit.xml", Settings.ResourcesPath);
-            Logger.Log.DebugFormat("Using transliteration rule file : {0}", Rus2Lat.Instance.RuleFile);
+            epubFile.TranslitMode.FileName = string.IsNullOrEmpty(Settings.ResourcesPath) ? @".\Translit\translit.xml" : string.Format(@"{0}\Translit\translit.xml", Settings.ResourcesPath);
+            Logger.Log.DebugFormat("Using transliteration rule file : {0}", epubFile.TranslitMode.FileName);
             if (Settings.CommonSettings.Transliterate)
             {
-                epubFile.TranslitMode = TranslitModeEnum.ExternalRuleFile;
-                if (!File.Exists(Rus2Lat.Instance.RuleFile))
+                epubFile.TranslitMode.Mode = TranslitModeEnum.ExternalRuleFile;
+                if (!File.Exists(epubFile.TranslitMode.FileName))
                 {
-                    Console.WriteLine(@"Unable to locate translation file {0}", Rus2Lat.Instance.RuleFile);
+                    Logger.Log.ErrorFormat(@"Unable to locate translation file {0}, switching transliteration off", epubFile.TranslitMode.FileName);
+                    epubFile.TranslitMode.Mode = TranslitModeEnum.None;
                 }
             }
             else
             {
-                epubFile.TranslitMode = TranslitModeEnum.None;
+                epubFile.TranslitMode.Mode = TranslitModeEnum.None;
             }
             epubFile.TranliterateToc = Settings.CommonSettings.TransliterateToc;
-            Logger.Log.DebugFormat("Transliteration mode : {0}", epubFile.TranslitMode);
+            Logger.Log.DebugFormat("Transliteration mode : {0}", epubFile.TranslitMode.Mode);
         }
 
         protected virtual void Reset()
