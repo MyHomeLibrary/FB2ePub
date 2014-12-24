@@ -1,0 +1,42 @@
+﻿The EPUB file format uses standard CSS 2.1 without some elements to change the way book presented.
+See http://www.w3schools.com/Css/default.asp for CSS tutorial.
+
+FB2 standard include some elements are absent in XHTML standard used in EPUB files.
+To preserve "special" representation of such elements in resulting EPUB such element marked with "class" attribute that you can
+style with CSS.
+
+Here is the list of the "class" attribute values used and their meanings:
+--------------------------------------------------------------------------------
+
+
+Here are style classes specific to cover page only:
+--------------------------------------------------------------------------------
+"coverpage" - coverpage main section (page)
+"coverimage" - coverpage image
+
+
+
+
+Here are style classes specific to TitlePage only:
+--------------------------------------------------------------------------------
+"titlepage" - title page main section (page)
+"title_series" - (applied only to h3 on title page) used to style series on Title page
+"title_authors" - (applied only to h3 on title page) used to style authors on Title page
+
+
+Here are style classes specific to About page only:
+--------------------------------------------------------------------------------
+"about"   - about page main section (page)
+
+
+Here are style classes specific to Navigation/Table of Context page only:
+--------------------------------------------------------------------------------
+"nav_body" - main body of navigation page
+"toc" - table of context nav section
+"toc-brief" - brief table of context nav section (not used yet)
+"landmarks" - landmarks nav section
+"loa" - list of audio clips nav section (not used yet)
+"loi" - list of illustrations nav section
+"lot" - list of tables nav section
+"lov" - list of video clips (not used yet)
+
