@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
-namespace EPubLibrary.TOC.NavMap
+namespace EPubLibrary.Content.NavigationDocument
 {
     public class NavPointV3
     {
         private readonly List<NavPointV3> _subpoints = new List<NavPointV3>();
 
         public List<NavPointV3> SubPoints { get { return _subpoints; } }
+
         public string Name { get; set; }
+
         public string Content { set; get; }
+
         public string Id { get; set; }
 
         public int GetDepth()

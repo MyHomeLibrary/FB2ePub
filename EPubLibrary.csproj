@@ -166,8 +166,8 @@
     <Compile Include="ReferenceUtils\OnixSchemaConverter.cs" />
     <Compile Include="ReferenceUtils\ReferencesUtils.cs" />
     <Compile Include="CSS_Items\StyleElement.cs" />
-    <Compile Include="TOC\NavMap\NavMapElementV3.cs" />
-    <Compile Include="TOC\NavMap\NavPointV3.cs" />
+    <Compile Include="Content\NavigationDocument\NavMapElementV3.cs" />
+    <Compile Include="Content\NavigationDocument\NavPointV3.cs" />
     <Compile Include="TOC\TOCFileV3Transitional.cs" />
     <Compile Include="V3StandardChecker.cs" />
     <Compile Include="Template\AdobeTemplate.cs" />

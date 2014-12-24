@@ -20,7 +20,12 @@ namespace EPubLibrary.Content.NavigationDocument
         private readonly NavMapElementV3 _tocNav = new NavMapElementV3
         {
             Type = NavigationTableType.TOC,
-            NavHeading = "Table of Contents",
+            Heading = "Table of Contents",
+        };
+
+        private readonly NavMapElementV3 _landmarks = new NavMapElementV3
+        {
+            Type = NavigationTableType.Landmarks
         };
 
         public static readonly EPubInternalPath NAVFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/nav.xhtml");
@@ -90,10 +95,20 @@ namespace EPubLibrary.Content.NavigationDocument
             }
 
             var body = new XElement(WWWNamespaces.XHTML + "body");
+            body.Add(new XAttribute("class","nav_body"));
             html.Add(body);
 
             var navElement = _tocNav.GenerateXMLMap();
-            body.Add(navElement);          
+            if (navElement != null)
+            {
+                body.Add(navElement);
+            }
+
+            var landmarksElement = _landmarks.GenerateXMLMap();
+            if (landmarksElement != null)
+            {
+                body.Add(landmarksElement);
+            }
         }
 
         public void AddNavPoint(BookDocument content, string name)

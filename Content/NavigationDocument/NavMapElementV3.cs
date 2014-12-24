@@ -3,23 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace EPubLibrary.TOC.NavMap
+namespace EPubLibrary.Content.NavigationDocument
 {
     public enum NavigationTableType
     {
-        TOC,
-        TOCBrief,
-        Landmarks,
-        LOA,
-        LOI,
-        LOT,LOV,
+        TOC,                // Table of Context
+        TOCBrief,           // Brief TOC
+        Landmarks,          // Landmarks
+        LOA,                // List of Audio Clips
+        LOI,                // List of Illustrations
+        LOT,                // List of Tables
+        LOV,                // List Of videos
+    }
+
+    public enum HeadingTypeOptions
+    {
+        H1,
+        H2,
+        H3,
+        H4,
+        H5
     }
 
     public class NavMapElementV3 : List<NavPointV3>
     {
         public string Name { get; set; }
 
-        public string NavHeading { get; set; }
+        public string Heading { get; set; }
+
+        public HeadingTypeOptions HeadingType { get; set; }
 
         private NavigationTableType _type = NavigationTableType.TOC;
 
@@ -40,18 +52,19 @@ namespace EPubLibrary.TOC.NavMap
 
         public XElement GenerateXMLMap()
         {
-            var navMap = new XElement(DaisyNamespaces.NCXNamespace + "nav");
+            var navMap = new XElement("nav");
             string typeAsString = TypeToString(_type);
-            navMap.Add(new XAttribute(EPubNamespaces.OpsNamespace + "type", typeAsString));
+            navMap.Add(new XAttribute("type", typeAsString));
             navMap.Add(new XAttribute("id", typeAsString)); // use same as id
+            navMap.Add(new XAttribute("class",typeAsString));
 
-            if (!string.IsNullOrEmpty(NavHeading))
+            if (!string.IsNullOrEmpty(Heading))
             {
-                var h1 = new XElement(DaisyNamespaces.NCXNamespace + "h1") { Value = NavHeading };
+                var h1 = new XElement(GetHeadingTypeAsString(HeadingType)) { Value = Heading };
                 navMap.Add(h1);              
             }
 
-            var subElements = new XElement(DaisyNamespaces.NCXNamespace + "ol");
+            var subElements = new XElement("ol");
             foreach (var point in this)
             {
                 XElement navXPoint = point.Generate();
@@ -59,6 +72,24 @@ namespace EPubLibrary.TOC.NavMap
             }
             navMap.Add(subElements);
             return navMap;
+        }
+
+        private string GetHeadingTypeAsString(HeadingTypeOptions headingType)
+        {
+            switch (headingType)
+            {
+                case HeadingTypeOptions.H1:
+                    return "h1";
+                case HeadingTypeOptions.H2:
+                    return "h2";
+                case HeadingTypeOptions.H3:
+                    return "h3";
+                case HeadingTypeOptions.H4:
+                    return "h4";
+                case HeadingTypeOptions.H5:
+                    return "h5";
+            }
+            return "h1";
         }
 
         private static string TypeToString(NavigationTableType type)
