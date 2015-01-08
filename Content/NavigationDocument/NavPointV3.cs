@@ -64,21 +64,11 @@ namespace EPubLibrary.Content.NavigationDocument
         {
             var navXPoint = new XElement(WWWNamespaces.XHTML + "li");
             navXPoint.Add(new XAttribute("id", Id));
-            var link = new XElement(WWWNamespaces.XHTML + "a") {Value = Name};
+            var link = new XElement(WWWNamespaces.XHTML + "a") { Value = EnsureValid(Name) };
             link.Add(new XAttribute("href",Content));
             navXPoint.Add(link);
-            //navXPoint.Add(new XAttribute("playOrder", pointnumber));
 
-            //XElement navLabel = new XElement(xmlNamespace + "navLabel");
-            //XElement text = new XElement(xmlNamespace + "text", EnsureValid(Name));
-            //navLabel.Add(text);
-            //navXPoint.Add(navLabel);
-
-            //XElement content = new XElement(xmlNamespace + "content");
-            //content.Add(new XAttribute("src", Content));
-            //navXPoint.Add(content);
-
-            if (SubPoints.Count > 0)
+            if (SubPoints.Count > 0) // if has sub items ("branch")
             {
                 var subElements = new XElement(WWWNamespaces.XHTML + "ol");
                 foreach (var subPoint in SubPoints)
@@ -96,11 +86,11 @@ namespace EPubLibrary.Content.NavigationDocument
         /// Makes sure that the Name does not contains invalid 
         /// (control) characters that might confuse the reader (ADE etc)
         /// </summary>
-        /// <param name="Name"></param>
+        /// <param name="name"></param>
         /// <returns></returns>
-        private static string EnsureValid(string Name)
+        private static string EnsureValid(string name)
         {
-            return WebUtility.HtmlEncode(Name);
+            return WebUtility.HtmlEncode(name);
         }
  
     }

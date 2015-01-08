@@ -34,7 +34,7 @@ namespace EPubLibrary.Content.NavigationManagement
                 if (subsection.NavigationLevel <= 1)
                 {
                     _tableOfContentFile.AddNavPoint(subsection, name);
-                    _navigationDocument.AddNavPoint(subsection, name);
+                    _navigationDocument.AddTOCNavPoint(subsection, name);
                 }
                 else
                 {

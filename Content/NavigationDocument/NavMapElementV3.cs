@@ -54,7 +54,7 @@ namespace EPubLibrary.Content.NavigationDocument
         {
             var navMap = new XElement("nav");
             string typeAsString = TypeToString(_type);
-            navMap.Add(new XAttribute("type", typeAsString));
+            navMap.Add(new XAttribute(EPubNamespaces.OpsNamespace + "type", typeAsString));
             navMap.Add(new XAttribute("id", typeAsString)); // use same as id
             navMap.Add(new XAttribute("class",typeAsString));
 

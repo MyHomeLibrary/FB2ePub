@@ -111,7 +111,7 @@ namespace EPubLibrary.Content.NavigationDocument
             }
         }
 
-        public void AddNavPoint(BookDocument content, string name)
+        public void AddTOCNavPoint(BookDocument content, string name)
         {
             if (string.IsNullOrEmpty(name))
             {

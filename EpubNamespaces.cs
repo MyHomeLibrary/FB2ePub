@@ -59,6 +59,33 @@ namespace EPubLibrary
         /// http://www.w3.org/1999/xhtml
         /// </summary>
         public static readonly XNamespace XHTML = @"http://www.w3.org/1999/xhtml";
+
+
+        /// <summary>
+        /// MathML namespace
+        /// http://www.w3.org/1998/Math/MathML
+        /// </summary>
+        public static readonly XNamespace MathML = @"http://www.w3.org/1998/Math/MathML";
+
+
+        /// <summary>
+        /// Prononsiation Lexicone namespace 
+        /// http://www.w3.org/2005/01/pronunciation-lexicon
+        /// </summary>
+        public static readonly XNamespace PLex = @"http://www.w3.org/2005/01/pronunciation-lexicon";
+
+
+        /// <summary>
+        /// Synthesis namespace (Speech Synthesis Markup Language)
+        ///  http://www.w3.org/2001/10/synthesis 
+        /// </summary>
+        public static readonly XNamespace Synthesis = @" http://www.w3.org/2001/10/synthesis ";
+
+
+        /// <summary>
+        /// SVG graphics namespace
+        /// </summary>
+        public static readonly XNamespace SVG = @"http://www.w3.org/2000/svg";
     }
 
     /// <summary>
