@@ -143,6 +143,10 @@
       <Project>{58E261A5-B2EA-43F3-820D-902B5C061321}</Project>
       <Name>ISOLanguages</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ConverterContracts\ConverterContracts.csproj">
+      <Project>{71F465E1-FCA1-4701-8958-643E7332EA7F}</Project>
+      <Name>ConverterContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FB2EPubConverter\FB2EPubConverter.csproj">
       <Project>{738F2015-0DC7-4C38-BBF0-90FD5C3C2518}</Project>
       <Name>FB2EPubConverter</Name>

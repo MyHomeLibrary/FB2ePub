@@ -1,4 +1,5 @@
-﻿using EPubLibrary;
+﻿using ConverterContracts.Settings;
+using EPubLibrary;
 using Fb2epubSettings;
 using FB2Library;
 
@@ -13,7 +14,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         private readonly SeriesDataConverterV2 _seriesDataConverter = new SeriesDataConverterV2();
         private readonly BookIDConverterV2 _bookIDConverter = new BookIDConverterV2();
 
-        public HeaderDataConverterV2(EPubCommonSettings commonSettings,EPubV2Settings v2Settings)
+        public HeaderDataConverterV2(IEPubCommonSettings commonSettings,IEPubV2Settings v2Settings)
         {
             _titleInfoConverter = new TitleInfoConverterV2(commonSettings);
             _sourceInfoConverter = new SourceInfoConverterV2(commonSettings);

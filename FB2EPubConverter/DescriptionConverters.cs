@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Fb2epubSettings;
+using ConverterContracts.Settings;
 using FB2Library.Elements;
 using FB2Library.HeaderItems;
 
@@ -63,14 +63,14 @@ namespace FB2EPubConverter
             return allSequences;
         }
 
-        public  static string GenerateFileAsString(AuthorType author,EPubCommonSettings commonSettings)
+        public  static string GenerateFileAsString(AuthorType author,IEPubCommonSettings commonSettings)
         {
             var processor = new ProcessAuthorFormat { Format =commonSettings.FileAsFormat };
             return processor.GenerateAuthorString(author);
 
         }
 
-        public static string GenerateAuthorString(AuthorType author,EPubCommonSettings commonSettings)
+        public static string GenerateAuthorString(AuthorType author,IEPubCommonSettings commonSettings)
         {
             var processor = new ProcessAuthorFormat { Format = commonSettings.AuthorFormat };
             return processor.GenerateAuthorString(author);
@@ -83,7 +83,7 @@ namespace FB2EPubConverter
             return genre;
         }
 
-        public static string FormatBookTitle(ItemTitleInfo titleInfo, EPubCommonSettings commonSettings)
+        public static string FormatBookTitle(ItemTitleInfo titleInfo, IEPubCommonSettings commonSettings)
         {
             var formatTitle = new ProcessSeqFormatString
             {

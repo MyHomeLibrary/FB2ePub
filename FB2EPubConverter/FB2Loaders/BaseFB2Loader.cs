@@ -4,8 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using Fb2ePubConverter;
-using Fb2epubSettings;
+using ConverterContracts.Settings;
 using FB2Fix;
 using FB2Library;
 using XMLFixerLibrary;
@@ -14,7 +13,7 @@ namespace FB2EPubConverter.FB2Loaders
 {
     internal abstract class BaseFB2Loader : IFB2Loader
     {
-        public abstract List<FB2File> LoadFile(string fileName, FB2ImportSettings settings);
+        public abstract List<FB2File> LoadFile(string fileName, IFB2ImportSettings settings);
 
         protected FB2File ReadFb2FileStream(Stream s)
         {

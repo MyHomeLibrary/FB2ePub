@@ -1,57 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
+using ConverterContracts.Settings;
 
 namespace Fb2epubSettings.AppleSettings.ePub_v2
 {
-    /// <summary>
-    /// Defines types ("platforms") of the apple devices it distinguish between
-    /// in order to apply different settings
-    /// </summary>
-    public enum AppleTargetPlatform
-    {
-        [XmlEnum(Name = "")]
-        NotSet = 0, 
-        [XmlEnum(Name = "iPad")]
-        iPad = 1,
-        [XmlEnum(Name = "iPhone")]
-        iPhone = 2,
-        [XmlEnum(Name = "Any")]
-        All = 3,
-    };
-
-
-    /// <summary>
-    /// Defines orientation lock
-    /// preventing the device to display book in specific orientation
-    /// </summary>
-    public enum AppleOrientationLock
-    {
-        [XmlEnum(Name = "Disabled")]
-        None = 0,
-        [XmlEnum(Name = "LandscapeOnly")]
-        LandscapeOnly = 1,
-        [XmlEnum(Name = "PortraitOnly")]
-        PortraitOnly = 2,
-
-        LastValue = PortraitOnly,
-    };
-
     /// <summary>
     /// Represent Apple settings for ePub v2 files, subset for one "platform" - device type
     /// Based on Apple "iBookStore Assets Guide v4.7 Rev 3"
     /// </summary>
     [Serializable]
-    public class AppleEPub2PlatformSettings
+    public class AppleEPub2PlatformSettings : IAppleEPub2PlatformSettings
     {
         private bool _useCustomFonts = true;
-        private bool _openToSpread = false;
+        private bool _openToSpread;
         private AppleTargetPlatform _targetPlatform = AppleTargetPlatform.NotSet;
         private AppleOrientationLock _orientationLock = AppleOrientationLock.None;
-        private bool _fixedLayout = false;
+        private bool _fixedLayout;
 
         /// <summary>
         /// Direct system to use custom fonts for Apple based systems
@@ -106,7 +70,7 @@ namespace Fb2epubSettings.AppleSettings.ePub_v2
         /// Copies values from another object
         /// </summary>
         /// <param name="otherSettings"></param>
-        public void CopyFrom(AppleEPub2PlatformSettings otherSettings)
+        public void CopyFrom(IAppleEPub2PlatformSettings otherSettings)
         {
             if (otherSettings == null)
             {
@@ -116,11 +80,11 @@ namespace Fb2epubSettings.AppleSettings.ePub_v2
             {
                 return;
             }
-            _useCustomFonts = otherSettings._useCustomFonts;
-            _openToSpread = otherSettings._openToSpread;
-            _targetPlatform = otherSettings._targetPlatform;
-            _orientationLock = otherSettings._orientationLock;
-            _fixedLayout = otherSettings._fixedLayout;
+            _useCustomFonts = otherSettings.UseCustomFonts;
+            _openToSpread = otherSettings.OpenToSpread;
+            _targetPlatform = otherSettings.Name;
+            _orientationLock = otherSettings.OrientationLock;
+            _fixedLayout = otherSettings.FixedLayout;
         }
 
         public override string ToString()

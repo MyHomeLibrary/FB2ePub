@@ -1,8 +1,8 @@
 ﻿using System;
+using ConverterContracts.Settings;
 using EPubLibrary;
 using EPubLibrary.XHTML_Items;
 using FB2EPubConverter.SourceDataInclusionControls;
-using Fb2epubSettings;
 using FB2Library.HeaderItems;
 using TranslitRu;
 using XHTMLClassLibrary.BaseElements;
@@ -11,9 +11,9 @@ namespace FB2EPubConverter.ElementConvertersV2
 {
     internal class TitleInfoConverterV2
     {
-        private readonly EPubCommonSettings _commonSettings;
+        private readonly IEPubCommonSettings _commonSettings;
 
-        public TitleInfoConverterV2(EPubCommonSettings commonSettings)
+        public TitleInfoConverterV2(IEPubCommonSettings commonSettings)
         {
             _commonSettings = commonSettings;
         }

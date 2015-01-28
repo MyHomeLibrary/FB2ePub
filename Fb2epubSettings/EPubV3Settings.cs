@@ -1,15 +1,10 @@
 ﻿using System.Xml.Serialization;
+using ConverterContracts.Settings;
 
 namespace Fb2epubSettings
 {
-    public enum EPubV3SubStandard
-    {
-        V30,
-        V301,
-    }
-
     [XmlRoot(ElementName = "EPubV3Settings")]
-    public class EPubV3Settings
+    public class EPubV3Settings : IEPubV3Settings
     {
         private EPubV3SubStandard _v3SubStandard = EPubV3SubStandard.V30;
 
@@ -30,9 +25,9 @@ namespace Fb2epubSettings
         }
 
 
-        internal void CopyFrom(EPubV3Settings temp)
+        public void CopyFrom(IEPubV3Settings temp)
         {
-            _v3SubStandard = temp._v3SubStandard;
+            _v3SubStandard = temp.V3SubStandard;
         }
     }
 }

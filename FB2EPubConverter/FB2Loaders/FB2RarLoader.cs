@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Fb2epubSettings;
+using ConverterContracts.Settings;
 using FB2Library;
 using NUnrar.Archive;
 
@@ -12,7 +12,7 @@ namespace FB2EPubConverter.FB2Loaders
     /// </summary>
     internal class FB2RarLoader : BaseFB2Loader
     {
-        public override List<FB2File> LoadFile(string fileName, FB2ImportSettings settings)
+        public override List<FB2File> LoadFile(string fileName, IFB2ImportSettings settings)
         {
             var result = new List<FB2File>();
             try

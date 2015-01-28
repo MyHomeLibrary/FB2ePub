@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ConverterContracts.FontSettings;
 using FontsSettings;
 
 namespace Fb2epubSettings
 {
     public partial class AddFontsForm : Form
     {
-        private Dictionary<string, CSSFontFamily> _fonts = null;
+        private Dictionary<string, ICSSFontFamily> _fonts = null;
         private string _selectedFont = null;
 
 
@@ -21,7 +22,7 @@ namespace Fb2epubSettings
             get { return _selectedFont; } 
         }
 
-        public AddFontsForm(Dictionary<string, CSSFontFamily> fonts)
+        public AddFontsForm(Dictionary<string, ICSSFontFamily> fonts)
         {
             _fonts = fonts;
             InitializeComponent();

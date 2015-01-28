@@ -10,6 +10,7 @@ using FB2EPubConverter;
 using log4net;
 using ProcessStartInfo=System.Diagnostics.ProcessStartInfo;
 using System.Diagnostics;
+using ConverterContracts.Settings;
 using FolderSettingsHelper;
 using Fb2epubSettings;
 

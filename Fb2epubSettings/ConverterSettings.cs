@@ -1,30 +1,10 @@
-﻿using FontsSettings;
-using System;
+﻿using System;
 using System.Xml.Serialization;
+using ConverterContracts.Settings;
 
 namespace Fb2epubSettings
 {
-    /// <summary>
-    /// Fix mode options
-    /// </summary>
-    public enum FixOptions
-    {
-        DoNotFix, // do not attempt to fix
-        MinimalFix, // try minimal (internal) fix
-        UseFb2Fix, // use Fb2Fix if prev. failed
-        Fb2FixAlways, // always use Fb2Fix
-    }
 
-    public enum IgnoreInfoSourceOptions
-    {
-        IgnoreNothing = 0,
-        IgnoreMainTitle,
-        IgnoreSourceTitle,
-        IgnorePublishTitle,
-        IgnoreMainAndSource,
-        IgnoreMainAndPublish,
-        IgnoreSourceAndPublish,
-    }
 
     public enum EPubVersion
     {
@@ -33,16 +13,16 @@ namespace Fb2epubSettings
     }
 
     [XmlRoot(ElementName = "ConverterSettings")]
-    public class ConverterSettings
+    public class ConverterSettings : IConverterSettings
     {
         #region private_members
         private string _outputPath = string.Empty;
         private string _resourcesPath = string.Empty;
         private EPubVersion _standardVersion = EPubVersion.VEpub20;
-        private readonly FB2ImportSettings _fb2Settings = new FB2ImportSettings();
-        private readonly EPubV2Settings _v2Settings = new EPubV2Settings();
-        private readonly EPubV3Settings _v3Settings = new EPubV3Settings();
-        private  readonly EPubCommonSettings _commonSettings = new EPubCommonSettings();
+        private readonly IFB2ImportSettings _fb2Settings = new FB2ImportSettings();
+        private readonly IEPubV2Settings _v2Settings = new EPubV2Settings();
+        private readonly IEPubV3Settings _v3Settings = new EPubV3Settings();
+        private  readonly IEPubCommonSettings _commonSettings = new EPubCommonSettings();
         #endregion
 
         public ConverterSettings()
@@ -75,7 +55,7 @@ namespace Fb2epubSettings
         /// Get/Set common settings
         /// </summary>
         [XmlElement(ElementName = "Fb2ImportSettings")]
-        public FB2ImportSettings Fb2ImportSettings
+        public IFB2ImportSettings Fb2ImportSettings
         {
             get { return _fb2Settings; }
             set { _fb2Settings.CopyFrom(value); }
@@ -86,7 +66,7 @@ namespace Fb2epubSettings
         /// Get/Set common settings
         /// </summary>
         [XmlElement(ElementName = "CommonSettings")]
-        public EPubCommonSettings CommonSettings
+        public IEPubCommonSettings CommonSettings
         {
             get { return _commonSettings; }
             set { _commonSettings.CopyFrom(value); }
@@ -97,7 +77,7 @@ namespace Fb2epubSettings
         /// Get/Set V2 settings
         /// </summary>
         [XmlElement(ElementName = "V2Settings")]
-        public EPubV2Settings V2Settings
+        public IEPubV2Settings V2Settings
         {
             get { return _v2Settings; }
             set { _v2Settings.CopyFrom(value); }
@@ -107,7 +87,7 @@ namespace Fb2epubSettings
         /// Get/Set V3 settings
         /// </summary>
         [XmlElement(ElementName = "V3Settings")]
-        public EPubV3Settings V3Settings
+        public IEPubV3Settings V3Settings
         {
             get { return _v3Settings; }
             set { _v3Settings.CopyFrom(value); }

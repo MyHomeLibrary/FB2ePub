@@ -224,6 +224,10 @@
       <Project>{CDFF6D0A-EB28-4817-8635-D6B0A9FDE833}</Project>
       <Name>TranslitRu</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ConverterContracts\ConverterContracts.csproj">
+      <Project>{71f465e1-fca1-4701-8958-643e7332ea7f}</Project>
+      <Name>ConverterContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fb2epubSettings\Fb2epubSettings.csproj">
       <Project>{BB87C009-1337-43FF-ADF6-6E7861AA9343}</Project>
       <Name>Fb2epubSettings</Name>

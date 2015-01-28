@@ -1,14 +1,15 @@
 ﻿using System.Xml.Serialization;
-using Fb2epubSettings.AppleSettings;
+using ConverterContracts.Settings;
+using Fb2epubSettings.AppleSettings.ePub_v2;
 
 namespace Fb2epubSettings
 {
     [XmlRoot(ElementName = "EPubV2Settings")]
-    public class EPubV2Settings
+    public class EPubV2Settings : IEPubV2Settings
     {
-        private bool _enableAdobeTemplate = false;
+        private bool _enableAdobeTemplate;
         private string _adobeTemplatePath = string.Empty;
-        private readonly AppleConverterSettings _appleEPubSettings = new AppleConverterSettings();
+        private readonly IAppleConverterePub2Settings _appleEPubSettings = new AppleConverterePub2Settings();
         private bool _addCalibreMetadata = true;
 
         public void SetupDefaults()
@@ -43,7 +44,7 @@ namespace Fb2epubSettings
         /// Return reference to set of apple/iBook related settings
         /// </summary>
         [XmlElement(ElementName = "AppleConverterEPub2Settings")]
-        public AppleConverterSettings AppleConverterEPubSettings
+        public IAppleConverterePub2Settings AppleConverterEPubSettings
         {
             get { return _appleEPubSettings; }
             set { _appleEPubSettings.CopyFrom(value); }
@@ -60,12 +61,12 @@ namespace Fb2epubSettings
         }
 
 
-        public void CopyFrom(EPubV2Settings temp)
+        public void CopyFrom(IEPubV2Settings temp)
         {
-            _enableAdobeTemplate = temp._enableAdobeTemplate;
-            _adobeTemplatePath = temp._adobeTemplatePath;
-            _addCalibreMetadata = temp._addCalibreMetadata;
-            _appleEPubSettings.CopyFrom(temp._appleEPubSettings);
+            _enableAdobeTemplate = temp.EnableAdobeTemplate;
+            _adobeTemplatePath = temp.AdobeTemplatePath;
+            _addCalibreMetadata = temp.AddCalibreMetadata;
+            _appleEPubSettings.CopyFrom(temp.AppleConverterEPubSettings);
 
         }
     }

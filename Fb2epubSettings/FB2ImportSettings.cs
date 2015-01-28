@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Xml.Serialization;
+using ConverterContracts.Settings;
 
 namespace Fb2epubSettings
 {
-    public class FB2ImportSettings
+    public class FB2ImportSettings : IFB2ImportSettings
     {
         #region private_members
         private FixOptions _fixMode = FixOptions.DoNotFix;
@@ -11,7 +12,7 @@ namespace Fb2epubSettings
         #endregion
 
 
-        public void CopyFrom(FB2ImportSettings temp)
+        public void CopyFrom(IFB2ImportSettings temp)
         {
             if (temp == null)
             {
@@ -21,8 +22,8 @@ namespace Fb2epubSettings
             {
                 return;
             }
-            _fixMode = temp._fixMode;
-            _convertAlphaPng = temp._convertAlphaPng;
+            _fixMode = temp.FixMode;
+            _convertAlphaPng = temp.ConvertAlphaPng;
         }
 
         public void SetupDefaults()
