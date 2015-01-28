@@ -45,22 +45,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FontSettings\IFontSource.cs" />
-    <Compile Include="FontSettings\ICSSFont.cs" />
-    <Compile Include="FontSettings\ICSSFontFamily.cs" />
-    <Compile Include="FontSettings\ICSSStylableElement.cs" />
-    <Compile Include="Settings\IAppleConverterePub2Settings.cs" />
-    <Compile Include="Settings\IAppleEPub2PlatformSettings.cs" />
     <Compile Include="Settings\IConverterSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\IEPubCommonSettings.cs" />
-    <Compile Include="FontSettings\IEPubFontSettings.cs" />
-    <Compile Include="Settings\IEPubV2Settings.cs" />
-    <Compile Include="Settings\IEPubV3Settings.cs" />
     <Compile Include="Settings\IFB2ImportSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\epublibrary\EPubLibraryContracts\EPubLibraryContracts.csproj">
+      <Project>{a5581cdb-9ffc-45d6-b20c-6eb060e978fd}</Project>
+      <Name>EPubLibraryContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\fontsettings\FontSettingsContracts\FontSettingsContracts.csproj">
+      <Project>{F39FC602-BF90-4721-8274-CECF45676C10}</Project>
+      <Name>FontSettingsContracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

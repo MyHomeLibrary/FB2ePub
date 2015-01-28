@@ -213,6 +213,14 @@
     <EmbeddedResource Include="Resources\Fb2epubSettings.ru.resx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\epublibrary\EPubLibraryContracts\EPubLibraryContracts.csproj">
+      <Project>{a5581cdb-9ffc-45d6-b20c-6eb060e978fd}</Project>
+      <Name>EPubLibraryContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\fontsettings\FontSettingsContracts\FontSettingsContracts.csproj">
+      <Project>{F39FC602-BF90-4721-8274-CECF45676C10}</Project>
+      <Name>FontSettingsContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\fontsettings\FontsSettings.csproj">
       <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
       <Name>FontsSettings</Name>

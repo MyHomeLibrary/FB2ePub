@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using ConverterContracts.Settings;
+using EPubLibraryContracts.Settings;
 
 namespace Fb2epubSettings.AppleSettings.ePub_v2
 {

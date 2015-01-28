@@ -1,4 +1,6 @@
-﻿namespace ConverterContracts.Settings
+﻿using EPubLibraryContracts.Settings;
+
+namespace ConverterContracts.Settings
 {
     public interface IConverterSettings
     {

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using ConverterContracts.FontSettings;
-using FontsSettings;
+﻿using System.Collections.Generic;
+using FontSettingsContracts;
 
 namespace Fb2epubSettings
 {

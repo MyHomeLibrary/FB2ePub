@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
-using ConverterContracts.FontSettings;
 using ConverterContracts.Settings;
+using FontSettingsContracts;
 using FontsSettings;
 namespace Fb2epubSettings
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
-using ConverterContracts.Settings;
+using EPubLibraryContracts.Settings;
 using Fb2epubSettings.AppleSettings.ePub_v2;
 
 namespace Fb2epubSettings

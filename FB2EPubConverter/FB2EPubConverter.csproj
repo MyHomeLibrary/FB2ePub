@@ -212,9 +212,17 @@
       <Project>{2868CFB2-562D-4C26-9471-F78F1D94CE0D}</Project>
       <Name>EPubLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\epublibrary\EPubLibraryContracts\EPubLibraryContracts.csproj">
+      <Project>{a5581cdb-9ffc-45d6-b20c-6eb060e978fd}</Project>
+      <Name>EPubLibraryContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\fb2librarynet\FB2Library.csproj">
       <Project>{4DEC5888-E71A-4D00-93B7-7F11C92D0A3F}</Project>
       <Name>FB2Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\fontsettings\FontSettingsContracts\FontSettingsContracts.csproj">
+      <Project>{F39FC602-BF90-4721-8274-CECF45676C10}</Project>
+      <Name>FontSettingsContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\fontsettings\FontsSettings.csproj">
       <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
