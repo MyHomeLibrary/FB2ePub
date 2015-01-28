@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
-using ConverterContracts.FontSettings;
+using FontSettingsContracts;
 
 namespace FontsSettings
 {  
