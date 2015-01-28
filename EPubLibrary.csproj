@@ -219,6 +219,10 @@
       <Project>{e596a296-1c1a-42b7-8482-b7b0e95b82d3}</Project>
       <Name>HTMLClassLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\fontsettings\FontSettingsContracts\FontSettingsContracts.csproj">
+      <Project>{f39fc602-bf90-4721-8274-cecf45676c10}</Project>
+      <Name>FontSettingsContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\fontsettings\FontsSettings.csproj">
       <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
       <Name>FontsSettings</Name>

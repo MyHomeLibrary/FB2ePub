@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using ConverterContracts.FontSettings;
-using FontsSettings;
+using FontSettingsContracts;
 
 namespace EPubLibrary.CSS_Items
 {
@@ -53,9 +51,14 @@ namespace EPubLibrary.CSS_Items
             set { if (value != null) parameters["src"] = value; }
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public override bool Equals(object obj)
         {
-            CssFontDefinition otherFont = obj as CssFontDefinition;
+            var otherFont = obj as CssFontDefinition;
             if (otherFont == null)
             {
                 return false;
@@ -82,13 +85,8 @@ namespace EPubLibrary.CSS_Items
             return true;
         }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
         /// <summary>
-        /// Convert from font style enumiration to string to be used in CSS
+        /// Convert from font style enumeration to string to be used in CSS
         /// </summary>
         /// <param name="style">style to convert</param>
         /// <returns>resulting style as string</returns>
