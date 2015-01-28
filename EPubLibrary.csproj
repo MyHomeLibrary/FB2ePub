@@ -211,6 +211,10 @@
     <None Include="license.docx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\fb2epub\ConverterContracts\ConverterContracts.csproj">
+      <Project>{71f465e1-fca1-4701-8958-643e7332ea7f}</Project>
+      <Name>ConverterContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\fb2epub\HTML5ClassLibrary\HTMLClassLibrary.csproj">
       <Project>{e596a296-1c1a-42b7-8482-b7b0e95b82d3}</Project>
       <Name>HTMLClassLibrary</Name>

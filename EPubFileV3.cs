@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using ConverterContracts.FontSettings;
 using EPubLibrary.Container;
 using EPubLibrary.Content;
 using EPubLibrary.Content.Collections;
@@ -695,7 +696,7 @@ namespace EPubLibrary
         /// <param name="fonts">font settings to use</param>
         /// <param name="resourcesPath">path to program's "resources"</param>
         /// <param name="decorateFontNames">add or not random decoration to the font names</param>
-        public void SetEPubFonts(EPubFontSettings fonts, string resourcesPath, bool decorateFontNames)
+        public void SetEPubFonts(IEPubFontSettings fonts, string resourcesPath, bool decorateFontNames)
         {
             _fontSettings.ResourceMask = resourcesPath;
             _fontSettings.Load(fonts, decorateFontNames ? Title.Identifiers[0].IdentifierName : string.Empty);
@@ -704,7 +705,7 @@ namespace EPubLibrary
             AddCssElementsToCSS(_fontSettings.CssElements);
         }
 
-        private void AddCssElementsToCSS(Dictionary<string, Dictionary<string, List<CSSFontFamily>>> cssElements)
+        private void AddCssElementsToCSS(Dictionary<string, Dictionary<string, List<ICSSFontFamily>>> cssElements)
         {
             // Now add the elements
             foreach (var elementName in cssElements.Keys)
@@ -742,7 +743,7 @@ namespace EPubLibrary
         }
 
 
-        private void AddFontsToCSS(Dictionary<string, CSSFontFamily> fontsFamilies)
+        private void AddFontsToCSS(Dictionary<string, ICSSFontFamily> fontsFamilies)
         {
             // Add the fonts to CSS
             foreach (var cssFontFamily in fontsFamilies)

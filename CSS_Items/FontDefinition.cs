@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using ConverterContracts.FontSettings;
 using FontsSettings;
 
 namespace EPubLibrary.CSS_Items
@@ -148,7 +149,7 @@ namespace EPubLibrary.CSS_Items
         /// <param name="embedStyles"></param>
         /// <param name="flatStructure"></param>
         /// <returns></returns>
-        public static string ConvertToSourceString(FontSource fontSource, bool embedStyles,bool flatStructure)
+        public static string ConvertToSourceString(IFontSource fontSource, bool embedStyles,bool flatStructure)
         {
             StringBuilder builder = new StringBuilder();
                 switch (fontSource.Type)
