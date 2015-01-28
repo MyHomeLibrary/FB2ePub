@@ -112,7 +112,6 @@
       <DependentUpon>AddPathForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AppleSettings\ePub_v2\AppleConverterePub2Settings.cs" />
-    <Compile Include="AppleSettings\AppleConverterSettings.cs" />
     <Compile Include="AppleSettings\ePub_v2\AppleEPub2PlatformSettings.cs" />
     <Compile Include="AppleV2Settings.cs">
       <SubType>UserControl</SubType>
@@ -217,6 +216,10 @@
     <ProjectReference Include="..\..\fontsettings\FontsSettings.csproj">
       <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
       <Name>FontsSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConverterContracts\ConverterContracts.csproj">
+      <Project>{71f465e1-fca1-4701-8958-643e7332ea7f}</Project>
+      <Name>ConverterContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\FolderSettingsHelper\FolderSettingsHelper.csproj">
       <Project>{97C916FF-6271-44F8-9A20-6E0A0389524B}</Project>

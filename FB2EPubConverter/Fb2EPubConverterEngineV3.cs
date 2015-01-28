@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using ConverterContracts.Settings;
 using EPubLibrary;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.XHTML_Items;

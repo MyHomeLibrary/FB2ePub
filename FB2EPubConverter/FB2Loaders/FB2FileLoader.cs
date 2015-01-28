@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
-using Fb2ePubConverter;
-using Fb2epubSettings;
+using ConverterContracts.Settings;
 using FB2Library;
 
 namespace FB2EPubConverter.FB2Loaders
@@ -14,7 +13,7 @@ namespace FB2EPubConverter.FB2Loaders
     /// </summary>
     internal class FB2FileLoader : BaseFB2Loader
     {
-        public override List<FB2File> LoadFile(string fileName, FB2ImportSettings settings)
+        public override List<FB2File> LoadFile(string fileName, IFB2ImportSettings settings)
         {
             var result = new List<FB2File>();
             try

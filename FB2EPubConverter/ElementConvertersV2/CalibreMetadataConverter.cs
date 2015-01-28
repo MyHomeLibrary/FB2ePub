@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ConverterContracts.Settings;
 using EPubLibrary;
 using Fb2epubSettings;
 using FB2Library;
@@ -10,9 +7,9 @@ namespace FB2EPubConverter.ElementConvertersV2
 {
     internal class CalibreMetadataConverter
     {
-        private readonly EPubV2Settings _v2Settings;
+        private readonly IEPubV2Settings _v2Settings;
 
-        public CalibreMetadataConverter(EPubV2Settings v2Settings)
+        public CalibreMetadataConverter(IEPubV2Settings v2Settings)
         {
             _v2Settings = v2Settings;
         }

@@ -1,30 +1,28 @@
-﻿using Fb2epubSettings.AppleSettings.ePub_v2;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
+using ConverterContracts.Settings;
 
-namespace Fb2epubSettings.AppleSettings
+namespace Fb2epubSettings.AppleSettings.ePub_v2
 {
 
     /// <summary>
     /// 
     /// </summary>
     [Serializable]
-    public class AppleConverterePub2Settings
+    public class AppleConverterePub2Settings : IAppleConverterePub2Settings
     {
-        private readonly List<AppleEPub2PlatformSettings> _platforms = new List<AppleEPub2PlatformSettings>();
+        private readonly List<IAppleEPub2PlatformSettings> _platforms = new List<IAppleEPub2PlatformSettings>();
 
 
-        [XmlArray("Platforms"), XmlArrayItem(typeof(AppleEPub2PlatformSettings), ElementName = "Platform")]
-        public List<AppleEPub2PlatformSettings> Platforms { get { return _platforms; } }
+        [XmlArray("Platforms"), XmlArrayItem(typeof(IAppleEPub2PlatformSettings), ElementName = "Platform")]
+        public List<IAppleEPub2PlatformSettings> Platforms { get { return _platforms; } }
 
 
         public void SetupDefaults()
         {
             _platforms.Clear();
-            AppleEPub2PlatformSettings platform = new AppleEPub2PlatformSettings { Name = AppleTargetPlatform.All, 
+            var platform = new AppleEPub2PlatformSettings { Name = AppleTargetPlatform.All, 
                                                                 UseCustomFonts = true, 
                                                                 OpenToSpread = false, 
                                                                 OrientationLock = AppleOrientationLock.None,
@@ -32,18 +30,19 @@ namespace Fb2epubSettings.AppleSettings
             _platforms.Add(platform);
         }
 
-        public void CopyFrom(AppleConverterePub2Settings appleConverterSettings)
+
+        public void CopyFrom(IAppleConverterePub2Settings appleConverterSettings)
         {
             if (appleConverterSettings == null)
             {
-                throw new ArgumentNullException("AppleConverterePubV2Settings");
+                throw new ArgumentNullException("appleConverterSettings");
             }
             if (appleConverterSettings == this)
             {
                 return;
             }
             _platforms.Clear();
-            foreach (var platform in appleConverterSettings._platforms)
+            foreach (var platform in appleConverterSettings.Platforms)
             {
                 AppleEPub2PlatformSettings platformTo = new AppleEPub2PlatformSettings();
                 platformTo.CopyFrom(platform);

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using ConverterContracts.Settings;
 using Fb2epubSettings.AppleSettings.ePub_v2;
 
 namespace Fb2epubSettings
@@ -115,7 +112,7 @@ namespace Fb2epubSettings
         {
             SuspendLayout();
 
-            LoadUsedPlatformsFromSettings(settings.V2Settings.AppleConverterEPubSettings.V2Settings.Platforms);
+            LoadUsedPlatformsFromSettings(settings.V2Settings.AppleConverterEPubSettings.Platforms);
 
             ResumeLayout();            
         }
@@ -124,7 +121,7 @@ namespace Fb2epubSettings
         /// Load Apple ePub V2 settings to the control
         /// </summary>
         /// <param name="platforms"></param>
-        private void LoadUsedPlatformsFromSettings(List<AppleEPub2PlatformSettings> platforms)
+        private void LoadUsedPlatformsFromSettings(List<IAppleEPub2PlatformSettings> platforms)
         {
             ResetPlatforms();
             // first move al platforms in settings to used, coping values
@@ -333,7 +330,7 @@ namespace Fb2epubSettings
                 AppleTargetPlatform currentPlatform = GetCurrentPlatform();
                 OrientationTypeConverter converter = new OrientationTypeConverter();
                 string value = (string)comboBoxOrientationLock.SelectedItem;
-                AppleOrientationLock orientationLock = (AppleOrientationLock)converter.ConvertFromString(value);
+                var orientationLock = (AppleOrientationLock)converter.ConvertFromString(value);
                 _allPlatformObjects[currentPlatform].OrientationLock = orientationLock;
             }
         }
@@ -403,12 +400,12 @@ namespace Fb2epubSettings
         /// <param name="settings"></param>
         public override void SaveToSettings(ConverterSettings settings)
         {
-            settings.V2Settings.AppleConverterEPubSettings.V2Settings.Platforms.Clear();
+            settings.V2Settings.AppleConverterEPubSettings.Platforms.Clear();
             foreach (var platform in _used.Values)
             {
                 var createdSettings = new AppleEPub2PlatformSettings();
                 createdSettings.CopyFrom(platform);
-                settings.V2Settings.AppleConverterEPubSettings.V2Settings.Platforms.Add(createdSettings);
+                settings.V2Settings.AppleConverterEPubSettings.Platforms.Add(createdSettings);
             }
             base.SaveToSettings(settings);
 

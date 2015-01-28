@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using Fb2ePubConverter;
-using Fb2epubSettings;
+using ConverterContracts.Settings;
 using FB2Library;
 using ICSharpCode.SharpZipLib.Zip;
 
@@ -14,7 +13,7 @@ namespace FB2EPubConverter.FB2Loaders
     /// </summary>
     internal class FB2ZipFileLoader : BaseFB2Loader
     {
-        public override List<FB2File> LoadFile(string fileName, FB2ImportSettings settings)
+        public override List<FB2File> LoadFile(string fileName, IFB2ImportSettings settings)
         {
             Logger.Log.DebugFormat("Starting to load ZIP file {0}", fileName);
             var result = new List<FB2File>();

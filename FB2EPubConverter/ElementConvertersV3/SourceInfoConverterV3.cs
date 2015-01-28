@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ConverterContracts.Settings;
 using EPubLibrary;
 using FB2EPubConverter.SourceDataInclusionControls;
-using Fb2epubSettings;
 using FB2Library;
 using TranslitRu;
 
@@ -12,9 +8,9 @@ namespace FB2EPubConverter.ElementConvertersV3
 {
     internal class SourceInfoConverterV3
     {
-        private readonly EPubCommonSettings _commonSettings;
+        private readonly IEPubCommonSettings _commonSettings;
 
-        internal SourceInfoConverterV3(EPubCommonSettings commonSettings)
+        internal SourceInfoConverterV3(IEPubCommonSettings commonSettings)
         {
             _commonSettings = commonSettings;
         }

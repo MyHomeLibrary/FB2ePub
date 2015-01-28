@@ -1,7 +1,7 @@
-﻿using EPubLibrary;
+﻿using ConverterContracts.Settings;
+using EPubLibrary;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.XHTML_Items;
-using Fb2epubSettings;
 using FB2Library;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
@@ -11,14 +11,14 @@ namespace FB2EPubConverter.ElementConvertersV2
 {
     internal class Fb2EPubTextConverterV2
     {
-        private readonly EPubCommonSettings _commonSettings;
+        private readonly IEPubCommonSettings _commonSettings;
         private readonly ImageManager _images;
         private readonly HRefManagerV2 _referencesManager;
         private readonly long _maxSize;
 
         private int _sectionCounter;
 
-        internal Fb2EPubTextConverterV2(EPubCommonSettings commonSettings, ImageManager images, HRefManagerV2 referencesManager,long maxSize)
+        internal Fb2EPubTextConverterV2(IEPubCommonSettings commonSettings, ImageManager images, HRefManagerV2 referencesManager,long maxSize)
         {
             _commonSettings = commonSettings;
             _images = images;

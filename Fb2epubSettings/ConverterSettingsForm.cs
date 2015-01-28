@@ -11,6 +11,8 @@ using FolderSettingsHelper.IniLocations;
 using FontsSettings;
 using System.IO;
 using System.Reflection;
+using ConverterContracts.FontSettings;
+using ConverterContracts.Settings;
 using Fb2epubSettings.AppleSettings.ePub_v2;
 
 namespace Fb2epubSettings
@@ -707,8 +709,8 @@ namespace Fb2epubSettings
             CSSElementListItem newViewElement = null;
             if(!_fontSettings.CssElements.ContainsKey(name) )
             {
-                _fontSettings.CssElements.Add(name,new Dictionary<string, List<CSSFontFamily>>());
-                _fontSettings.CssElements[name].Add(className,new List<CSSFontFamily>());
+                _fontSettings.CssElements.Add(name,new Dictionary<string, List<ICSSFontFamily>>());
+                _fontSettings.CssElements[name].Add(className,new List<ICSSFontFamily>());
                 newViewElement = new CSSElementListItem {Class = className, Name = name};
                 _viewCSSElements.Add(newViewElement);
             }
@@ -716,7 +718,7 @@ namespace Fb2epubSettings
             {
                 if (!_fontSettings.CssElements[name].ContainsKey(className))
                 {
-                    _fontSettings.CssElements[name].Add(className,new List<CSSFontFamily>());
+                    _fontSettings.CssElements[name].Add(className,new List<ICSSFontFamily>());
                     newViewElement = new CSSElementListItem { Class = className, Name = name };
                     _viewCSSElements.Add(newViewElement);
                 }
@@ -765,7 +767,7 @@ namespace Fb2epubSettings
                 CSSElementListItem currentElement = _myDataSourceCSS.Current as CSSElementListItem;
                 if (currentElement != null)
                 {
-                    CSSFontFamily font = _fontSettings.Fonts[addForm.SelectedFont];
+                    ICSSFontFamily font = _fontSettings.Fonts[addForm.SelectedFont];
                     if (font != null)
                     {
                         currentElement.Fonts.Add(font);

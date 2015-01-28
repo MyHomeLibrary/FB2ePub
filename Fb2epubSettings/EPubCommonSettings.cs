@@ -1,36 +1,37 @@
 ﻿using System;
 using System.Xml.Serialization;
+using ConverterContracts.FontSettings;
+using ConverterContracts.Settings;
 using FontsSettings;
 namespace Fb2epubSettings
 {
-    public class EPubCommonSettings
+    public class EPubCommonSettings : IEPubCommonSettings
     {
         #region private_members
-        private bool _transliterate = false;
-        private bool _transliterateFileName = false;
-        private bool _transliterateTOC = false;
-        private bool _addFB2Info = false;
-        private bool _addSeqToTitle = false;
+        private bool _transliterate;
+        private bool _transliterateFileName;
+        private bool _transliterateTOC;
+        private bool _addFB2Info;
+        private bool _addSeqToTitle;
         private string _sequenceFormat = string.Empty;
         private string _noSequenceFormat = string.Empty;
         private string _noSeriesFormat = string.Empty;
-        private bool _flatStructure = false;
-        private bool _embedStyles = false;
+        private bool _flatStructure;
+        private bool _embedStyles;
         private string _authorFormat = string.Empty;
         private string _fileAsFormat = string.Empty;
-        private bool _capitalDrop = false;
-        private bool _skipAboutPage = false;
+        private bool _capitalDrop;
+        private bool _skipAboutPage;
         private IgnoreInfoSourceOptions _ignoreTitle = IgnoreInfoSourceOptions.IgnoreNothing;
         private IgnoreInfoSourceOptions _ignoreAuthors= IgnoreInfoSourceOptions.IgnoreNothing;
         private IgnoreInfoSourceOptions _ignoreTranslators = IgnoreInfoSourceOptions.IgnoreNothing;
         private IgnoreInfoSourceOptions _ignoreGenres = IgnoreInfoSourceOptions.IgnoreNothing;
-        private bool _decorateFontNames = false;
+        private bool _decorateFontNames;
         private readonly EPubFontSettings _fonts = new EPubFontSettings();
-        private bool _fixCodeElement = true;
         #endregion
 
 
-        public void CopyFrom(EPubCommonSettings temp)
+        public void CopyFrom(IEPubCommonSettings temp)
         {
             if (temp == null)
             {
@@ -40,27 +41,26 @@ namespace Fb2epubSettings
             {
                 return;
             }
-            _transliterate = temp._transliterate;
-            _transliterateFileName = temp._transliterateFileName;
-            _transliterateTOC = temp._transliterateTOC;
-            _addFB2Info = temp._addFB2Info;
-            _addSeqToTitle = temp._addSeqToTitle;
-            _sequenceFormat = temp._sequenceFormat;
-            _noSequenceFormat = temp._noSequenceFormat;
-            _noSeriesFormat = temp._noSeriesFormat;
-            _flatStructure = temp._flatStructure;
-            _embedStyles = temp._embedStyles;
-            _authorFormat = temp._authorFormat;
-            _fileAsFormat = temp._fileAsFormat;
-            _capitalDrop = temp._capitalDrop;
-            _skipAboutPage = temp._skipAboutPage;
-            _ignoreTitle = temp._ignoreTitle;
-            _ignoreAuthors = temp._ignoreAuthors;
-            _ignoreTranslators = temp._ignoreTranslators;
-            _ignoreGenres = temp._ignoreGenres;
-            _decorateFontNames = temp._decorateFontNames;
-            _fonts.CopyFrom(temp._fonts);
-            _fixCodeElement = temp._fixCodeElement;
+            _transliterate = temp.Transliterate;
+            _transliterateFileName = temp.TransliterateFileName;
+            _transliterateTOC = temp.TransliterateToc;
+            _addFB2Info = temp.Fb2Info;
+            _addSeqToTitle = temp.AddSeqToTitle;
+            _sequenceFormat = temp.SequenceFormat;
+            _noSequenceFormat = temp.NoSequenceFormat;
+            _noSeriesFormat = temp.NoSeriesFormat;
+            _flatStructure = temp.Flat;
+            _embedStyles = temp.EmbedStyles;
+            _authorFormat = temp.AuthorFormat;
+            _fileAsFormat = temp.FileAsFormat;
+            _capitalDrop = temp.CapitalDrop;
+            _skipAboutPage = temp.SkipAboutPage;
+            _ignoreTitle = temp.IgnoreTitle;
+            _ignoreAuthors = temp.IgnoreAuthors;
+            _ignoreTranslators = temp.IgnoreTranslators;
+            _ignoreGenres = temp.IgnoreGenres;
+            _decorateFontNames = temp.DecorateFontNames;
+            _fonts.CopyFrom(temp.Fonts);
         }
 
         public void SetupDefaults()
@@ -84,7 +84,6 @@ namespace Fb2epubSettings
             _ignoreTranslators = IgnoreInfoSourceOptions.IgnoreNothing;
             _ignoreGenres = IgnoreInfoSourceOptions.IgnoreNothing;
             _decorateFontNames = true;
-            _fixCodeElement = true;
 
             _fonts.FontFamilies.Clear();
             //CSSFontFamily family = new CSSFontFamily() { Name = @"LiberationSerif" };
@@ -346,7 +345,7 @@ namespace Fb2epubSettings
         /// Get/Set Fonts settings
         /// </summary>
         [XmlElement(ElementName = "Fonts")]
-        public EPubFontSettings Fonts
+        public IEPubFontSettings Fonts
         {
             get { return _fonts; }
             set { _fonts.CopyFrom(value); }

@@ -1,4 +1,5 @@
-﻿using Fb2epubSettings;
+﻿using ConverterContracts.Settings;
+using Fb2epubSettings;
 
 namespace FB2EPubConverter.SourceDataInclusionControls
 {

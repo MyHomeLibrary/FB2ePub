@@ -122,21 +122,21 @@ namespace FB2EPubConverter
             }
             // setup epub2 options
             epubFile.AppleOptions.Reset();
-            foreach (var platform in Settings.V2Settings.AppleConverterEPubSettings.V2Settings.Platforms)
+            foreach (var platform in Settings.V2Settings.AppleConverterEPubSettings.Platforms)
             {
                 var targetPlatform = new AppleTargetPlatform();
                 switch (platform.Name)
                 {
-                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleTargetPlatform.All:
+                    case ConverterContracts.Settings.AppleTargetPlatform.All:
                         targetPlatform.Type = PlatformType.All;
                         break;
-                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleTargetPlatform.iPad:
+                    case ConverterContracts.Settings.AppleTargetPlatform.iPad:
                         targetPlatform.Type = PlatformType.iPad;
                         break;
-                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleTargetPlatform.iPhone:
+                    case ConverterContracts.Settings.AppleTargetPlatform.iPhone:
                         targetPlatform.Type = PlatformType.iPhone;
                         break;
-                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleTargetPlatform.NotSet: // we not going to add if type not set
+                    case ConverterContracts.Settings.AppleTargetPlatform.NotSet: // we not going to add if type not set
                         Logger.Log.Error("SetupAppleSettings() - passed apple platform of type NotSet");
                         continue;
                 }
@@ -145,13 +145,13 @@ namespace FB2EPubConverter
                 targetPlatform.CustomFontsAllowed = platform.UseCustomFonts;
                 switch (platform.OrientationLock)
                 {
-                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleOrientationLock.None:
+                    case ConverterContracts.Settings.AppleOrientationLock.None:
                         targetPlatform.OrientationLockType = OrientationLock.Off;
                         break;
-                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleOrientationLock.LandscapeOnly:
+                    case ConverterContracts.Settings.AppleOrientationLock.LandscapeOnly:
                         targetPlatform.OrientationLockType = OrientationLock.LandscapeOnly;
                         break;
-                    case Fb2epubSettings.AppleSettings.ePub_v2.AppleOrientationLock.PortraitOnly:
+                    case ConverterContracts.Settings.AppleOrientationLock.PortraitOnly:
                         targetPlatform.OrientationLockType = OrientationLock.PortraitOnly;
                         break;
                 }

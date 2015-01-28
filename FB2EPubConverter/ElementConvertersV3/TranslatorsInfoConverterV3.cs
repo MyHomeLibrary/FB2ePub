@@ -1,5 +1,5 @@
-﻿using EPubLibrary;
-using Fb2epubSettings;
+﻿using ConverterContracts.Settings;
+using EPubLibrary;
 using FB2Library.HeaderItems;
 using TranslitRu;
 
@@ -7,7 +7,7 @@ namespace FB2EPubConverter.ElementConvertersV3
 {
     internal static class TranslatorsInfoConverterV3
     {
-        public static void Convert(ItemTitleInfo titleInfo, EPubFileV3 epubFile, EPubCommonSettings settings)
+        public static void Convert(ItemTitleInfo titleInfo, EPubFileV3 epubFile, IEPubCommonSettings settings)
         {
             foreach (var translator in titleInfo.Translators)
             {
