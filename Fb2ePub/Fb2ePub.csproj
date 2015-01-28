@@ -139,6 +139,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\epublibrary\EPubLibraryContracts\EPubLibraryContracts.csproj">
+      <Project>{A5581CDB-9FFC-45D6-B20C-6EB060E978FD}</Project>
+      <Name>EPubLibraryContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\isiolanguages\ISOLanguages.csproj">
       <Project>{58E261A5-B2EA-43F3-820D-902B5C061321}</Project>
       <Name>ISOLanguages</Name>

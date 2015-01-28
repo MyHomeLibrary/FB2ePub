@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using ConverterContracts.FontSettings;
+using FontSettingsContracts;
 using FontsSettings;
 
 
@@ -16,8 +11,8 @@ namespace Fb2epubSettings
     {
         delegate void OnButtonPressedCallback(object sender, EventArgs e);
 
-        private string _familyFontName;
-        private CSSFontSettingsCollection _fontSettings;
+        private readonly string _familyFontName;
+        private readonly CSSFontSettingsCollection _fontSettings;
 
         private readonly BindingSource _myDataSourceFonts = new BindingSource();
         private readonly BindingSource _myDataSourceSources= new BindingSource();
@@ -71,7 +66,7 @@ namespace Fb2epubSettings
 
         void _myDataSourceSources_CurrentChanged(object sender, EventArgs e)
         {
-            FontSource currentSource = _myDataSourceSources.Current as FontSource;
+            var currentSource = _myDataSourceSources.Current as FontSource;
             if (currentSource != null)
             {
                 ShowCurrentSourceDetails(currentSource);
@@ -164,7 +159,7 @@ namespace Fb2epubSettings
             CSSFont currentFont = _myDataSourceFonts.Current as CSSFont;
             ShowCurrentFontDetails(currentFont);
 
-            FontSource currentSource = _myDataSourceSources.Current as FontSource;
+            var currentSource = _myDataSourceSources.Current as FontSource;
             if (currentSource != null)
             {
                 ShowCurrentSourceDetails(currentSource);                
@@ -224,7 +219,7 @@ namespace Fb2epubSettings
 
         private void buttonAddFont_Click(object sender, EventArgs e)
         {
-            CSSFont newFont = new CSSFont
+            var newFont = new CSSFont
                                   {
                                       FontStretch = FontStretch.Normal,
                                       FontStyle = FontStylesEnum.Normal,
@@ -393,13 +388,13 @@ namespace Fb2epubSettings
 
         private void buttonBrowseForLocation_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog{AutoUpgradeEnabled = true,CheckFileExists = true,CheckPathExists = true};
+            var dialog = new OpenFileDialog{AutoUpgradeEnabled = true,CheckFileExists = true,CheckPathExists = true};
             dialog.Filter = "All font files|*.ttf; *.otf; *.ttc|TTF files (*.ttf)|*.ttf|All files (*.*)|*.*";
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
                 //textBoxLocation.Text = ReplaceData(dialog.FileName);   
-                FontSource fs = _myDataSourceSources.Current as FontSource;
+                var fs = _myDataSourceSources.Current as FontSource;
                 if (fs != null)
                 {
                     fs.Location = ReplaceData(dialog.FileName);   
@@ -433,7 +428,7 @@ namespace Fb2epubSettings
 
         private void comboBoxSourceType_SelectedValueChanged(object sender, EventArgs e)
         {
-            SourceTypes sourceType = SourceTypes.Embedded;
+            var sourceType = SourceTypes.Embedded;
             switch (comboBoxSourceType.SelectedItem.ToString())
             {
                 case "Embedded":
@@ -451,7 +446,7 @@ namespace Fb2epubSettings
 
         private void SetSourceTypeToFont(SourceTypes sourceType)
         {
-            FontSource currentSource = _myDataSourceSources.Current as FontSource;
+            var currentSource = _myDataSourceSources.Current as FontSource;
             if (currentSource != null)
             {
                 currentSource.Type = sourceType;
@@ -462,7 +457,7 @@ namespace Fb2epubSettings
 
         private void comboBoxFormat_SelectedValueChanged(object sender, EventArgs e)
         {
-            FontFormat format = FontFormat.Unknown;
+            var format = FontFormat.Unknown;
             switch (comboBoxFormat.SelectedItem.ToString())
             {
                 case "NA":
@@ -489,7 +484,7 @@ namespace Fb2epubSettings
 
         private void SetSourceFormatToFont(FontFormat format)
         {
-            FontSource currentSource = _myDataSourceSources.Current as FontSource;
+            var currentSource = _myDataSourceSources.Current as FontSource;
             if (currentSource != null)
             {
                 currentSource.Format = format;
@@ -506,9 +501,9 @@ namespace Fb2epubSettings
                 return;
             }
 
-            FontSource source = new FontSource {Format = FontFormat.Unknown, Location = "Undefined", Type = SourceTypes.Local};
+            var source = new FontSource {Format = FontFormat.Unknown, Location = "Undefined", Type = SourceTypes.Local};
 
-            CSSFont currentFont = _myDataSourceFonts.Current as CSSFont;
+            var currentFont = _myDataSourceFonts.Current as CSSFont;
             if (currentFont != null)
             {
                 currentFont.Sources.Add(source);
@@ -535,7 +530,7 @@ namespace Fb2epubSettings
 
         private void SetStyle(FontStylesEnum fontStyle)
         {
-            CSSFont currentFont= _myDataSourceFonts.Current as CSSFont;
+            var currentFont= _myDataSourceFonts.Current as CSSFont;
             if (currentFont != null)
             {
                 currentFont.FontStyle = fontStyle;
@@ -560,7 +555,7 @@ namespace Fb2epubSettings
 
         private void SetVariant(FontVaiantEnum variant)
         {
-            CSSFont currentFont= _myDataSourceFonts.Current as CSSFont;
+            var currentFont= _myDataSourceFonts.Current as CSSFont;
             if (currentFont != null)
             {
                 currentFont.FontVariant = variant;
@@ -575,7 +570,7 @@ namespace Fb2epubSettings
 
         private void comboBoxWidth_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CSSFont currentFont = _myDataSourceFonts.Current as CSSFont;
+            var currentFont = _myDataSourceFonts.Current as CSSFont;
             if (currentFont != null)
             {
                 currentFont.FontWidth = GetSelectedWidth();
@@ -585,7 +580,7 @@ namespace Fb2epubSettings
 
         private FontBoldnessEnum GetSelectedWidth()
         {
-            FontBoldnessEnum selected = FontBoldnessEnum.Normal;
+            var selected = FontBoldnessEnum.Normal;
             switch (comboBoxWidth.SelectedItem as string)
             {
                 case "400 (normal)":
@@ -627,7 +622,7 @@ namespace Fb2epubSettings
 
         private void comboBoxStretch_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CSSFont currentFont = _myDataSourceFonts.Current as CSSFont;
+            var currentFont = _myDataSourceFonts.Current as CSSFont;
             if (currentFont != null)
             {
                 currentFont.FontStretch = GetSelectedStretch();
@@ -639,7 +634,7 @@ namespace Fb2epubSettings
 
         private FontStretch GetSelectedStretch()
         {
-            FontStretch selected = FontStretch.Normal;
+            var selected = FontStretch.Normal;
             switch (comboBoxStretch.SelectedItem as string)
             {
                 case "condensed":

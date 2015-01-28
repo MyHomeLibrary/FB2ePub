@@ -1,5 +1,5 @@
 ﻿using System.Xml.Serialization;
-using ConverterContracts.Settings;
+using EPubLibraryContracts.Settings;
 using Fb2epubSettings.AppleSettings.ePub_v2;
 
 namespace Fb2epubSettings

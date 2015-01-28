@@ -1,6 +1,6 @@
 ﻿using ConverterContracts.Settings;
 using EPubLibrary;
-using Fb2epubSettings;
+using EPubLibraryContracts.Settings;
 using FB2Library;
 
 namespace FB2EPubConverter.ElementConvertersV3

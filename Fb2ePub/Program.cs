@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Reflection;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Fb2ePubConverter;
 using System.IO;
 using FB2EPubConverter;
 using log4net;
-using ProcessStartInfo=System.Diagnostics.ProcessStartInfo;
-using System.Diagnostics;
 using ConverterContracts.Settings;
 using FolderSettingsHelper;
-using Fb2epubSettings;
 
 
 
@@ -66,12 +59,12 @@ namespace Fb2ePub
                     if (log.IsInfoEnabled) log.Info("Application [FB2EPUB] End");
                     return;
                 }
-                ConvertProcessor processor = new ConvertProcessor();
+                var processor = new ConvertProcessor();
                 PreProcessParameters(options, processor.ProcessorSettings);
                 ProcessSettings(processor);
                 ProcessParameters(options, processor.ProcessorSettings);
                 Console.WriteLine("Loading {0}...", fileParams[0]);
-                List<string> filesInMask = new List<string>();
+                var filesInMask = new List<string>();
                 processor.DetectFilesToProcess(fileParams, ref filesInMask);
                 string outputFileName = (fileParams.Count > 1)?fileParams[1]:null;
                 processor.PerformConvertOperation(filesInMask,  outputFileName);
@@ -121,7 +114,7 @@ namespace Fb2ePub
 
         private static void SetupLogAndData()
         {
-            Console.WriteLine("FB2 to EPUB command line converter by Lord KiRon");
+            Console.WriteLine(@"FB2 to EPUB command line converter by Lord KiRon");
             string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(), @"Lord_KiRon\fb2epub.log");
             SetNewLogPath(logPath);
             log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
@@ -150,7 +143,7 @@ namespace Fb2ePub
             }
             GlobalContext.Properties["LogFileName"] = logPath;
             log4net.Config.XmlConfigurator.Configure();
-            Console.WriteLine("Logging to: {0}\\", pathName);
+            Console.WriteLine(@"Logging to: {0}\", pathName);
             Console.WriteLine();
         }
 

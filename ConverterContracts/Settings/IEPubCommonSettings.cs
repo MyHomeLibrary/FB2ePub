@@ -1,4 +1,4 @@
-﻿using ConverterContracts.FontSettings;
+﻿using FontSettingsContracts;
 
 namespace ConverterContracts.Settings
 {
