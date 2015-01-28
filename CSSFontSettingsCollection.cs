@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
+using ConverterContracts.FontSettings;
 
 namespace FontsSettings
 {
@@ -12,11 +11,11 @@ namespace FontsSettings
     /// </summary>
     public class CSSFontSettingsCollection 
     {
-        private readonly Dictionary<string,CSSFontFamily> _fonts = new Dictionary<string, CSSFontFamily>();
-        private readonly Dictionary<string, Dictionary<string, List<CSSFontFamily>>> _elements = new Dictionary<string, Dictionary<string, List<CSSFontFamily>>>();
-        private readonly Dictionary<string,List<CSSFont>> _fontFiles = new Dictionary<string, List<CSSFont>>();
+        private readonly Dictionary<string,ICSSFontFamily> _fonts = new Dictionary<string, ICSSFontFamily>();
+        private readonly Dictionary<string, Dictionary<string, List<ICSSFontFamily>>> _elements = new Dictionary<string, Dictionary<string, List<ICSSFontFamily>>>();
+        private readonly Dictionary<string,List<ICSSFont>> _fontFiles = new Dictionary<string, List<ICSSFont>>();
 
-        private EPubFontSettings _storageSettings = null;
+        private IEPubFontSettings _storageSettings = null;
         private string _loadedDecoration = string.Empty;
 
         public const string MacroMask = "%ResourceFolder%";
@@ -35,12 +34,12 @@ namespace FontsSettings
         /// <summary>
         /// Return dictionary of all CSS elements
         /// </summary>
-        public Dictionary<string, Dictionary<string, List<CSSFontFamily>>> CssElements { get { return _elements; } }
+        public Dictionary<string, Dictionary<string, List<ICSSFontFamily>>> CssElements { get { return _elements; } }
 
         /// <summary>
         /// Return dictionary containing all the fonts families
         /// </summary>
-        public Dictionary<string, CSSFontFamily> Fonts { get { return _fonts; } }
+        public Dictionary<string, ICSSFontFamily> Fonts { get { return _fonts; } }
 
         /// <summary>
         /// Return number of embedded files in collection
@@ -81,7 +80,7 @@ namespace FontsSettings
                 if (fontFileLocation.Contains(MacroMask.ToLower()))
                 {
                     string newLocation = fontFileLocation.Replace(MacroMask.ToLower(), _resourcePath);
-                    List<CSSFont> temp = _fontFiles[fontFileLocation];
+                    List<ICSSFont> temp = _fontFiles[fontFileLocation];
                     _fontFiles.Remove(fontFileLocation);
                     if (_fontFiles.ContainsKey(newLocation))
                     {
@@ -100,7 +99,7 @@ namespace FontsSettings
         /// </summary>
         /// <param name="settings">settings to load</param>
         /// <param name="decoration">decoration to be added to family font names</param>
-        public void Load(EPubFontSettings settings, string decoration)
+        public void Load(IEPubFontSettings settings, string decoration)
         {
             // Copy all font families 
             _fonts.Clear();
@@ -125,7 +124,7 @@ namespace FontsSettings
                             }
                             if (!_fonts.ContainsKey(locationKey)) // if key/location not present - add it
                             {
-                                _fontFiles.Add(locationKey, new List<CSSFont>()); 
+                                _fontFiles.Add(locationKey, new List<ICSSFont>()); 
                             }
                             _fontFiles[locationKey].Add(cssFont); // save reference to the font object
                         }
@@ -141,9 +140,9 @@ namespace FontsSettings
                 newElement.CopyFrom(element);
                 if (!_elements.ContainsKey(element.Name)) // if key not present 
                 {
-                    _elements.Add(element.Name,new Dictionary<string, List<CSSFontFamily>>()); // add
+                    _elements.Add(element.Name,new Dictionary<string, List<ICSSFontFamily>>()); // add
                 }
-                _elements[element.Name].Add(element.Class,new List<CSSFontFamily>()); // reserve place for new list
+                _elements[element.Name].Add(element.Class,new List<ICSSFontFamily>()); // reserve place for new list
                 // now fill the list with pointers to the font families instead of names
                 foreach (var assignedFontFamily in element.AssignedFontFamilies)
                 {
@@ -185,7 +184,7 @@ namespace FontsSettings
             }
         }
 
-        public void StoreTo(EPubFontSettings settings)
+        public void StoreTo(IEPubFontSettings settings)
         {
             settings.FontFamilies.Clear();
             settings.CssElements.Clear();
@@ -201,7 +200,7 @@ namespace FontsSettings
             {
                 foreach (var elementClass in _elements[elementName].Keys)
                 {
-                    CSSStylableElement item = new CSSStylableElement();
+                    var item = new CSSStylableElement();
                     item.Name = elementName;
                     item.Class = elementClass;
                     foreach (var fontFamily in _elements[elementName][elementClass])

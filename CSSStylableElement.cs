@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
+using ConverterContracts.FontSettings;
 
 namespace FontsSettings
 {
@@ -10,7 +9,7 @@ namespace FontsSettings
     /// Represent any element (HTTP or .class) that can be styled
     /// </summary>
     /// 
-    public class CSSStylableElement
+    public class CSSStylableElement : ICSSStylableElement
     {
         private string _name = string.Empty;
         private string _class = string.Empty;
@@ -36,7 +35,7 @@ namespace FontsSettings
             get { return _assignedFonts; }
         }
 
-        internal void CopyFrom(CSSStylableElement element)
+        public void CopyFrom(ICSSStylableElement element)
         {
             if (element == null)
             {
@@ -46,10 +45,10 @@ namespace FontsSettings
             {
                 return;
             }
-            _name= element._name;
-            _class= element._class;
+            _name= element.Name;
+            _class= element.Class;
             _assignedFonts.Clear();
-            foreach (var font in element._assignedFonts)
+            foreach (var font in element.AssignedFontFamilies)
             {
                 _assignedFonts.Add(font);
             }

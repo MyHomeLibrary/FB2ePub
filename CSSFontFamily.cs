@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
+using ConverterContracts.FontSettings;
 
 namespace FontsSettings
 {
@@ -12,9 +11,9 @@ namespace FontsSettings
     /// Represent set of fonts grouped into one family
     /// </summary>
     [Serializable]
-    public class CSSFontFamily
+    public class CSSFontFamily : ICSSFontFamily
     {
-        private readonly List<CSSFont> _fonts = new List<CSSFont>();
+        private readonly List<ICSSFont> _fonts = new List<ICSSFont>();
         private string _name = GenerateUniqueName();
 
         /// <summary>
@@ -30,7 +29,7 @@ namespace FontsSettings
         /// List of fonts belong to the family
         /// </summary>
         [XmlElement(ElementName = "Font")]
-        public List<CSSFont> Fonts { get { return _fonts; } }
+        public List<ICSSFont> Fonts { get { return _fonts; } }
 
         /// <summary>
         /// Name of the family
@@ -65,7 +64,7 @@ namespace FontsSettings
         /// Copy from another CSSFontFamily allocating new objects
         /// </summary>
         /// <param name="cssFontFamily"></param>
-        public void CopyFrom(CSSFontFamily cssFontFamily)
+        public void CopyFrom(ICSSFontFamily cssFontFamily)
         {
             if (cssFontFamily == null)
             {
