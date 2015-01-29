@@ -8,17 +8,19 @@ using EPubLibrary.XHTML_Items;
 using EPubLibraryContracts.Settings;
 using Fb2ePubConverter;
 using FB2EPubConverter.ElementConvertersV3;
-using Fb2epubSettings;
 using FB2Library;
 using FB2Library.HeaderItems;
 using TranslitRu;
 using XHTMLClassLibrary.BaseElements;
+using XHTMLClassLibrary.BaseElements.BlockElements;
+using EPubLibrary.Content.Guide;
 
 namespace FB2EPubConverter
 {
     internal class Fb2EPubConverterEngineV3 : Fb2EPubConverterEngineBase
     {
         private readonly  HRefManagerV3 _referencesManager = new HRefManagerV3();
+        private long _maxSize = 0;
 
         protected override void ConvertContent(FB2File fb2File, IEpubFile epubFile)
         {
@@ -104,7 +106,8 @@ namespace FB2EPubConverter
 
         private void PassTextFromFb2ToEpub(EPubFileV3 epubFile, FB2File fb2File)
         {
-            throw new NotImplementedException();
+            var converter = new Fb2EPubTextConverterV3(Settings.CommonSettings, Images, _referencesManager, _maxSize);
+            converter.Convert(epubFile, fb2File);
         }
 
         /// <summary>
@@ -118,7 +121,20 @@ namespace FB2EPubConverter
             {
                 return;
             }
-            throw new NotImplementedException();
+            BookDocument infoDocument = epubFile.AddDocument("FB2 Info");
+            var converterSettings = new ConverterOptionsV3
+            {
+                CapitalDrop = false,
+                Images = Images,
+                MaxSize = _maxSize,
+                ReferencesManager = _referencesManager,
+            };
+            var infoConverter = new Fb2EpubInfoConverterV3();
+            infoDocument.Content = infoConverter.Convert(fb2File, converterSettings);
+            infoDocument.FileName = "fb2info.xhtml";
+            infoDocument.DocumentType = GuideTypeEnum.Notes;
+            infoDocument.Type = SectionTypeEnum.Text;
+            infoDocument.NotPartOfNavigation = true;
         }
 
         private void PassHeaderDataFromFb2ToEpub(EPubFileV3 epubFile, FB2File fb2File)
@@ -209,16 +225,16 @@ namespace FB2EPubConverter
             {
                 epubFile.Title.Description = titleInfo.Annotation.ToString();
                 epubFile.AnnotationPage = new AnnotationPageFile(HTMLElementType.HTML5);
-                //var converterSettings = new ConverterOptionsV3
-                //{
-                //    CapitalDrop = Settings.CommonSettings.CapitalDrop,
-                //    Images = Images,
-                //    MaxSize = MaxSize,
-                //    ReferencesManager = ReferencesManager,
-                //};
-                //var annotationConverter = new AnnotationConverterV3();
-                //epubFile.AnnotationPage.BookAnnotation = (Div)annotationConverter.Convert(fb2File.TitleInfo.Annotation,
-                //   new AnnotationConverterParams { Settings = converterSettings, Level = 1 });
+                var converterSettings = new ConverterOptionsV3
+                {
+                    CapitalDrop = Settings.CommonSettings.CapitalDrop,
+                    Images = Images,
+                    MaxSize = _maxSize,
+                    ReferencesManager = _referencesManager,
+                };
+                var annotationConverter = new AnnotationConverterV3();
+                epubFile.AnnotationPage.BookAnnotation = (Div)annotationConverter.Convert(titleInfo.Annotation,
+                   new AnnotationConverterParamsV3 { Settings = converterSettings, Level = 1 });
             }
             throw new NotImplementedException();
         }

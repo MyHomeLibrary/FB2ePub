@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using FB2EPubConverter.ElementConvertersV2.Epigraph;
-using FB2EPubConverter.ElementConvertersV2.Poem;
+using FB2EPubConverter.ElementConvertersV3.Epigraph;
+using FB2EPubConverter.ElementConvertersV3.Poem;
+using FB2EPubConverter.ElementConvertersV3.Tables;
 using FB2Library.Elements;
 using FB2Library.Elements.Poem;
 using FB2Library.Elements.Table;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
-using FB2EPubConverter.ElementConvertersV2.Tables;
 
-namespace FB2EPubConverter.ElementConvertersV2
+namespace FB2EPubConverter.ElementConvertersV3
 {
-    internal class SectionConverterV2 
+    internal class SectionConverterV3
     {
-        public int RecursionLevel { get; set;}
+        public int RecursionLevel { get; set; }
         public bool LinkSection { get; set; }
-        public ConverterOptionsV2 Settings { get; set; }
+        public ConverterOptionsV3 Settings { get; set; }
 
         /// <summary>
         /// Converts FB2 section element
@@ -32,7 +32,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             var resList = new List<IHTMLItem>();
             Logger.Log.Debug("Converting section");
 
-            var content = new Div(HTMLElementType.XHTML11);
+            var content = new Div(HTMLElementType.HTML5);
             long documentSize = 0;
 
             content.GlobalAttributes.Class.Value = string.Format("section{0}", RecursionLevel);
@@ -51,15 +51,15 @@ namespace FB2EPubConverter.ElementConvertersV2
                 IHTMLItem titleItem;
                 if (!LinkSection)
                 {
-                    var titleConverter = new TitleConverterV2();
+                    var titleConverter = new TitleConverterV3();
                     titleItem = titleConverter.Convert(sectionItem.Title,
-                        new TitleConverterParamsV2 { Settings = Settings, TitleLevel = RecursionLevel + 1 });
+                        new TitleConverterParamsV3 { Settings = Settings, TitleLevel = RecursionLevel + 1 });
                 }
                 else
                 {
-                    var linkSectionConverter = new LinkSectionConverterV2();
+                    var linkSectionConverter = new LinkSectionConverterV3();
                     titleItem = linkSectionConverter.Convert(sectionItem,
-                        new LinkSectionConverterParamsV2{Settings = Settings});
+                        new LinkSectionConverterParamsV3 { Settings = Settings });
                 }
                 if (titleItem != null)
                 {
@@ -68,7 +68,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     {
                         var oldContent = content;
                         resList.Add(content);
-                        content = new Div(HTMLElementType.XHTML11);
+                        content = new Div(HTMLElementType.HTML5);
                         content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
                         content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                         documentSize = 0;
@@ -89,7 +89,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                                 {
                                     var oldContent = content;
                                     resList.Add(content);
-                                    content = new Div(HTMLElementType.XHTML11);
+                                    content = new Div(HTMLElementType.HTML5);
                                     content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
                                     content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                                     documentSize = 0;
@@ -109,15 +109,15 @@ namespace FB2EPubConverter.ElementConvertersV2
             foreach (var epigraph in sectionItem.Epigraphs)
             {
 
-                var epigraphConverter = new EpigraphConverterV2();
+                var epigraphConverter = new EpigraphConverterV3();
                 var epigraphItem = epigraphConverter.Convert(epigraph,
-                    new EpigraphConverterParamsV2 { Settings = Settings, Level = RecursionLevel + 1 });
+                    new EpigraphConverterParamsV3 { Settings = Settings, Level = RecursionLevel + 1 });
                 long itemSize = epigraphItem.EstimateSize();
                 if (documentSize + itemSize >= Settings.MaxSize)
                 {
                     var oldContent = content;
                     resList.Add(content);
-                    content = new Div(HTMLElementType.XHTML11);
+                    content = new Div(HTMLElementType.HTML5);
                     content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
                     content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                     documentSize = 0;
@@ -136,7 +136,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                         {
                             var oldContent = content;
                             resList.Add(content);
-                            content = new Div(HTMLElementType.XHTML11);
+                            content = new Div(HTMLElementType.HTML5);
                             content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
                             content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                             documentSize = 0;
@@ -159,8 +159,8 @@ namespace FB2EPubConverter.ElementConvertersV2
                     {
                         if (Settings.Images.IsImageIdReal(sectionImage.HRef))
                         {
-                            var container = new Div(HTMLElementType.XHTML11);
-                            var sectionImagemage = new Image(HTMLElementType.XHTML11);
+                            var container = new Div(HTMLElementType.HTML5);
+                            var sectionImagemage = new Image(HTMLElementType.HTML5);
                             if (sectionImage.AltText != null)
                             {
                                 sectionImagemage.Alt.Value = sectionImage.AltText;
@@ -179,7 +179,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                             {
                                 var oldContent = content;
                                 resList.Add(content);
-                                content = new Div(HTMLElementType.XHTML11);
+                                content = new Div(HTMLElementType.HTML5);
                                 content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
                                 content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                                 documentSize = 0;
@@ -196,14 +196,14 @@ namespace FB2EPubConverter.ElementConvertersV2
             // Load annotations
             if (sectionItem.Annotation != null)
             {
-                var annotationConverter = new AnnotationConverterV2();
-                IHTMLItem annotationItem = annotationConverter.Convert(sectionItem.Annotation,  new AnnotationConverterParamsV2{ Level = RecursionLevel + 1 ,Settings = Settings});
+                var annotationConverter = new AnnotationConverterV3();
+                IHTMLItem annotationItem = annotationConverter.Convert(sectionItem.Annotation, new AnnotationConverterParamsV3 { Level = RecursionLevel + 1, Settings = Settings });
                 long itemSize = annotationItem.EstimateSize();
                 if (documentSize + itemSize >= Settings.MaxSize)
                 {
                     var oldContent = content;
                     resList.Add(content);
-                    content = new Div(HTMLElementType.XHTML11);
+                    content = new Div(HTMLElementType.HTML5);
                     content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
                     content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                     documentSize = 0;
@@ -224,7 +224,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                             {
                                 var oldContent = content;
                                 resList.Add(content);
-                                content = new Div(HTMLElementType.XHTML11);
+                                content = new Div(HTMLElementType.HTML5);
                                 content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
                                 content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                                 documentSize = 0;
@@ -248,38 +248,38 @@ namespace FB2EPubConverter.ElementConvertersV2
                     IHTMLItem newItem = null;
                     if (item is SubTitleItem)
                     {
-                        var subtitleConverter = new SubtitleConverterV2();
-                        newItem = subtitleConverter.Convert(item as SubTitleItem,new SubtitleConverterParamsV2{ Settings = Settings});
+                        var subtitleConverter = new SubtitleConverterV3();
+                        newItem = subtitleConverter.Convert(item as SubTitleItem, new SubtitleConverterParamsV3 { Settings = Settings });
                     }
                     else if (item is ParagraphItem)
                     {
-                        var paragraphConverter = new ParagraphConverterV2();
+                        var paragraphConverter = new ParagraphConverterV3();
                         newItem = paragraphConverter.Convert(item as ParagraphItem,
-                            new ParagraphConverterParamsV2 { ResultType = ParagraphConvTargetEnumV2.Paragraph, StartSection =startSection,Settings = Settings});
+                            new ParagraphConverterParamsV3 { ResultType = ParagraphConvTargetEnumV3.Paragraph, StartSection = startSection, Settings = Settings });
                         startSection = false;
                     }
                     else if (item is PoemItem)
                     {
-                        var poemConverter = new PoemConverterV2();
+                        var poemConverter = new PoemConverterV3();
                         newItem = poemConverter.Convert(item as PoemItem,
-                            new PoemConverterParamsV2 { Settings = Settings, Level = RecursionLevel + 1 });
+                            new PoemConverterParamsV3 { Settings = Settings, Level = RecursionLevel + 1 });
                     }
                     else if (item is CiteItem)
                     {
-                        var citationConverter = new CitationConverterV2();
+                        var citationConverter = new CitationConverterV3();
                         newItem = citationConverter.Convert(item as CiteItem,
-                            new CitationConverterParamsV2 { Level = RecursionLevel + 1 , Settings = Settings});
+                            new CitationConverterParamsV3 { Level = RecursionLevel + 1, Settings = Settings });
                     }
                     else if (item is EmptyLineItem)
                     {
-                        var emptyLineConverter = new EmptyLineConverterV2();
+                        var emptyLineConverter = new EmptyLineConverterV3();
                         newItem = emptyLineConverter.Convert();
                     }
                     else if (item is TableItem)
                     {
-                        var tableConverter = new TableConverterV2();
+                        var tableConverter = new TableConverterV3();
                         newItem = tableConverter.Convert(item as TableItem,
-                            new TableConverterParamsV2 { Settings = Settings});
+                            new TableConverterParamsV3 { Settings = Settings });
                     }
                     else if ((item is ImageItem) && Settings.Images.HasRealImages())
                     {
@@ -289,9 +289,9 @@ namespace FB2EPubConverter.ElementConvertersV2
                         {
                             if (Settings.Images.IsImageIdReal(fb2Img.HRef))
                             {
-                                var enclosing = new Div(HTMLElementType.XHTML11); // we use the enclosing so the user can style center it
-                                var imageConverter = new ImageConverterV2();
-                                enclosing.Add(imageConverter.Convert(fb2Img,new ImageConverterParamsV2{Settings = Settings}));
+                                var enclosing = new Div(HTMLElementType.HTML5); // we use the enclosing so the user can style center it
+                                var imageConverter = new ImageConverterV3();
+                                enclosing.Add(imageConverter.Convert(fb2Img, new ImageConverterParamsV3 { Settings = Settings }));
                                 enclosing.GlobalAttributes.Class.Value = "normal_image";
                                 newItem = enclosing;
                             }
@@ -304,7 +304,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                         {
                             var oldContent = content;
                             resList.Add(content);
-                            content = new Div(HTMLElementType.XHTML11);
+                            content = new Div(HTMLElementType.HTML5);
                             content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
                             content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                             documentSize = 0;
@@ -325,7 +325,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                                     {
                                         var oldContent = content;
                                         resList.Add(content);
-                                        content = new Div(HTMLElementType.XHTML11);
+                                        content = new Div(HTMLElementType.HTML5);
                                         content.GlobalAttributes.Class.Value = oldContent.GlobalAttributes.Class.Value;
                                         content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                                         documentSize = 0;
@@ -343,14 +343,14 @@ namespace FB2EPubConverter.ElementConvertersV2
             }
 
             resList.Add(content);
-            return resList;          
+            return resList;
         }
 
         private IEnumerable<IHTMLItem> SplitDiv(Div div, long documentSize)
         {
             var resList = new List<IHTMLItem>();
             long newDocumentSize = documentSize;
-            var container = new Div(HTMLElementType.XHTML11);
+            var container = new Div(HTMLElementType.HTML5);
             container.GlobalAttributes.ID.Value = div.GlobalAttributes.ID.Value;
             foreach (var element in div.SubElements())
             {
@@ -358,7 +358,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 if (elementSize + newDocumentSize >= Settings.MaxSize)
                 {
                     resList.Add(container);
-                    container = new Div(HTMLElementType.XHTML11);
+                    container = new Div(HTMLElementType.HTML5);
                     container.GlobalAttributes.Class.Value = div.GlobalAttributes.Class.Value;
                     container.GlobalAttributes.Language.Value = div.GlobalAttributes.Language.Value;
                     newDocumentSize = 0;
@@ -372,5 +372,6 @@ namespace FB2EPubConverter.ElementConvertersV2
             resList.Add(container);
             return resList;
         }
+
     }
 }

@@ -14,8 +14,6 @@ namespace FB2EPubConverter.ElementConvertersV2
     /// </summary>
     internal class Fb2EpubInfoConverterV2 : BaseElementConverterV2
     {
-
-
         public HTMLItem Convert(FB2File fb2File, ConverterOptionsV2 settings)
         {
             if (fb2File == null)
@@ -120,7 +118,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     heading.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = "Document history:" });
                     info.Add(heading);
                     var annotationConverter = new AnnotationConverterV2();
-                    info.Add(annotationConverter.Convert(fb2File.DocumentInfo.History,new AnnotationConverterParams { Level = 1, Settings = settings }));
+                    info.Add(annotationConverter.Convert(fb2File.DocumentInfo.History,new AnnotationConverterParamsV2 { Level = 1, Settings = settings }));
                     //Paragraph p = new Paragraph();
                     //p.Add(new SimpleHTML5Text() { Text = fb2File.DocumentInfo.History.ToString() });
                     //info.Add(p);                                                            

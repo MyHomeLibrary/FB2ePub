@@ -3,9 +3,9 @@ using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConvertersV2
+namespace FB2EPubConverter.ElementConvertersV2.Epigraph
 {
-    internal class EpigraphAuthorConverterParams
+    internal class EpigraphAuthorConverterParamsV2
     {
         public ConverterOptionsV2 Settings { get; set; }  
     }
@@ -18,7 +18,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// <param name="textAuthorItem">item to convert</param>
         /// <param name="epigraphAuthorConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(TextAuthorItem textAuthorItem,EpigraphAuthorConverterParams epigraphAuthorConverterParams)
+        public IHTMLItem Convert(TextAuthorItem textAuthorItem,EpigraphAuthorConverterParamsV2 epigraphAuthorConverterParams)
         {
             if (textAuthorItem == null)
             {
@@ -27,7 +27,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             var epigraphAuthor = new Div(HTMLElementType.XHTML11);
             var paragraphConverter = new ParagraphConverterV2();
             epigraphAuthor.Add(paragraphConverter.Convert(textAuthorItem,
-                new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, Settings = epigraphAuthorConverterParams.Settings, StartSection = false }));
+                new ParagraphConverterParamsV2 { ResultType = ParagraphConvTargetEnumV2.Paragraph, Settings = epigraphAuthorConverterParams.Settings, StartSection = false }));
             SetClassType(epigraphAuthor,"epigraph_author");
             return epigraphAuthor;
         }

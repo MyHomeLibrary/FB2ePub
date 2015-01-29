@@ -3,7 +3,7 @@ using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConvertersV2
+namespace FB2EPubConverter.ElementConvertersV2.Poem
 {
     class PoemDateConverterV2 : BaseElementConverterV2
     {
@@ -11,7 +11,6 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// Converts poemdate FB2 element 
         /// </summary>
         /// <param name="poemDateItem">item to convert </param>
-        /// <param name="compatibility"></param>
         /// <returns>XHTML representation</returns>
         public IHTMLItem Convert(DateItem poemDateItem)
         {

@@ -2,7 +2,7 @@
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 
-namespace FB2EPubConverter.ElementConvertersV2
+namespace FB2EPubConverter.ElementConvertersV2.Poem
 {
     internal class PoemAuthorConverterParamsV2
     {
@@ -25,7 +25,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             }
 
             var paragraphConverter = new ParagraphConverterV2();
-            var item = paragraphConverter.Convert(paragraphItem,  new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, StartSection = false, Settings = poemAuthorConverterParams .Settings});
+            var item = paragraphConverter.Convert(paragraphItem,  new ParagraphConverterParamsV2 { ResultType = ParagraphConvTargetEnumV2.Paragraph, StartSection = false, Settings = poemAuthorConverterParams .Settings});
 
             SetClassType(item,"poem_author");
             return item;
