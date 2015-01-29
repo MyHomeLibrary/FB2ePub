@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
@@ -54,7 +53,7 @@ namespace EPubLibrary.XHTML_Items
         /// <summary>
         /// Get/Set max document size in bytes
         /// </summary>
-        public static long MaxSize { get; set; }
+        public ulong MaxSize { get; set; }
 
         
         /// <summary>
@@ -104,14 +103,14 @@ namespace EPubLibrary.XHTML_Items
             var list = new List<BookDocument>();
             BookDocument newDoc = null;
             var listToRemove = new List<IHTMLItem>();
-            long totlaSize = 0;
+            ulong totlaSize = 0;
             IHTMLItem oldContent = _content;
             var newContent = new Div(Compatibility);
             if (_content != null)
             {
                 foreach (var subElement in _content.SubElements())
                 {
-                    long itemSize = EstimateSize(subElement);
+                    ulong itemSize = EstimateSize(subElement);
                     if (totlaSize + itemSize > MaxSize)
                     {
                         Content = newContent;
@@ -175,7 +174,7 @@ namespace EPubLibrary.XHTML_Items
             {
                 var newParagraph = new Paragraph(Compatibility);
                 newParagraph.Add(subElement);
-                long itemSize = EstimateSize(newParagraph);
+                ulong itemSize = EstimateSize(newParagraph);
                 if (itemSize > MaxSize)
                 {
                     if (Content.SubElements() != null )
@@ -215,7 +214,7 @@ namespace EPubLibrary.XHTML_Items
             {
                 newText.Text += ' ';
                 newText.Text+= word;
-                long itemSize = EstimateSize(newParagraph);
+                ulong itemSize = EstimateSize(newParagraph);
                 if (itemSize >= MaxSize)
                 {
                     list.Add(newDoc);
@@ -235,15 +234,15 @@ namespace EPubLibrary.XHTML_Items
             return list;
         }
 
-        private static long EstimateSize(IHTMLItem item)
+        private static ulong EstimateSize(IHTMLItem item)
         {
-            MemoryStream stream = new MemoryStream();
+            var stream = new MemoryStream();
             XNode node = item.Generate();
             using (var writer = XmlWriter.Create(stream))
             {
                 node.WriteTo(writer);
             }
-            return stream.Length;
+            return (ulong)stream.Length;
         }
 
         /// <summary>

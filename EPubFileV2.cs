@@ -38,14 +38,14 @@ namespace EPubLibrary
     /// </summary>
     internal static class XNodetemExtender
     {
-        public static long EstimateSize(this XNode node)
+        public static ulong EstimateSize(this XNode node)
         {
             var stream = new MemoryStream();
             using (var writer = XmlWriter.Create(stream))
             {
                 node.WriteTo(writer);
             }
-            return stream.Length;
+            return (ulong)stream.Length;
         }
     }
 
@@ -134,15 +134,6 @@ namespace EPubLibrary
             }
         }
 
-        /// <summary>
-        /// Transliteration settings
-        /// </summary>
-        public TransliterationSettings TranslitMode
-        {
-            get { return _translitMode; }
-            set { _translitMode = value; }
-        }
-
         // All sequences in the book
         public List<string> AllSequences { get { return _allSequences; } }
 
@@ -190,11 +181,6 @@ namespace EPubLibrary
         public AnnotationPageFile AnnotationPage { get; set; }
 
         /// <summary>
-        /// Set/get it Table of Content (TOC) entries should be transliterated
-        /// </summary>
-        public bool TranliterateToc { set; get; }
-
-        /// <summary>
         /// Strings added to about page
         /// </summary>
         public List<string> AboutTexts
@@ -224,6 +210,32 @@ namespace EPubLibrary
             get { return _appleOptionsFile; }
         }
 
+        #endregion
+
+
+        #region File creation related properties
+
+        /// <summary>
+        /// Max size of content (xhtml) file, 0 means no limit
+        /// </summary>
+        public ulong ContentFileLimit { get; set; }
+
+        #endregion
+
+        #region Transliteration_common_properties
+        /// <summary>
+        /// Transliteration mode
+        /// </summary>
+        public TransliterationSettings TranslitMode
+        {
+            get { return _translitMode; }
+            set { _translitMode = value; }
+        }
+
+        /// <summary>
+        /// Set/get it Table of Content (TOC) entries should be transliterated
+        /// </summary>
+        public bool TranliterateToc { set; get; }
         #endregion
 
         #region public_functions
@@ -628,37 +640,24 @@ namespace EPubLibrary
             {
                 section.FlatStructure = FlatStructure;
                 section.EmbedStyles = EmbedStyles;
+                section.MaxSize = ContentFileLimit;
+
                 if (string.IsNullOrEmpty(section.FileName)) // if file name not defined yet create our own (not converter case)
                 {
-                    section.FileName = string.Format("section{0}.xhtml", count);                    
+                    section.FileName = string.Format(@"section{0}.xhtml", count);
                 }
-                XDocument document = section.Generate();
-                long docSize = document.EstimateSize();
-                if ( docSize >= BookDocument.MaxSize )
+
+                if (section.MaxSize != 0)
                 {
-                    // This case is not for converter
-                    // after converter the files should be in right size already
-                    int subCount = 0;
-                    foreach( var subsection in section.Split() )
-                    {
-                        subsection.FlatStructure = FlatStructure;
-                        subsection.EmbedStyles = EmbedStyles;
-                        subsection.FileName = string.Format("{0}_{1}.xhtml", Path.GetFileNameWithoutExtension(section.FileName), subCount);
-                        CreateFileEntryInZip(stream,subsection);
-                        subsection.Write(stream);
-                        AddBookContentSection(subsection,count,subCount);
-                        subCount++;
-                    }
-                    count++;                        
+                    count = SplitAndAddSubSections(stream, section, count);
                 }
                 else
                 {
-                    CreateFileEntryInZip(stream,section);
+                    CreateFileEntryInZip(stream, section);
                     section.Write(stream);
-                    AddBookContentSection(section, count,0);
-                    count++;                    
+                    AddBookContentSection(section, count, 0);
+                    count++;
                 }
-                
             }
 
             // remove navigation leaf end points with empty names
@@ -671,6 +670,39 @@ namespace EPubLibrary
             }
         }
 
+
+        private int SplitAndAddSubSections(ZipOutputStream stream, BookDocument section, int count)
+        {
+            int newCount = count;
+            XDocument document = section.Generate();
+            ulong docSize = document.EstimateSize();
+            if (docSize >= section.MaxSize)
+            {
+                // This case is not for converter
+                // after converter the files should be in right size already
+                int subCount = 0;
+                foreach (var subsection in section.Split())
+                {
+                    subsection.FlatStructure = FlatStructure;
+                    subsection.EmbedStyles = EmbedStyles;
+                    subsection.FileName = string.Format("{0}_{1}.xhtml",
+                        Path.GetFileNameWithoutExtension(section.FileName), subCount);
+                    CreateFileEntryInZip(stream, subsection);
+                    subsection.Write(stream);
+                    AddBookContentSection(subsection, count, subCount);
+                    subCount++;
+                }
+                newCount++;
+            }
+            else
+            {
+                CreateFileEntryInZip(stream, section);
+                section.Write(stream);
+                AddBookContentSection(section, count, 0);
+                newCount++;
+            }
+            return newCount;
+        }
 
         protected  virtual void AddBookContentSection(BookDocument subsection, int count,int subcount)
         {
