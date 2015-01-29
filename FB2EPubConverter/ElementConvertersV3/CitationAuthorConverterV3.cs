@@ -3,14 +3,14 @@ using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConvertersV2
+namespace FB2EPubConverter.ElementConvertersV3
 {
-    internal class CitationAuthorConverterParamsV2
+    internal class CitationAuthorConverterParamsV3
     {
-        public ConverterOptionsV2 Settings { get; set; }    
+        public ConverterOptionsV3 Settings { get; set; }
     }
 
-    internal class CitationAuthorConverterV2 : BaseElementConverterV2
+    internal class CitationAuthorConverterV3 : BaseElementConverterV3
     {
         /// <summary>
         /// Converts FB2 citation author element
@@ -18,21 +18,20 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// <param name="paragraphItem">item to convert</param>
         /// <param name="citationAuthorConverterParams"></param>
         /// <returns>XHTML representation</returns>
-        public IHTMLItem Convert(ParagraphItem paragraphItem, CitationAuthorConverterParamsV2 citationAuthorConverterParams)
+        public IHTMLItem Convert(ParagraphItem paragraphItem, CitationAuthorConverterParamsV3 citationAuthorConverterParams)
         {
             if (paragraphItem == null)
             {
                 throw new ArgumentNullException("paragraphItem");
             }
-            var cite = new Div(HTMLElementType.XHTML11);
+            var cite = new Div(HTMLElementType.HTML5);
 
-            var paragraphConverter = new ParagraphConverterV2();
+            var paragraphConverter = new ParagraphConverterV3();
             cite.Add(paragraphConverter.Convert(paragraphItem,
-                new ParagraphConverterParamsV2 {Settings =citationAuthorConverterParams.Settings, ResultType = ParagraphConvTargetEnumV2.Paragraph, StartSection = false}));
+                new ParagraphConverterParamsV3 { Settings = citationAuthorConverterParams.Settings, ResultType = ParagraphConvTargetEnumV3.Paragraph, StartSection = false }));
 
             SetClassType(cite, "citation_author");
             return cite;
         }
-
     }
 }

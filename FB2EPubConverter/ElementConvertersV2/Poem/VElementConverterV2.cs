@@ -2,7 +2,7 @@
 using FB2Library.Elements.Poem;
 using XHTMLClassLibrary.BaseElements;
 
-namespace FB2EPubConverter.ElementConvertersV2
+namespace FB2EPubConverter.ElementConvertersV2.Poem
 {
     internal class VElementConverterParamsV2
     {
@@ -23,10 +23,10 @@ namespace FB2EPubConverter.ElementConvertersV2
             }
             var paragraphConverter = new ParagraphConverterV2();
             var item = paragraphConverter.Convert(paragraphItem,
-                new ParagraphConverterParams
+                new ParagraphConverterParamsV2
                 {
                     ResultType =
-                        ParagraphConvTargetEnum.Paragraph,
+                        ParagraphConvTargetEnumV2.Paragraph,
                     Settings = vElementConverterParams.Settings,
                     StartSection = false,
                 });

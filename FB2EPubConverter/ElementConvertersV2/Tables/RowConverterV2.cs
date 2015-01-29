@@ -3,7 +3,7 @@ using FB2Library.Elements.Table;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.TableElements;
 
-namespace FB2EPubConverter.ElementConvertersV2
+namespace FB2EPubConverter.ElementConvertersV2.Tables
 {
     internal class RowConverterParamsV2
     {
@@ -16,7 +16,6 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// 
         /// </summary>
         /// <param name="tableRowItem"></param>
-        /// <param name="compatibility"></param>
         /// <param name="rowConverterParams"></param>
         /// <returns></returns>
         public IHTMLItem Convert(TableRowItem tableRowItem, RowConverterParamsV2 rowConverterParams)
@@ -35,7 +34,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     var cell = new TableHeaderCell(HTMLElementType.XHTML11);
                     var paragraphConverter = new ParagraphConverterV2();
                     var cellData = paragraphConverter.Convert(th, 
-                        new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, Settings = rowConverterParams .Settings,StartSection = false});
+                        new ParagraphConverterParamsV2 { ResultType = ParagraphConvTargetEnumV2.Paragraph, Settings = rowConverterParams .Settings,StartSection = false});
                     if (cellData.SubElements() != null)
                     {
                         foreach (var subElement in cellData.SubElements())
@@ -88,7 +87,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     var cell = new TableData(HTMLElementType.XHTML11);
                     var paragraphConverter = new ParagraphConverterV2();
                     var cellData = paragraphConverter.Convert(td,  
-                        new ParagraphConverterParams { ResultType = ParagraphConvTargetEnum.Paragraph, Settings = rowConverterParams.Settings, StartSection = false });
+                        new ParagraphConverterParamsV2 { ResultType = ParagraphConvTargetEnumV2.Paragraph, Settings = rowConverterParams.Settings, StartSection = false });
                     if (cellData.SubElements() != null)
                     {
                         foreach (var subElement in cellData.SubElements())

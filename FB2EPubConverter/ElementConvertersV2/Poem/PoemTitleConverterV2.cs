@@ -4,7 +4,7 @@ using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
-namespace FB2EPubConverter.ElementConvertersV2
+namespace FB2EPubConverter.ElementConvertersV2.Poem
 {
     internal class PoemTitleConverterV2 : BaseElementConverterV2
     {
@@ -31,7 +31,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     var paragraphStyle = GetParagraphStyleByLevel(_level);
                     var paragraphConverter = new ParagraphConverterV2();
                     title.Add(paragraphConverter.Convert(fb2TextItem as ParagraphItem, 
-                        new ParagraphConverterParams { ResultType = paragraphStyle, Settings = titleConverterParams.Settings, StartSection = false }));
+                        new ParagraphConverterParamsV2 { ResultType = paragraphStyle, Settings = titleConverterParams.Settings, StartSection = false }));
                 }
                 else if (fb2TextItem is EmptyLineItem)
                 {
@@ -47,25 +47,25 @@ namespace FB2EPubConverter.ElementConvertersV2
             return title;
         }
 
-        private static ParagraphConvTargetEnum GetParagraphStyleByLevel(int titleLevel)
+        private static ParagraphConvTargetEnumV2 GetParagraphStyleByLevel(int titleLevel)
         {
-            var paragraphStyle = ParagraphConvTargetEnum.H6;
+            var paragraphStyle = ParagraphConvTargetEnumV2.H6;
             switch (titleLevel)
             {
                 case 1:
-                    paragraphStyle = ParagraphConvTargetEnum.H1;
+                    paragraphStyle = ParagraphConvTargetEnumV2.H1;
                     break;
                 case 2:
-                    paragraphStyle = ParagraphConvTargetEnum.H2;
+                    paragraphStyle = ParagraphConvTargetEnumV2.H2;
                     break;
                 case 3:
-                    paragraphStyle = ParagraphConvTargetEnum.H3;
+                    paragraphStyle = ParagraphConvTargetEnumV2.H3;
                     break;
                 case 4:
-                    paragraphStyle = ParagraphConvTargetEnum.H4;
+                    paragraphStyle = ParagraphConvTargetEnumV2.H4;
                     break;
                 case 5:
-                    paragraphStyle = ParagraphConvTargetEnum.H5;
+                    paragraphStyle = ParagraphConvTargetEnumV2.H5;
                     break;
             }
             return paragraphStyle;

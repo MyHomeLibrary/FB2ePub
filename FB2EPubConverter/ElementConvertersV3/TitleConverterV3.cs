@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Diagnostics;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
+using System.Diagnostics;
 
-namespace FB2EPubConverter.ElementConvertersV2
+namespace FB2EPubConverter.ElementConvertersV3
 {
-    internal class TitleConverterParamsV2
+    internal class TitleConverterParamsV3
     {
-        public ConverterOptionsV2 Settings { get; set; }  
-        public int TitleLevel { get; set; }
+        public ConverterOptionsV3 Settings { get; set; }
+        public int TitleLevel { get; set; }      
     }
-
-    internal class TitleConverterV2 : BaseElementConverterV2
+    
+    
+    internal class TitleConverterV3 : BaseElementConverterV3
     {
         private int _level;
 
@@ -22,7 +23,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// <param name="titleItem">title item to convert</param>
         /// <param name="titleConverterParams"></param>
         /// <returns></returns>
-        public Div Convert(TitleItem titleItem,TitleConverterParamsV2 titleConverterParams)
+        public Div Convert(TitleItem titleItem, TitleConverterParamsV3 titleConverterParams)
         {
             if (titleItem == null)
             {
@@ -35,13 +36,13 @@ namespace FB2EPubConverter.ElementConvertersV2
                 if (fb2TextItem is ParagraphItem)
                 {
                     var paragraphStyle = GetParagraphStyleByLevel(_level);
-                    var paragraphConverter = new ParagraphConverterV2();
-                    title.Add(paragraphConverter.Convert(fb2TextItem as ParagraphItem, 
-                        new ParagraphConverterParamsV2 { ResultType = paragraphStyle, Settings = titleConverterParams.Settings, StartSection = false}));
+                    var paragraphConverter = new ParagraphConverterV3();
+                    title.Add(paragraphConverter.Convert(fb2TextItem as ParagraphItem,
+                        new ParagraphConverterParamsV3 { ResultType = paragraphStyle, Settings = titleConverterParams.Settings, StartSection = false }));
                 }
                 else if (fb2TextItem is EmptyLineItem)
                 {
-                    var emptyLineConverter = new EmptyLineConverterV2();
+                    var emptyLineConverter = new EmptyLineConverterV3();
                     title.Add(emptyLineConverter.Convert());
                 }
                 else
@@ -53,28 +54,29 @@ namespace FB2EPubConverter.ElementConvertersV2
             return title;
         }
 
-        private static ParagraphConvTargetEnumV2 GetParagraphStyleByLevel(int titleLevel)
+        private static ParagraphConvTargetEnumV3 GetParagraphStyleByLevel(int titleLevel)
         {
-            var paragraphStyle = ParagraphConvTargetEnumV2.H6;
+            var paragraphStyle = ParagraphConvTargetEnumV3.H6;
             switch (titleLevel)
             {
                 case 1:
-                    paragraphStyle = ParagraphConvTargetEnumV2.H1;
+                    paragraphStyle = ParagraphConvTargetEnumV3.H1;
                     break;
                 case 2:
-                    paragraphStyle = ParagraphConvTargetEnumV2.H2;
+                    paragraphStyle = ParagraphConvTargetEnumV3.H2;
                     break;
                 case 3:
-                    paragraphStyle = ParagraphConvTargetEnumV2.H3;
+                    paragraphStyle = ParagraphConvTargetEnumV3.H3;
                     break;
                 case 4:
-                    paragraphStyle = ParagraphConvTargetEnumV2.H4;
+                    paragraphStyle = ParagraphConvTargetEnumV3.H4;
                     break;
                 case 5:
-                    paragraphStyle = ParagraphConvTargetEnumV2.H5;
+                    paragraphStyle = ParagraphConvTargetEnumV3.H5;
                     break;
             }
             return paragraphStyle;
         }
+
     }
 }
