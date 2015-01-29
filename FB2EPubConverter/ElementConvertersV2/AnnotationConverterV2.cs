@@ -1,6 +1,6 @@
 ﻿using System;
 using FB2EPubConverter.ElementConvertersV2.Poem;
-using FB2EPubConverter.ElementConvertersV2.Table;
+using FB2EPubConverter.ElementConvertersV2.Tables;
 using FB2Library.Elements;
 using FB2Library.Elements.Poem;
 using FB2Library.Elements.Table;
