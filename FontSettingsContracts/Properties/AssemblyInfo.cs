@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("FontSettingsContracts")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Font settings assembly")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FontSettingsContracts")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCompany("Lord KiRon http://www.fb2epub.net")]
+[assembly: AssemblyProduct("FontSettings")]
+[assembly: AssemblyCopyright("Copyfree ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
