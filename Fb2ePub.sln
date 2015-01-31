@@ -61,6 +61,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPubLibraryContracts", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FontSettingsContracts", "..\fontsettings\FontSettingsContracts\FontSettingsContracts.csproj", "{F39FC602-BF90-4721-8274-CECF45676C10}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testers", "Testers", "{2D9E7F78-94AD-4504-8661-9E05A8DFC84B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConverterTester", "Testers\ConverterTester\ConverterTester.csproj", "{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -341,6 +345,20 @@ Global
 		{F39FC602-BF90-4721-8274-CECF45676C10}.Release|Win32.ActiveCfg = Release|Any CPU
 		{F39FC602-BF90-4721-8274-CECF45676C10}.Release|x64.ActiveCfg = Release|Any CPU
 		{F39FC602-BF90-4721-8274-CECF45676C10}.Release|x86.ActiveCfg = Release|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Release|Win32.ActiveCfg = Release|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Release|x64.ActiveCfg = Release|Any CPU
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -348,5 +366,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{747EB3E8-4318-4A6F-BDB9-90F7DB4122D3} = {00762258-A3B0-43F5-B490-A4A1B58137FC}
 		{260632CD-33BF-4324-9119-C542E9A9B516} = {00762258-A3B0-43F5-B490-A4A1B58137FC}
+		{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B} = {2D9E7F78-94AD-4504-8661-9E05A8DFC84B}
 	EndGlobalSection
 EndGlobal
