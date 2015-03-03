@@ -41,21 +41,21 @@
             resources.ApplyResources(this.buttonRemoveFont, "buttonRemoveFont");
             this.buttonRemoveFont.Name = "buttonRemoveFont";
             this.buttonRemoveFont.UseVisualStyleBackColor = true;
-            this.buttonRemoveFont.Click += new System.EventHandler(this.buttonRemoveFont_Click);
+            this.buttonRemoveFont.Click += new System.EventHandler(this.ButtonRemoveFontClick);
             // 
             // buttonEditFont
             // 
             resources.ApplyResources(this.buttonEditFont, "buttonEditFont");
             this.buttonEditFont.Name = "buttonEditFont";
             this.buttonEditFont.UseVisualStyleBackColor = true;
-            this.buttonEditFont.Click += new System.EventHandler(this.buttonEditFont_Click);
+            this.buttonEditFont.Click += new System.EventHandler(this.ButtonEditFontClick);
             // 
             // buttonAddFont
             // 
             resources.ApplyResources(this.buttonAddFont, "buttonAddFont");
             this.buttonAddFont.Name = "buttonAddFont";
             this.buttonAddFont.UseVisualStyleBackColor = true;
-            this.buttonAddFont.Click += new System.EventHandler(this.buttonAddFont_Click);
+            this.buttonAddFont.Click += new System.EventHandler(this.ButtonAddFontClick);
             // 
             // listViewFonts
             // 
@@ -67,7 +67,7 @@
             this.listViewFonts.Name = "listViewFonts";
             this.listViewFonts.UseCompatibleStateImageBehavior = false;
             this.listViewFonts.View = System.Windows.Forms.View.Details;
-            this.listViewFonts.SelectedIndexChanged += new System.EventHandler(this.listViewFonts_SelectedIndexChanged);
+            this.listViewFonts.SelectedIndexChanged += new System.EventHandler(this.ListViewFontsSelectedIndexChanged);
             // 
             // columnHeaderFont
             // 

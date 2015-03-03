@@ -22,13 +22,13 @@ namespace FontsSettings
         }
 
 
-        private void buttonRemoveFont_Click(object sender, EventArgs e)
+        private void ButtonRemoveFontClick(object sender, EventArgs e)
         {
             ListView.SelectedListViewItemCollection selected = listViewFonts.SelectedItems;
             List<ListViewItem> used = GetUsed(selected);
             if (used.Count > 0)
             {
-                StringBuilder sb = new StringBuilder();
+                var sb = new StringBuilder();
                 sb.AppendFormat(Resources.FontSettings.ConverterSettingsForm_buttonRemoveFont_FontNameMessage, used[0].Text);
                 MessageBox.Show(this, sb.ToString(), Resources.FontSettings.ConverterSettingsForm_buttonRemoveFont_Click_Font_used, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -43,12 +43,12 @@ namespace FontsSettings
             RefreshData();
         }
 
-        private void buttonEditFont_Click(object sender, EventArgs e)
+        private void ButtonEditFontClick(object sender, EventArgs e)
         {
             EditFontFamily(listViewFonts.SelectedItems[0].Text);
         }
 
-        private void buttonAddFont_Click(object sender, EventArgs e)
+        private void ButtonAddFontClick(object sender, EventArgs e)
         {
             CSSFontFamily newFamily = new CSSFontFamily();
             CSSFontSettings.Fonts.Add(newFamily.Name, newFamily);
@@ -85,7 +85,7 @@ namespace FontsSettings
             RefreshData();
         }
 
-        private void listViewFonts_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListViewFontsSelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateFontsButtons();
         }
