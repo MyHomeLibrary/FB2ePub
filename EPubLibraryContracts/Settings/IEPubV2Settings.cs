@@ -1,6 +1,8 @@
-﻿namespace EPubLibraryContracts.Settings
+﻿using System.Xml.Serialization;
+
+namespace EPubLibraryContracts.Settings
 {
-    public interface IEPubV2Settings
+    public interface IEPubV2Settings : IXmlSerializable
     {
         void SetupDefaults();
         bool AddCalibreMetadata { get; set; }

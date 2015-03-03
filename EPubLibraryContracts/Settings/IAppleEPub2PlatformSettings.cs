@@ -8,13 +8,9 @@ namespace EPubLibraryContracts.Settings
     /// </summary>
     public enum AppleTargetPlatform
     {
-        [XmlEnum(Name = "")]
         NotSet = 0,
-        [XmlEnum(Name = "iPad")]
         iPad = 1,
-        [XmlEnum(Name = "iPhone")]
         iPhone = 2,
-        [XmlEnum(Name = "Any")]
         All = 3,
     };
 
@@ -25,18 +21,15 @@ namespace EPubLibraryContracts.Settings
     /// </summary>
     public enum AppleOrientationLock
     {
-        [XmlEnum(Name = "Disabled")]
         None = 0,
-        [XmlEnum(Name = "LandscapeOnly")]
         LandscapeOnly = 1,
-        [XmlEnum(Name = "PortraitOnly")]
         PortraitOnly = 2,
 
         LastValue = PortraitOnly,
     };
 
 
-    public interface IAppleEPub2PlatformSettings
+    public interface IAppleEPub2PlatformSettings : IXmlSerializable
     {
         bool UseCustomFonts { get; set; }
         bool OpenToSpread { get; set; }

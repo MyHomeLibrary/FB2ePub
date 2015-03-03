@@ -1,4 +1,6 @@
-﻿namespace EPubLibraryContracts.Settings
+﻿using System.Xml.Serialization;
+
+namespace EPubLibraryContracts.Settings
 {
     public enum EPubV3SubStandard
     {
@@ -6,7 +8,7 @@
         V301,
     }
 
-    public interface IEPubV3Settings
+    public interface IEPubV3Settings : IXmlSerializable
     {
         void SetupDefaults();
         void CopyFrom(IEPubV3Settings temp);
