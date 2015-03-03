@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConverterTester.Tests;
 
 namespace ConverterTester
 {
@@ -11,7 +12,7 @@ namespace ConverterTester
 
 
         static void Main(string[] args)
-        {
+        {           
             foreach (var test in InitTesters().Where(test => !test.Test()))
             {
                 throw new Exception(string.Format("Test {0} failed",test.Name));

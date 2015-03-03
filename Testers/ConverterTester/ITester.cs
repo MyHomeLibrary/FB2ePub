@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ConverterTester
 {
@@ -9,5 +6,6 @@ namespace ConverterTester
     {
         bool Test();
         string Name { get; }
+        Exception TestError { get; }
     }
 }

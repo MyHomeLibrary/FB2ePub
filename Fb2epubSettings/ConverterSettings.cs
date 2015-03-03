@@ -184,7 +184,7 @@ namespace Fb2epubSettings
                             _v3Settings.ReadXml(reader.ReadSubtree());
                             break;
                         case ResourcesPathElementName:
-                            _resourcesPath = reader.ReadContentAsString();
+                            _resourcesPath = reader.ReadElementContentAsString();
                             continue;
                         case EPUBVersionElementName:
                             EPubVersion version;

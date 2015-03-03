@@ -99,7 +99,7 @@ namespace Fb2epubSettings
                             _appleEPubSettings.ReadXml(reader.ReadSubtree());
                             break;
                         case AdobeTemplatePathElementName:
-                            _adobeTemplatePath = reader.ReadContentAsString();
+                            _adobeTemplatePath = reader.ReadElementContentAsString();
                             continue;
                     }
                 }
