@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
+using ConverterContracts.Settings;
 
 namespace Fb2epubSettings
 {
     public partial class ImportExportForm : Form
     {
-        private ConverterSettings _settings = null;
+        private IConverterSettings _settings = null;
         public static readonly log4net.ILog Log = log4net.LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
 
-        public ImportExportForm(ConverterSettings settings)
+        public ImportExportForm(IConverterSettings settings)
         {
             _settings = settings;
             InitializeComponent();

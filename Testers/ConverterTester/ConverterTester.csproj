@@ -42,8 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigFileTester.cs" />
+    <Compile Include="ITester.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestConvertProcessorSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -53,10 +56,24 @@
       <Project>{f39fc602-bf90-4721-8274-cecf45676c10}</Project>
       <Name>FontSettingsContracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ConverterContracts\ConverterContracts.csproj">
+      <Project>{71f465e1-fca1-4701-8958-643e7332ea7f}</Project>
+      <Name>ConverterContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\FB2EPubConverter\FB2EPubConverter.csproj">
       <Project>{738f2015-0dc7-4c38-bbf0-90fd5c3c2518}</Project>
       <Name>FB2EPubConverter</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Fb2epubSettings\Fb2epubSettings.csproj">
+      <Project>{bb87c009-1337-43ff-adf6-6e7861aa9343}</Project>
+      <Name>Fb2epubSettings</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TestFiles\Test_001.fb2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

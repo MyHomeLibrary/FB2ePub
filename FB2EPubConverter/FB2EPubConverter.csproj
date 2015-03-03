@@ -219,14 +219,13 @@
     <Compile Include="FB2Loaders\FileTypeDetector.cs" />
     <Compile Include="FB2Loaders\IFB2Loader.cs" />
     <Compile Include="HRefManagerV3.cs" />
-    <Compile Include="Interfaces\ePubConverterInterface.cs" />
     <Compile Include="Fb2EPubConverterEngineBase.cs" />
     <Compile Include="ElementConvertersV2\Fb2EpubInfoConverterV2.cs" />
     <Compile Include="HRefManagerV2.cs" />
+    <Compile Include="IFb2EPubConverterEngine.cs" />
     <Compile Include="ImageManager.cs" />
     <Compile Include="ProcessAuthorFormat.cs" />
     <Compile Include="ProcessSeqFormatString.cs" />
-    <Compile Include="Interfaces\ProgressUpdateInterface.cs" />
     <Compile Include="ProgressUpdateWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ElementConvertersV2\SectionConverterV2.cs" />

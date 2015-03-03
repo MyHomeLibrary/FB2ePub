@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
-using FB2EPubConverter.Interfaces;
+using ConverterContracts.ComInterfaces;
 
 namespace FB2EPubConverter
 {

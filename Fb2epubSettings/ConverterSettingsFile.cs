@@ -1,14 +1,6 @@
-﻿using System.Collections;
-using Fb2epubSettings.AppleSettings;
-using Fb2epubSettings.AppleSettings.ePub_v2;
-using FontsSettings;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Xml.Serialization;
+using ConverterContracts.Settings;
 
 namespace Fb2epubSettings
 {
@@ -17,12 +9,11 @@ namespace Fb2epubSettings
     /// </summary>
     public class ConverterSettingsFile
     {
-        protected readonly ConverterSettings _settings = new ConverterSettings();
-        //private Hashtable _serializers = new Hashtable();
-        private XmlSerializer _serializer = null;
+        private readonly IConverterSettings _settings = new ConverterSettings();
+        private XmlSerializer _serializer;
 
 
-        public ConverterSettings Settings { get { return _settings; } }
+        public IConverterSettings Settings { get { return _settings; } }
 
         /// <summary>
         /// Load converter settings from file
@@ -32,7 +23,7 @@ namespace Fb2epubSettings
         {
             if (_serializer == null)
             {
-                _serializer = new XmlSerializer(_settings.GetType(), GetSerializerTypes());
+                _serializer = new XmlSerializer(_settings.GetType());
             }
             using (FileStream fs = File.OpenRead(fileName))
             {
@@ -53,21 +44,12 @@ namespace Fb2epubSettings
         {
             if (_serializer == null)
             {
-                _serializer = new XmlSerializer(_settings.GetType(), GetSerializerTypes());
+                _serializer = new XmlSerializer(_settings.GetType());
             }
             using (FileStream fs = File.Create(fileName))
             {
                 _serializer.Serialize(fs, _settings);
             }
-        }
-
-        private Type[] GetSerializerTypes()
-        {
-            return new[] {typeof (EPubFontSettings),
-                    typeof (CSSFontFamily),
-                    typeof (CSSStylableElement),
-                    typeof (AppleConverterePub2Settings),
-                    typeof (AppleEPub2PlatformSettings)};
         }
     }
 }

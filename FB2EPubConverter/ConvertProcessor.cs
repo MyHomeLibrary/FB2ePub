@@ -9,9 +9,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using Fb2ePubConverter;
-using FB2EPubConverter.Interfaces;
 using System.Runtime.InteropServices;
+using ConverterContracts;
+using ConverterContracts.ComInterfaces;
+using ConverterContracts.Settings;
 using Fb2epubSettings;
 using log4net.Config;
 using FolderSettingsHelper;
@@ -47,11 +48,21 @@ namespace FB2EPubConverter
     public class ConvertProcessor : IEPubConverterInterface
     {
 
-        private readonly ConvertProcessorSettings _processorSettings = new ConvertProcessorSettings();
+        private readonly IConvertProcessorSettings _processorSettings = new ConvertProcessorSettings();
         private  CancellationTokenSource _cts = new CancellationTokenSource();
 
-        public ConvertProcessorSettings ProcessorSettings { get { return _processorSettings; } }
+        public IConvertProcessorSettings ProcessorSettings { get { return _processorSettings; } }
 
+
+        public ConvertProcessor()
+        {
+
+        }
+
+        public ConvertProcessor(IConvertProcessorSettings processorSettings)
+        {
+            _processorSettings = processorSettings;
+        }
 
         public bool PerformConvertOperation(string[] filesInMask, string outputFileName)
         {
@@ -87,7 +98,7 @@ namespace FB2EPubConverter
                 {
                     po.CancellationToken.ThrowIfCancellationRequested();
 
-                    Fb2EPubConverterEngineBase converter = CreateConverterEngine(_processorSettings.Settings);
+                    IFb2EPubConverterEngine converter = CreateConverterEngine(_processorSettings.Settings);
 
                     try
                     {
@@ -142,13 +153,13 @@ namespace FB2EPubConverter
             return conversionResult;
         }
 
-        private Fb2EPubConverterEngineBase CreateConverterEngine(ConverterSettings converterSettings)
+        private IFb2EPubConverterEngine CreateConverterEngine(IConverterSettings converterSettings)
         {
             switch (converterSettings.StandardVersion)
             {
-                case EPubVersion.VEpub20:
+                case EPubVersion.V2:
                     return new Fb2EPubConverterEngineV2 { Settings = converterSettings };
-                case EPubVersion.VePub30:
+                case EPubVersion.V3:
                     return new Fb2EPubConverterEngineV3 { Settings = converterSettings };
             }
             throw new InvalidEnumArgumentException(string.Format("Unknown EPubVersion enum: {0}",converterSettings.StandardVersion));
@@ -165,7 +176,8 @@ namespace FB2EPubConverter
             string fileName = outputFileName;
             if (!string.IsNullOrEmpty(outputFileName) && !_processorSettings.LookInSubFolders) // if output file name specified
             {
-                if (Path.GetExtension(fileName).ToLower() != ".epub") // if output file name already has "ePub" extension - do nothing, if not - add it
+                var extension = Path.GetExtension(fileName);
+                if (extension != null && extension.ToLower() != ".epub") // if output file name already has "ePub" extension - do nothing, if not - add it
                 {
                     fileName = string.Format("{0}.epub", outputFileName);
                 }
@@ -208,7 +220,7 @@ namespace FB2EPubConverter
             return string.Format("{0}.epub",fileNameWithoutExtension);           
         }
 
-        private void SaveAndCleanUp(Fb2EPubConverterEngineBase converter, string fileName, string inFileName)
+        private void SaveAndCleanUp(IFb2EPubConverterEngine converter, string fileName, string inFileName)
         {
             try
             {
@@ -270,11 +282,15 @@ namespace FB2EPubConverter
                         fileParams[0].Contains(Path.AltDirectorySeparatorChar.ToString(CultureInfo.InvariantCulture)))
                     // if does not have dir. separators then it's current folder
                     {
-                        filesInMask.AddRange(Directory.GetFiles(Path.GetDirectoryName(fileParams[0]),
-                                                                subMask,
-                                                                _processorSettings.LookInSubFolders
-                                                                    ? SearchOption.AllDirectories
-                                                                    : SearchOption.TopDirectoryOnly));
+                        var dirName = Path.GetDirectoryName(fileParams[0]);
+                        if (!string.IsNullOrEmpty(dirName))
+                        {
+                            filesInMask.AddRange(Directory.GetFiles(dirName,
+                                subMask,
+                                _processorSettings.LookInSubFolders
+                                    ? SearchOption.AllDirectories
+                                    : SearchOption.TopDirectoryOnly));
+                        }
                     }
                     else
                     {
@@ -380,7 +396,7 @@ namespace FB2EPubConverter
             progressReporter.ConvertStarted(1);
 
 
-            Fb2EPubConverterEngineBase converter = CreateConverterEngine(_processorSettings.Settings);
+            IFb2EPubConverterEngine converter = CreateConverterEngine(_processorSettings.Settings);
 
             try
             {
@@ -421,7 +437,7 @@ namespace FB2EPubConverter
                 }
                 string filePath;
                 DefaultSettingsLocatorHelper.EnsureDefaultSettingsFilePresent(out filePath, file.Settings);
-                ProcessorSettings.SettingsFileToUse = filePath;
+                _processorSettings.SettingsFileToUse = filePath;
             }
             try
             {

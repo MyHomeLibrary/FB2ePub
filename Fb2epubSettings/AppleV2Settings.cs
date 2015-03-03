@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using ConverterContracts.Settings;
 using EPubLibraryContracts.Settings;
 using Fb2epubSettings.AppleSettings.ePub_v2;
 
@@ -52,13 +53,14 @@ namespace Fb2epubSettings
             }
             public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
             {
-                if ( value.GetType() == typeof(string) )
+                var s = value as string;
+                if ( s != null )
                 {
-                        if ( Resources.Fb2epubSettings.Applev2BookOrientationLockOff == (string)value)
+                        if ( Resources.Fb2epubSettings.Applev2BookOrientationLockOff == s)
                             return AppleOrientationLock.None;
-                        if ( Resources.Fb2epubSettings.Applev2BookOrientationLockLandscapeOnly== (string)value)
+                        if ( Resources.Fb2epubSettings.Applev2BookOrientationLockLandscapeOnly== s)
                             return AppleOrientationLock.LandscapeOnly;
-                        if ( Resources.Fb2epubSettings.Applev2BookOrientationLockPortraitOnly== (string)value)
+                        if ( Resources.Fb2epubSettings.Applev2BookOrientationLockPortraitOnly== s)
                             return AppleOrientationLock.PortraitOnly;
 
                 }
@@ -108,7 +110,7 @@ namespace Fb2epubSettings
         /// Used to load settings object into a dialog/control
         /// </summary>
         /// <param name="settings"></param>
-        public override void LoadSettings(ConverterSettings settings)
+        public override void LoadSettings(IConverterSettings settings)
         {
             SuspendLayout();
 
@@ -330,8 +332,12 @@ namespace Fb2epubSettings
                 AppleTargetPlatform currentPlatform = GetCurrentPlatform();
                 OrientationTypeConverter converter = new OrientationTypeConverter();
                 string value = (string)comboBoxOrientationLock.SelectedItem;
-                var orientationLock = (AppleOrientationLock)converter.ConvertFromString(value);
-                _allPlatformObjects[currentPlatform].OrientationLock = orientationLock;
+                var convertFromString = converter.ConvertFromString(value);
+                if (convertFromString != null)
+                {
+                    var orientationLock = (AppleOrientationLock)convertFromString;
+                    _allPlatformObjects[currentPlatform].OrientationLock = orientationLock;
+                }
             }
         }
 
@@ -398,7 +404,7 @@ namespace Fb2epubSettings
         /// Saves current state to settings
         /// </summary>
         /// <param name="settings"></param>
-        public override void SaveToSettings(ConverterSettings settings)
+        public override void SaveToSettings(IConverterSettings settings)
         {
             settings.V2Settings.AppleConverterEPubSettings.Platforms.Clear();
             foreach (var platform in _used.Values)

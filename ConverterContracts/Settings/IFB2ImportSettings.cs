@@ -1,4 +1,6 @@
-﻿namespace ConverterContracts.Settings
+﻿using System.Xml.Serialization;
+
+namespace ConverterContracts.Settings
 {
     /// <summary>
     /// Fix mode options
@@ -11,7 +13,7 @@
         Fb2FixAlways, // always use Fb2Fix
     }
 
-    public interface IFB2ImportSettings
+    public interface IFB2ImportSettings : IXmlSerializable
     {
         void CopyFrom(IFB2ImportSettings temp);
         void SetupDefaults();

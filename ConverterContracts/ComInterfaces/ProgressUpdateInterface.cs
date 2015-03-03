@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace FB2EPubConverter.Interfaces
+namespace ConverterContracts.ComInterfaces
 {
     [Guid("255293F1-ECB5-4218-8797-1068B915BEC5"),ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]

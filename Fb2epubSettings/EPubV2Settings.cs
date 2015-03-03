@@ -1,16 +1,26 @@
-﻿using System.Xml.Serialization;
+﻿using System.Xml;
+using System.Xml.Schema;
 using EPubLibraryContracts.Settings;
 using Fb2epubSettings.AppleSettings.ePub_v2;
 
 namespace Fb2epubSettings
 {
-    [XmlRoot(ElementName = "EPubV2Settings")]
-    public class EPubV2Settings : IEPubV2Settings
+    public class EPubV2Settings : IEPubV2Settings 
     {
         private bool _enableAdobeTemplate;
         private string _adobeTemplatePath = string.Empty;
-        private readonly IAppleConverterePub2Settings _appleEPubSettings = new AppleConverterePub2Settings();
+        private readonly AppleConverterePub2Settings _appleEPubSettings = new AppleConverterePub2Settings();
         private bool _addCalibreMetadata = true;
+
+        #region constants
+
+        public const string V2SettingsElementName = "EPubV2Settings";
+
+        private const string AddCalibreMetadataElementName = "AddCalibreMetadata";
+        private const string EnableAdobeTemplateUsageElementName = "EnableAdobeTemplateUsage";
+        private const string AdobeTemplatePathElementName = "AdobeTemplatePath";
+
+        #endregion
 
         public void SetupDefaults()
         {
@@ -23,7 +33,6 @@ namespace Fb2epubSettings
         /// <summary>
         /// Get/Set if Calibre metadata should be added
         /// </summary>
-        [XmlElement(ElementName = "AddCalibreMetadata")]
         public bool AddCalibreMetadata
         {
             get { return _addCalibreMetadata; }
@@ -33,7 +42,6 @@ namespace Fb2epubSettings
         /// <summary>
         /// Enable/Disable embedding of Adobe XPGT Template into a resulting file
         /// </summary>
-        [XmlElement(ElementName = "EnableAdobeTemplateUsage")]
         public bool EnableAdobeTemplate
         {
             get { return _enableAdobeTemplate; }
@@ -43,7 +51,6 @@ namespace Fb2epubSettings
         /// <summary>
         /// Return reference to set of apple/iBook related settings
         /// </summary>
-        [XmlElement(ElementName = "AppleConverterEPub2Settings")]
         public IAppleConverterePub2Settings AppleConverterEPubSettings
         {
             get { return _appleEPubSettings; }
@@ -53,7 +60,6 @@ namespace Fb2epubSettings
         /// <summary>
         /// Path to location of Adobe XPGT template
         /// </summary>
-        [XmlElement(ElementName = "AdobeTemplatePath")]
         public string AdobeTemplatePath
         {
             get { return _adobeTemplatePath; }
@@ -68,6 +74,58 @@ namespace Fb2epubSettings
             _addCalibreMetadata = temp.AddCalibreMetadata;
             _appleEPubSettings.CopyFrom(temp.AppleConverterEPubSettings);
 
+        }
+
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
+
+        public void ReadXml(XmlReader reader)
+        {
+            while (!reader.EOF)
+            {
+                if (reader.IsStartElement())
+                {
+                    switch (reader.Name)
+                    {
+                        case AddCalibreMetadataElementName:
+                            _addCalibreMetadata = reader.ReadElementContentAsBoolean();
+                            continue;
+                        case EnableAdobeTemplateUsageElementName:
+                            _enableAdobeTemplate = reader.ReadElementContentAsBoolean();
+                            continue;
+                        case AppleConverterePub2Settings.AppleConverterEPub2SettingsElementName:
+                            _appleEPubSettings.ReadXml(reader.ReadSubtree());
+                            break;
+                        case AdobeTemplatePathElementName:
+                            _adobeTemplatePath = reader.ReadContentAsString();
+                            continue;
+                    }
+                }
+                reader.Read();
+            }            
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            writer.WriteStartElement(V2SettingsElementName);
+
+            writer.WriteStartElement(AddCalibreMetadataElementName);
+            writer.WriteValue(_addCalibreMetadata);
+            writer.WriteEndElement();
+
+            writer.WriteStartElement(EnableAdobeTemplateUsageElementName);
+            writer.WriteValue(_enableAdobeTemplate);
+            writer.WriteEndElement();
+
+            _appleEPubSettings.WriteXml(writer);
+
+            writer.WriteStartElement(AdobeTemplatePathElementName);
+            writer.WriteValue(_adobeTemplatePath);
+            writer.WriteEndElement();
+
+            writer.WriteEndElement();
         }
     }
 }

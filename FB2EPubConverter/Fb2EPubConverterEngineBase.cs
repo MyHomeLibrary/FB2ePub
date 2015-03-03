@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
+using ConverterContracts.Settings;
 using EPubLibrary;
 using FB2EPubConverter;
 using FB2EPubConverter.FB2Loaders;
 using FB2Library;
 using TranslitRu;
-using Fb2epubSettings;
 using Logger = FB2EPubConverter.Logger;
+using ConverterContracts;
 
 
 namespace Fb2ePubConverter
 {
 
-    internal abstract class Fb2EPubConverterEngineBase
+    internal abstract class Fb2EPubConverterEngineBase : IFb2EPubConverterEngine
     {
 
         protected readonly ImageManager Images = new ImageManager();
@@ -25,9 +26,7 @@ namespace Fb2ePubConverter
         /// <summary>
         /// Settings for the converter
         /// </summary>
-        public ConverterSettings Settings;
-
-
+        public IConverterSettings Settings;
 
 
 
@@ -54,7 +53,7 @@ namespace Fb2ePubConverter
                     var fb2ZipLoader = new FB2ZipFileLoader();
                     try
                     {
-                        FB2Files.AddRange(fb2ZipLoader.LoadFile(fileName, Settings.Fb2ImportSettings));
+                        FB2Files.AddRange(fb2ZipLoader.LoadFile(fileName, Settings.FB2ImportSettings));
                     }
                     catch (Exception)
                     {
@@ -67,7 +66,7 @@ namespace Fb2ePubConverter
                     var fb2FileLoader = new FB2FileLoader();
                     try
                     {
-                        FB2Files.AddRange(fb2FileLoader.LoadFile(fileName,Settings.Fb2ImportSettings));
+                        FB2Files.AddRange(fb2FileLoader.LoadFile(fileName,Settings.FB2ImportSettings));
                     }
                     catch (Exception)
                     {
@@ -80,7 +79,7 @@ namespace Fb2ePubConverter
                     var fb2RarLoader = new FB2RarLoader();
                     try
                     {
-                        FB2Files.AddRange(fb2RarLoader.LoadFile(fileName,Settings.Fb2ImportSettings));
+                        FB2Files.AddRange(fb2RarLoader.LoadFile(fileName,Settings.FB2ImportSettings));
                     }
                     catch (Exception)
                     {
@@ -136,7 +135,7 @@ namespace Fb2ePubConverter
 
         private void LoadImagesInMemory(FB2File fb2File)
         {
-            Images.RemoveAlpha = Settings.Fb2ImportSettings.ConvertAlphaPng;
+            Images.RemoveAlpha = Settings.FB2ImportSettings.ConvertAlphaPng;
             Images.LoadFromBinarySection(fb2File.Images);
         }
 
