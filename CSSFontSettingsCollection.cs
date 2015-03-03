@@ -51,7 +51,7 @@ namespace FontsSettings
         }
 
         /// <summary>
-        /// return list of all embeded files
+        /// return list of all embedded files
         /// </summary>
         public List<string> EmbededFilesLocations
         {
@@ -96,7 +96,7 @@ namespace FontsSettings
         }
 
         /// <summary>
-        /// Load settings into a workacle helper class structure
+        /// Load settings into a workable helper class structure
         /// </summary>
         /// <param name="settings">settings to load</param>
         /// <param name="decoration">decoration to be added to family font names</param>
@@ -116,9 +116,9 @@ namespace FontsSettings
                 {
                     foreach (var fontSource in cssFont.Sources) // and all sources of the fonts in font family
                     {
-                        if (fontSource.Type == SourceTypes.Embedded) // if font is embeded font
+                        if (fontSource.Type == SourceTypes.Embedded) // if font is embedded font
                         {
-                            string locationKey = fontSource.Location.ToLower(); // one case good for comperason
+                            string locationKey = fontSource.Location.ToLower(); // one case good for comparison
                             if (!string.IsNullOrEmpty(_resourcePath) && locationKey.Contains(MacroMask.ToLower())) // in case we need to update resource path
                             {
                                 locationKey = locationKey.Replace(MacroMask.ToLower(), _resourcePath);   
@@ -229,21 +229,13 @@ namespace FontsSettings
 
         public FontFormat GetFontFormat(string embededFileLocation)
         {
-            foreach (var cssFontFamily in _fontFiles)
+            foreach (var fontSource in _fontFiles.SelectMany(cssFontFamily => cssFontFamily.Value.SelectMany(cssFont => 
+                cssFont.Sources.Where(fontSource => 
+                    fontSource.EmbeddedLocation && String.Equals(fontSource.Location, embededFileLocation, StringComparison.CurrentCultureIgnoreCase)))))
             {
-                foreach (var cssFont in cssFontFamily.Value)
-                {
-                    foreach (var fontSource in cssFont.Sources)
-                    {
-                        if (fontSource.EmbeddedLocation && String.Equals(fontSource.Location, embededFileLocation, StringComparison.CurrentCultureIgnoreCase))
-                        {
-                            return fontSource.Format;
-                        }
-                    }
-                }
+                return fontSource.Format;
             }
             return FontFormat.OpenType;
         }
-
     }
 }

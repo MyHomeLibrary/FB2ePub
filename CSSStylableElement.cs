@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Xml;
 using System.Xml.Schema;
-using System.Xml.Serialization;
 using FontSettingsContracts;
 
 namespace FontsSettings
@@ -73,11 +70,7 @@ namespace FontsSettings
 
         public void ReadXml(XmlReader reader)
         {
-            if (!reader.ReadAttributeValue())
-            {
-                throw new InvalidDataException("Unable to read attributes from CSS style node");
-            }
-
+            reader.MoveToContent();
             _name = reader.GetAttribute(NameAttributeName);
 
             _class = reader.GetAttribute(ClassAttributeName);
@@ -103,7 +96,7 @@ namespace FontsSettings
         {
             writer.WriteStartElement(CSSStylableElementName);
             writer.WriteAttributeString(NameAttributeName,_name);
-            writer.WriteAttributeString(Class,_class);
+            writer.WriteAttributeString(ClassAttributeName,_class);
             foreach (var assignedFont in _assignedFonts)
             {
                 writer.WriteStartElement(FontElementName);

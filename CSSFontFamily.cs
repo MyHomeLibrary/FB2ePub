@@ -99,10 +99,7 @@ namespace FontsSettings
         public void ReadXml(XmlReader reader)
         {
             _fonts.Clear();
-            if (!reader.ReadAttributeValue())
-            {
-                throw new InvalidDataException("Unable to read attributes from Font family node");
-            }
+            reader.MoveToContent();
             string nameAttribute = reader.GetAttribute(NameAttributeName);
             if (string.IsNullOrEmpty(nameAttribute))
             {
@@ -116,7 +113,8 @@ namespace FontsSettings
                     switch (reader.Name)
                     {
                         case  CSSFont.FontElementName:
-                            var font = (CSSFont)reader.ReadElementContentAs(typeof(CSSFont), null);
+                            var font = new CSSFont();
+                            font.ReadXml(reader.ReadSubtree());
                             _fonts.Add(font);
                             continue;
                     }

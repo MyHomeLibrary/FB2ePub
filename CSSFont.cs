@@ -121,10 +121,7 @@ namespace FontsSettings
 
         public void ReadXml(XmlReader reader)
         {
-            if (!reader.ReadAttributeValue())
-            {
-                throw new InvalidDataException("Unable to read attributes from Font family node");
-            }
+            reader.MoveToContent();
             string styleAttribute = reader.GetAttribute(StyleAttributeName);
             if (string.IsNullOrEmpty(styleAttribute))
             {
@@ -182,7 +179,9 @@ namespace FontsSettings
                     switch (reader.Name)
                     {
                         case FontSource.SourceElementName:
-                            var source = (FontSource) reader.ReadElementContentAs(typeof (FontSource), null);
+
+                            var source = new FontSource();
+                            source.ReadXml(reader);
                             _sources.Add(source);
                             continue;
                     }

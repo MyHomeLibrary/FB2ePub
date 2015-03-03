@@ -81,11 +81,7 @@ namespace FontsSettings
 
         public void ReadXml(XmlReader reader)
         {
-            if (!reader.ReadAttributeValue())
-            {
-                throw new InvalidDataException("Unable to read attributes from Font source node");
-            }
-
+            reader.MoveToContent();
             string typeAttribute = reader.GetAttribute(TypeAttributeName);
             if (string.IsNullOrEmpty(typeAttribute))
             {
@@ -104,7 +100,7 @@ namespace FontsSettings
                 throw new InvalidDataException("Format attribute can't be empty");
             }
             FontFormat format;
-            if (!Enum.TryParse(typeAttribute, true, out format))
+            if (!Enum.TryParse(formatAttribute, true, out format))
             {
                 throw new InvalidDataException(string.Format("Invalid format value: {0}", formatAttribute));
             }
