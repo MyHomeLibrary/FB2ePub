@@ -48,6 +48,10 @@
     <Compile Include="..\CommonIncludes\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="IConvertProcessorSettings.cs" />
+    <Compile Include="ComInterfaces\ePubConverterInterface.cs" />
+    <Compile Include="ComInterfaces\ProgressUpdateInterface.cs" />
+    <Compile Include="IFb2EPubConverterEngine.cs" />
     <Compile Include="Settings\IConverterSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\IEPubCommonSettings.cs" />

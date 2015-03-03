@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
-using FB2EPubConverter.Interfaces;
+using ConverterContracts.ComInterfaces;
 using Fb2ePubGui.Properties;
 
 namespace Fb2ePubGui

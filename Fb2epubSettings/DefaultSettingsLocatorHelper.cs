@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using ConverterContracts.Settings;
 
 namespace Fb2epubSettings
 {
@@ -22,9 +23,9 @@ namespace Fb2epubSettings
         /// </summary>
         /// <param name="fileLocation"></param>
         /// <param name="defaultSettings"></param>
-        public static void EnsureDefaultSettingsFilePresent(out string fileLocation,ConverterSettings defaultSettings)
+        public static void EnsureDefaultSettingsFilePresent(out string fileLocation,IConverterSettings defaultSettings)
         {
-            SettingsLocation locationDetected = SettingsLocation.NotDetected;
+            SettingsLocation locationDetected;
             if (LocateDefaultSettings(out fileLocation,out locationDetected))
             {
                 switch (locationDetected)

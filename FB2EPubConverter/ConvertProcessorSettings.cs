@@ -1,30 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FB2EPubConverter.Interfaces;
+﻿using ConverterContracts;
+using ConverterContracts.ComInterfaces;
+using ConverterContracts.Settings;
 using Fb2epubSettings;
 
 namespace FB2EPubConverter
 {
-    public enum PathSearchOptions
-    {
-        Fb2Only,
-        Fb2WithArchives,
-        WithAllArchives,
-        All,
-    }
 
-    public class ConvertProcessorSettings
+    internal class ConvertProcessorSettings : IConvertProcessorSettings
     {
 
         private PathSearchOptions _searchMask = PathSearchOptions.Fb2WithArchives;
 
-        private readonly ConverterSettings _settings = new ConverterSettings();
+        private readonly IConverterSettings _settings = new ConverterSettings();
         /// <summary>
         /// Settings for the converter
         /// </summary>
-        public ConverterSettings Settings { get { return _settings; } }
+        public IConverterSettings Settings { get { return _settings; } }
 
         /// <summary>
         /// Get/Set if source file (Fb2/zip/etc...) need to be deleted

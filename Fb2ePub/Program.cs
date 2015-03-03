@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.IO;
+using ConverterContracts;
 using FB2EPubConverter;
 using log4net;
 using ConverterContracts.Settings;
@@ -22,7 +23,7 @@ namespace Fb2ePub
     {     
         // Create a logger for use in this class
         
-        private static ILog log;
+        private static ILog _log;
 
 
         [STAThread]
@@ -54,27 +55,27 @@ namespace Fb2ePub
                             return;
                         }
                     }
-                    Console.WriteLine("Input file name missing. Exiting.");
-                    log.Error("Input file name missing.");
-                    if (log.IsInfoEnabled) log.Info("Application [FB2EPUB] End");
+                    Console.WriteLine(@"Input file name missing. Exiting.");
+                    _log.Error("Input file name missing.");
+                    if (_log.IsInfoEnabled) _log.Info("Application [FB2EPUB] End");
                     return;
                 }
                 var processor = new ConvertProcessor();
                 PreProcessParameters(options, processor.ProcessorSettings);
                 ProcessSettings(processor);
                 ProcessParameters(options, processor.ProcessorSettings);
-                Console.WriteLine("Loading {0}...", fileParams[0]);
+                Console.WriteLine(@"Loading {0}...", fileParams[0]);
                 var filesInMask = new List<string>();
                 processor.DetectFilesToProcess(fileParams, ref filesInMask);
                 string outputFileName = (fileParams.Count > 1)?fileParams[1]:null;
                 processor.PerformConvertOperation(filesInMask,  outputFileName);
-                Console.WriteLine("Done.");
+                Console.WriteLine(@"Done.");
             }
             else
             {
                 ShowHelp();
             }
-            log.Debug("Application [FB2EPUB] End");
+            _log.Debug("Application [FB2EPUB] End");
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace Fb2ePub
         /// </summary>
         /// <param name="options"></param>
         /// <param name="convertProcessorSettings"></param>
-        private static void PreProcessParameters(List<string> options, ConvertProcessorSettings convertProcessorSettings)
+        private static void PreProcessParameters(List<string> options, IConvertProcessorSettings convertProcessorSettings)
         {
             foreach (var param in options)
             {
@@ -117,9 +118,9 @@ namespace Fb2ePub
             Console.WriteLine(@"FB2 to EPUB command line converter by Lord KiRon");
             string logPath = Path.Combine(FolderLocator.GetLocalAppDataFolder(), @"Lord_KiRon\fb2epub.log");
             SetNewLogPath(logPath);
-            log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
+            _log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
             // Log an info level message
-            log.Debug("Application [FB2EPUB] Start");
+            _log.Debug("Application [FB2EPUB] Start");
         }
 
         private static void SetNewLogPath(string pathName)
@@ -154,7 +155,7 @@ namespace Fb2ePub
             processor.ProcessorSettings.Settings.ResourcesPath = ConvertProcessor.GetResourcesPath();
         }
 
-        private static void ProcessParameters(List<string> options, ConvertProcessorSettings settings)
+        private static void ProcessParameters(List<string> options, IConvertProcessorSettings settings)
         {
             foreach (var param in options)
             {
@@ -203,12 +204,12 @@ namespace Fb2ePub
                         }
                         else
                         {
-                           log.InfoFormat("Invalid -t: parameter value {0}.",commandValue);
+                           _log.InfoFormat("Invalid -t: parameter value {0}.",commandValue);
                         }
                     }
                     else
                     {
-                        log.InfoFormat("Invalid -t: parameter value {0}.", commandValue);
+                        _log.InfoFormat("Invalid -t: parameter value {0}.", commandValue);
                     }
                 }
                 else if (command.StartsWith("o:")) // output 
@@ -238,12 +239,12 @@ namespace Fb2ePub
                         }
                         else
                         {
-                            log.InfoFormat("Invalid -f2i: parameter value {0}.", commandValue);
+                            _log.InfoFormat("Invalid -f2i: parameter value {0}.", commandValue);
                         }
                     }
                     else
                     {
-                        log.InfoFormat("Invalid -f2i: parameter value {0}.", commandValue);
+                        _log.InfoFormat("Invalid -f2i: parameter value {0}.", commandValue);
                     }
                 }
                 else if (command == "s") // subfolders
@@ -274,12 +275,12 @@ namespace Fb2ePub
                         }
                         else
                         {
-                            log.InfoFormat("Invalid -m: parameter value {0}.", value);
+                            _log.InfoFormat("Invalid -m: parameter value {0}.", value);
                         }
                     }
                     else
                     {
-                        log.InfoFormat("Invalid -m: parameter value {0}.", commandValue);
+                        _log.InfoFormat("Invalid -m: parameter value {0}.", commandValue);
                     }
                 }
                 else if (command == "deletesource")
@@ -294,23 +295,23 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.Fb2ImportSettings.FixMode = FixOptions.DoNotFix;
+                            settings.Settings.FB2ImportSettings.FixMode = FixOptions.DoNotFix;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.Fb2ImportSettings.FixMode = FixOptions.MinimalFix;
+                            settings.Settings.FB2ImportSettings.FixMode = FixOptions.MinimalFix;
                         }
                         else if (value == 2)
                         {
-                            settings.Settings.Fb2ImportSettings.FixMode = FixOptions.UseFb2Fix;
+                            settings.Settings.FB2ImportSettings.FixMode = FixOptions.UseFb2Fix;
                         }
                         else if (value == 3)
                         {
-                            settings.Settings.Fb2ImportSettings.FixMode = FixOptions.Fb2FixAlways;
+                            settings.Settings.FB2ImportSettings.FixMode = FixOptions.Fb2FixAlways;
                         }
                         else
                         {
-                            log.InfoFormat("Invalid -fix: parameter value {0}.", value);
+                            _log.InfoFormat("Invalid -fix: parameter value {0}.", value);
                         }
                     }
                 }
@@ -330,7 +331,7 @@ namespace Fb2ePub
                         }
                         else
                         {
-                            log.InfoFormat("Invalid -seqadd: parameter value {0}.", value);
+                            _log.InfoFormat("Invalid -seqadd: parameter value {0}.", value);
                         }
                     }                    
                 }
@@ -340,7 +341,7 @@ namespace Fb2ePub
                     if (!string.IsNullOrEmpty(commandValue))
                         settings.Settings.CommonSettings.SequenceFormat = commandValue;
                     else
-                        log.InfoFormat("Invalid -seqformat: parameter value is empty.");
+                        _log.InfoFormat("Invalid -seqformat: parameter value is empty.");
                 }
                 else if (command.StartsWith("nseqformat:"))
                 {
@@ -348,7 +349,7 @@ namespace Fb2ePub
                     if (!string.IsNullOrEmpty(commandValue))
                         settings.Settings.CommonSettings.NoSequenceFormat = commandValue;
                     else
-                        log.InfoFormat("Invalid -nseqformat: parameter value is empty.");
+                        _log.InfoFormat("Invalid -nseqformat: parameter value is empty.");
                 }
                 else if (command.StartsWith("nnseqformat:"))
                 {
@@ -356,7 +357,7 @@ namespace Fb2ePub
                     if (!string.IsNullOrEmpty(commandValue))
                         settings.Settings.CommonSettings.NoSeriesFormat = commandValue;
                     else
-                        log.InfoFormat("Invalid -nnseqformat: parameter value is empty.");
+                        _log.InfoFormat("Invalid -nnseqformat: parameter value is empty.");
                 }
                 else if (command.StartsWith("aformat:"))
                 {
@@ -364,7 +365,7 @@ namespace Fb2ePub
                     if (!string.IsNullOrEmpty(commandValue))
                         settings.Settings.CommonSettings.AuthorFormat = commandValue;
                     else
-                        log.InfoFormat("Invalid -aformat: parameter value is empty.");
+                        _log.InfoFormat("Invalid -aformat: parameter value is empty.");
                 }
                 else if (command.StartsWith("svformat:"))
                 {
@@ -372,7 +373,7 @@ namespace Fb2ePub
                     if (!string.IsNullOrEmpty(commandValue))
                         settings.Settings.CommonSettings.FileAsFormat = commandValue;
                     else
-                        log.InfoFormat("Invalid -svformat: parameter value is empty.");
+                        _log.InfoFormat("Invalid -svformat: parameter value is empty.");
                 }
                 else if (command.StartsWith("flat:"))
                 {
@@ -390,7 +391,7 @@ namespace Fb2ePub
                         }
                         else
                         {
-                            log.InfoFormat("Invalid -flat: parameter value {0}.", value);
+                            _log.InfoFormat("Invalid -flat: parameter value {0}.", value);
                         }
                     }
                 }
@@ -410,7 +411,7 @@ namespace Fb2ePub
                         }
                         else
                         {
-                            log.InfoFormat("Invalid -emstyles: parameter value {0}.", value);
+                            _log.InfoFormat("Invalid -emstyles: parameter value {0}.", value);
                         }
                     }
                 }
@@ -422,15 +423,15 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.Fb2ImportSettings.ConvertAlphaPng = false;
+                            settings.Settings.FB2ImportSettings.ConvertAlphaPng = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.Fb2ImportSettings.ConvertAlphaPng = true;
+                            settings.Settings.FB2ImportSettings.ConvertAlphaPng = true;
                         }
                         else
                         {
-                            log.InfoFormat("Invalid -apng: parameter value {0}.", value);
+                            _log.InfoFormat("Invalid -apng: parameter value {0}.", value);
                         }
                     }                                        
                 }
@@ -450,7 +451,7 @@ namespace Fb2ePub
                         }
                         else
                         {
-                            log.InfoFormat("Invalid -cap: parameter value {0}.", value);
+                            _log.InfoFormat("Invalid -cap: parameter value {0}.", value);
                         }
                     }
                 }
@@ -474,7 +475,7 @@ namespace Fb2ePub
                         }
                         else
                         {
-                            log.InfoFormat("Invalid -xpgt: parameter value {0}.", value);
+                            _log.InfoFormat("Invalid -xpgt: parameter value {0}.", value);
                         }
                     }                   
                 }
@@ -518,7 +519,7 @@ namespace Fb2ePub
                         }
                         else
                         {
-                            log.InfoFormat("Invalid -ignoretitle: parameter value {0}.", value);
+                            _log.InfoFormat("Invalid -ignoretitle: parameter value {0}.", value);
                         }
                     }                                       
                 }
@@ -538,7 +539,7 @@ namespace Fb2ePub
                         }
                         else
                         {
-                            log.InfoFormat("Invalid -calibremeta: parameter value {0}.", value);
+                            _log.InfoFormat("Invalid -calibremeta: parameter value {0}.", value);
                         }
                     }
                 }

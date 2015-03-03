@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 using ConverterContracts.Settings;
 using EPubLibraryContracts.Settings;
@@ -6,25 +9,27 @@ using EPubLibraryContracts.Settings;
 namespace Fb2epubSettings
 {
 
-
-    public enum EPubVersion
-    {
-        VEpub20 =   2,
-        VePub30 =   3,
-    }
-
-    [XmlRoot(ElementName = "ConverterSettings")]
-    public class ConverterSettings : IConverterSettings
+    public class ConverterSettings : IConverterSettings 
     {
         #region private_members
         private string _outputPath = string.Empty;
         private string _resourcesPath = string.Empty;
-        private EPubVersion _standardVersion = EPubVersion.VEpub20;
-        private readonly IFB2ImportSettings _fb2Settings = new FB2ImportSettings();
-        private readonly IEPubV2Settings _v2Settings = new EPubV2Settings();
-        private readonly IEPubV3Settings _v3Settings = new EPubV3Settings();
-        private  readonly IEPubCommonSettings _commonSettings = new EPubCommonSettings();
+        private EPubVersion _standardVersion = EPubVersion.V2;
+        private readonly FB2ImportSettings _fb2ImportSettings = new FB2ImportSettings();
+        private readonly EPubV2Settings _v2Settings = new EPubV2Settings();
+        private readonly EPubV3Settings _v3Settings = new EPubV3Settings();
+        private readonly EPubCommonSettings _commonSettings = new EPubCommonSettings();
         #endregion
+
+
+        #region constants
+
+        public const string ConverterSettingsElementName = "ConverterSettings";
+
+        private const string ResourcesPathElementName = "ResourcesPath";
+        private const string EPUBVersionElementName = "EPUBVersion";
+
+        #endregion 
 
         public ConverterSettings()
         {
@@ -37,13 +42,11 @@ namespace Fb2epubSettings
         public void SetupDefaults()
         {
             _resourcesPath = string.Empty;
-            _fb2Settings.SetupDefaults();
+            _fb2ImportSettings.SetupDefaults();
             _commonSettings.SetupDefaults();
             _v2Settings.SetupDefaults();
             _v3Settings.SetupDefaults();
-
-
-            //_standardVersion = EPubVersion.VePub30;
+            _standardVersion = EPubVersion.V3;
 
         }
 
@@ -55,18 +58,16 @@ namespace Fb2epubSettings
         /// <summary>
         /// Get/Set common settings
         /// </summary>
-        [XmlElement(ElementName = "Fb2ImportSettings")]
-        public IFB2ImportSettings Fb2ImportSettings
+        public IFB2ImportSettings FB2ImportSettings
         {
-            get { return _fb2Settings; }
-            set { _fb2Settings.CopyFrom(value); }
+            get { return _fb2ImportSettings; }
+            set { _fb2ImportSettings.CopyFrom(value); }
         }
 
 
         /// <summary>
         /// Get/Set common settings
         /// </summary>
-        [XmlElement(ElementName = "CommonSettings")]
         public IEPubCommonSettings CommonSettings
         {
             get { return _commonSettings; }
@@ -77,7 +78,6 @@ namespace Fb2epubSettings
         /// <summary>
         /// Get/Set V2 settings
         /// </summary>
-        [XmlElement(ElementName = "V2Settings")]
         public IEPubV2Settings V2Settings
         {
             get { return _v2Settings; }
@@ -87,7 +87,6 @@ namespace Fb2epubSettings
         /// <summary>
         /// Get/Set V3 settings
         /// </summary>
-        [XmlElement(ElementName = "V3Settings")]
         public IEPubV3Settings V3Settings
         {
             get { return _v3Settings; }
@@ -97,7 +96,6 @@ namespace Fb2epubSettings
         /// <summary>
         /// Get/Set path to conversion resources location (CSS, fonts etc)
         /// </summary>
-        [XmlElement(ElementName = "ResourcesPath")]
         public string ResourcesPath 
         {
             get { return _resourcesPath; }
@@ -108,7 +106,6 @@ namespace Fb2epubSettings
         /// <summary>
         /// Version of ePub to generate
         /// </summary>
-        [XmlElement(ElementName = "EPUBVersion")]
         public EPubVersion StandardVersion
         {
             get { return _standardVersion; }
@@ -124,7 +121,6 @@ namespace Fb2epubSettings
         /// <summary>
         /// Get/Set output path used in case output file name does not includes path
         /// </summary>
-        [XmlIgnore]
         public string OutPutPath
         {
             get { return _outputPath; }
@@ -142,7 +138,7 @@ namespace Fb2epubSettings
 
 
 
-        public void CopyFrom(ConverterSettings temp)
+        public void CopyFrom(IConverterSettings temp)
         {
             if (temp == null)
             {
@@ -153,13 +149,76 @@ namespace Fb2epubSettings
                 return;
             }
 
-            _outputPath = temp._outputPath;
-            _resourcesPath = temp._resourcesPath;
-            _standardVersion = temp._standardVersion;
+            _outputPath = temp.OutPutPath;
+            _resourcesPath = temp.ResourcesPath;
+            _standardVersion = temp.StandardVersion;
             _commonSettings.CopyFrom(temp.CommonSettings);
             _v2Settings.CopyFrom(temp.V2Settings);
             _v3Settings.CopyFrom(temp.V3Settings);
         }
 
+
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
+
+        public void ReadXml(XmlReader reader)
+        {
+            while (!reader.EOF )
+            {
+                if (reader.IsStartElement())
+                {
+                    switch (reader.Name)
+                    {
+                        case Fb2epubSettings.FB2ImportSettings.FB2ImportSettingsElementName:
+                            _fb2ImportSettings.ReadXml(reader.ReadSubtree());
+                            break;
+                        case EPubCommonSettings.CommonSettingsElementName:
+                            _commonSettings.ReadXml(reader.ReadSubtree());
+                            break;
+                        case EPubV2Settings.V2SettingsElementName:
+                            _v2Settings.ReadXml(reader.ReadSubtree());
+                            break;
+                        case EPubV3Settings.EPubV3SettingsElementName:
+                            _v3Settings.ReadXml(reader.ReadSubtree());
+                            break;
+                        case ResourcesPathElementName:
+                            _resourcesPath = reader.ReadContentAsString();
+                            continue;
+                        case EPUBVersionElementName:
+                            EPubVersion version;
+                            string elementContent = reader.ReadElementContentAsString();
+                            if (!Enum.TryParse(elementContent, true, out version))
+                            {
+                                throw new InvalidDataException(string.Format("Invalid epub version : {0}", elementContent));
+                            }
+                            _standardVersion = version;
+                            continue;
+                    }                   
+                }
+                reader.Read();
+            }
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            writer.WriteStartElement(ConverterSettingsElementName);
+
+            _fb2ImportSettings.WriteXml(writer);
+            _commonSettings.WriteXml(writer);
+            _v2Settings.WriteXml(writer);
+            _v3Settings.WriteXml(writer);
+
+            writer.WriteStartElement(ResourcesPathElementName);
+            writer.WriteValue(_resourcesPath);
+            writer.WriteEndElement();
+
+            writer.WriteStartElement(EPUBVersionElementName);
+            writer.WriteValue(_standardVersion.ToString());
+            writer.WriteEndElement();
+
+            writer.WriteEndElement();
+        }
     }
 }

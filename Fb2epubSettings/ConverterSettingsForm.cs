@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using FolderSettingsHelper.IniLocations;
-using FontSettingsContracts;
-using FontsSettings;
 using System.IO;
 using System.Reflection;
+using System.Text;
+using System.Windows.Forms;
 using ConverterContracts.Settings;
+using FolderSettingsHelper.IniLocations;
+using FontsSettings;
+using FontSettingsContracts;
+using log4net;
 
 namespace Fb2epubSettings
 {
@@ -17,7 +18,7 @@ namespace Fb2epubSettings
         internal static class Logger
         {
             // Create a logger for use in this class
-            public static readonly log4net.ILog Log = log4net.LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
+            public static readonly ILog Log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
 
         }
 
@@ -28,9 +29,11 @@ namespace Fb2epubSettings
         private readonly BindingSource _myDataSourceCSS = new BindingSource();
         private readonly BindingSource _myDataSourceCSSFonts = new BindingSource();
         private readonly List<CSSElementListItem> _viewCSSElements = new List<CSSElementListItem>();
-        private readonly ConverterSettings _settings = new ConverterSettings();
+        private readonly IConverterSettings _settings = new ConverterSettings();
 
-        private bool _locationsLoaded = false;
+
+
+        private bool _locationsLoaded;
 
 
         /// <summary>
@@ -41,6 +44,8 @@ namespace Fb2epubSettings
         public ConverterSettingsForm()
         {
             InitializeComponent();
+            fontsEditControl.CSSFontSettings = _fontSettings;
+
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -48,11 +53,11 @@ namespace Fb2epubSettings
             if (InvokeRequired)
             {
                 OnButtonPressedCallback d = buttonSave_Click;
-                Invoke(d, new object[] { sender, e });
+                Invoke(d, sender, e);
                 return;
             }
-            savePathsList();
-            saveXPGT();
+            SavePathsList();
+            SaveXPGT();
             _fontSettings.StoreTo(_settings.CommonSettings.Fonts);
             appleV2SettingsControl.SaveToSettings(_settings);
             var settingsFile = new ConverterSettingsFile();
@@ -67,15 +72,16 @@ namespace Fb2epubSettings
             }
             DialogResult = DialogResult.OK;
             Close();
+
         }
 
-        private void saveXPGT()
+        private void SaveXPGT()
         {
             _settings.V2Settings.EnableAdobeTemplate = checkBoxUseXPGT.Checked;
             _settings.V2Settings.AdobeTemplatePath = textBoxTemplatePath.Text;
         }
 
-        private void savePathsList()
+        private void SavePathsList()
         {
             _locations.Save();
         }
@@ -85,7 +91,7 @@ namespace Fb2epubSettings
             if (InvokeRequired)
             {
                 OnButtonPressedCallback d = buttonReset_Click;
-                Invoke(d, new object[] { sender, e });
+                Invoke(d, sender, e);
                 return;
             }
             ConverterSettingsForm_Load(this,null);
@@ -96,7 +102,7 @@ namespace Fb2epubSettings
             if (InvokeRequired)
             {
                 OnButtonPressedCallback d = buttonCancel_Click;
-                Invoke(d, new object[] { sender, e });
+                Invoke(d, sender, e);
                 return;
             }
 
@@ -108,15 +114,15 @@ namespace Fb2epubSettings
         {
             if (string.IsNullOrEmpty(SettingsFileName)) // if no file name set load defaults
             {
-                string filePath = string.Empty;
-                ConverterSettings settings = new ConverterSettings();
+                string filePath;
+                var settings = new ConverterSettings();
                 DefaultSettingsLocatorHelper.EnsureDefaultSettingsFilePresent(out filePath,settings);
                 SettingsFileName = filePath;
             }
             else if (!File.Exists(SettingsFileName)) // if file not exist load default settings
             {
-                string filePath = string.Empty;
-                ConverterSettings settings = new ConverterSettings();
+                string filePath;
+                var settings = new ConverterSettings();
                 DefaultSettingsLocatorHelper.EnsureDefaultSettingsFilePresent(out filePath, settings);
                 SettingsFileName = filePath;
             }
@@ -127,8 +133,10 @@ namespace Fb2epubSettings
                 settingsFile.Load(SettingsFileName);
                 _settings.CopyFrom(settingsFile.Settings);
             }
-            catch (Exception)
+            catch(Exception ex)
             {
+                Logger.Log.Error(ex);
+                // ignored
             }
             checkBoxTransliterateTOC.Checked = _settings.CommonSettings.TransliterateToc;
             checkBoxTransliterateFileName.Checked = _settings.CommonSettings.TransliterateFileName;
@@ -140,7 +148,7 @@ namespace Fb2epubSettings
             textBoxNoSeriesFormat.Text = _settings.CommonSettings.NoSeriesFormat;
             checkBoxAddSequences.Checked = _settings.CommonSettings.AddSeqToTitle;
             checkBoxFb2Info.Checked = _settings.CommonSettings.Fb2Info;
-            checkBoxConvertAlphaPNG.Checked = _settings.Fb2ImportSettings.ConvertAlphaPng;
+            checkBoxConvertAlphaPNG.Checked = _settings.FB2ImportSettings.ConvertAlphaPng;
             checkBoxFlatStructure.Checked = _settings.CommonSettings.Flat;
             checkBoxEmbedStyles.Checked = _settings.CommonSettings.EmbedStyles;
             checkBoxCapitalize.Checked = _settings.CommonSettings.CapitalDrop;
@@ -162,8 +170,6 @@ namespace Fb2epubSettings
             LoadPathsGroup();
             UpdateXPGTGroupGUI();
             LoadFontsList();
-            UpdateFontsList();
-            UpdateFontsButtons();
             SetupCSSElements();
             UpdateCCSElements();
             LoadAppleSettingsTab();
@@ -174,11 +180,11 @@ namespace Fb2epubSettings
         {
             // remove Apple controls first
             // (for future use/ conditional add)
-            this.tabControlSettings.Controls.Remove(tabPageAppleV2);
+            tabControlSettings.Controls.Remove(tabPageAppleV2);
 
             
             // add needed controls conditionally
-            this.tabControlSettings.Controls.Add(tabPageAppleV2);
+            tabControlSettings.Controls.Add(tabPageAppleV2);
 
         }
 
@@ -219,25 +225,11 @@ namespace Fb2epubSettings
             
         }
 
-        private void UpdateFontsButtons()
-        {
-            bool itemSelected = listViewFonts.SelectedItems.Count > 0;
-            buttonEditFont.Enabled = itemSelected;
-            buttonRemoveFont.Enabled = itemSelected;
-        }
-
-        private void UpdateFontsList()
-        {
-            listViewFonts.Items.Clear();
-            foreach (var cssFontFamily in _fontSettings.Fonts.Keys)
-            {
-                listViewFonts.Items.Add(cssFontFamily);
-            }
-        }
-
+        
         private void LoadFontsList()
         {
             _fontSettings.Load(_settings.CommonSettings.Fonts, string.Empty); 
+            fontsEditControl.RefreshData();
         }
 
         private void UpdateXPGTGroupGUI()
@@ -302,7 +294,7 @@ namespace Fb2epubSettings
             comboBoxFixMode.Items.Add("Internal");
             comboBoxFixMode.Items.Add("Fb2Fix");
             comboBoxFixMode.Items.Add("FixAlways");
-            comboBoxFixMode.SelectedIndex = (int)_settings.Fb2ImportSettings.FixMode;
+            comboBoxFixMode.SelectedIndex = (int)_settings.FB2ImportSettings.FixMode;
         }
 
         private void checkBoxTransliterateTOC_CheckedChanged(object sender, EventArgs e)
@@ -353,7 +345,7 @@ namespace Fb2epubSettings
 
         private void checkBoxConvertAlphaPNG_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.Fb2ImportSettings.ConvertAlphaPng = checkBoxConvertAlphaPNG.Checked;
+            _settings.FB2ImportSettings.ConvertAlphaPng = checkBoxConvertAlphaPNG.Checked;
         }
 
         private void checkBoxFlatStructure_CheckedChanged(object sender, EventArgs e)
@@ -378,7 +370,7 @@ namespace Fb2epubSettings
 
         private void comboBoxFixMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _settings.Fb2ImportSettings.FixMode = (FixOptions)comboBoxFixMode.SelectedIndex;
+            _settings.FB2ImportSettings.FixMode = (FixOptions)comboBoxFixMode.SelectedIndex;
         }
 
         private void textBoxNoSeriesFormat_TextChanged(object sender, EventArgs e)
@@ -452,9 +444,7 @@ namespace Fb2epubSettings
             DialogResult result = addPathForm.ShowDialog(this);
             if ( result == DialogResult.OK)
             {
-                Location newLocation = new Location();
-                newLocation.Name = addPathForm.PathName;
-                newLocation.Path = addPathForm.PathFolder;
+                Location newLocation = new Location {Name = addPathForm.PathName, Path = addPathForm.PathFolder};
                 _locations.Add(newLocation);
                 listBoxPaths.SelectedIndex =  listBoxPaths.Items.Add(newLocation);                
             }
@@ -553,7 +543,7 @@ namespace Fb2epubSettings
 
         private void comboBoxSDValue_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _locations.SingleDestination = (int) comboBoxSDValue.SelectedIndex+1;
+            _locations.SingleDestination = comboBoxSDValue.SelectedIndex+1;
             listBoxPaths.Refresh();
         }
 
@@ -562,7 +552,7 @@ namespace Fb2epubSettings
             if (InvokeRequired)
             {
                 OnButtonPressedCallback d = buttonClear_Click;
-                Invoke(d, new object[] { sender, e });
+                Invoke(d, sender, e);
                 return;
             }
             textBoxTemplatePath.Text = string.Empty;
@@ -574,22 +564,26 @@ namespace Fb2epubSettings
             if (InvokeRequired)
             {
                 OnButtonPressedCallback d = buttonBrowseForXPGT_Click;
-                Invoke(d, new object[] { sender, e });
+                Invoke(d, sender, e);
                 return;
             }
-            OpenFileDialog selectTemplateDlg = new OpenFileDialog();
-            selectTemplateDlg.Title = Resources.Fb2epubSettings.ConverterSettingsForm_buttonBrowseForXPGT_Click_Please_select_Adobe_XPGT_template_file;
-            selectTemplateDlg.AutoUpgradeEnabled = true;
-            selectTemplateDlg.CheckFileExists = true;
-            selectTemplateDlg.CheckPathExists = true;
-            selectTemplateDlg.DefaultExt = "*.xpgt";
-            selectTemplateDlg.FilterIndex = 1;
-            selectTemplateDlg.Multiselect = false;
-            selectTemplateDlg.Filter = "XPGT file | *.xpgt|Any file | *.*";
-            selectTemplateDlg.RestoreDirectory = true;
-            selectTemplateDlg.ShowReadOnly = false;
-            selectTemplateDlg.SupportMultiDottedExtensions = true;
-            selectTemplateDlg.ValidateNames = true;
+            OpenFileDialog selectTemplateDlg = new OpenFileDialog
+            {
+                Title =
+                    Resources.Fb2epubSettings
+                        .ConverterSettingsForm_buttonBrowseForXPGT_Click_Please_select_Adobe_XPGT_template_file,
+                AutoUpgradeEnabled = true,
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = "*.xpgt",
+                FilterIndex = 1,
+                Multiselect = false,
+                Filter = @"XPGT file | *.xpgt|Any file | *.*",
+                RestoreDirectory = true,
+                ShowReadOnly = false,
+                SupportMultiDottedExtensions = true,
+                ValidateNames = true
+            };
             DialogResult result = selectTemplateDlg.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -610,76 +604,6 @@ namespace Fb2epubSettings
 
         }
 
-        private void buttonAddFont_Click(object sender, EventArgs e)
-        {
-            CSSFontFamily newFamily = new CSSFontFamily();
-            _fontSettings.Fonts.Add(newFamily.Name, newFamily);
-            listViewFonts.Items.Add(newFamily.Name);
-            UpdateFontsList();
-            UpdateFontsButtons();
-            EditFontFamily(newFamily.Name);
-        }
-
-        private void buttonEditFont_Click(object sender, EventArgs e)
-        {
-            EditFontFamily(listViewFonts.SelectedItems[0].Text);
-        }
-
-        private void EditFontFamily(string familyFontName)
-        {
-            EditFontFamilyForm editForm = new EditFontFamilyForm(_fontSettings,familyFontName);
-            editForm.ShowDialog();
-            UpdateFontsList();
-            UpdateFontsButtons();
-        }
-
-        private void buttonRemoveFont_Click(object sender, EventArgs e)
-        {
-            ListView.SelectedListViewItemCollection selected = listViewFonts.SelectedItems;
-            List<ListViewItem> used = GetUsed(selected);
-            if (used.Count > 0)
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendFormat(Resources.Fb2epubSettings.ConverterSettingsForm_buttonRemoveFont_FontNameMessage, used[0].Text);
-                MessageBox.Show(this, sb.ToString(), Resources.Fb2epubSettings.ConverterSettingsForm_buttonRemoveFont_Click_Font_used, MessageBoxButtons.OK, MessageBoxIcon.Warning);                
-            }
-            List<ListViewItem> toDelete = new List<ListViewItem>();
-            foreach (ListViewItem item in selected)
-            {
-                if ((item != null) && !used.Contains(item))
-                {
-                    toDelete.Add(item);
-                }
-            }
-            listViewFonts.BeginUpdate();
-            foreach (ListViewItem selectedItem in toDelete)
-            {
-                _fontSettings.Fonts.Remove(selectedItem.Text);
-                listViewFonts.Items.Remove(selectedItem);
-            }
-            listViewFonts.EndUpdate();
-            UpdateFontsList();
-            UpdateFontsButtons();
-        }
-
-        private List<ListViewItem> GetUsed(ListView.SelectedListViewItemCollection selected)
-        {
-            List<ListViewItem> items = new List<ListViewItem>();
-            foreach (ListViewItem item in selected)
-            {
-                if (_fontSettings.IsFontUsed(item.Text))
-                {
-                    items.Add(item);
-                }
-            }
-            return items;
-        }
-
-
-        private void listViewFonts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateFontsButtons();
-        }
 
         private void buttonAddCSS_Click(object sender, EventArgs e)
         {
@@ -701,11 +625,11 @@ namespace Fb2epubSettings
 
         private void AddCSSElement(string name, string className)
         {
-            CSSElementListItem newViewElement = null;
-            if(!_fontSettings.CssElements.ContainsKey(name) )
+            CSSElementListItem newViewElement;
+            if (!_fontSettings.CssElements.ContainsKey(name))
             {
-                _fontSettings.CssElements.Add(name,new Dictionary<string, List<ICSSFontFamily>>());
-                _fontSettings.CssElements[name].Add(className,new List<ICSSFontFamily>());
+                _fontSettings.CssElements.Add(name, new Dictionary<string, List<ICSSFontFamily>>());
+                _fontSettings.CssElements[name].Add(className, new List<ICSSFontFamily>());
                 newViewElement = new CSSElementListItem {Class = className, Name = name};
                 _viewCSSElements.Add(newViewElement);
             }
@@ -713,7 +637,7 @@ namespace Fb2epubSettings
             {
                 if (!_fontSettings.CssElements[name].ContainsKey(className))
                 {
-                    _fontSettings.CssElements[name].Add(className,new List<ICSSFontFamily>());
+                    _fontSettings.CssElements[name].Add(className, new List<ICSSFontFamily>());
                     newViewElement = new CSSElementListItem { Class = className, Name = name };
                     _viewCSSElements.Add(newViewElement);
                 }
@@ -798,7 +722,10 @@ namespace Fb2epubSettings
         {
             var form = new ImportExportForm(_settings);
             DialogResult result =  form.ShowDialog();
-            ConverterSettingsForm_Load(this, null);
+            if (result == DialogResult.OK)
+            {
+                ConverterSettingsForm_Load(this, null);
+            }
         }
 
         private void checkBoxCalibreMetadata_CheckedChanged(object sender, EventArgs e)
