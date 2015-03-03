@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using FontSettingsContracts;
@@ -15,7 +16,7 @@ namespace FontsSettings
         private readonly Dictionary<string, Dictionary<string, List<ICSSFontFamily>>> _elements = new Dictionary<string, Dictionary<string, List<ICSSFontFamily>>>();
         private readonly Dictionary<string,List<ICSSFont>> _fontFiles = new Dictionary<string, List<ICSSFont>>();
 
-        private IEPubFontSettings _storageSettings = null;
+        private IEPubFontSettings _storageSettings;
         private string _loadedDecoration = string.Empty;
 
         public const string MacroMask = "%ResourceFolder%";
@@ -171,12 +172,12 @@ namespace FontsSettings
                 return;
             }
             //In CSS, identifiers (including element names, classes, and IDs in selectors) can contain only the characters [a-zA-Z0-9] and ISO 10646 characters U+00A0 and higher, plus the hyphen (-) and the underscore (_).
-            string pattern1 = "[^-_a-zA-Z0-9\u00A0-\u10FFFF]";
-            string replacement = "a";
+            const string pattern1 = "[^-_a-zA-Z0-9\u00A0-\u10FFFF]";
+            const string replacement = "a";
             Regex processor = new Regex(pattern1);
             decoration = processor.Replace(decoration, replacement);
             // [Identifiers] cannot start with a digit, two hyphens, or a hyphen followed by a digit. Identifiers can also contain escaped characters and any ISO 10646 character as a numeric code
-            string pattern2 = @"^(-?\d|--)";
+            const string pattern2 = @"^(-?\d|--)";
            processor = new Regex(pattern2);
             if (processor.IsMatch(decoration))
             {
@@ -200,9 +201,7 @@ namespace FontsSettings
             {
                 foreach (var elementClass in _elements[elementName].Keys)
                 {
-                    var item = new CSSStylableElement();
-                    item.Name = elementName;
-                    item.Class = elementClass;
+                    var item = new CSSStylableElement {Name = elementName, Class = elementClass};
                     foreach (var fontFamily in _elements[elementName][elementClass])
                     {
                         item.AssignedFontFamilies.Add(fontFamily.Name);
@@ -236,7 +235,7 @@ namespace FontsSettings
                 {
                     foreach (var fontSource in cssFont.Sources)
                     {
-                        if (fontSource.EmbeddedLocation && fontSource.Location.ToLower() == embededFileLocation.ToLower())
+                        if (fontSource.EmbeddedLocation && String.Equals(fontSource.Location, embededFileLocation, StringComparison.CurrentCultureIgnoreCase))
                         {
                             return fontSource.Format;
                         }

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 using FontSettingsContracts;
 
@@ -10,11 +13,17 @@ namespace FontsSettings
     /// <summary>
     /// Represent set of fonts grouped into one family
     /// </summary>
-    [Serializable]
     public class CSSFontFamily : ICSSFontFamily
     {
         private readonly List<ICSSFont> _fonts = new List<ICSSFont>();
         private string _name = GenerateUniqueName();
+
+        #region constants
+
+        public const string FontFamilyElementName = "FontFamily";
+        private const string NameAttributeName = "name";
+
+        #endregion 
 
         /// <summary>
         /// Generates unique name for the font family
@@ -28,13 +37,11 @@ namespace FontsSettings
         /// <summary>
         /// List of fonts belong to the family
         /// </summary>
-        [XmlElement(ElementName = "Font")]
         public List<ICSSFont> Fonts { get { return _fonts; } }
 
         /// <summary>
         /// Name of the family
         /// </summary>
-        [XmlAttribute(AttributeName = "name")]
         public string Name
         {
             get
@@ -82,6 +89,52 @@ namespace FontsSettings
                 newFont.CopyFrom(cssFont);
                 _fonts.Add(newFont);
             }
+        }
+
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
+
+        public void ReadXml(XmlReader reader)
+        {
+            _fonts.Clear();
+            if (!reader.ReadAttributeValue())
+            {
+                throw new InvalidDataException("Unable to read attributes from Font family node");
+            }
+            string nameAttribute = reader.GetAttribute(NameAttributeName);
+            if (string.IsNullOrEmpty(nameAttribute))
+            {
+                throw new InvalidDataException("Font family name can't be empty");
+            }
+            _name = nameAttribute;
+            while (!reader.EOF)
+            {
+                if (reader.IsStartElement())
+                {
+                    switch (reader.Name)
+                    {
+                        case  CSSFont.FontElementName:
+                            var font = (CSSFont)reader.ReadElementContentAs(typeof(CSSFont), null);
+                            _fonts.Add(font);
+                            continue;
+                    }
+                }
+                reader.Read();
+            } 
+
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            writer.WriteStartElement(FontFamilyElementName);
+            writer.WriteAttributeString(NameAttributeName,_name);
+            foreach (var cssFont in _fonts)
+            {
+                cssFont.WriteXml(writer);
+            }
+            writer.WriteEndElement();
         }
     }
 }

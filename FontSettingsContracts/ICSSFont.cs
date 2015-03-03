@@ -123,7 +123,7 @@ namespace FontSettingsContracts
 
     #endregion
 
-    public interface ICSSFont
+    public interface ICSSFont : IXmlSerializable
     {
         bool HasSources { get; }
         string Name { get; }

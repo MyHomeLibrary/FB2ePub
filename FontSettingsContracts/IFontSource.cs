@@ -7,13 +7,8 @@ namespace FontSettingsContracts
     /// </summary>
     public enum SourceTypes
     {
-        [XmlEnum(Name = "Embedded")]
         Embedded = 0, // embeded, same as external but the font file will be added to resulting ePub
-
-        [XmlEnum(Name = "External")]
         External, // external - contains link to the font file or font file url
-
-        [XmlEnum(Name = "Local")]
         Local // name of the file local to reader device
     }
 
@@ -22,27 +17,16 @@ namespace FontSettingsContracts
     /// </summary>
     public enum FontFormat
     {
-        [XmlEnum(Name = "")]
         Unknown = 0,
-
-        [XmlEnum(Name = "woff")]
         WOFF,
-
-        [XmlEnum(Name = "truetype")]
         TrueType,
-
-        [XmlEnum(Name = "opentype")]
         OpenType,
-
-        [XmlEnum(Name = "embedded-opentype")]
         EmbeddedOpenType,
-
-        [XmlEnum(Name = "svg")]
         SVGFont,
     }
 
 
-    public interface IFontSource
+    public interface IFontSource : IXmlSerializable
     {
         SourceTypes Type { get; set; }
         string Location { get; set; }

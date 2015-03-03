@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace FontSettingsContracts
 {
-    public interface ICSSStylableElement
+    public interface ICSSStylableElement : IXmlSerializable
     {
         string Name { get; set; }
         string Class { get; set; }
