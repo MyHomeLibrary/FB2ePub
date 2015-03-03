@@ -2,10 +2,12 @@
 using System.IO;
 using Fb2epubSettings;
 
-namespace ConverterTester
+namespace ConverterTester.Tests
 {
     class ConfigFileTester : ITester
     {
+        private Exception _lastException;
+
         public bool Test()
         {
             try
@@ -19,6 +21,7 @@ namespace ConverterTester
             }
             catch(Exception ex)
             {
+                _lastException = ex;
                 return false;
             }
             return true;
@@ -27,6 +30,11 @@ namespace ConverterTester
         public string Name
         {
             get { return "Configuration File tester"; }
+        }
+
+        public Exception TestError
+        {
+            get { return _lastException; }
         }
     }
 }

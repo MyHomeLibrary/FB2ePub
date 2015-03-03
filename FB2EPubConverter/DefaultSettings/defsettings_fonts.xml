@@ -1,74 +1,86 @@
 <?xml version="1.0"?>
-<ConverterSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <TransliterateBook>false</TransliterateBook>
-  <AddCalibreMetadata>true</AddCalibreMetadata>  
-  <TransliterateFileName>false</TransliterateFileName>
-  <TransliterateTOC>false</TransliterateTOC>
-  <AddFB2Info>true</AddFB2Info>
-  <Fb2FixMode>UseFb2Fix</Fb2FixMode>
-  <AddSequenceNameToTitle>true</AddSequenceNameToTitle>
-  <FormatWithSequenceName>%bt% %sa.l%-%sn%</FormatWithSequenceName>
-  <FormatWithOutSequenceName>%bt% (%sf.l%)</FormatWithOutSequenceName>
-  <FormatWithOutSeriesName>%bt%</FormatWithOutSeriesName>
-  <CreateFlatInternalFolderStructure>false</CreateFlatInternalFolderStructure>
-  <ConvertAlphaChannelPNGImages>true</ConvertAlphaChannelPNGImages>
-  <EmbedStylesIntoXHTML>false</EmbedStylesIntoXHTML>
-  <AuthorNameFormat>%f.c%%m.c%%l.c%%n.c:b%</AuthorNameFormat>
-  <FileAsFormat>%l.c% %f.c%</FileAsFormat>
-  <GenerateDropCharacters>true</GenerateDropCharacters>
-  <SkipAboutPageGeneration>false</SkipAboutPageGeneration>
-  <EnableAdobeTemplateUsage>false</EnableAdobeTemplateUsage>
-  <IgnoreTitleOption>IgnoreNothing</IgnoreTitleOption>
-  <AdobeTemplatePath>C:\Project\GoogleCode\fb2epub\Fb2ePub\Template\template.xpgt</AdobeTemplatePath>
-  <DecorateFontNames>true</DecorateFontNames>
-  <Fonts>
-    <FontFamilies>
-      <FontFamily name="LiberationSerif">
-        <Font style="normal" variant="normal" width="400" stretch="normal">
-          <Source type="Embedded" format="">
-            <Location>%ResourceFolder%\Fonts/LiberationSerif-Regular.ttf</Location>
-          </Source>
-        </Font>
-        <Font style="italic" variant="normal" width="400" stretch="normal">
-          <Source type="Embedded" format="">
-            <Location>%ResourceFolder%\Fonts/LiberationSerif-Italic.ttf</Location>
-          </Source>
-        </Font>
-        <Font style="normal" variant="normal" width="700" stretch="normal">
-          <Source type="Embedded" format="">
-            <Location>%ResourceFolder%\Fonts/LiberationSerif-Bold.ttf</Location>
-          </Source>
-        </Font>
-        <Font style="italic" variant="normal" width="700" stretch="normal">
-          <Source type="Embedded" format="">
-            <Location>%ResourceFolder%\Fonts/LiberationSerif-BoldItalic.ttf</Location>
-          </Source>
-        </Font>
-      </FontFamily>
-    </FontFamilies>
-    <CSSElements>
-      <CSSElement name="body" class="">
-        <Font>LiberationSerif</Font>
-      </CSSElement>
-      <CSSElement name="code" class="">
-        <Font>LiberationSerif</Font>
-      </CSSElement>
-      <CSSElement name="epub" class="">
-        <Font>LiberationSerif</Font>
-      </CSSElement>
-    </CSSElements>
-  </Fonts>
-  <ResourcesPath />
-    <AppleConverterEPub2Settings>
-    <V2Settings>
-      <Platforms>
-        <Platform PlatformType="Any">
+<ConverterSettings>
+  <ConverterSettings>
+    <Fb2ImportSettings>
+      <Fb2FixMode>UseFb2Fix</Fb2FixMode>
+      <ConvertAlphaChannelPNGImages>true</ConvertAlphaChannelPNGImages>
+    </Fb2ImportSettings>
+    <CommonSettings>
+      <TransliterateBook>false</TransliterateBook>
+      <TransliterateFileName>false</TransliterateFileName>
+      <TransliterateTOC>false</TransliterateTOC>
+      <AddFB2Info>true</AddFB2Info>
+      <AddSequenceNameToTitle>true</AddSequenceNameToTitle>
+      <FormatWithSequenceName>%bt% %sa.l%-%sn%</FormatWithSequenceName>
+      <FormatWithOutSequenceName>%bt% (%sf.l%)</FormatWithOutSequenceName>
+      <FormatWithOutSeriesName>%bt%</FormatWithOutSeriesName>
+      <CreateFlatInternalFolderStructure>false</CreateFlatInternalFolderStructure>
+      <EmbedStylesIntoXHTML>false</EmbedStylesIntoXHTML>
+      <AuthorNameFormat>%f.c% %m.c% %l.c% %n.c:b%</AuthorNameFormat>
+      <FileAsFormat>%l.c% %f.c%</FileAsFormat>
+      <GenerateDropCharacters>true</GenerateDropCharacters>
+      <SkipAboutPageGeneration>false</SkipAboutPageGeneration>
+      <IgnoreTitleOption>IgnoreNothing</IgnoreTitleOption>
+      <IgnoreAuthorsOption>IgnoreNothing</IgnoreAuthorsOption>
+      <IgnoreTranstatorsOption>IgnoreNothing</IgnoreTranstatorsOption>
+      <IgnoreGenresOption>IgnoreNothing</IgnoreGenresOption>
+      <DecorateFontNames>true</DecorateFontNames>
+      <Fonts>
+        <FontFamilies>
+          <FontFamily name="LiberationSerif">
+            <Font style="Normal" variant="Normal" width="Normal" stretch="Normal">
+              <Source type="Embedded" format="Unknown">
+                <Location>%ResourceFolder%\Fonts/LiberationSerif-Regular.ttf</Location>
+              </Source>
+            </Font>
+            <Font style="Italic" variant="Normal" width="Normal" stretch="Normal">
+              <Source type="Embedded" format="Unknown">
+                <Location>%ResourceFolder%\Fonts/LiberationSerif-Italic.ttf</Location>
+              </Source>
+            </Font>
+            <Font style="Normal" variant="Normal" width="B700" stretch="Normal">
+              <Source type="Embedded" format="Unknown">
+                <Location>%ResourceFolder%\Fonts/LiberationSerif-Bold.ttf</Location>
+              </Source>
+            </Font>
+            <Font style="Italic" variant="Normal" width="B700" stretch="Normal">
+              <Source type="Embedded" format="Unknown">
+                <Location>%ResourceFolder%\Fonts/LiberationSerif-BoldItalic.ttf</Location>
+              </Source>
+            </Font>
+          </FontFamily>
+        </FontFamilies>
+        <CSSElements>
+          <CSSElement name="body" class="">
+            <Font>LiberationSerif</Font>
+          </CSSElement>
+          <CSSElement name="code" class="">
+            <Font>LiberationSerif</Font>
+          </CSSElement>
+          <CSSElement name="epub" class="">
+            <Font>LiberationSerif</Font>
+          </CSSElement>
+        </CSSElements>
+      </Fonts>
+    </CommonSettings>
+    <EPubV2Settings>
+      <AddCalibreMetadata>true</AddCalibreMetadata>
+      <EnableAdobeTemplateUsage>false</EnableAdobeTemplateUsage>
+      <AppleConverterEPub2Settings>
+        <Platform>
           <UseCusomFontsOnAppleDevices>true</UseCusomFontsOnAppleDevices>
           <OpenToSpreadOnAppleDevices>false</OpenToSpreadOnAppleDevices>
+          <PlatformType>All</PlatformType>
           <FixedLayoutOnAppleDevices>false</FixedLayoutOnAppleDevices>
-          <OrientationLockOnAppleDevices>Disabled</OrientationLockOnAppleDevices>
+          <OrientationLockOnAppleDevices>None</OrientationLockOnAppleDevices>
         </Platform>
-      </Platforms>
-    </V2Settings>
-  </AppleConverterEPub2Settings>
+      </AppleConverterEPub2Settings>
+      <AdobeTemplatePath />
+    </EPubV2Settings>
+    <EPubV3Settings>
+      <EPUB3SubVersion>V30</EPUB3SubVersion>
+    </EPubV3Settings>
+    <ResourcesPath />
+    <EPUBVersion>V3</EPUBVersion>
+  </ConverterSettings>
 </ConverterSettings>
