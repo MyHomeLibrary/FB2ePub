@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ExtLibs\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,12 +50,16 @@
     <Compile Include="ITester.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestConvertProcessorSettings.cs" />
+    <Compile Include="Tests\ePubConversionTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\epublibrary\EPubLibrary.csproj">
+      <Project>{2868CFB2-562D-4C26-9471-F78F1D94CE0D}</Project>
+      <Name>EPubLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\fontsettings\FontSettingsContracts\FontSettingsContracts.csproj">
       <Project>{f39fc602-bf90-4721-8274-cecf45676c10}</Project>
       <Name>FontSettingsContracts</Name>

@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using ConverterContracts.Settings;
 using ConverterTester.Tests;
+using EPubLibrary;
 
 namespace ConverterTester
 {
@@ -15,7 +16,7 @@ namespace ConverterTester
         {           
             foreach (var test in InitTesters().Where(test => !test.Test()))
             {
-                throw new Exception(string.Format("Test {0} failed",test.Name));
+                Logger.Log.Error(string.Format("Test {0} failed",test.Name));
             }
         }
 
@@ -24,6 +25,8 @@ namespace ConverterTester
             var testList = new List<ITester>
             {
                 new ConfigFileTester(), // configuration file tester
+                new EPubConversionTester(EPubVersion.V2), // V2 conversion test 
+                new EPubConversionTester(EPubVersion.V3), // V3 conversion test
             };
 
 
