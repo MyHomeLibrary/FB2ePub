@@ -65,6 +65,8 @@
             resources.ApplyResources(this.listViewFonts, "listViewFonts");
             this.listViewFonts.MultiSelect = false;
             this.listViewFonts.Name = "listViewFonts";
+            this.listViewFonts.ShowGroups = false;
+            this.listViewFonts.ShowItemToolTips = true;
             this.listViewFonts.UseCompatibleStateImageBehavior = false;
             this.listViewFonts.View = System.Windows.Forms.View.Details;
             this.listViewFonts.SelectedIndexChanged += new System.EventHandler(this.ListViewFontsSelectedIndexChanged);

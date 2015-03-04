@@ -205,7 +205,7 @@
     <value>Font</value>
   </data>
   <data name="columnHeaderFont.Width" type="System.Int32, mscorlib">
-    <value>600</value>
+    <value>300</value>
   </data>
   <data name="listViewFonts.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 24</value>
