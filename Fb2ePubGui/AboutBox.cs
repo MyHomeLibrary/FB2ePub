@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows.Forms;
-using Fb2ePubConverter;
 using Fb2ePubGui.Properties;
 using Fb2epubSettings;
 using log4net;
@@ -13,7 +12,7 @@ namespace Fb2ePubGui
         public AboutBox()
         {
             InitializeComponent();
-            this.Text = String.Format("About {0}", AssemblyTitle);
+            Text = String.Format("About {0}", AssemblyTitle);
             linkLabelAbout.Links.Add(0, linkLabelAbout.Text.Length, @"http://www.fb2epub.net");
             Assembly asm = Assembly.GetAssembly(GetType());
             string version = "???";
@@ -36,7 +35,12 @@ namespace Fb2ePubGui
             }
             textBoxResourcePath.Text = string.Format(Resources.Using_Resources_From, (DefaultSettingsLocatorHelper.GetResourcesPath()));
         }
-    
+
+        public override sealed string Text
+        {
+            get { return base.Text; }
+            set { base.Text = value; }
+        }
 
         #region Assembly Attribute Accessors
 

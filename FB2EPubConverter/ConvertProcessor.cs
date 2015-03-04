@@ -14,6 +14,7 @@ using ConverterContracts;
 using ConverterContracts.ComInterfaces;
 using ConverterContracts.Settings;
 using Fb2epubSettings;
+using FolderResourcesHelper;
 using log4net.Config;
 using FolderSettingsHelper;
 
@@ -348,7 +349,7 @@ namespace FB2EPubConverter
 
         public static string GetResourcesPath()
         {
-            return DefaultSettingsLocatorHelper.GetResourcesPath();
+            return ResourceLocator.Instance.GetResourcesPath();
         }
 
         public void ConvertList(string[] files, string outputFolder, IProgressUpdateInterface progress)

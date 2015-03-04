@@ -85,7 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CommonIncludes\CommonAssemblyInfo.cs">
+    <Compile Include="..\..\CommonIncludes\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="FoolderLocator.cs" />
@@ -93,6 +93,12 @@
     <Compile Include="IniLocations\IniLocations.cs" />
     <Compile Include="IniLocations\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ConverterContracts\ConverterContracts.csproj">
+      <Project>{71f465e1-fca1-4701-8958-643e7332ea7f}</Project>
+      <Name>ConverterContracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
