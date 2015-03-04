@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Management.Instrumentation;
 using System.Xml;
 using System.Xml.Schema;
-using System.Xml.Serialization;
 using ConverterContracts.Settings;
 using EPubLibraryContracts.Settings;
 
@@ -28,6 +28,10 @@ namespace Fb2epubSettings
 
         private const string ResourcesPathElementName = "ResourcesPath";
         private const string EPUBVersionElementName = "EPUBVersion";
+
+        public const string VersionAttributeName = "version";
+
+        private const int ConfigurationFileVersion = 1;
 
         #endregion 
 
@@ -171,6 +175,24 @@ namespace Fb2epubSettings
                 {
                     switch (reader.Name)
                     {
+                        case ConverterSettingsElementName:
+                            reader.MoveToContent();
+                            string versionAttribute = reader.GetAttribute(VersionAttributeName);
+                            if (string.IsNullOrEmpty(versionAttribute))
+                            {
+                                throw new InvalidDataException("The configuration file does not have a version attribute, probably old version");
+                            }
+                            int version;
+                            if (!int.TryParse(versionAttribute, out version))
+                            {
+                                throw new InvalidDataException(string.Format("Unable to parse file version : {0}",versionAttribute));
+                            }
+                            if (version > ConfigurationFileVersion)
+                            {
+                                throw new InvalidDataException(string.Format("The file version is {0} while program can read only up to {1}",version,ConfigurationFileVersion));
+                            }
+                            reader.MoveToElement();
+                            break;
                         case Fb2epubSettings.FB2ImportSettings.FB2ImportSettingsElementName:
                             _fb2ImportSettings.ReadXml(reader.ReadSubtree());
                             break;
@@ -187,13 +209,13 @@ namespace Fb2epubSettings
                             _resourcesPath = reader.ReadElementContentAsString();
                             continue;
                         case EPUBVersionElementName:
-                            EPubVersion version;
+                            EPubVersion ePubVersion;
                             string elementContent = reader.ReadElementContentAsString();
-                            if (!Enum.TryParse(elementContent, true, out version))
+                            if (!Enum.TryParse(elementContent, true, out ePubVersion))
                             {
                                 throw new InvalidDataException(string.Format("Invalid epub version : {0}", elementContent));
                             }
-                            _standardVersion = version;
+                            _standardVersion = ePubVersion;
                             continue;
                     }                   
                 }
@@ -203,7 +225,7 @@ namespace Fb2epubSettings
 
         public void WriteXml(XmlWriter writer)
         {
-            writer.WriteStartElement(ConverterSettingsElementName);
+            writer.WriteAttributeString(VersionAttributeName, ConfigurationFileVersion.ToString());
 
             _fb2ImportSettings.WriteXml(writer);
             _commonSettings.WriteXml(writer);
@@ -216,8 +238,6 @@ namespace Fb2epubSettings
 
             writer.WriteStartElement(EPUBVersionElementName);
             writer.WriteValue(_standardVersion.ToString());
-            writer.WriteEndElement();
-
             writer.WriteEndElement();
         }
     }

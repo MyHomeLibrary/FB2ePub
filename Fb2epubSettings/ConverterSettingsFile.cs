@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using ConverterContracts.Settings;
 
@@ -44,12 +47,34 @@ namespace Fb2epubSettings
         {
             if (_serializer == null)
             {
-                _serializer = new XmlSerializer(_settings.GetType());
+                _serializer = new XmlSerializer(_settings.GetType(), new XmlRootAttribute(ConverterSettings.ConverterSettingsElementName));
             }
             using (FileStream fs = File.Create(fileName))
             {
                 _serializer.Serialize(fs, _settings);
             }
+        }
+
+        public static bool IsValidConfigFile(string fileLocation)
+        {
+            try
+            {
+                var document = XDocument.Load(fileLocation);
+                if (document.Root == null)
+                {
+                    return false;
+                }
+                var attr = document.Root.Attributes(ConverterSettings.VersionAttributeName);
+                if (!attr.Any()) // if no version attribute present
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
