@@ -270,7 +270,11 @@
       <Project>{BB87C009-1337-43FF-ADF6-6E7861AA9343}</Project>
       <Name>Fb2epubSettings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FolderSettingsHelper\FolderSettingsHelper.csproj">
+    <ProjectReference Include="..\Helpers\FolderResourcesHelper\FolderResourcesHelper.csproj">
+      <Project>{D8B62485-C4CE-48FD-A299-F8F44D0B3D93}</Project>
+      <Name>FolderResourcesHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Helpers\FolderSettingsHelper\FolderSettingsHelper.csproj">
       <Project>{97c916ff-6271-44f8-9a20-6e0a0389524b}</Project>
       <Name>FolderSettingsHelper</Name>
     </ProjectReference>

@@ -14,6 +14,8 @@ namespace FB2EPubConverter.ElementConvertersV3
 {
     internal class SectionConverterV3
     {
+        private readonly SizeLimitChecker _checker = new SizeLimitChecker();
+
         public int RecursionLevel { get; set; }
         public bool LinkSection { get; set; }
         public ConverterOptionsV3 Settings { get; set; }
@@ -34,6 +36,7 @@ namespace FB2EPubConverter.ElementConvertersV3
 
             var content = new Div(HTMLElementType.HTML5);
             long documentSize = 0;
+            _checker.MaxSizeLimit = Settings.MaxSize;
 
             content.GlobalAttributes.Class.Value = string.Format("section{0}", RecursionLevel);
 
@@ -64,7 +67,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 if (titleItem != null)
                 {
                     long itemSize = titleItem.EstimateSize();
-                    if (ExceedSizeLimit(documentSize + itemSize))
+                    if (_checker.ExceedSizeLimit(documentSize + itemSize))
                     {
                         var oldContent = content;
                         resList.Add(content);
@@ -73,7 +76,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                         content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                         documentSize = 0;
                     }
-                    if (!ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
+                    if (!_checker.ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
                     {
                         documentSize += itemSize;
                         content.Add(titleItem);
@@ -85,7 +88,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                             foreach (var splitedItem in SplitDiv(titleItem as Div, documentSize))
                             {
                                 itemSize = splitedItem.EstimateSize();
-                                if (ExceedSizeLimit(documentSize + itemSize))
+                                if (_checker.ExceedSizeLimit(documentSize + itemSize))
                                 {
                                     var oldContent = content;
                                     resList.Add(content);
@@ -94,7 +97,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                                     content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                                     documentSize = 0;
                                 }
-                                if (!ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
+                                if (!_checker.ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
                                 {
                                     documentSize += itemSize;
                                     content.Add(splitedItem);
@@ -113,7 +116,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 var epigraphItem = epigraphConverter.Convert(epigraph,
                     new EpigraphConverterParamsV3 { Settings = Settings, Level = RecursionLevel + 1 });
                 long itemSize = epigraphItem.EstimateSize();
-                if (ExceedSizeLimit(documentSize + itemSize))
+                if (_checker.ExceedSizeLimit(documentSize + itemSize))
                 {
                     var oldContent = content;
                     resList.Add(content);
@@ -122,7 +125,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                     documentSize = 0;
                 }
-                if (!ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
+                if (!_checker.ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
                 {
                     documentSize += itemSize;
                     content.Add(epigraphItem);
@@ -132,7 +135,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     foreach (var splitedItem in SplitDiv(epigraphItem, documentSize))
                     {
                         itemSize = splitedItem.EstimateSize();
-                        if (ExceedSizeLimit(documentSize + itemSize))
+                        if (_checker.ExceedSizeLimit(documentSize + itemSize))
                         {
                             var oldContent = content;
                             resList.Add(content);
@@ -141,7 +144,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                             content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                             documentSize = 0;
                         }
-                        if (!ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
+                        if (!_checker.ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
                         {
                             documentSize += itemSize;
                             content.Add(splitedItem);
@@ -175,7 +178,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                             container.GlobalAttributes.Class.Value = "section_image";
                             container.Add(sectionImagemage);
                             long itemSize = container.EstimateSize();
-                            if (ExceedSizeLimit(documentSize + itemSize))
+                            if (_checker.ExceedSizeLimit(documentSize + itemSize))
                             {
                                 var oldContent = content;
                                 resList.Add(content);
@@ -199,7 +202,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 var annotationConverter = new AnnotationConverterV3();
                 IHTMLItem annotationItem = annotationConverter.Convert(sectionItem.Annotation, new AnnotationConverterParamsV3 { Level = RecursionLevel + 1, Settings = Settings });
                 long itemSize = annotationItem.EstimateSize();
-                if (ExceedSizeLimit(documentSize + itemSize))
+                if (_checker.ExceedSizeLimit(documentSize + itemSize))
                 {
                     var oldContent = content;
                     resList.Add(content);
@@ -208,7 +211,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                     documentSize = 0;
                 }
-                if (!ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
+                if (!_checker.ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
                 {
                     documentSize += itemSize;
                     content.Add(annotationItem);
@@ -220,7 +223,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                         foreach (var splitedItem in SplitDiv(annotationItem as Div, documentSize))
                         {
                             itemSize = splitedItem.EstimateSize();
-                            if (ExceedSizeLimit(documentSize + itemSize))
+                            if (_checker.ExceedSizeLimit(documentSize + itemSize))
                             {
                                 var oldContent = content;
                                 resList.Add(content);
@@ -229,7 +232,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                                 content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                                 documentSize = 0;
                             }
-                            if (!ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
+                            if (!_checker.ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
                             {
                                 documentSize += itemSize;
                                 content.Add(splitedItem);
@@ -300,7 +303,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     if (newItem != null)
                     {
                         long itemSize = newItem.EstimateSize();
-                        if (ExceedSizeLimit(documentSize + itemSize))
+                        if (_checker.ExceedSizeLimit(documentSize + itemSize))
                         {
                             var oldContent = content;
                             resList.Add(content);
@@ -309,7 +312,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                             content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                             documentSize = 0;
                         }
-                        if (!ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
+                        if (!_checker.ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
                         {
                             documentSize += itemSize;
                             content.Add(newItem);
@@ -321,7 +324,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                                 foreach (var splitedItem in SplitDiv(newItem as Div, documentSize))
                                 {
                                     itemSize = splitedItem.EstimateSize();
-                                    if (ExceedSizeLimit(documentSize + itemSize))
+                                    if (_checker.ExceedSizeLimit(documentSize + itemSize))
                                     {
                                         var oldContent = content;
                                         resList.Add(content);
@@ -330,7 +333,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                                         content.GlobalAttributes.Language.Value = oldContent.GlobalAttributes.Language.Value;
                                         documentSize = 0;
                                     }
-                                    if (!ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
+                                    if (!_checker.ExceedSizeLimit(itemSize)) // if we can "fit" element into a max size XHTML document
                                     {
                                         documentSize += itemSize;
                                         content.Add(splitedItem);
@@ -346,10 +349,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             return resList;
         }
 
-        private bool ExceedSizeLimit(long itemSize)
-        {
-             return ((Settings.MaxSize != 0) && (itemSize >= Settings.MaxSize) );
-        }
+   
 
         private IEnumerable<IHTMLItem> SplitDiv(Div div, long documentSize)
         {
@@ -360,7 +360,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             foreach (var element in div.SubElements())
             {
                 long elementSize = element.EstimateSize();
-                if (ExceedSizeLimit(elementSize + newDocumentSize))
+                if (_checker.ExceedSizeLimit(elementSize + newDocumentSize))
                 {
                     resList.Add(container);
                     container = new Div(HTMLElementType.HTML5);
@@ -368,7 +368,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     container.GlobalAttributes.Language.Value = div.GlobalAttributes.Language.Value;
                     newDocumentSize = 0;
                 }
-                if (!ExceedSizeLimit(elementSize))
+                if (!_checker.ExceedSizeLimit(elementSize))
                 {
                     container.Add(element);
                     newDocumentSize += elementSize;

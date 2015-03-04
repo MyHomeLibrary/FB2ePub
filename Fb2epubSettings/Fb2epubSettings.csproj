@@ -220,8 +220,8 @@
       <Project>{71f465e1-fca1-4701-8958-643e7332ea7f}</Project>
       <Name>ConverterContracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FolderSettingsHelper\FolderSettingsHelper.csproj">
-      <Project>{97C916FF-6271-44F8-9A20-6E0A0389524B}</Project>
+    <ProjectReference Include="..\Helpers\FolderSettingsHelper\FolderSettingsHelper.csproj">
+      <Project>{97c916ff-6271-44f8-9a20-6e0a0389524b}</Project>
       <Name>FolderSettingsHelper</Name>
     </ProjectReference>
   </ItemGroup>

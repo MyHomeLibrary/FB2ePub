@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using ConverterContracts.Settings;
 
 namespace Fb2epubSettings
@@ -40,7 +37,7 @@ namespace Fb2epubSettings
                     case SettingsLocation.ProgramFolder:
                         CopySettingsFileToUserAppDataFolder(fileLocation);
                         return;
-                };
+                }
             }
             fileLocation    =   GetProperSettingsLocation();
             ConverterSettingsFile settingsFile = new ConverterSettingsFile();
@@ -124,21 +121,5 @@ namespace Fb2epubSettings
         {
             return Path.Combine(rootPath, @"Lord_KiRon\Fb2ePub", "defsettings.xml");
         }
-
-        /// <summary>
-        /// Return path to default resources
-        /// </summary>
-        /// <returns></returns>
-        public static string GetResourcesPath()
-        {
-            string detectionFolder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Lord_KiRon\FB2ePub";
-            if (Directory.Exists(detectionFolder))
-            {
-                return detectionFolder;
-            }
-            return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        }
-
-
     }
 }

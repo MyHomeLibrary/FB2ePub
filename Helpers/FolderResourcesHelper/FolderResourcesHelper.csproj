@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F624E3DF-B9C0-4BF6-A93D-CDA6CA26323B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{D8B62485-C4CE-48FD-A299-F8F44D0B3D93}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConverterTester</RootNamespace>
-    <AssemblyName>ConverterTester</AssemblyName>
+    <RootNamespace>FolderResourcesHelper</RootNamespace>
+    <AssemblyName>FolderResourcesHelper</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ExtLibs\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,42 +43,8 @@
     <Compile Include="..\..\CommonIncludes\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Tests\ConfigFileTester.cs" />
-    <Compile Include="ITester.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\ePubConversionTester.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\epublibrary\EPubLibrary.csproj">
-      <Project>{2868CFB2-562D-4C26-9471-F78F1D94CE0D}</Project>
-      <Name>EPubLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\fontsettings\FontSettingsContracts\FontSettingsContracts.csproj">
-      <Project>{f39fc602-bf90-4721-8274-cecf45676c10}</Project>
-      <Name>FontSettingsContracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ConverterContracts\ConverterContracts.csproj">
-      <Project>{71f465e1-fca1-4701-8958-643e7332ea7f}</Project>
-      <Name>ConverterContracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FB2EPubConverter\FB2EPubConverter.csproj">
-      <Project>{738f2015-0dc7-4c38-bbf0-90fd5c3c2518}</Project>
-      <Name>FB2EPubConverter</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Fb2epubSettings\Fb2epubSettings.csproj">
-      <Project>{bb87c009-1337-43ff-adf6-6e7861aa9343}</Project>
-      <Name>Fb2epubSettings</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Content Include="TestFiles\Test_001.fb2">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Compile Include="ResourceLocator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
