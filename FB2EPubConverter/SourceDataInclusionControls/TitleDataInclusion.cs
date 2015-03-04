@@ -1,5 +1,4 @@
 ﻿using ConverterContracts.Settings;
-using Fb2epubSettings;
 
 namespace FB2EPubConverter.SourceDataInclusionControls
 {
@@ -18,7 +17,7 @@ namespace FB2EPubConverter.SourceDataInclusionControls
             {
                 return true;
             }
-            if (ignoreInfoSourceOptions != IgnoreInfoSourceOptions.IgnoreMainAndPublish)
+            if (ignoreInfoSourceOptions == IgnoreInfoSourceOptions.IgnoreMainAndPublish)
             {
                 return true;
             }

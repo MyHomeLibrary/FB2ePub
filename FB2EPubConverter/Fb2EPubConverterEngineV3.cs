@@ -236,7 +236,6 @@ namespace FB2EPubConverter
                 epubFile.AnnotationPage.BookAnnotation = (Div)annotationConverter.Convert(titleInfo.Annotation,
                    new AnnotationConverterParamsV3 { Settings = converterSettings, Level = 1 });
             }
-            throw new NotImplementedException();
         }
 
 
