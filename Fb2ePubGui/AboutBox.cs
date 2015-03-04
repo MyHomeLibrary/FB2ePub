@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using Fb2ePubGui.Properties;
 using Fb2epubSettings;
+using FolderResourcesHelper;
 using log4net;
 
 namespace Fb2ePubGui
@@ -33,7 +34,7 @@ namespace Fb2ePubGui
             {
                 textBoxSettingsPath.Text = Resources.AboutBox_AboutBox_Default_settings_file_not_found;
             }
-            textBoxResourcePath.Text = string.Format(Resources.Using_Resources_From, (DefaultSettingsLocatorHelper.GetResourcesPath()));
+            textBoxResourcePath.Text = string.Format(Resources.Using_Resources_From, (ResourceLocator.Instance.GetResourcesPath()));
         }
 
         public override sealed string Text
