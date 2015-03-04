@@ -32,7 +32,7 @@ namespace EPubLibrary
     public class EPubFileV3 : IEpubFile
     {
         #region readonly_private_propeties
-        private readonly V3Standard _standard = V3Standard.V301;
+        private readonly V3Standard _standard;
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
         private readonly EPubTitleSettings _title = new EPubTitleSettings();
         private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS", FileName = "main.css" };
@@ -78,6 +78,8 @@ namespace EPubLibrary
         /// Set/get it Table of Content (TOC) entries should be transliterated
         /// </summary>
         public bool TranliterateToc { set; get; }
+
+        public List<BookDocument> BookDocuments { get { return _sections; } }
 
         #endregion 
 
@@ -637,7 +639,7 @@ namespace EPubLibrary
             if (!IsValid())
             {
                 Logger.Log.Error("File data not valid. Can't generate. Aborting.");
-                return;
+                throw new InvalidDataException("File data not valid. Can't generate.");
             }
             try
             {
@@ -734,7 +736,7 @@ namespace EPubLibrary
         public void SetEPubFonts(IEPubFontSettings fonts, string resourcesPath, bool decorateFontNames)
         {
             _fontSettings.ResourceMask = resourcesPath;
-            _fontSettings.Load(fonts, decorateFontNames ? Title.Identifiers[0].IdentifierName : string.Empty);
+            _fontSettings.Load(fonts, decorateFontNames ? _title.Identifiers[0].IdentifierName : string.Empty);
 
             AddFontsToCSS(_fontSettings.Fonts);
             AddCssElementsToCSS(_fontSettings.CssElements);

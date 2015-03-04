@@ -1,4 +1,6 @@
-﻿using TranslitRu;
+﻿using System.Collections.Generic;
+using EPubLibrary.XHTML_Items;
+using TranslitRu;
 
 namespace EPubLibrary
 {
@@ -15,6 +17,11 @@ namespace EPubLibrary
         /// Set/get it Table of Content (TOC) entries should be transliterated
         /// </summary>
         bool TranliterateToc { set; get; }
+
+        /// <summary>
+        /// Return reference to the list of the contained "book documents" - book content objects
+        /// </summary>
+        List<BookDocument> BookDocuments { get; }
         #endregion
 
         #region File creation related properties

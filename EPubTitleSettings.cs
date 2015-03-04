@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 
 namespace EPubLibrary
 {
@@ -23,13 +20,13 @@ namespace EPubLibrary
         /// <summary>
         /// default role - author if not set otherwise
         /// </summary>
-        private RolesEnum role = RolesEnum.Author;
+        private RolesEnum _role = RolesEnum.Author;
 
         public string PersonName { get; set; }
         public RolesEnum Role
         {
-            get { return role;}
-            set { role = value; }
+            get { return _role;}
+            set { _role = value; }
         }
 
         /// <summary>
@@ -152,37 +149,37 @@ namespace EPubLibrary
         /// <summary>
         /// list of subjects for the book (usually genres)
         /// </summary>
-        private readonly List<Subject> subjects = new List<Subject>();
+        private readonly List<Subject> _subjects = new List<Subject>();
 
         /// <summary>
         /// List of creators
         /// </summary>
-        private readonly List<PersoneWithRole> creators = new List<PersoneWithRole>();
+        private readonly List<PersoneWithRole> _creators = new List<PersoneWithRole>();
 
         /// <summary>
         /// List of contributors 
         /// </summary>
-        private readonly List<PersoneWithRole> contributors = new List<PersoneWithRole>();
+        private readonly List<PersoneWithRole> _contributors = new List<PersoneWithRole>();
 
         /// <summary>
         /// List of identifiers
         /// </summary>
-        private readonly List<Identifier> identifiers = new List<Identifier>();
+        private readonly List<Identifier> _identifiers = new List<Identifier>();
 
         /// <summary>
         /// List of Titles
         /// </summary>
-        private readonly List<Title> bookTitles = new List<Title>();
+        private readonly List<Title> _bookTitles = new List<Title>();
 
         /// <summary>
         /// List of book languages
         /// </summary>
-        private readonly List<string> languages = new List<string>();
+        private readonly List<string> _languages = new List<string>();
 
         /// <summary>
         /// Publisher element
         /// </summary>
-        private readonly Publisher publisher = new Publisher();
+        private readonly Publisher _publisher = new Publisher();
 
         
         /// <summary>
@@ -190,7 +187,7 @@ namespace EPubLibrary
         /// </summary>
         public List<Title> BookTitles
         {
-            get { return bookTitles; }
+            get { return _bookTitles; }
         }
 
         /// <summary>
@@ -198,7 +195,7 @@ namespace EPubLibrary
         /// </summary>
         public List<string> Languages 
         {
-            get { return languages; }
+            get { return _languages; }
         }
 
         /// <summary>
@@ -206,7 +203,7 @@ namespace EPubLibrary
         /// </summary>
         public List<Identifier> Identifiers
         {
-            get { return identifiers; }
+            get { return _identifiers; }
         }
 
         /// <summary>
@@ -214,7 +211,7 @@ namespace EPubLibrary
         /// </summary>
         public List<PersoneWithRole> Creators 
         {
-            get { return creators; }
+            get { return _creators; }
         }
 
         /// <summary>
@@ -222,7 +219,7 @@ namespace EPubLibrary
         /// </summary>
         public List<PersoneWithRole> Contributors
         {
-            get { return contributors; }
+            get { return _contributors; }
         }
 
         /// <summary>
@@ -230,7 +227,7 @@ namespace EPubLibrary
         /// </summary>
         public Publisher Publisher
         {
-            get { return publisher; }
+            get { return _publisher; }
         }
 
         /// <summary>
@@ -238,7 +235,7 @@ namespace EPubLibrary
         /// </summary>
         public List<Subject> Subjects 
         {
-            get { return subjects; }
+            get { return _subjects; }
         }
 
         public string Description { set; get; }

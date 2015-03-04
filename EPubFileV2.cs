@@ -278,7 +278,7 @@ namespace EPubLibrary
         public void SetEPubFonts(IEPubFontSettings fonts, string resourcesPath, bool decorateFontNames)
         {
             _fontSettings.ResourceMask = resourcesPath;
-            _fontSettings.Load(fonts, decorateFontNames ? Title.Identifiers[0].IdentifierName : string.Empty);
+            _fontSettings.Load(fonts, decorateFontNames ? _title.Identifiers[0].IdentifierName : string.Empty);
 
             AddFontsToCSS(_fontSettings.Fonts);
             AddCssElementsToCSS(_fontSettings.CssElements);
