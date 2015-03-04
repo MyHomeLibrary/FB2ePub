@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using FolderResourcesHelper;
 using FontSettingsContracts;
 
 namespace FontsSettings
@@ -119,10 +120,22 @@ namespace FontsSettings
                         if (fontSource.Type == SourceTypes.Embedded) // if font is embedded font
                         {
                             string locationKey = fontSource.Location.ToLower(); // one case good for comparison
+                            bool needToUpdateLocation = false;
                             if (!string.IsNullOrEmpty(_resourcePath) && locationKey.Contains(MacroMask.ToLower())) // in case we need to update resource path
+                            {
+                                needToUpdateLocation = true;
+                            }
+                            else if (string.IsNullOrEmpty(_resourcePath))
+                            {
+                                _resourcePath = ResourceLocator.Instance.GetResourcesPath();
+                                needToUpdateLocation = true;
+                            }
+
+                            if (needToUpdateLocation)
                             {
                                 locationKey = locationKey.Replace(MacroMask.ToLower(), _resourcePath);   
                             }
+
                             if (!_fonts.ContainsKey(locationKey)) // if key/location not present - add it
                             {
                                 _fontFiles.Add(locationKey, new List<ICSSFont>()); 
