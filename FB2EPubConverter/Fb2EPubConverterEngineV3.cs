@@ -22,6 +22,8 @@ namespace FB2EPubConverter
         private readonly  HRefManagerV3 _referencesManager = new HRefManagerV3();
         private long _maxSize = 0;
 
+        private const string DefaultCSSFileName = "default_v3.css";
+
         protected override void ConvertContent(FB2File fb2File, IEpubFile epubFile)
         {
             var epubFileV3 = epubFile as EPubFileV3;
@@ -50,7 +52,7 @@ namespace FB2EPubConverter
             {
                 pathPreffix = Settings.ResourcesPath;
             }
-            epubFile.CSSFiles.Add(new CSSFile { FilePathOnDisk = string.Format(@"{0}\{1}", pathPreffix, @"CSS\default.css"), FileName = "default.css" });
+            epubFile.CSSFiles.Add(new CSSFile { FilePathOnDisk = string.Format(@"{0}\CSS\{1}", pathPreffix, DefaultCSSFileName), FileName = DefaultCSSFileName });
         }
 
 
