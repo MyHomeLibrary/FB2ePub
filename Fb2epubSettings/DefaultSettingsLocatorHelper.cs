@@ -31,6 +31,10 @@ namespace Fb2epubSettings
                 switch (locationDetected)
                 {
                     case SettingsLocation.UserAppDataFolder:
+                        if (!IsValidFileVersion(fileLocation))
+                        {
+                            break;
+                        }
                         return;
                     case SettingsLocation.AppDataFolder:
                     case SettingsLocation.ProgramFolder:
@@ -43,6 +47,11 @@ namespace Fb2epubSettings
             settingsFile.Settings.CopyFrom(defaultSettings);
             Directory.CreateDirectory(Path.GetDirectoryName(fileLocation));
             settingsFile.Save(fileLocation);
+        }
+
+        private static bool IsValidFileVersion(string fileLocation)
+        {
+            return ConverterSettingsFile.IsValidConfigFile(fileLocation);
         }
 
         /// <summary>

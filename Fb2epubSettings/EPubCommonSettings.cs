@@ -1,5 +1,4 @@
-﻿//#define TEST
-using System;
+﻿using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
@@ -119,7 +118,7 @@ namespace Fb2epubSettings
 
             _fonts.FontFamilies.Clear();
             _fonts.CssElements.Clear();
-#if TEST
+
             CSSFontFamily family = new CSSFontFamily() { Name = @"LiberationSerif" };
 
             CSSFont font1 = new CSSFont
@@ -177,7 +176,6 @@ namespace Fb2epubSettings
             CSSStylableElement css3 = new CSSStylableElement() { Name = "epub" };
             css3.AssignedFontFamilies.Add(family.Name);
             _fonts.CssElements.Add(css3);
-#endif
 
         }
 
