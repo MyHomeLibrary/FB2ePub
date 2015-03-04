@@ -295,7 +295,7 @@ namespace EPubLibrary
             if (!IsValid())
             {
                 Logger.Log.Error("File data not valid. Can't generate. Aborting.");
-                return;
+                throw new InvalidDataException("File data not valid. Can't generate.");
             }
             try
             {
@@ -329,6 +329,7 @@ namespace EPubLibrary
             {
                 Logger.Log.ErrorFormat("Error generating file, exception thrown : {0}", ex);
                 File.Delete(outFileName);
+                throw;
             }
         }
         #endregion 

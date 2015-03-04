@@ -673,6 +673,7 @@ namespace EPubLibrary
             {
                 Logger.Log.ErrorFormat("Error generating file, exception thrown : {0}", ex);
                 File.Delete(outFileName);
+                throw;
             }
         }
 
