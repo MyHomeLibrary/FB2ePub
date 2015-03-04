@@ -145,32 +145,39 @@ namespace Fb2ePubConverter
         {
             int count = 0;
 
-            Logger.Log.DebugFormat("Transliteration of file names set to : {0}", Settings.CommonSettings.TransliterateFileName);
-            if (Settings.CommonSettings.TransliterateFileName)
-            {
-                outFileName = Rus2Lat.Instance.Translate(outFileName, epubFile.TranslitMode);
-                Logger.Log.DebugFormat("New transliterated file name : {0}", outFileName);
-            }
-            string outFile = outFileName;
             string outFolder = Path.GetDirectoryName(outFileName);
             if (string.IsNullOrEmpty(outFolder))
             {
                 Logger.Log.DebugFormat("Using output folder : {0}", Settings.OutPutPath);
                 outFolder = Settings.OutPutPath;
-                if (!string.IsNullOrEmpty(outFolder))
-                {
-                    outFile = string.Format(@"{0}\{1}.epub", outFolder, Path.GetFileNameWithoutExtension(outFileName));
-                }
+            }
 
-            }
-            while (File.Exists(outFile) && (fb2File != FB2Files[0]))
+            string outFile = Path.GetFileNameWithoutExtension(outFileName);
+
+            Logger.Log.DebugFormat("Transliteration of file names set to : {0}", Settings.CommonSettings.TransliterateFileName);
+            if (Settings.CommonSettings.TransliterateFileName &&
+                !string.IsNullOrEmpty(outFile))
             {
-                Logger.Log.DebugFormat("{0} file exists , incrementing", outFile);
-                outFile = string.Format(@"{0}\{1}_{2}.epub", outFolder, Path.GetFileNameWithoutExtension(outFileName), count++);
+                outFile = Rus2Lat.Instance.Translate(outFileName, epubFile.TranslitMode);
+                Logger.Log.DebugFormat("New transliterated file name : {0}", outFile);
             }
-            Logger.Log.DebugFormat("Final output file name : {0}", outFile);
-            return outFile;
+
+            if (string.IsNullOrEmpty(outFile))
+            {
+                outFile = "converted_file";
+            }
+
+
+            string resultFilePath = Path.Combine(outFolder,outFile + ".epub");
+            while (File.Exists(resultFilePath) && (fb2File != FB2Files[0]))
+            {
+                Logger.Log.DebugFormat("{0} file exists , incrementing", resultFilePath);
+                resultFilePath = Path.Combine(outFolder,string.Format(@"{0}_{1}.epub",  outFile, count++));
+            }
+            Logger.Log.DebugFormat("Final output file name : {0}", resultFilePath);
+            return resultFilePath;
         }
+
 
         private void SetTransliterationOptions(IEpubFile epubFile)
         {
