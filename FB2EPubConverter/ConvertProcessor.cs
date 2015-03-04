@@ -153,7 +153,7 @@ namespace FB2EPubConverter
             return conversionResult;
         }
 
-        private IFb2EPubConverterEngine CreateConverterEngine(IConverterSettings converterSettings)
+        public static IFb2EPubConverterEngine CreateConverterEngine(IConverterSettings converterSettings)
         {
             switch (converterSettings.StandardVersion)
             {

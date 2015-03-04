@@ -116,11 +116,13 @@ namespace Fb2ePubConverter
                     
                     SetTransliterationOptions(epubFile);
 
+                    // do it first (before actual conversion) as if there is a problem with generating file name - we do not spend time here on generation
+                    string outFile = GenerateOutputFileName(fb2File, epubFile, outFileName);
+
                     LoadImagesInMemory(fb2File);
 
                     ConvertContent(fb2File,epubFile);
 
-                    string outFile = GenerateOutputFileName(fb2File, epubFile, outFileName);
                     epubFile.Generate(outFile);
 
                 }

@@ -2,7 +2,6 @@
 using ConverterContracts.Settings;
 using EPubLibrary;
 using EPubLibrary.XHTML_Items;
-using FB2EPubConverter.SourceDataInclusionControls;
 using FB2Library.HeaderItems;
 using TranslitRu;
 using XHTMLClassLibrary.BaseElements;
@@ -60,21 +59,18 @@ namespace FB2EPubConverter.ElementConvertersV2
 
         private void ConvertMainTitle(ItemTitleInfo titleInfo, EPubFileV2 epubFile)
         {
-            if (!SourceDataInclusionControl.Instance.IsIgnoreInfoSource(SourceDataInclusionControl.DataTypes.Title, _commonSettings.IgnoreTitle))
+            var bookTitle = new Title
             {
-                var bookTitle = new Title
-                {
-                    TitleName = Rus2Lat.Instance.Translate(DescriptionConverters.FormatBookTitle(titleInfo, _commonSettings),
-                        epubFile.TranslitMode),
-                    Language = string.IsNullOrEmpty(titleInfo.BookTitle.Language)
-                        ? titleInfo.Language
-                        : titleInfo.BookTitle.Language,
-                    TitleType = TitleType.Main
-                };
-                epubFile.Title.BookTitles.Add(bookTitle);
-                // add main title language
-                epubFile.Title.Languages.Add(titleInfo.Language);
-            }
+                TitleName = Rus2Lat.Instance.Translate(DescriptionConverters.FormatBookTitle(titleInfo, _commonSettings),
+                    epubFile.TranslitMode),
+                Language = string.IsNullOrEmpty(titleInfo.BookTitle.Language)
+                    ? titleInfo.Language
+                    : titleInfo.BookTitle.Language,
+                TitleType = TitleType.Main
+            };
+            epubFile.Title.BookTitles.Add(bookTitle);
+            // add main title language
+            epubFile.Title.Languages.Add(titleInfo.Language);
         }
 
     }

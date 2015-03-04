@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using XHTMLClassLibrary.Exceptions;
-
-namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
+﻿namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
 {
     public abstract class TextBasedElement : HTMLItem, IInlineItem
     {

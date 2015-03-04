@@ -61,7 +61,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                         ))
                     {
                         s.Parent = anchor;
-                        anchor.InternalTextItem.Add(s);
+                        anchor.Add(s);
                     }
                 }
                 list.Add(anchor);
