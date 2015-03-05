@@ -143,12 +143,6 @@ namespace EPubLibrary
         public List<CSSFile> CSSFiles { get { return _cssFiles; } }
 
         /// <summary>
-        /// Get access to main CSS file included in all 
-        /// xhtml book files 
-        /// </summary>
-        public CSSFile MainCSS { get { return _mainCss; } }
-
-        /// <summary>
         /// Get access to book's title data
         /// </summary>
         public EPubTitleSettings Title

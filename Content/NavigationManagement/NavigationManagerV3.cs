@@ -45,11 +45,12 @@ namespace EPubLibrary.Content.NavigationManagement
             
         }
 
-        public void SetupBookNavigation(string id, string title)
+        public void SetupBookNavigation(string id, string title,bool flatStructure)
         {
             _tableOfContentFile.ID = id;
             _tableOfContentFile.Title = title;
             _navigationDocument.PageTitle = title;
+            _navigationDocument.FlatStructure = flatStructure;
         }
     }
 }

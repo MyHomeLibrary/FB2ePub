@@ -32,7 +32,6 @@ namespace EPubLibrary
     public class EPubFileV3 : IEpubFile
     {
         #region readonly_private_propeties
-        private readonly V3Standard _standard;
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
         private readonly EPubTitleSettings _title = new EPubTitleSettings();
         private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS", FileName = "main.css" };
@@ -85,22 +84,14 @@ namespace EPubLibrary
 
 
 
-        public V3Standard EPubV3Standard
-        {
-            get { return _standard; }
-        }
-
         public EPubFileV3(V3Standard standard)
         {
-            _standard = standard;
             _content = new ContentFileV3(standard);
         }
 
 
-
-        public bool GenerateCompatibleTOC
+        private bool GenerateCompatibleTOC
         {
-            get { return _generateCompatibleTOC; }
             set { _content.GenerateCompatibleTOC = _generateCompatibleTOC = value; }
         }
 
@@ -114,13 +105,13 @@ namespace EPubLibrary
         }
 
 
-        protected void CreateContainer(out ContainerFile container)
+        private void CreateContainer(out ContainerFile container)
         {
             container = new ContainerFileV3 { FlatStructure = _flatStructure, ContentFilePath = _content };
         }
 
 
-        protected void AddContentFile(ZipOutputStream stream)
+        private void AddContentFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
             CreateFileEntryInZip(stream, _content);
@@ -155,12 +146,12 @@ namespace EPubLibrary
         /// Adds "license" file 
         /// </summary>
         /// <param name="stream"></param>
-        protected void AddLicenseFile(ZipOutputStream stream)
+        private void AddLicenseFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
             var licensePage = new LicenseFile(HTMLElementType.HTML5)
             {
-                FlatStructure = FlatStructure,
+                FlatStructure = _flatStructure,
                 EmbedStyles = EmbedStyles,
             };
             CreateFileEntryInZip(stream, licensePage);
@@ -173,13 +164,13 @@ namespace EPubLibrary
         /// Adds "About" page file
         /// </summary>
         /// <param name="stream"></param>
-        protected void AddAbout(ZipOutputStream stream)
+        private void AddAbout(ZipOutputStream stream)
         {
             stream.SetLevel(9);
 
             var aboutPage = new AboutPageFile(HTMLElementType.HTML5)
             {
-                FlatStructure = FlatStructure,
+                FlatStructure = _flatStructure,
                 EmbedStyles = EmbedStyles,
                 AboutLinks = _aboutLinks,
                 AboutTexts = _aboutTexts
@@ -196,7 +187,7 @@ namespace EPubLibrary
         /// Adds actual book "context" 
         /// </summary>
         /// <param name="stream"></param>
-        protected void AddBookData(ZipOutputStream stream)
+        private void AddBookData(ZipOutputStream stream)
         {
             if (InjectLKRLicense)
             {
@@ -211,16 +202,16 @@ namespace EPubLibrary
 
         private void AddNavigation(ZipOutputStream stream)
         {
-            _navigationManager.SetupBookNavigation(_title.Identifiers[0].ID, Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, TranslitMode));
+            _navigationManager.SetupBookNavigation(_title.Identifiers[0].ID, Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, TranslitMode),_flatStructure);
 
-            if (GenerateCompatibleTOC)
+            if (_generateCompatibleTOC)
             {
                 AddTOCFile(stream);
             }
             AddNavigationFile(stream);
         }
 
-        protected void AddTOCFile(ZipOutputStream stream)
+        private void AddTOCFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
             CreateFileEntryInZip(stream, _navigationManager.TableOfContentFile);
@@ -228,7 +219,7 @@ namespace EPubLibrary
             _content.AddTOC();
         }
 
-        protected void AddNavigationFile(ZipOutputStream stream)
+        private void AddNavigationFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
             CreateFileEntryInZip(stream, _navigationManager.NavigationDocument);
@@ -241,7 +232,7 @@ namespace EPubLibrary
         /// Adds different additional generated files like cover, annotation etc.
         /// </summary>
         /// <param name="stream"></param>
-        protected void AddAdditionalFiles(ZipOutputStream stream)
+        private void AddAdditionalFiles(ZipOutputStream stream)
         {
             AddCSSFiles(stream);
             AddCover(stream);
@@ -322,7 +313,7 @@ namespace EPubLibrary
         /// Adds embedded font files
         /// </summary>
         /// <param name="stream"></param>
-        protected void AddFontFiles(ZipOutputStream stream)
+        private void AddFontFiles(ZipOutputStream stream)
         {
             if (_fontSettings.NumberOfEmbededFiles > 0)
             {
@@ -365,7 +356,7 @@ namespace EPubLibrary
 
 
 
-        protected void AddImages(ZipOutputStream stream)
+        private void AddImages(ZipOutputStream stream)
         {
             if (_images.Count > 0)
             {
@@ -387,7 +378,7 @@ namespace EPubLibrary
         }
 
 
-        protected void AddCover(ZipOutputStream stream)
+        private void AddCover(ZipOutputStream stream)
         {
             if (string.IsNullOrEmpty(_coverImage))
             {
@@ -418,7 +409,7 @@ namespace EPubLibrary
             _content.AddXHTMLTextItem(cover);
         }
 
-        protected ImageOnStorage GetCoverImageName(EPUBImage eImage)
+        private ImageOnStorage GetCoverImageName(EPUBImage eImage)
         {
             if (_images.Any(image => image.Key == _coverImage))
             {
@@ -431,7 +422,7 @@ namespace EPubLibrary
         /// Writes book content to the stream
         /// </summary>
         /// <param name="stream">stream to write to</param>
-        protected void AddBookContent(ZipOutputStream stream)
+        private void AddBookContent(ZipOutputStream stream)
         {
             int count = 1;
 
@@ -439,7 +430,7 @@ namespace EPubLibrary
 
             foreach (var section in _sections)
             {
-                section.FlatStructure = FlatStructure;
+                section.FlatStructure = _flatStructure;
                 section.EmbedStyles = EmbedStyles;
                 section.MaxSize = ContentFileLimit;
 
@@ -484,7 +475,7 @@ namespace EPubLibrary
                 int subCount = 0;
                 foreach (var subsection in section.Split())
                 {
-                    subsection.FlatStructure = FlatStructure;
+                    subsection.FlatStructure = _flatStructure;
                     subsection.EmbedStyles = EmbedStyles;
                     subsection.FileName = string.Format("{0}_{1}.xhtml",
                         Path.GetFileNameWithoutExtension(section.FileName), subCount);
@@ -506,7 +497,7 @@ namespace EPubLibrary
         }
 
 
-        protected void AddBookContentSection(BookDocument subsection, int count, int subcount)
+        private void AddBookContentSection(BookDocument subsection, int count, int subcount)
         {
             subsection.Id = string.Format(@"bookcontent{0}_{1}", count, subcount); // generate unique ID
             _content.AddXHTMLTextItem(subsection);
@@ -519,7 +510,6 @@ namespace EPubLibrary
         /// </summary>
         public bool FlatStructure
         {
-            get { return _flatStructure; }
             set
             {
                 _content.FlatStructure = value;
@@ -530,23 +520,17 @@ namespace EPubLibrary
         /// <summary>
         /// Get/Set embedding styles into xHTML files instead of referencing style files
         /// </summary>
-        public bool EmbedStyles { get; set; }
+        public bool EmbedStyles { private get; set; }
 
         /// <summary>
         /// Controls if Lord Kiron's license need to be added to file
         /// </summary>
-        public bool InjectLKRLicense { get; set; }
+        public bool InjectLKRLicense { private get; set; }
 
         /// <summary>
         /// Return reference to the list of the CSS style files
         /// </summary>
         public List<CSSFile> CSSFiles { get { return _cssFiles; } }
-
-        /// <summary>
-        /// Get access to main CSS file included in all 
-        /// xhtml book files 
-        /// </summary>
-        public CSSFile MainCSS { get { return _mainCss; } }
 
         /// <summary>
         /// Set/Get title page object
@@ -614,16 +598,16 @@ namespace EPubLibrary
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="pathObject"></param>
-        protected void CreateFileEntryInZip(ZipOutputStream stream, IEPubPath pathObject)
+        private void CreateFileEntryInZip(ZipOutputStream stream, IEPubPath pathObject)
         {
             ZipEntry file = _zipFactory.MakeFileEntry(pathObject.PathInEPUB.GetFilePathInZip(_flatStructure), false);
             file.CompressionMethod = CompressionMethod.Deflated; // as defined by ePub stndard
             stream.PutNextEntry(file);
         }
 
-        protected void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
+        private void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
         {
-            xhtmlFile.FlatStructure = FlatStructure;
+            xhtmlFile.FlatStructure = _flatStructure;
             xhtmlFile.EmbedStyles = EmbedStyles;
             xhtmlFile.StyleFiles.Add(_mainCss);
             xhtmlFile.Write(stream);
@@ -794,7 +778,7 @@ namespace EPubLibrary
                         FontStyle = CssFontDefinition.FromStyle(subFont.FontStyle),
                         FontWidth = CssFontDefinition.FromWidth(subFont.FontWidth)
                     };
-                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, EmbedStyles, FlatStructure)).ToList();
+                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, EmbedStyles, _flatStructure)).ToList();
                     cssFont.FontSrcs = sources;
                     _mainCss.AddFont(cssFont);
                 }

@@ -17,7 +17,7 @@ namespace EPubLibrary.Content.NavigationDocument
     public class NavigationDocumentFile : IEPubPath
     {
         private readonly List<StyleElement> _styles = new List<StyleElement>();
-        private readonly NavMapElementV3 _tocNav = new NavMapElementV3
+        private readonly NavMapElementV3 _documentNavigationMap = new NavMapElementV3
         {
             Type = NavigationTableType.TOC,
             Heading = "Table of Contents",
@@ -28,7 +28,7 @@ namespace EPubLibrary.Content.NavigationDocument
             Type = NavigationTableType.Landmarks
         };
 
-        public static readonly EPubInternalPath NAVFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/nav.xhtml");
+        private static readonly EPubInternalPath NAVFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/nav.xhtml");
 
         public EPubInternalPath PathInEPUB
         {
@@ -98,7 +98,7 @@ namespace EPubLibrary.Content.NavigationDocument
             body.Add(new XAttribute("class","nav_body"));
             html.Add(body);
 
-            var navElement = _tocNav.GenerateXMLMap();
+            var navElement = _documentNavigationMap.GenerateXMLMap();
             if (navElement != null)
             {
                 body.Add(navElement);
@@ -120,28 +120,24 @@ namespace EPubLibrary.Content.NavigationDocument
             var bookPoint = new NavPointV3 { Content = content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure), 
                 Name = name,
             Id =  content.Id};
-            _tocNav.Add(bookPoint);
+            _documentNavigationMap.Add(bookPoint);
         }
 
         public void AddSubNavPoint(BookDocument content, BookDocument subcontent, string name)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                return;
-            }
-            var point = _tocNav.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure)));
+            var point = _documentNavigationMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure)));
             if (point != null)
             {
-                point.SubPoints.Add(new NavPointV3 { Content = subcontent.PathInEPUB.GetRelativePath(NAVFilePath, subcontent.FlatStructure), Name = name });
+                point.SubPoints.Add(new NavPointV3 { Content = subcontent.PathInEPUB.GetRelativePath(NAVFilePath, subcontent.FlatStructure), Name = name, Id = content.Id});
             }
             else
             {
-                foreach (var element in _tocNav)
+                foreach (var element in _documentNavigationMap)
                 {
                     point = element.AllContent().Find(x => (x.Content == content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure)));
                     if (point != null)
                     {
-                        point.SubPoints.Add(new NavPointV3 { Content = subcontent.PathInEPUB.GetRelativePath(NAVFilePath, subcontent.FlatStructure), Name = name });
+                        point.SubPoints.Add(new NavPointV3 { Content = subcontent.PathInEPUB.GetRelativePath(NAVFilePath, subcontent.FlatStructure), Name = name, Id = content.Id });
                         return;
                     }
                 }
@@ -153,7 +149,7 @@ namespace EPubLibrary.Content.NavigationDocument
 
         public void AddSubLink(BookDocument content, BookDocument subcontent, string name)
         {
-            var point = _tocNav.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure)));
+            var point = _documentNavigationMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure)));
             if (point != null)
             {
                 point.SubPoints.Add(new NavPointV3 { Content = string.Format("{0}#{1}", content, subcontent), Name = name });
