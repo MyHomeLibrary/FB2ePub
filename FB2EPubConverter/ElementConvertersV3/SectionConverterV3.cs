@@ -182,10 +182,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 {
                     var container = new Div(HTMLElementType.HTML5);
                     var sectionImagemage = new Image(HTMLElementType.HTML5);
-                    if (sectionImage.AltText != null)
-                    {
-                        sectionImagemage.Alt.Value = sectionImage.AltText;
-                    }
+                    sectionImagemage.Alt.Value = sectionImage.AltText ?? string.Empty;
                     sectionImagemage.Source.Value = Settings.ReferencesManager.AddImageRefferenced(sectionImage, sectionImagemage);
                     sectionImagemage.GlobalAttributes.ID.Value = Settings.ReferencesManager.AddIdUsed(sectionImage.ID,
                                                                             sectionImagemage);

@@ -25,10 +25,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 throw new ArgumentNullException("imageItem");
             }
             var image = new Image(HTMLElementType.HTML5);
-            if (imageItem.AltText != null)
-            {
-                image.Alt.Value = imageItem.AltText;
-            }
+            image.Alt.Value = imageItem.AltText ?? string.Empty;
             image.Source.Value = imageConverterParams.Settings.ReferencesManager.AddImageRefferenced(imageItem, image);
 
             image.GlobalAttributes.ID.Value = imageConverterParams.Settings.ReferencesManager.AddIdUsed(imageItem.ID, image);
