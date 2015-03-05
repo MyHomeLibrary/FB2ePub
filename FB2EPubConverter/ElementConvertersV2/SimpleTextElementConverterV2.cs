@@ -170,9 +170,14 @@ namespace FB2EPubConverter.ElementConvertersV2
             }
             else if (styletypeItem is InlineImageItem)
             {
-                var inlineImageConverter = new InlineImageConverterV2();
-                list.Add(inlineImageConverter.Convert(styletypeItem as InlineImageItem,
-                    new InlineImageConverterParamsV2 { Settings = simpleTextElementConverterParams.Settings}));
+                var inlineItem = styletypeItem as InlineImageItem;
+                if (simpleTextElementConverterParams.Settings.Images.IsImageIdReal(inlineItem.HRef))
+                {
+                    var inlineImageConverter = new InlineImageConverterV2();
+                    list.Add(inlineImageConverter.Convert(styletypeItem as InlineImageItem,
+                        new InlineImageConverterParamsV2 {Settings = simpleTextElementConverterParams.Settings}));
+                    simpleTextElementConverterParams.Settings.Images.ImageIdUsed(inlineItem.HRef);
+                }
             }
 
             return list;
