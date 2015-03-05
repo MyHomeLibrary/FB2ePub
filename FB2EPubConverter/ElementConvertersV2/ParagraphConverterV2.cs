@@ -67,8 +67,8 @@ namespace FB2EPubConverter.ElementConvertersV2
                         {
                             var inlineImageConverter = new InlineImageConverterV2();
                             paragraph.Add(inlineImageConverter.Convert(inlineItem,new InlineImageConverterParamsV2{ Settings = paragraphConverterParams.Settings }));
+                            paragraphConverterParams.Settings.Images.ImageIdUsed(inlineItem.HRef);
                         }
-                        paragraphConverterParams.Settings.Images.ImageIdUsed(inlineItem.HRef);
                         if (needToInsertDrop) // in case this is "drop" image - no need to create a drop
                         {
                             needToInsertDrop = false;
