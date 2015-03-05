@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using ConverterContracts.ConversionElementsStyles;
 using EPubLibrary;
 using EPubLibrary.XHTML_Items;
 using FB2Library.Elements;
@@ -248,7 +249,7 @@ namespace FB2EPubConverter
                                 spanElement.GlobalAttributes.ID.Value = element.GlobalAttributes.ID.Value; // Copy ID anyway - may be someone "jumps" here
                                 _ids[(string)element.GlobalAttributes.ID.Value] = spanElement;     // and update the "pointer" to element                           
                             }
-                            spanElement.GlobalAttributes.Class.Value = "ex_bad_link";
+                            spanElement.GlobalAttributes.Class.Value = ElementStylesV2.BadExternalLink;
                         }
                         if (element.Parent != null)
                         {
@@ -366,7 +367,7 @@ namespace FB2EPubConverter
                             }
                             if ((iDDocument is BookDocument) && ((iDDocument as BookDocument).Type == SectionTypeEnum.Links))  // if it's FBE notes section
                             {
-                                newAnchor.GlobalAttributes.Class.Value = "note_anchor";
+                                newAnchor.GlobalAttributes.Class.Value = ElementStylesV2.NoteAnchor;
                                 newParent.Add(new EmptyLine(newParent.HTMLStandard));
                                 newParent.Add(newAnchor);
                                 count++;

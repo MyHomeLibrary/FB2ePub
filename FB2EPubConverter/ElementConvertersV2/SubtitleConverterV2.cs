@@ -1,4 +1,5 @@
 ﻿using System;
+using ConverterContracts.ConversionElementsStyles;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 
@@ -27,7 +28,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             var paragraphConverter = new ParagraphConverterV2();
             var internalData = paragraphConverter.Convert(subtitleItem,
                 new ParagraphConverterParamsV2 { ResultType = ParagraphConvTargetEnumV2.Paragraph, Settings = subtitleConverterParams.Settings, StartSection = false });
-            SetClassType(internalData,"subtitle");
+            SetClassType(internalData, ElementStylesV2.SubTitle);
             //subtitle.Add(internalData);
 
             //SetClassType(subtitle);

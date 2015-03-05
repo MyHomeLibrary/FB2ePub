@@ -1,4 +1,5 @@
-﻿using ConverterContracts.Settings;
+﻿using ConverterContracts.ConversionElementsStyles;
+using ConverterContracts.Settings;
 using EPubLibrary;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.XHTML_Items;
@@ -10,7 +11,7 @@ using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace FB2EPubConverter.ElementConvertersV3
 {
-    internal class Fb2EPubTextConverterV3
+    internal class Fb2EPubTextConverterV3 : BaseElementConverterV3
     {
         private readonly IEPubCommonSettings _commonSettings;
         private readonly ImageManager _images;
@@ -88,7 +89,7 @@ namespace FB2EPubConverter.ElementConvertersV3
 
                     var imageConverter = new ImageConverterV3();
                     enclosing.Add(imageConverter.Convert(fb2File.MainBody.ImageName, new ImageConverterParamsV3 { Settings = converterSettings }));
-                    enclosing.GlobalAttributes.Class.Value = "body_image";
+                    SetClassType(enclosing, ElementStylesV3.BodyImage);
                     mainDocument.Content.Add(enclosing);
                 }
 

@@ -48,6 +48,8 @@
     <Compile Include="..\CommonIncludes\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ConversionElementsStyles\ElementStylesV2.cs" />
+    <Compile Include="ConversionElementsStyles\ElementStylesV3.cs" />
     <Compile Include="IConvertProcessorSettings.cs" />
     <Compile Include="ComInterfaces\ePubConverterInterface.cs" />
     <Compile Include="ComInterfaces\ProgressUpdateInterface.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using ConverterContracts.ConversionElementsStyles;
 using FB2Library.Elements.Poem;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
@@ -50,7 +51,7 @@ namespace FB2EPubConverter.ElementConvertersV2.Poem
                 stanzaSection.GlobalAttributes.Language.Value = stanzaItem.Lang;
             }
 
-            SetClassType(stanzaSection,"stanza");
+            SetClassType(stanzaSection, ElementStylesV2.Stanza);
             return stanzaSection;
         }
     }

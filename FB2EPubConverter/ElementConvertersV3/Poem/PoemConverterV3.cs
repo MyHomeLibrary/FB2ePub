@@ -1,4 +1,5 @@
 ﻿using System;
+using ConverterContracts.ConversionElementsStyles;
 using FB2EPubConverter.ElementConvertersV3.Epigraph;
 using FB2Library.Elements;
 using FB2Library.Elements.Poem;
@@ -80,7 +81,7 @@ namespace FB2EPubConverter.ElementConvertersV3.Poem
             {
                 poemContent.GlobalAttributes.Language.Value = poemItem.Lang;
             }
-            SetClassType(poemContent, "poem");
+            SetClassType(poemContent, ElementStylesV3.Poem);
             return poemContent;
         }
 

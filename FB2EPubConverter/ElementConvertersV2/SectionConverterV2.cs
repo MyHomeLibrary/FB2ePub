@@ -9,10 +9,11 @@ using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 using FB2EPubConverter.ElementConvertersV2.Tables;
+using ConverterContracts.ConversionElementsStyles;
 
 namespace FB2EPubConverter.ElementConvertersV2
 {
-    internal class SectionConverterV2 
+    internal class SectionConverterV2 : BaseElementConverterV2
     {
         public int RecursionLevel { get; set;}
         public bool LinkSection { get; set; }
@@ -38,7 +39,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             long documentSize = 0;
             _checker.MaxSizeLimit = Settings.MaxSize;
 
-            content.GlobalAttributes.Class.Value = string.Format("section{0}", RecursionLevel);
+            SetClassType(content, string.Format(ElementStylesV2.SectionItemFormat, RecursionLevel));
 
             content.GlobalAttributes.ID.Value = Settings.ReferencesManager.AddIdUsed(sectionItem.ID, content);
 
@@ -175,7 +176,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                             {
                                 sectionImagemage.GlobalAttributes.Title.Value = sectionImage.Title;
                             }
-                            container.GlobalAttributes.Class.Value = "section_image";
+                            SetClassType(container, ElementStylesV2.SectionImage);
                             container.Add(sectionImagemage);
                             long itemSize = container.EstimateSize();
                             if (_checker.ExceedSizeLimit(documentSize + itemSize))
@@ -295,7 +296,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                                 var enclosing = new Div(HTMLElementType.XHTML11); // we use the enclosing so the user can style center it
                                 var imageConverter = new ImageConverterV2();
                                 enclosing.Add(imageConverter.Convert(fb2Img,new ImageConverterParamsV2{Settings = Settings}));
-                                enclosing.GlobalAttributes.Class.Value = "normal_image";
+                                SetClassType(enclosing, ElementStylesV2.NormalImage);
                                 newItem = enclosing;
                             }
                         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using ConverterContracts.ConversionElementsStyles;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
@@ -38,11 +39,11 @@ namespace FB2EPubConverter.ElementConvertersV3
             a.HRef.Value = string.Format("{0}_back", newId);
             if (((string)a.HRef.Value).StartsWith("_back") == false)
             {
-                SetClassType(a, "note_anchor");
+                SetClassType(a, ElementStylesV3.NoteAnchor);
                 linkSectionConverterParams.Settings.ReferencesManager.AddBackReference((string)a.HRef.Value, a);
                 //content.Add(a);
             }
-            SetClassType(content, "note_section");
+            SetClassType(content, ElementStylesV3.NoteSection);
             return content;
 
         }

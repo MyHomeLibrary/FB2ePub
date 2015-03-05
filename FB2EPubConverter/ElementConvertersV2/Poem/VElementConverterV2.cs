@@ -1,4 +1,5 @@
 ﻿using System;
+using ConverterContracts.ConversionElementsStyles;
 using FB2Library.Elements.Poem;
 using XHTMLClassLibrary.BaseElements;
 
@@ -31,7 +32,7 @@ namespace FB2EPubConverter.ElementConvertersV2.Poem
                     StartSection = false,
                 });
 
-            SetClassType(item, "v");
+            SetClassType(item, ElementStylesV2.VElement);
 
             //item.ID.Value = Settings.ReferencesManager.AddIdUsed(paragraphItem.ID, item);
 
