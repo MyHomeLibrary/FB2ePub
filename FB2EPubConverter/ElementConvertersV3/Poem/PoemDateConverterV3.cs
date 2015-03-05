@@ -19,8 +19,8 @@ namespace FB2EPubConverter.ElementConvertersV3.Poem
             {
                 throw new ArgumentNullException("poemDateItem");
             }
-            var date = new Paragraph(HTMLElementType.XHTML11);
-            date.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = poemDateItem.Text });
+            var date = new Paragraph(HTMLElementType.HTML5);
+            date.Add(new SimpleHTML5Text(HTMLElementType.HTML5) { Text = poemDateItem.Text });
             SetClassType(date, ElementStylesV3.PoemDate);
             return date;
         }

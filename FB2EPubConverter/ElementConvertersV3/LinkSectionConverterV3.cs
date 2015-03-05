@@ -27,15 +27,15 @@ namespace FB2EPubConverter.ElementConvertersV3
             {
                 throw new ArgumentNullException("linkSectionItem");
             }
-            var content = new Div(HTMLElementType.XHTML11);
-            var a = new Anchor(HTMLElementType.XHTML11);
+            var content = new Div(HTMLElementType.HTML5);
+            var a = new Anchor(HTMLElementType.HTML5);
             var titleConverter = new TitleConverterV3();
             foreach (var item in titleConverter.Convert(linkSectionItem.Title, new TitleConverterParamsV3 { Settings = linkSectionConverterParams.Settings, TitleLevel = 2 }).SubElements())
             {
                 content.Add(item);
             }
             string newId = linkSectionConverterParams.Settings.ReferencesManager.EnsureGoodId(linkSectionItem.ID);
-            a.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = newId });
+            a.Add(new SimpleHTML5Text(HTMLElementType.HTML5) { Text = newId });
             a.HRef.Value = string.Format("{0}_back", newId);
             if (((string)a.HRef.Value).StartsWith("_back") == false)
             {

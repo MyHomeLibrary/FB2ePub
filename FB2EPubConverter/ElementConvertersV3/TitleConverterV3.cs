@@ -31,7 +31,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 throw new ArgumentNullException("titleItem");
             }
             _level = titleConverterParams.TitleLevel;
-            var title = new Div(HTMLElementType.XHTML11);
+            var title = new Div(HTMLElementType.HTML5);
             foreach (var fb2TextItem in titleItem.TitleData)
             {
                 if (fb2TextItem is ParagraphItem)
