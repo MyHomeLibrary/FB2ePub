@@ -39,7 +39,7 @@ namespace XHTMLClassLibrary.AttributeDataTypes
                 }
                 else
                 {
-                    var rgbTester = new Regex("rgb(*)");
+                    var rgbTester = new Regex(@"rgb\(\d+\)$");
                     if (rgbTester.IsMatch(value))
                     {
                         _colorType = ColorOptions.RGBNumber;
