@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
 using XHTMLClassLibrary.AttributeDataTypes;
-using XHTMLClassLibrary.BaseElements;
 
 
 namespace XHTMLClassLibrary.Attributes
@@ -45,19 +44,26 @@ namespace XHTMLClassLibrary.Attributes
             get { return AttrObject.Value; }
             set
             {
-                if (!(value is string) && !(value is T)) 
+                if (!(value is string) && !(value is T) && value != null) 
                     throw new ArgumentException(string.Format("The value set can be only of string or {0} type",typeof(T).Name));
 
-                var str = value as string;
-                if (str != null)
+                if (value == null)
                 {
-                    AttrObject.Value = str;
-                    AttributeHasValue =  true;                   
+                    AttrObject.Value = null;
+                    AttributeHasValue = false;
                 }
                 else
                 {
-                    AttrObject = (T) value;
-                    AttributeHasValue = AttrObject.Value != null;
+                    var str = value as string;
+                    if (str != null)
+                    {
+                        AttrObject.Value = str;
+                    }
+                    else
+                    {
+                        AttrObject = (T)value;                       
+                    }
+                    AttributeHasValue = true;                   
                 }
             }
         }
