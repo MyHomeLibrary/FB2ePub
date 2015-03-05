@@ -110,7 +110,7 @@ namespace FB2EPubConverter
         {
             if (string.IsNullOrEmpty(id))
             {
-                return string.Empty;
+                return id;
             }
             string newid = EnsureGoodId(id);
             if (_ids.ContainsKey(newid))

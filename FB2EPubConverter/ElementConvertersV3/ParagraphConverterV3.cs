@@ -93,11 +93,8 @@ namespace FB2EPubConverter.ElementConvertersV3
             }
 
             //SetClassType(paragraph);
-            if (!string.IsNullOrEmpty(paragraphItem.ID))
-            {
-                paragraph.GlobalAttributes.ID.Value =
-                    paragraphConverterParams.Settings.ReferencesManager.AddIdUsed(paragraphItem.ID, paragraph);
-            }
+            paragraph.GlobalAttributes.ID.Value =
+                paragraphConverterParams.Settings.ReferencesManager.AddIdUsed(paragraphItem.ID, paragraph);
 
             return paragraph;
         }
