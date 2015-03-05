@@ -26,14 +26,7 @@ namespace Fb2ePubGui
             string settingsLocation;
             DefaultSettingsLocatorHelper.SettingsLocation detected;
             DefaultSettingsLocatorHelper.LocateDefaultSettings(out settingsLocation, out detected);
-            if (detected != DefaultSettingsLocatorHelper.SettingsLocation.NotDetected)
-            {
-                textBoxSettingsPath.Text = string.Format(Resources.Default_Settings_File, settingsLocation, detected);
-            }
-            else
-            {
-                textBoxSettingsPath.Text = Resources.AboutBox_AboutBox_Default_settings_file_not_found;
-            }
+            textBoxSettingsPath.Text = detected != DefaultSettingsLocatorHelper.SettingsLocation.NotDetected ? string.Format(Resources.Default_Settings_File, settingsLocation, detected) : Resources.AboutBox_AboutBox_Default_settings_file_not_found;
             textBoxResourcePath.Text = string.Format(Resources.Using_Resources_From, (ResourceLocator.Instance.GetResourcesPath()));
         }
 
