@@ -65,14 +65,15 @@ namespace XHTMLClassLibrary.BaseElements
 
 
         /// <summary>
-        /// Check if speciffic standard is XML format or not
+        /// Check if specific standard is XML format or not
         /// </summary>
         /// <param name="standard"></param>
         /// <returns></returns>
         public static bool IsXMLFormat(HTMLElementType standard)
         {
             if (standard == HTMLElementType.XHTML11 ||
-                standard == HTMLElementType.XHTML5)
+                standard == HTMLElementType.XHTML5 ||
+                standard == HTMLElementType.HTML5)
                 return true;
             return false;
         }
