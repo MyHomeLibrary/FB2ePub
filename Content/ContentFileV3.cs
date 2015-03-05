@@ -130,9 +130,9 @@ namespace EPubLibrary.Content
 
 
 
+            int creatorCounter = 0;
             foreach (var creatorItem in Title.Creators)
             {
-                int creatorCounter = 0;
                 if (!string.IsNullOrEmpty(creatorItem.PersonName))
                 {
                     string creatorId = string.Format("creator{0}", ++creatorCounter);
