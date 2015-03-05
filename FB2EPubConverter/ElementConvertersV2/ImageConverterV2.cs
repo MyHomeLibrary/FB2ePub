@@ -25,10 +25,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 throw new ArgumentNullException("imageItem");
             }
             var image = new Image(HTMLElementType.XHTML11);
-            if (imageItem.AltText != null)
-            {
-                image.Alt.Value = imageItem.AltText;
-            }
+            image.Alt.Value = imageItem.AltText ?? string.Empty; // ePub require image always to have attribute
             image.Source.Value = imageConverterParams.Settings.ReferencesManager.AddImageRefferenced(imageItem, image);
 
             image.GlobalAttributes.ID.Value = imageConverterParams.Settings.ReferencesManager.AddIdUsed(imageItem.ID, image);

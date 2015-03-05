@@ -19,7 +19,7 @@ namespace Fb2ePubConverter
     {
 
         protected readonly ImageManager Images = new ImageManager();
-        protected readonly List<FB2File> FB2Files = new List<FB2File>();
+        private readonly List<FB2File> _fb2Files = new List<FB2File>();
 
 
 
@@ -40,7 +40,7 @@ namespace Fb2ePubConverter
         public bool LoadAndCheckFB2Files(string fileName)
         {
             Logger.Log.InfoFormat("Starting to convert {0}", fileName);
-            FB2Files.Clear();
+            _fb2Files.Clear();
             if (!File.Exists(fileName))
             {
                 Logger.Log.ErrorFormat("Unable to locate file {0} on disk.", fileName);
@@ -53,7 +53,7 @@ namespace Fb2ePubConverter
                     var fb2ZipLoader = new FB2ZipFileLoader();
                     try
                     {
-                        FB2Files.AddRange(fb2ZipLoader.LoadFile(fileName, Settings.FB2ImportSettings));
+                        _fb2Files.AddRange(fb2ZipLoader.LoadFile(fileName, Settings.FB2ImportSettings));
                     }
                     catch (Exception)
                     {
@@ -66,7 +66,7 @@ namespace Fb2ePubConverter
                     var fb2FileLoader = new FB2FileLoader();
                     try
                     {
-                        FB2Files.AddRange(fb2FileLoader.LoadFile(fileName,Settings.FB2ImportSettings));
+                        _fb2Files.AddRange(fb2FileLoader.LoadFile(fileName,Settings.FB2ImportSettings));
                     }
                     catch (Exception)
                     {
@@ -79,7 +79,7 @@ namespace Fb2ePubConverter
                     var fb2RarLoader = new FB2RarLoader();
                     try
                     {
-                        FB2Files.AddRange(fb2RarLoader.LoadFile(fileName,Settings.FB2ImportSettings));
+                        _fb2Files.AddRange(fb2RarLoader.LoadFile(fileName,Settings.FB2ImportSettings));
                     }
                     catch (Exception)
                     {
@@ -108,16 +108,15 @@ namespace Fb2ePubConverter
             Logger.Log.DebugFormat("Saving {0}", outFileName);
             try
             {
-                Logger.Log.DebugFormat("Saving totally {0} file(s)", FB2Files.Count);
-                foreach (var fb2File in FB2Files)
+                Logger.Log.DebugFormat("Saving totally {0} file(s)", _fb2Files.Count);
+                foreach (var fb2File in _fb2Files)
                 {
                     IEpubFile epubFile = CreateEpub();
-                    Reset();
                     
                     SetTransliterationOptions(epubFile);
 
                     // do it first (before actual conversion) as if there is a problem with generating file name - we do not spend time here on generation
-                    string outFile = GenerateOutputFileName(fb2File, epubFile, outFileName);
+                    string outFile = GenerateOutputFileName(epubFile, outFileName);
 
                     LoadImagesInMemory(fb2File);
 
@@ -141,7 +140,7 @@ namespace Fb2ePubConverter
             Images.LoadFromBinarySection(fb2File.Images);
         }
 
-        private string GenerateOutputFileName(FB2File fb2File, IEpubFile epubFile, string outFileName)
+        private string GenerateOutputFileName(IEpubFile epubFile, string outFileName)
         {
             int count = 0;
 
@@ -169,10 +168,14 @@ namespace Fb2ePubConverter
 
 
             string resultFilePath = Path.Combine(outFolder,outFile + ".epub");
-            while (File.Exists(resultFilePath) && (fb2File != FB2Files[0]))
+            while (File.Exists(resultFilePath) )
             {
                 Logger.Log.DebugFormat("{0} file exists , incrementing", resultFilePath);
                 resultFilePath = Path.Combine(outFolder,string.Format(@"{0}_{1}.epub",  outFile, count++));
+                if (count == int.MaxValue)
+                {
+                    throw new IndexOutOfRangeException(@"File name counter reached maximum possible limit - consider to clean up the folder"); 
+                }
             }
             Logger.Log.DebugFormat("Final output file name : {0}", resultFilePath);
             return resultFilePath;
@@ -200,22 +203,18 @@ namespace Fb2ePubConverter
             Logger.Log.DebugFormat("Transliteration mode : {0}", epubFile.TranslitMode.Mode);
         }
 
-        protected virtual void Reset()
-        {
-        }
-
         protected abstract IEpubFile CreateEpub();
 
 
 
         public void LoadFB2FileFromXML(XDocument fb2Document)
         {
-            FB2Files.Clear();
+            _fb2Files.Clear();
             var file = new FB2File();
             try
             {
                 file.Load(fb2Document, false);
-                FB2Files.Add(file);
+                _fb2Files.Add(file);
             }
             catch (Exception ex)
             {
