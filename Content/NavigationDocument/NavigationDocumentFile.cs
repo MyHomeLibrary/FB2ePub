@@ -28,7 +28,7 @@ namespace EPubLibrary.Content.NavigationDocument
             Type = NavigationTableType.Landmarks
         };
 
-        private static readonly EPubInternalPath NAVFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/nav.xhtml");
+        private static readonly EPubInternalPath NAVFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/nav.xhtml");
 
         public EPubInternalPath PathInEPUB
         {

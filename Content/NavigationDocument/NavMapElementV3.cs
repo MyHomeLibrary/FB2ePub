@@ -52,7 +52,7 @@ namespace EPubLibrary.Content.NavigationDocument
 
         public XElement GenerateXMLMap()
         {
-            var navMap = new XElement("nav");
+            var navMap = new XElement(WWWNamespaces.XHTML + "nav");
             string typeAsString = TypeToString(_type);
             navMap.Add(new XAttribute(EPubNamespaces.OpsNamespace + "type", typeAsString));
             navMap.Add(new XAttribute("id", typeAsString)); // use same as id
@@ -60,11 +60,11 @@ namespace EPubLibrary.Content.NavigationDocument
 
             if (!string.IsNullOrEmpty(Heading))
             {
-                var h1 = new XElement(GetHeadingTypeAsString(HeadingType)) { Value = Heading };
+                var h1 = new XElement(WWWNamespaces.XHTML + GetHeadingTypeAsString(HeadingType)) { Value = Heading };
                 navMap.Add(h1);              
             }
 
-            var subElements = new XElement("ol");
+            var subElements = new XElement(WWWNamespaces.XHTML + "ol");
             foreach (var point in this)
             {
                 XElement navXPoint = point.Generate();
