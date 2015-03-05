@@ -48,15 +48,16 @@ namespace XHTMLClassLibrary.Attributes
                 if (!(value is string) && !(value is T)) 
                     throw new ArgumentException(string.Format("The value set can be only of string or {0} type",typeof(T).Name));
 
-                if (value is string)
+                var str = value as string;
+                if (str != null)
                 {
-                    AttrObject.Value = value as string;
-                    AttributeHasValue = (value as string != string.Empty);
+                    AttrObject.Value = str;
+                    AttributeHasValue =  true;                   
                 }
                 else
                 {
                     AttrObject = (T) value;
-                    AttributeHasValue = AttrObject.Value != string.Empty;
+                    AttributeHasValue = AttrObject.Value != null;
                 }
             }
         }

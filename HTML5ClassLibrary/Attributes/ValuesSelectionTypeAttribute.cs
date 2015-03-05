@@ -65,7 +65,7 @@ namespace XHTMLClassLibrary.Attributes
                     }
                 }
                 AttrObject.Value = passedValue;
-                AttributeHasValue = (passedValue != string.Empty);
+                AttributeHasValue = (passedValue != null);
             }
         }
 
