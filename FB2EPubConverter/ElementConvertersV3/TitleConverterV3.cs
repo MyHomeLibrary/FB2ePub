@@ -3,6 +3,7 @@ using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using System.Diagnostics;
+using ConverterContracts.ConversionElementsStyles;
 
 namespace FB2EPubConverter.ElementConvertersV3
 {
@@ -50,7 +51,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     Debug.WriteLine("invalid type in Title - {0}", fb2TextItem.GetType());
                 }
             }
-            SetClassType(title, string.Format("title{0}", _level));
+            SetClassType(title, string.Format(ElementStylesV3.TitleItemFormat, _level));
             return title;
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using ConverterContracts.ConversionElementsStyles;
 using EPubLibrary.ReferenceUtils;
 using FB2Library;
 using XHTMLClassLibrary.BaseElements;
@@ -131,7 +132,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 info.Remove(header);
             }
 
-            info.GlobalAttributes.Class.Value = "fb2_info";
+            SetClassType(info,ElementStylesV2.FB2Info);
             return info;
             
         }

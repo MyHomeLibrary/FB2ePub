@@ -1,4 +1,5 @@
 ﻿using System;
+using ConverterContracts.ConversionElementsStyles;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
@@ -20,7 +21,7 @@ namespace FB2EPubConverter.ElementConvertersV3.Poem
             }
             var date = new Paragraph(HTMLElementType.XHTML11);
             date.Add(new SimpleHTML5Text(HTMLElementType.XHTML11) { Text = poemDateItem.Text });
-            SetClassType(date, "poemdate");
+            SetClassType(date, ElementStylesV3.PoemDate);
             return date;
         }
     }

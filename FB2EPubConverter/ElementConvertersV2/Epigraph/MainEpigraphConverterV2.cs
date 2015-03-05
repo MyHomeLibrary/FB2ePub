@@ -1,4 +1,5 @@
 ﻿using System;
+using ConverterContracts.ConversionElementsStyles;
 using FB2EPubConverter.ElementConvertersV2.Poem;
 using FB2Library.Elements;
 using FB2Library.Elements.Poem;
@@ -57,7 +58,7 @@ namespace FB2EPubConverter.ElementConvertersV2.Epigraph
                 content.Add(epigraphAuthorConverter.Convert(author as TextAuthorItem,  new EpigraphAuthorConverterParamsV2 { Settings = epigraphConverterParams.Settings }));
             }
 
-            SetClassType(content, "epigraph_main");
+            SetClassType(content, ElementStylesV2.EpigraphMain);
 
             content.GlobalAttributes.ID.Value = epigraphConverterParams.Settings.ReferencesManager.AddIdUsed(epigraphItem.ID, content);
 

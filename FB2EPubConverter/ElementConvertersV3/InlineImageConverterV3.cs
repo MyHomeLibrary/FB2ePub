@@ -1,5 +1,6 @@
 ﻿using FB2Library.Elements;
 using System;
+using ConverterContracts.ConversionElementsStyles;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
@@ -31,7 +32,7 @@ namespace FB2EPubConverter.ElementConvertersV3
 
             img.Source.Value = inlineImageConverterParams.Settings.ReferencesManager.AddImageRefferenced(inlineImageItem, img);
 
-            SetClassType(img, "int_image");
+            SetClassType(img, ElementStylesV3.InlineImage);
             return img;
         }
     }

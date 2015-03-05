@@ -1,4 +1,5 @@
 ﻿using System;
+using ConverterContracts.ConversionElementsStyles;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
@@ -30,7 +31,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             cite.Add(paragraphConverter.Convert(paragraphItem,
                 new ParagraphConverterParamsV2 {Settings =citationAuthorConverterParams.Settings, ResultType = ParagraphConvTargetEnumV2.Paragraph, StartSection = false}));
 
-            SetClassType(cite, "citation_author");
+            SetClassType(cite, ElementStylesV2.CitationAuthor);
             return cite;
         }
 

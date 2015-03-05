@@ -1,4 +1,5 @@
 ﻿using System;
+using ConverterContracts.ConversionElementsStyles;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
@@ -28,7 +29,7 @@ namespace FB2EPubConverter.ElementConvertersV3.Epigraph
             var paragraphConverter = new ParagraphConverterV3();
             epigraphAuthor.Add(paragraphConverter.Convert(textAuthorItem,
                 new ParagraphConverterParamsV3 { ResultType = ParagraphConvTargetEnumV3.Paragraph, Settings = epigraphAuthorConverterParams.Settings, StartSection = false }));
-            SetClassType(epigraphAuthor, "epigraph_author");
+            SetClassType(epigraphAuthor, ElementStylesV3.EpigraphAuthor);
             return epigraphAuthor;
         }
 

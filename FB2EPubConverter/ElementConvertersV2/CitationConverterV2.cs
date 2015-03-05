@@ -1,4 +1,5 @@
 ﻿using System;
+using ConverterContracts.ConversionElementsStyles;
 using FB2EPubConverter.ElementConvertersV2.Poem;
 using FB2EPubConverter.ElementConvertersV2.Tables;
 using FB2Library.Elements;
@@ -83,7 +84,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             {
                 citation.GlobalAttributes.Language.Value = citeItem.Lang;
             }
-            SetClassType(citation, "citation");
+            SetClassType(citation, ElementStylesV2.Citation);
             return citation;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using ConverterContracts.ConversionElementsStyles;
 using FB2EPubConverter.ElementConvertersV3.Poem;
 using FB2EPubConverter.ElementConvertersV3.Tables;
 using FB2Library.Elements;
@@ -73,7 +74,7 @@ namespace FB2EPubConverter.ElementConvertersV3
 
             resAnnotation.GlobalAttributes.ID.Value = converterParams.Settings.ReferencesManager.AddIdUsed(annotationItem.ID, resAnnotation);
 
-            SetClassType(resAnnotation, "annotation");
+            SetClassType(resAnnotation, ElementStylesV3.Annotation);
             return resAnnotation;
         }
     }

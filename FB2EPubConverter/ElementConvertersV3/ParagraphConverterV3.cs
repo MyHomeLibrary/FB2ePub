@@ -1,5 +1,6 @@
 ﻿using FB2Library.Elements;
 using System;
+using ConverterContracts.ConversionElementsStyles;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
@@ -52,7 +53,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                         if (needToInsertDrop)
                         {
                             needToInsertDrop = false;
-                            paragraph.GlobalAttributes.Class.Value = "drop";
+                            SetClassType(paragraph, ElementStylesV3.CapitalDrop);
                         }
                         paragraph.Add(s);
                     }
@@ -84,7 +85,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                         if (needToInsertDrop)
                         {
                             needToInsertDrop = false;
-                            paragraph.GlobalAttributes.Class.Value = "drop";
+                            SetClassType(paragraph, ElementStylesV3.CapitalDrop);
                         }
                         paragraph.Add(s);
                     }

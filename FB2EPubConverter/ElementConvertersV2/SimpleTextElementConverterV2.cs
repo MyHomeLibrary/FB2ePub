@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConverterContracts.ConversionElementsStyles;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -182,10 +183,10 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// </summary>
         /// <param name="parent">parent container insert into</param>
         /// <param name="text">text to insert</param>
-        private static void AddAsDrop(List<IHTMLItem> parent, SimpleText text)
+        private void AddAsDrop(List<IHTMLItem> parent, SimpleText text)
         {
             var span1 = new Span(HTMLElementType.XHTML11);
-            span1.GlobalAttributes.Class.Value = "drop";
+            SetClassType(span1, ElementStylesV2.CapitalDrop);
             int dropEnd = 0;
             // "pad" the white spaces so drop starts from visible character
             while (dropEnd < text.Text.Length && UnicodeHelpers.IsSpaceLike(text.Text[dropEnd]) )

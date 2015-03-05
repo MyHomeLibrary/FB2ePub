@@ -1,4 +1,5 @@
-﻿using XHTMLClassLibrary.BaseElements;
+﻿using ConverterContracts.ConversionElementsStyles;
+using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
 namespace FB2EPubConverter.ElementConvertersV3
@@ -13,7 +14,7 @@ namespace FB2EPubConverter.ElementConvertersV3
         {
             var el = new Paragraph(HTMLElementType.HTML5);
             el.Add(new SimpleHTML5Text(HTMLElementType.HTML5) { Text = "\u00A0" });
-            SetClassType(el, "empty-line");
+            SetClassType(el, ElementStylesV3.EmptyLine);
             return el;
         }
 

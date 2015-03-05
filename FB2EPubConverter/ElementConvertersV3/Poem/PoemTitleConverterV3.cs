@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using ConverterContracts.ConversionElementsStyles;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
@@ -43,7 +44,7 @@ namespace FB2EPubConverter.ElementConvertersV3.Poem
                     Debug.WriteLine("invalid type in Title - {0}", fb2TextItem.GetType());
                 }
             }
-            SetClassType(title, "poem_title");
+            SetClassType(title, ElementStylesV3.PoemTitle);
             return title;
         }
 
