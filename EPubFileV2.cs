@@ -70,6 +70,7 @@ namespace EPubLibrary
         private readonly Dictionary<string, EPUBImage> _images = new Dictionary<string, EPUBImage>();
         private readonly CalibreMetadataObject _calibreMetadata =  new CalibreMetadataObject();
         private readonly ContentFileV2 _content = new ContentFileV2();
+        private readonly SectionIDTracker _sectionIDTracker = new SectionIDTracker();
         #endregion
 
         #region private_properties
@@ -650,7 +651,7 @@ namespace EPubLibrary
                 {
                     CreateFileEntryInZip(stream, section);
                     section.Write(stream);
-                    AddBookContentSection(section, count, 0);
+                    AddBookContentSection(section);
                     count++;
                 }
             }
@@ -684,7 +685,7 @@ namespace EPubLibrary
                         Path.GetFileNameWithoutExtension(section.FileName), subCount);
                     CreateFileEntryInZip(stream, subsection);
                     subsection.Write(stream);
-                    AddBookContentSection(subsection, count, subCount);
+                    AddBookContentSection(subsection);
                     subCount++;
                 }
                 newCount++;
@@ -693,15 +694,15 @@ namespace EPubLibrary
             {
                 CreateFileEntryInZip(stream, section);
                 section.Write(stream);
-                AddBookContentSection(section, count, 0);
+                AddBookContentSection(section);
                 newCount++;
             }
             return newCount;
         }
 
-        protected  virtual void AddBookContentSection(BookDocument subsection, int count,int subcount)
+        protected  virtual void AddBookContentSection(BookDocument subsection)
         {
-            subsection.Id = string.Format("bookcontent{0}_{1}", count, subcount); // generate unique ID
+            subsection.Id = _sectionIDTracker.GenerateSectionId(subsection);
             _content.AddXHTMLTextItem(subsection);
             _navigationManager.AddBookSubsection(subsection,
                 TranliterateToc? Rus2Lat.Instance.Translate(subsection.PageTitle,  _translitMode):subsection.PageTitle);

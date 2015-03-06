@@ -11,13 +11,13 @@ namespace EPubLibrary.TOC
 {
     public class TOCFile : IEPubPath
     {
-        protected readonly NavMapElement NavMap = new NavMapElement();
+        private readonly NavMapElement _navMap = new NavMapElement();
         private string _title;
 
 
         public bool IsNavMapEmpty()
         {
-            return (NavMap.Count == 0);
+            return (_navMap.Count == 0);
         }
 
         public string Title
@@ -52,24 +52,30 @@ namespace EPubLibrary.TOC
         public void AddNavPoint(BookDocument content, string name)
         {
             var bookPoint = new NavPoint { Content = content.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, content.FlatStructure), Name = name };
-            NavMap.Add(bookPoint);
+            _navMap.Add(bookPoint);
         }
 
-        public void AddSubNavPoint(BookDocument content, BookDocument subcontent, string name)
+        public void AddSubNavPoint(BookDocument subcontent, string name)
         {
-            var point = NavMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, content.FlatStructure)));
-            if (point != null)
+            var newPoint = new NavPoint
             {
-                point.SubPoints.Add(new NavPoint { Content = subcontent.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, subcontent.FlatStructure), Name = name });
+                Content =
+                    subcontent.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, subcontent.FlatStructure),
+                Name = name
+            };
+            var parentPoint = _navMap.Find(x => (x.Content == subcontent.NavigationParent.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, subcontent.NavigationParent.FlatStructure)));
+            if (parentPoint != null)
+            {
+                parentPoint.SubPoints.Add(newPoint);
             }
             else
             {
-                foreach (var element in NavMap)
+                foreach (var element in _navMap)
                 {
-                    point = element.AllContent().Find(x => (x.Content == content.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, content.FlatStructure)));
-                    if (point != null)
+                    parentPoint = element.AllContent().Find(x => (x.Content == subcontent.NavigationParent.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, subcontent.NavigationParent.FlatStructure)));
+                    if (parentPoint != null)
                     {
-                        point.SubPoints.Add(new NavPoint { Content = subcontent.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, subcontent.FlatStructure), Name = name });
+                        parentPoint.SubPoints.Add(newPoint);
                         return;
                     }
                 }
@@ -79,22 +85,7 @@ namespace EPubLibrary.TOC
         }
 
 
-        public void AddSubLink(BookDocument content, BookDocument subcontent, string name)
-        {
-            var point = NavMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, content.FlatStructure)));
-            if (point != null)
-            {
-                point.SubPoints.Add(new NavPoint { Content = string.Format("{0}#{1}", content, subcontent), Name = name });
-            }
-            else
-            {
-                throw new Exception("no such point to add sub point");
-            }
-
-        }
-
-
-        protected void CreateTOCDocument(XDocument document)
+        private void CreateTOCDocument(XDocument document)
         {
             if (ID == null)
             {
@@ -114,7 +105,7 @@ namespace EPubLibrary.TOC
 
             var metaDepth = new XElement(DaisyNamespaces.NCXNamespace + "meta");
             metaDepth.Add(new XAttribute("name", "dtb:depth"));
-            metaDepth.Add(new XAttribute("content", NavMap.GetDepth()));
+            metaDepth.Add(new XAttribute("content", _navMap.GetDepth()));
             headElement.Add(metaDepth);
 
             var metaTotalPageCount = new XElement(DaisyNamespaces.NCXNamespace + "meta");
@@ -135,7 +126,7 @@ namespace EPubLibrary.TOC
             docTitleElement.Add(textElement);
             ncxElement.Add(docTitleElement);
 
-            ncxElement.Add(NavMap.GenerateXMLMap());
+            ncxElement.Add(_navMap.GenerateXMLMap());
 
             AddNamespaces(document);
             document.Add(ncxElement);
@@ -149,17 +140,17 @@ namespace EPubLibrary.TOC
 
         internal void Consolidate()
         {
-            foreach (var point in NavMap)
+            foreach (var point in _navMap)
             {
                 point.RemoveDeadEnds();
             }
 
-            var points = NavMap.FindAll(x => (string.IsNullOrEmpty(x.Name)));
+            var points = _navMap.FindAll(x => (string.IsNullOrEmpty(x.Name)));
             foreach (var navPoint in points)
             {
                 if (navPoint.SubPoints.Count == 0)
                 {
-                    NavMap.Remove(navPoint);
+                    _navMap.Remove(navPoint);
                 }
             }
         }

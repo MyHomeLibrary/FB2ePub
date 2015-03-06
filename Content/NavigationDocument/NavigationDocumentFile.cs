@@ -7,7 +7,6 @@ using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
-using EPubLibrary.TOC.NavMap;
 using EPubLibrary.XHTML_Items;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.Structure_Header;
@@ -16,11 +15,13 @@ namespace EPubLibrary.Content.NavigationDocument
 {
     public class NavigationDocumentFile : IEPubPath
     {
+        private const string HeadingTOC = "Table of Contents";
+
         private readonly List<StyleElement> _styles = new List<StyleElement>();
         private readonly NavMapElementV3 _documentNavigationMap = new NavMapElementV3
         {
             Type = NavigationTableType.TOC,
-            Heading = "Table of Contents",
+            Heading = HeadingTOC,
         };
 
         private readonly NavMapElementV3 _landmarks = new NavMapElementV3
@@ -123,39 +124,37 @@ namespace EPubLibrary.Content.NavigationDocument
             _documentNavigationMap.Add(bookPoint);
         }
 
-        public void AddSubNavPoint(BookDocument content, BookDocument subcontent, string name)
+        public void AddSubNavPoint(BookDocument subcontent, string name)
         {
-            var point = _documentNavigationMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure)));
-            if (point != null)
+            if (subcontent.NavigationParent == null)
             {
-                point.SubPoints.Add(new NavPointV3 { Content = subcontent.PathInEPUB.GetRelativePath(NAVFilePath, subcontent.FlatStructure), Name = name, Id = content.Id});
+                throw new ArgumentException(@"Can't add subpoint without a parent","subcontent");
+            }
+            var newPoint = new NavPointV3
+            {
+                Content = subcontent.PathInEPUB.GetRelativePath(NAVFilePath, subcontent.FlatStructure),
+                Name = name,
+                Id = subcontent.Id
+            };
+            var parentPoint = _documentNavigationMap.Find(x => (x.Id == subcontent.NavigationParent.Id));
+            if (parentPoint != null)
+            {
+                parentPoint.SubPoints.Add(newPoint);
             }
             else
             {
+                // iterate all top level content
                 foreach (var element in _documentNavigationMap)
                 {
-                    point = element.AllContent().Find(x => (x.Content == content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure)));
-                    if (point != null)
+                    // here "AllContent) will return all the sub elements (any depth) of given top level element
+                    // so we look for parent in all this elements
+                    parentPoint = element.AllContent().Find(x => (x.Id == subcontent.NavigationParent.Id));
+                    if (parentPoint != null)
                     {
-                        point.SubPoints.Add(new NavPointV3 { Content = subcontent.PathInEPUB.GetRelativePath(NAVFilePath, subcontent.FlatStructure), Name = name, Id = content.Id });
+                        parentPoint.SubPoints.Add(newPoint);
                         return;
                     }
                 }
-                throw new Exception("no such point to add sub point");
-            }
-
-        }
-
-
-        public void AddSubLink(BookDocument content, BookDocument subcontent, string name)
-        {
-            var point = _documentNavigationMap.Find(x => (x.Content == content.PathInEPUB.GetRelativePath(NAVFilePath, content.FlatStructure)));
-            if (point != null)
-            {
-                point.SubPoints.Add(new NavPointV3 { Content = string.Format("{0}#{1}", content, subcontent), Name = name });
-            }
-            else
-            {
                 throw new Exception("no such point to add sub point");
             }
 

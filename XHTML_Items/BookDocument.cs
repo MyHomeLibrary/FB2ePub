@@ -29,7 +29,6 @@ namespace EPubLibrary.XHTML_Items
             get { return _references; }    
         }
 
-
         public BookDocument(HTMLElementType compatibility)
             : base(compatibility)
         {
@@ -39,11 +38,6 @@ namespace EPubLibrary.XHTML_Items
             FileEPubInternalPath = DefaultTextFilesFolder;
         }
 
-
-        public bool NeedSplit()
-        {
-            return (EstimateSize(_content)>MaxSize);
-        }
 
         /// <summary>
         /// Get/Set section type

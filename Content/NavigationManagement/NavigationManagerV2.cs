@@ -30,7 +30,7 @@ namespace EPubLibrary.Content.NavigationManagement
                 }
                 else
                 {
-                    _tableOfContentFile.AddSubNavPoint(subsection.NavigationParent, subsection, name);
+                    _tableOfContentFile.AddSubNavPoint(subsection, name);
                 }
             }
 
