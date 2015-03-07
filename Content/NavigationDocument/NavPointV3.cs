@@ -40,26 +40,6 @@ namespace EPubLibrary.Content.NavigationDocument
             return resList;
         }
 
-        internal void RemoveDeadEnds()
-        {
-            var listToDelete = new List<NavPointV3>();
-            foreach (var point in SubPoints)
-            {
-                if (point.SubPoints.Count == 0 && string.IsNullOrEmpty(point.Name))
-                {
-                    listToDelete.Add(point);
-                }
-                else
-                {
-                    point.RemoveDeadEnds();
-                }
-            }
-            foreach (var toDelete in listToDelete)
-            {
-                SubPoints.Remove(toDelete);
-            }
-        }
-
         internal XElement Generate()
         {
             var navXPoint = new XElement(WWWNamespaces.XHTML + "li");
@@ -90,7 +70,12 @@ namespace EPubLibrary.Content.NavigationDocument
         /// <returns></returns>
         private static string EnsureValid(string name)
         {
-            return WebUtility.HtmlEncode(name);
+            var localName = name;
+            if (string.IsNullOrEmpty(localName))
+            {
+                localName = " --- ";
+            }
+            return WebUtility.HtmlEncode(localName);
         }
  
     }
