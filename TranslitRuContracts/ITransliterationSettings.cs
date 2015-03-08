@@ -10,9 +10,12 @@ namespace TranslitRuContracts
         HtmlCodes, // HTML codes
     }
 
-    public interface ITransliterationSettings 
+    public interface ITransliterationSettings : IXmlSerializable
     {
         TranslitModeEnum Mode { get; set; }
         string FileName { get; set; }
+
+        void CopyFrom(ITransliterationSettings temp);
+        void SetupDefaults();
     }
 }

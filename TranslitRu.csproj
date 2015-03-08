@@ -115,7 +115,6 @@
     <Compile Include="HTMLConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rus2Lat.cs" />
-    <Compile Include="TransliterationSettings.cs" />
     <Compile Include="TransLitRuConverter.cs" />
   </ItemGroup>
   <ItemGroup>
