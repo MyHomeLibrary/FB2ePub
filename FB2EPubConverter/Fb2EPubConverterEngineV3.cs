@@ -272,7 +272,6 @@ namespace FB2EPubConverter
         {
             return new EPubFileV3(Settings.CommonSettings,Settings.V3Settings)
             {
-                FlatStructure = Settings.ConversionSettings.Flat,
                 EmbedStyles = Settings.ConversionSettings.EmbedStyles
             };
         }

@@ -390,11 +390,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.ConversionSettings.Flat = false;
+                            settings.Settings.CommonSettings.FlatStructure = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.ConversionSettings.Flat = true;
+                            settings.Settings.CommonSettings.FlatStructure = true;
                         }
                         else
                         {
