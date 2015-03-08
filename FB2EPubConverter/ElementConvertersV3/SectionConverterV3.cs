@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ConverterContracts.ConversionElementsStyles;
 using FB2EPubConverter.ElementConvertersV3.Epigraph;
 using FB2EPubConverter.ElementConvertersV3.Poem;
@@ -72,21 +73,12 @@ namespace FB2EPubConverter.ElementConvertersV3
             }
 
             // Load epigraphs
-            foreach (var epigraph in sectionItem.Epigraphs)
-            {
-                var epigraphConverter = new EpigraphConverterV3();
-                var epigraphItem = epigraphConverter.Convert(epigraph,
-                    new EpigraphConverterParamsV3 { Settings = Settings, Level = RecursionLevel + 1 });
-                documentSize = SplitBlockHTMLItem(epigraphItem, content, resList, documentSize);
-            }
+            documentSize = (from epigraph in sectionItem.Epigraphs let epigraphConverter = new EpigraphConverterV3() select epigraphConverter.Convert(epigraph, new EpigraphConverterParamsV3 {Settings = Settings, Level = RecursionLevel + 1})).Aggregate(documentSize, (current, epigraphItem) => SplitBlockHTMLItem(epigraphItem, content, resList, current));
 
             // Load section image
             if (Settings.Images.HasRealImages())
             {
-                foreach (var sectionImage in sectionItem.SectionImages)
-                {
-                    documentSize = ConvertSectionImage(sectionImage, content,resList,documentSize);
-                }
+                documentSize = sectionItem.SectionImages.Aggregate(documentSize, (current, sectionImage) => ConvertSectionImage(sectionImage, content, resList, current));
             }
 
             // Load annotations
@@ -101,10 +93,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             if (sectionItem.SubSections.Count == 0)
             {
                 bool startSection = true;
-                foreach (var item in sectionItem.Content)
-                {
-                    documentSize = ConvertSimpleSubItem(item, sectionItem,content, resList, ref startSection, documentSize);
-                }
+                sectionItem.Content.Aggregate(documentSize, (current, item) => ConvertSimpleSubItem(item, sectionItem, content, resList, ref startSection, current));
             }
 
             resList.Add(content);
@@ -115,28 +104,29 @@ namespace FB2EPubConverter.ElementConvertersV3
         {
             long docSize = documentSize;
             IHTMLItem newItem = null;
-            if (item is SubTitleItem)
+            var subtitleItem = item as SubTitleItem;
+            if (subtitleItem != null)
             {
                 var subtitleConverter = new SubtitleConverterV3();
-                newItem = subtitleConverter.Convert(item as SubTitleItem, new SubtitleConverterParamsV3 { Settings = Settings });
+                newItem = subtitleConverter.Convert(subtitleItem, new SubtitleConverterParamsV3 { Settings = Settings });
             }
             else if (item is ParagraphItem)
             {
                 var paragraphConverter = new ParagraphConverterV3();
-                newItem = paragraphConverter.Convert(item as ParagraphItem,
+                newItem = paragraphConverter.Convert((ParagraphItem) item,
                     new ParagraphConverterParamsV3 { ResultType = ParagraphConvTargetEnumV3.Paragraph, StartSection = startSection, Settings = Settings });
                 startSection = false;
             }
             else if (item is PoemItem)
             {
                 var poemConverter = new PoemConverterV3();
-                newItem = poemConverter.Convert(item as PoemItem,
+                newItem = poemConverter.Convert((PoemItem) item,
                     new PoemConverterParamsV3 { Settings = Settings, Level = RecursionLevel + 1 });
             }
             else if (item is CiteItem)
             {
                 var citationConverter = new CitationConverterV3();
-                newItem = citationConverter.Convert(item as CiteItem,
+                newItem = citationConverter.Convert((CiteItem) item,
                     new CitationConverterParamsV3 { Level = RecursionLevel + 1, Settings = Settings });
             }
             else if (item is EmptyLineItem)
@@ -147,7 +137,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             else if (item is TableItem)
             {
                 var tableConverter = new TableConverterV3();
-                newItem = tableConverter.Convert(item as TableItem,
+                newItem = tableConverter.Convert((TableItem) item,
                     new TableConverterParamsV3 { Settings = Settings });
             }
             else if ((item is ImageItem) && Settings.Images.HasRealImages())
