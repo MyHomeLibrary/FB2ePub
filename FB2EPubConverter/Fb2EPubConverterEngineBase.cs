@@ -10,6 +10,7 @@ using FB2Library;
 using TranslitRu;
 using Logger = FB2EPubConverter.Logger;
 using ConverterContracts;
+using TranslitRuContracts;
 
 
 namespace Fb2ePubConverter
