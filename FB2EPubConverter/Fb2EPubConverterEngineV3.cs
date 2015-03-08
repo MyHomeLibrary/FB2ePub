@@ -5,7 +5,6 @@ using ConverterContracts.Settings;
 using EPubLibrary;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.XHTML_Items;
-using EPubLibraryContracts.Settings;
 using Fb2ePubConverter;
 using FB2EPubConverter.ElementConvertersV3;
 using FB2Library;

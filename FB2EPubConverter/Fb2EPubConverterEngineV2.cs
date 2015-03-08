@@ -7,7 +7,6 @@ using Fb2ePubConverter;
 using FB2Library;
 using FB2Library.HeaderItems;
 using XHTMLClassLibrary.BaseElements;
-using EPubLibrary.AppleEPubV2Extensions;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.XHTML_Items;
 using FB2EPubConverter.ElementConvertersV2;
