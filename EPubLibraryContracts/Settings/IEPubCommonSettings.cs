@@ -9,5 +9,7 @@ namespace EPubLibraryContracts.Settings
 
         bool TransliterateToc { get; set; }
         bool FlatStructure { get; set; }
+        bool EmbedStyles { get; set; }
+        bool CapitalDrop { get; set; }
     }
 }

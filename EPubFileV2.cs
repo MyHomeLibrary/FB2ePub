@@ -133,11 +133,6 @@ namespace EPubLibrary
 
 
         /// <summary>
-        /// Get/Set embedding styles into xHTML files instead of referencing style files
-        /// </summary>
-        public bool EmbedStyles { get; set; }
-
-        /// <summary>
         /// Return reference to the list of images
         /// </summary>
         public Dictionary<string,EPUBImage> Images
@@ -378,7 +373,7 @@ namespace EPubLibrary
             var licensePage = new LicenseFile(HTMLElementType.XHTML11)
             {
                 FlatStructure = _commonSettings.FlatStructure, 
-                EmbedStyles = EmbedStyles, 
+                EmbedStyles = _commonSettings.EmbedStyles, 
             };
             CreateFileEntryInZip(stream, licensePage);
             PutPageToFile(stream,licensePage);
@@ -499,7 +494,7 @@ namespace EPubLibrary
             {
                 _mainCss.Load(cssFile.FilePathOnDisk, true);
             }
-            if (EmbedStyles)
+            if (_commonSettings.EmbedStyles)
             {
                 return;
             }
@@ -550,7 +545,7 @@ namespace EPubLibrary
         private void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
         {
             xhtmlFile.FlatStructure = _commonSettings.FlatStructure;
-            xhtmlFile.EmbedStyles = EmbedStyles;
+            xhtmlFile.EmbedStyles = _commonSettings.EmbedStyles;
             xhtmlFile.StyleFiles.Add(_mainCss);
             if (_v2Settings.EnableAdobeTemplate)
             {
@@ -569,8 +564,8 @@ namespace EPubLibrary
 
             var aboutPage = new AboutPageFile(HTMLElementType.XHTML11)
             {
-                FlatStructure = _commonSettings.FlatStructure, 
-                EmbedStyles = EmbedStyles,
+                FlatStructure = _commonSettings.FlatStructure,
+                EmbedStyles = _commonSettings.EmbedStyles,
                 AboutLinks = _aboutLinks, 
                 AboutTexts = _aboutTexts
             };
@@ -594,7 +589,7 @@ namespace EPubLibrary
             foreach (var section in _sections)
             {
                 section.FlatStructure = _commonSettings.FlatStructure;
-                section.EmbedStyles = EmbedStyles;
+                section.EmbedStyles = _commonSettings.EmbedStyles;
                 section.MaxSize = _v2Settings.HTMLFileMaxSize;
 
                 if (string.IsNullOrEmpty(section.FileName)) // if file name not defined yet create our own (not converter case)
@@ -639,7 +634,7 @@ namespace EPubLibrary
                 foreach (var subsection in section.Split())
                 {
                     subsection.FlatStructure = _commonSettings.FlatStructure;
-                    subsection.EmbedStyles = EmbedStyles;
+                    subsection.EmbedStyles = _commonSettings.EmbedStyles;
                     subsection.FileName = string.Format("{0}_{1}.xhtml",
                         Path.GetFileNameWithoutExtension(section.FileName), subCount);
                     CreateFileEntryInZip(stream, subsection);
@@ -826,7 +821,7 @@ namespace EPubLibrary
                         FontStyle = CssFontDefinition.FromStyle(subFont.FontStyle),
                         FontWidth = CssFontDefinition.FromWidth(subFont.FontWidth)
                     };
-                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, EmbedStyles, _commonSettings.FlatStructure)).ToList();
+                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, _commonSettings.EmbedStyles, _commonSettings.FlatStructure)).ToList();
                     cssFont.FontSrcs = sources;
                     _mainCss.AddFont(cssFont);
                 }

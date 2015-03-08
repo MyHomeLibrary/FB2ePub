@@ -141,7 +141,7 @@ namespace EPubLibrary
             var licensePage = new LicenseFile(HTMLElementType.HTML5)
             {
                 FlatStructure = _content.FlatStructure,
-                EmbedStyles = EmbedStyles,
+                EmbedStyles = _commonSettings.EmbedStyles,
             };
             CreateFileEntryInZip(stream, licensePage);
             PutPageToFile(stream, licensePage);
@@ -160,7 +160,7 @@ namespace EPubLibrary
             var aboutPage = new AboutPageFile(HTMLElementType.HTML5)
             {
                 FlatStructure = _commonSettings.FlatStructure,
-                EmbedStyles = EmbedStyles,
+                EmbedStyles = _commonSettings.EmbedStyles,
                 AboutLinks = _aboutLinks,
                 AboutTexts = _aboutTexts
             };
@@ -277,7 +277,7 @@ namespace EPubLibrary
             {
                 _mainCss.Load(cssFile.FilePathOnDisk, true);
             }
-            if (EmbedStyles)
+            if (_commonSettings.EmbedStyles)
             {
                 return;
             }
@@ -420,7 +420,7 @@ namespace EPubLibrary
             foreach (var section in _sections)
             {
                 section.FlatStructure = _commonSettings.FlatStructure;
-                section.EmbedStyles = EmbedStyles;
+                section.EmbedStyles = _commonSettings.EmbedStyles;
                 section.MaxSize = _v3Settings.HTMLFileMaxSize;
 
                 if (string.IsNullOrEmpty(section.FileName)) // if file name not defined yet create our own (not converter case)
@@ -465,7 +465,7 @@ namespace EPubLibrary
                 foreach (var subsection in section.Split())
                 {
                     subsection.FlatStructure = _commonSettings.FlatStructure;
-                    subsection.EmbedStyles = EmbedStyles;
+                    subsection.EmbedStyles = _commonSettings.EmbedStyles;
                     subsection.FileName = string.Format("{0}_{1}.xhtml",
                         Path.GetFileNameWithoutExtension(section.FileName), subCount);
                     CreateFileEntryInZip(stream, subsection);
@@ -493,10 +493,6 @@ namespace EPubLibrary
             _navigationManager.AddBookSubsection(subsection, _commonSettings.TransliterateToc ? Rus2Lat.Instance.Translate(subsection.PageTitle, _translitMode ):subsection.PageTitle);
         }
 
-        /// <summary>
-        /// Get/Set embedding styles into xHTML files instead of referencing style files
-        /// </summary>
-        public bool EmbedStyles { private get; set; }
 
         /// <summary>
         /// Controls if Lord Kiron's license need to be added to file
@@ -584,7 +580,7 @@ namespace EPubLibrary
         private void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
         {
             xhtmlFile.FlatStructure = _commonSettings.FlatStructure;
-            xhtmlFile.EmbedStyles = EmbedStyles;
+            xhtmlFile.EmbedStyles = _commonSettings.EmbedStyles;
             xhtmlFile.StyleFiles.Add(_mainCss);
             xhtmlFile.Write(stream);
         }
@@ -754,7 +750,7 @@ namespace EPubLibrary
                         FontStyle = CssFontDefinition.FromStyle(subFont.FontStyle),
                         FontWidth = CssFontDefinition.FromWidth(subFont.FontWidth)
                     };
-                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, EmbedStyles, _commonSettings.FlatStructure)).ToList();
+                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, _commonSettings.EmbedStyles, _commonSettings.FlatStructure)).ToList();
                     cssFont.FontSrcs = sources;
                     _mainCss.AddFont(cssFont);
                 }
