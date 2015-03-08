@@ -192,7 +192,7 @@ namespace FB2EPubConverter
 
         protected override IEpubFile CreateEpub()
         {
-            return new EPubFileV2(Settings.CommonSettings,Settings.V2Settings) { FlatStructure = Settings.ConversionSettings.Flat, EmbedStyles = Settings.ConversionSettings.EmbedStyles };
+            return new EPubFileV2(Settings.CommonSettings,Settings.V2Settings) { EmbedStyles = Settings.ConversionSettings.EmbedStyles };
         }
 
 

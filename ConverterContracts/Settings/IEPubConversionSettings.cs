@@ -27,7 +27,6 @@ namespace ConverterContracts.Settings
         string SequenceFormat { get; set; }
         string NoSequenceFormat { get; set; }
         string NoSeriesFormat { get; set; }
-        bool Flat { get; set; }
         bool EmbedStyles { get; set; }
         string AuthorFormat { get; set; }
         string FileAsFormat { get; set; }

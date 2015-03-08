@@ -18,7 +18,6 @@ namespace Fb2epubSettings
         private string _sequenceFormat = string.Empty;
         private string _noSequenceFormat = string.Empty;
         private string _noSeriesFormat = string.Empty;
-        private bool _flatStructure;
         private bool _embedStyles;
         private string _authorFormat = string.Empty;
         private string _fileAsFormat = string.Empty;
@@ -44,7 +43,6 @@ namespace Fb2epubSettings
         private const string FormatWithSequenceNameElementName = "FormatWithSequenceName";
         private const string FormatWithOutSequenceNameElementName = "FormatWithOutSequenceName";
         private const string FormatWithOutSeriesNameElementName = "FormatWithOutSeriesName";
-        private const string CreateFlatInternalFolderStructureElementName = "CreateFlatInternalFolderStructure";
         private const string EmbedStylesIntoXHTMLElementName = "EmbedStylesIntoXHTML";
         private const string AuthorNameFormatElementName = "AuthorNameFormat";
         private const string FileAsFormatElementName = "FileAsFormat";
@@ -74,7 +72,6 @@ namespace Fb2epubSettings
             _sequenceFormat = temp.SequenceFormat;
             _noSequenceFormat = temp.NoSequenceFormat;
             _noSeriesFormat = temp.NoSeriesFormat;
-            _flatStructure = temp.Flat;
             _embedStyles = temp.EmbedStyles;
             _authorFormat = temp.AuthorFormat;
             _fileAsFormat = temp.FileAsFormat;
@@ -98,7 +95,6 @@ namespace Fb2epubSettings
             _sequenceFormat = @"%bt% %sa.l%-%sn%";
             _noSequenceFormat = @"%bt% (%sf.l%)";
             _noSeriesFormat = @"%bt%";
-            _flatStructure = false;
             _embedStyles = false;
             _authorFormat = @"%f.c% %m.c% %l.c% %n.c:b%";
             _fileAsFormat = @"%l.c% %f.c%";
@@ -236,16 +232,6 @@ namespace Fb2epubSettings
         {
             get { return _noSeriesFormat; }
             set { _noSeriesFormat = value; }
-        }
-
-        /// <summary>
-        /// Get/Set "flat" mode , when flat mode is set no subfolders created inside the ZIP
-        /// used to work around bugs in some readers
-        /// </summary>
-        public bool Flat
-        {
-            get { return _flatStructure; }
-            set { _flatStructure = value; }
         }
 
 
@@ -386,9 +372,6 @@ namespace Fb2epubSettings
                         case FormatWithOutSeriesNameElementName:
                             _noSeriesFormat = reader.ReadElementContentAsString();
                             continue;
-                        case CreateFlatInternalFolderStructureElementName:
-                            _flatStructure = reader.ReadElementContentAsBoolean();
-                            continue;
                         case EmbedStylesIntoXHTMLElementName:
                             _embedStyles = reader.ReadElementContentAsBoolean();
                             continue;
@@ -482,10 +465,6 @@ namespace Fb2epubSettings
 
             writer.WriteStartElement(FormatWithOutSeriesNameElementName);
             writer.WriteValue(_noSeriesFormat);
-            writer.WriteEndElement();
-
-            writer.WriteStartElement(CreateFlatInternalFolderStructureElementName);
-            writer.WriteValue(_flatStructure);
             writer.WriteEndElement();
 
             writer.WriteStartElement(EmbedStylesIntoXHTMLElementName);

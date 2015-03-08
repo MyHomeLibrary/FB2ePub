@@ -150,7 +150,7 @@ namespace Fb2epubSettings
             checkBoxAddSequences.Checked = _settings.ConversionSettings.AddSeqToTitle;
             checkBoxFb2Info.Checked = _settings.ConversionSettings.Fb2Info;
             checkBoxConvertAlphaPNG.Checked = _settings.FB2ImportSettings.ConvertAlphaPng;
-            checkBoxFlatStructure.Checked = _settings.ConversionSettings.Flat;
+            checkBoxFlatStructure.Checked = _settings.CommonSettings.FlatStructure;
             checkBoxEmbedStyles.Checked = _settings.ConversionSettings.EmbedStyles;
             checkBoxCapitalize.Checked = _settings.ConversionSettings.CapitalDrop;
             checkBoxCalibreMetadata.Checked = _settings.V2Settings.AddCalibreMetadata;
@@ -351,7 +351,7 @@ namespace Fb2epubSettings
 
         private void checkBoxFlatStructure_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.ConversionSettings.Flat = checkBoxFlatStructure.Checked;
+            _settings.CommonSettings.FlatStructure = checkBoxFlatStructure.Checked;
         }
 
         private void checkBoxEmbedStyles_CheckedChanged(object sender, EventArgs e)
