@@ -9,6 +9,7 @@ namespace Fb2epubSettings
     public class EPubV3Settings : IEPubV3Settings 
     {
         private EPubV3SubStandard _v3SubStandard = EPubV3SubStandard.V30;
+        private bool _oldVersionCompatibility = true;
 
 
         #region constant
@@ -16,12 +17,14 @@ namespace Fb2epubSettings
         public const string EPubV3SettingsElementName = "EPubV3Settings";
 
         private const string EPUB3SubVersionElementName = "EPUB3SubVersion";
+        private const string OldVersionCompatibilityModeElementName = "OldVersionsCompatibleMode";
 
         #endregion
 
         public void SetupDefaults()
         {
             _v3SubStandard = EPubV3SubStandard.V30;
+            _oldVersionCompatibility = true;
         }
 
         /// <summary>
@@ -31,6 +34,12 @@ namespace Fb2epubSettings
         {
             get { return _v3SubStandard; }
             set { _v3SubStandard = value; }
+        }
+
+        public bool OldVersionCompatibilityMode
+        {
+            get { return _oldVersionCompatibility; }
+            set { _oldVersionCompatibility = value; }
         }
 
 
@@ -61,6 +70,9 @@ namespace Fb2epubSettings
                             }
                             _v3SubStandard = standard;
                             continue;
+                        case OldVersionCompatibilityModeElementName:
+                            _oldVersionCompatibility = reader.ReadElementContentAsBoolean();
+                            continue;
                     }
                 }
                 reader.Read();
@@ -74,6 +86,10 @@ namespace Fb2epubSettings
 
             writer.WriteStartElement(EPUB3SubVersionElementName);
             writer.WriteValue(_v3SubStandard.ToString());
+            writer.WriteEndElement();
+
+            writer.WriteStartElement(OldVersionCompatibilityModeElementName);
+            writer.WriteValue(_oldVersionCompatibility.ToString());
             writer.WriteEndElement();
 
             writer.WriteEndElement();
