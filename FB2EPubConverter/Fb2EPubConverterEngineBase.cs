@@ -158,8 +158,8 @@ namespace Fb2ePubConverter
 
             string outFile = Path.GetFileNameWithoutExtension(outFileName);
 
-            Logger.Log.DebugFormat("Transliteration of file names set to : {0}", Settings.CommonSettings.TransliterateFileName);
-            if (Settings.CommonSettings.TransliterateFileName &&
+            Logger.Log.DebugFormat("Transliteration of file names set to : {0}", Settings.ConversionSettings.TransliterateFileName);
+            if (Settings.ConversionSettings.TransliterateFileName &&
                 !string.IsNullOrEmpty(outFile))
             {
                 outFile = Rus2Lat.Instance.Translate(outFileName, epubFile.TranslitMode);
@@ -191,7 +191,7 @@ namespace Fb2ePubConverter
         {
             epubFile.TranslitMode.FileName = string.IsNullOrEmpty(Settings.ResourcesPath) ? @".\Translit\translit.xml" : string.Format(@"{0}\Translit\translit.xml", Settings.ResourcesPath);
             Logger.Log.DebugFormat("Using transliteration rule file : {0}", epubFile.TranslitMode.FileName);
-            if (Settings.CommonSettings.Transliterate)
+            if (Settings.ConversionSettings.Transliterate)
             {
                 epubFile.TranslitMode.Mode = TranslitModeEnum.ExternalRuleFile;
                 if (!File.Exists(epubFile.TranslitMode.FileName))
@@ -204,7 +204,6 @@ namespace Fb2ePubConverter
             {
                 epubFile.TranslitMode.Mode = TranslitModeEnum.None;
             }
-            epubFile.TranliterateToc = Settings.CommonSettings.TransliterateToc;
             Logger.Log.DebugFormat("Transliteration mode : {0}", epubFile.TranslitMode.Mode);
         }
 

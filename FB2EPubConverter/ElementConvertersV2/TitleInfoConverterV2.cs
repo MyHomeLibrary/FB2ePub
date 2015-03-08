@@ -10,9 +10,9 @@ namespace FB2EPubConverter.ElementConvertersV2
 {
     internal class TitleInfoConverterV2
     {
-        private readonly IEPubCommonSettings _commonSettings;
+        private readonly IEPubConversionSettings _commonSettings;
 
-        public TitleInfoConverterV2(IEPubCommonSettings commonSettings)
+        public TitleInfoConverterV2(IEPubConversionSettings commonSettings)
         {
             _commonSettings = commonSettings;
         }

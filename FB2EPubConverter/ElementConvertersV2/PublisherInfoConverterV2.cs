@@ -9,9 +9,9 @@ namespace FB2EPubConverter.ElementConvertersV2
 {
     internal class PublisherInfoConverterV2
     {
-        private readonly IEPubCommonSettings _commonSettings;
+        private readonly IEPubConversionSettings _commonSettings;
 
-        public PublisherInfoConverterV2(IEPubCommonSettings commonSettings)
+        public PublisherInfoConverterV2(IEPubConversionSettings commonSettings)
         {
             _commonSettings = commonSettings;
         }

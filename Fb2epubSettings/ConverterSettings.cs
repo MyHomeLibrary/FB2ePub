@@ -15,10 +15,11 @@ namespace Fb2epubSettings
         private string _outputPath = string.Empty;
         private string _resourcesPath = string.Empty;
         private EPubVersion _standardVersion = EPubVersion.V2;
-        private readonly FB2ImportSettings _fb2ImportSettings = new FB2ImportSettings();
-        private readonly EPubV2Settings _v2Settings = new EPubV2Settings();
-        private readonly EPubV3Settings _v3Settings = new EPubV3Settings();
-        private readonly EPubCommonSettings _commonSettings = new EPubCommonSettings();
+        private readonly IFB2ImportSettings _fb2ImportSettings = new FB2ImportSettings();
+        private readonly IEPubV2Settings _v2Settings = new EPubV2Settings();
+        private readonly IEPubV3Settings _v3Settings = new EPubV3Settings();
+        private readonly IEPubConversionSettings _conversionSettings = new EPubConversionSettings();
+        private readonly IEPubCommonSettings _commonSettings = new EPubCommonSettings();
         #endregion
 
 
@@ -47,10 +48,11 @@ namespace Fb2epubSettings
         {
             _resourcesPath = string.Empty;
             _fb2ImportSettings.SetupDefaults();
-            _commonSettings.SetupDefaults();
+            _conversionSettings.SetupDefaults();
             _v2Settings.SetupDefaults();
             _v3Settings.SetupDefaults();
             _standardVersion = EPubVersion.V3;
+            _commonSettings.SetupDefaults();
 
         }
 
@@ -68,11 +70,23 @@ namespace Fb2epubSettings
             set { _fb2ImportSettings.CopyFrom(value); }
         }
 
+        public IEPubCommonSettings CommonSettings
+        {
+            get { return _commonSettings; }
+            set { _commonSettings.CopyFrom(value); }
+        }
+
 
         /// <summary>
         /// Get/Set common settings
         /// </summary>
-        public IEPubCommonSettings CommonSettings
+        public IEPubConversionSettings ConversionSettings
+        {
+            get { return _conversionSettings; }
+            set { _conversionSettings.CopyFrom(value); }
+        }
+
+        public IEPubCommonSettings CommonSetting
         {
             get { return _commonSettings; }
             set { _commonSettings.CopyFrom(value); }
@@ -156,9 +170,10 @@ namespace Fb2epubSettings
             _outputPath = temp.OutPutPath;
             _resourcesPath = temp.ResourcesPath;
             _standardVersion = temp.StandardVersion;
-            _commonSettings.CopyFrom(temp.CommonSettings);
+            _conversionSettings.CopyFrom(temp.ConversionSettings);
             _v2Settings.CopyFrom(temp.V2Settings);
             _v3Settings.CopyFrom(temp.V3Settings);
+            _commonSettings.CopyFrom(temp.CommonSettings);
         }
 
 
@@ -196,6 +211,9 @@ namespace Fb2epubSettings
                         case Fb2epubSettings.FB2ImportSettings.FB2ImportSettingsElementName:
                             _fb2ImportSettings.ReadXml(reader.ReadSubtree());
                             break;
+                        case EPubConversionSettings.ConversiononSettingsElementName:
+                            _conversionSettings.ReadXml(reader.ReadSubtree());
+                            break;
                         case EPubCommonSettings.CommonSettingsElementName:
                             _commonSettings.ReadXml(reader.ReadSubtree());
                             break;
@@ -228,9 +246,10 @@ namespace Fb2epubSettings
             writer.WriteAttributeString(VersionAttributeName, ConfigurationFileVersion.ToString());
 
             _fb2ImportSettings.WriteXml(writer);
-            _commonSettings.WriteXml(writer);
+            _conversionSettings.WriteXml(writer);
             _v2Settings.WriteXml(writer);
             _v3Settings.WriteXml(writer);
+            _commonSettings.WriteXml(writer);
 
             writer.WriteStartElement(ResourcesPathElementName);
             writer.WriteValue(_resourcesPath);

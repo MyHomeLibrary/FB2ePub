@@ -168,39 +168,39 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.CommonSettings.Transliterate = false;
-                            settings.Settings.CommonSettings.TransliterateFileName = false;
                             settings.Settings.CommonSettings.TransliterateToc = false;
+                            settings.Settings.ConversionSettings.Transliterate = false;
+                            settings.Settings.ConversionSettings.TransliterateFileName = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.CommonSettings.Transliterate = true;
                             settings.Settings.CommonSettings.TransliterateToc = true;
-                            settings.Settings.CommonSettings.TransliterateFileName = false;
+                            settings.Settings.ConversionSettings.Transliterate = true;
+                            settings.Settings.ConversionSettings.TransliterateFileName = false;
                         }
                         else if (value == 2)
                         {
-                            settings.Settings.CommonSettings.Transliterate = false;
                             settings.Settings.CommonSettings.TransliterateToc = false;
-                            settings.Settings.CommonSettings.TransliterateFileName = true;
+                            settings.Settings.ConversionSettings.Transliterate = false;
+                            settings.Settings.ConversionSettings.TransliterateFileName = true;
                         }
                         else if (value == 3)
                         {
-                            settings.Settings.CommonSettings.Transliterate = true;
                             settings.Settings.CommonSettings.TransliterateToc = true;
-                            settings.Settings.CommonSettings.TransliterateFileName = true;
+                            settings.Settings.ConversionSettings.Transliterate = true;
+                            settings.Settings.ConversionSettings.TransliterateFileName = true;
                         }
                         else if (value == 4)
                         {
-                            settings.Settings.CommonSettings.Transliterate = true;
                             settings.Settings.CommonSettings.TransliterateToc = false;
-                            settings.Settings.CommonSettings.TransliterateFileName = false;
+                            settings.Settings.ConversionSettings.Transliterate = true;
+                            settings.Settings.ConversionSettings.TransliterateFileName = false;
                         }
                         else if (value == 5)
                         {
-                            settings.Settings.CommonSettings.Transliterate = true;
                             settings.Settings.CommonSettings.TransliterateToc = false;
-                            settings.Settings.CommonSettings.TransliterateFileName = true;
+                            settings.Settings.ConversionSettings.Transliterate = true;
+                            settings.Settings.ConversionSettings.TransliterateFileName = true;
                         }
                         else
                         {
@@ -231,11 +231,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.CommonSettings.Fb2Info = false;
+                            settings.Settings.ConversionSettings.Fb2Info = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.CommonSettings.Fb2Info = true;
+                            settings.Settings.ConversionSettings.Fb2Info = true;
                         }
                         else
                         {
@@ -323,11 +323,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.CommonSettings.AddSeqToTitle = false;
+                            settings.Settings.ConversionSettings.AddSeqToTitle = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.CommonSettings.AddSeqToTitle = true;
+                            settings.Settings.ConversionSettings.AddSeqToTitle = true;
                         }
                         else
                         {
@@ -339,7 +339,7 @@ namespace Fb2ePub
                 {
                     string commandValue = command.Substring(10);
                     if (!string.IsNullOrEmpty(commandValue))
-                        settings.Settings.CommonSettings.SequenceFormat = commandValue;
+                        settings.Settings.ConversionSettings.SequenceFormat = commandValue;
                     else
                         _log.InfoFormat("Invalid -seqformat: parameter value is empty.");
                 }
@@ -347,7 +347,7 @@ namespace Fb2ePub
                 {
                     string commandValue = command.Substring(10);
                     if (!string.IsNullOrEmpty(commandValue))
-                        settings.Settings.CommonSettings.NoSequenceFormat = commandValue;
+                        settings.Settings.ConversionSettings.NoSequenceFormat = commandValue;
                     else
                         _log.InfoFormat("Invalid -nseqformat: parameter value is empty.");
                 }
@@ -355,7 +355,7 @@ namespace Fb2ePub
                 {
                     string commandValue = command.Substring(10);
                     if (!string.IsNullOrEmpty(commandValue))
-                        settings.Settings.CommonSettings.NoSeriesFormat = commandValue;
+                        settings.Settings.ConversionSettings.NoSeriesFormat = commandValue;
                     else
                         _log.InfoFormat("Invalid -nnseqformat: parameter value is empty.");
                 }
@@ -363,7 +363,7 @@ namespace Fb2ePub
                 {
                     string commandValue = command.Substring(10);
                     if (!string.IsNullOrEmpty(commandValue))
-                        settings.Settings.CommonSettings.AuthorFormat = commandValue;
+                        settings.Settings.ConversionSettings.AuthorFormat = commandValue;
                     else
                         _log.InfoFormat("Invalid -aformat: parameter value is empty.");
                 }
@@ -371,7 +371,7 @@ namespace Fb2ePub
                 {
                     string commandValue = command.Substring(10);
                     if (!string.IsNullOrEmpty(commandValue))
-                        settings.Settings.CommonSettings.FileAsFormat = commandValue;
+                        settings.Settings.ConversionSettings.FileAsFormat = commandValue;
                     else
                         _log.InfoFormat("Invalid -svformat: parameter value is empty.");
                 }
@@ -383,11 +383,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.CommonSettings.Flat = false;
+                            settings.Settings.ConversionSettings.Flat = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.CommonSettings.Flat = true;
+                            settings.Settings.ConversionSettings.Flat = true;
                         }
                         else
                         {
@@ -403,11 +403,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.CommonSettings.EmbedStyles = false;
+                            settings.Settings.ConversionSettings.EmbedStyles = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.CommonSettings.EmbedStyles = true;
+                            settings.Settings.ConversionSettings.EmbedStyles = true;
                         }
                         else
                         {
@@ -443,11 +443,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.CommonSettings.CapitalDrop = false;
+                            settings.Settings.ConversionSettings.CapitalDrop = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.CommonSettings.CapitalDrop = true;
+                            settings.Settings.ConversionSettings.CapitalDrop = true;
                         }
                         else
                         {
@@ -457,7 +457,7 @@ namespace Fb2ePub
                 }
                 else if (command.StartsWith("noabout"))
                 {
-                    settings.Settings.CommonSettings.SkipAboutPage = true;
+                    settings.Settings.ConversionSettings.SkipAboutPage = true;
                 }
                 else if (command.StartsWith("xpgt:"))
                 {
@@ -491,31 +491,31 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreNothing;
+                            settings.Settings.ConversionSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreNothing;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreMainTitle;
+                            settings.Settings.ConversionSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreMainTitle;
                         }
                         else if (value == 2)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreSourceTitle;
+                            settings.Settings.ConversionSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreSourceTitle;
                         }
                         else if (value == 3)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnorePublishTitle;
+                            settings.Settings.ConversionSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnorePublishTitle;
                         }
                         else if (value == 4)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreMainAndSource;
+                            settings.Settings.ConversionSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreMainAndSource;
                         }
                         else if (value == 5)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreMainAndPublish;
+                            settings.Settings.ConversionSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreMainAndPublish;
                         }
                         else if (value == 6)
                         {
-                            settings.Settings.CommonSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreSourceAndPublish;
+                            settings.Settings.ConversionSettings.IgnoreTitle = IgnoreInfoSourceOptions.IgnoreSourceAndPublish;
                         }
                         else
                         {

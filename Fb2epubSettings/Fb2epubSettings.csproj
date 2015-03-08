@@ -133,6 +133,7 @@
     <Compile Include="CSSElementListItem.cs" />
     <Compile Include="DefaultSettingsLocatorHelper.cs" />
     <Compile Include="EPubCommonSettings.cs" />
+    <Compile Include="EPubConversionSettings.cs" />
     <Compile Include="EPubV2Settings.cs" />
     <Compile Include="EPubV3Settings.cs" />
     <Compile Include="FB2ImportSettings.cs" />

@@ -7,7 +7,7 @@ namespace FB2EPubConverter.ElementConvertersV3
 {
     internal static class TranslatorsInfoConverterV3
     {
-        public static void Convert(ItemTitleInfo titleInfo, EPubFileV3 epubFile, IEPubCommonSettings settings)
+        public static void Convert(ItemTitleInfo titleInfo, EPubFileV3 epubFile, IEPubConversionSettings settings)
         {
             foreach (var translator in titleInfo.Translators)
             {

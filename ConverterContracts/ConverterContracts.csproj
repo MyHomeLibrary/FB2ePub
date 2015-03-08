@@ -56,7 +56,7 @@
     <Compile Include="IFb2EPubConverterEngine.cs" />
     <Compile Include="Settings\IConverterSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\IEPubCommonSettings.cs" />
+    <Compile Include="Settings\IEPubConversionSettings.cs" />
     <Compile Include="Settings\IFB2ImportSettings.cs" />
   </ItemGroup>
   <ItemGroup>

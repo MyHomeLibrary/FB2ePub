@@ -1,4 +1,5 @@
-﻿using FontSettingsContracts;
+﻿using System.Xml.Serialization;
+using FontSettingsContracts;
 
 namespace ConverterContracts.Settings
 {
@@ -13,14 +14,13 @@ namespace ConverterContracts.Settings
         IgnoreSourceAndPublish,
     }
 
-    public interface IEPubCommonSettings
+    public interface IEPubConversionSettings : IXmlSerializable
     {
-        void CopyFrom(IEPubCommonSettings temp);
+        void CopyFrom(IEPubConversionSettings temp);
         void SetupDefaults();
 
         bool Transliterate { get; set; }
         bool TransliterateFileName { get; set; }
-        bool TransliterateToc { get; set; }
         bool Fb2Info { get; set; }
         bool AddSeqToTitle { get; set; }
         string SequenceFormat { get; set; }
