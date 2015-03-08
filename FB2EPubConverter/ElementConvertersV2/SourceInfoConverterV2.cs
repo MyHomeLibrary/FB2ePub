@@ -8,9 +8,9 @@ namespace FB2EPubConverter.ElementConvertersV2
 {
     internal class SourceInfoConverterV2
     {
-        private readonly IEPubCommonSettings _commonSettings;
+        private readonly IEPubConversionSettings _commonSettings;
 
-        public SourceInfoConverterV2(IEPubCommonSettings commonSettings)
+        public SourceInfoConverterV2(IEPubConversionSettings commonSettings)
         {
             _commonSettings = commonSettings;
         }

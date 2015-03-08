@@ -7,7 +7,7 @@ namespace FB2EPubConverter.ElementConvertersV2
 {
     internal static class AuthorsInfoConverterV2
     {
-        public  static void Convert(ItemTitleInfo titleInfo, EPubFileV2 epubFile, IEPubCommonSettings settings)
+        public  static void Convert(ItemTitleInfo titleInfo, EPubFileV2 epubFile, IEPubConversionSettings settings)
         {
             foreach (var author in titleInfo.BookAuthors)
             {

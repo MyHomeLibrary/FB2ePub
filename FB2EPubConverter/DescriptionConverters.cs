@@ -63,14 +63,14 @@ namespace FB2EPubConverter
             return allSequences;
         }
 
-        public  static string GenerateFileAsString(AuthorType author,IEPubCommonSettings commonSettings)
+        public  static string GenerateFileAsString(AuthorType author,IEPubConversionSettings commonSettings)
         {
             var processor = new ProcessAuthorFormat { Format =commonSettings.FileAsFormat };
             return processor.GenerateAuthorString(author);
 
         }
 
-        public static string GenerateAuthorString(AuthorType author,IEPubCommonSettings commonSettings)
+        public static string GenerateAuthorString(AuthorType author,IEPubConversionSettings commonSettings)
         {
             var processor = new ProcessAuthorFormat { Format = commonSettings.AuthorFormat };
             return processor.GenerateAuthorString(author);
@@ -83,7 +83,7 @@ namespace FB2EPubConverter
             return genre;
         }
 
-        public static string FormatBookTitle(ItemTitleInfo titleInfo, IEPubCommonSettings commonSettings)
+        public static string FormatBookTitle(ItemTitleInfo titleInfo, IEPubConversionSettings commonSettings)
         {
             var formatTitle = new ProcessSeqFormatString
             {

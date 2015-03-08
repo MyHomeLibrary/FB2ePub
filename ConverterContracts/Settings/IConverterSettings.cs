@@ -14,6 +14,7 @@ namespace ConverterContracts.Settings
         void SetupDefaults();
         IFB2ImportSettings FB2ImportSettings { get; set; }
         IEPubCommonSettings CommonSettings { get; set; }
+        IEPubConversionSettings ConversionSettings { get; set; }
         IEPubV2Settings V2Settings { get; set; }
         IEPubV3Settings V3Settings { get; set; }
         string ResourcesPath { get; set; }
