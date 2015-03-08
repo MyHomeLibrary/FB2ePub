@@ -27,10 +27,8 @@ namespace ConverterContracts.Settings
         string SequenceFormat { get; set; }
         string NoSequenceFormat { get; set; }
         string NoSeriesFormat { get; set; }
-        bool EmbedStyles { get; set; }
         string AuthorFormat { get; set; }
         string FileAsFormat { get; set; }
-        bool CapitalDrop { get; set; }
         bool SkipAboutPage { get; set; }
         IgnoreInfoSourceOptions IgnoreTitle { get; set; }
         IgnoreInfoSourceOptions IgnoreAuthors { get; set; }

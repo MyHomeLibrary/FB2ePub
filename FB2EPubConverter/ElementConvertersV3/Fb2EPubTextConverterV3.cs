@@ -1,8 +1,8 @@
 ﻿using ConverterContracts.ConversionElementsStyles;
-using ConverterContracts.Settings;
 using EPubLibrary;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.XHTML_Items;
+using EPubLibraryContracts.Settings;
 using FB2EPubConverter.ElementConvertersV3.Epigraph;
 using FB2Library;
 using FB2Library.Elements;
@@ -13,16 +13,16 @@ namespace FB2EPubConverter.ElementConvertersV3
 {
     internal class Fb2EPubTextConverterV3 : BaseElementConverterV3
     {
-        private readonly IEPubConversionSettings _conversionSettings;
+        private readonly IEPubCommonSettings _commonSettings;
         private readonly ImageManager _images;
         private readonly HRefManagerV3 _referencesManager;
         private readonly ulong _maxSize;
 
         private int _sectionCounter;
 
-        public Fb2EPubTextConverterV3(IEPubConversionSettings conversionSettings, ImageManager images, HRefManagerV3 referencesManager, ulong maxSize)
+        public Fb2EPubTextConverterV3(IEPubCommonSettings commonSettings, ImageManager images, HRefManagerV3 referencesManager, ulong maxSize)
         {
-            _conversionSettings = conversionSettings;
+            _commonSettings = commonSettings;
             _images = images;
             _referencesManager = referencesManager;
             _maxSize = maxSize;
@@ -40,7 +40,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 addTitlePage.Content = new Div(HTMLElementType.HTML5);
                 var converterSettings = new ConverterOptionsV3
                 {
-                    CapitalDrop = _conversionSettings.CapitalDrop,
+                    CapitalDrop = _commonSettings.CapitalDrop,
                     Images = _images,
                     MaxSize = _maxSize,
                     ReferencesManager = _referencesManager,
@@ -81,7 +81,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     var enclosing = new Div(HTMLElementType.HTML5); // we use the enclosing so the user can style center it
                     var converterSettings = new ConverterOptionsV3
                     {
-                        CapitalDrop = _conversionSettings.CapitalDrop,
+                        CapitalDrop = _commonSettings.CapitalDrop,
                         Images = _images,
                         MaxSize = _maxSize,
                         ReferencesManager = _referencesManager,
@@ -108,7 +108,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 }
                 var converterSettings = new ConverterOptionsV3
                 {
-                    CapitalDrop = _conversionSettings.CapitalDrop,
+                    CapitalDrop = _commonSettings.CapitalDrop,
                     Images = _images,
                     MaxSize = _maxSize,
                     ReferencesManager = _referencesManager,
@@ -156,7 +156,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             bool firstDocumentOfSplit = true;
             var converterSettings = new ConverterOptionsV3
             {
-                CapitalDrop = !fbeNotesSection && _conversionSettings.CapitalDrop,
+                CapitalDrop = !fbeNotesSection && _commonSettings.CapitalDrop,
                 Images = _images,
                 MaxSize = _maxSize,
                 ReferencesManager = _referencesManager,
@@ -261,7 +261,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             {
                 var converterSettings = new ConverterOptionsV3
                 {
-                    CapitalDrop = _conversionSettings.CapitalDrop,
+                    CapitalDrop = _commonSettings.CapitalDrop,
                     Images = _images,
                     MaxSize = _maxSize,
                     ReferencesManager = _referencesManager,

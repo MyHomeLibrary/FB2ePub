@@ -18,10 +18,8 @@ namespace Fb2epubSettings
         private string _sequenceFormat = string.Empty;
         private string _noSequenceFormat = string.Empty;
         private string _noSeriesFormat = string.Empty;
-        private bool _embedStyles;
         private string _authorFormat = string.Empty;
         private string _fileAsFormat = string.Empty;
-        private bool _capitalDrop;
         private bool _skipAboutPage;
         private IgnoreInfoSourceOptions _ignoreTitle = IgnoreInfoSourceOptions.IgnoreNothing;
         private IgnoreInfoSourceOptions _ignoreAuthors= IgnoreInfoSourceOptions.IgnoreNothing;
@@ -43,10 +41,8 @@ namespace Fb2epubSettings
         private const string FormatWithSequenceNameElementName = "FormatWithSequenceName";
         private const string FormatWithOutSequenceNameElementName = "FormatWithOutSequenceName";
         private const string FormatWithOutSeriesNameElementName = "FormatWithOutSeriesName";
-        private const string EmbedStylesIntoXHTMLElementName = "EmbedStylesIntoXHTML";
         private const string AuthorNameFormatElementName = "AuthorNameFormat";
         private const string FileAsFormatElementName = "FileAsFormat";
-        private const string GenerateDropCharactersElementName = "GenerateDropCharacters";
         private const string SkipAboutPageGenerationElementName = "SkipAboutPageGeneration";
         private const string IgnoreTitleOptionElementName = "IgnoreTitleOption";
         private const string IgnoreAuthorsOptionElementName = "IgnoreAuthorsOption";
@@ -72,10 +68,8 @@ namespace Fb2epubSettings
             _sequenceFormat = temp.SequenceFormat;
             _noSequenceFormat = temp.NoSequenceFormat;
             _noSeriesFormat = temp.NoSeriesFormat;
-            _embedStyles = temp.EmbedStyles;
             _authorFormat = temp.AuthorFormat;
             _fileAsFormat = temp.FileAsFormat;
-            _capitalDrop = temp.CapitalDrop;
             _skipAboutPage = temp.SkipAboutPage;
             _ignoreTitle = temp.IgnoreTitle;
             _ignoreAuthors = temp.IgnoreAuthors;
@@ -95,10 +89,8 @@ namespace Fb2epubSettings
             _sequenceFormat = @"%bt% %sa.l%-%sn%";
             _noSequenceFormat = @"%bt% (%sf.l%)";
             _noSeriesFormat = @"%bt%";
-            _embedStyles = false;
             _authorFormat = @"%f.c% %m.c% %l.c% %n.c:b%";
             _fileAsFormat = @"%l.c% %f.c%";
-            _capitalDrop = true;
             _skipAboutPage = false;
             _ignoreTitle = IgnoreInfoSourceOptions.IgnoreNothing;
             _ignoreAuthors = IgnoreInfoSourceOptions.IgnoreNothing;
@@ -236,15 +228,6 @@ namespace Fb2epubSettings
 
 
         /// <summary>
-        /// Get/Set embedding styles into xHTML files instead of referencing style files
-        /// </summary>
-        public bool EmbedStyles
-        {
-            get { return _embedStyles; }
-            set { _embedStyles = value; }
-        }
-
-        /// <summary>
         /// Get/Set Author format string
         /// </summary>
         public string AuthorFormat
@@ -262,14 +245,6 @@ namespace Fb2epubSettings
             set { _fileAsFormat = value; }
         }
 
-        /// <summary>
-        /// Get set if a first character in section should start from capital huge "floating" character
-        /// </summary>
-        public bool CapitalDrop
-        {
-            get { return _capitalDrop; }
-            set { _capitalDrop = value; }
-        }
 
         /// <summary>
         /// Get/Set if About page generation will be skipped
@@ -372,17 +347,11 @@ namespace Fb2epubSettings
                         case FormatWithOutSeriesNameElementName:
                             _noSeriesFormat = reader.ReadElementContentAsString();
                             continue;
-                        case EmbedStylesIntoXHTMLElementName:
-                            _embedStyles = reader.ReadElementContentAsBoolean();
-                            continue;
                         case AuthorNameFormatElementName:
                             _authorFormat = reader.ReadElementContentAsString();
                             continue;
                         case FileAsFormatElementName:
                             _fileAsFormat = reader.ReadElementContentAsString();
-                            continue;
-                        case GenerateDropCharactersElementName:
-                            _capitalDrop = reader.ReadElementContentAsBoolean();
                             continue;
                         case SkipAboutPageGenerationElementName:
                             _skipAboutPage = reader.ReadElementContentAsBoolean();
@@ -467,20 +436,12 @@ namespace Fb2epubSettings
             writer.WriteValue(_noSeriesFormat);
             writer.WriteEndElement();
 
-            writer.WriteStartElement(EmbedStylesIntoXHTMLElementName);
-            writer.WriteValue(_embedStyles);
-            writer.WriteEndElement();
-
             writer.WriteStartElement(AuthorNameFormatElementName);
             writer.WriteValue(_authorFormat);
             writer.WriteEndElement();
 
             writer.WriteStartElement(FileAsFormatElementName);
             writer.WriteValue(_fileAsFormat);
-            writer.WriteEndElement();
-
-            writer.WriteStartElement(GenerateDropCharactersElementName);
-            writer.WriteValue(_capitalDrop);
             writer.WriteEndElement();
 
             writer.WriteStartElement(SkipAboutPageGenerationElementName);

@@ -410,11 +410,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.ConversionSettings.EmbedStyles = false;
+                            settings.Settings.CommonSettings.EmbedStyles = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.ConversionSettings.EmbedStyles = true;
+                            settings.Settings.CommonSettings.EmbedStyles = true;
                         }
                         else
                         {
@@ -450,11 +450,11 @@ namespace Fb2ePub
                     {
                         if (value == 0)
                         {
-                            settings.Settings.ConversionSettings.CapitalDrop = false;
+                            settings.Settings.CommonSettings.CapitalDrop = false;
                         }
                         else if (value == 1)
                         {
-                            settings.Settings.ConversionSettings.CapitalDrop = true;
+                            settings.Settings.CommonSettings.CapitalDrop = true;
                         }
                         else
                         {
