@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using EPubLibraryContracts.Settings;
 
 namespace EPubLibrary.Content.Spine
 {
@@ -13,9 +14,9 @@ namespace EPubLibrary.Content.Spine
             RightToLeft,
         }
 
-        private V3Standard _standard;
+        private EPubV3SubStandard _standard;
 
-        public SpineSectionV3(V3Standard standard)
+        public SpineSectionV3(EPubV3SubStandard standard)
         {
             _standard = standard;
         }

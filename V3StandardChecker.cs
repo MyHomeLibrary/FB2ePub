@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using EPubLibraryContracts.Settings;
 
 namespace EPubLibrary
 {
@@ -12,18 +9,18 @@ namespace EPubLibrary
         /// </summary>
         /// <param name="standard"></param>
         /// <returns></returns>
-        public static bool IsCollectionsAllowedByStandard(V3Standard standard)
+        public static bool IsCollectionsAllowedByStandard(EPubV3SubStandard standard)
         {
-            if (standard == V3Standard.V30)
+            if (standard == EPubV3SubStandard.V30)
             {
                 return false;
             }
             return true;
         }
 
-        internal static bool IsRenditionFlowAllowedByStandard(V3Standard standard)
+        internal static bool IsRenditionFlowAllowedByStandard(EPubV3SubStandard standard)
         {
-            if (standard == V3Standard.V30)
+            if (standard == EPubV3SubStandard.V30)
             {
                 return false;
             }

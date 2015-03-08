@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary.PathUtils;
+using EPubLibraryContracts.Settings;
 
 namespace EPubLibrary.AppleEPubV2Extensions
 {
@@ -13,7 +14,7 @@ namespace EPubLibrary.AppleEPubV2Extensions
     {
         private readonly Dictionary<PlatformType, AppleTargetPlatform> _platforms = new Dictionary<PlatformType, AppleTargetPlatform>();
 
-        public static readonly EPubInternalPath DefaultAppleFilePath = new EPubInternalPath("META-INF/com.apple.ibooks.display-options.xml")
+        private static readonly EPubInternalPath DefaultAppleFilePath = new EPubInternalPath("META-INF/com.apple.ibooks.display-options.xml")
         {
             SupportFlatStructure = false
         };
@@ -77,12 +78,7 @@ namespace EPubLibrary.AppleEPubV2Extensions
         }
 
 
-        public void Reset()
-        {
-            _platforms.Clear();
-        }
-
-        public void AddPlatform(AppleEPubV2Extensions.AppleTargetPlatform targetPlatform)
+        private void AddPlatform(AppleEPubV2Extensions.AppleTargetPlatform targetPlatform)
         {
             if (_platforms.ContainsKey(targetPlatform.Type))
             {
@@ -98,6 +94,48 @@ namespace EPubLibrary.AppleEPubV2Extensions
                 return DefaultAppleFilePath;
             }
            
+        }
+
+        internal void SetSettings(IAppleConverterePub2Settings appleConverterePub2Settings)
+        {
+            _platforms.Clear();
+            foreach (var platform in appleConverterePub2Settings.Platforms)
+            {
+                var targetPlatform = new AppleTargetPlatform();
+                switch (platform.Name)
+                {
+                    case EPubLibraryContracts.Settings.AppleTargetPlatform.All:
+                        targetPlatform.Type = PlatformType.All;
+                        break;
+                    case EPubLibraryContracts.Settings.AppleTargetPlatform.iPad:
+                        targetPlatform.Type = PlatformType.iPad;
+                        break;
+                    case EPubLibraryContracts.Settings.AppleTargetPlatform.iPhone:
+                        targetPlatform.Type = PlatformType.iPhone;
+                        break;
+                    case EPubLibraryContracts.Settings.AppleTargetPlatform.NotSet: // we not going to add if type not set
+                        Logger.Log.Error("SetupAppleSettings() - passed apple platform of type NotSet");
+                        continue;
+                }
+                targetPlatform.FixedLayout = platform.FixedLayout;
+                targetPlatform.OpenToSpread = platform.OpenToSpread;
+                targetPlatform.CustomFontsAllowed = platform.UseCustomFonts;
+                switch (platform.OrientationLock)
+                {
+                    case AppleOrientationLock.None:
+                        targetPlatform.OrientationLockType = OrientationLock.Off;
+                        break;
+                    case AppleOrientationLock.LandscapeOnly:
+                        targetPlatform.OrientationLockType = OrientationLock.LandscapeOnly;
+                        break;
+                    case AppleOrientationLock.PortraitOnly:
+                        targetPlatform.OrientationLockType = OrientationLock.PortraitOnly;
+                        break;
+                }
+                AddPlatform(targetPlatform);
+            }
+
+
         }
     }
 }

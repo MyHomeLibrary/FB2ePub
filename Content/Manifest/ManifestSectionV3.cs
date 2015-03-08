@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using System.Xml.Linq;
+using EPubLibraryContracts.Settings;
 
 namespace EPubLibrary.Content.Manifest
 {
     internal class ManifestSectionV3 : List<ManifestItemV3>
     {
-        private V3Standard _standard;
+        private EPubV3SubStandard _standard;
 
-        public ManifestSectionV3(V3Standard standard)
+        public ManifestSectionV3(EPubV3SubStandard standard)
         {
             _standard = standard;
         }

@@ -11,6 +11,7 @@ using EPubLibrary.Content.NavigationManagement;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
 using EPubLibrary.XHTML_Items;
+using EPubLibraryContracts.Settings;
 using FontSettingsContracts;
 using FontsSettings;
 using ICSharpCode.SharpZipLib.Zip;
@@ -19,12 +20,6 @@ using XHTMLClassLibrary.BaseElements;
 
 namespace EPubLibrary
 {
-
-    public enum V3Standard
-    {
-        V30,
-        V301,
-    }
 
     /// <summary>
     /// Implements v3 of ePub standard
@@ -45,11 +40,11 @@ namespace EPubLibrary
         private readonly ContentFileV3 _content;
         private readonly NavigationManagerV3 _navigationManager = new NavigationManagerV3();
         private readonly SectionIDTracker _sectionIDTracker = new SectionIDTracker();
+        private readonly IEPubV3Settings _v3Settings;
         #endregion
 
         #region private_properties
         private bool _flatStructure;
-        private bool _generateCompatibleTOC;
         private TransliterationSettings _translitMode = new TransliterationSettings { Mode = TranslitModeEnum.ExternalRuleFile};
         private string _coverImage;
         #endregion
@@ -57,11 +52,7 @@ namespace EPubLibrary
 
         #region File creation related properties
 
-        /// <summary>
-        /// Max size of content (xhtml) file, 0 means no limit
-        /// </summary>
-        public ulong ContentFileLimit { get; set; }
-
+      
         #endregion
 
         #region Transliteration_common_properties
@@ -85,16 +76,15 @@ namespace EPubLibrary
 
 
 
-        public EPubFileV3(V3Standard standard)
+        public EPubFileV3(IEPubV3Settings v3Settings)
         {
-            _content = new ContentFileV3(standard);
+            _v3Settings = v3Settings;
+            _content = new ContentFileV3(v3Settings.V3SubStandard)
+            {
+                GenerateCompatibleTOC = v3Settings.GenerateV2CompatibleTOC
+            };
         }
 
-
-        public bool GenerateCompatibleTOC
-        {
-            set { _content.GenerateCompatibleTOC = _generateCompatibleTOC = value; }
-        }
 
         /// <summary>
         /// Adds new series collection to ePub
@@ -205,7 +195,7 @@ namespace EPubLibrary
         {
             _navigationManager.SetupBookNavigation(_title.Identifiers[0].ID, Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, TranslitMode),_flatStructure);
 
-            if (_generateCompatibleTOC)
+            if (_content.GenerateCompatibleTOC)
             {
                 AddTOCFile(stream);
             }
@@ -433,7 +423,7 @@ namespace EPubLibrary
             {
                 section.FlatStructure = _flatStructure;
                 section.EmbedStyles = EmbedStyles;
-                section.MaxSize = ContentFileLimit;
+                section.MaxSize = _v3Settings.HTMLFileMaxSize;
 
                 if (string.IsNullOrEmpty(section.FileName)) // if file name not defined yet create our own (not converter case)
                 {

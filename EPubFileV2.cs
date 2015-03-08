@@ -19,8 +19,8 @@ using FontsSettings;
 using ICSharpCode.SharpZipLib.Zip;
 using TranslitRu;
 using EPubLibrary.AppleEPubV2Extensions;
+using EPubLibraryContracts.Settings;
 using XHTMLClassLibrary.BaseElements;
-using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace EPubLibrary
 {
@@ -71,6 +71,7 @@ namespace EPubLibrary
         private readonly CalibreMetadataObject _calibreMetadata =  new CalibreMetadataObject();
         private readonly ContentFileV2 _content = new ContentFileV2();
         private readonly SectionIDTracker _sectionIDTracker = new SectionIDTracker();
+        private readonly IEPubV2Settings _v2Settings;
         #endregion
 
         #region private_properties
@@ -81,6 +82,12 @@ namespace EPubLibrary
 
         #region public_properties
 
+
+        public EPubFileV2(IEPubV2Settings settings)
+        {
+            _v2Settings = settings;
+            SetupAppleSettings();
+        }
 
         /// <summary>
         /// Used to set creator software string
@@ -95,13 +102,6 @@ namespace EPubLibrary
         public CalibreMetadataObject CalibreMetadata { get { return _calibreMetadata; }}
 
         /// <summary>
-        /// Controls id Calibre metadata is to be added to content metadata
-        /// </summary>
-        public bool AddCalibreMetadata
-        {
-            get; set;
-        } 
-        /// <summary>
         /// Return reference to the list of the contained "book documents" - book content objects
         /// </summary>
         public List<BookDocument> BookDocuments { get { return _sections; } }
@@ -110,16 +110,6 @@ namespace EPubLibrary
         /// Controls if Lord Kiron's license need to be added to file
         /// </summary>
         public bool InjectLKRLicense { get; set; }
-
-        /// <summary>
-        /// Get/Set if adobe template XPGT file should be added to resulting file
-        /// </summary>
-        public virtual bool UseAdobeTemplate { get; set; }
-
-        /// <summary>
-        /// Get/Set Path to Adobe template XPGT file
-        /// </summary>
-        public string AdobeTemplatePath{get;set;}
 
         /// <summary>
         /// Get/Set "flat" mode , when flat mode is set no subfolders created inside the ZIP
@@ -208,15 +198,6 @@ namespace EPubLibrary
         #endregion
 
 
-        #region File creation related properties
-
-        /// <summary>
-        /// Max size of content (xhtml) file, 0 means no limit
-        /// </summary>
-        public ulong ContentFileLimit { get; set; }
-
-        #endregion
-
         #region Transliteration_common_properties
         /// <summary>
         /// Transliteration mode
@@ -249,11 +230,11 @@ namespace EPubLibrary
         /// </summary>
         /// <param name="id">id - title to assign to the new document</param>
         /// <returns></returns>
-        public virtual BookDocument AddDocument(string id)
+        public BookDocument AddDocument(string id)
         {
             var section = new BookDocument(HTMLElementType.XHTML11) { PageTitle = id };
             section.StyleFiles.Add(_mainCss);
-            if (UseAdobeTemplate)
+            if (_v2Settings.EnableAdobeTemplate)
             {
                 section.StyleFiles.Add(_adobeTemplate);
             }
@@ -380,7 +361,7 @@ namespace EPubLibrary
             stream.CloseEntry();
         }
 
-        protected virtual void CreateContainer(out ContainerFile container)
+        private void CreateContainer(out ContainerFile container)
         {
             container = new ContainerFile {FlatStructure = _flatStructure, ContentFilePath = _content};
         }
@@ -390,7 +371,7 @@ namespace EPubLibrary
         /// Adds actual book "context" 
         /// </summary>
         /// <param name="stream"></param>
-        protected virtual void AddBookData(ZipOutputStream stream)
+        private void AddBookData(ZipOutputStream stream)
         {
             if (InjectLKRLicense)
             {
@@ -413,7 +394,7 @@ namespace EPubLibrary
         /// Adds "license" file 
         /// </summary>
         /// <param name="stream"></param>
-        protected virtual void AddLicenseFile(ZipOutputStream stream)
+        private void AddLicenseFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
             var licensePage = new LicenseFile(HTMLElementType.XHTML11)
@@ -430,7 +411,7 @@ namespace EPubLibrary
         /// Adds embedded font files
         /// </summary>
         /// <param name="stream"></param>
-        protected void AddFontFiles(ZipOutputStream stream)
+        private void AddFontFiles(ZipOutputStream stream)
         {
             if (_fontSettings.NumberOfEmbededFiles > 0)
             {
@@ -496,12 +477,12 @@ namespace EPubLibrary
         /// <param name="stream"></param>
         private void AddAdobeTemplate(ZipOutputStream stream)
         {
-            if (!UseAdobeTemplate || string.IsNullOrEmpty(AdobeTemplatePath))
+            if (!_v2Settings.EnableAdobeTemplate || string.IsNullOrEmpty(_v2Settings.AdobeTemplatePath))
             {
                 return;
             }
             stream.SetLevel(9);
-            _adobeTemplate.TemplateFileInputPath = AdobeTemplatePath;
+            _adobeTemplate.TemplateFileInputPath = _v2Settings.AdobeTemplatePath;
             try
             {
                 _adobeTemplate.Load();
@@ -565,7 +546,7 @@ namespace EPubLibrary
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="pathObject"></param>
-        protected void CreateFileEntryInZip(ZipOutputStream stream,IEPubPath pathObject)
+        private void CreateFileEntryInZip(ZipOutputStream stream, IEPubPath pathObject)
         {
             ZipEntry file = _zipFactory.MakeFileEntry(pathObject.PathInEPUB.GetFilePathInZip(_flatStructure), false);
             file.CompressionMethod = CompressionMethod.Deflated; // as defined by ePub stndard
@@ -588,12 +569,12 @@ namespace EPubLibrary
 
         }
 
-        protected void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
+        private void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
         {
             xhtmlFile.FlatStructure = FlatStructure;
             xhtmlFile.EmbedStyles = EmbedStyles;
             xhtmlFile.StyleFiles.Add(_mainCss);
-            if (UseAdobeTemplate)
+            if (_v2Settings.EnableAdobeTemplate)
             {
                 xhtmlFile.StyleFiles.Add(_adobeTemplate);
             }
@@ -604,7 +585,7 @@ namespace EPubLibrary
         /// Adds "About" page file
         /// </summary>
         /// <param name="stream"></param>
-        protected virtual void AddAbout(ZipOutputStream stream)
+        private void AddAbout(ZipOutputStream stream)
         {
             stream.SetLevel(9);
 
@@ -626,7 +607,7 @@ namespace EPubLibrary
         /// Writes book content to the stream
         /// </summary>
         /// <param name="stream">stream to write to</param>
-        protected virtual void AddBookContent(ZipOutputStream stream)
+        private void AddBookContent(ZipOutputStream stream)
         {
             int count = 1;
 
@@ -636,7 +617,7 @@ namespace EPubLibrary
             {
                 section.FlatStructure = FlatStructure;
                 section.EmbedStyles = EmbedStyles;
-                section.MaxSize = ContentFileLimit;
+                section.MaxSize = _v2Settings.HTMLFileMaxSize;
 
                 if (string.IsNullOrEmpty(section.FileName)) // if file name not defined yet create our own (not converter case)
                 {
@@ -700,7 +681,7 @@ namespace EPubLibrary
             return newCount;
         }
 
-        protected  virtual void AddBookContentSection(BookDocument subsection)
+        private  void AddBookContentSection(BookDocument subsection)
         {
             subsection.Id = _sectionIDTracker.GenerateSectionId(subsection);
             _content.AddXHTMLTextItem(subsection);
@@ -710,7 +691,7 @@ namespace EPubLibrary
 
 
 
-        protected virtual void AddCover(ZipOutputStream stream)
+        private void AddCover(ZipOutputStream stream)
         {
             if (string.IsNullOrEmpty(_coverImage) )
             {
@@ -743,7 +724,7 @@ namespace EPubLibrary
             _content.AddXHTMLTextItem(cover);
         }
 
-        protected ImageOnStorage GetCoverImageName(EPUBImage eImage)
+        private ImageOnStorage GetCoverImageName(EPUBImage eImage)
         {
             if (_images.Any(image => image.Key == _coverImage))
             {
@@ -752,7 +733,7 @@ namespace EPubLibrary
             return new ImageOnStorage(eImage) { FileName = "cover.jpg" };
         }
 
-        protected void AddTOCFile(ZipOutputStream stream)
+        private void AddTOCFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
             CreateFileEntryInZip(stream, _navigationManager.TableOfContentFile);
@@ -762,12 +743,12 @@ namespace EPubLibrary
 
 
 
-        protected virtual void AddContentFile(ZipOutputStream stream)
+        private void AddContentFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
             CreateFileEntryInZip(stream,_content);
             _content.Title = _title;
-            if (AddCalibreMetadata)
+            if (_v2Settings.AddCalibreMetadata)
             {
                 _content.CalibreData = _calibreMetadata;
             }
@@ -776,7 +757,7 @@ namespace EPubLibrary
 
 
 
-        protected void AddImages(ZipOutputStream stream)
+        private void AddImages(ZipOutputStream stream)
         {
             if (_images.Count > 0)
             {
@@ -873,51 +854,14 @@ namespace EPubLibrary
                 }
             }
         }
+
+        private void SetupAppleSettings()
+        {
+            // setup epub2 options
+            _appleOptionsFile.SetSettings(_v2Settings.AppleConverterEPubSettings);
+        }
+
         #endregion
     }
 
-
-    /// <summary>
-    /// Extends IHTMLItem class with functionality
-    /// </summary>
-    public static class XHTMLExtensions
-    {
-        /// <summary>
-        /// Checks if specific ID present in class list of elements (any depth)
-        /// </summary>
-        /// <param name="iXHTMLItem"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static bool IsIdPresent(this IHTMLItem iXHTMLItem, string value)
-        {
-            if (iXHTMLItem.SubElements() == null)
-            {
-                return false;
-            }
-            foreach (var s in iXHTMLItem.SubElements())
-            {
-                if (s is Anchor)
-                {
-                    var a = s as Anchor;
-                    if (a.GlobalAttributes.ID!= null)
-                    {
-                        if ((string)(a.GlobalAttributes.ID.Value) == value)
-                        {
-                            return true;
-                        }
-                    }
-                }
-                else 
-                {
-                    if( IsIdPresent(s,value) )
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-        
-
-    }
 }

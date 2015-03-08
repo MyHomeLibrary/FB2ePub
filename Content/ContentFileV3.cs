@@ -13,6 +13,7 @@ using EPubLibrary.PathUtils;
 using System.IO;
 using System.Text;
 using System.Xml;
+using EPubLibraryContracts.Settings;
 
 
 namespace EPubLibrary.Content
@@ -20,7 +21,7 @@ namespace EPubLibrary.Content
     public class ContentFileV3 : IEPubPath
     {
 
-        private readonly V3Standard _standard;   
+        private readonly EPubV3SubStandard _standard;   
         private readonly ManifestSectionV3 _manifest;
         private readonly BindingsV3 _bindings = new BindingsV3();
         private readonly  EPubSeriesCollections _seriesCollections  = new EPubSeriesCollections();
@@ -41,8 +42,8 @@ namespace EPubLibrary.Content
             get { return _flatStructure; }
             set { _flatStructure = value; }
         }
-        
-        public ContentFileV3(V3Standard standard)
+
+        public ContentFileV3(EPubV3SubStandard standard)
         {
             _standard = standard;
             _manifest   =   new ManifestSectionV3(standard);

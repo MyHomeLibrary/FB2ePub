@@ -26,11 +26,6 @@ namespace EPubLibrary
 
         #region File creation related properties
 
-        /// <summary>
-        /// Max size of content (xhtml) file, 0 means no limit
-        /// </summary>
-        ulong ContentFileLimit { get; set; }
-
         #endregion
         /// <summary>
         /// Writes (generates) file to disk
