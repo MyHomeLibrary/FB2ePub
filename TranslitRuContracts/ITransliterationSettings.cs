@@ -12,8 +12,9 @@ namespace TranslitRuContracts
 
     public interface ITransliterationSettings : IXmlSerializable
     {
-        TranslitModeEnum Mode { get; set; }
-        string FileName { get; set; }
+        TranslitModeEnum Mode { get; }
+        string FileName { get;  }
+        bool Transliterate { get; }
 
         void CopyFrom(ITransliterationSettings temp);
         void SetupDefaults();
