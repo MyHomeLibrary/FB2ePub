@@ -9,22 +9,28 @@ namespace Fb2epubSettings
     public class EPubV3Settings : IEPubV3Settings 
     {
         private EPubV3SubStandard _v3SubStandard = EPubV3SubStandard.V30;
-        private bool _oldVersionCompatibility = true;
+        private bool _generateV2CompatibleTOC = true;
 
+        public EPubV3Settings()
+        {
+            HTMLFileMaxSize = 0;
+        }
 
         #region constant
 
         public const string EPubV3SettingsElementName = "EPubV3Settings";
 
         private const string EPUB3SubVersionElementName = "EPUB3SubVersion";
-        private const string OldVersionCompatibilityModeElementName = "OldVersionsCompatibleMode";
+        private const string GenerateV2CompatibleTOCElementName = "GenerateV2CompatibleTOC";
+        private const string HTMLFileMaxSizeAllowedElementName = "HTMLFileMaxSizeAllowed";
 
         #endregion
 
         public void SetupDefaults()
         {
             _v3SubStandard = EPubV3SubStandard.V30;
-            _oldVersionCompatibility = true;
+            _generateV2CompatibleTOC = true;
+            HTMLFileMaxSize = 0;
         }
 
         /// <summary>
@@ -36,11 +42,13 @@ namespace Fb2epubSettings
             set { _v3SubStandard = value; }
         }
 
-        public bool OldVersionCompatibilityMode
+        public bool GenerateV2CompatibleTOC
         {
-            get { return _oldVersionCompatibility; }
-            set { _oldVersionCompatibility = value; }
+            get { return _generateV2CompatibleTOC; }
+            set { _generateV2CompatibleTOC = value; }
         }
+
+        public long HTMLFileMaxSize { get; set; }
 
 
         public void CopyFrom(IEPubV3Settings temp)
@@ -70,8 +78,11 @@ namespace Fb2epubSettings
                             }
                             _v3SubStandard = standard;
                             continue;
-                        case OldVersionCompatibilityModeElementName:
-                            _oldVersionCompatibility = reader.ReadElementContentAsBoolean();
+                        case GenerateV2CompatibleTOCElementName:
+                            _generateV2CompatibleTOC = reader.ReadElementContentAsBoolean();
+                            continue;
+                        case HTMLFileMaxSizeAllowedElementName:
+                            HTMLFileMaxSize = reader.ReadElementContentAsLong();
                             continue;
                     }
                 }
@@ -88,8 +99,12 @@ namespace Fb2epubSettings
             writer.WriteValue(_v3SubStandard.ToString());
             writer.WriteEndElement();
 
-            writer.WriteStartElement(OldVersionCompatibilityModeElementName);
-            writer.WriteValue(_oldVersionCompatibility.ToString());
+            writer.WriteStartElement(GenerateV2CompatibleTOCElementName);
+            writer.WriteValue(_generateV2CompatibleTOC.ToString());
+            writer.WriteEndElement();
+
+            writer.WriteStartElement(HTMLFileMaxSizeAllowedElementName);
+            writer.WriteValue(HTMLFileMaxSize.ToString());
             writer.WriteEndElement();
 
             writer.WriteEndElement();
