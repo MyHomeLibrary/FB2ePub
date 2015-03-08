@@ -91,7 +91,7 @@ namespace EPubLibrary
         }
 
 
-        private bool GenerateCompatibleTOC
+        public bool GenerateCompatibleTOC
         {
             set { _content.GenerateCompatibleTOC = _generateCompatibleTOC = value; }
         }

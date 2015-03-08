@@ -475,7 +475,7 @@ namespace EPubLibrary
         /// Adds different additional generated files like cover, annotation etc.
         /// </summary>
         /// <param name="stream"></param>
-        protected void AddAdditionalFiles(ZipOutputStream stream)
+        private void AddAdditionalFiles(ZipOutputStream stream)
         {
             AddAdobeTemplate(stream);
             AddCSSFiles(stream);
