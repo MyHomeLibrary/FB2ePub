@@ -3,16 +3,16 @@ using System.Xml;
 using System.Xml.Linq;
 using XHTMLClassLibrary.BaseElements;
 
-namespace FB2EPubConverter.ElementConvertersV2
+namespace FB2EPubConverter
 {
-    internal static class XhtmlItemExtenderV2
+    internal static class XhtmlItemExtender
     {
         /// <summary>
         /// Extends IHTMLItem class to evaluate the size of generated output
         /// </summary>
         /// <param name="item">item to evaluate</param>
         /// <returns></returns>
-        public static long EstimateSize(this IHTMLItem item)
+        public static ulong EstimateSize(this IHTMLItem item)
         {
             var stream = new MemoryStream();
             var node = item.Generate();
@@ -20,10 +20,9 @@ namespace FB2EPubConverter.ElementConvertersV2
             doc.Add(node);
             using (var writer = XmlWriter.Create(stream))
             {
-                //node.WriteTo(writer);
                 doc.WriteTo(writer);
             }
-            return stream.Length;
+            return (ulong)stream.Length;
         }
 
     }

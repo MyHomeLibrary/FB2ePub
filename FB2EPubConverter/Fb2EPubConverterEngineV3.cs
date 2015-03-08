@@ -20,7 +20,6 @@ namespace FB2EPubConverter
     internal class Fb2EPubConverterEngineV3 : Fb2EPubConverterEngineBase
     {
         private readonly  HRefManagerV3 _referencesManager = new HRefManagerV3();
-        private long _maxSize = 0;
 
         private const string DefaultCSSFileName = "default_v3.css";
 
@@ -108,7 +107,7 @@ namespace FB2EPubConverter
 
         private void PassTextFromFb2ToEpub(EPubFileV3 epubFile, FB2File fb2File)
         {
-            var converter = new Fb2EPubTextConverterV3(Settings.CommonSettings, Images, _referencesManager, _maxSize);
+            var converter = new Fb2EPubTextConverterV3(Settings.CommonSettings, Images, _referencesManager, Settings.V3Settings.HTMLFileMaxSize);
             converter.Convert(epubFile, fb2File);
         }
 
@@ -128,7 +127,7 @@ namespace FB2EPubConverter
             {
                 CapitalDrop = false,
                 Images = Images,
-                MaxSize = _maxSize,
+                MaxSize = Settings.V3Settings.HTMLFileMaxSize,
                 ReferencesManager = _referencesManager,
             };
             var infoConverter = new Fb2EpubInfoConverterV3();
@@ -160,6 +159,18 @@ namespace FB2EPubConverter
                 epubFile.AddCoverImage(coverPage.CoverpageImages[0].HRef);
                 Images.ImageIdUsed(coverPage.CoverpageImages[0].HRef);
             }
+        }
+
+        protected override void PassEPubSettings(IEpubFile epubFile)
+        {
+            base.PassEPubSettings(epubFile);
+            epubFile.ContentFileLimit = Settings.V3Settings.HTMLFileMaxSize;
+            var epubV3File = epubFile as EPubFileV3;
+            if (epubV3File == null)
+            {
+                throw new ArgumentException(@"The epub object passed is not V3 object","epubFile");
+            }
+            epubV3File.GenerateCompatibleTOC = Settings.V3Settings.GenerateV2CompatibleTOC;
         }
 
         private void PassPublisherInfoFromFB2(FB2File fb2File, EPubFileV3 epubFile)
@@ -231,7 +242,7 @@ namespace FB2EPubConverter
                 {
                     CapitalDrop = Settings.CommonSettings.CapitalDrop,
                     Images = Images,
-                    MaxSize = _maxSize,
+                    MaxSize = Settings.V3Settings.HTMLFileMaxSize,
                     ReferencesManager = _referencesManager,
                 };
                 var annotationConverter = new AnnotationConverterV3();

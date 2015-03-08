@@ -48,7 +48,7 @@ namespace Fb2epubSettings
             set { _generateV2CompatibleTOC = value; }
         }
 
-        public long HTMLFileMaxSize { get; set; }
+        public ulong HTMLFileMaxSize { get; set; }
 
 
         public void CopyFrom(IEPubV3Settings temp)
@@ -82,7 +82,7 @@ namespace Fb2epubSettings
                             _generateV2CompatibleTOC = reader.ReadElementContentAsBoolean();
                             continue;
                         case HTMLFileMaxSizeAllowedElementName:
-                            HTMLFileMaxSize = reader.ReadElementContentAsLong();
+                            HTMLFileMaxSize = (ulong)reader.ReadElementContentAsLong();
                             continue;
                     }
                 }
