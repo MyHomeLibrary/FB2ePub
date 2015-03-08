@@ -6,8 +6,9 @@ using ConverterContracts;
 using FB2EPubConverter;
 using log4net;
 using ConverterContracts.Settings;
+using Fb2epubSettings;
 using FolderSettingsHelper;
-
+using TranslitRuContracts;
 
 
 // Configure log4net using the .config file
@@ -169,37 +170,43 @@ namespace Fb2ePub
                         if (value == 0)
                         {
                             settings.Settings.CommonSettings.TransliterateToc = false;
-                            settings.Settings.ConversionSettings.Transliterate = false;
+                            settings.Settings.ConversionSettings.TransliterationSettings.CopyFrom(
+                                new TransliterationSettingsImp {Mode = TranslitModeEnum.None});
                             settings.Settings.ConversionSettings.TransliterateFileName = false;
                         }
                         else if (value == 1)
                         {
                             settings.Settings.CommonSettings.TransliterateToc = true;
-                            settings.Settings.ConversionSettings.Transliterate = true;
+                            settings.Settings.ConversionSettings.TransliterationSettings.CopyFrom(
+                                new TransliterationSettingsImp { Mode = TranslitModeEnum.None });
                             settings.Settings.ConversionSettings.TransliterateFileName = false;
                         }
                         else if (value == 2)
                         {
                             settings.Settings.CommonSettings.TransliterateToc = false;
-                            settings.Settings.ConversionSettings.Transliterate = false;
+                            settings.Settings.ConversionSettings.TransliterationSettings.CopyFrom(
+                                new TransliterationSettingsImp { Mode = TranslitModeEnum.None });
                             settings.Settings.ConversionSettings.TransliterateFileName = true;
                         }
                         else if (value == 3)
                         {
                             settings.Settings.CommonSettings.TransliterateToc = true;
-                            settings.Settings.ConversionSettings.Transliterate = true;
+                            settings.Settings.ConversionSettings.TransliterationSettings.CopyFrom(
+                                new TransliterationSettingsImp { Mode = TranslitModeEnum.TranslitRu});
                             settings.Settings.ConversionSettings.TransliterateFileName = true;
                         }
                         else if (value == 4)
                         {
                             settings.Settings.CommonSettings.TransliterateToc = false;
-                            settings.Settings.ConversionSettings.Transliterate = true;
+                            settings.Settings.ConversionSettings.TransliterationSettings.CopyFrom(
+                                new TransliterationSettingsImp { Mode = TranslitModeEnum.TranslitRu });
                             settings.Settings.ConversionSettings.TransliterateFileName = false;
                         }
                         else if (value == 5)
                         {
                             settings.Settings.CommonSettings.TransliterateToc = false;
-                            settings.Settings.ConversionSettings.Transliterate = true;
+                            settings.Settings.ConversionSettings.TransliterationSettings.CopyFrom(
+                                new TransliterationSettingsImp { Mode = TranslitModeEnum.TranslitRu });
                             settings.Settings.ConversionSettings.TransliterateFileName = true;
                         }
                         else

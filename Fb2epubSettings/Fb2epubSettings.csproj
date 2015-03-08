@@ -130,6 +130,7 @@
     <Compile Include="ConverterSettingsForm.Designer.cs">
       <DependentUpon>ConverterSettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TransliterationSettingsImp.cs" />
     <Compile Include="CSSElementListItem.cs" />
     <Compile Include="DefaultSettingsLocatorHelper.cs" />
     <Compile Include="EPubCommonSettings.cs" />
@@ -216,6 +217,10 @@
     <ProjectReference Include="..\..\fontsettings\FontsSettings.csproj">
       <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
       <Name>FontsSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\translitrunet\TranslitRuContracts\TranslitRuContracts.csproj">
+      <Project>{15699C26-B81D-4833-B077-E7B020F38EE6}</Project>
+      <Name>TranslitRuContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\ConverterContracts\ConverterContracts.csproj">
       <Project>{71f465e1-fca1-4701-8958-643e7332ea7f}</Project>

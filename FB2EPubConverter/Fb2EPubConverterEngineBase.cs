@@ -10,6 +10,7 @@ using FB2Library;
 using TranslitRu;
 using Logger = FB2EPubConverter.Logger;
 using ConverterContracts;
+using Fb2epubSettings;
 using TranslitRuContracts;
 
 
@@ -190,22 +191,26 @@ namespace Fb2ePubConverter
 
         private void SetTransliterationOptions(IEpubFile epubFile)
         {
-            epubFile.TranslitMode.FileName = string.IsNullOrEmpty(Settings.ResourcesPath) ? @".\Translit\translit.xml" : string.Format(@"{0}\Translit\translit.xml", Settings.ResourcesPath);
-            Logger.Log.DebugFormat("Using transliteration rule file : {0}", epubFile.TranslitMode.FileName);
-            if (Settings.ConversionSettings.Transliterate)
+            var setting = new TransliterationSettingsImp
             {
-                epubFile.TranslitMode.Mode = TranslitModeEnum.ExternalRuleFile;
-                if (!File.Exists(epubFile.TranslitMode.FileName))
+                FileName = string.IsNullOrEmpty(Settings.ResourcesPath) ? @".\Translit\translit.xml" : string.Format(@"{0}\Translit\translit.xml", Settings.ResourcesPath),
+            };
+            Logger.Log.DebugFormat("Using transliteration rule file : {0}", setting.FileName);
+            if (Settings.ConversionSettings.TransliterationSettings.Transliterate)
+            {
+                setting.Mode = TranslitModeEnum.ExternalRuleFile;
+                if (!File.Exists(setting.FileName))
                 {
-                    Logger.Log.ErrorFormat(@"Unable to locate translation file {0}, switching transliteration off", epubFile.TranslitMode.FileName);
-                    epubFile.TranslitMode.Mode = TranslitModeEnum.None;
+                    Logger.Log.ErrorFormat(@"Unable to locate translation file {0}, switching transliteration off", setting.FileName);
+                    setting.Mode = TranslitModeEnum.None;
                 }
             }
             else
             {
-                epubFile.TranslitMode.Mode = TranslitModeEnum.None;
+                setting.Mode = TranslitModeEnum.None;
             }
-            Logger.Log.DebugFormat("Transliteration mode : {0}", epubFile.TranslitMode.Mode);
+            Logger.Log.DebugFormat("Transliteration mode : {0}", setting.Mode);
+            epubFile.TranslitMode = setting;
         }
 
         protected abstract IEpubFile CreateEpub();

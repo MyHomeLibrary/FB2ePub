@@ -5,12 +5,13 @@ using System.Xml.Schema;
 using ConverterContracts.Settings;
 using FontSettingsContracts;
 using FontsSettings;
+using TranslitRuContracts;
+
 namespace Fb2epubSettings
 {
     public class EPubConversionSettings : IEPubConversionSettings 
     {
         #region private_members
-        private bool _transliterate;
         private bool _transliterateFileName;
         private bool _addFB2Info;
         private bool _addSeqToTitle;
@@ -29,6 +30,7 @@ namespace Fb2epubSettings
         private IgnoreInfoSourceOptions _ignoreGenres = IgnoreInfoSourceOptions.IgnoreNothing;
         private bool _decorateFontNames;
         private readonly EPubFontSettings _fonts = new EPubFontSettings();
+        private readonly ITransliterationSettings _transliterationSettings = new TransliterationSettingsImp();
         #endregion
 
 
@@ -36,7 +38,6 @@ namespace Fb2epubSettings
 
         public const string ConversiononSettingsElementName = "ConversionSettings";
 
-        private const string TransliterateElementName = "TransliterateBook";
         private const string TransliterateFileElementName = "TransliterateFileName";
         private const string AddFB2InfoElementName = "AddFB2Info";
         private const string AddSequenceNameToTitleElementName = "AddSequenceNameToTitle";
@@ -67,7 +68,6 @@ namespace Fb2epubSettings
             {
                 return;
             }
-            _transliterate = temp.Transliterate;
             _transliterateFileName = temp.TransliterateFileName;
             _addFB2Info = temp.Fb2Info;
             _addSeqToTitle = temp.AddSeqToTitle;
@@ -86,12 +86,12 @@ namespace Fb2epubSettings
             _ignoreGenres = temp.IgnoreGenres;
             _decorateFontNames = temp.DecorateFontNames;
             _fonts.CopyFrom(temp.Fonts);
+            _transliterationSettings.CopyFrom(temp.TransliterationSettings);
         }
 
         public void SetupDefaults()
         {
 
-            _transliterate = false;
             _transliterateFileName = false;
             _addFB2Info = true;
             _addSeqToTitle = true;
@@ -109,6 +109,7 @@ namespace Fb2epubSettings
             _ignoreTranslators = IgnoreInfoSourceOptions.IgnoreNothing;
             _ignoreGenres = IgnoreInfoSourceOptions.IgnoreNothing;
             _decorateFontNames = true;
+            _transliterationSettings.CopyFrom(new TransliterationSettingsImp {Mode = TranslitModeEnum.None});
 
 
             _fonts.FontFamilies.Clear();
@@ -174,18 +175,13 @@ namespace Fb2epubSettings
 
         }
 
-
+        public ITransliterationSettings TransliterationSettings
+        {
+            get { return _transliterationSettings; }
+            set { _transliterationSettings.CopyFrom(value); }
+        }
 
         #region serializable_public_Properties
-        /// <summary>
-        /// Get/Set if data outside the text body needs to be transliterated 
-        /// (used in case device does not support Cyrillic fonts)
-        /// </summary>
-        public bool Transliterate
-        {
-            get { return _transliterate; }
-            set { _transliterate = value; }
-        }
 
         /// <summary>
         /// Get/Set transliteration of the output file name(s)
@@ -372,9 +368,6 @@ namespace Fb2epubSettings
                 {
                     switch (reader.Name)
                     {
-                        case TransliterateElementName:
-                            _transliterate = reader.ReadElementContentAsBoolean();
-                            continue;
                         case TransliterateFileElementName:
                             _transliterateFileName = reader.ReadElementContentAsBoolean();
                             continue;
@@ -453,6 +446,9 @@ namespace Fb2epubSettings
                         case EPubFontSettings.FontsElementName:
                             _fonts.ReadXml(reader.ReadSubtree());
                             break;
+                        case TransliterationSettingsImp.TransliterationSettingsElementName:
+                            _transliterationSettings.ReadXml(reader.ReadSubtree());
+                            break;
                     }
                 }
                 reader.Read();
@@ -462,10 +458,6 @@ namespace Fb2epubSettings
         public void WriteXml(XmlWriter writer)
         {
             writer.WriteStartElement(ConversiononSettingsElementName);
-
-            writer.WriteStartElement(TransliterateElementName);
-            writer.WriteValue(_transliterate);
-            writer.WriteEndElement();
 
             writer.WriteStartElement(TransliterateFileElementName);
             writer.WriteValue(_transliterateFileName);
@@ -537,6 +529,8 @@ namespace Fb2epubSettings
             writer.WriteEndElement();
 
             _fonts.WriteXml(writer);
+
+            _transliterationSettings.WriteXml(writer);
 
             writer.WriteEndElement();
         }
