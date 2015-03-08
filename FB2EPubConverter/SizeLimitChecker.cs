@@ -2,9 +2,9 @@
 {
     internal class SizeLimitChecker
     {
-        public long MaxSizeLimit { get; set; }
+        public ulong MaxSizeLimit { get; set; }
 
-        public bool ExceedSizeLimit(long itemSize)
+        public bool ExceedSizeLimit(ulong itemSize)
         {
             return ((MaxSizeLimit != 0) && (itemSize >= MaxSizeLimit));
         }

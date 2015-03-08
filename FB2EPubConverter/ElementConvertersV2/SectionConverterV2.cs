@@ -18,7 +18,7 @@ namespace FB2EPubConverter.ElementConvertersV2
     {
         public int RecursionLevel { private get; set;}
         public bool LinkSection { private get; set; }
-        public ConverterOptionsV2 Settings { get; set; }
+        public ConverterOptionsV2 Settings { private get; set; }
 
         private readonly SizeLimitChecker _checker = new SizeLimitChecker();
 
@@ -37,7 +37,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             Logger.Log.Debug("Converting section");
 
             var content = new Div(HTMLElementType.XHTML11);
-            long documentSize = 0;
+            ulong documentSize = 0;
             _checker.MaxSizeLimit = Settings.MaxSize;
 
             SetClassType(content, string.Format(ElementStylesV2.SectionItemFormat, RecursionLevel));
@@ -100,9 +100,9 @@ namespace FB2EPubConverter.ElementConvertersV2
             return resList;          
         }
 
-        private long ConvertSimpleSubItem(IFb2TextItem item, SectionItem sectionItem, Div content, List<IHTMLItem> resList, ref bool startSection, long documentSize)
+        private ulong ConvertSimpleSubItem(IFb2TextItem item, SectionItem sectionItem, Div content, List<IHTMLItem> resList, ref bool startSection, ulong documentSize)
         {
-            long docSize = documentSize;
+            ulong docSize = documentSize;
             IHTMLItem newItem = null;
             if (item is SubTitleItem)
             {
@@ -163,9 +163,9 @@ namespace FB2EPubConverter.ElementConvertersV2
         }
 
 
-        private long ConvertSectionImage(ImageItem sectionImage, Div content, IList<IHTMLItem> resList, long documentSize)
+        private ulong ConvertSectionImage(ImageItem sectionImage, Div content, IList<IHTMLItem> resList, ulong documentSize)
         {
-            long docSize = documentSize;
+            ulong docSize = documentSize;
             if (sectionImage.HRef != null)
             {
                 if (Settings.Images.IsImageIdReal(sectionImage.HRef))
@@ -182,7 +182,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     }
                     SetClassType(container, ElementStylesV3.SectionImage);
                     container.Add(sectionImagemage);
-                    long itemSize = container.EstimateSize();
+                    ulong itemSize = container.EstimateSize();
                     if (_checker.ExceedSizeLimit(documentSize + itemSize))
                     {
                         var oldContent = content;
@@ -201,10 +201,10 @@ namespace FB2EPubConverter.ElementConvertersV2
         }
 
 
-        private long SplitBlockHTMLItem(IHTMLItem item, Div content, IList<IHTMLItem> resList, long documentSize)
+        private ulong SplitBlockHTMLItem(IHTMLItem item, Div content, IList<IHTMLItem> resList, ulong documentSize)
         {
-            long docSize = documentSize;
-            long itemSize = item.EstimateSize();
+            ulong docSize = documentSize;
+            ulong itemSize = item.EstimateSize();
             if (_checker.ExceedSizeLimit(documentSize + itemSize))
             {
                 var oldContent = content;
@@ -233,10 +233,10 @@ namespace FB2EPubConverter.ElementConvertersV2
             return docSize;
         }
 
-        private long SplitSimpleHTMLItem(IHTMLItem splitedItem, Div content, IList<IHTMLItem> resList, long documentSize)
+        private ulong SplitSimpleHTMLItem(IHTMLItem splitedItem, Div content, IList<IHTMLItem> resList, ulong documentSize)
         {
-            long docSize = documentSize;
-            long itemSize = splitedItem.EstimateSize();
+            ulong docSize = documentSize;
+            ulong itemSize = splitedItem.EstimateSize();
             if (_checker.ExceedSizeLimit(documentSize + itemSize))
             {
                 var oldContent = content;
@@ -255,15 +255,15 @@ namespace FB2EPubConverter.ElementConvertersV2
         }
 
 
-        private IEnumerable<IHTMLItem> SplitDiv(Div div, long documentSize)
+        private IEnumerable<IHTMLItem> SplitDiv(Div div, ulong documentSize)
         {
             var resList = new List<IHTMLItem>();
-            long newDocumentSize = documentSize;
+            ulong newDocumentSize = documentSize;
             var container = new Div(HTMLElementType.XHTML11);
             container.GlobalAttributes.ID.Value = div.GlobalAttributes.ID.Value;
             foreach (var element in div.SubElements())
             {
-                long elementSize = element.EstimateSize();
+                ulong elementSize = element.EstimateSize();
                 if (_checker.ExceedSizeLimit(elementSize + newDocumentSize))
                 {
                     resList.Add(container);

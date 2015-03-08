@@ -112,8 +112,8 @@ namespace Fb2ePubConverter
                 foreach (var fb2File in _fb2Files)
                 {
                     IEpubFile epubFile = CreateEpub();
-                    
-                    SetTransliterationOptions(epubFile);
+
+                    PassEPubSettings(epubFile);
 
                     // do it first (before actual conversion) as if there is a problem with generating file name - we do not spend time here on generation
                     string outFile = GenerateOutputFileName(epubFile, outFileName);
@@ -132,6 +132,11 @@ namespace Fb2ePubConverter
                 throw;
             }
 
+        }
+
+        protected virtual void PassEPubSettings(IEpubFile epubFile)
+        {
+            SetTransliterationOptions(epubFile);
         }
 
         private void LoadImagesInMemory(FB2File fb2File)

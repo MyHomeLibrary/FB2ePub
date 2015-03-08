@@ -16,11 +16,11 @@ namespace FB2EPubConverter.ElementConvertersV2
         private readonly IEPubCommonSettings _commonSettings;
         private readonly ImageManager _images;
         private readonly HRefManagerV2 _referencesManager;
-        private readonly long _maxSize;
+        private readonly ulong _maxSize;
 
         private int _sectionCounter;
 
-        internal Fb2EPubTextConverterV2(IEPubCommonSettings commonSettings, ImageManager images, HRefManagerV2 referencesManager,long maxSize)
+        internal Fb2EPubTextConverterV2(IEPubCommonSettings commonSettings, ImageManager images, HRefManagerV2 referencesManager,ulong maxSize)
         {
             _commonSettings = commonSettings;
             _images = images;

@@ -73,7 +73,7 @@ namespace Fb2epubSettings
             set { _adobeTemplatePath = value; }
         }
 
-        public long HTMLFileMaxSize { get; set; }
+        public ulong HTMLFileMaxSize { get; set; }
 
         public void CopyFrom(IEPubV2Settings temp)
         {
@@ -110,7 +110,7 @@ namespace Fb2epubSettings
                             _adobeTemplatePath = reader.ReadElementContentAsString();
                             continue;
                         case HTMLFileMaxSizeAllowedElementName:
-                            HTMLFileMaxSize = reader.ReadElementContentAsLong();
+                            HTMLFileMaxSize = (ulong)reader.ReadElementContentAsLong();
                             continue;
                     }
                 }

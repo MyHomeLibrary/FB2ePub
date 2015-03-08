@@ -18,7 +18,6 @@ namespace FB2EPubConverter
 {
     internal class Fb2EPubConverterEngineV2 : Fb2EPubConverterEngineBase
     {
-        private long _maxSize = 245 * 1024;
         private readonly HRefManagerV2 _referencesManager = new HRefManagerV2();
 
         private const string DefaultCSSFileName = "default_v2.css";
@@ -45,7 +44,7 @@ namespace FB2EPubConverter
             AddAboutInformation(epubFileV2);
         }
 
-        public void SetupCSS(EPubFileV2 epubFile)
+        private void SetupCSS(EPubFileV2 epubFile)
         {
             Assembly asm = Assembly.GetAssembly(GetType());
             string pathPreffix = Path.GetDirectoryName(asm.Location);
@@ -57,7 +56,13 @@ namespace FB2EPubConverter
         }
 
 
-        public void SetupFonts(EPubFileV2 epubFile)
+        protected override void PassEPubSettings(IEpubFile epubFile)
+        {
+            base.PassEPubSettings(epubFile);
+            epubFile.ContentFileLimit = Settings.V2Settings.HTMLFileMaxSize;
+        }
+
+        private void SetupFonts(EPubFileV2 epubFile)
         {
             if (Settings.CommonSettings.Fonts == null)
             {
@@ -170,7 +175,7 @@ namespace FB2EPubConverter
             {
                 CapitalDrop = false,
                 Images = Images,
-                MaxSize = _maxSize,
+                MaxSize = Settings.V2Settings.HTMLFileMaxSize,
                 ReferencesManager = _referencesManager,
             };
             var infoConverter = new Fb2EpubInfoConverterV2();
@@ -186,7 +191,7 @@ namespace FB2EPubConverter
 
         private void PassTextFromFb2ToEpub(EPubFileV2 epubFile, FB2File fb2File)
         {
-            var converter = new Fb2EPubTextConverterV2(Settings.CommonSettings, Images, _referencesManager, _maxSize);
+            var converter = new Fb2EPubTextConverterV2(Settings.CommonSettings, Images, _referencesManager, Settings.V2Settings.HTMLFileMaxSize);
             converter.Convert(epubFile,fb2File);
         }
 
@@ -233,7 +238,7 @@ namespace FB2EPubConverter
                 {
                     CapitalDrop = Settings.CommonSettings.CapitalDrop,
                     Images = Images,
-                    MaxSize = _maxSize,
+                    MaxSize = Settings.V2Settings.HTMLFileMaxSize,
                     ReferencesManager = _referencesManager,
                 };
                 var annotationConverter = new AnnotationConverterV2();
