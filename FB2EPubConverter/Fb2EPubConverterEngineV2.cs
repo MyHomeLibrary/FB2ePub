@@ -30,13 +30,11 @@ namespace FB2EPubConverter
                 throw new ArrayTypeMismatchException(string.Format("Invalid ePub object type passed, expected EPubFileV2, got {0}", epubFile.GetType()));
             }
 
-            SetAdobeOptions(epubFileV2);
             PassHeaderDataFromFb2ToEpub(epubFileV2, fb2File);
             ConvertAnnotation(fb2File.TitleInfo, epubFileV2);
             PassCoverImageFromFB2(fb2File.TitleInfo.Cover, epubFileV2);
             SetupCSS(epubFileV2);
             SetupFonts(epubFileV2);
-            SetupAppleSettings(epubFileV2);
             PassTextFromFb2ToEpub(epubFileV2, fb2File);
             PassFb2InfoToEpub(epubFileV2, fb2File);
             UpdateInternalLinks(epubFileV2, fb2File);
@@ -55,12 +53,6 @@ namespace FB2EPubConverter
             epubFile.CSSFiles.Add(new CSSFile { FilePathOnDisk = string.Format(@"{0}\CSS\{1}", pathPreffix, DefaultCSSFileName), FileName = DefaultCSSFileName });
         }
 
-
-        protected override void PassEPubSettings(IEpubFile epubFile)
-        {
-            base.PassEPubSettings(epubFile);
-            epubFile.ContentFileLimit = Settings.V2Settings.HTMLFileMaxSize;
-        }
 
         private void SetupFonts(EPubFileV2 epubFile)
         {
@@ -99,57 +91,7 @@ namespace FB2EPubConverter
         }
 
 
-        private void SetAdobeOptions(EPubFileV2 epubFile)
-        {
-            epubFile.AdobeTemplatePath = string.IsNullOrEmpty(Settings.V2Settings.AdobeTemplatePath) ? @".\Template\template.xpgt" : Settings.V2Settings.AdobeTemplatePath;
-            epubFile.UseAdobeTemplate = Settings.V2Settings.EnableAdobeTemplate;
-        }
 
-        private void SetupAppleSettings(EPubFileV2 epubFile)
-        {
-            if (epubFile == null)
-            {
-                throw new ArgumentNullException("epubFile");
-            }
-            // setup epub2 options
-            epubFile.AppleOptions.Reset();
-            foreach (var platform in Settings.V2Settings.AppleConverterEPubSettings.Platforms)
-            {
-                var targetPlatform = new AppleTargetPlatform();
-                switch (platform.Name)
-                {
-                    case EPubLibraryContracts.Settings.AppleTargetPlatform.All:
-                        targetPlatform.Type = PlatformType.All;
-                        break;
-                    case EPubLibraryContracts.Settings.AppleTargetPlatform.iPad:
-                        targetPlatform.Type = PlatformType.iPad;
-                        break;
-                    case EPubLibraryContracts.Settings.AppleTargetPlatform.iPhone:
-                        targetPlatform.Type = PlatformType.iPhone;
-                        break;
-                    case EPubLibraryContracts.Settings.AppleTargetPlatform.NotSet: // we not going to add if type not set
-                        Logger.Log.Error("SetupAppleSettings() - passed apple platform of type NotSet");
-                        continue;
-                }
-                targetPlatform.FixedLayout = platform.FixedLayout;
-                targetPlatform.OpenToSpread = platform.OpenToSpread;
-                targetPlatform.CustomFontsAllowed = platform.UseCustomFonts;
-                switch (platform.OrientationLock)
-                {
-                    case EPubLibraryContracts.Settings.AppleOrientationLock.None:
-                        targetPlatform.OrientationLockType = OrientationLock.Off;
-                        break;
-                    case EPubLibraryContracts.Settings.AppleOrientationLock.LandscapeOnly:
-                        targetPlatform.OrientationLockType = OrientationLock.LandscapeOnly;
-                        break;
-                    case EPubLibraryContracts.Settings.AppleOrientationLock.PortraitOnly:
-                        targetPlatform.OrientationLockType = OrientationLock.PortraitOnly;
-                        break;
-                }
-                epubFile.AppleOptions.AddPlatform(targetPlatform);
-            }
-
-        }
 
         private void UpdateInternalLinks(EPubFileV2 epubFile, FB2File fb2File)
         {
@@ -250,7 +192,7 @@ namespace FB2EPubConverter
 
         protected override IEpubFile CreateEpub()
         {
-            return new EPubFileV2 { FlatStructure = Settings.CommonSettings.Flat, EmbedStyles = Settings.CommonSettings.EmbedStyles };
+            return new EPubFileV2(Settings.V2Settings) { FlatStructure = Settings.CommonSettings.Flat, EmbedStyles = Settings.CommonSettings.EmbedStyles };
         }
 
 

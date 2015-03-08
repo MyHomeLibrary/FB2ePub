@@ -161,18 +161,6 @@ namespace FB2EPubConverter
             }
         }
 
-        protected override void PassEPubSettings(IEpubFile epubFile)
-        {
-            base.PassEPubSettings(epubFile);
-            epubFile.ContentFileLimit = Settings.V3Settings.HTMLFileMaxSize;
-            var epubV3File = epubFile as EPubFileV3;
-            if (epubV3File == null)
-            {
-                throw new ArgumentException(@"The epub object passed is not V3 object","epubFile");
-            }
-            epubV3File.GenerateCompatibleTOC = Settings.V3Settings.GenerateV2CompatibleTOC;
-        }
-
         private void PassPublisherInfoFromFB2(FB2File fb2File, EPubFileV3 epubFile)
         {
             if (fb2File.PublishInfo.BookTitle != null)
@@ -282,7 +270,7 @@ namespace FB2EPubConverter
 
         protected override IEpubFile CreateEpub()
         {
-            return new EPubFileV3(Settings.V3Settings.V3SubStandard == EPubV3SubStandard.V30 ? V3Standard.V30 : V3Standard.V301)
+            return new EPubFileV3(Settings.V3Settings)
             {
                 FlatStructure = Settings.CommonSettings.Flat,
                 EmbedStyles = Settings.CommonSettings.EmbedStyles
