@@ -14,11 +14,17 @@ namespace Fb2epubSettings
 
         #region constants
 
+        public EPubV2Settings()
+        {
+            HTMLFileMaxSize = 245 * 1024;
+        }
+
         public const string V2SettingsElementName = "EPubV2Settings";
 
         private const string AddCalibreMetadataElementName = "AddCalibreMetadata";
         private const string EnableAdobeTemplateUsageElementName = "EnableAdobeTemplateUsage";
         private const string AdobeTemplatePathElementName = "AdobeTemplatePath";
+        private const string HTMLFileMaxSizeAllowedElementName = "HTMLFileMaxSizeAllowed";
 
         #endregion
 
@@ -28,6 +34,7 @@ namespace Fb2epubSettings
             _adobeTemplatePath = string.Empty;
             _addCalibreMetadata = true;
             _appleEPubSettings.SetupDefaults();
+            HTMLFileMaxSize = 245 * 1024;
         }
 
         /// <summary>
@@ -66,6 +73,7 @@ namespace Fb2epubSettings
             set { _adobeTemplatePath = value; }
         }
 
+        public long HTMLFileMaxSize { get; set; }
 
         public void CopyFrom(IEPubV2Settings temp)
         {
@@ -101,6 +109,9 @@ namespace Fb2epubSettings
                         case AdobeTemplatePathElementName:
                             _adobeTemplatePath = reader.ReadElementContentAsString();
                             continue;
+                        case HTMLFileMaxSizeAllowedElementName:
+                            HTMLFileMaxSize = reader.ReadElementContentAsLong();
+                            continue;
                     }
                 }
                 reader.Read();
@@ -123,6 +134,10 @@ namespace Fb2epubSettings
 
             writer.WriteStartElement(AdobeTemplatePathElementName);
             writer.WriteValue(_adobeTemplatePath);
+            writer.WriteEndElement();
+
+            writer.WriteStartElement(HTMLFileMaxSizeAllowedElementName);
+            writer.WriteValue(HTMLFileMaxSize.ToString());
             writer.WriteEndElement();
 
             writer.WriteEndElement();
