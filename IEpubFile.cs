@@ -14,11 +14,6 @@ namespace EPubLibrary
         TransliterationSettings TranslitMode { get; set; }
 
         /// <summary>
-        /// Set/get it Table of Content (TOC) entries should be transliterated
-        /// </summary>
-        bool TranliterateToc { set; get; }
-
-        /// <summary>
         /// Return reference to the list of the contained "book documents" - book content objects
         /// </summary>
         List<BookDocument> BookDocuments { get; }

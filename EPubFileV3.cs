@@ -41,6 +41,7 @@ namespace EPubLibrary
         private readonly NavigationManagerV3 _navigationManager = new NavigationManagerV3();
         private readonly SectionIDTracker _sectionIDTracker = new SectionIDTracker();
         private readonly IEPubV3Settings _v3Settings;
+        private readonly IEPubCommonSettings _commonSettings;
         #endregion
 
         #region private_properties
@@ -65,20 +66,16 @@ namespace EPubLibrary
             set { _translitMode = value; }
         }
 
-        /// <summary>
-        /// Set/get it Table of Content (TOC) entries should be transliterated
-        /// </summary>
-        public bool TranliterateToc { set; get; }
-
         public List<BookDocument> BookDocuments { get { return _sections; } }
 
         #endregion 
 
 
 
-        public EPubFileV3(IEPubV3Settings v3Settings)
+        public EPubFileV3(IEPubCommonSettings commonSettings, IEPubV3Settings v3Settings)
         {
             _v3Settings = v3Settings;
+            _commonSettings = commonSettings;
             _content = new ContentFileV3(v3Settings.V3SubStandard)
             {
                 GenerateCompatibleTOC = v3Settings.GenerateV2CompatibleTOC
@@ -450,7 +447,7 @@ namespace EPubLibrary
             // to be valid we need at least one NAVPoint
             if (_navigationManager.TableOfContentFile.IsNavMapEmpty() && (_sections.Count > 0))
             {
-                _navigationManager.AddBookSubsection(_sections[0], TranliterateToc ?Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName,  _translitMode ):_title.BookTitles[0].TitleName);
+                _navigationManager.AddBookSubsection(_sections[0], _commonSettings.TransliterateToc ?Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName,  _translitMode ):_title.BookTitles[0].TitleName);
             }
         }
 
@@ -492,7 +489,7 @@ namespace EPubLibrary
         {
             subsection.Id = _sectionIDTracker.GenerateSectionId(subsection);
             _content.AddXHTMLTextItem(subsection);
-            _navigationManager.AddBookSubsection(subsection, TranliterateToc ? Rus2Lat.Instance.Translate(subsection.PageTitle, _translitMode ):subsection.PageTitle);
+            _navigationManager.AddBookSubsection(subsection, _commonSettings.TransliterateToc ? Rus2Lat.Instance.Translate(subsection.PageTitle, _translitMode ):subsection.PageTitle);
         }
 
         /// <summary>

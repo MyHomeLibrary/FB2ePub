@@ -72,6 +72,7 @@ namespace EPubLibrary
         private readonly ContentFileV2 _content = new ContentFileV2();
         private readonly SectionIDTracker _sectionIDTracker = new SectionIDTracker();
         private readonly IEPubV2Settings _v2Settings;
+        private readonly IEPubCommonSettings _commonSettings;
         #endregion
 
         #region private_properties
@@ -83,9 +84,10 @@ namespace EPubLibrary
         #region public_properties
 
 
-        public EPubFileV2(IEPubV2Settings settings)
+        public EPubFileV2(IEPubCommonSettings commonSettings, IEPubV2Settings v2Settings)
         {
-            _v2Settings = settings;
+            _v2Settings = v2Settings;
+            _commonSettings = commonSettings;
             SetupAppleSettings();
         }
 
@@ -187,14 +189,6 @@ namespace EPubLibrary
             }
         }
 
-        /// <summary>
-        /// Returns reference to apple options file
-        /// </summary>
-        public AppleDisplayOptionsFile AppleOptions
-        {
-            get { return _appleOptionsFile; }
-        }
-
         #endregion
 
 
@@ -208,10 +202,6 @@ namespace EPubLibrary
             set { _translitMode = value; }
         }
 
-        /// <summary>
-        /// Set/get it Table of Content (TOC) entries should be transliterated
-        /// </summary>
-        public bool TranliterateToc { set; get; }
         #endregion
 
         #region public_functions
@@ -643,7 +633,7 @@ namespace EPubLibrary
             // to be valid we need at least one NAVPoint
             if (_navigationManager.TableOfContentFile.IsNavMapEmpty() && (_sections.Count > 0))
             {
-                _navigationManager.AddBookSubsection(_sections[0], TranliterateToc ? Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, _translitMode) : _title.BookTitles[0].TitleName);                        
+                _navigationManager.AddBookSubsection(_sections[0], _commonSettings.TransliterateToc ? Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, _translitMode) : _title.BookTitles[0].TitleName);                        
             }
         }
 
@@ -686,7 +676,7 @@ namespace EPubLibrary
             subsection.Id = _sectionIDTracker.GenerateSectionId(subsection);
             _content.AddXHTMLTextItem(subsection);
             _navigationManager.AddBookSubsection(subsection,
-                TranliterateToc? Rus2Lat.Instance.Translate(subsection.PageTitle,  _translitMode):subsection.PageTitle);
+                _commonSettings.TransliterateToc? Rus2Lat.Instance.Translate(subsection.PageTitle,  _translitMode):subsection.PageTitle);
         }
 
 
