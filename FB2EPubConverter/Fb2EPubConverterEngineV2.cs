@@ -23,22 +23,6 @@ namespace FB2EPubConverter
 
         private const string DefaultCSSFileName = "default_v2.css";
 
-        /// <summary>
-        /// Get/Set max document size in bytes
-        /// </summary>
-        public long MaxSize
-        {
-            get { return _maxSize; }
-            set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentException("value");
-                }
-                _maxSize = value;
-            }
-        }
-
         protected override void ConvertContent(FB2File fb2File, IEpubFile epubFile)
         {
             var epubFileV2 = epubFile as EPubFileV2;
@@ -186,7 +170,7 @@ namespace FB2EPubConverter
             {
                 CapitalDrop = false,
                 Images = Images,
-                MaxSize = MaxSize,
+                MaxSize = _maxSize,
                 ReferencesManager = _referencesManager,
             };
             var infoConverter = new Fb2EpubInfoConverterV2();
@@ -249,7 +233,7 @@ namespace FB2EPubConverter
                 {
                     CapitalDrop = Settings.CommonSettings.CapitalDrop,
                     Images = Images,
-                    MaxSize = MaxSize,
+                    MaxSize = _maxSize,
                     ReferencesManager = _referencesManager,
                 };
                 var annotationConverter = new AnnotationConverterV2();
