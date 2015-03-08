@@ -44,7 +44,7 @@ namespace FB2EPubConverter
             AddAboutInformation(epubFileV3);
         }
 
-        public void SetupCSS(EPubFileV3 epubFile)
+        private void SetupCSS(EPubFileV3 epubFile)
         {
             Assembly asm = Assembly.GetAssembly(GetType());
             string pathPreffix = Path.GetDirectoryName(asm.Location);
@@ -56,7 +56,7 @@ namespace FB2EPubConverter
         }
 
 
-        public void SetupFonts(EPubFileV3 epubFile)
+        private void SetupFonts(EPubFileV3 epubFile)
         {
             if (Settings.CommonSettings.Fonts == null)
             {
