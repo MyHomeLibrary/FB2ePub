@@ -10,12 +10,13 @@ using FolderSettingsHelper.IniLocations;
 using FontsSettings;
 using FontSettingsContracts;
 using log4net;
+using TranslitRuContracts;
 
 namespace Fb2epubSettings
 {
     public partial class ConverterSettingsForm : Form
     {
-        internal static class Logger
+        private static class Logger
         {
             // Create a logger for use in this class
             public static readonly ILog Log = LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
@@ -140,7 +141,7 @@ namespace Fb2epubSettings
             }
             checkBoxTransliterateTOC.Checked = _settings.CommonSettings.TransliterateToc;
             checkBoxTransliterateFileName.Checked = _settings.ConversionSettings.TransliterateFileName;
-            checkBoxTransliterateAdditional.Checked = _settings.ConversionSettings.Transliterate;
+            checkBoxTransliterateAdditional.Checked = _settings.ConversionSettings.TransliterationSettings.Transliterate;
             textBoxAuthorFormat.Text = _settings.ConversionSettings.AuthorFormat;
             textBoxFileAsFormat.Text = _settings.ConversionSettings.FileAsFormat;
             textBoxNoSequenceFormat.Text = _settings.ConversionSettings.NoSequenceFormat;
@@ -309,7 +310,7 @@ namespace Fb2epubSettings
 
         private void checkBoxTransliterateAdditional_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.ConversionSettings.Transliterate = checkBoxTransliterateAdditional.Checked;
+            ((TransliterationSettingsImp)_settings.ConversionSettings.TransliterationSettings).Mode = (checkBoxTransliterateAdditional.Checked)? TranslitModeEnum.TranslitRu : TranslitModeEnum.None;
         }
 
         private void textBoxSequenceFormat_TextChanged(object sender, EventArgs e)

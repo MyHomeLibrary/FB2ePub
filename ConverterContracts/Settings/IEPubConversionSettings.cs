@@ -1,5 +1,6 @@
 ﻿using System.Xml.Serialization;
 using FontSettingsContracts;
+using TranslitRuContracts;
 
 namespace ConverterContracts.Settings
 {
@@ -19,7 +20,7 @@ namespace ConverterContracts.Settings
         void CopyFrom(IEPubConversionSettings temp);
         void SetupDefaults();
 
-        bool Transliterate { get; set; }
+        ITransliterationSettings TransliterationSettings { get; set; }
         bool TransliterateFileName { get; set; }
         bool Fb2Info { get; set; }
         bool AddSeqToTitle { get; set; }

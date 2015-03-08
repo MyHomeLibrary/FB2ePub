@@ -11,7 +11,6 @@ namespace ConverterContracts.Settings
 
     public interface IConverterSettings : IXmlSerializable
     {
-        void SetupDefaults();
         IFB2ImportSettings FB2ImportSettings { get; set; }
         IEPubCommonSettings CommonSettings { get; set; }
         IEPubConversionSettings ConversionSettings { get; set; }
@@ -20,6 +19,8 @@ namespace ConverterContracts.Settings
         string ResourcesPath { get; set; }
         EPubVersion StandardVersion { get; set; }
         string OutPutPath { get; set; }
+
+        void SetupDefaults();
         void CopyFrom(IConverterSettings temp);
     }
 }
