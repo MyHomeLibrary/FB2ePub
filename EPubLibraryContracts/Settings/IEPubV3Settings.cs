@@ -14,7 +14,8 @@ namespace EPubLibraryContracts.Settings
         void CopyFrom(IEPubV3Settings temp);
 
         EPubV3SubStandard V3SubStandard { get; set; }
-        bool OldVersionCompatibilityMode { get; set; }
+        bool GenerateV2CompatibleTOC { get; set; }
+        long HTMLFileMaxSize { get; set; }
 
     }
 }

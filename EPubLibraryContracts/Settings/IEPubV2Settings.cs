@@ -9,6 +9,7 @@ namespace EPubLibraryContracts.Settings
         bool EnableAdobeTemplate { get; set; }
         IAppleConverterePub2Settings AppleConverterEPubSettings { get; set; }
         string AdobeTemplatePath { get; set; }
+        long HTMLFileMaxSize { get; set; }
 
         void CopyFrom(IEPubV2Settings temp);
     }
