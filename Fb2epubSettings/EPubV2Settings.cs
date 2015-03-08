@@ -8,7 +8,7 @@ namespace Fb2epubSettings
     public class EPubV2Settings : IEPubV2Settings 
     {
         private bool _enableAdobeTemplate;
-        private string _adobeTemplatePath = string.Empty;
+        private string _adobeTemplatePath = @".\Template\template.xpgt";
         private readonly AppleConverterePub2Settings _appleEPubSettings = new AppleConverterePub2Settings();
         private bool _addCalibreMetadata = true;
 
@@ -31,7 +31,7 @@ namespace Fb2epubSettings
         public void SetupDefaults()
         {
             _enableAdobeTemplate = false;
-            _adobeTemplatePath = string.Empty;
+            _adobeTemplatePath = @".\Template\template.xpgt";
             _addCalibreMetadata = true;
             _appleEPubSettings.SetupDefaults();
             HTMLFileMaxSize = 245 * 1024;

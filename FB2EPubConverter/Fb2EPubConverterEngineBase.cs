@@ -134,7 +134,7 @@ namespace Fb2ePubConverter
 
         }
 
-        protected virtual void PassEPubSettings(IEpubFile epubFile)
+        private void PassEPubSettings(IEpubFile epubFile)
         {
             SetTransliterationOptions(epubFile);
         }
