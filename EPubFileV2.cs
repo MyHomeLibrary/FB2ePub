@@ -79,7 +79,7 @@ namespace EPubLibrary
         #region private_properties
         private bool _flatStructure;
         private string _coverImage;
-        private ITransliterationSettings _translitMode = new TransliterationSettings { Mode = TranslitModeEnum.ExternalRuleFile };
+        private ITransliterationSettings _translitMode;// = new TransliterationSettings { Mode = TranslitModeEnum.ExternalRuleFile };
         #endregion
 
         #region public_properties
