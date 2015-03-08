@@ -17,6 +17,7 @@ using FontsSettings;
 using ICSharpCode.SharpZipLib.Zip;
 using TranslitRu;
 using XHTMLClassLibrary.BaseElements;
+using TranslitRuContracts;
 
 namespace EPubLibrary
 {
@@ -46,7 +47,7 @@ namespace EPubLibrary
 
         #region private_properties
         private bool _flatStructure;
-        private TransliterationSettings _translitMode = new TransliterationSettings { Mode = TranslitModeEnum.ExternalRuleFile};
+        private ITransliterationSettings _translitMode = new TransliterationSettings { Mode = TranslitModeEnum.ExternalRuleFile };
         private string _coverImage;
         #endregion
 
@@ -60,7 +61,7 @@ namespace EPubLibrary
         /// <summary>
         /// Transliteration mode
         /// </summary>
-        public TransliterationSettings TranslitMode
+        public ITransliterationSettings TranslitMode
         {
             get { return _translitMode; }
             set { _translitMode = value; }

@@ -232,6 +232,10 @@
       <Project>{CDFF6D0A-EB28-4817-8635-D6B0A9FDE833}</Project>
       <Name>TranslitRu</Name>
     </ProjectReference>
+    <ProjectReference Include="..\translitrunet\TranslitRuContracts\TranslitRuContracts.csproj">
+      <Project>{15699C26-B81D-4833-B077-E7B020F38EE6}</Project>
+      <Name>TranslitRuContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="EPubLibraryContracts\EPubLibraryContracts.csproj">
       <Project>{a5581cdb-9ffc-45d6-b20c-6eb060e978fd}</Project>
       <Name>EPubLibraryContracts</Name>

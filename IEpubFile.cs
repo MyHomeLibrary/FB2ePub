@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using EPubLibrary.XHTML_Items;
-using TranslitRu;
+using TranslitRuContracts;
 
 namespace EPubLibrary
 {
@@ -11,7 +11,7 @@ namespace EPubLibrary
         /// <summary>
         /// Transliteration mode
         /// </summary>
-        TransliterationSettings TranslitMode { get; set; }
+        ITransliterationSettings TranslitMode { get; set; }
 
         /// <summary>
         /// Return reference to the list of the contained "book documents" - book content objects
