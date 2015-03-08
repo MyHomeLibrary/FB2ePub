@@ -151,8 +151,8 @@ namespace Fb2epubSettings
             checkBoxFb2Info.Checked = _settings.ConversionSettings.Fb2Info;
             checkBoxConvertAlphaPNG.Checked = _settings.FB2ImportSettings.ConvertAlphaPng;
             checkBoxFlatStructure.Checked = _settings.CommonSettings.FlatStructure;
-            checkBoxEmbedStyles.Checked = _settings.ConversionSettings.EmbedStyles;
-            checkBoxCapitalize.Checked = _settings.ConversionSettings.CapitalDrop;
+            checkBoxEmbedStyles.Checked = _settings.CommonSettings.EmbedStyles;
+            checkBoxCapitalize.Checked = _settings.CommonSettings.CapitalDrop;
             checkBoxCalibreMetadata.Checked = _settings.V2Settings.AddCalibreMetadata;
             checkBoxSkipAboutPage.Checked = _settings.ConversionSettings.SkipAboutPage;
             checkBoxUseXPGT.Checked = _settings.V2Settings.EnableAdobeTemplate;
@@ -356,12 +356,12 @@ namespace Fb2epubSettings
 
         private void checkBoxEmbedStyles_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.ConversionSettings.EmbedStyles = checkBoxEmbedStyles.Checked;
+            _settings.CommonSettings.EmbedStyles = checkBoxEmbedStyles.Checked;
         }
 
         private void checkBoxCapitalize_CheckedChanged(object sender, EventArgs e)
         {
-            _settings.ConversionSettings.CapitalDrop = checkBoxCapitalize.Checked;
+            _settings.CommonSettings.CapitalDrop = checkBoxCapitalize.Checked;
         }
 
         private void checkBoxSkipAboutPage_CheckedChanged(object sender, EventArgs e)

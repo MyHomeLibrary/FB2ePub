@@ -107,7 +107,7 @@ namespace FB2EPubConverter
 
         private void PassTextFromFb2ToEpub(EPubFileV3 epubFile, FB2File fb2File)
         {
-            var converter = new Fb2EPubTextConverterV3(Settings.ConversionSettings, Images, _referencesManager, Settings.V3Settings.HTMLFileMaxSize);
+            var converter = new Fb2EPubTextConverterV3(Settings.CommonSettings, Images, _referencesManager, Settings.V3Settings.HTMLFileMaxSize);
             converter.Convert(epubFile, fb2File);
         }
 
@@ -228,7 +228,7 @@ namespace FB2EPubConverter
                 epubFile.AnnotationPage = new AnnotationPageFile(HTMLElementType.HTML5);
                 var converterSettings = new ConverterOptionsV3
                 {
-                    CapitalDrop = Settings.ConversionSettings.CapitalDrop,
+                    CapitalDrop = Settings.CommonSettings.CapitalDrop,
                     Images = Images,
                     MaxSize = Settings.V3Settings.HTMLFileMaxSize,
                     ReferencesManager = _referencesManager,
@@ -270,10 +270,7 @@ namespace FB2EPubConverter
 
         protected override IEpubFile CreateEpub()
         {
-            return new EPubFileV3(Settings.CommonSettings,Settings.V3Settings)
-            {
-                EmbedStyles = Settings.ConversionSettings.EmbedStyles
-            };
+            return new EPubFileV3(Settings.CommonSettings, Settings.V3Settings);
         }
     }
 }

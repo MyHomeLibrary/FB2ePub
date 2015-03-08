@@ -8,6 +8,8 @@ namespace Fb2epubSettings
     {
         private bool _transliterateTOC;
         private bool _flatFileFolderStructure;
+        private bool _embeddStyles;
+        private bool _capitalDrop;
 
 
         #region constants
@@ -15,6 +17,10 @@ namespace Fb2epubSettings
 
         private const string TransliterateTOCElementName = "TransliterateTOC";
         private const string FlatFileFolderStructureElementName = "FlatFileFolderStructure";
+        private const string EmbedStylesIntoXHTMLElementName = "EmbedStylesIntoXHTML";
+        private const string GenerateDropCharactersElementName = "GenerateDropCharacters";
+
+
         #endregion
 
 
@@ -22,6 +28,8 @@ namespace Fb2epubSettings
         {
             _transliterateTOC = temp.TransliterateToc;
             _flatFileFolderStructure = temp.FlatStructure;
+            _embeddStyles = temp.EmbedStyles;
+            _capitalDrop = temp.CapitalDrop;
 
         }
 
@@ -29,6 +37,8 @@ namespace Fb2epubSettings
         {
             _transliterateTOC = false;
             _flatFileFolderStructure = false;
+            _embeddStyles = false;
+            _capitalDrop = true;
         }
 
         /// <summary>
@@ -45,6 +55,23 @@ namespace Fb2epubSettings
             get { return _flatFileFolderStructure; }
             set { _flatFileFolderStructure = value; }
         }
+
+        public bool EmbedStyles
+        {
+            get { return _embeddStyles; }
+            set { _embeddStyles = value; }
+        }
+
+
+        /// <summary>
+        /// Get set if a first character in section should start from capital huge "floating" character
+        /// </summary>
+        public bool CapitalDrop
+        {
+            get { return _capitalDrop; }
+            set { _capitalDrop = value; }
+        }
+
 
         public XmlSchema GetSchema()
         {
@@ -65,6 +92,12 @@ namespace Fb2epubSettings
                         case FlatFileFolderStructureElementName:
                             _flatFileFolderStructure = reader.ReadElementContentAsBoolean();
                             continue;
+                        case EmbedStylesIntoXHTMLElementName:
+                            _embeddStyles = reader.ReadElementContentAsBoolean();
+                            continue;
+                        case GenerateDropCharactersElementName:
+                            _capitalDrop = reader.ReadElementContentAsBoolean();
+                            continue;
                     }
                 }
                 reader.Read();
@@ -82,6 +115,14 @@ namespace Fb2epubSettings
 
             writer.WriteStartElement(FlatFileFolderStructureElementName);
             writer.WriteValue(_flatFileFolderStructure.ToString());
+            writer.WriteEndElement();
+
+            writer.WriteStartElement(EmbedStylesIntoXHTMLElementName);
+            writer.WriteValue(_embeddStyles);
+            writer.WriteEndElement();
+
+            writer.WriteStartElement(GenerateDropCharactersElementName);
+            writer.WriteValue(_capitalDrop);
             writer.WriteEndElement();
 
             writer.WriteEndElement();
