@@ -8,6 +8,6 @@ namespace EPubLibraryContracts.Settings
         void SetupDefaults();
 
         bool TransliterateToc { get; set; }
-
+        bool FlatStructure { get; set; }
     }
 }

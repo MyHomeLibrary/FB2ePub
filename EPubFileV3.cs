@@ -46,7 +46,6 @@ namespace EPubLibrary
         #endregion
 
         #region private_properties
-        private bool _flatStructure;
         private ITransliterationSettings _translitMode;// = new TransliterationSettings { Mode = TranslitModeEnum.ExternalRuleFile };
         private string _coverImage;
         #endregion
@@ -79,7 +78,8 @@ namespace EPubLibrary
             _commonSettings = commonSettings;
             _content = new ContentFileV3(v3Settings.V3SubStandard)
             {
-                GenerateCompatibleTOC = v3Settings.GenerateV2CompatibleTOC
+                GenerateCompatibleTOC = v3Settings.GenerateV2CompatibleTOC,
+                FlatStructure = _commonSettings.FlatStructure,
             };
         }
 
@@ -96,7 +96,7 @@ namespace EPubLibrary
 
         private void CreateContainer(out ContainerFile container)
         {
-            container = new ContainerFileV3 { FlatStructure = _flatStructure, ContentFilePath = _content };
+            container = new ContainerFileV3 { FlatStructure = _commonSettings.FlatStructure, ContentFilePath = _content };
         }
 
 
@@ -140,7 +140,7 @@ namespace EPubLibrary
             stream.SetLevel(9);
             var licensePage = new LicenseFile(HTMLElementType.HTML5)
             {
-                FlatStructure = _flatStructure,
+                FlatStructure = _content.FlatStructure,
                 EmbedStyles = EmbedStyles,
             };
             CreateFileEntryInZip(stream, licensePage);
@@ -159,7 +159,7 @@ namespace EPubLibrary
 
             var aboutPage = new AboutPageFile(HTMLElementType.HTML5)
             {
-                FlatStructure = _flatStructure,
+                FlatStructure = _commonSettings.FlatStructure,
                 EmbedStyles = EmbedStyles,
                 AboutLinks = _aboutLinks,
                 AboutTexts = _aboutTexts
@@ -191,7 +191,7 @@ namespace EPubLibrary
 
         private void AddNavigation(ZipOutputStream stream)
         {
-            _navigationManager.SetupBookNavigation(_title.Identifiers[0].ID, Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, TranslitMode),_flatStructure);
+            _navigationManager.SetupBookNavigation(_title.Identifiers[0].ID, Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, TranslitMode),_commonSettings.FlatStructure);
 
             if (_content.GenerateCompatibleTOC)
             {
@@ -419,7 +419,7 @@ namespace EPubLibrary
 
             foreach (var section in _sections)
             {
-                section.FlatStructure = _flatStructure;
+                section.FlatStructure = _commonSettings.FlatStructure;
                 section.EmbedStyles = EmbedStyles;
                 section.MaxSize = _v3Settings.HTMLFileMaxSize;
 
@@ -464,7 +464,7 @@ namespace EPubLibrary
                 int subCount = 0;
                 foreach (var subsection in section.Split())
                 {
-                    subsection.FlatStructure = _flatStructure;
+                    subsection.FlatStructure = _commonSettings.FlatStructure;
                     subsection.EmbedStyles = EmbedStyles;
                     subsection.FileName = string.Format("{0}_{1}.xhtml",
                         Path.GetFileNameWithoutExtension(section.FileName), subCount);
@@ -491,19 +491,6 @@ namespace EPubLibrary
             subsection.Id = _sectionIDTracker.GenerateSectionId(subsection);
             _content.AddXHTMLTextItem(subsection);
             _navigationManager.AddBookSubsection(subsection, _commonSettings.TransliterateToc ? Rus2Lat.Instance.Translate(subsection.PageTitle, _translitMode ):subsection.PageTitle);
-        }
-
-        /// <summary>
-        /// Get/Set "flat" mode , when flat mode is set no subfolders created inside the ZIP
-        /// used to work around bugs in some readers
-        /// </summary>
-        public bool FlatStructure
-        {
-            set
-            {
-                _content.FlatStructure = value;
-                _flatStructure = value;
-            }
         }
 
         /// <summary>
@@ -589,14 +576,14 @@ namespace EPubLibrary
         /// <param name="pathObject"></param>
         private void CreateFileEntryInZip(ZipOutputStream stream, IEPubPath pathObject)
         {
-            ZipEntry file = _zipFactory.MakeFileEntry(pathObject.PathInEPUB.GetFilePathInZip(_flatStructure), false);
+            ZipEntry file = _zipFactory.MakeFileEntry(pathObject.PathInEPUB.GetFilePathInZip(_commonSettings.FlatStructure), false);
             file.CompressionMethod = CompressionMethod.Deflated; // as defined by ePub stndard
             stream.PutNextEntry(file);
         }
 
         private void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
         {
-            xhtmlFile.FlatStructure = _flatStructure;
+            xhtmlFile.FlatStructure = _commonSettings.FlatStructure;
             xhtmlFile.EmbedStyles = EmbedStyles;
             xhtmlFile.StyleFiles.Add(_mainCss);
             xhtmlFile.Write(stream);
@@ -767,7 +754,7 @@ namespace EPubLibrary
                         FontStyle = CssFontDefinition.FromStyle(subFont.FontStyle),
                         FontWidth = CssFontDefinition.FromWidth(subFont.FontWidth)
                     };
-                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, EmbedStyles, _flatStructure)).ToList();
+                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, EmbedStyles, _commonSettings.FlatStructure)).ToList();
                     cssFont.FontSrcs = sources;
                     _mainCss.AddFont(cssFont);
                 }

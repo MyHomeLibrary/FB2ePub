@@ -77,7 +77,6 @@ namespace EPubLibrary
         #endregion
 
         #region private_properties
-        private bool _flatStructure;
         private string _coverImage;
         private ITransliterationSettings _translitMode;// = new TransliterationSettings { Mode = TranslitModeEnum.ExternalRuleFile };
         #endregion
@@ -90,6 +89,7 @@ namespace EPubLibrary
             _v2Settings = v2Settings;
             _commonSettings = commonSettings;
             SetupAppleSettings();
+            _content.FlatStructure = commonSettings.FlatStructure;
         }
 
         /// <summary>
@@ -114,19 +114,6 @@ namespace EPubLibrary
         /// </summary>
         public bool InjectLKRLicense { get; set; }
 
-        /// <summary>
-        /// Get/Set "flat" mode , when flat mode is set no subfolders created inside the ZIP
-        /// used to work around bugs in some readers
-        /// </summary>
-        public bool FlatStructure
-        {
-            get { return _flatStructure; }
-            set
-            {
-                _content.FlatStructure = value;
-                _flatStructure = value;
-            }
-        }
 
         // All sequences in the book
         public List<string> AllSequences { get { return _allSequences; } }
@@ -354,7 +341,7 @@ namespace EPubLibrary
 
         private void CreateContainer(out ContainerFile container)
         {
-            container = new ContainerFile {FlatStructure = _flatStructure, ContentFilePath = _content};
+            container = new ContainerFile { FlatStructure = _commonSettings.FlatStructure, ContentFilePath = _content };
         }
 
 
@@ -390,7 +377,7 @@ namespace EPubLibrary
             stream.SetLevel(9);
             var licensePage = new LicenseFile(HTMLElementType.XHTML11)
             {
-                FlatStructure = FlatStructure, 
+                FlatStructure = _commonSettings.FlatStructure, 
                 EmbedStyles = EmbedStyles, 
             };
             CreateFileEntryInZip(stream, licensePage);
@@ -539,7 +526,7 @@ namespace EPubLibrary
         /// <param name="pathObject"></param>
         private void CreateFileEntryInZip(ZipOutputStream stream, IEPubPath pathObject)
         {
-            ZipEntry file = _zipFactory.MakeFileEntry(pathObject.PathInEPUB.GetFilePathInZip(_flatStructure), false);
+            ZipEntry file = _zipFactory.MakeFileEntry(pathObject.PathInEPUB.GetFilePathInZip(_commonSettings.FlatStructure), false);
             file.CompressionMethod = CompressionMethod.Deflated; // as defined by ePub stndard
             stream.PutNextEntry(file);
         }
@@ -562,7 +549,7 @@ namespace EPubLibrary
 
         private void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
         {
-            xhtmlFile.FlatStructure = FlatStructure;
+            xhtmlFile.FlatStructure = _commonSettings.FlatStructure;
             xhtmlFile.EmbedStyles = EmbedStyles;
             xhtmlFile.StyleFiles.Add(_mainCss);
             if (_v2Settings.EnableAdobeTemplate)
@@ -582,7 +569,7 @@ namespace EPubLibrary
 
             var aboutPage = new AboutPageFile(HTMLElementType.XHTML11)
             {
-                FlatStructure = FlatStructure, 
+                FlatStructure = _commonSettings.FlatStructure, 
                 EmbedStyles = EmbedStyles,
                 AboutLinks = _aboutLinks, 
                 AboutTexts = _aboutTexts
@@ -606,7 +593,7 @@ namespace EPubLibrary
 
             foreach (var section in _sections)
             {
-                section.FlatStructure = FlatStructure;
+                section.FlatStructure = _commonSettings.FlatStructure;
                 section.EmbedStyles = EmbedStyles;
                 section.MaxSize = _v2Settings.HTMLFileMaxSize;
 
@@ -651,7 +638,7 @@ namespace EPubLibrary
                 int subCount = 0;
                 foreach (var subsection in section.Split())
                 {
-                    subsection.FlatStructure = FlatStructure;
+                    subsection.FlatStructure = _commonSettings.FlatStructure;
                     subsection.EmbedStyles = EmbedStyles;
                     subsection.FileName = string.Format("{0}_{1}.xhtml",
                         Path.GetFileNameWithoutExtension(section.FileName), subCount);
@@ -839,7 +826,7 @@ namespace EPubLibrary
                         FontStyle = CssFontDefinition.FromStyle(subFont.FontStyle),
                         FontWidth = CssFontDefinition.FromWidth(subFont.FontWidth)
                     };
-                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, EmbedStyles, FlatStructure)).ToList();
+                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, EmbedStyles, _commonSettings.FlatStructure)).ToList();
                     cssFont.FontSrcs = sources;
                     _mainCss.AddFont(cssFont);
                 }
