@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TranslitRuContracts;
 
 namespace TranslitRu
 {
 
     public class Rus2Lat
     {
-        public static Rus2Lat Instance;
+        public static readonly Rus2Lat Instance = new Rus2Lat();
         private readonly Dictionary<string,ITranslitConverter>  _fileConverters = new Dictionary<string, ITranslitConverter>();
 
-        static Rus2Lat()
-        {
-            Instance = new Rus2Lat();
-        }
 
         private Rus2Lat()
         {
             
         }
 
-        public string Translate(string stringWithCyrillic, TransliterationSettings settings)
+        public string Translate(string stringWithCyrillic, ITransliterationSettings settings)
         {
             ITranslitConverter converter;
             switch (settings.Mode)

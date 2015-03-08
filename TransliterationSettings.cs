@@ -1,14 +1,10 @@
-﻿namespace TranslitRu
-{
-    public enum TranslitModeEnum
-    {
-        None,
-        TranslitRu, // use mode used by http://www.translit.ru
-        ExternalRuleFile, // use external maping file
-        HtmlCodes, // HTML codes
-    }
+﻿using TranslitRuContracts;
 
-    public class TransliterationSettings
+namespace TranslitRu
+{
+
+
+    public class TransliterationSettings : ITransliterationSettings
     {
         public TranslitModeEnum Mode { get; set; }
         public string FileName { get; set; }
