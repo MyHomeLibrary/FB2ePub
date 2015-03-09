@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Xml.Linq;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.Content.CalibreMetadata
 {
     /// <summary>
     /// Represent metadata set by Calibre, used by some readers and librusec
     /// </summary>
-    public class CalibreMetadataObject
+    public class CalibreMetadataObject : ICalibreMetadata
     {
         private static readonly XName MetaName = EPubNamespaces.OpfNameSpace + "meta";
 
@@ -35,7 +31,7 @@ namespace EPubLibrary.Content.CalibreMetadata
         /// Injects Calibre's namespace into XHTML element
         /// </summary>
         /// <param name="metadata"></param>
-        internal void InjectNamespace(XElement metadata)
+        public void InjectNamespace(XElement metadata)
         {
             metadata.Add(new XAttribute(XNamespace.Xmlns + "calibre", CalibreNamespaces.CalibreNamespace));
         }
@@ -44,7 +40,7 @@ namespace EPubLibrary.Content.CalibreMetadata
         /// Injects Calibre's metadata into XHTML element (for metadata part)
         /// </summary>
         /// <param name="metadata"></param>
-        internal void InjectData(XElement metadata)
+        public void InjectData(XElement metadata)
         {
             if (!string.IsNullOrEmpty(SeriesName))
             {

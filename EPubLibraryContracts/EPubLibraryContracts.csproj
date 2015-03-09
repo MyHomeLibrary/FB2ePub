@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBookInformationData.cs" />
+    <Compile Include="ICalibreMetadataObject.cs" />
     <Compile Include="ICoverage.cs" />
     <Compile Include="IDataWithLanguage.cs" />
     <Compile Include="IDescription.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="IPublisher.cs" />
     <Compile Include="IRelation.cs" />
     <Compile Include="IRights.cs" />
+    <Compile Include="ISeriesCollectionMember.cs" />
     <Compile Include="ISource.cs" />
     <Compile Include="ISubject.cs" />
     <Compile Include="ITitle.cs" />

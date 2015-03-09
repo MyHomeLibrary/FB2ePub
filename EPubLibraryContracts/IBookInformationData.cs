@@ -14,9 +14,9 @@ namespace EPubLibraryContracts
         IList<IEPubIdentifier> Identifiers { get; }
         IList<IPersoneWithRole> Creators { get; }
         IList<IPersoneWithRole> Contributors { get; }
-        IPublisher Publisher { get; }
+        IPublisher Publisher { get; set; }
         IList<ISubject> Subjects { get; }
-        IDescription Description { get; }
+        IDescription Description { get; set; }
         DateTime? DateFileCreation { set; get; }
         DateTime? DatePublished { set; get; }
         DateTime? DataFileModification { set; get; }
@@ -28,7 +28,8 @@ namespace EPubLibraryContracts
         ICoverage Coverage { set; get; }
         IRights Rights { set; get; }
         string CoverID { set; get; }
-
+        ISeriesCollection SeriesCollection { get; }
+        
         bool IsValid();
     }
 }

@@ -11,6 +11,7 @@ using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
 using EPubLibrary.Template;
 using EPubLibrary.XHTML_Items;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.Content
 {
@@ -26,7 +27,7 @@ namespace EPubLibrary.Content
         /// <summary>
         /// Get/Set CalibreData object containing calibre's metadata to add to file
         /// </summary>
-        public CalibreMetadataObject CalibreData { get; set; }
+        public ICalibreMetadata CalibreData { get; set; }
 
 
         /// <summary>
@@ -49,7 +50,7 @@ namespace EPubLibrary.Content
 
         private void CreateContentDocument(XDocument document)
         {
-            if (Title == null)
+            if (BookInformation == null)
             {
                 throw new NullReferenceException("Please set Title first!");
             }
@@ -65,7 +66,7 @@ namespace EPubLibrary.Content
             var packagedata = new XElement(EPubNamespaces.OpfNameSpace + "package");
             packagedata.Add(new XAttribute("version", GetEPubVersion()));
             // we use ID of the first identifier
-            packagedata.Add(new XAttribute("unique-identifier", Title.Identifiers[0].IdentifierName));
+            packagedata.Add(new XAttribute("unique-identifier", BookInformation.Identifiers[0].IdentifierName));
             packagedata.Add(new XAttribute("xmlns", EPubNamespaces.OpfNameSpace.NamespaceName));
             document.Add(packagedata);
         }
@@ -105,7 +106,7 @@ namespace EPubLibrary.Content
                 CalibreData.InjectNamespace(metadata);
             }
 
-            foreach (var titleItem in Title.BookTitles)
+            foreach (var titleItem in BookInformation.BookTitles)
             {
                 var titleElement = new XElement(PURLNamespaces.DCElements + "title", titleItem.TitleName);
                 if (!string.IsNullOrEmpty(titleItem.Language))
@@ -116,14 +117,14 @@ namespace EPubLibrary.Content
                 metadata.Add(titleElement);
             }
 
-            foreach (var languageItem in Title.Languages)
+            foreach (var languageItem in BookInformation.Languages)
             {
                 var language = new XElement(PURLNamespaces.DCElements + "language", languageItem);
                 language.Add(new XAttribute(WWWNamespaces.XSI + "type", "dcterms:RFC3066"));
                 metadata.Add(language);
             }
 
-            foreach (var identifierItem in Title.Identifiers)
+            foreach (var identifierItem in BookInformation.Identifiers)
             {
                 var identifier = new XElement(PURLNamespaces.DCElements + "identifier", identifierItem.ID);
                 identifier.Add(new XAttribute("id", identifierItem.IdentifierName));
@@ -131,14 +132,14 @@ namespace EPubLibrary.Content
                 metadata.Add(identifier);
             }
 
-            if ( Title.DatePublished.HasValue)
+            if ( BookInformation.DatePublished.HasValue)
             {
-                var xDate = new XElement(PURLNamespaces.DCElements + "date", Title.DatePublished.Value.Year);
+                var xDate = new XElement(PURLNamespaces.DCElements + "date", BookInformation.DatePublished.Value.Year);
                 xDate.Add(new XAttribute(EPubNamespaces.FakeOpf + "event", "original-publication"));
                 metadata.Add(xDate);
             }
 
-            foreach (var creatorItem in Title.Creators)
+            foreach (var creatorItem in BookInformation.Creators)
             {
                 if (!string.IsNullOrEmpty(creatorItem.PersonName))
                 {
@@ -157,7 +158,7 @@ namespace EPubLibrary.Content
                 }
             }
 
-            foreach (var contributorItem in Title.Contributors)
+            foreach (var contributorItem in BookInformation.Contributors)
             {
                 if (!string.IsNullOrEmpty(contributorItem.PersonName))
                 {
@@ -183,10 +184,10 @@ namespace EPubLibrary.Content
                 metadata.Add(maker);
             }
 
-            if (!string.IsNullOrEmpty(Title.Publisher.PublisherName))
+            if (!string.IsNullOrEmpty(BookInformation.Publisher.PublisherName))
             {
-                var publisher = new XElement(PURLNamespaces.DCElements + "publisher", Title.Publisher.PublisherName);
-                if (!string.IsNullOrEmpty(Title.Publisher.Language))
+                var publisher = new XElement(PURLNamespaces.DCElements + "publisher", BookInformation.Publisher.PublisherName);
+                if (!string.IsNullOrEmpty(BookInformation.Publisher.Language))
                 {
                     // need to add writing language in "xml:lang — use RFC-3066 format"
                     // will add when will find an example since unclear
@@ -194,15 +195,19 @@ namespace EPubLibrary.Content
                 metadata.Add(publisher);
             }
 
-            if (!string.IsNullOrEmpty(Title.Description))
+            if (!string.IsNullOrEmpty(BookInformation.Description.DescInfo))
             {
-
-                var publisher = new XElement(PURLNamespaces.DCElements + "description", Title.Description);
+                var publisher = new XElement(PURLNamespaces.DCElements + "description", BookInformation.Description);
+                if (!string.IsNullOrEmpty(BookInformation.Description.Language))
+                {
+                    // need to add writing language in "xml:lang — use RFC-3066 format"
+                    // will add when will find an example since unclear
+                }
                 metadata.Add(publisher);                
             }
 
 
-            foreach (var subjectItem in Title.Subjects)
+            foreach (var subjectItem in BookInformation.Subjects)
             {
                 if (!string.IsNullOrEmpty(subjectItem.SubjectInfo))
                 {
@@ -241,7 +246,7 @@ namespace EPubLibrary.Content
         /// <summary>
         /// Get/Set book title
         /// </summary>
-        public EPubTitleSettings Title { get; set; }
+        public IBookInformationData BookInformation { get; set; }
 
         /// <summary>
         /// get/set Id of the cover image file

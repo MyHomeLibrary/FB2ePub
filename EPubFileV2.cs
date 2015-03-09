@@ -58,7 +58,6 @@ namespace EPubLibrary
     {
         #region readonly_private_propeties
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
-        private readonly EPubTitleSettings _title = new EPubTitleSettings();
         private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS",  FileName = "main.css" };
         private readonly AdobeTemplate _adobeTemplate = new AdobeTemplate();
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
@@ -69,12 +68,12 @@ namespace EPubLibrary
         private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
         private readonly AppleDisplayOptionsFile _appleOptionsFile = new AppleDisplayOptionsFile();
         private readonly Dictionary<string, EPUBImage> _images = new Dictionary<string, EPUBImage>();
-        private readonly CalibreMetadataObject _calibreMetadata =  new CalibreMetadataObject();
+        private readonly ICalibreMetadata _calibreMetadata = new CalibreMetadataObject();
         private readonly ContentFileV2 _content = new ContentFileV2();
         private readonly SectionIDTracker _sectionIDTracker = new SectionIDTracker();
         private readonly IEPubV2Settings _v2Settings;
         private readonly IEPubCommonSettings _commonSettings;
-        private readonly IBookInformationData _bookInformation = new BookInformationData();
+        private readonly BookInformationData _bookInformation = new BookInformationData();
         #endregion
 
         #region private_properties
@@ -110,7 +109,7 @@ namespace EPubLibrary
         /// <summary>
         /// Return Calibre's metadata object
         /// </summary>
-        public CalibreMetadataObject CalibreMetadata { get { return _calibreMetadata; }}
+        public ICalibreMetadata CalibreMetadata { get { return _calibreMetadata; } }
 
         /// <summary>
         /// Return reference to the list of the contained "book documents" - book content objects
@@ -127,14 +126,6 @@ namespace EPubLibrary
         /// Return reference to the list of the CSS style files
         /// </summary>
         public List<CSSFile> CSSFiles { get { return _cssFiles; } }
-
-        /// <summary>
-        /// Get access to book's title data
-        /// </summary>
-        public EPubTitleSettings Title
-        {
-            get { return _title; }
-        }
 
 
         /// <summary>
@@ -228,7 +219,7 @@ namespace EPubLibrary
         public void SetEPubFonts(IEPubFontSettings fonts, string resourcesPath, bool decorateFontNames)
         {
             _fontSettings.ResourceMask = resourcesPath;
-            _fontSettings.Load(fonts, decorateFontNames ? _title.Identifiers[0].IdentifierName : string.Empty);
+            _fontSettings.Load(fonts, decorateFontNames ? _bookInformation.Identifiers[0].IdentifierName : string.Empty);
         }
 
 
@@ -296,7 +287,8 @@ namespace EPubLibrary
         /// <returns></returns>
         private bool IsValid()
         {
-            if (!_title.IsValid())
+            if ((_bookInformation != null) && 
+                !_bookInformation.IsValid())
             {
                 return false;
             }
@@ -364,7 +356,7 @@ namespace EPubLibrary
 
         private void AddNavigation(ZipOutputStream stream)
         {
-            _navigationManager.SetupBookNavigation(_title.Identifiers[0].ID, Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, TranslitMode));
+            _navigationManager.SetupBookNavigation(_bookInformation.Identifiers[0].ID, Rus2Lat.Instance.Translate(_bookInformation.BookTitles[0].TitleName, TranslitMode));
             AddTOCFile(stream);
         }
 
@@ -614,7 +606,7 @@ namespace EPubLibrary
             // to be valid we need at least one NAVPoint
             if (_navigationManager.TableOfContentFile.IsNavMapEmpty() && (_sections.Count > 0))
             {
-                _navigationManager.AddBookSubsection(_sections[0], _commonSettings.TransliterateToc ? Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, _translitMode) : _title.BookTitles[0].TitleName);                        
+                _navigationManager.AddBookSubsection(_sections[0], _commonSettings.TransliterateToc ? Rus2Lat.Instance.Translate(_bookInformation.BookTitles[0].TitleName, _translitMode) : _bookInformation.BookTitles[0].TitleName);                        
             }
         }
 
@@ -718,7 +710,7 @@ namespace EPubLibrary
         {
             stream.SetLevel(9);
             CreateFileEntryInZip(stream,_content);
-            _content.Title = _title;
+            _content.BookInformation = _bookInformation;
             if (_v2Settings.AddCalibreMetadata)
             {
                 _content.CalibreData = _calibreMetadata;

@@ -30,7 +30,6 @@ namespace EPubLibrary
     {
         #region readonly_private_propeties
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
-        private readonly EPubTitleSettings _title = new EPubTitleSettings();
         private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS", FileName = "main.css" };
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
         private readonly List<BookDocument> _sections = new List<BookDocument>();
@@ -43,7 +42,7 @@ namespace EPubLibrary
         private readonly SectionIDTracker _sectionIDTracker = new SectionIDTracker();
         private readonly IEPubV3Settings _v3Settings;
         private readonly IEPubCommonSettings _commonSettings;
-        private readonly IBookInformationData _bookInformation = new BookInformationData();
+        private readonly BookInformationData _bookInformation = new BookInformationData();
         #endregion
 
         #region private_properties
@@ -87,16 +86,12 @@ namespace EPubLibrary
         }
 
 
-        /// <summary>
-        /// Adds new series collection to ePub
-        /// </summary>
-        /// <param name="collection"></param>
-        public void AddNewCollection(SeriesCollectionMember collection)
+        public ISeriesCollection SeriesCollection
         {
-            _content.SeriesCollections.CollectionMembers.Add(collection);
+            get { return _bookInformation.SeriesCollection; }
         }
 
-
+   
         private void CreateContainer(out ContainerFile container)
         {
             container = new ContainerFileV3 { FlatStructure = _commonSettings.FlatStructure, ContentFilePath = _content };
@@ -107,7 +102,7 @@ namespace EPubLibrary
         {
             stream.SetLevel(9);
             CreateFileEntryInZip(stream, _content);
-            _content.Title = _title;
+            _content.BookInformation = _bookInformation;
             _content.Write(stream);
         }
 
@@ -194,7 +189,7 @@ namespace EPubLibrary
 
         private void AddNavigation(ZipOutputStream stream)
         {
-            _navigationManager.SetupBookNavigation(_title.Identifiers[0].ID, Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName, TranslitMode),_commonSettings.FlatStructure);
+            _navigationManager.SetupBookNavigation(_bookInformation.Identifiers[0].ID, Rus2Lat.Instance.Translate(_bookInformation.BookTitles[0].TitleName, TranslitMode), _commonSettings.FlatStructure);
 
             if (_content.GenerateCompatibleTOC)
             {
@@ -444,7 +439,7 @@ namespace EPubLibrary
             // to be valid we need at least one NAVPoint
             if (_navigationManager.TableOfContentFile.IsNavMapEmpty() && (_sections.Count > 0))
             {
-                _navigationManager.AddBookSubsection(_sections[0], _commonSettings.TransliterateToc ?Rus2Lat.Instance.Translate(_title.BookTitles[0].TitleName,  _translitMode ):_title.BookTitles[0].TitleName);
+                _navigationManager.AddBookSubsection(_sections[0], _commonSettings.TransliterateToc ? Rus2Lat.Instance.Translate(_bookInformation.BookTitles[0].TitleName, _translitMode) : _bookInformation.BookTitles[0].TitleName);
             }
         }
 
@@ -505,16 +500,7 @@ namespace EPubLibrary
         /// </summary>
         public AnnotationPageFile AnnotationPage { get; set; }
 
-
-        /// <summary>
-        /// Get access to book's title data
-        /// </summary>
-        public EPubTitleSettings Title
-        {
-            get { return _title; }
-        }
-
-        
+      
         /// <summary>
         /// Used to set creator software string
         /// </summary>
@@ -634,7 +620,8 @@ namespace EPubLibrary
         /// <returns></returns>
         private bool IsValid()
         {
-            if (!_title.IsValid())
+            if ((_bookInformation != null) &&
+                 !_bookInformation.IsValid())
             {
                 return false;
             }
@@ -688,7 +675,7 @@ namespace EPubLibrary
         public void SetEPubFonts(IEPubFontSettings fonts, string resourcesPath, bool decorateFontNames)
         {
             _fontSettings.ResourceMask = resourcesPath;
-            _fontSettings.Load(fonts, decorateFontNames ? _title.Identifiers[0].IdentifierName : string.Empty);
+            _fontSettings.Load(fonts, decorateFontNames ? _bookInformation.Identifiers[0].IdentifierName : string.Empty);
         }
 
         private void AddCssElementsToCSS(Dictionary<string, Dictionary<string, List<ICSSFontFamily>>> cssElements)

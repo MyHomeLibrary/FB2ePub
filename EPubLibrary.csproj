@@ -157,7 +157,6 @@
     <Compile Include="IEpubFile.cs" />
     <Compile Include="PathUtils\ePubInternalPath.cs" />
     <Compile Include="EPubRoles.cs" />
-    <Compile Include="EPubTitleSettings.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="Content\Manifest\ManifestSectionV2.cs" />
     <Compile Include="Content\Manifest\ManifestItemV2.cs" />

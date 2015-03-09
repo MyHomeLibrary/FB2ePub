@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
+﻿using System.Globalization;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.ReferenceUtils
 {
@@ -50,7 +47,7 @@ namespace EPubLibrary.ReferenceUtils
         {
             return ((int) _type).ToString();
         }
-        public Onix5SchemaConverter(Identifier identifier)
+        public Onix5SchemaConverter(IEPubIdentifier identifier)
         {
             // if isbn
             bool bISBN = false;

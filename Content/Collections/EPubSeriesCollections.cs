@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.Content.Collections
 {
@@ -8,18 +9,11 @@ namespace EPubLibrary.Content.Collections
     /// <summary>
     /// Contains "collections" - series etc
     /// </summary>
-    public class EPubSeriesCollections
+    public class EPubSeriesCollections : ISeriesCollection
     {
-        private readonly List<SeriesCollectionMember>   _collectionMembers = new List<SeriesCollectionMember>();
+        private readonly List<ISeriesCollectionMember>   _collectionMembers = new List<ISeriesCollectionMember>();
 
-        /// <summary>
-        /// List of collection members
-        /// </summary>
-        public List<SeriesCollectionMember> CollectionMembers
-        {
-            get{return _collectionMembers;}
-        }
-
+       
         /// <summary>
         /// Writes the collections information to metadata element
         /// </summary>
@@ -27,11 +21,16 @@ namespace EPubLibrary.Content.Collections
         public void AddCollectionsToElement(XElement metadata)
         {
             int collectionCounter = 0;
-            foreach (var collection in CollectionMembers)
+            foreach (var collection in _collectionMembers)
             {
                 collection.AddCollectionToElement(metadata, ++collectionCounter);
             }
 
+        }
+
+        public void AddCollectionMember(ISeriesCollectionMember newMemeber)
+        {
+            _collectionMembers.Add(newMemeber);
         }
     }
 }

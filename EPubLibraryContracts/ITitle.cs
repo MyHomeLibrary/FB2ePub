@@ -10,6 +10,6 @@
     public interface ITitle : IDataWithLanguage
     {
         string TitleName { get; set; }
-        TitleType TitleType { get; set; };
+        TitleType TitleType { get; set; }
     }
 }

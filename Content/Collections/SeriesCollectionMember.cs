@@ -1,22 +1,14 @@
 ﻿using System.Xml.Linq;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.Content.Collections
 {
 
     /// <summary>
-    /// Coolection member
+    /// Colection member
     /// </summary>
-    public class SeriesCollectionMember
+    public class SeriesCollectionMember : ISeriesCollectionMember
     {
-        /// <summary>
-        /// Types of the collections
-        /// </summary>
-        public enum CollectionType
-        {
-            Series, // top level series ( A sequence of related works that are formally identified as a group; typically open-ended with works issued individually over time.)
-            Set,    // sub- "series" (A finite collection of works that together constitute a single intellectual unit; typically issued together and able to be sold as a unit)
-        }
-
         /// <summary>
         /// Name of the collection publication belongs to
         /// </summary>
@@ -37,7 +29,7 @@ namespace EPubLibrary.Content.Collections
         /// </summary>
         public string CollectionUID { get; set; }
 
-        public static string ToStringType(CollectionType collectionType)
+        private static string ToStringType(CollectionType collectionType)
         {
             if (collectionType == CollectionType.Series)
             {

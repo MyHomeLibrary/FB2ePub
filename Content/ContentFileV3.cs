@@ -13,6 +13,7 @@ using EPubLibrary.PathUtils;
 using System.IO;
 using System.Text;
 using System.Xml;
+using EPubLibraryContracts;
 using EPubLibraryContracts.Settings;
 
 
@@ -24,7 +25,6 @@ namespace EPubLibrary.Content
         private readonly EPubV3SubStandard _standard;   
         private readonly ManifestSectionV3 _manifest;
         private readonly BindingsV3 _bindings = new BindingsV3();
-        private readonly  EPubSeriesCollections _seriesCollections  = new EPubSeriesCollections();
         private readonly GuideSection _guide = new GuideSection();
 
 
@@ -52,8 +52,6 @@ namespace EPubLibrary.Content
 
         public bool GenerateCompatibleTOC { get; set; }
 
-        public EPubSeriesCollections SeriesCollections { get { return _seriesCollections; }}
-
         /// <summary>
         /// Returns epub version to write into a package
         /// </summary>
@@ -68,9 +66,9 @@ namespace EPubLibrary.Content
             var packagedata = new XElement(EPubNamespaces.OpfNameSpace + "package");
             packagedata.Add(new XAttribute("version", GetEPubVersion()));
             // we use ID of the first identifier
-            packagedata.Add(new XAttribute("unique-identifier", Title.Identifiers[0].IdentifierName));
+            packagedata.Add(new XAttribute("unique-identifier", BookInformation.Identifiers[0].IdentifierName));
             packagedata.Add(new XAttribute("xmlns", EPubNamespaces.OpfNameSpace.NamespaceName));
-            packagedata.Add(new XAttribute(XNamespace.Xml + "lang",Title.Languages[0]));
+            packagedata.Add(new XAttribute(XNamespace.Xml + "lang",BookInformation.Languages[0]));
             document.Add(packagedata);
         }
 
@@ -83,7 +81,7 @@ namespace EPubLibrary.Content
             metadata.Add(new XAttribute(XNamespace.Xmlns + "opf", EPubNamespaces.FakeOpf.NamespaceName));
 
             Onix5SchemaConverter source = null;
-            foreach (var identifierItem in Title.Identifiers)
+            foreach (var identifierItem in BookInformation.Identifiers)
             {
                 var schemaConverter = new Onix5SchemaConverter(identifierItem);
                 var identifier = new XElement(PURLNamespaces.DCElements + "identifier", schemaConverter.GetIdentifier());
@@ -104,7 +102,7 @@ namespace EPubLibrary.Content
 
 
             int titleIdCounter = 0;
-            foreach (var titleItem in Title.BookTitles)
+            foreach (var titleItem in BookInformation.BookTitles)
             {
                 string idString = string.Format("t{0}",++titleIdCounter);
                 var titleElement = new XElement(PURLNamespaces.DCElements + "title", titleItem.TitleName);
@@ -123,7 +121,7 @@ namespace EPubLibrary.Content
 
             }
 
-            foreach (var languageItem in Title.Languages)
+            foreach (var languageItem in BookInformation.Languages)
             {
                 var language = new XElement(PURLNamespaces.DCElements + "language", languageItem);
                 metadata.Add(language);
@@ -132,7 +130,7 @@ namespace EPubLibrary.Content
 
 
             int creatorCounter = 0;
-            foreach (var creatorItem in Title.Creators)
+            foreach (var creatorItem in BookInformation.Creators)
             {
                 if (!string.IsNullOrEmpty(creatorItem.PersonName))
                 {
@@ -164,7 +162,7 @@ namespace EPubLibrary.Content
             }
 
             int contributorCounter = 0;
-            foreach (var contributorItem in Title.Contributors)
+            foreach (var contributorItem in BookInformation.Contributors)
             {
                 if (!string.IsNullOrEmpty(contributorItem.PersonName))
                 {
@@ -218,9 +216,9 @@ namespace EPubLibrary.Content
 
 
             // date
-            if (Title.DatePublished.HasValue)
+            if (BookInformation.DatePublished.HasValue)
             {
-                var xDate = new XElement(PURLNamespaces.DCElements + "date", Title.DatePublished.Value.Year);
+                var xDate = new XElement(PURLNamespaces.DCElements + "date", BookInformation.DatePublished.Value.Year);
                 metadata.Add(xDate);
             }
 
@@ -241,13 +239,13 @@ namespace EPubLibrary.Content
             }
 
             // description
-            if (!string.IsNullOrEmpty(Title.Description))
+            if (!string.IsNullOrEmpty(BookInformation.Description.DescInfo))
             {
 
-                var publisher = new XElement(PURLNamespaces.DCElements + "description", Title.Description);
-                if (Title.Languages.Count > 0 && !string.IsNullOrEmpty(Title.Languages[0]))
+                var publisher = new XElement(PURLNamespaces.DCElements + "description", BookInformation.Description);
+                if (!string.IsNullOrEmpty(BookInformation.Description.Language))
                 {
-                    publisher.Add(new XAttribute(XNamespace.Xml + "lang", Title.Languages[0]));
+                    publisher.Add(new XAttribute(XNamespace.Xml + "lang", BookInformation.Description.Language));
                 }
                 publisher.Add(new XAttribute("id", "id_desc"));
                 metadata.Add(publisher);
@@ -261,12 +259,12 @@ namespace EPubLibrary.Content
 
 
             // publisher
-            if (!string.IsNullOrEmpty(Title.Publisher.PublisherName))
+            if (!string.IsNullOrEmpty(BookInformation.Publisher.PublisherName))
             {
-                var publisher = new XElement(PURLNamespaces.DCElements + "publisher", Title.Publisher.PublisherName);
-                if (!string.IsNullOrEmpty(Title.Publisher.Language))
+                var publisher = new XElement(PURLNamespaces.DCElements + "publisher", BookInformation.Publisher.PublisherName);
+                if (!string.IsNullOrEmpty(BookInformation.Publisher.Language))
                 {
-                    publisher.Add(new XAttribute(XNamespace.Xml + "lang", Title.Publisher.Language));
+                    publisher.Add(new XAttribute(XNamespace.Xml + "lang", BookInformation.Publisher.Language));
                 }
                 metadata.Add(publisher);
             }
@@ -274,7 +272,7 @@ namespace EPubLibrary.Content
 
             // subject
             int subjectCount = 0;
-            foreach (var subjectItem in Title.Subjects)
+            foreach (var subjectItem in BookInformation.Subjects)
             {
                 if (!string.IsNullOrEmpty(subjectItem.SubjectInfo))
                 {
@@ -296,24 +294,25 @@ namespace EPubLibrary.Content
 
             // meta modified
             string modifiedDate = DateTime.UtcNow.ToString("s")+"Z";
-            if (Title.DataFileModification.HasValue)
+            if (BookInformation.DataFileModification.HasValue)
             {
-                modifiedDate = Title.DataFileModification.Value.ToUniversalTime().ToString("s")+"Z";
+                modifiedDate = BookInformation.DataFileModification.Value.ToUniversalTime().ToString("s")+"Z";
             }
             var metaModified = new XElement(EPubNamespaces.FakeOpf + "meta", modifiedDate);
             metaModified.Add(new XAttribute("property", "dcterms:modified"));
             metadata.Add(metaModified);
 
             // series
-            if (V3StandardChecker.IsCollectionsAllowedByStandard(_standard))
+            if (V3StandardChecker.IsCollectionsAllowedByStandard(_standard) && BookInformation.SeriesCollection != null)
             {
-                _seriesCollections.AddCollectionsToElement(metadata);
+                EPubSeriesCollections bookData = BookInformation.SeriesCollection as EPubSeriesCollections;
+                if (bookData != null) bookData.AddCollectionsToElement(metadata);
             }
             document.Add(metadata);
         }
 
 
-        private string GetTitleType(Title titleItem)
+        private string GetTitleType(ITitle titleItem)
         {
             switch (titleItem.TitleType)
             {
@@ -449,7 +448,7 @@ namespace EPubLibrary.Content
 
         private void CreateContentDocument(XDocument document)
         {
-            if (Title == null)
+            if (BookInformation == null)
             {
                 throw new NullReferenceException("Please set Title first!");
             }
@@ -512,7 +511,7 @@ namespace EPubLibrary.Content
         /// <summary>
         /// Get/Set book title
         /// </summary>
-        public EPubTitleSettings Title { get; set; }
+        public IBookInformationData BookInformation { get; set; }
 
         /// <summary>
         /// get/set Id of the cover image file
