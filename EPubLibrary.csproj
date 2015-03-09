@@ -125,6 +125,7 @@
   <ItemGroup>
     <Compile Include="AppleEPubV2Extensions\AppleDisplayOptionsFile.cs" />
     <Compile Include="AppleEPubV2Extensions\AppleTargetPlatform.cs" />
+    <Compile Include="BookInformationData.cs" />
     <Compile Include="Container\ContainerFile.cs" />
     <Compile Include="Container\ContainerFileV3.cs" />
     <Compile Include="Content\Bindings\BindingsMediaTypeV3.cs" />

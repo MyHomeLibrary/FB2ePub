@@ -20,15 +20,14 @@ namespace EPubLibrary
         List<BookDocument> BookDocuments { get; }
         #endregion
 
-        #region File creation related properties
 
-        #endregion
+        IBookInformationData BookInformation { get; }
+
+
         /// <summary>
         /// Writes (generates) file to disk
         /// </summary>
         /// <param name="outFileName"></param>
         void Generate(string outFileName);
-
-        void SetTitlePageInformation(IBookTitleInformation titleInformation);
     }
 }

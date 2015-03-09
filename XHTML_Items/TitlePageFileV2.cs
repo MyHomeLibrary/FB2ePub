@@ -15,7 +15,7 @@ namespace EPubLibrary.XHTML_Items
         private readonly List<string> _authors = new List<string>();
         private readonly List<string> _series = new List<string>();
 
-        public TitlePageFileV2(IBookTitleInformation titleInformation)
+        public TitlePageFileV2(IBookInformationData titleInformation)
             : base(HTMLElementType.XHTML11)
         {
             Authors.AddRange(titleInformation.Authors);

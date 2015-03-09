@@ -40,7 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBookTitleInformation.cs" />
+    <Compile Include="IBookInformationData.cs" />
+    <Compile Include="ICoverage.cs" />
+    <Compile Include="IDataWithLanguage.cs" />
+    <Compile Include="IDescription.cs" />
+    <Compile Include="IePubIdentifier.cs" />
+    <Compile Include="IPersoneWithRole.cs" />
+    <Compile Include="IPublisher.cs" />
+    <Compile Include="IRelation.cs" />
+    <Compile Include="IRights.cs" />
+    <Compile Include="ISource.cs" />
+    <Compile Include="ISubject.cs" />
+    <Compile Include="ITitle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\IAppleConverterePub2Settings.cs" />
     <Compile Include="Settings\IAppleEPub2PlatformSettings.cs" />

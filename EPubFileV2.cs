@@ -64,7 +64,6 @@ namespace EPubLibrary
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
         private readonly List<BookDocument> _sections = new List<BookDocument>();
         private readonly NavigationManagerV2 _navigationManager = new NavigationManagerV2();
-        private readonly List<string> _allSequences = new List<string>();
         private readonly List<string> _aboutTexts = new List<string>();
         private readonly List<string> _aboutLinks = new List<string>();
         private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
@@ -75,12 +74,12 @@ namespace EPubLibrary
         private readonly SectionIDTracker _sectionIDTracker = new SectionIDTracker();
         private readonly IEPubV2Settings _v2Settings;
         private readonly IEPubCommonSettings _commonSettings;
+        private readonly IBookInformationData _bookInformation = new BookInformationData();
         #endregion
 
         #region private_properties
         private string _coverImage;
         private ITransliterationSettings _translitMode;
-        private TitlePageFileV2 _titlePage;
         #endregion
 
         #region public_properties
@@ -95,11 +94,12 @@ namespace EPubLibrary
         }
 
 
-        public void SetTitlePageInformation(IBookTitleInformation titleInformation)
+        public IBookInformationData BookInformation
         {
-            _titlePage = new TitlePageFileV2(titleInformation);
+            get { return _bookInformation; }
         }
 
+        
         /// <summary>
         /// Used to set creator software string
         /// </summary>
@@ -122,9 +122,6 @@ namespace EPubLibrary
         /// </summary>
         public bool InjectLKRLicense { private get; set; }
 
-
-        // All sequences in the book
-        public List<string> AllSequences { get { return _allSequences; } }
 
         /// <summary>
         /// Return reference to the list of the CSS style files
@@ -532,12 +529,13 @@ namespace EPubLibrary
         /// <param name="stream"></param>
         private void AddTitle(ZipOutputStream stream)
         {
-            if (_titlePage != null)
+            var titlePage = new TitlePageFileV2(_bookInformation);
+            //if (titlePage != null)
             {
                 stream.SetLevel(9);
-                CreateFileEntryInZip(stream, _titlePage);
-                PutPageToFile(stream, _titlePage);
-                _content.AddXHTMLTextItem(_titlePage);
+                CreateFileEntryInZip(stream, titlePage);
+                PutPageToFile(stream, titlePage);
+                _content.AddXHTMLTextItem(titlePage);
             }
 
         }

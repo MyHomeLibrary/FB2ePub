@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using EPubLibraryContracts;
 
 namespace EPubLibrary
 {
@@ -7,7 +9,7 @@ namespace EPubLibrary
     /// <summary>
     /// used as base class to all data containers supporting language
     /// </summary>
-    public class DataWithLanguage
+    public class DataWithLanguage : IDataWithLanguage
     {
         public string Language { get; set; }
     }
@@ -15,7 +17,7 @@ namespace EPubLibrary
     /// <summary>
     /// Class to store person with role
     /// </summary>
-    public class PersoneWithRole :  DataWithLanguage
+    public class PersoneWithRole :  DataWithLanguage , IPersoneWithRole
     {
         /// <summary>
         /// default role - author if not set otherwise
@@ -38,7 +40,7 @@ namespace EPubLibrary
     /// <summary>
     /// Class to store coverage information
     /// </summary>
-    public class Coverage : DataWithLanguage
+    public class Coverage : DataWithLanguage, ICoverage
     {
         public string CoverageData { get; set; }
     }
@@ -46,7 +48,7 @@ namespace EPubLibrary
     /// <summary>
     /// Class to store book description
     /// </summary>
-    public class Description : DataWithLanguage
+    public class Description : DataWithLanguage , IDescription
     {
         public string DescInfo { get; set; }
     }
@@ -54,7 +56,7 @@ namespace EPubLibrary
     /// <summary>
     /// Class to store publisher data
     /// </summary>
-    public class Publisher : DataWithLanguage
+    public class Publisher : DataWithLanguage, IPublisher
     {
         public string PublisherName { get; set; }
     }
@@ -62,7 +64,7 @@ namespace EPubLibrary
     /// <summary>
     /// Class to store relation info
     /// </summary>
-    public class Relation : DataWithLanguage
+    public class Relation : DataWithLanguage, IRelation
     {
         public string RelationInfo { get; set; }
     }
@@ -70,7 +72,7 @@ namespace EPubLibrary
     /// <summary>
     /// Class to store rights/copyrights info
     /// </summary>
-    public class Rights : DataWithLanguage
+    public class Rights : DataWithLanguage, IRights
     {
         public string RightsInfo { get; set; }
     }
@@ -78,7 +80,7 @@ namespace EPubLibrary
     /// <summary>
     /// Class to store source data
     /// </summary>
-    public class Source : DataWithLanguage
+    public class Source : DataWithLanguage, ISource
     {
         public string SourceData { get; set; }
     }
@@ -86,31 +88,25 @@ namespace EPubLibrary
     /// <summary>
     /// Class to store subject data
     /// </summary>
-    public class Subject : DataWithLanguage
+    public class Subject : DataWithLanguage, ISubject
     {
         public string SubjectInfo { get; set; }
     }
 
-    public enum TitleType
-    {
-        Main,
-        SourceInfo,
-        PublishInfo,
-    }
 
     /// <summary>
     /// Class to store one title
     /// </summary>
-    public class Title : DataWithLanguage
+    public class Title : DataWithLanguage , ITitle
     {
         public string TitleName { get; set; }
-        public TitleType TitleType;
+        public TitleType TitleType { get; set; }
     }
 
     /// <summary>
     /// Class to store one identifier
     /// </summary>
-    public class Identifier
+    public class Identifier : IEPubIdentifier
     {
         private string _id = string.Empty;
 
@@ -144,32 +140,32 @@ namespace EPubLibrary
     /// <summary>
     /// EPub book title settings
     /// </summary>
-    public class EPubTitleSettings
+    public class EPubTitleSettings : IBookInformationData
     {
         /// <summary>
         /// list of subjects for the book (usually genres)
         /// </summary>
-        private readonly List<Subject> _subjects = new List<Subject>();
+        private readonly List<ISubject> _subjects = new List<ISubject>();
 
         /// <summary>
         /// List of creators
         /// </summary>
-        private readonly List<PersoneWithRole> _creators = new List<PersoneWithRole>();
+        private readonly List<IPersoneWithRole> _creators = new List<IPersoneWithRole>();
 
         /// <summary>
         /// List of contributors 
         /// </summary>
-        private readonly List<PersoneWithRole> _contributors = new List<PersoneWithRole>();
+        private readonly List<IPersoneWithRole> _contributors = new List<IPersoneWithRole>();
 
         /// <summary>
         /// List of identifiers
         /// </summary>
-        private readonly List<Identifier> _identifiers = new List<Identifier>();
+        private readonly List<IEPubIdentifier> _identifiers = new List<IEPubIdentifier>();
 
         /// <summary>
         /// List of Titles
         /// </summary>
-        private readonly List<Title> _bookTitles = new List<Title>();
+        private readonly List<ITitle> _bookTitles = new List<ITitle>();
 
         /// <summary>
         /// List of book languages
@@ -181,19 +177,21 @@ namespace EPubLibrary
         /// </summary>
         private readonly Publisher _publisher = new Publisher();
 
+        private readonly IDescription _description = new Description();
+
         
         /// <summary>
         /// Get list of identifiers
         /// </summary>
-        public List<Title> BookTitles
+        public IList<ITitle> BookTitles
         {
-            get { return _bookTitles; }
+            get { return _bookTitles.Select(x=>x as ITitle).ToList(); }
         }
 
         /// <summary>
         /// Get list of book languages
         /// </summary>
-        public List<string> Languages 
+        public IList<string> Languages 
         {
             get { return _languages; }
         }
@@ -201,7 +199,7 @@ namespace EPubLibrary
         /// <summary>
         /// Get list of book Identifiers
         /// </summary>
-        public List<Identifier> Identifiers
+        public IList<IEPubIdentifier> Identifiers
         {
             get { return _identifiers; }
         }
@@ -209,7 +207,7 @@ namespace EPubLibrary
         /// <summary>
         /// Get list of creators of the book 
         /// </summary>
-        public List<PersoneWithRole> Creators 
+        public IList<IPersoneWithRole> Creators 
         {
             get { return _creators; }
         }
@@ -217,7 +215,7 @@ namespace EPubLibrary
         /// <summary>
         /// Get list of contributors
         /// </summary>
-        public List<PersoneWithRole> Contributors
+        public IList<IPersoneWithRole> Contributors
         {
             get { return _contributors; }
         }
@@ -225,7 +223,7 @@ namespace EPubLibrary
         /// <summary>
         /// Get publisher element
         /// </summary>
-        public Publisher Publisher
+        public IPublisher Publisher
         {
             get { return _publisher; }
         }
@@ -233,12 +231,12 @@ namespace EPubLibrary
         /// <summary>
         /// Get list of subjects for the book (usually genres)
         /// </summary>
-        public List<Subject> Subjects 
+        public IList<ISubject> Subjects 
         {
             get { return _subjects; }
         }
 
-        public string Description { set; get; }
+        public IDescription Description { get { return _description; } }
 
         public DateTime? DateFileCreation { set; get; }
 
@@ -250,13 +248,13 @@ namespace EPubLibrary
 
         public string Format  { set; get; }
 
-        public Source Source { set; get; }
+        public ISource Source { set; get; }
 
-        public Relation Relation { set; get; }
+        public IRelation Relation { set; get; }
 
-        public Coverage Coverage { set; get; }
+        public ICoverage Coverage { set; get; }
 
-        public Rights Rights { set; get; }
+        public IRights Rights { set; get; }
 
         public string CoverID { set; get; }
 
