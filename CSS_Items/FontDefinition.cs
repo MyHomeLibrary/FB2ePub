@@ -54,7 +54,7 @@ namespace EPubLibrary.CSS_Items
 
         public override int GetHashCode()
         {
-            return Family.GetHashCode() ^ FontStyle.GetHashCode() ^ FontWidth.GetHashCode() ^ FontSrcs.GetHashCode();
+            return new { Family, FontStyle, FontWidth, FontSrcs }.GetHashCode();
         }
 
         public override bool Equals(object obj)
