@@ -228,9 +228,6 @@ namespace EPubLibrary
         {
             _fontSettings.ResourceMask = resourcesPath;
             _fontSettings.Load(fonts, decorateFontNames ? _title.Identifiers[0].IdentifierName : string.Empty);
-
-            AddFontsToCSS(_fontSettings.Fonts);
-            AddCssElementsToCSS(_fontSettings.CssElements);
         }
 
 
@@ -346,6 +343,9 @@ namespace EPubLibrary
         /// <param name="stream"></param>
         private void AddBookData(ZipOutputStream stream)
         {
+            AddFontsToCSS(_fontSettings.Fonts);
+            AddCssElementsToCSS(_fontSettings.CssElements);
+
             if (InjectLKRLicense)
             {
                 AddLicenseFile(stream);
