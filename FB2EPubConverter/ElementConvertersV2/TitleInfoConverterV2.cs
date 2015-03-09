@@ -26,7 +26,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             epubFile.Title.Subjects.Clear();
             epubFile.Title.Identifiers.Clear();
 
-            IBookTitleInformation titleInformation = new BookTitleInformation();
+            IBookInformationData titleInformation = new BookTitleInformation();
             // in case main body title is not defined (empty) 
             if ((itemTitleInfo != null) && (itemTitleInfo.BookTitle != null))
             {
@@ -53,7 +53,6 @@ namespace FB2EPubConverter.ElementConvertersV2
 
             }
             epubFile.Title.DateFileCreation = DateTime.Now;
-            epubFile.SetTitlePageInformation(titleInformation);
         }
 
 
