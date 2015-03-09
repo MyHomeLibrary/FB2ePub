@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 
 namespace EPubLibrary
 {
@@ -12,13 +9,13 @@ namespace EPubLibrary
         void WriteFontToStream(string fontPath, Stream outputStream);
     }
 
-    internal class EmbeddedFontsCache : IEmbeddedFontsCache, IDisposable
+    internal sealed class EmbeddedFontsCache : IEmbeddedFontsCache, IDisposable
     {
         public static readonly IEmbeddedFontsCache Instance = new EmbeddedFontsCache();
 
         private readonly Dictionary<string, MemoryStream> _cachedFonts = new Dictionary<string, MemoryStream>();
         private readonly object _accesslock = new object();
-        private bool _disposed = false;
+        private bool _disposed;
 
         public void WriteFontToStream(string fontPath, Stream outputStream)
         {
@@ -54,7 +51,7 @@ namespace EPubLibrary
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (_disposed) return;
 
