@@ -20,19 +20,11 @@ namespace FontsSettings
         private IEPubFontSettings _storageSettings;
         private string _loadedDecoration = string.Empty;
 
-        public const string MacroMask = "%ResourceFolder%";
+        private const string MacroMask = "%ResourceFolder%";
 
         private string _resourcePath = string.Empty;
 
        
-
-        public CSSFontSettingsCollection() {}
-
-        public CSSFontSettingsCollection(EPubFontSettings settings)
-        {
-            Load(settings, string.Empty);
-        }
-
         /// <summary>
         /// Return dictionary of all CSS elements
         /// </summary>
@@ -66,7 +58,6 @@ namespace FontsSettings
         /// </summary>
         public string ResourceMask
         {
-            get { return _resourcePath; }
             set { _resourcePath = value;
                 UpdateSourceLocations();
             }
