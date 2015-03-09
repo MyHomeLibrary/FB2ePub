@@ -395,26 +395,18 @@ namespace EPubLibrary
                 stream.SetLevel(9);
                 foreach (var embededFileLocation in _fontSettings.EmbededFilesLocations)
                 {
-                    var fontFile = new FontOnStorage(embededFileLocation, ConvertFontToMediaType(_fontSettings.GetFontFormat(embededFileLocation)));
-                    CreateFileEntryInZip(stream,fontFile);
+                    var fontFileName = new FontOnStorage(embededFileLocation, ConvertFontToMediaType(_fontSettings.GetFontFormat(embededFileLocation)));
+                    CreateFileEntryInZip(stream,fontFileName);
                     try
                     {
-                        using (var reader = new BinaryReader(File.OpenRead(embededFileLocation)))
-                        {
-                            int iCount;
-                            var buffer = new Byte[2048];
-                            while ((iCount = reader.Read(buffer, 0, 2048)) != 0)
-                            {
-                                stream.Write(buffer, 0, iCount);
-                            }
-                        }
+                        EmbeddedFontsCache.Instance.WriteFontToStream(embededFileLocation,stream);
                     }
                     catch (Exception ex)
                     {
                         Logger.Log.ErrorFormat("Error loading font file {0} : {1}", embededFileLocation, ex);
                         continue;
                     }
-                    _content.AddFontFile(fontFile);
+                    _content.AddFontFile(fontFileName);
                 }
             }
         }

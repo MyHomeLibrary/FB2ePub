@@ -133,6 +133,7 @@
     <Compile Include="Content\Collections\SeriesCollectionMember.cs" />
     <Compile Include="Content\ContentFileV2.cs" />
     <Compile Include="Content\ContentFileV3.cs" />
+    <Compile Include="EmbeddedFontsCache.cs" />
     <Compile Include="PathUtils\DefaultInternalPaths.cs" />
     <Compile Include="Content\EPubCoreMediaTypesConverter.cs" />
     <Compile Include="Content\Guide\GuideSection.cs" />
