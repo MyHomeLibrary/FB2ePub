@@ -1,4 +1,5 @@
-﻿using EPubLibrary;
+﻿using ConverterContracts.Settings;
+using EPubLibraryContracts;
 using FB2Library.HeaderItems;
 using TranslitRu;
 
@@ -6,16 +7,16 @@ namespace FB2EPubConverter.ElementConvertersV2
 {
     internal static class GenresInfoConverterV2
     {
-        public static void Convert(ItemTitleInfo titleInfo, EPubFileV2 epubFile)
+        public static void Convert(ItemTitleInfo titleInfo, IBookInformationData titleInformation,IEPubConversionSettings settings)
         {
             foreach (var genre in titleInfo.Genres)
             {
                 var item = new Subject
                 {
                     SubjectInfo = Rus2Lat.Instance.Translate(DescriptionConverters.Fb2GenreToDescription(genre.Genre),
-                        epubFile.TranslitMode)
+                        settings.TransliterationSettings)
                 };
-                epubFile.Title.Subjects.Add(item);
+                titleInformation.Subjects.Add(item);
             }
         }
 

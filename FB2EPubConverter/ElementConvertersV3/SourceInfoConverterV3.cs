@@ -1,25 +1,27 @@
 ﻿using ConverterContracts.Settings;
-using EPubLibrary;
+using EPubLibraryContracts;
 using FB2EPubConverter.SourceDataInclusionControls;
 using FB2Library;
 using TranslitRu;
+using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
+using XHTMLClassLibrary.BaseElements.Structure_Header;
 
 namespace FB2EPubConverter.ElementConvertersV3
 {
     internal class SourceInfoConverterV3
     {
-        private readonly IEPubConversionSettings _commonSettings;
+        private readonly IEPubConversionSettings _conversionSettings;
 
-        internal SourceInfoConverterV3(IEPubConversionSettings commonSettings)
+        internal SourceInfoConverterV3(IEPubConversionSettings conversionSettings)
         {
-            _commonSettings = commonSettings;
+            _conversionSettings = conversionSettings;
         }
 
-        public void Convert(FB2File fb2File, EPubFileV3 epubFile)
+        public void Convert(FB2File fb2File, IBookInformationData titleInformation)
         {
             if ((fb2File.DocumentInfo.SourceOCR != null) && !string.IsNullOrEmpty(fb2File.DocumentInfo.SourceOCR.Text))
             {
-                epubFile.Title.Source = new Source { SourceData = fb2File.DocumentInfo.SourceOCR.Text };
+                titleInformation.Source = new Source { SourceData = fb2File.DocumentInfo.SourceOCR.Text };
             }
 
             foreach (var docAuthor in fb2File.DocumentInfo.DocumentAuthors)
@@ -27,19 +29,19 @@ namespace FB2EPubConverter.ElementConvertersV3
                 var person = new PersoneWithRole
                 {
                     PersonName =
-                        Rus2Lat.Instance.Translate(DescriptionConverters.GenerateAuthorString(docAuthor, _commonSettings), epubFile.TranslitMode),
-                    FileAs = DescriptionConverters.GenerateFileAsString(docAuthor, _commonSettings),
+                        Rus2Lat.Instance.Translate(DescriptionConverters.GenerateAuthorString(docAuthor, _conversionSettings), _conversionSettings.TransliterationSettings),
+                    FileAs = DescriptionConverters.GenerateFileAsString(docAuthor, _conversionSettings),
                     Role = RolesEnum.Adapter
                 };
                 if (fb2File.TitleInfo != null)
                 {
                     person.Language = fb2File.TitleInfo.Language;
                 }
-                epubFile.Title.Contributors.Add(person);
+                titleInformation.Contributors.Add(person);
             }
 
             // Getting information from FB2 Source Title Info section
-            if (!SourceDataInclusionControl.Instance.IsIgnoreInfoSource(SourceDataInclusionControl.DataTypes.Source, _commonSettings.IgnoreTitle) &&
+            if (!SourceDataInclusionControl.Instance.IsIgnoreInfoSource(SourceDataInclusionControl.DataTypes.Source, _conversionSettings.IgnoreTitle) &&
                 (fb2File.SourceTitleInfo.BookTitle != null) && 
                 !string.IsNullOrEmpty(fb2File.SourceTitleInfo.BookTitle.Text))
             {
@@ -47,7 +49,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 {
                     TitleName =
                         Rus2Lat.Instance.Translate(fb2File.SourceTitleInfo.BookTitle.Text,
-                            epubFile.TranslitMode),
+                            _conversionSettings.TransliterationSettings),
                     Language =
                         string.IsNullOrEmpty(fb2File.SourceTitleInfo.BookTitle.Language) &&
                         (fb2File.TitleInfo != null)
@@ -55,8 +57,8 @@ namespace FB2EPubConverter.ElementConvertersV3
                             : fb2File.SourceTitleInfo.BookTitle.Language,
                     TitleType = TitleType.SourceInfo
                 };
-                epubFile.Title.BookTitles.Add(bookTitle);
-                epubFile.Title.Languages.Add(fb2File.SourceTitleInfo.Language);
+                titleInformation.BookTitles.Add(bookTitle);
+                titleInformation.Languages.Add(fb2File.SourceTitleInfo.Language);
             }
 
             // add authors
@@ -67,16 +69,16 @@ namespace FB2EPubConverter.ElementConvertersV3
                     PersonName =
                         Rus2Lat.Instance.Translate(
                             string.Format("{0} {1} {2}", author.FirstName, author.MiddleName, author.LastName),
-                            epubFile.TranslitMode),
-                    FileAs = DescriptionConverters.GenerateFileAsString(author, _commonSettings),
+                            _conversionSettings.TransliterationSettings),
+                    FileAs = DescriptionConverters.GenerateFileAsString(author, _conversionSettings),
                     Role = RolesEnum.Author,
                     Language = fb2File.SourceTitleInfo.Language
                 };
-                epubFile.Title.Creators.Add(person);
+                titleInformation.Creators.Add(person);
             }
 
-            TranslatorsInfoConverterV3.Convert(fb2File.SourceTitleInfo, epubFile, _commonSettings);
-            GenresInfoConverterV3.Convert(fb2File.SourceTitleInfo, epubFile);
+            TranslatorsInfoConverterV3.Convert(fb2File.SourceTitleInfo, titleInformation, _conversionSettings);
+            GenresInfoConverterV3.Convert(fb2File.SourceTitleInfo, titleInformation,_conversionSettings);
         }
 
     }

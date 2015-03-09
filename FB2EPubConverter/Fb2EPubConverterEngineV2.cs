@@ -29,7 +29,7 @@ namespace FB2EPubConverter
                 throw new ArrayTypeMismatchException(string.Format("Invalid ePub object type passed, expected EPubFileV2, got {0}", epubFile.GetType()));
             }
 
-            PassHeaderDataFromFb2ToEpub(epubFileV2, fb2File);
+            PassHeaderDataFromFb2ToEpub(fb2File, epubFileV2);
             ConvertAnnotation(fb2File.TitleInfo, epubFileV2);
             PassCoverImageFromFB2(fb2File.TitleInfo.Cover, epubFileV2);
             SetupCSS(epubFileV2);
@@ -142,7 +142,7 @@ namespace FB2EPubConverter
             Images.ConvertFb2ToEpubImages(fb2File.Images, epubFile.Images);
         }
 
-        private void PassHeaderDataFromFb2ToEpub(EPubFileV2 epubFile, FB2File fb2File)
+        private void PassHeaderDataFromFb2ToEpub(FB2File fb2File,EPubFileV2 epubFile)
         {
             Logger.Log.Debug("Passing header data from FB2 to EPUB");
 
@@ -152,7 +152,7 @@ namespace FB2EPubConverter
             }
 
             var headerDataConverter = new HeaderDataConverterV2(Settings.ConversionSettings,Settings.V2Settings);
-            headerDataConverter.Convert(epubFile,fb2File);
+            headerDataConverter.Convert(fb2File, epubFile.BookInformation,epubFile.CalibreMetadata);
         }
 
         private void PassCoverImageFromFB2(CoverPage coverPage, EPubFileV2 epubFile)
@@ -173,7 +173,11 @@ namespace FB2EPubConverter
         {
             if (titleInfo.Annotation != null)
             {
-                epubFile.Title.Description = titleInfo.Annotation.ToString();
+                var desc = new Description
+                {
+                    DescInfo = titleInfo.Annotation.ToString(),
+                };
+                epubFile.BookInformation.Description = desc;
                 epubFile.AnnotationPage = new AnnotationPageFile(HTMLElementType.XHTML11);
                 var converterSettings = new ConverterOptionsV2
                 {

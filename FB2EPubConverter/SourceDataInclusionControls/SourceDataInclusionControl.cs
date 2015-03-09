@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using ConverterContracts.Settings;
-using Fb2epubSettings;
 
 namespace FB2EPubConverter.SourceDataInclusionControls
 {
     /// <summary>
-    /// This class controls if speciffic FB2 section information need to be included based on settings
+    /// This class controls if specific FB2 section information need to be included based on settings
     /// </summary>
     internal class SourceDataInclusionControl 
     {

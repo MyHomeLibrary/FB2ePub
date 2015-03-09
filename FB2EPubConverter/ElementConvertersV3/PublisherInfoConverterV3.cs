@@ -1,38 +1,39 @@
 ﻿using System;
 using ConverterContracts.Settings;
-using EPubLibrary;
+using EPubLibraryContracts;
 using FB2EPubConverter.SourceDataInclusionControls;
 using FB2Library;
 using TranslitRu;
+using XHTMLClassLibrary.BaseElements.Structure_Header;
 
 namespace FB2EPubConverter.ElementConvertersV3
 {
     internal class PublisherInfoConverterV3
     {
-        private readonly IEPubConversionSettings _commonSettings;
+        private readonly IEPubConversionSettings _conversionSettings;
 
-        internal PublisherInfoConverterV3(IEPubConversionSettings commonSettings)
+        internal PublisherInfoConverterV3(IEPubConversionSettings conversionSettings)
         {
-            _commonSettings = commonSettings;
+            _conversionSettings = conversionSettings;
         }
 
-        public void Convert(EPubFileV3 epubFile, FB2File fb2File)
+        public void Convert(FB2File fb2File, IBookInformationData titleInformation)
         {
             if (fb2File.PublishInfo.BookTitle != null)
             {
                 var bookTitle = new Title
                 {
                     TitleName =
-                        Rus2Lat.Instance.Translate(fb2File.PublishInfo.BookTitle.Text, epubFile.TranslitMode),
+                        Rus2Lat.Instance.Translate(fb2File.PublishInfo.BookTitle.Text, _conversionSettings.TransliterationSettings),
                     Language =
                         !string.IsNullOrEmpty(fb2File.PublishInfo.BookTitle.Language)
                             ? fb2File.PublishInfo.BookTitle.Language
                             : fb2File.TitleInfo.Language
                 };
-                if (!SourceDataInclusionControl.Instance.IsIgnoreInfoSource(SourceDataInclusionControl.DataTypes.Publish, _commonSettings.IgnoreTitle))
+                if (!SourceDataInclusionControl.Instance.IsIgnoreInfoSource(SourceDataInclusionControl.DataTypes.Publish, _conversionSettings.IgnoreTitle))
                 {
                     bookTitle.TitleType = TitleType.PublishInfo;
-                    epubFile.Title.BookTitles.Add(bookTitle);
+                    titleInformation.BookTitles.Add(bookTitle);
                 }
             }
 
@@ -45,13 +46,13 @@ namespace FB2EPubConverter.ElementConvertersV3
                     ID = fb2File.PublishInfo.ISBN.Text,
                     Scheme = "ISBN"
                 };
-                epubFile.Title.Identifiers.Add(bookId);
+                titleInformation.Identifiers.Add(bookId);
             }
 
-
+            titleInformation.Publisher = new Publisher();
             if (fb2File.PublishInfo.Publisher != null)
             {
-                epubFile.Title.Publisher.PublisherName = Rus2Lat.Instance.Translate(fb2File.PublishInfo.Publisher.Text, epubFile.TranslitMode);
+                titleInformation.Publisher.PublisherName = Rus2Lat.Instance.Translate(fb2File.PublishInfo.Publisher.Text, _conversionSettings.TransliterationSettings);
             }
 
 
@@ -60,7 +61,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 if (fb2File.PublishInfo.Year.HasValue)
                 {
                     var date = new DateTime(fb2File.PublishInfo.Year.Value, 1, 1);
-                    epubFile.Title.DatePublished = date;
+                    titleInformation.DatePublished = date;
                 }
             }
             catch (FormatException ex)
