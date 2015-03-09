@@ -2,6 +2,7 @@
 using ConverterContracts.Settings;
 using EPubLibrary;
 using EPubLibrary.XHTML_Items;
+using EPubLibraryContracts;
 using FB2Library.HeaderItems;
 using TranslitRu;
 using XHTMLClassLibrary.BaseElements;
@@ -25,13 +26,12 @@ namespace FB2EPubConverter.ElementConvertersV3
             epubFile.Title.Subjects.Clear();
             epubFile.Title.Identifiers.Clear();
 
-            // cReate new Title page
-            epubFile.TitlePage = new TitlePageFile(HTMLElementType.HTML5);
 
+            IBookTitleInformation titleInformation  =   new BookTitleInformation();
             // in case main body title is not defined (empty) 
             if ((itemTitleInfo != null) && (itemTitleInfo.BookTitle != null))
             {
-                epubFile.TitlePage.BookTitle = itemTitleInfo.BookTitle.Text;
+                titleInformation.BookMainTitle = itemTitleInfo.BookTitle.Text;
             }
 
             epubFile.AllSequences.Clear();
@@ -39,13 +39,13 @@ namespace FB2EPubConverter.ElementConvertersV3
             if (itemTitleInfo != null)
             {
                 // Pass all sequences
-                SequencesInfoConverterV3.Convert(itemTitleInfo, epubFile);
+                SequencesInfoConverterV3.Convert(itemTitleInfo, epubFile,titleInformation);
 
                 // Getting information from FB2 Title section
                 ConvertMainTitle(itemTitleInfo, epubFile);
 
                 // add authors
-                AuthorsInfoConverterV3.Convert(itemTitleInfo, epubFile,_commonSettings);
+                AuthorsInfoConverterV3.Convert(itemTitleInfo, epubFile,_commonSettings,titleInformation);
 
                 // add translators
                 TranslatorsInfoConverterV3.Convert(itemTitleInfo, epubFile,_commonSettings);
@@ -54,6 +54,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 GenresInfoConverterV3.Convert(itemTitleInfo, epubFile);
             }
             epubFile.Title.DateFileCreation = DateTime.Now;
+            epubFile.SetTitlePageInformation(titleInformation);
         }
 
         private void ConvertMainTitle(ItemTitleInfo titleInfo, EPubFileV3 epubFile)
