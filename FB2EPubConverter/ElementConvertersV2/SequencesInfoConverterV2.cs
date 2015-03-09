@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using EPubLibrary;
+using EPubLibraryContracts;
 using FB2Library.HeaderItems;
 
 namespace FB2EPubConverter.ElementConvertersV2
 {
     internal static class SequencesInfoConverterV2
     {
-        public static void Convert(ItemTitleInfo itemInfo, EPubFileV2 epubFile)
+        public static void Convert(ItemTitleInfo itemInfo, EPubFileV2 epubFile, IBookTitleInformation titleInformation)
         {
             foreach (var seq in itemInfo.Sequences)
             {
@@ -15,7 +16,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 {
                     foreach (var sequence in allSequences)
                     {
-                        epubFile.TitlePage.Series.Add(sequence);
+                        titleInformation.Series.Add(sequence);
                         epubFile.AllSequences.Add(sequence);
                     }
                 }

@@ -126,6 +126,7 @@
     <Compile Include="..\CommonIncludes\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BookTitleInformation.cs" />
     <Compile Include="ConvertProcessor.cs" />
     <Compile Include="ConvertProcessorSettings.cs" />
     <Compile Include="DescriptionConverters.cs" />

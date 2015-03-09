@@ -1,5 +1,6 @@
 ﻿using ConverterContracts.Settings;
 using EPubLibrary;
+using EPubLibraryContracts;
 using FB2Library.HeaderItems;
 using TranslitRu;
 
@@ -7,7 +8,7 @@ namespace FB2EPubConverter.ElementConvertersV2
 {
     internal static class AuthorsInfoConverterV2
     {
-        public  static void Convert(ItemTitleInfo titleInfo, EPubFileV2 epubFile, IEPubConversionSettings settings)
+        public static void Convert(ItemTitleInfo titleInfo, EPubFileV2 epubFile, IEPubConversionSettings settings, IBookTitleInformation titleInformation)
         {
             foreach (var author in titleInfo.BookAuthors)
             {
@@ -20,7 +21,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 epubFile.Title.Creators.Add(person);
 
                 // add authors to Title page
-                epubFile.TitlePage.Authors.Add(authorString);
+                titleInformation.Authors.Add(authorString);
             }
         }
 

@@ -2,6 +2,7 @@
 using ConverterContracts.Settings;
 using EPubLibrary;
 using EPubLibrary.XHTML_Items;
+using EPubLibraryContracts;
 using FB2Library.HeaderItems;
 using TranslitRu;
 using XHTMLClassLibrary.BaseElements;
@@ -25,26 +26,24 @@ namespace FB2EPubConverter.ElementConvertersV2
             epubFile.Title.Subjects.Clear();
             epubFile.Title.Identifiers.Clear();
 
-            // Create new Title page
-            epubFile.TitlePage = new TitlePageFile(HTMLElementType.XHTML11);
-
+            IBookTitleInformation titleInformation = new BookTitleInformation();
             // in case main body title is not defined (empty) 
             if ((itemTitleInfo != null) && (itemTitleInfo.BookTitle != null))
             {
-                epubFile.TitlePage.BookTitle = itemTitleInfo.BookTitle.Text;
+                titleInformation.BookMainTitle = itemTitleInfo.BookTitle.Text;
             }
 
             epubFile.AllSequences.Clear();
 
             if (itemTitleInfo != null)
             {
-                SequencesInfoConverterV2.Convert(itemTitleInfo, epubFile);
+                SequencesInfoConverterV2.Convert(itemTitleInfo, epubFile, titleInformation);
 
                 // Getting information from FB2 Title section
                 ConvertMainTitle(itemTitleInfo, epubFile);
 
                 // add authors
-                AuthorsInfoConverterV2.Convert(itemTitleInfo, epubFile, _commonSettings);
+                AuthorsInfoConverterV2.Convert(itemTitleInfo, epubFile, _commonSettings, titleInformation);
 
                 // add translators
                 TranslatorsInfoConverterV2.Convert(itemTitleInfo, epubFile,_commonSettings);
@@ -54,6 +53,7 @@ namespace FB2EPubConverter.ElementConvertersV2
 
             }
             epubFile.Title.DateFileCreation = DateTime.Now;
+            epubFile.SetTitlePageInformation(titleInformation);
         }
 
 
