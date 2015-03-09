@@ -1,4 +1,4 @@
-﻿using EPubLibrary;
+﻿using EPubLibraryContracts;
 using EPubLibraryContracts.Settings;
 using FB2Library;
 
@@ -14,7 +14,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         }
 
 
-        internal void Convert(FB2File fb2File, EPubFileV2 epubFile)
+        internal void Convert(FB2File fb2File, ICalibreMetadata metadata)
         {
             if (!_v2Settings.AddCalibreMetadata)
             {
@@ -23,15 +23,15 @@ namespace FB2EPubConverter.ElementConvertersV2
             if (fb2File.TitleInfo != null && fb2File.TitleInfo.BookTitle != null &&
                 !string.IsNullOrEmpty(fb2File.TitleInfo.BookTitle.Text))
             {
-                epubFile.CalibreMetadata.TitleForSort = fb2File.TitleInfo.BookTitle.Text;
+                metadata.TitleForSort = fb2File.TitleInfo.BookTitle.Text;
             }
             if (fb2File.TitleInfo != null && fb2File.TitleInfo.Sequences.Count > 0 &&
                 !string.IsNullOrEmpty(fb2File.TitleInfo.Sequences[0].Name))
             {
-                epubFile.CalibreMetadata.SeriesName = fb2File.TitleInfo.Sequences[0].Name;
+                metadata.SeriesName = fb2File.TitleInfo.Sequences[0].Name;
                 if (fb2File.TitleInfo.Sequences[0].Number.HasValue)
                 {
-                    epubFile.CalibreMetadata.SeriesIndex = fb2File.TitleInfo.Sequences[0].Number.Value;
+                    metadata.SeriesIndex = fb2File.TitleInfo.Sequences[0].Number.Value;
                 }
             }
             

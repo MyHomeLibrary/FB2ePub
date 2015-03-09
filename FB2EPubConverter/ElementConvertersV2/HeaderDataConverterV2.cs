@@ -1,5 +1,5 @@
 ﻿using ConverterContracts.Settings;
-using EPubLibrary;
+using EPubLibraryContracts;
 using EPubLibraryContracts.Settings;
 using FB2Library;
 
@@ -22,14 +22,14 @@ namespace FB2EPubConverter.ElementConvertersV2
             _calibreMetadataConverter   =   new CalibreMetadataConverter(v2Settings);
         }
 
-        public void Convert(EPubFileV2 epubFile, FB2File fb2File)
+        public void Convert(FB2File fb2File,IBookInformationData titleInformation, ICalibreMetadata metadata)
         {
-            _titleInfoConverter.Convert(fb2File.TitleInfo, epubFile);
-            _bookIDConverter.Convert(fb2File, epubFile);
-            _sourceInfoConverter.Convert(fb2File, epubFile);
-            _publisherInfoConverter.Convert(fb2File, epubFile);
-            _calibreMetadataConverter.Convert(fb2File, epubFile);
-            _seriesDataConverter.Convert(fb2File, epubFile);
+            _titleInfoConverter.Convert(fb2File.TitleInfo, titleInformation);
+            _bookIDConverter.Convert(fb2File, titleInformation);
+            _sourceInfoConverter.Convert(fb2File, titleInformation);
+            _publisherInfoConverter.Convert(fb2File, titleInformation);
+            _calibreMetadataConverter.Convert(fb2File, metadata);
+            _seriesDataConverter.Convert(fb2File, titleInformation);
         }
     }
 }
