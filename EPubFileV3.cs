@@ -11,6 +11,7 @@ using EPubLibrary.Content.NavigationManagement;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
 using EPubLibrary.XHTML_Items;
+using EPubLibraryContracts;
 using EPubLibraryContracts.Settings;
 using FontSettingsContracts;
 using FontsSettings;
@@ -48,6 +49,7 @@ namespace EPubLibrary
         #region private_properties
         private ITransliterationSettings _translitMode;// = new TransliterationSettings { Mode = TranslitModeEnum.ExternalRuleFile };
         private string _coverImage;
+        private TitlePageFileV3 _titlePage;
         #endregion
 
 
@@ -83,6 +85,11 @@ namespace EPubLibrary
             };
         }
 
+
+        public void SetTitlePageInformation(IBookTitleInformation titleInformation)
+        {
+            _titlePage = new TitlePageFileV3(titleInformation);
+        }
 
         /// <summary>
         /// Adds new series collection to ePub
@@ -255,12 +262,12 @@ namespace EPubLibrary
         /// <param name="stream"></param>
         private void AddTitle(ZipOutputStream stream)
         {
-            if (TitlePage != null)
+            if (_titlePage != null)
             {
                 stream.SetLevel(9);
-                CreateFileEntryInZip(stream, TitlePage);
-                PutPageToFile(stream, TitlePage);
-                _content.AddXHTMLTextItem(TitlePage);
+                CreateFileEntryInZip(stream, _titlePage);
+                PutPageToFile(stream, _titlePage);
+                _content.AddXHTMLTextItem(_titlePage);
             }
 
         }
@@ -495,11 +502,6 @@ namespace EPubLibrary
         /// Return reference to the list of the CSS style files
         /// </summary>
         public List<CSSFile> CSSFiles { get { return _cssFiles; } }
-
-        /// <summary>
-        /// Set/Get title page object
-        /// </summary>
-        public TitlePageFile TitlePage { get; set; }
 
         /// <summary>
         /// Set/get Annotation object

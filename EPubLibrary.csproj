@@ -187,7 +187,8 @@
     <Compile Include="XHTML_Items\CoverPageFileV3.cs" />
     <Compile Include="XHTML_Items\IBaseXHTMLFile.cs" />
     <Compile Include="XHTML_Items\LicenseFile.cs" />
-    <Compile Include="XHTML_Items\TitlePageFile.cs" />
+    <Compile Include="XHTML_Items\TitlePageFileV2.cs" />
+    <Compile Include="XHTML_Items\TitlePageFileV3.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Build.txt" />

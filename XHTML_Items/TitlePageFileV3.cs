@@ -1,22 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using EPubLibrary.Content.Guide;
 using EPubLibrary.PathUtils;
+using EPubLibraryContracts;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
-using EPubLibrary.Content.Guide;
 using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace EPubLibrary.XHTML_Items
 {
-    public class TitlePageFile : BaseXHTMLFile
+    internal class TitlePageFileV3 : BaseXHTMLFile
     {
+        private const string TitleTypeAttributeValue = "titlepage";
+
         private readonly List<string> _authors = new List<string>();
         private readonly List<string> _series = new List<string>();
 
-        public TitlePageFile(HTMLElementType compatibility)
-            : base(compatibility)
+        public TitlePageFileV3(IBookTitleInformation titleInformation)
+            : base(HTMLElementType.HTML5)
         {
+            Authors.AddRange(titleInformation.Authors);
+            Series.AddRange(titleInformation.Series);
+            BookTitle = titleInformation.BookMainTitle;
+
             InternalPageTitle = "Title";
             DocumentType = GuideTypeEnum.TitlePage;
             FileName = "title.xhtml";
@@ -33,6 +41,8 @@ namespace EPubLibrary.XHTML_Items
         public override void GenerateBody()
         {
             base.GenerateBody();
+            BodyElement.CustomAttributes.Add(new CustomAttribute(EPubNamespaces.OpsNamespace + "type", TitleTypeAttributeValue));
+
             var titlePage = new Div(Compatibility);
             titlePage.GlobalAttributes.Class.Value = "titlepage";
             if (!string.IsNullOrEmpty(BookTitle))

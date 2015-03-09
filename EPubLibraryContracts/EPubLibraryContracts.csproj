@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBookTitleInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\IAppleConverterePub2Settings.cs" />
     <Compile Include="Settings\IAppleEPub2PlatformSettings.cs" />

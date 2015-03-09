@@ -19,6 +19,7 @@ using FontsSettings;
 using ICSharpCode.SharpZipLib.Zip;
 using TranslitRu;
 using EPubLibrary.AppleEPubV2Extensions;
+using EPubLibraryContracts;
 using EPubLibraryContracts.Settings;
 using TranslitRuContracts;
 using XHTMLClassLibrary.BaseElements;
@@ -78,7 +79,8 @@ namespace EPubLibrary
 
         #region private_properties
         private string _coverImage;
-        private ITransliterationSettings _translitMode;// = new TransliterationSettings { Mode = TranslitModeEnum.ExternalRuleFile };
+        private ITransliterationSettings _translitMode;
+        private TitlePageFileV2 _titlePage;
         #endregion
 
         #region public_properties
@@ -90,6 +92,12 @@ namespace EPubLibrary
             _commonSettings = commonSettings;
             SetupAppleSettings();
             _content.FlatStructure = commonSettings.FlatStructure;
+        }
+
+
+        public void SetTitlePageInformation(IBookTitleInformation titleInformation)
+        {
+            _titlePage = new TitlePageFileV2(titleInformation);
         }
 
         /// <summary>
@@ -140,11 +148,7 @@ namespace EPubLibrary
             get { return _images; }
         }
 
-        /// <summary>
-        /// Set/Get title page object
-        /// </summary>
-        public TitlePageFile TitlePage { get; set; }
-
+     
         /// <summary>
         /// Set/get Annotation object
         /// </summary>
@@ -528,12 +532,12 @@ namespace EPubLibrary
         /// <param name="stream"></param>
         private void AddTitle(ZipOutputStream stream)
         {
-            if (TitlePage != null)
+            if (_titlePage != null)
             {
                 stream.SetLevel(9);
-                CreateFileEntryInZip(stream, TitlePage);
-                PutPageToFile(stream,TitlePage);
-                _content.AddXHTMLTextItem(TitlePage);
+                CreateFileEntryInZip(stream, _titlePage);
+                PutPageToFile(stream, _titlePage);
+                _content.AddXHTMLTextItem(_titlePage);
             }
 
         }

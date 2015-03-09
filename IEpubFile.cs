@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using EPubLibrary.XHTML_Items;
+using EPubLibraryContracts;
 using TranslitRuContracts;
 
 namespace EPubLibrary
@@ -27,5 +28,7 @@ namespace EPubLibrary
         /// </summary>
         /// <param name="outFileName"></param>
         void Generate(string outFileName);
+
+        void SetTitlePageInformation(IBookTitleInformation titleInformation);
     }
 }
