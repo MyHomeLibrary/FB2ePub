@@ -50,6 +50,7 @@
     <Compile Include="AttributeDataTypes\Color.cs" />
     <Compile Include="AttributeDataTypes\ContentType.cs" />
     <Compile Include="AttributeDataTypes\Coords.cs" />
+    <Compile Include="AttributeDataTypes\CustomAttribute.cs" />
     <Compile Include="AttributeDataTypes\Datetime.cs" />
     <Compile Include="AttributeDataTypes\FloatingNumber.cs" />
     <Compile Include="AttributeDataTypes\HTMLCode.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="BaseElements\TableElements\TableFooter.cs" />
     <Compile Include="BaseElements\TableElements\TableHead.cs" />
     <Compile Include="BaseElements\TableElements\TableRow.cs" />
+    <Compile Include="CustomNamespace.cs" />
     <Compile Include="ElementConvertor.cs" />
     <Compile Include="Exceptions\HTML5ViolationException.cs" />
     <Compile Include="HTMLDocument.cs" />

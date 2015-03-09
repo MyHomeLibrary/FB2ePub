@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.Attributes.AttributeGroups;
 using XHTMLClassLibrary.Exceptions;
@@ -17,10 +18,10 @@ namespace XHTMLClassLibrary.BaseElements
     abstract public class HTMLItem : IHTMLItem
     {
         private readonly List<IBaseAttribute> _attributes = new List<IBaseAttribute>();
-        private HTMLElementType _htmlStandard = HTMLElementType.HTML5;
+        private HTMLElementType _htmlStandard;
 
         protected readonly List<IHTMLItem> Subitems  = new List<IHTMLItem>();
-        protected ISimpleText TextContent = null;
+        protected ISimpleText TextContent;
 
 
         // General common attributes and event attributes for any HTML element
@@ -37,11 +38,25 @@ namespace XHTMLClassLibrary.BaseElements
         [AttributeBlockAttribute]
         private readonly WindowEventAttributes _windowEventAttributes = new WindowEventAttributes();
 
+        private readonly List<CustomAttribute> _customAttributes = new List<CustomAttribute>();
+        private readonly List<CustomNamespace> _namespaces = new List<CustomNamespace>();
+
         protected HTMLItem(HTMLElementType htmlStandard)
         {
             _htmlStandard = htmlStandard;
             RegisterAttributes();
         }
+
+
+        /// <summary>
+        /// Returns list of custom attributes
+        /// </summary>
+        public IList<CustomAttribute> CustomAttributes { get { return _customAttributes; }}
+
+        /// <summary>
+        /// Returns a list of additional namespaces
+        /// </summary>
+        public IList<CustomNamespace> ItemNamespaces { get { return _namespaces; } }
 
         /// <summary>
         /// Get/set item's standard it should comply to
@@ -69,7 +84,7 @@ namespace XHTMLClassLibrary.BaseElements
         /// </summary>
         /// <param name="standard"></param>
         /// <returns></returns>
-        public static bool IsXMLFormat(HTMLElementType standard)
+        private static bool IsXMLFormat(HTMLElementType standard)
         {
             if (standard == HTMLElementType.XHTML11 ||
                 standard == HTMLElementType.XHTML5 ||
@@ -251,6 +266,15 @@ namespace XHTMLClassLibrary.BaseElements
                 AddAttributes(xElement,null);
             }
 
+            foreach (var customAttribute in _customAttributes)
+            {
+                xElement.Add(new XAttribute(customAttribute.Name,customAttribute.Value));
+            }
+
+            foreach (var xNamespace in _namespaces)
+            {
+                xElement.SetAttributeValue(xNamespace.Prefix, xNamespace.XNamespace.NamespaceName);
+            }
 
             foreach (var item in Subitems)
             {
