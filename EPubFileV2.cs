@@ -264,6 +264,7 @@ namespace EPubLibrary
                         // The EPub does not like 64 bit "patched" headers due to mimetype entry
                         s.UseZip64 = UseZip64.Off;
                         AddMimeTypeEntry(s);
+                        AddCSSData();
                         AddBookData(s);
                         AddMetaData(s);
                         s.Finish();
@@ -277,6 +278,12 @@ namespace EPubLibrary
                 File.Delete(outFileName);
                 throw;
             }
+        }
+
+        private void AddCSSData()
+        {
+            AddFontsToCSS(_fontSettings.Fonts);
+            AddCssElementsToCSS(_fontSettings.CssElements);
         }
         #endregion 
 
@@ -343,9 +350,6 @@ namespace EPubLibrary
         /// <param name="stream"></param>
         private void AddBookData(ZipOutputStream stream)
         {
-            AddFontsToCSS(_fontSettings.Fonts);
-            AddCssElementsToCSS(_fontSettings.CssElements);
-
             if (InjectLKRLicense)
             {
                 AddLicenseFile(stream);
