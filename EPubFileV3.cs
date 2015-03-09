@@ -375,7 +375,7 @@ namespace EPubLibrary
             // for test let's just create one file
             stream.SetLevel(9);
 
-            var cover = new CoverPageFile(HTMLElementType.HTML5)
+            var cover = new CoverPageFileV3()
             {
                 CoverFileName = GetCoverImageName(eImage),
             };

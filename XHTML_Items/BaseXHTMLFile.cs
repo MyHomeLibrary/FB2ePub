@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -9,6 +10,7 @@ using EPubLibrary.Content.Guide;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
 using XHTMLClassLibrary;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.Structure_Header;
 
@@ -16,11 +18,11 @@ namespace EPubLibrary.XHTML_Items
 {
     public class BaseXHTMLFile : IEPubPath , IBaseXHTMLFile
     {
-        protected Head HeadElement = null;
-        protected Body BodyElement = null;
+        protected Head HeadElement;
+        protected Body BodyElement;
         protected string InternalPageTitle;
         protected bool Durty = true;
-        protected HTMLElementType Compatibility = HTMLElementType.XHTML11;
+        protected readonly HTMLElementType Compatibility;
 
         public BaseXHTMLFile(HTMLElementType compatibility)
         {
@@ -105,10 +107,7 @@ namespace EPubLibrary.XHTML_Items
 
         public void Write(Stream stream)
         {
-            var settings = new XmlWriterSettings();
-            settings.CloseOutput = false;
-            settings.Encoding = Encoding.UTF8;
-            settings.Indent = true;
+            var settings = new XmlWriterSettings {CloseOutput = false, Encoding = Encoding.UTF8, Indent = true};
 
 
             XDocument document = _generatedCodeXDocument;
@@ -147,8 +146,9 @@ namespace EPubLibrary.XHTML_Items
                             styleElementEntry.InternalTextItem.Text = encoding.GetString(outStream.ToArray());
                         }
                     }
-                    catch (Exception)
+                    catch
                     {
+                        // ignored
                     }
                 }
                 else
@@ -165,6 +165,12 @@ namespace EPubLibrary.XHTML_Items
             mainDocument.RootHTML.Add(HeadElement);
 
             mainDocument.RootHTML.Add(BodyElement);
+
+            if (Compatibility == HTMLElementType.HTML5 ||
+                Compatibility == HTMLElementType.XHTML5) // basically in ePub v3 cases
+            {
+                mainDocument.RootHTML.ItemNamespaces.Add(new CustomNamespace(XNamespace.Xmlns + "epub",EPubNamespaces.OpsNamespace));
+            }
 
             if (!mainDocument.RootHTML.IsValid())
             {

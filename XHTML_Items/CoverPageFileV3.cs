@@ -1,17 +1,25 @@
-﻿using EPubLibrary.Content.Guide;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml.Linq;
+using EPubLibrary.Content.Guide;
 using EPubLibrary.PathUtils;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace EPubLibrary.XHTML_Items
 {
-    internal class CoverPageFile : BaseXHTMLFile
+    internal class CoverPageFileV3 : BaseXHTMLFile
     {
+        private const string CoverTypeAttributeValue = "cover";
+
         public ImageOnStorage CoverFileName { get; set; }
 
-        public CoverPageFile(HTMLElementType compatibility)
-            : base(compatibility)
+        public CoverPageFileV3()
+            : base(HTMLElementType.HTML5)
         {
             InternalPageTitle = "Cover";
             DocumentType = GuideTypeEnum.Cover;
@@ -22,7 +30,10 @@ namespace EPubLibrary.XHTML_Items
 
         public override void GenerateBody()
         {
+
             base.GenerateBody();
+            BodyElement.CustomAttributes.Add(new CustomAttribute(EPubNamespaces.OpsNamespace+ "type", CoverTypeAttributeValue));
+
             var coverPage = new Div(Compatibility);
             coverPage.GlobalAttributes.Class.Value = "coverpage";
             //            coverPage.Style.Value = "text-align: center; page-break-after: always;";
@@ -31,7 +42,6 @@ namespace EPubLibrary.XHTML_Items
             coverImage.GlobalAttributes.Class.Value = "coverimage";
             coverImage.Source.Value = CoverFileName.PathInEPUB.GetRelativePath(FileEPubInternalPath, FlatStructure);
             coverImage.Alt.Value = "Cover";
-            //coverImage.Style.Value = "max-width: 100%;";
             coverPage.Add(coverImage);
 
             BodyElement.Add(coverPage);

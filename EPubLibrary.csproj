@@ -183,7 +183,8 @@
     <Compile Include="Content\Spine\SpineSectionV2.cs" />
     <Compile Include="Content\Spine\SpineItemV2.cs" />
     <Compile Include="XHTML_Items\BookDocument.cs" />
-    <Compile Include="XHTML_Items\CoverPageFile.cs" />
+    <Compile Include="XHTML_Items\CoverPageFileV2.cs" />
+    <Compile Include="XHTML_Items\CoverPageFileV3.cs" />
     <Compile Include="XHTML_Items\IBaseXHTMLFile.cs" />
     <Compile Include="XHTML_Items\LicenseFile.cs" />
     <Compile Include="XHTML_Items\TitlePageFile.cs" />
