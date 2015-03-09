@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using EPubLibraryContracts.Settings;
 using FontSettingsContracts;
 
 namespace EPubLibrary.CSS_Items
@@ -15,7 +16,7 @@ namespace EPubLibrary.CSS_Items
 
         public string Family
         {
-            get { if (parameters.ContainsKey("font-family"))
+            private get { if (parameters.ContainsKey("font-family"))
                     return parameters["font-family"].ToString();
                 return string.Empty;}
             set { if (!string.IsNullOrEmpty(value)) parameters["font-family"] = value; }
@@ -23,7 +24,7 @@ namespace EPubLibrary.CSS_Items
 
         public string FontStyle
         {
-            get { if (parameters.ContainsKey("font-style"))
+            private get { if (parameters.ContainsKey("font-style"))
                     return parameters["font-style"].ToString();
                 return string.Empty;
             }
@@ -32,7 +33,7 @@ namespace EPubLibrary.CSS_Items
 
         public string FontWidth
         {
-            get { if (parameters.ContainsKey("font-weight"))
+            private get { if (parameters.ContainsKey("font-weight"))
                     return parameters["font-weight"].ToString();
                 return "normal";
             }
@@ -42,7 +43,7 @@ namespace EPubLibrary.CSS_Items
 
         public List<string> FontSrcs
         {
-            get
+            private get
             {
                 if (parameters.ContainsKey("src"))
                     return parameters["src"] as List<string>;
@@ -53,7 +54,7 @@ namespace EPubLibrary.CSS_Items
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return Family.GetHashCode() ^ FontStyle.GetHashCode() ^ FontWidth.GetHashCode() ^ FontSrcs.GetHashCode();
         }
 
         public override bool Equals(object obj)
@@ -144,12 +145,11 @@ namespace EPubLibrary.CSS_Items
         /// Convert source objects into a source string
         /// </summary>
         /// <param name="fontSource"></param>
-        /// <param name="embedStyles"></param>
-        /// <param name="flatStructure"></param>
+        /// <param name="commonSettings"></param>
         /// <returns></returns>
-        public static string ConvertToSourceString(IFontSource fontSource, bool embedStyles,bool flatStructure)
+        public static string ConvertToSourceString(IFontSource fontSource, IEPubCommonSettings commonSettings)
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
                 switch (fontSource.Type)
                 {
                     case SourceTypes.External:
@@ -159,13 +159,13 @@ namespace EPubLibrary.CSS_Items
                         builder.AppendFormat(" local(\"{0}\") ", fontSource.Location);
                         break;
                     case SourceTypes.Embedded:
-                        if (!embedStyles)
+                        if (!commonSettings.EmbedStyles)
                         {
-                            builder.AppendFormat(flatStructure ? @" url({0}) " : @" url(../fonts/{0}) ", Path.GetFileName(fontSource.Location.ToLower()));
+                            builder.AppendFormat(commonSettings.FlatStructure? @" url({0}) " : @" url(../fonts/{0}) ", Path.GetFileName(fontSource.Location.ToLower()));
                         }
                         else
                         {
-                            builder.AppendFormat(flatStructure ? @" url(../{0}) " : @" url(fonts/{0}) ", Path.GetFileName(fontSource.Location.ToLower()));
+                            builder.AppendFormat(commonSettings.FlatStructure ? @" url(../{0}) " : @" url(fonts/{0}) ", Path.GetFileName(fontSource.Location.ToLower()));
                         }
                         break;
                     default:

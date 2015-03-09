@@ -112,7 +112,7 @@ namespace EPubLibrary
         /// <summary>
         /// Controls if Lord Kiron's license need to be added to file
         /// </summary>
-        public bool InjectLKRLicense { get; set; }
+        public bool InjectLKRLicense { private get; set; }
 
 
         // All sequences in the book
@@ -486,7 +486,7 @@ namespace EPubLibrary
         /// <param name="stream"></param>
         private void AddCSSFiles(ZipOutputStream stream)
         {
-            foreach (var cssFile in CSSFiles)
+            foreach (var cssFile in _cssFiles)
             {
                 _mainCss.Load(cssFile.FilePathOnDisk, true);
             }
@@ -817,7 +817,7 @@ namespace EPubLibrary
                         FontStyle = CssFontDefinition.FromStyle(subFont.FontStyle),
                         FontWidth = CssFontDefinition.FromWidth(subFont.FontWidth)
                     };
-                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, _commonSettings.EmbedStyles, _commonSettings.FlatStructure)).ToList();
+                    var sources = subFont.Sources.Select(fontSource => CssFontDefinition.ConvertToSourceString(fontSource, _commonSettings)).ToList();
                     cssFont.FontSrcs = sources;
                     _mainCss.AddFont(cssFont);
                 }

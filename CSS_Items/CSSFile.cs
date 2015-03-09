@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 using EPubLibrary.Content;
 using EPubLibrary.PathUtils;
@@ -23,7 +21,7 @@ namespace EPubLibrary.CSS_Items
         /// <summary>
         /// Name of the file in ePub
         /// </summary>
-        public string FileName { get; set; }
+        public string FileName { private get; set; }
 
         /// <summary>
         /// Get/Set ID of the current element to be used in manifest etc
@@ -68,7 +66,7 @@ namespace EPubLibrary.CSS_Items
             using (var textReader = File.OpenText(fileName))
             {
                 string line;
-                StringBuilder elementString = new StringBuilder();
+                var elementString = new StringBuilder();
                 while ((line = textReader.ReadLine()) != null)
                 {
                     if (!string.IsNullOrEmpty(line))
@@ -144,10 +142,6 @@ namespace EPubLibrary.CSS_Items
             }
         }
 
-        public bool Empty() 
-        {
-            return ((_fonts.Count == 0) && (_targets.Count == 0));
-        }
 
         /// <summary>
         /// Writes CSS file to stream
