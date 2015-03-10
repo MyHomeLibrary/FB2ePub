@@ -43,6 +43,7 @@
     <Compile Include="EPubCoreMediaTypeAttribute.cs" />
     <Compile Include="EPubCoreMediaTypesConverter.cs" />
     <Compile Include="EPubDataContentType.cs" />
+    <Compile Include="EPubV3Vocabulary.cs" />
     <Compile Include="IBaseXHTMLFile.cs" />
     <Compile Include="IBookInformationData.cs" />
     <Compile Include="ICalibreMetadataObject.cs" />
