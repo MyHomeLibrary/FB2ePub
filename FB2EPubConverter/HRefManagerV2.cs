@@ -337,13 +337,13 @@ namespace FB2EPubConverter
                 if (!ReferencesUtils.IsExternalLink(link.Key))
                 {
                     string idString = ReferencesUtils.GetIdFromLink(link.Key);
-                    BaseXHTMLFile iDDocument = GetIDParentDocument(epubFile, _ids[idString]);
+                    BaseXHTMLFileV2 iDDocument = GetIDParentDocument(epubFile, _ids[idString]);
                     if (iDDocument != null)
                     {
                         int count = 0;
                         foreach (var anchor in link.Value)
                         {
-                            BaseXHTMLFile idDocument = GetIDParentDocument(epubFile, anchor);
+                            BaseXHTMLFileV2 idDocument = GetIDParentDocument(epubFile, anchor);
                             var referencedItem = _ids[(string)anchor.HRef.Value];
                             var newParent = DetectParentContainer(referencedItem);
                             if (newParent == null)
@@ -365,7 +365,7 @@ namespace FB2EPubConverter
                                 }
                                 newAnchor.HRef.Value = string.Format("{0}#{1}", idDocument.FileName, anchor.GlobalAttributes.ID.Value);
                             }
-                            if ((iDDocument is BookDocument) && ((iDDocument as BookDocument).Type == SectionTypeEnum.Links))  // if it's FBE notes section
+                            if ((iDDocument is BookDocumentV2) && ((iDDocument as BookDocumentV2).Type == SectionTypeEnum.Links))  // if it's FBE notes section
                             {
                                 newAnchor.GlobalAttributes.Class.Value = ElementStylesV2.NoteAnchor;
                                 newParent.Add(new EmptyLine(newParent.HTMLStandard));
@@ -405,13 +405,13 @@ namespace FB2EPubConverter
 
 
 
-        private BaseXHTMLFile GetIDParentDocument(EPubFileV2 file, IHTMLItem value)
+        private BaseXHTMLFileV2 GetIDParentDocument(EPubFileV2 file, IHTMLItem value)
         {
             if ((file.AnnotationPage != null) && file.AnnotationPage.PartOfDocument(value))
             {
                 return file.AnnotationPage;
             }
-            return file.BookDocuments.FirstOrDefault(document => document.PartOfDocument(value));
+            return file.GetIDOfParentDocument(value);
         }
 
 
