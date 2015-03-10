@@ -48,7 +48,7 @@ namespace EPubLibrary.XHTML_Items
         /// </summary>
         /// <param name="value">elemenrt to check</param>
         /// <returns>true idf part of this document, false otherwise</returns>
-        public new bool PartOfDocument(IHTMLItem value)
+        public override bool PartOfDocument(IHTMLItem value)
         {
             if (BookAnnotation == null)
             {

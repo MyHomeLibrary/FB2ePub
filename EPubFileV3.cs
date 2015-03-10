@@ -31,7 +31,7 @@ namespace EPubLibrary
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
         private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS", FileName = "main.css" };
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
-        private readonly List<BaseXHTMLFileV3> _sections = new List<BaseXHTMLFileV3>();
+        private readonly List<IBaseXHTMLFile> _sections = new List<IBaseXHTMLFile>();
         private readonly List<string> _aboutTexts = new List<string>();
         private readonly List<string> _aboutLinks = new List<string>();
         private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
@@ -112,18 +112,26 @@ namespace EPubLibrary
             _coverImage = imageRef;
         }
 
-        /// <summary>
-        /// Adds (creates) a new empty document in a list of book content documents
-        /// </summary>
-        /// <param name="id">id - title to assign to the new document</param>
-        /// <returns></returns>
-        public BaseXHTMLFileV3 AddDocument(string id)
-        {
-            var section = new BaseXHTMLFileV3{ PageTitle = id ,FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder()};
-            section.StyleFiles.Add(_mainCss);
+        ///// <summary>
+        ///// Adds (creates) a new empty document in a list of book content documents
+        ///// </summary>
+        ///// <param name="id">id - title to assign to the new document</param>
+        ///// <returns></returns>
+        //public BaseXHTMLFileV3 AddDocument(string id)
+        //{
+        //    var section = new BaseXHTMLFileV3{ PageTitle = id ,FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder()};
+        //    section.StyleFiles.Add(_mainCss);
 
-            _sections.Add(section);
-            return section;
+        //    _sections.Add(section);
+        //    return section;
+        //}
+
+
+        public void AddXHTMLFile(IBaseXHTMLFile file)
+        {
+            file.StyleFiles.Add(_mainCss);
+
+            _sections.Add(file);            
         }
 
         /// <summary>
@@ -133,7 +141,7 @@ namespace EPubLibrary
         private void AddLicenseFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            var licensePage = new LicenseFile(HTMLElementType.HTML5)
+            var licensePage = new LicenseFile()
             {
                 FlatStructure = _content.FlatStructure,
                 EmbedStyles = _commonSettings.EmbedStyles,
@@ -440,7 +448,7 @@ namespace EPubLibrary
             }
         }
 
-        private int SplitAndAddSubSections(ZipOutputStream stream, BaseXHTMLFileV3 section, int count)
+        private int SplitAndAddSubSections(ZipOutputStream stream, IBaseXHTMLFile section, int count)
         {
             int newCount = count;
             XDocument document = section.Generate();
@@ -450,7 +458,13 @@ namespace EPubLibrary
                 // This case is not for converter
                 // after converter the files should be in right size already
                 int subCount = 0;
-                foreach (var subsection in section.Split())
+                var baseXHTMLFileV3 = section as BaseXHTMLFileV3;
+                if (baseXHTMLFileV3 == null)
+                {
+                    throw new ArgumentException("The section passed has to be BaseXHTMLFileV3");
+                }
+
+                foreach (var subsection in baseXHTMLFileV3.Split())
                 {
                     subsection.FlatStructure = _commonSettings.FlatStructure;
                     subsection.EmbedStyles = _commonSettings.EmbedStyles;
@@ -474,7 +488,7 @@ namespace EPubLibrary
         }
 
 
-        private void AddBookContentSection(BaseXHTMLFileV3 subsection)
+        private void AddBookContentSection(IBaseXHTMLFile subsection)
         {
             subsection.Id = _sectionIDTracker.GenerateSectionId(subsection);
             _content.AddXHTMLTextItem(subsection);
@@ -733,11 +747,14 @@ namespace EPubLibrary
             }
         }
 
-        public BaseXHTMLFileV3 GetIDOfParentDocument(IHTMLItem value)
+        public IBaseXHTMLFile GetIDOfParentDocument(IHTMLItem value)
         {
-            return _sections.FirstOrDefault(document => document.PartOfDocument(value));
+            return _sections.FirstOrDefault(document =>
+            {
+                var baseXHTMLFileV3 = document as BaseXHTMLFileV3;
+                return baseXHTMLFileV3 != null && baseXHTMLFileV3.PartOfDocument(value);
+            });
         }
-
     }
 
 }

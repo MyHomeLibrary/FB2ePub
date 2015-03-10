@@ -1,5 +1,5 @@
 ﻿using EPubLibrary.TOC;
-using EPubLibrary.XHTML_Items;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.Content.NavigationManagement
 {
@@ -20,7 +20,7 @@ namespace EPubLibrary.Content.NavigationManagement
             _tableOfContentFile.Consolidate();
         }
 
-        public void AddBookSubsection(BaseXHTMLFileV2 subsection, string name)
+        public void AddBookSubsection(IBaseXHTMLFile subsection, string name)
         {
             if (!subsection.NotPartOfNavigation)
             {

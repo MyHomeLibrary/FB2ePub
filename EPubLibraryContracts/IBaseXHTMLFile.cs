@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace EPubLibraryContracts
 {
-    public interface IBaseXHTMLFile
+    public interface IBaseXHTMLFile : IEPubPath
     {
         void Write(Stream stream);
         XDocument Generate();
@@ -20,7 +20,6 @@ namespace EPubLibraryContracts
         string PageTitle { get; set; }
         List<IStyleElement> StyleFiles { get;  }
         string HRef { get; }
-        IEPubInternalPath PathInEPUB { get; }
         IBaseXHTMLFile NavigationParent { get; set; }
         int NavigationLevel { get; }
         ulong MaxSize { get; set; }

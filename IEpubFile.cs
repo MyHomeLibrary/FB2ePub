@@ -23,5 +23,7 @@ namespace EPubLibrary
         /// </summary>
         /// <param name="outFileName"></param>
         void Generate(string outFileName);
+
+        void AddXHTMLFile(IBaseXHTMLFile file);
     }
 }

@@ -238,7 +238,7 @@ namespace EPubLibrary.XHTML_Items
         /// </summary>
         /// <param name="value">element to check</param>
         /// <returns>true if part of this document, false otherwise</returns>
-        public bool PartOfDocument(IHTMLItem value)
+        public virtual bool PartOfDocument(IHTMLItem value)
         {
             if (Content == null)
             {
