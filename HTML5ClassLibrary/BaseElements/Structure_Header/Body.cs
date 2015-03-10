@@ -1,6 +1,7 @@
 ﻿using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
+using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.Structure_Header
 {
@@ -80,6 +81,14 @@ namespace XHTMLClassLibrary.BaseElements.Structure_Header
         protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is IBlockElement)
+            {
+                return item.IsValid();
+            }
+            else if (item is IInlineItem)
+            {
+                return item.IsValid();
+            }
+            else if (item is SimpleHTML5Text)
             {
                 return item.IsValid();
             }
