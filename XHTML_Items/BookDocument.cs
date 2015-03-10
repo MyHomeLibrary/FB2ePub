@@ -115,7 +115,7 @@ namespace EPubLibrary.XHTML_Items
                             NotPartOfNavigation = true
                         };
                         newDoc.StyleFiles.AddRange(StyleFiles);
-                        newDoc.DocumentType = DocumentType;
+                        newDoc.GuideRole = GuideRole;
                         newDoc.NavigationParent = NavigationParent;
                         break;
                     }
@@ -197,7 +197,7 @@ namespace EPubLibrary.XHTML_Items
             var list = new List<BookDocument>();
             var newDoc = new BookDocument(Compatibility) {PageTitle = PageTitle, NotPartOfNavigation = true};
             newDoc.StyleFiles.AddRange(StyleFiles);
-            newDoc.DocumentType = DocumentType;
+            newDoc.GuideRole = GuideRole;
             newDoc.NavigationParent = NavigationParent;
             newDoc.Content = new Div(Compatibility);
             var newParagraph = new Paragraph(Compatibility);
@@ -214,7 +214,7 @@ namespace EPubLibrary.XHTML_Items
                     list.Add(newDoc);
                     newDoc = new BookDocument(Compatibility) {PageTitle = PageTitle, NotPartOfNavigation = true};
                     newDoc.StyleFiles.AddRange(StyleFiles);
-                    newDoc.DocumentType = DocumentType;
+                    newDoc.GuideRole = GuideRole;
                     newDoc.NavigationParent = NavigationParent;
                     newDoc.Content = new Div(Compatibility);
                     newParagraph = new Paragraph(Compatibility);

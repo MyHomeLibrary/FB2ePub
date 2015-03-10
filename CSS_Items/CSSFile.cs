@@ -4,10 +4,11 @@ using System.IO;
 using System.Text;
 using EPubLibrary.Content;
 using EPubLibrary.PathUtils;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.CSS_Items
 {
-    public class CSSFile : StyleElement
+    public class CSSFile : IStyleElement
     {
         private readonly List<CssFontDefinition> _fonts = new List<CssFontDefinition>();
 
@@ -33,7 +34,7 @@ namespace EPubLibrary.CSS_Items
         /// </summary>
         public static EPubCoreMediaType MediaType { get { return EPubCoreMediaType.TextCss; } }
 
-        public override EPubInternalPath PathInEPUB
+        public IEPubInternalPath PathInEPUB
         {
             get
             {
@@ -147,7 +148,7 @@ namespace EPubLibrary.CSS_Items
         /// Writes CSS file to stream
         /// </summary>
         /// <param name="stream"></param>
-        public override void Write(Stream stream)
+        public void Write(Stream stream)
         {
             foreach (var item in _fonts)
             {
@@ -161,7 +162,7 @@ namespace EPubLibrary.CSS_Items
         }
 
 
-        public override EPubCoreMediaType GetMediaType()
+        public EPubCoreMediaType GetMediaType()
         {
             return MediaType;
         }

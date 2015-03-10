@@ -161,7 +161,6 @@
     <Compile Include="Content\Manifest\ManifestSectionV2.cs" />
     <Compile Include="Content\Manifest\ManifestItemV2.cs" />
     <Compile Include="PathUtils\FontOnStorage.cs" />
-    <Compile Include="PathUtils\IEPubPath.cs" />
     <Compile Include="PathUtils\ImageOnStorage.cs" />
     <Compile Include="PathUtils\PathElement.cs" />
     <Compile Include="ReferenceUtils\OnixSchemaConverter.cs" />

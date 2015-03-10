@@ -3,7 +3,6 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using EPubLibrary.Content.CalibreMetadata;
 using EPubLibrary.Content.Guide;
 using EPubLibrary.Content.Manifest;
 using EPubLibrary.Content.Spine;
@@ -299,7 +298,7 @@ namespace EPubLibrary.Content
             var bookItem = new ManifestItemV2 { HRef = baseXhtmlFile.HRef, ID = baseXhtmlFile.Id, MediaType = EPubCoreMediaType.ApplicationXhtmlXml };
             _manifest.Add(bookItem);
 
-            if (baseXhtmlFile.DocumentType != GuideTypeEnum.Ignore) // we do not add objects that to be ignored 
+            if (baseXhtmlFile.GuideRole != GuideTypeEnum.Ignore) // we do not add objects that to be ignored 
             {
                 var bookSpine = new SpineItemV2 {Name = baseXhtmlFile.Id};
                 _spine.Add(bookSpine);
@@ -341,7 +340,7 @@ namespace EPubLibrary.Content
         /// <summary>
         /// Returns path in ePub 
         /// </summary>
-        public EPubInternalPath PathInEPUB
+        public IEPubInternalPath PathInEPUB
         {
             get { return DefaultInternalPaths.ContentFilePath; }
         }

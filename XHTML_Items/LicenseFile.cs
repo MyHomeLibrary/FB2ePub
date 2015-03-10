@@ -1,5 +1,5 @@
-﻿using EPubLibrary.Content.Guide;
-using EPubLibrary.PathUtils;
+﻿using EPubLibrary.PathUtils;
+using EPubLibraryContracts;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
@@ -14,7 +14,7 @@ namespace EPubLibrary.XHTML_Items
             FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/license/");
             Id = "license";
             FileName = "license.xhtml";
-            DocumentType = GuideTypeEnum.Ignore;
+            GuideRole = GuideTypeEnum.Ignore;
         }
 
         public override void GenerateBody()

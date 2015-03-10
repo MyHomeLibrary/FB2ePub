@@ -337,7 +337,7 @@ namespace EPubLibrary.Content
             };
             _manifest.Add(bookItem);
 
-            if (baseXhtmlFile.DocumentType != GuideTypeEnum.Ignore) // we do not add objects that to be ignored 
+            if (baseXhtmlFile.GuideRole != GuideTypeEnum.Ignore) // we do not add objects that to be ignored 
             {
                 var bookSpine = new SpineItemV3 { Name = baseXhtmlFile.Id };
                 if (V3StandardChecker.IsRenditionFlowAllowedByStandard(_standard))
@@ -503,7 +503,7 @@ namespace EPubLibrary.Content
         /// <summary>
         /// Returns path in ePub 
         /// </summary>
-        public EPubInternalPath PathInEPUB
+        public IEPubInternalPath PathInEPUB
         {
             get { return DefaultInternalPaths.ContentFilePath; }
         }

@@ -3,6 +3,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary.PathUtils;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.Container
 {
@@ -48,7 +49,7 @@ namespace EPubLibrary.Container
         }
 
 
-        public EPubInternalPath PathInEPUB
+        public IEPubInternalPath PathInEPUB
         {
             get
             {

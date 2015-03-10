@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary.Content;
-using EPubLibrary.Content.Guide;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
+using EPubLibraryContracts;
 using XHTMLClassLibrary;
-using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.Structure_Header;
 
@@ -30,9 +28,9 @@ namespace EPubLibrary.XHTML_Items
         }
         
 
-        protected EPubInternalPath FileEPubInternalPath = null;
+        protected EPubInternalPath FileEPubInternalPath;
 
-        private readonly List<StyleElement> _styles = new List<StyleElement>();
+        private readonly List<IStyleElement> _styles = new List<IStyleElement>();
         private XDocument _generatedCodeXDocument;
         private bool _embeddStyles;
 
@@ -41,7 +39,7 @@ namespace EPubLibrary.XHTML_Items
             HeadElement = new Head(Compatibility);
         }
 
-        public GuideTypeEnum DocumentType { get; set; }
+        public GuideTypeEnum GuideRole { get; set; }
 
         public bool NotPartOfNavigation{get; set;}
 
@@ -50,7 +48,7 @@ namespace EPubLibrary.XHTML_Items
         public string Id { get; set; }
 
 
-        public EPubInternalPath PathInEPUB
+        public IEPubInternalPath PathInEPUB
         {
             get
             {
@@ -102,7 +100,7 @@ namespace EPubLibrary.XHTML_Items
         /// <summary>
         /// Get access to list of CSS files
         /// </summary>
-        public List<StyleElement> StyleFiles { get { return _styles; } }
+        public List<IStyleElement> StyleFiles { get { return _styles; } }
 
 
         public void Write(Stream stream)
@@ -178,7 +176,7 @@ namespace EPubLibrary.XHTML_Items
             }
 
 
-            var titleElm = new XHTMLClassLibrary.BaseElements.Structure_Header.Title(Compatibility);
+            var titleElm = new Title(Compatibility);
             titleElm.InternalTextItem.Text = InternalPageTitle;
             HeadElement.Add(titleElm);
             

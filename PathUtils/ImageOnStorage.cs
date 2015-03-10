@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.PathUtils
 {
@@ -9,8 +7,8 @@ namespace EPubLibrary.PathUtils
     {
         public static readonly EPubInternalPath DefaultImagesStoragePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/images/");
         private readonly EPubInternalPath _pathInEPub = DefaultImagesStoragePath;
-        private readonly string _id = string.Empty;
-        private readonly EPUBImageTypeEnum _imageType = EPUBImageTypeEnum.ImageJPG;
+        private readonly string _id;
+        private readonly EPUBImageTypeEnum _imageType;
 
         public string FileName { get; set; }
 
@@ -24,7 +22,7 @@ namespace EPubLibrary.PathUtils
             get { return _id; }
         }
 
-        public EPubInternalPath PathInEPUB
+        public IEPubInternalPath PathInEPUB
         {
             get
             {

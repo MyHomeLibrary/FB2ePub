@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
 using EPubLibrary.XHTML_Items;
+using EPubLibraryContracts;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.Structure_Header;
 
@@ -17,7 +18,7 @@ namespace EPubLibrary.Content.NavigationDocument
     {
         private const string HeadingTOC = "Table of Contents";
 
-        private readonly List<StyleElement> _styles = new List<StyleElement>();
+        private readonly List<IStyleElement> _styles = new List<IStyleElement>();
         private readonly NavMapElementV3 _documentNavigationMap = new NavMapElementV3
         {
             Type = NavigationTableType.TOC,
@@ -31,7 +32,7 @@ namespace EPubLibrary.Content.NavigationDocument
 
         private static readonly EPubInternalPath NAVFilePath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/nav.xhtml");
 
-        public EPubInternalPath PathInEPUB
+        public IEPubInternalPath PathInEPUB
         {
             get { return NAVFilePath; }
         }
@@ -41,7 +42,7 @@ namespace EPubLibrary.Content.NavigationDocument
         /// <summary>
         /// Get access to list of CSS files
         /// </summary>
-        public List<StyleElement> StyleFiles { get { return _styles; } }
+        public List<IStyleElement> StyleFiles { get { return _styles; } }
 
         /// <summary>
         /// Document title (meaningless in EPUB , usually used by browsers)

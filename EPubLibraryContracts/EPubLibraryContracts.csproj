@@ -40,12 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EPubDataContentType.cs" />
     <Compile Include="IBookInformationData.cs" />
     <Compile Include="ICalibreMetadataObject.cs" />
     <Compile Include="ICoverage.cs" />
     <Compile Include="IDataWithLanguage.cs" />
     <Compile Include="IDescription.cs" />
     <Compile Include="IePubIdentifier.cs" />
+    <Compile Include="IEPubPath.cs" />
+    <Compile Include="IEPubInternalPath.cs" />
     <Compile Include="IPersoneWithRole.cs" />
     <Compile Include="IPublisher.cs" />
     <Compile Include="IRelation.cs" />

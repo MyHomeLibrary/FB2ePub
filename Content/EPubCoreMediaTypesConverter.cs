@@ -72,12 +72,9 @@ namespace EPubLibrary.Content
             {
                 if (destinationType == null) { throw new ArgumentNullException("destinationType"); }
 
-                if (value != null)
+                if (value is T && destinationType == typeof(string))
                 {
-                    if (value is T && destinationType == typeof(string))
-                    {
-                        return GetMediaTypeAsString((T)value);
-                    }
+                    return GetMediaTypeAsString((T)value);
                 }
                 return base.ConvertTo(context, culture, value, destinationType);
             }

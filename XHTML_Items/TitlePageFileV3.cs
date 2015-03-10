@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using EPubLibrary.Content.Guide;
 using EPubLibrary.PathUtils;
 using EPubLibraryContracts;
 using XHTMLClassLibrary.AttributeDataTypes;
@@ -26,7 +25,7 @@ namespace EPubLibrary.XHTML_Items
             BookTitle = titleInformation.BookMainTitle;
 
             InternalPageTitle = "Title";
-            DocumentType = GuideTypeEnum.TitlePage;
+            GuideRole = GuideTypeEnum.TitlePage;
             FileName = "title.xhtml";
             FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
             Id = "title";

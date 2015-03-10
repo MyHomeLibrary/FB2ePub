@@ -1,5 +1,5 @@
-﻿using EPubLibrary.Content.Guide;
-using EPubLibrary.PathUtils;
+﻿using EPubLibrary.PathUtils;
+using EPubLibraryContracts;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -14,7 +14,7 @@ namespace EPubLibrary.XHTML_Items
             : base(HTMLElementType.XHTML11)
         {
             InternalPageTitle = "Cover";
-            DocumentType = GuideTypeEnum.Cover;
+            GuideRole = GuideTypeEnum.Cover;
             Id = "cover";
             FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
             FileName = "cover.xhtml";

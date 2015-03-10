@@ -1,14 +1,14 @@
 ﻿using System.IO;
 using EPubLibrary.Content;
 using EPubLibrary.PathUtils;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.CSS_Items
 {
-    public abstract class StyleElement : IEPubPath
+    public interface IStyleElement : IEPubPath
     {
-        abstract public void Write(Stream stream);
-        public abstract EPubInternalPath PathInEPUB { get; }
-        public abstract EPubCoreMediaType GetMediaType();
+        void Write(Stream stream);
+        EPubCoreMediaType GetMediaType();
 
     }
 }

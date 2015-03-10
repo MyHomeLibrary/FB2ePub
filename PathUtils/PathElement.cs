@@ -1,18 +1,13 @@
 ﻿using System;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.PathUtils
 {
-    public enum PathType
-    {
-        Root = 0,
-        Folder = 1,
-        File = 2,
-    };
 
-    public class PathElement : ICloneable
+    public class PathElement : IPathElement
     {
-        private readonly PathType _pathType = PathType.File;
-        private readonly string _name = string.Empty;
+        private readonly PathType _pathType;
+        private readonly string _name;
 
         public PathElement(string name, PathType type)
         {

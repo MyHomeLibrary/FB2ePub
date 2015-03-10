@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -10,25 +7,19 @@ using EPubLibrary.Content;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
 using ICSharpCode.SharpZipLib.Zip;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.Template
 {
     /// <summary>
     /// Contains code for loading and saving adobe XPGT templates
     /// </summary>
-    public class AdobeTemplate : StyleElement
+    public class AdobeTemplate : IStyleElement
     {
-        internal static class Logger
-        {
-            // Create a logger for use in this class
-            public static readonly log4net.ILog Log = log4net.LogManager.GetLogger(Assembly.GetExecutingAssembly().GetType());
-
-        }
-
         private readonly EPubInternalPath _pathInEPub = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/template/");
 
 
-        private  XDocument _fileDocument = null;
+        private  XDocument _fileDocument;
 
 
         public string FileName { get { return "template.xpgt"; } }
@@ -78,29 +69,26 @@ namespace EPubLibrary.Template
 
         }
 
-        public void Write(ZipOutputStream stream)
+    
+        public void Write(Stream stream)
         {
             if (_fileDocument == null)
             {
                 throw new NullReferenceException("Document pointer is null - file need to be properly loaded first");
             }
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.CloseOutput = false;
-            settings.Encoding = Encoding.UTF8;
-            settings.Indent = true;
+            XmlWriterSettings settings = new XmlWriterSettings
+            {
+                CloseOutput = false,
+                Encoding = Encoding.UTF8,
+                Indent = true
+            };
             using (var writer = XmlWriter.Create(stream, settings))
             {
                 _fileDocument.WriteTo(writer);
             }
-            
         }
 
-        public override void Write(Stream stream)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override EPubInternalPath PathInEPUB
+        public IEPubInternalPath PathInEPUB
         {
             get
             {
@@ -113,7 +101,7 @@ namespace EPubLibrary.Template
         }
 
 
-        public override EPubCoreMediaType GetMediaType()
+        public EPubCoreMediaType GetMediaType()
         {
             return EPubCoreMediaType.AdditionalAddobeTemplateXml;
         }

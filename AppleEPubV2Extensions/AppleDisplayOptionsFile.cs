@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary.PathUtils;
+using EPubLibraryContracts;
 using EPubLibraryContracts.Settings;
 
 namespace EPubLibrary.AppleEPubV2Extensions
@@ -87,7 +88,7 @@ namespace EPubLibrary.AppleEPubV2Extensions
             _platforms.Add(targetPlatform.Type, targetPlatform);
         }
 
-        public EPubInternalPath PathInEPUB
+        public IEPubInternalPath PathInEPUB
         {
             get
             {

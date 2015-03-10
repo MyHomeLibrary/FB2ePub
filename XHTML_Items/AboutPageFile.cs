@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using EPubLibrary.Content.Guide;
 using EPubLibrary.PathUtils;
+using EPubLibraryContracts;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
@@ -12,7 +12,7 @@ namespace EPubLibrary.XHTML_Items
         public AboutPageFile(HTMLElementType compatibility)
             : base(compatibility)
         {
-            DocumentType = GuideTypeEnum.CopyrightPage;
+            GuideRole = GuideTypeEnum.CopyrightPage;
             InternalPageTitle = "About";
             Id = "about";
             FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");

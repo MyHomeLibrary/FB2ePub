@@ -2,23 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.PathUtils
 {
-    public class EPubInternalPath : ICloneable
+    public class EPubInternalPath : IEPubInternalPath
     {
         private bool _supportFlatStructure = true;
 
         public const string DefaultOebpsFolder = "OEBPS";
 
-        private readonly List<PathElement> _path = new List<PathElement>();
+        private readonly List<IPathElement> _path = new List<IPathElement>();
+
+
+        public IList<IPathElement> Path { get { return _path; }}
 
         public EPubInternalPath(string zipPath)
         {
             string resolvedZipPath = zipPath.Replace('\\', '/');
             if (resolvedZipPath.EndsWith("/"))
             {
-                resolvedZipPath =   resolvedZipPath.TrimEnd(new[] { '/' });
+                resolvedZipPath =   resolvedZipPath.TrimEnd('/');
             }
             string[] pathArray = resolvedZipPath.Split('/');
             LoadAsPath(pathArray);
@@ -117,18 +121,18 @@ namespace EPubLibrary.PathUtils
         {
             // we assume the structure is valid and file name can be only at last element
             StringBuilder result = new StringBuilder();
-            for (int i = 0; i < _path.Count; i++)
+            foreach (IPathElement t in _path)
             {
-                switch (_path[i].Type)
+                switch (t.Type)
                 {
                     case PathType.Root:
                         result.Append('/');
                         break;
                     case PathType.Folder:
-                        result.AppendFormat("{0}/", _path[i].Name);
+                        result.AppendFormat("{0}/", t.Name);
                         break;
                     case PathType.File:
-                        result.Append(_path[i].Name);
+                        result.Append(t.Name);
                         break;
                 }
             }
@@ -156,7 +160,7 @@ namespace EPubLibrary.PathUtils
         /// <param name="otherObject"></param>
         /// <param name="flatStructure"></param>
         /// <returns></returns>
-        public string GetRelativePath(EPubInternalPath otherObject, bool flatStructure)
+        public string GetRelativePath(IEPubInternalPath otherObject, bool flatStructure)
         {
             if (flatStructure && _supportFlatStructure)
             {
@@ -169,16 +173,16 @@ namespace EPubLibrary.PathUtils
             int commongPathIndex = 0;
             // locate position where common path starts
             while ((commongPathIndex < _path.Count)
-                && (commongPathIndex < otherObject._path.Count)
-                && (0 == String.Compare(_path[commongPathIndex].Name, otherObject._path[commongPathIndex].Name, StringComparison.OrdinalIgnoreCase)))
+                && (commongPathIndex < otherObject.Path.Count)
+                && (0 == String.Compare(_path[commongPathIndex].Name, otherObject.Path[commongPathIndex].Name, StringComparison.OrdinalIgnoreCase)))
             {
                 commongPathIndex++;
             }
             StringBuilder sb = new StringBuilder();
             int i = commongPathIndex;
             // for all not common folders in path depth of other object we need to go folder up
-            while ( (i < otherObject._path.Count) 
-                && (otherObject._path[i].Type != PathType.File))
+            while ( (i < otherObject.Path.Count) 
+                && (otherObject.Path[i].Type != PathType.File))
             {
                 sb.Append("../");
                 i++;
@@ -202,12 +206,13 @@ namespace EPubLibrary.PathUtils
         /// Return Path only part of the path
         /// </summary>
         /// <returns></returns>
-        public EPubInternalPath GetPathWithoutFileName()
+        public IEPubInternalPath GetPathWithoutFileName()
         {
             EPubInternalPath newPathObject = (EPubInternalPath)MemberwiseClone();
             newPathObject._path.Clear();
-            foreach (PathElement element in _path) // copy all without Filename
+            foreach (var pathElement in _path) // copy all without Filename
             {
+                var element = (PathElement) pathElement;
                 if (element.Type != PathType.File)
                 {
                     newPathObject._path.Add((PathElement)element.Clone());
@@ -224,15 +229,15 @@ namespace EPubLibrary.PathUtils
         {
             // we assume the structure is valid and file name can be only at last element
             StringBuilder result = new StringBuilder();
-            for (int i = 0; i < _path.Count; i++)
+            foreach (IPathElement t in _path)
             {
-                switch (_path[i].Type)
+                switch (t.Type)
                 {
                     case PathType.Root:
                         result.Append('/');
                         break;
                     case PathType.Folder:
-                        result.AppendFormat("{0}/", _path[i].Name);
+                        result.AppendFormat("{0}/", t.Name);
                         break;
                 }
             }
@@ -243,8 +248,9 @@ namespace EPubLibrary.PathUtils
         {
             EPubInternalPath newPath = (EPubInternalPath)MemberwiseClone();
             newPath._path.Clear();
-            foreach (PathElement element in _path)
+            foreach (var pathElement in _path)
             {
+                var element = (PathElement) pathElement;
                 newPath._path.Add((PathElement)element.Clone());
             }
             return newPath;

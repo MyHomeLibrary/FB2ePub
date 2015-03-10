@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using EPubLibrary.PathUtils;
 using EPubLibrary.TOC.NavMap;
 using EPubLibrary.XHTML_Items;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.TOC
 {
@@ -155,7 +156,7 @@ namespace EPubLibrary.TOC
             }
         }
 
-        public EPubInternalPath PathInEPUB
+        public IEPubInternalPath PathInEPUB
         {
             get { return DefaultInternalPaths.TOCFilePath; }
         }
