@@ -3,10 +3,10 @@ using System.IO;
 using System.Reflection;
 using EPubLibrary;
 using EPubLibrary.CSS_Items;
+using EPubLibrary.PathUtils;
 using Fb2ePubConverter;
 using FB2Library;
 using FB2Library.HeaderItems;
-using XHTMLClassLibrary.BaseElements;
 using EPubLibrary.XHTML_Items;
 using EPubLibraryContracts;
 using FB2EPubConverter.ElementConvertersV2;
@@ -111,7 +111,9 @@ namespace FB2EPubConverter
             {
                 return;
             }
-            BookDocumentV2 infoDocument = epubFile.AddDocument("FB2 Info");
+            BaseXHTMLFileV2 infoDocument = epubFile.AddDocument("FB2 Info");
+            infoDocument.Type = SectionTypeEnum.Text;
+            infoDocument.FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder();
             var converterSettings = new ConverterOptionsV2
             {
                 CapitalDrop = false,
