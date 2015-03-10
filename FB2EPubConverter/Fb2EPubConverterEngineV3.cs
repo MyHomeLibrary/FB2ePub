@@ -123,7 +123,7 @@ namespace FB2EPubConverter
             }
             var infoDocument = new BaseXHTMLFileV3
             {
-                Id = "FB2 Info",
+                PageTitle = "FB2 Info",
                 FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
                 FileName = "fb2info.xhtml",
                 GuideRole = GuideTypeEnum.Notes,

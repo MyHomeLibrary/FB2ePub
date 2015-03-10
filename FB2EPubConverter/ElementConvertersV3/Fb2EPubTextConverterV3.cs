@@ -36,9 +36,9 @@ namespace FB2EPubConverter.ElementConvertersV3
             {
                 string docTitle = fb2File.MainBody.Title.ToString();
                 Logger.Log.DebugFormat("Adding section : {0}", docTitle);
-                BaseXHTMLFileV3 addTitlePage = new BaseXHTMLFileV3
+                var addTitlePage = new BaseXHTMLFileV3
                 {
-                    Id = docTitle,
+                    PageTitle = docTitle,
                     FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
                     GuideRole = GuideTypeEnum.TitlePage,
                     Content = new Div(HTMLElementType.HTML5),
@@ -67,7 +67,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 Logger.Log.DebugFormat("Adding section : {0}", docTitle);
                 mainDocument = new BaseXHTMLFileV3
                 {
-                    Id = docTitle,
+                    PageTitle = docTitle,
                     FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
                     GuideRole = GuideTypeEnum.Text,
                     Content = new Div(HTMLElementType.HTML5),
@@ -84,7 +84,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     string newDocTitle = ((fb2File.MainBody.Title != null) && (!string.IsNullOrEmpty(fb2File.MainBody.Title.ToString()))) ? fb2File.MainBody.Title.ToString() : "main";
                     mainDocument = new BaseXHTMLFileV3
                     {
-                        Id = newDocTitle,
+                        PageTitle = newDocTitle,
                         FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
                         GuideRole = GuideTypeEnum.Text,
                         Content = new Div(HTMLElementType.HTML5),
@@ -119,7 +119,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     string newDocTitle = ((fb2File.MainBody.Title != null) && (!string.IsNullOrEmpty(fb2File.MainBody.Title.ToString()))) ? fb2File.MainBody.Title.ToString() : "main";
                     mainDocument = new BaseXHTMLFileV3
                     {
-                        Id = newDocTitle,
+                        PageTitle = newDocTitle,
                         FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
                         GuideRole = GuideTypeEnum.Text,
                         Content = new Div(HTMLElementType.HTML5),
@@ -193,14 +193,15 @@ namespace FB2EPubConverter.ElementConvertersV3
             {
                 sectionDocument = new BaseXHTMLFileV3
                 {
-                    Id = docTitle,
-                    GuideRole = (navParent == null) ? GuideTypeEnum.Text : navParent.GuideRole,
+                    PageTitle = docTitle,
                     FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                    GuideRole = (navParent == null) ? GuideTypeEnum.Text : navParent.GuideRole,
                     Content = subitem,
                     NavigationParent = navParent,
                     FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
                 };
-                if (!firstDocumentOfSplit)
+                if (!firstDocumentOfSplit || 
+                    ((navParent!= null) && navParent.NotPartOfNavigation))
                 {
                     sectionDocument.NotPartOfNavigation = true;
                 }
@@ -234,7 +235,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             Logger.Log.DebugFormat("Adding section : {0}", docTitle);
             var sectionDocument = new BaseXHTMLFileV3
             {
-                Id = docTitle,
+                PageTitle = docTitle,
                 FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
                 GuideRole = GuideTypeEnum.Glossary,
                 Content = new Div(HTMLElementType.HTML5),
@@ -291,7 +292,8 @@ namespace FB2EPubConverter.ElementConvertersV3
                 Content = new Div(HTMLElementType.HTML5),
                 NavigationParent = null,
                 NotPartOfNavigation = false,
-                FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
+                FileName = string.Format("section{0}.xhtml", ++_sectionCounter),
+                PageTitle = docTitle,
             };
             if (bodyItem.Title != null)
             {
