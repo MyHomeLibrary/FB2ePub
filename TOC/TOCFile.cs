@@ -80,8 +80,7 @@ namespace EPubLibrary.TOC
                     }
                 }
                 throw new Exception("no such point to add sub point");
-            }
-            
+            }           
         }
 
 

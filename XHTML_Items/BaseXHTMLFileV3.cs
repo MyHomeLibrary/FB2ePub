@@ -223,7 +223,11 @@ namespace EPubLibrary.XHTML_Items
         {
             BodyElement = new Body(Compatibility);
             BodyElement.GlobalAttributes.Class.Value = "epub";
-            BodyElement.Add(_content ?? new EmptyLine(Compatibility));
+            if (_content != null)
+            {
+                BodyElement.Add(_content);
+            }
+
         }
 
         /// <summary>
@@ -268,7 +272,7 @@ namespace EPubLibrary.XHTML_Items
                         newDoc = new BaseXHTMLFileV3()
                         {
                             Content = oldContent,
-                            PageTitle = PageTitle,
+                            PageTitle = InternalPageTitle,
                             NotPartOfNavigation = true
                         };
                         newDoc.StyleFiles.AddRange(StyleFiles);
@@ -352,7 +356,7 @@ namespace EPubLibrary.XHTML_Items
         private List<BaseXHTMLFileV3> SplitSimpleText(SimpleHTML5Text simpleEPubText)
         {
             var list = new List<BaseXHTMLFileV3>();
-            var newDoc = new BaseXHTMLFileV3 { PageTitle = PageTitle, NotPartOfNavigation = true };
+            var newDoc = new BaseXHTMLFileV3 { PageTitle = InternalPageTitle, NotPartOfNavigation = true };
             newDoc.StyleFiles.AddRange(StyleFiles);
             newDoc.GuideRole = GuideRole;
             newDoc.NavigationParent = NavigationParent;

@@ -230,7 +230,10 @@ namespace EPubLibrary.XHTML_Items
         {
             BodyElement = new Body(Compatibility);
             BodyElement.GlobalAttributes.Class.Value = "epub";
-            BodyElement.Add(_content ?? new EmptyLine(Compatibility));
+            if (_content != null)
+            {
+                BodyElement.Add(_content);
+            }
         }
 
         /// <summary>
@@ -275,8 +278,8 @@ namespace EPubLibrary.XHTML_Items
                         newDoc = new BaseXHTMLFileV2()
                         {
                             Content = oldContent,
-                            PageTitle = PageTitle,
-                            NotPartOfNavigation = true
+                            PageTitle = InternalPageTitle,
+                            NotPartOfNavigation = true,
                         };
                         newDoc.StyleFiles.AddRange(StyleFiles);
                         newDoc.GuideRole = GuideRole;
@@ -376,13 +379,19 @@ namespace EPubLibrary.XHTML_Items
                 if (itemSize >= MaxSize)
                 {
                     list.Add(newDoc);
-                    newDoc = new BaseXHTMLFileV2{ PageTitle = PageTitle, NotPartOfNavigation = true , Type = SectionTypeEnum.Text, FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder()};
-                    newDoc.StyleFiles.AddRange(StyleFiles);
-                    newDoc.GuideRole = GuideRole;
-                    newDoc.NavigationParent = NavigationParent;
-                    newDoc.Content = new Div(Compatibility);
+                    newDoc = new BaseXHTMLFileV2
+                    {
+                        PageTitle = InternalPageTitle,
+                        NotPartOfNavigation = true,
+                        Type = SectionTypeEnum.Text,
+                        FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                        GuideRole = GuideRole,
+                        NavigationParent = NavigationParent,
+                        Content = new Div(Compatibility)
+                    };
                     newParagraph = new Paragraph(Compatibility);
                     newDoc.Content.Add(newParagraph);
+                    newDoc.StyleFiles.AddRange(StyleFiles);
                     newText = new SimpleHTML5Text(Compatibility) { Text = "" };
                     newParagraph.Add(newText);
                 }

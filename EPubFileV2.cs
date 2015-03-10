@@ -373,7 +373,7 @@ namespace EPubLibrary
         private void AddLicenseFile(ZipOutputStream stream)
         {
             stream.SetLevel(9);
-            var licensePage = new LicenseFile()
+            var licensePage = new LicenseFileV2()
             {
                 FlatStructure = _commonSettings.FlatStructure, 
                 EmbedStyles = _commonSettings.EmbedStyles, 

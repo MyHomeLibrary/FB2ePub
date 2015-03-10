@@ -6,20 +6,21 @@ using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace EPubLibrary.XHTML_Items
 {
-    class LicenseFile : BaseXHTMLFileV2
+    internal sealed class LicenseFileV3 : BaseXHTMLFileV3
     {
-        internal LicenseFile()
+        internal LicenseFileV3()
         {
             FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/license/");
             Id = "license";
             FileName = "license.xhtml";
             GuideRole = GuideTypeEnum.Ignore;
+            InternalPageTitle = "License";
+
         }
 
         public override void GenerateBody()
         {
             base.GenerateBody();
-            InternalPageTitle = "License";
             var page = new Div(Compatibility);
             var heading = new H1(Compatibility);
             heading.Add(new SimpleHTML5Text(Compatibility) { Text = "Converter use license" });
@@ -48,7 +49,6 @@ namespace EPubLibrary.XHTML_Items
 
             BodyElement.Add(page);
         }
-
 
     }
 }

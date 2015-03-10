@@ -183,7 +183,8 @@
     <Compile Include="XHTML_Items\BaseXHTMLFileV3.cs" />
     <Compile Include="XHTML_Items\CoverPageFileV2.cs" />
     <Compile Include="XHTML_Items\CoverPageFileV3.cs" />
-    <Compile Include="XHTML_Items\LicenseFile.cs" />
+    <Compile Include="XHTML_Items\LicenseFileV2.cs" />
+    <Compile Include="XHTML_Items\LicenseFileV3.cs" />
     <Compile Include="XHTML_Items\TitlePageFileV2.cs" />
     <Compile Include="XHTML_Items\TitlePageFileV3.cs" />
   </ItemGroup>
