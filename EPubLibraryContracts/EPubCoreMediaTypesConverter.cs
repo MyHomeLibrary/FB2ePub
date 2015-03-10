@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 
-namespace EPubLibrary.Content
+namespace EPubLibraryContracts
 {
     class EPubCoreMediaTypesConverter<T> : TypeConverter where T : struct
     {

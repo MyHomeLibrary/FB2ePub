@@ -20,7 +20,7 @@ namespace EPubLibrary.Content.NavigationManagement
             _tableOfContentFile.Consolidate();
         }
 
-        public void AddBookSubsection(BookDocument subsection, string name)
+        public void AddBookSubsection(BaseXHTMLFileV2 subsection, string name)
         {
             if (!subsection.NotPartOfNavigation)
             {

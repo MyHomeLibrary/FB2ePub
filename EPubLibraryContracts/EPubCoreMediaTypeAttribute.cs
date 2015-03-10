@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace EPubLibrary.Content
+namespace EPubLibraryContracts
 {
     [AttributeUsage(AttributeTargets.Field, Inherited = false,AllowMultiple = false)]
     public class EPubCoreMediaTypeAttribute : Attribute

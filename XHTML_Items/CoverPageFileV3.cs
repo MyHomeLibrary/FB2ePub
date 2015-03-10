@@ -1,20 +1,18 @@
 ﻿using EPubLibrary.PathUtils;
 using EPubLibraryContracts;
 using XHTMLClassLibrary.AttributeDataTypes;
-using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace EPubLibrary.XHTML_Items
 {
-    internal class CoverPageFileV3 : BaseXHTMLFile
+    internal class CoverPageFileV3 : BaseXHTMLFileV3
     {
         private const string CoverTypeAttributeValue = "cover";
 
         public ImageOnStorage CoverFileName { get; set; }
 
         public CoverPageFileV3()
-            : base(HTMLElementType.HTML5)
         {
             InternalPageTitle = "Cover";
             GuideRole = GuideTypeEnum.Cover;

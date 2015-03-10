@@ -10,7 +10,7 @@ using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace EPubLibrary.XHTML_Items
 {
-    internal class TitlePageFileV3 : BaseXHTMLFile
+    internal class TitlePageFileV3 : BaseXHTMLFileV3
     {
         private const string TitleTypeAttributeValue = "titlepage";
 
@@ -18,7 +18,6 @@ namespace EPubLibrary.XHTML_Items
         private readonly List<string> _series = new List<string>();
 
         public TitlePageFileV3(IBookInformationData titleInformation)
-            : base(HTMLElementType.HTML5)
         {
             Authors.AddRange(titleInformation.Authors);
             Series.AddRange(titleInformation.Series);

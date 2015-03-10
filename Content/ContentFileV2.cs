@@ -293,7 +293,7 @@ namespace EPubLibrary.Content
             return str;
         }
 
-        public void AddXHTMLTextItem(BaseXHTMLFile baseXhtmlFile)
+        public void AddXHTMLTextItem(BaseXHTMLFileV2 baseXhtmlFile)
         {
             var bookItem = new ManifestItemV2 { HRef = baseXhtmlFile.HRef, ID = baseXhtmlFile.Id, MediaType = EPubCoreMediaType.ApplicationXhtmlXml };
             _manifest.Add(bookItem);

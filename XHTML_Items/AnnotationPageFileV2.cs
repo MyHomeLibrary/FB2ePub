@@ -6,10 +6,10 @@ using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace EPubLibrary.XHTML_Items
 {
-    public class AnnotationPageFile : BaseXHTMLFile
+    public class AnnotationPageFileV2 : BaseXHTMLFileV2
     {
 
-        public AnnotationPageFile(HTMLElementType compatibility) : base(compatibility)
+        public AnnotationPageFileV2() 
         {
             InternalPageTitle = "Annotation";
             GuideRole = GuideTypeEnum.Preface;

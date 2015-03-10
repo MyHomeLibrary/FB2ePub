@@ -60,7 +60,7 @@ namespace EPubLibrary.ReferenceUtils
         public static string FormatImagePath(string validName, bool flatStructure)
         {
             EPubInternalPath imagePath = new EPubInternalPath(ImageOnStorage.DefaultImagesStoragePath,validName);
-            return imagePath.GetRelativePath(BookDocument.DefaultTextFilesFolder, flatStructure);
+            return imagePath.GetRelativePath(BookDocumentV2.DefaultTextFilesFolder, flatStructure);
         }
     }
 }

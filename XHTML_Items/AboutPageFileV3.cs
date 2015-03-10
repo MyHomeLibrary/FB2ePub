@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using EPubLibrary.PathUtils;
 using EPubLibraryContracts;
 using XHTMLClassLibrary.BaseElements;
@@ -7,10 +10,9 @@ using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace EPubLibrary.XHTML_Items
 {
-    internal class AboutPageFile : BaseXHTMLFile
+    public class AboutPageFileV3 : BaseXHTMLFileV3
     {
-        public AboutPageFile(HTMLElementType compatibility)
-            : base(compatibility)
+        public AboutPageFileV3()
         {
             GuideRole = GuideTypeEnum.CopyrightPage;
             InternalPageTitle = "About";

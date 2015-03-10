@@ -16,28 +16,28 @@ namespace EPubLibrary.CSS_Items
 
         public string Family
         {
-            private get { if (parameters.ContainsKey("font-family"))
-                    return parameters["font-family"].ToString();
+            private get { if (ParametersDictionary.ContainsKey("font-family"))
+                    return ParametersDictionary["font-family"].ToString();
                 return string.Empty;}
-            set { if (!string.IsNullOrEmpty(value)) parameters["font-family"] = value; }
+            set { if (!string.IsNullOrEmpty(value)) ParametersDictionary["font-family"] = value; }
         }
 
         public string FontStyle
         {
-            private get { if (parameters.ContainsKey("font-style"))
-                    return parameters["font-style"].ToString();
+            private get { if (ParametersDictionary.ContainsKey("font-style"))
+                    return ParametersDictionary["font-style"].ToString();
                 return string.Empty;
             }
-            set { if (!string.IsNullOrEmpty(value)) parameters["font-style"] = value.ToLower(); }           
+            set { if (!string.IsNullOrEmpty(value)) ParametersDictionary["font-style"] = value.ToLower(); }           
         }
 
         public string FontWidth
         {
-            private get { if (parameters.ContainsKey("font-weight"))
-                    return parameters["font-weight"].ToString();
+            private get { if (ParametersDictionary.ContainsKey("font-weight"))
+                    return ParametersDictionary["font-weight"].ToString();
                 return "normal";
             }
-            set { if (!string.IsNullOrEmpty(value)) parameters["font-weight"] = value; }                       
+            set { if (!string.IsNullOrEmpty(value)) ParametersDictionary["font-weight"] = value; }                       
         }
 
 
@@ -45,11 +45,11 @@ namespace EPubLibrary.CSS_Items
         {
             private get
             {
-                if (parameters.ContainsKey("src"))
-                    return parameters["src"] as List<string>;
+                if (ParametersDictionary.ContainsKey("src"))
+                    return ParametersDictionary["src"] as List<string>;
                 return new List<string>();
             }
-            set { if (value != null) parameters["src"] = value; }
+            set { if (value != null) ParametersDictionary["src"] = value; }
         }
 
         public override int GetHashCode()

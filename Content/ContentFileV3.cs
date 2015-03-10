@@ -8,7 +8,6 @@ using EPubLibrary.Content.NavigationDocument;
 using EPubLibrary.Content.Spine;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.ReferenceUtils;
-using EPubLibrary.XHTML_Items;
 using EPubLibrary.PathUtils;
 using System.IO;
 using System.Text;
@@ -327,7 +326,7 @@ namespace EPubLibrary.Content
         }
 
 
-        public void AddXHTMLTextItem(BaseXHTMLFile baseXhtmlFile)
+        public void AddXHTMLTextItem(IBaseXHTMLFile baseXhtmlFile)
         {
             var bookItem = new ManifestItemV3
             {

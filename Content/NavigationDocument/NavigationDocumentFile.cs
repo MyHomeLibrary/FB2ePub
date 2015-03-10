@@ -113,7 +113,7 @@ namespace EPubLibrary.Content.NavigationDocument
             }
         }
 
-        public void AddTOCNavPoint(BookDocument content, string name)
+        public void AddTOCNavPoint(BaseXHTMLFileV3 content, string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -125,7 +125,7 @@ namespace EPubLibrary.Content.NavigationDocument
             _documentNavigationMap.Add(bookPoint);
         }
 
-        public void AddSubNavPoint(BookDocument subcontent, string name)
+        public void AddSubNavPoint(BaseXHTMLFileV3 subcontent, string name)
         {
             if (subcontent.NavigationParent == null)
             {

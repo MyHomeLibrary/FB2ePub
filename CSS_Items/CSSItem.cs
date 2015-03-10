@@ -7,11 +7,11 @@ namespace EPubLibrary.CSS_Items
 {
     public class BaseCSSItem
     {
-        protected readonly Dictionary<string,object> parameters = new Dictionary<string, object>();
+        protected readonly Dictionary<string,object> ParametersDictionary = new Dictionary<string, object>();
 
         public string Name { get; set; }
 
-        public Dictionary<string, object> Parameters { get { return parameters; } }
+        public Dictionary<string, object> Parameters { get { return ParametersDictionary; } }
 
         public override string ToString()
         {

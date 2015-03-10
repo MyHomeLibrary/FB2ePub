@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
-using EPubLibrary.CSS_Items;
-using EPubLibraryContracts;
 
-namespace EPubLibrary.XHTML_Items
+namespace EPubLibraryContracts
 {
     public interface IBaseXHTMLFile
     {
@@ -21,5 +19,10 @@ namespace EPubLibrary.XHTML_Items
         bool EmbedStyles { get; set; }
         string PageTitle { get; set; }
         List<IStyleElement> StyleFiles { get;  }
+        string HRef { get; }
+        IEPubInternalPath PathInEPUB { get; }
+        IBaseXHTMLFile NavigationParent { get; set; }
+        int NavigationLevel { get; }
+        ulong MaxSize { get; set; }
     }
 }

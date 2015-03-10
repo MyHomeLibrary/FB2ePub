@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using EPubLibrary.XHTML_Items;
+using EPubLibraryContracts;
 
 namespace EPubLibrary
 {
@@ -42,10 +40,10 @@ namespace EPubLibrary
             }
         }
 
-        private readonly Dictionary<BookDocument, RegistrationNode> _sectionMapping = new Dictionary<BookDocument, RegistrationNode>();
+        private readonly Dictionary<IBaseXHTMLFile, RegistrationNode> _sectionMapping = new Dictionary<IBaseXHTMLFile, RegistrationNode>();
         private long _topLevelCounter;
 
-        public string GenerateSectionId(BookDocument section)
+        public string GenerateSectionId(IBaseXHTMLFile section)
         {
             if (!_sectionMapping.ContainsKey(section))
             {
@@ -54,7 +52,7 @@ namespace EPubLibrary
             return _sectionMapping[section].ID;
         }
 
-        private RegistrationNode GenerateNewRegistration(BookDocument section)
+        private RegistrationNode GenerateNewRegistration(IBaseXHTMLFile section)
         {
             List<long> idLevels = new List<long>();
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using EPubLibrary.Content;
+using EPubLibraryContracts;
 
 namespace EPubLibrary
 {

@@ -1,9 +1,6 @@
 ﻿using System.IO;
-using EPubLibrary.Content;
-using EPubLibrary.PathUtils;
-using EPubLibraryContracts;
 
-namespace EPubLibrary.CSS_Items
+namespace EPubLibraryContracts
 {
     public interface IStyleElement : IEPubPath
     {

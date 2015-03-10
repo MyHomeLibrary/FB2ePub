@@ -6,7 +6,6 @@ using System.Text;
 using System.Xml.Linq;
 using EPubLibrary.Container;
 using EPubLibrary.Content;
-using EPubLibrary.Content.Collections;
 using EPubLibrary.Content.NavigationManagement;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
@@ -32,7 +31,7 @@ namespace EPubLibrary
         private readonly ZipEntryFactory _zipFactory = new ZipEntryFactory();
         private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS", FileName = "main.css" };
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
-        private readonly List<BookDocument> _sections = new List<BookDocument>();
+        private readonly List<BaseXHTMLFileV3> _sections = new List<BaseXHTMLFileV3>();
         private readonly List<string> _aboutTexts = new List<string>();
         private readonly List<string> _aboutLinks = new List<string>();
         private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
@@ -61,8 +60,6 @@ namespace EPubLibrary
             get { return _translitMode; }
             set { _translitMode = value; }
         }
-
-        public List<BookDocument> BookDocuments { get { return _sections; } }
 
         #endregion 
 
@@ -120,9 +117,9 @@ namespace EPubLibrary
         /// </summary>
         /// <param name="id">id - title to assign to the new document</param>
         /// <returns></returns>
-        public BookDocument AddDocument(string id)
+        public BookDocumentV3 AddDocument(string id)
         {
-            var section = new BookDocument(HTMLElementType.HTML5) { PageTitle = id };
+            var section = new BookDocumentV3{ PageTitle = id };
             section.StyleFiles.Add(_mainCss);
 
             _sections.Add(section);
@@ -155,7 +152,7 @@ namespace EPubLibrary
         {
             stream.SetLevel(9);
 
-            var aboutPage = new AboutPageFile(HTMLElementType.HTML5)
+            var aboutPage = new AboutPageFileV3()
             {
                 FlatStructure = _commonSettings.FlatStructure,
                 EmbedStyles = _commonSettings.EmbedStyles,
@@ -443,7 +440,7 @@ namespace EPubLibrary
             }
         }
 
-        private int SplitAndAddSubSections(ZipOutputStream stream,BookDocument section, int count)
+        private int SplitAndAddSubSections(ZipOutputStream stream, BaseXHTMLFileV3 section, int count)
         {
             int newCount = count;
             XDocument document = section.Generate();
@@ -477,7 +474,7 @@ namespace EPubLibrary
         }
 
 
-        private void AddBookContentSection(BookDocument subsection)
+        private void AddBookContentSection(BaseXHTMLFileV3 subsection)
         {
             subsection.Id = _sectionIDTracker.GenerateSectionId(subsection);
             _content.AddXHTMLTextItem(subsection);
@@ -498,7 +495,7 @@ namespace EPubLibrary
         /// <summary>
         /// Set/get Annotation object
         /// </summary>
-        public AnnotationPageFile AnnotationPage { get; set; }
+        public AnnotationPageFileV3 AnnotationPage { get; set; }
 
       
         /// <summary>
@@ -734,6 +731,11 @@ namespace EPubLibrary
                     _mainCss.AddFont(cssFont);
                 }
             }
+        }
+
+        public BaseXHTMLFileV3 GetIDOfParentDocument(IHTMLItem value)
+        {
+            return _sections.FirstOrDefault(document => document.PartOfDocument(value));
         }
 
     }

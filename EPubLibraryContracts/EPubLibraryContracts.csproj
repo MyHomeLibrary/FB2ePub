@@ -40,7 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EPubCoreMediaTypeAttribute.cs" />
+    <Compile Include="EPubCoreMediaTypesConverter.cs" />
     <Compile Include="EPubDataContentType.cs" />
+    <Compile Include="IBaseXHTMLFile.cs" />
     <Compile Include="IBookInformationData.cs" />
     <Compile Include="ICalibreMetadataObject.cs" />
     <Compile Include="ICoverage.cs" />
@@ -55,6 +58,7 @@
     <Compile Include="IRights.cs" />
     <Compile Include="ISeriesCollectionMember.cs" />
     <Compile Include="ISource.cs" />
+    <Compile Include="IStyleElement.cs" />
     <Compile Include="ISubject.cs" />
     <Compile Include="ITitle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

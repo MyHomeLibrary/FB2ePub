@@ -5,7 +5,6 @@ using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary.PathUtils;
 using EPubLibrary.TOC.NavMap;
-using EPubLibrary.XHTML_Items;
 using EPubLibraryContracts;
 
 namespace EPubLibrary.TOC
@@ -50,13 +49,13 @@ namespace EPubLibrary.TOC
             
         }
 
-        public void AddNavPoint(BookDocument content, string name)
+        public void AddNavPoint(IBaseXHTMLFile content, string name)
         {
             var bookPoint = new NavPoint { Content = content.PathInEPUB.GetRelativePath(DefaultInternalPaths.TOCFilePath, content.FlatStructure), Name = name };
             _navMap.Add(bookPoint);
         }
 
-        public void AddSubNavPoint(BookDocument subcontent, string name)
+        public void AddSubNavPoint(IBaseXHTMLFile subcontent, string name)
         {
             var newPoint = new NavPoint
             {

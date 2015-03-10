@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
-using EPubLibrary.XHTML_Items;
 using EPubLibraryContracts;
 
 namespace EPubLibrary.Content.Guide
@@ -41,7 +40,7 @@ namespace EPubLibrary.Content.Guide
         /// Add new document to be a part of navigation
         /// </summary>
         /// <param name="baseXhtmlFile"></param>
-        public void AddDocumentToNavigation(BaseXHTMLFile baseXhtmlFile)
+        public void AddDocumentToNavigation(IBaseXHTMLFile baseXhtmlFile)
         {
             AddGuideItem(baseXhtmlFile.HRef, baseXhtmlFile.Id, baseXhtmlFile.GuideRole);
         }

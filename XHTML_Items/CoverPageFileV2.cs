@@ -6,12 +6,11 @@ using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace EPubLibrary.XHTML_Items
 {
-    internal class CoverPageFileV2 : BaseXHTMLFile
+    internal class CoverPageFileV2 : BaseXHTMLFileV2
     {
         public ImageOnStorage CoverFileName { get; set; }
 
         public CoverPageFileV2()
-            : base(HTMLElementType.XHTML11)
         {
             InternalPageTitle = "Cover";
             GuideRole = GuideTypeEnum.Cover;

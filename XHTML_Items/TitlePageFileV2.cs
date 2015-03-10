@@ -9,13 +9,12 @@ using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace EPubLibrary.XHTML_Items
 {
-    internal class TitlePageFileV2 : BaseXHTMLFile
+    internal class TitlePageFileV2 : BaseXHTMLFileV2
     {
         private readonly List<string> _authors = new List<string>();
         private readonly List<string> _series = new List<string>();
 
         public TitlePageFileV2(IBookInformationData titleInformation)
-            : base(HTMLElementType.XHTML11)
         {
             Authors.AddRange(titleInformation.Authors);
             Series.AddRange(titleInformation.Series);

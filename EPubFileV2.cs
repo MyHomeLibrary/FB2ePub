@@ -61,7 +61,7 @@ namespace EPubLibrary
         private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS",  FileName = "main.css" };
         private readonly AdobeTemplate _adobeTemplate = new AdobeTemplate();
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
-        private readonly List<BookDocument> _sections = new List<BookDocument>();
+        private readonly List<BaseXHTMLFileV2> _sections = new List<BaseXHTMLFileV2>();
         private readonly NavigationManagerV2 _navigationManager = new NavigationManagerV2();
         private readonly List<string> _aboutTexts = new List<string>();
         private readonly List<string> _aboutLinks = new List<string>();
@@ -112,11 +112,6 @@ namespace EPubLibrary
         public ICalibreMetadata CalibreMetadata { get { return _calibreMetadata; } }
 
         /// <summary>
-        /// Return reference to the list of the contained "book documents" - book content objects
-        /// </summary>
-        public List<BookDocument> BookDocuments { get { return _sections; } }
-
-        /// <summary>
         /// Controls if Lord Kiron's license need to be added to file
         /// </summary>
         public bool InjectLKRLicense { private get; set; }
@@ -140,7 +135,7 @@ namespace EPubLibrary
         /// <summary>
         /// Set/get Annotation object
         /// </summary>
-        public AnnotationPageFile AnnotationPage { get; set; }
+        public AnnotationPageFileV2 AnnotationPage { get; set; }
 
         /// <summary>
         /// Strings added to about page
@@ -195,9 +190,9 @@ namespace EPubLibrary
         /// </summary>
         /// <param name="id">id - title to assign to the new document</param>
         /// <returns></returns>
-        public BookDocument AddDocument(string id)
+        public BookDocumentV2 AddDocument(string id)
         {
-            var section = new BookDocument(HTMLElementType.XHTML11) { PageTitle = id };
+            var section = new BookDocumentV2{ PageTitle = id };
             section.StyleFiles.Add(_mainCss);
             if (_v2Settings.EnableAdobeTemplate)
             {
@@ -552,7 +547,7 @@ namespace EPubLibrary
         {
             stream.SetLevel(9);
 
-            var aboutPage = new AboutPageFile(HTMLElementType.XHTML11)
+            var aboutPage = new AboutPageFileV2()
             {
                 FlatStructure = _commonSettings.FlatStructure,
                 EmbedStyles = _commonSettings.EmbedStyles,
@@ -611,7 +606,7 @@ namespace EPubLibrary
         }
 
 
-        private int SplitAndAddSubSections(ZipOutputStream stream, BookDocument section, int count)
+        private int SplitAndAddSubSections(ZipOutputStream stream, BaseXHTMLFileV2 section, int count)
         {
             int newCount = count;
             XDocument document = section.Generate();
@@ -644,7 +639,7 @@ namespace EPubLibrary
             return newCount;
         }
 
-        private  void AddBookContentSection(BookDocument subsection)
+        private void AddBookContentSection(BaseXHTMLFileV2 subsection)
         {
             subsection.Id = _sectionIDTracker.GenerateSectionId(subsection);
             _content.AddXHTMLTextItem(subsection);
@@ -825,6 +820,11 @@ namespace EPubLibrary
         }
 
         #endregion
+
+        public BaseXHTMLFileV2 GetIDOfParentDocument(IHTMLItem value)
+        {
+            return _sections.FirstOrDefault(document => document.PartOfDocument(value));
+        }
     }
 
 }
