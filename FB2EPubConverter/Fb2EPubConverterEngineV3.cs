@@ -121,7 +121,15 @@ namespace FB2EPubConverter
             {
                 return;
             }
-            BaseXHTMLFileV3 infoDocument = epubFile.AddDocument("FB2 Info");
+            var infoDocument = new BaseXHTMLFileV3
+            {
+                Id = "FB2 Info",
+                FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                FileName = "fb2info.xhtml",
+                GuideRole = GuideTypeEnum.Notes,
+                NotPartOfNavigation = true
+            };
+
             var converterSettings = new ConverterOptionsV3
             {
                 CapitalDrop = false,
@@ -130,11 +138,9 @@ namespace FB2EPubConverter
                 ReferencesManager = _referencesManager,
             };
             var infoConverter = new Fb2EpubInfoConverterV3();
-            infoDocument.FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder();
             infoDocument.Content = infoConverter.Convert(fb2File, converterSettings);
-            infoDocument.FileName = "fb2info.xhtml";
-            infoDocument.GuideRole = GuideTypeEnum.Notes;
-            infoDocument.NotPartOfNavigation = true;
+
+            epubFile.AddXHTMLFile(infoDocument);
         }
 
         private void PassHeaderDataFromFb2ToEpub(FB2File fb2File,IBookInformationData titleInformation)

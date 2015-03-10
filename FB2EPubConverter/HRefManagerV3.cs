@@ -411,7 +411,7 @@ namespace FB2EPubConverter
             {
                 return file.AnnotationPage;
             }
-            return file.GetIDOfParentDocument(value);
+            return file.GetIDOfParentDocument(value) as BaseXHTMLFileV3;
         }
 
 
