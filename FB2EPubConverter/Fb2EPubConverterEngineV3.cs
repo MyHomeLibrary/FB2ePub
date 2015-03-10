@@ -121,7 +121,7 @@ namespace FB2EPubConverter
             {
                 return;
             }
-            BookDocument infoDocument = epubFile.AddDocument("FB2 Info");
+            BookDocumentV3 infoDocument = epubFile.AddDocument("FB2 Info");
             var converterSettings = new ConverterOptionsV3
             {
                 CapitalDrop = false,
@@ -224,7 +224,7 @@ namespace FB2EPubConverter
             if (titleInfo.Annotation != null)
             {
                 epubFile.BookInformation.Description = new Description {DescInfo = titleInfo.Annotation.ToString()};
-                epubFile.AnnotationPage = new AnnotationPageFile(HTMLElementType.HTML5);
+                epubFile.AnnotationPage = new AnnotationPageFileV3();
                 var converterSettings = new ConverterOptionsV3
                 {
                     CapitalDrop = Settings.CommonSettings.CapitalDrop,

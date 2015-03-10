@@ -35,7 +35,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             {
                 string docTitle = fb2File.MainBody.Title.ToString();
                 Logger.Log.DebugFormat("Adding section : {0}", docTitle);
-                BookDocument addTitlePage = epubFile.AddDocument(docTitle);
+                BookDocumentV3 addTitlePage = epubFile.AddDocument(docTitle);
                 addTitlePage.GuideRole = GuideTypeEnum.TitlePage;
                 addTitlePage.Content = new Div(HTMLElementType.HTML5);
                 var converterSettings = new ConverterOptionsV3
@@ -53,7 +53,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 addTitlePage.NotPartOfNavigation = true;
             }
 
-            BookDocument mainDocument = null;
+            BookDocumentV3 mainDocument = null;
             if (!string.IsNullOrEmpty(fb2File.MainBody.Name))
             {
                 string docTitle = fb2File.MainBody.Name;
@@ -144,7 +144,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             }
         }
 
-        private void AddSection(EPubFileV3 epubFile, SectionItem section, BookDocument navParent, bool fbeNotesSection)
+        private void AddSection(EPubFileV3 epubFile, SectionItem section, BookDocumentV3 navParent, bool fbeNotesSection)
         {
             string docTitle = string.Empty;
             if (section.Title != null)
@@ -152,7 +152,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 docTitle = section.Title.ToString();
             }
             Logger.Log.DebugFormat("Adding section : {0}", docTitle);
-            BookDocument sectionDocument = null;
+            BookDocumentV3 sectionDocument = null;
             bool firstDocumentOfSplit = true;
             var converterSettings = new ConverterOptionsV3
             {
@@ -188,7 +188,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             }
         }
 
-        private static int GetRecursionLevel(BookDocument navParent)
+        private static int GetRecursionLevel(BookDocumentV3 navParent)
         {
             if (navParent == null)
             {

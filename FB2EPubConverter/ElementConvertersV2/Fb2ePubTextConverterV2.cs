@@ -36,7 +36,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             {
                 string docTitle = fb2File.MainBody.Title.ToString();
                 Logger.Log.DebugFormat("Adding section : {0}", docTitle);
-                BookDocument addTitlePage = epubFile.AddDocument(docTitle);
+                BookDocumentV2 addTitlePage = epubFile.AddDocument(docTitle);
                 addTitlePage.GuideRole = GuideTypeEnum.TitlePage;
                 addTitlePage.Content = new Div(HTMLElementType.XHTML11);
                 var converterSettings = new ConverterOptionsV2
@@ -54,7 +54,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 addTitlePage.NotPartOfNavigation = true;
             }
 
-            BookDocument mainDocument = null;
+            BookDocumentV2 mainDocument = null;
             if (!string.IsNullOrEmpty(fb2File.MainBody.Name))
             {
                 string docTitle = fb2File.MainBody.Name;
@@ -145,7 +145,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             }          
         }
 
-        private void AddSection(EPubFileV2 epubFile, SectionItem section, BookDocument navParent, bool fbeNotesSection)
+        private void AddSection(EPubFileV2 epubFile, SectionItem section, BookDocumentV2 navParent, bool fbeNotesSection)
         {
             string docTitle = string.Empty;
             if (section.Title != null)
@@ -153,7 +153,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 docTitle = section.Title.ToString();
             }
             Logger.Log.DebugFormat("Adding section : {0}", docTitle);
-            BookDocument sectionDocument = null;
+            BookDocumentV2 sectionDocument = null;
             bool firstDocumentOfSplit = true;
             var converterSettings = new ConverterOptionsV2
             {
@@ -189,7 +189,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             }
         }
 
-        private static int GetRecursionLevel(BookDocument navParent)
+        private static int GetRecursionLevel(BookDocumentV2 navParent)
         {
             if (navParent == null)
             {
