@@ -365,14 +365,14 @@ namespace FB2EPubConverter
                                 }
                                 newAnchor.HRef.Value = string.Format("{0}#{1}", idDocument.FileName, anchor.GlobalAttributes.ID.Value);
                             }
-                            if ((iDDocument is BookDocumentV3) && ((iDDocument as BookDocumentV3).Type == SectionTypeEnum.Links))  // if it's FBE notes section
-                            {
-                                newAnchor.GlobalAttributes.Class.Value = ElementStylesV3.NoteAnchor;
-                                newParent.Add(new EmptyLine(newParent.HTMLStandard));
-                                newParent.Add(newAnchor);
-                                count++;
-                                newAnchor.Add(new SimpleHTML5Text(newAnchor.HTMLStandard) { Text = (link.Value.Count > 1) ? string.Format("(<< back {0})  ", count) : string.Format("(<< back)  ") });
-                            }
+                            //if (iDDocument.Type == SectionTypeEnum.Links))  // if it's FBE notes section
+                            //{
+                            //    newAnchor.GlobalAttributes.Class.Value = ElementStylesV3.NoteAnchor;
+                            //    newParent.Add(new EmptyLine(newParent.HTMLStandard));
+                            //    newParent.Add(newAnchor);
+                            //    count++;
+                            //    newAnchor.Add(new SimpleHTML5Text(newAnchor.HTMLStandard) { Text = (link.Value.Count > 1) ? string.Format("(<< back {0})  ", count) : string.Format("(<< back)  ") });
+                            //}
                         }
                     }
                     else
@@ -409,7 +409,7 @@ namespace FB2EPubConverter
         {
             if ((file.AnnotationPage != null) && file.AnnotationPage.PartOfDocument(value))
             {
-                return file.AnnotationPage as BaseXHTMLFileV3;
+                return file.AnnotationPage;
             }
             return file.GetIDOfParentDocument(value);
         }

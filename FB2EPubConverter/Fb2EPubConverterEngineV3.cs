@@ -4,13 +4,13 @@ using System.Reflection;
 using ConverterContracts.Settings;
 using EPubLibrary;
 using EPubLibrary.CSS_Items;
+using EPubLibrary.PathUtils;
 using EPubLibrary.XHTML_Items;
 using Fb2ePubConverter;
 using FB2EPubConverter.ElementConvertersV3;
 using FB2Library;
 using FB2Library.HeaderItems;
 using TranslitRu;
-using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using EPubLibraryContracts;
 
@@ -121,7 +121,7 @@ namespace FB2EPubConverter
             {
                 return;
             }
-            BookDocumentV3 infoDocument = epubFile.AddDocument("FB2 Info");
+            BaseXHTMLFileV3 infoDocument = epubFile.AddDocument("FB2 Info");
             var converterSettings = new ConverterOptionsV3
             {
                 CapitalDrop = false,
@@ -130,10 +130,10 @@ namespace FB2EPubConverter
                 ReferencesManager = _referencesManager,
             };
             var infoConverter = new Fb2EpubInfoConverterV3();
+            infoDocument.FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder();
             infoDocument.Content = infoConverter.Convert(fb2File, converterSettings);
             infoDocument.FileName = "fb2info.xhtml";
             infoDocument.GuideRole = GuideTypeEnum.Notes;
-            infoDocument.Type = SectionTypeEnum.Text;
             infoDocument.NotPartOfNavigation = true;
         }
 
