@@ -46,7 +46,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     NavigationParent = null,
                     FileName = string.Format("section{0}.xhtml", ++_sectionCounter),
                     NotPartOfNavigation = true,
-                    Id = docTitle,
+                    PageTitle = docTitle,
                 };
                 var converterSettings = new ConverterOptionsV2
                 {
@@ -68,7 +68,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 Logger.Log.DebugFormat("Adding section : {0}", docTitle);
                 mainDocument = new BaseXHTMLFileV2
                 {
-                    Id = docTitle,
+                    PageTitle = docTitle,
                     GuideRole = GuideTypeEnum.Text,
                     Content = new Div(BaseXHTMLFileV2.Compatibility),
                     Type = SectionTypeEnum.Text,
@@ -86,7 +86,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     string newDocTitle = ((fb2File.MainBody.Title != null) && (!string.IsNullOrEmpty(fb2File.MainBody.Title.ToString()))) ? fb2File.MainBody.Title.ToString() : "main";
                     mainDocument = new BaseXHTMLFileV2
                     {
-                        Id = newDocTitle,
+                        PageTitle = newDocTitle,
                         GuideRole = GuideTypeEnum.Text,
                         Content = new Div(BaseXHTMLFileV2.Compatibility),
                         NavigationParent = null,
@@ -122,7 +122,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     string newDocTitle = ((fb2File.MainBody.Title != null) && (!string.IsNullOrEmpty(fb2File.MainBody.Title.ToString()))) ? fb2File.MainBody.Title.ToString() : "main";
                     mainDocument = new BaseXHTMLFileV2
                     {
-                        Id = newDocTitle,
+                        PageTitle = newDocTitle,
                         GuideRole = GuideTypeEnum.Text,
                         Content = new Div(BaseXHTMLFileV2.Compatibility),
                         NavigationParent = null,
@@ -197,7 +197,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             {
                 sectionDocument = new BaseXHTMLFileV2
                 {
-                    Id = docTitle,
+                    PageTitle = docTitle,
                     FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
                     GuideRole = (navParent == null) ? GuideTypeEnum.Text : navParent.GuideRole,
                     Type = (navParent == null) ? SectionTypeEnum.Text : navParent.Type,
@@ -239,11 +239,15 @@ namespace FB2EPubConverter.ElementConvertersV2
             Logger.Log.DebugFormat("Adding section : {0}", docTitle);
             var sectionDocument = new BaseXHTMLFileV2
             {
-                Id = docTitle,
+                PageTitle = docTitle,
                 FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
                 GuideRole = GuideTypeEnum.Glossary,
                 Type = SectionTypeEnum.Links,
-                Content = new Div(BaseXHTMLFileV2.Compatibility)
+                Content = new Div(BaseXHTMLFileV2.Compatibility),
+                NavigationParent = null,
+                NotPartOfNavigation = true,
+                FileName = string.Format("section{0}.xhtml", ++_sectionCounter),
+
             };
             if (bodyItem.Title != null)
             {
@@ -257,11 +261,9 @@ namespace FB2EPubConverter.ElementConvertersV2
                 var titleConverter = new TitleConverterV2();
                 sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,
                     new TitleConverterParamsV2 { Settings = converterSettings, TitleLevel = 1 }));
-                epubFile.AddXHTMLFile(sectionDocument);
             }
-            sectionDocument.NavigationParent = null;
-            sectionDocument.NotPartOfNavigation = true;
-            sectionDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
+            epubFile.AddXHTMLFile(sectionDocument);
+
             Logger.Log.Debug("Adding sub-sections");
             foreach (var section in bodyItem.Sections)
             {
