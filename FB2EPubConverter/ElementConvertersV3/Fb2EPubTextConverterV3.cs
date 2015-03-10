@@ -36,10 +36,16 @@ namespace FB2EPubConverter.ElementConvertersV3
             {
                 string docTitle = fb2File.MainBody.Title.ToString();
                 Logger.Log.DebugFormat("Adding section : {0}", docTitle);
-                BaseXHTMLFileV3 addTitlePage = epubFile.AddDocument(docTitle);
-                addTitlePage.FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder();
-                addTitlePage.GuideRole = GuideTypeEnum.TitlePage;
-                addTitlePage.Content = new Div(HTMLElementType.HTML5);
+                BaseXHTMLFileV3 addTitlePage = new BaseXHTMLFileV3
+                {
+                    Id = docTitle,
+                    FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                    GuideRole = GuideTypeEnum.TitlePage,
+                    Content = new Div(HTMLElementType.HTML5),
+                    NavigationParent = null,
+                    FileName = string.Format("section{0}.xhtml", ++_sectionCounter),
+                    NotPartOfNavigation = true
+                };
                 var converterSettings = new ConverterOptionsV3
                 {
                     CapitalDrop = _commonSettings.CapitalDrop,
@@ -50,9 +56,8 @@ namespace FB2EPubConverter.ElementConvertersV3
                 var titleConverter = new TitleConverterV3();
                 addTitlePage.Content.Add(titleConverter.Convert(fb2File.MainBody.Title,
                     new TitleConverterParamsV3 { Settings = converterSettings, TitleLevel = 2 }));
-                addTitlePage.NavigationParent = null;
-                addTitlePage.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
-                addTitlePage.NotPartOfNavigation = true;
+
+                epubFile.AddXHTMLFile(addTitlePage);
             }
 
             BaseXHTMLFileV3 mainDocument = null;
@@ -60,12 +65,16 @@ namespace FB2EPubConverter.ElementConvertersV3
             {
                 string docTitle = fb2File.MainBody.Name;
                 Logger.Log.DebugFormat("Adding section : {0}", docTitle);
-                mainDocument = epubFile.AddDocument(docTitle);
-                mainDocument.FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder();
-                mainDocument.GuideRole = GuideTypeEnum.Text;
-                mainDocument.Content = new Div(HTMLElementType.HTML5);
-                mainDocument.NavigationParent = null;
-                mainDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
+                mainDocument = new BaseXHTMLFileV3
+                {
+                    Id = docTitle,
+                    FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                    GuideRole = GuideTypeEnum.Text,
+                    Content = new Div(HTMLElementType.HTML5),
+                    NavigationParent = null,
+                    FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
+                };
+                epubFile.AddXHTMLFile(mainDocument);
             }
 
             if ((fb2File.MainBody.ImageName != null) && !string.IsNullOrEmpty(fb2File.MainBody.ImageName.HRef))
@@ -73,12 +82,16 @@ namespace FB2EPubConverter.ElementConvertersV3
                 if (mainDocument == null)
                 {
                     string newDocTitle = ((fb2File.MainBody.Title != null) && (!string.IsNullOrEmpty(fb2File.MainBody.Title.ToString()))) ? fb2File.MainBody.Title.ToString() : "main";
-                    mainDocument = epubFile.AddDocument(newDocTitle);
-                    mainDocument.FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder();
-                    mainDocument.GuideRole = GuideTypeEnum.Text;
-                    mainDocument.Content = new Div(HTMLElementType.HTML5);
-                    mainDocument.NavigationParent = null;
-                    mainDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
+                    mainDocument = new BaseXHTMLFileV3
+                    {
+                        Id = newDocTitle,
+                        FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                        GuideRole = GuideTypeEnum.Text,
+                        Content = new Div(HTMLElementType.HTML5),
+                        NavigationParent = null,
+                        FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
+                    };
+                    epubFile.AddXHTMLFile(mainDocument);
                 }
                 if (_images.IsImageIdReal(fb2File.MainBody.ImageName.HRef))
                 {
@@ -104,12 +117,16 @@ namespace FB2EPubConverter.ElementConvertersV3
                 if (mainDocument == null)
                 {
                     string newDocTitle = ((fb2File.MainBody.Title != null) && (!string.IsNullOrEmpty(fb2File.MainBody.Title.ToString()))) ? fb2File.MainBody.Title.ToString() : "main";
-                    mainDocument = epubFile.AddDocument(newDocTitle);
-                    mainDocument.FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder();
-                    mainDocument.GuideRole = GuideTypeEnum.Text;
-                    mainDocument.Content = new Div(HTMLElementType.HTML5);
-                    mainDocument.NavigationParent = null;
-                    mainDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
+                    mainDocument = new BaseXHTMLFileV3
+                    {
+                        Id = newDocTitle,
+                        FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                        GuideRole = GuideTypeEnum.Text,
+                        Content = new Div(HTMLElementType.HTML5),
+                        NavigationParent = null,
+                        FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
+                    };
+                    epubFile.AddXHTMLFile(mainDocument);
                 }
                 var converterSettings = new ConverterOptionsV3
                 {
@@ -174,17 +191,21 @@ namespace FB2EPubConverter.ElementConvertersV3
             };
             foreach (var subitem in sectionConverter.Convert(section))
             {
-                sectionDocument = epubFile.AddDocument(docTitle);
-                sectionDocument.GuideRole= (navParent == null) ? GuideTypeEnum.Text : navParent.GuideRole;
-                sectionDocument.FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder();
-                sectionDocument.Content = subitem;
-                sectionDocument.NavigationParent = navParent;
-                sectionDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
+                sectionDocument = new BaseXHTMLFileV3
+                {
+                    Id = docTitle,
+                    GuideRole = (navParent == null) ? GuideTypeEnum.Text : navParent.GuideRole,
+                    FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                    Content = subitem,
+                    NavigationParent = navParent,
+                    FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
+                };
                 if (!firstDocumentOfSplit)
                 {
                     sectionDocument.NotPartOfNavigation = true;
                 }
                 firstDocumentOfSplit = false;
+                epubFile.AddXHTMLFile(sectionDocument);
             }
             Logger.Log.Debug("Adding sub-sections");
             foreach (var subSection in section.SubSections)
@@ -211,10 +232,16 @@ namespace FB2EPubConverter.ElementConvertersV3
         {
             string docTitle = bodyItem.Name;
             Logger.Log.DebugFormat("Adding section : {0}", docTitle);
-            var sectionDocument = epubFile.AddDocument(docTitle);
-            sectionDocument.FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder();
-            sectionDocument.GuideRole= GuideTypeEnum.Glossary;
-            sectionDocument.Content = new Div(HTMLElementType.HTML5);
+            var sectionDocument = new BaseXHTMLFileV3
+            {
+                Id = docTitle,
+                FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                GuideRole = GuideTypeEnum.Glossary,
+                Content = new Div(HTMLElementType.HTML5),
+                NavigationParent = null,
+                NotPartOfNavigation = true,
+                FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
+            };
             if (bodyItem.Title != null)
             {
                 var converterSettings = new ConverterOptionsV3
@@ -228,9 +255,8 @@ namespace FB2EPubConverter.ElementConvertersV3
                 sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,
                     new TitleConverterParamsV3 { Settings = converterSettings, TitleLevel = 1 }));
             }
-            sectionDocument.NavigationParent = null;
-            sectionDocument.NotPartOfNavigation = true;
-            sectionDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
+            epubFile.AddXHTMLFile(sectionDocument);
+
             Logger.Log.Debug("Adding sub-sections");
             foreach (var section in bodyItem.Sections)
             {
@@ -258,10 +284,15 @@ namespace FB2EPubConverter.ElementConvertersV3
                 docTitle = bodyItem.Name;
             }
             Logger.Log.DebugFormat("Adding section : {0}", docTitle);
-            var sectionDocument = epubFile.AddDocument(docTitle);
-            sectionDocument.FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder();
-            sectionDocument.GuideRole= GuideTypeEnum.Text;
-            sectionDocument.Content = new Div(HTMLElementType.HTML5);
+            var sectionDocument = new BaseXHTMLFileV3
+            {
+                FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                GuideRole = GuideTypeEnum.Text,
+                Content = new Div(HTMLElementType.HTML5),
+                NavigationParent = null,
+                NotPartOfNavigation = false,
+                FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
+            };
             if (bodyItem.Title != null)
             {
                 var converterSettings = new ConverterOptionsV3
@@ -275,9 +306,8 @@ namespace FB2EPubConverter.ElementConvertersV3
                 sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,
                     new TitleConverterParamsV3 { Settings = converterSettings, TitleLevel = 1 }));
             }
-            sectionDocument.NavigationParent = null;
-            sectionDocument.NotPartOfNavigation = false;
-            sectionDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
+            epubFile.AddXHTMLFile(sectionDocument);
+
             Logger.Log.Debug("Adding sub-sections");
             foreach (var section in bodyItem.Sections)
             {
