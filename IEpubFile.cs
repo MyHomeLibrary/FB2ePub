@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using EPubLibraryContracts;
+﻿using EPubLibraryContracts;
 using TranslitRuContracts;
 
 namespace EPubLibrary

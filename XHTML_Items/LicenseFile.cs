@@ -8,7 +8,7 @@ namespace EPubLibrary.XHTML_Items
 {
     class LicenseFile : BaseXHTMLFileV2
     {
-        internal LicenseFile(HTMLElementType compatibility)
+        internal LicenseFile()
         {
             FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/license/");
             Id = "license";

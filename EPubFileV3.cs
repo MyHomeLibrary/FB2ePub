@@ -117,9 +117,9 @@ namespace EPubLibrary
         /// </summary>
         /// <param name="id">id - title to assign to the new document</param>
         /// <returns></returns>
-        public BookDocumentV3 AddDocument(string id)
+        public BaseXHTMLFileV3 AddDocument(string id)
         {
-            var section = new BookDocumentV3{ PageTitle = id };
+            var section = new BaseXHTMLFileV3{ PageTitle = id ,FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder()};
             section.StyleFiles.Add(_mainCss);
 
             _sections.Add(section);

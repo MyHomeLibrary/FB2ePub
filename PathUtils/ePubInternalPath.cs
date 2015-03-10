@@ -37,6 +37,11 @@ namespace EPubLibrary.PathUtils
         }
 
 
+        public static EPubInternalPath GetDefaultTextFilesFolder()
+        {
+            return new EPubInternalPath(DefaultOebpsFolder + "/text/");
+        }
+
         /// <summary>
         /// Set if path support flat structure or not (should always be placed at specific location )
         /// </summary>

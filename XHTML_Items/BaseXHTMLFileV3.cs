@@ -26,7 +26,7 @@ namespace EPubLibrary.XHTML_Items
 
 
 
-        protected EPubInternalPath FileEPubInternalPath;
+        public EPubInternalPath FileEPubInternalPath;
 
         private readonly List<IStyleElement> _styles = new List<IStyleElement>();
         private XDocument _generatedCodeXDocument;

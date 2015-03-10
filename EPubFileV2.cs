@@ -190,9 +190,9 @@ namespace EPubLibrary
         /// </summary>
         /// <param name="id">id - title to assign to the new document</param>
         /// <returns></returns>
-        public BookDocumentV2 AddDocument(string id)
+        public BaseXHTMLFileV2 AddDocument(string id)
         {
-            var section = new BookDocumentV2{ PageTitle = id };
+            var section = new BaseXHTMLFileV2 { PageTitle = id };
             section.StyleFiles.Add(_mainCss);
             if (_v2Settings.EnableAdobeTemplate)
             {

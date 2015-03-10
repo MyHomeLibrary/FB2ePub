@@ -15,16 +15,22 @@ using XHTMLClassLibrary.BaseElements.Structure_Header;
 
 namespace EPubLibrary.XHTML_Items
 {
+    public enum SectionTypeEnum
+    {
+        Text,
+        Links,
+    }
+
     public class BaseXHTMLFileV2 : IEPubPath , IBaseXHTMLFile
     {
         protected Head HeadElement;
         protected Body BodyElement;
         protected string InternalPageTitle;
         protected bool Durty = true;
-        protected const HTMLElementType Compatibility = HTMLElementType.XHTML11;
+        public const HTMLElementType Compatibility = HTMLElementType.XHTML11;
 
    
-        protected EPubInternalPath FileEPubInternalPath;
+        public EPubInternalPath FileEPubInternalPath;
 
         private readonly List<IStyleElement> _styles = new List<IStyleElement>();
         private XDocument _generatedCodeXDocument;
@@ -44,6 +50,11 @@ namespace EPubLibrary.XHTML_Items
 
         public string Id { get; set; }
 
+
+        /// <summary>
+        /// Get/Set section type
+        /// </summary>
+        public SectionTypeEnum Type { get; set; }
 
         public IHTMLItem Content
         {
@@ -348,7 +359,7 @@ namespace EPubLibrary.XHTML_Items
         private List<BaseXHTMLFileV2> SplitSimpleText(SimpleHTML5Text simpleEPubText)
         {
             var list = new List<BaseXHTMLFileV2>();
-            var newDoc = new BookDocumentV2 { PageTitle = PageTitle, NotPartOfNavigation = true };
+            var newDoc = new BaseXHTMLFileV2 { PageTitle = PageTitle, NotPartOfNavigation = true, Type = SectionTypeEnum.Text, FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder() };
             newDoc.StyleFiles.AddRange(StyleFiles);
             newDoc.GuideRole = GuideRole;
             newDoc.NavigationParent = NavigationParent;
@@ -365,7 +376,7 @@ namespace EPubLibrary.XHTML_Items
                 if (itemSize >= MaxSize)
                 {
                     list.Add(newDoc);
-                    newDoc = new BookDocumentV2 { PageTitle = PageTitle, NotPartOfNavigation = true };
+                    newDoc = new BaseXHTMLFileV2{ PageTitle = PageTitle, NotPartOfNavigation = true , Type = SectionTypeEnum.Text, FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder()};
                     newDoc.StyleFiles.AddRange(StyleFiles);
                     newDoc.GuideRole = GuideRole;
                     newDoc.NavigationParent = NavigationParent;

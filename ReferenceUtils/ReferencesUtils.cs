@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using EPubLibrary.PathUtils;
-using EPubLibrary.XHTML_Items;
 
 namespace EPubLibrary.ReferenceUtils
 {
@@ -60,7 +56,7 @@ namespace EPubLibrary.ReferenceUtils
         public static string FormatImagePath(string validName, bool flatStructure)
         {
             EPubInternalPath imagePath = new EPubInternalPath(ImageOnStorage.DefaultImagesStoragePath,validName);
-            return imagePath.GetRelativePath(BookDocumentV2.DefaultTextFilesFolder, flatStructure);
+            return imagePath.GetRelativePath(EPubInternalPath.GetDefaultTextFilesFolder(), flatStructure);
         }
     }
 }
