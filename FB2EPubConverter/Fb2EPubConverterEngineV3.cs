@@ -12,7 +12,6 @@ using FB2Library.HeaderItems;
 using TranslitRu;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
-using EPubLibrary.Content.Guide;
 using EPubLibraryContracts;
 
 namespace FB2EPubConverter
@@ -133,7 +132,7 @@ namespace FB2EPubConverter
             var infoConverter = new Fb2EpubInfoConverterV3();
             infoDocument.Content = infoConverter.Convert(fb2File, converterSettings);
             infoDocument.FileName = "fb2info.xhtml";
-            infoDocument.DocumentType = GuideTypeEnum.Notes;
+            infoDocument.GuideRole = GuideTypeEnum.Notes;
             infoDocument.Type = SectionTypeEnum.Text;
             infoDocument.NotPartOfNavigation = true;
         }
