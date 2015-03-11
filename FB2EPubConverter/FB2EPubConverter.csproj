@@ -180,6 +180,8 @@
     <Compile Include="ElementConvertersV2\TitleInfoConverterV2.cs" />
     <Compile Include="ElementConvertersV2\TranslatorsInfoConverterV2.cs" />
     <Compile Include="ElementConvertersV2\Poem\VElementConverterV2.cs" />
+    <Compile Include="PrepearedHTMLFiles\LicenseFileV2.cs" />
+    <Compile Include="PrepearedHTMLFiles\LicenseFileV3.cs" />
     <Compile Include="XhtmlItemExtender.cs" />
     <Compile Include="ElementConvertersV3\AuthorsInfoConverterV3.cs" />
     <Compile Include="ElementConvertersV3\Fb2EpubInfoConverterV3.cs" />

@@ -10,6 +10,7 @@ using FB2Library.HeaderItems;
 using EPubLibrary.XHTML_Items;
 using EPubLibraryContracts;
 using FB2EPubConverter.ElementConvertersV2;
+using FB2EPubConverter.PrepearedHTMLFiles;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 
 
@@ -86,7 +87,18 @@ namespace FB2EPubConverter
                 epubFile.AboutTexts.Add("(Эта книга может содержать материал который защищен авторским правом, автор конвертера не несет ответственности за его использование)");
                 epubFile.AboutLinks.Add(@"http://www.fb2epub.net");
                 epubFile.AboutLinks.Add(@"https://code.google.com/p/fb2epub/");
+                epubFile.AddXHTMLFile(CreateLicenseFile());
             }
+        }
+
+        private IBaseXHTMLFile CreateLicenseFile()
+        {
+            var licensePage = new BaseXHTMLFileV2()
+            {
+                FlatStructure = Settings.CommonSettings.FlatStructure,
+                EmbedStyles = Settings.CommonSettings.EmbedStyles,
+            };
+            return licensePage;
         }
 
 
