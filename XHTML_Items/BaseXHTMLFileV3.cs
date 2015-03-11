@@ -6,29 +6,32 @@ using System.Xml;
 using System.Xml.Linq;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
+using EPubLibrary.V3ePubType;
 using EPubLibraryContracts;
 using XHTMLClassLibrary;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
-using XHTMLClassLibrary.BaseElements.InlineElements;
 using XHTMLClassLibrary.BaseElements.Structure_Header;
 
 namespace EPubLibrary.XHTML_Items
 {
-    public class BaseXHTMLFileV3 : IEPubPath, IBaseXHTMLFile
+    public class BaseXHTMLFileV3 :  IBaseXHTMLFile
     {
         protected Head HeadElement;
         protected Body BodyElement;
         protected string InternalPageTitle;
-        protected bool Durty = true;
+        private bool _durty = true;
         protected const HTMLElementType Compatibility = HTMLElementType.HTML5;
         private IHTMLItem _content;
+
 
 
 
         public EPubInternalPath FileEPubInternalPath;
 
         private readonly List<IStyleElement> _styles = new List<IStyleElement>();
+        private readonly EPubV3VocabularyStyles _epubAttributeTypes = new EPubV3VocabularyStyles();
+
         private XDocument _generatedCodeXDocument;
         private bool _embeddStyles;
 
@@ -51,10 +54,9 @@ namespace EPubLibrary.XHTML_Items
             set
             {
                 _content = value;
-                Durty = true;
+                _durty = true;
             }
         }
-
 
 
         /// <summary>
@@ -116,7 +118,7 @@ namespace EPubLibrary.XHTML_Items
             set
             {
                 _embeddStyles = value;
-                Durty = true;
+                _durty = true;
             }
         }
 
@@ -129,7 +131,7 @@ namespace EPubLibrary.XHTML_Items
             set
             {
                 InternalPageTitle = value;
-                Durty = true;
+                _durty = true;
             }
         }
 
@@ -139,13 +141,19 @@ namespace EPubLibrary.XHTML_Items
         public List<IStyleElement> StyleFiles { get { return _styles; } }
 
 
+        public void SetDocumentEpubType(EpubV3Vocabulary type)
+        {
+            _epubAttributeTypes.SetType(type);
+            _durty = true;
+        }
+
         public void Write(Stream stream)
         {
             var settings = new XmlWriterSettings {CloseOutput = false, Encoding = Encoding.UTF8, Indent = true};
 
 
             XDocument document = _generatedCodeXDocument;
-            if (document == null || Durty)
+            if (document == null || _durty)
             {
                 document = Generate();
             }
@@ -214,7 +222,7 @@ namespace EPubLibrary.XHTML_Items
             
 
             _generatedCodeXDocument =  mainDocument.Generate();
-            Durty = false;
+            _durty = false;
             return _generatedCodeXDocument;
         }
 
@@ -223,6 +231,10 @@ namespace EPubLibrary.XHTML_Items
         {
             BodyElement = new Body(Compatibility);
             BodyElement.GlobalAttributes.Class.Value = "epub";
+            if (_epubAttributeTypes.IsPresent())
+            {
+                BodyElement.CustomAttributes.Add(_epubAttributeTypes.GetAsCustomAttribute());
+            }
             if (_content != null)
             {
                 BodyElement.Add(_content);

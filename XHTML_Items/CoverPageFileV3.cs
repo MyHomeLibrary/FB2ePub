@@ -1,4 +1,5 @@
 ﻿using EPubLibrary.PathUtils;
+using EPubLibrary.V3ePubType;
 using EPubLibraryContracts;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.BaseElements.BlockElements;
@@ -19,13 +20,13 @@ namespace EPubLibrary.XHTML_Items
             Id = "cover";
             FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
             FileName = "cover.xhtml";
+            SetDocumentEpubType(EpubV3Vocabulary.Cover);
         }
 
         public override void GenerateBody()
         {
 
             base.GenerateBody();
-            BodyElement.CustomAttributes.Add(new CustomAttribute(EPubNamespaces.OpsNamespace+ "type", CoverTypeAttributeValue));
 
             var coverPage = new Div(Compatibility);
             coverPage.GlobalAttributes.Class.Value = "coverpage";

@@ -53,6 +53,7 @@
     <Compile Include="IePubIdentifier.cs" />
     <Compile Include="IEPubPath.cs" />
     <Compile Include="IEPubInternalPath.cs" />
+    <Compile Include="IEPubV3VocabularyStyles.cs" />
     <Compile Include="IPersoneWithRole.cs" />
     <Compile Include="IPublisher.cs" />
     <Compile Include="IRelation.cs" />
