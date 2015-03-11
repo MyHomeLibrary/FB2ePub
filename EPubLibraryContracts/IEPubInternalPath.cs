@@ -10,6 +10,13 @@ namespace EPubLibraryContracts
         File = 2,
     };
 
+    public enum DefaultLocations
+    {
+        DefaultTextFolder,
+        DefaultLicenseFolder,
+        DefaultImagesFolder,
+    }
+
     public interface IPathElement : ICloneable
     {
         PathType Type { get; }

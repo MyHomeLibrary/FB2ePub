@@ -26,7 +26,7 @@ namespace EPubLibrary.XHTML_Items
             InternalPageTitle = "Title";
             GuideRole = GuideTypeEnum.TitlePage;
             FileName = "title.xhtml";
-            FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
+            FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder);
             Id = "title";
         }
 

@@ -14,7 +14,7 @@ namespace EPubLibrary.XHTML_Items
             GuideRole = GuideTypeEnum.Preface;
             FileName = "annotation.xhtml";
             Id = "annotation";
-            FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
+            FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder);
             SetDocumentEpubType(EpubV3Vocabulary.Foreword);
         }
 

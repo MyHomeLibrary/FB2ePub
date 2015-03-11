@@ -182,8 +182,6 @@
     <Compile Include="Content\Spine\SpineSectionV2.cs" />
     <Compile Include="Content\Spine\SpineItemV2.cs" />
     <Compile Include="XHTML_Items\BaseXHTMLFileV3.cs" />
-    <Compile Include="XHTML_Items\CoverPageFileV2.cs" />
-    <Compile Include="XHTML_Items\CoverPageFileV3.cs" />
     <Compile Include="V3ePubType\EPubV3VocabularyStyles.cs" />
     <Compile Include="XHTML_Items\TitlePageFileV2.cs" />
     <Compile Include="XHTML_Items\TitlePageFileV3.cs" />

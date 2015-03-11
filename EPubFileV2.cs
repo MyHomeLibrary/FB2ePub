@@ -77,7 +77,6 @@ namespace EPubLibrary
         #endregion
 
         #region private_properties
-        private string _coverImage;
         private ITransliterationSettings _translitMode;
         #endregion
 
@@ -175,33 +174,6 @@ namespace EPubLibrary
         #endregion
 
         #region public_functions
-
-        /// <summary>
-        /// Assign image (by id) to be cover image
-        /// </summary>
-        /// <param name="imageRef">image reference name</param>
-        public void AddCoverImage(string imageRef)
-        {
-            _coverImage = imageRef;
-        }
-
-        ///// <summary>
-        ///// Adds (creates) a new empty document in a list of book content documents
-        ///// </summary>
-        ///// <param name="id">id - title to assign to the new document</param>
-        ///// <returns></returns>
-        //public BaseXHTMLFileV2 AddDocument(string id)
-        //{
-        //    var section = new BaseXHTMLFileV2 { PageTitle = id };
-        //    section.StyleFiles.Add(_mainCss);
-        //    if (_v2Settings.EnableAdobeTemplate)
-        //    {
-        //        section.StyleFiles.Add(_adobeTemplate);
-        //    }
-
-        //    _sections.Add(section);
-        //    return section;
-        //}
 
         public void AddXHTMLFile(IBaseXHTMLFile file)
         {
@@ -407,7 +379,6 @@ namespace EPubLibrary
         {
             AddAdobeTemplate(stream);
             AddCSSFiles(stream);
-            AddCover(stream);
             AddTitle(stream);
             AddAnnotation(stream);
             AddBookContent(stream);
@@ -644,47 +615,6 @@ namespace EPubLibrary
 
 
 
-        private void AddCover(ZipOutputStream stream)
-        {
-            if (string.IsNullOrEmpty(_coverImage) )
-            {
-                // if no cover image - no cover
-                return;
-            }
-            EPUBImage eImage;
-            // also image need to be in list of the images we have (check in case of invalid input)
-            if (!_images.TryGetValue(_coverImage, out eImage))
-            {
-                return;
-            }
-            // for test let's just create one file
-            stream.SetLevel(9);
-
-            var cover = new CoverPageFileV2()
-            {
-                CoverFileName = GetCoverImageName(eImage),
-            };
-
-            CreateFileEntryInZip(stream,cover);
-            PutPageToFile(stream,cover);
-
-            if (!string.IsNullOrEmpty(eImage.ID))
-            {
-                _content.CoverId = eImage.ID;                
-            }
-
-
-            _content.AddXHTMLTextItem(cover);
-        }
-
-        private ImageOnStorage GetCoverImageName(EPUBImage eImage)
-        {
-            if (_images.Any(image => image.Key == _coverImage))
-            {
-                return new ImageOnStorage(eImage) {FileName = eImage.ID};
-            }
-            return new ImageOnStorage(eImage) { FileName = "cover.jpg" };
-        }
 
         private void AddTOCFile(ZipOutputStream stream)
         {
@@ -823,6 +753,11 @@ namespace EPubLibrary
                 var baseXHTMLFileV2 = document as BaseXHTMLFileV2;
                 return baseXHTMLFileV2 != null && baseXHTMLFileV2.PartOfDocument(value);
             });
+        }
+
+        public void SetCoverImageID(string id)
+        {
+            _content.CoverId = id;
         }
     }
 

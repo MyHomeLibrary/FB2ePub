@@ -1,5 +1,6 @@
 ﻿using System;
 using EPubLibrary.PathUtils;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.ReferenceUtils
 {
@@ -55,8 +56,8 @@ namespace EPubLibrary.ReferenceUtils
 
         public static string FormatImagePath(string validName, bool flatStructure)
         {
-            EPubInternalPath imagePath = new EPubInternalPath(ImageOnStorage.DefaultImagesStoragePath,validName);
-            return imagePath.GetRelativePath(EPubInternalPath.GetDefaultTextFilesFolder(), flatStructure);
+            EPubInternalPath imagePath = new EPubInternalPath(EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultImagesFolder), validName);
+            return imagePath.GetRelativePath(EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder), flatStructure);
         }
     }
 }

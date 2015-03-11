@@ -46,7 +46,7 @@ namespace EPubLibrary
 
         #region private_properties
         private ITransliterationSettings _translitMode;// = new TransliterationSettings { Mode = TranslitModeEnum.ExternalRuleFile };
-        private string _coverImage;
+        //private string _coverImage;
         #endregion
 
 
@@ -103,14 +103,14 @@ namespace EPubLibrary
             _content.Write(stream);
         }
 
-        /// <summary>
-        /// Assign image (by id) to be cover image
-        /// </summary>
-        /// <param name="imageRef">image reference name</param>
-        public void AddCoverImage(string imageRef)
-        {
-            _coverImage = imageRef;
-        }
+        ///// <summary>
+        ///// Assign image (by id) to be cover image
+        ///// </summary>
+        ///// <param name="imageRef">image reference name</param>
+        //public void AddCoverImage(string imageRef)
+        //{
+        //    _coverImage = imageRef;
+        //}
 
 
         public void AddXHTMLFile(IBaseXHTMLFile file)
@@ -191,7 +191,7 @@ namespace EPubLibrary
         /// <param name="stream"></param>
         private void AddBookHTMLFiles(ZipOutputStream stream)
         {
-            AddCover(stream);
+            //AddCover(stream);
             AddTitle(stream);
             AddAnnotation(stream);
             AddBookContent(stream);
@@ -327,46 +327,7 @@ namespace EPubLibrary
         }
 
 
-        private void AddCover(ZipOutputStream stream)
-        {
-            if (string.IsNullOrEmpty(_coverImage))
-            {
-                // if no cover image - no cover
-                return;
-            }
-            EPUBImage eImage;
-            // also image need to be in list of the images we have (check in case of invalid input)
-            if (!_images.TryGetValue(_coverImage, out eImage))
-            {
-                return;
-            }
-            // for test let's just create one file
-            stream.SetLevel(9);
-
-            var cover = new CoverPageFileV3()
-            {
-                CoverFileName = GetCoverImageName(eImage),
-            };
-
-            CreateFileEntryInZip(stream, cover);
-            PutPageToFile(stream, cover);
-
-            if (!string.IsNullOrEmpty(eImage.ID))
-            {
-                _content.CoverId = eImage.ID;
-            }
-            _content.AddXHTMLTextItem(cover);
-        }
-
-        private ImageOnStorage GetCoverImageName(EPUBImage eImage)
-        {
-            if (_images.Any(image => image.Key == _coverImage))
-            {
-                return new ImageOnStorage(eImage) { FileName = eImage.ID };
-            }
-            return new ImageOnStorage(eImage) { FileName = "cover.jpg" };
-        }
-
+  
         /// <summary>
         /// Writes book content to the stream
         /// </summary>
@@ -713,6 +674,11 @@ namespace EPubLibrary
                 var baseXHTMLFileV3 = document as BaseXHTMLFileV3;
                 return baseXHTMLFileV3 != null && baseXHTMLFileV3.PartOfDocument(value);
             });
+        }
+
+        public void SetCoverImageID(string id)
+        {
+            _content.CoverId = id;
         }
     }
 

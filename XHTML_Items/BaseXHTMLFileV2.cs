@@ -361,7 +361,7 @@ namespace EPubLibrary.XHTML_Items
         private List<BaseXHTMLFileV2> SplitSimpleText(SimpleHTML5Text simpleEPubText)
         {
             var list = new List<BaseXHTMLFileV2>();
-            var newDoc = new BaseXHTMLFileV2 { PageTitle = PageTitle, NotPartOfNavigation = true, Type = SectionTypeEnum.Text, FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder() };
+            var newDoc = new BaseXHTMLFileV2 { PageTitle = PageTitle, NotPartOfNavigation = true, Type = SectionTypeEnum.Text, FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder) };
             newDoc.StyleFiles.AddRange(StyleFiles);
             newDoc.GuideRole = GuideRole;
             newDoc.NavigationParent = NavigationParent;
@@ -383,7 +383,7 @@ namespace EPubLibrary.XHTML_Items
                         PageTitle = InternalPageTitle,
                         NotPartOfNavigation = true,
                         Type = SectionTypeEnum.Text,
-                        FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                        FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                         GuideRole = GuideRole,
                         NavigationParent = NavigationParent,
                         Content = new Div(Compatibility)

@@ -35,6 +35,7 @@ namespace EPubLibrary.XHTML_Items
         private XDocument _generatedCodeXDocument;
         private bool _embeddStyles;
 
+     
         public virtual void GenerateHead()
         {
             HeadElement = new Head(Compatibility);

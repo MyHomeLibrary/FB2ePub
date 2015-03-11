@@ -14,7 +14,7 @@ namespace EPubLibrary.XHTML_Items
             GuideRole = GuideTypeEnum.CopyrightPage;
             InternalPageTitle = "About";
             Id = "about";
-            FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
+            FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder);
             FileName = "about.xhtml";
             SetDocumentEpubType(EpubV3Vocabulary.Imprint);
         }

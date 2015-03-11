@@ -16,6 +16,19 @@ namespace EPubLibrary.PathUtils
 
 
         public IList<IPathElement> Path { get { return _path; }}
+        public static EPubInternalPath GetDefaultLocation(DefaultLocations location)
+        {
+            switch (location)
+            {
+                case DefaultLocations.DefaultTextFolder:
+                    return GetDefaultTextFilesFolder();
+                case DefaultLocations.DefaultLicenseFolder:
+                    return new EPubInternalPath(DefaultOebpsFolder + "/license/");
+                case DefaultLocations.DefaultImagesFolder:
+                    return new EPubInternalPath(DefaultOebpsFolder + "/images/");
+            }
+            throw new ArgumentException(@"Unknown path type","location");
+        }
 
         public EPubInternalPath(string zipPath)
         {
@@ -37,7 +50,7 @@ namespace EPubLibrary.PathUtils
         }
 
 
-        public static EPubInternalPath GetDefaultTextFilesFolder()
+        private static EPubInternalPath GetDefaultTextFilesFolder()
         {
             return new EPubInternalPath(DefaultOebpsFolder + "/text/");
         }
@@ -183,7 +196,7 @@ namespace EPubLibrary.PathUtils
             {
                 commongPathIndex++;
             }
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             int i = commongPathIndex;
             // for all not common folders in path depth of other object we need to go folder up
             while ( (i < otherObject.Path.Count) 
