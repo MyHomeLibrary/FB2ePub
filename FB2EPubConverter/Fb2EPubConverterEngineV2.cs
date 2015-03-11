@@ -10,8 +10,8 @@ using FB2Library.HeaderItems;
 using EPubLibrary.XHTML_Items;
 using EPubLibraryContracts;
 using FB2EPubConverter.ElementConvertersV2;
-using FB2EPubConverter.PrepearedHTMLFiles;
 using XHTMLClassLibrary.BaseElements.BlockElements;
+using FB2EPubConverter.PrepearedHTMLFiles;
 
 
 namespace FB2EPubConverter
@@ -31,8 +31,8 @@ namespace FB2EPubConverter
             }
 
             PassHeaderDataFromFb2ToEpub(fb2File, epubFileV2);
-            ConvertAnnotation(fb2File.TitleInfo, epubFileV2);
             PassCoverImageFromFB2(fb2File.TitleInfo.Cover, epubFileV2);
+            ConvertAnnotation(fb2File.TitleInfo, epubFileV2);
             SetupCSS(epubFileV2);
             SetupFonts(epubFileV2);
             PassTextFromFb2ToEpub(epubFileV2, fb2File);
@@ -93,7 +93,7 @@ namespace FB2EPubConverter
 
         private IBaseXHTMLFile CreateLicenseFile()
         {
-            var licensePage = new BaseXHTMLFileV2()
+            var licensePage = new LicenseFileV2()
             {
                 FlatStructure = Settings.CommonSettings.FlatStructure,
                 EmbedStyles = Settings.CommonSettings.EmbedStyles,
@@ -127,7 +127,7 @@ namespace FB2EPubConverter
             {
                 Id = "FB2 Info",
                 Type = SectionTypeEnum.Text,
-                FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                 FileName = "fb2info.xhtml",
                 GuideRole = GuideTypeEnum.Notes,
                 NotPartOfNavigation = true
@@ -180,8 +180,10 @@ namespace FB2EPubConverter
             if ((coverPage != null) && (coverPage.HasImages()) && (coverPage.CoverpageImages[0].HRef != null))
             {
                 // we add just first one 
-                epubFile.AddCoverImage(coverPage.CoverpageImages[0].HRef);
+                var coverPageFile = new CoverPageFileV2(coverPage.CoverpageImages[0], _referencesManager);
+                epubFile.AddXHTMLFile(coverPageFile);
                 Images.ImageIdUsed(coverPage.CoverpageImages[0].HRef);
+                epubFile.SetCoverImageID(coverPage.CoverpageImages[0].HRef);
             }
         }
 

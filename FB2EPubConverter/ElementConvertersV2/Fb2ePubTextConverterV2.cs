@@ -42,7 +42,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     GuideRole = GuideTypeEnum.TitlePage,
                     Content = new Div(BaseXHTMLFileV2.Compatibility),
                     Type = SectionTypeEnum.Text,
-                    FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                    FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                     NavigationParent = null,
                     FileName = string.Format("section{0}.xhtml", ++_sectionCounter),
                     NotPartOfNavigation = true,
@@ -72,7 +72,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     GuideRole = GuideTypeEnum.Text,
                     Content = new Div(BaseXHTMLFileV2.Compatibility),
                     Type = SectionTypeEnum.Text,
-                    FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                    FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                     NavigationParent = null,
                     FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
                 };
@@ -91,7 +91,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                         Content = new Div(BaseXHTMLFileV2.Compatibility),
                         NavigationParent = null,
                         Type = SectionTypeEnum.Text,
-                        FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                        FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                         FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
                     };
                     epubFile.AddXHTMLFile(mainDocument);
@@ -127,7 +127,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                         Content = new Div(BaseXHTMLFileV2.Compatibility),
                         NavigationParent = null,
                         Type = SectionTypeEnum.Text,
-                        FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                        FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                         FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
                     };
                 }
@@ -198,7 +198,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 sectionDocument = new BaseXHTMLFileV2
                 {
                     PageTitle = docTitle,
-                    FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                    FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                     GuideRole = (navParent == null) ? GuideTypeEnum.Text : navParent.GuideRole,
                     Type = (navParent == null) ? SectionTypeEnum.Text : navParent.Type,
                     Content = subitem,
@@ -240,7 +240,7 @@ namespace FB2EPubConverter.ElementConvertersV2
             var sectionDocument = new BaseXHTMLFileV2
             {
                 PageTitle = docTitle,
-                FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                 GuideRole = GuideTypeEnum.Glossary,
                 Type = SectionTypeEnum.Links,
                 Content = new Div(BaseXHTMLFileV2.Compatibility),
@@ -296,7 +296,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 Id = docTitle,
                 GuideRole = GuideTypeEnum.Text,
                 Type = SectionTypeEnum.Text,
-                FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                 Content = new Div(BaseXHTMLFileV2.Compatibility),
                 NavigationParent = null,
                 NotPartOfNavigation = false,

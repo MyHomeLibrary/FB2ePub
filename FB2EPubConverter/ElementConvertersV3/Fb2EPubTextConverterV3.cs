@@ -39,7 +39,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 var addTitlePage = new BaseXHTMLFileV3
                 {
                     PageTitle = docTitle,
-                    FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                    FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                     GuideRole = GuideTypeEnum.TitlePage,
                     Content = new Div(HTMLElementType.HTML5),
                     NavigationParent = null,
@@ -68,7 +68,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 mainDocument = new BaseXHTMLFileV3
                 {
                     PageTitle = docTitle,
-                    FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                    FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                     GuideRole = GuideTypeEnum.Text,
                     Content = new Div(HTMLElementType.HTML5),
                     NavigationParent = null,
@@ -85,7 +85,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     mainDocument = new BaseXHTMLFileV3
                     {
                         PageTitle = newDocTitle,
-                        FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                        FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                         GuideRole = GuideTypeEnum.Text,
                         Content = new Div(HTMLElementType.HTML5),
                         NavigationParent = null,
@@ -120,7 +120,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     mainDocument = new BaseXHTMLFileV3
                     {
                         PageTitle = newDocTitle,
-                        FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                        FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                         GuideRole = GuideTypeEnum.Text,
                         Content = new Div(HTMLElementType.HTML5),
                         NavigationParent = null,
@@ -194,7 +194,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 sectionDocument = new BaseXHTMLFileV3
                 {
                     PageTitle = docTitle,
-                    FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                    FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                     GuideRole = (navParent == null) ? GuideTypeEnum.Text : navParent.GuideRole,
                     Content = subitem,
                     NavigationParent = navParent,
@@ -236,7 +236,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             var sectionDocument = new BaseXHTMLFileV3
             {
                 PageTitle = docTitle,
-                FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                 GuideRole = GuideTypeEnum.Glossary,
                 Content = new Div(HTMLElementType.HTML5),
                 NavigationParent = null,
@@ -287,7 +287,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             Logger.Log.DebugFormat("Adding section : {0}", docTitle);
             var sectionDocument = new BaseXHTMLFileV3
             {
-                FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder(),
+                FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                 GuideRole = GuideTypeEnum.Text,
                 Content = new Div(HTMLElementType.HTML5),
                 NavigationParent = null,
