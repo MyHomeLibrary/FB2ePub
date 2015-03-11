@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ConverterContracts.ConversionElementsStyles
+﻿namespace ConverterContracts.ConversionElementsStyles
 {
     public static class ElementStylesV3
     {
@@ -13,6 +8,7 @@ namespace ConverterContracts.ConversionElementsStyles
         public const string SectionItemFormat = "section{0}";
         public const string SectionImage = "section_image";
         public const string NormalImage = "normal_image";
+        public const string CoverImage = "coverimage";
         public const string BadExternalLink = "ex_bad_link";
         public const string NoteAnchor = "note_anchor";
         public const string NoteSection = "note_section";
@@ -34,5 +30,6 @@ namespace ConverterContracts.ConversionElementsStyles
         public const string VElement = "v";
         public const string SubTitle = "subtitle";
         public const string TitleItemFormat = "title{0}";
+        public const string CoverPage = "coverpage";
     }
 }

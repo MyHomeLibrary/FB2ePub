@@ -11,7 +11,7 @@ namespace FB2EPubConverter.PrepearedHTMLFiles
     {
         internal LicenseFileV3()
         {
-            FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/license/");
+            FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultLicenseFolder);
             Id = "license";
             FileName = "license.xhtml";
             GuideRole = GuideTypeEnum.Ignore;
