@@ -112,20 +112,6 @@ namespace EPubLibrary
             _coverImage = imageRef;
         }
 
-        ///// <summary>
-        ///// Adds (creates) a new empty document in a list of book content documents
-        ///// </summary>
-        ///// <param name="id">id - title to assign to the new document</param>
-        ///// <returns></returns>
-        //public BaseXHTMLFileV3 AddDocument(string id)
-        //{
-        //    var section = new BaseXHTMLFileV3{ PageTitle = id ,FileEPubInternalPath = EPubInternalPath.GetDefaultTextFilesFolder()};
-        //    section.StyleFiles.Add(_mainCss);
-
-        //    _sections.Add(section);
-        //    return section;
-        //}
-
 
         public void AddXHTMLFile(IBaseXHTMLFile file)
         {
@@ -133,24 +119,6 @@ namespace EPubLibrary
 
             _sections.Add(file);            
         }
-
-        /// <summary>
-        /// Adds "license" file 
-        /// </summary>
-        /// <param name="stream"></param>
-        private void AddLicenseFile(ZipOutputStream stream)
-        {
-            stream.SetLevel(9);
-            var licensePage = new LicenseFileV3()
-            {
-                FlatStructure = _content.FlatStructure,
-                EmbedStyles = _commonSettings.EmbedStyles,
-            };
-            CreateFileEntryInZip(stream, licensePage);
-            PutPageToFile(stream, licensePage);
-            _content.AddXHTMLTextItem(licensePage);
-        }
-
 
         /// <summary>
         /// Adds "About" page file
@@ -181,13 +149,10 @@ namespace EPubLibrary
         /// <param name="stream"></param>
         private void AddBookData(ZipOutputStream stream)
         {
-            if (InjectLKRLicense)
-            {
-                AddLicenseFile(stream);
-            }
             AddImages(stream);
             AddFontFiles(stream);
-            AddAdditionalFiles(stream);
+            AddCSSFiles(stream);
+            AddBookHTMLFiles(stream);
             AddNavigation(stream);
             AddContentFile(stream);
         }
@@ -224,9 +189,8 @@ namespace EPubLibrary
         /// Adds different additional generated files like cover, annotation etc.
         /// </summary>
         /// <param name="stream"></param>
-        private void AddAdditionalFiles(ZipOutputStream stream)
+        private void AddBookHTMLFiles(ZipOutputStream stream)
         {
-            AddCSSFiles(stream);
             AddCover(stream);
             AddTitle(stream);
             AddAnnotation(stream);
@@ -495,11 +459,6 @@ namespace EPubLibrary
             _navigationManager.AddBookSubsection(subsection, _commonSettings.TransliterateToc ? Rus2Lat.Instance.Translate(subsection.PageTitle, _translitMode ):subsection.PageTitle);
         }
 
-
-        /// <summary>
-        /// Controls if Lord Kiron's license need to be added to file
-        /// </summary>
-        public bool InjectLKRLicense { private get; set; }
 
         /// <summary>
         /// Return reference to the list of the CSS style files

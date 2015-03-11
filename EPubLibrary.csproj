@@ -185,8 +185,6 @@
     <Compile Include="XHTML_Items\CoverPageFileV2.cs" />
     <Compile Include="XHTML_Items\CoverPageFileV3.cs" />
     <Compile Include="V3ePubType\EPubV3VocabularyStyles.cs" />
-    <Compile Include="XHTML_Items\LicenseFileV2.cs" />
-    <Compile Include="XHTML_Items\LicenseFileV3.cs" />
     <Compile Include="XHTML_Items\TitlePageFileV2.cs" />
     <Compile Include="XHTML_Items\TitlePageFileV3.cs" />
   </ItemGroup>

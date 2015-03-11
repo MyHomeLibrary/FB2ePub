@@ -349,10 +349,6 @@ namespace EPubLibrary
         /// <param name="stream"></param>
         private void AddBookData(ZipOutputStream stream)
         {
-            if (InjectLKRLicense)
-            {
-                AddLicenseFile(stream);
-            }
             AddImages(stream);
             AddFontFiles(stream);
             AddAdditionalFiles(stream);
@@ -364,23 +360,6 @@ namespace EPubLibrary
         {
             _navigationManager.SetupBookNavigation(_bookInformation.Identifiers[0].ID, Rus2Lat.Instance.Translate(_bookInformation.BookTitles[0].TitleName, TranslitMode));
             AddTOCFile(stream);
-        }
-
-        /// <summary>
-        /// Adds "license" file 
-        /// </summary>
-        /// <param name="stream"></param>
-        private void AddLicenseFile(ZipOutputStream stream)
-        {
-            stream.SetLevel(9);
-            var licensePage = new LicenseFileV2()
-            {
-                FlatStructure = _commonSettings.FlatStructure, 
-                EmbedStyles = _commonSettings.EmbedStyles, 
-            };
-            CreateFileEntryInZip(stream, licensePage);
-            PutPageToFile(stream,licensePage);
-            _content.AddXHTMLTextItem(licensePage);          
         }
 
         /// <summary>
