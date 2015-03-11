@@ -16,6 +16,7 @@ namespace EPubLibrary.XHTML_Items
             Id = "about";
             FileEPubInternalPath = new EPubInternalPath(EPubInternalPath.DefaultOebpsFolder + "/text/");
             FileName = "about.xhtml";
+            SetDocumentEpubType(EpubV3Vocabulary.Imprint);
         }
 
         /// <summary>

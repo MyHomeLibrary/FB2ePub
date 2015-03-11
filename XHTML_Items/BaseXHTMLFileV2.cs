@@ -10,7 +10,6 @@ using EPubLibraryContracts;
 using XHTMLClassLibrary;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
-using XHTMLClassLibrary.BaseElements.InlineElements;
 using XHTMLClassLibrary.BaseElements.Structure_Header;
 
 namespace EPubLibrary.XHTML_Items
@@ -21,7 +20,7 @@ namespace EPubLibrary.XHTML_Items
         Links,
     }
 
-    public class BaseXHTMLFileV2 : IEPubPath , IBaseXHTMLFile
+    public class BaseXHTMLFileV2 : IBaseXHTMLFile
     {
         protected Head HeadElement;
         protected Body BodyElement;
