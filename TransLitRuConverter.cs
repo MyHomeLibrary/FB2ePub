@@ -1,0 +1,152 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace TranslitRu
+{
+    internal class TransLitRuConverter : BaseTrasLitConverter
+    {
+        public override string ConvertCharacter(char inputCharacter)
+        {
+            switch (inputCharacter)
+            {
+                case 'а':
+                    return "a";
+                case 'А':
+                    return "A";
+                case 'б':
+                    return "b";
+                case 'Б':
+                    return "B";
+                case 'в':
+                    return "v";
+                case 'В':
+                    return "V";
+                case 'г':
+                    return "g";
+                case 'Г':
+                    return "G";
+                case 'д':
+                    return "d";
+                case 'Д':
+                    return "D";
+                case 'е':
+                    return "e";
+                case 'Е':
+                    return "E";
+                case 'ё':
+                    return "jo";
+                case 'Ё':
+                    return "Jo";
+                case 'ж':
+                    return "zh";
+                case 'Ж':
+                    return "Zh";
+                case 'з':
+                    return "z";
+                case 'З':
+                    return "Z";
+                case 'и':
+                    return "i";
+                case 'И':
+                    return "I";
+                case 'й':
+                    return "j";
+                case 'Й':
+                    return "J";
+                case 'к':
+                    return "k";
+                case 'К':
+                    return "K";
+                case 'л':
+                    return "l";
+                case 'Л':
+                    return "L";
+                case 'м':
+                    return "m";
+                case 'М':
+                    return "M";
+                case 'н':
+                    return "n";
+                case 'Н':
+                    return "N";
+                case 'о':
+                    return "o";
+                case 'О':
+                    return "O";
+                case 'п':
+                    return "p";
+                case 'П':
+                    return "P";
+                case 'р':
+                    return "r";
+                case 'Р':
+                    return "R";
+                case 'с':
+                    return "s";
+                case 'С':
+                    return "S";
+                case 'т':
+                    return "t";
+                case 'Т':
+                    return "T";
+                case 'у':
+                    return "u";
+                case 'У':
+                    return "U";
+                case 'ф':
+                    return "f";
+                case 'Ф':
+                    return "F";
+                case 'х':
+                    return "x";
+                case 'Х':
+                    return "X";
+                case 'ц':
+                    return "c";
+                case 'Ц':
+                    return "C";
+                case 'ч':
+                    return "ch";
+                case 'Ч':
+                    return "Ch";
+                case 'ш':
+                    return "sh";
+                case 'Ш':
+                    return "Sh";
+                case 'ь':
+                    return "'";
+                case 'Ь':
+                    return "'";
+                case 'ъ':
+                    return "#";
+                case 'Ъ':
+                    return "##";
+                case 'ы':
+                    return "y";
+                case 'Ы':
+                    return "Y";
+                case 'э':
+                    return "je";
+                case 'Э':
+                    return "Je";
+                case 'ю':
+                    return "ju";
+                case 'Ю':
+                    return "Ju";
+                case 'я':
+                    return "ja";
+                case 'Я':
+                    return "Ja";
+                case 'щ':
+                    return "w";
+                case 'Щ':
+                    return "W";
+
+            }
+            return inputCharacter.ToString();
+        }
+
+    }
+}
