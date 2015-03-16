@@ -184,6 +184,8 @@
     <Compile Include="PrepearedHTMLFiles\CoverPageFileV3.cs" />
     <Compile Include="PrepearedHTMLFiles\LicenseFileV2.cs" />
     <Compile Include="PrepearedHTMLFiles\LicenseFileV3.cs" />
+    <Compile Include="PrepearedHTMLFiles\TitlePageFileV2.cs" />
+    <Compile Include="PrepearedHTMLFiles\TitlePageFileV3.cs" />
     <Compile Include="XhtmlItemExtender.cs" />
     <Compile Include="ElementConvertersV3\AuthorsInfoConverterV3.cs" />
     <Compile Include="ElementConvertersV3\Fb2EpubInfoConverterV3.cs" />

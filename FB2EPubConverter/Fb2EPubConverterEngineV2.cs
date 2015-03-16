@@ -31,6 +31,8 @@ namespace FB2EPubConverter
             }
 
             PassHeaderDataFromFb2ToEpub(fb2File, epubFileV2);
+            var titlePage = new TitlePageFileV2(epubFileV2.BookInformation);
+            epubFileV2.AddXHTMLFile(titlePage);
             PassCoverImageFromFB2(fb2File.TitleInfo.Cover, epubFileV2);
             ConvertAnnotation(fb2File.TitleInfo, epubFileV2);
             SetupCSS(epubFileV2);

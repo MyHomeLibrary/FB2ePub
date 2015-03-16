@@ -14,7 +14,7 @@ using TranslitRu;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using EPubLibraryContracts;
 using FB2EPubConverter.PrepearedHTMLFiles;
-using System.Linq;
+
 
 namespace FB2EPubConverter
 {
@@ -33,6 +33,8 @@ namespace FB2EPubConverter
             }
            
             PassHeaderDataFromFb2ToEpub(fb2File,epubFile.BookInformation);
+            var titlePage = new TitlePageFileV3(epubFileV3.BookInformation);
+            epubFileV3.AddXHTMLFile(titlePage);
             PassCoverImageFromFB2(fb2File.TitleInfo.Cover, epubFileV3);
             ConvertAnnotation(fb2File.TitleInfo, epubFileV3);
             SetupCSS(epubFileV3);
