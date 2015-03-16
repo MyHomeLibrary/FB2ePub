@@ -407,10 +407,10 @@ namespace FB2EPubConverter
 
         private BaseXHTMLFileV2 GetIDParentDocument(EPubFileV2 file, IHTMLItem value)
         {
-            if ((file.AnnotationPage != null) && file.AnnotationPage.PartOfDocument(value))
-            {
-                return file.AnnotationPage;
-            }
+            //if ((file.AnnotationPage != null) && file.AnnotationPage.PartOfDocument(value))
+            //{
+            //    return file.AnnotationPage;
+            //}
             return file.GetIDOfParentDocument(value) as BaseXHTMLFileV2;
         }
 
