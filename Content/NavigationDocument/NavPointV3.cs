@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Xml.Linq;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.Content.NavigationDocument
 {

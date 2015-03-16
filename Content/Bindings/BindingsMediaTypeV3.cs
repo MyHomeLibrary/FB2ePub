@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using EPubLibraryContracts;
 
 namespace EPubLibrary.Content.Bindings
 {

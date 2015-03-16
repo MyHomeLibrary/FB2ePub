@@ -1,11 +1,11 @@
 ﻿using System.Xml.Linq;
 
-namespace EPubLibrary
+namespace EPubLibraryContracts
 {
     /// <summary>
     /// Contains different namespaces used by epub
     /// </summary>
-    internal static class EPubNamespaces
+    public static class EPubNamespaces
     {
         /// <summary>
         /// OPF namespace 
@@ -29,7 +29,7 @@ namespace EPubLibrary
     /// <summary>
     /// PURL namespaces
     /// </summary>
-    internal static class PURLNamespaces
+    public static class PURLNamespaces
     {
         /// <summary>
         /// DC namespace 
@@ -47,7 +47,7 @@ namespace EPubLibrary
     /// <summary>
     /// WWW (w3) namespaces
     /// </summary>
-    internal static class WWWNamespaces
+    public static class WWWNamespaces
     {
         /// <summary>
         /// XSI namespace
@@ -91,7 +91,7 @@ namespace EPubLibrary
     /// <summary>
     /// Namespaces used by Calibre
     /// </summary>
-    internal static class CalibreNamespaces
+    public static class CalibreNamespaces
     {
         /// <summary>
         /// Calibre namespace    
@@ -103,7 +103,7 @@ namespace EPubLibrary
     /// <summary>
     /// Daisy (www.daisy.org) namespaces
     /// </summary>
-    internal static class DaisyNamespaces
+    public static class DaisyNamespaces
     {
         /// <summary>
         /// NCX namespace 

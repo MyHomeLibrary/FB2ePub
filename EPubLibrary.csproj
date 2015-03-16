@@ -151,7 +151,6 @@
     <Compile Include="Content\Collections\EPubSeriesCollections.cs" />
     <Compile Include="EPubFileV2.cs" />
     <Compile Include="EPubFileV3.cs" />
-    <Compile Include="EpubNamespaces.cs" />
     <Compile Include="IEpubFile.cs" />
     <Compile Include="PathUtils\ePubInternalPath.cs" />
     <Compile Include="EPubRoles.cs" />
@@ -183,8 +182,6 @@
     <Compile Include="Content\Spine\SpineItemV2.cs" />
     <Compile Include="XHTML_Items\BaseXHTMLFileV3.cs" />
     <Compile Include="V3ePubType\EPubV3VocabularyStyles.cs" />
-    <Compile Include="XHTML_Items\TitlePageFileV2.cs" />
-    <Compile Include="XHTML_Items\TitlePageFileV3.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Build.txt" />

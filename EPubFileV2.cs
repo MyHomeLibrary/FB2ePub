@@ -379,7 +379,7 @@ namespace EPubLibrary
         {
             AddAdobeTemplate(stream);
             AddCSSFiles(stream);
-            AddTitle(stream);
+            //AddTitle(stream);
             AddAnnotation(stream);
             AddBookContent(stream);
             if (_aboutTexts.Count >0 || _aboutLinks.Count > 0)
@@ -471,22 +471,22 @@ namespace EPubLibrary
             stream.PutNextEntry(file);
         }
 
-        /// <summary>
-        /// Adds title page file
-        /// </summary>
-        /// <param name="stream"></param>
-        private void AddTitle(ZipOutputStream stream)
-        {
-            var titlePage = new TitlePageFileV2(_bookInformation);
-            //if (titlePage != null)
-            {
-                stream.SetLevel(9);
-                CreateFileEntryInZip(stream, titlePage);
-                PutPageToFile(stream, titlePage);
-                _content.AddXHTMLTextItem(titlePage);
-            }
-
-        }
+        ///// <summary>
+        ///// Adds title page file
+        ///// </summary>
+        ///// <param name="stream"></param>
+        //private void AddTitle(ZipOutputStream stream)
+        //{
+        //    var titlePage = new TitlePageFileV2(_bookInformation);
+        //    //if (titlePage != null)
+        //    {
+        //        stream.SetLevel(9);
+        //        CreateFileEntryInZip(stream, titlePage);
+        //        PutPageToFile(stream, titlePage);
+        //        _content.AddXHTMLTextItem(titlePage);
+        //    }
+        //
+        //}
 
         private void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
         {

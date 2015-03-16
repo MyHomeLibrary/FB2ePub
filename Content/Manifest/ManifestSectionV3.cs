@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using EPubLibraryContracts;
 using EPubLibraryContracts.Settings;
 
 namespace EPubLibrary.Content.Manifest
