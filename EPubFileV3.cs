@@ -32,8 +32,6 @@ namespace EPubLibrary
         private readonly CSSFile _mainCss = new CSSFile { ID = "mainCSS", FileName = "main.css" };
         private readonly List<CSSFile> _cssFiles = new List<CSSFile>();
         private readonly List<IBaseXHTMLFile> _sections = new List<IBaseXHTMLFile>();
-        private readonly List<string> _aboutTexts = new List<string>();
-        private readonly List<string> _aboutLinks = new List<string>();
         private readonly CSSFontSettingsCollection _fontSettings = new CSSFontSettingsCollection();
         private readonly Dictionary<string, EPUBImage> _images = new Dictionary<string, EPUBImage>();
         private readonly ContentFileV3 _content;
@@ -111,29 +109,6 @@ namespace EPubLibrary
         }
 
         /// <summary>
-        /// Adds "About" page file
-        /// </summary>
-        /// <param name="stream"></param>
-        private void AddAbout(ZipOutputStream stream)
-        {
-            stream.SetLevel(9);
-
-            var aboutPage = new AboutPageFileV3()
-            {
-                FlatStructure = _commonSettings.FlatStructure,
-                EmbedStyles = _commonSettings.EmbedStyles,
-                AboutLinks = _aboutLinks,
-                AboutTexts = _aboutTexts
-            };
-
-            CreateFileEntryInZip(stream, aboutPage);
-            PutPageToFile(stream, aboutPage);
-
-            _content.AddXHTMLTextItem(aboutPage);
-        }
-
-
-        /// <summary>
         /// Adds actual book "context" 
         /// </summary>
         /// <param name="stream"></param>
@@ -142,7 +117,7 @@ namespace EPubLibrary
             AddImages(stream);
             AddFontFiles(stream);
             AddCSSFiles(stream);
-            AddBookHTMLFiles(stream);
+            AddBookContent(stream);
             AddNavigation(stream);
             AddContentFile(stream);
         }
@@ -175,35 +150,7 @@ namespace EPubLibrary
             _content.AddNavigationDocument(_navigationManager.NavigationDocument);
         }
 
-        /// <summary>
-        /// Adds different additional generated files like cover, annotation etc.
-        /// </summary>
-        /// <param name="stream"></param>
-        private void AddBookHTMLFiles(ZipOutputStream stream)
-        {
-            //AddAnnotation(stream);
-            AddBookContent(stream);
-            if (_aboutTexts.Count > 0 || _aboutLinks.Count > 0)
-            {
-                AddAbout(stream);
-            }
-        }
-
-        ///// <summary>
-        ///// Adds annotation page file
-        ///// </summary>
-        ///// <param name="stream"></param>
-        //private void AddAnnotation(ZipOutputStream stream)
-        //{
-        //    if (AnnotationPage != null)
-        //    {
-        //        stream.SetLevel(9);
-        //        CreateFileEntryInZip(stream, AnnotationPage);
-        //        PutPageToFile(stream, AnnotationPage);
-        //        _content.AddXHTMLTextItem(AnnotationPage);
-        //    }
-        //}
-
+   
   
 
         /// <summary>
@@ -406,27 +353,6 @@ namespace EPubLibrary
             set { _content.CreatorSoftwareString = value; }
         }
 
-        /// <summary>
-        /// Strings added to about page
-        /// </summary>
-        public List<string> AboutTexts
-        {
-            get
-            {
-                return _aboutTexts;
-            }
-        }
-
-        /// <summary>
-        /// Links added to about page
-        /// </summary>
-        public List<string> AboutLinks
-        {
-            get
-            {
-                return _aboutLinks;
-            }
-        }
 
         /// <summary>
         /// Return reference to the list of images
