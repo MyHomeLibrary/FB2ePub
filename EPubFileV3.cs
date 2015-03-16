@@ -103,16 +103,6 @@ namespace EPubLibrary
             _content.Write(stream);
         }
 
-        ///// <summary>
-        ///// Assign image (by id) to be cover image
-        ///// </summary>
-        ///// <param name="imageRef">image reference name</param>
-        //public void AddCoverImage(string imageRef)
-        //{
-        //    _coverImage = imageRef;
-        //}
-
-
         public void AddXHTMLFile(IBaseXHTMLFile file)
         {
             file.StyleFiles.Add(_mainCss);
@@ -191,9 +181,7 @@ namespace EPubLibrary
         /// <param name="stream"></param>
         private void AddBookHTMLFiles(ZipOutputStream stream)
         {
-            //AddCover(stream);
-            //AddTitle(stream);
-            AddAnnotation(stream);
+            //AddAnnotation(stream);
             AddBookContent(stream);
             if (_aboutTexts.Count > 0 || _aboutLinks.Count > 0)
             {
@@ -201,39 +189,22 @@ namespace EPubLibrary
             }
         }
 
-        /// <summary>
-        /// Adds annotation page file
-        /// </summary>
-        /// <param name="stream"></param>
-        private void AddAnnotation(ZipOutputStream stream)
-        {
-            if (AnnotationPage != null)
-            {
-                stream.SetLevel(9);
-                CreateFileEntryInZip(stream, AnnotationPage);
-                PutPageToFile(stream, AnnotationPage);
-                _content.AddXHTMLTextItem(AnnotationPage);
-            }
-        }
-
         ///// <summary>
-        ///// Adds title page file
+        ///// Adds annotation page file
         ///// </summary>
         ///// <param name="stream"></param>
-        //private void AddTitle(ZipOutputStream stream)
+        //private void AddAnnotation(ZipOutputStream stream)
         //{
-        //    var titlePage = new TitlePageFileV3(_bookInformation);
-        //    //if (_titlePage != null)
+        //    if (AnnotationPage != null)
         //    {
         //        stream.SetLevel(9);
-        //        CreateFileEntryInZip(stream, titlePage);
-        //        PutPageToFile(stream, titlePage);
-        //        _content.AddXHTMLTextItem(titlePage);
+        //        CreateFileEntryInZip(stream, AnnotationPage);
+        //        PutPageToFile(stream, AnnotationPage);
+        //        _content.AddXHTMLTextItem(AnnotationPage);
         //    }
-
         //}
 
-
+  
 
         /// <summary>
         /// Adds CSS styles files
@@ -425,11 +396,6 @@ namespace EPubLibrary
         /// Return reference to the list of the CSS style files
         /// </summary>
         public List<CSSFile> CSSFiles { get { return _cssFiles; } }
-
-        /// <summary>
-        /// Set/get Annotation object
-        /// </summary>
-        public AnnotationPageFileV3 AnnotationPage { get; set; }
 
       
         /// <summary>

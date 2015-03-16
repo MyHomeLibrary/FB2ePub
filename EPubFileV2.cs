@@ -130,13 +130,7 @@ namespace EPubLibrary
             get { return _images; }
         }
 
-     
-        /// <summary>
-        /// Set/get Annotation object
-        /// </summary>
-        public AnnotationPageFileV2 AnnotationPage { get; set; }
-
-        /// <summary>
+    /// <summary>
         /// Strings added to about page
         /// </summary>
         public List<string> AboutTexts
@@ -379,8 +373,7 @@ namespace EPubLibrary
         {
             AddAdobeTemplate(stream);
             AddCSSFiles(stream);
-            //AddTitle(stream);
-            AddAnnotation(stream);
+            //AddAnnotation(stream);
             AddBookContent(stream);
             if (_aboutTexts.Count >0 || _aboutLinks.Count > 0)
             {
@@ -414,20 +407,20 @@ namespace EPubLibrary
             }
         }
 
-        /// <summary>
-        /// Adds annotation page file
-        /// </summary>
-        /// <param name="stream"></param>
-        private void AddAnnotation(ZipOutputStream stream)
-        {
-            if (AnnotationPage != null)
-            {
-                stream.SetLevel(9);
-                CreateFileEntryInZip(stream, AnnotationPage);
-                PutPageToFile(stream, AnnotationPage);
-                _content.AddXHTMLTextItem(AnnotationPage);
-            }
-        }
+        ///// <summary>
+        ///// Adds annotation page file
+        ///// </summary>
+        ///// <param name="stream"></param>
+        //private void AddAnnotation(ZipOutputStream stream)
+        //{
+        //    if (AnnotationPage != null)
+        //    {
+        //        stream.SetLevel(9);
+        //        CreateFileEntryInZip(stream, AnnotationPage);
+        //        PutPageToFile(stream, AnnotationPage);
+        //        _content.AddXHTMLTextItem(AnnotationPage);
+        //    }
+        //}
 
         /// <summary>
         /// Adds CSS styles files
@@ -471,22 +464,6 @@ namespace EPubLibrary
             stream.PutNextEntry(file);
         }
 
-        ///// <summary>
-        ///// Adds title page file
-        ///// </summary>
-        ///// <param name="stream"></param>
-        //private void AddTitle(ZipOutputStream stream)
-        //{
-        //    var titlePage = new TitlePageFileV2(_bookInformation);
-        //    //if (titlePage != null)
-        //    {
-        //        stream.SetLevel(9);
-        //        CreateFileEntryInZip(stream, titlePage);
-        //        PutPageToFile(stream, titlePage);
-        //        _content.AddXHTMLTextItem(titlePage);
-        //    }
-        //
-        //}
 
         private void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
         {

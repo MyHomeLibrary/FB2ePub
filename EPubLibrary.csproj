@@ -174,8 +174,6 @@
     <Compile Include="TOC\TOCFile.cs" />
     <Compile Include="XHTML_Items\AboutPageFileV2.cs" />
     <Compile Include="XHTML_Items\AboutPageFileV3.cs" />
-    <Compile Include="XHTML_Items\AnnotationPageFileV2.cs" />
-    <Compile Include="XHTML_Items\AnnotationPageFileV3.cs" />
     <Compile Include="XHTML_Items\BaseXHTMLFileV2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Content\Spine\SpineSectionV2.cs" />
