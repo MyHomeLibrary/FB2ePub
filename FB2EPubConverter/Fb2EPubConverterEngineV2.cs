@@ -201,7 +201,7 @@ namespace FB2EPubConverter
                     DescInfo = titleInfo.Annotation.ToString(),
                 };
                 epubFile.BookInformation.Description = desc;
-                epubFile.AnnotationPage = new AnnotationPageFileV2();
+                
                 var converterSettings = new ConverterOptionsV2
                 {
                     CapitalDrop = Settings.CommonSettings.CapitalDrop,
@@ -210,8 +210,12 @@ namespace FB2EPubConverter
                     ReferencesManager = _referencesManager,
                 };
                 var annotationConverter = new AnnotationConverterV2();
-                epubFile.AnnotationPage.BookAnnotation = (Div)annotationConverter.Convert(titleInfo.Annotation,
-                   new AnnotationConverterParamsV2 { Settings = converterSettings, Level = 1 });
+                var annotationPage = new AnnotationPageFileV2
+                {
+                    BookAnnotation = (Div) annotationConverter.Convert(titleInfo.Annotation,
+                        new AnnotationConverterParamsV2 {Settings = converterSettings, Level = 1})
+                };
+                epubFile.AddXHTMLFile(annotationPage);
             }
         }
 
