@@ -31,5 +31,8 @@
         public const string SubTitle = "subtitle";
         public const string TitleItemFormat = "title{0}";
         public const string CoverPage = "coverpage";
+        public const string TitlePage = "titlepage";
+        public const string TitleSeries = "title_series";
+        public const string TitleAuthors = "title_authors";
     }
 }
