@@ -21,6 +21,7 @@ namespace Fb2ePubConverter
     {
 
         protected readonly ImageManager Images = new ImageManager();
+        protected readonly BookStructureManager StructureManager = new BookStructureManager();
         private readonly List<FB2File> _fb2Files = new List<FB2File>();
 
 
