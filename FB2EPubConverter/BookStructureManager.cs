@@ -6,82 +6,6 @@ using EPubLibraryContracts;
 
 namespace FB2EPubConverter
 {
-    internal class BookStructureManagerEnumerator : IEnumerator<IBaseXHTMLFile>
-    {
-        private readonly BookStructureManager _structureManager;
-        private IBaseXHTMLFile _current;
-        private BookStructureManager.PageType _currentPageType;
-
-        public BookStructureManagerEnumerator(BookStructureManager structureManager)
-        {
-            _structureManager = structureManager;
-            _current = GetFirstItem(out _currentPageType);
-        }
-
-
-        public void Dispose()
-        {
-            
-        }
-
-        public bool MoveNext()
-        {
-            _current = GetNextPage(ref _currentPageType);
-        }
-
-        
-        public void Reset()
-        {
-            _current = GetFirstItem(out _currentPageType);
-        }
-
-        public IBaseXHTMLFile Current
-        {
-            get { return _current; }
-        }
-
-        object IEnumerator.Current
-        {
-            get { return Current; }
-        }
-
-        private IBaseXHTMLFile GetFirstItem(out BookStructureManager.PageType type)
-        {
-            if (_structureManager.CoverPages.Any())
-            {
-                type = BookStructureManager.PageType.CoverPages;
-                return _structureManager.CoverPages.First();
-            }
-            if (_structureManager.TitlePages.Any())
-            {
-                type = BookStructureManager.PageType.TitlePages;
-                return _structureManager.TitlePages.First();
-            }
-            if (_structureManager.AnnotationPages.Any())
-            {
-                type = BookStructureManager.PageType.AnnotationPages;
-                return _structureManager.AnnotationPages.First();
-            }
-            if (_structureManager.NormalPages.Any())
-            {
-                type = BookStructureManager.PageType.NormalPages;
-                return _structureManager.NormalPages.First();
-            }
-            if (_structureManager.AboutPages.Any())
-            {
-                type = BookStructureManager.PageType.AboutPages;
-                return _structureManager.AboutPages.First();
-            }
-            throw new Exception("No items in page list");
-        }
-
-        private IBaseXHTMLFile GetNextPage(ref BookStructureManager.PageType _currentPageType)
-        {
-
-        }
-
-    }
-
     internal class BookStructureManager : IEnumerable<IBaseXHTMLFile>
     {
         public enum PageType
@@ -136,7 +60,31 @@ namespace FB2EPubConverter
 
         public IEnumerator<IBaseXHTMLFile> GetEnumerator()
         {
-            return new BookStructureManagerEnumerator(this);
+            foreach (var coverPage in _coverPages)
+            {
+                yield return coverPage;
+            }
+
+            foreach (var titlePage in _titlePages)
+            {
+                yield return titlePage;
+            }
+
+
+            foreach (var annotationPage in _annotationPages)
+            {
+                yield return annotationPage;
+            }
+
+            foreach (var normalPage in _normalPages)
+            {
+                yield return normalPage;
+            }
+
+            foreach (var aboutPage in _aboutPages)
+            {
+                yield return aboutPage;
+            }           
         }
 
         IEnumerator IEnumerable.GetEnumerator()
