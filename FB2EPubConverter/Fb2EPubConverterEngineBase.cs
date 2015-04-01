@@ -125,6 +125,11 @@ namespace Fb2ePubConverter
 
                     ConvertContent(fb2File,epubFile);
 
+                    foreach (var xhtmlFile in StructureManager)
+                    {
+                        epubFile.AddXHTMLFile(xhtmlFile);
+                    }
+
                     epubFile.Generate(outFile);
 
                 }

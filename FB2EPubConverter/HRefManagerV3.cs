@@ -340,7 +340,7 @@ namespace FB2EPubConverter
                     BaseXHTMLFileV3 iDDocument = GetIDParentDocument(epubFile, _ids[idString]);
                     if (iDDocument != null)
                     {
-                        int count = 0;
+                        //int count = 0;
                         foreach (var anchor in link.Value)
                         {
                             BaseXHTMLFileV3 idDocument = GetIDParentDocument(epubFile, anchor);
