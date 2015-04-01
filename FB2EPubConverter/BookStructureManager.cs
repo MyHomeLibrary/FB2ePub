@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using EPubLibraryContracts;
 
 namespace FB2EPubConverter
 {
     internal class BookStructureManager : IEnumerable<IBaseXHTMLFile>
     {
-        public enum PageType
-        {
-            CoverPages,
-            TitlePages,
-            AnnotationPages,
-            NormalPages,
-            AboutPages,
-        }
-
         private readonly List<IBaseXHTMLFile> _normalPages = new List<IBaseXHTMLFile>();
         private readonly List<IBaseXHTMLFile> _coverPages = new List<IBaseXHTMLFile>();
         private readonly List<IBaseXHTMLFile> _annotationPages = new List<IBaseXHTMLFile>();

@@ -30,7 +30,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         }
 
 
-        public void Convert(EPubFileV2 epubFile, FB2File fb2File)
+        public void Convert(BookStructureManager bookStructureManager, FB2File fb2File)
         {
             // create second title page
             if ((fb2File.MainBody.Title != null) && (!string.IsNullOrEmpty(fb2File.MainBody.Title.ToString())))
@@ -58,7 +58,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                 var titleConverter = new TitleConverterV2();
                 addTitlePage.Content.Add(titleConverter.Convert(fb2File.MainBody.Title,
                     new TitleConverterParamsV2 { Settings = converterSettings, TitleLevel = 2 }));
-                epubFile.AddXHTMLFile(addTitlePage);
+                bookStructureManager.AddTitlePage(addTitlePage);
             }
 
             BaseXHTMLFileV2 mainDocument = null;
@@ -76,7 +76,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                     NavigationParent = null,
                     FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
                 };
-                epubFile.AddXHTMLFile(mainDocument);
+                bookStructureManager.AddBookPage(mainDocument);
             }
 
             if ((fb2File.MainBody.ImageName != null) && !string.IsNullOrEmpty(fb2File.MainBody.ImageName.HRef))
@@ -94,7 +94,7 @@ namespace FB2EPubConverter.ElementConvertersV2
                         FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
                         FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
                     };
-                    epubFile.AddXHTMLFile(mainDocument);
+                    bookStructureManager.AddBookPage(mainDocument);
                 }
                 if (_images.IsImageIdReal(fb2File.MainBody.ImageName.HRef))
                 {
@@ -142,13 +142,13 @@ namespace FB2EPubConverter.ElementConvertersV2
                 var epigraphConverter = new MainEpigraphConverterV2();
                 mainDocument.Content.Add(epigraphConverter.Convert(ep,
                     new EpigraphConverterParamsV2 { Settings = converterSettings, Level = 1 }));
-                epubFile.AddXHTMLFile(mainDocument);
+                bookStructureManager.AddBookPage(mainDocument);
             }
 
             Logger.Log.Debug("Adding main sections");
             foreach (var section in fb2File.MainBody.Sections)
             {
-                AddSection(epubFile, section, mainDocument, false);
+                AddSection(bookStructureManager, section, mainDocument, false);
             }
 
             Logger.Log.Debug("Adding secondary bodies");
@@ -161,16 +161,16 @@ namespace FB2EPubConverter.ElementConvertersV2
                 bool fbeNotesSection = FBENotesSection(bodyItem.Name);
                 if (fbeNotesSection)
                 {
-                    AddFbeNotesBody(epubFile, bodyItem);
+                    AddFbeNotesBody(bookStructureManager, bodyItem);
                 }
                 else
                 {
-                    AddSecondaryBody(epubFile, bodyItem);
+                    AddSecondaryBody(bookStructureManager, bodyItem);
                 }
             }          
         }
 
-        private void AddSection(EPubFileV2 epubFile, SectionItem section, BaseXHTMLFileV2 navParent, bool fbeNotesSection)
+        private void AddSection(BookStructureManager bookStructureManager, SectionItem section, BaseXHTMLFileV2 navParent, bool fbeNotesSection)
         {
             string docTitle = string.Empty;
             if (section.Title != null)
@@ -210,12 +210,12 @@ namespace FB2EPubConverter.ElementConvertersV2
                     sectionDocument.NotPartOfNavigation = true;
                 }
                 firstDocumentOfSplit = false;
-                epubFile.AddXHTMLFile(sectionDocument);
+                bookStructureManager.AddBookPage(sectionDocument);
             }
             Logger.Log.Debug("Adding sub-sections");
             foreach (var subSection in section.SubSections)
             {
-                AddSection(epubFile, subSection, sectionDocument, fbeNotesSection);
+                AddSection(bookStructureManager, subSection, sectionDocument, fbeNotesSection);
             }
         }
 
@@ -233,7 +233,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// </summary>
         /// <param name="epubFile"></param>
         /// <param name="bodyItem"></param>
-        private void AddFbeNotesBody(EPubFileV2 epubFile, BodyItem bodyItem)
+        private void AddFbeNotesBody(BookStructureManager bookStructureManager, BodyItem bodyItem)
         {
             string docTitle = bodyItem.Name;
             Logger.Log.DebugFormat("Adding section : {0}", docTitle);
@@ -262,12 +262,12 @@ namespace FB2EPubConverter.ElementConvertersV2
                 sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,
                     new TitleConverterParamsV2 { Settings = converterSettings, TitleLevel = 1 }));
             }
-            epubFile.AddXHTMLFile(sectionDocument);
+            bookStructureManager.AddBookPage(sectionDocument);
 
             Logger.Log.Debug("Adding sub-sections");
             foreach (var section in bodyItem.Sections)
             {
-                AddSection(epubFile, section, sectionDocument, true);
+                AddSection(bookStructureManager, section, sectionDocument, true);
             }
         }
 
@@ -276,7 +276,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// </summary>
         /// <param name="epubFile"></param>
         /// <param name="bodyItem"></param>
-        private void AddSecondaryBody(EPubFileV2 epubFile, BodyItem bodyItem)
+        private void AddSecondaryBody(BookStructureManager bookStructureManager, BodyItem bodyItem)
         {
             string docTitle = string.Empty;
             if (string.IsNullOrEmpty(bodyItem.Name))
@@ -316,13 +316,13 @@ namespace FB2EPubConverter.ElementConvertersV2
                 sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,
                     new TitleConverterParamsV2 { Settings = converterSettings, TitleLevel = 1 }));
             }
-            epubFile.AddXHTMLFile(sectionDocument);
+            bookStructureManager.AddBookPage(sectionDocument);
 
 
             Logger.Log.Debug("Adding sub-sections");
             foreach (var section in bodyItem.Sections)
             {
-                AddSection(epubFile, section, sectionDocument, false);
+                AddSection(bookStructureManager, section, sectionDocument, false);
             }
         }
 
