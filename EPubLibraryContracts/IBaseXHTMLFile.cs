@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
+using XHTMLClassLibrary.BaseElements;
 
 namespace EPubLibraryContracts
 {
@@ -10,6 +11,7 @@ namespace EPubLibraryContracts
         XDocument Generate();
         void GenerateBody();
         void GenerateHead();
+        bool PartOfDocument(IHTMLItem value);
 
         GuideTypeEnum GuideRole { get; set; }
         bool NotPartOfNavigation { get; set; }

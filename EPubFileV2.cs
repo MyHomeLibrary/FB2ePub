@@ -651,15 +651,6 @@ namespace EPubLibrary
 
         #endregion
 
-        public IBaseXHTMLFile GetIDOfParentDocument(IHTMLItem value)
-        {
-            return _sections.FirstOrDefault(document =>
-            {
-                var baseXHTMLFileV2 = document as BaseXHTMLFileV2;
-                return baseXHTMLFileV2 != null && baseXHTMLFileV2.PartOfDocument(value);
-            });
-        }
-
         public void SetCoverImageID(string id)
         {
             _content.CoverId = id;

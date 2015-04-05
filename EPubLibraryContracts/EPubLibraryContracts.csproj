@@ -55,6 +55,7 @@
     <Compile Include="IEPubPath.cs" />
     <Compile Include="IEPubInternalPath.cs" />
     <Compile Include="IEPubV3VocabularyStyles.cs" />
+    <Compile Include="IHTMLItem.cs" />
     <Compile Include="IPersoneWithRole.cs" />
     <Compile Include="IPublisher.cs" />
     <Compile Include="IRelation.cs" />
@@ -70,6 +71,12 @@
     <Compile Include="Settings\IEPubCommonSettings.cs" />
     <Compile Include="Settings\IEPubV2Settings.cs" />
     <Compile Include="Settings\IEPubV3Settings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\fb2epub\HTML5ClassLibrary\HTMLClassLibrary.csproj">
+      <Project>{e596a296-1c1a-42b7-8482-b7b0e95b82d3}</Project>
+      <Name>HTMLClassLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
