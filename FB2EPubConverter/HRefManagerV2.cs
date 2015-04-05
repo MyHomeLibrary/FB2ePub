@@ -330,20 +330,20 @@ namespace FB2EPubConverter
         }
 
 
-        public void RemapAnchors(EPubFileV2 epubFile)
+        public void RemapAnchors(BookStructureManager structureManager)
         {
             foreach (var link in _references)
             {
                 if (!ReferencesUtils.IsExternalLink(link.Key))
                 {
                     string idString = ReferencesUtils.GetIdFromLink(link.Key);
-                    BaseXHTMLFileV2 iDDocument = GetIDParentDocument(epubFile, _ids[idString]);
+                    BaseXHTMLFileV2 iDDocument = GetIDParentDocument(structureManager, _ids[idString]);
                     if (iDDocument != null)
                     {
                         int count = 0;
                         foreach (var anchor in link.Value)
                         {
-                            BaseXHTMLFileV2 idDocument = GetIDParentDocument(epubFile, anchor);
+                            BaseXHTMLFileV2 idDocument = GetIDParentDocument(structureManager, anchor);
                             var referencedItem = _ids[(string)anchor.HRef.Value];
                             var newParent = DetectParentContainer(referencedItem);
                             if (newParent == null)
@@ -405,13 +405,9 @@ namespace FB2EPubConverter
 
 
 
-        private BaseXHTMLFileV2 GetIDParentDocument(EPubFileV2 file, IHTMLItem value)
+        private BaseXHTMLFileV2 GetIDParentDocument(BookStructureManager structureManager, IHTMLItem value)
         {
-            //if ((file.AnnotationPage != null) && file.AnnotationPage.PartOfDocument(value))
-            //{
-            //    return file.AnnotationPage;
-            //}
-            return file.GetIDOfParentDocument(value) as BaseXHTMLFileV2;
+            return structureManager.GetIDOfParentDocument(value) as BaseXHTMLFileV2;
         }
 
 
