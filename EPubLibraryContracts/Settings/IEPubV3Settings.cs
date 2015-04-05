@@ -16,6 +16,7 @@ namespace EPubLibraryContracts.Settings
         EPubV3SubStandard V3SubStandard { get; set; }
         bool GenerateV2CompatibleTOC { get; set; }
         ulong HTMLFileMaxSize { get; set; }
+        bool DoNotUseFootnotes { get; set; }
 
     }
 }
