@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using ConverterContracts.ConversionElementsStyles;
-using EPubLibrary;
 using EPubLibrary.ReferenceUtils;
 using EPubLibrary.XHTML_Items;
 using FB2Library.Elements;
@@ -319,7 +318,7 @@ namespace FB2EPubConverter
             return res.ToString();
         }
 
-        public string EnsureGoodReference(string reference)
+        private string EnsureGoodReference(string reference)
         {
             if ((string.IsNullOrEmpty(reference)) || (reference[0] != '#') || (reference.Length < 2))
             {
@@ -429,6 +428,6 @@ namespace FB2EPubConverter
         }
 
 
-        public bool FlatStructure { get; set; }
+        public bool FlatStructure { private get; set; }
     }
 }
