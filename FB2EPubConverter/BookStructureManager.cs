@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using EPubLibraryContracts;
+using XHTMLClassLibrary.BaseElements;
 
 namespace FB2EPubConverter
 {
@@ -79,6 +81,11 @@ namespace FB2EPubConverter
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public IBaseXHTMLFile GetIDOfParentDocument(IHTMLItem value)
+        {
+            return this.FirstOrDefault(document => document != null && document.PartOfDocument(value));
         }
     }
 }

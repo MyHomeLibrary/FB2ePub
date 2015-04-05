@@ -40,9 +40,9 @@ namespace FB2EPubConverter
             SetupFonts(epubFileV2);
             PassTextFromFb2ToEpub(fb2File);
             PassFb2InfoToEpub(epubFileV2, fb2File);
-            UpdateInternalLinks(epubFileV2, fb2File);
             PassImagesDataFromFb2ToEpub(epubFileV2, fb2File);
             AddAboutInformation(epubFileV2);
+            UpdateInternalLinks(fb2File);
         }
 
         private void SetupCSS(EPubFileV2 epubFile)
@@ -115,11 +115,11 @@ namespace FB2EPubConverter
 
 
 
-        private void UpdateInternalLinks(EPubFileV2 epubFile, FB2File fb2File)
+        private void UpdateInternalLinks(FB2File fb2File)
         {
             _referencesManager.RemoveInvalidAnchors();
             _referencesManager.RemoveInvalidImages(fb2File.Images);
-            _referencesManager.RemapAnchors(epubFile);
+            _referencesManager.RemapAnchors(StructureManager);
         }
 
 
