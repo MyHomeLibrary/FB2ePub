@@ -23,6 +23,7 @@ namespace Fb2epubSettings
         private const string EPUB3SubVersionElementName = "EPUB3SubVersion";
         private const string GenerateV2CompatibleTOCElementName = "GenerateV2CompatibleTOC";
         private const string HTMLFileMaxSizeAllowedElementName = "HTMLFileMaxSizeAllowed";
+        private const string DoNotUseFootnotesElementName = "DoNotUseFootnotes";
 
         #endregion
 
@@ -31,6 +32,7 @@ namespace Fb2epubSettings
             _v3SubStandard = EPubV3SubStandard.V30;
             _generateV2CompatibleTOC = true;
             HTMLFileMaxSize = 0;
+            DoNotUseFootnotes = false;
         }
 
         /// <summary>
@@ -50,10 +52,16 @@ namespace Fb2epubSettings
 
         public ulong HTMLFileMaxSize { get; set; }
 
+        public bool DoNotUseFootnotes { get; set; }
+
 
         public void CopyFrom(IEPubV3Settings temp)
         {
             _v3SubStandard = temp.V3SubStandard;
+            _generateV2CompatibleTOC = temp.GenerateV2CompatibleTOC;
+            DoNotUseFootnotes = temp.DoNotUseFootnotes;
+            HTMLFileMaxSize = temp.HTMLFileMaxSize;
+
         }
 
         public XmlSchema GetSchema()
@@ -84,6 +92,9 @@ namespace Fb2epubSettings
                         case HTMLFileMaxSizeAllowedElementName:
                             HTMLFileMaxSize = (ulong)reader.ReadElementContentAsLong();
                             continue;
+                        case DoNotUseFootnotesElementName:
+                            DoNotUseFootnotes = reader.ReadElementContentAsBoolean();
+                            continue;
                     }
                 }
                 reader.Read();
@@ -105,6 +116,10 @@ namespace Fb2epubSettings
 
             writer.WriteStartElement(HTMLFileMaxSizeAllowedElementName);
             writer.WriteValue(HTMLFileMaxSize.ToString());
+            writer.WriteEndElement();
+
+            writer.WriteStartElement(DoNotUseFootnotesElementName);
+            writer.WriteValue(DoNotUseFootnotes.ToString());
             writer.WriteEndElement();
 
             writer.WriteEndElement();
