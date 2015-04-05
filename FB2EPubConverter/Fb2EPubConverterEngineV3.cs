@@ -32,7 +32,7 @@ namespace FB2EPubConverter
             {
                 throw new ArrayTypeMismatchException(string.Format("Invalid ePub object type passed, expected EPubFileV3, got {0}",epubFile.GetType()));
             }
-           
+            _referencesManager.FlatStructure = Settings.CommonSettings.FlatStructure;
             PassHeaderDataFromFb2ToEpub(fb2File,epubFile.BookInformation);
             var titlePage = new TitlePageFileV3(epubFileV3.BookInformation);
             StructureManager.AddTitlePage(titlePage);
