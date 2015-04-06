@@ -39,6 +39,8 @@ namespace FB2EPubConverter
         /// </summary>
         private readonly Dictionary<string, string> _attributesRemap = new Dictionary<string, string>();
 
+        public bool DoNotAddFootnotes { get; set; }
+
         /// <summary>
         /// Resets the manager to empty state,
         /// releases all references etc
