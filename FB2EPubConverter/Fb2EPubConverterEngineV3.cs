@@ -34,6 +34,7 @@ namespace FB2EPubConverter
             }
             _referencesManager.FlatStructure = Settings.CommonSettings.FlatStructure;
             _referencesManager.DoNotAddFootnotes = Settings.V3Settings.DoNotUseFootnotes;
+            StructureManager.DoNotAddFootnotes = Settings.V3Settings.DoNotUseFootnotes;
             PassHeaderDataFromFb2ToEpub(fb2File,epubFile.BookInformation);
             var titlePage = new TitlePageFileV3(epubFileV3.BookInformation);
             StructureManager.AddTitlePage(titlePage);
