@@ -1,5 +1,4 @@
 ﻿using ConverterContracts.ConversionElementsStyles;
-using EPubLibrary;
 using EPubLibrary.PathUtils;
 using EPubLibrary.XHTML_Items;
 using EPubLibraryContracts;
@@ -231,7 +230,8 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// <summary>
         /// Add and convert FBE style generated notes sections
         /// </summary>
-        /// <param name="epubFile"></param>
+
+        /// <param name="bookStructureManager"></param>
         /// <param name="bodyItem"></param>
         private void AddFbeNotesBody(BookStructureManager bookStructureManager, BodyItem bodyItem)
         {
@@ -274,7 +274,7 @@ namespace FB2EPubConverter.ElementConvertersV2
         /// <summary>
         /// Add and convert generic secondary body section
         /// </summary>
-        /// <param name="epubFile"></param>
+        /// <param name="bookStructureManager"></param>
         /// <param name="bodyItem"></param>
         private void AddSecondaryBody(BookStructureManager bookStructureManager, BodyItem bodyItem)
         {

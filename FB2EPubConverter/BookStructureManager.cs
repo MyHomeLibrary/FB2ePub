@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using EPubLibraryContracts;
+using FB2EPubConverter.PrepearedHTMLFiles;
 using XHTMLClassLibrary.BaseElements;
 
 namespace FB2EPubConverter
@@ -13,6 +14,7 @@ namespace FB2EPubConverter
         private readonly List<IBaseXHTMLFile> _annotationPages = new List<IBaseXHTMLFile>();
         private readonly List<IBaseXHTMLFile> _titlePages = new List<IBaseXHTMLFile>();
         private readonly List<IBaseXHTMLFile> _aboutPages = new List<IBaseXHTMLFile>();
+        private readonly List<IBaseXHTMLFile> _footnotesContainer = new List<IBaseXHTMLFile>(); 
 
         public IEnumerable<IBaseXHTMLFile> NormalPages { get { return _normalPages;}}
 
@@ -23,6 +25,10 @@ namespace FB2EPubConverter
         public IEnumerable<IBaseXHTMLFile> TitlePages { get { return _titlePages; } }
 
         public IEnumerable<IBaseXHTMLFile> AboutPages { get { return _aboutPages; } }
+
+        public IEnumerable<IBaseXHTMLFile> Footnotes { get { return _footnotesContainer; }}
+
+        public bool DoNotAddFootnotes { get; set; }
 
         public void AddBookPage(IBaseXHTMLFile pageFile)
         {
@@ -49,6 +55,11 @@ namespace FB2EPubConverter
             _aboutPages.Add(pageFile);
         }
 
+        public void AddFootnote(IBaseXHTMLFile footnoteFile)
+        {
+            _footnotesContainer.Add(footnoteFile);
+        }
+
         public IEnumerator<IBaseXHTMLFile> GetEnumerator()
         {
             foreach (var coverPage in _coverPages)
@@ -70,6 +81,17 @@ namespace FB2EPubConverter
             foreach (var normalPage in _normalPages)
             {
                 yield return normalPage;
+            }
+
+            if (DoNotAddFootnotes)
+            {
+                foreach (var footNotePage in _footnotesContainer)
+                {
+                    if (!(footNotePage is FB2NotesPageSectionFile) && DoNotAddFootnotes) // we do not add footnotes files if this set in settings
+                    {
+                        yield return footNotePage;
+                    }
+                }               
             }
 
             foreach (var aboutPage in _aboutPages)

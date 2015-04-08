@@ -7,6 +7,8 @@ using System.Text.RegularExpressions;
 using ConverterContracts.ConversionElementsStyles;
 using EPubLibrary.ReferenceUtils;
 using EPubLibrary.XHTML_Items;
+using EPubLibraryContracts;
+using FB2EPubConverter.PrepearedHTMLFiles;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
@@ -39,7 +41,7 @@ namespace FB2EPubConverter
         /// </summary>
         private readonly Dictionary<string, string> _attributesRemap = new Dictionary<string, string>();
 
-        public bool DoNotAddFootnotes { get; set; }
+        public bool DoNotAddFootnotes { private get; set; }
 
         /// <summary>
         /// Resets the manager to empty state,
@@ -337,53 +339,66 @@ namespace FB2EPubConverter
             {
                 if (!ReferencesUtils.IsExternalLink(link.Key))
                 {
-                    string idString = ReferencesUtils.GetIdFromLink(link.Key);
-                    BaseXHTMLFileV3 iDDocument = GetIDParentDocument(structureManager, _ids[idString]);
-                    if (iDDocument != null)
+                    RemapInternalLink(structureManager, link);
+                }
+            }
+        }
+
+        private void RemapInternalLink(BookStructureManager structureManager,KeyValuePair<string, List<Anchor>> link)
+        {
+            string idString = ReferencesUtils.GetIdFromLink(link.Key);  // Get ID of a link target
+            IHTMLItem linkTargetItem = _ids[idString]; // get object targeted by link
+            BaseXHTMLFileV3 linkTargetDocument = GetIDParentDocument(structureManager, linkTargetItem);  // get parent document (file) containing targeted object
+            if (linkTargetDocument != null) // if such document/file found
+            {
+                int count = 0;
+                foreach (var anchor in link.Value) // iterate over all anchor objects that point to this ID
+                {
+                    BaseXHTMLFileV3 idDocument = GetIDParentDocument(structureManager, anchor); // get document containing anchor pointing to target ID
+                    bool linkToFB2NotesSection = linkTargetDocument is FB2NotesPageSectionFile;
+
+                    var newParent = DetectParentContainer(linkTargetItem); // get parent container of link targer item
+                    if (newParent == null)
                     {
-                        //int count = 0;
-                        foreach (var anchor in link.Value)
-                        {
-                            BaseXHTMLFileV3 idDocument = GetIDParentDocument(structureManager, anchor);
-                            var referencedItem = _ids[(string)anchor.HRef.Value];
-                            var newParent = DetectParentContainer(referencedItem);
-                            if (newParent == null)
-                            {
-                                continue;
-                            }
-                            var newAnchor = new Anchor(newParent.HTMLStandard);
-                            if (idDocument == iDDocument)
-                            {
-                                anchor.HRef.Value = string.Format("#{0}", idString);
-                                newAnchor.HRef.Value = string.Format("#{0}", anchor.GlobalAttributes.ID.Value);
-                            }
-                            else
-                            {
-                                anchor.HRef.Value = string.Format("{0}#{1}", iDDocument.FileName, idString);
-                                if (idDocument == null)
-                                {
-                                    continue;
-                                }
-                                newAnchor.HRef.Value = string.Format("{0}#{1}", idDocument.FileName, anchor.GlobalAttributes.ID.Value);
-                            }
-                            //if (iDDocument.Type == SectionTypeEnum.Links))  // if it's FBE notes section
-                            //{
-                            //    newAnchor.GlobalAttributes.Class.Value = ElementStylesV3.NoteAnchor;
-                            //    newParent.Add(new EmptyLine(newParent.HTMLStandard));
-                            //    newParent.Add(newAnchor);
-                            //    count++;
-                            //    newAnchor.Add(new SimpleHTML5Text(newAnchor.HTMLStandard) { Text = (link.Value.Count > 1) ? string.Format("(<< back {0})  ", count) : string.Format("(<< back)  ") });
-                            //}
-                        }
+                        continue;
+                    }
+                    var newAnchor = new Anchor(newParent.HTMLStandard);
+                    if (idDocument == linkTargetDocument)
+                    {
+                        anchor.HRef.Value = string.Format("#{0}", idString);
+                        newAnchor.HRef.Value = string.Format("#{0}", anchor.GlobalAttributes.ID.Value);
                     }
                     else
                     {
-                        //throw new Exception("Internal consistency error - Used ID has to be in one of the book documents objects");
-                        Logger.Log.Error("Internal consistency error - Used ID has to be in one of the book documents objects");
-                        //continue;
+                        if (linkToFB2NotesSection && DoNotAddFootnotes)  // if it's FBE notes section and we are not generating footnotes acording to settings
+                        {
+                            anchor.HRef.Value = string.Format("{0}#{1}", linkTargetDocument.FileName, idString);
+                            if (idDocument == null)
+                            {
+                                continue;
+                            }
+                            newAnchor.HRef.Value = string.Format("{0}#{1}", idDocument.FileName, anchor.GlobalAttributes.ID.Value);
+                        }
+                        else // if not FB2 Notes parent section file or we generating footnotes
+                        {
+
+                        }
                     }
+
+                    newAnchor.GlobalAttributes.Class.Value = ElementStylesV3.NoteAnchor;
+                    newParent.Add(new EmptyLine(newParent.HTMLStandard));
+                    newParent.Add(newAnchor);
+                    count++;
+                    newAnchor.Add(new SimpleHTML5Text(newAnchor.HTMLStandard) { Text = (link.Value.Count > 1) ? string.Format("(<< back {0})  ", count) : string.Format("(<< back)  ") });
                 }
             }
+            else
+            {
+                //throw new Exception("Internal consistency error - Used ID has to be in one of the book documents objects");
+                Logger.Log.Error("Internal consistency error - Used ID has to be in one of the book documents objects");
+                //continue;
+            }
+
         }
 
         /// <summary>

@@ -1,10 +1,10 @@
 ﻿using ConverterContracts.ConversionElementsStyles;
-using EPubLibrary;
 using EPubLibrary.PathUtils;
 using EPubLibrary.XHTML_Items;
 using EPubLibraryContracts;
 using EPubLibraryContracts.Settings;
 using FB2EPubConverter.ElementConvertersV3.Epigraph;
+using FB2EPubConverter.PrepearedHTMLFiles;
 using FB2Library;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
@@ -191,22 +191,29 @@ namespace FB2EPubConverter.ElementConvertersV3
             };
             foreach (var subitem in sectionConverter.Convert(section))
             {
-                sectionDocument = new BaseXHTMLFileV3
-                {
-                    PageTitle = docTitle,
-                    FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
-                    GuideRole = (navParent == null) ? GuideTypeEnum.Text : navParent.GuideRole,
-                    Content = subitem,
-                    NavigationParent = navParent,
-                    FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
-                };
+                sectionDocument = fbeNotesSection ? new FB2NotesPageSectionFile() : new BaseXHTMLFileV3();
+                sectionDocument.PageTitle = docTitle;
+                sectionDocument.FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder);
+                sectionDocument.GuideRole = (navParent == null) ? GuideTypeEnum.Text : navParent.GuideRole;
+                sectionDocument.Content = subitem;
+                sectionDocument.NavigationParent = navParent;
+                sectionDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
+
                 if (!firstDocumentOfSplit || 
                     ((navParent!= null) && navParent.NotPartOfNavigation))
                 {
                     sectionDocument.NotPartOfNavigation = true;
                 }
                 firstDocumentOfSplit = false;
-                bookStructureManager.AddBookPage(sectionDocument);
+                if (fbeNotesSection)
+                {
+                    bookStructureManager.AddFootnote(sectionDocument);
+                }
+                else
+                {
+                    bookStructureManager.AddBookPage(sectionDocument);
+                }
+
             }
             Logger.Log.Debug("Adding sub-sections");
             foreach (var subSection in section.SubSections)
@@ -227,48 +234,48 @@ namespace FB2EPubConverter.ElementConvertersV3
         /// <summary>
         /// Add and convert FBE style generated notes sections
         /// </summary>
-        /// <param name="epubFile"></param>
+        /// <param name="bookStructureManager"></param>
         /// <param name="bodyItem"></param>
         private void AddFbeNotesBody(BookStructureManager bookStructureManager, BodyItem bodyItem)
         {
-            string docTitle = bodyItem.Name;
-            Logger.Log.DebugFormat("Adding section : {0}", docTitle);
-            var sectionDocument = new BaseXHTMLFileV3
-            {
-                PageTitle = docTitle,
-                FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
-                GuideRole = GuideTypeEnum.Glossary,
-                Content = new Div(HTMLElementType.HTML5),
-                NavigationParent = null,
-                NotPartOfNavigation = true,
-                FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
-            };
-            if (bodyItem.Title != null)
-            {
-                var converterSettings = new ConverterOptionsV3
+                string docTitle = bodyItem.Name;
+                Logger.Log.DebugFormat("Adding section : {0}", docTitle);
+                var sectionDocument = new FB2NotesPageSectionFile
                 {
-                    CapitalDrop = false,
-                    Images = _images,
-                    MaxSize = _maxSize,
-                    ReferencesManager = _referencesManager,
+                    PageTitle = docTitle,
+                    FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
+                    GuideRole = GuideTypeEnum.Glossary,
+                    Content = new Div(HTMLElementType.HTML5),
+                    NavigationParent = null,
+                    NotPartOfNavigation = true,
+                    FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
                 };
-                var titleConverter = new TitleConverterV3();
-                sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,
-                    new TitleConverterParamsV3 { Settings = converterSettings, TitleLevel = 1 }));
-            }
-            bookStructureManager.AddBookPage(sectionDocument);
+                if (bodyItem.Title != null)
+                {
+                    var converterSettings = new ConverterOptionsV3
+                    {
+                        CapitalDrop = false,
+                        Images = _images,
+                        MaxSize = _maxSize,
+                        ReferencesManager = _referencesManager,
+                    };
+                    var titleConverter = new TitleConverterV3();
+                    sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,
+                        new TitleConverterParamsV3 { Settings = converterSettings, TitleLevel = 1 }));
+                }
+                bookStructureManager.AddFootnote(sectionDocument);
 
-            Logger.Log.Debug("Adding sub-sections");
-            foreach (var section in bodyItem.Sections)
-            {
-                AddSection(bookStructureManager, section, sectionDocument, true);
-            }
+                Logger.Log.Debug("Adding sub-sections");
+                foreach (var section in bodyItem.Sections)
+                {
+                    AddSection(bookStructureManager, section, sectionDocument, true);
+                }
         }
 
         /// <summary>
         /// Add and convert generic secondary body section
         /// </summary>
-        /// <param name="epubFile"></param>
+        /// <param name="bookStructureManager"></param>
         /// <param name="bodyItem"></param>
         private void AddSecondaryBody(BookStructureManager bookStructureManager, BodyItem bodyItem)
         {
