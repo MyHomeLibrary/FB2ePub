@@ -110,11 +110,11 @@ namespace Fb2epubSettings
             writer.WriteStartElement(CommonSettingsElementName);
 
             writer.WriteStartElement(TransliterateTOCElementName);
-            writer.WriteValue(_transliterateTOC.ToString());
+            writer.WriteValue(_transliterateTOC);
             writer.WriteEndElement();
 
             writer.WriteStartElement(FlatFileFolderStructureElementName);
-            writer.WriteValue(_flatFileFolderStructure.ToString());
+            writer.WriteValue(_flatFileFolderStructure);
             writer.WriteEndElement();
 
             writer.WriteStartElement(EmbedStylesIntoXHTMLElementName);

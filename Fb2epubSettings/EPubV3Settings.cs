@@ -111,7 +111,7 @@ namespace Fb2epubSettings
             writer.WriteEndElement();
 
             writer.WriteStartElement(GenerateV2CompatibleTOCElementName);
-            writer.WriteValue(_generateV2CompatibleTOC.ToString());
+            writer.WriteValue(_generateV2CompatibleTOC);
             writer.WriteEndElement();
 
             writer.WriteStartElement(HTMLFileMaxSizeAllowedElementName);
@@ -119,7 +119,7 @@ namespace Fb2epubSettings
             writer.WriteEndElement();
 
             writer.WriteStartElement(DoNotUseFootnotesElementName);
-            writer.WriteValue(DoNotUseFootnotes.ToString());
+            writer.WriteValue(DoNotUseFootnotes);
             writer.WriteEndElement();
 
             writer.WriteEndElement();
