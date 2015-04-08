@@ -22,7 +22,7 @@ using EPubLibrary.AppleEPubV2Extensions;
 using EPubLibraryContracts;
 using EPubLibraryContracts.Settings;
 using TranslitRuContracts;
-using XHTMLClassLibrary.BaseElements;
+
 
 namespace EPubLibrary
 {
@@ -413,18 +413,6 @@ namespace EPubLibrary
             stream.PutNextEntry(file);
         }
 
-
-        private void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
-        {
-            xhtmlFile.FlatStructure = _commonSettings.FlatStructure;
-            xhtmlFile.EmbedStyles = _commonSettings.EmbedStyles;
-            xhtmlFile.StyleFiles.Add(_mainCss);
-            if (_v2Settings.EnableAdobeTemplate)
-            {
-                xhtmlFile.StyleFiles.Add(_adobeTemplate);
-            }
-            xhtmlFile.Write(stream);
-        }
 
      
         /// <summary>

@@ -278,7 +278,6 @@ namespace EPubLibrary
                     AddBookContentSection(section);
                     count++;                   
                 }
-
             }
 
             // remove navigation leaf end points with empty names
@@ -374,14 +373,7 @@ namespace EPubLibrary
             stream.PutNextEntry(file);
         }
 
-        private void PutPageToFile(ZipOutputStream stream, IBaseXHTMLFile xhtmlFile)
-        {
-            xhtmlFile.FlatStructure = _commonSettings.FlatStructure;
-            xhtmlFile.EmbedStyles = _commonSettings.EmbedStyles;
-            xhtmlFile.StyleFiles.Add(_mainCss);
-            xhtmlFile.Write(stream);
-        }
-
+        
         /// <summary>
         /// Writes (generates) file to disk
         /// </summary>

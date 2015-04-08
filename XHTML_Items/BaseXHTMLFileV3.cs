@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -23,6 +24,8 @@ namespace EPubLibrary.XHTML_Items
         private bool _durty = true;
         protected const HTMLElementType Compatibility = HTMLElementType.HTML5;
         private IHTMLItem _content;
+        private readonly List<IHTMLItem> _footnotes = new List<IHTMLItem>();
+
 
 
 
@@ -148,6 +151,11 @@ namespace EPubLibrary.XHTML_Items
             _durty = true;
         }
 
+        public bool IsDocumentOfType(EpubV3Vocabulary type)
+        {
+            return _epubAttributeTypes.IsOfType(type);
+        }
+
         public void Write(Stream stream)
         {
             var settings = new XmlWriterSettings {CloseOutput = false, Encoding = Encoding.UTF8, Indent = true};
@@ -239,8 +247,21 @@ namespace EPubLibrary.XHTML_Items
             if (_content != null)
             {
                 BodyElement.Add(_content);
+                AddFootnotes(BodyElement);
             }
+        }
 
+        private void AddFootnotes(Body bodyElement)
+        {
+            if (_footnotes.Any())
+            {
+                var aside = new Aside(Compatibility);
+                foreach (var footnote in _footnotes)
+                {
+                    aside.Add(footnote);
+                }
+                bodyElement.Add(aside);
+            }
         }
 
         /// <summary>
