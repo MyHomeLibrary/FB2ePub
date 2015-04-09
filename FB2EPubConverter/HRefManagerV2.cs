@@ -5,10 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using ConverterContracts.ConversionElementsStyles;
-using EPubLibrary.XHTML_Items;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
-using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 using EPubLibrary.ReferenceUtils;
 using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
@@ -341,92 +339,11 @@ namespace FB2EPubConverter
 
         private void RemapInternalLink(BookStructureManager structureManager, KeyValuePair<string, List<Anchor>> link)
         {
-            string idString = ReferencesUtils.GetIdFromLink(link.Key); // Get ID of a link target
-            IHTMLItem linkTargetItem = _ids[idString]; // get object targeted by link
-            BaseXHTMLFileV2 linkTargetDocument = GetIDParentDocument(structureManager, linkTargetItem); // get parent document (file) containing targeted object
-            if (linkTargetDocument != null)
-            {
-                int count = 0;
-                var anchorParent = DetectParentContainer(linkTargetItem); // get parent container of link target item
-                if (anchorParent == null) // if no parent container found , means the link is directly to document , which can't be , so we ignore
-                {
-                    Logger.Log.Error(string.Format("Internal consistency error - target link item ( {0} )has no parent container", linkTargetItem));
-                    return;
-                }
-
-                foreach (var anchor in link.Value)
-                {
-                    BaseXHTMLFileV2 anchorDocument = GetIDParentDocument(structureManager, anchor); // get document containing anchor pointing to target ID
-                    if (anchorDocument == null) // if anchor not contained (not found) in any document
-                    {
-                        Logger.Log.Error(string.Format("Internal consistency error - anchor ({0}) for id ({1}) not contained (not found) in any document", anchor, linkTargetItem));
-                        continue;
-                    }
-                    string backlinkRef; 
-                    if (anchorDocument == linkTargetDocument) // if anchor (link) and target (id) located in same document
-                    {
-                        anchor.HRef.Value = GenerateLocalLinkReference(idString);// update reference link for an anchor, local one (without file name)
-                        backlinkRef = GenerateLocalLinkReference(anchor.GlobalAttributes.ID.Value as string); // in case we going to insert backlin - create a local reference
-                    }
-                    else // if they are located in different documents
-                    {
-                        anchor.HRef.Value = GenerateFarLinkReference(idString, linkTargetDocument.FileName); // update reference link for an anchor, "far" one (with, pointing to another file name)
-                        backlinkRef = GenerateFarLinkReference(anchor.GlobalAttributes.ID.Value as string, anchorDocument.FileName); // in case we going to insert backlin - create a "far" reference
-                    }
-                    if (linkTargetDocument.Type == SectionTypeEnum.Links)  // if it's FBE notes section
-                    {
-                        var backLinkAnchor = new Anchor(anchorParent.HTMLStandard);
-                        backLinkAnchor.HRef.Value = backlinkRef;
-                        backLinkAnchor.GlobalAttributes.Class.Value = ElementStylesV2.NoteAnchor;
-                        anchorParent.Add(new EmptyLine(anchorParent.HTMLStandard));
-                        anchorParent.Add(backLinkAnchor);
-                        count++;
-                        backLinkAnchor.Add(new SimpleHTML5Text(backLinkAnchor.HTMLStandard) { Text = (link.Value.Count > 1) ? string.Format("(<< back {0})  ", count) : string.Format("(<< back)  ") });
-                    }
-                }
-            }
-            else
-            {
-                //throw new Exception("Internal consistency error - Used ID has to be in one of the book documents objects");
-                Logger.Log.Error(string.Format("Internal consistency error - Used ID ({0}) has to be in one of the book documents objects", linkTargetItem));
-                //continue;
-            }
-        }
-
-        private string GenerateLocalLinkReference(string idToReference)
-        {
-            return string.Format("#{0}", idToReference);
-        }
-
-        private string GenerateFarLinkReference(string idToReference,string fileName)
-        {
-            return string.Format("{0}#{1}", fileName, idToReference);
-        }
-
-        /// <summary>
-        /// Detect parent container of the element
-        /// </summary>
-        /// <param name="referencedItem"></param>
-        /// <returns></returns>
-        private static IHTMLItem DetectParentContainer(IHTMLItem referencedItem)
-        {
-            if (referencedItem is IBlockElement)
-            {
-                return referencedItem;
-            }
-            if (referencedItem.Parent is IBlockElement)
-            {
-                return referencedItem.Parent;
-            }
-            return null;
+            var linkRemaper = new LinkReMapperV2(link, _ids, structureManager);
+            linkRemaper.Remap();
         }
 
 
-
-        private BaseXHTMLFileV2 GetIDParentDocument(BookStructureManager structureManager, IHTMLItem value)
-        {
-            return structureManager.GetIDOfParentDocument(value) as BaseXHTMLFileV2;
-        }
 
 
         public void RemoveInvalidImages(Dictionary<string, BinaryItem> dictionary)

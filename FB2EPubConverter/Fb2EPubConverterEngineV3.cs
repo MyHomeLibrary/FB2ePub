@@ -33,7 +33,6 @@ namespace FB2EPubConverter
                 throw new ArrayTypeMismatchException(string.Format("Invalid ePub object type passed, expected EPubFileV3, got {0}",epubFile.GetType()));
             }
             _referencesManager.FlatStructure = Settings.CommonSettings.FlatStructure;
-            _referencesManager.DoNotAddFootnotes = Settings.V3Settings.DoNotUseFootnotes;
             StructureManager.DoNotAddFootnotes = Settings.V3Settings.DoNotUseFootnotes;
             PassHeaderDataFromFb2ToEpub(fb2File,epubFile.BookInformation);
             var titlePage = new TitlePageFileV3(epubFileV3.BookInformation);
@@ -305,5 +304,27 @@ namespace FB2EPubConverter
         {
             return new EPubFileV3(Settings.CommonSettings, Settings.V3Settings);
         }
+
+        protected override void PassPagesToEpubFile(IEpubFile epubFile)
+        {
+            foreach (var xhtmlFile in StructureManager)
+            {
+                if (IsAddableFile(xhtmlFile))
+                {
+                    epubFile.AddXHTMLFile(xhtmlFile);
+                }
+            }
+
+        }
+
+        private bool IsAddableFile(IBaseXHTMLFile xhtmlFile)
+        {
+            if (xhtmlFile is FB2NotesPageSectionFile)
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }
