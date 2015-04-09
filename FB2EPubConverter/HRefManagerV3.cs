@@ -18,7 +18,7 @@ namespace FB2EPubConverter
         /// <summary>
         /// List of IDs 
         /// </summary>
-        private readonly Dictionary<string, IHTMLItem> _ids = new Dictionary<string, IHTMLItem>();
+        private readonly Dictionary<string, HTMLItem> _ids = new Dictionary<string, HTMLItem>();
 
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace FB2EPubConverter
         /// <param name="id">Id to list as used</param>
         /// <param name="item">item that ID belong to</param>
         /// <returns>returns and registers the id if available, empty string if ID already exists</returns>
-        public string AddIdUsed(string id, IHTMLItem item)
+        public string AddIdUsed(string id, HTMLItem item)
         {
             if (string.IsNullOrEmpty(id))
             {

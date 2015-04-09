@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using ConverterContracts.ConversionElementsStyles;
 using EPubLibrary.ReferenceUtils;
+using EPubLibrary.V3ePubType;
 using EPubLibrary.XHTML_Items;
+using EPubLibraryContracts;
 using FB2EPubConverter.PrepearedHTMLFiles;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
@@ -13,7 +15,7 @@ namespace FB2EPubConverter
     internal class LinkReMapperV3
     {
         private readonly string _idString;
-        private readonly IHTMLItem _linkTargetItem;
+        private readonly HTMLItem _linkTargetItem;
         private readonly BaseXHTMLFileV3 _linkTargetDocument;
         private readonly IHTMLItem _anchorParent;
         private readonly KeyValuePair<string, List<Anchor>> _link;
@@ -21,7 +23,7 @@ namespace FB2EPubConverter
 
         private int _linksCount;
 
-        public LinkReMapperV3(KeyValuePair<string, List<Anchor>> link, Dictionary<string, IHTMLItem> ids, BookStructureManager structureManager)
+        public LinkReMapperV3(KeyValuePair<string, List<Anchor>> link, Dictionary<string, HTMLItem> ids, BookStructureManager structureManager)
         {
             _link = link;
             _structureManager = structureManager;
@@ -85,7 +87,21 @@ namespace FB2EPubConverter
 
         private void GenerateFootnotes()
         {
-            
+            foreach (var anchor in _link.Value)
+            {
+                BaseXHTMLFileV3 anchorDocument = GetIDParentDocument(_structureManager, anchor); // get document containing anchor pointing to target ID
+                if (anchorDocument == null) // if anchor not contained (not found) in any document
+                {
+                    Logger.Log.Error(string.Format("Internal consistency error - anchor ({0}) for id ({1}) not contained (not found) in any document", anchor, _linkTargetItem));
+                    continue;
+                }
+                anchor.HRef.Value = GenerateLocalLinkReference(_idString);// update reference link for an anchor, local one (without file name)
+                EPubV3VocabularyStyles linkStyles = new EPubV3VocabularyStyles();
+                linkStyles.SetType(EpubV3Vocabulary.NoteRef);
+                anchor.CustomAttributes.Add(linkStyles.GetAsCustomAttribute());
+                anchorDocument.AddFootNote(_linkTargetItem,_idString);
+            }
+            _linkTargetItem.GlobalAttributes.ID.Value = null; // remove attribute from the item itself to avoid double IDs
         }
 
         private void RemepLinkSectionV2Style()
