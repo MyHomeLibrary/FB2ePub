@@ -210,65 +210,6 @@ namespace FB2EPubConverter
         }
 
 
-        /// <summary>
-        /// Processes all the references and removes invalid anchors
-        /// Invalid meaning pointing to non-existing IDs
-        /// only "internal" anchors are removed
-        /// </summary>
-        public void RemoveInvalidAnchors()
-        {
-            var listToRemove = new List<string>();
-            foreach (var reference in _references)
-            {
-                // If reference does not points on one of valid IDs and it's not external reference
-                if (!IsIdUsed(reference.Key) && !ReferencesUtils.IsExternalLink(reference.Key))
-                {
-                    listToRemove.Add(reference.Key);
-                    // remove all references to this ID
-                    foreach (var element in _references[reference.Key])
-                    {
-                        // The Anchor element can't have empty reference so
-                        // we remove it and in case it has some meaningful content
-                        // replace with span that is meaningless non-block element
-                        // so contained text etc are kept
-                        if (element.SubElements().Count != 0)
-                        {
-                            var spanElement = new Span(element.HTMLStandard);
-                            foreach (var subElement in element.SubElements())
-                            {
-                                spanElement.Add(subElement);
-                            }
-                            if (element.Parent != null)
-                            {
-                                int index = element.Parent.SubElements().IndexOf(element);
-                                if (index != -1)
-                                {
-                                    spanElement.Parent = element.Parent;
-                                    element.Parent.SubElements().Insert(index, spanElement);
-                                }
-                            }
-                            if (!string.IsNullOrEmpty((string)element.GlobalAttributes.ID.Value))
-                            {
-                                spanElement.GlobalAttributes.ID.Value = element.GlobalAttributes.ID.Value; // Copy ID anyway - may be someone "jumps" here
-                                _ids[(string)element.GlobalAttributes.ID.Value] = spanElement;     // and update the "pointer" to element                           
-                            }
-                            spanElement.GlobalAttributes.Class.Value = ElementStylesV3.BadExternalLink;
-                        }
-                        if (element.Parent != null)
-                        {
-                            element.Parent.Remove(element);
-                        }
-                    }
-                }
-            }
-            // Remove the unused anchor (and their ID if they have one)
-            // from the lists
-            foreach (var toRemove in listToRemove)
-            {
-                _references.Remove(toRemove);
-            }
-        }
-
 
         /// <summary>
         /// Ensures that all IDs are valid
@@ -335,11 +276,71 @@ namespace FB2EPubConverter
 
         public void RemapAnchors(BookStructureManager structureManager)
         {
+            var listToRemove = new List<string>();
             foreach (var link in _references)
             {
                 if (!ReferencesUtils.IsExternalLink(link.Key))
                 {
-                    RemapInternalLink(structureManager, link);
+                    if (IsIdUsed(link.Key))
+                    {
+                        RemapInternalLink(structureManager, link);
+                    }
+                    else
+                    {
+                        listToRemove.Add(link.Key);
+                        RemoveInvalidAnchor(link);
+                    }
+                }
+            }
+            // Remove the unused anchor (and their ID if they have one)
+            // from the lists
+            foreach (var toRemove in listToRemove)
+            {
+                _references.Remove(toRemove);
+            }
+        }
+
+
+        /// <summary>
+        /// Processes all the references and removes invalid anchors
+        /// Invalid meaning pointing to non-existing IDs
+        /// only "internal" anchors are removed
+        /// </summary>
+        private void RemoveInvalidAnchor(KeyValuePair<string, List<Anchor>> link)
+        {
+            // remove all references to this ID
+            foreach (var element in _references[link.Key])
+            {
+                // The Anchor element can't have empty reference so
+                // we remove it and in case it has some meaningful content
+                // replace with span that is meaningless non-block element
+                // so contained text etc are kept
+                if (element.SubElements().Count != 0)
+                {
+                    var spanElement = new Span(element.HTMLStandard);
+                    foreach (var subElement in element.SubElements())
+                    {
+                        spanElement.Add(subElement);
+                    }
+                    if (element.Parent != null)
+                    {
+                        int index = element.Parent.SubElements().IndexOf(element);
+                        if (index != -1)
+                        {
+                            spanElement.Parent = element.Parent;
+                            element.Parent.SubElements().Insert(index, spanElement);
+                        }
+                    }
+                    if (!string.IsNullOrEmpty((string)element.GlobalAttributes.ID.Value))
+                    {
+                        spanElement.GlobalAttributes.ID.Value = element.GlobalAttributes.ID.Value; // Copy ID anyway - may be someone "jumps" here
+                        _ids[(string)element.GlobalAttributes.ID.Value] = spanElement;     // and update the "pointer" to element                           
+                    }
+                    spanElement.GlobalAttributes.Class.Value = ElementStylesV2.BadExternalLink;
+                }
+                if (element.Parent != null)
+                {
+                    element.Parent.Remove(element);
                 }
             }
         }
@@ -365,19 +366,19 @@ namespace FB2EPubConverter
                     var newAnchor = new Anchor(newParent.HTMLStandard);
                     if (idDocument == linkTargetDocument)
                     {
-                        anchor.HRef.Value = string.Format("#{0}", idString);
-                        newAnchor.HRef.Value = string.Format("#{0}", anchor.GlobalAttributes.ID.Value);
+                        anchor.HRef.Value = GenerateLocalLinkReference(idString);
+                        newAnchor.HRef.Value = GenerateLocalLinkReference(anchor.GlobalAttributes.ID.Value as string);
                     }
                     else
                     {
                         if (linkToFB2NotesSection && DoNotAddFootnotes)  // if it's FBE notes section and we are not generating footnotes acording to settings
                         {
-                            anchor.HRef.Value = string.Format("{0}#{1}", linkTargetDocument.FileName, idString);
+                            anchor.HRef.Value = GenerateFarLinkReference(idString,linkTargetDocument.FileName);
                             if (idDocument == null)
                             {
                                 continue;
                             }
-                            newAnchor.HRef.Value = string.Format("{0}#{1}", idDocument.FileName, anchor.GlobalAttributes.ID.Value);
+                            newAnchor.HRef.Value = GenerateFarLinkReference(anchor.GlobalAttributes.ID.Value as string, idDocument.FileName);
                         }
                         else // if not FB2 Notes parent section file or we generating footnotes
                         {
@@ -400,6 +401,17 @@ namespace FB2EPubConverter
             }
 
         }
+
+        private string GenerateLocalLinkReference(string idToReference)
+        {
+            return string.Format("#{0}", idToReference);
+        }
+
+        private string GenerateFarLinkReference(string idToReference, string fileName)
+        {
+            return string.Format("{0}#{1}", fileName, idToReference);
+        }
+
 
         /// <summary>
         /// Detect parent container of the element

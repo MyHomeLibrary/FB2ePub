@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using ConverterContracts.ConversionElementsStyles;
-using EPubLibrary;
 using EPubLibrary.XHTML_Items;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
@@ -208,66 +207,6 @@ namespace FB2EPubConverter
 
 
         /// <summary>
-        /// Processes all the references and removes invalid anchors
-        /// Invalid meaning pointing to non-existing IDs
-        /// only "internal" anchors are removed
-        /// </summary>
-        public void RemoveInvalidAnchors()
-        {
-            var listToRemove = new List<string>();
-            foreach (var reference in _references)
-            {
-                // If reference does not points on one of valid IDs and it's not external reference
-                if (!IsIdUsed(reference.Key) && !ReferencesUtils.IsExternalLink(reference.Key))
-                {
-                    listToRemove.Add(reference.Key);
-                    // remove all references to this ID
-                    foreach (var element in _references[reference.Key])
-                    {
-                        // The Anchor element can't have empty reference so
-                        // we remove it and in case it has some meaningful content
-                        // replace with span that is meaningless non-block element
-                        // so contained text etc are kept
-                        if (element.SubElements().Count != 0)
-                        {
-                            var spanElement = new Span(element.HTMLStandard);
-                            foreach (var subElement in element.SubElements())
-                            {
-                                spanElement.Add(subElement);
-                            }
-                            if (element.Parent != null)
-                            {
-                                int index = element.Parent.SubElements().IndexOf(element);
-                                if (index != -1)
-                                {
-                                    spanElement.Parent = element.Parent;
-                                    element.Parent.SubElements().Insert(index, spanElement);
-                                }                                
-                            }
-                            if (!string.IsNullOrEmpty((string)element.GlobalAttributes.ID.Value))
-                            {
-                                spanElement.GlobalAttributes.ID.Value = element.GlobalAttributes.ID.Value; // Copy ID anyway - may be someone "jumps" here
-                                _ids[(string)element.GlobalAttributes.ID.Value] = spanElement;     // and update the "pointer" to element                           
-                            }
-                            spanElement.GlobalAttributes.Class.Value = ElementStylesV2.BadExternalLink;
-                        }
-                        if (element.Parent != null)
-                        {
-                            element.Parent.Remove(element);   
-                        }
-                    }                                     
-                }
-            }
-            // Remove the unused anchor (and their ID if they have one)
-            // from the lists
-            foreach (var toRemove in listToRemove)
-            {
-                _references.Remove(toRemove);
-            }
-        }
-
-
-        /// <summary>
         /// Ensures that all IDs are valid
         /// This still require remapping the references to updated IDs
         /// </summary>
@@ -332,13 +271,72 @@ namespace FB2EPubConverter
 
         public void RemapAnchors(BookStructureManager structureManager)
         {
+            var listToRemove = new List<string>();
             foreach (var link in _references)
             {
                 if (!ReferencesUtils.IsExternalLink(link.Key))
                 {
-                    RemapInternalLink(structureManager, link);
+                    if (IsIdUsed(link.Key))
+                    {
+                        RemapInternalLink(structureManager, link);
+                    }
+                    else
+                    {
+                        listToRemove.Add(link.Key);
+                        RemoveInvalidAnchor(link);
+                    }
                 }
             }
+            // Remove the unused anchor (and their ID if they have one)
+            // from the lists
+            foreach (var toRemove in listToRemove)
+            {
+                _references.Remove(toRemove);
+            }
+        }
+
+        /// <summary>
+        /// Processes all the references and removes invalid anchors
+        /// Invalid meaning pointing to non-existing IDs
+        /// only "internal" anchors are removed
+        /// </summary>
+        private void RemoveInvalidAnchor(KeyValuePair<string, List<Anchor>> link)
+        {
+            // remove all references to this ID
+            foreach (var element in _references[link.Key])
+            {
+                // The Anchor element can't have empty reference so
+                // we remove it and in case it has some meaningful content
+                // replace with span that is meaningless non-block element
+                // so contained text etc are kept
+                if (element.SubElements().Count != 0)
+                {
+                    var spanElement = new Span(element.HTMLStandard);
+                    foreach (var subElement in element.SubElements())
+                    {
+                        spanElement.Add(subElement);
+                    }
+                    if (element.Parent != null)
+                    {
+                        int index = element.Parent.SubElements().IndexOf(element);
+                        if (index != -1)
+                        {
+                            spanElement.Parent = element.Parent;
+                            element.Parent.SubElements().Insert(index, spanElement);
+                        }
+                    }
+                    if (!string.IsNullOrEmpty((string)element.GlobalAttributes.ID.Value))
+                    {
+                        spanElement.GlobalAttributes.ID.Value = element.GlobalAttributes.ID.Value; // Copy ID anyway - may be someone "jumps" here
+                        _ids[(string)element.GlobalAttributes.ID.Value] = spanElement;     // and update the "pointer" to element                           
+                    }
+                    spanElement.GlobalAttributes.Class.Value = ElementStylesV2.BadExternalLink;
+                }
+                if (element.Parent != null)
+                {
+                    element.Parent.Remove(element);
+                }
+            }                                     
         }
 
         private void RemapInternalLink(BookStructureManager structureManager, KeyValuePair<string, List<Anchor>> link)
@@ -349,45 +347,60 @@ namespace FB2EPubConverter
             if (linkTargetDocument != null)
             {
                 int count = 0;
+                var anchorParent = DetectParentContainer(linkTargetItem); // get parent container of link target item
+                if (anchorParent == null) // if no parent container found , means the link is directly to document , which can't be , so we ignore
+                {
+                    Logger.Log.Error(string.Format("Internal consistency error - target link item ( {0} )has no parent container", linkTargetItem));
+                    return;
+                }
+
                 foreach (var anchor in link.Value)
                 {
-                    BaseXHTMLFileV2 idDocument = GetIDParentDocument(structureManager, anchor);
-                    var newParent = DetectParentContainer(linkTargetItem); // get parent container of link targer item
-                    if (newParent == null)
+                    BaseXHTMLFileV2 anchorDocument = GetIDParentDocument(structureManager, anchor); // get document containing anchor pointing to target ID
+                    if (anchorDocument == null) // if anchor not contained (not found) in any document
                     {
+                        Logger.Log.Error(string.Format("Internal consistency error - anchor ({0}) for id ({1}) not contained (not found) in any document", anchor, linkTargetItem));
                         continue;
                     }
-                    var newAnchor = new Anchor(newParent.HTMLStandard);
-                    if (idDocument == linkTargetDocument)
+                    string backlinkRef; 
+                    if (anchorDocument == linkTargetDocument) // if anchor (link) and target (id) located in same document
                     {
-                        anchor.HRef.Value = string.Format("#{0}", idString);
-                        newAnchor.HRef.Value = string.Format("#{0}", anchor.GlobalAttributes.ID.Value);
+                        anchor.HRef.Value = GenerateLocalLinkReference(idString);// update reference link for an anchor, local one (without file name)
+                        backlinkRef = GenerateLocalLinkReference(anchor.GlobalAttributes.ID.Value as string); // in case we going to insert backlin - create a local reference
                     }
-                    else
+                    else // if they are located in different documents
                     {
-                        anchor.HRef.Value = string.Format("{0}#{1}", linkTargetDocument.FileName, idString);
-                        if (idDocument == null)
-                        {
-                            continue;
-                        }
-                        newAnchor.HRef.Value = string.Format("{0}#{1}", idDocument.FileName, anchor.GlobalAttributes.ID.Value);
+                        anchor.HRef.Value = GenerateFarLinkReference(idString, linkTargetDocument.FileName); // update reference link for an anchor, "far" one (with, pointing to another file name)
+                        backlinkRef = GenerateFarLinkReference(anchor.GlobalAttributes.ID.Value as string, anchorDocument.FileName); // in case we going to insert backlin - create a "far" reference
                     }
                     if (linkTargetDocument.Type == SectionTypeEnum.Links)  // if it's FBE notes section
                     {
-                        newAnchor.GlobalAttributes.Class.Value = ElementStylesV2.NoteAnchor;
-                        newParent.Add(new EmptyLine(newParent.HTMLStandard));
-                        newParent.Add(newAnchor);
+                        var backLinkAnchor = new Anchor(anchorParent.HTMLStandard);
+                        backLinkAnchor.HRef.Value = backlinkRef;
+                        backLinkAnchor.GlobalAttributes.Class.Value = ElementStylesV2.NoteAnchor;
+                        anchorParent.Add(new EmptyLine(anchorParent.HTMLStandard));
+                        anchorParent.Add(backLinkAnchor);
                         count++;
-                        newAnchor.Add(new SimpleHTML5Text(newAnchor.HTMLStandard) { Text = (link.Value.Count > 1) ? string.Format("(<< back {0})  ", count) : string.Format("(<< back)  ") });
+                        backLinkAnchor.Add(new SimpleHTML5Text(backLinkAnchor.HTMLStandard) { Text = (link.Value.Count > 1) ? string.Format("(<< back {0})  ", count) : string.Format("(<< back)  ") });
                     }
                 }
             }
             else
             {
                 //throw new Exception("Internal consistency error - Used ID has to be in one of the book documents objects");
-                Logger.Log.Error("Internal consistency error - Used ID has to be in one of the book documents objects");
+                Logger.Log.Error(string.Format("Internal consistency error - Used ID ({0}) has to be in one of the book documents objects", linkTargetItem));
                 //continue;
             }
+        }
+
+        private string GenerateLocalLinkReference(string idToReference)
+        {
+            return string.Format("#{0}", idToReference);
+        }
+
+        private string GenerateFarLinkReference(string idToReference,string fileName)
+        {
+            return string.Format("{0}#{1}", fileName, idToReference);
         }
 
         /// <summary>
