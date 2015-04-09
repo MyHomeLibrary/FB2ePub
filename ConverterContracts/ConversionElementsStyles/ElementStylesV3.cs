@@ -34,5 +34,7 @@
         public const string TitlePage = "titlepage";
         public const string TitleSeries = "title_series";
         public const string TitleAuthors = "title_authors";
+        public const string EPUB = "epub";
+        public const string Footnote = "footnote";
     }
 }
