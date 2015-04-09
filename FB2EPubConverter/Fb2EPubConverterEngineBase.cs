@@ -125,10 +125,7 @@ namespace Fb2ePubConverter
 
                     ConvertContent(fb2File,epubFile);
 
-                    foreach (var xhtmlFile in StructureManager)
-                    {
-                        epubFile.AddXHTMLFile(xhtmlFile);
-                    }
+                    PassPagesToEpubFile(epubFile);
 
                     epubFile.Generate(outFile);
 
@@ -140,6 +137,15 @@ namespace Fb2ePubConverter
                 throw;
             }
 
+        }
+
+        protected virtual void PassPagesToEpubFile(IEpubFile epubFile)
+        {
+            foreach (var xhtmlFile in StructureManager)
+            {
+                epubFile.AddXHTMLFile(xhtmlFile);
+            }
+           
         }
 
         private void PassEPubSettings(IEpubFile epubFile)

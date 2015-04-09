@@ -83,16 +83,10 @@ namespace FB2EPubConverter
                 yield return normalPage;
             }
 
-            if (DoNotAddFootnotes)
+            foreach (var footNotePage in _footnotesContainer)
             {
-                foreach (var footNotePage in _footnotesContainer)
-                {
-                    if (!(footNotePage is FB2NotesPageSectionFile) && DoNotAddFootnotes) // we do not add footnotes files if this set in settings
-                    {
-                        yield return footNotePage;
-                    }
-                }               
-            }
+                yield return footNotePage;
+            }               
 
             foreach (var aboutPage in _aboutPages)
             {
