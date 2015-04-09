@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using ConverterContracts.ConversionElementsStyles;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
 using EPubLibrary.V3ePubType;
 using EPubLibraryContracts;
 using XHTMLClassLibrary;
+using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.Structure_Header;
@@ -24,7 +26,7 @@ namespace EPubLibrary.XHTML_Items
         private bool _durty = true;
         protected const HTMLElementType Compatibility = HTMLElementType.HTML5;
         private IHTMLItem _content;
-        private readonly List<IHTMLItem> _footnotes = new List<IHTMLItem>();
+        private readonly Dictionary<string, HTMLItem> _footnotes = new Dictionary<string, HTMLItem>();
 
 
 
@@ -144,6 +146,14 @@ namespace EPubLibrary.XHTML_Items
         /// </summary>
         public List<IStyleElement> StyleFiles { get { return _styles; } }
 
+        public void AddFootNote(HTMLItem item,string id)
+        {
+            if (!_footnotes.ContainsKey(id))
+            {
+                _footnotes.Add(id,item);
+            }
+        }
+
 
         public void SetDocumentEpubType(EpubV3Vocabulary type)
         {
@@ -239,7 +249,7 @@ namespace EPubLibrary.XHTML_Items
         public virtual void GenerateBody()
         {
             BodyElement = new Body(Compatibility);
-            BodyElement.GlobalAttributes.Class.Value = "epub";
+            BodyElement.GlobalAttributes.Class.Value = ElementStylesV3.EPUB;
             if (_epubAttributeTypes.IsPresent())
             {
                 BodyElement.CustomAttributes.Add(_epubAttributeTypes.GetAsCustomAttribute());
@@ -255,12 +265,23 @@ namespace EPubLibrary.XHTML_Items
         {
             if (_footnotes.Any())
             {
-                var aside = new Aside(Compatibility);
+                var group = new Div(Compatibility);
+                EPubV3VocabularyStyles groupStyles = new EPubV3VocabularyStyles();
+                groupStyles.SetType(EpubV3Vocabulary.FootNotes);
+                group.CustomAttributes.Add(groupStyles.GetAsCustomAttribute());
+
                 foreach (var footnote in _footnotes)
                 {
-                    aside.Add(footnote);
+                    var aside = new Aside(Compatibility);
+                    aside.GlobalAttributes.ID.Value = footnote.Key;
+                    aside.GlobalAttributes.Class.Value = ElementStylesV3.Footnote;
+                    EPubV3VocabularyStyles attributeStyles = new EPubV3VocabularyStyles();
+                    attributeStyles.SetType(EpubV3Vocabulary.FootNote);
+                    aside.CustomAttributes.Add(attributeStyles.GetAsCustomAttribute());
+                    aside.Add(footnote.Value);
+                    group.Add(aside);
                 }
-                bodyElement.Add(aside);
+                bodyElement.Add(group);
             }
         }
 
