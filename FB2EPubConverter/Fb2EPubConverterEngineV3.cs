@@ -122,8 +122,7 @@ namespace FB2EPubConverter
 
 
         private void UpdateInternalLinks(FB2File fb2File)
-        {
-            _referencesManager.RemoveInvalidAnchors();
+        {           
             _referencesManager.RemoveInvalidImages(fb2File.Images);
             _referencesManager.RemapAnchors(StructureManager);
         }
