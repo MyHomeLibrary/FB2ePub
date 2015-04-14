@@ -190,6 +190,7 @@ namespace EPubLibrary.XHTML_Items
             var mainDocument = new HTMLDocument(Compatibility);
             GenerateHead();
             GenerateBody();
+            GenerateFootnotes();
             var encoding = new UTF8Encoding();
             foreach (var file in _styles)
             {
@@ -245,23 +246,7 @@ namespace EPubLibrary.XHTML_Items
             return _generatedCodeXDocument;
         }
 
-
-        public virtual void GenerateBody()
-        {
-            BodyElement = new Body(Compatibility);
-            BodyElement.GlobalAttributes.Class.Value = ElementStylesV3.EPUB;
-            if (_epubAttributeTypes.IsPresent())
-            {
-                BodyElement.CustomAttributes.Add(_epubAttributeTypes.GetAsCustomAttribute());
-            }
-            if (_content != null)
-            {
-                BodyElement.Add(_content);
-                AddFootnotes(BodyElement);
-            }
-        }
-
-        private void AddFootnotes(Body bodyElement)
+        protected virtual void GenerateFootnotes()
         {
             if (_footnotes.Any())
             {
@@ -281,9 +266,25 @@ namespace EPubLibrary.XHTML_Items
                     aside.Add(footnote.Value);
                     group.Add(aside);
                 }
-                bodyElement.Add(group);
+                BodyElement.Add(group);
             }
         }
+
+
+        public virtual void GenerateBody()
+        {
+            BodyElement = new Body(Compatibility);
+            BodyElement.GlobalAttributes.Class.Value = ElementStylesV3.EPUB;
+            if (_epubAttributeTypes.IsPresent())
+            {
+                BodyElement.CustomAttributes.Add(_epubAttributeTypes.GetAsCustomAttribute());
+            }
+            if (_content != null)
+            {
+                BodyElement.Add(_content);
+            }
+        }
+
 
         /// <summary>
         /// Checks if XHTML element is part of current document
