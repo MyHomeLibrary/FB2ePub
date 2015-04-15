@@ -35,18 +35,5 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
             return (Subitems.Count > 0);
         }
 
-        public override object Clone()
-        {
-            var item = new DirectoryList(HTMLStandard);
-            item.CloneAttributes(this);
-            foreach (var htmlItem in Subitems)
-            {
-                item.Add(htmlItem.Clone() as IHTMLItem);
-            }
-            item.TextContent = TextContent;
-            return item;
-        }
-
-
     }
 }

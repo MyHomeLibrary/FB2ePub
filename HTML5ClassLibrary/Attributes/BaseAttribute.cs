@@ -53,6 +53,11 @@ namespace XHTMLClassLibrary.Attributes
             return _attributeName;
         }
 
-        public abstract object Clone();
+        public virtual object Clone()
+        {
+            BaseAttribute clonedAttribute = (BaseAttribute)Activator.CreateInstance(GetType());
+            clonedAttribute.Value = Value;
+            return clonedAttribute;
+        }
     }
 }
