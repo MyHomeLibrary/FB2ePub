@@ -54,7 +54,7 @@ namespace XHTMLClassLibrary
                 var item = theObj as IHTMLItem;
                 return item; 
             }
-            return null; // no such element registered
+            throw new ArgumentException(string.Format("Invalid element name {0} passed",elementName), "elementName");
         }
     }
 }

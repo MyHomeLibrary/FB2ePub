@@ -85,7 +85,7 @@ namespace XHTMLClassLibrary.BaseElements
         {
             if (!CheckIfValidStandardArgument(standardType))
             {
-                return null;
+                throw new ArgumentException("Invalid standard passed", "standardType");
             }
             if (xNode.NodeType == XmlNodeType.Element)
             {
@@ -93,18 +93,18 @@ namespace XHTMLClassLibrary.BaseElements
                 return Converters[standardType].CreateHTMLItem(element.Name.LocalName);
 
             }
-            else if (xNode.NodeType == XmlNodeType.Text)
+            if (xNode.NodeType == XmlNodeType.Text)
             {
                 return new SimpleHTML5Text(standardType);
             }
-            return null;
+            throw new ArgumentException(string.Format("Invalid element type {0} passed", xNode.NodeType), "xNode");
         }
 
         public static IHTMLItem CreateElement(string elementName, HTMLElementType standardType)
         {
             if (!CheckIfValidStandardArgument(standardType))
             {
-                return null;
+                throw new ArgumentException("Invalid standard passed","standardType");
             }
             return Converters[standardType].CreateHTMLItem(elementName);
         }

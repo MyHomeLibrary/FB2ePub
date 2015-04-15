@@ -77,19 +77,6 @@ namespace XHTMLClassLibrary.BaseElements.ListElements
         public IAttributeDataAccess Reversed { get { return _reversedAttribute; } }
 
 
-        public override object Clone()
-        {
-            var item = new OrderedList(HTMLStandard);
-            item.CloneAttributes(this);
-            foreach (var htmlItem in Subitems)
-            {
-                item.Add(htmlItem.Clone() as IHTMLItem);
-            }
-            item.TextContent = TextContent;
-            return item;
-        }
-
-
         protected override bool IsValidSubType(IHTMLItem item)
         {
             if (item is ListItem)
