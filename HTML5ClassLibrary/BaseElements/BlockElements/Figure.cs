@@ -22,14 +22,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         public override bool IsValid()
         {
             IEnumerable<IHTMLItem> captions = Subitems.FindAll(x => x is FigCaption);
-            foreach (var figCaption in captions) // figcaption can be only first or last element
-            {
-                if (figCaption != Subitems.First() && figCaption != Subitems.Last())
-                {
-                    return false;
-                }
-            }
-            return true;
+            return captions.All(figCaption => figCaption == Subitems.First() || figCaption == Subitems.Last());
         }
 
         protected override bool IsValidSubType(IHTMLItem item)

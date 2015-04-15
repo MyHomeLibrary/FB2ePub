@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -93,6 +94,15 @@ namespace XHTMLClassLibrary.BaseElements
             return false;
         }
 
+        private void ClearAttributes()
+        {
+            _attributes.Clear();
+        }
+
+        private void SetClonedAttribute(IBaseAttribute attributeToSet)
+        {
+            _attributes.Add(attributeToSet.Clone() as IBaseAttribute);
+        }
 
         private static IEnumerable<FieldInfo> GetAllFields(Type t,BindingFlags flags)
         {
@@ -135,8 +145,6 @@ namespace XHTMLClassLibrary.BaseElements
                         RegisterAttributeBlock(field);
                     }
                 }
-
-
             }
         }
 
@@ -418,5 +426,26 @@ namespace XHTMLClassLibrary.BaseElements
                 attribute.ReadAttribute(xElement);
             }
         }
+
+        public virtual object Clone()
+        {
+            var item = ElementFactory.CreateElement(GetObjectElementName(),HTMLStandard) as HTMLItem;
+            if (item != null)
+            {
+                item.ClearAttributes();
+                foreach (var attribute in _attributes)
+                {
+                    item.SetClonedAttribute(attribute);
+                }
+                foreach (var htmlItem in Subitems)
+                {
+                    item.Add(htmlItem.Clone() as IHTMLItem);
+                }
+                item.TextContent = TextContent;
+            }
+            return item;
+        }
+
+
     }
 }

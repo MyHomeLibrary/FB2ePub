@@ -11,5 +11,6 @@
         public Abbreviation(HTMLElementType htmlStandard) : base(htmlStandard)
         {
         }
+
     }
 }

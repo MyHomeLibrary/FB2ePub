@@ -6,6 +6,8 @@
         public H1(HTMLElementType htmlStandard) : base(htmlStandard)
         {
         }
+
+        
     }
 
     [HTMLItemAttribute(ElementName = "h2", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
@@ -14,7 +16,7 @@
         public H2(HTMLElementType htmlStandard) : base(htmlStandard)
         {
         }
-    }
+   }
 
     [HTMLItemAttribute(ElementName = "h3", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class H3 : BaseHeader
@@ -30,6 +32,7 @@
         public H4(HTMLElementType htmlStandard) : base(htmlStandard)
         {
         }
+
     }
 
     [HTMLItemAttribute(ElementName = "h5", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 
@@ -13,7 +14,7 @@ namespace XHTMLClassLibrary.BaseElements
     /// <summary>
     /// Interface defining behavior of basic HTML 5 item
     /// </summary>
-    public interface IHTMLItem
+    public interface IHTMLItem : ICloneable
     {
         /// <summary>
         /// Loads the element from XNode

@@ -18,6 +18,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
 
         public IAttributeDataAccess Cite { get { return _citeAttribute; } }
 
+
         #region Overrides of IBlockElement
 
 

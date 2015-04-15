@@ -11,7 +11,7 @@ namespace XHTMLClassLibrary.Attributes
         object Value { get; set; }       
     }
 
-    public interface IBaseAttribute : IAttributeDataAccess
+    public interface IBaseAttribute : IAttributeDataAccess , ICloneable
     {
 
         void AddAttribute(XElement xElement,XNamespace ns);
@@ -52,5 +52,7 @@ namespace XHTMLClassLibrary.Attributes
         {
             return _attributeName;
         }
+
+        public abstract object Clone();
     }
 }

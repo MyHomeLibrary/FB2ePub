@@ -21,14 +21,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
 
         public override bool IsValid()
         {
-            foreach (var item in Subitems)
-            {
-                if (!item.IsValid())
-                {
-                    return false;
-                }
-            }
-            return true;
+            return Subitems.All(item => item.IsValid());
         }
 
         protected override bool IsValidSubType(IHTMLItem item)
@@ -41,6 +34,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
             }
             return false;
         }
+
 
     }
 }
