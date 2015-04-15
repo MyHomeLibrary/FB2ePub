@@ -55,7 +55,7 @@ namespace XHTMLClassLibrary.Attributes
 
         public virtual object Clone()
         {
-            BaseAttribute clonedAttribute = (BaseAttribute)Activator.CreateInstance(GetType());
+            BaseAttribute clonedAttribute = (BaseAttribute)Activator.CreateInstance(GetType(), _attributeName);
             clonedAttribute.Value = Value;
             return clonedAttribute;
         }

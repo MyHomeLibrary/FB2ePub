@@ -438,7 +438,15 @@ namespace XHTMLClassLibrary.BaseElements
                 }
                 foreach (var htmlItem in Subitems)
                 {
-                    item.Add(htmlItem.Clone() as IHTMLItem);
+                    var text = htmlItem as ISimpleText;
+                    if (text == null)
+                    {
+                        item.Add(htmlItem.Clone() as IHTMLItem);
+                    }
+                    else
+                    {
+                        item.TextContent = text;
+                    }
                 }
                 item.TextContent = TextContent;
             }

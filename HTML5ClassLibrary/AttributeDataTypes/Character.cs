@@ -22,15 +22,18 @@ namespace XHTMLClassLibrary.AttributeDataTypes
 
             set
             {
-                if (value.Length > 1)
-                {
-                    throw new ArgumentException(string.Format("The value set should be single character, not {0}",value));
-                }
                 if (string.IsNullOrEmpty(value))
                 {
                     _character = null;
                 }
-                _character = value[0];
+                else
+                {
+                    if (value.Length > 1)
+                    {
+                        throw new ArgumentException(string.Format("The value set should be single character, not {0}", value));
+                    }
+                    _character = value[0];
+                }
             }
         }
     }

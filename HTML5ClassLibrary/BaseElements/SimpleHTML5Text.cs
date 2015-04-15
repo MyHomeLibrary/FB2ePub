@@ -25,6 +25,8 @@ namespace XHTMLClassLibrary.BaseElements
     /// <summary>
     /// Represent a simple HTML 5 text element (XText)
     /// </summary>
+    /// "fake" Element name used here as it's never xElement but xText
+    [HTMLItemAttribute(ElementName = "@__xText__@", SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
     public class SimpleHTML5Text : HTMLItem , ISimpleText
     {
         /// <summary>

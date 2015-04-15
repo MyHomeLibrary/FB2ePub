@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
-using XHTMLClassLibrary.BaseElements.InlineElements;
+﻿using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.BlockElements
 {
     /// <summary>
-    /// The "header>" tag specifies a header for a document or section.
-    /// The "header>" element should be used as a container for introductory content or set of navigational links.
-    /// You can have several "header>" elements in one document. 
+    /// The "header" tag specifies a header for a document or section.
+    /// The "header" element should be used as a container for introductory content or set of navigational links.
+    /// You can have several "header" elements in one document. 
     /// Note: A "header" tag cannot be placed within a "footer", "address" or another "header" element.
     /// </summary>
     [HTMLItemAttribute(ElementName = "header", SupportedStandards = HTMLElementType.HTML5)]    
