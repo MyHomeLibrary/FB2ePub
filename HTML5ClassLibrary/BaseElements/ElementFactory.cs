@@ -100,6 +100,15 @@ namespace XHTMLClassLibrary.BaseElements
             return null;
         }
 
+        public static IHTMLItem CreateElement(string elementName, HTMLElementType standardType)
+        {
+            if (!CheckIfValidStandardArgument(standardType))
+            {
+                return null;
+            }
+            return Converters[standardType].CreateHTMLItem(elementName);
+        }
+
 
     }
 }

@@ -9,5 +9,19 @@
         public Underlined(HTMLElementType htmlStandard) : base(htmlStandard)
         {
         }
+
+        public override object Clone()
+        {
+            var item = new Underlined(HTMLStandard);
+            item.CloneAttributes(this);
+            foreach (var htmlItem in Subitems)
+            {
+                item.Add(htmlItem.Clone() as IHTMLItem);
+            }
+            item.TextContent = TextContent;
+            return item;
+        }
+
+
     }
 }

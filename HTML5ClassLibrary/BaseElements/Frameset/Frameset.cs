@@ -52,5 +52,7 @@ namespace XHTMLClassLibrary.BaseElements.Frameset
             }
             return false;
         }
+
+         
     }
 }

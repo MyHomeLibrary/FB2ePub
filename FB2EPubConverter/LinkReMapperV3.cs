@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ConverterContracts.ConversionElementsStyles;
 using EPubLibrary.ReferenceUtils;
 using EPubLibrary.V3ePubType;
@@ -20,12 +21,14 @@ namespace FB2EPubConverter
         private readonly IHTMLItem _linkParentContainer;
         private readonly KeyValuePair<string, List<Anchor>> _link;
         private readonly BookStructureManager _structureManager;
+        private readonly IDictionary<string, HTMLItem> _ids;
 
         private int _linksCount;
 
         public LinkReMapperV3(KeyValuePair<string, List<Anchor>> link, IDictionary<string, HTMLItem> ids, BookStructureManager structureManager)
         {
             _link = link;
+            _ids = ids;
             _structureManager = structureManager;
             _idString = ReferencesUtils.GetIdFromLink(link.Key); // Get ID of a link target;
             _linkTargetItem = ids[_idString]; // get object targeted by link
@@ -95,13 +98,36 @@ namespace FB2EPubConverter
                     Logger.Log.Error(string.Format("Internal consistency error - anchor ({0}) for id ({1}) not contained (not found) in any document", anchor, _linkTargetItem));
                     continue;
                 }
+                if (anchorDocument is FB2NotesPageSectionFile) // if anchor in FB2 Notes section (meaning link from FB2 notes to FB2Notes) no need to do anything as we do not save notes files in this mode
+                {
+                    continue;
+                }
                 anchor.HRef.Value = GenerateLocalLinkReference(_idString);// update reference link for an anchor, local one (without file name)
                 EPubV3VocabularyStyles linkStyles = new EPubV3VocabularyStyles();
                 linkStyles.SetType(EpubV3Vocabulary.NoteRef);
                 anchor.CustomAttributes.Add(linkStyles.GetAsCustomAttribute());
                 anchorDocument.AddFootNote(_linkTargetItem,_idString);
+                EnsureAllReferencedItemsPresent();
             }
             _linkTargetItem.GlobalAttributes.ID.Value = null; // remove attribute from the item itself to avoid double IDs
+        }
+
+        private void EnsureAllReferencedItemsPresent()
+        {
+            var listOfContainedAnchors = GetAllContainedAnchors(_linkTargetItem).Where(x => GetIDParentDocument(_structureManager, x) is FB2NotesPageSectionFile);
+            foreach (var item in listOfContainedAnchors.ToList())
+            {
+            }
+        }
+
+        private IEnumerable<Anchor> GetAllContainedAnchors(IHTMLItem linkItem)
+        {
+            if (linkItem.SubElements() == null) // if no sub elements - simple text item can't be anchor, so return empty list
+            {
+                return new List<Anchor>();
+            }
+            IEnumerable<Anchor> containedAnchors =  linkItem.SubElements().OfType<Anchor>();
+            return linkItem.SubElements().Aggregate(containedAnchors, (current, subElement) => current.Concat(GetAllContainedAnchors(subElement)));
         }
 
         private void RemepLinkSectionV2Style()

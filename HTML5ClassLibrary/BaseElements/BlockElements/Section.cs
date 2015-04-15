@@ -32,6 +32,5 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
             return true;
         }
 
-
     }
 }

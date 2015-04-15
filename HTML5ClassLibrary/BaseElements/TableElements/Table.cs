@@ -261,6 +261,19 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
         }
 
 
+        public override object Clone()
+        {
+            var item = new Table(HTMLStandard);
+            item.CloneAttributes(this);
+            foreach (var htmlItem in Subitems)
+            {
+                item.Add(htmlItem.Clone() as IHTMLItem);
+            }
+            item.TextContent = TextContent;
+            return item;
+        }
+
+
 
         public override bool IsValid()
         {

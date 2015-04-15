@@ -277,5 +277,7 @@ namespace XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements
         {
             return HRef != null;
         }
+
+
     }
 }

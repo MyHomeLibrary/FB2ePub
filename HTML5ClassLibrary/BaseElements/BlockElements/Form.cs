@@ -142,6 +142,7 @@ namespace XHTMLClassLibrary.BaseElements.BlockElements
         /// </summary>
         public IAttributeDataAccess Target { get { return _formTargetAttribute; } }
 
+        
         #region Overrides of IBlockElement
 
         protected override bool IsValidSubType(IHTMLItem item)
