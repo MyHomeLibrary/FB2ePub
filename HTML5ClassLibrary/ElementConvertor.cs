@@ -45,12 +45,13 @@ namespace XHTMLClassLibrary
         /// Create one IHTMLItem element, according to HTML element name passed
         /// </summary>
         /// <param name="elementName">name of the element to create</param>
+        /// <param name="standardType"></param>
         /// <returns>IHTMLItem element</returns>
-        public IHTMLItem CreateHTMLItem(string elementName)
+        public IHTMLItem CreateHTMLItem(string elementName, HTMLElementType standardType)
         {
             if (_elementsMap.ContainsKey(elementName))
             {
-                Object theObj = Activator.CreateInstance(_elementsMap[elementName]);
+                Object theObj = Activator.CreateInstance(_elementsMap[elementName],standardType);
                 var item = theObj as IHTMLItem;
                 return item; 
             }

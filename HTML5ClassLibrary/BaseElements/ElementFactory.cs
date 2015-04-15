@@ -90,7 +90,7 @@ namespace XHTMLClassLibrary.BaseElements
             if (xNode.NodeType == XmlNodeType.Element)
             {
                 var element = (XElement) xNode;
-                return Converters[standardType].CreateHTMLItem(element.Name.LocalName);
+                return Converters[standardType].CreateHTMLItem(element.Name.LocalName,standardType);
 
             }
             if (xNode.NodeType == XmlNodeType.Text)
@@ -106,7 +106,7 @@ namespace XHTMLClassLibrary.BaseElements
             {
                 throw new ArgumentException("Invalid standard passed","standardType");
             }
-            return Converters[standardType].CreateHTMLItem(elementName);
+            return Converters[standardType].CreateHTMLItem(elementName,standardType);
         }
 
 
