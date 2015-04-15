@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using XHTMLClassLibrary.AttributeDataTypes;
 using XHTMLClassLibrary.Attributes;
+using XHTMLClassLibrary.BaseElements.BlockElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
 
 namespace XHTMLClassLibrary.BaseElements.TableElements
@@ -10,7 +11,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     /// If a caption is to be used, it should be the first element after the opening table element.
     /// </summary>
     [HTMLItemAttribute(ElementName = "caption", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.XHTML11 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet)]
-    public class TableCaption : HTMLItem
+    public class TableCaption : HTMLItem, IBlockElement
     {
         #region Attribute_Values_Enums
         /// <summary>

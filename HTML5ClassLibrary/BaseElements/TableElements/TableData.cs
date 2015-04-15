@@ -10,7 +10,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     /// The td element defines a data cell in a table (i.e. cells that are not header cells).
     /// </summary>
     [HTMLItemAttribute(ElementName = "td", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-    public class TableData : HTMLItem
+    public class TableData : HTMLItem , IBlockElement
     {
         #region Attribute_Values_Enums
         /// <summary>

@@ -10,7 +10,7 @@ namespace XHTMLClassLibrary.BaseElements.TableElements
     /// The th element defines a table header cell.
     /// </summary>
     [HTMLItemAttribute(ElementName = "th", SupportedStandards = HTMLElementType.HTML5 |  HTMLElementType.XHTML5 | HTMLElementType.Transitional | HTMLElementType.Strict | HTMLElementType.FrameSet | HTMLElementType.XHTML11)]
-    public class TableHeaderCell : HTMLItem
+    public class TableHeaderCell : HTMLItem, IBlockElement
     {
         #region Attribute_Values_Enums
         /// <summary>

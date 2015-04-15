@@ -14,7 +14,7 @@ namespace FB2EPubConverter
         private readonly string _idString;
         private readonly IHTMLItem _linkTargetItem;
         private readonly BaseXHTMLFileV2 _linkTargetDocument;
-        private readonly IHTMLItem _anchorParent;
+        private readonly IHTMLItem _linkParentContainer;
         private readonly KeyValuePair<string, List<Anchor>> _link;
         private readonly BookStructureManager _structureManager;
 
@@ -29,7 +29,7 @@ namespace FB2EPubConverter
             _linkTargetDocument = GetIDParentDocument(structureManager, _linkTargetItem); // get parent document (file) containing targeted object
             if (_linkTargetDocument != null)
             {
-                _anchorParent = DetectParentContainer(_linkTargetItem); // get parent container of link target item
+                _linkParentContainer = DetectItemParentContainer(_linkTargetItem); // get parent container of link target item
             }
         }
 
@@ -40,7 +40,7 @@ namespace FB2EPubConverter
                 Logger.Log.Error(string.Format("Internal consistency error - Used ID ({0}) has to be in one of the book documents objects", _linkTargetItem));
                 return;
             }
-            if (_anchorParent == null) // if no parent container found , means the link is directly to document , which can't be , so we ignore
+            if (_linkParentContainer == null) // if no parent container found , means the link is directly to document , which can't be , so we ignore
             {
                 Logger.Log.Error(string.Format("Internal consistency error - target link item ( {0} )has no parent container", _linkTargetItem));
                 return;
@@ -91,11 +91,11 @@ namespace FB2EPubConverter
                     anchor.HRef.Value = GenerateFarLinkReference(_idString, _linkTargetDocument.FileName); // update reference link for an anchor, "far" one (with, pointing to another file name)
                     backlinkRef = GenerateFarLinkReference(anchor.GlobalAttributes.ID.Value as string, anchorDocument.FileName); // in case we going to insert backlin - create a "far" reference
                 }
-                var backLinkAnchor = new Anchor(_anchorParent.HTMLStandard);
+                var backLinkAnchor = new Anchor(_linkParentContainer.HTMLStandard);
                 backLinkAnchor.HRef.Value = backlinkRef;
                 backLinkAnchor.GlobalAttributes.Class.Value = ElementStylesV2.NoteAnchor;
-                _anchorParent.Add(new EmptyLine(_anchorParent.HTMLStandard));
-                _anchorParent.Add(backLinkAnchor);
+                _linkParentContainer.Add(new EmptyLine(_linkParentContainer.HTMLStandard));
+                _linkParentContainer.Add(backLinkAnchor);
                 _linksCount++;
                 backLinkAnchor.Add(new SimpleHTML5Text(backLinkAnchor.HTMLStandard) { Text = (_link.Value.Count > 1) ? string.Format("(<< back {0})  ", _linksCount) : string.Format("(<< back)  ") });
             }
@@ -124,16 +124,25 @@ namespace FB2EPubConverter
         /// </summary>
         /// <param name="referencedItem"></param>
         /// <returns></returns>
-        private IHTMLItem DetectParentContainer(IHTMLItem referencedItem)
+        private IHTMLItem DetectItemParentContainer(IHTMLItem referencedItem)
         {
-            if (referencedItem is IBlockElement)
+            if (referencedItem is IBlockElement) // if item itself is container - return it
             {
                 return referencedItem;
             }
-            if (referencedItem.Parent is IBlockElement)
+            if (referencedItem.Parent != null)
             {
-                return referencedItem.Parent;
+                if (referencedItem.Parent is IBlockElement) // if item is located inside container
+                {
+                    return referencedItem.Parent;
+                }
+                if (referencedItem.Parent is TextBasedElement) // if parent is text, i's ok for container
+                {
+                    return referencedItem.Parent;
+                }
+                return DetectItemParentContainer(referencedItem.Parent); // go up the inclusion chain
             }
+
             return null;
         }
 
