@@ -41,7 +41,14 @@ namespace XHTMLClassLibrary.Attributes
 
         public override object Value
         {
-            get { return AttrObject.Value; }
+            get
+            {
+                if (!AttributeHasValue)
+                {
+                    return null;
+                }
+                return AttrObject.Value;
+            }
             set
             {
                 if (!(value is string) && !(value is T) && value != null) 
@@ -49,7 +56,7 @@ namespace XHTMLClassLibrary.Attributes
 
                 if (value == null)
                 {
-                    AttrObject.Value = null;
+                    AttrObject = new T();
                     AttributeHasValue = false;
                 }
                 else

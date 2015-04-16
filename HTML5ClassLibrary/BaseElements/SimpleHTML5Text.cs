@@ -99,6 +99,13 @@ namespace XHTMLClassLibrary.BaseElements
             throw new Exception("This element does not contain or obtain sub items");
         }
 
+        public override object Clone()
+        {
+            SimpleHTML5Text cloned = (SimpleHTML5Text)base.Clone();
+            cloned.Text = Text;
+            return cloned;
+        }
+
         /// <summary>
         /// Return list of sub-items,
         /// useless here as can not contain sub-items

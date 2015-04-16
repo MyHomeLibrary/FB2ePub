@@ -16,6 +16,7 @@ namespace XHTMLClassLibrary.Attributes
 
         void AddAttribute(XElement xElement,XNamespace ns);
         void ReadAttribute(XElement element);
+        string GetAttributeName();
     }
 
     public  abstract class BaseAttribute : IBaseAttribute
@@ -48,7 +49,7 @@ namespace XHTMLClassLibrary.Attributes
         ///  Extracts attribute name from custom attributes
         /// </summary>
         /// <returns>name of the attribute as it in XML/HTML</returns>
-        protected string GetAttributeName()
+        public string GetAttributeName()
         {
             return _attributeName;
         }
@@ -56,7 +57,10 @@ namespace XHTMLClassLibrary.Attributes
         public virtual object Clone()
         {
             BaseAttribute clonedAttribute = (BaseAttribute)Activator.CreateInstance(GetType(), _attributeName);
-            clonedAttribute.Value = Value;
+            if (AttributeHasValue)
+            {
+                clonedAttribute.Value = Value;
+            }
             return clonedAttribute;
         }
     }
