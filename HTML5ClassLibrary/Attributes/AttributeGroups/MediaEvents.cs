@@ -23,8 +23,8 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly OnEventAttribute _onEndedEventAttribute = new OnEventAttribute("onended");
 
-        [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
-        private readonly OnEventAttribute _onMediaErrorEventAttribute = new OnEventAttribute("onerror");
+        //[AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
+        //private readonly OnEventAttribute _onMediaErrorEventAttribute = new OnEventAttribute("onerror");
 
         [AttributeTypeAttributeMember(SupportedStandards = HTMLElementType.HTML5 | HTMLElementType.XHTML5)]
         private readonly OnEventAttribute _onMediaLoadedDataEventAttribute = new OnEventAttribute("onloadeddata");
@@ -117,10 +117,10 @@ namespace XHTMLClassLibrary.Attributes.AttributeGroups
         public OnEventAttribute OnEndedEvent { get { return _onEndedEventAttribute; }}
 
 
-        /// <summary>
-        /// Script to be run when an error occurs when the file is being loaded 
-        /// </summary>
-        public OnEventAttribute OnMediaErrorEvent { get { return _onMediaErrorEventAttribute; }}
+        ///// <summary>
+        ///// Script to be run when an error occurs when the file is being loaded 
+        ///// </summary>
+        //public OnEventAttribute OnMediaErrorEvent { get { return _onMediaErrorEventAttribute; }}
 
 
         /// <summary>

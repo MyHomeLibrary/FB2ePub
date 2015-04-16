@@ -46,6 +46,10 @@ namespace XHTMLClassLibrary.Attributes
         {
             get
             {
+                if (!AttributeHasValue)
+                {
+                    return null;
+                }
                 return GetAttributeName();
             }
             set

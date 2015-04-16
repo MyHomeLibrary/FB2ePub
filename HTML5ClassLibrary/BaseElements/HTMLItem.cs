@@ -17,7 +17,7 @@ namespace XHTMLClassLibrary.BaseElements
     /// </summary>
     abstract public class HTMLItem : IHTMLItem
     {
-        private readonly List<IBaseAttribute> _attributes = new List<IBaseAttribute>();
+        private readonly Dictionary<string,IBaseAttribute> _attributes = new Dictionary<string,IBaseAttribute>();
         private HTMLElementType _htmlStandard;
 
         protected readonly List<IHTMLItem> Subitems  = new List<IHTMLItem>();
@@ -98,10 +98,6 @@ namespace XHTMLClassLibrary.BaseElements
             _attributes.Clear();
         }
 
-        private void SetClonedAttribute(IBaseAttribute attributeToSet)
-        {
-            _attributes.Add(attributeToSet.Clone() as IBaseAttribute);
-        }
 
         private static IEnumerable<FieldInfo> GetAllFields(Type t,BindingFlags flags)
         {
@@ -179,8 +175,11 @@ namespace XHTMLClassLibrary.BaseElements
             {
                 if (interfaces.Contains(typeof(IBaseAttribute)))
                 {
-                    var memberItem = field.GetValue(instanceObject);
-                    _attributes.Add((IBaseAttribute)memberItem);
+                    IBaseAttribute memberItem = (IBaseAttribute)field.GetValue(instanceObject);
+                    if ( memberItem != null)
+                    {
+                        _attributes.Add(memberItem.GetAttributeName(),memberItem);
+                    }
                 }
                 else
                 {
@@ -408,7 +407,7 @@ namespace XHTMLClassLibrary.BaseElements
         /// <param name="ns">Namespace of the attribute</param>
         protected void AddAttributes(XElement xElement,XNamespace ns)
         {
-            foreach (var attribute in _attributes)
+            foreach (var attribute in _attributes.Values)
             {
                 attribute.AddAttribute(xElement,ns);
             }
@@ -420,7 +419,7 @@ namespace XHTMLClassLibrary.BaseElements
         /// <param name="xElement">XElement to load attributes from</param>
         protected void ReadAttributes(XElement xElement)
         {
-            foreach (var attribute in _attributes)
+            foreach (var attribute in _attributes.Values)
             {
                 attribute.ReadAttribute(xElement);
             }
@@ -431,28 +430,39 @@ namespace XHTMLClassLibrary.BaseElements
             var item = ElementFactory.CreateElement(GetObjectElementName(),HTMLStandard) as HTMLItem;
             if (item != null)
             {
-                item.ClearAttributes();
-                foreach (var attribute in _attributes)
+                //item.ClearAttributes();
+                foreach (var attributePair in _attributes)
                 {
-                    item.SetClonedAttribute(attribute);
+                    item.SetAttribute(attributePair);
                 }
                 foreach (var htmlItem in Subitems)
                 {
-                    var text = htmlItem as ISimpleText;
-                    if (text == null)
-                    {
+                    //var text = htmlItem as ISimpleText;
+                    //if (text == null)
+                    //{
                         item.Add(htmlItem.Clone() as IHTMLItem);
-                    }
-                    else
-                    {
-                        item.TextContent = text;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    item.TextContent.Text = text.Text;
+                    //}
                 }
-                item.TextContent = TextContent;
+                if (TextContent != null)
+                {
+                    item.TextContent = (ISimpleText) TextContent.Clone();
+                }
             }
             return item;
         }
 
-
+        private void SetAttribute(KeyValuePair<string, IBaseAttribute> attributePair)
+        {
+            if (!_attributes.ContainsKey(attributePair.Key))
+            {
+                throw new InvalidDataException(string.Format("Unable to locate attribute '{0}' inside {1} item",attributePair.Key,GetObjectElementName()));
+            }
+            _attributes[attributePair.Key].Value = attributePair.Value.Value;
+        }
+    
     }
 }
