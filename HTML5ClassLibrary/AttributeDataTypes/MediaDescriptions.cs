@@ -92,34 +92,36 @@ namespace XHTMLClassLibrary.AttributeDataTypes
             
         }
 
-        private readonly List<MediaDescription> descriptions = new List<MediaDescription>();
+        private readonly List<MediaDescription> _descriptions = new List<MediaDescription>();
 
         public string Value
         {
             get
             {
                 StringBuilder builder = new StringBuilder();
-                foreach (var description in descriptions)
+                foreach (var description in _descriptions)
                 {
                     builder.AppendFormat("{0},", description.Value);
                 }
-                // remove last one
-                builder.Remove(builder.Length - 1, 1);
+                if (builder.Length > 0)
+                {
+                    // remove last one
+                    builder.Remove(builder.Length - 1, 1);
+                }
                 return builder.ToString();
                
             }
 
             set
             {
-                descriptions.Clear();
+                _descriptions.Clear();
                 string[] ar = value.Split(',');
                 foreach (var s in ar)
                 {
-                    MediaDescription description = new MediaDescription();
-                    description.Value = s;
+                    var description = new MediaDescription {Value = s};
                     if (!string.IsNullOrEmpty(description.Value))
                     {
-                        descriptions.Add(description);                        
+                        _descriptions.Add(description);                        
                     }
                 }
                 
