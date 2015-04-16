@@ -106,10 +106,11 @@ namespace FB2EPubConverter
                 EPubV3VocabularyStyles linkStyles = new EPubV3VocabularyStyles();
                 linkStyles.SetType(EpubV3Vocabulary.NoteRef);
                 anchor.CustomAttributes.Add(linkStyles.GetAsCustomAttribute());
-                anchorDocument.AddFootNote(_linkTargetItem,_idString);
-                EnsureAllReferencedItemsPresent();
+                var footnoteToAdd = (HTMLItem) _linkTargetItem.Clone();
+                footnoteToAdd.GlobalAttributes.ID.Value = null; // remove attribute from the item itself to avoid double IDs
+                anchorDocument.AddFootNote(footnoteToAdd, _idString);
+                //EnsureAllReferencedItemsPresent();
             }
-            _linkTargetItem.GlobalAttributes.ID.Value = null; // remove attribute from the item itself to avoid double IDs
         }
 
         private void EnsureAllReferencedItemsPresent()
