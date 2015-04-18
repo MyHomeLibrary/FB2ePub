@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using EPubLibraryContracts;
+using EPubLibraryContracts.Settings;
 using FB2EPubConverter.PrepearedHTMLFiles;
 using XHTMLClassLibrary.BaseElements;
 
@@ -27,8 +28,6 @@ namespace FB2EPubConverter
         public IEnumerable<IBaseXHTMLFile> AboutPages { get { return _aboutPages; } }
 
         public IEnumerable<IBaseXHTMLFile> Footnotes { get { return _footnotesContainer; }}
-
-        public bool DoNotAddFootnotes { get; set; }
 
         public void AddBookPage(IBaseXHTMLFile pageFile)
         {

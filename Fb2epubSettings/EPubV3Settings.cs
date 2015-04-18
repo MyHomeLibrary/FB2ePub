@@ -23,7 +23,7 @@ namespace Fb2epubSettings
         private const string EPUB3SubVersionElementName = "EPUB3SubVersion";
         private const string GenerateV2CompatibleTOCElementName = "GenerateV2CompatibleTOC";
         private const string HTMLFileMaxSizeAllowedElementName = "HTMLFileMaxSizeAllowed";
-        private const string DoNotUseFootnotesElementName = "DoNotUseFootnotes";
+        private const string FootnotesCreationModeElementName = "FootnotesCreationMode";
 
         #endregion
 
@@ -32,7 +32,7 @@ namespace Fb2epubSettings
             _v3SubStandard = EPubV3SubStandard.V30;
             _generateV2CompatibleTOC = true;
             HTMLFileMaxSize = 0;
-            DoNotUseFootnotes = false;
+            FootnotesCreationMode = FootnotesGenerationMode.V3Footnotes;
         }
 
         /// <summary>
@@ -52,14 +52,14 @@ namespace Fb2epubSettings
 
         public ulong HTMLFileMaxSize { get; set; }
 
-        public bool DoNotUseFootnotes { get; set; }
+        public FootnotesGenerationMode FootnotesCreationMode { get; set; }
 
 
         public void CopyFrom(IEPubV3Settings temp)
         {
             _v3SubStandard = temp.V3SubStandard;
             _generateV2CompatibleTOC = temp.GenerateV2CompatibleTOC;
-            DoNotUseFootnotes = temp.DoNotUseFootnotes;
+            FootnotesCreationMode = temp.FootnotesCreationMode;
             HTMLFileMaxSize = temp.HTMLFileMaxSize;
 
         }
@@ -92,8 +92,14 @@ namespace Fb2epubSettings
                         case HTMLFileMaxSizeAllowedElementName:
                             HTMLFileMaxSize = (ulong)reader.ReadElementContentAsLong();
                             continue;
-                        case DoNotUseFootnotesElementName:
-                            DoNotUseFootnotes = reader.ReadElementContentAsBoolean();
+                        case FootnotesCreationModeElementName:
+                            FootnotesGenerationMode mode;
+                            elementContent = reader.ReadElementContentAsString();
+                            if (!Enum.TryParse(elementContent, true, out mode))
+                            {
+                                throw new InvalidDataException(string.Format("Invalid FootnotesCreationMode value read: {0}", elementContent));
+                            }
+                            FootnotesCreationMode = mode;
                             continue;
                     }
                 }
@@ -118,8 +124,8 @@ namespace Fb2epubSettings
             writer.WriteValue(HTMLFileMaxSize.ToString());
             writer.WriteEndElement();
 
-            writer.WriteStartElement(DoNotUseFootnotesElementName);
-            writer.WriteValue(DoNotUseFootnotes);
+            writer.WriteStartElement(FootnotesCreationModeElementName);
+            writer.WriteValue(FootnotesCreationMode.ToString());
             writer.WriteEndElement();
 
             writer.WriteEndElement();

@@ -10,6 +10,7 @@ using FB2Library;
 using FB2Library.HeaderItems;
 using EPubLibrary.XHTML_Items;
 using EPubLibraryContracts;
+using EPubLibraryContracts.Settings;
 using FB2EPubConverter.ElementConvertersV2;
 using XHTMLClassLibrary.BaseElements.BlockElements;
 using FB2EPubConverter.PrepearedHTMLFiles;
@@ -31,7 +32,6 @@ namespace FB2EPubConverter
                 throw new ArrayTypeMismatchException(string.Format("Invalid ePub object type passed, expected EPubFileV2, got {0}", epubFile.GetType()));
             }
             _referencesManager.FlatStructure = Settings.CommonSettings.FlatStructure;
-            StructureManager.DoNotAddFootnotes = true;
             PassHeaderDataFromFb2ToEpub(fb2File, epubFileV2);
             var titlePage = new TitlePageFileV2(epubFileV2.BookInformation);
             StructureManager.AddTitlePage(titlePage);

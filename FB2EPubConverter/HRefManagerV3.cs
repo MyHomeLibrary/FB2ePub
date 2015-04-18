@@ -6,6 +6,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using ConverterContracts.ConversionElementsStyles;
 using EPubLibrary.ReferenceUtils;
+using EPubLibraryContracts.Settings;
+using Fb2epubSettings;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.InlineElements;
@@ -13,8 +15,10 @@ using XHTMLClassLibrary.BaseElements.InlineElements.TextBasedElements;
 
 namespace FB2EPubConverter
 {
-    internal class HRefManagerV3 
+    internal class HRefManagerV3
     {
+        private readonly IEPubV3Settings _v3Settings =   new EPubV3Settings();
+
         /// <summary>
         /// List of IDs 
         /// </summary>
@@ -37,6 +41,11 @@ namespace FB2EPubConverter
         /// </summary>
         private readonly Dictionary<string, string> _attributesRemap = new Dictionary<string, string>();
 
+
+        public void SetConversionSettings(IEPubV3Settings v3Settings)
+        {
+            _v3Settings.CopyFrom(v3Settings);
+        }
         /// <summary>
         /// Resets the manager to empty state,
         /// releases all references etc
@@ -341,7 +350,7 @@ namespace FB2EPubConverter
 
         private void RemapInternalLink(BookStructureManager structureManager,KeyValuePair<string, List<Anchor>> link)
         {
-            var linkRemaper = new LinkReMapperV3(link, _ids, structureManager);
+            var linkRemaper = new LinkReMapperV3(link, _ids, structureManager,_v3Settings);
             linkRemaper.Remap();
 
         }

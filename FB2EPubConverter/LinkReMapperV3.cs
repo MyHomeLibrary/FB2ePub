@@ -5,6 +5,7 @@ using EPubLibrary.ReferenceUtils;
 using EPubLibrary.V3ePubType;
 using EPubLibrary.XHTML_Items;
 using EPubLibraryContracts;
+using EPubLibraryContracts.Settings;
 using FB2EPubConverter.PrepearedHTMLFiles;
 using XHTMLClassLibrary.BaseElements;
 using XHTMLClassLibrary.BaseElements.BlockElements;
@@ -22,13 +23,15 @@ namespace FB2EPubConverter
         private readonly KeyValuePair<string, List<Anchor>> _link;
         private readonly BookStructureManager _structureManager;
         private readonly IDictionary<string, HTMLItem> _ids;
-
+        private readonly IEPubV3Settings _v3Settings;
+        
         private int _linksCount;
 
-        public LinkReMapperV3(KeyValuePair<string, List<Anchor>> link, IDictionary<string, HTMLItem> ids, BookStructureManager structureManager)
+        public LinkReMapperV3(KeyValuePair<string, List<Anchor>> link, IDictionary<string, HTMLItem> ids, BookStructureManager structureManager, IEPubV3Settings v3Settings)
         {
             _link = link;
             _ids = ids;
+            _v3Settings = v3Settings;
             _structureManager = structureManager;
             _idString = ReferencesUtils.GetIdFromLink(link.Key); // Get ID of a link target;
             _linkTargetItem = ids[_idString]; // get object targeted by link
@@ -78,13 +81,16 @@ namespace FB2EPubConverter
 
         private void RemapLinkSecionReference()
         {
-            if (_structureManager.DoNotAddFootnotes)
+            switch (_v3Settings.FootnotesCreationMode)
             {
-                RemepLinkSectionV2Style();
-            }
-            else
-            {
-                GenerateFootnotes();
+                case FootnotesGenerationMode.Combined:
+                    break;
+                case FootnotesGenerationMode.V2StyleSections:
+                    RemepLinkSectionV2Style();
+                    break;
+                case FootnotesGenerationMode.V3Footnotes:
+                    GenerateFootnotes();
+                    break;
             }
         }
 

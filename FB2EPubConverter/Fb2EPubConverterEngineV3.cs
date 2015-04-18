@@ -21,7 +21,7 @@ namespace FB2EPubConverter
 {
     internal class Fb2EPubConverterEngineV3 : Fb2EPubConverterEngineBase
     {
-        private readonly  HRefManagerV3 _referencesManager = new HRefManagerV3();
+        private readonly HRefManagerV3 _referencesManager = new HRefManagerV3();
 
         private const string DefaultCSSFileName = "default_v3.css";
 
@@ -33,7 +33,7 @@ namespace FB2EPubConverter
                 throw new ArrayTypeMismatchException(string.Format("Invalid ePub object type passed, expected EPubFileV3, got {0}",epubFile.GetType()));
             }
             _referencesManager.FlatStructure = Settings.CommonSettings.FlatStructure;
-            StructureManager.DoNotAddFootnotes = Settings.V3Settings.DoNotUseFootnotes;
+            _referencesManager.SetConversionSettings(Settings.V3Settings);
             PassHeaderDataFromFb2ToEpub(fb2File,epubFile.BookInformation);
             var titlePage = new TitlePageFileV3(epubFileV3.BookInformation);
             StructureManager.AddTitlePage(titlePage);
