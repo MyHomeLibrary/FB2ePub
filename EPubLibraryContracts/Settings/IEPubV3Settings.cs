@@ -8,6 +8,13 @@ namespace EPubLibraryContracts.Settings
         V301,
     }
 
+    public enum FootnotesGenerationMode
+    {
+        V2StyleSections,
+        V3Footnotes,
+        Combined,
+    }
+
     public interface IEPubV3Settings : IXmlSerializable
     {
         void SetupDefaults();
@@ -16,7 +23,7 @@ namespace EPubLibraryContracts.Settings
         EPubV3SubStandard V3SubStandard { get; set; }
         bool GenerateV2CompatibleTOC { get; set; }
         ulong HTMLFileMaxSize { get; set; }
-        bool DoNotUseFootnotes { get; set; }
+        FootnotesGenerationMode FootnotesCreationMode { get; set; }
 
     }
 }
