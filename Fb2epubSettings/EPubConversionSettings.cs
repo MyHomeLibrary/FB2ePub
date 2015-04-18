@@ -361,7 +361,7 @@ namespace Fb2epubSettings
                             string elementContent = reader.ReadElementContentAsString();
                             if (!Enum.TryParse(elementContent, true, out ignoreTitle))
                             {
-                                throw new InvalidDataException(string.Format("Invalit ignore Title value read: {0}",elementContent));
+                                throw new InvalidDataException(string.Format("Invalid ignore Title value read: {0}",elementContent));
                             }
                             _ignoreTitle = ignoreTitle;
                             continue;
