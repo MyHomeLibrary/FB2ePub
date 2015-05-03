@@ -129,7 +129,7 @@ namespace FB2EPubConverter
 
         private void PassTextFromFb2ToEpub(FB2File fb2File)
         {
-            var converter = new Fb2EPubTextConverterV3(Settings.CommonSettings, Images, _referencesManager, Settings.V3Settings.HTMLFileMaxSize);
+            var converter = new Fb2EPubTextConverterV3(Settings.CommonSettings, Images, _referencesManager, Settings.V3Settings);
             converter.Convert(StructureManager, fb2File);
         }
 
