@@ -17,16 +17,16 @@ namespace FB2EPubConverter.ElementConvertersV3
         private readonly IEPubCommonSettings _commonSettings;
         private readonly ImageManager _images;
         private readonly HRefManagerV3 _referencesManager;
-        private readonly ulong _maxSize;
+        private readonly IEPubV3Settings _v3Settings;
 
         private int _sectionCounter;
 
-        public Fb2EPubTextConverterV3(IEPubCommonSettings commonSettings, ImageManager images, HRefManagerV3 referencesManager, ulong maxSize)
+        public Fb2EPubTextConverterV3(IEPubCommonSettings commonSettings, ImageManager images, HRefManagerV3 referencesManager,IEPubV3Settings v3Settings)
         {
             _commonSettings = commonSettings;
             _images = images;
             _referencesManager = referencesManager;
-            _maxSize = maxSize;
+            _v3Settings = v3Settings;
         }
 
         public void Convert(BookStructureManager bookStructureManager, FB2File fb2File)
@@ -50,7 +50,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 {
                     CapitalDrop = _commonSettings.CapitalDrop,
                     Images = _images,
-                    MaxSize = _maxSize,
+                    MaxSize = _v3Settings.HTMLFileMaxSize,
                     ReferencesManager = _referencesManager,
                 };
                 var titleConverter = new TitleConverterV3();
@@ -100,7 +100,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     {
                         CapitalDrop = _commonSettings.CapitalDrop,
                         Images = _images,
-                        MaxSize = _maxSize,
+                        MaxSize = _v3Settings.HTMLFileMaxSize,
                         ReferencesManager = _referencesManager,
                     };
 
@@ -132,7 +132,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 {
                     CapitalDrop = _commonSettings.CapitalDrop,
                     Images = _images,
-                    MaxSize = _maxSize,
+                    MaxSize = _v3Settings.HTMLFileMaxSize,
                     ReferencesManager = _referencesManager,
                 };
 
@@ -180,7 +180,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             {
                 CapitalDrop = !fbeNotesSection && _commonSettings.CapitalDrop,
                 Images = _images,
-                MaxSize = _maxSize,
+                MaxSize = _v3Settings.HTMLFileMaxSize,
                 ReferencesManager = _referencesManager,
             };
             var sectionConverter = new SectionConverterV3
@@ -238,38 +238,59 @@ namespace FB2EPubConverter.ElementConvertersV3
         /// <param name="bodyItem"></param>
         private void AddFbeNotesBody(BookStructureManager bookStructureManager, BodyItem bodyItem)
         {
-                string docTitle = bodyItem.Name;
-                Logger.Log.DebugFormat("Adding section : {0}", docTitle);
-                var sectionDocument = new FB2NotesPageSectionFile
-                {
-                    PageTitle = docTitle,
-                    FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
-                    GuideRole = GuideTypeEnum.Glossary,
-                    Content = new Div(HTMLElementType.HTML5),
-                    NavigationParent = null,
-                    NotPartOfNavigation = true,
-                    FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
-                };
-                if (bodyItem.Title != null)
-                {
-                    var converterSettings = new ConverterOptionsV3
-                    {
-                        CapitalDrop = false,
-                        Images = _images,
-                        MaxSize = _maxSize,
-                        ReferencesManager = _referencesManager,
-                    };
-                    var titleConverter = new TitleConverterV3();
-                    sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,
-                        new TitleConverterParamsV3 { Settings = converterSettings, TitleLevel = 1 }));
-                }
-                bookStructureManager.AddFootnote(sectionDocument);
+            switch (_v3Settings.FootnotesCreationMode)
+            {
+                case FootnotesGenerationMode.V2StyleSections:
+                    AddV2StyleFbeNotesBody(bookStructureManager, bodyItem);
+                    break;
+                case FootnotesGenerationMode.Combined:
+                    AddV2StyleFbeNotesBody(bookStructureManager, bodyItem);               
+                    break;
+                case FootnotesGenerationMode.V3Footnotes:
+                    AddFootnotesData(bookStructureManager, bodyItem);
+                    break;
+            }
+        }
 
-                Logger.Log.Debug("Adding sub-sections");
-                foreach (var section in bodyItem.Sections)
+        private void AddFootnotesData(BookStructureManager bookStructureManager, BodyItem bodyItem)
+        {
+            
+        }
+
+        private void AddV2StyleFbeNotesBody(BookStructureManager bookStructureManager, BodyItem bodyItem)
+        {
+            string docTitle = bodyItem.Name;
+            Logger.Log.DebugFormat("Adding section : {0}", docTitle);
+            var sectionDocument = new FB2NotesPageSectionFile
+            {
+                PageTitle = docTitle,
+                FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
+                GuideRole = GuideTypeEnum.Glossary,
+                Content = new Div(HTMLElementType.HTML5),
+                NavigationParent = null,
+                NotPartOfNavigation = true,
+                FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
+            };
+            if (bodyItem.Title != null)
+            {
+                var converterSettings = new ConverterOptionsV3
                 {
-                    AddSection(bookStructureManager, section, sectionDocument, true);
-                }
+                    CapitalDrop = false,
+                    Images = _images,
+                    MaxSize = _v3Settings.HTMLFileMaxSize,
+                    ReferencesManager = _referencesManager,
+                };
+                var titleConverter = new TitleConverterV3();
+                sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,
+                    new TitleConverterParamsV3 { Settings = converterSettings, TitleLevel = 1 }));
+            }
+            bookStructureManager.AddFootnote(sectionDocument);
+
+            Logger.Log.Debug("Adding sub-sections");
+            foreach (var section in bodyItem.Sections)
+            {
+                AddSection(bookStructureManager, section, sectionDocument, true);
+            }
         }
 
         /// <summary>
@@ -308,7 +329,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 {
                     CapitalDrop = _commonSettings.CapitalDrop,
                     Images = _images,
-                    MaxSize = _maxSize,
+                    MaxSize = _v3Settings.HTMLFileMaxSize,
                     ReferencesManager = _referencesManager,
                 };
                 var titleConverter = new TitleConverterV3();
