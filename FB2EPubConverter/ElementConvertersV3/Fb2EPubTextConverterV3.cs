@@ -1,4 +1,5 @@
-﻿using ConverterContracts.ConversionElementsStyles;
+﻿using System;
+using ConverterContracts.ConversionElementsStyles;
 using EPubLibrary.PathUtils;
 using EPubLibrary.XHTML_Items;
 using EPubLibraryContracts;
@@ -254,7 +255,8 @@ namespace FB2EPubConverter.ElementConvertersV3
 
         private void AddFootnotesData(BookStructureManager bookStructureManager, BodyItem bodyItem)
         {
-            
+            throw new NotImplementedException();
+            //AddV2StyleFbeNotesBody(bookStructureManager, bodyItem);               
         }
 
         private void AddV2StyleFbeNotesBody(BookStructureManager bookStructureManager, BodyItem bodyItem)

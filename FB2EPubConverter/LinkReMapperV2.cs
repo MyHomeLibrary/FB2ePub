@@ -116,7 +116,7 @@ namespace FB2EPubConverter
 
         private BaseXHTMLFileV2 GetIDParentDocument(BookStructureManager structureManager, IHTMLItem value)
         {
-            return structureManager.GetIDOfParentDocument(value) as BaseXHTMLFileV2;
+            return structureManager.GetItemParentDocument(value) as BaseXHTMLFileV2;
         }
 
         /// <summary>
