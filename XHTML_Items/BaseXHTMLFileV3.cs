@@ -146,11 +146,16 @@ namespace EPubLibrary.XHTML_Items
         /// </summary>
         public List<IStyleElement> StyleFiles { get { return _styles; } }
 
-        public void AddFootNote(HTMLItem item,string id)
+        /// <summary>
+        /// Add item to the list of footnotes
+        /// </summary>
+        /// <param name="newItemId">ID item will be added (referenced) with</param>
+        /// <param name="item">item to add</param>
+        public void AddFootNote(string newItemId, HTMLItem item)
         {
-            if (!_footnotes.ContainsKey(id))
+            if (!_footnotes.ContainsKey(newItemId))
             {
-                _footnotes.Add(id,item);
+                _footnotes.Add(newItemId,item);
             }
         }
 
