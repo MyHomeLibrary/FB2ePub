@@ -98,7 +98,13 @@ namespace FB2EPubConverter
             return GetEnumerator();
         }
 
-        public IBaseXHTMLFile GetIDOfParentDocument(IHTMLItem value)
+        /// <summary>
+        /// Returns parent (file level) document (document containing) for the item
+        /// parent document determined by reference to the object
+        /// </summary>
+        /// <param name="value">item to locate</param>
+        /// <returns>base document containing item</returns>
+        public IBaseXHTMLFile GetItemParentDocument(IHTMLItem value)
         {
             return this.FirstOrDefault(document => document != null && document.PartOfDocument(value));
         }

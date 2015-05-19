@@ -35,7 +35,7 @@ namespace FB2EPubConverter
             _structureManager = structureManager;
             _idString = ReferencesUtils.GetIdFromLink(link.Key); // Get ID of a link target;
             _linkTargetItem = ids[_idString]; // get object targeted by link
-            _linkTargetDocument = GetIDParentDocument(structureManager, _linkTargetItem); // get parent document (file) containing targeted object
+            _linkTargetDocument = GetItemParentDocument(_linkTargetItem); // get parent document (file) containing targeted object
             if (_linkTargetDocument != null) // if link target container document (document containing item with ID we jump to) found 
             {
                 _linkParentContainer = DetectItemParentContainer(_linkTargetItem); // get parent container of link target item
@@ -64,11 +64,11 @@ namespace FB2EPubConverter
             }
         }
 
-        private void RemapNormalReference()
+        private void RemapNormalReference() 
         {
-            foreach (var anchor in _link.Value)
+            foreach (var anchor in _link.Value) // iterate over all anchors (references) pointing to this link target (destination)
             {
-                BaseXHTMLFileV3 anchorDocument = GetIDParentDocument(_structureManager, anchor); // get document containing anchor pointing to target ID
+                BaseXHTMLFileV3 anchorDocument = GetItemParentDocument(anchor); // get document containing anchor (link) pointing to target ID
                 if (anchorDocument == null) // if anchor not contained (not found) in any document
                 {
                     Logger.Log.Error(string.Format("Internal consistency error - anchor ({0}) for id ({1}) not contained (not found) in any document", anchor, _linkTargetItem));
@@ -96,35 +96,62 @@ namespace FB2EPubConverter
 
         private void GenerateFootnotes()
         {
-            foreach (var anchor in _link.Value)
+            foreach (var anchor in _link.Value) // iterate over all anchors (references) pointing to this link target (destination)
             {
-                BaseXHTMLFileV3 anchorDocument = GetIDParentDocument(_structureManager, anchor); // get document containing anchor pointing to target ID
-                if (anchorDocument == null) // if anchor not contained (not found) in any document
-                {
-                    Logger.Log.Error(string.Format("Internal consistency error - anchor ({0}) for id ({1}) not contained (not found) in any document", anchor, _linkTargetItem));
-                    continue;
-                }
-                if (anchorDocument is FB2NotesPageSectionFile) // if anchor in FB2 Notes section (meaning link from FB2 notes to FB2Notes) no need to do anything as we do not save notes files in this mode
-                {
-                    continue;
-                }
-                anchor.HRef.Value = GenerateLocalLinkReference(_idString);// update reference link for an anchor, local one (without file name)
-                EPubV3VocabularyStyles linkStyles = new EPubV3VocabularyStyles();
-                linkStyles.SetType(EpubV3Vocabulary.NoteRef);
-                anchor.CustomAttributes.Add(linkStyles.GetAsCustomAttribute());
-                var footnoteToAdd = (HTMLItem) _linkTargetItem.Clone();
-                footnoteToAdd.GlobalAttributes.ID.Value = null; // remove attribute from the item itself to avoid double IDs
-                anchorDocument.AddFootNote(footnoteToAdd, _idString);
-                //EnsureAllReferencedItemsPresent();
+                // generate a footnote section for this anchor in it's document
+                // this might create several copies of the same footnote in different documents that linked to target
+                GenerateSingleFootnote(anchor, _idString);
             }
         }
 
-        private void EnsureAllReferencedItemsPresent()
+        private void GenerateSingleFootnote(Anchor anchor,string targetID)
         {
-            var listOfContainedAnchors = GetAllContainedAnchors(_linkTargetItem).Where(x => GetIDParentDocument(_structureManager, x) is FB2NotesPageSectionFile);
-            foreach (var item in listOfContainedAnchors.ToList())
+            BaseXHTMLFileV3 anchorDocument = GetItemParentDocument(anchor); // get document containing anchor pointing to target ID
+            if (anchorDocument == null) // if anchor not contained (not found) in any document
             {
+                Logger.Log.Error(string.Format("Internal consistency error - anchor ({0}) for id ({1}) not contained (not found) in any document", anchor, _linkTargetItem));
+                return;
             }
+            if (anchorDocument is FB2NotesPageSectionFile) // if anchor in FB2 Notes section (meaning link from FB2 notes to FB2 notes) no need to do anything as we do not save notes files in this mode
+            {
+                return;
+            }
+
+            // update reference link for an anchor, local one (without file name)
+            anchor.HRef.Value = GenerateLocalLinkReference(targetID);
+            // mark anchor (link reference) as note reference to make it pop-up able 
+            EPubV3VocabularyStyles linkStyles = new EPubV3VocabularyStyles();
+            linkStyles.SetType(EpubV3Vocabulary.NoteRef);
+            anchor.CustomAttributes.Add(linkStyles.GetAsCustomAttribute());
+
+            // add footnote object to the same document that contains link ,so the pop up point and pop up content will be in a same document
+            var footnoteToAdd = CreateFootnoteItemFromTargetNoteItem(targetID);
+            anchorDocument.AddFootNote(targetID, footnoteToAdd); // if footnote target ID already exist it will not add it
+        }
+
+        private HTMLItem CreateFootnoteItemFromTargetNoteItem(string targetId)
+        {
+            // Create copy (clone) of a referenced item
+            var resultItem =  (HTMLItem)_ids[targetId].Clone();
+
+            // get list of all links inside the pop up (footnote) item, that end up popinting to the items in FB2 Notes section
+            var listOfContainedAnchors = GetAllFirstLevelContainedAnchors(resultItem).Where(x => GetItemParentDocument(x) is FB2NotesPageSectionFile);
+            foreach (var anchor in listOfContainedAnchors.ToList())
+            {
+                GenerateSingleFootnote(anchor,targetId);
+            }
+            return resultItem;
+        }
+
+
+        private IEnumerable<Anchor> GetAllFirstLevelContainedAnchors(IHTMLItem linkItem)
+        {
+            if (linkItem.SubElements() == null) // if no sub elements - simple text item can't be anchor, so return empty list
+            {
+                return new List<Anchor>();
+            }
+            IEnumerable<Anchor> containedAnchors = linkItem.SubElements().OfType<Anchor>();
+            return containedAnchors;
         }
 
         private IEnumerable<Anchor> GetAllContainedAnchors(IHTMLItem linkItem)
@@ -141,7 +168,7 @@ namespace FB2EPubConverter
         {
             foreach (var anchor in _link.Value)
             {
-                BaseXHTMLFileV3 anchorDocument = GetIDParentDocument(_structureManager, anchor); // get document containing anchor pointing to target ID
+                BaseXHTMLFileV3 anchorDocument = GetItemParentDocument(anchor); // get document containing anchor pointing to target ID
                 if (anchorDocument == null) // if anchor not contained (not found) in any document
                 {
                     Logger.Log.Error(string.Format("Internal consistency error - anchor ({0}) for id ({1}) not contained (not found) in any document", anchor, _linkTargetItem));
@@ -180,9 +207,14 @@ namespace FB2EPubConverter
 
 
 
-        private BaseXHTMLFileV3 GetIDParentDocument(BookStructureManager structureManager, IHTMLItem value)
+        /// <summary>
+        /// Returns parent (file level) document (document containing) for the item
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private BaseXHTMLFileV3 GetItemParentDocument(IHTMLItem value)
         {
-            return structureManager.GetIDOfParentDocument(value) as BaseXHTMLFileV3;
+            return _structureManager.GetItemParentDocument(value) as BaseXHTMLFileV3;
         }
 
         /// <summary>
