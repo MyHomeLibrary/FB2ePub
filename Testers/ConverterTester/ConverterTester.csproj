@@ -63,6 +63,10 @@
       <Project>{2868CFB2-562D-4C26-9471-F78F1D94CE0D}</Project>
       <Name>EPubLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\epublibrary\EPubLibraryContracts\EPubLibraryContracts.csproj">
+      <Project>{A5581CDB-9FFC-45D6-B20C-6EB060E978FD}</Project>
+      <Name>EPubLibraryContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\fontsettings\FontSettingsContracts\FontSettingsContracts.csproj">
       <Project>{f39fc602-bf90-4721-8274-cecf45676c10}</Project>
       <Name>FontSettingsContracts</Name>

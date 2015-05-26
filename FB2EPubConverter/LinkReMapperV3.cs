@@ -84,6 +84,14 @@ namespace FB2EPubConverter
             switch (_v3Settings.FootnotesCreationMode)
             {
                 case FootnotesGenerationMode.Combined:
+                    RemepLinkSectionV2Style();
+                    if (_v3Settings.FootnotesCreationMode == FootnotesGenerationMode.Combined)
+                    {
+                        EPubV3VocabularyStyles linkStyles = new EPubV3VocabularyStyles();
+                        linkStyles.SetType(EpubV3Vocabulary.NoteRef);
+                        _linkTargetItem.CustomAttributes.Add(linkStyles.GetAsCustomAttribute());
+                    }
+
                     break;
                 case FootnotesGenerationMode.V2StyleSections:
                     RemepLinkSectionV2Style();
