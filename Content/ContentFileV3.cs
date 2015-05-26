@@ -241,13 +241,13 @@ namespace EPubLibrary.Content
             if (!string.IsNullOrEmpty(BookInformation.Description.DescInfo))
             {
 
-                var publisher = new XElement(PURLNamespaces.DCElements + "description", BookInformation.Description);
+                var description = new XElement(PURLNamespaces.DCElements + "description", BookInformation.Description.DescInfo);
                 if (!string.IsNullOrEmpty(BookInformation.Description.Language))
                 {
-                    publisher.Add(new XAttribute(XNamespace.Xml + "lang", BookInformation.Description.Language));
+                    description.Add(new XAttribute(XNamespace.Xml + "lang", BookInformation.Description.Language));
                 }
-                publisher.Add(new XAttribute("id", "id_desc"));
-                metadata.Add(publisher);
+                description.Add(new XAttribute("id", "id_desc"));
+                metadata.Add(description);
 
                 var metaRefineDisplay = new XElement(EPubNamespaces.FakeOpf + "meta",1);
                 metaRefineDisplay.Add(new XAttribute("refines", "#id_desc"));

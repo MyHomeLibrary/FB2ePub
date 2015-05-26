@@ -196,13 +196,13 @@ namespace EPubLibrary.Content
 
             if (!string.IsNullOrEmpty(BookInformation.Description.DescInfo))
             {
-                var publisher = new XElement(PURLNamespaces.DCElements + "description", BookInformation.Description);
+                var description = new XElement(PURLNamespaces.DCElements + "description", BookInformation.Description.DescInfo);
                 if (!string.IsNullOrEmpty(BookInformation.Description.Language))
                 {
                     // need to add writing language in "xml:lang — use RFC-3066 format"
                     // will add when will find an example since unclear
                 }
-                metadata.Add(publisher);                
+                metadata.Add(description);                
             }
 
 
