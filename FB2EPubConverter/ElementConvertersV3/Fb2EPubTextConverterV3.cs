@@ -1,11 +1,9 @@
-﻿using System;
-using ConverterContracts.ConversionElementsStyles;
+﻿using ConverterContracts.ConversionElementsStyles;
 using EPubLibrary.PathUtils;
 using EPubLibrary.XHTML_Items;
 using EPubLibraryContracts;
 using EPubLibraryContracts.Settings;
 using FB2EPubConverter.ElementConvertersV3.Epigraph;
-using FB2EPubConverter.PrepearedHTMLFiles;
 using FB2Library;
 using FB2Library.Elements;
 using XHTMLClassLibrary.BaseElements;
@@ -19,8 +17,16 @@ namespace FB2EPubConverter.ElementConvertersV3
         private readonly ImageManager _images;
         private readonly HRefManagerV3 _referencesManager;
         private readonly IEPubV3Settings _v3Settings;
+        private readonly FBNotesManager _notesManager;
+
+        private const string EPubFileNameFormat = "section{0}.xhtml";
 
         private int _sectionCounter;
+
+        private string BuildSectionFileName()
+        {
+            return string.Format(EPubFileNameFormat, ++_sectionCounter);
+        }
 
         public Fb2EPubTextConverterV3(IEPubCommonSettings commonSettings, ImageManager images, HRefManagerV3 referencesManager,IEPubV3Settings v3Settings)
         {
@@ -28,6 +34,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             _images = images;
             _referencesManager = referencesManager;
             _v3Settings = v3Settings;
+            _notesManager = new FBNotesManager(v3Settings,images,referencesManager);
         }
 
         public void Convert(BookStructureManager bookStructureManager, FB2File fb2File)
@@ -44,7 +51,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     GuideRole = GuideTypeEnum.TitlePage,
                     Content = new Div(HTMLElementType.HTML5),
                     NavigationParent = null,
-                    FileName = string.Format("section{0}.xhtml", ++_sectionCounter),
+                    FileName = BuildSectionFileName(),
                     NotPartOfNavigation = true
                 };
                 var converterSettings = new ConverterOptionsV3
@@ -73,7 +80,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                     GuideRole = GuideTypeEnum.Text,
                     Content = new Div(HTMLElementType.HTML5),
                     NavigationParent = null,
-                    FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
+                    FileName = BuildSectionFileName()
                 };
                 bookStructureManager.AddBookPage(mainDocument);
             }
@@ -90,7 +97,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                         GuideRole = GuideTypeEnum.Text,
                         Content = new Div(HTMLElementType.HTML5),
                         NavigationParent = null,
-                        FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
+                        FileName = BuildSectionFileName()
                     };
                     bookStructureManager.AddBookPage(mainDocument);
                 }
@@ -110,9 +117,8 @@ namespace FB2EPubConverter.ElementConvertersV3
                     SetClassType(enclosing, ElementStylesV3.BodyImage);
                     mainDocument.Content.Add(enclosing);
                 }
-
-
             }
+
             foreach (var ep in fb2File.MainBody.Epigraphs)
             {
                 if (mainDocument == null)
@@ -125,7 +131,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                         GuideRole = GuideTypeEnum.Text,
                         Content = new Div(HTMLElementType.HTML5),
                         NavigationParent = null,
-                        FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
+                        FileName = BuildSectionFileName()
                     };
                     bookStructureManager.AddBookPage(mainDocument);
                 }
@@ -145,7 +151,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             Logger.Log.Debug("Adding main sections");
             foreach (var section in fb2File.MainBody.Sections)
             {
-                AddSection(bookStructureManager, section, mainDocument, false);
+                AddSection(bookStructureManager, section, mainDocument);
             }
 
             Logger.Log.Debug("Adding secondary bodies");
@@ -158,16 +164,20 @@ namespace FB2EPubConverter.ElementConvertersV3
                 bool fbeNotesSection = FBENotesSection(bodyItem.Name);
                 if (fbeNotesSection)
                 {
-                    AddFbeNotesBody(bookStructureManager, bodyItem);
+                    _notesManager.AddNotesBody(bodyItem);
                 }
                 else
                 {
                     AddSecondaryBody(bookStructureManager, bodyItem);
                 }
             }
+            foreach (var footNotesAdditionalDocument in _notesManager.GetFootNotesAdditionalDocuments())
+            {
+                bookStructureManager.AddFootnote(footNotesAdditionalDocument);                
+            }
         }
 
-        private void AddSection(BookStructureManager bookStructureManager, SectionItem section, BaseXHTMLFileV3 navParent, bool fbeNotesSection)
+        private void AddSection(BookStructureManager bookStructureManager, SectionItem section, BaseXHTMLFileV3 navParent)
         {
             string docTitle = string.Empty;
             if (section.Title != null)
@@ -179,26 +189,28 @@ namespace FB2EPubConverter.ElementConvertersV3
             bool firstDocumentOfSplit = true;
             var converterSettings = new ConverterOptionsV3
             {
-                CapitalDrop = !fbeNotesSection && _commonSettings.CapitalDrop,
+                CapitalDrop = _commonSettings.CapitalDrop,
                 Images = _images,
                 MaxSize = _v3Settings.HTMLFileMaxSize,
                 ReferencesManager = _referencesManager,
             };
             var sectionConverter = new SectionConverterV3
             {
-                LinkSection = fbeNotesSection,
+                LinkSection = false,
                 RecursionLevel = GetRecursionLevel(navParent),
                 Settings = converterSettings
             };
             foreach (var subitem in sectionConverter.Convert(section))
             {
-                sectionDocument = fbeNotesSection ? new FB2NotesPageSectionFile() : new BaseXHTMLFileV3();
-                sectionDocument.PageTitle = docTitle;
-                sectionDocument.FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder);
-                sectionDocument.GuideRole = (navParent == null) ? GuideTypeEnum.Text : navParent.GuideRole;
-                sectionDocument.Content = subitem;
-                sectionDocument.NavigationParent = navParent;
-                sectionDocument.FileName = string.Format("section{0}.xhtml", ++_sectionCounter);
+                sectionDocument = new BaseXHTMLFileV3
+                {
+                    PageTitle = docTitle,
+                    FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
+                    GuideRole = (navParent == null) ? GuideTypeEnum.Text : navParent.GuideRole,
+                    Content = subitem,
+                    NavigationParent = navParent,
+                    FileName = BuildSectionFileName()
+                };
 
                 if (!firstDocumentOfSplit || 
                     ((navParent!= null) && navParent.NotPartOfNavigation))
@@ -206,20 +218,13 @@ namespace FB2EPubConverter.ElementConvertersV3
                     sectionDocument.NotPartOfNavigation = true;
                 }
                 firstDocumentOfSplit = false;
-                if (fbeNotesSection)
-                {
-                    bookStructureManager.AddFootnote(sectionDocument);
-                }
-                else
-                {
-                    bookStructureManager.AddBookPage(sectionDocument);
-                }
+                bookStructureManager.AddBookPage(sectionDocument);
 
             }
             Logger.Log.Debug("Adding sub-sections");
             foreach (var subSection in section.SubSections)
             {
-                AddSection(bookStructureManager, subSection, sectionDocument, fbeNotesSection);
+                AddSection(bookStructureManager, subSection, sectionDocument);
             }
         }
 
@@ -232,68 +237,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             return navParent.NavigationLevel + 1;
         }
 
-        /// <summary>
-        /// Add and convert FBE style generated notes sections
-        /// </summary>
-        /// <param name="bookStructureManager"></param>
-        /// <param name="bodyItem"></param>
-        private void AddFbeNotesBody(BookStructureManager bookStructureManager, BodyItem bodyItem)
-        {
-            switch (_v3Settings.FootnotesCreationMode)
-            {
-                case FootnotesGenerationMode.V2StyleSections:
-                    AddV2StyleFbeNotesBody(bookStructureManager, bodyItem);
-                    break;
-                case FootnotesGenerationMode.Combined:
-                    AddV2StyleFbeNotesBody(bookStructureManager, bodyItem);               
-                    break;
-                case FootnotesGenerationMode.V3Footnotes:
-                    AddFootnotesData(bookStructureManager, bodyItem);
-                    break;
-            }
-        }
 
-        private void AddFootnotesData(BookStructureManager bookStructureManager, BodyItem bodyItem)
-        {
-            throw new NotImplementedException();
-            //AddV2StyleFbeNotesBody(bookStructureManager, bodyItem);               
-        }
-
-        private void AddV2StyleFbeNotesBody(BookStructureManager bookStructureManager, BodyItem bodyItem)
-        {
-            string docTitle = bodyItem.Name;
-            Logger.Log.DebugFormat("Adding section : {0}", docTitle);
-            var sectionDocument = new FB2NotesPageSectionFile
-            {
-                PageTitle = docTitle,
-                FileEPubInternalPath = EPubInternalPath.GetDefaultLocation(DefaultLocations.DefaultTextFolder),
-                GuideRole = GuideTypeEnum.Glossary,
-                Content = new Div(HTMLElementType.HTML5),
-                NavigationParent = null,
-                NotPartOfNavigation = true,
-                FileName = string.Format("section{0}.xhtml", ++_sectionCounter)
-            };
-            if (bodyItem.Title != null)
-            {
-                var converterSettings = new ConverterOptionsV3
-                {
-                    CapitalDrop = false,
-                    Images = _images,
-                    MaxSize = _v3Settings.HTMLFileMaxSize,
-                    ReferencesManager = _referencesManager,
-                };
-                var titleConverter = new TitleConverterV3();
-                sectionDocument.Content.Add(titleConverter.Convert(bodyItem.Title,
-                    new TitleConverterParamsV3 { Settings = converterSettings, TitleLevel = 1 }));
-            }
-            bookStructureManager.AddFootnote(sectionDocument);
-
-            Logger.Log.Debug("Adding sub-sections");
-            foreach (var section in bodyItem.Sections)
-            {
-                AddSection(bookStructureManager, section, sectionDocument, true);
-            }
-        }
 
         /// <summary>
         /// Add and convert generic secondary body section
@@ -322,7 +266,7 @@ namespace FB2EPubConverter.ElementConvertersV3
                 Content = new Div(HTMLElementType.HTML5),
                 NavigationParent = null,
                 NotPartOfNavigation = false,
-                FileName = string.Format("section{0}.xhtml", ++_sectionCounter),
+                FileName = BuildSectionFileName(),
                 PageTitle = docTitle,
             };
             if (bodyItem.Title != null)
@@ -343,7 +287,7 @@ namespace FB2EPubConverter.ElementConvertersV3
             Logger.Log.Debug("Adding sub-sections");
             foreach (var section in bodyItem.Sections)
             {
-                AddSection(bookStructureManager, section, sectionDocument, false);
+                AddSection(bookStructureManager, section, sectionDocument);
             }
         }
 

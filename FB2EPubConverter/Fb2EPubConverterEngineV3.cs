@@ -136,7 +136,6 @@ namespace FB2EPubConverter
         /// <summary>
         /// Passes FB2 info to the EPub file to be added at the end of the book
         /// </summary>
-        /// <param name="epubFile">destination epub object</param>
         /// <param name="fb2File">source fb2 object</param>
         private void PassFb2InfoToEpub(FB2File fb2File)
         {
@@ -309,22 +308,9 @@ namespace FB2EPubConverter
         {
             foreach (var xhtmlFile in StructureManager)
             {
-                if (IsAddableFile(xhtmlFile))
-                {
-                    epubFile.AddXHTMLFile(xhtmlFile);
-                }
+                 epubFile.AddXHTMLFile(xhtmlFile);
             }
 
         }
-
-        private bool IsAddableFile(IBaseXHTMLFile xhtmlFile)
-        {
-            if (xhtmlFile is FB2NotesPageSectionFile)
-            {
-                return false;
-            }
-            return true;
-        }
-
     }
 }
