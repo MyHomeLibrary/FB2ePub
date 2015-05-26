@@ -5,6 +5,7 @@ using System.Reflection;
 using EPubLibrary;
 using EPubLibrary.CSS_Items;
 using EPubLibrary.PathUtils;
+using EPubLibrary.ReferenceUtils;
 using Fb2ePubConverter;
 using FB2Library;
 using FB2Library.HeaderItems;
@@ -194,7 +195,7 @@ namespace FB2EPubConverter
                 var coverPageFile = new CoverPageFileV2(coverPage.CoverpageImages[0], _referencesManager);
                 StructureManager.AddCoverPage(coverPageFile);
                 Images.ImageIdUsed(coverPage.CoverpageImages[0].HRef);
-                epubFile.SetCoverImageID(coverPage.CoverpageImages[0].HRef);
+                epubFile.SetCoverImageID(ReferencesUtils.GetIdFromLink(coverPage.CoverpageImages[0].HRef));
             }
         }
 
