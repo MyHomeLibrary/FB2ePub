@@ -9,9 +9,8 @@ using Fb2epubSettings;
 
 namespace ConverterTester.Tests
 {
-    class EPubConversionTester : ITester
+    class EPubConversionTester 
     {
-        private Exception _lastException;
         private readonly EPubVersion _version;
 
 
@@ -20,10 +19,8 @@ namespace ConverterTester.Tests
             _version = version;
         }
 
-        public bool Test()
+        public void Test()
         {
-            try
-            {
                 ConverterSettingsFile settingsFile = new ConverterSettingsFile();
                 string filePath;
                 var settings = new ConverterSettings();
@@ -38,23 +35,6 @@ namespace ConverterTester.Tests
                 converter.LoadAndCheckFB2Files(path.ToString());
                 string outPath = Path.GetTempPath();
                 converter.Save(outPath);
-            }
-            catch (Exception ex)
-            {
-                _lastException = ex;
-                return false;
-            }
-            return true;
-        }
-
-        public string Name
-        {
-            get { return "ePub conversion"; }
-        }
-
-        public Exception TestError
-        {
-            get { return _lastException; }
         }
 
     
