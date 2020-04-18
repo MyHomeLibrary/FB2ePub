@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+xmlns="http://www.lordkiron.com/translit" 
+targetNamespace="http://www.lordkiron.com/translit"
+elementFormDefault="qualified">
+
+<xs:element name="transtable">
+  <xs:annotation>
+    <xs:documentation>Root element of the file</xs:documentation>
+  </xs:annotation>
+  <xs:complexType>
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="map"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="map" >
+  <xs:annotation>
+    <xs:documentation>Single element defining one mapping from cyrillic character to english string</xs:documentation>
+  </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="in" type="character" use="required"/>
+      <xs:attribute name="out" type="xs:string" use="required"/>
+    </xs:complexType>
+</xs:element>
+
+  <xs:simpleType name="character">
+    <xs:annotation>
+      <xs:documentation>Defines type for element containing only one character</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>
