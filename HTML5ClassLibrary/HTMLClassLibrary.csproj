@@ -217,12 +217,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\isiolanguages\ISOLanguages.csproj">
-      <Project>{58e261a5-b2ea-43f3-820d-902b5c061321}</Project>
-      <Name>ISOLanguages</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Exceptions\BlockElements\" />
     <Folder Include="Exceptions\InlineElements\" />
     <Folder Include="Exceptions\StructureAndHeader\" />

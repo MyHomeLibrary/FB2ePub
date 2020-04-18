@@ -119,7 +119,7 @@
     <None Include="license.docx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fb2epub\Helpers\FolderResourcesHelper\FolderResourcesHelper.csproj">
+    <ProjectReference Include="..\Helpers\FolderResourcesHelper\FolderResourcesHelper.csproj">
       <Project>{D8B62485-C4CE-48FD-A299-F8F44D0B3D93}</Project>
       <Name>FolderResourcesHelper</Name>
     </ProjectReference>
