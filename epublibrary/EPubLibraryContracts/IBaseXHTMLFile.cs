@@ -1,0 +1,29 @@
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Xml.Linq;
+using XHTMLClassLibrary.BaseElements;
+
+namespace EPubLibraryContracts
+{
+    public interface IBaseXHTMLFile : IEPubPath
+    {
+        void Write(Stream stream);
+        XDocument Generate();
+        void GenerateBody();
+        void GenerateHead();
+        bool PartOfDocument(IHTMLItem value);
+
+        GuideTypeEnum GuideRole { get; set; }
+        bool NotPartOfNavigation { get; set; }
+        bool FlatStructure { get; set; }
+        string Id { get; set; }
+        string FileName { get; set; }
+        bool EmbedStyles { get; set; }
+        string PageTitle { get; set; }
+        List<IStyleElement> StyleFiles { get;  }
+        string HRef { get; }
+        IBaseXHTMLFile NavigationParent { get; set; }
+        int NavigationLevel { get; }
+        ulong MaxSize { get; set; }
+    }
+}

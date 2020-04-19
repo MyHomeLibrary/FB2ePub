@@ -1,0 +1,52 @@
+﻿1.0.23.0
+* Fixed the issue when elements of type Ignore (e.g. license.xhtml) were added to guide
+
+
+1.0.22.0
++ Added support for generation of Calibre metadata - used for some sorts, series etc.
++ Added Fb2ePub Converter as book producer
++ Added 2 new style classes for Title page "title_series" for series on title page and "title_authors" for authors on title page
+* Changed to generate truly Flat ePubs 
+* Refactoring of the code to perform automatic internal relative paths resolving when constructing ePubs , instead of hard coded
+* Changed manifest creation to omit of namespace as some readers (librusec) "did not liked it"
+
+1.0.21.0
++ Added option to generate Apple file that allows Apple devices to use custom (embedded) fonts
++ Added option to embed invisible license file 
+* Fixed the issue with improper filling the identifier in .ncx file (id and content got mixed up)
+* Fixed a namespace issue that prevented proper book sort on some systems
+* Fixed a FlatStructure option generating invalid files
+
+1.0.20.0
+* Updated to use Visual Studio 2012 Update 1
+
+1.0.19.0
+* Updated log4net to v1.2.11 client profile
+* Changed to .Net 4.0 client profile
+
+1.0.18.0
++ License file added
+* Small refactoring of code
+* Changed to .Net 4.0
+
+
+
+1.0.16.0
++ Added code to include external adobe XPGT templates into a resulting ePub 
+
+1.0.15.0
+* Fixed (removed) extra \r\n in a mimetype tag to make it more compatible 
+
+1.0.14.0
+* Converted to Visual Studio 2010 solution
+* Fixed problem with stack overflow in case of system unable to split document
+
+1.0.13.0
+* Fixed bug when font without style attribute and font with "normal" attribute were considered different , this caused sometimes for italic styles to be overwriten
+* Fixed a bug when CSS stylesheet for one element contained more than one occurrence of same parameter (in this case previously entire element was ignored)
+
+1.0.12.0
+* Changed the About page generation to allow change "About" page from caller application
+
+1.0.11.0 
+- Added to GoogleCode
