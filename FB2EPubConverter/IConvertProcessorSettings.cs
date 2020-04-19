@@ -1,5 +1,4 @@
-﻿using ConverterContracts.ComInterfaces;
-using ConverterContracts.Settings;
+﻿using ConverterContracts.Settings;
 
 namespace ConverterContracts
 {
@@ -17,7 +16,6 @@ namespace ConverterContracts
         bool DeleteSource { get; set; }
         bool LookInSubFolders { get; set; }
         PathSearchOptions SearchMask { get; set; }
-        IProgressUpdateInterface ProgressCallbacks { get; set; }
         string SettingsFileToUse { get; set; }
         bool SingleFile { get; set; }
     }

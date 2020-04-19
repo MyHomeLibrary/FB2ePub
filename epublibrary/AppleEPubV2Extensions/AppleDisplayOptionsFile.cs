@@ -1,13 +1,11 @@
-﻿using System;
+﻿using EPubLibrary.PathUtils;
+using EPubLibraryContracts;
+using EPubLibraryContracts.Settings;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using EPubLibrary.PathUtils;
-using EPubLibraryContracts;
-using EPubLibraryContracts.Settings;
 
 namespace EPubLibrary.AppleEPubV2Extensions
 {

@@ -182,6 +182,7 @@
     <Compile Include="ElementConvertersV2\TranslatorsInfoConverterV2.cs" />
     <Compile Include="ElementConvertersV2\Poem\VElementConverterV2.cs" />
     <Compile Include="FBNotesManager.cs" />
+    <Compile Include="IConvertProcessorSettings.cs" />
     <Compile Include="LinkReMapperV2.cs" />
     <Compile Include="LinkReMapperV3.cs" />
     <Compile Include="PrepearedHTMLFiles\AboutPageFileV2.cs" />
@@ -241,7 +242,6 @@
     <Compile Include="ImageManager.cs" />
     <Compile Include="ProcessAuthorFormat.cs" />
     <Compile Include="ProcessSeqFormatString.cs" />
-    <Compile Include="ProgressUpdateWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ElementConvertersV2\SectionConverterV2.cs" />
     <Compile Include="SizeLimitChecker.cs" />
@@ -257,7 +257,7 @@
       <Project>{2868CFB2-562D-4C26-9471-F78F1D94CE0D}</Project>
       <Name>EPubLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\epublibrary\EPubLibraryContracts\EPubLibraryContracts.csproj">
+    <ProjectReference Include="..\EPubLibraryContracts\EPubLibraryContracts.csproj">
       <Project>{a5581cdb-9ffc-45d6-b20c-6eb060e978fd}</Project>
       <Name>EPubLibraryContracts</Name>
     </ProjectReference>
@@ -280,10 +280,6 @@
     <ProjectReference Include="..\translitrunet\TranslitRuContracts\TranslitRuContracts.csproj">
       <Project>{15699C26-B81D-4833-B077-E7B020F38EE6}</Project>
       <Name>TranslitRuContracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ConverterContracts\ConverterContracts.csproj">
-      <Project>{71f465e1-fca1-4701-8958-643e7332ea7f}</Project>
-      <Name>ConverterContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fb2epubSettings\Fb2epubSettings.csproj">
       <Project>{BB87C009-1337-43FF-ADF6-6E7861AA9343}</Project>

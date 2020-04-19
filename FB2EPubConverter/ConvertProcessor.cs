@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Runtime.InteropServices;
 using ConverterContracts;
-using ConverterContracts.ComInterfaces;
 using ConverterContracts.Settings;
 using Fb2epubSettings;
 using FolderResourcesHelper;
@@ -45,8 +44,7 @@ namespace FB2EPubConverter
 
     }
 
-    [Guid("0FF011AD-18A5-4CF2-8AB1-011AA9AA2BDF"),ComVisible(true)]
-    public class ConvertProcessor : IEPubConverterInterface
+    public class ConvertProcessor
     {
 
         private readonly IConvertProcessorSettings _processorSettings = new ConvertProcessorSettings();
@@ -81,8 +79,6 @@ namespace FB2EPubConverter
             int filesCount = filesInMask.Count;
 
             Logger.Log.InfoFormat("Using resources from: {0}",_processorSettings.Settings.ResourcesPath);
-            var progressReporter = new ProgressUpdateWrapper(_processorSettings.ProgressCallbacks);
-            progressReporter.ConvertStarted(filesCount);
             Logger.Log.InfoFormat("Conversion process started at {0}",DateTime.Now.ToString("f"));
 
             var po = new ParallelOptions
@@ -103,12 +99,10 @@ namespace FB2EPubConverter
 
                     try
                     {
-                        progressReporter.ProcessingStarted(file);
                         if (!converter.LoadAndCheckFB2Files(file))
                         {
                             string error = string.Format("Conversion of a file {0} failed", file);
                             Logger.Log.Error(error);
-                            progressReporter.SkippedDueError(file);
                             if (_processorSettings.SingleFile)
                             {
                                 throw new Exception(error);
@@ -120,7 +114,6 @@ namespace FB2EPubConverter
                     {
                         const string error = "Conversion error";
                         Logger.Log.Error(error, ex);
-                        progressReporter.SkippedDueError(file);
                         if (_processorSettings.SingleFile)
                         {
                             throw new Exception(error);
@@ -129,9 +122,7 @@ namespace FB2EPubConverter
                     }
                     string fileName = BuildNewFileName(file, outputFileName);
                     Logger.Log.InfoFormat("Saving {0}...", fileName);
-                    progressReporter.ProcessingSaving(fileName);
                     SaveAndCleanUp(converter, fileName, file);
-                    progressReporter.Processed(fileName);
                 });
             }
             catch (OperationCanceledException )
@@ -147,7 +138,6 @@ namespace FB2EPubConverter
             }
             finally
             {
-                progressReporter.ConvertFinished(0);
                 Logger.Log.Info("Conversion process finished");
             }
 
@@ -334,10 +324,9 @@ namespace FB2EPubConverter
 
         #region Implementation of IEPubConverterInterface
 
-        public void ConvertPath(string inputPath, string outputFolder, IProgressUpdateInterface progress)
+        public void ConvertPath(string inputPath, string outputFolder)
         {
             LoadSettings();
-            ProcessorSettings.ProgressCallbacks = progress;
             ProcessorSettings.Settings.OutPutPath = outputFolder;
             var fileParams = new List<string> {inputPath};
             ProcessorSettings.LookInSubFolders = true;
@@ -352,20 +341,18 @@ namespace FB2EPubConverter
             return ResourceLocator.Instance.GetResourcesPath();
         }
 
-        public void ConvertList(string[] files, string outputFolder, IProgressUpdateInterface progress)
+        public void ConvertList(string[] files, string outputFolder)
         {
             LoadSettings();
             ProcessorSettings.Settings.OutPutPath = outputFolder;
-            ProcessorSettings.ProgressCallbacks = progress;
             ProcessorSettings.Settings.ResourcesPath = GetResourcesPath();
             PerformConvertOperation(files, null);
 
         }
 
-        public void ConvertSingleFile(string inputPath, string outputName, IProgressUpdateInterface progress)
+        public void ConvertSingleFile(string inputPath, string outputName)
         {
             LoadSettings();
-            ProcessorSettings.ProgressCallbacks = progress;
             ProcessorSettings.Settings.ResourcesPath = GetResourcesPath();
             ProcessorSettings.SingleFile = true;
             var filesInMask = new List<string> {inputPath};
@@ -382,26 +369,15 @@ namespace FB2EPubConverter
             _cts.Cancel();
         }
 
-        bool IEPubConverterInterface.ShowSettingsDialog(IntPtr parent)
-        {
-            IWin32Window w = Control.FromHandle(parent);
-            return ShowSettingsDialog(w);
-        }
-
-        public void ConvertXml(XDocument doc, string outFileName, IProgressUpdateInterface progress)
+        public void ConvertXml(XDocument doc, string outFileName)
         {
             LoadSettings();
             _processorSettings.DeleteSource = false;
-
-            var progressReporter = new ProgressUpdateWrapper(_processorSettings.ProgressCallbacks);
-            progressReporter.ConvertStarted(1);
-
 
             IFb2EPubConverterEngine converter = CreateConverterEngine(_processorSettings.Settings);
 
             try
             {
-                progressReporter.ProcessingStarted(outFileName);
                 converter.LoadFB2FileFromXML(doc);
             }
             catch (Exception ex)
@@ -409,10 +385,7 @@ namespace FB2EPubConverter
                 Logger.Log.Error(ex);
                 return;
             }
-            progressReporter.ProcessingSaving(outFileName);
             SaveAndCleanUp(converter, outFileName, "");
-            progressReporter.Processed(outFileName);
-            progressReporter.ConvertFinished(0);
         }
 
         #endregion

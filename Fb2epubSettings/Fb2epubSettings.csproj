@@ -130,6 +130,9 @@
     <Compile Include="ConverterSettingsForm.Designer.cs">
       <DependentUpon>ConverterSettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings\IConverterSettings.cs" />
+    <Compile Include="Settings\IEPubConversionSettings.cs" />
+    <Compile Include="Settings\IFB2ImportSettings.cs" />
     <Compile Include="TransliterationSettingsImp.cs" />
     <Compile Include="CSSElementListItem.cs" />
     <Compile Include="DefaultSettingsLocatorHelper.cs" />
@@ -206,7 +209,7 @@
     <EmbeddedResource Include="Resources\Fb2epubSettings.ru.resx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\epublibrary\EPubLibraryContracts\EPubLibraryContracts.csproj">
+    <ProjectReference Include="..\EPubLibraryContracts\EPubLibraryContracts.csproj">
       <Project>{a5581cdb-9ffc-45d6-b20c-6eb060e978fd}</Project>
       <Name>EPubLibraryContracts</Name>
     </ProjectReference>
@@ -221,10 +224,6 @@
     <ProjectReference Include="..\translitrunet\TranslitRuContracts\TranslitRuContracts.csproj">
       <Project>{15699C26-B81D-4833-B077-E7B020F38EE6}</Project>
       <Name>TranslitRuContracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ConverterContracts\ConverterContracts.csproj">
-      <Project>{71f465e1-fca1-4701-8958-643e7332ea7f}</Project>
-      <Name>ConverterContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Helpers\FolderSettingsHelper\FolderSettingsHelper.csproj">
       <Project>{97c916ff-6271-44f8-9a20-6e0a0389524b}</Project>

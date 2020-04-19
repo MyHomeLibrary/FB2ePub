@@ -1,5 +1,4 @@
 ﻿using ConverterContracts;
-using ConverterContracts.ComInterfaces;
 using ConverterContracts.Settings;
 using Fb2epubSettings;
 
@@ -31,11 +30,6 @@ namespace FB2EPubConverter
         /// Returns search mask
         /// </summary>
         public PathSearchOptions SearchMask { get { return _searchMask; } set { _searchMask = value; } }
-
-        /// <summary>
-        /// Get/Set reference to progress callback interface
-        /// </summary>
-        public IProgressUpdateInterface ProgressCallbacks { get; set; }
 
         /// <summary>
         /// Returns the name of the settings file to use, null if we need to use default file
