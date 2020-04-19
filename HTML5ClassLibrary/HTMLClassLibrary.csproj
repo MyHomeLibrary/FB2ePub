@@ -213,13 +213,8 @@
     <Compile Include="HTMLDocument.cs" />
     <Compile Include="BaseElements\BlockElements\Menu.cs" />
     <Compile Include="BaseElements\InlineElements\MenuItem.cs" />
+    <Compile Include="Languages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\isiolanguages\ISOLanguages.csproj">
-      <Project>{58e261a5-b2ea-43f3-820d-902b5c061321}</Project>
-      <Name>ISOLanguages</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\BlockElements\" />

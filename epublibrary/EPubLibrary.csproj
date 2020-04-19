@@ -204,11 +204,11 @@
     <None Include="license.docx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fb2epub\ConverterContracts\ConverterContracts.csproj">
+    <ProjectReference Include="..\ConverterContracts\ConverterContracts.csproj">
       <Project>{71F465E1-FCA1-4701-8958-643E7332EA7F}</Project>
       <Name>ConverterContracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\fb2epub\HTML5ClassLibrary\HTMLClassLibrary.csproj">
+    <ProjectReference Include="..\HTML5ClassLibrary\HTMLClassLibrary.csproj">
       <Project>{e596a296-1c1a-42b7-8482-b7b0e95b82d3}</Project>
       <Name>HTMLClassLibrary</Name>
     </ProjectReference>

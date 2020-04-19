@@ -73,7 +73,7 @@
     <Compile Include="Settings\IEPubV3Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\fb2epub\HTML5ClassLibrary\HTMLClassLibrary.csproj">
+    <ProjectReference Include="..\..\HTML5ClassLibrary\HTMLClassLibrary.csproj">
       <Project>{e596a296-1c1a-42b7-8482-b7b0e95b82d3}</Project>
       <Name>HTMLClassLibrary</Name>
     </ProjectReference>

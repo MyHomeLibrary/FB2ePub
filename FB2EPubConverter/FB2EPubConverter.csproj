@@ -253,31 +253,31 @@
     <Compile Include="UnicodeHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\epublibrary\EPubLibrary.csproj">
+    <ProjectReference Include="..\epublibrary\EPubLibrary.csproj">
       <Project>{2868CFB2-562D-4C26-9471-F78F1D94CE0D}</Project>
       <Name>EPubLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\epublibrary\EPubLibraryContracts\EPubLibraryContracts.csproj">
+    <ProjectReference Include="..\epublibrary\EPubLibraryContracts\EPubLibraryContracts.csproj">
       <Project>{a5581cdb-9ffc-45d6-b20c-6eb060e978fd}</Project>
       <Name>EPubLibraryContracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\fb2librarynet\FB2Library.csproj">
+    <ProjectReference Include="..\fb2librarynet\FB2Library.csproj">
       <Project>{4DEC5888-E71A-4D00-93B7-7F11C92D0A3F}</Project>
       <Name>FB2Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\fontsettings\FontSettingsContracts\FontSettingsContracts.csproj">
+    <ProjectReference Include="..\fontsettings\FontSettingsContracts\FontSettingsContracts.csproj">
       <Project>{F39FC602-BF90-4721-8274-CECF45676C10}</Project>
       <Name>FontSettingsContracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\fontsettings\FontsSettings.csproj">
+    <ProjectReference Include="..\fontsettings\FontsSettings.csproj">
       <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
       <Name>FontsSettings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\translitrunet\TranslitRu.csproj">
+    <ProjectReference Include="..\translitrunet\TranslitRu.csproj">
       <Project>{CDFF6D0A-EB28-4817-8635-D6B0A9FDE833}</Project>
       <Name>TranslitRu</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\translitrunet\TranslitRuContracts\TranslitRuContracts.csproj">
+    <ProjectReference Include="..\translitrunet\TranslitRuContracts\TranslitRuContracts.csproj">
       <Project>{15699C26-B81D-4833-B077-E7B020F38EE6}</Project>
       <Name>TranslitRuContracts</Name>
     </ProjectReference>
@@ -393,9 +393,8 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>call "$(DevEnvDir)..\..\VC\vcvarsall.bat"
-tlbexp $(TargetPath)  /verbose  /out:$(SolutionDir)$(TargetName).tlb
-copy $(ProjectDir)DefaultSettings\defsettings_fonts.xml $(TargetDir)defsettings.xml</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
