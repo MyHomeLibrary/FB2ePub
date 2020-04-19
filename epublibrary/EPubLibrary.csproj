@@ -201,9 +201,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="license.docx" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ConverterContracts\ConverterContracts.csproj">
       <Project>{71F465E1-FCA1-4701-8958-643E7332EA7F}</Project>
       <Name>ConverterContracts</Name>
@@ -219,10 +216,6 @@
     <ProjectReference Include="..\fontsettings\FontsSettings.csproj">
       <Project>{3E201D89-9F10-4CE0-B5A2-372B4ACFDAA2}</Project>
       <Name>FontsSettings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\isiolanguages\ISOLanguages.csproj">
-      <Project>{58E261A5-B2EA-43F3-820D-902B5C061321}</Project>
-      <Name>ISOLanguages</Name>
     </ProjectReference>
     <ProjectReference Include="..\translitrunet\TranslitRu.csproj">
       <Project>{CDFF6D0A-EB28-4817-8635-D6B0A9FDE833}</Project>

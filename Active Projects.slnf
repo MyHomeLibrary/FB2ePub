@@ -1,0 +1,23 @@
+{
+  "solution": {
+    "path": "Fb2ePub.sln",
+    "projects": [
+      "ConverterContracts\\ConverterContracts.csproj",
+      "FB2EPubConverter\\FB2EPubConverter.csproj",
+      "Fb2ePubGui\\Fb2ePubGui.csproj",
+      "Fb2ePub\\Fb2ePub.csproj",
+      "Fb2epubSettings\\Fb2epubSettings.csproj",
+      "HTML5ClassLibrary\\HTMLClassLibrary.csproj",
+      "Helpers\\FolderResourcesHelper\\FolderResourcesHelper.csproj",
+      "Helpers\\FolderSettingsHelper\\FolderSettingsHelper.csproj",
+      "XMLFixerLibrary\\XMLFixerLibrary.csproj",
+      "epublibrary\\EPubLibrary.csproj",
+      "epublibrary\\EPubLibraryContracts\\EPubLibraryContracts.csproj",
+      "fb2librarynet\\FB2Library.csproj",
+      "fontsettings\\FontSettingsContracts\\FontSettingsContracts.csproj",
+      "fontsettings\\FontsSettings.csproj",
+      "translitrunet\\TranslitRu.csproj",
+      "translitrunet\\TranslitRuContracts\\TranslitRuContracts.csproj"
+    ]
+  }
+}
